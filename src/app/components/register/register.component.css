@@ -1,0 +1,14 @@
+nav {
+    padding: 10px 0;
+}
+
+footer {
+    padding: 0px 0;
+}
+
+input, .register-page .theme-card .theme-form textarea {
+
+    padding: 10px 20px;
+    margin-bottom: 20px !important;
+  
+}

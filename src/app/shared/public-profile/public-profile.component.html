@@ -1,0 +1,159 @@
+<h2 mat-dialog-title class="ml-n2">
+    <button class="btn btn-link btn-sm" mat-button mat-dialog-close>
+        <i class="icon-angle-left"></i>&nbsp;Back
+    </button>&nbsp;Profile
+</h2>
+<div class="row mb-2 mb-3">
+    <div class="col-xl-3 col-12">
+        <img [src]="userObj.selfProfileUrl" onerror="this.src='/assets/img/nouser.png';" class="img-fluid border" />
+        <!--
+        <div class="my-3">
+            <div><strong>Skills</strong>&nbsp;</div>
+            <h4><span class="badge badge-secondary font-weight-lighter mr-2"
+                    *ngFor="let skill of userObj.skillSets">{{utilityService.returnStringWithReplacing_(skill) |
+                    titlecase}}</span></h4>
+        </div>
+        -->
+    </div>
+    <div class="col-xl-9 col-12 pl-5">
+        <div class="row">
+            <div class="col-xl-12 col-12">
+                <div class="my-3">
+                    <strong>
+                        {{userObj.firstName | titlecase}}&nbsp;{{userObj.middleName |
+                        titlecase}}&nbsp;{{userObj.lastName |
+                        titlecase}}
+                    </strong>
+                    <span *ngIf="!adminViewT" (click)="addNewRatings(userObj)" mat-button mat-dialog-close>&nbsp;
+                        <i class="icon-star"></i>
+                    </span>
+                    <span *ngIf="!adminViewT">&nbsp;
+                        <i class="icon-star text-warning"></i>
+                    </span>
+                </div>
+            </div>
+            <div class="col-xl-6 col-6">
+                <div class="my-3">
+                    <strong>City/Country</strong>&nbsp;
+                    <label>
+                        {{userObj.cityCode | titlecase}}&nbsp;/&nbsp;{{userObj.country | titlecase}}
+                    </label>
+                </div>
+            </div>
+            <div class="col-xl-6 col-6">
+                <div class="my-3">
+                    <strong>Email ID/Mobile Number</strong>&nbsp;
+                    <label>
+                        {{userObj.emailAddress}}&nbsp;/&nbsp;{{userObj.mobile}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-6">
+                <strong>App Links</strong>&nbsp;
+            </div>
+            <div class="col-xl-6">
+                <strong>Hear From</strong>&nbsp;
+                <label>
+                    {{userObj.hearAboutUs}}
+                </label>
+            </div>
+        </div>
+        <div *ngIf="userObj.externalAppLinks">
+            <hr>
+            <div *ngFor="let previewUrl of userObj.externalAppLinks">
+                <div class="row" *ngIf="previewUrl">
+                    <div class="col-xl-2">
+                        <strong>{{previewUrl.appName}}</strong>&nbsp;
+                    </div>
+                    <div class="col-xl-10">
+                        <a href="{{previewUrl.appLink}}">{{previewUrl.appLink}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="my-3" *ngIf="adminViewT">
+            <hr>
+            <div class="row">
+                <div class="col-xl-12"><strong>Passport Documents</strong>&nbsp;</div>
+                <div *ngIf="userObj.myPassportMedia">
+                    <div class="col-xl-2" *ngFor="let previewUrl of userObj.myPassportMedia">
+                        <div *ngIf="previewUrl">
+                            <video width="1000" height="1000"
+                                *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')>-1" class="img-fluid border"
+                                controls [src]="previewUrl.url"></video>
+                            <img width="1000" height="1000"
+                                *ngIf="previewUrl.type && previewUrl.type.indexOf('image/')>-1" class="img-fluid border"
+                                [src]="previewUrl.url" onerror="this.src='/assets/img/na.png';" />
+                            <img width="1000" height="1000"
+                                *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1"
+                                class="img-fluid border" src="/assets/img/pdf.png"
+                                onerror="this.src='/assets/img/na.png';" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xl-12"><strong>Driving Licence Documents</strong>&nbsp;</div>
+                <div *ngIf="userObj.myDLMedia">
+                    <div class="col-xl-2" *ngFor="let previewUrl of userObj.myDLMedia">
+                        <div *ngIf="previewUrl">
+                            <video width="1000" height="1000"
+                                *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')>-1" class="img-fluid border"
+                                controls [src]="previewUrl.url"></video>
+                            <img width="1000" height="1000"
+                                *ngIf="previewUrl.type && previewUrl.type.indexOf('image/')>-1" class="img-fluid border"
+                                [src]="previewUrl.url" onerror="this.src='/assets/img/na.png';" />
+                            <img width="1000" height="1000"
+                                *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1"
+                                class="img-fluid border" src="/assets/img/pdf.png"
+                                onerror="this.src='/assets/img/na.png';" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xl-12"><strong>Health Insurance Documents</strong>&nbsp;</div>
+                <div *ngIf="userObj.myHICardMedia">
+                    <div class="col-xl-2" *ngFor="let previewUrl of userObj.myHICardMedia">
+                        <div *ngIf="previewUrl">
+                            <video width="1000" height="1000"
+                                *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')>-1" class="img-fluid border"
+                                controls [src]="previewUrl.url"></video>
+                            <img width="1000" height="1000"
+                                *ngIf="previewUrl.type && previewUrl.type.indexOf('image/')>-1" class="img-fluid border"
+                                [src]="previewUrl.url" onerror="this.src='/assets/img/na.png';" />
+                            <img width="1000" height="1000"
+                                *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1"
+                                class="img-fluid border" src="/assets/img/pdf.png"
+                                onerror="this.src='/assets/img/na.png';" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" *ngIf="userObj.isRKIRegistered">
+                <hr>
+                <div class="col-xl-12"><strong>RKI Registered Documents</strong>&nbsp;</div>
+                <div *ngIf="userObj.myRKIMedia">
+                    <div class="col-xl-2" *ngFor="let previewUrl of userObj.myRKIMedia">
+                        <div *ngIf="previewUrl">
+                            <video width="1000" height="1000"
+                                *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')>-1" class="img-fluid border"
+                                controls [src]="previewUrl.url"></video>
+                            <img width="1000" height="1000"
+                                *ngIf="previewUrl.type && previewUrl.type.indexOf('image/')>-1" class="img-fluid border"
+                                [src]="previewUrl.url" onerror="this.src='/assets/img/na.png';" />
+                            <img width="1000" height="1000"
+                                *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1"
+                                class="img-fluid border" src="/assets/img/pdf.png"
+                                onerror="this.src='/assets/img/na.png';" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

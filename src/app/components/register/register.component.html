@@ -1,0 +1,153 @@
+
+<section class="resume schedule pt-3 pb-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="cal-time">
+                <div class="time">
+                    <h2 class="title-text pt-1" i18n>Sign Up</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- register section -->
+<section class="register-page section-b-space pt-0">
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <form [formGroup]="registerForm" class="theme-form">
+                <div class="tab-content theme-card shadow-sm">
+                    <div class="tab-pane active" id="reg_basic_details">
+                        <div class="form-row">
+                            <div class="col-md-12 text-center mb-2">
+                                <div class="btn-group shadow mb-3">
+                                    <button type="button" class="btn" (click)="onClickRoleChange('borrower')"
+                                        [ngClass]="{ 'btn-app1-theme text-white': f.role.value=='borrower', 'btn-outline-info': f.role.value!='borrower'}"
+                                        i18n>
+                                        I'm A Borrower
+                                    </button>
+                                    <button type="button" class="btn" (click)="onClickRoleChange('lender')"
+                                        [ngClass]="{ 'btn-app1-theme text-white': f.role.value=='lender', 'btn-outline-info': f.role.value!='lender'}"
+                                        i18n>
+                                        I'm A Lender
+                                    </button>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="firstName" i18n>First Name</label>
+                                <input type="text" formControlName="firstName" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                                <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                                    <div *ngIf="f.firstName.errors.required" i18n>First Name is required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="lastName" i18n>Last Name</label>
+                                <input type="text" formControlName="lastName" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                                <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                                    <div *ngIf="f.lastName.errors.required" i18n>Last Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <label for="mobileNo" i18n>
+                                    <i class="fab fa-whatsapp text-success"></i>
+                                    Mobile Number</label>
+                                <input type="text" formControlName="mobileNo" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" />
+                                <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
+                                    <div *ngIf="f.mobileNo.errors.required" i18n>Mobile Number is required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="emailAddress" i18n>Email<span class="small"> (Link will be sent for
+                                        verification)</span></label>
+                                <input type="email" formControlName="emailAddress" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }"
+                                    pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" />
+                                <div *ngIf="submitted && f.emailAddress.errors" class="invalid-feedback">
+                                    <div *ngIf="f.emailAddress.errors.required" i18n>Email is required</div>
+                                    <div *ngIf="f.emailAddress.errors.email || f.emailAddress.errors.pattern" i18n>
+                                        Invalid Email format.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <!-- <div class="col-md-12">
+                                <div class="text-gray" i18n>
+                                    Verification link will be sent on mail, to complete your registration please click on mail link when received.
+                                </div>
+                                <hr>
+                            </div> -->
+                            <div class="col-md-6">
+                                <label for="password" i18n>Password</label>
+                                <input type="password" formControlName="password" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                    <div *ngIf="f.password.errors.required" i18n>Password is required</div>
+                                    <div *ngIf="f.password.errors.minlength" i18n>Password must be at least 6 characters
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label i18n>Confirm Password</label>
+                                <input type="password" formControlName="confirmPassword" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+                                <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                                    <div *ngIf="f.confirmPassword.errors.required" i18n>
+                                        Confirm Password is required
+                                    </div>
+                                    <div *ngIf="f.confirmPassword.errors.mustMatch" i18n>
+                                        Passwords must match
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 mb-3">
+                                <label for="hearAboutUs">From where you hear about us?</label>
+                                <select formControlName="hearAboutUs" class="custom-select"
+                                    [ngClass]="{ 'is-invalid': submitted && f.hearAboutUs.errors }">
+                                    <option value="" selected disabled>Choose</option>
+                                    <option *ngFor="let hearAboutUs of hearAboutUslist" [ngValue]="hearAboutUs">
+                                        {{hearAboutUs}}</option>
+                                </select>
+                                <div *ngIf="submitted && f.hearAboutUs.errors" class="invalid-feedback">
+                                    <div *ngIf="f.hearAboutUs.errors.required">hearAboutUs is required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="custom-control custom-checkbox">
+
+                                    <input type="checkbox" [value]="true" formControlName="acceptTerms"
+                                        class="custom-control-input" id="defaultUnchecked"
+                                        [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
+                                    <label class="custom-control-label" for="defaultUnchecked" i18n>I accept the general
+                                        <a class="text-primary" routerLink="/disclaimer" routerLinkActive="active" for="defaultUnchecked">
+                                            Terms Of Use and Privacy Policy.
+                                        </a>
+                                    </label>
+                                </div>
+                                <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">
+                                    <div *ngIf="f.acceptTerms.errors.required" i18n> is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <hr>
+                                <button type="button" (click)="onSubmitVerifyRegisterUser()" [disabled]="loading"
+                                    class="btn btn-default primary-btn  radius-0" i18n>Submit</button>
+                                <img *ngIf="loading" class="pl-3"
+                                    src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<!-- register section -->

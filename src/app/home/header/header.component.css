@@ -1,0 +1,12 @@
+nav {
+    padding: 10px 0;
+}
+
+header nav ul .mega-menu .mega-menu-container {
+
+    min-width: auto;
+}
+
+header nav ul li>a {
+    color: white !important;
+}

@@ -1,0 +1,177 @@
+
+<div class="row">
+<div class="col-xl-11 col-10">
+    <h4  class="mb-3 text-black-50">
+        Borrowers Requests for {{utilityService.returnLoanType(LoanObj.loanType)}} of kr {{LoanObj.loanAmount}}
+  </h4>
+</div>
+<div class="col-xl-1 col-2">
+  
+        <i class="icon-close float-right" mat-button mat-dialog-close></i>
+  
+</div>
+</div>
+<div class="row">
+    <div class="col-xl-12 col-12">
+        <div id="accordion">
+            <div class="card shadow-sm mb-3" *ngFor="let LoanApplyObj of LoanObj.sessionAppliedByBorrowers;">
+                <div class="card-header">
+                    <a class="collapsed card-link" data-toggle="collapse" [attr.href]="'#collapse_' + LoanApplyObj.borrowerId">
+                        {{userService.allAppUsersCollections[LoanApplyObj.borrowerId].firstName | titlecase }}
+                        <label class="badge font-weight-light text-capitalize text-cap"
+                            [ngClass]="{'badge-success': (LoanApplyObj.status==SessionStatus.Accepted || LoanApplyObj.status==SessionStatus.Active || LoanApplyObj.status==SessionStatus.Completed || LoanApplyObj.status==SessionStatus.OngoingInitiated  || LoanApplyObj.status==SessionStatus.OngoingAccepted  || LoanApplyObj.status==SessionStatus.Ongoing), 'badge-danger': (LoanApplyObj.status==SessionStatus.Rejected || LoanApplyObj.status==SessionStatus.RejectedOngoing || LoanApplyObj.status==SessionStatus.Suspended), 'badge-info': ( LoanApplyObj.status==null || LoanApplyObj.status=='' || LoanApplyObj.status==SessionStatus.Pending)}">{{ utilityService.returnStringWithReplacing_(LoanApplyObj.status || SessionStatus.Pending)  | titlecase }}</label>
+                        
+                       
+                    </a>
+                </div>
+                <div [attr.id]="'collapse_' + LoanApplyObj.borrowerId" class="collapse show" data-parent="#accordion">
+                    <div class="card-body">
+
+                        <h5 class="card-title">New Proposed Amount: <badge class="badge badge-primary">kr 3000</badge></h5>
+                     
+                         <!-- <div class="row">
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group">
+                                    <label for="loanTenureInMonths" i18n>Tenure in Months</label>
+                                    <h4 class="text-primary">
+                                        {{LoanObj.loanTenureInMonths}}
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group border-right">
+                                    <label for="loanInterestRate" i18n>Interest(%) Rate (per month)</label>
+                                    <h4 class="text-primary">
+                                        {{LoanObj.loanInterestRate}}
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group border-right">
+                                    <label for="loanStartDateTime" i18n>Start Date</label>
+                                    <h4 class="text-primary" i18n>
+                                        {{LoanObj.loanStartDateTime | date:'dd-MMM-YYYY'}}
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <p class="mb-2" i18n>Description:</p>
+                                <div class="text-black-50" i18n>
+                                    {{LoanObj.loanDescription}}
+                                </div>
+                            </div>
+                        </div>  -->
+                    </div>
+                    <div class="card-footer">
+                        <div class="row" [ngClass]="{ 'd-none': ready2Refund }" [ngSwitch]="returnSessionApplyStatus(LoanApplyObj)">
+                            <!-- the same view can be shown in more than one case -->
+                            <div class="col-xl-12" *ngSwitchCase="SessionStatus.Pending">
+                                <!--
+                                <button class="btn btn-danger btn-sm float-left" (click)="closeDialog(LoanApplyObj, SessionStatus.Rejected)">Reject</button>
+                                <button class="btn btn-success btn-sm float-right" (click)="closeDialog(LoanApplyObj, SessionStatus.Accepted)">Accept</button>
+                                -->
+                            </div>
+                            <div class="col-xl-12" *ngSwitchCase="SessionStatus.Accepted">
+                                <!--
+                                <button class="btn btn-danger btn-sm float-left" (click)="closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)">Reject</button> &nbsp;
+                                <button class="btn btn-info btn-sm" (click)="closeDialog(LoanApplyObj, SessionStatus.RejectedOngoingWithRefund)">Apply
+                                    for Refund</button>
+                                <button class="btn btn-success btn-sm float-right" (click)="closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)">Proceed for
+                                    Execution</button>
+                                    -->
+
+                                    <a class="btn btn-success btn-sm float-right ml-2" target="_blank"  [href]="returnUrl4downloadCOntractPDF(LoanApplyObj._id)" download><i class="icon-cloud-down"></i>&nbsp;Download Contract</a>                            
+                                    <button class="btn btn-primary btn-sm float-right" (click)="clickedOnSessionChatVideo(LoanObj, false)"><i class="icon-comments"></i>&nbsp;Chat</button>
+                            </div>
+
+                            <div class="col-xl-12" *ngSwitchCase="SessionStatus.OngoingInitiated">
+                                <!--
+                                <button class="btn btn-danger btn-sm float-left" (click)="closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)">Reject</button>
+                                <button [disabled]="true" class="btn btn-success btn-sm float-right" (click)="closeDialog(LoanApplyObj, SessionStatus.OngoingAccepted)">Proceed for
+                                    Execution</button>
+                                -->
+                            </div>
+                            <div class="col-xl-12" *ngSwitchCase="SessionStatus.OngoingAccepted">
+                                <!--
+                                <button class="btn btn-danger btn-sm float-left" (click)="closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)">Reject</button>
+                                <button class="btn btn-success btn-sm float-right" (click)="closeDialog(LoanApplyObj, SessionStatus.Ongoing)">Proceed for
+                                    Execution</button>
+                                -->
+                                
+                                <button class="float-right btn btn-danger btn-sm">Reject</button>
+                                <button class="btn btn-success btn-sm float-right mr-2" (click)="closeDialog(LoanApplyObj, SessionStatus.Accepted)">
+                                    Proceed For Contract
+                                </button>
+                                <button class="btn btn-primary btn-sm float-right mr-2" (click)="clickedOnSessionChatVideo(LoanObj, false)"><i class="icon-comments"></i>&nbsp;Chat</button>
+                                
+                            </div>
+                            <div class="col-xl-12" *ngSwitchCase="SessionStatus.Ongoing">
+                                <!--
+                                <button class="btn btn-danger btn-sm float-left" (click)="closeDialog(LoanApplyObj, SessionStatus.Suspended)">Reject</button>
+                                <button class="btn btn-success btn-sm float-right" (click)="closeDialog(LoanApplyObj, SessionStatus.Completed)">Completed</button>
+                                -->
+                            </div>
+                            <div class="col-xl-12" *ngSwitchCase="SessionStatus.Completed">
+                                <button mat-button mat-dialog-close class="btn btn-success btn-sm float-right" (click)="addNewRatings(LoanApplyObj)">Rate Now</button>
+                            </div>
+                            <!--default case when there are no matches -->
+                            <div class="col-xl-12" *ngSwitchDefault>
+                                <!-- 
+                                <button class="btn btn-danger btn-sm float-left" (click)="closeDialog(LoanApplyObj, SessionStatus.Rejected)">Reject</button>
+                                <button class="btn btn-success btn-sm float-right" (click)="closeDialog(LoanApplyObj, SessionStatus.Accepted)">Accept</button>
+                            -->
+                            </div>
+                        </div>
+                    </div>
+                    <!--<button *ngIf="!check4SessionApplyStatus(LoanApplyObj)" class="btn btn-success btn-sm float-right" (click)="closeDialog(LoanApplyObj, SessionStatus.Accepted)">Accept</button>
+                    <button *ngIf="check4SessionApplyStatus(LoanApplyObj)" class="btn btn-success btn-sm float-right mr-2" (click)="closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)">Proceed for Execution</button>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
+<div class="row" [ngClass]="{ 'd-none': !userInitiatedForPayment }">
+    <div class="col-xl-12 text-center">
+        <app-payment></app-payment>
+    </div>
+</div>
+<div class="row" [ngClass]="{ 'd-none': !ready2Refund }">
+    <div class="col-xl-12">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-xl-12 text-center">
+                    <div class="form-group">
+                        <label class="mb-3 font-weight-bold">
+                            Paid Amount:&nbsp;
+                        </label>
+                        <label class="mb-3">
+                            {{refundObj.amount}}
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="mb-3 font-weight-bold">
+                            Refund Charges:&nbsp;
+                        </label>
+                        <label class="mb-3">
+                            {{refundObj.cancellationCharges}}
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label class="mb-3 font-weight-bold">
+                            Amount to be refunded:&nbsp;
+                        </label>
+                        <label class="mb-3">
+                            {{refundObj.finalAmount2Refund}}
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-danger btn-sm" (click)="ready2Refund=false">Cancel</button> &nbsp;
+                        <button class="btn btn-success btn-sm" (click)="finalSubmissionForRefund()">Refund</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->

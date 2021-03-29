@@ -1,0 +1,127 @@
+<app-header></app-header>
+<section class="resume schedule pt-3 pb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="cal-time">
+                    <div class="time">
+                        <h2 class="title-text pt-1">Get In Touch With Us</h2>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="event contact set-relative p-b-0" id="contact">
+    <div class="container p-b-100">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="title title3">
+                            <div class="main-title">
+                                <h2 class=" text-black-50">Partnership</h2>
+                            </div>
+
+                            <P class="text-black-50">partner@avitii-lending.com</P>
+
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="title title3">
+                            <div class="main-title">
+                                <h2 class=" text-black-50" i18n>Lender Support</h2>
+                            </div>
+
+                            <P class="text-black-50" >lender@avitii-lending.com</P>
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="title title3">
+                            <div class="main-title">
+                                <h2 class=" text-black-50" i18n>Borrower Support</h2>
+                            </div>
+                            <div class="sub-title">
+                                <P class="text-black-50">borrower@avitii-lending.com </P>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xl-5 offset-xl-1 col-md-6 p-r-0 map">
+                <div class="iframe-container border-0">
+                  
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.801736539438!2d-0.08865598482088188!3d51.51685327963669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761cacece87517%3A0xe550bb3ead047ff2!2s65%20London%20Wall%2C%20London%20EC2M%205TU%2C%20UK!5e0!3m2!1sen!2sin!4v1616149104126!5m2!1sen!2sin" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+            <div class="col-xl-5 p-l-0 col-md-6 set-z-index form-footer">
+                <div class="bg-white">
+
+                    <form [formGroup]="contactUsForm" (ngSubmit)="sendMailForContactUs()">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="name">Name *</label>
+                                    <input formControlName="userName" class="form-control" id="name" type="text" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
+                                    <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                                        <div *ngIf="f.userName.errors.required">required</div>
+                                        <div *ngIf="f.userName.errors.email">must be valid</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="Phone">Phone *</label>
+                                    <input formControlName="phoneNo" class="form-control" id="Phone" type="text" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }">
+                                    <div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback">
+                                        <div *ngIf="f.phoneNo.errors.required">required</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="Email">Email *</label>
+                                    <input formControlName="emailAddress" class="form-control" id="Email" type="email" [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }">
+                                    <div *ngIf="submitted && f.emailAddress.errors" class="invalid-feedback">
+                                        <div *ngIf="f.emailAddress.errors.required">required</div>
+                                        <div *ngIf="f.emailAddress.errors.email">must be valid</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="Subject">Subject *</label>
+                                    <input formControlName="subject" class="form-control" id="Subject" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="Message">Message *</label>
+                            <textarea formControlName="message" class="form-control" id="Message" type="text" [ngClass]="{ 'is-invalid': submitted && f.message.errors }">
+                                </textarea>
+                            <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
+                                <div *ngIf="f.message.errors.required">required</div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" [disabled]="loading" class="btn btn-default primary-btn m-0-auto">Send
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<app-footer></app-footer>

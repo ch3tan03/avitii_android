@@ -1,0 +1,9 @@
+.container_read {
+    height: 70px;
+    overflow: hidden;
+  }
+  
+  .show_more {
+    overflow: visible;
+    height: auto;
+  }

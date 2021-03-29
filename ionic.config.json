@@ -1,0 +1,7 @@
+{
+  "name": "educolive",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

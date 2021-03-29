@@ -1,0 +1,36 @@
+{
+    "appName": "Educo Live",
+    "user": "DB_A480DD_urbanclap_admin",
+    "password": "Pune@2019",
+    "server": "SQL5044.site4now.net",
+    "database": "DB_A480DD_urbanclap",
+    "mongo_db_connection": "mongodb://dbuser:qwer1234@cluster0-shard-00-00-pgctr.mongodb.net:27017,cluster0-shard-00-01-pgctr.mongodb.net:27017,cluster0-shard-00-02-pgctr.mongodb.net:27017/academydb_uat?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority",
+    "server_default_port": 4444,
+    "smtp_default_setting": {
+        "pool": true,
+        "host": "smtp.gmail.com",
+        "port": 465,
+        "secure": true,
+        "auth": {
+            "user": "cokonsult123@gmail.com",
+            "pass": "coadmin@konsult999"
+        }
+    },
+    "zoom_master": {
+        "port": 4000,
+        "API_KEY": "euzlASjMReemoDCr_Sv9XA",
+        "API_SECRET": "SsJ41yz9SvQBEhSs9I9WZIgUjbZFaeB16Tmq"
+    },
+    "googleApiKey": "AIzaSyBpZgU-ylt0TDvnt6_mFp2vqFETqHTBjps",
+    "contactUsEmailId": "cokonsult123@gmail.com",
+    "PAYUMONEY_MERCHANT_KEY": "IQAnLfsi",
+    "PAYUMONEY_MERCHANT_SALT": "hAQE5AQBfi",
+    "PAYUMONEY_AUTHORIZATION_HEADER": "Ep3z4t7QNNwbWVeoByzdSweZzBQMz3JnjahaGmxINIg=",
+    "PAYUMONEY_MERCHANT_KEY_SANDBOX": "IQAnLfsi",
+    "PAYUMONEY_MERCHANT_SALT_SANDBOX": "hAQE5AQBfi",
+    "PAYUMONEY_AUTHORIZATION_HEADER_SANDBOX": "Ep3z4t7QNNwbWVeoByzdSweZzBQMz3JnjahaGmxINIg=",
+    "PAYUMONEY_IS_PROD_MODE": false,
+    "BigBlueButtonSharedSecret": "79d2afaa51c0a9d3be4fe2d6cb686c78",
+    "BigBlueButtonApiUrl": "https://we.educolive.com/bigbluebutton/api/",
+    "OtpApiURL": "https://api.msg91.com/api/v5/otp?authkey=334942AYCkfsOwLEQn5f04bd15P1&template_id=5f04c0f4d6fc050e1470e511"
+}

@@ -1,0 +1,213 @@
+<section class="tab-product  p-b-0">
+    <div class="row">
+        <div class="col-sm-12 col-lg-12">
+            <ul class="nav nav-justified nav-material nav-tabs" id="top-tab" role="tablist">
+                <li class="nav-item">
+                    <a aria-selected="false" class="nav-link" data-toggle="tab" href="#top-home" id="top-home-tab"
+                        role="tab"
+                        (click)="SessionStatusTypeFilter=[SessionStatus.Pending,SessionStatus.OngoingAccepted];checkCreatedByUserId=authenticationService.currentUserValue._id;checkCreatedByT=true;">Received
+                        <i class="icon-info-alt small ml-1 tooltip-info" data-toggle="tooltip"
+                            title="Your applied loans those are accepted by LoanObj creator"></i>
+                    </a>
+                    <div class="material-border"></div>
+                </li>
+                <li class="nav-item">
+                    <a aria-selected="false" class="nav-link" data-toggle="tab" href="#top-sent" id="profile-sent-tab"
+                        role="tab"
+                        (click)="SessionStatusTypeFilter=[SessionStatus.OngoingAccepted,SessionStatus.Rejected, SessionStatus.RejectedOngoing, SessionStatus.Suspended, SessionStatus.RejectedOngoingWithRefund];checkCreatedByUserId=authenticationService.currentUserValue._id;checkCreatedByT=false">Sent
+                        <i class="icon-info-alt small ml-1 tooltip-info" data-toggle="tooltip"
+                            title="Your applied loans those are accepted by LoanObj creator"></i>
+                    </a>
+                    <div class="material-border"></div>
+                </li>
+                <li class="nav-item">
+                    <a aria-selected="false" class="nav-link active show" data-toggle="tab" href="#top-active"
+                        id="profile-active-tab" role="tab"
+                        (click)="SessionStatusTypeFilter=[SessionStatus.Accepted];checkCreatedByUserId=null;checkCreatedByT=false;">Active
+                        <i class="icon-info-alt small ml-1 tooltip-info" data-toggle="tooltip"
+                            title="Your applied loans those are accepted by LoanObj creator"></i>
+                    </a>
+                    <div class="material-border"></div>
+                </li>
+                <li class="nav-item">
+                    <a aria-selected="false" class="nav-link" data-toggle="tab" href="#top-profile" id="profile-top-tab"
+                        role="tab"
+                        (click)="SessionStatusTypeFilter=[SessionStatus.Completed];checkCreatedByUserId=null;checkCreatedByT=false;">Paid
+                        
+                        <i class="icon-info-alt small ml-1 tooltip-info" data-toggle="tooltip"
+                            title="Your applied loans those are accepted by LoanObj creator"></i>
+                    </a>
+                    <div class="material-border"></div>
+                </li>
+                <li class="nav-item"><a aria-selected="false" class="nav-link" data-toggle="tab" href="#top-profile"
+                        id="profile-top-tab" role="tab"
+                        (click)="SessionStatusTypeFilter=[SessionStatus.RejectedOngoing, SessionStatus.Suspended];checkCreatedByUserId=null;checkCreatedByT=false;">Unpaid
+                        
+                        <i class="icon-info-alt small ml-1 tooltip-info" data-toggle="tooltip"
+                            title="Your applied loans those are accepted by LoanObj creator"></i>
+                    </a>
+                    <div class="material-border"></div>
+                </li>
+                <li class="nav-item"><a aria-selected="false" class="nav-link" data-toggle="tab" href="#top-contact"
+                        id="contact-top-tab" role="tab"
+                        (click)="SessionStatusTypeFilter=[SessionStatus.Rejected,SessionStatus.RejectedOngoingWithRefund];checkCreatedByUserId=null;checkCreatedByT=false;">Inkasso
+                        Cases
+                        <i class="icon-info-alt small ml-1 tooltip-info" data-toggle="tooltip"
+                            title="Your applied loans those are accepted by LoanObj creator"></i>
+                    </a>
+                    <div class="material-border"></div>
+                </li>
+                <!-- <li class="nav-item"><a aria-selected="true" class="nav-link" data-toggle="tab" href="#top-review" id="review-top-tab" role="tab" (click)="SessionStatusTypeFilter=[SessionStatus.Completed]">Completed 
+                    <i class="icon-info-alt small ml-1 tooltip-info" data-toggle="tooltip"
+                            title="Your applied loans those are accepted by LoanObj creator"></i>
+                        </a>
+                    <div class="material-border"></div>
+                </li> -->
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="agency blog blog-sec blog-sidebar sider p-0 mt-4">
+    <!-- ;-->
+    <div class="card shadow-sm mb-4"
+        *ngFor="let LoanObj of allSessionsData | mySessionsFilter : 'sessionAppliedByBorrowers[0].status' : (SessionStatusTypeFilter.length>0 ? SessionStatusTypeFilter:['accepted']):checkCreatedByUserId:checkCreatedByT">
+        <div class="bg-white blog-title card-header mb-0 text-capitalize">
+            {{utilityService.returnLoanType(LoanObj.loanType)}}
+        </div>
+        <div class="card-body px-md-3 px-1 small">
+            <div class="row">
+              
+                <div class="col-xl-4 col-12">
+                    <div class="form-group ">
+                        <label for="loanAmount" i18n>Loan Amount</label>
+                        <h4 class="text-primary">
+                            {{LoanObj.loanAmount}}
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-12">
+                    <div class="form-group">
+                        <label for="loanTenureInMonths" i18n>Tenure in Months</label>
+                        <h4 class="text-primary">
+                            {{LoanObj.loanTenureInMonths}}
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-12">
+                    <div class="form-group ">
+                        <label for="loanInterestRate" i18n>Interest(%) Rate (per month)</label>
+                        <h4 class="text-primary">
+                            {{LoanObj.loanInterestRate}}
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-12">
+                    <div class="form-group ">
+                        <label for="loanStartDateTime" i18n>Start Date</label>
+                        <h4 class="text-primary" i18n>
+                            {{LoanObj.loanStartDateTime | date:'dd-MMM-YYYY'}}
+                        </h4>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-12">
+                    <div class="form-group">
+                        <div>
+                            <label for="loanStartDateTime" i18n>Payment Method</label>
+                        </div>
+                        
+
+                        <span *ngIf="utilityService.returnLoanRepaymentType('bank',LoanObj)>-1"
+                            class="badge  mr-2 badge-success">
+                            BANK
+                        </span>
+                        <span *ngIf="utilityService.returnLoanRepaymentType('cash',LoanObj)>-1"
+                            class="badge  mr-2 badge-success">
+                            Cash
+                        </span>
+                        <span *ngIf="utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1"
+                            class="badge  mr-2 badge-success">
+                            Revolut
+                        </span>
+                        <span *ngIf="utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1"
+                            class="badge  mr-2 badge-success">
+                            Paypal
+                        </span>
+                        <span *ngIf="utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1"
+                            class="badge  badge-success">
+                            Skrill
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xl-12">
+                    <p class="mb-2" i18n>Description:</p>
+                    <div class="text-black-50" i18n>
+                        {{LoanObj.loanDescription}}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="card-footer bg-white">
+            <span class="badge badge-success font-weight-normal text-capitalize btn float-left" >{{LoanObj.sessionType}}</span>
+            <div class="row" [ngSwitch]="returnSessionApplyStatus(utilityService._.first(LoanObj.sessionAppliedByBorrowers))">
+                <!-- the same view can be shown in more than one case -->
+                <div class="col-xl-12" *ngSwitchCase="SessionStatus.Pending">
+                    <!--
+                    <a *ngIf="!check4applyToSession(LoanObj, checkCreatedByT)" class="btn btn-success text-capitalize btn-sm float-right text-white" (click)="showAppliedToSession(LoanObj)">APPLY</a>
+                    <a *ngIf="check4applyToSession(LoanObj, checkCreatedByT)" class="btn btn-success text-capitalize btn-sm float-right text-white" (click)="showAppliedToSession(LoanObj)"> Details</a>
+                    -->
+                    <a class="btn btn-success text-capitalize btn-sm float-right text-white" (click)="showAppliedToSession(LoanObj)"> Details</a>
+                </div>
+                <div class="col-xl-12" *ngSwitchCase="SessionStatus.Accepted">
+                    <!--
+                    <a *ngIf="!check4applyToSession(LoanObj, checkCreatedByT)" class="btn btn-success text-capitalize btn-sm float-right text-white" (click)="showAppliedToSession(LoanObj)">APPLY</a>
+                    <a *ngIf="check4applyToSession(LoanObj, checkCreatedByT)" class="btn btn-success text-capitalize btn-sm float-right text-white" (click)="showAppliedToSession(LoanObj)"> Details</a>
+                    -->
+                    <a class="btn btn-success text-capitalize btn-sm float-right text-white" (click)="showAppliedToSession(LoanObj)"> Details</a>
+                </div>
+                <div class="col-xl-12" *ngSwitchCase="SessionStatus.OngoingInitiated">
+                    <!--
+                    <button *ngIf="check4applyToSession(LoanObj, checkCreatedByT)" class="btn btn-success text-capitalize btn-sm float-right" (click)="sessionApplyOngoingCheck(LoanObj, utilityService._.first(LoanObj.sessionAppliedByBorrowers))">
+                        Proceed for Execution
+                    </button>
+                -->
+                <a class="btn btn-success text-capitalize btn-sm float-right text-white" (click)="showAppliedToSession(LoanObj)"> Details</a>
+                </div>
+                <div class="col-xl-12" *ngSwitchCase="SessionStatus.OngoingAccepted">
+                    <a *ngIf="!check4applyToSession(LoanObj, checkCreatedByT)" class="btn btn-success btn-sm text-capitalize float-right text-white" (click)="showAppliedToSession(LoanObj)">
+                        Details
+                    </a>
+                    <a *ngIf="check4applyToSession(LoanObj, checkCreatedByT)" class="btn btn-success btn-sm text-capitalize float-right text-white" (click)="showAppliedToSession(LoanObj)"> 
+                        View Loan Requests
+                    </a>
+                </div>
+                <div class="col-xl-12" *ngSwitchCase="SessionStatus.Ongoing">
+                   <!--
+                    <a *ngIf="!check4applyToSession(LoanObj, checkCreatedByT)" class="btn btn-success text-capitalize btn-sm float-right text-white" (click)="showAppliedToSession(LoanObj)">
+                        Details
+                    </a>
+                    <a *ngIf="check4applyToSession(LoanObj, checkCreatedByT)" class="btn btn-success text-capitalize btn-sm float-right text-white" (click)="showAppliedToSession(LoanObj)"> <i class="icon-check fa-lg text-white"></i>
+                        Proceed for Execution
+                    </a>
+                -->
+                <a class="btn btn-success text-capitalize btn-sm float-right text-white" (click)="showAppliedToSession(LoanObj)"> Details</a>
+                </div>
+                <!--default case when there are no matches -->
+                <div class="col-xl-12" *ngSwitchDefault>
+                    <!--
+                    <a *ngIf="!check4applyToSession(LoanObj, checkCreatedByT)" class="btn btn-success btn-sm text-capitalize float-right text-white" (click)="showAppliedToSession(LoanObj)">Apply</a>
+                    <a *ngIf="check4applyToSession(LoanObj, checkCreatedByT)" class="btn btn-success btn-sm float-right text-white" (click)="showAppliedToSession(LoanObj)">Details</a>
+                    -->
+                    <a class="btn btn-success text-capitalize btn-sm float-right text-white" (click)="showAppliedToSession(LoanObj)"> Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-5 text-center blog-agency no-item">
+        <img src="assets/img/noresult.png">
+        <h2 class="text-black-50">No Data Found</h2>
+    </div>
+</section>

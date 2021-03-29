@@ -1,0 +1,119 @@
+<!-- addServiceTypes section -->
+<section class="addServiceTypes-page section-b-space pt-0">
+    <div class="container">
+        <div class="row">
+           
+            <div class="col-xl-12">
+                <form [formGroup]="addServiceTypesForm" class="theme-form">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <h5 class="blog-head font-600">New Service Type</h5>
+                                    <hr>
+                                </div>
+
+                                <div class="col-xl-12 mb-3">
+                                    <label for="sessionType">Parent Service Type</label>
+                                    <select [disabled]="editing" formControlName="parentServicesTypesId" class="custom-select" [ngClass]="{ 'is-invalid': submitted && f.parentServicesTypesId.errors }">
+                                        <option [ngValue]="''">[Choose to Set As Parent category]</option>
+                                        <option *ngFor="let item of ParentServicesTypes; let i = index"
+                                            [ngValue]="item._id">
+                                            {{item.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-xl-12 mb-3">
+                                    <label for="name">Title</label>
+                                    <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                        <div *ngIf="f.name.errors.required">Name is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 mb-3">
+                                    <div class="form-group">
+                                        <label for="description">Description:</label>
+                                        <textarea class="form-control" formControlName="description" rows="5" [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+                                    </textarea>
+                                    </div>
+                                    <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                                        <div *ngIf="f.description.errors.required">Description is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="feeFromUserFixedAmount">Charges for User:</label>
+                                        <input class="form-control" formControlName="feeFromUserFixedAmount" min="0" type="number" [ngClass]="{ 'is-invalid': submitted && f.feeFromUserFixedAmount.errors }" />
+                                    </div>
+
+                                    <div *ngIf="submitted && f.feeFromUserFixedAmount.errors" class="invalid-feedback">
+                                        <div *ngIf="f.feeFromUserFixedAmount.errors.required">Charges for User is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="serviceFeeFromUserFixedAmount">Service Charges:</label>
+                                        <input class="form-control" formControlName="serviceFeeFromUserFixedAmount" min="0" type="number" [ngClass]="{ 'is-invalid': submitted && f.serviceFeeFromUserFixedAmount.errors }" />
+                                    </div>
+                                    <div *ngIf="submitted && f.serviceFeeFromUserFixedAmount.errors" class="invalid-feedback">
+                                        <div *ngIf="f.serviceFeeFromUserFixedAmount.errors.required">Service Charges is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="feeToConsultFixedAmount">Consult Fees:</label>
+                                        <input class="form-control" formControlName="feeToConsultFixedAmount" min="0" type="number" [ngClass]="{ 'is-invalid': submitted && f.feeToConsultFixedAmount.errors }" />
+                                    </div>
+                                    <div *ngIf="submitted && f.feeToConsultFixedAmount.errors" class="invalid-feedback">
+                                        <div *ngIf="f.feeToConsultFixedAmount.errors.required">Consult Fees is required
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 mb-3">
+                                    <div class="form-group">
+                                        <label for="commisionToProtalFixedAmount">Portal Commision:</label>
+                                        <input class="form-control" formControlName="commisionToProtalFixedAmount" min="0" type="number" [ngClass]="{ 'is-invalid': submitted && f.commisionToProtalFixedAmount.errors }" />
+                                    </div>
+                                    <div *ngIf="submitted && f.commisionToProtalFixedAmount.errors" class="invalid-feedback">
+                                        <div *ngIf="f.commisionToProtalFixedAmount.errors.required">Portal Commision is required
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <label for="">Related Keywords:</label>
+                                    <div class="input-group mb-2">
+                                        <input class="form-control" [(ngModel)]="currentSkill" [ngModelOptions]="{standalone: true}" placeholder="type one keyword at a time and click add button" />
+                                        <div class="input-group-append">
+                                          <button class="btn btn-success" (click)="addItem(currentSkill)">Add</button>
+                                        </div>
+                                      </div>
+                                                                         
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-2" *ngFor="let arrayItem of arrayItems; let i=index">
+                                    <label [for]="arrayItem" class="array-item-title">
+                                        {{arrayItem}}</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 text-center">
+                                    <hr>
+                                    <button type="button" (click)="onaddServiceTypesUpdateSubmit()" [disabled]="loading" class="btn btn-primary">Submit</button>
+                                    <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- addServiceTypes section -->

@@ -1,0 +1,51 @@
+
+<section class="login-page section-b-space pt-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 mt-5">
+              
+                <div class="theme-card mt-5 mt-md-2">
+                    <div class="text-center">
+                        <h2 class="title-text pt-1" i18n>Sign In</h2>
+                    </div>
+                  
+                    <hr>
+                    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                        <div class="theme-form">
+                            <div class="form-group">
+                                <label for="userName" i18n>Email</label>
+                                <input type="email" formControlName="userName" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.userName.errors }"
+                                    autocomplete="userName" />
+                                <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+                                    <div *ngIf="f.userName.errors.required" i18n>Email is required</div>
+                                    <div *ngIf="f.userName.errors.email" i18n>Email must be valid</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" i18n>Password</label>
+                                <input type="password" formControlName="password" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                                    autocomplete="current-password" />
+                                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                    <div *ngIf="f.password.errors.required" i18n>Password is required</div>
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" [disabled]="loading"
+                                    class="btn btn-default primary-btn radius-0 float-right" i18n>Sign
+                                    in <span *ngIf="loading" class="spinner-border spinner-border-sm"></span></button>
+                                    
+                                <p class="font-small blue-text d-flex justify-content-start">
+                                    <a routerLink="/forgotpassword" routerLinkActive="active"
+                                        class="blue-text ml-1" i18n>Forgot Password?</a>
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
