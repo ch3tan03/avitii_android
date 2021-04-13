@@ -147,7 +147,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index">
+                                        <tr
+                                            *ngFor="let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index">
                                             <td>{{utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1)
                                                 | date:'dd-MMM-YYYY'}}</td>
                                             <td>kr {{LoanObj.calculatedMonthlyAmountForEMI}}</td>
@@ -366,10 +367,23 @@
                             </div>
                         </div>
                         <div class="col-xl-4 col-12">
-                            <div class="card shadow-sm p-2">
+                            <div class="card shadow-sm p-2" *ngIf="!f.proposedLoanAmount.value">
                                 <label for="loanAmount" i18n>Loan Amount</label>
                                 <h4 class="text-primary">
                                     {{LoanObj.loanAmount}}
+                                </h4>
+                            </div>
+                            <div class="card shadow-sm p-2" *ngIf="f.proposedLoanAmount.value">
+                                <label for="loanAmount" i18n>Loan Amount/Proposed Loan Amount</label>
+                                <h4 class="text-primary">
+                                    <span
+                                        style="-webkit-text-decoration-line: line-through;text-decoration-line: line-through;">
+                                        {{LoanObj.loanAmount}}
+                                    </span>
+                                    /
+                                    <span>
+                                        {{f.proposedLoanAmount.value}}
+                                    </span>
                                 </h4>
                             </div>
                         </div>
@@ -435,6 +449,14 @@
                             </div>
 
                         </div>
+                        <div class="col-xl-12 mt-3" *ngIf="f.loanInsuranceRequired.value">
+                            <div class="card shadow-sm p-2">
+                                <label i18n>Applied for Insurance with Amount</label>
+                                <div class="text-black-50">
+                                    {{f.loanInsuranceAmount.value}}
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="col-xl-12 col-12 mt-3">
                             <div class="table-responsive table shadow-sm">
@@ -447,13 +469,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngFor="let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index">
+                                        <tr
+                                            *ngFor="let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index">
                                             <td>{{utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1)
                                                 | date:'dd-MMM-YYYY'}}</td>
-                                            <td>kr {{LoanObj.calculatedMonthlyAmountForEMI}}</td>
-
+                                            <td *ngIf="!f.calculatedMonthlyAmountForEMI.value">kr
+                                                {{LoanObj.calculatedMonthlyAmountForEMI}}</td>
+                                            <td *ngIf="f.calculatedMonthlyAmountForEMI.value">kr
+                                                <span
+                                                    style="-webkit-text-decoration-line: line-through;text-decoration-line: line-through;">
+                                                    {{LoanObj.calculatedMonthlyAmountForEMI}}
+                                                </span>
+                                                &nbsp;
+                                                <span>
+                                                    {{f.calculatedMonthlyAmountForEMI.value}}
+                                                </span>
+                                            </td>
                                         </tr>
-
                                     </tbody>
                                 </table>
                             </div>
@@ -583,7 +615,7 @@
                 <hr>
                 <form [formGroup]="lendNowForm" class="theme-form">
                     <div class="row">
-                        <div class="col-xl-6 col-6">
+                        <div class="col-xl-6 col-12">
                             <div class="form-group">
                                 <label for="eSignatureLendersName" i18n>Name</label>
                                 <input type="text" formControlName="eSignatureLendersName" class="form-control"
@@ -593,7 +625,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-6">
+                        <div class="col-xl-6 col-12">
                             <div class="form-group">
                                 <label for="eSignatureLendersPassportNumber" i18n>Passport or Driving Licence
                                     Number</label>
@@ -608,32 +640,38 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-12">
+                        <div class="col-xl-6 col-12" *ngIf="authenticationService.currentUserValue.userMemberShipExpireOn">
                             <div class="form-check-inline">
                                 <div class="custom-control custom-checkbox">
                                     <input name="loanInsuranceRequired" id="loanInsuranceRequired" type="checkbox"
-                                        class="custom-control-input" [value]="true" (change)="initiatePayment($event)"
+                                        class="custom-control-input" [value]="true"
+                                        (change)="clicked2InitiatePayment($event)"
                                         [checked]="f.loanInsuranceRequired.value"
                                         [ngClass]="{ 'is-invalid': submitted && f.loanInsuranceRequired.errors }">
                                     <label for="loanInsuranceRequired" class="custom-control-label">Get Loan
-                                        Insurance <i class="icon icon-info-alt" data-title="Calculated insurance will be 20% of the total loan amount."></i></label>
+                                        Insurance <i class="icon icon-info-alt"
+                                            data-title="Calculated insurance will be 20% of the total loan amount."></i></label>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-12" *ngIf="userInitiatedForPayment">
-                          Insurance Amount <span class="badge badge-secondary">kr {{(LoanObj.loanAmount/100)*20}}</span>
-                          <div class="small text-black-50">Calculated insurance will be 20% of the total loan amount.</div>
+                        <div class="col-xl-6 col-12" *ngIf="f.loanInsuranceRequired.value">
+                            Insurance Amount <span class="badge badge-secondary">kr
+                                {{utilityService.returnRoundedNumber(((LoanObj.loanAmount || 0)/100)*20)}}</span>
+                            <div class="small text-black-50">Calculated insurance will be 20% of the total loan amount.
+                            </div>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="card-footer text-right">
-                
-                <app-payment *ngIf="userInitiatedForPayment"></app-payment>
-                           
 
-                <button type="button" *ngIf="!userInitiatedForPayment" class="btn btn-success float-right" (click)="clickedOnVerifiedSignLoanContract()"
-                    i18n>
+                <app-payment [hidden]="!userInitiatedForPayment"></app-payment>
+
+                <button *ngIf="f.loanInsuranceRequired.value" type="button" class="btn btn-success float-right" (click)="initiatePayment()" i18n>
+                    Proceed & Pay
+                </button>
+                <button type="button" *ngIf="!f.loanInsuranceRequired.value" class="btn btn-success float-right"
+                    (click)="clickedOnVerifiedSignLoanContract()" i18n>
                     SUBMIT
                 </button>
             </div>

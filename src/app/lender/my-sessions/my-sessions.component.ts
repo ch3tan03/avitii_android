@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { SocketioService } from 'src/app/socketio.service';
 import { Subscription } from 'rxjs';
 import { AuthenticationService } from '../../services/authentication.service';
@@ -37,6 +37,7 @@ export class MySessionsComponent implements OnInit, OnDestroy {
     private alertService: AlertService,
     public userService: UserService,
     public router: Router,
+    private _cdr: ChangeDetectorRef
   ) {
 
     this.subscription = this.socketService.getCurrentSessionAll().subscribe(_allSessionsData => {
@@ -173,6 +174,16 @@ export class MySessionsComponent implements OnInit, OnDestroy {
               //#endregion other cases where need to update status of session
             }
             */
+          }
+          if (result.data.updatedSessionObj) {
+
+            let _keyPairedMapObj = this.utilityService._.mapKeys(this.allSessionsData, "_id");
+
+            _keyPairedMapObj[result.data.updatedSessionObj._id] = result.data.updatedSessionObj;
+
+            this.allSessionsData = this.utilityService._.values(_keyPairedMapObj);
+
+            this._cdr.detectChanges();
           }
         }
       }

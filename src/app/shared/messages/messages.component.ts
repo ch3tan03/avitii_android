@@ -14,6 +14,7 @@ declare const annyang: any;
 import Speech from 'speak-tts';
 //import translate from 'google-translate';//'google-translate-open-api';
 import { Router } from '@angular/router';
+import { UtilityService } from 'src/app/services/utility.service';
 declare let window: any;
 
 @Component({
@@ -55,6 +56,7 @@ export class MessagesComponent implements OnInit {
     public contactService: ContactService,
     public router: Router,
     private alertService: AlertService,
+    private utilityService: UtilityService,
   ) {
     if (languageCodesEn) {
       this.languageCodes = languageCodesEn["eo"];
@@ -243,6 +245,46 @@ export class MessagesComponent implements OnInit {
   }
 
   sendMessage(_roomId, _message) {
+    if (_message == null || typeof _message == 'undefined' || _message == '' || !_message) {
+      return;
+    }
+
+    //#region filter message with reserved word and make it with star
+    let wordsArr2filterFromMessage = [];
+    let _copiedMessage = _message.toString().toLowerCase();
+    for (let index in wordsArr2filterFromMessage) {
+      let word2find = wordsArr2filterFromMessage[index];
+      let _temp_message = _message;
+      if (_copiedMessage.indexOf(word2find) > -1) {
+        let _wordLength = word2find.length;
+        let _startIndex = _copiedMessage.indexOf(word2find);
+        let _endIndex = _startIndex + _wordLength;
+        let _maskedWord2Replace = this.utilityService.createString('*', _wordLength);
+        let _word2replace = _message.substr(_startIndex, _wordLength);
+        _message = _temp_message.replaceAll(_word2replace, _maskedWord2Replace);
+      }
+    }
+    //#endregion filter message with reserved word and make it with star
+    let _copiedMessage3 = _message.toString().toLowerCase().replaceAll(' ', '');
+    
+      if (_copiedMessage3.match(/[0-9]{8}/)) {
+        this.alertService.error("Phone number is not allowed in message");
+        return;
+      }
+    
+
+    //#region filter message with reserved word and make it with star
+    let wordsArr2restrictFromMessage = ['@', '(a)', '-a-', '.com', '.dk', 'messenger', 'facebook', 'whatsapp', 'wechat', 'skype', 'mobile', 'emailid', 'mob', 'email'];
+    let _copiedMessage2 = _message.toString().toLowerCase();
+    for (let index in wordsArr2restrictFromMessage) {
+      let word2find = wordsArr2restrictFromMessage[index];
+      if (_copiedMessage2.indexOf(word2find) > -1) {
+        this.alertService.error("Message contains restricted word '" + word2find + "'");
+        return;
+      }
+    }
+    //#endregion filter message with reserved word and make it with star
+
     if (_message != null && typeof _message != 'undefined' && _message != '') {
       this.socketService.sendEventWithMessageChatRoom(_roomId, this.currentUser._id, _message);
       this.message2send = '';
@@ -329,7 +371,7 @@ export class MessagesComponent implements OnInit {
   initializeVoiceRecognitionCallback(): void {
     annyang.addCallback('error', (err) => {
       if (err.error === 'network') {
-        this.message2send = "Internet is require";
+        this.message2send = "Please check your internet connection.";
         annyang.abort();
         this.ngZone.run(() => this.voiceActiveSectionSuccess = true);
       } else if (this.message2send === undefined) {

@@ -42,7 +42,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<!-- addSession section -->\r\n\r\n        <div class=\"row\">\r\n            <div class=\"col-xl-3 col-12\">\r\n                <div class=\"card border-left-primary shadow py-2 mb-3\">\r\n                    <div class=\"card-body\">\r\n                        <div class=\"row no-gutters align-items-center\">\r\n                            <div class=\"col mr-2\">\r\n                                <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\" i18n>\r\n                                    EMI (Monthly)\r\n                                </div>\r\n                                <div class=\"h5 mb-0 font-weight-bold text-gray-800\" i18n>\r\n                                    kr {{_calculatedMonthlyAmountForEMI}}\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-auto\">\r\n                                <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"card border-left-primary shadow py-2 mb-3\">\r\n                    <div class=\"card-body\">\r\n                        <div class=\"row no-gutters align-items-center\">\r\n                            <div class=\"col mr-2\">\r\n                                <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\" i18n>\r\n                                    Loan Amount\r\n                                </div>\r\n                                <div class=\"h5 mb-0 font-weight-bold text-gray-800\" i18n>\r\n                                    kr {{f.loanAmount.value}}\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-auto\">\r\n                                <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"card border-left-primary shadow py-2\">\r\n                    <div class=\"card-body\">\r\n                        <div class=\"row no-gutters align-items-center\">\r\n                            <div class=\"col mr-2\">\r\n                                <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\" i18n>\r\n                                    Total Loan\r\n                                </div>\r\n                                <div class=\"h5 mb-0 font-weight-bold text-gray-800\" i18n>\r\n                                    kr {{utilityService.returnRoundedNumber(_calculatedMonthlyAmountForEMI*f.loanTenureInMonths.value)}}\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-auto\">\r\n                                <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-xl-9 col-12\">\r\n                <div class=\"card shadow mb-4\">\r\n                    <!-- Card Header - Dropdown -->\r\n                    <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\r\n                        <h6 class=\"m-0 font-weight-bold text-primary\" i18n>Get A Loan</h6>\r\n                    </div>\r\n                    <!-- Card Body -->\r\n                    <div class=\"card-body\">\r\n                        <form [formGroup]=\"addSessionForm\" class=\"theme-form\">\r\n\r\n                            <div class=\"row\">\r\n\r\n                                <div class=\"col-xl-12 col-12\">\r\n\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"loanType\" i18n>Loan Type</label>\r\n                                        <select formControlName=\"loanType\" class=\"custom-select\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.loanType.errors }\">\r\n                                            <option value=\"\" selected disabled > Choose Loan Type</option>\r\n                                            <option *ngFor=\"let item of _.values(utilityService.ParentLoanTypes);\"\r\n                                                [ngValue]=\"item._id\" i18n>\r\n                                                {{item.name}}</option>\r\n                                        </select>\r\n                                        <div *ngIf=\"submitted && f.loanType.errors\" class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.loanType.errors.required\" i18n>Loan type is required</div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"loanAmount\" i18n>Loan Amount</label>\r\n                                        <input type=\"number\" min=\"0\" formControlName=\"loanAmount\" class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.loanAmount.errors }\"\r\n                                            (change)=\"calculateMonthlyAmountForEMI()\"\r\n                                            (keyup)=\"calculateMonthlyAmountForEMI()\" />\r\n                                        <div *ngIf=\"submitted && f.loanAmount.errors\" class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.loanAmount.errors.required\" i18n>Loan Amount is required</div>\r\n                                            <div *ngIf=\"f.loanAmount.errors.min\" i18n>value must be greater than 1</div>\r\n                                            <div *ngIf=\"f.loanAmount.errors.max\" i18n>value must be less than\r\n                                                {{currentUserMaxLoanAmount}}</div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12 small text-primary mt-n3 mb-3\">\r\n\r\n                                </div>\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"loanTenureInMonths\" i18n>Tenure in Months</label>\r\n                                        <input type=\"number\" formControlName=\"loanTenureInMonths\" class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.loanTenureInMonths.errors }\"\r\n                                            (change)=\"calculateMonthlyAmountForEMI()\"\r\n                                            (keyup)=\"calculateMonthlyAmountForEMI()\" />\r\n                                        <div *ngIf=\"submitted && f.loanTenureInMonths.errors\" class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.loanTenureInMonths.errors.required\" i18n>Loan Tenure is\r\n                                                required\r\n                                            </div>\r\n                                            <div *ngIf=\"f.loanTenureInMonths.errors.min\" i18n>value must be greater than\r\n                                                3</div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"loanInterestRate\" i18n>Interest(%) Rate (per month)</label>\r\n                                        <input type=\"number\" formControlName=\"loanInterestRate\" class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.loanInterestRate.errors }\"\r\n                                            (change)=\"calculateMonthlyAmountForEMI()\"\r\n                                            (keyup)=\"calculateMonthlyAmountForEMI()\" />\r\n                                        <div *ngIf=\"submitted && f.loanInterestRate.errors\" class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.loanInterestRate.errors.required\" i18n>Interest Rate is\r\n                                                required\r\n                                            </div>\r\n                                            <div *ngIf=\"f.loanInterestRate.errors.min\" i18n>value must be greater than 0\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <div class=\"form-group mb-0\">\r\n                                        <label for=\"loanStartDateTimeCustomised\" i18n>Start on</label>\r\n                                        <input type=\"date\" formControlName=\"loanStartDateTimeCustomised\"\r\n                                            class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.loanStartDateTimeCustomised.errors }\"\r\n                                            [max]=\"maxDate\" [min]=\"minDate\" />\r\n                                        <div *ngIf=\"submitted && f.loanStartDateTimeCustomised.errors\"\r\n                                            class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.loanStartDateTimeCustomised.errors.required\" i18n>Start Date\r\n                                                Time is required\r\n                                            </div>\r\n                                            <div *ngIf=\"f.loanStartDateTimeCustomised.errors.date\" i18n>Invalid Date\r\n                                                format.\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <!--\r\n                                        <div class=\"col-xl-12 col-12\">\r\n                                            <label for=\"loanEndDateTimeCustomised\" i18n>Ends on</label>\r\n                                            <input [readonly]=\"true\" type=\"datetime-local\"\r\n                                                formControlName=\"loanEndDateTimeCustomised\" class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.loanEndDateTimeCustomised.errors }\"\r\n                                                [max]=\"maxDate\" [min]=\"minDate\" />\r\n                                            <div *ngIf=\"submitted && f.loanEndDateTimeCustomised.errors\"\r\n                                                class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.loanEndDateTimeCustomised.errors.required\" i18n>End Date Time is\r\n                                                    required\r\n                                                </div>\r\n                                                <div *ngIf=\"f.loanEndDateTimeCustomised.errors.date\" i18n>Invalid Date format.\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                        -->\r\n                                <div class=\"col-xl-12 mt-3\">\r\n                                    <div for=\"loanRepaymentType\" class=\"mb-2\" i18n>How to give the money</div>\r\n                                   \r\n                                        \r\n                                        <div class=\"form-check-inline\" *ngFor=\"let item of _.values( utilityService.LoanRepaymentTypes);\">\r\n                                           \r\n                                            <div class=\"custom-control custom-checkbox\">\r\n                                                <input name=\"service\" id=\"services_{{item._id}}\"\r\n                                                    type=\"checkbox\" class=\"custom-control-input\"\r\n                                                    value=\"{{item._id}}\"\r\n                                                    (change)=\"onLoanRepaymentTypeChange($event)\"\r\n                                                    [checked]=\"onInitSetLoanRepaymentTypeValue(item._id)\"\r\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.loanRepaymentType.errors }\">\r\n                                                <label for=\"services_{{item._id}}\"\r\n                                                    class=\"custom-control-label\">{{item.name}}</label>\r\n                                            </div>\r\n                                       \r\n                                    </div>\r\n                                        <div *ngIf=\"submitted && f.loanRepaymentType.errors\" class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.loanRepaymentType.errors.required\">Payment option required\r\n                                            </div>\r\n                                        </div>\r\n                                   \r\n                                </div>\r\n\r\n                                <div class=\"col-xl-12 mt-3\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"comment\" i18n>Description:</label>\r\n                                        <textarea class=\"form-control\" formControlName=\"loanDescription\" rows=\"2\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.loanDescription.errors }\">\r\n                                            </textarea>\r\n                                    </div>\r\n                                    <div *ngIf=\"submitted && f.loanDescription.errors\" class=\"invalid-feedback\">\r\n                                        <div *ngIf=\"f.loanDescription.errors.required\" i18n>Description is\r\n                                            required\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"col-xl-12 text-center\">\r\n                                    <hr>\r\n                                    <button type=\"button\" (click)=\"onaddSessionUpdateSubmit()\" [disabled]=\"loading\"\r\n                                        class=\"btn btn-primary\" i18n>Submit</button>\r\n                                    <img *ngIf=\"loading\" class=\"pl-3\"\r\n                                        src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\" />\r\n                                </div>\r\n                            </div>\r\n                        </form>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n \r\n<!-- addSession section -->";
+      __webpack_exports__["default"] = "<!-- addSession section -->\r\n\r\n        <div class=\"row\">\r\n            <div class=\"col-xl-3 col-12\">\r\n                <div class=\"card border-left-primary shadow py-2 mb-3\">\r\n                    <div class=\"card-body\">\r\n                        <div class=\"row no-gutters align-items-center\">\r\n                            <div class=\"col mr-2\">\r\n                                <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\" i18n>\r\n                                    EMI (Monthly)\r\n                                </div>\r\n                                <div class=\"h5 mb-0 font-weight-bold text-gray-800\" i18n>\r\n                                    kr {{_calculatedMonthlyAmountForEMI}}\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-auto\">\r\n                                <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"card border-left-primary shadow py-2 mb-3\">\r\n                    <div class=\"card-body\">\r\n                        <div class=\"row no-gutters align-items-center\">\r\n                            <div class=\"col mr-2\">\r\n                                <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\" i18n>\r\n                                    Loan Amount\r\n                                </div>\r\n                                <div class=\"h5 mb-0 font-weight-bold text-gray-800\" i18n>\r\n                                    kr {{f.loanAmount.value}}\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-auto\">\r\n                                <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"card border-left-primary shadow py-2\">\r\n                    <div class=\"card-body\">\r\n                        <div class=\"row no-gutters align-items-center\">\r\n                            <div class=\"col mr-2\">\r\n                                <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\" i18n>\r\n                                    Total Loan\r\n                                </div>\r\n                                <div class=\"h5 mb-0 font-weight-bold text-gray-800\" i18n>\r\n                                    kr {{utilityService.returnRoundedNumber(_calculatedMonthlyAmountForEMI*f.loanTenureInMonths.value)}}\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-auto\">\r\n                                <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-xl-9 col-12\">\r\n                <div class=\"card shadow mb-4\">\r\n                    <!-- Card Header - Dropdown -->\r\n                    <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\r\n                        <h6 class=\"m-0 font-weight-bold text-primary\" i18n>Get A Loan</h6>\r\n                    </div>\r\n                    <!-- Card Body -->\r\n                    <div class=\"card-body\">\r\n                        <form [formGroup]=\"addSessionForm\" class=\"theme-form\">\r\n\r\n                            <div class=\"row\">\r\n\r\n                                <div class=\"col-xl-12 col-12\">\r\n\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"loanType\" i18n>Loan Type</label>\r\n                                        <select formControlName=\"loanType\" class=\"custom-select\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.loanType.errors }\">\r\n                                            <option value=\"\" selected disabled > Choose Loan Type</option>\r\n                                            <option *ngFor=\"let item of _.values(utilityService.ParentLoanTypes);\"\r\n                                                [ngValue]=\"item._id\" i18n>\r\n                                                {{item.name}}</option>\r\n                                        </select>\r\n                                        <div *ngIf=\"submitted && f.loanType.errors\" class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.loanType.errors.required\" i18n>Loan type is required</div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"loanAmount\" i18n>Loan Amount</label>\r\n                                        <input type=\"number\" min=\"0\" formControlName=\"loanAmount\" class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.loanAmount.errors }\"\r\n                                            (change)=\"calculateMonthlyAmountForEMI()\"\r\n                                            (keyup)=\"calculateMonthlyAmountForEMI()\" />\r\n                                        <div *ngIf=\"submitted && f.loanAmount.errors\" class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.loanAmount.errors.required\" i18n>Loan Amount is required</div>\r\n                                            <div *ngIf=\"f.loanAmount.errors.min\" i18n>value must be greater than 1</div>\r\n                                            <div *ngIf=\"f.loanAmount.errors.max\" i18n>value must be less than\r\n                                                {{currentUserMaxLoanAmount}}</div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12 small text-primary mt-n3 mb-3\">\r\n\r\n                                </div>\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"loanTenureInMonths\" i18n>Tenure in Months</label>\r\n                                        <input type=\"number\" formControlName=\"loanTenureInMonths\" class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.loanTenureInMonths.errors }\"\r\n                                            (change)=\"calculateMonthlyAmountForEMI()\"\r\n                                            (keyup)=\"calculateMonthlyAmountForEMI()\" />\r\n                                        <div *ngIf=\"submitted && f.loanTenureInMonths.errors\" class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.loanTenureInMonths.errors.required\" i18n>Loan Tenure is\r\n                                                required\r\n                                            </div>\r\n                                            <div *ngIf=\"f.loanTenureInMonths.errors.min\" i18n>value must be greater than\r\n                                                3</div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"loanInterestRate\" i18n>Interest(%) Rate (per month)</label>\r\n                                        <input type=\"number\" formControlName=\"loanInterestRate\" class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.loanInterestRate.errors }\"\r\n                                            (change)=\"calculateMonthlyAmountForEMI()\"\r\n                                            (keyup)=\"calculateMonthlyAmountForEMI()\" />\r\n                                        <div *ngIf=\"submitted && f.loanInterestRate.errors\" class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.loanInterestRate.errors.required\" i18n>Interest Rate is\r\n                                                required\r\n                                            </div>\r\n                                            <div *ngIf=\"f.loanInterestRate.errors.min\" i18n>minimum permitted interest rate is {{loanInterestRateMin}}\r\n                                            </div>\r\n                                            <div *ngIf=\"f.loanInterestRate.errors.max\" i18n>maximum permitted interest rate is {{loanInterestRateMax}}\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <!--\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <div class=\"form-group mb-0\">\r\n                                        <label for=\"loanStartDateTimeCustomised\" i18n>Start on</label>\r\n                                        <input type=\"date\" formControlName=\"loanStartDateTimeCustomised\"\r\n                                            class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.loanStartDateTimeCustomised.errors }\"\r\n                                            [max]=\"maxDate\" [min]=\"minDate\" />\r\n                                        <div *ngIf=\"submitted && f.loanStartDateTimeCustomised.errors\"\r\n                                            class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.loanStartDateTimeCustomised.errors.required\" i18n>Start Date\r\n                                                Time is required\r\n                                            </div>\r\n                                            <div *ngIf=\"f.loanStartDateTimeCustomised.errors.date\" i18n>Invalid Date\r\n                                                format.\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            -->\r\n                                <!--\r\n                                        <div class=\"col-xl-12 col-12\">\r\n                                            <label for=\"loanEndDateTimeCustomised\" i18n>Ends on</label>\r\n                                            <input [readonly]=\"true\" type=\"datetime-local\"\r\n                                                formControlName=\"loanEndDateTimeCustomised\" class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.loanEndDateTimeCustomised.errors }\"\r\n                                                [max]=\"maxDate\" [min]=\"minDate\" />\r\n                                            <div *ngIf=\"submitted && f.loanEndDateTimeCustomised.errors\"\r\n                                                class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.loanEndDateTimeCustomised.errors.required\" i18n>End Date Time is\r\n                                                    required\r\n                                                </div>\r\n                                                <div *ngIf=\"f.loanEndDateTimeCustomised.errors.date\" i18n>Invalid Date format.\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                        -->\r\n                                <div class=\"col-xl-12 mt-3\">\r\n                                    <div for=\"loanRepaymentType\" class=\"mb-2\" i18n>How to give the money</div>\r\n                                   \r\n                                        \r\n                                        <div class=\"form-check-inline\" *ngFor=\"let item of _.values( utilityService.LoanRepaymentTypes);\">\r\n                                           \r\n                                            <div class=\"custom-control custom-checkbox\">\r\n                                                <input name=\"service\" id=\"services_{{item._id}}\"\r\n                                                    type=\"checkbox\" class=\"custom-control-input\"\r\n                                                    value=\"{{item._id}}\"\r\n                                                    (change)=\"onLoanRepaymentTypeChange($event)\"\r\n                                                    [checked]=\"onInitSetLoanRepaymentTypeValue(item._id)\"\r\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.loanRepaymentType.errors }\">\r\n                                                <label for=\"services_{{item._id}}\"\r\n                                                    class=\"custom-control-label\">{{item.name}}</label>\r\n                                            </div>\r\n                                       \r\n                                    </div>\r\n                                        <div *ngIf=\"submitted && f.loanRepaymentType.errors\" class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.loanRepaymentType.errors.required\">Payment option required\r\n                                            </div>\r\n                                        </div>\r\n                                   \r\n                                </div>\r\n\r\n                                <div class=\"col-xl-12 mt-3\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"comment\" i18n>Description:</label>\r\n                                        <textarea class=\"form-control\" formControlName=\"loanDescription\" rows=\"2\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.loanDescription.errors }\">\r\n                                            </textarea>\r\n                                    </div>\r\n                                    <div *ngIf=\"submitted && f.loanDescription.errors\" class=\"invalid-feedback\">\r\n                                        <div *ngIf=\"f.loanDescription.errors.required\" i18n>Description is\r\n                                            required\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"col-xl-12 text-center\">\r\n                                    <hr>\r\n                                    <button type=\"button\" (click)=\"onaddSessionUpdateSubmit()\" [disabled]=\"loading\"\r\n                                        class=\"btn btn-primary\" i18n>Submit</button>\r\n                                    <img *ngIf=\"loading\" class=\"pl-3\"\r\n                                        src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\" />\r\n                                </div>\r\n                            </div>\r\n                        </form>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n \r\n<!-- addSession section -->";
       /***/
     },
 
@@ -62,7 +62,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "\r\n    <!-- Page Heading -->\r\n    <!-- <div class=\"d-sm-flex align-items-center justify-content-between mb-4\">\r\n        <h1 class=\"h3 mb-0 text-gray-800\">Dashboard</h1>\r\n        <a href=\"#\" class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\"><i class=\"fas fa-download fa-sm text-white-50\"></i> Profile</a>\r\n    </div> -->\r\n\r\n    <div class=\"row\">\r\n\r\n        <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n            <div class=\"card border-left-primary shadow h-100\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"row no-gutters align-items-center\">\r\n                        <div class=\"col mr-2\">\r\n                            <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">\r\n                                My Level</div>\r\n                            <div class=\"h5 mb-0 font-weight-bold text-gray-800\">New Lender</div>\r\n                        </div>\r\n                        <div class=\"col-auto\">\r\n                            <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <!-- Earnings (Monthly) Card Example -->\r\n        <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n            <div class=\"card border-left-warning shadow h-100\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"row no-gutters align-items-center\">\r\n                        <div class=\"col mr-2\">\r\n                            <div class=\"text-xs font-weight-bold text-warning text-uppercase mb-1\">\r\n                                Member since</div>\r\n                            <div class=\"h5 mb-0 font-weight-bold text-gray-800\">Jan 11, 2020</div>\r\n                        </div>\r\n                        <div class=\"col-auto\">\r\n                            <i class=\"fas fa-dollar-sign fa-2x text-gray-300\"></i>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <!-- Earnings (Monthly) Card Example -->\r\n        <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n            <div class=\"card border-left-success shadow h-100\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"row no-gutters align-items-center\">\r\n                        <div class=\"col mr-2\">\r\n                            <div class=\"text-xs font-weight-bold text-success text-uppercase mb-1\">Paid Contracts\r\n                            </div>\r\n                            <div class=\"row no-gutters align-items-center\">\r\n                                <div class=\"col-auto\">\r\n                                    <div class=\"h5 mb-0 mr-3 font-weight-bold text-gray-800\">50</div>\r\n                                </div>\r\n                                <!-- <div class=\"col\">\r\n                                    <div class=\"progress progress-sm mr-2\">\r\n                                        <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 50%\" aria-valuenow=\"50\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                                    </div>\r\n                                </div> -->\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-auto\">\r\n                            <i class=\"fas fa-clipboard-list fa-2x text-gray-300\"></i>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <!-- Pending Requests Card Example -->\r\n        <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n            <div class=\"card border-left-secondary shadow h-100\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"row no-gutters align-items-center\">\r\n                        <div class=\"col mr-2\">\r\n                            <div class=\"text-xs font-weight-bold text-secondary text-uppercase mb-1\">\r\n                                Paid Loans</div>\r\n                            <div class=\"h5 mb-0 font-weight-bold text-gray-800\">18</div>\r\n                        </div>\r\n                        <div class=\"col-auto\">\r\n                            <i class=\"fas fa-comments fa-2x text-gray-300\"></i>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n            <div class=\"card bg-primary text-white shadow\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"text-xs font-weight-bold text-uppercase mb-1\">\r\n                        Active Loan</div>\r\n                        <div class=\"h5 mb-0 font-weight-bold\">18</div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n            <div class=\"card bg-warning text-white shadow\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"text-xs font-weight-bold text-uppercase mb-1\">\r\n                        Disbursed Loans</div>\r\n                        <div class=\"h5 mb-0 font-weight-bold\">18</div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n            <div class=\"card bg-success text-white shadow\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"text-xs font-weight-bold text-uppercase mb-1\">\r\n                        Signed contracts</div>\r\n                        <div class=\"h5 mb-0 font-weight-bold\">18</div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n            <div class=\"card bg-secondary text-white shadow\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"text-xs font-weight-bold text-uppercase mb-1\">\r\n                        Profit Overview</div>\r\n                        <div class=\"h5 mb-0 font-weight-bold\">18</div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row\">\r\n\r\n        <div class=\"col-xl-12 col-12\">\r\n            <div class=\"card shadow mb-4\">\r\n             \r\n                <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\r\n                    <h6 class=\"m-0 font-weight-bold text-primary\">Active Loans</h6>\r\n                    \r\n                </div>\r\n           \r\n                <div class=\"card-body p-0\">\r\n                    <div class=\"table-responsive table-billing-history\">\r\n                        <table class=\"table mb-0\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th scope=\"col\">Borrower</th>\r\n                                    <th scope=\"col\">Amount</th>\r\n                                    <th scope=\"col\">Refund</th>\r\n                                    <th scope=\"col\">Status</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr>\r\n                                    <td>#39201</td>\r\n                                    <td>06/15/2020</td>\r\n                                    <td>$29.99</td>\r\n                                    <td><span class=\"badge badge-light\">Pending</span></td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>#38594</td>\r\n                                    <td>05/15/2020</td>\r\n                                    <td>$29.99</td>\r\n                                    <td><span class=\"badge badge-success\">Paid</span></td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>#38223</td>\r\n                                    <td>04/15/2020</td>\r\n                                    <td>$29.99</td>\r\n                                    <td><span class=\"badge badge-success\">Paid</span></td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>#38125</td>\r\n                                    <td>03/15/2020</td>\r\n                                    <td>$29.99</td>\r\n                                    <td><span class=\"badge badge-success\">Paid</span></td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n        <div class=\"col-xl-12 col-12\">\r\n            <div class=\"card shadow mb-4\">\r\n               \r\n                <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\r\n                    <h6 class=\"m-0 font-weight-bold text-primary\">Unsigned Contracts</h6>\r\n                    \r\n                </div>\r\n              \r\n                <div class=\"card-body p-0\">\r\n                    <div class=\"table-responsive table-billing-history\">\r\n                        <table class=\"table mb-0\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th scope=\"col\">Borrower</th>\r\n                                    <th scope=\"col\">Amount</th>\r\n                                    <th scope=\"col\">Refund</th>\r\n                                    <th scope=\"col\">Status</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr>\r\n                                    <td>#39201</td>\r\n                                    <td>06/15/2020</td>\r\n                                    <td>$29.99</td>\r\n                                    <td><span class=\"badge badge-light\">Pending</span></td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>#38594</td>\r\n                                    <td>05/15/2020</td>\r\n                                    <td>$29.99</td>\r\n                                    <td><span class=\"badge badge-success\">Paid</span></td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>#38223</td>\r\n                                    <td>04/15/2020</td>\r\n                                    <td>$29.99</td>\r\n                                    <td><span class=\"badge badge-success\">Paid</span></td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>#38125</td>\r\n                                    <td>03/15/2020</td>\r\n                                    <td>$29.99</td>\r\n                                    <td><span class=\"badge badge-success\">Paid</span></td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n      \r\n    </div>\r\n\r\n\r\n<div class=\"row d-none\">\r\n\r\n    <div class=\"col-xl-4 col-12\">\r\n        <div class=\"row\">\r\n\r\n            <!-- Earnings (Monthly) Card Example -->\r\n            <div class=\"col-xl-12 col-md-6 mb-3\">\r\n                <div class=\"card shadow-sm\">\r\n                    <div class=\"card-body\">\r\n                        <div class=\"row no-gutters align-items-center\">\r\n                            <div class=\"col text-center border-right\">\r\n                                <div class=\"text-xs font-weight-bold text-success text-uppercase mb-1\">My Wallet\r\n                                </div>\r\n                                <div class=\"h5 mb-0 font-weight-bold text-gray-800\">\r\n                                    ${{fundService.totalFund4currentUser}}</div>\r\n                            </div>\r\n\r\n                            <div class=\"col text-center\">\r\n                                <div class=\"text-xs font-weight-bold text-success text-uppercase mb-1\">My Sessions\r\n                                </div>\r\n                                <div class=\"h5 mb-0 font-weight-bold text-gray-800\">\r\n                                    {{allSessionsCount}}/{{allSessionsTodayCount}}</div>\r\n                            </div>\r\n\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n            <div class=\"col-xl-12 col-md-6 mb-3\">\r\n\r\n                <section class=\"blog-sidebar pt-0\">\r\n                    <div class=\"row pl-0 pr-0\">\r\n                        <div class=\"col-lg-12\">\r\n                             <div>\r\n                                <h5 class=\"blog-title\">upcoming sessions</h5>\r\n                                <div class=\"sidebar-container\">\r\n                                    <div *ngFor=\"let item of utilityService._.values(allSessionsTodayList);\" class=\"post-container d-flex\">\r\n                                        <div class=\"w-35 m-r-25\">\r\n                                            <img alt=\"\" class=\"img-fluid\" src=\"/assets/img/na.png\">\r\n                                            <div class=\"badge badge-blue\">\r\n                                                {{item.location}}\r\n                                            </div>\r\n                                        </div>\r\n                                        <div>\r\n                                            <h5 class=\"post-head\">{{item.sessionSubject}}</h5>\r\n                                            <h6 class=\"date\">{{item.loanStartDateTime | date:'medium'}}</h6>\r\n                                            <div class=\"mt-3\">\r\n                                                <i class=\"icon-video-camera fa-lg mr-3\" (click)=\"clickedOnSessionChatVideo(item, true)\"></i>\r\n                                                <i class=\"icon-comment\" (click)=\"clickedOnSessionChatVideo(item, false)\"></i>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"mt-2 text-center blog-agency no-item\">\r\n                                        <img src=\"assets/img/noresult.png\" style=\"height: 60px;\">\r\n                                        <h5 class=\"mt-3 font-weight-normal\">Looks like you don't have any counselling Session today</h5>\r\n                                    </div>\r\n                                    <!-- <div *ngIf=\"!utilityService._.values(allSessionsTodayList)\">\r\n                                        <div class=\"content_loader_sm\"></div>\r\n                                        <div class=\"content_loader_sm\"></div>\r\n                                    </div> -->\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </section>\r\n            </div>\r\n\r\n        </div>\r\n\r\n    </div>\r\n\r\n    <div class=\"col-xl-8 col-12\">\r\n        <!-- <form [formGroup]=\"homeComponantForm\">\r\n            <div class=\"row mb-3\">\r\n                <div class=\"col-xl-12 col-12\">\r\n\r\n                    <div class=\"form-row bg-pink border p-4 shadow-sm\">\r\n                        <div class=\"col-xl-10\">\r\n                            <input formControlName=\"generaldata4search\" type=\"text\" class=\"form-control\" placeholder=\"Find Sessions\" autocomplete=\"off\">\r\n                        </div>\r\n\r\n                        <div class=\"col-xl-2\">\r\n                            <button class=\"btn btn-outline-primary btn-block\" (click)=\"sessionSearchByService()\">\r\n                                <i class=\"icon-search\"></i> SEARCH\r\n                            </button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </form> -->\r\n        <section class=\"agency blog blog-sec blog-sidebar sider p-0\">\r\n\r\n            <div class=\"h6 mb-3\">\r\n\r\n                LATEST SESSIONS\r\n               \r\n            </div>\r\n            <div class=\"card shadow-sm mb-4\" *ngFor=\"let session of allSessionsData\">\r\n                <div class=\"bg-white blog-title card-header mb-0 text-capitalize\">\r\n                    {{session.sessionSubject}}\r\n                </div>\r\n                <div class=\"card-body px-md-3 px-1 small\">\r\n                     <div class=\"row\">               \r\n                    <div class=\"col-xl-12 col-12\">\r\n                        <p class=\"para2\" [class.show_more]=\"!session._id\">\r\n                            {{session.loanDescription}}\r\n                        </p>\r\n                    </div>          \r\n                    <div class=\"col-xl-6 col-6 border-right mb-2\">\r\n                        <i aria-hidden=\"true\" class=\"icon-timer mr-2\"></i> {{session.loanStartDateTime | date:'MMM d, h:mm a'}}\r\n                    </div>\r\n                   \r\n                    <div class=\"col-xl-6 col-6\">\r\n                        <i aria-hidden=\"true\" class=\"icon-location-pin m-r-10\"></i>\r\n                        \r\n                        {{session.location}}\r\n                    </div>\r\n                  \r\n                </div>\r\n                </div>\r\n                <div class=\"card-footer bg-white\">\r\n                    <span class=\"badge badge-success font-weight-normal text-capitalize btn float-left\" >{{session.sessionType}}</span>\r\n                    <a *ngIf=\"!check4applyToSession(session)\" class=\"btn btn-success  text-capitalize btn-sm float-right text-white\" (click)=\"applyToSession(session)\">Apply</a>\r\n                    <a *ngIf=\"check4applyToSession(session)\" class=\"btn btn-primary text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(session)\"> Details</a>\r\n                </div>\r\n            </div>\r\n            \r\n            <div *ngIf=\"!allSessionsData\">\r\n                <div class=\"content_loader\"></div>\r\n                <div class=\"content_loader\"></div>\r\n            </div>\r\n\r\n        </section>\r\n    </div>\r\n</div>";
+      __webpack_exports__["default"] = "<!-- Page Heading -->\r\n<!-- <div class=\"d-sm-flex align-items-center justify-content-between mb-4\">\r\n        <h1 class=\"h3 mb-0 text-gray-800\">Dashboard</h1>\r\n        <a href=\"#\" class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\"><i class=\"fas fa-download fa-sm text-white-50\"></i> Profile</a>\r\n    </div> -->\r\n\r\n<div [ngSwitch]=\"authenticationService.currentUserValue.role\" class=\"d-none\">\r\n    <div *ngSwitchCase=\"Role.Borrower\">\r\n        <div class=\"jumbotron\"\r\n            *ngIf=\"!authenticationService.currentUserValue.isVerified || !authenticationService.currentUserValue.isUsersBankDetailsSubmitted || !authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified\">\r\n            <div class=\"text-black-50 h2 font-weight-lighter\">\r\n                Welome, Your profile has been verified succesfully. Your need to submit your\r\n                <span class=\"badge badge-danger\">Bank Details</span> and\r\n                <span class=\"badge badge-danger\">Income Proof Documents</span> to access the loan market.\r\n            </div>\r\n            <hr>\r\n            <ul class=\"list-unstyled\">\r\n                <li class=\"d-flex align-items-center justify-content-center mb-3 h4\">\r\n                    Profile and personal document verification\r\n                    <span [ngSwitch]=\"authenticationService.currentUserValue.isVerified\">\r\n                        <i *ngSwitchCase=\"true\" class=\"icon icon-check-box text-success ml-3\"></i>\r\n                        <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\r\n                            routerLink=\"/borrower/profile\"></i>\r\n                    </span>\r\n                </li>\r\n                <li class=\"d-flex align-items-center justify-content-center mb-3 h4\">\r\n                    Bank details submission\r\n                    <span [ngSwitch]=\"authenticationService.currentUserValue.isUsersBankDetailsSubmitted\">\r\n                        <i *ngSwitchCase=\"true\" class=\"icon icon-check-box text-success ml-3\"></i>\r\n                        <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\r\n                            routerLink=\"/borrower/bank-details\"></i>\r\n                    </span>\r\n                </li>\r\n                <li class=\"d-flex align-items-center justify-content-center mb-3 h4\">\r\n                    Income Proof Documents and Mothly Expenses\r\n                    <span [ngSwitch]=\"authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified\">\r\n                        <i *ngSwitchCase=\"true\" class=\"icon icon-check-box text-success ml-3\"></i>\r\n                        <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\r\n                            routerLink=\"/borrower/income-proof\"></i>\r\n                    </span>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n    <div *ngSwitchCase=\"Role.Lender\">\r\n        <div class=\"jumbotron\"\r\n            *ngIf=\"!authenticationService.currentUserValue.isVerified || !authenticationService.currentUserValue.isUsersBankDetailsSubmitted\">\r\n            <div class=\"text-black-50 h2 font-weight-lighter\">\r\n                Welome, Your profile has been verified succesfully. Your need to submit your\r\n                <span class=\"badge badge-danger\">Bank Details</span> to access the Loan Market.\r\n            </div>\r\n            <hr>\r\n            <ul class=\"list-unstyled\">\r\n                <li class=\"d-flex align-items-center justify-content-center mb-3 h4\">\r\n                    Profile and personal document verification\r\n                    <span [ngSwitch]=\"authenticationService.currentUserValue.isVerified\">\r\n                        <i *ngSwitchCase=\"true\" class=\"icon icon-check-box text-success ml-3\"></i>\r\n                        <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\r\n                            routerLink=\"/lender/profile\"></i>\r\n                    </span>\r\n                </li>\r\n                <li class=\"d-flex align-items-center justify-content-center mb-3 h4\">\r\n                    Bank details submission\r\n                    <span [ngSwitch]=\"authenticationService.currentUserValue.isUsersBankDetailsSubmitted\">\r\n                        <i *ngSwitchCase=\"true\" class=\"icon icon-check-box text-success ml-3\"></i>\r\n                        <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\r\n                            routerLink=\"/borrower/bank-details\"></i>\r\n                    </span>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"row\">\r\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n        <div class=\"card border-left-primary shadow h-100\">\r\n            <div class=\"card-body dashobard-card\">\r\n                <div class=\"row no-gutters align-items-center\">\r\n                    <div class=\"col mr-2\">\r\n                        <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\">\r\n                            My Level\r\n                        </div>\r\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800 text-capitalize text-cap\">\r\n                            {{utilityService.returnStringWithReplacing_(authenticationService.currentUserValue.userType)}}\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-auto\">\r\n                        <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <!-- Earnings (Monthly) Card Example -->\r\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n        <div class=\"card border-left-warning shadow h-100\">\r\n            <div class=\"card-body dashobard-card\">\r\n                <div class=\"row no-gutters align-items-center\">\r\n                    <div class=\"col mr-2\">\r\n                        <div class=\"text-xs font-weight-bold text-warning text-uppercase mb-1\">\r\n                            Member since\r\n                        </div>\r\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\">\r\n                            {{authenticationService.currentUserValue.userVerifiedOn | date:'dd-MMM-YYYY'}}\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-auto\">\r\n                        <i class=\"fas fa-dollar-sign fa-2x text-gray-300\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <!-- Earnings (Monthly) Card Example -->\r\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n        <div class=\"card border-left-success shadow h-100\">\r\n            <div class=\"card-body dashobard-card\">\r\n                <div class=\"row no-gutters align-items-center\">\r\n                    <div class=\"col mr-2\">\r\n                        <div class=\"text-xs font-weight-bold text-success text-uppercase mb-1\">\r\n                            Paid Contracts\r\n                        </div>\r\n                        <div class=\"row no-gutters align-items-center\">\r\n                            <div class=\"col-auto\">\r\n                                <div class=\"h5 mb-0 mr-3 font-weight-bold text-gray-800\">{{allMyPaidContractCount}}\r\n                                </div>\r\n                            </div>\r\n                            <!-- <div class=\"col\">\r\n                                        <div class=\"progress progress-sm mr-2\">\r\n                                            <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 50%\" aria-valuenow=\"50\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                                        </div>\r\n                                    </div> -->\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-auto\">\r\n                        <i class=\"fas fa-clipboard-list fa-2x text-gray-300\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <!-- Pending Requests Card Example -->\r\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n        <div class=\"card border-left-secondary shadow h-100\">\r\n            <div class=\"card-body dashobard-card\">\r\n                <div class=\"row no-gutters align-items-center\">\r\n                    <div class=\"col mr-2\">\r\n                        <div class=\"text-xs font-weight-bold text-secondary text-uppercase mb-1\">\r\n                            Paid Loans</div>\r\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\">{{allMyPaidLoanCount}}</div>\r\n                    </div>\r\n                    <div class=\"col-auto\">\r\n                        <i class=\"fas fa-comments fa-2x text-gray-300\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n        <div class=\"card bg-primary text-white shadow\">\r\n            <div class=\"card-body dashobard-card\">\r\n                <div class=\"text-xs font-weight-bold text-uppercase mb-1\">\r\n                    Active Loan</div>\r\n                <div class=\"h5 mb-0 font-weight-bold\">{{allMyActiveLoanCount}}</div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n        <div class=\"card bg-warning text-white shadow\">\r\n            <div class=\"card-body dashobard-card\">\r\n                <div class=\"text-xs font-weight-bold text-uppercase mb-1\">\r\n                    Disbursed Loans</div>\r\n                <div class=\"h5 mb-0 font-weight-bold\">{{allMyDisbursedLoanCount}}</div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n        <div class=\"card bg-success text-white shadow\">\r\n            <div class=\"card-body dashobard-card\">\r\n                <div class=\"text-xs font-weight-bold text-uppercase mb-1\">\r\n                    UnSigned contracts</div>\r\n                <div class=\"h5 mb-0 font-weight-bold\">{{allMyUnSignedContractLoanCount}}</div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n        <div class=\"card bg-secondary text-white shadow\">\r\n            <div class=\"card-body dashobard-card\">\r\n                <div class=\"text-xs font-weight-bold text-uppercase mb-1\">\r\n                    Profit Overview</div>\r\n                <div class=\"h5 mb-0 font-weight-bold\">{{allMyProfitOverviewCount}}</div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<div class=\"row\">\r\n\r\n    <div class=\"col-xl-12 col-12\">\r\n        <div class=\"card shadow mb-4\">\r\n\r\n            <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\r\n                <h6 class=\"m-0 font-weight-bold text-primary\">Active Loans</h6>\r\n\r\n            </div>\r\n\r\n            <div class=\"card-body p-0\">\r\n                <div class=\"table-responsive table-billing-history\">\r\n                    <table class=\"table mb-0\">\r\n                        <thead>\r\n                            <tr>\r\n                                <th scope=\"col\">Type</th>\r\n                                <th scope=\"col\">Lender Name</th>\r\n                                <th scope=\"col\">Amount</th>\r\n                                <th scope=\"col\">Refund</th>\r\n                                <th scope=\"col\">Next EMI</th>\r\n                                <th scope=\"col\">Status</th>\r\n                                <th scope=\"col\">#</th>\r\n                            </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                            <tr\r\n                                *ngFor=\"let LoanObj of allSessionsData | mySessionsFilter : 'sessionAppliedByBorrowers[0].status' : ['accepted']:checkCreatedByUserId:checkCreatedByT\">\r\n                                <td class=\"text-capitalize\">{{(LoanObj.loanType || \"\").replace(\"_\", \" \")}}</td>\r\n                                <td class=\"text-capitalize\">\r\n                                    {{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\r\n                                    true,'firstName')}}</td>\r\n                                <td>{{LoanObj.loanAmount}}</td>\r\n                                <td>{{utilityService.returnRoundedNumber(LoanObj.calculatedMonthlyAmountForEMI *\r\n                                    LoanObj.loanTenureInMonths)}}</td>\r\n                                <td>{{LoanObj.nextInstallment | date:'dd-MMM-YYYY'}}</td>\r\n                                <td>\r\n                                    <div *ngFor=\"let LoanApplyObj of LoanObj.sessionAppliedByBorrowers\">\r\n                                        <a>\r\n                                            <span *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender\"\r\n                                                class=\"badge badge-danger\">Pending</span>\r\n                                            <span *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender\"\r\n                                                class=\"badge badge-success\">Paid</span>\r\n                                        </a>\r\n                                    </div>\r\n                                </td>\r\n                                <td>\r\n                                    <a (click)=\"showAppliedToSession(LoanObj)\">\r\n                                        <span class=\"badge badge-primary\">Details</span>\r\n                                    </a>\r\n                                </td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"col-xl-12 col-12\">\r\n        <div class=\"card shadow mb-4\">\r\n\r\n            <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\r\n                <h6 class=\"m-0 font-weight-bold text-primary\">Unsigned Contracts</h6>\r\n\r\n            </div>\r\n\r\n            <div class=\"card-body p-0\">\r\n                <div class=\"table-responsive table-billing-history\">\r\n                    <table class=\"table mb-0\">\r\n                        <thead>\r\n                            <tr>\r\n                                <th scope=\"col\">Type</th>\r\n                                <th scope=\"col\">Lender Name</th>\r\n                                <th scope=\"col\">Amount</th>\r\n                                <th scope=\"col\">Refund</th>\r\n                                <th scope=\"col\">Next EMI</th>\r\n                                <th scope=\"col\">Status</th>\r\n                                <th scope=\"col\">#</th>\r\n                            </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                            <tr\r\n                                *ngFor=\"let LoanObj of allSessionsData | mySessionsFilter : 'sessionAppliedByBorrowers[0].status' : ['ongoing_accepted']:checkCreatedByUserId:checkCreatedByT\">\r\n                                <td class=\"text-capitalize\">{{(LoanObj.loanType || \"\").replace(\"_\", \" \")}}</td>\r\n                                <td class=\"text-capitalize\">\r\n                                    {{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\r\n                                    true,'firstName')}}</td>\r\n                                <td>{{LoanObj.loanAmount}}</td>\r\n                                <td>{{utilityService.returnRoundedNumber(LoanObj.calculatedMonthlyAmountForEMI *\r\n                                    LoanObj.loanTenureInMonths)}}</td>\r\n                                <td>{{LoanObj.nextInstallment | date:'dd-MMM-YYYY'}}</td>\r\n                                <td>\r\n                                    <div *ngFor=\"let LoanApplyObj of LoanObj.sessionAppliedByBorrowers\">\r\n                                        <a>\r\n                                            <span *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender\"\r\n                                                class=\"badge badge-danger\">Pending</span>\r\n                                            <span *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender\"\r\n                                                class=\"badge badge-success\">Paid</span>\r\n                                        </a>\r\n                                    </div>\r\n                                </td>\r\n                                <td>\r\n                                    <a (click)=\"showAppliedToSession(LoanObj)\">\r\n                                        <span class=\"badge badge-primary\">Details</span>\r\n                                    </a>\r\n                                </td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n<!--\r\n    <div class=\"row d-none\">\r\n    \r\n        <div class=\"col-xl-4 col-12\">\r\n            <div class=\"row\">\r\n    \r\n                <div class=\"col-xl-12 col-md-6 mb-3\">\r\n                    <div class=\"card shadow-sm\">\r\n                        <div class=\"card-body\">\r\n                            <div class=\"row no-gutters align-items-center\">\r\n                                <div class=\"col text-center border-right\">\r\n                                    <div class=\"text-xs font-weight-bold text-success text-uppercase mb-1\">My Wallet\r\n                                    </div>\r\n                                    <div class=\"h5 mb-0 font-weight-bold text-gray-800\">\r\n                                        ${{fundService.totalFund4currentUser}}</div>\r\n                                </div>\r\n    \r\n                                <div class=\"col text-center\">\r\n                                    <div class=\"text-xs font-weight-bold text-success text-uppercase mb-1\">My Sessions\r\n                                    </div>\r\n                                    <div class=\"h5 mb-0 font-weight-bold text-gray-800\">\r\n                                        {{allSessionsCount}}/{{allSessionsTodayCount}}</div>\r\n                                </div>\r\n    \r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n    \r\n                <div class=\"col-xl-12 col-md-6 mb-3\">\r\n    \r\n                    <section class=\"blog-sidebar pt-0\">\r\n                        <div class=\"row pl-0 pr-0\">\r\n                            <div class=\"col-lg-12\">\r\n                                 <div>\r\n                                    <h5 class=\"blog-title\">upcoming sessions</h5>\r\n                                    <div class=\"sidebar-container\">\r\n                                        <div *ngFor=\"let item of utilityService._.values(allSessionsTodayList);\" class=\"post-container d-flex\">\r\n                                            <div class=\"w-35 m-r-25\">\r\n                                                <img alt=\"\" class=\"img-fluid\" src=\"/assets/img/na.png\">\r\n                                                <div class=\"badge badge-blue\">\r\n                                                    {{item.location}}\r\n                                                </div>\r\n                                            </div>\r\n                                            <div>\r\n                                                <h5 class=\"post-head\">{{item.sessionSubject}}</h5>\r\n                                                <h6 class=\"date\">{{item.loanStartDateTime | date:'medium'}}</h6>\r\n                                                <div class=\"mt-3\">\r\n                                                    <i class=\"icon-video-camera fa-lg mr-3\" (click)=\"clickedOnSessionChatVideo(item, true)\"></i>\r\n                                                    <i class=\"icon-comment\" (click)=\"clickedOnSessionChatVideo(item, false)\"></i>\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"mt-2 text-center blog-agency no-item\">\r\n                                            <img src=\"assets/img/noresult.png\" style=\"height: 60px;\">\r\n                                            <h5 class=\"mt-3 font-weight-normal\">Looks like you don't have any counselling Session today</h5>\r\n                                        </div>\r\n    \r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </section>\r\n                </div>\r\n    \r\n            </div>\r\n    \r\n        </div>\r\n    \r\n        <div class=\"col-xl-8 col-12\">\r\n    \r\n            <section class=\"agency blog blog-sec blog-sidebar sider p-0\">\r\n    \r\n                <div class=\"h6 mb-3\">\r\n    \r\n                    LATEST SESSIONS\r\n                   \r\n                </div>\r\n                <div class=\"card shadow-sm mb-4\" *ngFor=\"let session of allSessionsData\">\r\n                    <div class=\"bg-white blog-title card-header mb-0 text-capitalize\">\r\n                        {{session.sessionSubject}}\r\n                    </div>\r\n                    <div class=\"card-body px-md-3 px-1 small\">\r\n                         <div class=\"row\">               \r\n                        <div class=\"col-xl-12 col-12\">\r\n                            <p class=\"para2\" [class.show_more]=\"!session._id\">\r\n                                {{session.loanDescription}}\r\n                            </p>\r\n                        </div>          \r\n                        <div class=\"col-xl-6 col-6 border-right mb-2\">\r\n                            <i aria-hidden=\"true\" class=\"icon-timer mr-2\"></i> {{session.loanStartDateTime | date:'MMM d, h:mm a'}}\r\n                        </div>\r\n                       \r\n                        <div class=\"col-xl-6 col-6\">\r\n                            <i aria-hidden=\"true\" class=\"icon-location-pin m-r-10\"></i>\r\n                            \r\n                            {{session.location}}\r\n                        </div>\r\n                      \r\n                    </div>\r\n                    </div>\r\n                    <div class=\"card-footer bg-white\">\r\n                        <span class=\"badge badge-success font-weight-normal text-capitalize btn float-left\" >{{session.sessionType}}</span>\r\n                        <a *ngIf=\"!check4applyToSession(session)\" class=\"btn btn-success  text-capitalize btn-sm float-right text-white\" (click)=\"applyToSession(session)\">Apply</a>\r\n                        <a *ngIf=\"check4applyToSession(session)\" class=\"btn btn-primary text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(session)\"> Details</a>\r\n                    </div>\r\n                </div>\r\n                \r\n                <div *ngIf=\"!allSessionsData\">\r\n                    <div class=\"content_loader\"></div>\r\n                    <div class=\"content_loader\"></div>\r\n                </div>\r\n    \r\n            </section>\r\n        </div>\r\n    </div>\r\n    -->";
       /***/
     },
 
@@ -288,7 +288,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "\r\n<div class=\"row\">\r\n    <div class=\"col-xl-11 col-10\">\r\n        <h4  class=\"mb-3 text-black-50\">\r\n            Lenders Requests for {{utilityService.returnLoanType(LoanObj.loanType)}} of kr {{LoanObj.loanAmount}}\r\n      </h4>\r\n    </div>\r\n    <div class=\"col-xl-1 col-2\">\r\n      \r\n            <i class=\"icon-close float-right\" mat-button mat-dialog-close></i>\r\n      \r\n    </div>\r\n    </div>\r\n<div class=\"row\">\r\n    <div class=\"col-xl-12\">\r\n        <div id=\"accordion\">\r\n            <div class=\"card shadow-sm mb-3\" *ngFor=\"let LoanApplyObj of LoanObj.sessionAppliedByBorrowers;\">\r\n                <div class=\"card-header\">\r\n                    <a class=\"collapsed card-link\" data-toggle=\"collapse\" [attr.href]=\"'#collapse_' + LoanApplyObj.borrowerId\">\r\n                        {{userService.allAppUsersCollections[LoanApplyObj.borrowerId].firstName | titlecase }}\r\n                        <label class=\"badge font-weight-light text-capitalize text-cap\"\r\n                            [ngClass]=\"{'badge-success': (LoanApplyObj.status==SessionStatus.Accepted || LoanApplyObj.status==SessionStatus.Active || LoanApplyObj.status==SessionStatus.Completed || LoanApplyObj.status==SessionStatus.OngoingInitiated  || LoanApplyObj.status==SessionStatus.OngoingAccepted  || LoanApplyObj.status==SessionStatus.Ongoing), 'badge-danger': (LoanApplyObj.status==SessionStatus.Rejected || LoanApplyObj.status==SessionStatus.RejectedOngoing || LoanApplyObj.status==SessionStatus.Suspended), 'badge-info': ( LoanApplyObj.status==null || LoanApplyObj.status=='' || LoanApplyObj.status==SessionStatus.Pending)}\">{{ utilityService.returnStringWithReplacing_(LoanApplyObj.status || SessionStatus.Pending)  | titlecase }}</label>\r\n                      \r\n                    </a>\r\n                </div>\r\n                <div [attr.id]=\"'collapse_' + LoanApplyObj.borrowerId\" class=\"collapse show\" data-parent=\"#accordion\">\r\n                    <div class=\"card-body\">\r\n                        <div class=\"row\">\r\n                            <div class=\"col-xl-4 col-12\">\r\n                                <div class=\"form-group\">\r\n                                    <label for=\"loanTenureInMonths\" i18n>Tenure in Months</label>\r\n                                    <h4 class=\"text-primary\">\r\n                                        {{LoanObj.loanTenureInMonths}}\r\n                                    </h4>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xl-4 col-12\">\r\n                                <div class=\"form-group border-right\">\r\n                                    <label for=\"loanInterestRate\" i18n>Interest(%) Rate (per month)</label>\r\n                                    <h4 class=\"text-primary\">\r\n                                        {{LoanObj.loanInterestRate}}\r\n                                    </h4>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xl-4 col-12\">\r\n                                <div class=\"form-group border-right\">\r\n                                    <label for=\"loanStartDateTime\" i18n>Start Date</label>\r\n                                    <h4 class=\"text-primary\" i18n>\r\n                                        {{LoanObj.loanStartDateTime | date:'dd-MMM-YYYY'}}\r\n                                    </h4>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xl-12\">\r\n                                <p class=\"mb-2\" i18n>Description:</p>\r\n                                <div class=\"text-black-50\" i18n>\r\n                                    {{LoanObj.loanDescription}}\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"card-footer\">\r\n                        <div class=\"row\" [ngClass]=\"{ 'd-none': ready2Refund }\" [ngSwitch]=\"returnSessionApplyStatus(LoanApplyObj)\">\r\n                            <!-- the same view can be shown in more than one case -->\r\n                            <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Pending\">\r\n                                <!--\r\n                                <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\">Reject</button>\r\n                                <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\r\n                                -->\r\n                            </div>\r\n                            <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Accepted\">\r\n                                <!--\r\n                                <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button> &nbsp;\r\n                                <button class=\"btn btn-info btn-sm\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoingWithRefund)\">Apply\r\n                                    for Refund</button>\r\n                                <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)\">Proceed for\r\n                                    Execution</button>\r\n                                    -->\r\n                                    <a class=\"btn btn-success btn-sm float-right ml-2\" target=\"_blank\"  [href]=\"returnUrl4downloadCOntractPDF(LoanApplyObj._id)\" download><i class=\"icon-cloud-down\"></i>&nbsp;Download Contract</a>                            \r\n                                    <button class=\"btn btn-primary btn-sm float-right\" (click)=\"clickedOnSessionChatVideo(LoanObj, false)\"><i class=\"icon-comments\"></i>&nbsp;Chat</button>\r\n                            </div>\r\n\r\n                            <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.OngoingInitiated\">\r\n                                <!--\r\n                                <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button>\r\n                                <button [disabled]=\"true\" class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingAccepted)\">Proceed for\r\n                                    Execution</button>\r\n                                -->\r\n                            </div>\r\n                            <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.OngoingAccepted\">\r\n                                <!--\r\n                                <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button>\r\n                                <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Ongoing)\">Proceed for\r\n                                    Execution</button>\r\n                                -->\r\n                                <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">\r\n                                    Proceed for Contract Sign\r\n                                </button>\r\n                                <button class=\"btn btn-primary btn-sm float-right mr-2\" (click)=\"clickedOnSessionChatVideo(LoanObj, false)\"><i class=\"icon-comments\"></i>&nbsp;Chat</button>\r\n                            </div>\r\n                            <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Ongoing\">\r\n                                <!--\r\n                                <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Suspended)\">Reject</button>\r\n                                <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Completed)\">Completed</button>\r\n                                -->\r\n                            </div>\r\n                            <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Completed\">\r\n                                <button mat-button mat-dialog-close class=\"btn btn-success btn-sm float-right\" (click)=\"addNewRatings(LoanApplyObj)\">Rate Now</button>\r\n                            </div>\r\n                            <!--default case when there are no matches -->\r\n                            <div class=\"col-xl-12\" *ngSwitchDefault>\r\n                                <!-- \r\n                                <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\">Reject</button>\r\n                                <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\r\n                            -->\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <!--<button *ngIf=\"!check4SessionApplyStatus(LoanApplyObj)\" class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\r\n                    <button *ngIf=\"check4SessionApplyStatus(LoanApplyObj)\" class=\"btn btn-success btn-sm float-right mr-2\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)\">Proceed for Execution</button>-->\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<!--\r\n<div class=\"row\" [ngClass]=\"{ 'd-none': !userInitiatedForPayment }\">\r\n    <div class=\"col-xl-12 text-center\">\r\n        <app-payment></app-payment>\r\n    </div>\r\n</div>\r\n<div class=\"row\" [ngClass]=\"{ 'd-none': !ready2Refund }\">\r\n    <div class=\"col-xl-12\">\r\n        <div class=\"card-body\">\r\n            <div class=\"row\">\r\n                <div class=\"col-xl-12 text-center\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"mb-3 font-weight-bold\">\r\n                            Paid Amount:&nbsp;\r\n                        </label>\r\n                        <label class=\"mb-3\">\r\n                            {{refundObj.amount}}\r\n                        </label>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"mb-3 font-weight-bold\">\r\n                            Refund Charges:&nbsp;\r\n                        </label>\r\n                        <label class=\"mb-3\">\r\n                            {{refundObj.cancellationCharges}}\r\n                        </label>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"mb-3 font-weight-bold\">\r\n                            Amount to be refunded:&nbsp;\r\n                        </label>\r\n                        <label class=\"mb-3\">\r\n                            {{refundObj.finalAmount2Refund}}\r\n                        </label>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <button class=\"btn btn-danger btn-sm\" (click)=\"ready2Refund=false\">Cancel</button> &nbsp;\r\n                        <button class=\"btn btn-success btn-sm\" (click)=\"finalSubmissionForRefund()\">Refund</button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n-->";
+      __webpack_exports__["default"] = "<h2 mat-dialog-title class=\"text-primary\">\r\n    <div class=\"row\">\r\n        <div class=\"col-xl-11 col-10\">\r\n            <h4 class=\"text-black-50\">\r\n                Lenders Requests for {{utilityService.returnLoanType(LoanObj.loanType)}} of kr {{LoanObj.loanAmount}}\r\n            </h4>\r\n        </div>\r\n        <div class=\"col-xl-1 col-2\">\r\n\r\n            <i class=\"icon-close float-right\" mat-button mat-dialog-close></i>\r\n\r\n        </div>\r\n    </div>\r\n</h2>\r\n\r\n<mat-dialog-content class=\"mat-typography\">\r\n    <div class=\"row\">\r\n        <div class=\"col-xl-12\">\r\n            <div id=\"accordion\">\r\n                <div class=\"card shadow-sm mb-3\" *ngFor=\"let LoanApplyObj of LoanObj.sessionAppliedByBorrowers;\">\r\n                    <div class=\"card-header\">\r\n                        <a class=\"collapsed card-link\" data-toggle=\"collapse\"\r\n                            [attr.href]=\"'#collapse_' + LoanApplyObj.borrowerId\">\r\n                            {{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\r\n                            false,'firstName')}}\r\n                            <label class=\"badge font-weight-light text-capitalize text-cap\"\r\n                                [ngClass]=\"{'badge-success': (LoanApplyObj.status==SessionStatus.Accepted || LoanApplyObj.status==SessionStatus.Active || LoanApplyObj.status==SessionStatus.Completed || LoanApplyObj.status==SessionStatus.OngoingInitiated  || LoanApplyObj.status==SessionStatus.OngoingAccepted  || LoanApplyObj.status==SessionStatus.Ongoing), 'badge-danger': (LoanApplyObj.status==SessionStatus.Rejected || LoanApplyObj.status==SessionStatus.RejectedOngoing || LoanApplyObj.status==SessionStatus.Suspended), 'badge-info': ( LoanApplyObj.status==null || LoanApplyObj.status=='' || LoanApplyObj.status==SessionStatus.Pending)}\">{{\r\n                                utilityService.returnStringWithReplacing_(LoanApplyObj.status || SessionStatus.Pending)\r\n                                | titlecase }}</label>\r\n                            <label class=\"badge badge-info font-weight-light text-capitalize text-cap float-right\">\r\n                                #{{LoanApplyObj.loanApplyNumber}}\r\n                            </label>\r\n                        </a>\r\n                    </div>\r\n                    <div [attr.id]=\"'collapse_' + LoanApplyObj.borrowerId\" class=\"collapse show\"\r\n                        data-parent=\"#accordion\">\r\n                        <div class=\"card-body\">\r\n                            <div class=\"row\">\r\n                                <div class=\"col-xl-6 col-12\">\r\n                                    <h5 class=\"card-title\" i18n>Proposed Amount: <badge class=\"badge badge-primary\">\r\n                                            {{LoanApplyObj.proposedLoanAmount || 'NA'}}</badge>\r\n                                    </h5>\r\n                                </div>\r\n                                <div class=\"col-xl-6 col-12\">\r\n                                    <h5 *ngIf=\"LoanApplyObj.loanInsuranceRequired\" class=\"card-title float-right\" i18n>Applied for Insurance with Amount: <badge\r\n                                            class=\"badge badge-primary\">\r\n                                            {{LoanApplyObj.loanInsuranceAmount || 'NA'}}</badge>\r\n                                    </h5>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\" *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender\">\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"transactionIdForLoanAmountPaidByLender\" i18n>TransactionId/Payment\r\n                                            Ref. ID</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObj.transactionIdForLoanAmountPaidByLender}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"transactionOnForLoanAmountPaidByLender\" i18n>Transaction\r\n                                            Date</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObj.transactionOnForLoanAmountPaidByLender | date:'dd-MMM-YYYY'}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"createdOnForLoanAmountPaidByLender\" i18n>Updated On</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObj.createdOnForLoanAmountPaidByLender | date:'dd-MMM-YYYY'}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12\">\r\n                                    <p class=\"mb-2\" for=\"transactionDescriptionForLoanAmountPaidByLender\" i18n>\r\n                                        Description:</p>\r\n                                    <div class=\"text-black-50\" i18n>\r\n                                        {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLender}}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\" *ngIf=\"LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\r\n\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrower\"\r\n                                            i18n>Transaction\r\n                                            Date</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObj.transactionOnForLoanAmountPaidByLenderConfirmByBorrower |\r\n                                            date:'dd-MMM-YYYY'}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"createdOnForLoanAmountPaidByLender\" i18n>Updated On</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObj.createdOnForLoanAmountPaidByLenderConfirmByBorrower |\r\n                                            date:'dd-MMM-YYYY'}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <p class=\"mb-2\"\r\n                                        for=\"transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\" i18n>\r\n                                        Description:</p>\r\n                                    <div class=\"text-black-50\" i18n>\r\n                                        {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower}}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\"\r\n                                *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower && LoanApplyObj.isLoanAmountPaidByLender && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id\">\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <div class=\"form-check-inline\">\r\n                                            <div class=\"custom-control custom-checkbox\">\r\n                                                <input\r\n                                                    [(ngModel)]=\"LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower\"\r\n                                                    name=\"isLoanAmountPaidByLenderConfirmByBorrower\"\r\n                                                    id=\"isLoanAmountPaidByLenderConfirmByBorrower\" type=\"checkbox\"\r\n                                                    class=\"custom-control-input\" [value]=\"true\"\r\n                                                    [checked]=\"LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower\">\r\n                                                <label for=\"isLoanAmountPaidByLenderConfirmByBorrower\"\r\n                                                    class=\"custom-control-label\" i18n>\r\n                                                    Is Loan Amount Received </label>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group\">\r\n\r\n                                        <label for=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrowerCustomised\"\r\n                                            i18n>\r\n                                            Transaction Completion Date\r\n                                        </label>\r\n                                        <input type=\"date\"\r\n                                            [(ngModel)]=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrowerCustomised\"\r\n                                            class=\"form-control\" />\r\n\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"usr\" i18n>Transaction Description</label>\r\n                                        <input type=\"transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\"\r\n                                            class=\"form-control\" placeholder=\"Description\"\r\n                                            [(ngModel)]=\"LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\">\r\n                                    </div>\r\n                                </div>\r\n                                <br>\r\n                                <hr>\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <button class=\"btn btn-primary btn-sm float-right\"\r\n                                        (click)=\"paymentDoneByLenderConfirmByBorrower(LoanApplyObj)\" i18n>\r\n                                        <i class=\"icon-cloud-up\"></i>&nbsp;Update\r\n                                    </button>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\" *ngIf=\"LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender\">\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"installmentKey\" i18n>Installment For</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObjCurrent4Installment.installmentKey}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"transactionIdForLoanAmountPaidToLender\" i18n>TransactionId/Payment\r\n                                            Ref.\r\n                                            ID</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"transactionOnForLoanAmountPaidToLender\" i18n>Transaction\r\n                                            Date</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender |\r\n                                            date:'dd-MMM-YYYY'}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"createdOnForLoanAmountPaidToLender\" i18n>Updated On</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender |\r\n                                            date:'dd-MMM-YYYY'}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <p class=\"mb-2\" for=\"transactionDescriptionForLoanAmountPaidToLender\" i18n>\r\n                                        Note:</p>\r\n                                    <div class=\"text-black-50\" i18n>\r\n                                        {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLender}}\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"transactionOnForLoanAmountPaidToLenderConfirmByLender\"\r\n                                            i18n>Confirmation: Transaction Date</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender\r\n                                            |\r\n                                            date:'dd-MMM-YYYY'}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"createdOnForLoanAmountPaidToLenderConfirmByLender\"\r\n                                            i18n>Confirmation: Updated On</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\r\n                                            |\r\n                                            date:'dd-MMM-YYYY'}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <p class=\"mb-2\" for=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\"\r\n                                        i18n>\r\n                                        Confirmation: Note:</p>\r\n                                    <div class=\"text-black-50\" i18n>\r\n                                        {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLenderConfirmByLender}}\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <button class=\"btn btn-primary btn-sm float-right\"\r\n                                        (click)=\"LoanApplyObjCurrent4Installment={};\" i18n>\r\n                                        <i class=\"icon-eye\"></i>&nbsp;Hide\r\n                                    </button>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\"\r\n                                *ngIf=\"!LoanApplyObj.isLoanAmountPaidByBorrower && LoanApplyObjCurrent4Installment.installmentKey && !LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted  && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id\">\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"installmentKey\" i18n>Installment For</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObjCurrent4Installment.installmentKey}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"transactionIdForLoanAmountPaidToLender\" i18n>TransactionId/Payment\r\n                                            Ref. ID</label>\r\n                                        <input type=\"text\" class=\"form-control\"\r\n                                            placeholder=\"TransactionId/Payment Ref. ID\"\r\n                                            [(ngModel)]=\"LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender\">\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group\">\r\n\r\n                                        <label for=\"transactionOnForLoanAmountPaidToLenderCustomised\" i18n>\r\n                                            Transaction Date\r\n                                        </label>\r\n                                        <input type=\"date\"\r\n                                            [(ngModel)]=\"transactionOnForLoanAmountPaidToLenderCustomised\"\r\n                                            class=\"form-control\" />\r\n\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"transactionDescriptionForLoanAmountPaidToLender\" i18n>Note.</label>\r\n                                        <input type=\"transactionDescriptionForLoanAmountPaidToLender\"\r\n                                            class=\"form-control\" placeholder=\"Description\"\r\n                                            [(ngModel)]=\"LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLender\">\r\n                                    </div>\r\n                                </div>\r\n                                <br>\r\n                                <hr>\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <button class=\"btn btn-primary btn-sm float-right\"\r\n                                        (click)=\"paymentDoneToLender(LoanApplyObj)\" i18n>\r\n                                        <i class=\"icon-cloud-up\"></i>&nbsp;Update\r\n                                    </button>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"col-xl-12 col-12 mt-3\">\r\n                                    <div class=\"table-responsive table shadow-sm\">\r\n                                        <table class=\"table mb-0\">\r\n                                            <thead>\r\n                                                <tr>\r\n                                                    <th scope=\"col\" i18n>EMI Date</th>\r\n                                                    <th scope=\"col\" i18n>Payment</th>\r\n                                                    <th *ngIf=\"returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted\"\r\n                                                        scope=\"col\" i18n>\r\n                                                        <!-- && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id-->\r\n                                                        Payment Status\r\n                                                    </th>\r\n                                                </tr>\r\n                                            </thead>\r\n                                            <tbody>\r\n                                                <tr\r\n                                                    *ngFor=\"let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index\">\r\n                                                    <td>{{utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1)\r\n                                                        | date:'dd-MMM-YYYY'}}</td>\r\n                                                    <td *ngIf=\"!LoanApplyObj.calculatedMonthlyAmountForEMI\">kr\r\n                                                        {{LoanObj.calculatedMonthlyAmountForEMI}}</td>\r\n                                                    <td *ngIf=\"LoanApplyObj.calculatedMonthlyAmountForEMI\">kr\r\n                                                        <span\r\n                                                            style=\"-webkit-text-decoration-line: line-through;text-decoration-line: line-through;\">\r\n                                                            {{LoanObj.calculatedMonthlyAmountForEMI}}\r\n                                                        </span>\r\n                                                        &nbsp;\r\n                                                        <span>\r\n                                                            {{LoanApplyObj.calculatedMonthlyAmountForEMI}}\r\n                                                        </span>\r\n                                                    </td>\r\n                                                    <td\r\n                                                        *ngIf=\"returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted\">\r\n                                                        <!--&& LoanApplyObj.borrowerId==authenticationService.currentUserValue._id-->\r\n                                                        <div\r\n                                                            *ngIf=\"!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id\">\r\n                                                            <div class=\"form-check-inline\">\r\n                                                                <div class=\"custom-control custom-checkbox\">\r\n                                                                    <!--[disabled]=\"LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]\"-->\r\n                                                                    <input\r\n                                                                        [(ngModel)]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]\"\r\n                                                                        name=\"isLoanAmountPaidByBorrower\"\r\n                                                                        id=\"isLoanAmountPaidByBorrower_{{i}}\"\r\n                                                                        type=\"checkbox\" class=\"custom-control-input\"\r\n                                                                        [value]=\"true\"\r\n                                                                        (change)=\"initiateLoanAmountPaidByBorrower($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_'+i))\"\r\n                                                                        [checked]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]\">\r\n                                                                    <label for=\"isLoanAmountPaidByBorrower_{{i}}\"\r\n                                                                        class=\"custom-control-label\" i18n>\r\n                                                                        Is Amount Transfered? </label>\r\n                                                                </div>\r\n                                                            </div>\r\n                                                        </div>\r\n                                                        <div\r\n                                                            *ngIf=\"(returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))  && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id) || (returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.lenderId==authenticationService.currentUserValue._id)\">\r\n                                                            <i class=\"icon-check\"></i>&nbsp;\r\n                                                            Paid{{returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj,\r\n                                                            utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))?'\r\n                                                            & Verified':''}}\r\n                                                            &nbsp;<i class=\"icon-eye\"\r\n                                                                (click)=\"viewCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))\"></i>&nbsp;\r\n                                                        </div>\r\n                                                        <div\r\n                                                            *ngIf=\"!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))  && LoanApplyObj.lenderId==authenticationService.currentUserValue._id\">\r\n                                                            <i class=\"icon-close\"></i>&nbsp;Not Paid\r\n                                                        </div>\r\n                                                        <div\r\n                                                            *ngIf=\"returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && !returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.lenderId==authenticationService.currentUserValue._id\">\r\n                                                            <div class=\"form-check-inline\">\r\n                                                                <div class=\"custom-control custom-checkbox\">\r\n                                                                    <!--[disabled]=\"LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]\"-->\r\n                                                                    <input\r\n                                                                        [(ngModel)]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrowerConfirmByLender_'+i]\"\r\n                                                                        name=\"isLoanAmountPaidByBorrowerConfirmByLender\"\r\n                                                                        id=\"isLoanAmountPaidByBorrowerConfirmByLender_{{i}}\"\r\n                                                                        type=\"checkbox\" class=\"custom-control-input\"\r\n                                                                        [value]=\"true\"\r\n                                                                        (change)=\"initiateLoanAmountPaidByBorrowerConfirmByLender($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrowerConfirmByLender_'+i))\"\r\n                                                                        [checked]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrowerConfirmByLender_'+i]\">\r\n                                                                    <label\r\n                                                                        for=\"isLoanAmountPaidByBorrowerConfirmByLender_{{i}}\"\r\n                                                                        class=\"custom-control-label\" i18n>\r\n                                                                        Is Amount Received? </label>\r\n                                                                </div>\r\n                                                            </div>\r\n                                                        </div>\r\n                                                    </td>\r\n                                                </tr>\r\n                                            </tbody>\r\n                                        </table>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"card-footer\">\r\n                            <div class=\"row\" [ngClass]=\"{ 'd-none': ready2Refund }\"\r\n                                [ngSwitch]=\"returnSessionApplyStatus(LoanApplyObj)\">\r\n                                <!-- the same view can be shown in more than one case -->\r\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Pending\">\r\n                                    <!--\r\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\">Reject</button>\r\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\r\n                                    -->\r\n                                    <button class=\"btn btn-primary btn-sm float-right mr-2\"\r\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\"><i\r\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\r\n                                </div>\r\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Accepted\">\r\n                                    <!--\r\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button> &nbsp;\r\n                                    <button class=\"btn btn-info btn-sm\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoingWithRefund)\">Apply\r\n                                        for Refund</button>\r\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)\">Proceed for\r\n                                        Execution</button>\r\n                                        -->\r\n                                    <a class=\"btn btn-success btn-sm float-left ml-2\" target=\"_blank\"\r\n                                        [href]=\"returnUrl4downloadCOntractPDF(LoanApplyObj._id)\" download><i\r\n                                            class=\"icon-cloud-down\"></i>&nbsp;Download Contract</a>\r\n                                    <button class=\"btn btn-primary btn-sm float-right\"\r\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\"><i\r\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\r\n                                </div>\r\n\r\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.OngoingInitiated\">\r\n                                    <!--\r\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button>\r\n                                    <button [disabled]=\"true\" class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingAccepted)\">Proceed for\r\n                                        Execution</button>\r\n                                    -->\r\n                                </div>\r\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.OngoingAccepted\">\r\n                                    <!--\r\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button>\r\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Ongoing)\">Proceed for\r\n                                        Execution</button>\r\n                                    -->\r\n                                    <button *ngIf=\"LoanApplyObj.createdBy!=authenticationService.currentUserValue._id\"\r\n                                        class=\"btn btn-success btn-sm float-right\"\r\n                                        (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">\r\n                                        Proceed for Contract Sign\r\n                                        {{LoanApplyObj.createdBy}}-{{authenticationService.currentUserValue._id}}\r\n                                    </button>\r\n                                    <button class=\"btn btn-primary btn-sm float-right mr-2\"\r\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\"><i\r\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\r\n                                </div>\r\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Ongoing\">\r\n                                    <!--\r\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Suspended)\">Reject</button>\r\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Completed)\">Completed</button>\r\n                                    -->\r\n                                </div>\r\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Completed\">\r\n                                    <button mat-button mat-dialog-close class=\"btn btn-success btn-sm float-right\"\r\n                                        (click)=\"addNewRatings(LoanApplyObj)\">Rate Now</button>\r\n                                </div>\r\n                                <!--default case when there are no matches -->\r\n                                <div class=\"col-xl-12\" *ngSwitchDefault>\r\n                                    <!-- \r\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\">Reject</button>\r\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\r\n                                -->\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <!--<button *ngIf=\"!check4SessionApplyStatus(LoanApplyObj)\" class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\r\n                        <button *ngIf=\"check4SessionApplyStatus(LoanApplyObj)\" class=\"btn btn-success btn-sm float-right mr-2\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)\">Proceed for Execution</button>-->\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</mat-dialog-content>\r\n\r\n<!-- <mat-dialog-actions align=\"end\">\r\n    <button class=\"btn btn-primary btn-sm float-right\" mat-button mat-dialog-close>\r\n        <i class=\"icon-close\"></i> CLOSE\r\n    </button>\r\n</mat-dialog-actions> -->\r\n\r\n\r\n\r\n\r\n<!--\r\n<div class=\"row\" [ngClass]=\"{ 'd-none': !userInitiatedForPayment }\">\r\n    <div class=\"col-xl-12 text-center\">\r\n        <app-payment></app-payment>\r\n    </div>\r\n</div>\r\n<div class=\"row\" [ngClass]=\"{ 'd-none': !ready2Refund }\">\r\n    <div class=\"col-xl-12\">\r\n        <div class=\"card-body\">\r\n            <div class=\"row\">\r\n                <div class=\"col-xl-12 text-center\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"mb-3 font-weight-bold\">\r\n                            Paid Amount:&nbsp;\r\n                        </label>\r\n                        <label class=\"mb-3\">\r\n                            {{refundObj.amount}}\r\n                        </label>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"mb-3 font-weight-bold\">\r\n                            Refund Charges:&nbsp;\r\n                        </label>\r\n                        <label class=\"mb-3\">\r\n                            {{refundObj.cancellationCharges}}\r\n                        </label>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"mb-3 font-weight-bold\">\r\n                            Amount to be refunded:&nbsp;\r\n                        </label>\r\n                        <label class=\"mb-3\">\r\n                            {{refundObj.finalAmount2Refund}}\r\n                        </label>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <button class=\"btn btn-danger btn-sm\" (click)=\"ready2Refund=false\">Cancel</button> &nbsp;\r\n                        <button class=\"btn btn-success btn-sm\" (click)=\"finalSubmissionForRefund()\">Refund</button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n-->";
       /***/
     },
 
@@ -308,7 +308,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<section class=\"tab-product  p-b-0\">\r\n    <div class=\"row\">\r\n        <div class=\"col-sm-12 col-lg-12\">\r\n            <ul class=\"nav nav-justified nav-material nav-tabs\" id=\"top-tab\" role=\"tablist\">\r\n                <li class=\"nav-item\">\r\n                    <a aria-selected=\"false\" class=\"nav-link\" data-toggle=\"tab\" href=\"#top-home\" \r\n                    id=\"top-home-tab\" role=\"tab\" (click)=\"SessionStatusTypeFilter=[SessionStatus.Pending,SessionStatus.OngoingAccepted];checkCreatedByUserId=authenticationService.currentUserValue._id;checkCreatedByT=true;\">Received\r\n                        <i class=\"icon-info-alt small ml-1 tooltip-info\" data-toggle=\"tooltip\"\r\n                            title=\"Your applied loans those are accepted by LoanObj creator\"></i>\r\n                    </a>\r\n                    <div class=\"material-border\"></div>\r\n                </li>\r\n                <li class=\"nav-item\">\r\n                    <a aria-selected=\"false\" class=\"nav-link\" data-toggle=\"tab\" href=\"#top-sent\" id=\"profile-sent-tab\"\r\n                        role=\"tab\" (click)=\"SessionStatusTypeFilter=[SessionStatus.OngoingAccepted,SessionStatus.Rejected, SessionStatus.RejectedOngoing, SessionStatus.Suspended, SessionStatus.RejectedOngoingWithRefund];checkCreatedByUserId=authenticationService.currentUserValue._id;checkCreatedByT=false\">Sent\r\n                        <i class=\"icon-info-alt small ml-1 tooltip-info\" data-toggle=\"tooltip\"\r\n                            title=\"Your applied loans those are accepted by LoanObj creator\"></i>\r\n                    </a>\r\n                    <div class=\"material-border\"></div>\r\n                </li>\r\n                <li class=\"nav-item\">\r\n                    <a aria-selected=\"false\" class=\"nav-link active show\" data-toggle=\"tab\" href=\"#top-active\"\r\n                        id=\"profile-active-tab\" role=\"tab\"\r\n                        (click)=\"SessionStatusTypeFilter=[SessionStatus.Accepted];checkCreatedByUserId=null;checkCreatedByT=false;\">Active\r\n                        <i class=\"icon-info-alt small ml-1 tooltip-info\" data-toggle=\"tooltip\"\r\n                            title=\"Your applied loans those are accepted by LoanObj creator\"></i>\r\n                    </a>\r\n                    <div class=\"material-border\"></div>\r\n                </li>\r\n                <li class=\"nav-item\">\r\n                    <a aria-selected=\"false\" class=\"nav-link\" data-toggle=\"tab\" href=\"#top-profile\" id=\"profile-top-tab\"\r\n                        role=\"tab\" (click)=\"SessionStatusTypeFilter=[SessionStatus.Completed];checkCreatedByUserId=null;checkCreatedByT=false;\">Paid\r\n                        <i class=\"icon-info-alt small ml-1 tooltip-info\" data-toggle=\"tooltip\"\r\n                            title=\"Your applied loans those are accepted by LoanObj creator\"></i>\r\n                    </a>\r\n                    <div class=\"material-border\"></div>\r\n                </li>\r\n                <li class=\"nav-item\"><a aria-selected=\"false\" class=\"nav-link\" data-toggle=\"tab\" href=\"#top-profile\"\r\n                        id=\"profile-top-tab\" role=\"tab\"\r\n                        (click)=\"SessionStatusTypeFilter=[SessionStatus.RejectedOngoing, SessionStatus.Suspended];checkCreatedByUserId=null;checkCreatedByT=false;\">Unpaid\r\n                        \r\n                        <i class=\"icon-info-alt small ml-1 tooltip-info\" data-toggle=\"tooltip\"\r\n                            title=\"Your applied loans those are accepted by LoanObj creator\"></i>\r\n                    </a>\r\n                    <div class=\"material-border\"></div>\r\n                </li>\r\n                <li class=\"nav-item\"><a aria-selected=\"false\" class=\"nav-link\" data-toggle=\"tab\" href=\"#top-contact\"\r\n                        id=\"contact-top-tab\" role=\"tab\"\r\n                        (click)=\"SessionStatusTypeFilter=[SessionStatus.Rejected,SessionStatus.RejectedOngoingWithRefund];checkCreatedByUserId=null;checkCreatedByT=false;\">Inkasso\r\n                        Cases\r\n                        <i class=\"icon-info-alt small ml-1 tooltip-info\" data-toggle=\"tooltip\"\r\n                            title=\"Your applied loans those are accepted by LoanObj creator\"></i>\r\n                    </a>\r\n                    <div class=\"material-border\"></div>\r\n                </li>\r\n                <!-- <li class=\"nav-item\"><a aria-selected=\"true\" class=\"nav-link\" data-toggle=\"tab\" href=\"#top-review\" id=\"review-top-tab\" role=\"tab\" (click)=\"SessionStatusTypeFilter=[SessionStatus.Completed]\">Completed \r\n                    <i class=\"icon-info-alt small ml-1 tooltip-info\" data-toggle=\"tooltip\"\r\n                            title=\"Your applied loans those are accepted by LoanObj creator\"></i>\r\n                        </a>\r\n                    <div class=\"material-border\"></div>\r\n                </li> -->\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</section>\r\n\r\n<section class=\"agency blog blog-sec blog-sidebar sider p-0 mt-4\">\r\n    <!-- ;-->\r\n    <div class=\"card shadow-sm mb-4\" *ngFor=\"let LoanObj of allSessionsData | mySessionsFilter : 'sessionAppliedByBorrowers[0].status' : (SessionStatusTypeFilter.length>0 ? SessionStatusTypeFilter:['accepted']):checkCreatedByUserId:checkCreatedByT\">\r\n        <div class=\"bg-white blog-title card-header mb-0 text-capitalize\">\r\n            {{utilityService.returnLoanType(LoanObj.loanType)}}\r\n        </div>\r\n        <div class=\"card-body px-md-3 px-1 small\">\r\n            <div class=\"row\">\r\n               \r\n                <div class=\"col-xl-4 col-12\">\r\n                    <div class=\"form-group border-right\">\r\n                        <label for=\"loanAmount\" i18n>Loan Amount</label>\r\n                        <h4 class=\"text-primary\">\r\n                            {{LoanObj.loanAmount}}\r\n                        </h4>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-xl-4 col-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"loanTenureInMonths\" i18n>Tenure in Months</label>\r\n                        <h4 class=\"text-primary\">\r\n                            {{LoanObj.loanTenureInMonths}}\r\n                        </h4>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-xl-4 col-12\">\r\n                    <div class=\"form-group border-right\">\r\n                        <label for=\"loanInterestRate\" i18n>Interest(%) Rate (per month)</label>\r\n                        <h4 class=\"text-primary\">\r\n                            {{LoanObj.loanInterestRate}}\r\n                        </h4>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-xl-4 col-12\">\r\n                    <div class=\"form-group border-right\">\r\n                        <label for=\"loanStartDateTime\" i18n>Start Date</label>\r\n                        <h4 class=\"text-primary\" i18n>\r\n                            {{LoanObj.loanStartDateTime | date:'dd-MMM-YYYY'}}\r\n                        </h4>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-xl-4 col-12\">\r\n                    <div class=\"form-group\">\r\n                        <p class=\"mb-2\" i18n>How to give the money</p>\r\n\r\n                        <span *ngIf=\"utilityService.returnLoanRepaymentType('bank',LoanObj)>-1\"\r\n                            class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                            BANK\r\n                        </span>\r\n                        <span *ngIf=\"utilityService.returnLoanRepaymentType('cash',LoanObj)>-1\"\r\n                            class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                            Cash\r\n                        </span>\r\n                        <span *ngIf=\"utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1\"\r\n                            class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                            Revolut\r\n                        </span>\r\n                        <span *ngIf=\"utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1\"\r\n                            class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                            Paypal\r\n                        </span>\r\n                        <span *ngIf=\"utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1\"\r\n                            class=\"badge font-weight-light text-uppercase badge-success\">\r\n                            Skrill\r\n                        </span>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-xl-12\">\r\n                    <p class=\"mb-2\" i18n>Description:</p>\r\n                    <div class=\"text-black-50\" i18n>\r\n                        {{LoanObj.loanDescription}}\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n        <div class=\"card-footer bg-white\">\r\n            <span class=\"badge badge-success font-weight-normal text-capitalize btn float-left\" >{{LoanObj.sessionType}}</span>\r\n            <div class=\"row\" [ngSwitch]=\"returnSessionApplyStatus(utilityService._.first(LoanObj.sessionAppliedByBorrowers))\">\r\n                <!-- the same view can be shown in more than one case -->\r\n                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Pending\">\r\n                    <!--\r\n                    <a *ngIf=\"!check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\">APPLY</a>\r\n                    <a *ngIf=\"check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> Details</a>\r\n                    -->\r\n                    <a class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> Details</a>\r\n                </div>\r\n                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Accepted\">\r\n                    <!--\r\n                    <a *ngIf=\"!check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\">APPLY</a>\r\n                    <a *ngIf=\"check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> Details</a>\r\n                    -->\r\n                    <a class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> Details</a>\r\n                </div>\r\n                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.OngoingInitiated\">\r\n                    <!--\r\n                    <button *ngIf=\"check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success text-capitalize btn-sm float-right\" (click)=\"sessionApplyOngoingCheck(LoanObj, utilityService._.first(LoanObj.sessionAppliedByBorrowers))\">\r\n                        Proceed for Execution\r\n                    </button>\r\n                -->\r\n                <a class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> Details</a>\r\n                </div>\r\n                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.OngoingAccepted\">\r\n                    <a *ngIf=\"!check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success btn-sm text-capitalize float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\">\r\n                        Details\r\n                    </a>\r\n                    <a *ngIf=\"check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success btn-sm text-capitalize float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> <i class=\"icon-check fa-lg text-white\"></i>\r\n                        Proceed for Contract Sign\r\n                    </a>\r\n                </div>\r\n                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Ongoing\">\r\n                   <!--\r\n                    <a *ngIf=\"!check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\">\r\n                        Details\r\n                    </a>\r\n                    <a *ngIf=\"check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> <i class=\"icon-check fa-lg text-white\"></i>\r\n                        Proceed for Execution\r\n                    </a>\r\n                -->\r\n                <a class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> Details</a>\r\n                </div>\r\n                <!--default case when there are no matches -->\r\n                <div class=\"col-xl-12\" *ngSwitchDefault>\r\n                    <!--\r\n                    <a *ngIf=\"!check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success btn-sm text-capitalize float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\">Apply</a>\r\n                    <a *ngIf=\"check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\">Details</a>\r\n                    -->\r\n                    <a class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> Details</a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"mt-5 text-center blog-agency no-item\">\r\n        <img src=\"assets/img/noresult.png\">\r\n        <h2 class=\"text-black-50\">No Data Found</h2>\r\n    </div>\r\n</section>";
+      __webpack_exports__["default"] = "<section class=\"tab-product  p-b-0\">\r\n    <div class=\"row\">\r\n        <div class=\"col-sm-12 col-lg-12\">\r\n            <ul class=\"nav nav-justified nav-material nav-tabs\" id=\"top-tab\" role=\"tablist\">\r\n                <li class=\"nav-item\">\r\n                    <a aria-selected=\"false\" class=\"nav-link\" data-toggle=\"tab\" href=\"#top-home\" \r\n                    id=\"top-home-tab\" role=\"tab\" (click)=\"SessionStatusTypeFilter=[SessionStatus.Pending,SessionStatus.OngoingAccepted];checkCreatedByUserId=authenticationService.currentUserValue._id;checkCreatedByT=true;\">Received\r\n                        <i class=\"icon-info-alt small ml-1 tooltip-info\" data-toggle=\"tooltip\"\r\n                            title=\"Your applied loans those are accepted by LoanObj creator\"></i>\r\n                    </a>\r\n                    <div class=\"material-border\"></div>\r\n                </li>\r\n                <li class=\"nav-item\">\r\n                    <a aria-selected=\"false\" class=\"nav-link\" data-toggle=\"tab\" href=\"#top-sent\" id=\"profile-sent-tab\"\r\n                        role=\"tab\" (click)=\"SessionStatusTypeFilter=[SessionStatus.OngoingAccepted,SessionStatus.Rejected, SessionStatus.RejectedOngoing, SessionStatus.Suspended, SessionStatus.RejectedOngoingWithRefund];checkCreatedByUserId=authenticationService.currentUserValue._id;checkCreatedByT=false\">Sent\r\n                        <i class=\"icon-info-alt small ml-1 tooltip-info\" data-toggle=\"tooltip\"\r\n                            title=\"Your applied loans those are accepted by LoanObj creator\"></i>\r\n                    </a>\r\n                    <div class=\"material-border\"></div>\r\n                </li>\r\n                <li class=\"nav-item\">\r\n                    <a aria-selected=\"false\" class=\"nav-link active show\" data-toggle=\"tab\" href=\"#top-active\"\r\n                        id=\"profile-active-tab\" role=\"tab\"\r\n                        (click)=\"SessionStatusTypeFilter=[SessionStatus.Accepted];checkCreatedByUserId=null;checkCreatedByT=false;\">Active\r\n                        <i class=\"icon-info-alt small ml-1 tooltip-info\" data-toggle=\"tooltip\"\r\n                            title=\"Your applied loans those are accepted by LoanObj creator\"></i>\r\n                    </a>\r\n                    <div class=\"material-border\"></div>\r\n                </li>\r\n                <li class=\"nav-item\">\r\n                    <a aria-selected=\"false\" class=\"nav-link\" data-toggle=\"tab\" href=\"#top-profile\" id=\"profile-top-tab\"\r\n                        role=\"tab\" (click)=\"SessionStatusTypeFilter=[SessionStatus.Completed];checkCreatedByUserId=null;checkCreatedByT=false;\">Paid\r\n                        <i class=\"icon-info-alt small ml-1 tooltip-info\" data-toggle=\"tooltip\"\r\n                            title=\"Your applied loans those are accepted by LoanObj creator\"></i>\r\n                    </a>\r\n                    <div class=\"material-border\"></div>\r\n                </li>\r\n                <li class=\"nav-item\"><a aria-selected=\"false\" class=\"nav-link\" data-toggle=\"tab\" href=\"#top-profile\"\r\n                        id=\"profile-top-tab\" role=\"tab\"\r\n                        (click)=\"SessionStatusTypeFilter=[SessionStatus.RejectedOngoing, SessionStatus.Suspended];checkCreatedByUserId=null;checkCreatedByT=false;\">Unpaid\r\n                        \r\n                        <i class=\"icon-info-alt small ml-1 tooltip-info\" data-toggle=\"tooltip\"\r\n                            title=\"Your applied loans those are accepted by LoanObj creator\"></i>\r\n                    </a>\r\n                    <div class=\"material-border\"></div>\r\n                </li>\r\n                <li class=\"nav-item\"><a aria-selected=\"false\" class=\"nav-link\" data-toggle=\"tab\" href=\"#top-contact\"\r\n                        id=\"contact-top-tab\" role=\"tab\"\r\n                        (click)=\"SessionStatusTypeFilter=[SessionStatus.Rejected,SessionStatus.RejectedOngoingWithRefund];checkCreatedByUserId=null;checkCreatedByT=false;\">Inkasso\r\n                        Cases\r\n                        <i class=\"icon-info-alt small ml-1 tooltip-info\" data-toggle=\"tooltip\"\r\n                            title=\"Your applied loans those are accepted by LoanObj creator\"></i>\r\n                    </a>\r\n                    <div class=\"material-border\"></div>\r\n                </li>\r\n                <!-- <li class=\"nav-item\"><a aria-selected=\"true\" class=\"nav-link\" data-toggle=\"tab\" href=\"#top-review\" id=\"review-top-tab\" role=\"tab\" (click)=\"SessionStatusTypeFilter=[SessionStatus.Completed]\">Completed \r\n                    <i class=\"icon-info-alt small ml-1 tooltip-info\" data-toggle=\"tooltip\"\r\n                            title=\"Your applied loans those are accepted by LoanObj creator\"></i>\r\n                        </a>\r\n                    <div class=\"material-border\"></div>\r\n                </li> -->\r\n            </ul>\r\n        </div>\r\n    </div>\r\n</section>\r\n\r\n<section class=\"agency blog blog-sec blog-sidebar sider p-0 mt-4\">\r\n    <!-- ;-->\r\n    <div class=\"card shadow-sm mb-4\" *ngFor=\"let LoanObj of allSessionsData | mySessionsFilter : 'sessionAppliedByBorrowers[0].status' : (SessionStatusTypeFilter.length>0 ? SessionStatusTypeFilter:['accepted']):checkCreatedByUserId:checkCreatedByT:(SessionStatusTypeFilter.indexOf(SessionStatus.Pending)>-1)\">\r\n        <div class=\"bg-white blog-title card-header mb-0 text-capitalize\">\r\n            {{utilityService.returnLoanType(LoanObj.loanType)}}\r\n        </div>\r\n        <div class=\"card-body px-md-3 px-1 small\">\r\n            <div class=\"row\">\r\n               \r\n                <div class=\"col-xl-4 col-12\">\r\n                    <div class=\"form-group border-right\">\r\n                        <label for=\"loanAmount\" i18n>Loan Amount</label>\r\n                        <h4 class=\"text-primary\">\r\n                            {{LoanObj.loanAmount}}\r\n                        </h4>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-xl-4 col-12\">\r\n                    <div class=\"form-group\">\r\n                        <label for=\"loanTenureInMonths\" i18n>Tenure in Months</label>\r\n                        <h4 class=\"text-primary\">\r\n                            {{LoanObj.loanTenureInMonths}}\r\n                        </h4>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-xl-4 col-12\">\r\n                    <div class=\"form-group border-right\">\r\n                        <label for=\"loanInterestRate\" i18n>Interest(%) Rate (per month)</label>\r\n                        <h4 class=\"text-primary\">\r\n                            {{LoanObj.loanInterestRate}}\r\n                        </h4>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-xl-4 col-12\">\r\n                    <div class=\"form-group border-right\">\r\n                        <label for=\"loanStartDateTime\" i18n>Start Date</label>\r\n                        <h4 class=\"text-primary\" i18n>\r\n                            {{LoanObj.loanStartDateTime | date:'dd-MMM-YYYY'}}\r\n                        </h4>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-xl-4 col-12\">\r\n                    <div class=\"form-group\">\r\n                        <p class=\"mb-2\" i18n>How to give the money</p>\r\n\r\n                        <span *ngIf=\"utilityService.returnLoanRepaymentType('bank',LoanObj)>-1\"\r\n                            class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                            BANK\r\n                        </span>\r\n                        <span *ngIf=\"utilityService.returnLoanRepaymentType('cash',LoanObj)>-1\"\r\n                            class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                            Cash\r\n                        </span>\r\n                        <span *ngIf=\"utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1\"\r\n                            class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                            Revolut\r\n                        </span>\r\n                        <span *ngIf=\"utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1\"\r\n                            class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                            Paypal\r\n                        </span>\r\n                        <span *ngIf=\"utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1\"\r\n                            class=\"badge font-weight-light text-uppercase badge-success\">\r\n                            Skrill\r\n                        </span>\r\n                    </div>\r\n                </div>\r\n                <div class=\"col-xl-12\">\r\n                    <p class=\"mb-2\" i18n>Description:</p>\r\n                    <div class=\"text-black-50\" i18n>\r\n                        {{LoanObj.loanDescription}}\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n        <div class=\"card-footer bg-white\">\r\n            <span class=\"badge badge-success font-weight-normal text-capitalize btn float-left\" >{{LoanObj.sessionType}}</span>\r\n            <div class=\"row\" [ngSwitch]=\"returnSessionApplyStatus(utilityService._.first(LoanObj.sessionAppliedByBorrowers))\">\r\n                <!-- the same view can be shown in more than one case -->\r\n                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Pending\">\r\n                    <!--\r\n                    <a *ngIf=\"!check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\">APPLY</a>\r\n                    <a *ngIf=\"check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> Details</a>\r\n                    -->\r\n                    <a class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> Details</a>\r\n                </div>\r\n                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Accepted\">\r\n                    <!--\r\n                    <a *ngIf=\"!check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\">APPLY</a>\r\n                    <a *ngIf=\"check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> Details</a>\r\n                    -->\r\n                    <a class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> Details</a>\r\n                </div>\r\n                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.OngoingInitiated\">\r\n                    <!--\r\n                    <button *ngIf=\"check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success text-capitalize btn-sm float-right\" (click)=\"sessionApplyOngoingCheck(LoanObj, utilityService._.first(LoanObj.sessionAppliedByBorrowers))\">\r\n                        Proceed for Execution\r\n                    </button>\r\n                -->\r\n                <a class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> Details</a>\r\n                </div>\r\n                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.OngoingAccepted\">\r\n                    <a *ngIf=\"!check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success btn-sm text-capitalize float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\">\r\n                        Details\r\n                    </a>\r\n                    <a *ngIf=\"check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success btn-sm text-capitalize float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> <i class=\"icon-check fa-lg text-white\"></i>\r\n                        Proceed for Contract Sign\r\n                    </a>\r\n                </div>\r\n                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Ongoing\">\r\n                   <!--\r\n                    <a *ngIf=\"!check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\">\r\n                        Details\r\n                    </a>\r\n                    <a *ngIf=\"check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> <i class=\"icon-check fa-lg text-white\"></i>\r\n                        Proceed for Execution\r\n                    </a>\r\n                -->\r\n                <a class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> Details</a>\r\n                </div>\r\n                <!--default case when there are no matches -->\r\n                <div class=\"col-xl-12\" *ngSwitchDefault>\r\n                    <!--\r\n                    <a *ngIf=\"!check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success btn-sm text-capitalize float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\">Apply</a>\r\n                    <a *ngIf=\"check4applyToSession(LoanObj, checkCreatedByT)\" class=\"btn btn-success btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\">Details</a>\r\n                    -->\r\n                    <a class=\"btn btn-success text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(LoanObj)\"> Details</a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"mt-5 text-center blog-agency no-item\">\r\n        <img src=\"assets/img/noresult.png\">\r\n        <h2 class=\"text-black-50\">No Data Found</h2>\r\n    </div>\r\n</section>";
       /***/
     },
 
@@ -526,7 +526,25 @@
               '_id': _sessionId
             })[0];
 
-            var _sessionApplyObj = this.utilityService._.first(_sessionObj.sessionAppliedByLenders);
+            var _proccessedSessionObj = null;
+
+            switch (this.authenticationService.currentUserValue.role) {
+              case src_app_models__WEBPACK_IMPORTED_MODULE_7__["Role"].Borrower:
+                _proccessedSessionObj = this.utilityService._.cloneDeep(_sessionObj);
+                _proccessedSessionObj.sessionAppliedByBorrowers = _sessionObj.sessionAppliedByBorrowers;
+                break;
+
+              case src_app_models__WEBPACK_IMPORTED_MODULE_7__["Role"].Lender:
+                _proccessedSessionObj = this.utilityService._.cloneDeep(_sessionObj);
+                _proccessedSessionObj.sessionAppliedByBorrowers = _sessionObj.sessionAppliedByLenders;
+                break;
+
+              default:
+                _proccessedSessionObj = this.utilityService._.cloneDeep(_sessionObj);
+                break;
+            }
+
+            var _sessionApplyObj = this.utilityService._.first(_proccessedSessionObj.sessionAppliedByBorrowers);
 
             var _borrowerId = null;
 
@@ -816,7 +834,7 @@
             delete history.state['loanApplyId'];
 
             if (this.loanApplyId) {
-              this.clickedOnSignLoanContract();
+              this.clickedOnSignLoanContract(true);
             }
 
             if (this.loanId) {
@@ -969,7 +987,11 @@
               eSignatureBorrowersPassportNumber: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               eSignatureBorrowersName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               loanInsuranceRequired: [false],
-              loanInsuranceAmount: [0]
+              loanInsuranceAmount: [0],
+              proposedLoanAmount: [null, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(this.LoanObj.loanAmount)],
+              loanApplyNumber: [null],
+              loanInsuranceCreatedOn: [null],
+              calculatedMonthlyAmountForEMI: [null]
             });
           }
         }, {
@@ -981,7 +1003,11 @@
               eSignatureBorrowersPassportNumber: [_userObj.eSignatureBorrowersPassportNumber || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               eSignatureBorrowersName: [_userObj.eSignatureBorrowersName || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               loanInsuranceRequired: [_userObj.loanInsuranceRequired || false],
-              loanInsuranceAmount: [_userObj.loanInsuranceAmount || 0]
+              loanInsuranceAmount: [_userObj.loanInsuranceAmount || 0],
+              proposedLoanAmount: [_userObj.proposedLoanAmount || null, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(this.LoanObj.loanAmount)],
+              loanApplyNumber: [_userObj.loanApplyNumber || null],
+              loanInsuranceCreatedOn: [_userObj.loanInsuranceCreatedOn || null],
+              calculatedMonthlyAmountForEMI: [_userObj.calculatedMonthlyAmountForEMI || null]
             });
           }
         }, {
@@ -1007,8 +1033,48 @@
         }, {
           key: "clickedOnSignLoanContract",
           value: function clickedOnSignLoanContract() {
+            var bypass2CheckOfProposedAmount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+            if (!bypass2CheckOfProposedAmount) {
+              if (this.borrowNowForm.get('proposedLoanAmount').value) {
+                if (this.borrowNowForm.get('proposedLoanAmount').value <= this.LoanObj.loanAmount) {
+                  this.alertService.error("amount must be hight than kr " + this.LoanObj.loanAmount);
+                  return;
+                }
+                /*
+                if (this.borrowNowForm.get('proposedLoanAmount').value > this.borrowerUserObj.monthlyIncomeExpenseMargineAmount) {
+                  this.alertService.error("amount must be lower than or equal to kr " + this.borrowerUserObj.monthlyIncomeExpenseMargineAmount);
+                  return;
+                }
+                */
+
+
+                if (this.borrowNowForm.get('proposedLoanAmount').value > this.returnAllowedAmountForLenderDependOnUserType()) {
+                  this.alertService.error("amount must be lower than or equal to kr " + this.returnAllowedAmountForLenderDependOnUserType());
+                  return;
+                }
+
+                var _calculatedMonthlyAmountForEMI = this.utilityService.fnCalculateMonthlyAmountForEMI(this.borrowNowForm.get('proposedLoanAmount').value, this.LoanObj.loanTenureInMonths, this.LoanObj.loanInterestRate);
+
+                this.borrowNowForm.get('calculatedMonthlyAmountForEMI').setValue(_calculatedMonthlyAmountForEMI);
+              }
+            }
+
             this.userClickedOnSignLoanContract = true;
             this.returnHeaderTitleForPage();
+          }
+        }, {
+          key: "returnAllowedAmountForLenderDependOnUserType",
+          value: function returnAllowedAmountForLenderDependOnUserType() {
+            var maxLoanAmountForLender = null;
+
+            if (this.lenderUserObj.userType) {
+              maxLoanAmountForLender = this.utilityService.LoanAmountMaxTypes[this.lenderUserObj.userType].amount;
+            } else {
+              maxLoanAmountForLender = this.utilityService.LoanAmountMaxTypes[src_app_models_role__WEBPACK_IMPORTED_MODULE_7__["UserType"].new_lender].amount;
+            }
+
+            return maxLoanAmountForLender;
           }
         }, {
           key: "clickedOnVerifiedSignLoanContract",
@@ -1027,17 +1093,25 @@
             }
 
             var _currentSessionApply = {
-              sessionObj: {},
+              sessionObj: {
+                loanAmount: null
+              },
               borrowerId: null,
               lenderId: null,
               _id: null,
               status: null,
               loanId: null,
               isLoanBorrowed: false,
-              createdByUserObj: {}
+              createdByUserObj: {},
+              createdBy: null
             };
             _currentSessionApply = this.borrowNowForm.value;
             _currentSessionApply.sessionObj = this.LoanObj;
+
+            if (this.borrowNowForm.get('proposedLoanAmount').value) {
+              _currentSessionApply.sessionObj.loanAmount = this.borrowNowForm.get('proposedLoanAmount').value;
+            }
+
             _currentSessionApply.borrowerId = this.borrowerUserObj._id;
             _currentSessionApply.lenderId = this.lenderUserObj._id;
             _currentSessionApply.loanId = this.LoanObj._id;
@@ -1063,13 +1137,25 @@
               switch (_currentSessionApply.status) {
                 case src_app_models_role__WEBPACK_IMPORTED_MODULE_7__["SessionStatus"].Pending:
                 case src_app_models_role__WEBPACK_IMPORTED_MODULE_7__["SessionStatus"].OngoingAccepted:
+                  _currentSessionApply.createdBy = this.authenticationService.currentUserValue._id;
                   this.socketService.setSessionApply(true, _currentSessionApply);
                   break;
 
                 default:
                   this.socketService.updateSessionApply(true, _currentSessionApply, this.borrowerUserObj);
                   break;
-              }
+              } //#region create chat group
+
+
+              var _adminUsersArray = [];
+
+              _adminUsersArray.push(this.lenderUserObj._id);
+
+              _adminUsersArray.push(this.borrowerUserObj._id);
+
+              var _currentContactObj = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, this.utilityService.returnLoanType(this.LoanObj.loanType) + " - " + this.borrowerUserObj.firstName, this.LoanObj._id, _currentSessionApply._id, _adminUsersArray, null, null);
+
+              this.socketService.sendEventToAddNewContact(_currentContactObj); //#endregion create chat group
 
               switch (_currentSessionApply.status) {
                 case src_app_models_role__WEBPACK_IMPORTED_MODULE_7__["SessionStatus"].Accepted:
@@ -1097,7 +1183,7 @@
                       calculatedMonthlyAmountForEMI: null
                     };
                     installment.loanStartDateTime = this.utilityService.returnDateWithAddingMonths(_LoanObj.loanStartDateTime, index + 1).format("DD-MMM-YYYY");
-                    installment.calculatedMonthlyAmountForEMI = this.LoanObj.calculatedMonthlyAmountForEMI;
+                    installment.calculatedMonthlyAmountForEMI = this.borrowNowForm.get('calculatedMonthlyAmountForEMI').value || this.LoanObj.calculatedMonthlyAmountForEMI;
 
                     _LoanObj.installments.push(installment);
                   }
@@ -1120,17 +1206,6 @@
 
                     _this3.loading = false;
                   }); //#endregion print PDF signed contract
-                  //#region create chat group
-
-                  var _adminUsersArray = [];
-
-                  _adminUsersArray.push(this.lenderUserObj._id);
-
-                  _adminUsersArray.push(this.borrowerUserObj._id);
-
-                  var _currentContactObj = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, _LoanObj.loanType + " - " + this.borrowerUserObj.firstName, this.LoanObj._id, _currentSessionApply._id, _adminUsersArray, null, null);
-
-                  this.socketService.sendEventToAddNewContact(_currentContactObj); //#endregion create chat group
 
                   break;
 
@@ -1413,7 +1488,7 @@
       "3ITz");
 
       var HomeComponent = /*#__PURE__*/function () {
-        function HomeComponent(userService, socketService, formBuilder, sessionsService, alertService, utilityService, dialog, authenticationService, fundService, router, contactService) {
+        function HomeComponent(userService, socketService, formBuilder, sessionsService, alertService, utilityService, dialog, authenticationService, fundService, router, contactService, _cdr) {
           var _this4 = this;
 
           _classCallCheck(this, HomeComponent);
@@ -1429,78 +1504,237 @@
           this.fundService = fundService;
           this.router = router;
           this.contactService = contactService;
+          this._cdr = _cdr;
           this.show_more = true;
-          this.subscription = this.socketService.getCurrentOnlineUsersListObj().subscribe(function (_currentOnlineUserList) {
-            if (_currentOnlineUserList) {
-              _this4.currentOnlineUserList = _currentOnlineUserList;
-            } else {
-              _this4.currentOnlineUserList = null;
-            }
-          });
-          this.subscription1 = this.socketService.getCurrentSessionCount().subscribe(function (_allSessionsCount) {
-            if (_allSessionsCount) {
-              _this4.allSessionsCount = _allSessionsCount;
-            } else {
-              _this4.allSessionsCount = null;
-            }
-          });
-          var _obj2Use4Filter = {
-            role: 'borrower'
+          this.checkCreatedByUserId = null;
+          this.checkCreatedByT = false;
+          this.allMyActiveLoanCount = 0;
+          this.allMyDisbursedLoanCount = 0;
+          this.allMyUnSignedContractLoanCount = 0;
+          this.allMyProfitOverviewCount = 0; //undone
+
+          this.allMyPaidContractCount = 0; //undone
+
+          this.allMyPaidLoanCount = 0; //undone
+
+          this.Role = src_app_models__WEBPACK_IMPORTED_MODULE_13__["Role"];
+          this.checkIfCurrentUserUpdatedBankDetailsOrNot();
+          this.checkIfCurrentUserUpdatedAndVerifiedIncomeAndExpenseDetailsOrNot();
+          this.checkCreatedByUserId = null;
+          this.checkCreatedByT = null;
+          var _obj2Save = {}; //#region get count for allMyActiveLoanCount i.e. status set to accepted
+
+          _obj2Save = {
+            borrowerId: this.authenticationService.currentUserValue._id,
+            status: src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].Accepted
           };
-          var useAndTrueOrFalse = false;
-          this.socketService.getUserOnlineList(false, _obj2Use4Filter, useAndTrueOrFalse);
-          var _obj2Save = {};
-          this.socketService.getSessionCountByQuery(false, _obj2Save);
-          fundService.getFundsCountForRequestedUser(this.authenticationService.currentUserValue._id);
-          fundService.getSessionSpentCountForRequestedUser(this.authenticationService.currentUserValue._id);
-          this.socketService.getSessionAllTodaysDateAcceptedOnly(this.authenticationService.currentUserValue._id, this.authenticationService.currentUserValue.role).subscribe(function (result) {
-            var data = null;
+          this.socketService.getSessionApplyCountByQuery(false, _obj2Save, true, 'sessions_response_get_session_apply_count_by_query_allMyActiveLoanCount').subscribe(function (data) {
+            //console.log('data => ', data)
+            if (data && data['success']) {
+              _this4.allMyActiveLoanCount = data['data'];
+            } else {
+              //alert(JSON.stringify(data['message']));
+              //this.alertService.error(data['message']);
+              _this4.loading = false;
+            }
+          }, function (error) {
+            var errorMsg2show = "";
 
-            if (result) {
-              if (result['success'] == true || result['success'] == false) {
-                data = result['data'];
+            try {
+              if (error && error.error && error.error.message) {
+                errorMsg2show = error.error.message;
+              } else if (error && error.message) {
+                errorMsg2show = error.message;
               } else {
-                data = result;
+                errorMsg2show = error;
               }
+            } catch (ex) {} //this.alertService.error(errorMsg2show);
+
+
+            _this4.loading = false;
+          }); //#endregion get count for allMyActiveLoanCount i.e. status set to accepted
+          //#region get count for allMyDisbursedLoanCount i.e. status set to accepted and loan amount paid by lender
+
+          _obj2Save = {
+            borrowerId: this.authenticationService.currentUserValue._id,
+            status: src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].Accepted,
+            isLoanAmountPaidByLender: true
+          };
+          this.socketService.getSessionApplyCountByQuery(false, _obj2Save, true, 'sessions_response_get_session_apply_count_by_query_allMyDisbursedLoanCount').subscribe(function (data) {
+            //console.log('data => ', data)
+            if (data && data['success']) {
+              _this4.allMyDisbursedLoanCount = data['data'];
+            } else {
+              //alert(JSON.stringify(data['message']));
+              //this.alertService.error(data['message']);
+              _this4.loading = false;
             }
+          }, function (error) {
+            var errorMsg2show = "";
 
-            _this4.allSessionsTodayList = data;
+            try {
+              if (error && error.error && error.error.message) {
+                errorMsg2show = error.error.message;
+              } else if (error && error.message) {
+                errorMsg2show = error.message;
+              } else {
+                errorMsg2show = error;
+              }
+            } catch (ex) {} //this.alertService.error(errorMsg2show);
 
-            if (_this4.utilityService._.keys(_this4.allSessionsTodayList).length <= 0) {
-              _this4.allSessionsTodayList = [];
+
+            _this4.loading = false;
+          }); //#endregion get count for allMyDisbursedLoanCount i.e. status set to accepted and loan amount paid by lender
+          //#region get count for allMyUnSignedContractLoanCount i.e. status set to OngoingAccepted
+
+          _obj2Save = {
+            borrowerId: this.authenticationService.currentUserValue._id,
+            status: src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].OngoingAccepted
+          };
+          this.socketService.getSessionApplyCountByQuery(false, _obj2Save, true, 'sessions_response_get_session_apply_count_by_query_allMyUnSignedContractLoanCount').pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (data) {
+            //console.log('data => ', data)
+            if (data && data['success']) {
+              _this4.allMyUnSignedContractLoanCount = data['data'];
+            } else {
+              //alert(JSON.stringify(data['message']));
+              //this.alertService.error(data['message']);
+              _this4.loading = false;
             }
+          }, function (error) {
+            var errorMsg2show = "";
 
-            _this4.allSessionsTodayCount = _this4.utilityService._.keys(_this4.allSessionsTodayList).length;
+            try {
+              if (error && error.error && error.error.message) {
+                errorMsg2show = error.error.message;
+              } else if (error && error.message) {
+                errorMsg2show = error.message;
+              } else {
+                errorMsg2show = error;
+              }
+            } catch (ex) {} //this.alertService.error(errorMsg2show);
+
+
+            _this4.loading = false;
+          }); //#endregion get count for allMyUnSignedContractLoanCount i.e. status set to OngoingAccepted
+
+          this.sessionsService.getSessionAllByBorrowerId(this.authenticationService.currentUserValue._id, null, null, null, true, null).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (data) {
+            //console.log('data => ', data)
+            if (data && data['success']) {
+              //alert(JSON.stringify( data));
+              _this4.allSessionsData = data['data'];
+
+              _this4.calculateAndStoreLocalNextEMIDateOfAppliedLoansForBorrower();
+
+              _this4.userService.proccessAllAppUsersCollections(_this4.utilityService._.uniq(_this4.utilityService._.map(_this4.utilityService._.flattenDepth(_this4.utilityService._.map(_this4.utilityService._.values(_this4.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId'))); //this.alertService.success(data['message'], true);
+
+
+              _this4.loading = false; //this.element_btn_click_addSession_skills_verification.click();
+            } else {
+              //alert(JSON.stringify(data['message']));
+              //this.alertService.error(data['message']);
+              _this4.loading = false;
+            }
+          }, function (error) {
+            var errorMsg2show = "";
+
+            try {
+              if (error && error.error && error.error.message) {
+                errorMsg2show = error.error.message;
+              } else if (error && error.message) {
+                errorMsg2show = error.message;
+              } else {
+                errorMsg2show = error;
+              }
+            } catch (ex) {} //this.alertService.error(errorMsg2show);
+
+
+            _this4.loading = false;
           });
+          this.sessionsService.getUpdatesForSessionAllByBorrowerId().subscribe(function (data) {
+            if (data && data['success']) {
+              var _keyPairedMapObj = _this4.utilityService._.mapKeys(_this4.allSessionsData, "_id");
+
+              for (var _items in data['data']) {
+                var _currentObj = data['data'][_items];
+                _keyPairedMapObj[_currentObj._id] = _currentObj;
+              }
+
+              _this4.allSessionsData = _this4.utilityService._.values(_keyPairedMapObj);
+
+              _this4.calculateAndStoreLocalNextEMIDateOfAppliedLoansForBorrower();
+
+              _this4.loading = false;
+            } else {
+              _this4.loading = false;
+            }
+          }, function (error) {
+            _this4.loading = false;
+          });
+          /*
+              this.subscription = this.socketService.getCurrentOnlineUsersListObj().subscribe(_currentOnlineUserList => {
+                if (_currentOnlineUserList) {
+                  this.currentOnlineUserList = _currentOnlineUserList;
+                } else {
+                  this.currentOnlineUserList = null;
+                }
+              });
+          
+              this.subscription1 =  this.socketService.getCurrentSessionCount().subscribe(_allSessionsCount => {
+                if (_allSessionsCount) {
+                  this.allSessionsCount = _allSessionsCount;
+                } else {
+                  this.allSessionsCount = null;
+                }
+              });
+          
+              let _obj2Use4Filter = {
+                role: 'borrower'
+              };
+              let useAndTrueOrFalse = false;
+          
+              this.socketService.getUserOnlineList(false, _obj2Use4Filter, useAndTrueOrFalse);
+              let _obj2Save = {};
+              this.socketService.getSessionCountByQuery(false, _obj2Save);
+              fundService.getFundsCountForRequestedUser(this.authenticationService.currentUserValue._id);
+              fundService.getSessionSpentCountForRequestedUser(this.authenticationService.currentUserValue._id);
+              this.socketService.getSessionAllTodaysDateAcceptedOnly(this.authenticationService.currentUserValue._id, this.authenticationService.currentUserValue.role).subscribe(result => {
+                let data = null;
+                if (result) {
+                  if (result['success'] == true || result['success'] == false) {
+                    data = result['data'];
+                  } else {
+                    data = result;
+                  }
+                }
+                this.allSessionsTodayList = data;
+                if (this.utilityService._.keys(this.allSessionsTodayList).length <= 0) {
+                  this.allSessionsTodayList = [];
+                }
+                this.allSessionsTodayCount = this.utilityService._.keys(this.allSessionsTodayList).length;
+              });
+              */
         }
 
         _createClass(HomeComponent, [{
-          key: "f",
-          get: function get() {
-            return this.homeComponantForm.controls;
-          }
+          key: "ngOnInit",
+          value: function ngOnInit() {}
         }, {
-          key: "sessionSearchByService",
-          value: function sessionSearchByService() {
+          key: "ngOnDestroy",
+          value: function ngOnDestroy() {}
+        }, {
+          key: "checkIfCurrentUserUpdatedBankDetailsOrNot",
+          value: function checkIfCurrentUserUpdatedBankDetailsOrNot() {
             var _this5 = this;
 
-            var generaldata4search = this.homeComponantForm.get('generaldata4search').value;
-            var useAndTrueOrFalse = false;
-            this.allSessionsData = [];
-            this.sessionsService.getSessionAllByService('', '', generaldata4search, generaldata4search, useAndTrueOrFalse).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (data) {
+            this.userService.getUserById(this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (data) {
               //console.log('data => ', data)
               if (data && data['success']) {
-                //alert(JSON.stringify( data));
-                _this5.allSessionsData = data['data']; //this.alertService.success(data['message'], true);
+                if (data["data"]["bankName"] || data["data"]["accountNumber"]) {
+                  _this5.authenticationService.currentUserValue.isUsersBankDetailsSubmitted = true;
 
-                _this5.userService.proccessAllAppUsersCollections(_this5.utilityService._.uniq(_this5.utilityService._.map(_this5.utilityService._.flattenDepth(_this5.utilityService._.map(_this5.utilityService._.values(_this5.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId')));
-
-                _this5.loading = false; //this.element_btn_click_addSession_skills_verification.click();
-              } else {
-                //alert(JSON.stringify(data['message']));
-                //this.alertService.error(data['message']);
-                _this5.loading = false;
-              }
+                  _this5.authenticationService.sendCurrentUserObj(_this5.authenticationService.currentUserValue);
+                }
+              } else {}
             }, function (error) {
               var errorMsg2show = "";
 
@@ -1512,37 +1746,28 @@
                 } else {
                   errorMsg2show = error;
                 }
-              } catch (ex) {} //this.alertService.error(errorMsg2show);
-
+              } catch (ex) {}
 
               _this5.loading = false;
             });
           }
         }, {
-          key: "ngOnInit",
-          value: function ngOnInit() {
+          key: "checkIfCurrentUserUpdatedAndVerifiedIncomeAndExpenseDetailsOrNot",
+          value: function checkIfCurrentUserUpdatedAndVerifiedIncomeAndExpenseDetailsOrNot() {
             var _this6 = this;
 
-            this.homeComponantForm = this.formBuilder.group({
-              services4search: [''],
-              location4search: [''],
-              generaldata4search: ['']
-            });
-            this.sessionsService.getSessionAllWithSessionApply(this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (data) {
+            this.userService.getUserIncomeExpenseDetailsByUserId(this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (data) {
               //console.log('data => ', data)
               if (data && data['success']) {
-                //alert(JSON.stringify( data));
-                _this6.allSessionsData = data['data'];
+                if (data["data"]["totalIncome4currentUser"] && data["data"]["totalExpense4currentUser"]) {
+                  _this6.authenticationService.currentUserValue.totalIncome4currentUser = data["data"]["totalIncome4currentUser"];
+                  _this6.authenticationService.currentUserValue.totalExpense4currentUser = data["data"]["totalExpense4currentUser"];
+                  _this6.authenticationService.currentUserValue.totalAllowedBudget = _this6.authenticationService.currentUserValue.totalIncome4currentUser - _this6.authenticationService.currentUserValue.totalExpense4currentUser;
+                  _this6.authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified = true;
 
-                _this6.userService.proccessAllAppUsersCollections(_this6.utilityService._.uniq(_this6.utilityService._.map(_this6.utilityService._.flattenDepth(_this6.utilityService._.map(_this6.utilityService._.values(_this6.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId'))); //this.alertService.success(data['message'], true);
-
-
-                _this6.loading = false; //this.element_btn_click_addSession_skills_verification.click();
-              } else {
-                //alert(JSON.stringify(data['message']));
-                //this.alertService.error(data['message']);
-                _this6.loading = false;
-              }
+                  _this6.authenticationService.sendCurrentUserObj(_this6.authenticationService.currentUserValue);
+                }
+              } else {}
             }, function (error) {
               var errorMsg2show = "";
 
@@ -1554,71 +1779,33 @@
                 } else {
                   errorMsg2show = error;
                 }
-              } catch (ex) {} //this.alertService.error(errorMsg2show);
-
-
-              _this6.loading = false;
-            });
-            this.sessionsService.getUpdatesForSessionAllByBorrowerId().subscribe(function (data) {
-              if (data && data['success']) {
-                var _keyPairedMapObj = _this6.utilityService._.mapKeys(_this6.allSessionsData, "_id");
-
-                for (var _items in data['data']) {
-                  var _currentObj = data['data'][_items];
-                  _keyPairedMapObj[_currentObj._id] = _currentObj;
-                }
-
-                _this6.allSessionsData = _this6.utilityService._.values(_keyPairedMapObj);
-                _this6.loading = false;
-              } else {
-                _this6.loading = false;
-              }
-            }, function (error) {
-              _this6.loading = false;
-            });
-            this.sessionsService.getSessionLengthByService(null, null, null, null, null).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (data) {
-              //console.log('data => ', data)
-              if (data && data['success']) {
-                //alert(JSON.stringify( data));
-                _this6.allSessionsCount = data['data']; //this.alertService.success(data['message'], true);
-
-                _this6.loading = false; //this.element_btn_click_addSession_skills_verification.click();
-              } else {
-                //alert(JSON.stringify(data['message']));
-                //this.alertService.error(data['message']);
-                _this6.loading = false;
-              }
-            }, function (error) {
-              var errorMsg2show = "";
-
-              try {
-                if (error && error.error && error.error.message) {
-                  errorMsg2show = error.error.message;
-                } else if (error && error.message) {
-                  errorMsg2show = error.message;
-                } else {
-                  errorMsg2show = error;
-                }
-              } catch (ex) {} //this.alertService.error(errorMsg2show);
-
+              } catch (ex) {}
 
               _this6.loading = false;
             });
           }
         }, {
-          key: "ngOnDestroy",
-          value: function ngOnDestroy() {
-            // unsubscribe to ensure no memory leaks
-            this.subscription.unsubscribe();
-            this.subscription1.unsubscribe();
+          key: "returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender",
+          value: function returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, currentRowDate, _key) {
+            var _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
+
+            if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+              if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+                if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey].createdOnForLoanAmountPaidToLenderConfirmByLender) {
+                  return true;
+                }
+              }
+            }
+
+            return false;
           }
         }, {
-          key: "check4applyToSession",
-          value: function check4applyToSession(sessionObj) {
-            if (sessionObj && sessionObj.sessionAppliedByBorrowers) {
-              if (lodash__WEBPACK_IMPORTED_MODULE_12__["filter"](sessionObj.sessionAppliedByBorrowers, {
-                "borrowerId": this.authenticationService.currentUserValue._id
-              }).length > 0) {
+          key: "returnT4IfCurrentInstallmentAlreadyPaid",
+          value: function returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, currentRowDate, _key) {
+            var _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
+
+            if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+              if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
                 return true;
               }
             }
@@ -1626,10 +1813,46 @@
             return false;
           }
         }, {
-          key: "applyToSession",
-          value: function applyToSession(sessionObj) {
-            var _this7 = this;
+          key: "calculateAndStoreLocalNextEMIDateOfAppliedLoansForBorrower",
+          value: function calculateAndStoreLocalNextEMIDateOfAppliedLoansForBorrower() {
+            for (var item in this.allSessionsData) {
+              var _LoanObj = this.allSessionsData[item];
 
+              if (_LoanObj) {
+                _LoanObj.nextInstallment = null;
+
+                for (var indexOuter in _LoanObj.sessionAppliedByBorrowers) {
+                  var LoanApplyObj = _LoanObj.sessionAppliedByBorrowers[indexOuter];
+
+                  if (LoanApplyObj) {
+                    for (var index = 0; index < _LoanObj.loanTenureInMonths; index++) {
+                      var installment = {
+                        loanStartDateTime: null,
+                        calculatedMonthlyAmountForEMI: null
+                      };
+                      installment.loanStartDateTime = this.utilityService.returnDateWithAddingMonths(_LoanObj.loanStartDateTime, index + 1);
+
+                      if (!this.returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, installment.loanStartDateTime, null)) {
+                        if (!_LoanObj.nextInstallment) {
+                          if (this.utilityService.moment(_LoanObj.nextInstallment).isBefore(this.utilityService.moment(installment.loanStartDateTime))) {
+                            break;
+                          }
+                        }
+
+                        _LoanObj.nextInstallment = installment.loanStartDateTime;
+                        break;
+                      }
+                    }
+                  }
+                }
+
+                this.allSessionsData[item] = _LoanObj;
+              }
+            }
+          }
+        }, {
+          key: "sessionApplyOngoingCheck",
+          value: function sessionApplyOngoingCheck(sessionObj, sessionApply) {
             console.log('179', this.authenticationService.currentUserValue);
             var dialogRef = this.dialog.open(_borrower_component__WEBPACK_IMPORTED_MODULE_6__["ModalApplySession"], {
               maxWidth: '100vw',
@@ -1638,82 +1861,25 @@
               width: '100%',
               data: {
                 sessionObj: sessionObj,
-                borrowerId: this.authenticationService.currentUserValue._id
+                borrowerId: this.authenticationService.currentUserValue._id,
+                sessionApply: sessionApply
               }
             });
             dialogRef.afterClosed().subscribe(function (result) {
               var _currentSessionApply = null;
 
               if (result) {
-                if (result.data) {
-                  _currentSessionApply = result.data.sessionApply;
-
-                  if (_currentSessionApply) {
-                    if (!_currentSessionApply._id) {
-                      _currentSessionApply._id = _currentSessionApply.loanId + '__' + _currentSessionApply.borrowerId;
-                    }
-
-                    _currentSessionApply.status = result.data.status || src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].Pending;
-
-                    _this7.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
-
-                    switch (_currentSessionApply.status) {
-                      case src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].Pending:
-                        _this7.socketService.setSessionApply(true, _currentSessionApply);
-
-                        break;
-
-                      default:
-                        _this7.socketService.updateSessionApply(true, _currentSessionApply, _this7.authenticationService.currentUserValue);
-
-                        break;
-                    }
-
-                    switch (_currentSessionApply.status) {
-                      case src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].Accepted:
-                        _this7.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
-
-                        break;
-
-                      case src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].Pending:
-                        _this7.alertService.success("Added. Session is available under My Sessions->Pending tab.", true);
-
-                        break;
-
-                      case src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].Rejected:
-                      case src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].RejectedOngoing:
-                      case src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].RejectedOngoingWithRefund:
-                      case src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].Suspended:
-                        _this7.alertService.success("Updated. Session is available under My Sessions->Rejected tab.", true);
-
-                        break;
-
-                      case src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].Completed:
-                        _this7.alertService.success("Updated. Session is available under My Sessions->Completed tab.", true);
-
-                        break;
-
-                      case src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].Active:
-                      case src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].Ongoing:
-                      case src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].OngoingInitiated:
-                      case src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].OngoingAccepted:
-                        _this7.alertService.success("Updated. Session is available under My Sessions->Ongoing tab.", true);
-
-                        break;
-
-                      default:
-                        break;
-                    }
-                  }
-                }
+                if (result.data) {}
               }
 
-              console.log("239 :: hc :: Dialog result: ".concat(JSON.stringify(result)));
+              console.log("163 :: myc :: Dialog result: ".concat(JSON.stringify(result)));
             });
           }
         }, {
           key: "showAppliedToSession",
           value: function showAppliedToSession(sessionObj) {
+            var _this7 = this;
+
             var _proccessedSessionObj = null;
 
             switch (this.authenticationService.currentUserValue.role) {
@@ -1731,8 +1897,8 @@
 
             console.log('214', this.authenticationService.currentUserValue);
             var dialogRef = this.dialog.open(_borrower_component__WEBPACK_IMPORTED_MODULE_6__["ModalAppliedSessionDisplay"], {
-              backdropClass: 'cdk-overlay-transparent-backdrop',
-              hasBackdrop: true,
+              backdropClass: 'custom-dialog-backdrop-class',
+              panelClass: 'my_session_details_modal',
               maxWidth: '100vw',
               maxHeight: '100vh',
               height: '100%',
@@ -1743,34 +1909,74 @@
               }
             });
             dialogRef.afterClosed().subscribe(function (result) {
-              console.log("238 :: hc :: Dialog result: ".concat(JSON.stringify(result)));
+              if (result) {
+                if (result.data) {
+                  console.log("86 :: msc :: Dialog result: ".concat(JSON.stringify(result)));
+
+                  if (result.data.status && result.data.sessionApply) {
+                    var _loanApplyId = result.data.sessionApply._id;
+                    var _status = result.data.status; //initiate payment here
+                    //this.socketService.setSessionApplyUpdateStatus(false, _loanId, _loanApplyId, _status, this.authenticationService.currentUserValue._id, _transactionId);
+
+                    var _allowed2CreateContactForSessionT = false;
+
+                    switch (_status) {
+                      case src_app_models__WEBPACK_IMPORTED_MODULE_13__["SessionStatus"].Accepted:
+                        //this.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
+                        _this7.proccedAppliedToSession(sessionObj, _loanApplyId);
+
+                        break;
+                    }
+                  }
+
+                  if (result.data.updatedSessionObj) {
+                    var _keyPairedMapObj = _this7.utilityService._.mapKeys(_this7.allSessionsData, "_id");
+
+                    _keyPairedMapObj[result.data.updatedSessionObj._id] = result.data.updatedSessionObj;
+                    _this7.allSessionsData = _this7.utilityService._.values(_keyPairedMapObj);
+
+                    _this7.calculateAndStoreLocalNextEMIDateOfAppliedLoansForBorrower();
+
+                    _this7._cdr.detectChanges();
+                  }
+                }
+              }
             });
           }
         }, {
-          key: "clickedOnSessionChatVideo",
-          value: function clickedOnSessionChatVideo(sessionObj, AVTrueChatFalse) {
-            var _contactId = this.contactService.returnContactIdForSession(sessionObj._id, sessionObj.sessionAppliedByBorrowers[0]._id);
-
-            var _parentRouting = '';
+          key: "proccedAppliedToSession",
+          value: function proccedAppliedToSession(sessionObj, loanApplyId) {
+            var loanId = sessionObj._id;
+            var _proccessedSessionObj = null;
 
             switch (this.authenticationService.currentUserValue.role) {
               case src_app_models__WEBPACK_IMPORTED_MODULE_13__["Role"].Borrower:
-                _parentRouting = 'borrower';
+                _proccessedSessionObj = lodash__WEBPACK_IMPORTED_MODULE_12__["cloneDeep"](sessionObj);
+                _proccessedSessionObj.sessionAppliedByBorrowers = lodash__WEBPACK_IMPORTED_MODULE_12__["filter"](sessionObj.sessionAppliedByBorrowers, {
+                  "borrowerId": this.authenticationService.currentUserValue._id
+                });
                 break;
 
               case src_app_models__WEBPACK_IMPORTED_MODULE_13__["Role"].Lender:
-                _parentRouting = 'lender';
+                _proccessedSessionObj = lodash__WEBPACK_IMPORTED_MODULE_12__["cloneDeep"](sessionObj);
+                _proccessedSessionObj.sessionAppliedByBorrowers = lodash__WEBPACK_IMPORTED_MODULE_12__["filter"](sessionObj.sessionAppliedByLenders, {
+                  "lenderId": this.authenticationService.currentUserValue._id
+                });
                 break;
 
-              case src_app_models__WEBPACK_IMPORTED_MODULE_13__["Role"].Admin:
-                _parentRouting = 'admin';
+              default:
+                _proccessedSessionObj = lodash__WEBPACK_IMPORTED_MODULE_12__["cloneDeep"](sessionObj);
                 break;
             }
 
-            this.router.navigate(['/' + _parentRouting + '/messages'], {
+            if (!loanApplyId) {
+              loanApplyId = _proccessedSessionObj.sessionAppliedByBorrowers[0]._id;
+            }
+
+            this.router.navigate(['/borrower/borrow-now'], {
               state: {
-                contactId: _contactId,
-                AVTrueChatFalse: AVTrueChatFalse
+                loanId: loanId,
+                loanApplyId: loanApplyId
               }
             });
           }
@@ -1802,6 +2008,8 @@
           type: _angular_router__WEBPACK_IMPORTED_MODULE_15__["Router"]
         }, {
           type: src_app_services_contact_service__WEBPACK_IMPORTED_MODULE_16__["ContactService"]
+        }, {
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectorRef"]
         }];
       };
 
@@ -1809,7 +2017,7 @@
         selector: 'app-home',
         template: _raw_loader_home_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_home_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_services__WEBPACK_IMPORTED_MODULE_8__["UserService"], src_app_socketio_service__WEBPACK_IMPORTED_MODULE_4__["SocketioService"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"], src_app_services_sessions_service__WEBPACK_IMPORTED_MODULE_9__["SessionsService"], src_app_services__WEBPACK_IMPORTED_MODULE_8__["AlertService"], src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_10__["UtilityService"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"], src_app_services__WEBPACK_IMPORTED_MODULE_8__["AuthenticationService"], src_app_services_add_funds_service__WEBPACK_IMPORTED_MODULE_14__["AddFundsService"], _angular_router__WEBPACK_IMPORTED_MODULE_15__["Router"], src_app_services_contact_service__WEBPACK_IMPORTED_MODULE_16__["ContactService"]])], HomeComponent);
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_services__WEBPACK_IMPORTED_MODULE_8__["UserService"], src_app_socketio_service__WEBPACK_IMPORTED_MODULE_4__["SocketioService"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"], src_app_services_sessions_service__WEBPACK_IMPORTED_MODULE_9__["SessionsService"], src_app_services__WEBPACK_IMPORTED_MODULE_8__["AlertService"], src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_10__["UtilityService"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_5__["MatDialog"], src_app_services__WEBPACK_IMPORTED_MODULE_8__["AuthenticationService"], src_app_services_add_funds_service__WEBPACK_IMPORTED_MODULE_14__["AddFundsService"], _angular_router__WEBPACK_IMPORTED_MODULE_15__["Router"], src_app_services_contact_service__WEBPACK_IMPORTED_MODULE_16__["ContactService"], _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectorRef"]])], HomeComponent);
       /***/
     },
 
@@ -1922,7 +2130,7 @@
       "tyNb");
 
       var MySessionsComponent = /*#__PURE__*/function () {
-        function MySessionsComponent(socketService, sessionsService, alertService, utilityService, dialog, authenticationService, userService, router) {
+        function MySessionsComponent(socketService, sessionsService, alertService, utilityService, dialog, authenticationService, userService, router, _cdr) {
           _classCallCheck(this, MySessionsComponent);
 
           this.socketService = socketService;
@@ -1933,6 +2141,7 @@
           this.authenticationService = authenticationService;
           this.userService = userService;
           this.router = router;
+          this._cdr = _cdr;
           this.SessionStatusTypeFilter = [];
           this.checkCreatedByUserId = '';
           this.checkCreatedByT = false;
@@ -1945,7 +2154,11 @@
             var _this8 = this;
 
             (function ($) {
-              $('.tooltip-info').tooltip();
+              try {
+                $('.tooltip-info').tooltip();
+              } catch (ex) {
+                console.log('48', ex.message);
+              }
             })(jQuery);
 
             this.sessionsService.getSessionAllByBorrowerId(this.authenticationService.currentUserValue._id, null, null, null, true, null).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
@@ -2034,18 +2247,30 @@
               if (result) {
                 if (result.data) {
                   console.log("86 :: msc :: Dialog result: ".concat(JSON.stringify(result)));
-                  var _loanApplyId = result.data.sessionApply._id;
-                  var _status = result.data.status; //initiate payment here
-                  //this.socketService.setSessionApplyUpdateStatus(false, _loanId, _loanApplyId, _status, this.authenticationService.currentUserValue._id, _transactionId);
 
-                  var _allowed2CreateContactForSessionT = false;
+                  if (result.data.status && result.data.sessionApply) {
+                    var _loanApplyId = result.data.sessionApply._id;
+                    var _status = result.data.status; //initiate payment here
+                    //this.socketService.setSessionApplyUpdateStatus(false, _loanId, _loanApplyId, _status, this.authenticationService.currentUserValue._id, _transactionId);
 
-                  switch (_status) {
-                    case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Accepted:
-                      //this.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
-                      _this9.proccedAppliedToSession(sessionObj, _loanApplyId);
+                    var _allowed2CreateContactForSessionT = false;
 
-                      break;
+                    switch (_status) {
+                      case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Accepted:
+                        //this.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
+                        _this9.proccedAppliedToSession(sessionObj, _loanApplyId);
+
+                        break;
+                    }
+                  }
+
+                  if (result.data.updatedSessionObj) {
+                    var _keyPairedMapObj = _this9.utilityService._.mapKeys(_this9.allSessionsData, "_id");
+
+                    _keyPairedMapObj[result.data.updatedSessionObj._id] = result.data.updatedSessionObj;
+                    _this9.allSessionsData = _this9.utilityService._.values(_keyPairedMapObj);
+
+                    _this9._cdr.detectChanges();
                   }
                 }
               }
@@ -2148,6 +2373,8 @@
 
                     switch (_currentSessionApply.status) {
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Pending:
+                        _currentSessionApply.createdBy = _this10.authenticationService.currentUserValue._id;
+
                         _this10.socketService.setSessionApply(true, _currentSessionApply);
 
                         break;
@@ -2222,6 +2449,8 @@
           type: src_app_services__WEBPACK_IMPORTED_MODULE_7__["UserService"]
         }, {
           type: _angular_router__WEBPACK_IMPORTED_MODULE_13__["Router"]
+        }, {
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectorRef"]
         }];
       };
 
@@ -2229,7 +2458,7 @@
         selector: 'app-my-sessions',
         template: _raw_loader_my_sessions_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_my_sessions_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_socketio_service__WEBPACK_IMPORTED_MODULE_4__["SocketioService"], src_app_services_sessions_service__WEBPACK_IMPORTED_MODULE_5__["SessionsService"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["AlertService"], src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_8__["UtilityService"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_13__["Router"]])], MySessionsComponent);
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_socketio_service__WEBPACK_IMPORTED_MODULE_4__["SocketioService"], src_app_services_sessions_service__WEBPACK_IMPORTED_MODULE_5__["SessionsService"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["AlertService"], src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_8__["UtilityService"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_13__["Router"], _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectorRef"]])], MySessionsComponent);
       /***/
     },
 
@@ -2318,7 +2547,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = ".container_read {\r\n    height: 70px;\r\n    overflow: hidden;\r\n  }\r\n  \r\n  .show_more {\r\n    overflow: visible;\r\n    height: auto;\r\n  }\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImhvbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFlBQVk7SUFDWixnQkFBZ0I7RUFDbEI7O0VBRUE7SUFDRSxpQkFBaUI7SUFDakIsWUFBWTtFQUNkIiwiZmlsZSI6ImhvbWUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXJfcmVhZCB7XHJcbiAgICBoZWlnaHQ6IDcwcHg7XHJcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gIH1cclxuICBcclxuICAuc2hvd19tb3JlIHtcclxuICAgIG92ZXJmbG93OiB2aXNpYmxlO1xyXG4gICAgaGVpZ2h0OiBhdXRvO1xyXG4gIH0iXX0= */";
+      __webpack_exports__["default"] = ".container_read {\r\n    height: 70px;\r\n    overflow: hidden;\r\n  }\r\n  \r\n  .show_more {\r\n    overflow: visible;\r\n    height: auto;\r\n  }\r\n\r\n  \r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImhvbWUuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLFlBQVk7SUFDWixnQkFBZ0I7RUFDbEI7O0VBRUE7SUFDRSxpQkFBaUI7SUFDakIsWUFBWTtFQUNkIiwiZmlsZSI6ImhvbWUuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5jb250YWluZXJfcmVhZCB7XHJcbiAgICBoZWlnaHQ6IDcwcHg7XHJcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gIH1cclxuICBcclxuICAuc2hvd19tb3JlIHtcclxuICAgIG92ZXJmbG93OiB2aXNpYmxlO1xyXG4gICAgaGVpZ2h0OiBhdXRvO1xyXG4gIH1cclxuXHJcbiAgIl19 */";
       /***/
     },
 
@@ -2543,6 +2772,18 @@
       var _shared_payment_success_payment_success_component__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(
       /*! ../shared/payment-success/payment-success.component */
       "72sj");
+      /* harmony import */
+
+
+      var _users_income_expense_verify_guard__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(
+      /*! ../users-income-expense-verify.guard */
+      "wFWH");
+      /* harmony import */
+
+
+      var _bank_details_verify_guard__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(
+      /*! ../bank-details-verify.guard */
+      "wtEr");
 
       var routes = [{
         path: '',
@@ -2600,11 +2841,11 @@
           path: 'ratings',
           component: _shared_user_ratings_user_ratings_component__WEBPACK_IMPORTED_MODULE_15__["UserRatingsComponent"]
         }, {
-          canActivate: [_components_guards_roles_guard__WEBPACK_IMPORTED_MODULE_16__["RolesGuard"]],
+          canActivate: [_components_guards_roles_guard__WEBPACK_IMPORTED_MODULE_16__["RolesGuard"], _bank_details_verify_guard__WEBPACK_IMPORTED_MODULE_28__["BankDetailsVerifyGuard"], _users_income_expense_verify_guard__WEBPACK_IMPORTED_MODULE_27__["UsersIncomeExpenseVerifyGuard"]],
           path: 'loan-market',
           component: _loan_market_loan_market_component__WEBPACK_IMPORTED_MODULE_17__["LoanMarketComponent"]
         }, {
-          canActivate: [_components_guards_roles_guard__WEBPACK_IMPORTED_MODULE_16__["RolesGuard"]],
+          canActivate: [_components_guards_roles_guard__WEBPACK_IMPORTED_MODULE_16__["RolesGuard"], _bank_details_verify_guard__WEBPACK_IMPORTED_MODULE_28__["BankDetailsVerifyGuard"], _users_income_expense_verify_guard__WEBPACK_IMPORTED_MODULE_27__["UsersIncomeExpenseVerifyGuard"]],
           path: 'make-a-loan',
           component: _get_a_loan_get_a_loan_component__WEBPACK_IMPORTED_MODULE_18__["GetALoanComponent"]
         }, {
@@ -2790,6 +3031,8 @@
           this.ParentServicesTypes = null;
           this.ChildServicesTypes = [];
           this.countrylist = null;
+          this.loanInterestRateMin = 0;
+          this.loanInterestRateMax = 0;
           this.now = new Date();
           this.year = this.now.getFullYear();
           this.month = this.now.getMonth();
@@ -2873,6 +3116,22 @@
         _createClass(GetALoanComponent, [{
           key: "showEditingForm",
           value: function showEditingForm(_userObj) {
+            var _loanInterestRateValidation = [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(0)];
+
+            switch (this.authenticationService.currentUserValue.role) {
+              case src_app_models__WEBPACK_IMPORTED_MODULE_13__["Role"].Borrower:
+                if (this.authenticationService.currentUserValue.isRKIRegistered) {
+                  this.loanInterestRateMin = 3;
+                  this.loanInterestRateMax = 35;
+                } else {
+                  this.loanInterestRateMin = 1;
+                  this.loanInterestRateMax = 3;
+                }
+
+                _loanInterestRateValidation = [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(this.loanInterestRateMin), _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].max(this.loanInterestRateMax)];
+                break;
+            }
+
             this.addSessionForm = this.formBuilder.group({
               _id: [_userObj._id || ''],
               loanType: [_userObj.loanType || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
@@ -2891,7 +3150,7 @@
               additionalDocuments: this.formBuilder.array(_userObj.additionalDocuments || [], []),
               loanAmount: [_userObj.loanAmount || 0, [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(1), _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].max(this.currentUserMaxLoanAmount)]],
               loanTenureInMonths: [_userObj.loanTenureInMonths || 3, [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(3)]],
-              loanInterestRate: [_userObj.loanInterestRate || 10, [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(0)]],
+              loanInterestRate: [_userObj.loanInterestRate || this.loanInterestRateMax, _loanInterestRateValidation],
               loanRepaymentType: this.formBuilder.array(_userObj.loanRepaymentType || [], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required),
               loanInsuranceType: [_userObj.loanInsuranceType || ''],
               loanMaxBorrower: [_userObj.loanMaxBorrower || 1, [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(1)]],
@@ -2919,7 +3178,23 @@
         }, {
           key: "initForm",
           value: function initForm() {
-            //_.first(this.ParentServicesTypes)['_id']
+            var _loanInterestRateValidation = [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(0)];
+
+            switch (this.authenticationService.currentUserValue.role) {
+              case src_app_models__WEBPACK_IMPORTED_MODULE_13__["Role"].Borrower:
+                if (this.authenticationService.currentUserValue.isRKIRegistered) {
+                  this.loanInterestRateMin = 3;
+                  this.loanInterestRateMax = 35;
+                } else {
+                  this.loanInterestRateMin = 1;
+                  this.loanInterestRateMax = 3;
+                }
+
+                _loanInterestRateValidation = [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(this.loanInterestRateMin), _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].max(this.loanInterestRateMax)];
+                break;
+            } //_.first(this.ParentServicesTypes)['_id']
+
+
             this.initHtmlContent();
             this.addSessionForm = this.formBuilder.group({
               _id: [''],
@@ -2939,7 +3214,7 @@
               additionalDocuments: this.formBuilder.array([], []),
               loanAmount: [0, [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(1), _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].max(this.currentUserMaxLoanAmount)]],
               loanTenureInMonths: [3, [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(3)]],
-              loanInterestRate: [10, [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(0)]],
+              loanInterestRate: [this.loanInterestRateMax, _loanInterestRateValidation],
               loanRepaymentType: this.formBuilder.array([], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required),
               loanInsuranceType: [''],
               loanMaxBorrower: [1, [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(1)]],
@@ -2988,11 +3263,12 @@
 
             var _loanStartDateTime = this.addSessionForm.get('loanStartDateTimeCustomised').value;
             var _loanEndDateTime = this.addSessionForm.get('loanEndDateTimeCustomised').value;
-
-            if (!_loanStartDateTime || moment__WEBPACK_IMPORTED_MODULE_6__(_loanStartDateTime).isBefore(moment__WEBPACK_IMPORTED_MODULE_6__().add(1, 'd'))) {
-              this.alertService.error("Start date must have 24 hours difference");
-              return;
-            }
+            /*
+                if (!_loanStartDateTime || moment(_loanStartDateTime).isBefore(moment().add(1, 'd'))) {
+                  this.alertService.error("Start date must have 24 hours difference");
+                  return;
+                }
+            */
 
             _loanEndDateTime = null;
 
@@ -3015,7 +3291,7 @@
             if (_loanEndDateTime) {
               loanEndDateTime_Temp = moment__WEBPACK_IMPORTED_MODULE_6__(_loanEndDateTime, 'YYYY-MM-DD').format('YYYY-MM-DD');
             } else {
-              loanEndDateTime_Temp = moment__WEBPACK_IMPORTED_MODULE_6__(lodash__WEBPACK_IMPORTED_MODULE_11__["cloneDeep"](_loanStartDateTime)).add(this.addSessionForm.get('loanTenureInMonths').value, 'month').format('YYYY-MM-DD');
+              loanEndDateTime_Temp = moment__WEBPACK_IMPORTED_MODULE_6__(loanStartDateTime_Temp, 'YYYY-MM-DD').add(this.addSessionForm.get('loanTenureInMonths').value, 'month').format('YYYY-MM-DD');
             } //#region validate dates
 
 
@@ -3031,11 +3307,13 @@
               this.alertService.error("end time is not valid");
               return;
             }
+            /*
+              if (moment(this.addSessionForm.get('loanStartDateTime').value).isBefore(moment())) {
+                this.alertService.error("Loan should start in future date time only.");
+                return;
+              }
+            */
 
-            if (moment__WEBPACK_IMPORTED_MODULE_6__(this.addSessionForm.get('loanStartDateTime').value).isBefore(moment__WEBPACK_IMPORTED_MODULE_6__())) {
-              this.alertService.error("Loan should start in future date time only.");
-              return;
-            }
 
             if (moment__WEBPACK_IMPORTED_MODULE_6__(this.addSessionForm.get('loanStartDateTime').value).add(1, 'h').isAfter(moment__WEBPACK_IMPORTED_MODULE_6__(this.addSessionForm.get('loanEndDateTime').value))) {
               this.alertService.error("There must be min. 1 hour difference in Loan start and end time");
@@ -3116,10 +3394,8 @@
           value: function calculateMonthlyAmountForEMI() {
             var loanAmount = this.addSessionForm.get('loanAmount').value || 0;
             var loanTenureInMonths = this.addSessionForm.get('loanTenureInMonths').value || 0;
-            var loanInterestRate = this.addSessionForm.get('loanInterestRate').value || 0; //this._calculatedMonthlyAmountForEMI = loanAmount * loanInterestRate * (((1 + loanInterestRate) ^ loanTenureInMonths) / ((1 + loanInterestRate) ^ (loanTenureInMonths - 1)));
-
-            this._calculatedMonthlyAmountForEMI = (loanAmount + loanAmount * loanInterestRate * loanTenureInMonths / 100) / loanTenureInMonths;
-            this._calculatedMonthlyAmountForEMI = this.utilityService.returnRoundedNumber(this._calculatedMonthlyAmountForEMI);
+            var loanInterestRate = this.addSessionForm.get('loanInterestRate').value || 0;
+            this._calculatedMonthlyAmountForEMI = this.utilityService.fnCalculateMonthlyAmountForEMI(loanAmount, loanTenureInMonths, loanInterestRate);
             this.addSessionForm.get('calculatedMonthlyAmountForEMI').setValue(this._calculatedMonthlyAmountForEMI);
           }
         }, {
@@ -3330,13 +3606,39 @@
 
 
       var lodash__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_10__);
+      /* harmony import */
+
+
+      var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+      /*! @angular/material/dialog */
+      "0IaG");
+      /* harmony import */
+
+
+      var src_app_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+      /*! src/app/shared/public-profile/public-profile.component */
+      "bLZ2");
+      /* harmony import */
+
+
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+      /*! rxjs/operators */
+      "kU1M");
+      /* harmony import */
+
+
+      var src_app_services__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+      /*! src/app/services */
+      "o0su");
 
       var LoanMarketComponent = /*#__PURE__*/function () {
-        function LoanMarketComponent(socketService, utilityService, alertService, router, authenticationService) {
+        function LoanMarketComponent(userService, dialog, socketService, utilityService, alertService, router, authenticationService) {
           var _this13 = this;
 
           _classCallCheck(this, LoanMarketComponent);
 
+          this.userService = userService;
+          this.dialog = dialog;
           this.socketService = socketService;
           this.utilityService = utilityService;
           this.alertService = alertService;
@@ -3405,6 +3707,48 @@
               return false;
             }
           }
+        }, {
+          key: "usersProfile",
+          value: function usersProfile(userObj) {
+            var _this14 = this;
+
+            //#region fetch creator id
+            this.userService.getUserById(userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["first"])()).subscribe(function (data) {
+              if (data && data['success']) {
+                console.log('84', _this14.authenticationService.currentUserValue);
+
+                var dialogRef = _this14.dialog.open(src_app_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_12__["PublicProfileComponent"], {
+                  maxWidth: '100vw',
+                  maxHeight: '100vh',
+                  height: '100%',
+                  width: '100%',
+                  hasBackdrop: true,
+                  data: {
+                    userObj: lodash__WEBPACK_IMPORTED_MODULE_10__["cloneDeep"](data['data']),
+                    adminViewT: false
+                  }
+                });
+
+                dialogRef.afterClosed().subscribe(function (result) {
+                  console.log("99 :: msc :: Dialog result: ".concat(JSON.stringify(result)));
+                });
+              } else {}
+            }, function (error) {
+              var errorMsg2show = "";
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this14.alertService.error(errorMsg2show);
+            }); //#endregion fetch creator id
+          }
         }]);
 
         return LoanMarketComponent;
@@ -3412,6 +3756,10 @@
 
       LoanMarketComponent.ctorParameters = function () {
         return [{
+          type: src_app_services__WEBPACK_IMPORTED_MODULE_14__["UserService"]
+        }, {
+          type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_11__["MatDialog"]
+        }, {
           type: src_app_socketio_service__WEBPACK_IMPORTED_MODULE_9__["SocketioService"]
         }, {
           type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_8__["UtilityService"]
@@ -3428,7 +3776,7 @@
         selector: 'app-loan-market',
         template: _raw_loader_loan_market_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_loan_market_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_socketio_service__WEBPACK_IMPORTED_MODULE_9__["SocketioService"], src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_8__["UtilityService"], src_app_services_alert_service__WEBPACK_IMPORTED_MODULE_6__["AlertService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], src_app_services_authentication_service__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"]])], LoanMarketComponent);
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_services__WEBPACK_IMPORTED_MODULE_14__["UserService"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_11__["MatDialog"], src_app_socketio_service__WEBPACK_IMPORTED_MODULE_9__["SocketioService"], src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_8__["UtilityService"], src_app_services_alert_service__WEBPACK_IMPORTED_MODULE_6__["AlertService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], src_app_services_authentication_service__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"]])], LoanMarketComponent);
       /***/
     },
 
@@ -3560,7 +3908,7 @@
 
       var HeaderComponent = /*#__PURE__*/function () {
         function HeaderComponent(router, authenticationService, alertService, sessionsService, dialog, serviceTypesService, socketService, fundService, utilityService, notificationService) {
-          var _this14 = this;
+          var _this15 = this;
 
           _classCallCheck(this, HeaderComponent);
 
@@ -3576,26 +3924,26 @@
           this.notificationService = notificationService;
           this.ParentServicesTypes = null;
           this.authenticationService.currentUser.subscribe(function (x) {
-            _this14.currentUser = x;
+            _this15.currentUser = x;
 
-            if (!_this14.currentUser) {
+            if (!_this15.currentUser) {
               return;
             }
 
-            fundService.getFundsCountForRequestedUser(_this14.currentUser._id);
-            fundService.getSessionSpentCountForRequestedUser(_this14.currentUser._id);
+            fundService.getFundsCountForRequestedUser(_this15.currentUser._id);
+            fundService.getSessionSpentCountForRequestedUser(_this15.currentUser._id);
 
-            _this14.sessionsService.getSessionAllWithSessionApply(_this14.authenticationService.currentUserValue._id).subscribe(function (data) {
+            _this15.sessionsService.getSessionAllWithSessionApply(_this15.authenticationService.currentUserValue._id).subscribe(function (data) {
               //console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this14.allSessionsData = data['data']; //this.alertService.success(data['message'], true);
+                _this15.allSessionsData = data['data']; //this.alertService.success(data['message'], true);
 
-                _this14.loading = false; //this.element_btn_click_addSession_skills_verification.click();
+                _this15.loading = false; //this.element_btn_click_addSession_skills_verification.click();
               } else {
                 //alert(JSON.stringify(data['message']));
                 //this.alertService.error(data['message']);
-                _this14.loading = false;
+                _this15.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -3611,57 +3959,57 @@
               } catch (ex) {} //this.alertService.error(errorMsg2show);
 
 
-              _this14.loading = false;
+              _this15.loading = false;
             });
           });
           this.sessionsService.getSessionInstastTypeAdded().subscribe(function (data) {
             if (data && data['success']) {
-              if (!_this14.allInstantSessionsData) {
-                _this14.allInstantSessionsData = [];
+              if (!_this15.allInstantSessionsData) {
+                _this15.allInstantSessionsData = [];
               }
 
               var _currentSessionObj = data['data'];
 
-              var _existingSessionObjKryPair = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_this14.allInstantSessionsData), '_id');
+              var _existingSessionObjKryPair = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_this15.allInstantSessionsData), '_id');
 
               if (lodash__WEBPACK_IMPORTED_MODULE_8__["keys"](_existingSessionObjKryPair).length > 0) {
                 delete _existingSessionObjKryPair[_currentSessionObj._id];
               }
 
               _existingSessionObjKryPair[_currentSessionObj._id] = _currentSessionObj;
-              _this14.allInstantSessionsData = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_existingSessionObjKryPair);
+              _this15.allInstantSessionsData = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_existingSessionObjKryPair);
             } else {//this.alertService.error(data['message']);
             }
           }, function (error) {});
           this.socketService.getCurrentAppliedSessionObj().subscribe(function (data) {
             if (data) {
-              if (!_this14.allInstantSessionsData) {
-                _this14.allInstantSessionsData = [];
+              if (!_this15.allInstantSessionsData) {
+                _this15.allInstantSessionsData = [];
               }
 
-              var _existingSessionObjKryPair = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_this14.allInstantSessionsData), '_id');
+              var _existingSessionObjKryPair = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_this15.allInstantSessionsData), '_id');
 
               delete _existingSessionObjKryPair[data];
-              _this14.allInstantSessionsData = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_existingSessionObjKryPair);
+              _this15.allInstantSessionsData = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_existingSessionObjKryPair);
             } else {//this.alertService.error(data['message']);
             }
           }, function (error) {});
           this.socketService.getSessionUpdates().subscribe(function (data) {
             if (data && data['success']) {
-              if (!_this14.allSessionsData) {
-                _this14.allSessionsData = [];
+              if (!_this15.allSessionsData) {
+                _this15.allSessionsData = [];
               }
 
               var _currentSessionObj = data['data'];
 
-              var _existingSessionObjKryPair = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_this14.allSessionsData), '_id');
+              var _existingSessionObjKryPair = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_this15.allSessionsData), '_id');
 
               if (lodash__WEBPACK_IMPORTED_MODULE_8__["keys"](_existingSessionObjKryPair).length > 0) {
                 delete _existingSessionObjKryPair[_currentSessionObj._id];
               }
 
               _existingSessionObjKryPair[_currentSessionObj._id] = _currentSessionObj;
-              _this14.allSessionsData = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_existingSessionObjKryPair);
+              _this15.allSessionsData = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_existingSessionObjKryPair);
             } else {//this.alertService.error(data['message']);
             }
           }, function (error) {});
@@ -3669,18 +4017,18 @@
             //console.log('data => ', data)
             if (data && data['success']) {
               //alert(JSON.stringify( data));
-              _this14.ParentServicesTypes = data["data"]; //this.alertService.success(data['message'], true);
+              _this15.ParentServicesTypes = data["data"]; //this.alertService.success(data['message'], true);
 
-              _this14.loading = false; //this.element_btn_click_addServiceTypes_skills_verification.click();
+              _this15.loading = false; //this.element_btn_click_addServiceTypes_skills_verification.click();
             } else {
               //alert(JSON.stringify(data['message']));
-              _this14.alertService.error(data['message']);
+              _this15.alertService.error(data['message']);
 
-              _this14.loading = false;
+              _this15.loading = false;
             }
           }, function (error) {
             var errorMsg2show = "";
-            _this14.ParentServicesTypes = [];
+            _this15.ParentServicesTypes = [];
 
             try {
               if (error && error.error && error.error.message) {
@@ -3692,9 +4040,9 @@
               }
             } catch (ex) {}
 
-            _this14.alertService.error(errorMsg2show);
+            _this15.alertService.error(errorMsg2show);
 
-            _this14.loading = false;
+            _this15.loading = false;
           });
         }
 
@@ -3720,7 +4068,7 @@
         }, {
           key: "applyToSession",
           value: function applyToSession(sessionObj) {
-            var _this15 = this;
+            var _this16 = this;
 
             console.log('179', this.authenticationService.currentUserValue);
             var dialogRef = this.dialog.open(_borrower_component__WEBPACK_IMPORTED_MODULE_13__["ModalApplySession"], {
@@ -3743,17 +4091,17 @@
                   _currentSessionApply = result.data.sessionApply;
 
                   if (_currentSessionApply) {
-                    if (!_this15.allInstantSessionsData) {
-                      _this15.allInstantSessionsData = [];
+                    if (!_this16.allInstantSessionsData) {
+                      _this16.allInstantSessionsData = [];
                     }
 
-                    var _existingSessionObjKryPair = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_this15.allInstantSessionsData), '_id');
+                    var _existingSessionObjKryPair = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_this16.allInstantSessionsData), '_id');
 
                     if (lodash__WEBPACK_IMPORTED_MODULE_8__["keys"](_existingSessionObjKryPair).length > 0) {
                       delete _existingSessionObjKryPair[_currentSessionApply.loanId];
                     }
 
-                    _this15.allInstantSessionsData = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_existingSessionObjKryPair);
+                    _this16.allInstantSessionsData = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_existingSessionObjKryPair);
 
                     if (!_currentSessionApply._id) {
                       _currentSessionApply._id = _currentSessionApply.loanId + '__' + _currentSessionApply.borrowerId;
@@ -3761,28 +4109,28 @@
 
                     _currentSessionApply.status = result.data.status || src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Pending;
 
-                    _this15.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
+                    _this16.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
 
                     switch (_currentSessionApply.status) {
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Pending:
-                        _this15.socketService.setSessionApply(true, _currentSessionApply);
+                        _this16.socketService.setSessionApply(true, _currentSessionApply);
 
                         break;
 
                       default:
-                        _this15.socketService.updateSessionApply(true, _currentSessionApply, _this15.authenticationService.currentUserValue);
+                        _this16.socketService.updateSessionApply(true, _currentSessionApply, _this16.authenticationService.currentUserValue);
 
                         break;
                     }
 
                     switch (_currentSessionApply.status) {
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Accepted:
-                        _this15.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
+                        _this16.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
 
                         break;
 
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Pending:
-                        _this15.alertService.success("Added. Session is available under My Sessions->Pending tab.", true);
+                        _this16.alertService.success("Added. Session is available under My Sessions->Pending tab.", true);
 
                         break;
 
@@ -3790,12 +4138,12 @@
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].RejectedOngoing:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].RejectedOngoingWithRefund:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Suspended:
-                        _this15.alertService.success("Updated. Session is available under My Sessions->Rejected tab.", true);
+                        _this16.alertService.success("Updated. Session is available under My Sessions->Rejected tab.", true);
 
                         break;
 
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Completed:
-                        _this15.alertService.success("Updated. Session is available under My Sessions->Completed tab.", true);
+                        _this16.alertService.success("Updated. Session is available under My Sessions->Completed tab.", true);
 
                         break;
 
@@ -3803,7 +4151,7 @@
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Ongoing:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].OngoingInitiated:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].OngoingAccepted:
-                        _this15.alertService.success("Updated. Session is available under My Sessions->Ongoing tab.", true);
+                        _this16.alertService.success("Updated. Session is available under My Sessions->Ongoing tab.", true);
 
                         break;
 
@@ -4022,7 +4370,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<!-- <section class=\"agency blog blog-sec blog-sidebar sider p-0 mt-4\">\r\n    <div class=\"card shadow-sm mb-4\" *ngFor=\"let LoanMarket of allLoanMarketData\">\r\n        <div class=\"bg-white blog-title card-header mb-0 text-capitalize\">\r\n            {{LoanMarket.LoanMarketubject}}\r\n        </div>\r\n        <div class=\"card-body px-md-3 px-1 small\">\r\n             <div class=\"row\">               \r\n            <div class=\"col-xl-12 col-12\">\r\n                <p class=\"para2\" [class.show_more]=\"!LoanMarket._id\">\r\n                    {{LoanMarket.loanAmount}}\r\n                </p>\r\n            </div>          \r\n            <div class=\"col-xl-6 col-6 border-right mb-2\">\r\n                <i aria-hidden=\"true\" class=\"icon-timer mr-2\"></i> {{LoanMarket.loanStartDateTime | date:'MMM d, h:mm a'}}\r\n            </div>\r\n            <div class=\"col-xl-6 col-6\">\r\n                <i aria-hidden=\"true\" class=\"icon-location-pin m-r-10\"></i>\r\n                {{LoanMarket.location}}\r\n            </div>\r\n          \r\n        </div>\r\n        </div>\r\n        <div class=\"card-footer bg-white\">\r\n            <span class=\"badge badge-success font-weight-normal text-capitalize btn float-left\" >{{LoanMarket.LoanMarketType}}</span>\r\n          \r\n            <a class=\"btn btn-primary text-capitalize  btn-sm float-right text-white\" (click)=\"showAppliedToLoanMarket(LoanMarket)\">Details</a>\r\n        </div>\r\n    </div>\r\n\r\n\r\n    <div class=\"mt-5 text-center blog-agency no-item\">\r\n        <img src=\"assets/img/noresult.png\">\r\n        <h2 class=\"mt-4 font-weight-normal\">No Data Found</h2>\r\n    </div>\r\n</section> -->\r\n\r\n\r\n\r\n<div class=\"row\">\r\n    <div class=\"col-xl-4 col-12 d-flex align-items-stretch mb-4\" *ngFor=\"let LoanMarket of allLoanMarketData\">\r\n\r\n        <div class=\"clash-card wizard w-100\">\r\n\r\n            <div class=\"clash-card__level clash-card__level--wizard mt-3\">{{(LoanMarket.createdByUserObj.userType || \"\").replace(\"_\", \" \")}}</div>\r\n            <div class=\"clash-card__unit-name text-capitalize\">{{(LoanMarket.loanType || \"\").replace(\"_\", \" \")}}</div>\r\n            <div class=\"clash-card__unit-description\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-xl-4 col-4 border-right\" data-toggle=\"tooltip\" title=\"Created By\">\r\n                        <div>\r\n                            <i class=\"icon icon-user\"></i>\r\n                        </div>\r\n                        <div class=\"text-black-50 small\">\r\n                            {{LoanMarket.createdByUserObj.firstName}}\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xl-4 col-4 border-right\" data-toggle=\"tooltip\" title=\"Max Applicants\">\r\n                        <div>\r\n                            <i class=\"icon icon-check-box\"></i>\r\n                        </div>\r\n                        <div class=\"text-black-50 small\">\r\n                            {{LoanMarket.loanMaxBorrower}}\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xl-4 col-4 \" data-toggle=\"tooltip\" title=\"Created On\">\r\n                        <div>\r\n                            <i class=\"icon icon-time\"></i>\r\n                        </div>\r\n                        <div class=\"text-black-50 small\">\r\n                            {{LoanMarket.loanStartDateTime | date:'MMM d, yy'}}\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xl-12 col-12 mt-2\">\r\n                        <div class=\"text-black-50 small mb-1\">\r\n                            Payment Methods\r\n                        </div>\r\n\r\n                        <span *ngIf=\"LoanMarket.loanRepaymentType.indexOf('bank')>-1\" class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                            BANK\r\n                        </span>\r\n                        <span *ngIf=\"LoanMarket.loanRepaymentType.indexOf('cash')>-1\" class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                            Cash\r\n                        </span>\r\n                        <span *ngIf=\"LoanMarket.loanRepaymentType.indexOf('revolut')>-1\" class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                            Revolut\r\n                        </span>\r\n                        <span *ngIf=\"LoanMarket.loanRepaymentType.indexOf('paypal')>-1\" class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                            Paypal\r\n                        </span>\r\n                        <span *ngIf=\"LoanMarket.loanRepaymentType.indexOf('skrill')>-1\" class=\"badge font-weight-light text-uppercase badge-success\">\r\n                            Skrill\r\n                        </span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <button *ngIf=\"!returnT4DisableLoanBorrowOrLendIfAlreadyAccepted(LoanMarket)\" class=\"btn btn-outline-secondary btn-sm mb-2\" (click)=\"navigate2LoanProccess(LoanMarket._id)\">Borrow Now</button>\r\n\r\n            <button *ngIf=\"returnT4DisableLoanBorrowOrLendIfAlreadyAccepted(LoanMarket)\" class=\"btn btn-outline-primary btn-sm mb-2\"><i class=\"icon icon-check-box\"></i> Contract Signed</button>\r\n\r\n            <div class=\"clash-card__unit-stats clash-card__unit-stats--wizard clearfix\">\r\n                <div class=\"one-third\">\r\n                    <div class=\"stat\">{{LoanMarket.loanAmount}}</div>\r\n                    <div class=\"stat-value\">Amount</div>\r\n                </div>\r\n\r\n                <div class=\"one-third\">\r\n                    <div class=\"stat\">\r\n                        {{utilityService.returnRoundedNumber(LoanMarket.calculatedMonthlyAmountForEMI*LoanMarket.loanTenureInMonths)}}\r\n                    </div>\r\n                    <div class=\"stat-value\">Refund</div>\r\n                </div>\r\n\r\n                <div class=\"one-third no-border\">\r\n                    <div class=\"stat\">{{LoanMarket.loanTenureInMonths}} <sub class=\"month\">{{LoanMarket.loanTenureInMonths>1?'Months':'Month'}}</sub></div>\r\n                    <div class=\"stat-value\">Duration</div>\r\n                </div>\r\n\r\n            </div>\r\n\r\n        </div>\r\n        <!-- end clash-card goblin-->\r\n\r\n\r\n    </div>\r\n    <!-- <div class=\"mt-5 text-center blog-agency no-item\">\r\n        <img src=\"assets/img/noresult.png\">\r\n        <h2 class=\"mt-4 font-weight-normal\">No Data Found</h2>\r\n    </div> -->\r\n</div>";
+      __webpack_exports__["default"] = "<!-- <section class=\"agency blog blog-sec blog-sidebar sider p-0 mt-4\">\r\n    <div class=\"card shadow-sm mb-4\" *ngFor=\"let LoanMarket of allLoanMarketData\">\r\n        <div class=\"bg-white blog-title card-header mb-0 text-capitalize\">\r\n            {{LoanMarket.LoanMarketubject}}\r\n        </div>\r\n        <div class=\"card-body px-md-3 px-1 small\">\r\n             <div class=\"row\">               \r\n            <div class=\"col-xl-12 col-12\">\r\n                <p class=\"para2\" [class.show_more]=\"!LoanMarket._id\">\r\n                    {{LoanMarket.loanAmount}}\r\n                </p>\r\n            </div>          \r\n            <div class=\"col-xl-6 col-6 border-right mb-2\">\r\n                <i aria-hidden=\"true\" class=\"icon-timer mr-2\"></i> {{LoanMarket.loanStartDateTime | date:'MMM d, h:mm a'}}\r\n            </div>\r\n            <div class=\"col-xl-6 col-6\">\r\n                <i aria-hidden=\"true\" class=\"icon-location-pin m-r-10\"></i>\r\n                {{LoanMarket.location}}\r\n            </div>\r\n          \r\n        </div>\r\n        </div>\r\n        <div class=\"card-footer bg-white\">\r\n            <span class=\"badge badge-success font-weight-normal text-capitalize btn float-left\" >{{LoanMarket.LoanMarketType}}</span>\r\n          \r\n            <a class=\"btn btn-primary text-capitalize  btn-sm float-right text-white\" (click)=\"showAppliedToLoanMarket(LoanMarket)\">Details</a>\r\n        </div>\r\n    </div>\r\n\r\n\r\n    <div class=\"mt-5 text-center blog-agency no-item\">\r\n        <img src=\"assets/img/noresult.png\">\r\n        <h2 class=\"mt-4 font-weight-normal\">No Data Found</h2>\r\n    </div>\r\n</section> -->\r\n\r\n\r\n\r\n<div class=\"row\">\r\n    <div class=\"col-xl-4 col-12 d-flex align-items-stretch mb-4\" *ngFor=\"let LoanMarket of allLoanMarketData\">\r\n\r\n        <div class=\"clash-card wizard w-100\">\r\n\r\n            <div class=\"clash-card__level clash-card__level--wizard mt-3\">{{(LoanMarket.createdByUserObj.userType ||\r\n                \"\").replace(\"_\", \" \")}}</div>\r\n            <div class=\"clash-card__unit-name text-capitalize\">{{(LoanMarket.loanType || \"\").replace(\"_\", \" \")}}</div>\r\n            <div class=\"clash-card__unit-description\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-xl-4 col-4 border-right\" data-toggle=\"tooltip\" title=\"Created By\">\r\n                        <div (click)=\"usersProfile(LoanMarket.createdByUserObj)\">\r\n                            <i class=\"icon icon-user\"></i>\r\n                        </div>\r\n                        <div class=\"text-black-50 small\">\r\n                            {{LoanMarket.createdByUserObj.firstName}}\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xl-4 col-4 border-right\" data-toggle=\"tooltip\" title=\"Max Applicants\">\r\n                        <div>\r\n                            <i class=\"icon icon-check-box\"></i>\r\n                        </div>\r\n                        <div class=\"text-black-50 small\">\r\n                            {{LoanMarket.loanMaxBorrower}}\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xl-4 col-4 \" data-toggle=\"tooltip\" title=\"Created On\">\r\n                        <div>\r\n                            <i class=\"icon icon-time\"></i>\r\n                        </div>\r\n                        <div class=\"text-black-50 small\">\r\n                            {{LoanMarket.loanStartDateTime | date:'MMM d, yy'}}\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-xl-12 col-12 mt-2\">\r\n                        <div class=\"text-black-50 small mb-1\">\r\n                            Payment Methods\r\n                        </div>\r\n\r\n                        <span *ngIf=\"LoanMarket.loanRepaymentType.indexOf('bank')>-1\"\r\n                            class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                            BANK\r\n                        </span>\r\n                        <span *ngIf=\"LoanMarket.loanRepaymentType.indexOf('cash')>-1\"\r\n                            class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                            Cash\r\n                        </span>\r\n                        <span *ngIf=\"LoanMarket.loanRepaymentType.indexOf('revolut')>-1\"\r\n                            class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                            Revolut\r\n                        </span>\r\n                        <span *ngIf=\"LoanMarket.loanRepaymentType.indexOf('paypal')>-1\"\r\n                            class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                            Paypal\r\n                        </span>\r\n                        <span *ngIf=\"LoanMarket.loanRepaymentType.indexOf('skrill')>-1\"\r\n                            class=\"badge font-weight-light text-uppercase badge-success\">\r\n                            Skrill\r\n                        </span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <button *ngIf=\"!returnT4DisableLoanBorrowOrLendIfAlreadyAccepted(LoanMarket)\"\r\n                class=\"btn btn-outline-secondary btn-sm mb-2\" (click)=\"navigate2LoanProccess(LoanMarket._id)\">Borrow\r\n                Now</button>\r\n\r\n            <button *ngIf=\"returnT4DisableLoanBorrowOrLendIfAlreadyAccepted(LoanMarket)\"\r\n                class=\"btn btn-outline-primary btn-sm mb-2\"><i class=\"icon icon-check-box\"></i> Contract Signed</button>\r\n\r\n            <div class=\"clash-card__unit-stats clash-card__unit-stats--wizard clearfix\">\r\n                <div class=\"one-third\">\r\n                    <div class=\"stat\">{{LoanMarket.loanAmount}}</div>\r\n                    <div class=\"stat-value\">Amount</div>\r\n                </div>\r\n\r\n                <div class=\"one-third\">\r\n                    <div class=\"stat\">\r\n                        {{utilityService.returnRoundedNumber(LoanMarket.calculatedMonthlyAmountForEMI*LoanMarket.loanTenureInMonths)}}\r\n                    </div>\r\n                    <div class=\"stat-value\">Refund</div>\r\n                </div>\r\n\r\n                <div class=\"one-third no-border\">\r\n                    <div class=\"stat\">{{LoanMarket.loanTenureInMonths}} <sub\r\n                            class=\"month\">{{LoanMarket.loanTenureInMonths>1?'Months':'Month'}}</sub></div>\r\n                    <div class=\"stat-value\">Duration</div>\r\n                </div>\r\n\r\n            </div>\r\n\r\n        </div>\r\n        <!-- end clash-card goblin-->\r\n\r\n\r\n    </div>\r\n    <!-- <div class=\"mt-5 text-center blog-agency no-item\">\r\n        <img src=\"assets/img/noresult.png\">\r\n        <h2 class=\"mt-4 font-weight-normal\">No Data Found</h2>\r\n    </div> -->\r\n</div>";
       /***/
     },
 
@@ -4062,7 +4410,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ul class=\"navbar-nav bg-gradient-primary sidebar sidebar-dark accordion navbar_side_panel\" id=\"accordionSidebar\">\r\n\r\n    <!-- Sidebar - Brand -->\r\n    <a class=\"sidebar-brand d-flex align-items-center justify-content-center\">\r\n        <img class=\"img-fluid\" src=\"/assets/img/avitii-logo.png\">\r\n    </a>\r\n\r\n    <!-- Divider -->\r\n    <hr class=\"sidebar-divider my-0\">\r\n\r\n    <!-- Nav Item - Dashboard -->\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\">\r\n            {{currentUser.firstName}} \r\n            <span class=\"badge badge-success float-right font-weight-lighter text-capitalize\" [textContent]=\"currentUser.role\"> Borrower</span>\r\n         </a>\r\n    </li>\r\n    \r\n\r\n    <!-- Divider -->\r\n    <hr class=\"sidebar-divider\">\r\n\r\n    <!-- Heading -->\r\n    <!-- <div class=\"sidebar-heading\">\r\n        Interface\r\n    </div> -->\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/borrower\">\r\n            <i class=\"icon icon-home\"></i>\r\n            <span>Dashboard</span></a>\r\n    </li>\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/borrower/loan-market\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-shopping-cart\"></i>\r\n            <span>Loan Market</span></a>\r\n    </li>\r\n\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/borrower/make-a-loan\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-money\"></i>\r\n            <span>Get a Loan</span></a>\r\n    </li>\r\n    <!-- Nav Item - Pages Collapse Menu -->\r\n    <!-- <li class=\"nav-item\">\r\n        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\" aria-expanded=\"true\" aria-controls=\"collapseTwo\">\r\n            <i class=\"icon icon-bag\"></i>\r\n            <span>My Contracts</span>\r\n        </a>\r\n        <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">\r\n            <div class=\"bg-white py-2 collapse-inner rounded\">\r\n            \r\n                <a class=\"collapse-item\" (click)=\"navigate2State('/borrower/my-contract')\" routerLinkActive=\"active\">My Offers</a>\r\n                <a class=\"collapse-item\" (click)=\"navigate2State('/borrower/my-contract')\" routerLinkActive=\"active\">Paid Contracts</a>\r\n                <a class=\"collapse-item\" (click)=\"navigate2State('/borrower/my-contract')\" routerLinkActive=\"active\">Unpaid Contracts</a>\r\n                <a class=\"collapse-item\" (click)=\"navigate2State('/borrower/my-contract')\" routerLinkActive=\"active\">Inkasso cases</a>\r\n           \r\n            </div>\r\n        </div>\r\n    </li> -->\r\n\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/borrower/my-contract\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-bag\"></i>\r\n            <span>My Contracts</span></a>\r\n    </li>\r\n\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\"  routerLink=\"/borrower/messages\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-comments\"></i>\r\n            <span>Messages</span></a>\r\n    </li>\r\n\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\"  routerLink=\"/borrower/calendar\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-calendar\"></i>\r\n            <span>Calendar</span></a>\r\n    </li>\r\n\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/borrower/ratings\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-star\"></i>\r\n            <span>My Ratings</span></a>\r\n    </li>\r\n\r\n    <!-- Divider -->\r\n    <hr class=\"sidebar-divider\">\r\n\r\n    <!-- Heading -->\r\n    <!-- <div class=\"sidebar-heading\">\r\n        Addons\r\n    </div> -->\r\n\r\n    <!-- Nav Item - Pages Collapse Menu -->\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link collapsed\" data-toggle=\"collapse\" data-target=\"#collapsePages\" aria-expanded=\"true\" aria-controls=\"collapsePages\">\r\n            <i class=\"icon icon-settings\"></i>\r\n            <span>Settings</span>\r\n        </a>\r\n        <div id=\"collapsePages\" class=\"collapse\" aria-labelledby=\"headingPages\" data-parent=\"#accordionSidebar\">\r\n            <div class=\"bg-white py-2 collapse-inner rounded\">\r\n            \r\n                <a class=\"collapse-item\" routerLink=\"/borrower/profile\" routerLinkActive=\"active\">My Profile</a>\r\n                <a class=\"collapse-item\" routerLink=\"/borrower/update-password\" routerLinkActive=\"active\">Change Password</a>\r\n                <a class=\"collapse-item\" routerLink=\"/borrower/bank-details\" routerLinkActive=\"active\">Bank Details</a>\r\n                <a class=\"collapse-item\" routerLink=\"/borrower/income-proof\" routerLinkActive=\"active\">Income Proof</a>\r\n                <a class=\"collapse-item\" routerLink=\"/borrower/my-subscriptions\" routerLinkActive=\"active\">My Subscriptions</a>\r\n               \r\n            </div>\r\n        </div>\r\n    </li>\r\n\r\n \r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/logout\">\r\n            <i class=\"icon icon-flickr-alt\"></i>\r\n            <span>Logout</span></a>\r\n    </li>\r\n\r\n    <!-- Divider -->\r\n    <!-- <hr class=\"sidebar-divider d-none d-md-block\">\r\n\r\n\r\n    <div class=\"text-center d-none d-md-inline\">\r\n        <button class=\"rounded-circle border-0\" id=\"sidebarToggle\"></button>\r\n    </div> -->\r\n\r\n\r\n</ul>\r\n\r\n\r\n<!-- Nav Start [ngClass]=\"{'dark position-relative' : (router.url!='/')}\"-->\r\n<header id=\"custom-header-nav\" class=\"ecommerce nav-fix shadow-sm p-0 hide-lg\">\r\n    \r\n    <div class=\"row\">\r\n        <div class=\"col\">\r\n            <nav>\r\n                <div class=\"responsive-btn ml-1\">\r\n                    <a class=\"toggle-nav\"><i aria-hidden=\"true\" class=\"icon-align-center\"></i></a>\r\n                </div>\r\n                <a class=\"logo-light\" routerLink=\"/home\">\r\n                    <img class=\"img-fluid\" src=\"/assets/img/avitii-logo-purple.png\"></a>\r\n\r\n                <!-- <div class=\"navbar navbar_side_panel m-l-auto p-1 btn-back\" id=\"togglebtn\">\r\n                 <div class=\"responsive-btn\">\r\n                        <h5 class=\"btn-back\">back</h5>\r\n                    </div> \r\n                    <ul class=\"main-menu\">\r\n                        <li><a routerLink=\"/lender\">Home</a></li>\r\n\r\n                        <li><a routerLink=\"/lender/search-consulatnt\" routerLinkActive=\"active\">Search</a></li>\r\n                        <li><a routerLink=\"/lender/my-contract\" routerLinkActive=\"active\">My Contract</a></li>\r\n                        <li><a routerLink=\"/lender/make-a-loan\" routerLinkActive=\"active\"><i class=\"icon-plus\"></i>\r\n                                Make a Loan</a></li>\r\n\r\n                    </ul>\r\n                </div> -->\r\n                <div class=\"top-header-right mr-1\">\r\n                    <ul>\r\n\r\n                        <!-- <li class=\"cart\">\r\n                            <a aria-expanded=\"false\" routerLink=\"/lender/messages\" routerLinkActive=\"active\">\r\n                                <i class=\"icon-comment-alt\"></i>\r\n                            </a>\r\n\r\n                        </li>\r\n                        <li class=\"cart\">\r\n                            <a aria-expanded=\"false\" data-toggle=\"dropdown\" href=\"#\" id=\"dropdownMenuButton1\">\r\n                                <i class=\"icon-bell bell\"></i>\r\n                                <span *ngIf=\"(utilityService._.keys(notificationService.appNotifications).length)>0\"\r\n                                    class=\"badge badge-primary bell-count\"\r\n                                    [textContent]=\"utilityService._.keys(notificationService.appNotifications).length\"></span>\r\n                            </a>\r\n                            <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\"\r\n                                x-placement=\"bottom-end\"\r\n                                style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\r\n                                <ul class=\"shopping-cart list-group list-group-flush\">\r\n                                    <li class=\"list-group-item\"\r\n                                        *ngFor=\"let notification of utilityService._.values(notificationService.appNotifications)\">\r\n                                        <div class=\"pb-2\">\r\n                                            <div class=\"mb-1\">{{notification.message}}&nbsp;<a\r\n                                                    class=\"float-lg-right font-large text-danger\"\r\n                                                    (click)=\"notificationService.check4Notification(notification)\"><i\r\n                                                        class=\"icon-close\" style=\"font-size: 0.6rem;\"></i></a></div>\r\n                                            <div class=\"font-weight-light small mb-1\">{{notification.description}}\r\n                                            </div>\r\n                                        </div>\r\n                                    </li>\r\n\r\n\r\n                                    <li class=\"no-item text-center\">\r\n                                        <h4 class=\"my-4 font-weight-normal\">No Notifications</h4>\r\n                                    </li>\r\n                                </ul>\r\n                            </div>\r\n                        </li> -->\r\n                        <li class=\"cart\">\r\n                            <a aria-expanded=\"false\" data-toggle=\"dropdown\" href=\"#\" id=\"dropdownMenuButton1\">\r\n                                <!-- <img class=\"userimg mt-n2\" src=\"/assets/img/user-default.png\"> -->\r\n                                <i class=\"icon icon-user\"></i>\r\n                            </a>\r\n                            <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\"\r\n                                x-placement=\"bottom-end\"\r\n                                style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\r\n                                <ul class=\"shopping-cart\">\r\n                                    <li>\r\n                                        <a class=\"h6 d-block\" routerLink=\"/lender\">\r\n                                            {{currentUser.firstName}}\r\n                                            <span class=\"badge badge-primary float-right\"\r\n                                                [textContent]=\"currentUser.role\"> Borrower</span>\r\n                                        </a>\r\n                                    </li>\r\n\r\n                                    <!-- <li>\r\n                                        <a class=\"d-block\" routerLink=\"/lender/wallet\">Wallet\r\n                                            <span\r\n                                                class=\"badge badge-success float-right\">${{fundService.totalFund4currentUser}}</span>\r\n                                        </a>\r\n                                    </li> -->\r\n                                    <li><a routerLink=\"/lender/profile\">Profile</a></li>\r\n                                    <hr>\r\n                                    <li>\r\n                                        <a routerLink=\"/logout\">Logout</a>\r\n                                    </li>\r\n                                </ul>\r\n                            </div>\r\n\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n                \r\n                <div class=\"sidebar_overlay navbar_side_panel btn-back\" style=\"display: none;\"></div>\r\n            </nav>\r\n        </div>\r\n    </div>\r\n\r\n</header>\r\n<!-- Nav end-->";
+      __webpack_exports__["default"] = "<ul class=\"navbar-nav bg-gradient-primary sidebar sidebar-dark accordion navbar_side_panel\" id=\"accordionSidebar\">\r\n\r\n    <!-- Sidebar - Brand -->\r\n    <a class=\"sidebar-brand d-flex align-items-center justify-content-center\">\r\n        <img class=\"img-fluid\" src=\"/assets/img/avitii-logo.png\">\r\n    </a>\r\n\r\n    <!-- Divider -->\r\n    <hr class=\"sidebar-divider my-0\">\r\n\r\n    <!-- Nav Item - Dashboard -->\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\">\r\n            {{currentUser.firstName}} \r\n            <span class=\"badge badge-success float-right font-weight-lighter text-capitalize\" [textContent]=\"currentUser.role\"> Borrower</span>\r\n         </a>\r\n    </li>\r\n    \r\n\r\n    <!-- Divider -->\r\n    <hr class=\"sidebar-divider\">\r\n\r\n    <!-- Heading -->\r\n    <!-- <div class=\"sidebar-heading\">\r\n        Interface\r\n    </div> -->\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/borrower\">\r\n            <i class=\"icon icon-home\"></i>\r\n            <span>Dashboard</span></a>\r\n    </li>\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/borrower/loan-market\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-shopping-cart\"></i>\r\n            <span>Loan Market</span></a>\r\n    </li>\r\n\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/borrower/make-a-loan\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-money\"></i>\r\n            <span>Get a Loan</span></a>\r\n    </li>\r\n    <!-- Nav Item - Pages Collapse Menu -->\r\n    <!-- <li class=\"nav-item\">\r\n        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\" aria-expanded=\"true\" aria-controls=\"collapseTwo\">\r\n            <i class=\"icon icon-bag\"></i>\r\n            <span>My Contracts</span>\r\n        </a>\r\n        <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">\r\n            <div class=\"bg-white py-2 collapse-inner rounded\">\r\n            \r\n                <a class=\"collapse-item\" (click)=\"navigate2State('/borrower/my-contract')\" routerLinkActive=\"active\">My Offers</a>\r\n                <a class=\"collapse-item\" (click)=\"navigate2State('/borrower/my-contract')\" routerLinkActive=\"active\">Paid Contracts</a>\r\n                <a class=\"collapse-item\" (click)=\"navigate2State('/borrower/my-contract')\" routerLinkActive=\"active\">Unpaid Contracts</a>\r\n                <a class=\"collapse-item\" (click)=\"navigate2State('/borrower/my-contract')\" routerLinkActive=\"active\">Inkasso cases</a>\r\n           \r\n            </div>\r\n        </div>\r\n    </li> -->\r\n\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/borrower/my-contract\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-bag\"></i>\r\n            <span>My Contracts</span></a>\r\n    </li>\r\n\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\"  routerLink=\"/borrower/messages\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-comments\"></i>\r\n            <span>Messages</span></a>\r\n    </li>\r\n\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\"  routerLink=\"/borrower/calendar\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-calendar\"></i>\r\n            <span>Calendar</span></a>\r\n    </li>\r\n\r\n    <!-- <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/borrower/ratings\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-star\"></i>\r\n            <span>My Ratings</span></a>\r\n    </li> -->\r\n\r\n    <!-- Divider -->\r\n    <hr class=\"sidebar-divider\">\r\n\r\n    <!-- Heading -->\r\n    <!-- <div class=\"sidebar-heading\">\r\n        Addons\r\n    </div> -->\r\n\r\n    <!-- Nav Item - Pages Collapse Menu -->\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link collapsed\" data-toggle=\"collapse\" data-target=\"#collapsePages\" aria-expanded=\"true\" aria-controls=\"collapsePages\">\r\n            <i class=\"icon icon-settings\"></i>\r\n            <span>Settings</span>\r\n        </a>\r\n        <div id=\"collapsePages\" class=\"collapse\" aria-labelledby=\"headingPages\" data-parent=\"#accordionSidebar\">\r\n            <div class=\"bg-white py-2 collapse-inner rounded\">\r\n            \r\n                <a class=\"collapse-item\" routerLink=\"/borrower/profile\" routerLinkActive=\"active\">My Profile</a>\r\n                <a class=\"collapse-item\" routerLink=\"/borrower/update-password\" routerLinkActive=\"active\">Change Password</a>\r\n                <a class=\"collapse-item\" routerLink=\"/borrower/bank-details\" routerLinkActive=\"active\">Bank Details</a>\r\n                <a class=\"collapse-item\" routerLink=\"/borrower/income-proof\" routerLinkActive=\"active\">Income Proof</a>\r\n                <a class=\"collapse-item\" routerLink=\"/borrower/my-subscriptions\" routerLinkActive=\"active\">My Subscriptions</a>\r\n               \r\n            </div>\r\n        </div>\r\n    </li>\r\n\r\n \r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/logout\">\r\n            <i class=\"icon icon-flickr-alt\"></i>\r\n            <span>Logout</span></a>\r\n    </li>\r\n\r\n    <!-- Divider -->\r\n    <!-- <hr class=\"sidebar-divider d-none d-md-block\">\r\n\r\n\r\n    <div class=\"text-center d-none d-md-inline\">\r\n        <button class=\"rounded-circle border-0\" id=\"sidebarToggle\"></button>\r\n    </div> -->\r\n\r\n\r\n</ul>\r\n\r\n\r\n<!-- Nav Start [ngClass]=\"{'dark position-relative' : (router.url!='/')}\"-->\r\n<header id=\"custom-header-nav\" class=\"ecommerce nav-fix shadow-sm p-0 hide-lg\">\r\n    \r\n    <div class=\"row\">\r\n        <div class=\"col\">\r\n            <nav>\r\n                <div class=\"responsive-btn ml-1\">\r\n                    <a class=\"toggle-nav\"><i aria-hidden=\"true\" class=\"icon-align-center\"></i></a>\r\n                </div>\r\n                <a class=\"logo-light\" routerLink=\"/home\">\r\n                    <img class=\"img-fluid\" src=\"/assets/img/avitii-logo-purple.png\"></a>\r\n\r\n                <!-- <div class=\"navbar navbar_side_panel m-l-auto p-1 btn-back\" id=\"togglebtn\">\r\n                 <div class=\"responsive-btn\">\r\n                        <h5 class=\"btn-back\">back</h5>\r\n                    </div> \r\n                    <ul class=\"main-menu\">\r\n                        <li><a routerLink=\"/lender\">Home</a></li>\r\n\r\n                        <li><a routerLink=\"/lender/search-consulatnt\" routerLinkActive=\"active\">Search</a></li>\r\n                        <li><a routerLink=\"/lender/my-contract\" routerLinkActive=\"active\">My Contract</a></li>\r\n                        <li><a routerLink=\"/lender/make-a-loan\" routerLinkActive=\"active\"><i class=\"icon-plus\"></i>\r\n                                Make a Loan</a></li>\r\n\r\n                    </ul>\r\n                </div> -->\r\n                <div class=\"top-header-right mr-1\">\r\n                    <ul>\r\n\r\n                        <!-- <li class=\"cart\">\r\n                            <a aria-expanded=\"false\" routerLink=\"/lender/messages\" routerLinkActive=\"active\">\r\n                                <i class=\"icon-comment-alt\"></i>\r\n                            </a>\r\n\r\n                        </li>\r\n                        <li class=\"cart\">\r\n                            <a aria-expanded=\"false\" data-toggle=\"dropdown\" href=\"#\" id=\"dropdownMenuButton1\">\r\n                                <i class=\"icon-bell bell\"></i>\r\n                                <span *ngIf=\"(utilityService._.keys(notificationService.appNotifications).length)>0\"\r\n                                    class=\"badge badge-primary bell-count\"\r\n                                    [textContent]=\"utilityService._.keys(notificationService.appNotifications).length\"></span>\r\n                            </a>\r\n                            <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\"\r\n                                x-placement=\"bottom-end\"\r\n                                style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\r\n                                <ul class=\"shopping-cart list-group list-group-flush\">\r\n                                    <li class=\"list-group-item\"\r\n                                        *ngFor=\"let notification of utilityService._.values(notificationService.appNotifications)\">\r\n                                        <div class=\"pb-2\">\r\n                                            <div class=\"mb-1\">{{notification.message}}&nbsp;<a\r\n                                                    class=\"float-lg-right font-large text-danger\"\r\n                                                    (click)=\"notificationService.check4Notification(notification)\"><i\r\n                                                        class=\"icon-close\" style=\"font-size: 0.6rem;\"></i></a></div>\r\n                                            <div class=\"font-weight-light small mb-1\">{{notification.description}}\r\n                                            </div>\r\n                                        </div>\r\n                                    </li>\r\n\r\n\r\n                                    <li class=\"no-item text-center\">\r\n                                        <h4 class=\"my-4 font-weight-normal\">No Notifications</h4>\r\n                                    </li>\r\n                                </ul>\r\n                            </div>\r\n                        </li> -->\r\n                        <li class=\"cart\">\r\n                            <a aria-expanded=\"false\" data-toggle=\"dropdown\" href=\"#\" id=\"dropdownMenuButton1\">\r\n                                <!-- <img class=\"userimg mt-n2\" src=\"/assets/img/user-default.png\"> -->\r\n                                <i class=\"icon icon-user\"></i>\r\n                            </a>\r\n                            <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\"\r\n                                x-placement=\"bottom-end\"\r\n                                style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\r\n                                <ul class=\"shopping-cart\">\r\n                                    <li>\r\n                                        <a class=\"h6 d-block\" routerLink=\"/lender\">\r\n                                            {{currentUser.firstName}}\r\n                                            <span class=\"badge badge-primary float-right\"\r\n                                                [textContent]=\"currentUser.role\"> Borrower</span>\r\n                                        </a>\r\n                                    </li>\r\n\r\n                                    <!-- <li>\r\n                                        <a class=\"d-block\" routerLink=\"/lender/wallet\">Wallet\r\n                                            <span\r\n                                                class=\"badge badge-success float-right\">${{fundService.totalFund4currentUser}}</span>\r\n                                        </a>\r\n                                    </li> -->\r\n                                    <li><a routerLink=\"/lender/profile\">Profile</a></li>\r\n                                    <hr>\r\n                                    <li>\r\n                                        <a routerLink=\"/logout\">Logout</a>\r\n                                    </li>\r\n                                </ul>\r\n                            </div>\r\n\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n                \r\n                <div class=\"sidebar_overlay navbar_side_panel btn-back\" style=\"display: none;\"></div>\r\n            </nav>\r\n        </div>\r\n    </div>\r\n\r\n</header>\r\n<!-- Nav end-->";
       /***/
     },
 
@@ -4082,7 +4430,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<!-- addSession section -->\r\n<div class=\"row\" *ngIf=\"!userClickedOnSignLoanContract\">\r\n    <div class=\"col-xl-3 col-12\">\r\n        <div class=\"card border-left-primary shadow py-2 mb-3\">\r\n            <div class=\"card-body\">\r\n                <div class=\"row no-gutters align-items-center\">\r\n                    <div class=\"col mr-2\">\r\n                        <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\" i18n>\r\n                            EMI (Monthly)\r\n                        </div>\r\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\" i18n>\r\n                            kr {{LoanObj.calculatedMonthlyAmountForEMI}}\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-auto\">\r\n                        <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"card border-left-primary shadow py-2 mb-3\">\r\n            <div class=\"card-body\">\r\n                <div class=\"row no-gutters align-items-center\">\r\n                    <div class=\"col mr-2\">\r\n                        <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\" i18n>\r\n                            Loan Amount\r\n                        </div>\r\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\" i18n>\r\n                            kr {{LoanObj.loanAmount}}\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-auto\">\r\n                        <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"card border-left-primary shadow py-2 mb-3\">\r\n            <div class=\"card-body\">\r\n                <div class=\"row no-gutters align-items-center\">\r\n                    <div class=\"col mr-2\">\r\n                        <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\" i18n>\r\n                            Total Loan\r\n                        </div>\r\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\" i18n>\r\n                            kr\r\n                            {{utilityService.returnRoundedNumber(LoanObj.calculatedMonthlyAmountForEMI*LoanObj.loanTenureInMonths)}}\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-auto\">\r\n                        <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"col-xl-9 col-12\">\r\n        <div class=\"card shadow mb-4\">\r\n            <!-- Card Header - Dropdown -->\r\n            <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\r\n                <h5 class=\"m-0 font-weight-bold text-primary\" i18n>{{headerMessage2show}}</h5>\r\n            </div>\r\n            <!-- Card Body -->\r\n            <div class=\"card-body\">\r\n                <div class=\"theme-form\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-xl-4 col-12 \">\r\n                            <div class=\"form-group border-right\">\r\n                                <label for=\"loanType\" i18n>Loan Type</label>\r\n                                <h4 class=\"text-primary\" i18n>\r\n                                    {{utilityService.returnLoanType(LoanObj.loanType)}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"form-group border-right\">\r\n                                <label for=\"loanAmount\" i18n>Loan Amount</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    {{LoanObj.loanAmount}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"form-group\">\r\n                                <label for=\"loanTenureInMonths\" i18n>Tenure in Months</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    {{LoanObj.loanTenureInMonths}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"form-group border-right\">\r\n                                <label for=\"loanInterestRate\" i18n>Interest(%) Rate (per month)</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    {{LoanObj.loanInterestRate}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"form-group border-right\">\r\n                                <label for=\"loanStartDateTime\" i18n>Start Date</label>\r\n                                <h4 class=\"text-primary\" i18n>\r\n                                    {{LoanObj.loanStartDateTime | date:'dd-MMM-YYYY'}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"form-group\">\r\n                                <p class=\"mb-2\" i18n>How to give the money</p>\r\n\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('bank',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                                    BANK\r\n                                </span>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('cash',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                                    Cash\r\n                                </span>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                                    Revolut\r\n                                </span>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                                    Paypal\r\n                                </span>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase badge-success\">\r\n                                    Skrill\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-12\">\r\n                            <p class=\"mb-2\" i18n>Description:</p>\r\n                            <div class=\"text-black-50\" i18n>\r\n                                {{LoanObj.loanDescription}}\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-12 col-12 mt-3\">\r\n                            <div class=\"table-responsive table-billing-history\">\r\n                                <table class=\"table mb-0\">\r\n                                    <thead>\r\n                                        <tr>\r\n                                            <th scope=\"col\">EMI Date</th>\r\n                                            <th scope=\"col\">Payment</th>\r\n\r\n                                        </tr>\r\n                                    </thead>\r\n                                    <tbody>\r\n                                        <tr *ngFor=\"let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index\">\r\n                                            <td>{{utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1)\r\n                                                | date:'dd-MMM-YYYY'}}</td>\r\n                                            <td>kr {{LoanObj.calculatedMonthlyAmountForEMI}}</td>\r\n\r\n                                        </tr>\r\n\r\n                                    </tbody>\r\n                                </table>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"card-footer\">\r\n                <button *ngIf=\"!userClickedOnSignLoanContract\" type=\"button\" class=\"btn btn-primary float-right\"\r\n                    (click)=\"clickedOnSignLoanContract()\" i18n>\r\n                    Sign Loan Contract\r\n                </button>\r\n                <button *ngIf=\"userClickedOnSignLoanContract\" type=\"button\" class=\"btn btn-primary float-right\"\r\n                    (click)=\"resetClickedOnSignLoanContract()\" i18n>\r\n                    Cancel\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>\r\n<div class=\"row\" *ngIf=\"userClickedOnSignLoanContract\">\r\n\r\n    <div class=\"col-xl-12 col-12\">\r\n        <div class=\"card shadow mb-4\">\r\n            <!-- Card Header - Dropdown -->\r\n            <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\r\n                <h5 class=\"m-0 font-weight-bold text-primary\" i18n>Loan Contract</h5>\r\n            </div>\r\n            <!-- Card Body -->\r\n            <div class=\"card-body\">\r\n                <div class=\"theme-form\">\r\n                    <div class=\"row mb-3\">\r\n                        <div class=\"col-xl-12 col-12\" *ngIf=\"lenderUserObj && borrowerUserObj\">\r\n\r\n                            <table class=\"table table table-bordered  shadow-sm\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th style=\"width: 20%;\">#</th>\r\n\r\n                                        <th style=\"width: 40%;\">Borrower</th>\r\n                                        <th style=\"width: 40%;\">Lender</th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr>\r\n                                        <td>\r\n                                            <div class=\"text-black-50 text-uppercase\">\r\n                                                NAME</div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div class=\"mb-0 font-weight-bold text-primary text-uppercase\">\r\n                                                {{borrowerUserObj.firstName}}&nbsp;{{borrowerUserObj.lastName}}\r\n                                            </div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div class=\"mb-0 font-weight-bold text-primary text-uppercase\">\r\n                                                {{lenderUserObj.firstName}}&nbsp;{{lenderUserObj.lastName}}\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n\r\n                                    <tr>\r\n                                        <td>\r\n                                            <div class=\"text-black-50 text-uppercase\">\r\n                                                Address</div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div class=\"mb-0 font-weight-bold text-primary\">\r\n                                                {{borrowerUserObj.address}}\r\n                                            </div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div class=\"mb-0 font-weight-bold text-primary\">\r\n                                                {{lenderUserObj.address}}\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n\r\n                                    <tr>\r\n                                        <td>\r\n                                            <div class=\"text-black-50 text-uppercase\">\r\n                                                Passport Number</div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div class=\"mb-0 font-weight-bold text-primary\">\r\n                                                {{borrowerUserObj.myPassportNumber}}\r\n                                            </div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div class=\"mb-0 font-weight-bold text-primary\">\r\n                                                {{lenderUserObj.myPassportNumber}}\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n\r\n                                    <tr>\r\n                                        <td>\r\n                                            <div class=\"text-black-50 text-uppercase\">\r\n                                                DL Number</div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div class=\"mb-0 font-weight-bold text-primary\">\r\n                                                {{borrowerUserObj.myDLNumber}}\r\n                                            </div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div class=\"mb-0 font-weight-bold text-primary\">\r\n                                                {{lenderUserObj.myDLNumber}}\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n\r\n                                    <tr>\r\n                                        <td>\r\n                                            <div class=\"text-black-50 text-uppercase\">\r\n                                                Payment Method</div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('bank',LoanObj)>-1\">\r\n                                                BANK\r\n\r\n                                                <label for=\"borrowerBankName\" i18n>Bank Name</label>\r\n                                                <h4 class=\"text-primary\" i18n>\r\n                                                    {{borrowerUserObj.bankName}}\r\n                                                </h4>\r\n                                                <label for=\"borrowerRegNumber\" i18n>Reg nr</label>\r\n                                                <h4 class=\"text-primary\" i18n>\r\n                                                    {{borrowerUserObj.regNumber}}\r\n                                                </h4>\r\n                                                <label for=\"borrowerAccountNumber\" i18n>Account Number</label>\r\n                                                <h4 class=\"text-primary\" i18n>\r\n                                                    {{borrowerUserObj.accountNumber}}\r\n                                                </h4>\r\n                                                <label for=\"borrowerMobilePayment\" i18n>Mobile payment</label>\r\n                                                <h4 class=\"text-primary\" i18n>\r\n                                                    {{borrowerUserObj.mobilePayment}}\r\n                                                </h4>\r\n                                            </div>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('cash',LoanObj)>-1\"\r\n                                                class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                                                Cash\r\n                                            </div>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1\">\r\n\r\n                                                Revolut:\r\n                                                {{borrowerUserObj.revolutWalletID}}\r\n                                            </div>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1\">\r\n                                                Paypal ID: {{borrowerUserObj.paypalWalletID}}\r\n                                            </div>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1\">\r\n                                                Skrill: {{borrowerUserObj.skrillWalletID}}\r\n                                            </div>\r\n\r\n\r\n                                        </td>\r\n\r\n                                        <td>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('bank',LoanObj)>-1\">\r\n                                                BANK\r\n\r\n                                                <div class=\"text-black-50\" i18n>Bank Name</div>\r\n                                                <div class=\"font-weight-bold text-primary mb-1\">\r\n                                                    {{lenderUserObj.bankName}}\r\n                                                </div>\r\n                                                <div for=\"lenderRegNumber\" i18n>Reg Number</div>\r\n                                                <div class=\"font-weight-bold text-primary mb-1\">\r\n                                                    {{lenderUserObj.regNumber}}\r\n                                                </div>\r\n                                                <div for=\"lenderAccountNumber\" i18n>Account Number</div>\r\n                                                <div class=\"font-weight-bold text-primary mb-1\">\r\n                                                    {{lenderUserObj.accountNumber}}\r\n                                                </div>\r\n                                            </div>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('cash',LoanObj)>-1\"\r\n                                                class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                                                Cash\r\n                                            </div>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1\">\r\n\r\n                                                Revolut:\r\n                                                {{lenderUserObj.revolutWalletID}}\r\n                                            </div>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1\">\r\n                                                Paypal ID: {{lenderUserObj.paypalWalletID}}\r\n                                            </div>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1\">\r\n                                                Skrill: {{lenderUserObj.skrillWalletID}}\r\n                                            </div>\r\n\r\n\r\n                                        </td>\r\n\r\n                                    </tr>\r\n\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n\r\n                    </div>\r\n\r\n                    <div class=\"row mb-3\">\r\n                        <div class=\"col-xl-4 col-12 \">\r\n                            <div class=\"card shadow-sm p-2\">\r\n                                <label for=\"loanType\" i18n>Loan Type</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    {{utilityService.returnLoanType(LoanObj.loanType)}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"card shadow-sm p-2\">\r\n                                <label for=\"loanAmount\" i18n>Loan Amount</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    {{LoanObj.loanAmount}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"card shadow-sm p-2\">\r\n                                <label i18n>Tenure in Months</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    {{LoanObj.loanTenureInMonths}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"card shadow-sm p-2\">\r\n                                <label i18n>Interest(%) Rate (per month)</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    {{LoanObj.loanInterestRate}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"card shadow-sm p-2\">\r\n                                <label i18n>Start Date</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    {{LoanObj.loanStartDateTime | date:'dd-MMM-YYYY'}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"card shadow-sm p-2\">\r\n\r\n                                <label class=\"mb-3\" i18n>Payment Method</label>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('bank',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase mr-2 badge-success w-20\">\r\n                                    BANK\r\n                                </span>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('cash',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase mr-2 badge-success w-20\">\r\n                                    Cash\r\n                                </span>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase mr-2 badge-success w-20\">\r\n                                    Revolut\r\n                                </span>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase mr-2 badge-success w-20\">\r\n                                    Paypal\r\n                                </span>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase badge-success w-20\">\r\n                                    Skrill\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-12 mt-3\">\r\n                            <div class=\"card shadow-sm p-2\">\r\n                                <label i18n>Description</label>\r\n\r\n                                <div class=\"text-black-50\">\r\n                                    {{LoanObj.loanDescription}}\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n\r\n                        <div class=\"col-xl-12 col-12 mt-3\">\r\n                            <div class=\"table-responsive table shadow-sm\">\r\n                                <table class=\"table mb-0\">\r\n                                    <thead>\r\n                                        <tr>\r\n                                            <th scope=\"col\" i18n>EMI Date</th>\r\n                                            <th scope=\"col\" i18n>Payment</th>\r\n\r\n                                        </tr>\r\n                                    </thead>\r\n                                    <tbody>\r\n                                        <tr *ngFor=\"let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index\">\r\n                                            <td>{{utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1)\r\n                                                | date:'dd-MMM-YYYY'}}</td>\r\n                                            <td>kr {{LoanObj.calculatedMonthlyAmountForEMI}}</td>\r\n\r\n                                        </tr>\r\n\r\n                                    </tbody>\r\n                                </table>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n\r\n        <div class=\"card shadow mb-4\">\r\n           \r\n            <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\r\n                <h5 class=\"m-0 font-weight-bold text-primary\" i18n>Terms & Conditions</h5>\r\n            </div>\r\n          \r\n            <div class=\"card-body\">\r\n                <ol class=\"terms ml-n4\">\r\n                    <li >\r\n                        <div class=\"font-weight-bold\" i18n>Scope</div>\r\n                        <div i18n>\r\n                            These loan terms apply to all loan agreements entered into between the borrower and the lender\r\n                            through the Avitii Lending System. Avitii Lending System acts solely as a dissemination platform\r\n                            and cannot be held liable of any kind, either by the lender or the borrower.\r\n                            By signing the loan agreement, you have accepted these loan terms, which deal with you and the\r\n                            borrower. You are at all times subject to the terms of use of the Avitii Lending System.\r\n                            Deviations from the loan terms must be agreed in writing, and in the event of a discrepancy\r\n                            between the loan terms and your agreement, the loan agreement will take precedence.\r\n                            Avitii Lending System does not provide financial advice when concluding the credit agreement and\r\n                            therefore does not assume any responsibility in connection with this.\r\n                            Both the borrower and the lender confirm compliance with the country's applicable laws and\r\n                            regulations for private loans between private individuals.\r\n                            Borrower as well as lender, provides using Avitii Lending System\r\n                            consent to information including, loan history as well as profile data,\r\n                            address, photo id, social media shared and registered at Credit-List.net\r\n                        </div>\r\n                       \r\n                    </li>\r\n                    <li >\r\n                        <div class=\"font-weight-bold\" i18n>Acceptance deadline</div>\r\n                        <div i18n>\r\n                        Loan offers offered on the Avitii Lending System must be considered as an open offer, for any\r\n                        borrower profile on the website. It is the individual private loan provider who, based on the\r\n                        borrower's information, makes the final decision on the loan implementation.\r\n                        Loan offers are considered as P2P loans, where any acceptance of loan offers is binding on the\r\n                        borrower. The lender as well as the borrower can stay updated at any time with the terms of\r\n                        agreements on the Avitii Lending Systems website.\r\n                    </div>\r\n                    </li>\r\n                    <li>\r\n                        <div class=\"font-weight-bold\" i18n>Prerequisites</div>\r\n                        <div i18n>\r\n                            Credit rating: As a borrower, you declare in good faith that your information entered at all\r\n                            times is correct, that at the time of entering into the loan you have not been declared unfit to\r\n                            take care of yourself or your finances. At the same time, you declare not to be under compulsory\r\n                            dissolution, debt restructuring, or otherwise declared insolvent.\r\n                            Money laundering: Avitii Lending System is a dissemination platform, and is therefore out of\r\n                            responsibility. Private lender enters into loan agreement with private borrowers. As a borrower\r\n                            on the website, you must in principle always provide private information on an ongoing basis, at\r\n                            the request of Avittii Lending Systems. If you do not provide the necessary correct information,\r\n                            the Avitii Lending System may exclude you from using the Website.\r\n                        </div>\r\n                     \r\n                    </li>\r\n                    <li>\r\n                        <div class=\"font-weight-bold\" i18n>Loan terms</div>\r\n                        The borrower must at all times be aware that he or she has the finances to take out offered\r\n                        loans. In addition to the principal, the opportunity to bear interest expenses, fees and other\r\n                        expenses in connection with redemption.\r\n\r\n                        <div i18n>The borrower must at all times confirm their creditworthiness, as well as they are not\r\n                            over-mortgaged for the applicable period. The borrower must at all times comply with the\r\n                            applicable rules for repayment. In the event of late payment or otherwise default, it is up\r\n                            to the lender to impose additional expenses. The borrower confirms that he or she is solely\r\n                            responsible for finding a solution to repay the loan / debt.</div>\r\n                        <div i18n>\r\n                            The borrower confirms with this agreement that he agrees that the lender can at any time\r\n                            transfer the loan to a third party for recovery.\r\n                        </div>\r\n                        <div i18n>\r\n                            Receipt for repayment or remission must be notified in writing by endorsement on this loan\r\n                            document.\r\n                        </div>\r\n\r\n                        <div i18n>\r\n                            In the event of late payment, 5 days from the payment date are generally given to find a\r\n                            solution yourself. In case the borrower fails to comply with the repayment within the 5\r\n                            days, the lender is entitled to impose a 65% fee on the amount lent, valid from the date of\r\n                            payment. After another 5 days, the debt will be transferred to recovery.\r\n                        </div>\r\n\r\n                    </li>\r\n                    <li>\r\n                        <div class=\"font-weight-bold\" i18n>Fraud</div>\r\n                        <div i18n>\r\n                            Borrowers who take out loans fraudulently, or in some other way by giving incorrect information\r\n                            and thus force themselves on loans that they are unable to repay or should have foreseen, not\r\n                            being able to repay will be considered fraud.\r\n                             279 CRIMINAL ACT Fraud For fraud, a person is punished who, in order to obtain gain or other\r\n                            unjustified gain, by unlawfully causing, corroborating or exploiting an error, determines\r\n                            another for an act or omission, whereby the person or person for whom the act is inflicted or\r\n                            the omission becomes decisive, a loss of property.\r\n                        </div>\r\n                       \r\n                    </li>\r\n\r\n\r\n                </ol>\r\n                <hr>\r\n                <h5>E-Signature</h5>\r\n                <hr>\r\n                <form [formGroup]=\"borrowNowForm\" class=\"theme-form\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-xl-6 col-6\">\r\n                            <div class=\"form-group\">\r\n                                <label for=\"eSignatureBorrowersName\" i18n>Name</label>\r\n                                <input type=\"text\" formControlName=\"eSignatureBorrowersName\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.eSignatureBorrowersName.errors }\" />\r\n                                <div *ngIf=\"submitted && f.eSignatureBorrowersName.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.eSignatureBorrowersName.errors.required\" i18n>Name is required</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-6 col-6\">\r\n                            <div class=\"form-group\">\r\n                                <label for=\"eSignatureBorrowersPassportNumber\" i18n>Passport or Driving Licence\r\n                                    Number</label>\r\n                                <input type=\"text\" formControlName=\"eSignatureBorrowersPassportNumber\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.eSignatureBorrowersPassportNumber.errors }\" />\r\n                                <div *ngIf=\"submitted && f.eSignatureBorrowersPassportNumber.errors\"\r\n                                    class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.eSignatureBorrowersPassportNumber.errors.required\" i18n>Passport or Driving\r\n                                        Licence Number is required</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </form>\r\n            </div>\r\n            <div class=\"card-footer\">\r\n\r\n                <button type=\"button\" class=\"btn btn-success float-right\" (click)=\"clickedOnVerifiedSignLoanContract()\"\r\n                    i18n>\r\n                    SUBMIT\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<!-- addSession section -->";
+      __webpack_exports__["default"] = "<form [formGroup]=\"borrowNowForm\" class=\"theme-form\">\r\n<!-- addSession section -->\r\n<div class=\"row\" *ngIf=\"!userClickedOnSignLoanContract\">\r\n    <div class=\"col-xl-3 col-12\">\r\n        <div class=\"card border-left-primary shadow py-2 mb-3\">\r\n            <div class=\"card-body\">\r\n                <div class=\"row no-gutters align-items-center\">\r\n                    <div class=\"col mr-2\">\r\n                        <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\" i18n>\r\n                            EMI (Monthly)\r\n                        </div>\r\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\" i18n>\r\n                            kr {{LoanObj.calculatedMonthlyAmountForEMI}}\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-auto\">\r\n                        <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"card border-left-primary shadow py-2 mb-3\">\r\n            <div class=\"card-body\">\r\n                <div class=\"row no-gutters align-items-center\">\r\n                    <div class=\"col mr-2\">\r\n                        <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\" i18n>\r\n                            Loan Amount\r\n                        </div>\r\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\" i18n>\r\n                            kr {{LoanObj.loanAmount}}\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-auto\">\r\n                        <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"card border-left-primary shadow py-2 mb-3\">\r\n            <div class=\"card-body\">\r\n                <div class=\"row no-gutters align-items-center\">\r\n                    <div class=\"col mr-2\">\r\n                        <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\" i18n>\r\n                            Total Loan\r\n                        </div>\r\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\" i18n>\r\n                            kr\r\n                            {{utilityService.returnRoundedNumber(LoanObj.calculatedMonthlyAmountForEMI*LoanObj.loanTenureInMonths)}}\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-auto\">\r\n                        <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"col-xl-9 col-12\">\r\n        <div class=\"card shadow mb-4\">\r\n            <!-- Card Header - Dropdown -->\r\n            <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\r\n                <h5 class=\"m-0 font-weight-bold text-primary\" i18n>{{headerMessage2show}}</h5>\r\n            </div>\r\n            <!-- Card Body -->\r\n            <div class=\"card-body\">\r\n                <div class=\"theme-form\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-xl-4 col-12 border-right\">\r\n                            <div class=\"form-group\">\r\n                                <label for=\"loanType\" i18n>Loan Type</label>\r\n                                <h4 class=\"text-primary\" i18n>\r\n                                    {{utilityService.returnLoanType(LoanObj.loanType)}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12 border-right\">\r\n                            <div class=\"form-group \">\r\n                                <label for=\"loanAmount\" i18n>Loan Amount</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    {{LoanObj.loanAmount}}\r\n                                </h4>\r\n                            </div>\r\n                            <div class=\"form-group bg-light2 p-2\">\r\n                                <label for=\"proposedLoanAmount\" i18n>\r\n                                    Propose a new loan amount <sub>(Optional) & amount must be hight than kr {{LoanObj.loanAmount}}</sub></label>\r\n                                <input type=\"number\" formControlName=\"proposedLoanAmount\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.proposedLoanAmount.errors }\" placeholder=\"Enter New Amount\"/>\r\n                                <div *ngIf=\"submitted && f.proposedLoanAmount.errors\"\r\n                                    class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.proposedLoanAmount.errors.required\" i18n>\r\n                                        Proposed Loan Amount is required\r\n                                    </div>\r\n                                    <div *ngIf=\"f.proposedLoanAmount.min.required\" i18n>\r\n                                        amount must be hight than kr {{LoanObj.loanAmount}}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"form-group\">\r\n                                <label for=\"loanTenureInMonths\" i18n>Tenure in Months</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    {{LoanObj.loanTenureInMonths}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12 border-right\">\r\n                            <div class=\"form-group \">\r\n                                <label for=\"loanInterestRate\" i18n>Interest(%) Rate (per month)</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    {{LoanObj.loanInterestRate}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12 border-right\">\r\n                            <div class=\"form-group \">\r\n                                <label for=\"loanStartDateTime\" i18n>Start Date</label>\r\n                                <h4 class=\"text-primary\" i18n>\r\n                                    {{LoanObj.loanStartDateTime | date:'dd-MMM-YYYY'}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"form-group\">\r\n                                <p class=\"mb-2\" i18n>How to give the money</p>\r\n\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('bank',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                                    BANK\r\n                                </span>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('cash',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                                    Cash\r\n                                </span>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                                    Revolut\r\n                                </span>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                                    Paypal\r\n                                </span>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase badge-success\">\r\n                                    Skrill\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-12\">\r\n                            <p class=\"mb-2\" i18n>Description:</p>\r\n                            <div class=\"text-black-50\" i18n>\r\n                                {{LoanObj.loanDescription}}\r\n                            </div>\r\n                        </div>\r\n                        <!-- <div class=\"col-xl-12\">\r\n                            <div class=\"form-group\">\r\n                                <label for=\"proposedLoanAmount\" i18n>\r\n                                    Propose a new loan amount <sub>(Optional) & amount must be hight than kr {{LoanObj.loanAmount}}</sub></label>\r\n                                <input type=\"number\" formControlName=\"proposedLoanAmount\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.proposedLoanAmount.errors }\" />\r\n                                <div *ngIf=\"submitted && f.proposedLoanAmount.errors\"\r\n                                    class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.proposedLoanAmount.errors.required\" i18n>\r\n                                        Proposed Loan Amount is required\r\n                                    </div>\r\n                                    <div *ngIf=\"f.proposedLoanAmount.min.required\" i18n>\r\n                                        amount must be hight than kr {{LoanObj.loanAmount}}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div> -->\r\n                        <div class=\"col-xl-12 col-12 mt-3\">\r\n                            <div class=\"table-responsive table-billing-history\">\r\n                                <table class=\"table mb-0\">\r\n                                    <thead>\r\n                                        <tr>\r\n                                            <th scope=\"col\">EMI Date</th>\r\n                                            <th scope=\"col\">Payment</th>\r\n\r\n                                        </tr>\r\n                                    </thead>\r\n                                    <tbody>\r\n                                        <tr *ngFor=\"let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index\">\r\n                                            <td>{{utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1)\r\n                                                | date:'dd-MMM-YYYY'}}</td>\r\n                                            <td>kr {{LoanObj.calculatedMonthlyAmountForEMI}}</td>\r\n\r\n                                        </tr>\r\n\r\n                                    </tbody>\r\n                                </table>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"card-footer\">\r\n                <button *ngIf=\"!userClickedOnSignLoanContract\" type=\"button\" class=\"btn btn-primary float-right\"\r\n                    (click)=\"clickedOnSignLoanContract()\" i18n>\r\n                    Sign Loan Contract\r\n                </button>\r\n                <button *ngIf=\"userClickedOnSignLoanContract\" type=\"button\" class=\"btn btn-primary float-right\"\r\n                    (click)=\"resetClickedOnSignLoanContract()\" i18n>\r\n                    Cancel\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n</div>\r\n<div class=\"row\" *ngIf=\"userClickedOnSignLoanContract\">\r\n\r\n    <div class=\"col-xl-12 col-12\">\r\n        <div class=\"card shadow mb-4\">\r\n            <!-- Card Header - Dropdown -->\r\n            <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\r\n                <h5 class=\"m-0 font-weight-bold text-primary\" i18n>Loan Contract</h5>\r\n            </div>\r\n            <!-- Card Body -->\r\n            <div class=\"card-body\">\r\n                <div class=\"theme-form\">\r\n                    <div class=\"row mb-3\">\r\n                        <div class=\"col-xl-12 col-12\" *ngIf=\"lenderUserObj && borrowerUserObj\">\r\n\r\n                            <table class=\"table table table-bordered  shadow-sm\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th style=\"width: 20%;\">#</th>\r\n\r\n                                        <th style=\"width: 40%;\">Borrower</th>\r\n                                        <th style=\"width: 40%;\">Lender</th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr>\r\n                                        <td>\r\n                                            <div class=\"text-black-50 text-uppercase\">\r\n                                                NAME</div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div class=\"mb-0 font-weight-bold text-primary text-uppercase\">\r\n                                                {{borrowerUserObj.firstName}}&nbsp;{{borrowerUserObj.lastName}}\r\n                                            </div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div class=\"mb-0 font-weight-bold text-primary text-uppercase\">\r\n                                                {{lenderUserObj.firstName}}&nbsp;{{lenderUserObj.lastName}}\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n\r\n                                    <tr>\r\n                                        <td>\r\n                                            <div class=\"text-black-50 text-uppercase\">\r\n                                                Address</div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div class=\"mb-0 font-weight-bold text-primary\">\r\n                                                {{borrowerUserObj.address}}\r\n                                            </div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div class=\"mb-0 font-weight-bold text-primary\">\r\n                                                {{lenderUserObj.address}}\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n\r\n                                    <tr>\r\n                                        <td>\r\n                                            <div class=\"text-black-50 text-uppercase\">\r\n                                                Passport Number</div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div class=\"mb-0 font-weight-bold text-primary\">\r\n                                                {{borrowerUserObj.myPassportNumber}}\r\n                                            </div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div class=\"mb-0 font-weight-bold text-primary\">\r\n                                                {{lenderUserObj.myPassportNumber}}\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n\r\n                                    <tr>\r\n                                        <td>\r\n                                            <div class=\"text-black-50 text-uppercase\">\r\n                                                DL Number</div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div class=\"mb-0 font-weight-bold text-primary\">\r\n                                                {{borrowerUserObj.myDLNumber}}\r\n                                            </div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div class=\"mb-0 font-weight-bold text-primary\">\r\n                                                {{lenderUserObj.myDLNumber}}\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n\r\n                                    <tr>\r\n                                        <td>\r\n                                            <div class=\"text-black-50 text-uppercase\">\r\n                                                Payment Method</div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('bank',LoanObj)>-1\">\r\n                                                BANK\r\n\r\n                                                <label for=\"borrowerBankName\" i18n>Bank Name</label>\r\n                                                <h4 class=\"text-primary\" i18n>\r\n                                                    {{borrowerUserObj.bankName}}\r\n                                                </h4>\r\n                                                <label for=\"borrowerRegNumber\" i18n>Reg nr</label>\r\n                                                <h4 class=\"text-primary\" i18n>\r\n                                                    {{borrowerUserObj.regNumber}}\r\n                                                </h4>\r\n                                                <label for=\"borrowerAccountNumber\" i18n>Account Number</label>\r\n                                                <h4 class=\"text-primary\" i18n>\r\n                                                    {{borrowerUserObj.accountNumber}}\r\n                                                </h4>\r\n                                                <label for=\"borrowerMobilePayment\" i18n>Mobile payment</label>\r\n                                                <h4 class=\"text-primary\" i18n>\r\n                                                    {{borrowerUserObj.mobilePayment}}\r\n                                                </h4>\r\n                                            </div>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('cash',LoanObj)>-1\"\r\n                                                class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                                                Cash\r\n                                            </div>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1\">\r\n\r\n                                                Revolut:\r\n                                                {{borrowerUserObj.revolutWalletID}}\r\n                                            </div>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1\">\r\n                                                Paypal ID: {{borrowerUserObj.paypalWalletID}}\r\n                                            </div>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1\">\r\n                                                Skrill: {{borrowerUserObj.skrillWalletID}}\r\n                                            </div>\r\n\r\n\r\n                                        </td>\r\n\r\n                                        <td>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('bank',LoanObj)>-1\">\r\n                                                BANK\r\n\r\n                                                <div class=\"text-black-50\" i18n>Bank Name</div>\r\n                                                <div class=\"font-weight-bold text-primary mb-1\">\r\n                                                    {{lenderUserObj.bankName}}\r\n                                                </div>\r\n                                                <div for=\"lenderRegNumber\" i18n>Reg Number</div>\r\n                                                <div class=\"font-weight-bold text-primary mb-1\">\r\n                                                    {{lenderUserObj.regNumber}}\r\n                                                </div>\r\n                                                <div for=\"lenderAccountNumber\" i18n>Account Number</div>\r\n                                                <div class=\"font-weight-bold text-primary mb-1\">\r\n                                                    {{lenderUserObj.accountNumber}}\r\n                                                </div>\r\n                                            </div>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('cash',LoanObj)>-1\"\r\n                                                class=\"badge font-weight-light text-uppercase mr-2 badge-success\">\r\n                                                Cash\r\n                                            </div>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1\">\r\n\r\n                                                Revolut:\r\n                                                {{lenderUserObj.revolutWalletID}}\r\n                                            </div>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1\">\r\n                                                Paypal ID: {{lenderUserObj.paypalWalletID}}\r\n                                            </div>\r\n                                            <div *ngIf=\"utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1\">\r\n                                                Skrill: {{lenderUserObj.skrillWalletID}}\r\n                                            </div>\r\n\r\n\r\n                                        </td>\r\n\r\n                                    </tr>\r\n\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n\r\n                    </div>\r\n\r\n                    <div class=\"row mb-3\">\r\n                        <div class=\"col-xl-4 col-12 \">\r\n                            <div class=\"card shadow-sm p-2\">\r\n                                <label for=\"loanType\" i18n>Loan Type</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    {{utilityService.returnLoanType(LoanObj.loanType)}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"card shadow-sm p-2\" *ngIf=\"!f.proposedLoanAmount.value\">\r\n                                <label for=\"loanAmount\" i18n>Loan Amount</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    {{LoanObj.loanAmount}}\r\n                                </h4>\r\n                            </div>\r\n                            <div class=\"card shadow-sm p-2\" *ngIf=\"f.proposedLoanAmount.value\">\r\n                                <label for=\"loanAmount\" i18n>Loan Amount/Proposed Loan Amount</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    <span style=\"-webkit-text-decoration-line: line-through;text-decoration-line: line-through;\">\r\n                                        {{LoanObj.loanAmount}}\r\n                                       </span>\r\n                                       / \r\n                                       <span>\r\n                                        {{f.proposedLoanAmount.value}}\r\n                                       </span>\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"card shadow-sm p-2\">\r\n                                <label i18n>Tenure in Months</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    {{LoanObj.loanTenureInMonths}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"card shadow-sm p-2\">\r\n                                <label i18n>Interest(%) Rate (per month)</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    {{LoanObj.loanInterestRate}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"card shadow-sm p-2\">\r\n                                <label i18n>Start Date</label>\r\n                                <h4 class=\"text-primary\">\r\n                                    {{LoanObj.loanStartDateTime | date:'dd-MMM-YYYY'}}\r\n                                </h4>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-4 col-12\">\r\n                            <div class=\"card shadow-sm p-2\">\r\n\r\n                                <label class=\"mb-3\" i18n>Payment Method</label>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('bank',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase mr-2 badge-success w-20\">\r\n                                    BANK\r\n                                </span>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('cash',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase mr-2 badge-success w-20\">\r\n                                    Cash\r\n                                </span>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase mr-2 badge-success w-20\">\r\n                                    Revolut\r\n                                </span>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase mr-2 badge-success w-20\">\r\n                                    Paypal\r\n                                </span>\r\n                                <span *ngIf=\"utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1\"\r\n                                    class=\"badge font-weight-light text-uppercase badge-success w-20\">\r\n                                    Skrill\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-12 mt-3\">\r\n                            <div class=\"card shadow-sm p-2\">\r\n                                <label i18n>Description</label>\r\n\r\n                                <div class=\"text-black-50\">\r\n                                    {{LoanObj.loanDescription}}\r\n                                </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                        <div class=\"col-xl-12 mt-3\" *ngIf=\"f.loanInsuranceRequired.value\">\r\n                            <div class=\"card shadow-sm p-2\">\r\n                                <label i18n>Applied for Insurance with Amount</label>\r\n                                <div class=\"text-black-50\">\r\n                                    {{f.loanInsuranceAmount.value}}\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"col-xl-12 col-12 mt-3\">\r\n                            <div class=\"table-responsive table shadow-sm\">\r\n                                <table class=\"table mb-0\">\r\n                                    <thead>\r\n                                        <tr>\r\n                                            <th scope=\"col\" i18n>EMI Date</th>\r\n                                            <th scope=\"col\" i18n>Payment</th>\r\n\r\n                                        </tr>\r\n                                    </thead>\r\n                                    <tbody>\r\n                                        <tr *ngFor=\"let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index\">\r\n                                            <td>{{utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1)\r\n                                                | date:'dd-MMM-YYYY'}}</td>\r\n                                            <td *ngIf=\"!f.calculatedMonthlyAmountForEMI.value\">kr {{LoanObj.calculatedMonthlyAmountForEMI}}</td>\r\n                                            <td *ngIf=\"f.calculatedMonthlyAmountForEMI.value\">kr \r\n                                               <span style=\"-webkit-text-decoration-line: line-through;text-decoration-line: line-through;\">\r\n                                                {{LoanObj.calculatedMonthlyAmountForEMI}}\r\n                                               </span>\r\n                                               &nbsp; \r\n                                               <span>\r\n                                                {{f.calculatedMonthlyAmountForEMI.value}}\r\n                                               </span>\r\n                                            </td>\r\n                                        </tr>\r\n                                    </tbody>\r\n                                </table>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n\r\n        <div class=\"card shadow mb-4\">\r\n           \r\n            <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\r\n                <h5 class=\"m-0 font-weight-bold text-primary\" i18n>Terms & Conditions</h5>\r\n            </div>\r\n          \r\n            <div class=\"card-body\">\r\n                <ol class=\"terms ml-n4\">\r\n                    <li >\r\n                        <div class=\"font-weight-bold\" i18n>Scope</div>\r\n                        <div i18n>\r\n                            These loan terms apply to all loan agreements entered into between the borrower and the lender\r\n                            through the Avitii Lending System. Avitii Lending System acts solely as a dissemination platform\r\n                            and cannot be held liable of any kind, either by the lender or the borrower.\r\n                            By signing the loan agreement, you have accepted these loan terms, which deal with you and the\r\n                            borrower. You are at all times subject to the terms of use of the Avitii Lending System.\r\n                            Deviations from the loan terms must be agreed in writing, and in the event of a discrepancy\r\n                            between the loan terms and your agreement, the loan agreement will take precedence.\r\n                            Avitii Lending System does not provide financial advice when concluding the credit agreement and\r\n                            therefore does not assume any responsibility in connection with this.\r\n                            Both the borrower and the lender confirm compliance with the country's applicable laws and\r\n                            regulations for private loans between private individuals.\r\n                            Borrower as well as lender, provides using Avitii Lending System\r\n                            consent to information including, loan history as well as profile data,\r\n                            address, photo id, social media shared and registered at Credit-List.net\r\n                        </div>\r\n                       \r\n                    </li>\r\n                    <li >\r\n                        <div class=\"font-weight-bold\" i18n>Acceptance deadline</div>\r\n                        <div i18n>\r\n                        Loan offers offered on the Avitii Lending System must be considered as an open offer, for any\r\n                        borrower profile on the website. It is the individual private loan provider who, based on the\r\n                        borrower's information, makes the final decision on the loan implementation.\r\n                        Loan offers are considered as P2P loans, where any acceptance of loan offers is binding on the\r\n                        borrower. The lender as well as the borrower can stay updated at any time with the terms of\r\n                        agreements on the Avitii Lending Systems website.\r\n                    </div>\r\n                    </li>\r\n                    <li>\r\n                        <div class=\"font-weight-bold\" i18n>Prerequisites</div>\r\n                        <div i18n>\r\n                            Credit rating: As a borrower, you declare in good faith that your information entered at all\r\n                            times is correct, that at the time of entering into the loan you have not been declared unfit to\r\n                            take care of yourself or your finances. At the same time, you declare not to be under compulsory\r\n                            dissolution, debt restructuring, or otherwise declared insolvent.\r\n                            Money laundering: Avitii Lending System is a dissemination platform, and is therefore out of\r\n                            responsibility. Private lender enters into loan agreement with private borrowers. As a borrower\r\n                            on the website, you must in principle always provide private information on an ongoing basis, at\r\n                            the request of Avittii Lending Systems. If you do not provide the necessary correct information,\r\n                            the Avitii Lending System may exclude you from using the Website.\r\n                        </div>\r\n                     \r\n                    </li>\r\n                    <li>\r\n                        <div class=\"font-weight-bold\" i18n>Loan terms</div>\r\n                        The borrower must at all times be aware that he or she has the finances to take out offered\r\n                        loans. In addition to the principal, the opportunity to bear interest expenses, fees and other\r\n                        expenses in connection with redemption.\r\n\r\n                        <div i18n>The borrower must at all times confirm their creditworthiness, as well as they are not\r\n                            over-mortgaged for the applicable period. The borrower must at all times comply with the\r\n                            applicable rules for repayment. In the event of late payment or otherwise default, it is up\r\n                            to the lender to impose additional expenses. The borrower confirms that he or she is solely\r\n                            responsible for finding a solution to repay the loan / debt.</div>\r\n                        <div i18n>\r\n                            The borrower confirms with this agreement that he agrees that the lender can at any time\r\n                            transfer the loan to a third party for recovery.\r\n                        </div>\r\n                        <div i18n>\r\n                            Receipt for repayment or remission must be notified in writing by endorsement on this loan\r\n                            document.\r\n                        </div>\r\n\r\n                        <div i18n>\r\n                            In the event of late payment, 5 days from the payment date are generally given to find a\r\n                            solution yourself. In case the borrower fails to comply with the repayment within the 5\r\n                            days, the lender is entitled to impose a 65% fee on the amount lent, valid from the date of\r\n                            payment. After another 5 days, the debt will be transferred to recovery.\r\n                        </div>\r\n\r\n                    </li>\r\n                    <li>\r\n                        <div class=\"font-weight-bold\" i18n>Fraud</div>\r\n                        <div i18n>\r\n                            Borrowers who take out loans fraudulently, or in some other way by giving incorrect information\r\n                            and thus force themselves on loans that they are unable to repay or should have foreseen, not\r\n                            being able to repay will be considered fraud.\r\n                             279 CRIMINAL ACT Fraud For fraud, a person is punished who, in order to obtain gain or other\r\n                            unjustified gain, by unlawfully causing, corroborating or exploiting an error, determines\r\n                            another for an act or omission, whereby the person or person for whom the act is inflicted or\r\n                            the omission becomes decisive, a loss of property.\r\n                        </div>\r\n                       \r\n                    </li>\r\n\r\n\r\n                </ol>\r\n                <hr>\r\n                <h5>E-Signature</h5>\r\n                <hr>\r\n\r\n                    <div class=\"row\">\r\n                        <div class=\"col-xl-6 col-12\">\r\n                            <div class=\"form-group\">\r\n                                <label for=\"eSignatureBorrowersName\" i18n>Name</label>\r\n                                <input type=\"text\" formControlName=\"eSignatureBorrowersName\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.eSignatureBorrowersName.errors }\" />\r\n                                <div *ngIf=\"submitted && f.eSignatureBorrowersName.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.eSignatureBorrowersName.errors.required\" i18n>Name is required</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-xl-6 col-12\">\r\n                            <div class=\"form-group\">\r\n                                <label for=\"eSignatureBorrowersPassportNumber\" i18n>Passport or Driving Licence\r\n                                    Number</label>\r\n                                <input type=\"text\" formControlName=\"eSignatureBorrowersPassportNumber\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.eSignatureBorrowersPassportNumber.errors }\" />\r\n                                <div *ngIf=\"submitted && f.eSignatureBorrowersPassportNumber.errors\"\r\n                                    class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.eSignatureBorrowersPassportNumber.errors.required\" i18n>Passport or Driving\r\n                                        Licence Number is required</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                \r\n            </div>\r\n            <div class=\"card-footer\">\r\n\r\n                <button type=\"button\" class=\"btn btn-success float-right\" (click)=\"clickedOnVerifiedSignLoanContract()\"\r\n                    i18n>\r\n                    SUBMIT\r\n                </button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n</form>\r\n<!-- addSession section -->";
       /***/
     },
 
@@ -4168,39 +4516,55 @@
       /* harmony import */
 
 
-      var src_environments_environment__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! rxjs/internal/operators/first */
+      "XoMe");
+      /* harmony import */
+
+
+      var rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8__);
+      /* harmony import */
+
+
+      var src_environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! src/environments/environment */
       "AytR");
       /* harmony import */
 
 
-      var _models_role__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      var _models_role__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! ../models/role */
       "z56L");
       /* harmony import */
 
 
-      var _services__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      var _services__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! ../services */
       "o0su");
       /* harmony import */
 
 
-      var _services_contact_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+      var _services_contact_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! ../services/contact.service */
       "3ITz");
       /* harmony import */
 
 
-      var _services_user_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+      var _services_user_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! ../services/user.service */
       "qfBg");
       /* harmony import */
 
 
-      var _services_utility_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+      var _services_utility_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! ../services/utility.service */
       "A1CT");
+      /* harmony import */
+
+
+      var _socketio_service__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+      /*! ../socketio.service */
+      "bgkY");
 
       var BorrowerComponent = /*#__PURE__*/function () {
         function BorrowerComponent(dialog) {
@@ -4250,9 +4614,9 @@
           this.data = data;
           this.utilityService = utilityService;
           this.arrayItems = [0];
-          this.SessionStatus = _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"];
+          this.SessionStatus = _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"];
           this.editing = false;
-          this.SessionExecutionType = _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionExecutionType"];
+          this.SessionExecutionType = _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionExecutionType"];
           this.LoanObj = data.sessionObj;
 
           if (!data.LoanApplyObj) {
@@ -4260,7 +4624,7 @@
             this.LoanApplyObj.loanId = this.LoanObj._id;
             this.LoanApplyObj.loanAmount = this.LoanObj.loanAmount;
             this.LoanApplyObj.borrowerId = data.borrowerId;
-            this.LoanApplyObj.sessionExecutionType = _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionExecutionType"].FixedPrice;
+            this.LoanApplyObj.sessionExecutionType = _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionExecutionType"].FixedPrice;
             this.LoanApplyObj.mileStoneProposal = [];
             this.LoanApplyObj.mileStoneProposal.push({
               "milestones": null,
@@ -4286,18 +4650,18 @@
         }, {
           key: "returnSessionApplyStatus",
           value: function returnSessionApplyStatus(LoanApplyObj) {
-            var _currentStatus = _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"].Pending;
+            var _currentStatus = _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Pending;
 
             try {
-              if (LoanApplyObj.status == _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"].Pending || LoanApplyObj.status == 'Pending' || LoanApplyObj.status == '' || LoanApplyObj.status == null || typeof LoanApplyObj.status == 'undefined') {
-                _currentStatus = _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"].Pending;
+              if (LoanApplyObj.status == _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Pending || LoanApplyObj.status == 'Pending' || LoanApplyObj.status == '' || LoanApplyObj.status == null || typeof LoanApplyObj.status == 'undefined') {
+                _currentStatus = _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Pending;
               } else {
                 _currentStatus = LoanApplyObj.status;
               }
             } catch (ex) {}
 
             try {
-              if (LoanApplyObj.status != _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"].Pending && LoanApplyObj.status != _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"].Rejected && LoanApplyObj.status != _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"].RejectedOngoing) {
+              if (LoanApplyObj.status != _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Pending && LoanApplyObj.status != _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Rejected && LoanApplyObj.status != _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].RejectedOngoing) {
                 this.anySingleDataIsApproved = true;
               }
             } catch (ex) {}
@@ -4332,20 +4696,22 @@
             args: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MAT_DIALOG_DATA"]]
           }]
         }, {
-          type: _services_utility_service__WEBPACK_IMPORTED_MODULE_13__["UtilityService"]
+          type: _services_utility_service__WEBPACK_IMPORTED_MODULE_14__["UtilityService"]
         }];
       };
 
       ModalApplySession = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["Component"])({
         selector: 'modal-apply-session',
         template: _raw_loader_modal_modal_apply_session_html__WEBPACK_IMPORTED_MODULE_3__["default"]
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogRef"], Object, _services_utility_service__WEBPACK_IMPORTED_MODULE_13__["UtilityService"]])], ModalApplySession); //#endregion modal popup for apply LoanObj
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogRef"], Object, _services_utility_service__WEBPACK_IMPORTED_MODULE_14__["UtilityService"]])], ModalApplySession); //#endregion modal popup for apply LoanObj
       //#region modal popup for display applied sessions
 
       var ModalAppliedSessionDisplay = /*#__PURE__*/function () {
-        function ModalAppliedSessionDisplay(dialogRef, data, userService, utilityService, dialog, router, authenticationService, contactService) {
+        function ModalAppliedSessionDisplay(alertService, socketService, dialogRef, data, userService, utilityService, dialog, router, authenticationService, contactService) {
           _classCallCheck(this, ModalAppliedSessionDisplay);
 
+          this.alertService = alertService;
+          this.socketService = socketService;
           this.dialogRef = dialogRef;
           this.data = data;
           this.userService = userService;
@@ -4354,21 +4720,230 @@
           this.router = router;
           this.authenticationService = authenticationService;
           this.contactService = contactService;
-          this.SessionStatus = _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"];
+          this.SessionStatus = _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"];
           this.arrayItems = [0];
           this.anySingleDataIsApproved = false; //public payPalConfig?: IPayPalConfig;
 
           this.userInitiatedForPayment = false;
-          this.SessionExecutionType = _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionExecutionType"];
+          this.SessionExecutionType = _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionExecutionType"];
           this.refundObj = {};
           this.ready2Refund = false;
+          this.alreadyInitiatedForPayment = false;
+          this.transactionOnForLoanAmountPaidByLenderConfirmByBorrowerCustomised = null;
+          this.LoanApplyObjCurrentCheckBoxes = {};
+          this.transactionOnForLoanAmountPaidToLenderCustomised = null;
+          this.alreadyVisibleForPayment = false;
           this.LoanObj = data.sessionObj;
+          this.LoanApplyObjCurrent = {};
+          this.LoanApplyObjCurrentCheckBoxes = {};
+          this.LoanApplyObjCurrentCheckBoxes.visibleKeys = {};
+          this.LoanApplyObjCurrent4Installment = {};
         }
 
         _createClass(ModalAppliedSessionDisplay, [{
+          key: "paymentDoneByLenderConfirmByBorrower",
+          value: function paymentDoneByLenderConfirmByBorrower(LoanApplyObj) {
+            var _this17 = this;
+
+            this.LoanApplyObjCurrent._id = LoanApplyObj._id;
+
+            if (this.transactionOnForLoanAmountPaidByLenderConfirmByBorrowerCustomised) {
+              this.LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLenderConfirmByBorrower = Date.parse(this.utilityService.moment(this.transactionOnForLoanAmountPaidByLenderConfirmByBorrowerCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD'));
+            }
+
+            if (!this.LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower || !this.LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLenderConfirmByBorrower) {
+              this.alertService.error("All data is required");
+              return;
+            }
+
+            if (this.utilityService.moment(this.LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLenderConfirmByBorrower).isAfter(this.utilityService.moment())) {
+              this.alertService.error("Future date is not allowed");
+              return;
+            }
+
+            if (this.utilityService.moment(this.LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLenderConfirmByBorrower).isBefore(this.utilityService.moment(this.LoanObj.loanStartDateTime))) {
+              this.alertService.error("Transaction date must be newer than loan created date");
+              return;
+            }
+
+            this.LoanApplyObjCurrent.createdOnForLoanAmountPaidByLenderConfirmByBorrower = this.utilityService._.now();
+            this.socketService.sendEventForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, this.LoanApplyObjCurrent).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8__["first"])()).subscribe(function (details) {
+              if (details && details["success"]) {
+                _this17.dialogRef.close({
+                  event: 'close',
+                  data: {
+                    updatedSessionObj: details["data"]
+                  }
+                });
+              }
+            });
+            this.LoanApplyObjCurrent = {};
+          }
+        }, {
+          key: "paymentDoneToLender",
+          value: function paymentDoneToLender(LoanApplyObj) {
+            var _this18 = this;
+
+            var _past_days_allowed4payment = 15;
+            var _future_days_allowed4payment = 7; //this.LoanApplyObjCurrent4Installment.loanTenureInMonths = this.LoanObj.loanTenureInMonths;
+            //this.LoanApplyObjCurrent4Installment.installmentKey = null;
+            //this.LoanApplyObjCurrent4Installment._id = LoanApplyObj._id;
+
+            if (this.transactionOnForLoanAmountPaidToLenderCustomised) {
+              this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender = Date.parse(this.utilityService.moment(this.transactionOnForLoanAmountPaidToLenderCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD 00:00:00 A'));
+            }
+
+            if (!this.LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender || !this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender) {
+              this.alertService.error("All data is required");
+              return;
+            }
+
+            if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender).isAfter(this.utilityService.moment(this.LoanApplyObjCurrent4Installment.installmentKey).add('D', _future_days_allowed4payment))) {
+              this.alertService.error("Future date is not allowed");
+              return;
+            }
+
+            if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidByLender).isAfter(this.utilityService.moment().add('D', -1 * _past_days_allowed4payment))) {
+              this.alertService.error("Historic date is not allowed");
+              return;
+            }
+
+            if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidByLender).isBefore(this.utilityService.moment().add('D'))) {
+              this.alertService.error("Future date is not allowed");
+              return;
+            }
+
+            if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+              var _old_installmentKey = null;
+
+              for (var index in LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+                if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[index]) {
+                  _old_installmentKey = LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[index].installmentKey;
+                }
+              }
+
+              if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender).isBefore(this.utilityService.moment(_old_installmentKey))) {
+                this.alertService.error("Transaction date must be newer than last installment date");
+                return;
+              }
+            } else {
+              if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender).isBefore(this.utilityService.moment(this.LoanObj.loanStartDateTime))) {
+                this.alertService.error("Transaction date must be newer than loan created date");
+                return;
+              }
+            }
+
+            this.LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender = this.utilityService._.now();
+
+            var _loanTenureInMonths = parseInt(this.LoanObj.loanTenureInMonths);
+
+            var _installmentKey = this.LoanApplyObjCurrent4Installment.installmentKey; //delete this.LoanApplyObjCurrent4Installment.installmentKey;
+
+            this.socketService.sendEventForLoanAmountPaidToLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, _installmentKey, _loanTenureInMonths, this.LoanApplyObjCurrent4Installment).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8__["first"])()).subscribe(function (details) {
+              if (details && details["success"]) {
+                _this18.dialogRef.close({
+                  event: 'close',
+                  data: {
+                    updatedSessionObj: details["data"]
+                  }
+                });
+              }
+            });
+            this.LoanApplyObjCurrent4Installment = {};
+          }
+        }, {
+          key: "returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender",
+          value: function returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, currentRowDate, _key) {
+            var _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
+
+            if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+              if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+                if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey].createdOnForLoanAmountPaidToLenderConfirmByLender) {
+                  return true;
+                }
+              }
+            }
+
+            return false;
+          }
+        }, {
+          key: "viewCurrentInstallmentAlreadyPaid",
+          value: function viewCurrentInstallmentAlreadyPaid(LoanApplyObj, currentRowDate, _key) {
+            var _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
+
+            if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+              if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+                if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+                  this.LoanApplyObjCurrent4Installment = {};
+                  this.LoanApplyObjCurrent4Installment = LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey];
+                  return true;
+                }
+              }
+            }
+
+            return false;
+          }
+        }, {
+          key: "initiateLoanAmountPaidByBorrower",
+          value: function initiateLoanAmountPaidByBorrower(event, LoanApplyObj, currentRowDate, _key) {
+            if (LoanApplyObj) {
+              var _installmentKey = null;
+
+              if (event.target.checked && !this.alreadyInitiatedForPayment) {
+                _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
+
+                if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+                  if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+                    this.alertService.error("Installment already paid");
+                    return;
+                  }
+                }
+
+                this.LoanApplyObjCurrent4Installment = {};
+                this.LoanApplyObjCurrent4Installment.installmentKey = _installmentKey;
+                this.alreadyInitiatedForPayment = true;
+              } else {
+                if (!event.target.checked) {
+                  if (this.alreadyInitiatedForPayment) {
+                    this.alreadyInitiatedForPayment = false;
+                  }
+
+                  this.LoanApplyObjCurrent4Installment = {};
+                }
+
+                event.target.checked = false;
+                this.LoanApplyObjCurrentCheckBoxes[_key] = false;
+              }
+            }
+          }
+        }, {
+          key: "returnT4IfCurrentInstallmentAlreadyPaid",
+          value: function returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, currentRowDate, _key) {
+            var _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
+
+            if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+              if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+                return true;
+              }
+            }
+            /*
+            if (_key) {
+                    if (!this.LoanApplyObjCurrentCheckBoxes.visibleKeys) {
+                this.LoanApplyObjCurrentCheckBoxes.visibleKeys = {};
+              }
+              if (this.utilityService._.keys(this.LoanApplyObjCurrentCheckBoxes.visibleKeys).length>0) {
+                this.LoanApplyObjCurrentCheckBoxes.visibleKeys[_key] = true;
+              }
+            }
+            */
+
+
+            return false;
+          }
+        }, {
           key: "returnUrl4downloadCOntractPDF",
           value: function returnUrl4downloadCOntractPDF(sessionApplyId) {
-            var Url4downloadCOntractPDF = src_environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].apiUrl + '/signed_pdf_contract/' + sessionApplyId + '.pdf';
+            var Url4downloadCOntractPDF = src_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl + '/signed_pdf_contract/' + sessionApplyId + '.pdf';
             return Url4downloadCOntractPDF;
           }
         }, {
@@ -4384,7 +4959,7 @@
             var _transactiActionType = null;
 
             switch (_status) {
-              case _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"].Accepted:
+              case _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Accepted:
                 //#region handle LoanObj accepted
                 //_sessionPrice = this.LoanObj.loanAmount;
                 //initiate payment here
@@ -4400,12 +4975,12 @@
 
                 break;
 
-              case _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"].Ongoing:
+              case _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Ongoing:
                 //#region handle LoanObj accepted
                 //#endregion handle LoanObj accepted
                 break;
 
-              case _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"].RejectedOngoingWithRefund:
+              case _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].RejectedOngoingWithRefund:
                 this.ready2Refund = false; //#region handle LoanObj rejected with refund
                 //#endregion handle LoanObj rejected with refund  
 
@@ -4425,18 +5000,18 @@
         }, {
           key: "returnSessionApplyStatus",
           value: function returnSessionApplyStatus(LoanApplyObj) {
-            var _currentStatus = _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"].Pending;
+            var _currentStatus = _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Pending;
 
             try {
-              if (LoanApplyObj.status == _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"].Pending || LoanApplyObj.status == 'Pending' || LoanApplyObj.status == '' || LoanApplyObj.status == null || typeof LoanApplyObj.status == 'undefined') {
-                _currentStatus = _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"].Pending;
+              if (LoanApplyObj.status == _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Pending || LoanApplyObj.status == 'Pending' || LoanApplyObj.status == '' || LoanApplyObj.status == null || typeof LoanApplyObj.status == 'undefined') {
+                _currentStatus = _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Pending;
               } else {
                 _currentStatus = LoanApplyObj.status;
               }
             } catch (ex) {}
 
             try {
-              if (LoanApplyObj.status != _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"].Pending && LoanApplyObj.status != _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"].Rejected && LoanApplyObj.status != _models_role__WEBPACK_IMPORTED_MODULE_9__["SessionStatus"].RejectedOngoing) {
+              if (LoanApplyObj.status != _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Pending && LoanApplyObj.status != _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Rejected && LoanApplyObj.status != _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].RejectedOngoing) {
                 this.anySingleDataIsApproved = true;
               }
             } catch (ex) {}
@@ -4451,15 +5026,15 @@
             var _parentRouting = '';
 
             switch (this.authenticationService.currentUserValue.role) {
-              case _models_role__WEBPACK_IMPORTED_MODULE_9__["Role"].Borrower:
+              case _models_role__WEBPACK_IMPORTED_MODULE_10__["Role"].Borrower:
                 _parentRouting = 'borrower';
                 break;
 
-              case _models_role__WEBPACK_IMPORTED_MODULE_9__["Role"].Lender:
+              case _models_role__WEBPACK_IMPORTED_MODULE_10__["Role"].Lender:
                 _parentRouting = 'lender';
                 break;
 
-              case _models_role__WEBPACK_IMPORTED_MODULE_9__["Role"].Admin:
+              case _models_role__WEBPACK_IMPORTED_MODULE_10__["Role"].Admin:
                 _parentRouting = 'admin';
                 break;
             }
@@ -4482,6 +5057,10 @@
 
       ModalAppliedSessionDisplay.ctorParameters = function () {
         return [{
+          type: _services__WEBPACK_IMPORTED_MODULE_11__["AlertService"]
+        }, {
+          type: _socketio_service__WEBPACK_IMPORTED_MODULE_15__["SocketioService"]
+        }, {
           type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogRef"]
         }, {
           type: undefined,
@@ -4492,24 +5071,24 @@
             args: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MAT_DIALOG_DATA"]]
           }]
         }, {
-          type: _services_user_service__WEBPACK_IMPORTED_MODULE_12__["UserService"]
+          type: _services_user_service__WEBPACK_IMPORTED_MODULE_13__["UserService"]
         }, {
-          type: _services_utility_service__WEBPACK_IMPORTED_MODULE_13__["UtilityService"]
+          type: _services_utility_service__WEBPACK_IMPORTED_MODULE_14__["UtilityService"]
         }, {
           type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"]
         }, {
           type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"]
         }, {
-          type: _services__WEBPACK_IMPORTED_MODULE_10__["AuthenticationService"]
+          type: _services__WEBPACK_IMPORTED_MODULE_11__["AuthenticationService"]
         }, {
-          type: _services_contact_service__WEBPACK_IMPORTED_MODULE_11__["ContactService"]
+          type: _services_contact_service__WEBPACK_IMPORTED_MODULE_12__["ContactService"]
         }];
       };
 
       ModalAppliedSessionDisplay = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_5__["Component"])({
         selector: 'modal-applied-session-display',
         template: _raw_loader_modal_modal_applied_session_display_html__WEBPACK_IMPORTED_MODULE_4__["default"]
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogRef"], Object, _services_user_service__WEBPACK_IMPORTED_MODULE_12__["UserService"], _services_utility_service__WEBPACK_IMPORTED_MODULE_13__["UtilityService"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"], _services__WEBPACK_IMPORTED_MODULE_10__["AuthenticationService"], _services_contact_service__WEBPACK_IMPORTED_MODULE_11__["ContactService"]])], ModalAppliedSessionDisplay); //#endregion modal popup for display applied sessions
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_services__WEBPACK_IMPORTED_MODULE_11__["AlertService"], _socketio_service__WEBPACK_IMPORTED_MODULE_15__["SocketioService"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialogRef"], Object, _services_user_service__WEBPACK_IMPORTED_MODULE_13__["UserService"], _services_utility_service__WEBPACK_IMPORTED_MODULE_14__["UtilityService"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"], _services__WEBPACK_IMPORTED_MODULE_11__["AuthenticationService"], _services_contact_service__WEBPACK_IMPORTED_MODULE_12__["ContactService"]])], ModalAppliedSessionDisplay); //#endregion modal popup for display applied sessions
 
       /***/
     },
@@ -4658,15 +5237,11 @@
       /* harmony import */
 
 
-      var src_app_services_service_types_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
-      /*! src/app/services/service-types.service */
-      "7ZPZ");
-      /* harmony import */
-
-
-      var src_app_socketio_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+      var src_app_socketio_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! src/app/socketio.service */
       "bgkY");
+      /*import { ServiceTypesService } from 'src/app/services/service-types.service';*/
+
 
       var _webpack_require__ = __webpack_require__(
       /*! country-list */
@@ -4680,9 +5255,7 @@
       }]);
 
       var BrowseSessionsComponent = /*#__PURE__*/function () {
-        function BrowseSessionsComponent(userService, socketService, formBuilder, sessionsService, alertService, utilityService, dialog, authenticationService, serviceTypesService) {
-          var _this16 = this;
-
+        function BrowseSessionsComponent(userService, socketService, formBuilder, sessionsService, alertService, utilityService, dialog, authenticationService) {
           _classCallCheck(this, BrowseSessionsComponent);
 
           this.userService = userService;
@@ -4693,41 +5266,43 @@
           this.utilityService = utilityService;
           this.dialog = dialog;
           this.authenticationService = authenticationService;
-          this.serviceTypesService = serviceTypesService;
           this.ParentServicesTypes = null;
           this.countrylist = null;
           this.countrylist = getNames();
-          this.serviceTypesService.getServiceTypesChildAll().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
-            //console.log('data => ', data)
-            if (data && data['success']) {
-              //alert(JSON.stringify( data));
-              _this16.ParentServicesTypes = data["data"]; //this.alertService.success(data['message'], true);
-
-              _this16.loading = false; //this.element_btn_click_addServiceTypes_skills_verification.click();
-            } else {
-              //alert(JSON.stringify(data['message']));
-              _this16.alertService.error(data['message']);
-
-              _this16.loading = false;
-            }
-          }, function (error) {
-            var errorMsg2show = "";
-            _this16.ParentServicesTypes = [];
-
-            try {
-              if (error && error.error && error.error.message) {
-                errorMsg2show = error.error.message;
-              } else if (error && error.message) {
-                errorMsg2show = error.message;
-              } else {
-                errorMsg2show = error;
-              }
-            } catch (ex) {}
-
-            _this16.alertService.error(errorMsg2show);
-
-            _this16.loading = false;
-          });
+          /*
+            this.serviceTypesService.getServiceTypesChildAll()
+              .pipe(first())
+              .subscribe(
+                data => {
+                  //console.log('data => ', data)
+                  if (data && data['success']) {
+                    //alert(JSON.stringify( data));
+                    this.ParentServicesTypes = data["data"];
+                    //this.alertService.success(data['message'], true);
+                    this.loading = false;
+                    //this.element_btn_click_addServiceTypes_skills_verification.click();
+                  } else {
+                    //alert(JSON.stringify(data['message']));
+                    this.alertService.error(data['message']);
+                    this.loading = false;
+                  }
+                },
+                error => {
+                  let errorMsg2show = "";
+                  this.ParentServicesTypes = [];
+                  try {
+                    if (error && error.error && error.error.message) {
+                      errorMsg2show = error.error.message;
+                    } else if (error && error.message) {
+                      errorMsg2show = error.message;
+                    } else {
+                      errorMsg2show = error;
+                    }
+                  } catch (ex) { }
+                  this.alertService.error(errorMsg2show);
+                  this.loading = false;
+                });
+          */
         }
 
         _createClass(BrowseSessionsComponent, [{
@@ -4746,7 +5321,7 @@
         }, {
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this17 = this;
+            var _this19 = this;
 
             this.browseSessionForm = this.formBuilder.group({
               services4search: [''],
@@ -4757,16 +5332,16 @@
               //console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this17.allSessionsData = data['data'];
+                _this19.allSessionsData = data['data'];
 
-                _this17.userService.proccessAllAppUsersCollections(_this17.utilityService._.uniq(_this17.utilityService._.map(_this17.utilityService._.flattenDepth(_this17.utilityService._.map(_this17.utilityService._.values(_this17.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId'))); //this.alertService.success(data['message'], true);
+                _this19.userService.proccessAllAppUsersCollections(_this19.utilityService._.uniq(_this19.utilityService._.map(_this19.utilityService._.flattenDepth(_this19.utilityService._.map(_this19.utilityService._.values(_this19.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId'))); //this.alertService.success(data['message'], true);
 
 
-                _this17.loading = false; //this.element_btn_click_addSession_skills_verification.click();
+                _this19.loading = false; //this.element_btn_click_addSession_skills_verification.click();
               } else {
                 //alert(JSON.stringify(data['message']));
                 //this.alertService.error(data['message']);
-                _this17.loading = false;
+                _this19.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -4782,36 +5357,36 @@
               } catch (ex) {} //this.alertService.error(errorMsg2show);
 
 
-              _this17.loading = false;
+              _this19.loading = false;
             });
             this.sessionsService.getUpdatesForSessionAllByBorrowerId().subscribe(function (data) {
               if (data && data['success']) {
-                var _keyPairedMapObj = _this17.utilityService._.mapKeys(_this17.allSessionsData, "_id");
+                var _keyPairedMapObj = _this19.utilityService._.mapKeys(_this19.allSessionsData, "_id");
 
                 for (var _items in data['data']) {
                   var _currentObj = data['data'][_items];
                   _keyPairedMapObj[_currentObj._id] = _currentObj;
                 }
 
-                _this17.allSessionsData = _this17.utilityService._.values(_keyPairedMapObj);
-                _this17.loading = false;
+                _this19.allSessionsData = _this19.utilityService._.values(_keyPairedMapObj);
+                _this19.loading = false;
               } else {
-                _this17.loading = false;
+                _this19.loading = false;
               }
             }, function (error) {
-              _this17.loading = false;
+              _this19.loading = false;
             });
             this.sessionsService.getSessionLengthByService(null, null, null, null, null).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
               //console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this17.allSessionsCount = data['data']; //this.alertService.success(data['message'], true);
+                _this19.allSessionsCount = data['data']; //this.alertService.success(data['message'], true);
 
-                _this17.loading = false; //this.element_btn_click_addSession_skills_verification.click();
+                _this19.loading = false; //this.element_btn_click_addSession_skills_verification.click();
               } else {
                 //alert(JSON.stringify(data['message']));
                 //this.alertService.error(data['message']);
-                _this17.loading = false;
+                _this19.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -4827,7 +5402,7 @@
               } catch (ex) {} //this.alertService.error(errorMsg2show);
 
 
-              _this17.loading = false;
+              _this19.loading = false;
             });
           }
         }, {
@@ -4838,7 +5413,7 @@
         }, {
           key: "sessionSearchByService",
           value: function sessionSearchByService() {
-            var _this18 = this;
+            var _this20 = this;
 
             var services = this.browseSessionForm.get('services4search').value;
             var location = this.browseSessionForm.get('location4search').value;
@@ -4849,16 +5424,16 @@
               //console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this18.allSessionsData = data['data'];
+                _this20.allSessionsData = data['data'];
 
-                _this18.userService.proccessAllAppUsersCollections(_this18.utilityService._.uniq(_this18.utilityService._.map(_this18.utilityService._.flattenDepth(_this18.utilityService._.map(_this18.utilityService._.values(_this18.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId'))); //this.alertService.success(data['message'], true);
+                _this20.userService.proccessAllAppUsersCollections(_this20.utilityService._.uniq(_this20.utilityService._.map(_this20.utilityService._.flattenDepth(_this20.utilityService._.map(_this20.utilityService._.values(_this20.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId'))); //this.alertService.success(data['message'], true);
 
 
-                _this18.loading = false; //this.element_btn_click_addSession_skills_verification.click();
+                _this20.loading = false; //this.element_btn_click_addSession_skills_verification.click();
               } else {
                 //alert(JSON.stringify(data['message']));
                 //this.alertService.error(data['message']);
-                _this18.loading = false;
+                _this20.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -4874,13 +5449,13 @@
               } catch (ex) {} //this.alertService.error(errorMsg2show);
 
 
-              _this18.loading = false;
+              _this20.loading = false;
             });
           }
         }, {
           key: "applyToSession",
           value: function applyToSession(sessionObj) {
-            var _this19 = this;
+            var _this21 = this;
 
             console.log('179', this.authenticationService.currentUserValue);
             var dialogRef = this.dialog.open(_borrower_component__WEBPACK_IMPORTED_MODULE_10__["ModalApplySession"], {
@@ -4905,28 +5480,30 @@
 
                     _currentSessionApply.status = result.data.status || src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Pending;
 
-                    _this19.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
+                    _this21.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
 
                     switch (_currentSessionApply.status) {
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Pending:
-                        _this19.socketService.setSessionApply(true, _currentSessionApply);
+                        _currentSessionApply.createdBy = _this21.authenticationService.currentUserValue._id;
+
+                        _this21.socketService.setSessionApply(true, _currentSessionApply);
 
                         break;
 
                       default:
-                        _this19.socketService.updateSessionApply(true, _currentSessionApply, _this19.authenticationService.currentUserValue);
+                        _this21.socketService.updateSessionApply(true, _currentSessionApply, _this21.authenticationService.currentUserValue);
 
                         break;
                     }
 
                     switch (_currentSessionApply.status) {
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Accepted:
-                        _this19.alertService.success("Updated. Session is available under My Sessionss ->Accepted tab.", true);
+                        _this21.alertService.success("Updated. Session is available under My Sessionss ->Accepted tab.", true);
 
                         break;
 
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Pending:
-                        _this19.alertService.success("Applied. Session is available under My Sessionss->Pending tab.", true);
+                        _this21.alertService.success("Applied. Session is available under My Sessionss->Pending tab.", true);
 
                         break;
 
@@ -4934,12 +5511,12 @@
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].RejectedOngoing:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].RejectedOngoingWithRefund:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Suspended:
-                        _this19.alertService.success("Updated. Session is available under My Sessionss->Rejected tab.", true);
+                        _this21.alertService.success("Updated. Session is available under My Sessionss->Rejected tab.", true);
 
                         break;
 
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Completed:
-                        _this19.alertService.success("Updated. Session is available under My Sessionss->Completed tab.", true);
+                        _this21.alertService.success("Updated. Session is available under My Sessionss->Completed tab.", true);
 
                         break;
 
@@ -4947,7 +5524,7 @@
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Ongoing:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].OngoingInitiated:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].OngoingAccepted:
-                        _this19.alertService.success("Updated. Session is available under My Sessionss->Ongoing tab.", true);
+                        _this21.alertService.success("Updated. Session is available under My Sessionss->Ongoing tab.", true);
 
                         break;
 
@@ -5001,7 +5578,7 @@
         return [{
           type: src_app_services__WEBPACK_IMPORTED_MODULE_6__["UserService"]
         }, {
-          type: src_app_socketio_service__WEBPACK_IMPORTED_MODULE_14__["SocketioService"]
+          type: src_app_socketio_service__WEBPACK_IMPORTED_MODULE_13__["SocketioService"]
         }, {
           type: _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormBuilder"]
         }, {
@@ -5014,8 +5591,6 @@
           type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialog"]
         }, {
           type: src_app_services__WEBPACK_IMPORTED_MODULE_6__["AuthenticationService"]
-        }, {
-          type: src_app_services_service_types_service__WEBPACK_IMPORTED_MODULE_13__["ServiceTypesService"]
         }];
       };
 
@@ -5024,7 +5599,7 @@
         template: _raw_loader_browse_sessions_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectionStrategy"].Default,
         styles: [_browse_sessions_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_services__WEBPACK_IMPORTED_MODULE_6__["UserService"], src_app_socketio_service__WEBPACK_IMPORTED_MODULE_14__["SocketioService"], _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormBuilder"], src_app_services_sessions_service__WEBPACK_IMPORTED_MODULE_5__["SessionsService"], src_app_services__WEBPACK_IMPORTED_MODULE_6__["AlertService"], src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_4__["UtilityService"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialog"], src_app_services__WEBPACK_IMPORTED_MODULE_6__["AuthenticationService"], src_app_services_service_types_service__WEBPACK_IMPORTED_MODULE_13__["ServiceTypesService"]])], BrowseSessionsComponent);
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_services__WEBPACK_IMPORTED_MODULE_6__["UserService"], src_app_socketio_service__WEBPACK_IMPORTED_MODULE_13__["SocketioService"], _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormBuilder"], src_app_services_sessions_service__WEBPACK_IMPORTED_MODULE_5__["SessionsService"], src_app_services__WEBPACK_IMPORTED_MODULE_6__["AlertService"], src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_4__["UtilityService"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialog"], src_app_services__WEBPACK_IMPORTED_MODULE_6__["AuthenticationService"]])], BrowseSessionsComponent);
       /***/
     },
 
@@ -5114,6 +5689,116 @@
 
 
       __webpack_exports__["default"] = "<p>room works!</p>\r\n";
+      /***/
+    },
+
+    /***/
+    "wFWH":
+    /*!******************************************************!*\
+      !*** ./src/app/users-income-expense-verify.guard.ts ***!
+      \******************************************************/
+
+    /*! exports provided: UsersIncomeExpenseVerifyGuard */
+
+    /***/
+    function wFWH(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "UsersIncomeExpenseVerifyGuard", function () {
+        return UsersIncomeExpenseVerifyGuard;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/router */
+      "tyNb");
+      /* harmony import */
+
+
+      var src_app_services_authentication_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! src/app/services/authentication.service */
+      "ej43");
+      /* harmony import */
+
+
+      var src_app_services__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! src/app/services */
+      "o0su");
+
+      var UsersIncomeExpenseVerifyGuard = /*#__PURE__*/function () {
+        function UsersIncomeExpenseVerifyGuard(alertService, router, authenticationService) {
+          _classCallCheck(this, UsersIncomeExpenseVerifyGuard);
+
+          this.alertService = alertService;
+          this.router = router;
+          this.authenticationService = authenticationService;
+        }
+
+        _createClass(UsersIncomeExpenseVerifyGuard, [{
+          key: "canActivate",
+          value: function canActivate(route, state) {
+            var currentUser = this.authenticationService.currentUserValue;
+
+            if (currentUser) {
+              var _currentUserRole = '';
+
+              try {
+                _currentUserRole = currentUser.role;
+              } catch (ex) {}
+
+              if (!currentUser.isUsersIncomeAndExpenseProofVerified) {
+                this.router.navigate([_currentUserRole + '/home']);
+                this.alertService.error("Income proof documents and mothly expenses verification is still pending. Please update to access this feature.", true);
+                return false;
+              } // authorised so return true	
+
+
+              return true;
+            } // not logged in so redirect to login page with the return url
+
+
+            this.router.navigate(['/login'], {
+              queryParams: {
+                returnUrl: state.url
+              }
+            });
+            return false;
+          }
+        }]);
+
+        return UsersIncomeExpenseVerifyGuard;
+      }();
+
+      UsersIncomeExpenseVerifyGuard.ctorParameters = function () {
+        return [{
+          type: src_app_services__WEBPACK_IMPORTED_MODULE_4__["AlertService"]
+        }, {
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
+        }, {
+          type: src_app_services_authentication_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticationService"]
+        }];
+      };
+
+      UsersIncomeExpenseVerifyGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_services__WEBPACK_IMPORTED_MODULE_4__["AlertService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_services_authentication_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticationService"]])], UsersIncomeExpenseVerifyGuard);
       /***/
     }
   }]);

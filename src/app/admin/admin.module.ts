@@ -16,15 +16,19 @@ import { BorrowerEarningsComponent } from './borrower-earnings/borrower-earnings
 import { SharedModule } from '../shared/shared.module';
 import { AddUserComponent } from './add-user/add-user.component';
 
+import { DataTablesModule } from "angular-datatables";
+import { UserLevelsComponent } from './user-levels/user-levels.component';
+import { BlogsComponent } from './blogs/blogs.component';
+
 @NgModule({
-  declarations: [AdminComponent, HomeComponent, HeaderComponent, FooterComponent, ServicesComponent, ServiceTypesAddComponent, UserManagementComponent, PaymentTransactionsComponent, BorrowerEarningsComponent, AddUserComponent],
+  declarations: [AdminComponent, HomeComponent, HeaderComponent, FooterComponent, ServicesComponent, ServiceTypesAddComponent, UserManagementComponent, PaymentTransactionsComponent, BorrowerEarningsComponent, AddUserComponent, UserLevelsComponent, BlogsComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
-    CommonModule,
     MatDialogModule,
     ScrollingModule,
     SharedModule,
+    DataTablesModule
   ]
 })
 export class AdminModule { }

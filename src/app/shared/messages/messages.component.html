@@ -29,7 +29,8 @@
                         <div class="meta ">
                             <div class="name ">{{currentContactItem.firstName | titlecase}}</div>
                             <div class="small font-weight-light">
-                                {{currentContactItem.lastMessage || 'NA'}}
+                                {{currentContactItem.createdOn | date}}
+                                <!-- {{currentContactItem.lastMessage || 'NA'}} -->
                             </div>
                         </div>
                     </div>
@@ -152,9 +153,11 @@
                 <button [disabled]="returnTifCurrentContactIsNullOrEmpty(currentContact) " class="submit " (click)="sendMessage(currentContact._id, message2send)">
 					<i class="fa fa-paper-plane " aria-hidden="true "></i>
                 </button> -->
-
-                <div class="input-group input-group-lg shadow-lg">
-
+                <small class="text-danger ml-1 mb-3" *ngIf="message2send && (message2send.includes('skype') || message2send.includes('facebook') || message2send.includes('wechat') || message2send.includes('messenger') || message2send.includes('messenger')|| message2send.includes('@') || message2send.includes('(a)') || message2send.includes('-a-') || message2send.includes('.dk') || message2send.includes('.com') )">Your message cannot have restricted keywords: messenger, facebook, whatsapp, wechat, skype, @,(a), -a-
+                   , .com, .dk   
+                      </small>
+                <div class="input-group input-group-lg shadow-lg mt-1">
+                   
                     <input type="text" (keydown.enter)="sendMessage(currentContact._id, message2send)" type="text " placeholder="Write your message... " [(ngModel)]="message2send" class="form-control border-0" placeholder="Start Typing...">
                     <div class="input-group-append">
                         <button class="btn btn-light d-none avittiNone" *ngIf="voiceActiveSectionListening; else beginning" (click)="closeVoiceRecognition()">

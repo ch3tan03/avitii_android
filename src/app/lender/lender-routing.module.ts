@@ -23,7 +23,8 @@ import { BankDetailsComponent } from '../shared/bank-details/bank-details.compon
 import { MonthlySubscriptionComponent } from '../shared/monthly-subscription/monthly-subscription.component';
 import { PaymentCancelComponent } from '../shared/payment-cancel/payment-cancel.component';
 import { PaymentSuccessComponent } from '../shared/payment-success/payment-success.component';
-import { StripeComponentComponent } from '../shared/stripe-component/stripe-component.component';
+import { BankDetailsVerifyGuard } from '../bank-details-verify.guard';
+/*import { StripeComponentComponent } from '../shared/stripe-component/stripe-component.component';*/
 
 const routes: Routes = [
   {
@@ -37,16 +38,16 @@ const routes: Routes = [
       { canActivate: [RolesGuard], path: 'payment', component: PaymentComponent },
       { canActivate: [RolesGuard], path: 'payment-success', component: PaymentSuccessComponent },
       { canActivate: [RolesGuard], path: 'payment-cancel', component: PaymentCancelComponent },
-      { canActivate: [RolesGuard], path: 'payment-stripe', component: StripeComponentComponent },
+      /*{ canActivate: [RolesGuard], path: 'payment-stripe', component: StripeComponentComponent },*/
 
-      { canActivate: [RolesGuard], path: 'make-a-loan', component: NewSessionComponent },
+      { canActivate: [RolesGuard, BankDetailsVerifyGuard], path: 'make-a-loan', component: NewSessionComponent },
       { canActivate: [RolesGuard], path: 'search-consulatnt', component: SearchBorrowerComponent },
       { canActivate: [RolesGuard], path: 'my-contract', component: MySessionsComponent },
       { canActivate: [RolesGuard], path: 'vcmeet', component: MeetingVcComponent },
       { canActivate: [RolesGuard], path: 'sessionview', component: SessionViewComponent },
       { canActivate: [RolesGuard], path: 'ratings', component: UserRatingsComponent },
       { canActivate: [RolesGuard], path: 'calendar', component: CalendarComponent },
-      { canActivate: [RolesGuard], path: 'loan-market', component: LoanMarketComponent },
+      { canActivate: [RolesGuard, BankDetailsVerifyGuard], path: 'loan-market', component: LoanMarketComponent },
       { canActivate: [RolesGuard], path: 'lend-now', component: LendNowComponent },
       { canActivate: [RolesGuard], path: 'update-password', component: UpdatePasswordComponent },
       { canActivate: [RolesGuard], path: 'bank-details', component: BankDetailsComponent },

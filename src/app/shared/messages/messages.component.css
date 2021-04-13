@@ -375,6 +375,8 @@ text-overflow: ellipsis;
       /* padding: 6px 0 46px 8px; */
       padding: 14px 12px;
       border-bottom: 1px solid #494b61;
+      margin-left: 10px;
+    border: 1px solid #545454;
     }
   }
   #frame #sidepanel #contacts ul li.contact:hover {

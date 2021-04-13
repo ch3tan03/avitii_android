@@ -8,7 +8,7 @@ import { SessionsService } from 'src/app/services/sessions.service';
 import { UtilityService } from 'src/app/services/utility.service';
 import * as _ from 'lodash';
 import { ActivatedRoute } from '@angular/router';
-import { SessionStatus, SessionTypes, UserType } from 'src/app/models';
+import { SessionStatus, SessionTypes, UserType, Role } from 'src/app/models';
 
 @Component({
   selector: 'app-get-a-loan',
@@ -39,6 +39,8 @@ export class GetALoanComponent implements OnInit {
   ParentServicesTypes: any = null;
   ChildServicesTypes: any = [];
   countrylist: any = null;
+  loanInterestRateMin:number=0;
+  loanInterestRateMax:number=0;
   constructor(
 
     private formBuilder: FormBuilder,
@@ -109,6 +111,21 @@ export class GetALoanComponent implements OnInit {
   }
 
   showEditingForm(_userObj) {
+    let _loanInterestRateValidation = [Validators.required, Validators.min(0)];
+
+    switch (this.authenticationService.currentUserValue.role) {
+      case Role.Borrower:
+        if (this.authenticationService.currentUserValue.isRKIRegistered) {
+          this.loanInterestRateMin=3;
+          this.loanInterestRateMax=35;
+        } else {
+          this.loanInterestRateMin=1;
+          this.loanInterestRateMax=3;
+        }
+        _loanInterestRateValidation = [Validators.required, Validators.min(this.loanInterestRateMin),Validators.max(this.loanInterestRateMax)];
+        break;
+    }
+
     this.addSessionForm = this.formBuilder.group({
 
       _id: [_userObj._id || ''],
@@ -128,7 +145,7 @@ export class GetALoanComponent implements OnInit {
       additionalDocuments: this.formBuilder.array(_userObj.additionalDocuments || [], []),
       loanAmount: [_userObj.loanAmount || 0, [Validators.required, Validators.min(1), Validators.max(this.currentUserMaxLoanAmount)]],
       loanTenureInMonths: [_userObj.loanTenureInMonths || 3, [Validators.required, Validators.min(3)]],
-      loanInterestRate: [_userObj.loanInterestRate || 10, [Validators.required, Validators.min(0)]],
+      loanInterestRate: [_userObj.loanInterestRate || this.loanInterestRateMax, _loanInterestRateValidation],
       loanRepaymentType: this.formBuilder.array(_userObj.loanRepaymentType || [], Validators.required),
       loanInsuranceType: [_userObj.loanInsuranceType || ''],
       loanMaxBorrower: [_userObj.loanMaxBorrower || 1, [Validators.required, Validators.min(1)]],
@@ -154,6 +171,20 @@ export class GetALoanComponent implements OnInit {
   }
 
   initForm() {
+    let _loanInterestRateValidation = [Validators.required, Validators.min(0)];
+
+    switch (this.authenticationService.currentUserValue.role) {
+      case Role.Borrower:
+        if (this.authenticationService.currentUserValue.isRKIRegistered) {
+          this.loanInterestRateMin=3;
+          this.loanInterestRateMax=35;
+        } else {
+          this.loanInterestRateMin=1;
+          this.loanInterestRateMax=3;
+        }
+        _loanInterestRateValidation = [Validators.required, Validators.min(this.loanInterestRateMin),Validators.max(this.loanInterestRateMax)];
+        break;
+    }
     //_.first(this.ParentServicesTypes)['_id']
     this.initHtmlContent();
     this.addSessionForm = this.formBuilder.group({
@@ -175,7 +206,7 @@ export class GetALoanComponent implements OnInit {
       additionalDocuments: this.formBuilder.array([], []),
       loanAmount: [0, [Validators.required, Validators.min(1), Validators.max(this.currentUserMaxLoanAmount)]],
       loanTenureInMonths: [3, [Validators.required, Validators.min(3)]],
-      loanInterestRate: [10, [Validators.required, Validators.min(0)]],
+      loanInterestRate: [this.loanInterestRateMax, _loanInterestRateValidation],
       loanRepaymentType: this.formBuilder.array([], Validators.required),
       loanInsuranceType: [''],
       loanMaxBorrower: [1, [Validators.required, Validators.min(1)]],
@@ -216,12 +247,12 @@ export class GetALoanComponent implements OnInit {
 
     let _loanStartDateTime = this.addSessionForm.get('loanStartDateTimeCustomised').value;
     let _loanEndDateTime = this.addSessionForm.get('loanEndDateTimeCustomised').value;
-
-    if (!_loanStartDateTime || moment(_loanStartDateTime).isBefore(moment().add(1, 'd'))) {
-      this.alertService.error("Start date must have 24 hours difference");
-      return;
-    }
-
+    /*
+        if (!_loanStartDateTime || moment(_loanStartDateTime).isBefore(moment().add(1, 'd'))) {
+          this.alertService.error("Start date must have 24 hours difference");
+          return;
+        }
+    */
     _loanEndDateTime = null;
     switch (this.addSessionForm.get('sessionType').value) {
       case SessionTypes.Instant:
@@ -242,7 +273,7 @@ export class GetALoanComponent implements OnInit {
     if (_loanEndDateTime) {
       loanEndDateTime_Temp = moment(_loanEndDateTime, 'YYYY-MM-DD').format('YYYY-MM-DD');
     } else {
-      loanEndDateTime_Temp = moment(_.cloneDeep(_loanStartDateTime)).add(this.addSessionForm.get('loanTenureInMonths').value, 'month').format('YYYY-MM-DD');
+      loanEndDateTime_Temp = moment(loanStartDateTime_Temp, 'YYYY-MM-DD').add(this.addSessionForm.get('loanTenureInMonths').value, 'month').format('YYYY-MM-DD');
     }
 
     //#region validate dates
@@ -257,11 +288,12 @@ export class GetALoanComponent implements OnInit {
       this.alertService.error("end time is not valid");
       return;
     }
-    if (moment(this.addSessionForm.get('loanStartDateTime').value).isBefore(moment())) {
-      this.alertService.error("Loan should start in future date time only.");
-      return;
-    }
-
+    /*
+      if (moment(this.addSessionForm.get('loanStartDateTime').value).isBefore(moment())) {
+        this.alertService.error("Loan should start in future date time only.");
+        return;
+      }
+  */
     if (moment(this.addSessionForm.get('loanStartDateTime').value).add(1, 'h').isAfter(moment(this.addSessionForm.get('loanEndDateTime').value))) {
       this.alertService.error("There must be min. 1 hour difference in Loan start and end time");
       return;
@@ -351,11 +383,8 @@ export class GetALoanComponent implements OnInit {
     let loanAmount = this.addSessionForm.get('loanAmount').value || 0;
     let loanTenureInMonths = this.addSessionForm.get('loanTenureInMonths').value || 0;
     let loanInterestRate = this.addSessionForm.get('loanInterestRate').value || 0;
-    //this._calculatedMonthlyAmountForEMI = loanAmount * loanInterestRate * (((1 + loanInterestRate) ^ loanTenureInMonths) / ((1 + loanInterestRate) ^ (loanTenureInMonths - 1)));
 
-    this._calculatedMonthlyAmountForEMI = (loanAmount + ((loanAmount * loanInterestRate * loanTenureInMonths) / 100)) / loanTenureInMonths;
-
-    this._calculatedMonthlyAmountForEMI = this.utilityService.returnRoundedNumber(this._calculatedMonthlyAmountForEMI);
+    this._calculatedMonthlyAmountForEMI = this.utilityService.fnCalculateMonthlyAmountForEMI(loanAmount, loanTenureInMonths, loanInterestRate);
 
     this.addSessionForm.get('calculatedMonthlyAmountForEMI').setValue(this._calculatedMonthlyAmountForEMI);
   }

@@ -41,12 +41,13 @@
 
         <div class="clash-card wizard w-100">
 
-            <div class="clash-card__level clash-card__level--wizard mt-3">{{(LoanMarket.createdByUserObj.userType || "").replace("_", " ")}}</div>
+            <div class="clash-card__level clash-card__level--wizard mt-3">{{(LoanMarket.createdByUserObj.userType ||
+                "").replace("_", " ")}}</div>
             <div class="clash-card__unit-name text-capitalize">{{(LoanMarket.loanType || "").replace("_", " ")}}</div>
             <div class="clash-card__unit-description">
                 <div class="row">
                     <div class="col-xl-4 col-4 border-right" data-toggle="tooltip" title="Created By">
-                        <div>
+                        <div (click)="usersProfile(LoanMarket.createdByUserObj)">
                             <i class="icon icon-user"></i>
                         </div>
                         <div class="text-black-50 small">
@@ -74,27 +75,35 @@
                             Payment Methods
                         </div>
 
-                        <span *ngIf="LoanMarket.loanRepaymentType.indexOf('bank')>-1" class="badge font-weight-light text-uppercase mr-2 badge-success">
+                        <span *ngIf="LoanMarket.loanRepaymentType.indexOf('bank')>-1"
+                            class="badge font-weight-light text-uppercase mr-2 badge-success">
                             BANK
                         </span>
-                        <span *ngIf="LoanMarket.loanRepaymentType.indexOf('cash')>-1" class="badge font-weight-light text-uppercase mr-2 badge-success">
+                        <span *ngIf="LoanMarket.loanRepaymentType.indexOf('cash')>-1"
+                            class="badge font-weight-light text-uppercase mr-2 badge-success">
                             Cash
                         </span>
-                        <span *ngIf="LoanMarket.loanRepaymentType.indexOf('revolut')>-1" class="badge font-weight-light text-uppercase mr-2 badge-success">
+                        <span *ngIf="LoanMarket.loanRepaymentType.indexOf('revolut')>-1"
+                            class="badge font-weight-light text-uppercase mr-2 badge-success">
                             Revolut
                         </span>
-                        <span *ngIf="LoanMarket.loanRepaymentType.indexOf('paypal')>-1" class="badge font-weight-light text-uppercase mr-2 badge-success">
+                        <span *ngIf="LoanMarket.loanRepaymentType.indexOf('paypal')>-1"
+                            class="badge font-weight-light text-uppercase mr-2 badge-success">
                             Paypal
                         </span>
-                        <span *ngIf="LoanMarket.loanRepaymentType.indexOf('skrill')>-1" class="badge font-weight-light text-uppercase badge-success">
+                        <span *ngIf="LoanMarket.loanRepaymentType.indexOf('skrill')>-1"
+                            class="badge font-weight-light text-uppercase badge-success">
                             Skrill
                         </span>
                     </div>
                 </div>
             </div>
-            <button *ngIf="!returnT4DisableLoanBorrowOrLendIfAlreadyAccepted(LoanMarket)" class="btn btn-outline-secondary btn-sm mb-2" (click)="navigate2LoanProccess(LoanMarket._id)">Borrow Now</button>
+            <button *ngIf="!returnT4DisableLoanBorrowOrLendIfAlreadyAccepted(LoanMarket)"
+                class="btn btn-outline-secondary btn-sm mb-2" (click)="navigate2LoanProccess(LoanMarket._id)">Borrow
+                Now</button>
 
-            <button *ngIf="returnT4DisableLoanBorrowOrLendIfAlreadyAccepted(LoanMarket)" class="btn btn-outline-primary btn-sm mb-2"><i class="icon icon-check-box"></i> Contract Signed</button>
+            <button *ngIf="returnT4DisableLoanBorrowOrLendIfAlreadyAccepted(LoanMarket)"
+                class="btn btn-outline-primary btn-sm mb-2"><i class="icon icon-check-box"></i> Contract Signed</button>
 
             <div class="clash-card__unit-stats clash-card__unit-stats--wizard clearfix">
                 <div class="one-third">
@@ -110,7 +119,8 @@
                 </div>
 
                 <div class="one-third no-border">
-                    <div class="stat">{{LoanMarket.loanTenureInMonths}} <sub class="month">{{LoanMarket.loanTenureInMonths>1?'Months':'Month'}}</sub></div>
+                    <div class="stat">{{LoanMarket.loanTenureInMonths}} <sub
+                            class="month">{{LoanMarket.loanTenureInMonths>1?'Months':'Month'}}</sub></div>
                     <div class="stat-value">Duration</div>
                 </div>
 

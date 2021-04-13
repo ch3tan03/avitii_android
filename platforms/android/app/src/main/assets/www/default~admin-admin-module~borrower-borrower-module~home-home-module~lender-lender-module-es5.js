@@ -258,101 +258,6 @@
     },
 
     /***/
-    "0Cwp":
-    /*!**************************************************************!*\
-      !*** ./node_modules/form-urlencoded/form-urlencoded.dist.js ***!
-      \**************************************************************/
-
-    /*! no static exports found */
-
-    /***/
-    function Cwp(module, exports, __webpack_require__) {
-      "use strict";
-
-      Object.defineProperty(exports, "__esModule", {
-        value: true
-      });
-      exports["default"] = void 0;
-
-      function _typeof(obj) {
-        "@babel/helpers - typeof";
-
-        if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-          _typeof = function _typeof(obj) {
-            return typeof obj;
-          };
-        } else {
-          _typeof = function _typeof(obj) {
-            return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-          };
-        }
-
-        return _typeof(obj);
-      }
-
-      var _default = function _default(data) {
-        var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-        var sorted = opts.sorted,
-            skipIndex = opts.skipIndex,
-            ignorenull = opts.ignorenull,
-            skipBracket = opts.skipBracket,
-            useDot = opts.useDot,
-            _opts$whitespace = opts.whitespace,
-            whitespace = _opts$whitespace === void 0 ? '+' : _opts$whitespace;
-
-        var encode = function encode(value) {
-          return String(value).replace(/(?:[\0-\x1F"-&\+-\}\x7F-\uD7FF\uE000-\uFFFF]|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\uD800-\uDBFF](?![\uDC00-\uDFFF])|(?:[^\uD800-\uDBFF]|^)[\uDC00-\uDFFF])/g, encodeURIComponent).replace(/ /g, whitespace).replace(/[!'()~*]/g, function (ch) {
-            return "%".concat(ch.charCodeAt().toString(16).slice(-2).toUpperCase());
-          });
-        };
-
-        var keys = function keys(obj) {
-          var keyarr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Object.keys(obj);
-          return sorted ? keyarr.sort() : keyarr;
-        };
-
-        var filterjoin = function filterjoin(arr) {
-          return arr.filter(function (e) {
-            return e;
-          }).join('&');
-        };
-
-        var objnest = function objnest(name, obj) {
-          return filterjoin(keys(obj).map(function (key) {
-            return useDot ? nest("".concat(name, ".").concat(key), obj[key]) : nest("".concat(name, "[").concat(key, "]"), obj[key]);
-          }));
-        };
-
-        var arrnest = function arrnest(name, arr) {
-          var brackets = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : skipBracket ? '' : '[]';
-          return arr.length ? filterjoin(arr.map(function (elem, index) {
-            return skipIndex ? nest(name + brackets, elem) : nest(name + '[' + index + ']', elem);
-          })) : encode(name + brackets);
-        };
-
-        var setnest = function setnest(name, set) {
-          return filterjoin(Array.from(set).map(function (elem) {
-            return nest(name, elem);
-          }));
-        };
-
-        var nest = function nest(name, value) {
-          var type = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : _typeof(value);
-          var f = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-          if (value === f) f = ignorenull ? f : encode(name) + '=' + f;else if (/string|number|boolean/.test(type)) f = encode(name) + '=' + encode(value);else if (Array.isArray(value)) f = arrnest(name, value);else if (value instanceof Set) f = setnest(name, value);else if (type === 'object') f = objnest(name, value);
-          return f;
-        };
-
-        return data && filterjoin(keys(data).map(function (key) {
-          return nest(key, data[key]);
-        }));
-      };
-
-      exports["default"] = _default;
-      /***/
-    },
-
-    /***/
     "0IaG":
     /*!************************************************************************!*\
       !*** ./node_modules/@angular/material/__ivy_ngcc__/fesm2015/dialog.js ***!
@@ -2587,1057 +2492,6 @@
     },
 
     /***/
-    "2o0M":
-    /*!***********************************************************************!*\
-      !*** ./src/app/shared/stripe-component/stripe-component.component.ts ***!
-      \***********************************************************************/
-
-    /*! exports provided: StripeComponentComponent, copyText */
-
-    /***/
-    function o0M(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "StripeComponentComponent", function () {
-        return StripeComponentComponent;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "copyText", function () {
-        return copyText;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
-      /* harmony import */
-
-
-      var _raw_loader_stripe_component_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! raw-loader!./stripe-component.component.html */
-      "q7J+");
-      /* harmony import */
-
-
-      var _stripe_component_component_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! ./stripe-component.component.css */
-      "jvV2");
-      /* harmony import */
-
-
-      var form_urlencoded__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! form-urlencoded */
-      "0Cwp");
-      /* harmony import */
-
-
-      var form_urlencoded__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(form_urlencoded__WEBPACK_IMPORTED_MODULE_3__);
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! @angular/core */
-      "fXoL");
-      /* harmony import */
-
-
-      var _templates_app_component_template__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! ./templates/app.component.template */
-      "pGuh");
-      /* harmony import */
-
-
-      var stripe_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! stripe-angular */
-      "CnOO");
-      /* harmony import */
-
-
-      var stripe_angular_package_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! stripe-angular/package.json */
-      "FtmX");
-
-      var stripe_angular_package_json__WEBPACK_IMPORTED_MODULE_7___namespace = /*#__PURE__*/__webpack_require__.t(
-      /*! stripe-angular/package.json */
-      "FtmX", 1); // import { BankAccountTokenOptions } from "stripe-angular/StripeTypes";
-      //DEMO REFERENCE TO stripe-angular . USE BELOW
-
-
-      var stripeServer = 'https://api.stripe.com/v1/';
-      var sampleAddress = {
-        city: 'Coconut Creek',
-        country: null,
-        line1: '1234 sw 1st ct',
-        line2: null,
-        postal_code: '33066',
-        state: 'FL'
-      };
-      var sample = {
-        metadata: {
-          testedUsing: 'stripe-angular',
-          author: 'Acker Apple'
-        },
-        owner: {
-          email: 'jenny.rosen@example.com',
-          name: 'jenny rosen',
-          phone: '561-561-5611',
-          address: sampleAddress
-        }
-      };
-      var storage = getProjectLocalStorage();
-
-      var StripeComponentComponent = /*#__PURE__*/function () {
-        function StripeComponentComponent(StripeScriptTag) {
-          var _this12 = this;
-
-          _classCallCheck2(this, StripeComponentComponent);
-
-          this.StripeScriptTag = StripeScriptTag;
-          this.version = stripe_angular_package_json__WEBPACK_IMPORTED_MODULE_7__["version"];
-          this.cardComplete = false;
-          this.tempPublishableKey = storage.key; // publishableKey = storage.key
-
-          this.tempPrivateKey = storage.privateKey; // localStorage?.stripeAngularPrivateKey;
-          // privateKey?: string = localStorage?.stripeAngularPrivateKey;
-
-          this.storage = storage;
-          this.localStorage = localStorage;
-          this.card = {};
-          this.demoTemplate = _templates_app_component_template__WEBPACK_IMPORTED_MODULE_5__["string"]; // card elements options
-
-          this.options = {
-            classes: {
-              base: '',
-              complete: '',
-              empty: '',
-              focus: '',
-              invalid: '',
-              webkitAutofill: ''
-            },
-            hidePostalCode: false,
-            hideIcon: false,
-            iconStyle: 'solid',
-            style: {},
-            value: {
-              postalCode: ''
-            },
-            // TODO: Add this back at later date (avoided due to this package doesn't cover transactions yet)
-            // paymentRequest?: paymentRequest.StripePaymentRequest;
-            disabled: false
-          }; // passed along during card token creation
-
-          this.extraData = storage.extraData || {
-            name: "",
-            address_city: "",
-            address_country: "",
-            address_line1: "",
-            address_line1_check: "",
-            address_line2: "",
-            address_state: "",
-            address_zip: "",
-            metadata: sample.metadata
-          }; // ach token data
-
-          this.bank = {
-            verify: {},
-            data: {
-              country: 'US',
-              currency: 'usd',
-              routing_number: '110000000',
-              account_number: '000123456789',
-              account_holder_name: 'Jenny Rosen',
-              account_holder_type: 'individual',
-              metadata: sample.metadata
-            } // The stripe-v3 types are missing the metadata property.
-
-          };
-          this.customer = {
-            $send: new _angular_core__WEBPACK_IMPORTED_MODULE_4__["EventEmitter"](),
-            load: 0,
-            data: Object.assign(Object.assign({
-              description: "some new customer"
-            }, sample.owner), {
-              metadata: sample.metadata
-            })
-          };
-          this.customer_update = {
-            $send: new _angular_core__WEBPACK_IMPORTED_MODULE_4__["EventEmitter"](),
-            load: 0,
-            data: {
-              id: "",
-              metadata: sample.metadata
-            }
-          };
-          this.customer_get = {
-            $send: new _angular_core__WEBPACK_IMPORTED_MODULE_4__["EventEmitter"](),
-            load: 0,
-            data: {
-              id: ""
-            }
-          };
-          this.get_paymethods = {
-            $send: new _angular_core__WEBPACK_IMPORTED_MODULE_4__["EventEmitter"](),
-            load: 0,
-            data: {
-              customer: "",
-              type: "card"
-            }
-          };
-          this.customer_attach_method = {
-            $send: new _angular_core__WEBPACK_IMPORTED_MODULE_4__["EventEmitter"](),
-            load: 0,
-            data: {} // not used currently
-
-          };
-          this.customer_detach_method = {
-            $send: new _angular_core__WEBPACK_IMPORTED_MODULE_4__["EventEmitter"](),
-            load: 0,
-            data: {} // not used currently
-
-          };
-          this.customer_get_sources = {
-            $send: new _angular_core__WEBPACK_IMPORTED_MODULE_4__["EventEmitter"](),
-            load: 0,
-            data: {
-              id: ""
-            }
-          };
-          this.source_get = {
-            $send: new _angular_core__WEBPACK_IMPORTED_MODULE_4__["EventEmitter"](),
-            load: 0,
-            data: {
-              id: ""
-            }
-          };
-          this.source_update = {
-            $send: new _angular_core__WEBPACK_IMPORTED_MODULE_4__["EventEmitter"](),
-            load: 0,
-            data: {
-              id: ""
-            }
-          };
-          this.payment_method_get = {
-            $send: new _angular_core__WEBPACK_IMPORTED_MODULE_4__["EventEmitter"](),
-            load: 0,
-            data: {
-              id: ""
-            }
-          };
-          this.payment_method_update = {
-            $send: new _angular_core__WEBPACK_IMPORTED_MODULE_4__["EventEmitter"](),
-            load: 0,
-            data: {
-              id: ""
-            }
-          };
-          this.payintent = {
-            $send: new _angular_core__WEBPACK_IMPORTED_MODULE_4__["EventEmitter"](),
-            load: 0,
-            data: {
-              amount: 1099,
-              confirm: 'true',
-              currency: 'usd',
-              setup_future_usage: 'off_session',
-              metadata: sample.metadata
-            }
-          };
-          this.charge = {
-            $send: new _angular_core__WEBPACK_IMPORTED_MODULE_4__["EventEmitter"](),
-            load: 0,
-            data: {
-              amount: 1099,
-              currency: 'usd',
-              metadata: sample.metadata
-            }
-          };
-          this.source_update.$send.subscribe(function (data) {
-            return _this12.sendSourceUpdate(data, data.id);
-          });
-          this.payment_method_update.$send.subscribe(function (data) {
-            return _this12.sendPaymentMethodUpdate(data, data.id);
-          });
-          this.payment_method_get.$send.subscribe(function (data) {
-            return _this12.getPaymentMethod(data.id);
-          });
-          this.source_get.$send.subscribe(function (data) {
-            return _this12.getSource(data.id);
-          });
-          this.customer_get.$send.subscribe(function (data) {
-            return _this12.getCustomer(data.id);
-          });
-          this.customer_get_sources.$send.subscribe(function (data) {
-            return _this12.getCustomerSources(data.id);
-          });
-          this.get_paymethods.$send.subscribe(function (data) {
-            return _this12.getPaymentMethods(data);
-          });
-          this.customer_update.$send.subscribe(function (data) {
-            return _this12.updateCustomer(data, data.id);
-          });
-          this.customer.$send.subscribe(function (data) {
-            return _this12.createCustomer(data);
-          });
-          this.payintent.$send.subscribe(function (data) {
-            return _this12.createPayIntent(data);
-          });
-          this.charge.$send.subscribe(function (data) {
-            return _this12.createCharge(data);
-          });
-        }
-
-        _createClass2(StripeComponentComponent, [{
-          key: "ngOnInit",
-          value: function ngOnInit() {
-            var _this13 = this;
-
-            //inject script tag onto document and save
-            this.save().then(function () {
-              return _this13.loaded = true;
-            })["catch"](function (e) {
-              _this13.lastError = e;
-              return Promise.reject(e);
-            });
-          }
-        }, {
-          key: "deleteLocalStorage",
-          value: function deleteLocalStorage() {
-            localStorage.stripeAngular = null;
-            delete localStorage.stripeAngular; // support old delete
-
-            localStorage.stripeAngularPrivateKey = null;
-            localStorage.stripeAngularKey = null;
-            delete localStorage.stripeAngularPrivateKey;
-            delete localStorage.stripeAngularKey;
-          }
-        }, {
-          key: "copyShareUrl",
-          value: function copyShareUrl() {
-            var storage = this.getSaveableStorage(); // do let next client auto assume saving these
-
-            delete storage.saveRequestsLocal;
-            delete storage.savePrivateKeyLocally;
-            delete storage.saveKeyLocally;
-
-            if (storage.privateKey && !confirm('include private server key?')) {
-              delete storage.privateKey;
-            }
-
-            var storageString = encodeURI(JSON.stringify(storage));
-            var url = window.location.href.split('?').shift() + '?storage=' + storageString;
-            copyText(url);
-            alert('copied');
-          }
-        }, {
-          key: "save",
-          value: function save() {
-            var _a;
-
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-              var _this14 = this;
-
-              var saveKeyLocally, savePrivateKeyLocally, storeLocally, cloneStorage, storageString;
-              return regeneratorRuntime.wrap(function _callee$(_context) {
-                while (1) {
-                  switch (_context.prev = _context.next) {
-                    case 0:
-                      saveKeyLocally = this.storage.saveKeyLocally;
-                      savePrivateKeyLocally = this.storage.savePrivateKeyLocally;
-                      this.tempPublishableKey;
-                      this.storage.key = this.tempPublishableKey || this.storage.key;
-
-                      if (savePrivateKeyLocally) {
-                        // localStorage.stripeAngularPrivateKey = this.privateKey;
-                        this.storage.privateKey = this.tempPrivateKey || this.storage.privateKey;
-                      }
-
-                      storeLocally = saveKeyLocally || savePrivateKeyLocally || this.storage.saveRequestsLocal;
-
-                      if (storeLocally) {
-                        cloneStorage = this.getSaveableStorage();
-                        storageString = JSON.stringify(cloneStorage);
-                        localStorage.stripeAngular = storageString;
-                        cloneStorage.privateKey = (_a = this.storage.privateKey) === null || _a === void 0 ? void 0 : _a.length; // never show
-
-                        this.log('saved to localStorage', cloneStorage);
-                      }
-
-                      return _context.abrupt("return", this.StripeScriptTag.setPublishableKey(this.storage.key).then(function (stripe) {
-                        return _this14.stripe = stripe;
-                      }));
-
-                    case 8:
-                    case "end":
-                      return _context.stop();
-                  }
-                }
-              }, _callee, this);
-            }));
-          }
-        }, {
-          key: "getSaveableStorage",
-          value: function getSaveableStorage() {
-            var cloneStorage = JSON.parse(JSON.stringify(this.storage));
-            delete cloneStorage.temp;
-
-            if (!cloneStorage.saveKeyLocally) {
-              delete cloneStorage.key;
-            }
-
-            if (!cloneStorage.savePrivateKeyLocally) {
-              delete cloneStorage.privateKey;
-            }
-
-            if (!cloneStorage.saveRequestsLocal) {
-              delete cloneStorage.requests;
-            }
-
-            return cloneStorage;
-          }
-        }, {
-          key: "changeSourceRequest",
-          value: function changeSourceRequest(data) {
-            var source;
-
-            try {
-              source = this.storage.requests.source = JSON.parse(data);
-            } catch (err) {
-              this.storage.temp.invalidSourceData = true;
-              this.log(err);
-              return;
-            }
-
-            delete this.storage.temp.invalidSourceData;
-
-            if (source.metadata) {
-              this.extraData.metadata = source.metadata;
-            }
-
-            if (this.storage.saveRequestsLocal) {
-              this.storage.requests.source = source;
-              this.save();
-            }
-          }
-        }, {
-          key: "changePaymentMethodRequest",
-          value: function changePaymentMethodRequest(data) {
-            var pmr = this.storage.requests.paymentMethod = JSON.parse(data);
-
-            if (pmr.metadata) {
-              this.extraData.metadata = pmr.metadata;
-            }
-
-            if (this.storage.saveRequestsLocal) {
-              this.storage.requests.paymentMethod = pmr;
-              this.save();
-            }
-          }
-        }, {
-          key: "changeExtraData",
-          value: function changeExtraData(data) {
-            this.extraData = JSON.parse(data);
-
-            if (this.storage.saveRequestsLocal) {
-              this.storage.extraData = this.extraData;
-              this.save();
-            }
-          }
-        }, {
-          key: "changeOptions",
-          value: function changeOptions(data) {
-            this.options = JSON.parse(data);
-          }
-        }, {
-          key: "changeKey",
-          value: function changeKey(scope, value) {
-            var keys = ['data'];
-            var current = scope;
-
-            while (keys.length > 1) {
-              current = current[keys.shift()];
-            }
-
-            try {
-              // current[keys[0]] = JSON.parse(value);
-              eval('current[keys[0]] = ' + value); // allow loose js to be cast to json
-            } catch (err) {
-              console.error("failed to parse object key ".concat(keys[0]));
-              throw err;
-            }
-          }
-        }, {
-          key: "log",
-          value: function log() {
-            var _console;
-
-            (_console = console).log.apply(_console, arguments);
-          }
-        }, {
-          key: "toggleServerMode",
-          value: function toggleServerMode() {
-            this.enableServerMode = !this.enableServerMode;
-
-            if (!this.enableServerMode) {
-              localStorage.stripeAngularPrivateKey = null;
-              delete localStorage.stripeAngularPrivateKey;
-              delete this.tempPrivateKey;
-              delete this.tempPublishableKey;
-            }
-          }
-        }, {
-          key: "getSource",
-          value: function getSource(sourceId) {
-            var _this15 = this;
-
-            ++this.source_get.load;
-            request({
-              url: stripeServer + 'sources/' + sourceId,
-              authorizationBearer: this.storage.privateKey
-            }).then(function (res) {
-              return _this15.setSource(res);
-            })["finally"](function () {
-              return --_this15.source_get.load;
-            });
-          }
-        }, {
-          key: "getPaymentMethod",
-          value: function getPaymentMethod(id) {
-            var _this16 = this;
-
-            ++this.payment_method_get.load;
-            request({
-              url: stripeServer + 'payment_methods/' + id,
-              authorizationBearer: this.storage.privateKey
-            }).then(function (res) {
-              return _this16.setPaymentMethod(res);
-            })["finally"](function () {
-              return --_this16.payment_method_get.load;
-            });
-          }
-        }, {
-          key: "setPaymentMethod",
-          value: function setPaymentMethod(res) {
-            this.payment_method_get.result = tryParse(res);
-            this.payment_method_get.resultAt = Date.now();
-          }
-        }, {
-          key: "setSource",
-          value: function setSource(res) {
-            this.source_get.result = tryParse(res);
-            this.source_get.resultAt = Date.now();
-          }
-        }, {
-          key: "getCustomer",
-          value: function getCustomer(id) {
-            var _this17 = this;
-
-            ++this.customer_get.load;
-            request({
-              url: stripeServer + 'customers/' + id,
-              authorizationBearer: this.storage.privateKey
-            }).then(function (res) {
-              _this17.customer_get.result = tryParse(res);
-              _this17.customer_get.resultAt = Date.now();
-            })["finally"](function () {
-              return --_this17.customer_get.load;
-            });
-          }
-        }, {
-          key: "getPaymentMethods",
-          value: function getPaymentMethods(query) {
-            var _this18 = this;
-
-            var queryString = Object.keys(query).reduce(function (all, key) {
-              return all + (all.length && '&' || '') + "".concat(key, "=").concat(query[key]);
-            }, '');
-            var url = stripeServer + 'payment_methods?' + queryString;
-            ++this.payment_method_get.load;
-            request({
-              url: url,
-              method: 'GET',
-              post: query,
-              authorizationBearer: this.storage.privateKey
-            }).then(function (res) {
-              var _a, _b;
-
-              _this18.get_paymethods.result = tryParse(res);
-              _this18.get_paymethods.resultAt = Date.now();
-
-              if (!_this18.payment_method_get.result && ((_b = (_a = _this18.get_paymethods.result) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.length)) {
-                _this18.payment_method_get.result = _this18.get_paymethods.result.data[0];
-              }
-            })["finally"](function () {
-              return --_this18.payment_method_get.load;
-            });
-          }
-        }, {
-          key: "getCustomerSources",
-          value: function getCustomerSources(id) {
-            var _this19 = this;
-
-            ++this.customer_get_sources.load;
-            request({
-              url: stripeServer + 'customers/' + id + '/sources',
-              authorizationBearer: this.storage.privateKey
-            }).then(function (res) {
-              _this19.customer_get_sources.result = tryParse(res);
-              _this19.customer_get_sources.resultAt = Date.now();
-            })["finally"](function () {
-              return --_this19.customer_get_sources.load;
-            });
-          }
-        }, {
-          key: "createCustomer",
-          value: function createCustomer(data) {
-            var _this20 = this;
-
-            ++this.customer.load;
-            request({
-              url: stripeServer + 'customers',
-              post: data,
-              authorizationBearer: this.storage.privateKey
-            }).then(function (res) {
-              _this20.customer.result = tryParse(res);
-              _this20.customer.resultAt = Date.now();
-            })["finally"](function () {
-              return --_this20.customer.load;
-            });
-          }
-        }, {
-          key: "createPayIntent",
-          value: function createPayIntent(data) {
-            var _this21 = this;
-
-            ++this.payintent.load;
-            request({
-              url: stripeServer + 'payment_intents',
-              post: data,
-              authorizationBearer: this.storage.privateKey
-            }).then(function (res) {
-              _this21.payintent.result = tryParse(res);
-              _this21.payintent.resultAt = Date.now();
-            })["finally"](function () {
-              return --_this21.payintent.load;
-            });
-          }
-        }, {
-          key: "createCharge",
-          value: function createCharge(data) {
-            var _this22 = this;
-
-            ++this.charge.load;
-            request({
-              url: stripeServer + 'charges',
-              post: data,
-              authorizationBearer: this.storage.privateKey
-            }).then(function (res) {
-              _this22.charge.result = tryParse(res);
-              _this22.charge.resultAt = Date.now();
-            })["finally"](function () {
-              return --_this22.charge.load;
-            });
-          } // a source or token converted into a customer
-
-        }, {
-          key: "createCustomerByToken",
-          value: function createCustomerByToken(token) {
-            var customer = this.customer.data;
-            customer.source = token.id;
-            this.createCustomer(customer);
-          } // a source or token converted into a customer
-
-        }, {
-          key: "createCustomerByPaymentMethod",
-          value: function createCustomerByPaymentMethod(data) {
-            var customer = this.customer.data;
-            customer.payment_method = data.id;
-            this.createCustomer(customer);
-          }
-        }, {
-          key: "verifyBank",
-          value: function verifyBank() {
-            var _this23 = this;
-
-            var base = stripeServer + 'customers/';
-            var cusId = this.customer.result.id;
-            var bankId = this.bank.token.bank_account.id;
-            var url = base + "".concat(cusId, "/sources/").concat(bankId, "/verify");
-            request({
-              url: url,
-              authorizationBearer: this.storage.privateKey,
-              post: {
-                amounts: [this.bank.verify.amount1, this.bank.verify.amount2]
-              }
-            }).then(function (result) {
-              return _this23.bank.verifyResponse = tryParse(result);
-            });
-          }
-        }, {
-          key: "fetchPayIntentUpdate",
-          value: function fetchPayIntentUpdate(config) {
-            var base = stripeServer + 'payment_intents/';
-            var intentId = config.result.id;
-            var url = base + intentId;
-            ++config.load;
-            request({
-              url: url,
-              authorizationBearer: this.storage.privateKey
-            }).then(function (result) {
-              return config.retrieve = tryParse(result);
-            })["finally"](function () {
-              return --config.load;
-            });
-          }
-        }, {
-          key: "sendSourceUpdate",
-          value: function sendSourceUpdate(data, id) {
-            var _this24 = this;
-
-            var shallowClone = Object.assign({}, data);
-            delete shallowClone.id; // just incase left over from text area
-
-            var base = stripeServer + 'sources/';
-            var url = base + id;
-            ++this.source_update.load;
-            request({
-              url: url,
-              post: shallowClone,
-              authorizationBearer: this.storage.privateKey
-            }).then(function (result) {
-              _this24.source_update.result = tryParse(result);
-              _this24.source_update.resultAt = Date.now();
-            })["finally"](function () {
-              return --_this24.source_update.load;
-            });
-          }
-        }, {
-          key: "sendPaymentMethodUpdate",
-          value: function sendPaymentMethodUpdate(data, id) {
-            var _this25 = this;
-
-            var shallowClone = Object.assign({}, data);
-            delete shallowClone.id; // just incase left over from text area
-
-            var base = stripeServer + 'payment_methods/';
-            var url = base + id;
-            ++this.payment_method_update.load;
-            request({
-              url: url,
-              post: shallowClone,
-              authorizationBearer: this.storage.privateKey
-            }).then(function (result) {
-              _this25.payment_method_update.result = tryParse(result);
-              _this25.payment_method_update.resultAt = Date.now();
-            })["finally"](function () {
-              return --_this25.payment_method_update.load;
-            });
-          }
-        }, {
-          key: "updateCustomer",
-          value: function updateCustomer(data, id) {
-            var _this26 = this;
-
-            var shallowClone = Object.assign({}, data);
-            delete shallowClone.id; // just incase left over from text area
-
-            var base = stripeServer + 'customers/';
-            var url = base + id;
-            ++this.customer_update.load;
-            request({
-              url: url,
-              post: shallowClone,
-              authorizationBearer: this.storage.privateKey
-            }).then(function (result) {
-              _this26.customer_update.result = tryParse(result);
-              _this26.customer_update.resultAt = Date.now();
-            })["finally"](function () {
-              return --_this26.customer_update.load;
-            });
-          }
-        }, {
-          key: "cleanSourceUpdateData",
-          value: function cleanSourceUpdateData(data) {
-            var deepClone = JSON.parse(JSON.stringify(data));
-            this.cleanCardData(deepClone.card);
-            this.cleanOwnerData(deepClone.owner);
-            var removeKeys = ['amount', 'object', 'client_secret', 'created', 'flow', 'livemode', 'address', 'status', 'type', 'usage', 'currency', 'statement_descriptor', 'customer' // you cannot associate customer during source update
-            ];
-            removeKeys.forEach(function (key) {
-              return delete deepClone[key];
-            });
-            return deepClone;
-          }
-        }, {
-          key: "cleanOwnerData",
-          value: function cleanOwnerData(data) {
-            var removeKeys = ['verified_address', 'verified_email', 'verified_name', 'verified_phone'];
-            removeKeys.forEach(function (key) {
-              return delete data[key];
-            });
-            return data;
-          }
-        }, {
-          key: "cleanCardData",
-          value: function cleanCardData(data) {
-            var cardRemoveKeys = ['wallet', 'checks', 'three_d_secure_usage', 'fingerprint', 'last4', 'generated_from', 'country', 'brand', 'address_line1_check', 'address_zip_check', 'cvc_check', 'funding', 'three_d_secure', 'name', 'tokenization_method', 'dynamic_last4'];
-            cardRemoveKeys.forEach(function (key) {
-              return delete data[key];
-            });
-
-            if (data.networks) {
-              delete data.networks.available;
-              delete data.networks.preferred;
-            }
-
-            return data;
-          }
-        }, {
-          key: "cleanPaymentMethodUpdateData",
-          value: function cleanPaymentMethodUpdateData(data) {
-            var deepClone = JSON.parse(JSON.stringify(data));
-            var removeKeys = ['object', 'checks', 'available', 'created', 'livemode', 'type', 'customer'];
-            removeKeys.forEach(function (key) {
-              return delete deepClone[key];
-            });
-            this.cleanCardData(deepClone.card);
-
-            if (data.billing_details) {
-              this.cleanBillingDetails(data.billing_details);
-            }
-
-            return deepClone;
-          }
-        }, {
-          key: "cleanBillingDetails",
-          value: function cleanBillingDetails(data) {
-            var _a, _b;
-
-            if (((_a = data.address) === null || _a === void 0 ? void 0 : _a.country) === null || ((_b = data.address) === null || _b === void 0 ? void 0 : _b.country) === 'null') {
-              delete data.address.country;
-            }
-          }
-        }, {
-          key: "cleanCustomerUpdateData",
-          value: function cleanCustomerUpdateData(data) {
-            var deepClone = JSON.parse(JSON.stringify(data));
-            var removeKeys = ['account_balance', 'balance', 'object', 'cards', 'created', 'delinquent', 'livemode', 'sources', 'data', 'subscriptions', 'tax_ids'];
-            removeKeys.forEach(function (key) {
-              return delete deepClone[key];
-            });
-            return deepClone;
-          }
-        }, {
-          key: "setCustomerDefaultPayMethod",
-          value: function setCustomerDefaultPayMethod(customer, payment_method) {
-            customer.invoice_settings = customer.invoice_settings || {};
-            customer.invoice_settings.default_payment_method = payment_method.id;
-          }
-        }, {
-          key: "attachCustomerPayMethod",
-          value: function attachCustomerPayMethod(customerId, paymentMethod) {
-            var _this27 = this;
-
-            ++this.customer_attach_method.load;
-            request({
-              url: "".concat(stripeServer, "payment_methods/").concat(paymentMethod.id, "/attach"),
-              post: {
-                customer: customerId
-              },
-              authorizationBearer: this.storage.privateKey
-            }).then(function (result) {
-              _this27.customer_attach_method.result = tryParse(result);
-              _this27.customer_attach_method.resultAt = Date.now();
-            })["finally"](function () {
-              return --_this27.customer_attach_method.load;
-            });
-          }
-        }, {
-          key: "detachCustomerPayMethod",
-          value: function detachCustomerPayMethod(paymentMethod) {
-            var _this28 = this;
-
-            ++this.customer_detach_method.load;
-            request({
-              url: "".concat(stripeServer, "payment_methods/").concat(paymentMethod.id, "/detach"),
-              method: 'POST',
-              authorizationBearer: this.storage.privateKey
-            }).then(function (result) {
-              _this28.customer_detach_method.result = tryParse(result);
-              _this28.customer_detach_method.resultAt = Date.now();
-            })["finally"](function () {
-              return --_this28.customer_detach_method.load;
-            });
-          }
-        }]);
-
-        return StripeComponentComponent;
-      }();
-
-      StripeComponentComponent.ctorParameters = function () {
-        return [{
-          type: stripe_angular__WEBPACK_IMPORTED_MODULE_6__["StripeScriptTag"]
-        }];
-      };
-
-      StripeComponentComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_4__["Component"])({
-        selector: 'app-stripe-component',
-        template: _raw_loader_stripe_component_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
-        styles: [_stripe_component_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [stripe_angular__WEBPACK_IMPORTED_MODULE_6__["StripeScriptTag"]])], StripeComponentComponent);
-
-      function request(_ref) {
-        var url = _ref.url,
-            method = _ref.method,
-            post = _ref.post,
-            authorizationBearer = _ref.authorizationBearer;
-        return new Promise(function (res, rej) {
-          var req = new XMLHttpRequest();
-          var endMethod = method || (post ? 'POST' : 'GET');
-          req.open(endMethod, url, true);
-          req.setRequestHeader('Accept', 'application/json');
-
-          if (authorizationBearer) {
-            req.setRequestHeader('Authorization', 'Bearer ' + authorizationBearer);
-          }
-
-          req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8'); // const formPost = objectToUriForm(post);
-
-          var formPost = form_urlencoded__WEBPACK_IMPORTED_MODULE_3___default()(post);
-          req.send(formPost);
-
-          req.onreadystatechange = function () {
-            if (req.readyState === 4) {
-              res(req.responseText);
-              req.responseText;
-            }
-          };
-        });
-      }
-
-      function objectToUriForm(ob, parentKey) {
-        var returnString = '';
-
-        if (!ob) {
-          return returnString;
-        } else if (Array.isArray(ob)) {
-          ob.forEach(function (value) {
-            returnString += "".concat(parentKey, "[]=").concat(encodeURIComponent(value), "&");
-          });
-        } else {
-          Object.keys(ob).forEach(function (key) {
-            var value = ob[key];
-            var endKey = key;
-            var stringValue = '';
-
-            if (parentKey) {
-              endKey = "".concat(parentKey, "[").concat(key, "]");
-            }
-
-            switch (typeof value) {
-              case 'string':
-              case 'number':
-                stringValue = value.toString();
-                break;
-
-              case 'object':
-                if (parentKey) {
-                  returnString += parentKey;
-                  key = '[' + key + ']';
-                }
-
-                return returnString += objectToUriForm(value, key) + '&';
-            }
-
-            returnString += "".concat(endKey, "=").concat(encodeURIComponent(stringValue)) + '&';
-          });
-        }
-
-        if (returnString.length) {
-          returnString = returnString.substr(0, returnString.length - 1); // last &
-        }
-
-        return returnString;
-      }
-
-      function tryParse(data) {
-        try {
-          return JSON.parse(data);
-        } catch (err) {
-          return data;
-        }
-      }
-
-      function getUrlStorage() {
-        var urlQuery = new URLSearchParams(window.location.search);
-        var storageUrlString = urlQuery.get('storage');
-
-        if (!storageUrlString) {
-          return;
-        }
-
-        try {
-          return JSON.parse(storageUrlString);
-        } catch (err) {
-          console.error('error parsing url storage', err);
-        }
-      }
-
-      function getLocalStorage() {
-        var storageString = localStorage === null || localStorage === void 0 ? void 0 : localStorage.stripeAngular;
-
-        try {
-          return JSON.parse(storageString);
-        } catch (err) {
-          console.error('error parsing local storage', err);
-        }
-      }
-
-      function getProjectLocalStorage() {
-        var storage = getUrlStorage() || getLocalStorage() || {};
-        console.log('storage', storage);
-        storage.key = storage.key || (localStorage === null || localStorage === void 0 ? void 0 : localStorage.stripeAnguarKey) || "pk_test_5JZuHhxsinNGc5JanVWWKSKq";
-        storage.privateKey = storage.privateKey || (localStorage === null || localStorage === void 0 ? void 0 : localStorage.stripeAngularPrivateKey);
-        storage.requests = storage.requests || {
-          // passed along when token or sources created
-          source: {
-            owner: sample.owner,
-            metadata: sample.metadata
-          },
-          paymentMethod: {
-            metadata: sample.metadata
-          }
-        };
-        storage.temp = {};
-        return storage;
-      }
-
-      function copyText(text) {
-        /* Get the text field */
-        var copyText = document.createElement('textarea');
-        copyText.value = text;
-        document.body.appendChild(copyText);
-        /* Select the text field */
-
-        copyText.select();
-        copyText.setSelectionRange(0, 99999);
-        /* For mobile devices */
-
-        /* Copy the text inside the text field */
-
-        document.execCommand("copy");
-        document.body.removeChild(copyText); // copyText.parentNode.removeChild(copyText)
-      }
-      /***/
-
-    },
-
-    /***/
     "3GRy":
     /*!*************************************************************************************************************!*\
       !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/shared/update-password/update-password.component.html ***!
@@ -3653,7 +2507,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "\n<div class=\"card mb-3 shadow\">\n    <div class=\"card-header\">\n        <h5 class=\"font-weight-bold text-primary\">Update Password</h5>\n    </div>\n    <div class=\"card-body\">\n\n        <div class=\"row\">\n            <div class=\"form-group col-xl-12\">\n                <label for=\"old-password\">Old Password</label>\n                <input id=\"old-password\" name=\"old-password\" type=\"text\" class=\"form-control\">\n            </div>\n\n            <div class=\"form-group col-xl-12\">\n                <label for=\"new-password\">Old Password</label>\n                <input id=\"new-password\" name=\"new-password\" type=\"text\" class=\"form-control\">\n            </div>\n\n            <div class=\"form-group col-xl-12\">\n                <label for=\"repeat-password\">Old Password</label>\n                <input id=\"repeat-password\" name=\"repeat-password\" type=\"password\" class=\"form-control\">\n            </div>\n        </div>\n\n\n    </div>\n\n    <div class=\"card-footer\">\n    \n            <button name=\"submit\" type=\"submit\" class=\"btn btn-primary\">Update</button>\n       \n    </div>\n</div>\n\n";
+      __webpack_exports__["default"] = "<form [formGroup]=\"profileUpdatePasswordForm\">\r\n    <div class=\"card mb-3 shadow\">\r\n        <div class=\"card-header\">\r\n            <h5 class=\"font-weight-bold text-primary\">Update Password</h5>\r\n        </div>\r\n        <div class=\"card-body\">\r\n\r\n            <div class=\"row\">\r\n                <div class=\"form-group col-xl-12\">\r\n                    <label for=\"password\">Old Password</label>\r\n                    <input type=\"text\" formControlName=\"password\" class=\"form-control\"\r\n                        [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\" />\r\n                    <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.password.errors.required\">Old Password is required</div>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group col-xl-12\">\r\n                    <label for=\"password2update\">New Password</label>\r\n                    <input type=\"text\" formControlName=\"password2update\" class=\"form-control\"\r\n                        [ngClass]=\"{ 'is-invalid': submitted && f.password2update.errors }\" />\r\n                    <div *ngIf=\"submitted && f.password2update.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.password2update.errors.required\">Old Password is required</div>\r\n                    </div>\r\n                </div>\r\n\r\n                <div class=\"form-group col-xl-12\">\r\n                    <label i18n>Confirm Password</label>\r\n                    <input type=\"password\" formControlName=\"confirmPassword\" class=\"form-control\"\r\n                        [ngClass]=\"{ 'is-invalid': submitted && f.confirmPassword.errors }\" />\r\n                    <div *ngIf=\"submitted && f.confirmPassword.errors\" class=\"invalid-feedback\">\r\n                        <div *ngIf=\"f.confirmPassword.errors.required\" i18n>\r\n                            Confirm Password is required\r\n                        </div>\r\n                        <div *ngIf=\"f.confirmPassword.errors.mustMatch\" i18n>\r\n                            Passwords must match\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"card-footer\">\r\n            <button type=\"button\" (click)=\"onUpdatePasswordSubmit()\" [disabled]=\"loading\"\r\n            class=\"btn btn-primary float-right\">Update</button>\r\n        </div>\r\n    </div>\r\n</form>";
       /***/
     },
 
@@ -3836,7 +2690,7 @@
         _createClass2(AddFundsService, [{
           key: "getFundsCountForRequestedUser",
           value: function getFundsCountForRequestedUser(userId) {
-            var _this29 = this;
+            var _this12 = this;
 
             if (userId) {
               this.funds_get_count_sum(userId).subscribe(function (result) {
@@ -3851,7 +2705,7 @@
                 }
 
                 if (data) {
-                  _this29.totalFund4currentUser = _this29.utilityService._.round(_this29.utilityService._.get(data, '0.totalFund4currentUser') || 0, 2);
+                  _this12.totalFund4currentUser = _this12.utilityService._.round(_this12.utilityService._.get(data, '0.totalFund4currentUser') || 0, 2);
                 }
               });
             }
@@ -3859,7 +2713,7 @@
         }, {
           key: "getSessionSpentCountForRequestedUser",
           value: function getSessionSpentCountForRequestedUser(userId) {
-            var _this30 = this;
+            var _this13 = this;
 
             if (userId) {
               if (!this.alreadySubscribed) {
@@ -3876,7 +2730,7 @@
                   }
 
                   if (data) {
-                    _this30.totalSpentOnSessions4currentUser = _this30.utilityService._.round(_this30.utilityService._.get(data, '0.totalSpentOnSessions4currentUser') || 0, 2);
+                    _this13.totalSpentOnSessions4currentUser = _this13.utilityService._.round(_this13.utilityService._.get(data, '0.totalSpentOnSessions4currentUser') || 0, 2);
                   }
                 });
               }
@@ -4043,7 +2897,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<h2 mat-dialog-title class=\"ml-n2\">\r\n    <button class=\"btn btn-link btn-sm\" mat-button mat-dialog-close>\r\n        <i class=\"icon-angle-left\"></i>&nbsp;Back\r\n    </button>&nbsp;Profile\r\n</h2>\r\n<div class=\"row mb-2 mb-3\">\r\n    <div class=\"col-xl-3 col-12\">\r\n        <img [src]=\"userObj.selfProfileUrl\" onerror=\"this.src='/assets/img/nouser.png';\" class=\"img-fluid border\" />\r\n        <!--\r\n        <div class=\"my-3\">\r\n            <div><strong>Skills</strong>&nbsp;</div>\r\n            <h4><span class=\"badge badge-secondary font-weight-lighter mr-2\"\r\n                    *ngFor=\"let skill of userObj.skillSets\">{{utilityService.returnStringWithReplacing_(skill) |\r\n                    titlecase}}</span></h4>\r\n        </div>\r\n        -->\r\n    </div>\r\n    <div class=\"col-xl-9 col-12 pl-5\">\r\n        <div class=\"row\">\r\n            <div class=\"col-xl-12 col-12\">\r\n                <div class=\"my-3\">\r\n                    <strong>\r\n                        {{userObj.firstName | titlecase}}&nbsp;{{userObj.middleName |\r\n                        titlecase}}&nbsp;{{userObj.lastName |\r\n                        titlecase}}\r\n                    </strong>\r\n                    <span *ngIf=\"!adminViewT\" (click)=\"addNewRatings(userObj)\" mat-button mat-dialog-close>&nbsp;\r\n                        <i class=\"icon-star\"></i>\r\n                    </span>\r\n                    <span *ngIf=\"!adminViewT\">&nbsp;\r\n                        <i class=\"icon-star text-warning\"></i>\r\n                    </span>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-xl-6 col-6\">\r\n                <div class=\"my-3\">\r\n                    <strong>City/Country</strong>&nbsp;\r\n                    <label>\r\n                        {{userObj.cityCode | titlecase}}&nbsp;/&nbsp;{{userObj.country | titlecase}}\r\n                    </label>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-xl-6 col-6\">\r\n                <div class=\"my-3\">\r\n                    <strong>Email ID/Mobile Number</strong>&nbsp;\r\n                    <label>\r\n                        {{userObj.emailAddress}}&nbsp;/&nbsp;{{userObj.mobile}}\r\n                    </label>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"row\">\r\n            <div class=\"col-xl-6\">\r\n                <strong>App Links</strong>&nbsp;\r\n            </div>\r\n            <div class=\"col-xl-6\">\r\n                <strong>Hear From</strong>&nbsp;\r\n                <label>\r\n                    {{userObj.hearAboutUs}}\r\n                </label>\r\n            </div>\r\n        </div>\r\n        <div *ngIf=\"userObj.externalAppLinks\">\r\n            <hr>\r\n            <div *ngFor=\"let previewUrl of userObj.externalAppLinks\">\r\n                <div class=\"row\" *ngIf=\"previewUrl\">\r\n                    <div class=\"col-xl-2\">\r\n                        <strong>{{previewUrl.appName}}</strong>&nbsp;\r\n                    </div>\r\n                    <div class=\"col-xl-10\">\r\n                        <a href=\"{{previewUrl.appLink}}\">{{previewUrl.appLink}}</a>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"my-3\" *ngIf=\"adminViewT\">\r\n            <hr>\r\n            <div class=\"row\">\r\n                <div class=\"col-xl-12\"><strong>Passport Documents</strong>&nbsp;</div>\r\n                <div *ngIf=\"userObj.myPassportMedia\">\r\n                    <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myPassportMedia\">\r\n                        <div *ngIf=\"previewUrl\">\r\n                            <video width=\"1000\" height=\"1000\"\r\n                                *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')>-1\" class=\"img-fluid border\"\r\n                                controls [src]=\"previewUrl.url\"></video>\r\n                            <img width=\"1000\" height=\"1000\"\r\n                                *ngIf=\"previewUrl.type && previewUrl.type.indexOf('image/')>-1\" class=\"img-fluid border\"\r\n                                [src]=\"previewUrl.url\" onerror=\"this.src='/assets/img/na.png';\" />\r\n                            <img width=\"1000\" height=\"1000\"\r\n                                *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1\"\r\n                                class=\"img-fluid border\" src=\"/assets/img/pdf.png\"\r\n                                onerror=\"this.src='/assets/img/na.png';\" />\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <hr>\r\n            <div class=\"row\">\r\n                <div class=\"col-xl-12\"><strong>Driving Licence Documents</strong>&nbsp;</div>\r\n                <div *ngIf=\"userObj.myDLMedia\">\r\n                    <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myDLMedia\">\r\n                        <div *ngIf=\"previewUrl\">\r\n                            <video width=\"1000\" height=\"1000\"\r\n                                *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')>-1\" class=\"img-fluid border\"\r\n                                controls [src]=\"previewUrl.url\"></video>\r\n                            <img width=\"1000\" height=\"1000\"\r\n                                *ngIf=\"previewUrl.type && previewUrl.type.indexOf('image/')>-1\" class=\"img-fluid border\"\r\n                                [src]=\"previewUrl.url\" onerror=\"this.src='/assets/img/na.png';\" />\r\n                            <img width=\"1000\" height=\"1000\"\r\n                                *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1\"\r\n                                class=\"img-fluid border\" src=\"/assets/img/pdf.png\"\r\n                                onerror=\"this.src='/assets/img/na.png';\" />\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <hr>\r\n            <div class=\"row\">\r\n                <div class=\"col-xl-12\"><strong>Health Insurance Documents</strong>&nbsp;</div>\r\n                <div *ngIf=\"userObj.myHICardMedia\">\r\n                    <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myHICardMedia\">\r\n                        <div *ngIf=\"previewUrl\">\r\n                            <video width=\"1000\" height=\"1000\"\r\n                                *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')>-1\" class=\"img-fluid border\"\r\n                                controls [src]=\"previewUrl.url\"></video>\r\n                            <img width=\"1000\" height=\"1000\"\r\n                                *ngIf=\"previewUrl.type && previewUrl.type.indexOf('image/')>-1\" class=\"img-fluid border\"\r\n                                [src]=\"previewUrl.url\" onerror=\"this.src='/assets/img/na.png';\" />\r\n                            <img width=\"1000\" height=\"1000\"\r\n                                *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1\"\r\n                                class=\"img-fluid border\" src=\"/assets/img/pdf.png\"\r\n                                onerror=\"this.src='/assets/img/na.png';\" />\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\" *ngIf=\"userObj.isRKIRegistered\">\r\n                <hr>\r\n                <div class=\"col-xl-12\"><strong>RKI Registered Documents</strong>&nbsp;</div>\r\n                <div *ngIf=\"userObj.myRKIMedia\">\r\n                    <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myRKIMedia\">\r\n                        <div *ngIf=\"previewUrl\">\r\n                            <video width=\"1000\" height=\"1000\"\r\n                                *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')>-1\" class=\"img-fluid border\"\r\n                                controls [src]=\"previewUrl.url\"></video>\r\n                            <img width=\"1000\" height=\"1000\"\r\n                                *ngIf=\"previewUrl.type && previewUrl.type.indexOf('image/')>-1\" class=\"img-fluid border\"\r\n                                [src]=\"previewUrl.url\" onerror=\"this.src='/assets/img/na.png';\" />\r\n                            <img width=\"1000\" height=\"1000\"\r\n                                *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1\"\r\n                                class=\"img-fluid border\" src=\"/assets/img/pdf.png\"\r\n                                onerror=\"this.src='/assets/img/na.png';\" />\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
+      __webpack_exports__["default"] = "<div class=\"row\">\r\n    <div class=\"col-xl-11 col-10\">\r\n        <h4 class=\"mb-3 text-black-50\" i18n>\r\n            Profile\r\n        </h4>\r\n    </div>\r\n    <div class=\"col-xl-1 col-2\">\r\n        <i class=\"icon-close float-right\" mat-button (click)=\"closeDialog()\"></i>\r\n    </div>\r\n</div>\r\n<mat-dialog-content class=\"mat-typography\" style=\"max-height: 86vh;\">\r\n    <div class=\"row mb-2 mb-3\">\r\n        <div class=\"col-xl-3 col-12\">\r\n            <div class=\"card\">\r\n                <div class=\"card-body\">\r\n                    <img [src]=\"userObj.selfProfileUrl\" onerror=\"this.src='/assets/img/nouser.png';\"\r\n                        class=\"img-fluid \" />\r\n                </div>\r\n                <div class=\"card-footer\">\r\n                    <strong>\r\n                        {{userObj.firstName | titlecase}}&nbsp;\r\n                        {{userObj.middleName | titlecase}}&nbsp;\r\n                        {{userObj.lastName | titlecase}}\r\n                    </strong>\r\n                </div>\r\n            </div>\r\n            <ul class=\"list-group list-group-flush\">\r\n                <li class=\"list-group-item\"> <strong>City</strong> {{userObj.cityCode | titlecase}}</li>\r\n                <li class=\"list-group-item\">\r\n                    <strong>Country</strong> {{userObj.country | titlecase}}\r\n                </li>\r\n                <li class=\"list-group-item\">\r\n                    <strong>Member Since</strong> {{userObj.birthDate | date}}\r\n                </li>\r\n                <li class=\"list-group-item\">\r\n                    <strong>DOB</strong> {{userObj.birthDate | date}}\r\n                </li>\r\n                <li *ngIf=\"userObj.externalAppLinks\" class=\"list-group-item\">\r\n                    <div *ngFor=\"let previewUrl of userObj.externalAppLinks\">\r\n                        <a *ngIf=\"previewUrl\" href=\"{{previewUrl.appLink}}\">{{previewUrl.appName}}</a>\r\n                    </div>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n        <div class=\"col-xl-9 col-12 pl-5\">\r\n            <div class=\"row\">\r\n                <div class=\"col-xl-6 col-12\" *ngIf=\"adminViewT\">\r\n                    <ul class=\"list-group\">\r\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\">\r\n                            Number of loan notices created\r\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.numberOfLoanCreated ||\r\n                                'NA'}}</span>\r\n                        </li>\r\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\">\r\n                            Signed contracts\r\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.numberOfSignedContract\r\n                                || 'NA'}}</span>\r\n                        </li>\r\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\">\r\n                            Repaid contracts:\r\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.numberOfRepaidContract\r\n                                || 'NA'}}</span>\r\n                        </li>\r\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\">\r\n                            Total amount borrowed\r\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.numberOfAmontBorrowed\r\n                                || 'NA'}}</span>\r\n                        </li>\r\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\">\r\n                            Total amount refunded\r\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.numberOfAmontRefunded\r\n                                || 'NA'}}</span>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n                <div class=\"col-xl-6 col-12\" *ngIf=\"adminViewT\">\r\n                    <ul class=\"list-group\">\r\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\">\r\n                            Amount available in budget\r\n                            <span\r\n                                class=\"badge badge-primary badge-pill\">{{profileAdditionalData.numberOfAmountAvailableInBudget\r\n                                || 'NA'}}</span>\r\n                        </li>\r\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\">\r\n                            Recommended\r\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.recommended ||\r\n                                'NA'}}</span>\r\n                        </li>\r\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\">\r\n                            Not Recommended\r\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.notRecommended ||\r\n                                'NA'}}</span>\r\n                        </li>\r\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\">\r\n                            This borrower is in RKI:\r\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.borrowerIsInRKI ||\r\n                                'NA'}}</span>\r\n                        </li>\r\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\">\r\n                            Email\r\n                            <span class=\"badge badge-primary badge-pill\">Vefified</span>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n                <div class=\"col-xl-12 col-12\">\r\n\r\n                    <div class=\"my-3\">\r\n                        <!--\r\n                        <span *ngIf=\"!adminViewT\" (click)=\"addNewRatings(userObj)\" mat-button mat-dialog-close>&nbsp;\r\n                            <i class=\"icon-star\"></i>\r\n                        </span>\r\n                    -->\r\n                        <span *ngIf=\"!adminViewT\">&nbsp;\r\n                            <i class=\"icon-star text-warning\"></i>\r\n                        </span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"row\">\r\n                <div class=\"col-xl-12 col-12\">\r\n                    <div class=\"table-responsive table-billing-history\">\r\n                        <table class=\"table mb-0\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th scope=\"col\">Document</th>\r\n                                    <th scope=\"col\">Doc Number</th>\r\n                                    <th scope=\"col\">Status</th>\r\n                                    <th scope=\"col\" *ngIf=\"adminViewT\">#</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr>\r\n                                    <td>Passport</td>\r\n                                    <td>{{userObj.myPassportNumber||'NA'}}</td>\r\n                                    <td>\r\n                                        <span *ngIf=\"userObj.myPassportMediaVerified\"\r\n                                            class=\"badge badge-success\">Verified</span>\r\n                                        <span *ngIf=\"!userObj.myPassportMediaVerified\"\r\n                                            class=\"badge badge-danger\">Unverified</span>\r\n                                    </td>\r\n                                    <td *ngIf=\"adminViewT\">\r\n                                        <button class=\"btn btn-danger btn-sm btn-xs mr-1\" data-title=\"Unverified\" *ngIf=\"userObj.myPassportMediaVerified\" (click)=\"updateUsersVerificationStatus(userObj._id, 'myPassportMediaVerified', !userObj.myPassportMediaVerified)\">\r\n                                            <i class=\"icon-close\"></i>\r\n                                        </button>\r\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verified\" *ngIf=\"!userObj.myPassportMediaVerified\" (click)=\"updateUsersVerificationStatus(userObj._id, 'myPassportMediaVerified', !userObj.myPassportMediaVerified)\">\r\n                                            <i class=\"icon-check\"></i>\r\n                                        </button>\r\n                                    </td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>Driving Licence</td>\r\n                                    <td>{{userObj.myDLNumber||'NA'}}</td>\r\n                                    <td>\r\n                                        <span *ngIf=\"userObj.myDLMediaVerified\"\r\n                                            class=\"badge badge-success\">Verified</span>\r\n                                        <span *ngIf=\"!userObj.myDLMediaVerified\"\r\n                                            class=\"badge badge-danger\">Unverified</span>\r\n                                    </td>\r\n                                    <td *ngIf=\"adminViewT\">\r\n                                        <button class=\"btn btn-danger btn-sm btn-xs mr-1\" data-title=\"Unverified\" *ngIf=\"userObj.myDLMediaVerified\" (click)=\"updateUsersVerificationStatus(userObj._id, 'myDLMediaVerified', !userObj.myDLMediaVerified)\">\r\n                                            <i class=\"icon-close\"></i>\r\n                                        </button>\r\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verified\" *ngIf=\"!userObj.myDLMediaVerified\" (click)=\"updateUsersVerificationStatus(userObj._id, 'myDLMediaVerified', !userObj.myDLMediaVerified)\">\r\n                                            <i class=\"icon-check\"></i>\r\n                                        </button>\r\n                                    </td>\r\n                                </tr>\r\n                                <tr>\r\n                                    <td>CPR Number</td>\r\n                                    <td>{{userObj.cprNumber||'NA'}}</td>\r\n                                    <td>\r\n                                        <span *ngIf=\"userObj.myHICardMediaVerified\"\r\n                                            class=\"badge badge-success\">Verified</span>\r\n                                        <span *ngIf=\"!userObj.myHICardMediaVerified\"\r\n                                            class=\"badge badge-danger\">Unverified</span>\r\n                                    </td>\r\n                                    <td *ngIf=\"adminViewT\">\r\n                                        <button class=\"btn btn-danger btn-sm btn-xs mr-1\" data-title=\"Unverified\" *ngIf=\"userObj.myHICardMediaVerified\" (click)=\"updateUsersVerificationStatus(userObj._id, 'myHICardMediaVerified', !userObj.myHICardMediaVerified)\">\r\n                                            <i class=\"icon-close\"></i>\r\n                                        </button>\r\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verified\" *ngIf=\"!userObj.myHICardMediaVerified\" (click)=\"updateUsersVerificationStatus(userObj._id, 'myHICardMediaVerified', !userObj.myHICardMediaVerified)\">\r\n                                            <i class=\"icon-check\"></i>\r\n                                        </button>\r\n                                    </td>\r\n                                </tr>\r\n                                <tr *ngIf=\"userObj.role=='borrower' && !userObj.isRKIRegistered\">\r\n                                    <td>RKI Document </td>\r\n                                    <td>{{userObj.myRKINumber||'NA'}}</td>\r\n                                    <td>\r\n                                        <span *ngIf=\"userObj.myRKIMediaVerified\"\r\n                                            class=\"badge badge-success\">Verified</span>\r\n                                        <span *ngIf=\"!userObj.myRKIMediaVerified\"\r\n                                            class=\"badge badge-danger\">Unverified</span>\r\n                                    </td>\r\n                                    <td *ngIf=\"adminViewT\">\r\n                                        <button class=\"btn btn-danger btn-sm btn-xs mr-1\" data-title=\"Unverified\" *ngIf=\"userObj.myRKIMediaVerified\" (click)=\"updateUsersVerificationStatus(userObj._id, 'myRKIMediaVerified', !userObj.myRKIMediaVerified)\">\r\n                                            <i class=\"icon-close\"></i>\r\n                                        </button>\r\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verified\" *ngIf=\"!userObj.myRKIMediaVerified\" (click)=\"updateUsersVerificationStatus(userObj._id, 'myRKIMediaVerified', !userObj.myRKIMediaVerified)\">\r\n                                            <i class=\"icon-check\"></i>\r\n                                        </button>\r\n                                    </td>\r\n                                </tr>\r\n\r\n                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n\r\n            <div class=\"row\" *ngIf=\"adminViewT\">\r\n                <div class=\"col-xl-12 col-12\">\r\n                    <hr>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-xl-12\"><strong>Passport\r\n                                Documents</strong>\r\n                        </div>\r\n                        <div *ngIf=\"userObj.myPassportMedia\">\r\n                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myPassportMedia\">\r\n                                <div *ngIf=\"previewUrl\">\r\n                                    <video width=\"1000\" height=\"1000\"\r\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')>-1\"\r\n                                        class=\"img-fluid border\" controls [src]=\"previewUrl.url\"></video>\r\n                                    <img width=\"1000\" height=\"1000\"\r\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('image/')>-1\"\r\n                                        class=\"img-fluid border\" [src]=\"previewUrl.url\"\r\n                                        onerror=\"this.src='/assets/img/na.png';\" />\r\n                                    <img width=\"1000\" height=\"1000\"\r\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1\"\r\n                                        class=\"img-fluid border\" src=\"/assets/img/pdf.png\"\r\n                                        onerror=\"this.src='/assets/img/na.png';\" />\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <hr>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-xl-12\"><strong>Driving Licence\r\n                                Documents</strong></div>\r\n                        <div *ngIf=\"userObj.myDLMedia\">\r\n                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myDLMedia\">\r\n                                <div *ngIf=\"previewUrl\">\r\n                                    <video width=\"1000\" height=\"1000\"\r\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')>-1\"\r\n                                        class=\"img-fluid border\" controls [src]=\"previewUrl.url\"></video>\r\n                                    <img width=\"1000\" height=\"1000\"\r\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('image/')>-1\"\r\n                                        class=\"img-fluid border\" [src]=\"previewUrl.url\"\r\n                                        onerror=\"this.src='/assets/img/na.png';\" />\r\n                                    <img width=\"1000\" height=\"1000\"\r\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1\"\r\n                                        class=\"img-fluid border\" src=\"/assets/img/pdf.png\"\r\n                                        onerror=\"this.src='/assets/img/na.png';\" />\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <hr>\r\n                    <div class=\"row\">\r\n                        <div class=\"col-xl-12\"><strong>\r\n                                CPR Number Documents\r\n                            </strong>\r\n                        </div>\r\n                        <div *ngIf=\"userObj.myHICardMedia\">\r\n                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myHICardMedia\">\r\n                                <div *ngIf=\"previewUrl\">\r\n                                    <video width=\"1000\" height=\"1000\"\r\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')>-1\"\r\n                                        class=\"img-fluid border\" controls [src]=\"previewUrl.url\"></video>\r\n                                    <img width=\"1000\" height=\"1000\"\r\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('image/')>-1\"\r\n                                        class=\"img-fluid border\" [src]=\"previewUrl.url\"\r\n                                        onerror=\"this.src='/assets/img/na.png';\" />\r\n                                    <img width=\"1000\" height=\"1000\"\r\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1\"\r\n                                        class=\"img-fluid border\" src=\"/assets/img/pdf.png\"\r\n                                        onerror=\"this.src='/assets/img/na.png';\" />\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"row\" *ngIf=\"userObj.role=='borrower' && !userObj.isRKIRegistered\">\r\n                        <hr>\r\n                        <div class=\"col-xl-12\">\r\n                            <strong>RKI Documents</strong>&nbsp;\r\n                        </div>\r\n                        <div *ngIf=\"userObj.myRKIMedia\">\r\n                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myRKIMedia\">\r\n                                <div *ngIf=\"previewUrl\">\r\n                                    <video width=\"1000\" height=\"1000\"\r\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')>-1\"\r\n                                        class=\"img-fluid border\" controls [src]=\"previewUrl.url\"></video>\r\n                                    <img width=\"1000\" height=\"1000\"\r\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('image/')>-1\"\r\n                                        class=\"img-fluid border\" [src]=\"previewUrl.url\"\r\n                                        onerror=\"this.src='/assets/img/na.png';\" />\r\n                                    <img width=\"1000\" height=\"1000\"\r\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1\"\r\n                                        class=\"img-fluid border\" src=\"/assets/img/pdf.png\"\r\n                                        onerror=\"this.src='/assets/img/na.png';\" />\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n    </div>\r\n</mat-dialog-content>";
       /***/
     },
 
@@ -4580,7 +3434,7 @@
 
       var BankDetailsComponent = /*#__PURE__*/function () {
         function BankDetailsComponent(dialog, http, formBuilder, router, authenticationService, userService, alertService, appRouterService, route, utilityService) {
-          var _this31 = this;
+          var _this14 = this;
 
           _classCallCheck2(this, BankDetailsComponent);
 
@@ -4607,19 +3461,19 @@
             //console.log('data => ', data)
             if (data && data['success']) {
               //alert(JSON.stringify( data));
-              _this31.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
+              _this14.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
 
 
-              _this31.loading = false;
-              _this31.isOtpSent = true; //this.element_btn_click_profile_skills_verification.click();
+              _this14.loading = false;
+              _this14.isOtpSent = true; //this.element_btn_click_profile_skills_verification.click();
             } else {
               //alert(JSON.stringify(data['message']));
-              _this31.alertService.error(data['message']);
+              _this14.alertService.error(data['message']);
 
-              _this31.loading = false;
-              _this31.isOtpSent = false;
+              _this14.loading = false;
+              _this14.isOtpSent = false;
 
-              _this31.appRouterService.appRouter('');
+              _this14.appRouterService.appRouter('');
             }
           }, function (error) {
             var errorMsg2show = "";
@@ -4634,12 +3488,12 @@
               }
             } catch (ex) {}
 
-            _this31.alertService.error(errorMsg2show);
+            _this14.alertService.error(errorMsg2show);
 
-            _this31.loading = false;
-            _this31.isOtpSent = false;
+            _this14.loading = false;
+            _this14.isOtpSent = false;
 
-            _this31.appRouterService.appRouter('');
+            _this14.appRouterService.appRouter('');
           });
         }
 
@@ -4792,7 +3646,7 @@
         }, {
           key: "onBankDetailsUpdateSubmit",
           value: function onBankDetailsUpdateSubmit() {
-            var _this32 = this;
+            var _this15 = this;
 
             this.submitted = true;
 
@@ -4808,16 +3662,16 @@
 
                 localStorage.setItem('currentUser', JSON.stringify(data['data']));
 
-                _this32.authenticationService.sendCurrentUserObj(data['data']);
+                _this15.authenticationService.sendCurrentUserObj(data['data']);
 
-                _this32.alertService.success('Bank details updated', true);
+                _this15.alertService.success('Bank details updated', true);
 
-                _this32.appRouterService.appRouter(_this32.authenticationService.currentUserValue);
+                _this15.appRouterService.appRouter(_this15.authenticationService.currentUserValue);
               } else {
                 //alert(JSON.stringify(data['message']));
-                _this32.alertService.error(data['message']);
+                _this15.alertService.error(data['message']);
 
-                _this32.loading = false;
+                _this15.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -4832,9 +3686,9 @@
                 }
               } catch (ex) {}
 
-              _this32.alertService.error(errorMsg2show);
+              _this15.alertService.error(errorMsg2show);
 
-              _this32.loading = false;
+              _this15.loading = false;
             });
           }
         }]);
@@ -4871,20 +3725,6 @@
         template: _raw_loader_bank_details_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_bank_details_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_6__["MatDialog"], _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"], src_app_services__WEBPACK_IMPORTED_MODULE_9__["AuthenticationService"], src_app_services__WEBPACK_IMPORTED_MODULE_9__["UserService"], src_app_services__WEBPACK_IMPORTED_MODULE_9__["AlertService"], src_app_services_app_router_service__WEBPACK_IMPORTED_MODULE_10__["AppRouterService"], _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"], src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_11__["UtilityService"]])], BankDetailsComponent);
-      /***/
-    },
-
-    /***/
-    "FtmX":
-    /*!**************************************************!*\
-      !*** ./node_modules/stripe-angular/package.json ***!
-      \**************************************************/
-
-    /*! exports provided: _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _shasum, _spec, _where, author, bugs, bundleDependencies, dependencies, deprecated, description, es2015_ivy_ngcc, es2015, esm2015, fesm2015_ivy_ngcc, fesm2015, homepage, keywords, license, main, metadata, module_ivy_ngcc, module, name, peerDependencies, repository, sideEffects, typings, version, __processed_by_ivy_ngcc__, scripts, default */
-
-    /***/
-    function FtmX(module) {
-      module.exports = JSON.parse("{\"_from\":\"stripe-angular@^1.7.0\",\"_id\":\"stripe-angular@1.7.0\",\"_inBundle\":false,\"_integrity\":\"sha512-ivWQhRjWv3aszK0vRyicI77UAGbHMa8z7UwhRb9YK4rPQK2SkROPpw3R6yxcOKy0bD/mJhaMvbgwSj5oZ/0eUQ==\",\"_location\":\"/stripe-angular\",\"_phantomChildren\":{},\"_requested\":{\"type\":\"range\",\"registry\":true,\"raw\":\"stripe-angular@^1.7.0\",\"name\":\"stripe-angular\",\"escapedName\":\"stripe-angular\",\"rawSpec\":\"^1.7.0\",\"saveSpec\":null,\"fetchSpec\":\"^1.7.0\"},\"_requiredBy\":[\"/\"],\"_resolved\":\"https://registry.npmjs.org/stripe-angular/-/stripe-angular-1.7.0.tgz\",\"_shasum\":\"1398c7573cc76a0cca7097b2d9a629fc2eecac57\",\"_spec\":\"stripe-angular@^1.7.0\",\"_where\":\"D:\\\\cordova\\\\avitii\",\"author\":{\"name\":\"Acker Apple\"},\"bugs\":{\"url\":\"https://github.com/AckerApple/stripe-angular/issues\"},\"bundleDependencies\":false,\"dependencies\":{\"tslib\":\"^2.0.0\"},\"deprecated\":false,\"description\":\"Angular to Stripe module containing useful providers, components, and directives\",\"es2015_ivy_ngcc\":\"__ivy_ngcc__/fesm2015/stripe-angular.js\",\"es2015\":\"fesm2015/stripe-angular.js\",\"esm2015\":\"esm2015/stripe-angular.js\",\"fesm2015_ivy_ngcc\":\"__ivy_ngcc__/fesm2015/stripe-angular.js\",\"fesm2015\":\"fesm2015/stripe-angular.js\",\"homepage\":\"https://github.com/AckerApple/stripe-angular#readme\",\"keywords\":[\"stripe\",\"angular\",\"credit\",\"debit\",\"card\",\"payment\",\"gateway\"],\"license\":\"MIT\",\"main\":\"bundles/stripe-angular.umd.js\",\"metadata\":\"stripe-angular.metadata.json\",\"module_ivy_ngcc\":\"__ivy_ngcc__/fesm2015/stripe-angular.js\",\"module\":\"fesm2015/stripe-angular.js\",\"name\":\"stripe-angular\",\"peerDependencies\":{\"@types/stripe-v3\":\"^3.1.23\"},\"repository\":{\"type\":\"git\",\"url\":\"git+https://github.com/AckerApple/stripe-angular.git\"},\"sideEffects\":false,\"typings\":\"stripe-angular.d.ts\",\"version\":\"1.7.0\",\"__processed_by_ivy_ngcc__\":{\"es2015\":\"11.2.7\",\"fesm2015\":\"11.2.7\",\"module\":\"11.2.7\",\"typings\":\"11.2.7\"},\"scripts\":{\"prepublishOnly\":\"node --eval \\\"console.error('ERROR: Trying to publish a package that has been compiled by NGCC. This is not allowed.\\\\nPlease delete and rebuild the package, without compiling with NGCC, before attempting to publish.\\\\nNote that NGCC may have been run by importing this package into another project that is being built with Ivy enabled.\\\\n')\\\" && exit 1\"}}");
       /***/
     },
 
@@ -5054,7 +3894,7 @@
 
       var WalletComponent = /*#__PURE__*/function () {
         function WalletComponent(utilityService, payment, formBuilder, addFundsService, authenticationService, alertService) {
-          var _this33 = this;
+          var _this16 = this;
 
           _classCallCheck2(this, WalletComponent);
 
@@ -5068,7 +3908,7 @@
           this.submitted = false;
           this.allFunds = [];
           this.authenticationService.currentUser.subscribe(function (x) {
-            return _this33.currentUser = x;
+            return _this16.currentUser = x;
           });
           this.currentFunds = new src_app_models_funds__WEBPACK_IMPORTED_MODULE_10__["Funds"]();
         }
@@ -5090,7 +3930,7 @@
         }, {
           key: "onSubmit",
           value: function onSubmit() {
-            var _this34 = this;
+            var _this17 = this;
 
             this.submitted = true; // stop here if form is invalid
 
@@ -5124,17 +3964,17 @@
               }]
             }];
             this.addFundsService.checkStatusOfNewFundsAdded().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (_obj) {
-              _this34.loading = false;
+              _this17.loading = false;
 
-              _this34.alertService.success('Funds Added');
+              _this17.alertService.success('Funds Added');
 
-              _this34.f.amount.setValue('');
+              _this17.f.amount.setValue('');
 
-              _this34.loadAllFunds();
+              _this17.loadAllFunds();
 
-              _this34.payPalConfig = null;
+              _this17.payPalConfig = null;
 
-              _this34.addFundsService.getFundsCountForRequestedUser(_this34.currentUser._id);
+              _this17.addFundsService.getFundsCountForRequestedUser(_this17.currentUser._id);
             });
             this.payPalConfig = this.payment.initConfig(purchaseUnits, src_app_models__WEBPACK_IMPORTED_MODULE_5__["TransactionActionType"].funds_add, this.currentUser._id);
             /*
@@ -5149,7 +3989,7 @@
         }, {
           key: "loadAllFunds",
           value: function loadAllFunds() {
-            var _this35 = this;
+            var _this18 = this;
 
             //this.addFundsService.funds_getall_funds(this.currentUser.id);
 
@@ -5162,21 +4002,21 @@
             }
             */
             this.addFundsService.funds_getall_funds(this.currentUser._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (funds) {
-              _this35.totalFund4currentUser = 0;
-              _this35.allFunds = funds;
+              _this18.totalFund4currentUser = 0;
+              _this18.allFunds = funds;
 
-              for (var item in _this35.allFunds) {
-                _this35.totalFund4currentUser = _this35.totalFund4currentUser + _this35.allFunds[item].amount;
+              for (var item in _this18.allFunds) {
+                _this18.totalFund4currentUser = _this18.totalFund4currentUser + _this18.allFunds[item].amount;
               }
             });
           }
         }, {
           key: "deleteFund",
           value: function deleteFund(id) {
-            var _this36 = this;
+            var _this19 = this;
 
             this.addFundsService.funds_delete(id, this.currentUser._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function () {
-              _this36.loadAllFunds();
+              _this19.loadAllFunds();
             });
           }
         }]);
@@ -5251,29 +4091,701 @@
       var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/core */
       "fXoL");
+      /* harmony import */
+
+
+      var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @angular/material/dialog */
+      "0IaG");
+      /* harmony import */
+
+
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! @angular/forms */
+      "3Pt+");
+      /* harmony import */
+
+
+      var src_app_models__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! src/app/models */
+      "VHTt");
+      /* harmony import */
+
+
+      var src_app_services__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! src/app/services */
+      "o0su");
+      /* harmony import */
+
+
+      var src_app_services_app_router_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! src/app/services/app-router.service */
+      "KHIh");
+      /* harmony import */
+
+
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! rxjs/operators */
+      "kU1M");
+      /* harmony import */
+
+
+      var moment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      /*! moment */
+      "wd/R");
+      /* harmony import */
+
+
+      var moment__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_10__);
+      /* harmony import */
+
+
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+      /*! @angular/common/http */
+      "tk/3");
+      /* harmony import */
+
+
+      var lodash__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+      /*! lodash */
+      "LvDl");
+      /* harmony import */
+
+
+      var lodash__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_12__);
+      /* harmony import */
+
+
+      var src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+      /*! src/app/services/utility.service */
+      "A1CT");
+      /* harmony import */
+
+
+      var src_environments_environment__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+      /*! src/environments/environment */
+      "AytR");
+      /* harmony import */
+
+
+      var _media_preview_media_preview_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+      /*! ../media-preview/media-preview.component */
+      "tZK8");
+
+      var uploadAPI = src_environments_environment__WEBPACK_IMPORTED_MODULE_14__["environment"].apiUrl + '/api/post/upload/assetdata';
+      var uploadAccessUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_14__["environment"].apiUrl + '/';
 
       var IncomeProofComponent = /*#__PURE__*/function () {
-        function IncomeProofComponent() {
+        function IncomeProofComponent(http, formBuilder, authenticationService, userService, alertService, appRouterService, utilityService, dialogRef, data, dialog, _cdr) {
           _classCallCheck2(this, IncomeProofComponent);
+
+          this.http = http;
+          this.formBuilder = formBuilder;
+          this.authenticationService = authenticationService;
+          this.userService = userService;
+          this.alertService = alertService;
+          this.appRouterService = appRouterService;
+          this.utilityService = utilityService;
+          this.dialogRef = dialogRef;
+          this.data = data;
+          this.dialog = dialog;
+          this._cdr = _cdr;
+          this.fileData4MonthlyIncomeProofDocument = null;
+          this.fileData4MonthlyIncomeProofDocumentPendingForUpload = false;
+          this.loading = false;
+          this.submittedIncomeDetails = false;
+          this.submittedExpenseDetails = false;
+          this.fileData = null;
+          this.fileData4Profile = null;
+          this.previewUrl = null;
+          this.fileUploadProgress = null;
+          this.uploadedFilePath = null;
+          this.myProfileFiles = [];
+          this.selfProfileUrlPendingForUpload = false;
+          this.portfolioDataArr = [];
+          this.SessionStatus = src_app_models__WEBPACK_IMPORTED_MODULE_6__["SessionStatus"];
+          this.userObj = null;
+          this.isOpenedInModel = false;
+          this.adminViewT = false;
+          this.now = new Date();
+          this.year = this.now.getFullYear();
+          this.month = this.now.getMonth();
+          this.day = this.now.getDay();
+          this.minDate = moment__WEBPACK_IMPORTED_MODULE_10__({
+            year: this.year - 100,
+            month: this.month,
+            day: this.day
+          }).format('YYYY-MM-DD');
+          this.maxDate = moment__WEBPACK_IMPORTED_MODULE_10__({
+            year: this.year - 18,
+            month: this.month,
+            day: this.day
+          }).format('YYYY-MM-DD');
+
+          if (data && data.isOpenedInModel) {
+            this.isOpenedInModel = true;
+            this.userObj = data.userObj;
+            this.adminViewT = !!data.adminViewT;
+          } else {
+            this.userObj = this.authenticationService.currentUserValue;
+          } // redirect to home if already logged in
+
+
+          if (!this.userObj || !this.userObj._id) {
+            if (this.isOpenedInModel) {
+              this.closeDialog();
+            } else {
+              this.appRouterService.appRouter('');
+            }
+
+            return;
+          }
+
+          this.initForm();
+          this.fetchAllIncomeDetailsByUserId();
+          this.fetchAllExpenseDetailsByUserId();
+          this.fetchSumOfIncomeExpenseDetailsByUserId();
         }
 
         _createClass2(IncomeProofComponent, [{
+          key: "fetchAllIncomeDetailsByUserId",
+          value: function fetchAllIncomeDetailsByUserId() {
+            var _this20 = this;
+
+            this.userService.getUserIncomeDetailsByUserId(this.userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+              //console.log('data => ', data)
+              if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                _this20.allIncomeDetailsData = data["data"]; //this.alertService.success(data['message'], true);
+
+                _this20.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = "";
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this20.alertService.error(errorMsg2show);
+
+              _this20.loading = false;
+
+              _this20.appRouterService.appRouter('');
+            });
+          }
+        }, {
+          key: "fetchAllExpenseDetailsByUserId",
+          value: function fetchAllExpenseDetailsByUserId() {
+            var _this21 = this;
+
+            this.userService.getUserExpenseDetailsByUserId(this.userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+              //console.log('data => ', data)
+              if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                _this21.allExpenseDetailsData = data["data"]; //this.alertService.success(data['message'], true);
+
+                _this21.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = "";
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this21.alertService.error(errorMsg2show);
+
+              _this21.loading = false;
+
+              _this21.appRouterService.appRouter('');
+            });
+          }
+        }, {
+          key: "fetchSumOfIncomeExpenseDetailsByUserId",
+          value: function fetchSumOfIncomeExpenseDetailsByUserId() {
+            var _this22 = this;
+
+            this.userService.getUserIncomeExpenseDetailsByUserId(this.userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+              //console.log('data => ', data)
+              if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                if (_this22.userObj._id == data["data"]["_id"]) {
+                  _this22.userObj.totalIncome4currentUser = data["data"]["totalIncome4currentUser"];
+                  _this22.userObj.totalExpense4currentUser = data["data"]["totalExpense4currentUser"];
+                  _this22.userObj.totalAllowedBudget = _this22.userObj.totalIncome4currentUser - _this22.userObj.totalExpense4currentUser;
+                }
+
+                _this22._cdr.detectChanges(); //this.alertService.success(data['message'], true);
+
+
+                _this22.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = "";
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this22.alertService.error(errorMsg2show);
+
+              _this22.loading = false;
+
+              _this22.appRouterService.appRouter('');
+            });
+          }
+        }, {
           key: "ngOnInit",
-          value: function ngOnInit() {}
+          value: function ngOnInit() {} // convenience getter for easy access to form fields
+
+        }, {
+          key: "f",
+          get: function get() {
+            return this.userIncomeDetailsForm.controls;
+          }
+        }, {
+          key: "ff",
+          get: function get() {
+            return this.userExpenseDetailsForm.controls;
+          }
+        }, {
+          key: "onUserIncomeDetailsUpdateSubmit",
+          value: function onUserIncomeDetailsUpdateSubmit() {
+            var _this23 = this;
+
+            this.submittedIncomeDetails = true;
+
+            if (this.userIncomeDetailsForm.invalid) {
+              this.alertService.error("Please Provide all data");
+              return;
+            }
+
+            if (this.fileData4MonthlyIncomeProofDocumentPendingForUpload) {
+              this.alertService.error('Please upload document first');
+              return;
+            }
+
+            this.userService.addUpdateUserIncomeDetails(this.userIncomeDetailsForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+              if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                _this23.alertService.success('Your Income proof is Updated successfully', true);
+
+                _this23.fetchAllIncomeDetailsByUserId();
+
+                _this23.submittedIncomeDetails = false; //this.appRouterService.appRouter(this.userObj);
+              } else {
+                //alert(JSON.stringify(data['message']));
+                _this23.alertService.error(data['message']);
+
+                _this23.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = "";
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this23.alertService.error(errorMsg2show);
+
+              _this23.loading = false;
+            });
+          }
+        }, {
+          key: "onUserExpenseDetailsUpdateSubmit",
+          value: function onUserExpenseDetailsUpdateSubmit() {
+            var _this24 = this;
+
+            this.submittedExpenseDetails = true;
+
+            if (this.userExpenseDetailsForm.invalid) {
+              this.alertService.error("Please Provide all data");
+              return;
+            }
+
+            var _monthlyExpenseStartDateTimeCustomised = this.userExpenseDetailsForm.get('monthlyExpenseStartDateTimeCustomised').value;
+            var _monthlyExpensePaymentDateTimeCustomised = this.userExpenseDetailsForm.get('monthlyExpensePaymentDateTimeCustomised').value;
+
+            if (_monthlyExpenseStartDateTimeCustomised) {
+              this.userExpenseDetailsForm.get('monthlyExpenseStartDate').setValue(Date.parse(moment__WEBPACK_IMPORTED_MODULE_10__(_monthlyExpenseStartDateTimeCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD')));
+            }
+
+            if (_monthlyExpensePaymentDateTimeCustomised) {
+              this.userExpenseDetailsForm.get('monthlyExpensePaymentDate').setValue(Date.parse(moment__WEBPACK_IMPORTED_MODULE_10__(_monthlyExpensePaymentDateTimeCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD')));
+            }
+
+            this.userService.addUpdateUserExpenseDetails(this.userExpenseDetailsForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+              if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                _this24.alertService.success('Your Expense proof is Updated successfully', true);
+
+                _this24.fetchAllExpenseDetailsByUserId();
+
+                _this24.submittedExpenseDetails = false; //this.appRouterService.appRouter(this.userObj);
+              } else {
+                //alert(JSON.stringify(data['message']));
+                _this24.alertService.error(data['message']);
+
+                _this24.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = "";
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this24.alertService.error(errorMsg2show);
+
+              _this24.loading = false;
+            });
+          }
+        }, {
+          key: "date",
+          value: function date(ev) {
+            console.log(this.minDate);
+            console.log(ev.target.value);
+          }
+        }, {
+          key: "showEditingFormIncomeDetails",
+          value: function showEditingFormIncomeDetails(_userObj) {
+            this.userIncomeDetailsForm = this.formBuilder.group({
+              _id: [_userObj._id || ''],
+              incomeSource: [_userObj.incomeSource || '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+              monthlyIncomeAmount: [_userObj.monthlyIncomeAmount || '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+              monthlyIncomeProofDocument: [_userObj.monthlyIncomeProofDocument || '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+              monthlyIncomeStatus: [_userObj.monthlyIncomeStatus || src_app_models__WEBPACK_IMPORTED_MODULE_6__["SessionStatus"].Pending, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+              userId: [_userObj.userId || this.userObj._id],
+              createdOn: [_userObj.createdOn || ''],
+              updatedOn: [_userObj.updatedOn || ''],
+              isDeleted: [_userObj.isDeleted || false],
+              createdBy: [_userObj.createdBy || ''],
+              deletedBy: [_userObj.deletedBy || ''],
+              updatedBy: [this.authenticationService.currentUserValue._id || '']
+            });
+          }
+        }, {
+          key: "showEditingFormExpenseDetails",
+          value: function showEditingFormExpenseDetails(_userObj) {
+            this.userExpenseDetailsForm = this.formBuilder.group({
+              _id: [_userObj._id || ''],
+              expenseDetails: [_userObj.expenseDetails || '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+              monthlyEMIAmount: [_userObj.monthlyEMIAmount || '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+              monthlyExpenseStartDateTimeCustomised: [_userObj.monthlyExpenseStartDateTimeCustomised || ''],
+              monthlyExpensePaymentDateTimeCustomised: [_userObj.monthlyExpensePaymentDateTimeCustomised || ''],
+              monthlyExpenseStartDate: [_userObj.monthlyExpenseStartDate || ''],
+              monthlyExpensePaymentDate: [_userObj.monthlyExpensePaymentDate || ''],
+              monthlyExpenseStatus: [_userObj.monthlyExpenseStatus || src_app_models__WEBPACK_IMPORTED_MODULE_6__["SessionStatus"].Pending],
+              userId: [_userObj.userId || this.userObj._id],
+              createdOn: [_userObj.createdOn || ''],
+              updatedOn: [_userObj.updatedOn || ''],
+              isDeleted: [_userObj.isDeleted || false],
+              createdBy: [_userObj.createdBy || ''],
+              deletedBy: [_userObj.deletedBy || ''],
+              updatedBy: [this.authenticationService.currentUserValue._id || '']
+            });
+          }
+        }, {
+          key: "initForm",
+          value: function initForm() {
+            this.userIncomeDetailsForm = this.formBuilder.group({
+              _id: [''],
+              incomeSource: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+              monthlyIncomeAmount: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+              monthlyIncomeProofDocument: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+              monthlyIncomeStatus: [src_app_models__WEBPACK_IMPORTED_MODULE_6__["SessionStatus"].Pending, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+              userId: [this.userObj._id],
+              createdOn: [''],
+              updatedOn: [''],
+              isDeleted: [false],
+              createdBy: [this.authenticationService.currentUserValue._id || ''],
+              deletedBy: [''],
+              updatedBy: ['']
+            });
+            this.userExpenseDetailsForm = this.formBuilder.group({
+              _id: [''],
+              expenseDetails: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+              monthlyEMIAmount: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+              monthlyExpenseStartDateTimeCustomised: [''],
+              monthlyExpensePaymentDateTimeCustomised: [''],
+              monthlyExpenseStartDate: [''],
+              monthlyExpensePaymentDate: [''],
+              monthlyExpenseStatus: [src_app_models__WEBPACK_IMPORTED_MODULE_6__["SessionStatus"].Pending],
+              userId: [this.userObj._id],
+              createdOn: [''],
+              updatedOn: [''],
+              isDeleted: [false],
+              createdBy: [this.authenticationService.currentUserValue._id || ''],
+              deletedBy: [''],
+              updatedBy: ['']
+            });
+          }
+        }, {
+          key: "onfileProgressForMonthlyIncomeProofDocument",
+          value: function onfileProgressForMonthlyIncomeProofDocument(fileInput) {
+            this.fileData4MonthlyIncomeProofDocument = fileInput.target.files[0];
+            this.previewForMonthlyIncomeProofDocument();
+          }
+        }, {
+          key: "previewForMonthlyIncomeProofDocument",
+          value: function previewForMonthlyIncomeProofDocument() {
+            var _this25 = this;
+
+            // Show preview 
+            var mimeType = this.fileData4MonthlyIncomeProofDocument.type;
+
+            if (mimeType.match(/image\/*/) == null) {
+              return;
+            }
+
+            var reader = new FileReader();
+            reader.readAsDataURL(this.fileData4MonthlyIncomeProofDocument);
+
+            reader.onload = function (_event) {
+              _this25.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(reader.result);
+
+              _this25.fileData4MonthlyIncomeProofDocumentPendingForUpload = true;
+            };
+          }
+        }, {
+          key: "onUploadForMonthlyIncomeProofDocument",
+          value: function onUploadForMonthlyIncomeProofDocument() {
+            var _this26 = this;
+
+            if (!this.fileData4MonthlyIncomeProofDocument) {
+              this.alertService.error("Select file first.");
+              return;
+            }
+
+            var mimeType = this.fileData4MonthlyIncomeProofDocument.type;
+
+            if (mimeType.match(/image\/*/) == null) {
+              this.alertService.error("Select Image file only.");
+              return;
+            }
+
+            var formData = new FormData();
+            formData.append('files', this.fileData4MonthlyIncomeProofDocument);
+            formData.append('documentId', this.userObj._id + '__income_proof');
+            this.fileUploadProgress = '0%';
+            this.http.post(uploadAPI, formData, {
+              reportProgress: true,
+              observe: 'events'
+            }).subscribe(function (events) {
+              if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].UploadProgress) {
+                _this26.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
+                console.log(_this26.fileUploadProgress);
+              } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].Response) {
+                _this26.fileUploadProgress = '';
+                console.log(events.body); //alert('SUCCESS !!');
+
+                _this26.fileData4Profile = null;
+
+                _this26.alertService.success('Uploaded Successfully !!', true);
+
+                var _uploadedUrl = events.body["data"].path;
+
+                if (lodash__WEBPACK_IMPORTED_MODULE_12__["startsWith"](_uploadedUrl, '/')) {
+                  _uploadedUrl = _uploadedUrl.substr(1);
+                }
+
+                _this26.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+
+                _this26.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(_this26.uploadedFilePath);
+
+                _this26.fileData4MonthlyIncomeProofDocumentPendingForUpload = false;
+              }
+            });
+          }
+        }, {
+          key: "closeDialog",
+          value: function closeDialog() {
+            this.dialogRef.close({
+              event: 'close',
+              data: true
+            });
+          }
+        }, {
+          key: "mediaPreviewModel",
+          value: function mediaPreviewModel(mediaSrc, mimeType) {
+            console.log('411', this.authenticationService.currentUserValue);
+            var dialogRef = this.dialog.open(_media_preview_media_preview_component__WEBPACK_IMPORTED_MODULE_15__["MediaPreviewComponent"], {
+              maxWidth: '100vw',
+              maxHeight: '100vh',
+              height: '70%',
+              width: '70%',
+              hasBackdrop: true,
+              data: {
+                mediaSrc: mediaSrc,
+                mimeType: mimeType
+              }
+            });
+            dialogRef.afterClosed().subscribe(function (result) {
+              console.log("426 :: msc :: Dialog result: ".concat(JSON.stringify(result)));
+            });
+          }
+        }, {
+          key: "updateUsersIncomeVerificationStatus",
+          value: function updateUsersIncomeVerificationStatus(_documentId, _status2update) {
+            var _this27 = this;
+
+            this.alertService.success("Please wait while we updating status of user");
+            this.userService.updateUsersIncomeVerificationStatus(_documentId, _status2update, this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+              if (data && data['success']) {
+                _this27._cdr.detach();
+
+                var usersObjArr = _this27.utilityService._.mapKeys(_this27.allIncomeDetailsData, '_id');
+
+                usersObjArr[data["data"]["_id"]] = data["data"];
+                _this27.allIncomeDetailsData = _this27.utilityService._.values(usersObjArr);
+
+                _this27._cdr.detectChanges();
+
+                _this27.alertService.success(data['message']);
+
+                _this27.loading = false;
+              } else {
+                _this27.alertService.error(data['message']);
+
+                _this27.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = ""; //this.PaymentTransactionDetailsArray = [];
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this27.alertService.error(errorMsg2show);
+
+              _this27.loading = false;
+            });
+          }
+        }, {
+          key: "updateUsersExpenseVerificationStatus",
+          value: function updateUsersExpenseVerificationStatus(_documentId, _status2update) {
+            var _this28 = this;
+
+            this.alertService.success("Please wait while we updating status of user");
+            this.userService.updateUsersExpenseVerificationStatus(_documentId, _status2update, this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+              if (data && data['success']) {
+                _this28._cdr.detach();
+
+                var usersObjArr = _this28.utilityService._.mapKeys(_this28.allExpenseDetailsData, '_id');
+
+                usersObjArr[data["data"]["_id"]] = data["data"];
+                _this28.allExpenseDetailsData = _this28.utilityService._.values(usersObjArr);
+
+                _this28._cdr.detectChanges();
+
+                _this28.alertService.success(data['message']);
+
+                _this28.loading = false;
+              } else {
+                _this28.alertService.error(data['message']);
+
+                _this28.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = ""; //this.PaymentTransactionDetailsArray = [];
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this28.alertService.error(errorMsg2show);
+
+              _this28.loading = false;
+            });
+          }
         }]);
 
         return IncomeProofComponent;
       }();
 
       IncomeProofComponent.ctorParameters = function () {
-        return [];
+        return [{
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpClient"]
+        }, {
+          type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"]
+        }, {
+          type: src_app_services__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"]
+        }, {
+          type: src_app_services__WEBPACK_IMPORTED_MODULE_7__["UserService"]
+        }, {
+          type: src_app_services__WEBPACK_IMPORTED_MODULE_7__["AlertService"]
+        }, {
+          type: src_app_services_app_router_service__WEBPACK_IMPORTED_MODULE_8__["AppRouterService"]
+        }, {
+          type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_13__["UtilityService"]
+        }, {
+          type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialogRef"],
+          decorators: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Optional"]
+          }]
+        }, {
+          type: undefined,
+          decorators: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Optional"]
+          }, {
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Inject"],
+            args: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MAT_DIALOG_DATA"]]
+          }]
+        }, {
+          type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialog"]
+        }, {
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectorRef"]
+        }];
       };
 
       IncomeProofComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-income-proof',
         template: _raw_loader_income_proof_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_income_proof_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [])], IncomeProofComponent);
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpClient"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["UserService"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["AlertService"], src_app_services_app_router_service__WEBPACK_IMPORTED_MODULE_8__["AppRouterService"], src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_13__["UtilityService"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialogRef"], Object, _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialog"], _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectorRef"]])], IncomeProofComponent);
       /***/
     },
 
@@ -5443,29 +4955,214 @@
       var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/core */
       "fXoL");
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @angular/router */
+      "tyNb");
+      /* harmony import */
+
+
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! rxjs/operators */
+      "kU1M");
+      /* harmony import */
+
+
+      var src_app_models_role__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! src/app/models/role */
+      "z56L");
+      /* harmony import */
+
+
+      var src_app_services__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! src/app/services */
+      "o0su");
+      /* harmony import */
+
+
+      var src_app_services_payment_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! src/app/services/payment.service */
+      "s5zK");
+      /* harmony import */
+
+
+      var src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! src/app/services/utility.service */
+      "A1CT");
 
       var MonthlySubscriptionComponent = /*#__PURE__*/function () {
-        function MonthlySubscriptionComponent() {
+        function MonthlySubscriptionComponent(utilityService, authenticationService, router, payment, alertService) {
           _classCallCheck2(this, MonthlySubscriptionComponent);
+
+          this.utilityService = utilityService;
+          this.authenticationService = authenticationService;
+          this.router = router;
+          this.payment = payment;
+          this.alertService = alertService;
+          this.userInitiatedForPayment = false;
+          this.usersCurrentPlanSubscription = {};
+          this.userMemberShipExpireOn = null;
+          this.usersNextPlanSubscription = {};
+
+          if (!this.authenticationService.currentUserValue || !this.authenticationService.currentUserValue._id) {
+            this.router.navigate(['/logout']);
+            return;
+          }
+
+          this.initUsersCurrentAppPlanDetails();
         }
 
         _createClass2(MonthlySubscriptionComponent, [{
+          key: "initUsersCurrentAppPlanDetails",
+          value: function initUsersCurrentAppPlanDetails() {
+            this.userMemberShipExpireOn = this.authenticationService.currentUserValue.userMemberShipExpireOn || this.utilityService.returnEpochDateWithAddingMonths(this.authenticationService.currentUserValue.userVerifiedOn, this.utilityService.AppPlanTypes['trial_plan'].expiryInMonth);
+            var appPlanId = this.authenticationService.currentUserValue.appPlanId || 'trial_plan';
+            this.usersCurrentPlanSubscription = {
+              appPlanId: this.utilityService.AppPlanTypes[appPlanId]._id,
+              planAmount: this.utilityService.AppPlanTypes[appPlanId].amount,
+              planName: this.utilityService.AppPlanTypes[appPlanId].name,
+              userMemberShipExpireOn: this.userMemberShipExpireOn
+            };
+          }
+        }, {
           key: "ngOnInit",
           value: function ngOnInit() {}
+        }, {
+          key: "returnPaidPlanAmountUserRoleWise",
+          value: function returnPaidPlanAmountUserRoleWise() {
+            var planAmount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+            if (!planAmount) {
+              switch (this.authenticationService.currentUserValue.role) {
+                case src_app_models_role__WEBPACK_IMPORTED_MODULE_6__["Role"].Borrower:
+                  planAmount = this.utilityService.AppPlanTypes["paid_plan4borrower"].amount;
+                  break;
+
+                case src_app_models_role__WEBPACK_IMPORTED_MODULE_6__["Role"].Lender:
+                  planAmount = this.utilityService.AppPlanTypes["paid_plan4lender"].amount;
+                  break;
+
+                default:
+                  planAmount = this.utilityService.AppPlanTypes["trial_plan"].amount;
+                  break;
+              }
+            }
+
+            return planAmount;
+          }
+        }, {
+          key: "userInitiatedForPlanPurchaseOrRenewal",
+          value: function userInitiatedForPlanPurchaseOrRenewal() {
+            var appPlanId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+            if (!this.userInitiatedForPayment) {
+              this.userMemberShipExpireOn = this.authenticationService.currentUserValue.userMemberShipExpireOn || this.utilityService.returnEpochDateWithAddingMonths(this.authenticationService.currentUserValue.userVerifiedOn, this.utilityService.AppPlanTypes['trial_plan'].expiryInMonth);
+
+              if (!appPlanId) {
+                switch (this.authenticationService.currentUserValue.role) {
+                  case src_app_models_role__WEBPACK_IMPORTED_MODULE_6__["Role"].Borrower:
+                    appPlanId = this.utilityService.AppPlanTypes["paid_plan4borrower"]._id;
+                    break;
+
+                  case src_app_models_role__WEBPACK_IMPORTED_MODULE_6__["Role"].Lender:
+                    appPlanId = this.utilityService.AppPlanTypes["paid_plan4lender"]._id;
+                    break;
+
+                  default:
+                    appPlanId = this.utilityService.AppPlanTypes["trial_plan"]._id;
+                    break;
+                }
+              }
+
+              this.userMemberShipExpireOn = this.utilityService.returnEpochDateWithAddingMonths(this.userMemberShipExpireOn, this.utilityService.AppPlanTypes[appPlanId].expiryInMonth);
+              this.usersNextPlanSubscription = {
+                appPlanId: this.utilityService.AppPlanTypes[appPlanId]._id,
+                planAmount: this.utilityService.AppPlanTypes[appPlanId].amount,
+                planName: this.utilityService.AppPlanTypes[appPlanId].name,
+                userMemberShipExpireOn: this.userMemberShipExpireOn
+              };
+
+              var _header4Payment = 'Payment for Plan Upgrade - ' + this.utilityService.AppPlanTypes[appPlanId].name;
+
+              var _paymentUniqId = this.authenticationService.currentUserValue._id + '__' + this.utilityService._.now();
+
+              this.initiateForPaymentForLender(this.usersNextPlanSubscription.appPlanId, this.usersNextPlanSubscription.userMemberShipExpireOn, this.authenticationService.currentUserValue._id, this.usersNextPlanSubscription.planAmount, _header4Payment, src_app_models_role__WEBPACK_IMPORTED_MODULE_6__["TransactionActionType"].plan_purchase, null, null, _paymentUniqId);
+            } else {//already inititated for payment
+            }
+          }
+        }, {
+          key: "resetStatusOfPayment",
+          value: function resetStatusOfPayment() {
+            this.userInitiatedForPayment = false;
+          }
+        }, {
+          key: "initiateForPaymentForLender",
+          value: function initiateForPaymentForLender(_appPlanId, _planExpiry, _endUserId, _amount4Payment, _header4Payment, _transactiActionType, _currency, _selectedPaymentMethod, _paymentUniqId) {
+            var _this29 = this;
+
+            //#region handle LoanObj payments
+            this.userInitiatedForPayment = true;
+            this.payment.getCurrentPaymentApproved().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (details) {});
+            var PaymentObj = {
+              transactiActionType: _transactiActionType,
+              header4Payment: _header4Payment || null,
+              amount4Payment: _amount4Payment || null,
+              selectedPaymentMethod: _selectedPaymentMethod || null,
+              currency: _currency || null,
+              loanId: null,
+              loanApplyId: null,
+              appPlanId: _appPlanId || null,
+              planExpiry: _planExpiry || null,
+              paymentUniqId: _paymentUniqId || null,
+              userId: _endUserId || null
+            };
+            this.payment.initPaymentConfigStripe(PaymentObj);
+            this.payment.getCurrentPaymentApproved().subscribe(function (_obj) {
+              if (_obj && _obj.success) {
+                var userObj = _this29.authenticationService.currentUserValue;
+                userObj.userMemberShipExpireOn = _this29.usersNextPlanSubscription.userMemberShipExpireOn;
+                userObj.appPlanId = _this29.usersNextPlanSubscription.appPlanId;
+
+                _this29.authenticationService.sendCurrentUserObj(userObj);
+
+                _this29.initUsersCurrentAppPlanDetails();
+
+                _this29.alertService.success("congratulations! 1 month's subscription is purchased successfullly.");
+              } else {
+                _this29.alertService.error(_obj.message || "Payment failed");
+              }
+
+              _this29.resetStatusOfPayment();
+
+              _this29.payment.sendCurrentPaymentFailed(true);
+            }); //#endregion handle LoanObj payments
+          }
         }]);
 
         return MonthlySubscriptionComponent;
       }();
 
       MonthlySubscriptionComponent.ctorParameters = function () {
-        return [];
+        return [{
+          type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_9__["UtilityService"]
+        }, {
+          type: src_app_services__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"]
+        }, {
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]
+        }, {
+          type: src_app_services_payment_service__WEBPACK_IMPORTED_MODULE_8__["PaymentService"]
+        }, {
+          type: src_app_services__WEBPACK_IMPORTED_MODULE_7__["AlertService"]
+        }];
       };
 
       MonthlySubscriptionComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-monthly-subscription',
         template: _raw_loader_monthly_subscription_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_monthly_subscription_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [])], MonthlySubscriptionComponent);
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_9__["UtilityService"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], src_app_services_payment_service__WEBPACK_IMPORTED_MODULE_8__["PaymentService"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["AlertService"]])], MonthlySubscriptionComponent);
       /***/
     },
 
@@ -5665,17 +5362,27 @@
       /* harmony import */
 
 
-      var _stripe_component_stripe_component_component__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(
-      /*! ./stripe-component/stripe-component.component */
-      "2o0M");
+      var _pipe_date_pretty_pipe__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(
+      /*! ./pipe/date-pretty.pipe */
+      "peRX");
+      /* harmony import */
+
+
+      var _media_preview_media_preview_component__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(
+      /*! ./media-preview/media-preview.component */
+      "tZK8");
+      /*import { StripeComponentComponent } from './stripe-component/stripe-component.component';*/
+
 
       var SharedModule = function SharedModule() {
         _classCallCheck2(this, SharedModule);
       };
 
       SharedModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [_profile_profile_component__WEBPACK_IMPORTED_MODULE_5__["ProfileComponent"], _wallet_wallet_component__WEBPACK_IMPORTED_MODULE_6__["WalletComponent"], _messages_messages_component__WEBPACK_IMPORTED_MODULE_7__["MessagesComponent"], _meeting_vc_meeting_vc_component__WEBPACK_IMPORTED_MODULE_8__["MeetingVcComponent"], _payment_payment_component__WEBPACK_IMPORTED_MODULE_9__["PaymentComponent"], _sort_array_by_updated_on_pipe__WEBPACK_IMPORTED_MODULE_10__["SortArrayByUpdatedOnPipe"], _filter_object_array_pipe__WEBPACK_IMPORTED_MODULE_11__["FilterObjectArrayPipe"], _public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_12__["PublicProfileComponent"], _pipe_data_array_filter_pipe__WEBPACK_IMPORTED_MODULE_15__["DataArrayFilterPipe"], _lender_lender_component__WEBPACK_IMPORTED_MODULE_17__["ModalPublicProfile"], _user_ratings_user_ratings_component__WEBPACK_IMPORTED_MODULE_18__["UserRatingsComponent"], _session_view_session_view_component__WEBPACK_IMPORTED_MODULE_19__["SessionViewComponent"], _pipe_my_sessions_pipe__WEBPACK_IMPORTED_MODULE_20__["MySessionsPipe"], _profile_portfolio_profile_portfolio_component__WEBPACK_IMPORTED_MODULE_22__["ProfilePortfolioComponent"], _update_password_update_password_component__WEBPACK_IMPORTED_MODULE_23__["UpdatePasswordComponent"], _bank_details_bank_details_component__WEBPACK_IMPORTED_MODULE_24__["BankDetailsComponent"], _monthly_subscription_monthly_subscription_component__WEBPACK_IMPORTED_MODULE_25__["MonthlySubscriptionComponent"], _income_proof_income_proof_component__WEBPACK_IMPORTED_MODULE_26__["IncomeProofComponent"], _payment_success_payment_success_component__WEBPACK_IMPORTED_MODULE_27__["PaymentSuccessComponent"], _payment_cancel_payment_cancel_component__WEBPACK_IMPORTED_MODULE_28__["PaymentCancelComponent"], _stripe_component_stripe_component_component__WEBPACK_IMPORTED_MODULE_29__["StripeComponentComponent"]],
-        exports: [_profile_profile_component__WEBPACK_IMPORTED_MODULE_5__["ProfileComponent"], _wallet_wallet_component__WEBPACK_IMPORTED_MODULE_6__["WalletComponent"], _messages_messages_component__WEBPACK_IMPORTED_MODULE_7__["MessagesComponent"], _payment_payment_component__WEBPACK_IMPORTED_MODULE_9__["PaymentComponent"], _session_view_session_view_component__WEBPACK_IMPORTED_MODULE_19__["SessionViewComponent"], _pipe_my_sessions_pipe__WEBPACK_IMPORTED_MODULE_20__["MySessionsPipe"]],
+        declarations: [_profile_profile_component__WEBPACK_IMPORTED_MODULE_5__["ProfileComponent"], _wallet_wallet_component__WEBPACK_IMPORTED_MODULE_6__["WalletComponent"], _messages_messages_component__WEBPACK_IMPORTED_MODULE_7__["MessagesComponent"], _meeting_vc_meeting_vc_component__WEBPACK_IMPORTED_MODULE_8__["MeetingVcComponent"], _payment_payment_component__WEBPACK_IMPORTED_MODULE_9__["PaymentComponent"], _sort_array_by_updated_on_pipe__WEBPACK_IMPORTED_MODULE_10__["SortArrayByUpdatedOnPipe"], _filter_object_array_pipe__WEBPACK_IMPORTED_MODULE_11__["FilterObjectArrayPipe"], _public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_12__["PublicProfileComponent"], _pipe_data_array_filter_pipe__WEBPACK_IMPORTED_MODULE_15__["DataArrayFilterPipe"], _lender_lender_component__WEBPACK_IMPORTED_MODULE_17__["ModalPublicProfile"], _user_ratings_user_ratings_component__WEBPACK_IMPORTED_MODULE_18__["UserRatingsComponent"], _session_view_session_view_component__WEBPACK_IMPORTED_MODULE_19__["SessionViewComponent"], _pipe_my_sessions_pipe__WEBPACK_IMPORTED_MODULE_20__["MySessionsPipe"], _profile_portfolio_profile_portfolio_component__WEBPACK_IMPORTED_MODULE_22__["ProfilePortfolioComponent"], _update_password_update_password_component__WEBPACK_IMPORTED_MODULE_23__["UpdatePasswordComponent"], _bank_details_bank_details_component__WEBPACK_IMPORTED_MODULE_24__["BankDetailsComponent"], _monthly_subscription_monthly_subscription_component__WEBPACK_IMPORTED_MODULE_25__["MonthlySubscriptionComponent"], _income_proof_income_proof_component__WEBPACK_IMPORTED_MODULE_26__["IncomeProofComponent"], _payment_success_payment_success_component__WEBPACK_IMPORTED_MODULE_27__["PaymentSuccessComponent"], _payment_cancel_payment_cancel_component__WEBPACK_IMPORTED_MODULE_28__["PaymentCancelComponent"],
+        /*StripeComponentComponent,*/
+        _pipe_date_pretty_pipe__WEBPACK_IMPORTED_MODULE_29__["DatePrettyPipe"], _pipe_date_pretty_pipe__WEBPACK_IMPORTED_MODULE_29__["DatePrettyPipe"], _media_preview_media_preview_component__WEBPACK_IMPORTED_MODULE_30__["MediaPreviewComponent"]],
+        exports: [_profile_profile_component__WEBPACK_IMPORTED_MODULE_5__["ProfileComponent"], _wallet_wallet_component__WEBPACK_IMPORTED_MODULE_6__["WalletComponent"], _messages_messages_component__WEBPACK_IMPORTED_MODULE_7__["MessagesComponent"], _payment_payment_component__WEBPACK_IMPORTED_MODULE_9__["PaymentComponent"], _session_view_session_view_component__WEBPACK_IMPORTED_MODULE_19__["SessionViewComponent"], _pipe_my_sessions_pipe__WEBPACK_IMPORTED_MODULE_20__["MySessionsPipe"], _pipe_date_pretty_pipe__WEBPACK_IMPORTED_MODULE_29__["DatePrettyPipe"]],
         imports: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_16__["MatDialogModule"], _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], ngx_paypal__WEBPACK_IMPORTED_MODULE_4__["NgxPayPalModule"], _angular_router__WEBPACK_IMPORTED_MODULE_13__["RouterModule"], ngx_dropzone__WEBPACK_IMPORTED_MODULE_14__["NgxDropzoneModule"], ngx_pipes__WEBPACK_IMPORTED_MODULE_21__["NgPipesModule"]],
         entryComponents: [_lender_lender_component__WEBPACK_IMPORTED_MODULE_17__["ModalPublicProfile"]]
       })], SharedModule);
@@ -5774,9 +5481,11 @@
           this.appPlanId = null;
           this.planExpiry = null;
           this.paymentUniqId = null;
-          this.transactiActionType = null; //this.payPalConfig = this.payment.initConfig(null, null, null);
+          this.transactiActionType = null;
+          this.alreadyClickedOnPayment = false; //this.payPalConfig = this.payment.initConfig(null, null, null);
 
           this.selectedPaymentMethod = src_app_models__WEBPACK_IMPORTED_MODULE_5__["PaymentMethod"].Online;
+          window.paymentStatusSentOnServer = false;
         }
 
         _createClass2(PaymentComponent, [{
@@ -5794,29 +5503,35 @@
         }, {
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this37 = this;
+            var _this30 = this;
 
             this.payment.getCurrentPayPalConfig().subscribe(function (payPalConfig) {
-              _this37.payPalConfig = payPalConfig;
+              _this30.payPalConfig = payPalConfig;
             });
             this.payment.getCurrentPaymentObj().subscribe(function (_currentPaymentObj) {
-              _this37.currentPaymentObj = _currentPaymentObj;
-              _this37.header4Payment = _this37.currentPaymentObj.header4Payment || 'Insurance Payment';
-              _this37.amount4Payment = _this37.currentPaymentObj.amount4Payment || 100;
-              _this37.selectedPaymentMethod = _this37.currentPaymentObj.selectedPaymentMethod || src_app_models__WEBPACK_IMPORTED_MODULE_5__["PaymentMethod"].Online;
-              _this37.currency = _this37.currentPaymentObj.currency || 'dkk';
-              _this37.loanId = _this37.currentPaymentObj.loanId || null;
-              _this37.loanApplyId = _this37.currentPaymentObj.loanApplyId || null;
-              _this37.appPlanId = _this37.currentPaymentObj.appPlanId || null;
-              _this37.planExpiry = _this37.currentPaymentObj.planExpiry || null;
-              _this37.paymentUniqId = _this37.currentPaymentObj.paymentUniqId || null;
-              _this37.transactiActionType = _currentPaymentObj.transactiActionType;
+              _this30.alreadyClickedOnPayment = false;
+              _this30.currentPaymentObj = _currentPaymentObj;
+              _this30.header4Payment = _this30.currentPaymentObj.header4Payment || 'Insurance Payment';
+              _this30.amount4Payment = _this30.currentPaymentObj.amount4Payment || 100;
+              _this30.selectedPaymentMethod = _this30.currentPaymentObj.selectedPaymentMethod || src_app_models__WEBPACK_IMPORTED_MODULE_5__["PaymentMethod"].Online;
+              _this30.currency = _this30.currentPaymentObj.currency || 'dkk';
+              _this30.loanId = _this30.currentPaymentObj.loanId || null;
+              _this30.loanApplyId = _this30.currentPaymentObj.loanApplyId || null;
+              _this30.appPlanId = _this30.currentPaymentObj.appPlanId || null;
+              _this30.planExpiry = _this30.currentPaymentObj.planExpiry || null;
+              _this30.paymentUniqId = _this30.currentPaymentObj.paymentUniqId || null;
+              _this30.transactiActionType = _currentPaymentObj.transactiActionType;
+            });
+            this.payment.getCurrentPaymentFailed().subscribe(function (transactionStatus) {
+              _this30.handler.close();
             });
             this.loadStripe();
           }
         }, {
           key: "pay",
-          value: function pay(amount) {
+          value: function pay(amount, event) {
+            this.alreadyClickedOnPayment = true;
+            this.payment.startTimerInit();
             var paymentObj = {
               isLiveMode: !src_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].isPaymentTestMode,
               amount: amount,
@@ -5834,7 +5549,7 @@
               transactiActionType: this.transactiActionType,
               apiUrl: this.payment.returnUrChargePaymentForStripel()
             };
-            var handler = window.StripeCheckout.configure({
+            this.handler = window.StripeCheckout.configure({
               key: src_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].STRIP_PAYMENT_Publishable_key,
               locale: 'auto',
               token: function token(_token) {
@@ -5842,6 +5557,7 @@
                 // Get the token ID to your server-side code for use.
                 console.log(_token);
                 paymentObj.tokenId = _token.id;
+                window.paymentStatusSentOnServer = true;
                 fetch(paymentObj.apiUrl, {
                   method: 'POST',
                   headers: {
@@ -5851,7 +5567,7 @@
                 }).then(function (response) {
                   return response.json();
                 }).then(function (data) {
-                  paymentData = data;
+                  //paymentData = data;
                   console.log(data);
                 });
                 /*
@@ -5860,15 +5576,40 @@
                         });
                         */
                 //alert('Token Created!!');
+              },
+              opened: function opened() {
+                console.log("Form opened");
+              },
+              closed: function closed() {
+                if (!window.paymentStatusSentOnServer) {
+                  paymentObj.tokenId = null;
+                  console.log("Form Terminated");
+                  fetch(paymentObj.apiUrl, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(paymentObj)
+                  }).then(function (response) {
+                    return response.json();
+                  }).then(function (data) {
+                    //paymentData = data;
+                    console.log(data);
+                  });
+                } else {
+                  console.log("Form closed");
+                }
               }
             });
-            handler.open({
+            this.handler.open({
               name: 'Avitii Lender System',
               description: this.header4Payment,
               amount: amount * 100,
               currency: this.currency,
-              email: this.authenticationService.currentUserValue.emailAddress
+              email: this.authenticationService.currentUserValue.emailAddress,
+              allowRememberMe: false
             });
+            event.preventDefault();
           }
         }, {
           key: "receivedTokenFromStripe",
@@ -5876,7 +5617,7 @@
         }, {
           key: "loadStripe",
           value: function loadStripe() {
-            var _this38 = this;
+            var _this31 = this;
 
             if (!window.document.getElementById('stripe-script')) {
               var s = window.document.createElement("script");
@@ -5885,7 +5626,7 @@
               s.src = "https://checkout.stripe.com/checkout.js";
 
               s.onload = function () {
-                _this38.handler = window.StripeCheckout.configure({
+                _this31.handler = window.StripeCheckout.configure({
                   key: src_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].STRIP_PAYMENT_Publishable_key,
                   locale: 'auto',
                   token: function token(_token2) {
@@ -6005,7 +5746,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<!--\r\n    --old ref--\r\n<div class=\"custom-control custom-radio custom-control-inline\">\r\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"wallet\">\r\n    <label class=\"custom-control-label\" for=\"customRadio\">Use Wallet</label>\r\n</div>\r\n<div class=\"custom-control custom-radio custom-control-inline\">\r\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio2\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"online\">\r\n    <label class=\"custom-control-label\" for=\"customRadio2\">Pay Now</label>\r\n</div>\r\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod!=PaymentMethod.Online }\">\r\n    <ngx-paypal [config]=\"payPalConfig\"></ngx-paypal>\r\n</div>\r\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod==PaymentMethod.Online }\">\r\n    <button class=\"btn btn-success btn-sm text-white\" [disabled]=\"addFundsService.totalFund4currentUser < payment.amount\" (click)=\"paymentThroughWallet()\">\r\n    Pay Now</button>\r\n</div>\r\n-->\r\n\r\n<!--<link rel=\"stylesheet\" href=\"style.css\">-->\r\n<!----stripe card payment with redirection ref---->\r\n<!--\r\n<section>\r\n    <div class=\"product\">\r\n        <div class=\"description\">\r\n            <h3>{{header4Payment}}</h3>\r\n            <h5>{{amount4Payment}}</h5>\r\n        </div>\r\n    </div>\r\n    <button type=\"button\" id=\"checkout-button1\" (click)=\"initForPayment()\">Pay</button>\r\n</section>\r\n kr {{amount4Payment}}\r\n-->\r\n\r\n<button (click)=\"pay(amount4Payment)\" class=\"btn btn-success\">Pay Now</button>\r\n<div class=\"mt-1 small text-black-50\">\r\n    Please Do not navigate or refresh page, while payment is in progress\r\n</div>\r\n\r\n<!--\r\n<div *ngIf=\"invalidError\" style=\"color:red\">\r\n    {{ invalidError.message }}\r\n</div>\r\n\r\n<stripe-card #stripeCard (catch)=\"onStripeError($event)\" [(complete)]=\"cardDetailsFilledOut\" [(invalid)]=\"invalidError\"\r\n    (cardMounted)=\"cardCaptureReady = 1\" (paymentMethodChange)=\"setPaymentMethod($event)\"\r\n    (tokenChange)=\"setStripeToken($event)\" (sourceChange)=\"setStripeSource($event)\"></stripe-card>\r\n\r\n<button type=\"button\" (click)=\"stripeCard.createPaymentMethod(extraData)\">createPaymentMethod</button>\r\n<button type=\"button\" (click)=\"stripeCard.createSource(extraData)\">createSource</button>\r\n<button type=\"button\" (click)=\"stripeCard.createToken(extraData)\">createToken</button>\r\n-->";
+      __webpack_exports__["default"] = "<!--\r\n    --old ref--\r\n<div class=\"custom-control custom-radio custom-control-inline\">\r\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"wallet\">\r\n    <label class=\"custom-control-label\" for=\"customRadio\">Use Wallet</label>\r\n</div>\r\n<div class=\"custom-control custom-radio custom-control-inline\">\r\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio2\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"online\">\r\n    <label class=\"custom-control-label\" for=\"customRadio2\">Pay Now</label>\r\n</div>\r\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod!=PaymentMethod.Online }\">\r\n    <ngx-paypal [config]=\"payPalConfig\"></ngx-paypal>\r\n</div>\r\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod==PaymentMethod.Online }\">\r\n    <button class=\"btn btn-success btn-sm text-white\" [disabled]=\"addFundsService.totalFund4currentUser < payment.amount\" (click)=\"paymentThroughWallet()\">\r\n    Pay Now</button>\r\n</div>\r\n-->\r\n\r\n<!--<link rel=\"stylesheet\" href=\"style.css\">-->\r\n<!----stripe card payment with redirection ref---->\r\n<!--\r\n<section>\r\n    <div class=\"product\">\r\n        <div class=\"description\">\r\n            <h3>{{header4Payment}}</h3>\r\n            <h5>{{amount4Payment}}</h5>\r\n        </div>\r\n    </div>\r\n    <button type=\"button\" id=\"checkout-button1\" (click)=\"initForPayment()\">Pay</button>\r\n</section>\r\n kr {{amount4Payment}}\r\n-->\r\n<div class=\"payment-backdrop text-center\">\r\n    <br>\r\n    <button [disabled]=\"alreadyClickedOnPayment\" *ngIf=\"!payment.paymentNotCompletedInTime\" (click)=\"pay(amount4Payment, $event)\" class=\"btn btn-success mt-5 btn-lg\">Pay Now  kr {{amount4Payment}}</button>\r\n    <div class=\"mt-4 text-white\">\r\n        Please Do not navigate or refresh page, while payment is in progress\r\n    </div>\r\n    <div class=\"mt-md-n2 mt-3\" *ngIf=\"payment.hours || payment.minutes || payment.seconds\">\r\n        <h4 class=\"text-white\"><div class=\"spinner-border text-success\" role=\"status\">\r\n            <span class=\"sr-only\">Loading...</span>\r\n          </div> Session expires in  <i class=\"icon-timer\"></i>&nbsp;{{payment.hours}}:{{payment.minutes}}:{{payment.seconds}}</h4>\r\n    </div>\r\n    <div class=\"mt-3 \" *ngIf=\"!payment.paymentNotCompletedInTime && payment.paymentNotCompletedInTimeErrorMessageShow\">\r\n        <h4 class=\"text-white\">Please complete payment within time limit</h4>\r\n    </div>\r\n    <div class=\" mt-3\" *ngIf=\"payment.paymentNotCompletedInTime\">\r\n        <h4 class=\"text-white\">Time limit for payment is exceeded, please try again later. In case any deduction, will be revert back in 7 working day's, if not please contact support.</h4>\r\n    </div>\r\n</div>\r\n\r\n<!--\r\n<div *ngIf=\"invalidError\" style=\"color:red\">\r\n    {{ invalidError.message }}\r\n</div>\r\n\r\n<stripe-card #stripeCard (catch)=\"onStripeError($event)\" [(complete)]=\"cardDetailsFilledOut\" [(invalid)]=\"invalidError\"\r\n    (cardMounted)=\"cardCaptureReady = 1\" (paymentMethodChange)=\"setPaymentMethod($event)\"\r\n    (tokenChange)=\"setStripeToken($event)\" (sourceChange)=\"setStripeSource($event)\"></stripe-card>\r\n\r\n<button type=\"button\" (click)=\"stripeCard.createPaymentMethod(extraData)\">createPaymentMethod</button>\r\n<button type=\"button\" (click)=\"stripeCard.createSource(extraData)\">createSource</button>\r\n<button type=\"button\" (click)=\"stripeCard.createToken(extraData)\">createToken</button>\r\n-->";
       /***/
     },
 
@@ -6025,7 +5766,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJwYXltZW50LmNvbXBvbmVudC5jc3MifQ== */";
+      __webpack_exports__["default"] = ".payment-backdrop{\r\n    position: fixed;\r\n    background: rgba(0, 0, 0, 0.95);\r\n    color: #eee;\r\n    width: 100%;\r\n    height: 100%;\r\n    left: 0;\r\n    top: 0;\r\n    z-index: 999;\r\n   }\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInBheW1lbnQuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGVBQWU7SUFDZiwrQkFBK0I7SUFDL0IsV0FBVztJQUNYLFdBQVc7SUFDWCxZQUFZO0lBQ1osT0FBTztJQUNQLE1BQU07SUFDTixZQUFZO0dBQ2IiLCJmaWxlIjoicGF5bWVudC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLnBheW1lbnQtYmFja2Ryb3B7XHJcbiAgICBwb3NpdGlvbjogZml4ZWQ7XHJcbiAgICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuOTUpO1xyXG4gICAgY29sb3I6ICNlZWU7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGhlaWdodDogMTAwJTtcclxuICAgIGxlZnQ6IDA7XHJcbiAgICB0b3A6IDA7XHJcbiAgICB6LWluZGV4OiA5OTk7XHJcbiAgIH0iXX0= */";
       /***/
     },
 
@@ -6122,7 +5863,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "\r\n/* .wrap_send_input{\r\n  background: #eeeeee;\r\n} */\r\n  /* #sidepanel p {\r\n    color: #ffffff;\r\n} */\r\n  .contact-profile .name{\r\n  width: 72%;\r\ndisplay: inline-block;\r\nline-height: initial;\r\ntext-overflow: ellipsis;\r\n}\r\n  #frame {\r\n    height: 100vh;\r\n    min-height: 300px;\r\n    max-height: 720px;\r\n    /* background: #E6EAEA; */\r\n  }\r\n  #frame #sidepanel {\r\n    float: left;\r\n    min-width: 280px;\r\n    max-width: 340px;\r\n    width: 40%;\r\n    height: 100%;\r\n    /* background: #2c3e50; */\r\n    /* color: #f5f5f5; */\r\n    overflow: hidden;\r\n    position: relative;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel {\r\n      /* width: 58px;\r\n      min-width: 58px; */\r\n      width: 100%;\r\n      min-width: 58px;\r\n      max-width: 100%;\r\n    }\r\n    .message_frame{\r\n      position: fixed;\r\n      width: 100%;\r\n   \r\n      top: 53.016px;\r\n      left: 0;\r\n    height: calc(100% - 53.016px) !important;\r\n  }\r\n    \r\n\r\n  }\r\n  #frame #sidepanel #profile {\r\n    width: 90%;\r\n    margin: 10px 0;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile {\r\n      width: 100%;\r\n      margin: 0 auto;\r\n      padding: 5px 0 0 0;\r\n      background: #32465a;\r\n      display: none;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile.expanded .wrap {\r\n    height: 210px;\r\n    line-height: initial;\r\n  }\r\n  #frame #sidepanel #profile.expanded .wrap p {\r\n    margin-top: 20px;\r\n  }\r\n  #frame #sidepanel #profile.expanded .wrap i.expand-button {\r\n    transform: scaleY(-1);\r\n    filter: FlipH;\r\n    -ms-filter: \"FlipH\";\r\n  }\r\n  #frame #sidepanel #profile .wrap {\r\n    height: 60px;\r\n    line-height: 60px;\r\n    overflow: hidden;\r\n    transition: 0.3s height ease;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap {\r\n      height: 55px;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap img {\r\n    width: 50px;\r\n    border-radius: 50%;\r\n    padding: 3px;\r\n    border: 2px solid #e74c3c;\r\n    height: auto;\r\n    float: left;\r\n    cursor: pointer;\r\n    transition: 0.3s border ease;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap img {\r\n      width: 40px;\r\n      margin-left: 8px;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap img.online {\r\n    border: 2px solid #2ecc71;\r\n  }\r\n  #frame #sidepanel #profile .wrap img.away {\r\n    border: 2px solid #f1c40f;\r\n  }\r\n  #frame #sidepanel #profile .wrap img.busy {\r\n    border: 2px solid #e74c3c;\r\n  }\r\n  #frame #sidepanel #profile .wrap img.offline {\r\n    border: 2px solid #95a5a6;\r\n  }\r\n  #frame #sidepanel #profile .wrap p {\r\n    float: left;\r\n    margin-left: 15px;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap p {\r\n      /* display: none; */\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap i.expand-button {\r\n    float: right;\r\n    margin-top: 23px;\r\n    font-size: 0.8em;\r\n    cursor: pointer;\r\n    color: #435f7a;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap i.expand-button {\r\n      display: none;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options {\r\n    position: absolute;\r\n    opacity: 0;\r\n    visibility: hidden;\r\n    width: 150px;\r\n    margin: 70px 0 0 0;\r\n    border-radius: 6px;\r\n    z-index: 99;\r\n    line-height: initial;\r\n    background: #435f7a;\r\n    transition: 0.3s all ease;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap #status-options {\r\n      width: 58px;\r\n      margin-top: 57px;\r\n      \r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options.active {\r\n    opacity: 1;\r\n    visibility: visible;\r\n    margin: 75px 0 0 0;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap #status-options.active {\r\n      margin-top: 62px;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options:before {\r\n    content: '';\r\n    position: absolute;\r\n    width: 0;\r\n    height: 0;\r\n    border-left: 6px solid transparent;\r\n    border-right: 6px solid transparent;\r\n    border-bottom: 8px solid #435f7a;\r\n    margin: -8px 0 0 24px;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap #status-options:before {\r\n      margin-left: 23px;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul {\r\n    overflow: hidden;\r\n    border-radius: 6px;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li {\r\n    padding: 15px 0 30px 18px;\r\n    display: block;\r\n    cursor: pointer;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap #status-options ul li {\r\n      padding: 15px 0 35px 22px;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li:hover {\r\n    background: #496886;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li span.status-circle {\r\n    position: absolute;\r\n    width: 10px;\r\n    height: 10px;\r\n    border-radius: 50%;\r\n    margin: 5px 0 0 0;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap #status-options ul li span.status-circle {\r\n      width: 14px;\r\n      height: 14px;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {\r\n    content: '';\r\n    position: absolute;\r\n    width: 14px;\r\n    height: 14px;\r\n    margin: -3px 0 0 -3px;\r\n    background: transparent;\r\n    border-radius: 50%;\r\n    z-index: 0;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {\r\n      height: 18px;\r\n      width: 18px;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li p {\r\n    padding-left: 12px;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap #status-options ul li p {\r\n      display: none;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li#status-online span.status-circle {\r\n    background: #2ecc71;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li#status-online.active span.status-circle:before {\r\n    border: 1px solid #2ecc71;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li#status-away span.status-circle {\r\n    background: #f1c40f;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li#status-away.active span.status-circle:before {\r\n    border: 1px solid #f1c40f;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li#status-busy span.status-circle {\r\n    background: #e74c3c;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li#status-busy.active span.status-circle:before {\r\n    border: 1px solid #e74c3c;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li#status-offline span.status-circle {\r\n    background: #95a5a6;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li#status-offline.active span.status-circle:before {\r\n    border: 1px solid #95a5a6;\r\n  }\r\n  #frame #sidepanel #profile .wrap #expanded {\r\n    padding: 100px 0 0 0;\r\n    display: block;\r\n    line-height: initial !important;\r\n  }\r\n  #frame #sidepanel #profile .wrap #expanded label {\r\n    float: left;\r\n    clear: both;\r\n    margin: 0 8px 5px 0;\r\n    padding: 5px 0;\r\n  }\r\n  #frame #sidepanel #profile .wrap #expanded input {\r\n    border: none;\r\n    margin-bottom: 6px;\r\n    background: #32465a;\r\n    border-radius: 3px;\r\n    color: #f5f5f5;\r\n    padding: 7px;\r\n    width: calc(100% - 43px);\r\n  }\r\n  #frame #sidepanel #profile .wrap #expanded input:focus {\r\n    outline: none;\r\n    background: #435f7a;\r\n  }\r\n  #frame #sidepanel #search {\r\n    border-top: 1px solid #32465a;\r\n    border-bottom: 1px solid #32465a;\r\n    font-weight: 300;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #search {\r\n      /* display: none; */\r\n    }\r\n  }\r\n  #frame #sidepanel #search label {\r\n    position: absolute;\r\n    margin: 10px 0 0 20px;\r\n  }\r\n  #frame #sidepanel #search input {\r\n    font-family: \"proxima-nova\",  \"Source Sans Pro\", sans-serif;\r\n    padding: 10px 0 10px 46px;\r\n    width: calc(100% - 0px);\r\n    border: none;\r\n    background: #32465a;\r\n    color: #f5f5f5;\r\n  }\r\n  #frame #sidepanel #search input:focus {\r\n    outline: none;\r\n    background: #435f7a;\r\n  }\r\n  #frame #sidepanel #search input::-webkit-input-placeholder {\r\n    color: #f5f5f5;\r\n  }\r\n  #frame #sidepanel #search input::-moz-placeholder {\r\n    color: #f5f5f5;\r\n  }\r\n  #frame #sidepanel #search input:-ms-input-placeholder {\r\n    color: #f5f5f5;\r\n  }\r\n  #frame #sidepanel #search input:-moz-placeholder {\r\n    color: #f5f5f5;\r\n  }\r\n  #frame #sidepanel #contacts {\r\n    /* height: calc(100% - 177px); */\r\n    height: 92%;\r\n    overflow-y: auto;\r\n    overflow-x: hidden;\r\n    border-right: 1px solid #c9e6ff;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #contacts {\r\n      height: calc(100% - 45px);\r\n      overflow-y: scroll;\r\n      overflow-x: hidden;\r\n    }\r\n    #frame #sidepanel #contacts::-webkit-scrollbar {\r\n      display: none;\r\n    }\r\n  }\r\n  #frame #sidepanel #contacts.expanded {\r\n    height: calc(100% - 334px);\r\n  }\r\n  #frame #sidepanel #contacts::-webkit-scrollbar {\r\n    width: 8px;\r\n    background: #2c3e50;\r\n  }\r\n  #frame #sidepanel #contacts::-webkit-scrollbar-thumb {\r\n    background-color: #243140;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact {\r\n    position: relative;\r\n    padding: 10px 0 15px 0;\r\n    font-size: 0.9em;\r\n    cursor: pointer;\r\n    margin-right: 10px;\r\n    background: #f5f5f5;\r\n    margin-bottom: 10px;\r\n    border-radius: 15px;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #contacts ul li.contact {\r\n      /* padding: 6px 0 46px 8px; */\r\n      padding: 14px 12px;\r\n      border-bottom: 1px solid #494b61;\r\n    }\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact:hover {\r\n    background: #eeeeee;\r\n    border-radius: 15px;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact.active {\r\n    background: #c8e6c9;\r\n    border-right: 5px solid #66bb6a;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact.active span.contact-status {\r\n    border: 2px solid #32465a !important;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap {\r\n    width: 88%;\r\n    margin: 0 auto;\r\n    position: relative;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #contacts ul li.contact .wrap {\r\n      width: 100%;\r\n    }\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap span {\r\n    position: absolute;\r\n    left: 0;\r\n    margin: -2px 0 0 -2px;\r\n    width: 10px;\r\n    height: 10px;\r\n    border-radius: 50%;\r\n    border: 2px solid #2c3e50;\r\n    background: #95a5a6;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap span.online {\r\n    background: #2ecc71;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap span.away {\r\n    background: #f1c40f;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap span.busy {\r\n    background: #e74c3c;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap img {\r\n    width: 40px;\r\n    border-radius: 50%;\r\n    float: left;\r\n    margin-right: 10px;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #contacts ul li.contact .wrap img {\r\n      margin-right: 12px;\r\n    }\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap .meta {\r\n    padding: 2px 0 0 2px;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #contacts ul li.contact .wrap .meta {\r\n      /* display: none; */\r\n    }\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap .meta .name {\r\n    font-weight: 400;\r\n    font-size: 12px;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap .meta .preview {\r\n    margin: 5px 0 0 0;\r\n    padding: 0 0 1px;\r\n    font-weight: 400;\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    transition: 1s all ease;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap .meta .preview span {\r\n    position: initial;\r\n    border-radius: initial;\r\n    background: none;\r\n    border: none;\r\n    padding: 0 2px 0 0;\r\n    margin: 0 0 0 1px;\r\n    opacity: .5;\r\n  }\r\n  #frame #sidepanel #bottom-bar {\r\n    position: absolute;\r\n    width: 100%;\r\n    bottom: 0;\r\n  }\r\n  #frame #sidepanel #bottom-bar button {\r\n    float: left;\r\n    border: none;\r\n    width: 50%;\r\n    padding: 10px 0;\r\n    background: #32465a;\r\n    color: #f5f5f5;\r\n    cursor: pointer;\r\n    font-size: 0.85em;\r\n    font-family: \"proxima-nova\",  \"Source Sans Pro\", sans-serif;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #bottom-bar button {\r\n      float: none;\r\n      width: 100%;\r\n      padding: 15px 0;\r\n    }\r\n  }\r\n  #frame #sidepanel #bottom-bar button:focus {\r\n    outline: none;\r\n  }\r\n  #frame #sidepanel #bottom-bar button:nth-child(1) {\r\n    border-right: 1px solid #2c3e50;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #bottom-bar button:nth-child(1) {\r\n      border-right: none;\r\n      border-bottom: 1px solid #2c3e50;\r\n    }\r\n  }\r\n  #frame #sidepanel #bottom-bar button:hover {\r\n    background: #435f7a;\r\n  }\r\n  #frame #sidepanel #bottom-bar button i {\r\n    margin-right: 3px;\r\n    font-size: 1em;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #bottom-bar button i {\r\n      font-size: 1.3em;\r\n    }\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #bottom-bar button span {\r\n      /* display: none; */\r\n    }\r\n  }\r\n  #frame .content {\r\n    float: right;\r\n    width: 60%;\r\n    height: 100%;\r\n    overflow: hidden;\r\n    position: relative;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame .content {\r\n      width: calc(100% - 0px);\r\n      min-width: 300px !important;\r\n    }\r\n    .contact-profile img{\r\n      display: none;\r\n    }\r\n    .contact-profile i\r\n    {\r\n      width: 35px;\r\n      margin: 20px 0px 0 10px;\r\n      font-size: 20px;\r\n  \r\n    }\r\n    .contact-profile i.icon-arrow-left\r\n    {\r\n      display: block;\r\n    }\r\n   \r\n  }\r\n  @media screen and (min-width: 900px) {\r\n    #frame .content {\r\n      width: calc(100% - 340px);\r\n    }\r\n  }\r\n  #frame .content .contact-profile {\r\n    width: 100%;\r\n    height: 60px;\r\n    line-height: 60px;\r\n    background: #f5f5f5;\r\n  }\r\n  #frame .content .contact-profile img {\r\n    width: 40px;\r\n    border-radius: 50%;\r\n    float: left;\r\n    margin: 9px 12px 0 9px;\r\n  }\r\n  #frame .content .contact-profile p {\r\n    float: left;\r\n  }\r\n  #frame .content .contact-profile .social-media {\r\n    float: right;\r\n  }\r\n  #frame .content .contact-profile .social-media i {\r\n    margin-left: 14px;\r\n    cursor: pointer;\r\n  }\r\n  #frame .content .contact-profile .social-media i:nth-last-child(1) {\r\n    margin-right: 20px;\r\n  }\r\n  #frame .content .contact-profile .social-media i:hover {\r\n    color: #435f7a;\r\n  }\r\n  #frame .content .messages {\r\n    height: auto;\r\n    min-height: calc(100% - 115px);\r\n    max-height: calc(100% - 115px);\r\n    overflow-y: scroll;\r\n    overflow-x: hidden;\r\n    width: 100%;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame .content .messages {\r\n      max-height: calc(100% - 105px);\r\n    }\r\n  }\r\n  #frame .content .messages::-webkit-scrollbar {\r\n    width: 8px;\r\n    background: transparent;\r\n  }\r\n  #frame .content .messages::-webkit-scrollbar-thumb {\r\n    background-color: rgba(0, 0, 0, 0.3);\r\n  }\r\n  #frame .content .messages ul li {\r\n    display: inline-block;\r\n    clear: both;\r\n    float: left;\r\n    margin: 15px 15px 5px 15px;\r\n    width: calc(100% - 25px);\r\n    font-size: 0.9em;\r\n    font-weight: normal;\r\n  }\r\n  #frame .content .messages ul li:nth-last-child(1) {\r\n    margin-bottom: 20px;\r\n  }\r\n  #frame .content .messages ul li.sent img {\r\n    margin: 6px 8px 0 0;\r\n  }\r\n  #frame .content .messages ul li.sent p {\r\n    background: #435f7a;\r\n    color: #f5f5f5;\r\n  }\r\n  #frame .content .messages ul li.replies img {\r\n    float: right;\r\n    margin: 6px 0 0 8px;\r\n  }\r\n  #frame .content .messages ul li.replies p {\r\n    background: #f5f5f5;\r\n    float: right;\r\n  }\r\n  #frame .content .messages ul li img {\r\n    width: 22px;\r\n    border-radius: 50%;\r\n    float: left;\r\n  }\r\n  #frame .content .messages ul li p {\r\n    display: inline-block;\r\n    padding: 10px 15px;\r\n    border-radius: 20px;\r\n    max-width: 70%;\r\n    line-height: 130%;\r\n  }\r\n  @media screen and (min-width: 767.98) {\r\n    #frame .content .messages ul li p {\r\n      max-width: 300px;\r\n    }\r\n   \r\n  }\r\n  #frame .content .message-input {\r\n    position: absolute;\r\n    bottom: 0;\r\n    width: 100%;\r\n    z-index: 99;\r\n  }\r\n  #frame .content .message-input .wrap {\r\n    position: relative;\r\n  }\r\n  #frame .content .message-input .wrap input {\r\n   float: left;\r\n    border: none;\r\n    width: calc(100% - 90px);\r\n    padding: 14px 32px 14px 8px;\r\n    font-size: 0.8em;\r\n    color: #32465a;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame .content .message-input .wrap input {\r\n      padding: 15px 32px 16px 8px;\r\n    }\r\n  }\r\n  #frame .content .message-input .wrap input:focus {\r\n    outline: none;\r\n  }\r\n  #frame .content .message-input .wrap .attachment {\r\n    position: absolute;\r\n    right: 65px;\r\n    z-index: 4;\r\n    margin-top: 17px;\r\n    font-size: 1.1em;\r\n    color: #435f7a;\r\n    /* opacity: .5; */\r\n    cursor: pointer;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame .content .message-input .wrap .attachment {\r\n      margin-top: 17px;\r\n      right: 65px;\r\n    }\r\n  }\r\n  #frame .content .message-input .wrap .attachment:hover {\r\n    opacity: 1;\r\n  }\r\n  #frame .content .message-input .wrap button {\r\n    float: right;\r\n    border: none;\r\n    width: 50px;\r\n    padding: 12px 0;\r\n    cursor: pointer;\r\n    background: #32465a;\r\n    color: #f5f5f5;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame .content .message-input .wrap button {\r\n      padding: 16px 0;\r\n    }\r\n  }\r\n  #frame .content .message-input .wrap button:hover {\r\n    background: #435f7a;\r\n  }\r\n  #frame .content .message-input .wrap button:focus {\r\n    outline: none;\r\n  }\r\n  .avittiNone{\r\n    display: none !important;\r\n  }\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1lc3NhZ2VzLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUNBOztHQUVHO0VBQ0Q7O0dBRUM7RUFDSDtFQUNFLFVBQVU7QUFDWixxQkFBcUI7QUFDckIsb0JBQW9CO0FBQ3BCLHVCQUF1QjtBQUN2QjtFQUVFO0lBQ0UsYUFBYTtJQUNiLGlCQUFpQjtJQUNqQixpQkFBaUI7SUFDakIseUJBQXlCO0VBQzNCO0VBRUE7SUFDRSxXQUFXO0lBQ1gsZ0JBQWdCO0lBQ2hCLGdCQUFnQjtJQUNoQixVQUFVO0lBQ1YsWUFBWTtJQUNaLHlCQUF5QjtJQUN6QixvQkFBb0I7SUFDcEIsZ0JBQWdCO0lBQ2hCLGtCQUFrQjtFQUNwQjtFQUNBO0lBQ0U7TUFDRTt3QkFDa0I7TUFDbEIsV0FBVztNQUNYLGVBQWU7TUFDZixlQUFlO0lBQ2pCO0lBQ0E7TUFDRSxlQUFlO01BQ2YsV0FBVzs7TUFFWCxhQUFhO01BQ2IsT0FBTztJQUlULHdDQUF3QztFQUMxQzs7O0VBR0E7RUFDQTtJQUNFLFVBQVU7SUFDVixjQUFjO0VBQ2hCO0VBQ0E7SUFDRTtNQUNFLFdBQVc7TUFDWCxjQUFjO01BQ2Qsa0JBQWtCO01BQ2xCLG1CQUFtQjtNQUNuQixhQUFhO0lBQ2Y7RUFDRjtFQUNBO0lBQ0UsYUFBYTtJQUNiLG9CQUFvQjtFQUN0QjtFQUNBO0lBQ0UsZ0JBQWdCO0VBQ2xCO0VBQ0E7SUFJRSxxQkFBcUI7SUFDckIsYUFBYTtJQUNiLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UsWUFBWTtJQUNaLGlCQUFpQjtJQUNqQixnQkFBZ0I7SUFJaEIsNEJBQTRCO0VBQzlCO0VBQ0E7SUFDRTtNQUNFLFlBQVk7SUFDZDtFQUNGO0VBQ0E7SUFDRSxXQUFXO0lBQ1gsa0JBQWtCO0lBQ2xCLFlBQVk7SUFDWix5QkFBeUI7SUFDekIsWUFBWTtJQUNaLFdBQVc7SUFDWCxlQUFlO0lBSWYsNEJBQTRCO0VBQzlCO0VBQ0E7SUFDRTtNQUNFLFdBQVc7TUFDWCxnQkFBZ0I7SUFDbEI7RUFDRjtFQUNBO0lBQ0UseUJBQXlCO0VBQzNCO0VBQ0E7SUFDRSx5QkFBeUI7RUFDM0I7RUFDQTtJQUNFLHlCQUF5QjtFQUMzQjtFQUNBO0lBQ0UseUJBQXlCO0VBQzNCO0VBQ0E7SUFDRSxXQUFXO0lBQ1gsaUJBQWlCO0VBQ25CO0VBQ0E7SUFDRTtNQUNFLG1CQUFtQjtJQUNyQjtFQUNGO0VBQ0E7SUFDRSxZQUFZO0lBQ1osZ0JBQWdCO0lBQ2hCLGdCQUFnQjtJQUNoQixlQUFlO0lBQ2YsY0FBYztFQUNoQjtFQUNBO0lBQ0U7TUFDRSxhQUFhO0lBQ2Y7RUFDRjtFQUNBO0lBQ0Usa0JBQWtCO0lBQ2xCLFVBQVU7SUFDVixrQkFBa0I7SUFDbEIsWUFBWTtJQUNaLGtCQUFrQjtJQUNsQixrQkFBa0I7SUFDbEIsV0FBVztJQUNYLG9CQUFvQjtJQUNwQixtQkFBbUI7SUFJbkIseUJBQXlCO0VBQzNCO0VBQ0E7SUFDRTtNQUNFLFdBQVc7TUFDWCxnQkFBZ0I7O0lBRWxCO0VBQ0Y7RUFDQTtJQUNFLFVBQVU7SUFDVixtQkFBbUI7SUFDbkIsa0JBQWtCO0VBQ3BCO0VBQ0E7SUFDRTtNQUNFLGdCQUFnQjtJQUNsQjtFQUNGO0VBQ0E7SUFDRSxXQUFXO0lBQ1gsa0JBQWtCO0lBQ2xCLFFBQVE7SUFDUixTQUFTO0lBQ1Qsa0NBQWtDO0lBQ2xDLG1DQUFtQztJQUNuQyxnQ0FBZ0M7SUFDaEMscUJBQXFCO0VBQ3ZCO0VBQ0E7SUFDRTtNQUNFLGlCQUFpQjtJQUNuQjtFQUNGO0VBQ0E7SUFDRSxnQkFBZ0I7SUFDaEIsa0JBQWtCO0VBQ3BCO0VBQ0E7SUFDRSx5QkFBeUI7SUFDekIsY0FBYztJQUNkLGVBQWU7RUFDakI7RUFDQTtJQUNFO01BQ0UseUJBQXlCO0lBQzNCO0VBQ0Y7RUFDQTtJQUNFLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0Usa0JBQWtCO0lBQ2xCLFdBQVc7SUFDWCxZQUFZO0lBQ1osa0JBQWtCO0lBQ2xCLGlCQUFpQjtFQUNuQjtFQUNBO0lBQ0U7TUFDRSxXQUFXO01BQ1gsWUFBWTtJQUNkO0VBQ0Y7RUFDQTtJQUNFLFdBQVc7SUFDWCxrQkFBa0I7SUFDbEIsV0FBVztJQUNYLFlBQVk7SUFDWixxQkFBcUI7SUFDckIsdUJBQXVCO0lBQ3ZCLGtCQUFrQjtJQUNsQixVQUFVO0VBQ1o7RUFDQTtJQUNFO01BQ0UsWUFBWTtNQUNaLFdBQVc7SUFDYjtFQUNGO0VBQ0E7SUFDRSxrQkFBa0I7RUFDcEI7RUFDQTtJQUNFO01BQ0UsYUFBYTtJQUNmO0VBQ0Y7RUFDQTtJQUNFLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UseUJBQXlCO0VBQzNCO0VBQ0E7SUFDRSxtQkFBbUI7RUFDckI7RUFDQTtJQUNFLHlCQUF5QjtFQUMzQjtFQUNBO0lBQ0UsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSx5QkFBeUI7RUFDM0I7RUFDQTtJQUNFLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UseUJBQXlCO0VBQzNCO0VBQ0E7SUFDRSxvQkFBb0I7SUFDcEIsY0FBYztJQUNkLCtCQUErQjtFQUNqQztFQUNBO0lBQ0UsV0FBVztJQUNYLFdBQVc7SUFDWCxtQkFBbUI7SUFDbkIsY0FBYztFQUNoQjtFQUNBO0lBQ0UsWUFBWTtJQUNaLGtCQUFrQjtJQUNsQixtQkFBbUI7SUFDbkIsa0JBQWtCO0lBQ2xCLGNBQWM7SUFDZCxZQUFZO0lBQ1osd0JBQXdCO0VBQzFCO0VBQ0E7SUFDRSxhQUFhO0lBQ2IsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSw2QkFBNkI7SUFDN0IsZ0NBQWdDO0lBQ2hDLGdCQUFnQjtFQUNsQjtFQUNBO0lBQ0U7TUFDRSxtQkFBbUI7SUFDckI7RUFDRjtFQUNBO0lBQ0Usa0JBQWtCO0lBQ2xCLHFCQUFxQjtFQUN2QjtFQUNBO0lBQ0UsMkRBQTJEO0lBQzNELHlCQUF5QjtJQUN6Qix1QkFBdUI7SUFDdkIsWUFBWTtJQUNaLG1CQUFtQjtJQUNuQixjQUFjO0VBQ2hCO0VBQ0E7SUFDRSxhQUFhO0lBQ2IsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSxjQUFjO0VBQ2hCO0VBQ0E7SUFDRSxjQUFjO0VBQ2hCO0VBQ0E7SUFDRSxjQUFjO0VBQ2hCO0VBQ0E7SUFDRSxjQUFjO0VBQ2hCO0VBQ0E7SUFDRSxnQ0FBZ0M7SUFDaEMsV0FBVztJQUNYLGdCQUFnQjtJQUNoQixrQkFBa0I7SUFDbEIsK0JBQStCO0VBQ2pDO0VBQ0E7SUFDRTtNQUNFLHlCQUF5QjtNQUN6QixrQkFBa0I7TUFDbEIsa0JBQWtCO0lBQ3BCO0lBQ0E7TUFDRSxhQUFhO0lBQ2Y7RUFDRjtFQUNBO0lBQ0UsMEJBQTBCO0VBQzVCO0VBQ0E7SUFDRSxVQUFVO0lBQ1YsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSx5QkFBeUI7RUFDM0I7RUFDQTtJQUNFLGtCQUFrQjtJQUNsQixzQkFBc0I7SUFDdEIsZ0JBQWdCO0lBQ2hCLGVBQWU7SUFDZixrQkFBa0I7SUFDbEIsbUJBQW1CO0lBQ25CLG1CQUFtQjtJQUNuQixtQkFBbUI7RUFDckI7RUFDQTtJQUNFO01BQ0UsNkJBQTZCO01BQzdCLGtCQUFrQjtNQUNsQixnQ0FBZ0M7SUFDbEM7RUFDRjtFQUNBO0lBQ0UsbUJBQW1CO0lBQ25CLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UsbUJBQW1CO0lBQ25CLCtCQUErQjtFQUNqQztFQUNBO0lBQ0Usb0NBQW9DO0VBQ3RDO0VBQ0E7SUFDRSxVQUFVO0lBQ1YsY0FBYztJQUNkLGtCQUFrQjtFQUNwQjtFQUNBO0lBQ0U7TUFDRSxXQUFXO0lBQ2I7RUFDRjtFQUNBO0lBQ0Usa0JBQWtCO0lBQ2xCLE9BQU87SUFDUCxxQkFBcUI7SUFDckIsV0FBVztJQUNYLFlBQVk7SUFDWixrQkFBa0I7SUFDbEIseUJBQXlCO0lBQ3pCLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSxtQkFBbUI7RUFDckI7RUFDQTtJQUNFLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UsV0FBVztJQUNYLGtCQUFrQjtJQUNsQixXQUFXO0lBQ1gsa0JBQWtCO0VBQ3BCO0VBQ0E7SUFDRTtNQUNFLGtCQUFrQjtJQUNwQjtFQUNGO0VBQ0E7SUFDRSxvQkFBb0I7RUFDdEI7RUFDQTtJQUNFO01BQ0UsbUJBQW1CO0lBQ3JCO0VBQ0Y7RUFDQTtJQUNFLGdCQUFnQjtJQUNoQixlQUFlO0VBQ2pCO0VBQ0E7SUFDRSxpQkFBaUI7SUFDakIsZ0JBQWdCO0lBQ2hCLGdCQUFnQjtJQUNoQixtQkFBbUI7SUFDbkIsZ0JBQWdCO0lBQ2hCLHVCQUF1QjtJQUl2Qix1QkFBdUI7RUFDekI7RUFDQTtJQUNFLGlCQUFpQjtJQUNqQixzQkFBc0I7SUFDdEIsZ0JBQWdCO0lBQ2hCLFlBQVk7SUFDWixrQkFBa0I7SUFDbEIsaUJBQWlCO0lBQ2pCLFdBQVc7RUFDYjtFQUNBO0lBQ0Usa0JBQWtCO0lBQ2xCLFdBQVc7SUFDWCxTQUFTO0VBQ1g7RUFDQTtJQUNFLFdBQVc7SUFDWCxZQUFZO0lBQ1osVUFBVTtJQUNWLGVBQWU7SUFDZixtQkFBbUI7SUFDbkIsY0FBYztJQUNkLGVBQWU7SUFDZixpQkFBaUI7SUFDakIsMkRBQTJEO0VBQzdEO0VBQ0E7SUFDRTtNQUNFLFdBQVc7TUFDWCxXQUFXO01BQ1gsZUFBZTtJQUNqQjtFQUNGO0VBQ0E7SUFDRSxhQUFhO0VBQ2Y7RUFDQTtJQUNFLCtCQUErQjtFQUNqQztFQUNBO0lBQ0U7TUFDRSxrQkFBa0I7TUFDbEIsZ0NBQWdDO0lBQ2xDO0VBQ0Y7RUFDQTtJQUNFLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UsaUJBQWlCO0lBQ2pCLGNBQWM7RUFDaEI7RUFDQTtJQUNFO01BQ0UsZ0JBQWdCO0lBQ2xCO0VBQ0Y7RUFDQTtJQUNFO01BQ0UsbUJBQW1CO0lBQ3JCO0VBQ0Y7RUFDQTtJQUNFLFlBQVk7SUFDWixVQUFVO0lBQ1YsWUFBWTtJQUNaLGdCQUFnQjtJQUNoQixrQkFBa0I7RUFDcEI7RUFFQTtJQUNFO01BQ0UsdUJBQXVCO01BQ3ZCLDJCQUEyQjtJQUM3QjtJQUNBO01BQ0UsYUFBYTtJQUNmO0lBQ0E7O01BRUUsV0FBVztNQUNYLHVCQUF1QjtNQUN2QixlQUFlOztJQUVqQjtJQUNBOztNQUVFLGNBQWM7SUFDaEI7O0VBRUY7RUFDQTtJQUNFO01BQ0UseUJBQXlCO0lBQzNCO0VBQ0Y7RUFDQTtJQUNFLFdBQVc7SUFDWCxZQUFZO0lBQ1osaUJBQWlCO0lBQ2pCLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UsV0FBVztJQUNYLGtCQUFrQjtJQUNsQixXQUFXO0lBQ1gsc0JBQXNCO0VBQ3hCO0VBQ0E7SUFDRSxXQUFXO0VBQ2I7RUFDQTtJQUNFLFlBQVk7RUFDZDtFQUNBO0lBQ0UsaUJBQWlCO0lBQ2pCLGVBQWU7RUFDakI7RUFDQTtJQUNFLGtCQUFrQjtFQUNwQjtFQUNBO0lBQ0UsY0FBYztFQUNoQjtFQUNBO0lBQ0UsWUFBWTtJQUNaLDhCQUE4QjtJQUM5Qiw4QkFBOEI7SUFDOUIsa0JBQWtCO0lBQ2xCLGtCQUFrQjtJQUNsQixXQUFXO0VBQ2I7RUFDQTtJQUNFO01BQ0UsOEJBQThCO0lBQ2hDO0VBQ0Y7RUFDQTtJQUNFLFVBQVU7SUFDVix1QkFBdUI7RUFDekI7RUFDQTtJQUNFLG9DQUFvQztFQUN0QztFQUNBO0lBQ0UscUJBQXFCO0lBQ3JCLFdBQVc7SUFDWCxXQUFXO0lBQ1gsMEJBQTBCO0lBQzFCLHdCQUF3QjtJQUN4QixnQkFBZ0I7SUFDaEIsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSxtQkFBbUI7RUFDckI7RUFDQTtJQUNFLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UsbUJBQW1CO0lBQ25CLGNBQWM7RUFDaEI7RUFDQTtJQUNFLFlBQVk7SUFDWixtQkFBbUI7RUFDckI7RUFDQTtJQUNFLG1CQUFtQjtJQUNuQixZQUFZO0VBQ2Q7RUFDQTtJQUNFLFdBQVc7SUFDWCxrQkFBa0I7SUFDbEIsV0FBVztFQUNiO0VBQ0E7SUFDRSxxQkFBcUI7SUFDckIsa0JBQWtCO0lBQ2xCLG1CQUFtQjtJQUNuQixjQUFjO0lBQ2QsaUJBQWlCO0VBQ25CO0VBQ0E7SUFDRTtNQUNFLGdCQUFnQjtJQUNsQjs7RUFFRjtFQUNBO0lBQ0Usa0JBQWtCO0lBQ2xCLFNBQVM7SUFDVCxXQUFXO0lBQ1gsV0FBVztFQUNiO0VBQ0E7SUFDRSxrQkFBa0I7RUFDcEI7RUFDQTtHQUNDLFdBQVc7SUFDVixZQUFZO0lBQ1osd0JBQXdCO0lBQ3hCLDJCQUEyQjtJQUMzQixnQkFBZ0I7SUFDaEIsY0FBYztFQUNoQjtFQUNBO0lBQ0U7TUFDRSwyQkFBMkI7SUFDN0I7RUFDRjtFQUNBO0lBQ0UsYUFBYTtFQUNmO0VBQ0E7SUFDRSxrQkFBa0I7SUFDbEIsV0FBVztJQUNYLFVBQVU7SUFDVixnQkFBZ0I7SUFDaEIsZ0JBQWdCO0lBQ2hCLGNBQWM7SUFDZCxpQkFBaUI7SUFDakIsZUFBZTtFQUNqQjtFQUNBO0lBQ0U7TUFDRSxnQkFBZ0I7TUFDaEIsV0FBVztJQUNiO0VBQ0Y7RUFDQTtJQUNFLFVBQVU7RUFDWjtFQUNBO0lBQ0UsWUFBWTtJQUNaLFlBQVk7SUFDWixXQUFXO0lBQ1gsZUFBZTtJQUNmLGVBQWU7SUFDZixtQkFBbUI7SUFDbkIsY0FBYztFQUNoQjtFQUNBO0lBQ0U7TUFDRSxlQUFlO0lBQ2pCO0VBQ0Y7RUFDQTtJQUNFLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UsYUFBYTtFQUNmO0VBR0E7SUFDRSx3QkFBd0I7RUFDMUIiLCJmaWxlIjoibWVzc2FnZXMuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIlxyXG4vKiAud3JhcF9zZW5kX2lucHV0e1xyXG4gIGJhY2tncm91bmQ6ICNlZWVlZWU7XHJcbn0gKi9cclxuICAvKiAjc2lkZXBhbmVsIHAge1xyXG4gICAgY29sb3I6ICNmZmZmZmY7XHJcbn0gKi9cclxuLmNvbnRhY3QtcHJvZmlsZSAubmFtZXtcclxuICB3aWR0aDogNzIlO1xyXG5kaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbmxpbmUtaGVpZ2h0OiBpbml0aWFsO1xyXG50ZXh0LW92ZXJmbG93OiBlbGxpcHNpcztcclxufVxyXG5cclxuICAjZnJhbWUge1xyXG4gICAgaGVpZ2h0OiAxMDB2aDtcclxuICAgIG1pbi1oZWlnaHQ6IDMwMHB4O1xyXG4gICAgbWF4LWhlaWdodDogNzIwcHg7XHJcbiAgICAvKiBiYWNrZ3JvdW5kOiAjRTZFQUVBOyAqL1xyXG4gIH1cclxuIFxyXG4gICNmcmFtZSAjc2lkZXBhbmVsIHtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgbWluLXdpZHRoOiAyODBweDtcclxuICAgIG1heC13aWR0aDogMzQwcHg7XHJcbiAgICB3aWR0aDogNDAlO1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG4gICAgLyogYmFja2dyb3VuZDogIzJjM2U1MDsgKi9cclxuICAgIC8qIGNvbG9yOiAjZjVmNWY1OyAqL1xyXG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcclxuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAjc2lkZXBhbmVsIHtcclxuICAgICAgLyogd2lkdGg6IDU4cHg7XHJcbiAgICAgIG1pbi13aWR0aDogNThweDsgKi9cclxuICAgICAgd2lkdGg6IDEwMCU7XHJcbiAgICAgIG1pbi13aWR0aDogNThweDtcclxuICAgICAgbWF4LXdpZHRoOiAxMDAlO1xyXG4gICAgfVxyXG4gICAgLm1lc3NhZ2VfZnJhbWV7XHJcbiAgICAgIHBvc2l0aW9uOiBmaXhlZDtcclxuICAgICAgd2lkdGg6IDEwMCU7XHJcbiAgIFxyXG4gICAgICB0b3A6IDUzLjAxNnB4O1xyXG4gICAgICBsZWZ0OiAwO1xyXG4gIFxyXG4gICAgaGVpZ2h0OiAtbW96LWNhbGMoMTAwJSAtIDUzLjAxNnB4KTtcclxuICAgIGhlaWdodDogLXdlYmtpdC1jYWxjKDEwMCUgLSA1My4wMTZweCk7XHJcbiAgICBoZWlnaHQ6IGNhbGMoMTAwJSAtIDUzLjAxNnB4KSAhaW1wb3J0YW50O1xyXG4gIH1cclxuICAgIFxyXG5cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUge1xyXG4gICAgd2lkdGg6IDkwJTtcclxuICAgIG1hcmdpbjogMTBweCAwO1xyXG4gIH1cclxuICBAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA3NjcuOThweCkge1xyXG4gICAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUge1xyXG4gICAgICB3aWR0aDogMTAwJTtcclxuICAgICAgbWFyZ2luOiAwIGF1dG87XHJcbiAgICAgIHBhZGRpbmc6IDVweCAwIDAgMDtcclxuICAgICAgYmFja2dyb3VuZDogIzMyNDY1YTtcclxuICAgICAgZGlzcGxheTogbm9uZTtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUuZXhwYW5kZWQgLndyYXAge1xyXG4gICAgaGVpZ2h0OiAyMTBweDtcclxuICAgIGxpbmUtaGVpZ2h0OiBpbml0aWFsO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZS5leHBhbmRlZCAud3JhcCBwIHtcclxuICAgIG1hcmdpbi10b3A6IDIwcHg7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlLmV4cGFuZGVkIC53cmFwIGkuZXhwYW5kLWJ1dHRvbiB7XHJcbiAgICAtbW96LXRyYW5zZm9ybTogc2NhbGVZKC0xKTtcclxuICAgIC1vLXRyYW5zZm9ybTogc2NhbGVZKC0xKTtcclxuICAgIC13ZWJraXQtdHJhbnNmb3JtOiBzY2FsZVkoLTEpO1xyXG4gICAgdHJhbnNmb3JtOiBzY2FsZVkoLTEpO1xyXG4gICAgZmlsdGVyOiBGbGlwSDtcclxuICAgIC1tcy1maWx0ZXI6IFwiRmxpcEhcIjtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAge1xyXG4gICAgaGVpZ2h0OiA2MHB4O1xyXG4gICAgbGluZS1oZWlnaHQ6IDYwcHg7XHJcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gICAgLW1vei10cmFuc2l0aW9uOiAwLjNzIGhlaWdodCBlYXNlO1xyXG4gICAgLW8tdHJhbnNpdGlvbjogMC4zcyBoZWlnaHQgZWFzZTtcclxuICAgIC13ZWJraXQtdHJhbnNpdGlvbjogMC4zcyBoZWlnaHQgZWFzZTtcclxuICAgIHRyYW5zaXRpb246IDAuM3MgaGVpZ2h0IGVhc2U7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCB7XHJcbiAgICAgIGhlaWdodDogNTVweDtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAgaW1nIHtcclxuICAgIHdpZHRoOiA1MHB4O1xyXG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xyXG4gICAgcGFkZGluZzogM3B4O1xyXG4gICAgYm9yZGVyOiAycHggc29saWQgI2U3NGMzYztcclxuICAgIGhlaWdodDogYXV0bztcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgY3Vyc29yOiBwb2ludGVyO1xyXG4gICAgLW1vei10cmFuc2l0aW9uOiAwLjNzIGJvcmRlciBlYXNlO1xyXG4gICAgLW8tdHJhbnNpdGlvbjogMC4zcyBib3JkZXIgZWFzZTtcclxuICAgIC13ZWJraXQtdHJhbnNpdGlvbjogMC4zcyBib3JkZXIgZWFzZTtcclxuICAgIHRyYW5zaXRpb246IDAuM3MgYm9yZGVyIGVhc2U7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCBpbWcge1xyXG4gICAgICB3aWR0aDogNDBweDtcclxuICAgICAgbWFyZ2luLWxlZnQ6IDhweDtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAgaW1nLm9ubGluZSB7XHJcbiAgICBib3JkZXI6IDJweCBzb2xpZCAjMmVjYzcxO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCBpbWcuYXdheSB7XHJcbiAgICBib3JkZXI6IDJweCBzb2xpZCAjZjFjNDBmO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCBpbWcuYnVzeSB7XHJcbiAgICBib3JkZXI6IDJweCBzb2xpZCAjZTc0YzNjO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCBpbWcub2ZmbGluZSB7XHJcbiAgICBib3JkZXI6IDJweCBzb2xpZCAjOTVhNWE2O1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCBwIHtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgbWFyZ2luLWxlZnQ6IDE1cHg7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCBwIHtcclxuICAgICAgLyogZGlzcGxheTogbm9uZTsgKi9cclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAgaS5leHBhbmQtYnV0dG9uIHtcclxuICAgIGZsb2F0OiByaWdodDtcclxuICAgIG1hcmdpbi10b3A6IDIzcHg7XHJcbiAgICBmb250LXNpemU6IDAuOGVtO1xyXG4gICAgY3Vyc29yOiBwb2ludGVyO1xyXG4gICAgY29sb3I6ICM0MzVmN2E7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCBpLmV4cGFuZC1idXR0b24ge1xyXG4gICAgICBkaXNwbGF5OiBub25lO1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjc3RhdHVzLW9wdGlvbnMge1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgb3BhY2l0eTogMDtcclxuICAgIHZpc2liaWxpdHk6IGhpZGRlbjtcclxuICAgIHdpZHRoOiAxNTBweDtcclxuICAgIG1hcmdpbjogNzBweCAwIDAgMDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDZweDtcclxuICAgIHotaW5kZXg6IDk5O1xyXG4gICAgbGluZS1oZWlnaHQ6IGluaXRpYWw7XHJcbiAgICBiYWNrZ3JvdW5kOiAjNDM1ZjdhO1xyXG4gICAgLW1vei10cmFuc2l0aW9uOiAwLjNzIGFsbCBlYXNlO1xyXG4gICAgLW8tdHJhbnNpdGlvbjogMC4zcyBhbGwgZWFzZTtcclxuICAgIC13ZWJraXQtdHJhbnNpdGlvbjogMC4zcyBhbGwgZWFzZTtcclxuICAgIHRyYW5zaXRpb246IDAuM3MgYWxsIGVhc2U7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjc3RhdHVzLW9wdGlvbnMge1xyXG4gICAgICB3aWR0aDogNThweDtcclxuICAgICAgbWFyZ2luLXRvcDogNTdweDtcclxuICAgICAgXHJcbiAgICB9XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucy5hY3RpdmUge1xyXG4gICAgb3BhY2l0eTogMTtcclxuICAgIHZpc2liaWxpdHk6IHZpc2libGU7XHJcbiAgICBtYXJnaW46IDc1cHggMCAwIDA7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjc3RhdHVzLW9wdGlvbnMuYWN0aXZlIHtcclxuICAgICAgbWFyZ2luLXRvcDogNjJweDtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAgI3N0YXR1cy1vcHRpb25zOmJlZm9yZSB7XHJcbiAgICBjb250ZW50OiAnJztcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIHdpZHRoOiAwO1xyXG4gICAgaGVpZ2h0OiAwO1xyXG4gICAgYm9yZGVyLWxlZnQ6IDZweCBzb2xpZCB0cmFuc3BhcmVudDtcclxuICAgIGJvcmRlci1yaWdodDogNnB4IHNvbGlkIHRyYW5zcGFyZW50O1xyXG4gICAgYm9yZGVyLWJvdHRvbTogOHB4IHNvbGlkICM0MzVmN2E7XHJcbiAgICBtYXJnaW46IC04cHggMCAwIDI0cHg7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjc3RhdHVzLW9wdGlvbnM6YmVmb3JlIHtcclxuICAgICAgbWFyZ2luLWxlZnQ6IDIzcHg7XHJcbiAgICB9XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB1bCB7XHJcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gICAgYm9yZGVyLXJhZGl1czogNnB4O1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjc3RhdHVzLW9wdGlvbnMgdWwgbGkge1xyXG4gICAgcGFkZGluZzogMTVweCAwIDMwcHggMThweDtcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgY3Vyc29yOiBwb2ludGVyO1xyXG4gIH1cclxuICBAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA3NjcuOThweCkge1xyXG4gICAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAgI3N0YXR1cy1vcHRpb25zIHVsIGxpIHtcclxuICAgICAgcGFkZGluZzogMTVweCAwIDM1cHggMjJweDtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAgI3N0YXR1cy1vcHRpb25zIHVsIGxpOmhvdmVyIHtcclxuICAgIGJhY2tncm91bmQ6ICM0OTY4ODY7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB1bCBsaSBzcGFuLnN0YXR1cy1jaXJjbGUge1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgd2lkdGg6IDEwcHg7XHJcbiAgICBoZWlnaHQ6IDEwcHg7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbiAgICBtYXJnaW46IDVweCAwIDAgMDtcclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB1bCBsaSBzcGFuLnN0YXR1cy1jaXJjbGUge1xyXG4gICAgICB3aWR0aDogMTRweDtcclxuICAgICAgaGVpZ2h0OiAxNHB4O1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjc3RhdHVzLW9wdGlvbnMgdWwgbGkgc3Bhbi5zdGF0dXMtY2lyY2xlOmJlZm9yZSB7XHJcbiAgICBjb250ZW50OiAnJztcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIHdpZHRoOiAxNHB4O1xyXG4gICAgaGVpZ2h0OiAxNHB4O1xyXG4gICAgbWFyZ2luOiAtM3B4IDAgMCAtM3B4O1xyXG4gICAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbiAgICB6LWluZGV4OiAwO1xyXG4gIH1cclxuICBAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA3NjcuOThweCkge1xyXG4gICAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAgI3N0YXR1cy1vcHRpb25zIHVsIGxpIHNwYW4uc3RhdHVzLWNpcmNsZTpiZWZvcmUge1xyXG4gICAgICBoZWlnaHQ6IDE4cHg7XHJcbiAgICAgIHdpZHRoOiAxOHB4O1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjc3RhdHVzLW9wdGlvbnMgdWwgbGkgcCB7XHJcbiAgICBwYWRkaW5nLWxlZnQ6IDEycHg7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjc3RhdHVzLW9wdGlvbnMgdWwgbGkgcCB7XHJcbiAgICAgIGRpc3BsYXk6IG5vbmU7XHJcbiAgICB9XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB1bCBsaSNzdGF0dXMtb25saW5lIHNwYW4uc3RhdHVzLWNpcmNsZSB7XHJcbiAgICBiYWNrZ3JvdW5kOiAjMmVjYzcxO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjc3RhdHVzLW9wdGlvbnMgdWwgbGkjc3RhdHVzLW9ubGluZS5hY3RpdmUgc3Bhbi5zdGF0dXMtY2lyY2xlOmJlZm9yZSB7XHJcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjMmVjYzcxO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjc3RhdHVzLW9wdGlvbnMgdWwgbGkjc3RhdHVzLWF3YXkgc3Bhbi5zdGF0dXMtY2lyY2xlIHtcclxuICAgIGJhY2tncm91bmQ6ICNmMWM0MGY7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB1bCBsaSNzdGF0dXMtYXdheS5hY3RpdmUgc3Bhbi5zdGF0dXMtY2lyY2xlOmJlZm9yZSB7XHJcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjZjFjNDBmO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjc3RhdHVzLW9wdGlvbnMgdWwgbGkjc3RhdHVzLWJ1c3kgc3Bhbi5zdGF0dXMtY2lyY2xlIHtcclxuICAgIGJhY2tncm91bmQ6ICNlNzRjM2M7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB1bCBsaSNzdGF0dXMtYnVzeS5hY3RpdmUgc3Bhbi5zdGF0dXMtY2lyY2xlOmJlZm9yZSB7XHJcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjZTc0YzNjO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjc3RhdHVzLW9wdGlvbnMgdWwgbGkjc3RhdHVzLW9mZmxpbmUgc3Bhbi5zdGF0dXMtY2lyY2xlIHtcclxuICAgIGJhY2tncm91bmQ6ICM5NWE1YTY7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB1bCBsaSNzdGF0dXMtb2ZmbGluZS5hY3RpdmUgc3Bhbi5zdGF0dXMtY2lyY2xlOmJlZm9yZSB7XHJcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjOTVhNWE2O1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjZXhwYW5kZWQge1xyXG4gICAgcGFkZGluZzogMTAwcHggMCAwIDA7XHJcbiAgICBkaXNwbGF5OiBibG9jaztcclxuICAgIGxpbmUtaGVpZ2h0OiBpbml0aWFsICFpbXBvcnRhbnQ7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNleHBhbmRlZCBsYWJlbCB7XHJcbiAgICBmbG9hdDogbGVmdDtcclxuICAgIGNsZWFyOiBib3RoO1xyXG4gICAgbWFyZ2luOiAwIDhweCA1cHggMDtcclxuICAgIHBhZGRpbmc6IDVweCAwO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjZXhwYW5kZWQgaW5wdXQge1xyXG4gICAgYm9yZGVyOiBub25lO1xyXG4gICAgbWFyZ2luLWJvdHRvbTogNnB4O1xyXG4gICAgYmFja2dyb3VuZDogIzMyNDY1YTtcclxuICAgIGJvcmRlci1yYWRpdXM6IDNweDtcclxuICAgIGNvbG9yOiAjZjVmNWY1O1xyXG4gICAgcGFkZGluZzogN3B4O1xyXG4gICAgd2lkdGg6IGNhbGMoMTAwJSAtIDQzcHgpO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjZXhwYW5kZWQgaW5wdXQ6Zm9jdXMge1xyXG4gICAgb3V0bGluZTogbm9uZTtcclxuICAgIGJhY2tncm91bmQ6ICM0MzVmN2E7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNzZWFyY2gge1xyXG4gICAgYm9yZGVyLXRvcDogMXB4IHNvbGlkICMzMjQ2NWE7XHJcbiAgICBib3JkZXItYm90dG9tOiAxcHggc29saWQgIzMyNDY1YTtcclxuICAgIGZvbnQtd2VpZ2h0OiAzMDA7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjc2VhcmNoIHtcclxuICAgICAgLyogZGlzcGxheTogbm9uZTsgKi9cclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3NlYXJjaCBsYWJlbCB7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICBtYXJnaW46IDEwcHggMCAwIDIwcHg7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNzZWFyY2ggaW5wdXQge1xyXG4gICAgZm9udC1mYW1pbHk6IFwicHJveGltYS1ub3ZhXCIsICBcIlNvdXJjZSBTYW5zIFByb1wiLCBzYW5zLXNlcmlmO1xyXG4gICAgcGFkZGluZzogMTBweCAwIDEwcHggNDZweDtcclxuICAgIHdpZHRoOiBjYWxjKDEwMCUgLSAwcHgpO1xyXG4gICAgYm9yZGVyOiBub25lO1xyXG4gICAgYmFja2dyb3VuZDogIzMyNDY1YTtcclxuICAgIGNvbG9yOiAjZjVmNWY1O1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjc2VhcmNoIGlucHV0OmZvY3VzIHtcclxuICAgIG91dGxpbmU6IG5vbmU7XHJcbiAgICBiYWNrZ3JvdW5kOiAjNDM1ZjdhO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjc2VhcmNoIGlucHV0Ojotd2Via2l0LWlucHV0LXBsYWNlaG9sZGVyIHtcclxuICAgIGNvbG9yOiAjZjVmNWY1O1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjc2VhcmNoIGlucHV0OjotbW96LXBsYWNlaG9sZGVyIHtcclxuICAgIGNvbG9yOiAjZjVmNWY1O1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjc2VhcmNoIGlucHV0Oi1tcy1pbnB1dC1wbGFjZWhvbGRlciB7XHJcbiAgICBjb2xvcjogI2Y1ZjVmNTtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3NlYXJjaCBpbnB1dDotbW96LXBsYWNlaG9sZGVyIHtcclxuICAgIGNvbG9yOiAjZjVmNWY1O1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHMge1xyXG4gICAgLyogaGVpZ2h0OiBjYWxjKDEwMCUgLSAxNzdweCk7ICovXHJcbiAgICBoZWlnaHQ6IDkyJTtcclxuICAgIG92ZXJmbG93LXk6IGF1dG87XHJcbiAgICBvdmVyZmxvdy14OiBoaWRkZW47XHJcbiAgICBib3JkZXItcmlnaHQ6IDFweCBzb2xpZCAjYzllNmZmO1xyXG4gIH1cclxuICBAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA3NjcuOThweCkge1xyXG4gICAgI2ZyYW1lICNzaWRlcGFuZWwgI2NvbnRhY3RzIHtcclxuICAgICAgaGVpZ2h0OiBjYWxjKDEwMCUgLSA0NXB4KTtcclxuICAgICAgb3ZlcmZsb3cteTogc2Nyb2xsO1xyXG4gICAgICBvdmVyZmxvdy14OiBoaWRkZW47XHJcbiAgICB9XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHM6Oi13ZWJraXQtc2Nyb2xsYmFyIHtcclxuICAgICAgZGlzcGxheTogbm9uZTtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI2NvbnRhY3RzLmV4cGFuZGVkIHtcclxuICAgIGhlaWdodDogY2FsYygxMDAlIC0gMzM0cHgpO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHM6Oi13ZWJraXQtc2Nyb2xsYmFyIHtcclxuICAgIHdpZHRoOiA4cHg7XHJcbiAgICBiYWNrZ3JvdW5kOiAjMmMzZTUwO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHM6Oi13ZWJraXQtc2Nyb2xsYmFyLXRodW1iIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6ICMyNDMxNDA7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNjb250YWN0cyB1bCBsaS5jb250YWN0IHtcclxuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICAgIHBhZGRpbmc6IDEwcHggMCAxNXB4IDA7XHJcbiAgICBmb250LXNpemU6IDAuOWVtO1xyXG4gICAgY3Vyc29yOiBwb2ludGVyO1xyXG4gICAgbWFyZ2luLXJpZ2h0OiAxMHB4O1xyXG4gICAgYmFja2dyb3VuZDogI2Y1ZjVmNTtcclxuICAgIG1hcmdpbi1ib3R0b206IDEwcHg7XHJcbiAgICBib3JkZXItcmFkaXVzOiAxNXB4O1xyXG4gIH1cclxuICBAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA3NjcuOThweCkge1xyXG4gICAgI2ZyYW1lICNzaWRlcGFuZWwgI2NvbnRhY3RzIHVsIGxpLmNvbnRhY3Qge1xyXG4gICAgICAvKiBwYWRkaW5nOiA2cHggMCA0NnB4IDhweDsgKi9cclxuICAgICAgcGFkZGluZzogMTRweCAxMnB4O1xyXG4gICAgICBib3JkZXItYm90dG9tOiAxcHggc29saWQgIzQ5NGI2MTtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI2NvbnRhY3RzIHVsIGxpLmNvbnRhY3Q6aG92ZXIge1xyXG4gICAgYmFja2dyb3VuZDogI2VlZWVlZTtcclxuICAgIGJvcmRlci1yYWRpdXM6IDE1cHg7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNjb250YWN0cyB1bCBsaS5jb250YWN0LmFjdGl2ZSB7XHJcbiAgICBiYWNrZ3JvdW5kOiAjYzhlNmM5O1xyXG4gICAgYm9yZGVyLXJpZ2h0OiA1cHggc29saWQgIzY2YmI2YTtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI2NvbnRhY3RzIHVsIGxpLmNvbnRhY3QuYWN0aXZlIHNwYW4uY29udGFjdC1zdGF0dXMge1xyXG4gICAgYm9yZGVyOiAycHggc29saWQgIzMyNDY1YSAhaW1wb3J0YW50O1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHMgdWwgbGkuY29udGFjdCAud3JhcCB7XHJcbiAgICB3aWR0aDogODglO1xyXG4gICAgbWFyZ2luOiAwIGF1dG87XHJcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHMgdWwgbGkuY29udGFjdCAud3JhcCB7XHJcbiAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHMgdWwgbGkuY29udGFjdCAud3JhcCBzcGFuIHtcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIGxlZnQ6IDA7XHJcbiAgICBtYXJnaW46IC0ycHggMCAwIC0ycHg7XHJcbiAgICB3aWR0aDogMTBweDtcclxuICAgIGhlaWdodDogMTBweDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcclxuICAgIGJvcmRlcjogMnB4IHNvbGlkICMyYzNlNTA7XHJcbiAgICBiYWNrZ3JvdW5kOiAjOTVhNWE2O1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHMgdWwgbGkuY29udGFjdCAud3JhcCBzcGFuLm9ubGluZSB7XHJcbiAgICBiYWNrZ3JvdW5kOiAjMmVjYzcxO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHMgdWwgbGkuY29udGFjdCAud3JhcCBzcGFuLmF3YXkge1xyXG4gICAgYmFja2dyb3VuZDogI2YxYzQwZjtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI2NvbnRhY3RzIHVsIGxpLmNvbnRhY3QgLndyYXAgc3Bhbi5idXN5IHtcclxuICAgIGJhY2tncm91bmQ6ICNlNzRjM2M7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNjb250YWN0cyB1bCBsaS5jb250YWN0IC53cmFwIGltZyB7XHJcbiAgICB3aWR0aDogNDBweDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgbWFyZ2luLXJpZ2h0OiAxMHB4O1xyXG4gIH1cclxuICBAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA3NjcuOThweCkge1xyXG4gICAgI2ZyYW1lICNzaWRlcGFuZWwgI2NvbnRhY3RzIHVsIGxpLmNvbnRhY3QgLndyYXAgaW1nIHtcclxuICAgICAgbWFyZ2luLXJpZ2h0OiAxMnB4O1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHMgdWwgbGkuY29udGFjdCAud3JhcCAubWV0YSB7XHJcbiAgICBwYWRkaW5nOiAycHggMCAwIDJweDtcclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAjc2lkZXBhbmVsICNjb250YWN0cyB1bCBsaS5jb250YWN0IC53cmFwIC5tZXRhIHtcclxuICAgICAgLyogZGlzcGxheTogbm9uZTsgKi9cclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI2NvbnRhY3RzIHVsIGxpLmNvbnRhY3QgLndyYXAgLm1ldGEgLm5hbWUge1xyXG4gICAgZm9udC13ZWlnaHQ6IDQwMDtcclxuICAgIGZvbnQtc2l6ZTogMTJweDtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI2NvbnRhY3RzIHVsIGxpLmNvbnRhY3QgLndyYXAgLm1ldGEgLnByZXZpZXcge1xyXG4gICAgbWFyZ2luOiA1cHggMCAwIDA7XHJcbiAgICBwYWRkaW5nOiAwIDAgMXB4O1xyXG4gICAgZm9udC13ZWlnaHQ6IDQwMDtcclxuICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XHJcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gICAgdGV4dC1vdmVyZmxvdzogZWxsaXBzaXM7XHJcbiAgICAtbW96LXRyYW5zaXRpb246IDFzIGFsbCBlYXNlO1xyXG4gICAgLW8tdHJhbnNpdGlvbjogMXMgYWxsIGVhc2U7XHJcbiAgICAtd2Via2l0LXRyYW5zaXRpb246IDFzIGFsbCBlYXNlO1xyXG4gICAgdHJhbnNpdGlvbjogMXMgYWxsIGVhc2U7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNjb250YWN0cyB1bCBsaS5jb250YWN0IC53cmFwIC5tZXRhIC5wcmV2aWV3IHNwYW4ge1xyXG4gICAgcG9zaXRpb246IGluaXRpYWw7XHJcbiAgICBib3JkZXItcmFkaXVzOiBpbml0aWFsO1xyXG4gICAgYmFja2dyb3VuZDogbm9uZTtcclxuICAgIGJvcmRlcjogbm9uZTtcclxuICAgIHBhZGRpbmc6IDAgMnB4IDAgMDtcclxuICAgIG1hcmdpbjogMCAwIDAgMXB4O1xyXG4gICAgb3BhY2l0eTogLjU7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNib3R0b20tYmFyIHtcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgYm90dG9tOiAwO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjYm90dG9tLWJhciBidXR0b24ge1xyXG4gICAgZmxvYXQ6IGxlZnQ7XHJcbiAgICBib3JkZXI6IG5vbmU7XHJcbiAgICB3aWR0aDogNTAlO1xyXG4gICAgcGFkZGluZzogMTBweCAwO1xyXG4gICAgYmFja2dyb3VuZDogIzMyNDY1YTtcclxuICAgIGNvbG9yOiAjZjVmNWY1O1xyXG4gICAgY3Vyc29yOiBwb2ludGVyO1xyXG4gICAgZm9udC1zaXplOiAwLjg1ZW07XHJcbiAgICBmb250LWZhbWlseTogXCJwcm94aW1hLW5vdmFcIiwgIFwiU291cmNlIFNhbnMgUHJvXCIsIHNhbnMtc2VyaWY7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjYm90dG9tLWJhciBidXR0b24ge1xyXG4gICAgICBmbG9hdDogbm9uZTtcclxuICAgICAgd2lkdGg6IDEwMCU7XHJcbiAgICAgIHBhZGRpbmc6IDE1cHggMDtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI2JvdHRvbS1iYXIgYnV0dG9uOmZvY3VzIHtcclxuICAgIG91dGxpbmU6IG5vbmU7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNib3R0b20tYmFyIGJ1dHRvbjpudGgtY2hpbGQoMSkge1xyXG4gICAgYm9yZGVyLXJpZ2h0OiAxcHggc29saWQgIzJjM2U1MDtcclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAjc2lkZXBhbmVsICNib3R0b20tYmFyIGJ1dHRvbjpudGgtY2hpbGQoMSkge1xyXG4gICAgICBib3JkZXItcmlnaHQ6IG5vbmU7XHJcbiAgICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCAjMmMzZTUwO1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjYm90dG9tLWJhciBidXR0b246aG92ZXIge1xyXG4gICAgYmFja2dyb3VuZDogIzQzNWY3YTtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI2JvdHRvbS1iYXIgYnV0dG9uIGkge1xyXG4gICAgbWFyZ2luLXJpZ2h0OiAzcHg7XHJcbiAgICBmb250LXNpemU6IDFlbTtcclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAjc2lkZXBhbmVsICNib3R0b20tYmFyIGJ1dHRvbiBpIHtcclxuICAgICAgZm9udC1zaXplOiAxLjNlbTtcclxuICAgIH1cclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAjc2lkZXBhbmVsICNib3R0b20tYmFyIGJ1dHRvbiBzcGFuIHtcclxuICAgICAgLyogZGlzcGxheTogbm9uZTsgKi9cclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IHtcclxuICAgIGZsb2F0OiByaWdodDtcclxuICAgIHdpZHRoOiA2MCU7XHJcbiAgICBoZWlnaHQ6IDEwMCU7XHJcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gIH1cclxuICBcclxuICBAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA3NjcuOThweCkge1xyXG4gICAgI2ZyYW1lIC5jb250ZW50IHtcclxuICAgICAgd2lkdGg6IGNhbGMoMTAwJSAtIDBweCk7XHJcbiAgICAgIG1pbi13aWR0aDogMzAwcHggIWltcG9ydGFudDtcclxuICAgIH1cclxuICAgIC5jb250YWN0LXByb2ZpbGUgaW1ne1xyXG4gICAgICBkaXNwbGF5OiBub25lO1xyXG4gICAgfVxyXG4gICAgLmNvbnRhY3QtcHJvZmlsZSBpXHJcbiAgICB7XHJcbiAgICAgIHdpZHRoOiAzNXB4O1xyXG4gICAgICBtYXJnaW46IDIwcHggMHB4IDAgMTBweDtcclxuICAgICAgZm9udC1zaXplOiAyMHB4O1xyXG4gIFxyXG4gICAgfVxyXG4gICAgLmNvbnRhY3QtcHJvZmlsZSBpLmljb24tYXJyb3ctbGVmdFxyXG4gICAge1xyXG4gICAgICBkaXNwbGF5OiBibG9jaztcclxuICAgIH1cclxuICAgXHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDkwMHB4KSB7XHJcbiAgICAjZnJhbWUgLmNvbnRlbnQge1xyXG4gICAgICB3aWR0aDogY2FsYygxMDAlIC0gMzQwcHgpO1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLmNvbnRhY3QtcHJvZmlsZSB7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGhlaWdodDogNjBweDtcclxuICAgIGxpbmUtaGVpZ2h0OiA2MHB4O1xyXG4gICAgYmFja2dyb3VuZDogI2Y1ZjVmNTtcclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5jb250YWN0LXByb2ZpbGUgaW1nIHtcclxuICAgIHdpZHRoOiA0MHB4O1xyXG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xyXG4gICAgZmxvYXQ6IGxlZnQ7XHJcbiAgICBtYXJnaW46IDlweCAxMnB4IDAgOXB4O1xyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLmNvbnRhY3QtcHJvZmlsZSBwIHtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLmNvbnRhY3QtcHJvZmlsZSAuc29jaWFsLW1lZGlhIHtcclxuICAgIGZsb2F0OiByaWdodDtcclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5jb250YWN0LXByb2ZpbGUgLnNvY2lhbC1tZWRpYSBpIHtcclxuICAgIG1hcmdpbi1sZWZ0OiAxNHB4O1xyXG4gICAgY3Vyc29yOiBwb2ludGVyO1xyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLmNvbnRhY3QtcHJvZmlsZSAuc29jaWFsLW1lZGlhIGk6bnRoLWxhc3QtY2hpbGQoMSkge1xyXG4gICAgbWFyZ2luLXJpZ2h0OiAyMHB4O1xyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLmNvbnRhY3QtcHJvZmlsZSAuc29jaWFsLW1lZGlhIGk6aG92ZXIge1xyXG4gICAgY29sb3I6ICM0MzVmN2E7XHJcbiAgfVxyXG4gICNmcmFtZSAuY29udGVudCAubWVzc2FnZXMge1xyXG4gICAgaGVpZ2h0OiBhdXRvO1xyXG4gICAgbWluLWhlaWdodDogY2FsYygxMDAlIC0gMTE1cHgpO1xyXG4gICAgbWF4LWhlaWdodDogY2FsYygxMDAlIC0gMTE1cHgpO1xyXG4gICAgb3ZlcmZsb3cteTogc2Nyb2xsO1xyXG4gICAgb3ZlcmZsb3cteDogaGlkZGVuO1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2VzIHtcclxuICAgICAgbWF4LWhlaWdodDogY2FsYygxMDAlIC0gMTA1cHgpO1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2VzOjotd2Via2l0LXNjcm9sbGJhciB7XHJcbiAgICB3aWR0aDogOHB4O1xyXG4gICAgYmFja2dyb3VuZDogdHJhbnNwYXJlbnQ7XHJcbiAgfVxyXG4gICNmcmFtZSAuY29udGVudCAubWVzc2FnZXM6Oi13ZWJraXQtc2Nyb2xsYmFyLXRodW1iIHtcclxuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMC4zKTtcclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlcyB1bCBsaSB7XHJcbiAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgICBjbGVhcjogYm90aDtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgbWFyZ2luOiAxNXB4IDE1cHggNXB4IDE1cHg7XHJcbiAgICB3aWR0aDogY2FsYygxMDAlIC0gMjVweCk7XHJcbiAgICBmb250LXNpemU6IDAuOWVtO1xyXG4gICAgZm9udC13ZWlnaHQ6IG5vcm1hbDtcclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlcyB1bCBsaTpudGgtbGFzdC1jaGlsZCgxKSB7XHJcbiAgICBtYXJnaW4tYm90dG9tOiAyMHB4O1xyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2VzIHVsIGxpLnNlbnQgaW1nIHtcclxuICAgIG1hcmdpbjogNnB4IDhweCAwIDA7XHJcbiAgfVxyXG4gICNmcmFtZSAuY29udGVudCAubWVzc2FnZXMgdWwgbGkuc2VudCBwIHtcclxuICAgIGJhY2tncm91bmQ6ICM0MzVmN2E7XHJcbiAgICBjb2xvcjogI2Y1ZjVmNTtcclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlcyB1bCBsaS5yZXBsaWVzIGltZyB7XHJcbiAgICBmbG9hdDogcmlnaHQ7XHJcbiAgICBtYXJnaW46IDZweCAwIDAgOHB4O1xyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2VzIHVsIGxpLnJlcGxpZXMgcCB7XHJcbiAgICBiYWNrZ3JvdW5kOiAjZjVmNWY1O1xyXG4gICAgZmxvYXQ6IHJpZ2h0O1xyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2VzIHVsIGxpIGltZyB7XHJcbiAgICB3aWR0aDogMjJweDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2VzIHVsIGxpIHAge1xyXG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgcGFkZGluZzogMTBweCAxNXB4O1xyXG4gICAgYm9yZGVyLXJhZGl1czogMjBweDtcclxuICAgIG1heC13aWR0aDogNzAlO1xyXG4gICAgbGluZS1oZWlnaHQ6IDEzMCU7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtaW4td2lkdGg6IDc2Ny45OCkge1xyXG4gICAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlcyB1bCBsaSBwIHtcclxuICAgICAgbWF4LXdpZHRoOiAzMDBweDtcclxuICAgIH1cclxuICAgXHJcbiAgfVxyXG4gICNmcmFtZSAuY29udGVudCAubWVzc2FnZS1pbnB1dCB7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICBib3R0b206IDA7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIHotaW5kZXg6IDk5O1xyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2UtaW5wdXQgLndyYXAge1xyXG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2UtaW5wdXQgLndyYXAgaW5wdXQge1xyXG4gICBmbG9hdDogbGVmdDtcclxuICAgIGJvcmRlcjogbm9uZTtcclxuICAgIHdpZHRoOiBjYWxjKDEwMCUgLSA5MHB4KTtcclxuICAgIHBhZGRpbmc6IDE0cHggMzJweCAxNHB4IDhweDtcclxuICAgIGZvbnQtc2l6ZTogMC44ZW07XHJcbiAgICBjb2xvcjogIzMyNDY1YTtcclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAuY29udGVudCAubWVzc2FnZS1pbnB1dCAud3JhcCBpbnB1dCB7XHJcbiAgICAgIHBhZGRpbmc6IDE1cHggMzJweCAxNnB4IDhweDtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlLWlucHV0IC53cmFwIGlucHV0OmZvY3VzIHtcclxuICAgIG91dGxpbmU6IG5vbmU7XHJcbiAgfVxyXG4gICNmcmFtZSAuY29udGVudCAubWVzc2FnZS1pbnB1dCAud3JhcCAuYXR0YWNobWVudCB7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICByaWdodDogNjVweDtcclxuICAgIHotaW5kZXg6IDQ7XHJcbiAgICBtYXJnaW4tdG9wOiAxN3B4O1xyXG4gICAgZm9udC1zaXplOiAxLjFlbTtcclxuICAgIGNvbG9yOiAjNDM1ZjdhO1xyXG4gICAgLyogb3BhY2l0eTogLjU7ICovXHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2UtaW5wdXQgLndyYXAgLmF0dGFjaG1lbnQge1xyXG4gICAgICBtYXJnaW4tdG9wOiAxN3B4O1xyXG4gICAgICByaWdodDogNjVweDtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlLWlucHV0IC53cmFwIC5hdHRhY2htZW50OmhvdmVyIHtcclxuICAgIG9wYWNpdHk6IDE7XHJcbiAgfVxyXG4gICNmcmFtZSAuY29udGVudCAubWVzc2FnZS1pbnB1dCAud3JhcCBidXR0b24ge1xyXG4gICAgZmxvYXQ6IHJpZ2h0O1xyXG4gICAgYm9yZGVyOiBub25lO1xyXG4gICAgd2lkdGg6IDUwcHg7XHJcbiAgICBwYWRkaW5nOiAxMnB4IDA7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICBiYWNrZ3JvdW5kOiAjMzI0NjVhO1xyXG4gICAgY29sb3I6ICNmNWY1ZjU7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2UtaW5wdXQgLndyYXAgYnV0dG9uIHtcclxuICAgICAgcGFkZGluZzogMTZweCAwO1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2UtaW5wdXQgLndyYXAgYnV0dG9uOmhvdmVyIHtcclxuICAgIGJhY2tncm91bmQ6ICM0MzVmN2E7XHJcbiAgfVxyXG4gICNmcmFtZSAuY29udGVudCAubWVzc2FnZS1pbnB1dCAud3JhcCBidXR0b246Zm9jdXMge1xyXG4gICAgb3V0bGluZTogbm9uZTtcclxuICB9XHJcbiAgXHJcblxyXG4gIC5hdml0dGlOb25le1xyXG4gICAgZGlzcGxheTogbm9uZSAhaW1wb3J0YW50O1xyXG4gIH0iXX0= */";
+      __webpack_exports__["default"] = "\r\n/* .wrap_send_input{\r\n  background: #eeeeee;\r\n} */\r\n  /* #sidepanel p {\r\n    color: #ffffff;\r\n} */\r\n  .contact-profile .name{\r\n  width: 72%;\r\ndisplay: inline-block;\r\nline-height: initial;\r\ntext-overflow: ellipsis;\r\n}\r\n  #frame {\r\n    height: 100vh;\r\n    min-height: 300px;\r\n    max-height: 720px;\r\n    /* background: #E6EAEA; */\r\n  }\r\n  #frame #sidepanel {\r\n    float: left;\r\n    min-width: 280px;\r\n    max-width: 340px;\r\n    width: 40%;\r\n    height: 100%;\r\n    /* background: #2c3e50; */\r\n    /* color: #f5f5f5; */\r\n    overflow: hidden;\r\n    position: relative;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel {\r\n      /* width: 58px;\r\n      min-width: 58px; */\r\n      width: 100%;\r\n      min-width: 58px;\r\n      max-width: 100%;\r\n    }\r\n    .message_frame{\r\n      position: fixed;\r\n      width: 100%;\r\n   \r\n      top: 53.016px;\r\n      left: 0;\r\n    height: calc(100% - 53.016px) !important;\r\n  }\r\n    \r\n\r\n  }\r\n  #frame #sidepanel #profile {\r\n    width: 90%;\r\n    margin: 10px 0;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile {\r\n      width: 100%;\r\n      margin: 0 auto;\r\n      padding: 5px 0 0 0;\r\n      background: #32465a;\r\n      display: none;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile.expanded .wrap {\r\n    height: 210px;\r\n    line-height: initial;\r\n  }\r\n  #frame #sidepanel #profile.expanded .wrap p {\r\n    margin-top: 20px;\r\n  }\r\n  #frame #sidepanel #profile.expanded .wrap i.expand-button {\r\n    transform: scaleY(-1);\r\n    filter: FlipH;\r\n    -ms-filter: \"FlipH\";\r\n  }\r\n  #frame #sidepanel #profile .wrap {\r\n    height: 60px;\r\n    line-height: 60px;\r\n    overflow: hidden;\r\n    transition: 0.3s height ease;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap {\r\n      height: 55px;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap img {\r\n    width: 50px;\r\n    border-radius: 50%;\r\n    padding: 3px;\r\n    border: 2px solid #e74c3c;\r\n    height: auto;\r\n    float: left;\r\n    cursor: pointer;\r\n    transition: 0.3s border ease;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap img {\r\n      width: 40px;\r\n      margin-left: 8px;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap img.online {\r\n    border: 2px solid #2ecc71;\r\n  }\r\n  #frame #sidepanel #profile .wrap img.away {\r\n    border: 2px solid #f1c40f;\r\n  }\r\n  #frame #sidepanel #profile .wrap img.busy {\r\n    border: 2px solid #e74c3c;\r\n  }\r\n  #frame #sidepanel #profile .wrap img.offline {\r\n    border: 2px solid #95a5a6;\r\n  }\r\n  #frame #sidepanel #profile .wrap p {\r\n    float: left;\r\n    margin-left: 15px;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap p {\r\n      /* display: none; */\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap i.expand-button {\r\n    float: right;\r\n    margin-top: 23px;\r\n    font-size: 0.8em;\r\n    cursor: pointer;\r\n    color: #435f7a;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap i.expand-button {\r\n      display: none;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options {\r\n    position: absolute;\r\n    opacity: 0;\r\n    visibility: hidden;\r\n    width: 150px;\r\n    margin: 70px 0 0 0;\r\n    border-radius: 6px;\r\n    z-index: 99;\r\n    line-height: initial;\r\n    background: #435f7a;\r\n    transition: 0.3s all ease;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap #status-options {\r\n      width: 58px;\r\n      margin-top: 57px;\r\n      \r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options.active {\r\n    opacity: 1;\r\n    visibility: visible;\r\n    margin: 75px 0 0 0;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap #status-options.active {\r\n      margin-top: 62px;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options:before {\r\n    content: '';\r\n    position: absolute;\r\n    width: 0;\r\n    height: 0;\r\n    border-left: 6px solid transparent;\r\n    border-right: 6px solid transparent;\r\n    border-bottom: 8px solid #435f7a;\r\n    margin: -8px 0 0 24px;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap #status-options:before {\r\n      margin-left: 23px;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul {\r\n    overflow: hidden;\r\n    border-radius: 6px;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li {\r\n    padding: 15px 0 30px 18px;\r\n    display: block;\r\n    cursor: pointer;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap #status-options ul li {\r\n      padding: 15px 0 35px 22px;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li:hover {\r\n    background: #496886;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li span.status-circle {\r\n    position: absolute;\r\n    width: 10px;\r\n    height: 10px;\r\n    border-radius: 50%;\r\n    margin: 5px 0 0 0;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap #status-options ul li span.status-circle {\r\n      width: 14px;\r\n      height: 14px;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {\r\n    content: '';\r\n    position: absolute;\r\n    width: 14px;\r\n    height: 14px;\r\n    margin: -3px 0 0 -3px;\r\n    background: transparent;\r\n    border-radius: 50%;\r\n    z-index: 0;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap #status-options ul li span.status-circle:before {\r\n      height: 18px;\r\n      width: 18px;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li p {\r\n    padding-left: 12px;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #profile .wrap #status-options ul li p {\r\n      display: none;\r\n    }\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li#status-online span.status-circle {\r\n    background: #2ecc71;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li#status-online.active span.status-circle:before {\r\n    border: 1px solid #2ecc71;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li#status-away span.status-circle {\r\n    background: #f1c40f;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li#status-away.active span.status-circle:before {\r\n    border: 1px solid #f1c40f;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li#status-busy span.status-circle {\r\n    background: #e74c3c;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li#status-busy.active span.status-circle:before {\r\n    border: 1px solid #e74c3c;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li#status-offline span.status-circle {\r\n    background: #95a5a6;\r\n  }\r\n  #frame #sidepanel #profile .wrap #status-options ul li#status-offline.active span.status-circle:before {\r\n    border: 1px solid #95a5a6;\r\n  }\r\n  #frame #sidepanel #profile .wrap #expanded {\r\n    padding: 100px 0 0 0;\r\n    display: block;\r\n    line-height: initial !important;\r\n  }\r\n  #frame #sidepanel #profile .wrap #expanded label {\r\n    float: left;\r\n    clear: both;\r\n    margin: 0 8px 5px 0;\r\n    padding: 5px 0;\r\n  }\r\n  #frame #sidepanel #profile .wrap #expanded input {\r\n    border: none;\r\n    margin-bottom: 6px;\r\n    background: #32465a;\r\n    border-radius: 3px;\r\n    color: #f5f5f5;\r\n    padding: 7px;\r\n    width: calc(100% - 43px);\r\n  }\r\n  #frame #sidepanel #profile .wrap #expanded input:focus {\r\n    outline: none;\r\n    background: #435f7a;\r\n  }\r\n  #frame #sidepanel #search {\r\n    border-top: 1px solid #32465a;\r\n    border-bottom: 1px solid #32465a;\r\n    font-weight: 300;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #search {\r\n      /* display: none; */\r\n    }\r\n  }\r\n  #frame #sidepanel #search label {\r\n    position: absolute;\r\n    margin: 10px 0 0 20px;\r\n  }\r\n  #frame #sidepanel #search input {\r\n    font-family: \"proxima-nova\",  \"Source Sans Pro\", sans-serif;\r\n    padding: 10px 0 10px 46px;\r\n    width: calc(100% - 0px);\r\n    border: none;\r\n    background: #32465a;\r\n    color: #f5f5f5;\r\n  }\r\n  #frame #sidepanel #search input:focus {\r\n    outline: none;\r\n    background: #435f7a;\r\n  }\r\n  #frame #sidepanel #search input::-webkit-input-placeholder {\r\n    color: #f5f5f5;\r\n  }\r\n  #frame #sidepanel #search input::-moz-placeholder {\r\n    color: #f5f5f5;\r\n  }\r\n  #frame #sidepanel #search input:-ms-input-placeholder {\r\n    color: #f5f5f5;\r\n  }\r\n  #frame #sidepanel #search input:-moz-placeholder {\r\n    color: #f5f5f5;\r\n  }\r\n  #frame #sidepanel #contacts {\r\n    /* height: calc(100% - 177px); */\r\n    height: 92%;\r\n    overflow-y: auto;\r\n    overflow-x: hidden;\r\n    border-right: 1px solid #c9e6ff;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #contacts {\r\n      height: calc(100% - 45px);\r\n      overflow-y: scroll;\r\n      overflow-x: hidden;\r\n    }\r\n    #frame #sidepanel #contacts::-webkit-scrollbar {\r\n      display: none;\r\n    }\r\n  }\r\n  #frame #sidepanel #contacts.expanded {\r\n    height: calc(100% - 334px);\r\n  }\r\n  #frame #sidepanel #contacts::-webkit-scrollbar {\r\n    width: 8px;\r\n    background: #2c3e50;\r\n  }\r\n  #frame #sidepanel #contacts::-webkit-scrollbar-thumb {\r\n    background-color: #243140;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact {\r\n    position: relative;\r\n    padding: 10px 0 15px 0;\r\n    font-size: 0.9em;\r\n    cursor: pointer;\r\n    margin-right: 10px;\r\n    background: #f5f5f5;\r\n    margin-bottom: 10px;\r\n    border-radius: 15px;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #contacts ul li.contact {\r\n      /* padding: 6px 0 46px 8px; */\r\n      padding: 14px 12px;\r\n      border-bottom: 1px solid #494b61;\r\n      margin-left: 10px;\r\n    border: 1px solid #545454;\r\n    }\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact:hover {\r\n    background: #eeeeee;\r\n    border-radius: 15px;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact.active {\r\n    background: #c8e6c9;\r\n    border-right: 5px solid #66bb6a;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact.active span.contact-status {\r\n    border: 2px solid #32465a !important;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap {\r\n    width: 88%;\r\n    margin: 0 auto;\r\n    position: relative;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #contacts ul li.contact .wrap {\r\n      width: 100%;\r\n    }\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap span {\r\n    position: absolute;\r\n    left: 0;\r\n    margin: -2px 0 0 -2px;\r\n    width: 10px;\r\n    height: 10px;\r\n    border-radius: 50%;\r\n    border: 2px solid #2c3e50;\r\n    background: #95a5a6;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap span.online {\r\n    background: #2ecc71;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap span.away {\r\n    background: #f1c40f;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap span.busy {\r\n    background: #e74c3c;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap img {\r\n    width: 40px;\r\n    border-radius: 50%;\r\n    float: left;\r\n    margin-right: 10px;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #contacts ul li.contact .wrap img {\r\n      margin-right: 12px;\r\n    }\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap .meta {\r\n    padding: 2px 0 0 2px;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #contacts ul li.contact .wrap .meta {\r\n      /* display: none; */\r\n    }\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap .meta .name {\r\n    font-weight: 400;\r\n    font-size: 12px;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap .meta .preview {\r\n    margin: 5px 0 0 0;\r\n    padding: 0 0 1px;\r\n    font-weight: 400;\r\n    white-space: nowrap;\r\n    overflow: hidden;\r\n    text-overflow: ellipsis;\r\n    transition: 1s all ease;\r\n  }\r\n  #frame #sidepanel #contacts ul li.contact .wrap .meta .preview span {\r\n    position: initial;\r\n    border-radius: initial;\r\n    background: none;\r\n    border: none;\r\n    padding: 0 2px 0 0;\r\n    margin: 0 0 0 1px;\r\n    opacity: .5;\r\n  }\r\n  #frame #sidepanel #bottom-bar {\r\n    position: absolute;\r\n    width: 100%;\r\n    bottom: 0;\r\n  }\r\n  #frame #sidepanel #bottom-bar button {\r\n    float: left;\r\n    border: none;\r\n    width: 50%;\r\n    padding: 10px 0;\r\n    background: #32465a;\r\n    color: #f5f5f5;\r\n    cursor: pointer;\r\n    font-size: 0.85em;\r\n    font-family: \"proxima-nova\",  \"Source Sans Pro\", sans-serif;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #bottom-bar button {\r\n      float: none;\r\n      width: 100%;\r\n      padding: 15px 0;\r\n    }\r\n  }\r\n  #frame #sidepanel #bottom-bar button:focus {\r\n    outline: none;\r\n  }\r\n  #frame #sidepanel #bottom-bar button:nth-child(1) {\r\n    border-right: 1px solid #2c3e50;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #bottom-bar button:nth-child(1) {\r\n      border-right: none;\r\n      border-bottom: 1px solid #2c3e50;\r\n    }\r\n  }\r\n  #frame #sidepanel #bottom-bar button:hover {\r\n    background: #435f7a;\r\n  }\r\n  #frame #sidepanel #bottom-bar button i {\r\n    margin-right: 3px;\r\n    font-size: 1em;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #bottom-bar button i {\r\n      font-size: 1.3em;\r\n    }\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame #sidepanel #bottom-bar button span {\r\n      /* display: none; */\r\n    }\r\n  }\r\n  #frame .content {\r\n    float: right;\r\n    width: 60%;\r\n    height: 100%;\r\n    overflow: hidden;\r\n    position: relative;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame .content {\r\n      width: calc(100% - 0px);\r\n      min-width: 300px !important;\r\n    }\r\n    .contact-profile img{\r\n      display: none;\r\n    }\r\n    .contact-profile i\r\n    {\r\n      width: 35px;\r\n      margin: 20px 0px 0 10px;\r\n      font-size: 20px;\r\n  \r\n    }\r\n    .contact-profile i.icon-arrow-left\r\n    {\r\n      display: block;\r\n    }\r\n   \r\n  }\r\n  @media screen and (min-width: 900px) {\r\n    #frame .content {\r\n      width: calc(100% - 340px);\r\n    }\r\n  }\r\n  #frame .content .contact-profile {\r\n    width: 100%;\r\n    height: 60px;\r\n    line-height: 60px;\r\n    background: #f5f5f5;\r\n  }\r\n  #frame .content .contact-profile img {\r\n    width: 40px;\r\n    border-radius: 50%;\r\n    float: left;\r\n    margin: 9px 12px 0 9px;\r\n  }\r\n  #frame .content .contact-profile p {\r\n    float: left;\r\n  }\r\n  #frame .content .contact-profile .social-media {\r\n    float: right;\r\n  }\r\n  #frame .content .contact-profile .social-media i {\r\n    margin-left: 14px;\r\n    cursor: pointer;\r\n  }\r\n  #frame .content .contact-profile .social-media i:nth-last-child(1) {\r\n    margin-right: 20px;\r\n  }\r\n  #frame .content .contact-profile .social-media i:hover {\r\n    color: #435f7a;\r\n  }\r\n  #frame .content .messages {\r\n    height: auto;\r\n    min-height: calc(100% - 115px);\r\n    max-height: calc(100% - 115px);\r\n    overflow-y: scroll;\r\n    overflow-x: hidden;\r\n    width: 100%;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame .content .messages {\r\n      max-height: calc(100% - 105px);\r\n    }\r\n  }\r\n  #frame .content .messages::-webkit-scrollbar {\r\n    width: 8px;\r\n    background: transparent;\r\n  }\r\n  #frame .content .messages::-webkit-scrollbar-thumb {\r\n    background-color: rgba(0, 0, 0, 0.3);\r\n  }\r\n  #frame .content .messages ul li {\r\n    display: inline-block;\r\n    clear: both;\r\n    float: left;\r\n    margin: 15px 15px 5px 15px;\r\n    width: calc(100% - 25px);\r\n    font-size: 0.9em;\r\n    font-weight: normal;\r\n  }\r\n  #frame .content .messages ul li:nth-last-child(1) {\r\n    margin-bottom: 20px;\r\n  }\r\n  #frame .content .messages ul li.sent img {\r\n    margin: 6px 8px 0 0;\r\n  }\r\n  #frame .content .messages ul li.sent p {\r\n    background: #435f7a;\r\n    color: #f5f5f5;\r\n  }\r\n  #frame .content .messages ul li.replies img {\r\n    float: right;\r\n    margin: 6px 0 0 8px;\r\n  }\r\n  #frame .content .messages ul li.replies p {\r\n    background: #f5f5f5;\r\n    float: right;\r\n  }\r\n  #frame .content .messages ul li img {\r\n    width: 22px;\r\n    border-radius: 50%;\r\n    float: left;\r\n  }\r\n  #frame .content .messages ul li p {\r\n    display: inline-block;\r\n    padding: 10px 15px;\r\n    border-radius: 20px;\r\n    max-width: 70%;\r\n    line-height: 130%;\r\n  }\r\n  @media screen and (min-width: 767.98) {\r\n    #frame .content .messages ul li p {\r\n      max-width: 300px;\r\n    }\r\n   \r\n  }\r\n  #frame .content .message-input {\r\n    position: absolute;\r\n    bottom: 0;\r\n    width: 100%;\r\n    z-index: 99;\r\n  }\r\n  #frame .content .message-input .wrap {\r\n    position: relative;\r\n  }\r\n  #frame .content .message-input .wrap input {\r\n   float: left;\r\n    border: none;\r\n    width: calc(100% - 90px);\r\n    padding: 14px 32px 14px 8px;\r\n    font-size: 0.8em;\r\n    color: #32465a;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame .content .message-input .wrap input {\r\n      padding: 15px 32px 16px 8px;\r\n    }\r\n  }\r\n  #frame .content .message-input .wrap input:focus {\r\n    outline: none;\r\n  }\r\n  #frame .content .message-input .wrap .attachment {\r\n    position: absolute;\r\n    right: 65px;\r\n    z-index: 4;\r\n    margin-top: 17px;\r\n    font-size: 1.1em;\r\n    color: #435f7a;\r\n    /* opacity: .5; */\r\n    cursor: pointer;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame .content .message-input .wrap .attachment {\r\n      margin-top: 17px;\r\n      right: 65px;\r\n    }\r\n  }\r\n  #frame .content .message-input .wrap .attachment:hover {\r\n    opacity: 1;\r\n  }\r\n  #frame .content .message-input .wrap button {\r\n    float: right;\r\n    border: none;\r\n    width: 50px;\r\n    padding: 12px 0;\r\n    cursor: pointer;\r\n    background: #32465a;\r\n    color: #f5f5f5;\r\n  }\r\n  @media screen and (max-width: 767.98px) {\r\n    #frame .content .message-input .wrap button {\r\n      padding: 16px 0;\r\n    }\r\n  }\r\n  #frame .content .message-input .wrap button:hover {\r\n    background: #435f7a;\r\n  }\r\n  #frame .content .message-input .wrap button:focus {\r\n    outline: none;\r\n  }\r\n  .avittiNone{\r\n    display: none !important;\r\n  }\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1lc3NhZ2VzLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUNBOztHQUVHO0VBQ0Q7O0dBRUM7RUFDSDtFQUNFLFVBQVU7QUFDWixxQkFBcUI7QUFDckIsb0JBQW9CO0FBQ3BCLHVCQUF1QjtBQUN2QjtFQUVFO0lBQ0UsYUFBYTtJQUNiLGlCQUFpQjtJQUNqQixpQkFBaUI7SUFDakIseUJBQXlCO0VBQzNCO0VBRUE7SUFDRSxXQUFXO0lBQ1gsZ0JBQWdCO0lBQ2hCLGdCQUFnQjtJQUNoQixVQUFVO0lBQ1YsWUFBWTtJQUNaLHlCQUF5QjtJQUN6QixvQkFBb0I7SUFDcEIsZ0JBQWdCO0lBQ2hCLGtCQUFrQjtFQUNwQjtFQUNBO0lBQ0U7TUFDRTt3QkFDa0I7TUFDbEIsV0FBVztNQUNYLGVBQWU7TUFDZixlQUFlO0lBQ2pCO0lBQ0E7TUFDRSxlQUFlO01BQ2YsV0FBVzs7TUFFWCxhQUFhO01BQ2IsT0FBTztJQUlULHdDQUF3QztFQUMxQzs7O0VBR0E7RUFDQTtJQUNFLFVBQVU7SUFDVixjQUFjO0VBQ2hCO0VBQ0E7SUFDRTtNQUNFLFdBQVc7TUFDWCxjQUFjO01BQ2Qsa0JBQWtCO01BQ2xCLG1CQUFtQjtNQUNuQixhQUFhO0lBQ2Y7RUFDRjtFQUNBO0lBQ0UsYUFBYTtJQUNiLG9CQUFvQjtFQUN0QjtFQUNBO0lBQ0UsZ0JBQWdCO0VBQ2xCO0VBQ0E7SUFJRSxxQkFBcUI7SUFDckIsYUFBYTtJQUNiLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UsWUFBWTtJQUNaLGlCQUFpQjtJQUNqQixnQkFBZ0I7SUFJaEIsNEJBQTRCO0VBQzlCO0VBQ0E7SUFDRTtNQUNFLFlBQVk7SUFDZDtFQUNGO0VBQ0E7SUFDRSxXQUFXO0lBQ1gsa0JBQWtCO0lBQ2xCLFlBQVk7SUFDWix5QkFBeUI7SUFDekIsWUFBWTtJQUNaLFdBQVc7SUFDWCxlQUFlO0lBSWYsNEJBQTRCO0VBQzlCO0VBQ0E7SUFDRTtNQUNFLFdBQVc7TUFDWCxnQkFBZ0I7SUFDbEI7RUFDRjtFQUNBO0lBQ0UseUJBQXlCO0VBQzNCO0VBQ0E7SUFDRSx5QkFBeUI7RUFDM0I7RUFDQTtJQUNFLHlCQUF5QjtFQUMzQjtFQUNBO0lBQ0UseUJBQXlCO0VBQzNCO0VBQ0E7SUFDRSxXQUFXO0lBQ1gsaUJBQWlCO0VBQ25CO0VBQ0E7SUFDRTtNQUNFLG1CQUFtQjtJQUNyQjtFQUNGO0VBQ0E7SUFDRSxZQUFZO0lBQ1osZ0JBQWdCO0lBQ2hCLGdCQUFnQjtJQUNoQixlQUFlO0lBQ2YsY0FBYztFQUNoQjtFQUNBO0lBQ0U7TUFDRSxhQUFhO0lBQ2Y7RUFDRjtFQUNBO0lBQ0Usa0JBQWtCO0lBQ2xCLFVBQVU7SUFDVixrQkFBa0I7SUFDbEIsWUFBWTtJQUNaLGtCQUFrQjtJQUNsQixrQkFBa0I7SUFDbEIsV0FBVztJQUNYLG9CQUFvQjtJQUNwQixtQkFBbUI7SUFJbkIseUJBQXlCO0VBQzNCO0VBQ0E7SUFDRTtNQUNFLFdBQVc7TUFDWCxnQkFBZ0I7O0lBRWxCO0VBQ0Y7RUFDQTtJQUNFLFVBQVU7SUFDVixtQkFBbUI7SUFDbkIsa0JBQWtCO0VBQ3BCO0VBQ0E7SUFDRTtNQUNFLGdCQUFnQjtJQUNsQjtFQUNGO0VBQ0E7SUFDRSxXQUFXO0lBQ1gsa0JBQWtCO0lBQ2xCLFFBQVE7SUFDUixTQUFTO0lBQ1Qsa0NBQWtDO0lBQ2xDLG1DQUFtQztJQUNuQyxnQ0FBZ0M7SUFDaEMscUJBQXFCO0VBQ3ZCO0VBQ0E7SUFDRTtNQUNFLGlCQUFpQjtJQUNuQjtFQUNGO0VBQ0E7SUFDRSxnQkFBZ0I7SUFDaEIsa0JBQWtCO0VBQ3BCO0VBQ0E7SUFDRSx5QkFBeUI7SUFDekIsY0FBYztJQUNkLGVBQWU7RUFDakI7RUFDQTtJQUNFO01BQ0UseUJBQXlCO0lBQzNCO0VBQ0Y7RUFDQTtJQUNFLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0Usa0JBQWtCO0lBQ2xCLFdBQVc7SUFDWCxZQUFZO0lBQ1osa0JBQWtCO0lBQ2xCLGlCQUFpQjtFQUNuQjtFQUNBO0lBQ0U7TUFDRSxXQUFXO01BQ1gsWUFBWTtJQUNkO0VBQ0Y7RUFDQTtJQUNFLFdBQVc7SUFDWCxrQkFBa0I7SUFDbEIsV0FBVztJQUNYLFlBQVk7SUFDWixxQkFBcUI7SUFDckIsdUJBQXVCO0lBQ3ZCLGtCQUFrQjtJQUNsQixVQUFVO0VBQ1o7RUFDQTtJQUNFO01BQ0UsWUFBWTtNQUNaLFdBQVc7SUFDYjtFQUNGO0VBQ0E7SUFDRSxrQkFBa0I7RUFDcEI7RUFDQTtJQUNFO01BQ0UsYUFBYTtJQUNmO0VBQ0Y7RUFDQTtJQUNFLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UseUJBQXlCO0VBQzNCO0VBQ0E7SUFDRSxtQkFBbUI7RUFDckI7RUFDQTtJQUNFLHlCQUF5QjtFQUMzQjtFQUNBO0lBQ0UsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSx5QkFBeUI7RUFDM0I7RUFDQTtJQUNFLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UseUJBQXlCO0VBQzNCO0VBQ0E7SUFDRSxvQkFBb0I7SUFDcEIsY0FBYztJQUNkLCtCQUErQjtFQUNqQztFQUNBO0lBQ0UsV0FBVztJQUNYLFdBQVc7SUFDWCxtQkFBbUI7SUFDbkIsY0FBYztFQUNoQjtFQUNBO0lBQ0UsWUFBWTtJQUNaLGtCQUFrQjtJQUNsQixtQkFBbUI7SUFDbkIsa0JBQWtCO0lBQ2xCLGNBQWM7SUFDZCxZQUFZO0lBQ1osd0JBQXdCO0VBQzFCO0VBQ0E7SUFDRSxhQUFhO0lBQ2IsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSw2QkFBNkI7SUFDN0IsZ0NBQWdDO0lBQ2hDLGdCQUFnQjtFQUNsQjtFQUNBO0lBQ0U7TUFDRSxtQkFBbUI7SUFDckI7RUFDRjtFQUNBO0lBQ0Usa0JBQWtCO0lBQ2xCLHFCQUFxQjtFQUN2QjtFQUNBO0lBQ0UsMkRBQTJEO0lBQzNELHlCQUF5QjtJQUN6Qix1QkFBdUI7SUFDdkIsWUFBWTtJQUNaLG1CQUFtQjtJQUNuQixjQUFjO0VBQ2hCO0VBQ0E7SUFDRSxhQUFhO0lBQ2IsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSxjQUFjO0VBQ2hCO0VBQ0E7SUFDRSxjQUFjO0VBQ2hCO0VBQ0E7SUFDRSxjQUFjO0VBQ2hCO0VBQ0E7SUFDRSxjQUFjO0VBQ2hCO0VBQ0E7SUFDRSxnQ0FBZ0M7SUFDaEMsV0FBVztJQUNYLGdCQUFnQjtJQUNoQixrQkFBa0I7SUFDbEIsK0JBQStCO0VBQ2pDO0VBQ0E7SUFDRTtNQUNFLHlCQUF5QjtNQUN6QixrQkFBa0I7TUFDbEIsa0JBQWtCO0lBQ3BCO0lBQ0E7TUFDRSxhQUFhO0lBQ2Y7RUFDRjtFQUNBO0lBQ0UsMEJBQTBCO0VBQzVCO0VBQ0E7SUFDRSxVQUFVO0lBQ1YsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSx5QkFBeUI7RUFDM0I7RUFDQTtJQUNFLGtCQUFrQjtJQUNsQixzQkFBc0I7SUFDdEIsZ0JBQWdCO0lBQ2hCLGVBQWU7SUFDZixrQkFBa0I7SUFDbEIsbUJBQW1CO0lBQ25CLG1CQUFtQjtJQUNuQixtQkFBbUI7RUFDckI7RUFDQTtJQUNFO01BQ0UsNkJBQTZCO01BQzdCLGtCQUFrQjtNQUNsQixnQ0FBZ0M7TUFDaEMsaUJBQWlCO0lBQ25CLHlCQUF5QjtJQUN6QjtFQUNGO0VBQ0E7SUFDRSxtQkFBbUI7SUFDbkIsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSxtQkFBbUI7SUFDbkIsK0JBQStCO0VBQ2pDO0VBQ0E7SUFDRSxvQ0FBb0M7RUFDdEM7RUFDQTtJQUNFLFVBQVU7SUFDVixjQUFjO0lBQ2Qsa0JBQWtCO0VBQ3BCO0VBQ0E7SUFDRTtNQUNFLFdBQVc7SUFDYjtFQUNGO0VBQ0E7SUFDRSxrQkFBa0I7SUFDbEIsT0FBTztJQUNQLHFCQUFxQjtJQUNyQixXQUFXO0lBQ1gsWUFBWTtJQUNaLGtCQUFrQjtJQUNsQix5QkFBeUI7SUFDekIsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSxtQkFBbUI7RUFDckI7RUFDQTtJQUNFLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSxXQUFXO0lBQ1gsa0JBQWtCO0lBQ2xCLFdBQVc7SUFDWCxrQkFBa0I7RUFDcEI7RUFDQTtJQUNFO01BQ0Usa0JBQWtCO0lBQ3BCO0VBQ0Y7RUFDQTtJQUNFLG9CQUFvQjtFQUN0QjtFQUNBO0lBQ0U7TUFDRSxtQkFBbUI7SUFDckI7RUFDRjtFQUNBO0lBQ0UsZ0JBQWdCO0lBQ2hCLGVBQWU7RUFDakI7RUFDQTtJQUNFLGlCQUFpQjtJQUNqQixnQkFBZ0I7SUFDaEIsZ0JBQWdCO0lBQ2hCLG1CQUFtQjtJQUNuQixnQkFBZ0I7SUFDaEIsdUJBQXVCO0lBSXZCLHVCQUF1QjtFQUN6QjtFQUNBO0lBQ0UsaUJBQWlCO0lBQ2pCLHNCQUFzQjtJQUN0QixnQkFBZ0I7SUFDaEIsWUFBWTtJQUNaLGtCQUFrQjtJQUNsQixpQkFBaUI7SUFDakIsV0FBVztFQUNiO0VBQ0E7SUFDRSxrQkFBa0I7SUFDbEIsV0FBVztJQUNYLFNBQVM7RUFDWDtFQUNBO0lBQ0UsV0FBVztJQUNYLFlBQVk7SUFDWixVQUFVO0lBQ1YsZUFBZTtJQUNmLG1CQUFtQjtJQUNuQixjQUFjO0lBQ2QsZUFBZTtJQUNmLGlCQUFpQjtJQUNqQiwyREFBMkQ7RUFDN0Q7RUFDQTtJQUNFO01BQ0UsV0FBVztNQUNYLFdBQVc7TUFDWCxlQUFlO0lBQ2pCO0VBQ0Y7RUFDQTtJQUNFLGFBQWE7RUFDZjtFQUNBO0lBQ0UsK0JBQStCO0VBQ2pDO0VBQ0E7SUFDRTtNQUNFLGtCQUFrQjtNQUNsQixnQ0FBZ0M7SUFDbEM7RUFDRjtFQUNBO0lBQ0UsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSxpQkFBaUI7SUFDakIsY0FBYztFQUNoQjtFQUNBO0lBQ0U7TUFDRSxnQkFBZ0I7SUFDbEI7RUFDRjtFQUNBO0lBQ0U7TUFDRSxtQkFBbUI7SUFDckI7RUFDRjtFQUNBO0lBQ0UsWUFBWTtJQUNaLFVBQVU7SUFDVixZQUFZO0lBQ1osZ0JBQWdCO0lBQ2hCLGtCQUFrQjtFQUNwQjtFQUVBO0lBQ0U7TUFDRSx1QkFBdUI7TUFDdkIsMkJBQTJCO0lBQzdCO0lBQ0E7TUFDRSxhQUFhO0lBQ2Y7SUFDQTs7TUFFRSxXQUFXO01BQ1gsdUJBQXVCO01BQ3ZCLGVBQWU7O0lBRWpCO0lBQ0E7O01BRUUsY0FBYztJQUNoQjs7RUFFRjtFQUNBO0lBQ0U7TUFDRSx5QkFBeUI7SUFDM0I7RUFDRjtFQUNBO0lBQ0UsV0FBVztJQUNYLFlBQVk7SUFDWixpQkFBaUI7SUFDakIsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSxXQUFXO0lBQ1gsa0JBQWtCO0lBQ2xCLFdBQVc7SUFDWCxzQkFBc0I7RUFDeEI7RUFDQTtJQUNFLFdBQVc7RUFDYjtFQUNBO0lBQ0UsWUFBWTtFQUNkO0VBQ0E7SUFDRSxpQkFBaUI7SUFDakIsZUFBZTtFQUNqQjtFQUNBO0lBQ0Usa0JBQWtCO0VBQ3BCO0VBQ0E7SUFDRSxjQUFjO0VBQ2hCO0VBQ0E7SUFDRSxZQUFZO0lBQ1osOEJBQThCO0lBQzlCLDhCQUE4QjtJQUM5QixrQkFBa0I7SUFDbEIsa0JBQWtCO0lBQ2xCLFdBQVc7RUFDYjtFQUNBO0lBQ0U7TUFDRSw4QkFBOEI7SUFDaEM7RUFDRjtFQUNBO0lBQ0UsVUFBVTtJQUNWLHVCQUF1QjtFQUN6QjtFQUNBO0lBQ0Usb0NBQW9DO0VBQ3RDO0VBQ0E7SUFDRSxxQkFBcUI7SUFDckIsV0FBVztJQUNYLFdBQVc7SUFDWCwwQkFBMEI7SUFDMUIsd0JBQXdCO0lBQ3hCLGdCQUFnQjtJQUNoQixtQkFBbUI7RUFDckI7RUFDQTtJQUNFLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSxtQkFBbUI7SUFDbkIsY0FBYztFQUNoQjtFQUNBO0lBQ0UsWUFBWTtJQUNaLG1CQUFtQjtFQUNyQjtFQUNBO0lBQ0UsbUJBQW1CO0lBQ25CLFlBQVk7RUFDZDtFQUNBO0lBQ0UsV0FBVztJQUNYLGtCQUFrQjtJQUNsQixXQUFXO0VBQ2I7RUFDQTtJQUNFLHFCQUFxQjtJQUNyQixrQkFBa0I7SUFDbEIsbUJBQW1CO0lBQ25CLGNBQWM7SUFDZCxpQkFBaUI7RUFDbkI7RUFDQTtJQUNFO01BQ0UsZ0JBQWdCO0lBQ2xCOztFQUVGO0VBQ0E7SUFDRSxrQkFBa0I7SUFDbEIsU0FBUztJQUNULFdBQVc7SUFDWCxXQUFXO0VBQ2I7RUFDQTtJQUNFLGtCQUFrQjtFQUNwQjtFQUNBO0dBQ0MsV0FBVztJQUNWLFlBQVk7SUFDWix3QkFBd0I7SUFDeEIsMkJBQTJCO0lBQzNCLGdCQUFnQjtJQUNoQixjQUFjO0VBQ2hCO0VBQ0E7SUFDRTtNQUNFLDJCQUEyQjtJQUM3QjtFQUNGO0VBQ0E7SUFDRSxhQUFhO0VBQ2Y7RUFDQTtJQUNFLGtCQUFrQjtJQUNsQixXQUFXO0lBQ1gsVUFBVTtJQUNWLGdCQUFnQjtJQUNoQixnQkFBZ0I7SUFDaEIsY0FBYztJQUNkLGlCQUFpQjtJQUNqQixlQUFlO0VBQ2pCO0VBQ0E7SUFDRTtNQUNFLGdCQUFnQjtNQUNoQixXQUFXO0lBQ2I7RUFDRjtFQUNBO0lBQ0UsVUFBVTtFQUNaO0VBQ0E7SUFDRSxZQUFZO0lBQ1osWUFBWTtJQUNaLFdBQVc7SUFDWCxlQUFlO0lBQ2YsZUFBZTtJQUNmLG1CQUFtQjtJQUNuQixjQUFjO0VBQ2hCO0VBQ0E7SUFDRTtNQUNFLGVBQWU7SUFDakI7RUFDRjtFQUNBO0lBQ0UsbUJBQW1CO0VBQ3JCO0VBQ0E7SUFDRSxhQUFhO0VBQ2Y7RUFHQTtJQUNFLHdCQUF3QjtFQUMxQiIsImZpbGUiOiJtZXNzYWdlcy5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXHJcbi8qIC53cmFwX3NlbmRfaW5wdXR7XHJcbiAgYmFja2dyb3VuZDogI2VlZWVlZTtcclxufSAqL1xyXG4gIC8qICNzaWRlcGFuZWwgcCB7XHJcbiAgICBjb2xvcjogI2ZmZmZmZjtcclxufSAqL1xyXG4uY29udGFjdC1wcm9maWxlIC5uYW1le1xyXG4gIHdpZHRoOiA3MiU7XHJcbmRpc3BsYXk6IGlubGluZS1ibG9jaztcclxubGluZS1oZWlnaHQ6IGluaXRpYWw7XHJcbnRleHQtb3ZlcmZsb3c6IGVsbGlwc2lzO1xyXG59XHJcblxyXG4gICNmcmFtZSB7XHJcbiAgICBoZWlnaHQ6IDEwMHZoO1xyXG4gICAgbWluLWhlaWdodDogMzAwcHg7XHJcbiAgICBtYXgtaGVpZ2h0OiA3MjBweDtcclxuICAgIC8qIGJhY2tncm91bmQ6ICNFNkVBRUE7ICovXHJcbiAgfVxyXG4gXHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwge1xyXG4gICAgZmxvYXQ6IGxlZnQ7XHJcbiAgICBtaW4td2lkdGg6IDI4MHB4O1xyXG4gICAgbWF4LXdpZHRoOiAzNDBweDtcclxuICAgIHdpZHRoOiA0MCU7XHJcbiAgICBoZWlnaHQ6IDEwMCU7XHJcbiAgICAvKiBiYWNrZ3JvdW5kOiAjMmMzZTUwOyAqL1xyXG4gICAgLyogY29sb3I6ICNmNWY1ZjU7ICovXHJcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gIH1cclxuICBAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA3NjcuOThweCkge1xyXG4gICAgI2ZyYW1lICNzaWRlcGFuZWwge1xyXG4gICAgICAvKiB3aWR0aDogNThweDtcclxuICAgICAgbWluLXdpZHRoOiA1OHB4OyAqL1xyXG4gICAgICB3aWR0aDogMTAwJTtcclxuICAgICAgbWluLXdpZHRoOiA1OHB4O1xyXG4gICAgICBtYXgtd2lkdGg6IDEwMCU7XHJcbiAgICB9XHJcbiAgICAubWVzc2FnZV9mcmFtZXtcclxuICAgICAgcG9zaXRpb246IGZpeGVkO1xyXG4gICAgICB3aWR0aDogMTAwJTtcclxuICAgXHJcbiAgICAgIHRvcDogNTMuMDE2cHg7XHJcbiAgICAgIGxlZnQ6IDA7XHJcbiAgXHJcbiAgICBoZWlnaHQ6IC1tb3otY2FsYygxMDAlIC0gNTMuMDE2cHgpO1xyXG4gICAgaGVpZ2h0OiAtd2Via2l0LWNhbGMoMTAwJSAtIDUzLjAxNnB4KTtcclxuICAgIGhlaWdodDogY2FsYygxMDAlIC0gNTMuMDE2cHgpICFpbXBvcnRhbnQ7XHJcbiAgfVxyXG4gICAgXHJcblxyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSB7XHJcbiAgICB3aWR0aDogOTAlO1xyXG4gICAgbWFyZ2luOiAxMHB4IDA7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSB7XHJcbiAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICBtYXJnaW46IDAgYXV0bztcclxuICAgICAgcGFkZGluZzogNXB4IDAgMCAwO1xyXG4gICAgICBiYWNrZ3JvdW5kOiAjMzI0NjVhO1xyXG4gICAgICBkaXNwbGF5OiBub25lO1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZS5leHBhbmRlZCAud3JhcCB7XHJcbiAgICBoZWlnaHQ6IDIxMHB4O1xyXG4gICAgbGluZS1oZWlnaHQ6IGluaXRpYWw7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlLmV4cGFuZGVkIC53cmFwIHAge1xyXG4gICAgbWFyZ2luLXRvcDogMjBweDtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUuZXhwYW5kZWQgLndyYXAgaS5leHBhbmQtYnV0dG9uIHtcclxuICAgIC1tb3otdHJhbnNmb3JtOiBzY2FsZVkoLTEpO1xyXG4gICAgLW8tdHJhbnNmb3JtOiBzY2FsZVkoLTEpO1xyXG4gICAgLXdlYmtpdC10cmFuc2Zvcm06IHNjYWxlWSgtMSk7XHJcbiAgICB0cmFuc2Zvcm06IHNjYWxlWSgtMSk7XHJcbiAgICBmaWx0ZXI6IEZsaXBIO1xyXG4gICAgLW1zLWZpbHRlcjogXCJGbGlwSFwiO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCB7XHJcbiAgICBoZWlnaHQ6IDYwcHg7XHJcbiAgICBsaW5lLWhlaWdodDogNjBweDtcclxuICAgIG92ZXJmbG93OiBoaWRkZW47XHJcbiAgICAtbW96LXRyYW5zaXRpb246IDAuM3MgaGVpZ2h0IGVhc2U7XHJcbiAgICAtby10cmFuc2l0aW9uOiAwLjNzIGhlaWdodCBlYXNlO1xyXG4gICAgLXdlYmtpdC10cmFuc2l0aW9uOiAwLjNzIGhlaWdodCBlYXNlO1xyXG4gICAgdHJhbnNpdGlvbjogMC4zcyBoZWlnaHQgZWFzZTtcclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwIHtcclxuICAgICAgaGVpZ2h0OiA1NXB4O1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCBpbWcge1xyXG4gICAgd2lkdGg6IDUwcHg7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbiAgICBwYWRkaW5nOiAzcHg7XHJcbiAgICBib3JkZXI6IDJweCBzb2xpZCAjZTc0YzNjO1xyXG4gICAgaGVpZ2h0OiBhdXRvO1xyXG4gICAgZmxvYXQ6IGxlZnQ7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICAtbW96LXRyYW5zaXRpb246IDAuM3MgYm9yZGVyIGVhc2U7XHJcbiAgICAtby10cmFuc2l0aW9uOiAwLjNzIGJvcmRlciBlYXNlO1xyXG4gICAgLXdlYmtpdC10cmFuc2l0aW9uOiAwLjNzIGJvcmRlciBlYXNlO1xyXG4gICAgdHJhbnNpdGlvbjogMC4zcyBib3JkZXIgZWFzZTtcclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwIGltZyB7XHJcbiAgICAgIHdpZHRoOiA0MHB4O1xyXG4gICAgICBtYXJnaW4tbGVmdDogOHB4O1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCBpbWcub25saW5lIHtcclxuICAgIGJvcmRlcjogMnB4IHNvbGlkICMyZWNjNzE7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwIGltZy5hd2F5IHtcclxuICAgIGJvcmRlcjogMnB4IHNvbGlkICNmMWM0MGY7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwIGltZy5idXN5IHtcclxuICAgIGJvcmRlcjogMnB4IHNvbGlkICNlNzRjM2M7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwIGltZy5vZmZsaW5lIHtcclxuICAgIGJvcmRlcjogMnB4IHNvbGlkICM5NWE1YTY7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwIHAge1xyXG4gICAgZmxvYXQ6IGxlZnQ7XHJcbiAgICBtYXJnaW4tbGVmdDogMTVweDtcclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwIHAge1xyXG4gICAgICAvKiBkaXNwbGF5OiBub25lOyAqL1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCBpLmV4cGFuZC1idXR0b24ge1xyXG4gICAgZmxvYXQ6IHJpZ2h0O1xyXG4gICAgbWFyZ2luLXRvcDogMjNweDtcclxuICAgIGZvbnQtc2l6ZTogMC44ZW07XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICBjb2xvcjogIzQzNWY3YTtcclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwIGkuZXhwYW5kLWJ1dHRvbiB7XHJcbiAgICAgIGRpc3BsYXk6IG5vbmU7XHJcbiAgICB9XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICBvcGFjaXR5OiAwO1xyXG4gICAgdmlzaWJpbGl0eTogaGlkZGVuO1xyXG4gICAgd2lkdGg6IDE1MHB4O1xyXG4gICAgbWFyZ2luOiA3MHB4IDAgMCAwO1xyXG4gICAgYm9yZGVyLXJhZGl1czogNnB4O1xyXG4gICAgei1pbmRleDogOTk7XHJcbiAgICBsaW5lLWhlaWdodDogaW5pdGlhbDtcclxuICAgIGJhY2tncm91bmQ6ICM0MzVmN2E7XHJcbiAgICAtbW96LXRyYW5zaXRpb246IDAuM3MgYWxsIGVhc2U7XHJcbiAgICAtby10cmFuc2l0aW9uOiAwLjNzIGFsbCBlYXNlO1xyXG4gICAgLXdlYmtpdC10cmFuc2l0aW9uOiAwLjNzIGFsbCBlYXNlO1xyXG4gICAgdHJhbnNpdGlvbjogMC4zcyBhbGwgZWFzZTtcclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB7XHJcbiAgICAgIHdpZHRoOiA1OHB4O1xyXG4gICAgICBtYXJnaW4tdG9wOiA1N3B4O1xyXG4gICAgICBcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAgI3N0YXR1cy1vcHRpb25zLmFjdGl2ZSB7XHJcbiAgICBvcGFjaXR5OiAxO1xyXG4gICAgdmlzaWJpbGl0eTogdmlzaWJsZTtcclxuICAgIG1hcmdpbjogNzVweCAwIDAgMDtcclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucy5hY3RpdmUge1xyXG4gICAgICBtYXJnaW4tdG9wOiA2MnB4O1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjc3RhdHVzLW9wdGlvbnM6YmVmb3JlIHtcclxuICAgIGNvbnRlbnQ6ICcnO1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgd2lkdGg6IDA7XHJcbiAgICBoZWlnaHQ6IDA7XHJcbiAgICBib3JkZXItbGVmdDogNnB4IHNvbGlkIHRyYW5zcGFyZW50O1xyXG4gICAgYm9yZGVyLXJpZ2h0OiA2cHggc29saWQgdHJhbnNwYXJlbnQ7XHJcbiAgICBib3JkZXItYm90dG9tOiA4cHggc29saWQgIzQzNWY3YTtcclxuICAgIG1hcmdpbjogLThweCAwIDAgMjRweDtcclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9uczpiZWZvcmUge1xyXG4gICAgICBtYXJnaW4tbGVmdDogMjNweDtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAgI3N0YXR1cy1vcHRpb25zIHVsIHtcclxuICAgIG92ZXJmbG93OiBoaWRkZW47XHJcbiAgICBib3JkZXItcmFkaXVzOiA2cHg7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB1bCBsaSB7XHJcbiAgICBwYWRkaW5nOiAxNXB4IDAgMzBweCAxOHB4O1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjc3RhdHVzLW9wdGlvbnMgdWwgbGkge1xyXG4gICAgICBwYWRkaW5nOiAxNXB4IDAgMzVweCAyMnB4O1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjc3RhdHVzLW9wdGlvbnMgdWwgbGk6aG92ZXIge1xyXG4gICAgYmFja2dyb3VuZDogIzQ5Njg4NjtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAgI3N0YXR1cy1vcHRpb25zIHVsIGxpIHNwYW4uc3RhdHVzLWNpcmNsZSB7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICB3aWR0aDogMTBweDtcclxuICAgIGhlaWdodDogMTBweDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcclxuICAgIG1hcmdpbjogNXB4IDAgMCAwO1xyXG4gIH1cclxuICBAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA3NjcuOThweCkge1xyXG4gICAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAgI3N0YXR1cy1vcHRpb25zIHVsIGxpIHNwYW4uc3RhdHVzLWNpcmNsZSB7XHJcbiAgICAgIHdpZHRoOiAxNHB4O1xyXG4gICAgICBoZWlnaHQ6IDE0cHg7XHJcbiAgICB9XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB1bCBsaSBzcGFuLnN0YXR1cy1jaXJjbGU6YmVmb3JlIHtcclxuICAgIGNvbnRlbnQ6ICcnO1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgd2lkdGg6IDE0cHg7XHJcbiAgICBoZWlnaHQ6IDE0cHg7XHJcbiAgICBtYXJnaW46IC0zcHggMCAwIC0zcHg7XHJcbiAgICBiYWNrZ3JvdW5kOiB0cmFuc3BhcmVudDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcclxuICAgIHotaW5kZXg6IDA7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjcHJvZmlsZSAud3JhcCAjc3RhdHVzLW9wdGlvbnMgdWwgbGkgc3Bhbi5zdGF0dXMtY2lyY2xlOmJlZm9yZSB7XHJcbiAgICAgIGhlaWdodDogMThweDtcclxuICAgICAgd2lkdGg6IDE4cHg7XHJcbiAgICB9XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB1bCBsaSBwIHtcclxuICAgIHBhZGRpbmctbGVmdDogMTJweDtcclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB1bCBsaSBwIHtcclxuICAgICAgZGlzcGxheTogbm9uZTtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAgI3N0YXR1cy1vcHRpb25zIHVsIGxpI3N0YXR1cy1vbmxpbmUgc3Bhbi5zdGF0dXMtY2lyY2xlIHtcclxuICAgIGJhY2tncm91bmQ6ICMyZWNjNzE7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB1bCBsaSNzdGF0dXMtb25saW5lLmFjdGl2ZSBzcGFuLnN0YXR1cy1jaXJjbGU6YmVmb3JlIHtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkICMyZWNjNzE7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB1bCBsaSNzdGF0dXMtYXdheSBzcGFuLnN0YXR1cy1jaXJjbGUge1xyXG4gICAgYmFja2dyb3VuZDogI2YxYzQwZjtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAgI3N0YXR1cy1vcHRpb25zIHVsIGxpI3N0YXR1cy1hd2F5LmFjdGl2ZSBzcGFuLnN0YXR1cy1jaXJjbGU6YmVmb3JlIHtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkICNmMWM0MGY7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB1bCBsaSNzdGF0dXMtYnVzeSBzcGFuLnN0YXR1cy1jaXJjbGUge1xyXG4gICAgYmFja2dyb3VuZDogI2U3NGMzYztcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAgI3N0YXR1cy1vcHRpb25zIHVsIGxpI3N0YXR1cy1idXN5LmFjdGl2ZSBzcGFuLnN0YXR1cy1jaXJjbGU6YmVmb3JlIHtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkICNlNzRjM2M7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNzdGF0dXMtb3B0aW9ucyB1bCBsaSNzdGF0dXMtb2ZmbGluZSBzcGFuLnN0YXR1cy1jaXJjbGUge1xyXG4gICAgYmFja2dyb3VuZDogIzk1YTVhNjtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAgI3N0YXR1cy1vcHRpb25zIHVsIGxpI3N0YXR1cy1vZmZsaW5lLmFjdGl2ZSBzcGFuLnN0YXR1cy1jaXJjbGU6YmVmb3JlIHtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkICM5NWE1YTY7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNleHBhbmRlZCB7XHJcbiAgICBwYWRkaW5nOiAxMDBweCAwIDAgMDtcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgbGluZS1oZWlnaHQ6IGluaXRpYWwgIWltcG9ydGFudDtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3Byb2ZpbGUgLndyYXAgI2V4cGFuZGVkIGxhYmVsIHtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgY2xlYXI6IGJvdGg7XHJcbiAgICBtYXJnaW46IDAgOHB4IDVweCAwO1xyXG4gICAgcGFkZGluZzogNXB4IDA7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNleHBhbmRlZCBpbnB1dCB7XHJcbiAgICBib3JkZXI6IG5vbmU7XHJcbiAgICBtYXJnaW4tYm90dG9tOiA2cHg7XHJcbiAgICBiYWNrZ3JvdW5kOiAjMzI0NjVhO1xyXG4gICAgYm9yZGVyLXJhZGl1czogM3B4O1xyXG4gICAgY29sb3I6ICNmNWY1ZjU7XHJcbiAgICBwYWRkaW5nOiA3cHg7XHJcbiAgICB3aWR0aDogY2FsYygxMDAlIC0gNDNweCk7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNwcm9maWxlIC53cmFwICNleHBhbmRlZCBpbnB1dDpmb2N1cyB7XHJcbiAgICBvdXRsaW5lOiBub25lO1xyXG4gICAgYmFja2dyb3VuZDogIzQzNWY3YTtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3NlYXJjaCB7XHJcbiAgICBib3JkZXItdG9wOiAxcHggc29saWQgIzMyNDY1YTtcclxuICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCAjMzI0NjVhO1xyXG4gICAgZm9udC13ZWlnaHQ6IDMwMDtcclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAjc2lkZXBhbmVsICNzZWFyY2gge1xyXG4gICAgICAvKiBkaXNwbGF5OiBub25lOyAqL1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjc2VhcmNoIGxhYmVsIHtcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIG1hcmdpbjogMTBweCAwIDAgMjBweDtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI3NlYXJjaCBpbnB1dCB7XHJcbiAgICBmb250LWZhbWlseTogXCJwcm94aW1hLW5vdmFcIiwgIFwiU291cmNlIFNhbnMgUHJvXCIsIHNhbnMtc2VyaWY7XHJcbiAgICBwYWRkaW5nOiAxMHB4IDAgMTBweCA0NnB4O1xyXG4gICAgd2lkdGg6IGNhbGMoMTAwJSAtIDBweCk7XHJcbiAgICBib3JkZXI6IG5vbmU7XHJcbiAgICBiYWNrZ3JvdW5kOiAjMzI0NjVhO1xyXG4gICAgY29sb3I6ICNmNWY1ZjU7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNzZWFyY2ggaW5wdXQ6Zm9jdXMge1xyXG4gICAgb3V0bGluZTogbm9uZTtcclxuICAgIGJhY2tncm91bmQ6ICM0MzVmN2E7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNzZWFyY2ggaW5wdXQ6Oi13ZWJraXQtaW5wdXQtcGxhY2Vob2xkZXIge1xyXG4gICAgY29sb3I6ICNmNWY1ZjU7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNzZWFyY2ggaW5wdXQ6Oi1tb3otcGxhY2Vob2xkZXIge1xyXG4gICAgY29sb3I6ICNmNWY1ZjU7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNzZWFyY2ggaW5wdXQ6LW1zLWlucHV0LXBsYWNlaG9sZGVyIHtcclxuICAgIGNvbG9yOiAjZjVmNWY1O1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjc2VhcmNoIGlucHV0Oi1tb3otcGxhY2Vob2xkZXIge1xyXG4gICAgY29sb3I6ICNmNWY1ZjU7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNjb250YWN0cyB7XHJcbiAgICAvKiBoZWlnaHQ6IGNhbGMoMTAwJSAtIDE3N3B4KTsgKi9cclxuICAgIGhlaWdodDogOTIlO1xyXG4gICAgb3ZlcmZsb3cteTogYXV0bztcclxuICAgIG92ZXJmbG93LXg6IGhpZGRlbjtcclxuICAgIGJvcmRlci1yaWdodDogMXB4IHNvbGlkICNjOWU2ZmY7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHMge1xyXG4gICAgICBoZWlnaHQ6IGNhbGMoMTAwJSAtIDQ1cHgpO1xyXG4gICAgICBvdmVyZmxvdy15OiBzY3JvbGw7XHJcbiAgICAgIG92ZXJmbG93LXg6IGhpZGRlbjtcclxuICAgIH1cclxuICAgICNmcmFtZSAjc2lkZXBhbmVsICNjb250YWN0czo6LXdlYmtpdC1zY3JvbGxiYXIge1xyXG4gICAgICBkaXNwbGF5OiBub25lO1xyXG4gICAgfVxyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHMuZXhwYW5kZWQge1xyXG4gICAgaGVpZ2h0OiBjYWxjKDEwMCUgLSAzMzRweCk7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNjb250YWN0czo6LXdlYmtpdC1zY3JvbGxiYXIge1xyXG4gICAgd2lkdGg6IDhweDtcclxuICAgIGJhY2tncm91bmQ6ICMyYzNlNTA7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNjb250YWN0czo6LXdlYmtpdC1zY3JvbGxiYXItdGh1bWIge1xyXG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzI0MzE0MDtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI2NvbnRhY3RzIHVsIGxpLmNvbnRhY3Qge1xyXG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gICAgcGFkZGluZzogMTBweCAwIDE1cHggMDtcclxuICAgIGZvbnQtc2l6ZTogMC45ZW07XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICBtYXJnaW4tcmlnaHQ6IDEwcHg7XHJcbiAgICBiYWNrZ3JvdW5kOiAjZjVmNWY1O1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMTBweDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDE1cHg7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHMgdWwgbGkuY29udGFjdCB7XHJcbiAgICAgIC8qIHBhZGRpbmc6IDZweCAwIDQ2cHggOHB4OyAqL1xyXG4gICAgICBwYWRkaW5nOiAxNHB4IDEycHg7XHJcbiAgICAgIGJvcmRlci1ib3R0b206IDFweCBzb2xpZCAjNDk0YjYxO1xyXG4gICAgICBtYXJnaW4tbGVmdDogMTBweDtcclxuICAgIGJvcmRlcjogMXB4IHNvbGlkICM1NDU0NTQ7XHJcbiAgICB9XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNjb250YWN0cyB1bCBsaS5jb250YWN0OmhvdmVyIHtcclxuICAgIGJhY2tncm91bmQ6ICNlZWVlZWU7XHJcbiAgICBib3JkZXItcmFkaXVzOiAxNXB4O1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHMgdWwgbGkuY29udGFjdC5hY3RpdmUge1xyXG4gICAgYmFja2dyb3VuZDogI2M4ZTZjOTtcclxuICAgIGJvcmRlci1yaWdodDogNXB4IHNvbGlkICM2NmJiNmE7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNjb250YWN0cyB1bCBsaS5jb250YWN0LmFjdGl2ZSBzcGFuLmNvbnRhY3Qtc3RhdHVzIHtcclxuICAgIGJvcmRlcjogMnB4IHNvbGlkICMzMjQ2NWEgIWltcG9ydGFudDtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI2NvbnRhY3RzIHVsIGxpLmNvbnRhY3QgLndyYXAge1xyXG4gICAgd2lkdGg6IDg4JTtcclxuICAgIG1hcmdpbjogMCBhdXRvO1xyXG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gIH1cclxuICBAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA3NjcuOThweCkge1xyXG4gICAgI2ZyYW1lICNzaWRlcGFuZWwgI2NvbnRhY3RzIHVsIGxpLmNvbnRhY3QgLndyYXAge1xyXG4gICAgICB3aWR0aDogMTAwJTtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI2NvbnRhY3RzIHVsIGxpLmNvbnRhY3QgLndyYXAgc3BhbiB7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICBsZWZ0OiAwO1xyXG4gICAgbWFyZ2luOiAtMnB4IDAgMCAtMnB4O1xyXG4gICAgd2lkdGg6IDEwcHg7XHJcbiAgICBoZWlnaHQ6IDEwcHg7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbiAgICBib3JkZXI6IDJweCBzb2xpZCAjMmMzZTUwO1xyXG4gICAgYmFja2dyb3VuZDogIzk1YTVhNjtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI2NvbnRhY3RzIHVsIGxpLmNvbnRhY3QgLndyYXAgc3Bhbi5vbmxpbmUge1xyXG4gICAgYmFja2dyb3VuZDogIzJlY2M3MTtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI2NvbnRhY3RzIHVsIGxpLmNvbnRhY3QgLndyYXAgc3Bhbi5hd2F5IHtcclxuICAgIGJhY2tncm91bmQ6ICNmMWM0MGY7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNjb250YWN0cyB1bCBsaS5jb250YWN0IC53cmFwIHNwYW4uYnVzeSB7XHJcbiAgICBiYWNrZ3JvdW5kOiAjZTc0YzNjO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHMgdWwgbGkuY29udGFjdCAud3JhcCBpbWcge1xyXG4gICAgd2lkdGg6IDQwcHg7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbiAgICBmbG9hdDogbGVmdDtcclxuICAgIG1hcmdpbi1yaWdodDogMTBweDtcclxuICB9XHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAjc2lkZXBhbmVsICNjb250YWN0cyB1bCBsaS5jb250YWN0IC53cmFwIGltZyB7XHJcbiAgICAgIG1hcmdpbi1yaWdodDogMTJweDtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI2NvbnRhY3RzIHVsIGxpLmNvbnRhY3QgLndyYXAgLm1ldGEge1xyXG4gICAgcGFkZGluZzogMnB4IDAgMCAycHg7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHMgdWwgbGkuY29udGFjdCAud3JhcCAubWV0YSB7XHJcbiAgICAgIC8qIGRpc3BsYXk6IG5vbmU7ICovXHJcbiAgICB9XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNjb250YWN0cyB1bCBsaS5jb250YWN0IC53cmFwIC5tZXRhIC5uYW1lIHtcclxuICAgIGZvbnQtd2VpZ2h0OiA0MDA7XHJcbiAgICBmb250LXNpemU6IDEycHg7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNjb250YWN0cyB1bCBsaS5jb250YWN0IC53cmFwIC5tZXRhIC5wcmV2aWV3IHtcclxuICAgIG1hcmdpbjogNXB4IDAgMCAwO1xyXG4gICAgcGFkZGluZzogMCAwIDFweDtcclxuICAgIGZvbnQtd2VpZ2h0OiA0MDA7XHJcbiAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xyXG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcclxuICAgIHRleHQtb3ZlcmZsb3c6IGVsbGlwc2lzO1xyXG4gICAgLW1vei10cmFuc2l0aW9uOiAxcyBhbGwgZWFzZTtcclxuICAgIC1vLXRyYW5zaXRpb246IDFzIGFsbCBlYXNlO1xyXG4gICAgLXdlYmtpdC10cmFuc2l0aW9uOiAxcyBhbGwgZWFzZTtcclxuICAgIHRyYW5zaXRpb246IDFzIGFsbCBlYXNlO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjY29udGFjdHMgdWwgbGkuY29udGFjdCAud3JhcCAubWV0YSAucHJldmlldyBzcGFuIHtcclxuICAgIHBvc2l0aW9uOiBpbml0aWFsO1xyXG4gICAgYm9yZGVyLXJhZGl1czogaW5pdGlhbDtcclxuICAgIGJhY2tncm91bmQ6IG5vbmU7XHJcbiAgICBib3JkZXI6IG5vbmU7XHJcbiAgICBwYWRkaW5nOiAwIDJweCAwIDA7XHJcbiAgICBtYXJnaW46IDAgMCAwIDFweDtcclxuICAgIG9wYWNpdHk6IC41O1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjYm90dG9tLWJhciB7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICB3aWR0aDogMTAwJTtcclxuICAgIGJvdHRvbTogMDtcclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI2JvdHRvbS1iYXIgYnV0dG9uIHtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgYm9yZGVyOiBub25lO1xyXG4gICAgd2lkdGg6IDUwJTtcclxuICAgIHBhZGRpbmc6IDEwcHggMDtcclxuICAgIGJhY2tncm91bmQ6ICMzMjQ2NWE7XHJcbiAgICBjb2xvcjogI2Y1ZjVmNTtcclxuICAgIGN1cnNvcjogcG9pbnRlcjtcclxuICAgIGZvbnQtc2l6ZTogMC44NWVtO1xyXG4gICAgZm9udC1mYW1pbHk6IFwicHJveGltYS1ub3ZhXCIsICBcIlNvdXJjZSBTYW5zIFByb1wiLCBzYW5zLXNlcmlmO1xyXG4gIH1cclxuICBAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA3NjcuOThweCkge1xyXG4gICAgI2ZyYW1lICNzaWRlcGFuZWwgI2JvdHRvbS1iYXIgYnV0dG9uIHtcclxuICAgICAgZmxvYXQ6IG5vbmU7XHJcbiAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICBwYWRkaW5nOiAxNXB4IDA7XHJcbiAgICB9XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNib3R0b20tYmFyIGJ1dHRvbjpmb2N1cyB7XHJcbiAgICBvdXRsaW5lOiBub25lO1xyXG4gIH1cclxuICAjZnJhbWUgI3NpZGVwYW5lbCAjYm90dG9tLWJhciBidXR0b246bnRoLWNoaWxkKDEpIHtcclxuICAgIGJvcmRlci1yaWdodDogMXB4IHNvbGlkICMyYzNlNTA7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjYm90dG9tLWJhciBidXR0b246bnRoLWNoaWxkKDEpIHtcclxuICAgICAgYm9yZGVyLXJpZ2h0OiBub25lO1xyXG4gICAgICBib3JkZXItYm90dG9tOiAxcHggc29saWQgIzJjM2U1MDtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lICNzaWRlcGFuZWwgI2JvdHRvbS1iYXIgYnV0dG9uOmhvdmVyIHtcclxuICAgIGJhY2tncm91bmQ6ICM0MzVmN2E7XHJcbiAgfVxyXG4gICNmcmFtZSAjc2lkZXBhbmVsICNib3R0b20tYmFyIGJ1dHRvbiBpIHtcclxuICAgIG1hcmdpbi1yaWdodDogM3B4O1xyXG4gICAgZm9udC1zaXplOiAxZW07XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjYm90dG9tLWJhciBidXR0b24gaSB7XHJcbiAgICAgIGZvbnQtc2l6ZTogMS4zZW07XHJcbiAgICB9XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgI3NpZGVwYW5lbCAjYm90dG9tLWJhciBidXR0b24gc3BhbiB7XHJcbiAgICAgIC8qIGRpc3BsYXk6IG5vbmU7ICovXHJcbiAgICB9XHJcbiAgfVxyXG4gICNmcmFtZSAuY29udGVudCB7XHJcbiAgICBmbG9hdDogcmlnaHQ7XHJcbiAgICB3aWR0aDogNjAlO1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcclxuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICB9XHJcbiAgXHJcbiAgQG1lZGlhIHNjcmVlbiBhbmQgKG1heC13aWR0aDogNzY3Ljk4cHgpIHtcclxuICAgICNmcmFtZSAuY29udGVudCB7XHJcbiAgICAgIHdpZHRoOiBjYWxjKDEwMCUgLSAwcHgpO1xyXG4gICAgICBtaW4td2lkdGg6IDMwMHB4ICFpbXBvcnRhbnQ7XHJcbiAgICB9XHJcbiAgICAuY29udGFjdC1wcm9maWxlIGltZ3tcclxuICAgICAgZGlzcGxheTogbm9uZTtcclxuICAgIH1cclxuICAgIC5jb250YWN0LXByb2ZpbGUgaVxyXG4gICAge1xyXG4gICAgICB3aWR0aDogMzVweDtcclxuICAgICAgbWFyZ2luOiAyMHB4IDBweCAwIDEwcHg7XHJcbiAgICAgIGZvbnQtc2l6ZTogMjBweDtcclxuICBcclxuICAgIH1cclxuICAgIC5jb250YWN0LXByb2ZpbGUgaS5pY29uLWFycm93LWxlZnRcclxuICAgIHtcclxuICAgICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICB9XHJcbiAgIFxyXG4gIH1cclxuICBAbWVkaWEgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA5MDBweCkge1xyXG4gICAgI2ZyYW1lIC5jb250ZW50IHtcclxuICAgICAgd2lkdGg6IGNhbGMoMTAwJSAtIDM0MHB4KTtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5jb250YWN0LXByb2ZpbGUge1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICBoZWlnaHQ6IDYwcHg7XHJcbiAgICBsaW5lLWhlaWdodDogNjBweDtcclxuICAgIGJhY2tncm91bmQ6ICNmNWY1ZjU7XHJcbiAgfVxyXG4gICNmcmFtZSAuY29udGVudCAuY29udGFjdC1wcm9maWxlIGltZyB7XHJcbiAgICB3aWR0aDogNDBweDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcclxuICAgIGZsb2F0OiBsZWZ0O1xyXG4gICAgbWFyZ2luOiA5cHggMTJweCAwIDlweDtcclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5jb250YWN0LXByb2ZpbGUgcCB7XHJcbiAgICBmbG9hdDogbGVmdDtcclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5jb250YWN0LXByb2ZpbGUgLnNvY2lhbC1tZWRpYSB7XHJcbiAgICBmbG9hdDogcmlnaHQ7XHJcbiAgfVxyXG4gICNmcmFtZSAuY29udGVudCAuY29udGFjdC1wcm9maWxlIC5zb2NpYWwtbWVkaWEgaSB7XHJcbiAgICBtYXJnaW4tbGVmdDogMTRweDtcclxuICAgIGN1cnNvcjogcG9pbnRlcjtcclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5jb250YWN0LXByb2ZpbGUgLnNvY2lhbC1tZWRpYSBpOm50aC1sYXN0LWNoaWxkKDEpIHtcclxuICAgIG1hcmdpbi1yaWdodDogMjBweDtcclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5jb250YWN0LXByb2ZpbGUgLnNvY2lhbC1tZWRpYSBpOmhvdmVyIHtcclxuICAgIGNvbG9yOiAjNDM1ZjdhO1xyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2VzIHtcclxuICAgIGhlaWdodDogYXV0bztcclxuICAgIG1pbi1oZWlnaHQ6IGNhbGMoMTAwJSAtIDExNXB4KTtcclxuICAgIG1heC1oZWlnaHQ6IGNhbGMoMTAwJSAtIDExNXB4KTtcclxuICAgIG92ZXJmbG93LXk6IHNjcm9sbDtcclxuICAgIG92ZXJmbG93LXg6IGhpZGRlbjtcclxuICAgIHdpZHRoOiAxMDAlO1xyXG4gIH1cclxuICBAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA3NjcuOThweCkge1xyXG4gICAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlcyB7XHJcbiAgICAgIG1heC1oZWlnaHQ6IGNhbGMoMTAwJSAtIDEwNXB4KTtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlczo6LXdlYmtpdC1zY3JvbGxiYXIge1xyXG4gICAgd2lkdGg6IDhweDtcclxuICAgIGJhY2tncm91bmQ6IHRyYW5zcGFyZW50O1xyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2VzOjotd2Via2l0LXNjcm9sbGJhci10aHVtYiB7XHJcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuMyk7XHJcbiAgfVxyXG4gICNmcmFtZSAuY29udGVudCAubWVzc2FnZXMgdWwgbGkge1xyXG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgY2xlYXI6IGJvdGg7XHJcbiAgICBmbG9hdDogbGVmdDtcclxuICAgIG1hcmdpbjogMTVweCAxNXB4IDVweCAxNXB4O1xyXG4gICAgd2lkdGg6IGNhbGMoMTAwJSAtIDI1cHgpO1xyXG4gICAgZm9udC1zaXplOiAwLjllbTtcclxuICAgIGZvbnQtd2VpZ2h0OiBub3JtYWw7XHJcbiAgfVxyXG4gICNmcmFtZSAuY29udGVudCAubWVzc2FnZXMgdWwgbGk6bnRoLWxhc3QtY2hpbGQoMSkge1xyXG4gICAgbWFyZ2luLWJvdHRvbTogMjBweDtcclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlcyB1bCBsaS5zZW50IGltZyB7XHJcbiAgICBtYXJnaW46IDZweCA4cHggMCAwO1xyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2VzIHVsIGxpLnNlbnQgcCB7XHJcbiAgICBiYWNrZ3JvdW5kOiAjNDM1ZjdhO1xyXG4gICAgY29sb3I6ICNmNWY1ZjU7XHJcbiAgfVxyXG4gICNmcmFtZSAuY29udGVudCAubWVzc2FnZXMgdWwgbGkucmVwbGllcyBpbWcge1xyXG4gICAgZmxvYXQ6IHJpZ2h0O1xyXG4gICAgbWFyZ2luOiA2cHggMCAwIDhweDtcclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlcyB1bCBsaS5yZXBsaWVzIHAge1xyXG4gICAgYmFja2dyb3VuZDogI2Y1ZjVmNTtcclxuICAgIGZsb2F0OiByaWdodDtcclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlcyB1bCBsaSBpbWcge1xyXG4gICAgd2lkdGg6IDIycHg7XHJcbiAgICBib3JkZXItcmFkaXVzOiA1MCU7XHJcbiAgICBmbG9hdDogbGVmdDtcclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlcyB1bCBsaSBwIHtcclxuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICAgIHBhZGRpbmc6IDEwcHggMTVweDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDIwcHg7XHJcbiAgICBtYXgtd2lkdGg6IDcwJTtcclxuICAgIGxpbmUtaGVpZ2h0OiAxMzAlO1xyXG4gIH1cclxuICBAbWVkaWEgc2NyZWVuIGFuZCAobWluLXdpZHRoOiA3NjcuOTgpIHtcclxuICAgICNmcmFtZSAuY29udGVudCAubWVzc2FnZXMgdWwgbGkgcCB7XHJcbiAgICAgIG1heC13aWR0aDogMzAwcHg7XHJcbiAgICB9XHJcbiAgIFxyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2UtaW5wdXQge1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgYm90dG9tOiAwO1xyXG4gICAgd2lkdGg6IDEwMCU7XHJcbiAgICB6LWluZGV4OiA5OTtcclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlLWlucHV0IC53cmFwIHtcclxuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlLWlucHV0IC53cmFwIGlucHV0IHtcclxuICAgZmxvYXQ6IGxlZnQ7XHJcbiAgICBib3JkZXI6IG5vbmU7XHJcbiAgICB3aWR0aDogY2FsYygxMDAlIC0gOTBweCk7XHJcbiAgICBwYWRkaW5nOiAxNHB4IDMycHggMTRweCA4cHg7XHJcbiAgICBmb250LXNpemU6IDAuOGVtO1xyXG4gICAgY29sb3I6ICMzMjQ2NWE7XHJcbiAgfVxyXG4gIEBtZWRpYSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDc2Ny45OHB4KSB7XHJcbiAgICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2UtaW5wdXQgLndyYXAgaW5wdXQge1xyXG4gICAgICBwYWRkaW5nOiAxNXB4IDMycHggMTZweCA4cHg7XHJcbiAgICB9XHJcbiAgfVxyXG4gICNmcmFtZSAuY29udGVudCAubWVzc2FnZS1pbnB1dCAud3JhcCBpbnB1dDpmb2N1cyB7XHJcbiAgICBvdXRsaW5lOiBub25lO1xyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2UtaW5wdXQgLndyYXAgLmF0dGFjaG1lbnQge1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgcmlnaHQ6IDY1cHg7XHJcbiAgICB6LWluZGV4OiA0O1xyXG4gICAgbWFyZ2luLXRvcDogMTdweDtcclxuICAgIGZvbnQtc2l6ZTogMS4xZW07XHJcbiAgICBjb2xvcjogIzQzNWY3YTtcclxuICAgIC8qIG9wYWNpdHk6IC41OyAqL1xyXG4gICAgY3Vyc29yOiBwb2ludGVyO1xyXG4gIH1cclxuICBAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA3NjcuOThweCkge1xyXG4gICAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlLWlucHV0IC53cmFwIC5hdHRhY2htZW50IHtcclxuICAgICAgbWFyZ2luLXRvcDogMTdweDtcclxuICAgICAgcmlnaHQ6IDY1cHg7XHJcbiAgICB9XHJcbiAgfVxyXG4gICNmcmFtZSAuY29udGVudCAubWVzc2FnZS1pbnB1dCAud3JhcCAuYXR0YWNobWVudDpob3ZlciB7XHJcbiAgICBvcGFjaXR5OiAxO1xyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2UtaW5wdXQgLndyYXAgYnV0dG9uIHtcclxuICAgIGZsb2F0OiByaWdodDtcclxuICAgIGJvcmRlcjogbm9uZTtcclxuICAgIHdpZHRoOiA1MHB4O1xyXG4gICAgcGFkZGluZzogMTJweCAwO1xyXG4gICAgY3Vyc29yOiBwb2ludGVyO1xyXG4gICAgYmFja2dyb3VuZDogIzMyNDY1YTtcclxuICAgIGNvbG9yOiAjZjVmNWY1O1xyXG4gIH1cclxuICBAbWVkaWEgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA3NjcuOThweCkge1xyXG4gICAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlLWlucHV0IC53cmFwIGJ1dHRvbiB7XHJcbiAgICAgIHBhZGRpbmc6IDE2cHggMDtcclxuICAgIH1cclxuICB9XHJcbiAgI2ZyYW1lIC5jb250ZW50IC5tZXNzYWdlLWlucHV0IC53cmFwIGJ1dHRvbjpob3ZlciB7XHJcbiAgICBiYWNrZ3JvdW5kOiAjNDM1ZjdhO1xyXG4gIH1cclxuICAjZnJhbWUgLmNvbnRlbnQgLm1lc3NhZ2UtaW5wdXQgLndyYXAgYnV0dG9uOmZvY3VzIHtcclxuICAgIG91dGxpbmU6IG5vbmU7XHJcbiAgfVxyXG4gIFxyXG5cclxuICAuYXZpdHRpTm9uZXtcclxuICAgIGRpc3BsYXk6IG5vbmUgIWltcG9ydGFudDtcclxuICB9Il19 */";
       /***/
     },
 
@@ -6216,6 +5957,26 @@
     },
 
     /***/
+    "Xbsl":
+    /*!*********************************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/shared/media-preview/media-preview.component.html ***!
+      \*********************************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function Xbsl(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<div class=\"row\">\r\n    <div class=\"col-xl-12\">\r\n        <i class=\"icon-close float-right\" mat-button mat-dialog-close></i>\r\n    </div>\r\n</div>\r\n<div class=\"row\" [ngSwitch]=\"mimeType\">\r\n    <!-- the same view can be shown in more than one case -->\r\n    <div class=\"col-xl-12\" *ngSwitchCase=\"MediaTypes.video\">\r\n    </div>\r\n    <div class=\"col-xl-12\" *ngSwitchCase=\"MediaTypes.audio\">\r\n    </div>\r\n    <div class=\"col-xl-12\" *ngSwitchCase=\"MediaTypes.image\">\r\n        <img class=\"img-fluid\" [src]=\"mediaSrc\" width=\"90%\" height=\"90%\" />\r\n    </div>\r\n    <div class=\"col-xl-12\" *ngSwitchDefault>\r\n        <img class=\"img-fluid\" [src]=\"mediaSrc\" width=\"90%\" height=\"90%\" />\r\n    </div>\r\n</div>";
+      /***/
+    },
+
+    /***/
     "Xwua":
     /*!*******************************************************************************************************!*\
       !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/shared/income-proof/income-proof.component.html ***!
@@ -6231,7 +5992,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"row\">\n\n    <div class=\"col-xl-12 col-12\">\n        <div class=\"card shadow mb-4\">\n         \n            <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\n                <h6 class=\"m-0 font-weight-bold text-primary\">Update Your Income Details</h6>\n                \n            </div>\n       \n            <div class=\"card-body\">\n                <div class=\"row mb-3\">\n                    <div class=\"col-xl-12 mb-3\">\n                        Update your mothly income proof for the verification. be careful with your income proof uploads as you cannot change your monthly income proof once uploaded.\n                    </div>\n                    <div class=\"col-xl-4\">\n                        <div class=\"form-group\">\n                            <label for=\"usr\">Income Source</label>\n                            <input type=\"text\" class=\"form-control\" placeholder=\"e.g. salaried, business, stocks etc\">\n                          </div>\n                    </div>\n                    <div class=\"col-xl-4\">\n                        <div class=\"form-group\">\n                            <label for=\"usr\">Monthly Income in kr</label>\n                            <input type=\"text\" class=\"form-control\" placeholder=\"\">\n                          </div>\n                    </div>\n                    <div class=\"col-xl-4\">\n                        <div class=\"form-group\">\n                            <label for=\"usr\">Upload proof</label>\n                            <input type=\"file\" class=\"form-control\" id=\"usr\">\n                          </div>\n                    </div>\n                    <div class=\"col-xl-12\">\n                        <button class=\"btn btn-success btn-sm float-right\"><i class=\"icon icon-plus\"></i> ADD</button>\n                    </div>\n\n                </div>\n\n                <div class=\"table-responsive table-billing-history\">\n                    <table class=\"table mb-0\">\n                        <thead>\n                            <tr>\n                                <th scope=\"col\">Type</th>\n                                <th scope=\"col\">Monthly Income</th>\n                                <th scope=\"col\">status</th>\n                                <th scope=\"col\">#</th>\n                            </tr>\n                        </thead>\n                        <tbody>\n                            <tr>\n                                <td>#39201</td>\n                                <td>06/15/2020</td>\n                                <td><span class=\"badge badge-success\">verified</span></td>\n                                <td><span class=\"badge badge-primary\">Preview</span></td>\n                            </tr>\n                            \n                            \n                        </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n    </div>\n\n\n    <div class=\"col-xl-12 col-12\">\n        <div class=\"card shadow mb-4\">\n         \n            <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\n                <h6 class=\"m-0 font-weight-bold text-primary\">Update Your Monthly Expenses</h6>\n                \n            </div>\n       \n            <div class=\"card-body\">\n                <div class=\"row mb-3\">\n                    <div class=\"col-xl-12 mb-3\">\n                        Update your existing loans or other expenses.\n\n                    </div>\n                    <div class=\"col-xl-6\">\n                        <div class=\"form-group\">\n                            <label for=\"usr\">Expense Details</label>\n                            <input type=\"text\" class=\"form-control\" placeholder=\"e.g. salaried, business, stocks etc\">\n                          </div>\n                    </div>\n                    <div class=\"col-xl-6\">\n                        <div class=\"form-group\">\n                            <label for=\"usr\">Start Date</label>\n                            <input type=\"date\" class=\"form-control\" placeholder=\"\">\n                          </div>\n                    </div>\n                    <div class=\"col-xl-6\">\n                        <div class=\"form-group\">\n                            <label for=\"usr\">Payment Date</label>\n                            <input type=\"date\" class=\"form-control\" id=\"usr\">\n                          </div>\n                    </div>\n                    <div class=\"col-xl-6\">\n                        <div class=\"form-group\">\n                            <label for=\"usr\">Monthly EMI</label>\n                            <input type=\"text\" class=\"form-control\" id=\"usr\">\n                          </div>\n                    </div>\n                    <div class=\"col-xl-12\">\n                        <button class=\"btn btn-success btn-sm float-right\"><i class=\"icon icon-plus\"></i> ADD</button>\n                    </div>\n\n                </div>\n\n                <div class=\"table-responsive table-billing-history\">\n                    <table class=\"table mb-0\">\n                        <thead>\n                            <tr>\n                                <th scope=\"col\">Expense Details</th>\n                                <th scope=\"col\">Start Date</th>\n                                <th scope=\"col\">Payment Date</th>\n                                <th scope=\"col\">Monthly EMI</th>\n                            </tr>\n                        </thead>\n                        <tbody>\n                            <tr>\n                                <td>#39201</td>\n                                <td>06/15/2020</td>\n                                <td><span class=\"badge badge-success\">verified</span></td>\n                                <td><span class=\"badge badge-primary\">Preview</span></td>\n                            </tr>\n                            \n                            \n                        </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n    </div>\n  \n</div>";
+      __webpack_exports__["default"] = "<div class=\"row\">\r\n    <div class=\"col-xl-12 col-12\">\r\n        <div id=\"accordion_userIncomeDetailsForm\">\r\n            <div class=\"card shadow mb-4\">\r\n                <div class=\"card-header py-3 flex-row align-items-center justify-content-between\">\r\n                    <a class=\"collapsed card-link\" data-toggle=\"collapse\"\r\n                        [attr.href]=\"'#collapse_userIncomeDetailsForm'\" i18n>\r\n                        <h6 class=\"m-0 font-weight-bold text-primary\">\r\n                            Update {{adminViewT?userObj.firstName+'`s':'Your'}} Income Details\r\n                            <span class=\"float-right\" [ngClass]=\"{ 'text-success': userObj.totalAllowedBudget, 'text-danger': !userObj.totalAllowedBudget }\">\r\n                                &nbsp;{{userObj.totalAllowedBudget}}&nbsp;\r\n                            </span>\r\n                            <span class=\"float-right\">\r\n                                &nbsp;{{userObj.totalIncome4currentUser || 0 }}&nbsp;-&nbsp;{{userObj.totalExpense4currentUser || 0}}&nbsp;=&nbsp;\r\n                            </span>\r\n                        </h6>\r\n                    </a>\r\n                    <i *ngIf=\"isOpenedInModel\" class=\"icon-close float-right\" mat-button mat-dialog-close></i>\r\n                </div>\r\n                <div [attr.id]=\"'collapse_userIncomeDetailsForm'\" class=\"collapse show\"\r\n                    data-parent=\"#accordion_userIncomeDetailsForm\">\r\n                    <div class=\"card-body\">\r\n\r\n                        <form [formGroup]=\"userIncomeDetailsForm\">\r\n                            <div class=\"row mb-3\" *ngIf=\"!adminViewT\">\r\n                                <div class=\"col-xl-12 mb-3\">\r\n                                    Update your mothly income proof for the verification. be careful with your income\r\n                                    proof\r\n                                    uploads as you cannot change your monthly income proof once uploaded.\r\n                                </div>\r\n                                <div class=\"col-xl-4\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"incomeSource\">Income Source</label>\r\n                                        <input type=\"text\" formControlName=\"incomeSource\" class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submittedIncomeDetails && f.incomeSource.errors }\"\r\n                                            placeholder=\"e.g. salaried, business, stocks etc\" />\r\n                                        <div *ngIf=\"submittedIncomeDetails && f.incomeSource.errors\"\r\n                                            class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.incomeSource.errors.required\">Income Source is required</div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"monthlyIncomeAmount\">Monthly Income in kr</label>\r\n                                        <input type=\"number\" formControlName=\"monthlyIncomeAmount\" class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submittedIncomeDetails && f.monthlyIncomeAmount.errors }\" />\r\n                                        <div *ngIf=\"submittedIncomeDetails && f.monthlyIncomeAmount.errors\"\r\n                                            class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.monthlyIncomeAmount.errors.required\">Monthly Income is\r\n                                                required\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"monthlyIncomeProofDocument\">Upload proof</label>\r\n                                        <!--\r\n                                        <input type=\"file\" class=\"form-control\" id=\"monthlyIncomeProofDocument\"\r\n                                            (change)=\"onfileProgressForMonthlyIncomeProofDocument($event)\">\r\n                                        -->\r\n\r\n                                        <img *ngIf=\"f.monthlyIncomeProofDocument.value\"\r\n                                            [src]=\"f.monthlyIncomeProofDocument.value\" class=\"border img-fluid mb-3\"\r\n                                            height=\"50\" width=\"50\" />\r\n\r\n                                        <input *ngIf=\"!fileData4MonthlyIncomeProofDocumentPendingForUpload\"\r\n                                            id=\"ctrlUploadmonthlyIncomeProofDocument\" type=\"file\" name=\"image\"\r\n                                            accept=\"image/*\"\r\n                                            (change)=\"onfileProgressForMonthlyIncomeProofDocument($event)\">\r\n                                        <i *ngIf=\"fileData4MonthlyIncomeProofDocumentPendingForUpload\"\r\n                                            class=\"icon-upload m-2 cursor-pointer text-success\"\r\n                                            (click)=\"onUploadForMonthlyIncomeProofDocument()\">\r\n                                            Upload\r\n                                        </i>\r\n                                        <div *ngIf=\"submittedIncomeDetails && f.monthlyIncomeProofDocument.errors\"\r\n                                            class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.monthlyIncomeProofDocument.errors.required\">Monthly Income\r\n                                                Proof is required\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12\">\r\n                                    <button class=\"btn btn-success btn-sm float-right\"\r\n                                        (click)=\"onUserIncomeDetailsUpdateSubmit()\"><i class=\"icon icon-plus\"></i>\r\n                                        ADD</button>\r\n                                </div>\r\n                            </div>\r\n                        </form>\r\n                        <div class=\"table-responsive table-billing-history\">\r\n                            <table class=\"table mb-0\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th scope=\"col\">Type</th>\r\n                                        <th scope=\"col\">Monthly Income</th>\r\n                                        <th scope=\"col\">Status</th>\r\n                                        <th scope=\"col\">Preview</th>\r\n                                        <th *ngIf=\"adminViewT\" scope=\"col\">#</th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr *ngFor=\"let obj2show of allIncomeDetailsData\">\r\n                                        <td>{{obj2show.incomeSource}}</td>\r\n                                        <td>{{obj2show.monthlyIncomeAmount}}</td>\r\n                                        <td class=\"text-capitalize text-cap\">\r\n                                            <span class=\"badge\"\r\n                                                [ngClass]=\"{'badge-success': (obj2show.monthlyIncomeStatus==SessionStatus.Approved || obj2show.monthlyIncomeStatus==SessionStatus.Accepted || obj2show.monthlyIncomeStatus==SessionStatus.Active || obj2show.monthlyIncomeStatus==SessionStatus.Completed || obj2show.monthlyIncomeStatus==SessionStatus.OngoingInitiated  || obj2show.monthlyIncomeStatus==SessionStatus.OngoingAccepted  || obj2show.monthlyIncomeStatus==SessionStatus.Ongoing), 'badge-danger': (obj2show.monthlyIncomeStatus==SessionStatus.Rejected || obj2show.monthlyIncomeStatus==SessionStatus.RejectedOngoing || obj2show.monthlyIncomeStatus==SessionStatus.Suspended), 'badge-info': ( obj2show.monthlyIncomeStatus==null || obj2show.monthlyIncomeStatus=='' || obj2show.monthlyIncomeStatus==SessionStatus.Pending)}\">\r\n                                                {{obj2show.monthlyIncomeStatus}}\r\n                                            </span>\r\n                                        </td>\r\n                                        <td>\r\n                                            <label title=\"Preview\"\r\n                                                (click)=\"mediaPreviewModel(obj2show.monthlyIncomeProofDocument, 'image')\">\r\n                                                <i class=\"icon-eye m-2 text-success\"></i>\r\n                                            </label>\r\n                                        </td>\r\n                                        <td *ngIf=\"adminViewT\">\r\n                                            <div [ngSwitch]=\"obj2show.monthlyIncomeStatus\">\r\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Pending\">\r\n                                                    <button title=\"Approve\" class=\"btn btn-link btn-sm\"\r\n                                                        (click)=\"updateUsersIncomeVerificationStatus(obj2show._id, SessionStatus.Approved)\">\r\n                                                        <i class=\"icon-check m-2 text-success\"></i>\r\n                                                    </button>\r\n                                                    <button title=\"Reject\" class=\"btn btn-link btn-sm\"\r\n                                                        (click)=\"updateUsersIncomeVerificationStatus(obj2show._id, SessionStatus.Rejected)\">\r\n                                                        <i class=\"icon-close m-2 text-danger\"></i>\r\n                                                    </button>\r\n                                                </div>\r\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Approved\">\r\n                                                    <button title=\"Reject\" class=\"btn btn-link btn-sm\"\r\n                                                        (click)=\"updateUsersIncomeVerificationStatus(obj2show._id, SessionStatus.Rejected)\">\r\n                                                        <i class=\"icon-close m-2 text-danger\"></i>\r\n                                                    </button>\r\n                                                </div>\r\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Rejected\">\r\n                                                    <button title=\"Approve\" class=\"btn btn-link btn-sm\"\r\n                                                        (click)=\"updateUsersIncomeVerificationStatus(obj2show._id, SessionStatus.Approved)\">\r\n                                                        <i class=\"icon-check m-2 text-success\"></i>\r\n                                                    </button>\r\n                                                </div>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <div class=\"col-xl-12 col-12\">\r\n        <div id=\"accordion_userExpenseDetailsForm\">\r\n            <div class=\"card shadow mb-4\">\r\n                <div class=\"card-header py-3 flex-row align-items-center justify-content-between\">\r\n                    <a class=\"collapsed card-link\" data-toggle=\"collapse\"\r\n                        [attr.href]=\"'#collapse_userExpenseDetailsForm'\" i18n>\r\n                        <h6 class=\"m-0 font-weight-bold text-primary\">\r\n                            Update {{adminViewT?userObj.firstName+'`s':'Your'}} Monthly Expenses\r\n                        </h6>\r\n                    </a>\r\n                </div>\r\n                <div [attr.id]=\"'collapse_userExpenseDetailsForm'\" class=\"collapse show\"\r\n                    data-parent=\"#accordion_userExpenseDetailsForm\">\r\n                    <div class=\"card-body\">\r\n\r\n                        <form [formGroup]=\"userExpenseDetailsForm\">\r\n                            <div class=\"row mb-3\" *ngIf=\"!adminViewT\">\r\n                                <div class=\"col-xl-12 mb-3\">\r\n                                    Update your existing loans or other expenses.\r\n\r\n                                </div>\r\n                                <div class=\"col-xl-6\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"usr\">Expense Details</label>\r\n                                        <label for=\"expenseDetails\">Expense Details</label>\r\n                                        <input type=\"text\" formControlName=\"expenseDetails\" class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submittedExpenseDetails && ff.expenseDetails.errors }\"\r\n                                            placeholder=\"e.g. salaried, business, stocks etc\" />\r\n                                        <div *ngIf=\"submittedExpenseDetails && ff.expenseDetails.errors\"\r\n                                            class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"ff.expenseDetails.errors.required\">Expense Details is required\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-6\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"monthlyEMIAmount\">Monthly EMI</label>\r\n                                        <input type=\"number\" formControlName=\"monthlyEMIAmount\" class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submittedExpenseDetails && ff.monthlyEMIAmount.errors }\" />\r\n                                        <div *ngIf=\"submittedExpenseDetails && ff.monthlyEMIAmount.errors\"\r\n                                            class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"ff.monthlyEMIAmount.errors.required\">Monthly EMI is required\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-6\">\r\n                                    <div class=\"form-group\">\r\n\r\n                                        <label for=\"monthlyExpenseStartDateTimeCustomised\" i18n>Start Date</label>\r\n                                        <input type=\"date\" formControlName=\"monthlyExpenseStartDateTimeCustomised\"\r\n                                            class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submittedExpenseDetails && ff.monthlyExpenseStartDateTimeCustomised.errors }\" />\r\n                                        <div *ngIf=\"submittedExpenseDetails && ff.monthlyExpenseStartDateTimeCustomised.errors\"\r\n                                            class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"ff.monthlyExpenseStartDateTimeCustomised.errors.required\" i18n>\r\n                                                Start Date\r\n                                                is required\r\n                                            </div>\r\n                                            <div *ngIf=\"ff.monthlyExpenseStartDateTimeCustomised.errors.date\" i18n>\r\n                                                Invalid Date\r\n                                                format.\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-6\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"monthlyExpensePaymentDateTimeCustomised\" i18n>Payment Date</label>\r\n                                        <input type=\"date\" formControlName=\"monthlyExpensePaymentDateTimeCustomised\"\r\n                                            class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submittedExpenseDetails && ff.monthlyExpensePaymentDateTimeCustomised.errors }\" />\r\n                                        <div *ngIf=\"submittedExpenseDetails && ff.monthlyExpensePaymentDateTimeCustomised.errors\"\r\n                                            class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"ff.monthlyExpensePaymentDateTimeCustomised.errors.required\"\r\n                                                i18n>Payment\r\n                                                Date is required\r\n                                            </div>\r\n                                            <div *ngIf=\"ff.monthlyExpensePaymentDateTimeCustomised.errors.date\" i18n>\r\n                                                Invalid Date\r\n                                                format.\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12\">\r\n                                    <button class=\"btn btn-success btn-sm float-right\"\r\n                                        (click)=\"onUserExpenseDetailsUpdateSubmit()\"><i class=\"icon icon-plus\"></i>\r\n                                        ADD</button>\r\n                                </div>\r\n\r\n                            </div>\r\n                        </form>\r\n                        <div class=\"table-responsive table-billing-history\">\r\n                            <table class=\"table mb-0\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th scope=\"col\">Expense Details</th>\r\n                                        <th scope=\"col\">Start Date</th>\r\n                                        <th scope=\"col\">Payment Date</th>\r\n                                        <th scope=\"col\">Monthly EMI</th>\r\n                                        <th scope=\"col\">Status</th>\r\n                                        <th *ngIf=\"adminViewT\" scope=\"col\">#</th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr>\r\n                                    <tr *ngFor=\"let obj2show of allExpenseDetailsData\">\r\n                                        <td>{{obj2show.expenseDetails}}</td>\r\n                                        <td>{{obj2show.monthlyExpenseStartDate | date:'dd-MMM-YYYY'}}</td>\r\n                                        <td>{{obj2show.monthlyExpensePaymentDate | date:'dd-MMM-YYYY'}}</td>\r\n                                        <td>{{obj2show.monthlyEMIAmount}}</td>\r\n                                        <td class=\"text-capitalize text-cap\">\r\n                                            <span class=\"badge\"\r\n                                                [ngClass]=\"{'badge-success': (obj2show.monthlyExpenseStatus==SessionStatus.Approved || obj2show.monthlyExpenseStatus==SessionStatus.Accepted || obj2show.monthlyExpenseStatus==SessionStatus.Active || obj2show.monthlyExpenseStatus==SessionStatus.Completed || obj2show.monthlyExpenseStatus==SessionStatus.OngoingInitiated  || obj2show.monthlyExpenseStatus==SessionStatus.OngoingAccepted  || obj2show.monthlyExpenseStatus==SessionStatus.Ongoing), 'badge-danger': (obj2show.monthlyExpenseStatus==SessionStatus.Rejected || obj2show.monthlyExpenseStatus==SessionStatus.RejectedOngoing || obj2show.monthlyExpenseStatus==SessionStatus.Suspended), 'badge-info': ( obj2show.monthlyExpenseStatus==null || obj2show.monthlyExpenseStatus=='' || obj2show.monthlyExpenseStatus==SessionStatus.Pending)}\">\r\n                                                {{obj2show.monthlyExpenseStatus}}\r\n                                            </span>\r\n                                        </td>\r\n                                        <td *ngIf=\"adminViewT\">\r\n                                            <div [ngSwitch]=\"obj2show.monthlyExpenseStatus\">\r\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Pending\">\r\n                                                    <button title=\"Approve\" class=\"btn btn-link btn-sm\"\r\n                                                        (click)=\"updateUsersExpenseVerificationStatus(obj2show._id, SessionStatus.Approved)\">\r\n                                                        <i class=\"icon-check m-2 text-success\"></i>\r\n                                                    </button>\r\n                                                    <button title=\"Reject\" class=\"btn btn-link btn-sm\"\r\n                                                        (click)=\"updateUsersExpenseVerificationStatus(obj2show._id, SessionStatus.Rejected)\">\r\n                                                        <i class=\"icon-close m-2 text-danger\"></i>\r\n                                                    </button>\r\n                                                </div>\r\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Approved\">\r\n                                                    <button title=\"Reject\" class=\"btn btn-link btn-sm\"\r\n                                                        (click)=\"updateUsersExpenseVerificationStatus(obj2show._id, SessionStatus.Rejected)\">\r\n                                                        <i class=\"icon-close m-2 text-danger\"></i>\r\n                                                    </button>\r\n                                                </div>\r\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Rejected\">\r\n                                                    <button title=\"Approve\" class=\"btn btn-link btn-sm\"\r\n                                                        (click)=\"updateUsersExpenseVerificationStatus(obj2show._id, SessionStatus.Approved)\">\r\n                                                        <i class=\"icon-check m-2 text-success\"></i>\r\n                                                    </button>\r\n                                                </div>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
       /***/
     },
 
@@ -6278,29 +6039,153 @@
       var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! @angular/core */
       "fXoL");
+      /* harmony import */
+
+
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @angular/forms */
+      "3Pt+");
+      /* harmony import */
+
+
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! rxjs/operators */
+      "kU1M");
+      /* harmony import */
+
+
+      var src_app_components_helpers_must_match_validator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! src/app/components/_helpers/must-match-validator */
+      "nDMU");
+      /* harmony import */
+
+
+      var src_app_services__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! src/app/services */
+      "o0su");
+      /* harmony import */
+
+
+      var src_app_services_app_router_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! src/app/services/app-router.service */
+      "KHIh");
+      /* harmony import */
+
+
+      var src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! src/app/services/utility.service */
+      "A1CT");
 
       var UpdatePasswordComponent = /*#__PURE__*/function () {
-        function UpdatePasswordComponent() {
+        function UpdatePasswordComponent(formBuilder, authenticationService, userService, alertService, appRouterService, utilityService) {
           _classCallCheck2(this, UpdatePasswordComponent);
+
+          this.formBuilder = formBuilder;
+          this.authenticationService = authenticationService;
+          this.userService = userService;
+          this.alertService = alertService;
+          this.appRouterService = appRouterService;
+          this.utilityService = utilityService;
+          this.submitted = false;
+          this.loading = false;
+
+          if (!this.authenticationService.currentUserValue) {
+            this.appRouterService.appRouter('');
+          }
+
+          this.showEditingForm(this.authenticationService.currentUserValue);
         }
 
         _createClass2(UpdatePasswordComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {}
+        }, {
+          key: "onUpdatePasswordSubmit",
+          value: function onUpdatePasswordSubmit() {
+            var _this32 = this;
+
+            this.submitted = true;
+
+            if (this.profileUpdatePasswordForm.invalid) {
+              this.alertService.error("Please enter stronger password and should have atleast 6 characters.");
+              return;
+            }
+
+            this.userService.resetExistingUsersPasswordByUserId(this.profileUpdatePasswordForm.value._id, this.profileUpdatePasswordForm.value.userName, this.profileUpdatePasswordForm.value.password, this.profileUpdatePasswordForm.value.password2update, this.profileUpdatePasswordForm.value.role).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (data) {
+              if (data && data['success']) {
+                _this32.submitted = false;
+
+                _this32.showEditingForm(_this32.authenticationService.currentUserValue);
+
+                _this32.alertService.success('Password Updated successfully', true);
+              } else {
+                _this32.alertService.error(data['message']);
+
+                _this32.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = "";
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this32.alertService.error(errorMsg2show);
+
+              _this32.loading = false;
+            });
+          }
+        }, {
+          key: "f",
+          get: function get() {
+            return this.profileUpdatePasswordForm.controls;
+          }
+        }, {
+          key: "showEditingForm",
+          value: function showEditingForm(_userObj) {
+            this.profileUpdatePasswordForm = this.formBuilder.group({
+              _id: [_userObj._id || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              role: [_userObj.role || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              userName: [_userObj.userName || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              password: [_userObj.password || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              password2update: [_userObj.password2update || '', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].minLength(6)]],
+              confirmPassword: [_userObj.confirmPassword || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+            }, {
+              validator: Object(src_app_components_helpers_must_match_validator__WEBPACK_IMPORTED_MODULE_6__["MustMatch"])('password2update', 'confirmPassword')
+            });
+          }
         }]);
 
         return UpdatePasswordComponent;
       }();
 
       UpdatePasswordComponent.ctorParameters = function () {
-        return [];
+        return [{
+          type: _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"]
+        }, {
+          type: src_app_services__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"]
+        }, {
+          type: src_app_services__WEBPACK_IMPORTED_MODULE_7__["UserService"]
+        }, {
+          type: src_app_services__WEBPACK_IMPORTED_MODULE_7__["AlertService"]
+        }, {
+          type: src_app_services_app_router_service__WEBPACK_IMPORTED_MODULE_8__["AppRouterService"]
+        }, {
+          type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_9__["UtilityService"]
+        }];
       };
 
       UpdatePasswordComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-update-password',
         template: _raw_loader_update_password_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_update_password_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [])], UpdatePasswordComponent);
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["UserService"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["AlertService"], src_app_services_app_router_service__WEBPACK_IMPORTED_MODULE_8__["AppRouterService"], src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_9__["UtilityService"]])], UpdatePasswordComponent);
       /***/
     },
 
@@ -6941,8 +6826,8 @@
             } // tslint:disable-next-line no-bitwise
 
 
-            for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-              args[_key - 1] = arguments[_key];
+            for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key2 = 1; _key2 < _len; _key2++) {
+              args[_key2 - 1] = arguments[_key2];
             }
 
             return args.reduce(function (d, c) {
@@ -7029,11 +6914,11 @@
         }, {
           key: "flatten",
           value: function flatten(array) {
-            var _this39 = this;
+            var _this33 = this;
 
             return array.reduce(function (arr, elm) {
               if (Array.isArray(elm)) {
-                return arr.concat(_this39.flatten(elm));
+                return arr.concat(_this33.flatten(elm));
               }
 
               return arr.concat(elm);
@@ -7076,8 +6961,8 @@
             } // tslint:disable-next-line no-bitwise
 
 
-            for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-              args[_key2 - 1] = arguments[_key2];
+            for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key3 = 1; _key3 < _len2; _key3++) {
+              args[_key3 - 1] = arguments[_key3];
             }
 
             return args.reduce(function (n, c) {
@@ -7510,9 +7395,9 @@
 
             for (var i = 0; i < n; ++i) {
               var j = Math.floor(Math.random() * (n - i + 1)) + i;
-              var _ref2 = [shuffled[j], shuffled[i]];
-              shuffled[i] = _ref2[0];
-              shuffled[j] = _ref2[1];
+              var _ref = [shuffled[j], shuffled[i]];
+              shuffled[i] = _ref[0];
+              shuffled[j] = _ref[1];
             }
 
             return shuffled;
@@ -7679,10 +7564,10 @@
         }, {
           key: "groupBy",
           value: function groupBy(list, discriminator, delimiter) {
-            var _this40 = this;
+            var _this34 = this;
 
             return list.reduce(function (acc, payload) {
-              var key = _this40.extractKeyByDiscriminator(discriminator, payload, delimiter);
+              var key = _this34.extractKeyByDiscriminator(discriminator, payload, delimiter);
 
               acc[key] = Array.isArray(acc[key]) ? acc[key].concat([payload]) : [payload];
               return acc;
@@ -8329,8 +8214,8 @@
               return obj;
             }
 
-            for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
-              args[_key3 - 1] = arguments[_key3];
+            for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key4 = 1; _key4 < _len3; _key4++) {
+              args[_key4 - 1] = arguments[_key4];
             }
 
             return args.reduce(function (o, k) {
@@ -8369,8 +8254,8 @@
         _createClass2(OmitPipe, [{
           key: "transform",
           value: function transform(obj) {
-            for (var _len4 = arguments.length, args = new Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
-              args[_key4 - 1] = arguments[_key4];
+            for (var _len4 = arguments.length, args = new Array(_len4 > 1 ? _len4 - 1 : 0), _key5 = 1; _key5 < _len4; _key5++) {
+              args[_key5 - 1] = arguments[_key5];
             }
 
             if (Array.isArray(obj) || !isObject(obj)) {
@@ -8888,8 +8773,8 @@
         _createClass2(StripTagsPipe, [{
           key: "transform",
           value: function transform(text) {
-            for (var _len5 = arguments.length, allowedTags = new Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
-              allowedTags[_key5 - 1] = arguments[_key5];
+            for (var _len5 = arguments.length, allowedTags = new Array(_len5 > 1 ? _len5 - 1 : 0), _key6 = 1; _key6 < _len5; _key6++) {
+              allowedTags[_key6 - 1] = arguments[_key6];
             }
 
             return allowedTags.length > 0 ? text.replace(new RegExp("<(?!/?(".concat(allowedTags.join('|'), ")s*/?)[^>]+>"), 'g'), '') : text.replace(/<(?:.|\s)*?>/g, '');
@@ -9904,11 +9789,11 @@
         _createClass2(LatinisePipe, [{
           key: "transform",
           value: function transform(text) {
-            var _this41 = this;
+            var _this35 = this;
 
             var chars = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '\\s';
             return isString(text) ? text.replace(/[^A-Za-z0-9]/g, function (key) {
-              return _this41.latinMap[key] || key;
+              return _this35.latinMap[key] || key;
             }) : text;
           }
         }]);
@@ -11813,7 +11698,7 @@
 
       var MeetingVcComponent = /*#__PURE__*/function () {
         function MeetingVcComponent(alertService, appRouterService, socketService, ref, payment, utilityService) {
-          var _this42 = this;
+          var _this36 = this;
 
           _classCallCheck2(this, MeetingVcComponent);
 
@@ -11858,39 +11743,39 @@
 
             if (this.loanId) {
               this.socketService.getByIdSessions(this.loanId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
-                _this42.loanStartDateTime = _this42.utilityService._.now(); //console.log('data => ', data)
+                _this36.loanStartDateTime = _this36.utilityService._.now(); //console.log('data => ', data)
 
                 if (data && data['success']) {
                   //alert(JSON.stringify( data));
-                  _this42.sessionObj = data['data'];
+                  _this36.sessionObj = data['data'];
                   var useThisElapsTime = null;
                   var _loanEndDateTime = null;
 
-                  if (_this42.sessionObj.sessionsExecutionCollection) {
-                    for (var item in _this42.sessionObj.sessionsExecutionCollection) {
-                      if (_this42.loanStartDateTime >= _this42.sessionObj.sessionsExecutionCollection[item].loanEndDateTime) {
-                        _this42.alertService.error("You have already exceeded allotated session period.", true);
+                  if (_this36.sessionObj.sessionsExecutionCollection) {
+                    for (var item in _this36.sessionObj.sessionsExecutionCollection) {
+                      if (_this36.loanStartDateTime >= _this36.sessionObj.sessionsExecutionCollection[item].loanEndDateTime) {
+                        _this36.alertService.error("You have already exceeded allotated session period.", true);
 
-                        _this42.appRouterService.appRouter(_this42.currentUser);
+                        _this36.appRouterService.appRouter(_this36.currentUser);
 
                         return;
                       }
 
-                      _loanEndDateTime = _this42.sessionObj.sessionsExecutionCollection[item].loanEndDateTime;
-                      useThisElapsTime = (_this42.sessionObj.sessionsExecutionCollection[item].loanEndDateTime - _this42.loanStartDateTime) / 60 / 1000;
+                      _loanEndDateTime = _this36.sessionObj.sessionsExecutionCollection[item].loanEndDateTime;
+                      useThisElapsTime = (_this36.sessionObj.sessionsExecutionCollection[item].loanEndDateTime - _this36.loanStartDateTime) / 60 / 1000;
                     }
                   }
 
-                  _this42.extendCurrenSession(true, useThisElapsTime, _loanEndDateTime, null);
+                  _this36.extendCurrenSession(true, useThisElapsTime, _loanEndDateTime, null);
 
-                  _this42.startMyVcSession(); //this.alertService.success(data['message'], true);
+                  _this36.startMyVcSession(); //this.alertService.success(data['message'], true);
 
 
-                  _this42.loading = false; //this.element_btn_click_addSession_skills_verification.click();
+                  _this36.loading = false; //this.element_btn_click_addSession_skills_verification.click();
                 } else {
                   //alert(JSON.stringify(data['message']));
                   //this.alertService.error(data['message']);
-                  _this42.loading = false;
+                  _this36.loading = false;
                 }
               }, function (error) {
                 var errorMsg2show = "";
@@ -11906,7 +11791,7 @@
                 } catch (ex) {} //this.alertService.error(errorMsg2show);
 
 
-                _this42.loading = false;
+                _this36.loading = false;
               });
               return;
             }
@@ -12012,66 +11897,66 @@
         }, {
           key: "startTimer",
           value: function startTimer() {
-            var _this43 = this;
+            var _this37 = this;
 
             this.subscription = this.everySecond.subscribe(function (seconds) {
               var currentTime = moment__WEBPACK_IMPORTED_MODULE_8__();
-              _this43.remainingTime = _this43.searchEndDate.diff(currentTime);
-              _this43.remainingTime = _this43.remainingTime / 1000;
+              _this37.remainingTime = _this37.searchEndDate.diff(currentTime);
+              _this37.remainingTime = _this37.remainingTime / 1000;
 
-              if (_this43.remainingTime <= 0) {
-                _this43.alertService.error("Session time limit expired..."); //this.SearchDate = moment();
+              if (_this37.remainingTime <= 0) {
+                _this37.alertService.error("Session time limit expired..."); //this.SearchDate = moment();
                 //this.searchEndDate = this.SearchDate.add(this.ElapsTime, "minutes");
                 //this.TimerExpired.emit();
 
 
-                _this43.showExtendSessionButton = false;
+                _this37.showExtendSessionButton = false;
 
-                if (_this43.api) {
-                  _this43.api.removeEventListeners(['incomingMessage', 'outgoingMessage', 'videoConferenceLeft', 'suspendDetected']);
+                if (_this37.api) {
+                  _this37.api.removeEventListeners(['incomingMessage', 'outgoingMessage', 'videoConferenceLeft', 'suspendDetected']);
 
-                  _this43.api.dispose();
+                  _this37.api.dispose();
 
-                  _this43.alertService.error("You are now navigating back.", true);
+                  _this37.alertService.error("You are now navigating back.", true);
 
-                  _this43.appRouterService.appRouter(_this43.currentUser);
+                  _this37.appRouterService.appRouter(_this37.currentUser);
 
                   return;
                 } else if (window.cordova) {
                   jitsiplugin.destroy();
 
-                  _this43.alertService.error("You are now navigating back.", true);
+                  _this37.alertService.error("You are now navigating back.", true);
 
-                  _this43.appRouterService.appRouter(_this43.currentUser);
+                  _this37.appRouterService.appRouter(_this37.currentUser);
 
                   return;
                 }
               } else {
-                _this43.minutes = Math.floor(_this43.remainingTime / 60);
+                _this37.minutes = Math.floor(_this37.remainingTime / 60);
 
-                if (_this43.minutes > 59) {
-                  _this43.hours = Math.floor(_this43.remainingTime / 60 / 60);
+                if (_this37.minutes > 59) {
+                  _this37.hours = Math.floor(_this37.remainingTime / 60 / 60);
                 } else {
-                  _this43.hours = 0;
+                  _this37.hours = 0;
                 }
 
-                _this43.minutes = Math.floor(_this43.remainingTime / 60 - _this43.hours * 60);
-                _this43.seconds = Math.floor(_this43.remainingTime - (_this43.minutes * 60 + _this43.hours * 60 * 60));
+                _this37.minutes = Math.floor(_this37.remainingTime / 60 - _this37.hours * 60);
+                _this37.seconds = Math.floor(_this37.remainingTime - (_this37.minutes * 60 + _this37.hours * 60 * 60));
               }
 
-              if (_this43.minutes <= _this43.MinimumTime4Extend) {
-                _this43.showExtendSessionButton = true;
+              if (_this37.minutes <= _this37.MinimumTime4Extend) {
+                _this37.showExtendSessionButton = true;
               } else {
-                _this43.showExtendSessionButton = false;
+                _this37.showExtendSessionButton = false;
               }
 
-              _this43.ref.markForCheck();
+              _this37.ref.markForCheck();
             });
           }
         }, {
           key: "extendCurrenSession",
           value: function extendCurrenSession(_initT, useThisElapsTime, _loanEndDateTime, _transactionDetailsObj) {
-            var _this44 = this;
+            var _this38 = this;
 
             this.SearchDate = moment__WEBPACK_IMPORTED_MODULE_8__();
 
@@ -12110,16 +11995,16 @@
                 //alert(JSON.stringify( data));
                 if (data['data']) {
                   if (data['data']["_id"]) {
-                    _this44.sessionObj = data['data'];
+                    _this38.sessionObj = data['data'];
                   } else {
-                    _this44.sessionObj = data['data'][0];
+                    _this38.sessionObj = data['data'][0];
                   }
                 }
 
-                _this44.loading = false;
+                _this38.loading = false;
               } else {
                 //this.alertService.error(data['message']);
-                _this44.loading = false;
+                _this38.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -12135,13 +12020,13 @@
               } catch (ex) {} //this.alertService.error(errorMsg2show);
 
 
-              _this44.loading = false;
+              _this38.loading = false;
             });
           }
         }, {
           key: "initiatePayment",
           value: function initiatePayment(sessionObj, _loanApplyId) {
-            var _this45 = this;
+            var _this39 = this;
 
             this.userInitiatedForPayment = true;
             _loanApplyId = _loanApplyId ? _loanApplyId : this.roomName;
@@ -12176,7 +12061,7 @@
               }]
             }];
             this.payment.getCurrentPaymentApproved().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (details) {
-              _this45.extendCurrenSession(false, null, null, details); //this.dialogRef.close({ event: 'close', data: { sessionApply: _sessionApply, status: _status, transactionId: details.id } });
+              _this39.extendCurrenSession(false, null, null, details); //this.dialogRef.close({ event: 'close', data: { sessionApply: _sessionApply, status: _status, transactionId: details.id } });
 
             });
             this.payPalConfig = this.payment.initConfig(purchaseUnits, src_app_models__WEBPACK_IMPORTED_MODULE_10__["TransactionActionType"].session_extended, _endUserId);
@@ -12312,8 +12197,8 @@
       var rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_9__);
 
       var PublicProfileComponent = /*#__PURE__*/function () {
-        function PublicProfileComponent(utilityService, authenticationService, router, dialogRef, data, userService) {
-          var _this46 = this;
+        function PublicProfileComponent(utilityService, authenticationService, router, dialogRef, data, userService, alertService) {
+          var _this40 = this;
 
           _classCallCheck2(this, PublicProfileComponent);
 
@@ -12323,7 +12208,20 @@
           this.dialogRef = dialogRef;
           this.data = data;
           this.userService = userService;
+          this.alertService = alertService;
           this.portfolioDataArr = [];
+          this.profileAdditionalData = {
+            numberOfLoanCreated: null,
+            numberOfSignedContract: null,
+            numberOfRepaidContract: null,
+            numberOfAmontBorrowed: null,
+            numberOfAmontRefunded: null,
+            numberOfAmountAvailableInBudget: null,
+            recommended: null,
+            notRecommended: null,
+            borrowerIsInRKI: null
+          };
+          this.loading = false;
           this.adminViewT = false;
           this.Role = src_app_models__WEBPACK_IMPORTED_MODULE_7__["Role"];
           this.userObj = data.userObj;
@@ -12334,7 +12232,7 @@
 
           this.userService.getUserProfilePortFolioByUserId(this.userObj._id).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this46.portfolioDataArr = data["data"];
+              _this40.portfolioDataArr = data["data"];
             } else {}
           }, function (error) {
             var errorMsg2show = "";
@@ -12359,7 +12257,7 @@
           value: function closeDialog() {
             this.dialogRef.close({
               event: 'close',
-              data: true
+              data: this.userObj
             });
           }
         }, {
@@ -12393,6 +12291,42 @@
               }
             });
           }
+        }, {
+          key: "updateUsersVerificationStatus",
+          value: function updateUsersVerificationStatus(_userId, _verifiedKey, _isVerified) {
+            var _this41 = this;
+
+            this.alertService.success("Please wait while we updating status of user");
+            this.userService.updateUsersDataKeyVerificationStatus(_userId, _verifiedKey, _isVerified).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+              if (data && data['success']) {
+                _this41.userObj = data["data"];
+
+                _this41.alertService.success(data['message']);
+
+                _this41.loading = false;
+              } else {
+                _this41.alertService.error(data['message']);
+
+                _this41.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = ""; //this.PaymentTransactionDetailsArray = [];
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this41.alertService.error(errorMsg2show);
+
+              _this41.loading = false;
+            });
+          }
         }]);
 
         return PublicProfileComponent;
@@ -12417,6 +12351,8 @@
           }]
         }, {
           type: src_app_services__WEBPACK_IMPORTED_MODULE_5__["UserService"]
+        }, {
+          type: src_app_services__WEBPACK_IMPORTED_MODULE_5__["AlertService"]
         }];
       };
 
@@ -12424,7 +12360,7 @@
         selector: 'app-public-profile',
         template: _raw_loader_public_profile_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_public_profile_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_8__["UtilityService"], src_app_services__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialogRef"], Object, src_app_services__WEBPACK_IMPORTED_MODULE_5__["UserService"]])], PublicProfileComponent);
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_8__["UtilityService"], src_app_services__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialogRef"], Object, src_app_services__WEBPACK_IMPORTED_MODULE_5__["UserService"], src_app_services__WEBPACK_IMPORTED_MODULE_5__["AlertService"]])], PublicProfileComponent);
       /***/
     },
 
@@ -12569,7 +12505,7 @@
           _createClass2(ScriptService, [{
             key: "registerScript",
             value: function registerScript(url, globalVar, onReady) {
-              var _this47 = this;
+              var _this42 = this;
 
               /** @type {?} */
               var existingGlobalVar =
@@ -12600,7 +12536,7 @@
               * @return {?}
               */
               function () {
-                _this47.zone.run(
+                _this42.zone.run(
                 /**
                 * @return {?}
                 */
@@ -12888,7 +12824,7 @@
           }, {
             key: "ngOnChanges",
             value: function ngOnChanges(changes) {
-              var _this48 = this;
+              var _this43 = this;
 
               if (!this.payPalButtonContainerId) {
                 this.payPalButtonContainerId = this.generateElementId();
@@ -12908,9 +12844,9 @@
                   */
                   function (payPal) {
                     // store reference to paypal global script
-                    _this48.payPal = payPal;
+                    _this43.payPal = payPal;
 
-                    _this48.doPayPalCheck();
+                    _this43.doPayPalCheck();
                   });
                 }
               } // changes to config
@@ -12959,7 +12895,7 @@
           }, {
             key: "reinitialize",
             value: function reinitialize(config) {
-              var _this49 = this;
+              var _this44 = this;
 
               this.config = config;
               this.payPal = undefined;
@@ -12984,9 +12920,9 @@
                   */
                   function (payPal) {
                     // store reference to paypal global script
-                    _this49.payPal = payPal;
+                    _this44.payPal = payPal;
 
-                    _this49.doPayPalCheck();
+                    _this44.doPayPalCheck();
                   });
                 } else {
                   this.doPayPalCheck();
@@ -13019,7 +12955,7 @@
           }, {
             key: "initPayPalScript",
             value: function initPayPalScript(config, initPayPal) {
-              var _this50 = this;
+              var _this45 = this;
 
               this.paypalScriptService.registerPayPalScript({
                 clientId: config.clientId,
@@ -13033,7 +12969,7 @@
               * @return {?}
               */
               function (paypal) {
-                _this50.scriptLoaded.next(paypal);
+                _this45.scriptLoaded.next(paypal);
 
                 initPayPal(paypal);
               });
@@ -13058,7 +12994,7 @@
           }, {
             key: "initPayPal",
             value: function initPayPal(config, paypal) {
-              var _this51 = this;
+              var _this46 = this;
 
               // Running outside angular zone prevents infinite ngDoCheck lifecycle calls
               this.ngZone.runOutsideAngular(
@@ -13076,7 +13012,7 @@
                 * @return {?}
                 */
                 function createOrder(data, actions) {
-                  return _this51.ngZone.run(
+                  return _this46.ngZone.run(
                   /**
                   * @return {?}
                   */
@@ -13110,7 +13046,7 @@
                 * @return {?}
                 */
                 function createSubscription(data, actions) {
-                  return _this51.ngZone.run(
+                  return _this46.ngZone.run(
                   /**
                   * @return {?}
                   */
@@ -13130,7 +13066,7 @@
                 * @return {?}
                 */
                 function onShippingChange(data, actions) {
-                  return _this51.ngZone.run(
+                  return _this46.ngZone.run(
                   /**
                   * @return {?}
                   */
@@ -13152,7 +13088,7 @@
                   * @return {?}
                   */
                   function onApprove(data, actions) {
-                    return _this51.ngZone.run(
+                    return _this46.ngZone.run(
                     /**
                     * @return {?}
                     */
@@ -13178,7 +13114,7 @@
                         * @return {?}
                         */
                         function (details) {
-                          _this51.ngZone.run(
+                          _this46.ngZone.run(
                           /**
                           * @return {?}
                           */
@@ -13196,7 +13132,7 @@
                   * @return {?}
                   */
                   function onError(error) {
-                    _this51.ngZone.run(
+                    _this46.ngZone.run(
                     /**
                     * @return {?}
                     */
@@ -13213,7 +13149,7 @@
                   * @return {?}
                   */
                   function onCancel(data, actions) {
-                    _this51.ngZone.run(
+                    _this46.ngZone.run(
                     /**
                     * @return {?}
                     */
@@ -13230,7 +13166,7 @@
                   * @return {?}
                   */
                   function onClick(data, actions) {
-                    _this51.ngZone.run(
+                    _this46.ngZone.run(
                     /**
                     * @return {?}
                     */
@@ -13247,7 +13183,7 @@
                   * @return {?}
                   */
                   function onInit(data, actions) {
-                    _this51.ngZone.run(
+                    _this46.ngZone.run(
                     /**
                     * @return {?}
                     */
@@ -13264,7 +13200,7 @@
                 }), config.onShippingChange && {
                   onShippingChange: onShippingChange
                 });
-                paypal.Buttons(buttonsConfig).render("#".concat(_this51.payPalButtonContainerId));
+                paypal.Buttons(buttonsConfig).render("#".concat(_this46.payPalButtonContainerId));
               });
             }
           }]);
@@ -13819,6 +13755,7 @@
           value: function transform(allSessionsData, field, valuesArr) {
             var checkCreatedByUserId = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
             var checkCreatedByT = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+            var sendMasterDataBackIfChildMissingT = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
             if (!allSessionsData) return [];
             if (!valuesArr || valuesArr.length == 0) return allSessionsData;
             return allSessionsData.filter(function (it) {
@@ -13834,10 +13771,39 @@
                 }
               }
 
-              var _fieldData = lodash__WEBPACK_IMPORTED_MODULE_2__["get"](it, field);
+              var _fieldData = null;
 
-              if (_fieldData) {
-                return valuesArr.indexOf(_fieldData.toLowerCase()) != -1;
+              var _splittedArr = field.replace('[0]', '').split('.');
+
+              if (field && _splittedArr.length == 2) {
+                var master_objAttr = field.replace('[0]', '').split('.')[0];
+                var child_objAttr = field.replace('[0]', '').split('.')[1];
+
+                for (var index in it[master_objAttr]) {
+                  var _obj = it[master_objAttr][index];
+
+                  if (_obj) {
+                    _fieldData = _obj[child_objAttr];
+
+                    if (_fieldData) {
+                      return valuesArr.indexOf(_fieldData.toLowerCase()) != -1;
+                    }
+                  } else {
+                    debugger;
+
+                    if (sendMasterDataBackIfChildMissingT) {
+                      if (valuesArr.indexOf('pending') > -1) {
+                        return true;
+                      }
+                    }
+                  }
+                }
+              } else {
+                _fieldData = lodash__WEBPACK_IMPORTED_MODULE_2__["get"](it, field);
+
+                if (_fieldData) {
+                  return valuesArr.indexOf(_fieldData.toLowerCase()) != -1;
+                }
               }
 
               return false;
@@ -13870,7 +13836,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"row pt-0 saas2\">\r\n    <div class=\"col-xl-12 col-12 text-center\">\r\n        <h3>Submit your portfolio for verification</h3>\r\n        <P class=\"my-3\">Remember to fill in all fields correctly, otherwise you may risk lifetime blockage</P>\r\n    </div>\r\n    <div class=\"col-xl-12 col-12\">\r\n        <section class=\"tab-product  p-b-0\">\r\n\r\n            <ul class=\"nav nav-justified nav-material nav-tabs mb-4 shadow-sm\" id=\"top-tab\" role=\"tablist\">\r\n                <li class=\"nav-item\">\r\n                    <a id=\"btn_click_profile_basic_details\" class=\"nav-link show active\" data-toggle=\"tab\"\r\n                        data-target=\"#profile_basic_details\">Basic Details</a>\r\n                    <div class=\"material-border\"></div>\r\n                </li>\r\n                <li class=\"nav-item\">\r\n                    <a id=\"btn_click_profile_skills_verification\" class=\"nav-link\" data-toggle=\"tab\"\r\n                        data-target=\"#profile_skills_verification\">Upload Documents</a>\r\n                    <div class=\"material-border\"></div>\r\n                </li>\r\n                <!-- <li class=\"nav-item\" *ngIf=\"_role == Role.Borrower\">\r\n                            <a id=\"btn_click_profile_banking\" class=\"nav-link font-weight-light\" data-toggle=\"pill\"\r\n                                data-target=\"#profile_banking_details\">Banking Details</a>\r\n                        </li> -->\r\n            </ul>\r\n\r\n        </section>\r\n\r\n        <form [formGroup]=\"profileForm\">\r\n\r\n            <div class=\"tab-content\">\r\n                <div class=\"tab-pane active\" id=\"profile_basic_details\">\r\n                    <div class=\"form-row mb-2  mb-3\">\r\n                        <div class=\"col-xl-3 text-center\">\r\n                            <div class=\"card\">\r\n                                <div class=\"card-header\">\r\n                                    <h6 class=\"font-weight-bold text-primary\">Change Profile Pic</h6>\r\n                                </div>\r\n\r\n                                <div class=\"card-body\">\r\n                                    <img [src]=\"f.selfProfileUrl.value\" onerror=\"this.src='/assets/img/nouser.png';\"\r\n                                        class=\"border img-fluid rounded-circle mb-3\" />\r\n\r\n                                    <i *ngIf=\"!selfProfileUrlPendingForUpload\"\r\n                                        class=\"icon-pencil-alt m-2 cursor-pointer text-success\"\r\n                                        (click)=\"openFileUploaderForProfile()\">\r\n                                        <input id=\"ctrlUploadProfile\" hidden type=\"file\" name=\"image\" accept=\"image/*\"\r\n                                            (change)=\"fileProgressForProfile($event)\"> Upload\r\n                                    </i>\r\n                                    <i *ngIf=\"selfProfileUrlPendingForUpload\"\r\n                                        class=\"icon-upload m-2 cursor-pointer text-success\"\r\n                                        (click)=\"onUploadForProfile()\"> Save\r\n                                    </i>\r\n                                </div>\r\n\r\n                                <div class=\"card-footer\">\r\n                                    <div class=\"btn-group btn-group-sm shadow\">\r\n                                        <button disabled *ngIf=\"f.role.value !=='lender'\" type=\"button\" class=\"btn\"\r\n                                            (click)=\"onClickRoleChange('borrower')\"\r\n                                            [ngClass]=\"{ 'btn-success': f.role.value=='borrower', 'btn-outline-success': f.role.value!='borrower'}\">\r\n                                            Borrower\r\n                                        </button>\r\n                                        <button disabled *ngIf=\"f.role.value !=='borrower'\" type=\"button\" class=\"btn\"\r\n                                            (click)=\"onClickRoleChange('lender')\"\r\n                                            [ngClass]=\"{ 'btn-success': f.role.value=='lender', 'btn-outline-success': f.role.value!='lender'}\">\r\n                                            Lender\r\n                                        </button>\r\n                                    </div>\r\n                                </div>\r\n\r\n                            </div>\r\n\r\n                        </div>\r\n\r\n\r\n\r\n                        <div class=\"col-xl-9\">\r\n\r\n                            <div class=\"card\">\r\n                                <div class=\"card-header\">\r\n                                    <h6 class=\"font-weight-bold text-primary\">Change Basic Details</h6>\r\n                                </div>\r\n\r\n                                <div class=\"card-body\">\r\n                                    <div class=\"form-row \">\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"firstName\">First Name</label>\r\n                                            <input type=\"text\" formControlName=\"firstName\" class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.firstName.errors }\" />\r\n                                            <div *ngIf=\"submitted && f.firstName.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.firstName.errors.required\">First Name is required</div>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"middleName\">Middle Name</label>\r\n                                            <input type=\"text\" formControlName=\"middleName\" class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.middleName.errors }\" />\r\n                                            <div *ngIf=\"submitted && f.middleName.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.middleName.errors.required\">Middle Name is required</div>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"lastName\">Last Name</label>\r\n                                            <input type=\"text\" formControlName=\"lastName\" class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.lastName.errors }\" />\r\n                                            <div *ngIf=\"submitted && f.lastName.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.lastName.errors.required\">Last Name is required</div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"form-row\">\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"mobileNo\">\r\n                                                <i class=\"icon-mobile text-success\"></i>\r\n                                                Mobile Number</label>\r\n                                            <input type=\"text\" formControlName=\"mobileNo\" class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.mobileNo.errors }\" />\r\n                                            <div *ngIf=\"submitted && f.mobileNo.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.mobileNo.errors.required\">Mobile Number is required\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"emailAddress\">Email</label>\r\n                                            <input type=\"text\" disabled formControlName=\"emailAddress\"\r\n                                                class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.emailAddress.errors }\" />\r\n                                            <div *ngIf=\"submitted && f.emailAddress.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.emailAddress.errors.required\">Email is required</div>\r\n                                                <div *ngIf=\"f.emailAddress.errors.email\">Invalid Email format.</div>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"address\" class=\"font-weight-bold\">\r\n                                                Address\r\n                                            </label>\r\n                                            <textarea rows=\"2\" maxlength=\"500\" formControlName=\"address\"\r\n                                                class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.address.errors }\">\r\n                                                    </textarea>\r\n                                            <div *ngIf=\"submitted && f.address.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.address.errors.required\">\r\n                                                    Address is required\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"form-row\">\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"birthDateCustomised\">Birthday</label>\r\n                                            <input type=\"date\" formControlName=\"birthDateCustomised\"\r\n                                                class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.birthDateCustomised.errors }\"\r\n                                                [max]=\"maxDate\" [min]=\"minDate\" />\r\n                                            <div *ngIf=\"submitted && f.birthDate.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.birthDateCustomised.errors.required\">Email is required\r\n                                                </div>\r\n                                                <div *ngIf=\"f.birthDateCustomised.errors.date\">Invalid Email format.\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-4 d-none\">\r\n                                            <div class=\"form-row\">\r\n                                                <div class=\"col-xl-12 text-center mb-2\">\r\n                                                    <label>Gender</label>\r\n                                                    <div class=\"btn-group shadow mb-3\">\r\n                                                        <button type=\"button\" class=\"btn\"\r\n                                                            (click)=\"onClickGenderChange('male')\"\r\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='male', 'btn-outline-success': f.gender.value!='male'}\">\r\n                                                            Male\r\n                                                        </button>\r\n                                                        <button type=\"button\" class=\"btn\"\r\n                                                            (click)=\"onClickGenderChange('female')\"\r\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='female', 'btn-outline-success': f.gender.value!='female'}\">\r\n                                                            Female\r\n                                                        </button>\r\n                                                        <button type=\"button\" class=\"btn\"\r\n                                                            (click)=\"onClickGenderChange('other')\"\r\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='other', 'btn-outline-success': f.gender.value!='other'}\">\r\n                                                            Other\r\n                                                        </button>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"cityCode\">City</label>\r\n                                            <input type=\"text\" formControlName=\"cityCode\" class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.cityCode.errors }\" />\r\n                                            <div *ngIf=\"submitted && f.cityCode.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.cityCode.errors.required\">City is required</div>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"cityCode\">Country</label>\r\n                                            <select formControlName=\"country\" class=\"custom-select\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.country.errors }\">\r\n                                                <option value=\"\" selected disabled>Choose Country</option>\r\n                                                <option *ngFor=\"let country of countrylist\" [ngValue]=\"country\">\r\n                                                    {{country}}</option>\r\n                                            </select>\r\n                                            <div *ngIf=\"submitted && f.country.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.country.errors.required\">Country is required</div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"myProfileDetails\">About</label>\r\n                                            <textarea rows=\"2\" maxlength=\"500\" formControlName=\"myProfileDetails\"\r\n                                                class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.myProfileDetails.errors }\">\r\n                                                    </textarea>\r\n                                            <div *ngIf=\"submitted && f.myProfileDetails.errors\"\r\n                                                class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.myProfileDetails.errors.required\">About My Profile is\r\n                                                    required\r\n                                                </div>\r\n                                                <div *ngIf=\"f.myProfileDetails.errors.email\">About My Profile format.\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"card-footer\">\r\n                                    <button type=\"button\" (click)=\"clickOnGoToNext(2)\" [disabled]=\"loading\"\r\n                                        class=\"btn btn-primary float-right\">Next</button>\r\n                                </div>\r\n                            </div>\r\n\r\n\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"tab-pane fade\" id=\"profile_skills_verification\">\r\n                    <div class=\"card\">\r\n                        <div class=\"card-header\">\r\n                            <h6 class=\"font-weight-bold text-primary\">Update Your Documents</h6>\r\n                        </div>\r\n\r\n                        <div class=\"card-body\">\r\n                            <div class=\"form-row mb-3\">\r\n                                <div class=\"col-md-12\">\r\n                                    <div class=\"text-gray\" i18n>\r\n                                        Upload your Passport, Driving Licence, Health Insurance Card document\r\n                                    </div>\r\n                                    <hr>\r\n                                </div>\r\n                                <div class=\"col-xl-3 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label class=\"mb-1\" for=\"myPassportNumber\">Passport Number:</label>\r\n                                        <input type=\"text\" formControlName=\"myPassportNumber\" class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myPassportNumber.errors }\" />\r\n                                        <div *ngIf=\"submitted && f.myPassportNumber.errors\" class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.myPassportNumber.errors.required\">Passport number is required\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-7 col-12\">\r\n                                    <div class=\"custom-file mt-4\">\r\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\r\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyPassportMedia')\">\r\n                                        <label class=\"custom-file-label\" for=\"customFile\"\r\n                                            id=\"lblmyPassportMedia\">{{lblmyPassportMediaText}}</label>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-2 col-12\">\r\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\r\n                                        (click)=\"onUploadAssetDocs('myPassportMedia')\">\r\n                                        Upload\r\n                                    </button>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-row mb-3\">\r\n                                <div class=\"col-xl-3 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label class=\"mb-1\" for=\"myDLNumber\">Driving License Number:</label>\r\n                                        <input type=\"text\" formControlName=\"myDLNumber\" class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myDLNumber.errors }\" />\r\n                                        <div *ngIf=\"submitted && f.myDLNumber.errors\" class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.myDLNumber.errors.required\">Driving License number is required\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-7\">\r\n                                    <div class=\"custom-file mt-4\">\r\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\r\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyDLMedia')\">\r\n                                        <label class=\"custom-file-label\" for=\"customFile\"\r\n                                            id=\"lblmyDLMedia\">{{lblmyDLMediaText}}</label>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-2\">\r\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\r\n                                        (click)=\"onUploadAssetDocs('myDLMedia')\">\r\n                                        Upload\r\n                                    </button>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-row mb-3\">\r\n                                <div class=\"col-xl-3 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label class=\"mb-1\" for=\"cprNumber\">CPR Number:</label>\r\n                                        <input type=\"text\" formControlName=\"cprNumber\" class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.cprNumber.errors }\" />\r\n                                        <div *ngIf=\"submitted && f.cprNumber.errors\" class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.cprNumber.errors.required\">CPR number is required</div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-7\">\r\n                                    <div class=\"custom-file mt-4\">\r\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\r\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyHICardMedia')\">\r\n                                        <label class=\"custom-file-label\" for=\"customFile\"\r\n                                            id=\"lblmyHICardMedia\">{{lblmyHICardMediaText}}</label>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-2\">\r\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\r\n                                        (click)=\"onUploadAssetDocs('myHICardMedia')\">\r\n                                        Upload\r\n                                    </button>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"col-xl-4\">\r\n                                    <div class=\"card\" *ngFor=\"let previewUrl of f.myPassportMedia.value\">\r\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\r\n                                        <div *ngIf=\"fileUploadProgress\">\r\n                                            Upload progress: {{ fileUploadProgress }}\r\n                                        </div>\r\n                                        <div class=\"card-body\">\r\n                                            Passport\r\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\r\n                                                    class=\"icon icon-trash\"\r\n                                                    (click)=\"onUploadCleanAssetDocs('myPassportMedia')\"></i></a>\r\n                                        </div>\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                                <div class=\"col-xl-4\">\r\n                                    <div class=\"card\" *ngFor=\"let previewUrl of f.myDLMedia.value\">\r\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\r\n                                        <div *ngIf=\"fileUploadProgress\">\r\n                                            Upload progress: {{ fileUploadProgress }}\r\n                                        </div>\r\n                                        <div class=\"card-body\">\r\n                                            Driving Licence\r\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\r\n                                                    class=\"icon icon-trash\"\r\n                                                    (click)=\"onUploadCleanAssetDocs('myDLMedia')\"></i></a>\r\n                                        </div>\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                                <div class=\"col-xl-4\">\r\n                                    <div class=\"card\" *ngFor=\"let previewUrl of f.myHICardMedia.value\">\r\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\r\n                                        <div *ngIf=\"fileUploadProgress\">\r\n                                            Upload progress: {{ fileUploadProgress }}\r\n                                        </div>\r\n                                        <div class=\"card-body\">\r\n                                            Health Insurance Card\r\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\r\n                                                    class=\"icon icon-trash\"\r\n                                                    (click)=\"onUploadCleanAssetDocs('myHICardMedia')\"></i></a>\r\n                                        </div>\r\n                                    </div>\r\n\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-row\">\r\n                                <div class=\"col-xl-12 mt-3\">\r\n                                    <label for=\"myProfileDetails\">Social Network</label>\r\n                                    <div class=\"form-row\">\r\n                                        <div class=\"col-xl-4\">\r\n\r\n                                            <select [(ngModel)]=\"appName\" class=\"custom-select\"\r\n                                                [ngModelOptions]=\"{standalone: true}\">\r\n                                                <option value=\"facebook\" selected>Facebook</option>\r\n                                                <!--<option value=\"linkedin\">LinkedIn</option>-->\r\n                                            </select>\r\n                                        </div>\r\n                                        <div class=\"col-xl-8\">\r\n\r\n                                            <div class=\"input-group mb-3\">\r\n                                                <input type=\"url\"\r\n                                                    pattern=\"/(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})/gi*\"\r\n                                                    [(ngModel)]=\"appLink\" class=\"form-control\"\r\n                                                    [ngModelOptions]=\"{standalone: true}\"\r\n                                                    placeholder=\"Facebook Profile Public Link\" />\r\n                                                <div class=\"input-group-append\">\r\n                                                    <button class=\"btn btn-success\"\r\n                                                        (click)=\"addExternalAppLinks(true, null, appName, appLink)\">Add</button>\r\n                                                </div>\r\n                                            </div>\r\n\r\n                                        </div>\r\n                                        <div class=\"col-xl-12\">\r\n                                            <div *ngIf=\"submitted && f.externalAppLinks.errors\"\r\n                                                class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.externalAppLinks.errors.required\">Links required</div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"form-row\" *ngFor=\"let applinks of f.externalAppLinks.value\">\r\n                                        <div class=\"col-xl-2\">\r\n                                            {{applinks.appName | titlecase}}\r\n                                        </div>\r\n                                        <div class=\"col-xl-10\">\r\n                                            <a href=\"{{applinks.appLink}}\">{{applinks.appLink}}</a>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\" *ngIf=\"_role == Role.Borrower\">\r\n                                <div class=\"col-xl-12\">\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-xl-12 mt-3\">\r\n                                            <div class=\"row\">\r\n                                                <div class=\"col-xl-12\">\r\n                                                    <label class=\"font-weight-bold\">Are you registered in RKI?</label>\r\n                                                    <i class=\"icon icon-info-alt ml-2\" data-toggle=\"tooltip\"\r\n                                                        title=\"Hooray!\"></i>\r\n                                                    <div class=\"btn-group btn-group btn-group-sm ml-4\">\r\n                                                        <button type=\"button\" class=\"btn\" (click)=\"onRKIChange(true)\"\r\n                                                            [ngClass]=\"{ 'btn-success': onInitRKICheckedValue()==true, 'btn-outline-success':onInitRKICheckedValue()==false}\">\r\n                                                            Yes\r\n                                                        </button>\r\n                                                        <button type=\"button\" class=\"btn\" (click)=\"onRKIChange(false)\"\r\n                                                            [ngClass]=\"{ 'btn-success': onInitRKICheckedValue()==false, 'btn-outline-success':onInitRKICheckedValue()==true}\">\r\n                                                            No\r\n                                                        </button>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n\r\n                                            <div *ngIf=\"submitted && f.isRKIRegistered.errors\" class=\"error\">\r\n                                                <div *ngIf=\"f.isRKIRegistered.errors.required\" class=\"text-red\">\r\n                                                    data required\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-xl-12 mt-3\">\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"form-row\" *ngIf=\"onInitRKICheckedValue()\">\r\n                                        <div class=\"col-xl-9\">\r\n                                            <div class=\"custom-file\">\r\n                                                <input type=\"file\" class=\"custom-file-input\" name=\"image\"\r\n                                                    accept=\"image/*\"\r\n                                                    (change)=\"fileProgressAssetDocs($event,'lblmyRKIMedia')\">\r\n                                                <label class=\"custom-file-label\" for=\"customFile\"\r\n                                                    id=\"lblmyRKIMedia\">{{lblmyRKIMediaText}}</label>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-3\">\r\n                                            <button class=\"btn btn-outline-secondary btn-block\"\r\n                                                (click)=\"onUploadAssetDocs('myRKIMedia')\">\r\n                                                Upload\r\n                                            </button>\r\n                                        </div>\r\n                                        <div class=\"col-xl-4\">\r\n\r\n                                            <div class=\"row\">\r\n                                                <div class=\"col-xl-12\" *ngFor=\"let previewUrl of f.myRKIMedia.value\">\r\n                                                    <i class=\"icon-trash text-danger\"\r\n                                                        (click)=\"onUploadCleanAssetDocs('myRKIMedia')\"></i>\r\n                                                    <img class=\"img-fluid\" [src]=\"previewUrl.url\" />\r\n                                                </div>\r\n                                                <div>\r\n                                                    <div *ngIf=\"fileUploadProgress\">\r\n                                                        Upload progress: {{ fileUploadProgress }}\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"card-footer\">\r\n                            <button type=\"button\" (click)=\"onProfileUpdateSubmit()\" [disabled]=\"loading\"\r\n                                class=\"btn btn-primary float-right\">Save</button>\r\n                        </div>\r\n                    </div>\r\n\r\n\r\n                </div>\r\n            </div>\r\n\r\n        </form>\r\n    </div>\r\n</div>\r\n<!-- register section -->";
+      __webpack_exports__["default"] = "<div class=\"row pt-0 saas2\">\r\n    <div class=\"col-xl-12 col-12 text-center\" *ngIf=\"!f.isVerified.value\">\r\n        <h3>Submit your portfolio for verification</h3>\r\n        <P class=\"my-3\">Remember to fill in all fields correctly, otherwise you may risk lifetime blockage</P>\r\n    </div>\r\n    <div class=\"col-xl-12 col-12\">\r\n        <section class=\"tab-product  p-b-0\">\r\n\r\n            <ul class=\"nav nav-justified nav-material nav-tabs mb-4 shadow-sm\" id=\"top-tab\" role=\"tablist\">\r\n                <li class=\"nav-item\">\r\n                    <a id=\"btn_click_profile_basic_details\" class=\"nav-link show active\" data-toggle=\"tab\"\r\n                        data-target=\"#profile_basic_details\">Basic Details</a>\r\n                    <div class=\"material-border\"></div>\r\n                </li>\r\n                <li class=\"nav-item\">\r\n                    <a id=\"btn_click_profile_skills_verification\" class=\"nav-link\" data-toggle=\"tab\"\r\n                        data-target=\"#profile_skills_verification\">Upload Documents</a>\r\n                    <div class=\"material-border\"></div>\r\n                </li>\r\n                <!-- <li class=\"nav-item\" *ngIf=\"_role == Role.Borrower\">\r\n                            <a id=\"btn_click_profile_banking\" class=\"nav-link font-weight-light\" data-toggle=\"pill\"\r\n                                data-target=\"#profile_banking_details\">Banking Details</a>\r\n                        </li> -->\r\n            </ul>\r\n\r\n        </section>\r\n\r\n        <form [formGroup]=\"profileForm\">\r\n\r\n            <div class=\"tab-content\">\r\n                <div class=\"tab-pane active\" id=\"profile_basic_details\">\r\n                    <div class=\"form-row mb-2  mb-3\">\r\n                        <div class=\"col-xl-3 text-center\">\r\n                            <div class=\"card\">\r\n                                <div class=\"card-header\">\r\n                                    <h6 class=\"font-weight-bold text-primary\">Change Profile Pic</h6>\r\n                                </div>\r\n\r\n                                <div class=\"card-body\">\r\n                                    <img [src]=\"f.selfProfileUrl.value\" onerror=\"this.src='/assets/img/nouser.png';\"\r\n                                        class=\"border img-fluid rounded-circle mb-3\" />\r\n\r\n                                    <i *ngIf=\"!selfProfileUrlPendingForUpload\"\r\n                                        class=\"icon-pencil-alt m-2 cursor-pointer text-success\"\r\n                                        (click)=\"openFileUploaderForProfile()\">\r\n                                        <input id=\"ctrlUploadProfile\" hidden type=\"file\" name=\"image\" accept=\"image/*\"\r\n                                            (change)=\"fileProgressForProfile($event)\"> Upload\r\n                                    </i>\r\n                                    <i *ngIf=\"selfProfileUrlPendingForUpload\"\r\n                                        class=\"icon-upload m-2 cursor-pointer text-success\"\r\n                                        (click)=\"onUploadForProfile()\"> Save\r\n                                    </i>\r\n                                </div>\r\n\r\n                                <div class=\"card-footer\">\r\n                                    <div class=\"btn-group btn-group-sm shadow\">\r\n                                        <button disabled *ngIf=\"f.role.value !=='lender'\" type=\"button\" class=\"btn\"\r\n                                            (click)=\"onClickRoleChange('borrower')\"\r\n                                            [ngClass]=\"{ 'btn-success': f.role.value=='borrower', 'btn-outline-success': f.role.value!='borrower'}\">\r\n                                            Borrower\r\n                                        </button>\r\n                                        <button disabled *ngIf=\"f.role.value !=='borrower'\" type=\"button\" class=\"btn\"\r\n                                            (click)=\"onClickRoleChange('lender')\"\r\n                                            [ngClass]=\"{ 'btn-success': f.role.value=='lender', 'btn-outline-success': f.role.value!='lender'}\">\r\n                                            Lender\r\n                                        </button>\r\n                                    </div>\r\n                                </div>\r\n\r\n                            </div>\r\n\r\n                        </div>\r\n\r\n\r\n\r\n                        <div class=\"col-xl-9\">\r\n\r\n                            <div class=\"card\">\r\n                                <div class=\"card-header\">\r\n                                    <h6 class=\"font-weight-bold text-primary\">Change Basic Details</h6>\r\n                                </div>\r\n\r\n                                <div class=\"card-body\">\r\n                                    <div class=\"form-row \">\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"firstName\">First Name</label>\r\n                                            <input type=\"text\" formControlName=\"firstName\" class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.firstName.errors }\" />\r\n                                            <div *ngIf=\"submitted && f.firstName.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.firstName.errors.required\">First Name is required</div>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"middleName\">Middle Name</label>\r\n                                            <input type=\"text\" formControlName=\"middleName\" class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.middleName.errors }\" />\r\n                                            <div *ngIf=\"submitted && f.middleName.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.middleName.errors.required\">Middle Name is required</div>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"lastName\">Last Name</label>\r\n                                            <input type=\"text\" formControlName=\"lastName\" class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.lastName.errors }\" />\r\n                                            <div *ngIf=\"submitted && f.lastName.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.lastName.errors.required\">Last Name is required</div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"form-row\">\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"mobileNo\">\r\n                                                <i class=\"icon-mobile text-success\"></i>\r\n                                                Mobile Number</label>\r\n                                            <input type=\"text\" formControlName=\"mobileNo\" class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.mobileNo.errors }\" />\r\n                                            <div *ngIf=\"submitted && f.mobileNo.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.mobileNo.errors.required\">Mobile Number is required\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"emailAddress\">Email</label>\r\n                                            <input type=\"text\" disabled formControlName=\"emailAddress\"\r\n                                                class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.emailAddress.errors }\" />\r\n                                            <div *ngIf=\"submitted && f.emailAddress.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.emailAddress.errors.required\">Email is required</div>\r\n                                                <div *ngIf=\"f.emailAddress.errors.email\">Invalid Email format.</div>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"address\" class=\"font-weight-bold\">\r\n                                                Address\r\n                                            </label>\r\n                                            <textarea rows=\"2\" maxlength=\"500\" formControlName=\"address\"\r\n                                                class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.address.errors }\">\r\n                                                    </textarea>\r\n                                            <div *ngIf=\"submitted && f.address.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.address.errors.required\">\r\n                                                    Address is required\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"form-row\">\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"birthDateCustomised\">Birthday</label>\r\n                                            <input type=\"date\" formControlName=\"birthDateCustomised\"\r\n                                                class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.birthDateCustomised.errors }\"\r\n                                                [max]=\"maxDate\" [min]=\"minDate\" />\r\n                                            <div *ngIf=\"submitted && f.birthDate.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.birthDateCustomised.errors.required\">Email is required\r\n                                                </div>\r\n                                                <div *ngIf=\"f.birthDateCustomised.errors.date\">Invalid Email format.\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-4 d-none\">\r\n                                            <div class=\"form-row\">\r\n                                                <div class=\"col-xl-12 text-center mb-2\">\r\n                                                    <label>Gender</label>\r\n                                                    <div class=\"btn-group shadow mb-3\">\r\n                                                        <button type=\"button\" class=\"btn\"\r\n                                                            (click)=\"onClickGenderChange('male')\"\r\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='male', 'btn-outline-success': f.gender.value!='male'}\">\r\n                                                            Male\r\n                                                        </button>\r\n                                                        <button type=\"button\" class=\"btn\"\r\n                                                            (click)=\"onClickGenderChange('female')\"\r\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='female', 'btn-outline-success': f.gender.value!='female'}\">\r\n                                                            Female\r\n                                                        </button>\r\n                                                        <button type=\"button\" class=\"btn\"\r\n                                                            (click)=\"onClickGenderChange('other')\"\r\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='other', 'btn-outline-success': f.gender.value!='other'}\">\r\n                                                            Other\r\n                                                        </button>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"cityCode\">City</label>\r\n                                            <input type=\"text\" formControlName=\"cityCode\" class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.cityCode.errors }\" />\r\n                                            <div *ngIf=\"submitted && f.cityCode.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.cityCode.errors.required\">City is required</div>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"cityCode\">Country</label>\r\n                                            <select formControlName=\"country\" class=\"custom-select\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.country.errors }\">\r\n                                                <option value=\"\" selected disabled>Choose Country</option>\r\n                                                <option *ngFor=\"let country of countrylist\" [ngValue]=\"country\">\r\n                                                    {{country}}</option>\r\n                                            </select>\r\n                                            <div *ngIf=\"submitted && f.country.errors\" class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.country.errors.required\">Country is required</div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-xl-12 mb-3\">\r\n                                            <label for=\"myProfileDetails\">About</label>\r\n                                            <textarea rows=\"2\" maxlength=\"500\" formControlName=\"myProfileDetails\"\r\n                                                class=\"form-control\"\r\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.myProfileDetails.errors }\">\r\n                                                    </textarea>\r\n                                            <div *ngIf=\"submitted && f.myProfileDetails.errors\"\r\n                                                class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.myProfileDetails.errors.required\">About My Profile is\r\n                                                    required\r\n                                                </div>\r\n                                                <div *ngIf=\"f.myProfileDetails.errors.email\">About My Profile format.\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n\r\n                                    </div>\r\n                                </div>\r\n\r\n                                <div class=\"card-footer\">\r\n                                    <button type=\"button\" (click)=\"clickOnGoToNext(2)\" [disabled]=\"loading\"\r\n                                        class=\"btn btn-primary float-right\">Next</button>\r\n                                </div>\r\n                            </div>\r\n\r\n\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n                <div class=\"tab-pane fade\" id=\"profile_skills_verification\">\r\n                    <div class=\"card\">\r\n                        <div class=\"card-header\">\r\n                            <h6 class=\"font-weight-bold text-primary\">Update Your Documents</h6>\r\n                        </div>\r\n\r\n                        <div class=\"card-body\">\r\n                            <div class=\"form-row mb-3\">\r\n                                <div class=\"col-md-12\">\r\n                                    <div class=\"text-gray\" i18n>\r\n                                        Upload your Passport, Driving Licence, Health Insurance Card document\r\n                                    </div>\r\n                                    <hr>\r\n                                </div>\r\n                                <div class=\"col-xl-3 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label class=\"mb-1\" for=\"myPassportNumber\">Passport Number:</label>\r\n                                        <input type=\"text\" formControlName=\"myPassportNumber\" class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myPassportNumber.errors }\" />\r\n                                        <div *ngIf=\"submitted && f.myPassportNumber.errors\" class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.myPassportNumber.errors.required\">Passport number is required\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-7 col-12\">\r\n                                    <div class=\"custom-file mt-4\">\r\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\r\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyPassportMedia')\">\r\n                                        <label class=\"custom-file-label\" for=\"customFile\"\r\n                                            id=\"lblmyPassportMedia\">{{lblmyPassportMediaText}}</label>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-2 col-12\">\r\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\r\n                                        (click)=\"onUploadAssetDocs('myPassportMedia')\">\r\n                                        Upload\r\n                                    </button>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-row mb-3\">\r\n                                <div class=\"col-xl-3 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label class=\"mb-1\" for=\"myDLNumber\">Driving License Number:</label>\r\n                                        <input type=\"text\" formControlName=\"myDLNumber\" class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myDLNumber.errors }\" />\r\n                                        <div *ngIf=\"submitted && f.myDLNumber.errors\" class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.myDLNumber.errors.required\">Driving License number is required\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-7\">\r\n                                    <div class=\"custom-file mt-4\">\r\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\r\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyDLMedia')\">\r\n                                        <label class=\"custom-file-label\" for=\"customFile\"\r\n                                            id=\"lblmyDLMedia\">{{lblmyDLMediaText}}</label>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-2\">\r\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\r\n                                        (click)=\"onUploadAssetDocs('myDLMedia')\">\r\n                                        Upload\r\n                                    </button>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-row mb-3\">\r\n                                <div class=\"col-xl-3 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label class=\"mb-1\" for=\"cprNumber\">CPR Number:</label>\r\n                                        <input type=\"text\" formControlName=\"cprNumber\" class=\"form-control\"\r\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.cprNumber.errors }\" />\r\n                                        <div *ngIf=\"submitted && f.cprNumber.errors\" class=\"invalid-feedback\">\r\n                                            <div *ngIf=\"f.cprNumber.errors.required\">CPR number is required</div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-7\">\r\n                                    <div class=\"custom-file mt-4\">\r\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\r\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyHICardMedia')\">\r\n                                        <label class=\"custom-file-label\" for=\"customFile\"\r\n                                            id=\"lblmyHICardMedia\">{{lblmyHICardMediaText}}</label>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-2\">\r\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\r\n                                        (click)=\"onUploadAssetDocs('myHICardMedia')\">\r\n                                        Upload\r\n                                    </button>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\">\r\n                                <div class=\"col-xl-4\">\r\n                                    <div class=\"card\" *ngFor=\"let previewUrl of f.myPassportMedia.value\">\r\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\r\n                                        <div *ngIf=\"fileUploadProgress\">\r\n                                            Upload progress: {{ fileUploadProgress }}\r\n                                        </div>\r\n                                        <div class=\"card-body\">\r\n                                            Passport\r\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\r\n                                                    class=\"icon icon-trash\"\r\n                                                    (click)=\"onUploadCleanAssetDocs('myPassportMedia')\"></i></a>\r\n                                        </div>\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                                <div class=\"col-xl-4\">\r\n                                    <div class=\"card\" *ngFor=\"let previewUrl of f.myDLMedia.value\">\r\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\r\n                                        <div *ngIf=\"fileUploadProgress\">\r\n                                            Upload progress: {{ fileUploadProgress }}\r\n                                        </div>\r\n                                        <div class=\"card-body\">\r\n                                            Driving Licence\r\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\r\n                                                    class=\"icon icon-trash\"\r\n                                                    (click)=\"onUploadCleanAssetDocs('myDLMedia')\"></i></a>\r\n                                        </div>\r\n                                    </div>\r\n\r\n\r\n                                </div>\r\n                                <div class=\"col-xl-4\">\r\n                                    <div class=\"card\" *ngFor=\"let previewUrl of f.myHICardMedia.value\">\r\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\r\n                                        <div *ngIf=\"fileUploadProgress\">\r\n                                            Upload progress: {{ fileUploadProgress }}\r\n                                        </div>\r\n                                        <div class=\"card-body\">\r\n                                            Health Insurance Card\r\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\r\n                                                    class=\"icon icon-trash\"\r\n                                                    (click)=\"onUploadCleanAssetDocs('myHICardMedia')\"></i></a>\r\n                                        </div>\r\n                                    </div>\r\n\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"form-row\">\r\n                                <div class=\"col-xl-12 mt-3\">\r\n                                    <label for=\"myProfileDetails\">Social Network</label>\r\n                                    <div class=\"form-row\">\r\n                                        <div class=\"col-xl-4\">\r\n\r\n                                            <select [(ngModel)]=\"appName\" class=\"custom-select\"\r\n                                                [ngModelOptions]=\"{standalone: true}\">\r\n                                                <option value=\"facebook\" selected>Facebook</option>\r\n                                                <!--<option value=\"linkedin\">LinkedIn</option>-->\r\n                                            </select>\r\n                                        </div>\r\n                                        <div class=\"col-xl-8\">\r\n\r\n                                            <div class=\"input-group mb-3\">\r\n                                                <input type=\"url\"\r\n                                                    pattern=\"/(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})/gi*\"\r\n                                                    [(ngModel)]=\"appLink\" class=\"form-control\"\r\n                                                    [ngModelOptions]=\"{standalone: true}\"\r\n                                                    placeholder=\"Facebook Profile Public Link\" />\r\n                                                <div class=\"input-group-append\">\r\n                                                    <button class=\"btn btn-success\"\r\n                                                        (click)=\"addExternalAppLinks(true, null, appName, appLink)\">Add</button>\r\n                                                </div>\r\n                                            </div>\r\n\r\n                                        </div>\r\n                                        <div class=\"col-xl-12\">\r\n                                            <div *ngIf=\"submitted && f.externalAppLinks.errors\"\r\n                                                class=\"invalid-feedback\">\r\n                                                <div *ngIf=\"f.externalAppLinks.errors.required\">Links required</div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"form-row\" *ngFor=\"let applinks of f.externalAppLinks.value\">\r\n                                        <div class=\"col-xl-2\">\r\n                                            {{applinks.appName | titlecase}}\r\n                                        </div>\r\n                                        <div class=\"col-xl-10\">\r\n                                            <a href=\"{{applinks.appLink}}\">{{applinks.appLink}}</a>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\" *ngIf=\"_role == Role.Borrower\">\r\n                                <div class=\"col-xl-12\">\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-xl-12 mt-3\">\r\n                                            <div class=\"row\">\r\n                                                <div class=\"col-xl-12\">\r\n                                                    <label class=\"font-weight-bold\">Are you registered in RKI?</label>\r\n                                                    <i class=\"icon icon-info-alt ml-2\" data-toggle=\"tooltip\"\r\n                                                        title=\"Hooray!\"></i>\r\n                                                    <div class=\"btn-group btn-group btn-group-sm ml-4\">\r\n                                                        <button type=\"button\" class=\"btn\" (click)=\"onRKIChange(true)\"\r\n                                                            [ngClass]=\"{ 'btn-success': onInitRKICheckedValue()==true, 'btn-outline-success':onInitRKICheckedValue()==false}\">\r\n                                                            Yes\r\n                                                        </button>\r\n                                                        <button type=\"button\" class=\"btn\" (click)=\"onRKIChange(false)\"\r\n                                                            [ngClass]=\"{ 'btn-success': onInitRKICheckedValue()==false, 'btn-outline-success':onInitRKICheckedValue()==true}\">\r\n                                                            No\r\n                                                        </button>\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n\r\n                                            <div *ngIf=\"submitted && f.isRKIRegistered.errors\" class=\"error\">\r\n                                                <div *ngIf=\"f.isRKIRegistered.errors.required\" class=\"text-red\">\r\n                                                    data required\r\n                                                </div>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"row\">\r\n                                        <div class=\"col-xl-12 mt-3\">\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"form-row\" *ngIf=\"!onInitRKICheckedValue()\">\r\n                                        <div class=\"col-xl-9\">\r\n                                            <div class=\"custom-file\">\r\n                                                <input type=\"file\" class=\"custom-file-input\" name=\"image\"\r\n                                                    accept=\"image/*\"\r\n                                                    (change)=\"fileProgressAssetDocs($event,'lblmyRKIMedia')\">\r\n                                                <label class=\"custom-file-label\" for=\"customFile\"\r\n                                                    id=\"lblmyRKIMedia\">{{lblmyRKIMediaText}}</label>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-3\">\r\n                                            <button class=\"btn btn-outline-secondary btn-block\"\r\n                                                (click)=\"onUploadAssetDocs('myRKIMedia')\">\r\n                                                Upload\r\n                                            </button>\r\n                                        </div>\r\n                                        <div class=\"col-xl-4\">\r\n\r\n                                            <div class=\"row\">\r\n                                                <div class=\"col-xl-12\" *ngFor=\"let previewUrl of f.myRKIMedia.value\">\r\n                                                    <i class=\"icon-trash text-danger\"\r\n                                                        (click)=\"onUploadCleanAssetDocs('myRKIMedia')\"></i>\r\n                                                    <img class=\"img-fluid\" [src]=\"previewUrl.url\" />\r\n                                                </div>\r\n                                                <div>\r\n                                                    <div *ngIf=\"fileUploadProgress\">\r\n                                                        Upload progress: {{ fileUploadProgress }}\r\n                                                    </div>\r\n                                                </div>\r\n                                            </div>\r\n\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"card-footer\">\r\n                            <button type=\"button\" (click)=\"onProfileUpdateSubmit()\" [disabled]=\"loading\"\r\n                                class=\"btn btn-primary float-right\">Save</button>\r\n                        </div>\r\n                    </div>\r\n\r\n\r\n                </div>\r\n            </div>\r\n\r\n        </form>\r\n    </div>\r\n</div>\r\n<!-- register section -->";
       /***/
     },
 
@@ -13987,7 +13953,7 @@
 
       var ProfilePortfolioComponent = /*#__PURE__*/function () {
         function ProfilePortfolioComponent(http, formBuilder, authenticationService, userService, alertService, appRouterService, utilityService, router) {
-          var _this52 = this;
+          var _this47 = this;
 
           _classCallCheck2(this, ProfilePortfolioComponent);
 
@@ -14018,17 +13984,17 @@
             //console.log('data => ', data)
             if (data && data['success']) {
               //alert(JSON.stringify( data));
-              _this52.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
+              _this47.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
 
 
-              _this52.loading = false; //this.element_btn_click_profile_skills_verification.click();
+              _this47.loading = false; //this.element_btn_click_profile_skills_verification.click();
             } else {
               //alert(JSON.stringify(data['message']));
-              _this52.alertService.error(data['message']);
+              _this47.alertService.error(data['message']);
 
-              _this52.loading = false;
+              _this47.loading = false;
 
-              _this52.appRouterService.appRouter('');
+              _this47.appRouterService.appRouter('');
             }
           }, function (error) {
             var errorMsg2show = "";
@@ -14043,11 +14009,11 @@
               }
             } catch (ex) {}
 
-            _this52.alertService.error(errorMsg2show);
+            _this47.alertService.error(errorMsg2show);
 
-            _this52.loading = false;
+            _this47.loading = false;
 
-            _this52.appRouterService.appRouter('');
+            _this47.appRouterService.appRouter('');
           });
         }
 
@@ -14096,7 +14062,7 @@
         }, {
           key: "onProfileUpdateSubmit",
           value: function onProfileUpdateSubmit() {
-            var _this53 = this;
+            var _this48 = this;
 
             if (this.selfProfileUrlPendingForUpload) {
               this.alertService.error("Please Save Profile First");
@@ -14113,16 +14079,16 @@
             this.userService.addUpdateUserProfilePortFolio(this.profilePortfolioForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this53.alertService.success('Your Portfolio is Updated successfully', true);
+                _this48.alertService.success('Your Portfolio is Updated successfully', true);
 
-                _this53.element_ctrlUploadProfile = document.getElementById('ctrlNavigate2Profile');
+                _this48.element_ctrlUploadProfile = document.getElementById('ctrlNavigate2Profile');
 
-                _this53.element_ctrlUploadProfile.click();
+                _this48.element_ctrlUploadProfile.click();
               } else {
                 //alert(JSON.stringify(data['message']));
-                _this53.alertService.error(data['message']);
+                _this48.alertService.error(data['message']);
 
-                _this53.loading = false;
+                _this48.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -14137,9 +14103,9 @@
                 }
               } catch (ex) {}
 
-              _this53.alertService.error(errorMsg2show);
+              _this48.alertService.error(errorMsg2show);
 
-              _this53.loading = false;
+              _this48.loading = false;
             });
           }
         }, {
@@ -14151,7 +14117,7 @@
         }, {
           key: "preview",
           value: function preview() {
-            var _this54 = this;
+            var _this49 = this;
 
             // Show preview 
             var mimeType = this.fileData.type;
@@ -14164,7 +14130,7 @@
             reader.readAsDataURL(this.fileData);
 
             reader.onload = function (_event) {
-              _this54.previewUrl = reader.result;
+              _this49.previewUrl = reader.result;
             };
           }
         }, {
@@ -14187,7 +14153,7 @@
         }, {
           key: "onUploadMyProfileMedia",
           value: function onUploadMyProfileMedia() {
-            var _this55 = this;
+            var _this50 = this;
 
             var checkArray = this.profilePortfolioForm.get('myProfileMedia');
 
@@ -14197,18 +14163,18 @@
             }
 
             var _loop = function _loop(_index) {
-              var currentFile = _this55.myProfileFiles[_index];
+              var currentFile = _this50.myProfileFiles[_index];
 
               if (!currentFile) {
-                _this55.alertService.error("Select file first.");
+                _this50.alertService.error("Select file first.");
 
                 return "continue";
               }
 
               var formData = new FormData();
               formData.append('files', currentFile);
-              formData.append('documentId', _this55.authenticationService.currentUserValue._id);
-              _this55.fileUploadProgress = '0%';
+              formData.append('documentId', _this50.authenticationService.currentUserValue._id);
+              _this50.fileUploadProgress = '0%';
               var _temp_currentFile = {
                 name: currentFile.name,
                 type: currentFile.type,
@@ -14216,20 +14182,20 @@
                 url: null
               };
 
-              _this55.http.post(uploadAPI, formData, {
+              _this50.http.post(uploadAPI, formData, {
                 reportProgress: true,
                 observe: 'events'
               }).subscribe(function (events) {
                 if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpEventType"].UploadProgress) {
-                  _this55.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
-                  console.log(_this55.fileUploadProgress);
+                  _this50.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
+                  console.log(_this50.fileUploadProgress);
                 } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpEventType"].Response) {
-                  _this55.fileUploadProgress = '';
+                  _this50.fileUploadProgress = '';
                   console.log(events.body); //alert('SUCCESS !!');
 
-                  lodash__WEBPACK_IMPORTED_MODULE_9__["pullAt"](_this55.myProfileFiles, _index);
+                  lodash__WEBPACK_IMPORTED_MODULE_9__["pullAt"](_this50.myProfileFiles, _index);
 
-                  _this55.alertService.success('Uploaded Successfully !!', true);
+                  _this50.alertService.success('Uploaded Successfully !!', true);
 
                   var _uploadedUrl = events.body["data"].path;
 
@@ -14237,10 +14203,10 @@
                     _uploadedUrl = _uploadedUrl.substr(1);
                   }
 
-                  _this55.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
-                  _temp_currentFile.url = _this55.uploadedFilePath;
+                  _this50.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                  _temp_currentFile.url = _this50.uploadedFilePath;
 
-                  _this55.onMyProfileMediaUpdate(true, null, _temp_currentFile);
+                  _this50.onMyProfileMediaUpdate(true, null, _temp_currentFile);
                 }
               });
             };
@@ -14349,7 +14315,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"text-center mb-4 hide-sm\">\n    <div class=\"h1 font-weight-light text-primary mb-2\">Pricing built for your needs.</div>\n    <div class=\"h3 text-black-50 font-weight-light\">No surprises, no hassle.</div>\n</div>\n\n<div class=\"pricing-detailed mb-4\">\n    <div class=\"row align-items-center no-gutters\">\n        <!-- Detailed pricing column 1-->\n        <div class=\"col-lg-6 z-1 mb-4 mb-lg-0\">\n            <div class=\"card text-center border-0 shadow-sm\">\n                <div class=\"card-header bg-transparent justify-content-center py-3\">\n                    <h5 class=\"text-primary mb-0\">Paid Plan</h5>\n                </div>\n                <div class=\"card-body px-5 py-4\">\n                    <p class=\"lead\">One easy to understand pricing plan for all of our users! Get complete access to all\n                        of our features.</p>\n                    <div class=\"mb-5\">\n                        <div class=\"display-3 text-dark\">$25</div>\n                        per month\n                    </div>\n                    <ul class=\"list-unstyled\">\n                        <li class=\"d-flex align-items-center justify-content-center mb-3\">\n                            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"\n                                fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"\n                                stroke-linejoin=\"round\" class=\"feather feather-check-circle text-primary mr-2\">\n                                <path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"></path>\n                                <polyline points=\"22 4 12 14.01 9 11.01\"></polyline>\n                            </svg>\n                            Unlimited access to all of our features\n                        </li>\n                        <li class=\"d-flex align-items-center justify-content-center mb-3\">\n                            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"\n                                fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"\n                                stroke-linejoin=\"round\" class=\"feather feather-check-circle text-primary mr-2\">\n                                <path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"></path>\n                                <polyline points=\"22 4 12 14.01 9 11.01\"></polyline>\n                            </svg>\n                            No setup fees or any hidden fees\n                        </li>\n                        <li class=\"d-flex align-items-center justify-content-center\">\n                            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"\n                                fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"\n                                stroke-linejoin=\"round\" class=\"feather feather-check-circle text-primary mr-2\">\n                                <path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"></path>\n                                <polyline points=\"22 4 12 14.01 9 11.01\"></polyline>\n                            </svg>\n                            Dedicated customer support\n                        </li>\n                    </ul>\n                </div>\n                <a class=\"card-footer d-flex align-items-center justify-content-center\" href=\"#!\">\n                    Pay Now\n                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"\n                        stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\n                        class=\"feather feather-arrow-right ml-2\">\n                        <line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"></line>\n                        <polyline points=\"12 5 19 12 12 19\"></polyline>\n                    </svg>\n                </a>\n            </div>\n        </div>\n        <!-- Detailed pricing column 2-->\n        <div class=\"col-lg-6\">\n            <div class=\"card bg-dark text-center pricing-detailed-behind\">\n                <div class=\"card-header justify-content-center py-3\">\n                    <h5 class=\"mb-0 text-white\">Current Subsciption</h5>\n                </div>\n                <div class=\"card-body text-white-50 px-5 py-4\">\n                    <h2 class=\"text-white\">Trial Plan</h2>\n                    \n                    Days remaining\n                    <h2 class=\"mt-3\">\n                        <span class=\"badge badge-primary h3\">26 Days</span>\n                    </h2>\n                    \n                </div>\n                <a class=\"card-footer bg-gray-800 text-white d-flex align-items-center justify-content-center\"\n                    href=\"#!\">\n                    Upgrade\n                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"\n                        stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\n                        class=\"feather feather-arrow-right ml-2\">\n                        <line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"></line>\n                        <polyline points=\"12 5 19 12 12 19\"></polyline>\n                    </svg>\n                </a>\n            </div>\n        </div>\n    </div>\n</div>";
+      __webpack_exports__["default"] = "<div class=\"text-center mb-4 hide-sm\">\r\n    <div class=\"h1 font-weight-light text-primary mb-2\">Pricing built for your needs.</div>\r\n    <div class=\"h3 text-black-50 font-weight-light\">No surprises, no hassle.</div>\r\n</div>\r\n\r\n<div class=\"pricing-detailed mb-4\">\r\n    <div class=\"row align-items-center no-gutters\">\r\n        <!-- Detailed pricing column 1-->\r\n        <div class=\"col-lg-6 z-1 mb-4 mb-lg-0\">\r\n            <div class=\"card text-center border-0 shadow-sm\">\r\n                <div class=\"card-header bg-transparent justify-content-center py-3\">\r\n                    <h5 class=\"text-primary mb-0\">Paid Plan</h5>\r\n                </div>\r\n                <div class=\"card-body px-5 py-4\">\r\n                    <p class=\"lead\">One easy to understand pricing plan for all of our users! Get complete access to all\r\n                        of our features.</p>\r\n                    <div class=\"mb-2\">\r\n                        <div class=\"display-3 text-dark\">${{returnPaidPlanAmountUserRoleWise()}}</div>\r\n                        per month\r\n                    </div>\r\n                    <ul class=\"list-unstyled\">\r\n                        <li class=\"d-flex align-items-center justify-content-center mb-3\">\r\n                            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"\r\n                                fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\" class=\"feather feather-check-circle text-primary mr-2\">\r\n                                <path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"></path>\r\n                                <polyline points=\"22 4 12 14.01 9 11.01\"></polyline>\r\n                            </svg>\r\n                            Unlimited access to all of our features\r\n                        </li>\r\n                        <li class=\"d-flex align-items-center justify-content-center mb-3\">\r\n                            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"\r\n                                fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\" class=\"feather feather-check-circle text-primary mr-2\">\r\n                                <path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"></path>\r\n                                <polyline points=\"22 4 12 14.01 9 11.01\"></polyline>\r\n                            </svg>\r\n                            No setup fees or any hidden fees\r\n                        </li>\r\n                        <li class=\"d-flex align-items-center justify-content-center\">\r\n                            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"\r\n                                fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\"\r\n                                stroke-linejoin=\"round\" class=\"feather feather-check-circle text-primary mr-2\">\r\n                                <path d=\"M22 11.08V12a10 10 0 1 1-5.93-9.14\"></path>\r\n                                <polyline points=\"22 4 12 14.01 9 11.01\"></polyline>\r\n                            </svg>\r\n                            Dedicated customer support\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n                <div class=\"card-footer d-flex align-items-center justify-content-center cursor-pointer\" href=\"#!\" (click)=\"userInitiatedForPlanPurchaseOrRenewal()\">\r\n                    Pay Now\r\n                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"\r\n                        stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                        class=\"feather feather-arrow-right ml-2\">\r\n                        <line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"></line>\r\n                        <polyline points=\"12 5 19 12 12 19\"></polyline>\r\n                    </svg>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <!-- Detailed pricing column 2-->\r\n        <div class=\"col-lg-6\">\r\n            <div class=\"card bg-dark text-center pricing-detailed-behind\" *ngIf=\"!userInitiatedForPayment\">\r\n                <div class=\"card-header justify-content-center py-3\">\r\n                    <h5 class=\"mb-0 text-white\">Current Subsciption</h5>\r\n                </div>\r\n                <div class=\"card-body text-white-50 px-5 py-4\">\r\n                    <h2 class=\"text-white\">{{usersCurrentPlanSubscription.planName}}</h2>\r\n                    Valid Untill\r\n                    <h2 class=\"mt-3\">\r\n                        <span class=\"badge badge-primary h3\">{{ usersCurrentPlanSubscription.userMemberShipExpireOn | date:'dd-MMM-YYYY'}}</span>\r\n                    </h2> \r\n\r\n                    <div class=\"mt-1 text-white-50\">Plan ends {{ usersCurrentPlanSubscription.userMemberShipExpireOn | datePretty}}</div>\r\n                                   \r\n                </div>\r\n                <div class=\"card-footer bg-gray-800 text-white d-flex align-items-center justify-content-center cursor-pointer\"\r\n                    (click)=\"userInitiatedForPlanPurchaseOrRenewal()\">\r\n                    Upgrade\r\n                    <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\"\r\n                        stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"\r\n                        class=\"feather feather-arrow-right ml-2\">\r\n                        <line x1=\"5\" y1=\"12\" x2=\"19\" y2=\"12\"></line>\r\n                        <polyline points=\"12 5 19 12 12 19\"></polyline>\r\n                    </svg>\r\n                </div>\r\n            </div>\r\n            <div class=\"card bg-dark text-center pricing-detailed-behind\" [hidden]=\"!userInitiatedForPayment\">\r\n                <div class=\"card-header justify-content-center py-3\">\r\n                    <h5 class=\"mb-0 text-white\">Selected Plan</h5>\r\n                </div>\r\n                <div class=\"card-body text-white-50 px-5 py-4\">\r\n                    <h2 class=\"text-white\">{{usersNextPlanSubscription.planName}}</h2>\r\n                    Next Renewal\r\n                    <h2 class=\"mt-3\">\r\n                        <span class=\"badge badge-primary h3\">{{ usersNextPlanSubscription.userMemberShipExpireOn | datePretty}}</span>\r\n                    </h2>\r\n                    {{ usersNextPlanSubscription.userMemberShipExpireOn | date:'dd-MMM-YYYY'}}                               \r\n                </div>\r\n                <div class=\"card-footer bg-gray-800 text-white d-flex align-items-center justify-content-center\">\r\n                    <app-payment [hidden]=\"!userInitiatedForPayment\"></app-payment>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>";
       /***/
     },
 
@@ -14390,26 +14356,6 @@
 
 
       __webpack_exports__["default"] = "<h2 mat-dialog-title class=\"ml-n2\"><button id=\"ctrlNavigate2Profile\" (click)=\"navigate2Profile()\" class=\"btn btn-link btn-sm\" mat-button mat-dialog-close><i\r\n            class=\"icon-angle-left\"></i> Back</button>Portfolio</h2>\r\n<div class=\"row mb-2 mb-3\">\r\n    <div class=\"col-xl-12 col-12\">\r\n        <form [formGroup]=\"profilePortfolioForm\">\r\n            <div class=\"card\">\r\n                <div class=\"card-body\">\r\n                    <div class=\"tab-pane\" id=\"profile_portfolio\">\r\n                        <div class=\"row\">\r\n                            <div class=\"col-xl-12 mt-3\">\r\n                                <label for=\"projectTitle\" class=\"font-weight-bold\">Project Title</label>\r\n                                <input maxlength=\"50\" formControlName=\"projectTitle\" class=\"form-control\" [ngClass]=\"{ 'is-invalid': submitted && f.projectTitle.errors }\" />\r\n                                <div *ngIf=\"submitted && f.projectTitle.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.projectTitle.errors.required\">Project Title is required\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xl-12 mt-3\">\r\n                                <label for=\"myProfileDetails\" class=\"font-weight-bold\">Description</label>\r\n                                <textarea rows=\"2\" maxlength=\"500\" formControlName=\"myProfileDetails\" class=\"form-control\" [ngClass]=\"{ 'is-invalid': submitted && f.myProfileDetails.errors }\">\r\n                                </textarea>\r\n                                <div *ngIf=\"submitted && f.myProfileDetails.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.myProfileDetails.errors.required\">Description is required</div>\r\n                                </div>\r\n                            </div>\r\n\r\n                            <div class=\"col-xl-12  mt-3 text-center\">\r\n                                <!--1000*(10*10*10*1000)::=>1GB-->\r\n                                <div class=\"custom-dropzone\" ngx-dropzone [accept]=\"'image/*,video/*,application/pdf'\" (change)=\"onSelectMyProfileMedia($event)\" [maxFileSize]=\"1000*(10*10*10*1000)\">\r\n                                    <ngx-dropzone-label>\r\n                                        <div>\r\n                                            <p>Drag and drop your files here to upload Your Work</p>\r\n                                        </div>\r\n                                    </ngx-dropzone-label>\r\n                                    <!--  | dataArrayFilter : 'type' : 'video/'; | dataArrayFilter : 'type' : 'image/jpeg';-->\r\n                                    <div *ngFor=\"let file4Preview of myProfileFiles\">\r\n                                        <ngx-dropzone-image-preview *ngIf=\"file4Preview.type.indexOf('image/')>-1\" ngProjectAs=\"ngx-dropzone-preview\" [file]=\"file4Preview\" [removable]=\"true\" (removed)=\"onRemoveMyProfileMedia(file4Preview)\">\r\n                                            <ngx-dropzone-label>{{ file4Preview.name }} ({{ file4Preview.type }})\r\n                                            </ngx-dropzone-label>\r\n                                        </ngx-dropzone-image-preview>\r\n                                        <ngx-dropzone-video-preview *ngIf=\"file4Preview.type.indexOf('video/')>-1\" ngProjectAs=\"ngx-dropzone-preview\" [file]=\"file4Preview\" [removable]=\"true\" (removed)=\"onRemoveMyProfileMedia(file4Preview)\">\r\n                                            <ngx-dropzone-label>{{ file4Preview.name }} ({{ file4Preview.type }})\r\n                                            </ngx-dropzone-label>\r\n                                        </ngx-dropzone-video-preview>\r\n                                        <ngx-dropzone-preview *ngIf=\"file4Preview.type.indexOf('video/')==-1 && file4Preview.type.indexOf('image/')==-1\" ngProjectAs=\"ngx-dropzone-preview\" [file]=\"file4Preview\" [removable]=\"true\" (removed)=\"onRemoveMyProfileMedia(file4Preview)\">\r\n                                            <ngx-dropzone-label>{{ file4Preview.name }} ({{ file4Preview.type }})\r\n                                            </ngx-dropzone-label>\r\n                                        </ngx-dropzone-preview>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xl-12  mt-3 text-center\">\r\n                                <button class=\"btn btn-primary mt-3\" (click)=\"onUploadMyProfileMedia()\">Upload</button>\r\n                            </div>\r\n                            <div *ngIf=\"fileUploadProgress\">\r\n                                Upload progress: {{ fileUploadProgress }}\r\n                            </div>\r\n                            <div class=\"col-xl-12 mt-3\">\r\n                                <div class=\"card mt-2\">\r\n                                    <div class=\"card-header\">\r\n                                        My Documents\r\n                                    </div>\r\n                                    <div class=\"card-body\">\r\n                                        <div class=\"row\">\r\n                                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of f.myProfileMedia.value\">\r\n                                                <video *ngIf=\"previewUrl.type.indexOf('video/')>-1\" class=\"img-fluid border\" controls [src]=\"previewUrl.url\"></video>\r\n                                                <img *ngIf=\"previewUrl.type.indexOf('image/')>-1\" class=\"img-fluid border\" [src]=\"previewUrl.url\" onerror=\"this.src='/assets/img/na.png';\" />\r\n                                                <img *ngIf=\"previewUrl.type.indexOf('video/')==-1 && previewUrl.type.indexOf('image/')==-1\" class=\"img-fluid border\" src=\"/assets/img/pdf.png\" onerror=\"this.src='/assets/img/na.png';\" />\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"row\">\r\n                            <div class=\"col-xl-12 mt-3\">\r\n                                <hr>\r\n                                <button type=\"button\" (click)=\"onProfileUpdateSubmit()\" [disabled]=\"loading\" class=\"btn btn-primary float-right\">Save</button>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</div>";
-      /***/
-    },
-
-    /***/
-    "jvV2":
-    /*!************************************************************************!*\
-      !*** ./src/app/shared/stripe-component/stripe-component.component.css ***!
-      \************************************************************************/
-
-    /*! exports provided: default */
-
-    /***/
-    function jvV2(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony default export */
-
-
-      __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzdHJpcGUtY29tcG9uZW50LmNvbXBvbmVudC5jc3MifQ== */";
       /***/
     },
 
@@ -14842,14 +14788,14 @@
         }, {
           key: "readFile",
           value: function readFile() {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-              var _this56 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+              var _this51 = this;
 
-              return regeneratorRuntime.wrap(function _callee2$(_context2) {
+              return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
-                  switch (_context2.prev = _context2.next) {
+                  switch (_context.prev = _context.next) {
                     case 0:
-                      return _context2.abrupt("return", new Promise(
+                      return _context.abrupt("return", new Promise(
                       /**
                       * @param {?} resolve
                       * @param {?} reject
@@ -14876,23 +14822,23 @@
                         * @return {?}
                         */
                         function (e) {
-                          console.error("FileReader failed on file ".concat(_this56.file.name, "."));
+                          console.error("FileReader failed on file ".concat(_this51.file.name, "."));
                           reject(e);
                         };
 
-                        if (!_this56.file) {
+                        if (!_this51.file) {
                           return reject('No file to read. Please provide a file using the [file] Input property.');
                         }
 
-                        reader.readAsDataURL(_this56.file);
+                        reader.readAsDataURL(_this51.file);
                       }));
 
                     case 1:
                     case "end":
-                      return _context2.stop();
+                      return _context.stop();
                   }
                 }
-              }, _callee2);
+              }, _callee);
             }));
           }
         }]);
@@ -15745,18 +15691,18 @@
          * @param {?} sanitizer
          */
         function NgxDropzoneImagePreviewComponent(sanitizer) {
-          var _this57;
+          var _this52;
 
           _classCallCheck2(this, NgxDropzoneImagePreviewComponent);
 
-          _this57 = _super5.call(this, sanitizer);
+          _this52 = _super5.call(this, sanitizer);
           /**
            * The image data source.
            */
 
-          _this57.defualtImgLoading = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBzdHlsZT0ibWFyZ2luOiBhdXRvOyBiYWNrZ3JvdW5kOiByZ2IoMjQxLCAyNDIsIDI0Mykgbm9uZSByZXBlYXQgc2Nyb2xsIDAlIDAlOyBkaXNwbGF5OiBibG9jazsgc2hhcGUtcmVuZGVyaW5nOiBhdXRvOyIgd2lkdGg9IjIyNHB4IiBoZWlnaHQ9IjIyNHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPgo8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxNCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2U9IiM4NWEyYjYiIHN0cm9rZS1kYXNoYXJyYXk9IjIxLjk5MTE0ODU3NTEyODU1MiAyMS45OTExNDg1NzUxMjg1NTIiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+CiAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIGR1cj0iMS4xNjI3OTA2OTc2NzQ0MTg0cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIGtleVRpbWVzPSIwOzEiIHZhbHVlcz0iMCA1MCA1MDszNjAgNTAgNTAiPjwvYW5pbWF0ZVRyYW5zZm9ybT4KPC9jaXJjbGU+CjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjEwIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZT0iI2JiY2VkZCIgc3Ryb2tlLWRhc2hhcnJheT0iMTUuNzA3OTYzMjY3OTQ4OTY2IDE1LjcwNzk2MzI2Nzk0ODk2NiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjE1LjcwNzk2MzI2Nzk0ODk2NiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj4KICA8YW5pbWF0ZVRyYW5zZm9ybSBhdHRyaWJ1dGVOYW1lPSJ0cmFuc2Zvcm0iIHR5cGU9InJvdGF0ZSIgZHVyPSIxLjE2Mjc5MDY5NzY3NDQxODRzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIga2V5VGltZXM9IjA7MSIgdmFsdWVzPSIwIDUwIDUwOy0zNjAgNTAgNTAiPjwvYW5pbWF0ZVRyYW5zZm9ybT4KPC9jaXJjbGU+CjwhLS0gW2xkaW9dIGdlbmVyYXRlZCBieSBodHRwczovL2xvYWRpbmcuaW8vIC0tPjwvc3ZnPg==';
-          _this57.imageSrc = _this57.sanitizer.bypassSecurityTrustUrl(_this57.defualtImgLoading);
-          return _this57;
+          _this52.defualtImgLoading = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBzdHlsZT0ibWFyZ2luOiBhdXRvOyBiYWNrZ3JvdW5kOiByZ2IoMjQxLCAyNDIsIDI0Mykgbm9uZSByZXBlYXQgc2Nyb2xsIDAlIDAlOyBkaXNwbGF5OiBibG9jazsgc2hhcGUtcmVuZGVyaW5nOiBhdXRvOyIgd2lkdGg9IjIyNHB4IiBoZWlnaHQ9IjIyNHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPgo8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxNCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2U9IiM4NWEyYjYiIHN0cm9rZS1kYXNoYXJyYXk9IjIxLjk5MTE0ODU3NTEyODU1MiAyMS45OTExNDg1NzUxMjg1NTIiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+CiAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIGR1cj0iMS4xNjI3OTA2OTc2NzQ0MTg0cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIGtleVRpbWVzPSIwOzEiIHZhbHVlcz0iMCA1MCA1MDszNjAgNTAgNTAiPjwvYW5pbWF0ZVRyYW5zZm9ybT4KPC9jaXJjbGU+CjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjEwIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZT0iI2JiY2VkZCIgc3Ryb2tlLWRhc2hhcnJheT0iMTUuNzA3OTYzMjY3OTQ4OTY2IDE1LjcwNzk2MzI2Nzk0ODk2NiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjE1LjcwNzk2MzI2Nzk0ODk2NiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj4KICA8YW5pbWF0ZVRyYW5zZm9ybSBhdHRyaWJ1dGVOYW1lPSJ0cmFuc2Zvcm0iIHR5cGU9InJvdGF0ZSIgZHVyPSIxLjE2Mjc5MDY5NzY3NDQxODRzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIga2V5VGltZXM9IjA7MSIgdmFsdWVzPSIwIDUwIDUwOy0zNjAgNTAgNTAiPjwvYW5pbWF0ZVRyYW5zZm9ybT4KPC9jaXJjbGU+CjwhLS0gW2xkaW9dIGdlbmVyYXRlZCBieSBodHRwczovL2xvYWRpbmcuaW8vIC0tPjwvc3ZnPg==';
+          _this52.imageSrc = _this52.sanitizer.bypassSecurityTrustUrl(_this52.defualtImgLoading);
+          return _this52;
         }
         /**
          * @return {?}
@@ -15766,7 +15712,7 @@
         _createClass2(NgxDropzoneImagePreviewComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this58 = this;
+            var _this53 = this;
 
             this.readFile().then(
             /**
@@ -15779,7 +15725,7 @@
               * @return {?}
               */
               function () {
-                return _this58.imageSrc = img;
+                return _this53.imageSrc = img;
               });
             })["catch"](
             /**
@@ -16159,7 +16105,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div id=\"frame\" class=\"mt-md-n4 message_frame\">\r\n    <div id=\"sidepanel\">\r\n        <div id=\"profile\">\r\n\r\n            <h4 class=\"text-primary\">My Loans</h4>\r\n            <div class=\"wrap avittiNone\">\r\n                <img id=\"profile-img\" src=\"/assets/img/user-default.png\" default=\"\" class=\"online\" alt=\"\" />\r\n                <p class=\"mt-2\"> {{currentUser.firstName | titlecase}}</p>\r\n                <i class=\"fa fa-chevron-down expand-button\" aria-hidden=\"true\"></i>\r\n            </div>\r\n        </div>\r\n        <div class=\"d-none\" id=\"search\">\r\n            <label for=\"\"><i class=\"icon-search\" aria-hidden=\"true\"></i></label>\r\n            <input type=\"text\" placeholder=\"Search contacts...\" />\r\n        </div>\r\n        <div id=\"contacts\" class=\"mt-3\">\r\n            <ul>\r\n                <li class=\"contact\" *ngFor=\"let currentContactItem of myContactsList | orderBy: ['-updatedOn']\" [ngClass]=\"{ 'active': (currentContact?._id==currentContactItem?._id) }\">\r\n                    <div (click)=\"setCurrentContact(currentContactItem)\" class=\"wrap\" >\r\n                        <div class=\"d-none\" [ngSwitch]=\"currentContactItem.onlineStatus\">\r\n                            <span *ngSwitchCase=\"online\" class=\"contact-status online\"></span>\r\n                            <span *ngSwitchCase=\"busy\" class=\"contact-status busy\"></span>\r\n                            <span *ngSwitchCase=\"away\" class=\"contact-status away\"></span>\r\n                            <span *ngSwitchDefault class=\"contact-status\"></span>\r\n                        </div>\r\n\r\n                        <img *ngIf=\"!currentContactItem.isGroup\" src=\"/assets/img/user-default.png\" alt=\" \" />\r\n                        <img *ngIf=\"currentContactItem.isGroup\" src=\"/assets/img/users.png\" alt=\" \" />\r\n                        <div class=\"meta \">\r\n                            <div class=\"name \">{{currentContactItem.firstName | titlecase}}</div>\r\n                            <div class=\"small font-weight-light\">\r\n                                {{currentContactItem.lastMessage || 'NA'}}\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n        <!-- <div id=\"bottom-bar\">\r\n            <button id=\"addcontact\"><i class=\"fa fa-user-plus fa-fw\" aria-hidden=\"true\"></i> <span>Add\r\n                    contact</span></button>\r\n            <button id=\"settings\"><i class=\"fa fa-cog fa-fw\" aria-hidden=\"true\"></i> <span>Settings</span></button>\r\n        </div> -->\r\n    </div>\r\n    <div class=\"content text-center\" *ngIf=\"!currentContact\">\r\n        <div class=\"mt-5 text-center blog-agency no-item\">\r\n            <img class=\"mt-5\" src=\"assets/img/noresult.png\">\r\n\r\n<!--            \r\n            <h4 class=\"font-weight-normal\">Choose A Session To Start Collaberating</h4> -->\r\n            <h4 class=\"text-black-50\"> Select your loan to start chatting.\r\n            </h4>\r\n\r\n        </div>\r\n        <div class=\"mt-5 d-none\">\r\n\r\n            <textarea class=\"form-control\" type=\"text\" [(ngModel)]=\"tts_textarea\"></textarea>\r\n            <select class=\"form-control\" #langSelect *ngIf=\"speechData\" (change)=\"setLanguage(langSelect.value)\">\r\n                <option [value]=\"i\" *ngFor=\"let voice of speechData.voices;let i = index;\">\r\n                    {{voice.name}} - {{voice.lang}}\r\n                </option>\r\n            </select>\r\n            <br>\r\n            <i class=\"icon-microphone-alt\" (click)=\"start()\" title=\"Start\"></i>\r\n            <button class=\"btn btn-xs d-none\" (click)=\"pause()\"> pause {{speech.volume}}</button>\r\n            <button class=\"btn btn-xs d-none\" (click)=\"resume()\"> resume </button>\r\n\r\n            <button class=\"btn btn-xs d-none\" (click)=\"speech.volume = speech.volume - 1\"> - </button> <button class=\"btn btn-xs d-none\" (click)=\"speech.volume = speech.volume + 1\"> + </button>\r\n        </div>\r\n    </div>\r\n    <div class=\"content\" *ngIf=\"currentContact\">\r\n        <div class=\"contact-profile shadow-sm\">\r\n            <!-- <img src=\"/assets/img/user-default.png\" alt=\" \" /> -->\r\n\r\n            <i class=\"icon-arrow-left float-left\" (click)=\"goback_to_contacts()\"></i>\r\n\r\n            <div class=\"name m-md-3 m-0\">{{currentContact.firstName | titlecase}}</div>\r\n            <div class=\"social-media avittiNone\" style=\"right: 0;top: 3px;position: absolute;\">\r\n                <select [(ngModel)]=\"currentSelectedLanguageCode\" [ngClass]=\"{ 'is-invalid': submitted && f.location.errors }\" style=\"width: 75px;\">\r\n                    <option value=\"\" selected>Language</option>\r\n                    <option *ngFor=\"let language of languageCodes\" [ngValue]=\"language.language\">\r\n                        {{language.name}}</option>\r\n                </select>\r\n                <a (click)=\"joinNewVCSessionWithContact(currentContact._id,currentContact.loanId,currentContact.isGroup)\" routerLinkActive=\"active\"> <i class=\"icon-video-camera fa-lg\"></i></a>\r\n\r\n                <!-- <i class=\"icon-comment \"></i> -->\r\n            </div>\r\n        </div>\r\n        <div id=\"chat_messages\" class=\"messages\">\r\n            <!--#scrollMe [scrollTop]=\"scrollMe.scrollHeight\"\r\n            $(\"#chat_messages\").animate({\r\n    scrollTop: $(\"#chat_messages\").height()\r\n}, 400)\r\n            -->\r\n            <ul>\r\n                <!--\r\n                <li n class=\"sent \">\r\n                    <img src=\"http://emilcarlsson.se/assets/mikeross.png \" alt=\" \" /> \r\n                    <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>\r\n                </li>\r\n                <li class=\"replies \">\r\n                    <img src=\"http://emilcarlsson.se/assets/harveyspecter.png \" alt=\" \" /> \r\n                    <p>When you're backed against the wall, break the god damn thing down.</p>\r\n                </li>\r\n            -->\r\n                <!-- | sortArrayByUpdatedOn:['updatedOn']-->\r\n                <li *ngFor=\"let _chat of allChatListOfRoom; trackBy $index; let i = index\" [ngClass]=\"{ 'replies': _chat.userId == currentUser._id, 'sent': _chat.userId!=currentUser._id }\">\r\n                    <!-- <img src=\"/assets/img/user-default.png\" alt=\" \" /> -->\r\n                    <p>\r\n                        <span id=\"{{_chat._id}}\">\r\n                            {{_chat.message}}\r\n                        </span>\r\n                        <i class=\"icon-microphone-alt mr-1 avittiNone\" (click)=\"start(_chat.message)\" title=\"Text To Speech\"></i> \r\n                        <i (click)=\"translateTextInOtherLanguage(_chat.message, currentSelectedLanguageCode, false, _chat._id)\" title=\"Speech To Text\" class=\"icon-flickr-alt avittiNone\"></i></p>\r\n                </li>\r\n\r\n            </ul>\r\n        </div>\r\n        <div class=\"message-input\">\r\n            <div class=\"d-none\">\r\n                <div *ngIf=\"voiceActiveSectionDisabled; else voicesection;\">\r\n                    <button type=\"button\" (click)=\"startVoiceRecognition()\">Record</button>\r\n                </div>\r\n                <ng-template #voicesection>\r\n                    <ng-container *ngIf=\"!voiceActiveSectionError; else failure\">\r\n                        <ng-container *ngIf=\"message2send; else start\">\r\n                            <!-- <span>{{message2send}}</span> -->\r\n                        </ng-container>\r\n                        <ng-template #start>\r\n                            <ng-container *ngIf=\"voiceActiveSectionListening; else beginning\">\r\n                                <span>Listening...</span>\r\n                            </ng-container>\r\n                            <ng-template #beginning>\r\n                                <span>Start talking...</span>\r\n                            </ng-template>\r\n                        </ng-template>\r\n                    </ng-container>\r\n                    <ng-template #failure>\r\n                        <span>Didn't catch that</span>\r\n                    </ng-template>\r\n                    <div>\r\n                        <button (click)=\"closeVoiceRecognition()\">Close</button>\r\n                        <button (click)=\"startVoiceRecognition()\">Restart</button>\r\n                    </div>\r\n                </ng-template>\r\n            </div>\r\n\r\n\r\n            <div class=\"wrap_send_input\">\r\n                <!-- <input (keydown.enter)=\"sendMessage(currentContact._id, message2send)\" type=\"text \" placeholder=\"Write your message... \" [(ngModel)]=\"message2send\" />\r\n                \r\n                <button [disabled]=\"returnTifCurrentContactIsNullOrEmpty(currentContact) \" class=\"submit \" (click)=\"sendMessage(currentContact._id, message2send)\">\r\n\t\t\t\t\t<i class=\"fa fa-paper-plane \" aria-hidden=\"true \"></i>\r\n                </button> -->\r\n\r\n                <div class=\"input-group input-group-lg shadow-lg\">\r\n\r\n                    <input type=\"text\" (keydown.enter)=\"sendMessage(currentContact._id, message2send)\" type=\"text \" placeholder=\"Write your message... \" [(ngModel)]=\"message2send\" class=\"form-control border-0\" placeholder=\"Start Typing...\">\r\n                    <div class=\"input-group-append\">\r\n                        <button class=\"btn btn-light d-none avittiNone\" *ngIf=\"voiceActiveSectionListening; else beginning\" (click)=\"closeVoiceRecognition()\">\r\n                            <span class=\"small font-weight-light mr-1\">Listening...</span> <i\r\n                                class=\"fas fa-headset\"></i>\r\n                        </button>\r\n                        <button *ngIf=\"!voiceActiveSectionListening\" class=\"btn btn-light avittiNone\" (click)=\"startVoiceRecognition()\">\r\n                            <i class=\"fas icon-microphone fa-lg\" aria-hidden=\"true \"></i>\r\n                        </button>\r\n\r\n\r\n                        <button class=\"btn btn-link\" type=\"button\" [disabled]=\"!returnTifCurrentContactIsNullOrEmpty(currentContact) && !message2send\" (click)=\"sendMessage(currentContact._id, message2send)\">\r\n                            <i class=\"icon-arrow-right\" aria-hidden=\"true \"></i>\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
+      __webpack_exports__["default"] = "<div id=\"frame\" class=\"mt-md-n4 message_frame\">\r\n    <div id=\"sidepanel\">\r\n        <div id=\"profile\">\r\n\r\n            <h4 class=\"text-primary\">My Loans</h4>\r\n            <div class=\"wrap avittiNone\">\r\n                <img id=\"profile-img\" src=\"/assets/img/user-default.png\" default=\"\" class=\"online\" alt=\"\" />\r\n                <p class=\"mt-2\"> {{currentUser.firstName | titlecase}}</p>\r\n                <i class=\"fa fa-chevron-down expand-button\" aria-hidden=\"true\"></i>\r\n            </div>\r\n        </div>\r\n        <div class=\"d-none\" id=\"search\">\r\n            <label for=\"\"><i class=\"icon-search\" aria-hidden=\"true\"></i></label>\r\n            <input type=\"text\" placeholder=\"Search contacts...\" />\r\n        </div>\r\n        <div id=\"contacts\" class=\"mt-3\">\r\n            <ul>\r\n                <li class=\"contact\" *ngFor=\"let currentContactItem of myContactsList | orderBy: ['-updatedOn']\" [ngClass]=\"{ 'active': (currentContact?._id==currentContactItem?._id) }\">\r\n                    <div (click)=\"setCurrentContact(currentContactItem)\" class=\"wrap\" >\r\n                        <div class=\"d-none\" [ngSwitch]=\"currentContactItem.onlineStatus\">\r\n                            <span *ngSwitchCase=\"online\" class=\"contact-status online\"></span>\r\n                            <span *ngSwitchCase=\"busy\" class=\"contact-status busy\"></span>\r\n                            <span *ngSwitchCase=\"away\" class=\"contact-status away\"></span>\r\n                            <span *ngSwitchDefault class=\"contact-status\"></span>\r\n                        </div>\r\n\r\n                        <img *ngIf=\"!currentContactItem.isGroup\" src=\"/assets/img/user-default.png\" alt=\" \" />\r\n                        <img *ngIf=\"currentContactItem.isGroup\" src=\"/assets/img/users.png\" alt=\" \" />\r\n                        <div class=\"meta \">\r\n                            <div class=\"name \">{{currentContactItem.firstName | titlecase}}</div>\r\n                            <div class=\"small font-weight-light\">\r\n                                {{currentContactItem.createdOn | date}}\r\n                                <!-- {{currentContactItem.lastMessage || 'NA'}} -->\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </li>\r\n            </ul>\r\n        </div>\r\n        <!-- <div id=\"bottom-bar\">\r\n            <button id=\"addcontact\"><i class=\"fa fa-user-plus fa-fw\" aria-hidden=\"true\"></i> <span>Add\r\n                    contact</span></button>\r\n            <button id=\"settings\"><i class=\"fa fa-cog fa-fw\" aria-hidden=\"true\"></i> <span>Settings</span></button>\r\n        </div> -->\r\n    </div>\r\n    <div class=\"content text-center\" *ngIf=\"!currentContact\">\r\n        <div class=\"mt-5 text-center blog-agency no-item\">\r\n            <img class=\"mt-5\" src=\"assets/img/noresult.png\">\r\n\r\n<!--            \r\n            <h4 class=\"font-weight-normal\">Choose A Session To Start Collaberating</h4> -->\r\n            <h4 class=\"text-black-50\"> Select your loan to start chatting.\r\n            </h4>\r\n\r\n        </div>\r\n        <div class=\"mt-5 d-none\">\r\n\r\n            <textarea class=\"form-control\" type=\"text\" [(ngModel)]=\"tts_textarea\"></textarea>\r\n            <select class=\"form-control\" #langSelect *ngIf=\"speechData\" (change)=\"setLanguage(langSelect.value)\">\r\n                <option [value]=\"i\" *ngFor=\"let voice of speechData.voices;let i = index;\">\r\n                    {{voice.name}} - {{voice.lang}}\r\n                </option>\r\n            </select>\r\n            <br>\r\n            <i class=\"icon-microphone-alt\" (click)=\"start()\" title=\"Start\"></i>\r\n            <button class=\"btn btn-xs d-none\" (click)=\"pause()\"> pause {{speech.volume}}</button>\r\n            <button class=\"btn btn-xs d-none\" (click)=\"resume()\"> resume </button>\r\n\r\n            <button class=\"btn btn-xs d-none\" (click)=\"speech.volume = speech.volume - 1\"> - </button> <button class=\"btn btn-xs d-none\" (click)=\"speech.volume = speech.volume + 1\"> + </button>\r\n        </div>\r\n    </div>\r\n    <div class=\"content\" *ngIf=\"currentContact\">\r\n        <div class=\"contact-profile shadow-sm\">\r\n            <!-- <img src=\"/assets/img/user-default.png\" alt=\" \" /> -->\r\n\r\n            <i class=\"icon-arrow-left float-left\" (click)=\"goback_to_contacts()\"></i>\r\n\r\n            <div class=\"name m-md-3 m-0\">{{currentContact.firstName | titlecase}}</div>\r\n            <div class=\"social-media avittiNone\" style=\"right: 0;top: 3px;position: absolute;\">\r\n                <select [(ngModel)]=\"currentSelectedLanguageCode\" [ngClass]=\"{ 'is-invalid': submitted && f.location.errors }\" style=\"width: 75px;\">\r\n                    <option value=\"\" selected>Language</option>\r\n                    <option *ngFor=\"let language of languageCodes\" [ngValue]=\"language.language\">\r\n                        {{language.name}}</option>\r\n                </select>\r\n                <a (click)=\"joinNewVCSessionWithContact(currentContact._id,currentContact.loanId,currentContact.isGroup)\" routerLinkActive=\"active\"> <i class=\"icon-video-camera fa-lg\"></i></a>\r\n\r\n                <!-- <i class=\"icon-comment \"></i> -->\r\n            </div>\r\n        </div>\r\n        <div id=\"chat_messages\" class=\"messages\">\r\n            <!--#scrollMe [scrollTop]=\"scrollMe.scrollHeight\"\r\n            $(\"#chat_messages\").animate({\r\n    scrollTop: $(\"#chat_messages\").height()\r\n}, 400)\r\n            -->\r\n            <ul>\r\n                <!--\r\n                <li n class=\"sent \">\r\n                    <img src=\"http://emilcarlsson.se/assets/mikeross.png \" alt=\" \" /> \r\n                    <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>\r\n                </li>\r\n                <li class=\"replies \">\r\n                    <img src=\"http://emilcarlsson.se/assets/harveyspecter.png \" alt=\" \" /> \r\n                    <p>When you're backed against the wall, break the god damn thing down.</p>\r\n                </li>\r\n            -->\r\n                <!-- | sortArrayByUpdatedOn:['updatedOn']-->\r\n                <li *ngFor=\"let _chat of allChatListOfRoom; trackBy $index; let i = index\" [ngClass]=\"{ 'replies': _chat.userId == currentUser._id, 'sent': _chat.userId!=currentUser._id }\">\r\n                    <!-- <img src=\"/assets/img/user-default.png\" alt=\" \" /> -->\r\n                    <p>\r\n                        <span id=\"{{_chat._id}}\">\r\n                            {{_chat.message}}\r\n                        </span>\r\n                        <i class=\"icon-microphone-alt mr-1 avittiNone\" (click)=\"start(_chat.message)\" title=\"Text To Speech\"></i> \r\n                        <i (click)=\"translateTextInOtherLanguage(_chat.message, currentSelectedLanguageCode, false, _chat._id)\" title=\"Speech To Text\" class=\"icon-flickr-alt avittiNone\"></i></p>\r\n                </li>\r\n\r\n            </ul>\r\n        </div>\r\n        <div class=\"message-input\">\r\n            <div class=\"d-none\">\r\n                <div *ngIf=\"voiceActiveSectionDisabled; else voicesection;\">\r\n                    <button type=\"button\" (click)=\"startVoiceRecognition()\">Record</button>\r\n                </div>\r\n                <ng-template #voicesection>\r\n                    <ng-container *ngIf=\"!voiceActiveSectionError; else failure\">\r\n                        <ng-container *ngIf=\"message2send; else start\">\r\n                            <!-- <span>{{message2send}}</span> -->\r\n                        </ng-container>\r\n                        <ng-template #start>\r\n                            <ng-container *ngIf=\"voiceActiveSectionListening; else beginning\">\r\n                                <span>Listening...</span>\r\n                            </ng-container>\r\n                            <ng-template #beginning>\r\n                                <span>Start talking...</span>\r\n                            </ng-template>\r\n                        </ng-template>\r\n                    </ng-container>\r\n                    <ng-template #failure>\r\n                        <span>Didn't catch that</span>\r\n                    </ng-template>\r\n                    <div>\r\n                        <button (click)=\"closeVoiceRecognition()\">Close</button>\r\n                        <button (click)=\"startVoiceRecognition()\">Restart</button>\r\n                    </div>\r\n                </ng-template>\r\n            </div>\r\n\r\n\r\n            <div class=\"wrap_send_input\">\r\n                <!-- <input (keydown.enter)=\"sendMessage(currentContact._id, message2send)\" type=\"text \" placeholder=\"Write your message... \" [(ngModel)]=\"message2send\" />\r\n                \r\n                <button [disabled]=\"returnTifCurrentContactIsNullOrEmpty(currentContact) \" class=\"submit \" (click)=\"sendMessage(currentContact._id, message2send)\">\r\n\t\t\t\t\t<i class=\"fa fa-paper-plane \" aria-hidden=\"true \"></i>\r\n                </button> -->\r\n                <small class=\"text-danger ml-1 mb-3\" *ngIf=\"message2send && (message2send.includes('skype') || message2send.includes('facebook') || message2send.includes('wechat') || message2send.includes('messenger') || message2send.includes('messenger')|| message2send.includes('@') || message2send.includes('(a)') || message2send.includes('-a-') || message2send.includes('.dk') || message2send.includes('.com') )\">Your message cannot have restricted keywords: messenger, facebook, whatsapp, wechat, skype, @,(a), -a-\r\n                   , .com, .dk   \r\n                      </small>\r\n                <div class=\"input-group input-group-lg shadow-lg mt-1\">\r\n                   \r\n                    <input type=\"text\" (keydown.enter)=\"sendMessage(currentContact._id, message2send)\" type=\"text \" placeholder=\"Write your message... \" [(ngModel)]=\"message2send\" class=\"form-control border-0\" placeholder=\"Start Typing...\">\r\n                    <div class=\"input-group-append\">\r\n                        <button class=\"btn btn-light d-none avittiNone\" *ngIf=\"voiceActiveSectionListening; else beginning\" (click)=\"closeVoiceRecognition()\">\r\n                            <span class=\"small font-weight-light mr-1\">Listening...</span> <i\r\n                                class=\"fas fa-headset\"></i>\r\n                        </button>\r\n                        <button *ngIf=\"!voiceActiveSectionListening\" class=\"btn btn-light avittiNone\" (click)=\"startVoiceRecognition()\">\r\n                            <i class=\"fas icon-microphone fa-lg\" aria-hidden=\"true \"></i>\r\n                        </button>\r\n\r\n\r\n                        <button class=\"btn btn-link\" type=\"button\" [disabled]=\"!returnTifCurrentContactIsNullOrEmpty(currentContact) && !message2send\" (click)=\"sendMessage(currentContact._id, message2send)\">\r\n                            <i class=\"icon-arrow-right\" aria-hidden=\"true \"></i>\r\n                        </button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n";
       /***/
     },
 
@@ -16350,6 +16296,7 @@
           this.utilityService = utilityService;
           this.arrayItems = [0];
           this.SessionExecutionType = _models__WEBPACK_IMPORTED_MODULE_8__["SessionExecutionType"];
+          this.transactionOnForLoanAmountPaidByLenderCustomised = null;
           this.LoanObj = data.sessionObj;
           this.sessionApply = {};
           this.sessionApply.loanId = this.LoanObj._id;
@@ -16433,11 +16380,245 @@
           this.SessionExecutionType = _models__WEBPACK_IMPORTED_MODULE_8__["SessionExecutionType"];
           this.refundObj = {};
           this.ready2Refund = false;
+          this.alreadyInitiatedForPayment = false;
+          this.transactionOnForLoanAmountPaidByLenderCustomised = null;
+          this.transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised = null;
           this.LoanObj = data.sessionObj;
           this.endUserId = data.endUserId;
+          this.LoanApplyObjCurrent = {};
+          this.LoanApplyObjCurrentCheckBoxes = {};
+          this.LoanApplyObjCurrentCheckBoxes.visibleKeys = {};
+          this.LoanApplyObjCurrent4Installment = {};
         }
 
         _createClass2(ModalAppliedSessionDisplay, [{
+          key: "initiateLoanAmountPaidByBorrower",
+          value: function initiateLoanAmountPaidByBorrower(event, LoanApplyObj, currentRowDate, _key) {
+            if (LoanApplyObj) {
+              var _installmentKey = null;
+
+              if (event.target.checked && !this.alreadyInitiatedForPayment) {
+                _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
+
+                if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+                  if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+                    this.alertService.error("Installment already paid");
+                    return;
+                  }
+                }
+
+                this.LoanApplyObjCurrent4Installment = {};
+                this.LoanApplyObjCurrent4Installment.installmentKey = _installmentKey;
+                this.alreadyInitiatedForPayment = true;
+              } else {
+                if (!event.target.checked) {
+                  if (this.alreadyInitiatedForPayment) {
+                    this.alreadyInitiatedForPayment = false;
+                  }
+
+                  this.LoanApplyObjCurrent4Installment = {};
+                }
+
+                event.target.checked = false;
+                this.LoanApplyObjCurrentCheckBoxes[_key] = false;
+              }
+            }
+          }
+        }, {
+          key: "returnT4IfCurrentInstallmentAlreadyPaid",
+          value: function returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, currentRowDate, _key) {
+            var _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
+
+            if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+              if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+                return true;
+              }
+            }
+
+            return false;
+          }
+        }, {
+          key: "paymentDoneByLender",
+          value: function paymentDoneByLender(LoanApplyObj) {
+            var _this54 = this;
+
+            this.LoanApplyObjCurrent._id = LoanApplyObj._id;
+
+            if (this.transactionOnForLoanAmountPaidByLenderCustomised) {
+              this.LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLender = Date.parse(this.utilityService.moment(this.transactionOnForLoanAmountPaidByLenderCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD'));
+            }
+
+            if (!this.LoanApplyObjCurrent.isLoanAmountPaidByLender || !this.LoanApplyObjCurrent.transactionIdForLoanAmountPaidByLender || !this.LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLender) {
+              this.alertService.error("All data is required");
+              return;
+            }
+
+            if (this.utilityService.moment(this.LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLender).isAfter(this.utilityService.moment())) {
+              this.alertService.error("Future date is not allowed");
+              return;
+            }
+
+            if (this.utilityService.moment(this.LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLender).isBefore(this.utilityService.moment(this.LoanObj.loanStartDateTime))) {
+              this.alertService.error("Transaction date must be newer than loan created date");
+              return;
+            }
+
+            this.LoanApplyObjCurrent.createdOnForLoanAmountPaidByLender = this.utilityService._.now();
+            this.socketService.sendEventForLoanAmountPaidByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, this.LoanApplyObjCurrent).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
+              if (details && details["success"]) {
+                _this54.dialogRef.close({
+                  event: 'close',
+                  data: {
+                    updatedSessionObj: details["data"]
+                  }
+                });
+              }
+            });
+            this.LoanApplyObjCurrent = {};
+          }
+        }, {
+          key: "paymentDoneToLenderConfirmByLender",
+          value: function paymentDoneToLenderConfirmByLender(LoanApplyObj) {
+            var _this55 = this;
+
+            var _past_days_allowed4payment = 15;
+            var _future_days_allowed4payment = 7; //this.LoanApplyObjCurrent4Installment.loanTenureInMonths = this.LoanObj.loanTenureInMonths;
+            //this.LoanApplyObjCurrent4Installment.installmentKey = null;
+            //this.LoanApplyObjCurrent4Installment._id = LoanApplyObj._id;
+
+            if (this.transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised) {
+              this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender = Date.parse(this.utilityService.moment(this.transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD 00:00:00 A'));
+            }
+
+            if (!this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender) {
+              this.alertService.error("All data is required");
+              return;
+            }
+
+            if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender).isAfter(this.utilityService.moment(this.LoanApplyObjCurrent4Installment.installmentKey).add('D', _future_days_allowed4payment))) {
+              this.alertService.error("Future date is not allowed");
+              return;
+            }
+
+            if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidByLenderConfirmByBorrower).isAfter(this.utilityService.moment().add('D', -1 * _past_days_allowed4payment))) {
+              this.alertService.error("Historic date is not allowed");
+              return;
+            }
+
+            if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidByLenderConfirmByBorrower).isBefore(this.utilityService.moment().add('D'))) {
+              this.alertService.error("Future date is not allowed");
+              return;
+            }
+
+            if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+              var _old_installmentKey = null;
+
+              for (var index in LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+                if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[index]) {
+                  _old_installmentKey = LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[index].installmentKey;
+                }
+              }
+
+              if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender).isBefore(this.utilityService.moment(_old_installmentKey))) {
+                this.alertService.error("Transaction date must be newer than installment date");
+                return;
+              }
+            } else {
+              if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender).isBefore(this.utilityService.moment(this.LoanObj.loanStartDateTime))) {
+                this.alertService.error("Transaction date must be newer than loan created date");
+                return;
+              }
+            }
+
+            this.LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender = this.utilityService._.now();
+
+            var _loanTenureInMonths = parseInt(this.LoanObj.loanTenureInMonths);
+
+            var _installmentKey = this.LoanApplyObjCurrent4Installment.installmentKey; //delete this.LoanApplyObjCurrent4Installment.installmentKey;
+
+            this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, _installmentKey, _loanTenureInMonths, this.LoanApplyObjCurrent4Installment).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
+              if (details && details["success"]) {
+                _this55.dialogRef.close({
+                  event: 'close',
+                  data: {
+                    updatedSessionObj: details["data"]
+                  }
+                });
+              }
+            });
+            this.LoanApplyObjCurrent4Installment = {};
+          }
+        }, {
+          key: "returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender",
+          value: function returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, currentRowDate, _key) {
+            var _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
+
+            if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+              if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+                if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey].createdOnForLoanAmountPaidToLenderConfirmByLender) {
+                  return true;
+                }
+              }
+            }
+
+            return false;
+          }
+        }, {
+          key: "viewCurrentInstallmentAlreadyPaid",
+          value: function viewCurrentInstallmentAlreadyPaid(LoanApplyObj, currentRowDate, _key) {
+            var _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
+
+            if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+              if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+                if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+                  this.LoanApplyObjCurrent4Installment = {};
+                  this.LoanApplyObjCurrent4Installment = LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey];
+                  return true;
+                }
+              }
+            }
+
+            return false;
+          }
+        }, {
+          key: "initiateLoanAmountPaidByBorrowerConfirmByLender",
+          value: function initiateLoanAmountPaidByBorrowerConfirmByLender(event, LoanApplyObj, currentRowDate, _key) {
+            if (LoanApplyObj) {
+              var _installmentKey = null;
+
+              if (event.target.checked && !this.alreadyInitiatedForPayment) {
+                _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
+                this.LoanApplyObjCurrent4Installment = {};
+
+                if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+                  if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+                    if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey].createdOnForLoanAmountPaidToLenderConfirmByLender) {
+                      this.alertService.error("Installment payment already confirmed");
+                      return;
+                    } else {
+                      this.LoanApplyObjCurrent4Installment = {};
+                      this.LoanApplyObjCurrent4Installment = LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey];
+                    }
+                  }
+                }
+
+                this.LoanApplyObjCurrent4Installment.installmentKey = _installmentKey;
+                this.alreadyInitiatedForPayment = true;
+              } else {
+                if (!event.target.checked) {
+                  if (this.alreadyInitiatedForPayment) {
+                    this.alreadyInitiatedForPayment = false;
+                  }
+
+                  this.LoanApplyObjCurrent4Installment = {};
+                }
+
+                event.target.checked = false;
+                this.LoanApplyObjCurrentCheckBoxes[_key] = false;
+              }
+            }
+          }
+        }, {
           key: "returnUrl4downloadCOntractPDF",
           value: function returnUrl4downloadCOntractPDF(sessionApplyId) {
             var Url4downloadCOntractPDF = src_environments_environment__WEBPACK_IMPORTED_MODULE_17__["environment"].apiUrl + '/signed_pdf_contract/' + sessionApplyId + '.pdf';
@@ -16449,12 +16630,12 @@
         }, {
           key: "finalSubmissionForRefund",
           value: function finalSubmissionForRefund() {
-            var _this59 = this;
+            var _this56 = this;
 
             this.socketService.sendEventToRejectSessionWithRefundRequestWiUpdateAll(this.refundObj.loanId, this.refundObj.loanApplyId, this.endUserId, _models__WEBPACK_IMPORTED_MODULE_8__["SessionStatus"].RejectedOngoingWithRefund, this.refundObj.transactionId, this.refundObj.amount, this.refundObj.cancellationCharges, this.refundObj.finalAmount2Refund, this.refundObj.captureId, this.refundObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {} else {}
 
-              _this59.dialogRef.close({
+              _this56.dialogRef.close({
                 event: 'close',
                 data: null
               });
@@ -16463,7 +16644,7 @@
         }, {
           key: "closeDialog",
           value: function closeDialog(_sessionApply, _status) {
-            var _this60 = this;
+            var _this57 = this;
 
             this.payment.clearCurrentPayPalConfig();
             var _loanId = _sessionApply.loanId;
@@ -16512,10 +16693,10 @@
 
                 this.socketService.sendEventToRejectSessionWithRefundRequest(_loanId, _loanApplyId, _endUserId, _status).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
                   if (details && details["success"]) {
-                    _this60.refundObj = details["data"];
-                    _this60.ready2Refund = true;
+                    _this57.refundObj = details["data"];
+                    _this57.ready2Refund = true;
                   } else {
-                    _this60.alertService.error(details["message"], true);
+                    _this57.alertService.error(details["message"], true);
                   } //this.dialogRef.close({ event: 'close', data: { sessionApply: _sessionApply, status: _status, transactionId: (details.id || details._id) } });
 
                 }); //#endregion handle LoanObj rejected with refund  
@@ -16536,7 +16717,7 @@
         }, {
           key: "initiateForPaymentForLender",
           value: function initiateForPaymentForLender(_loanId, _loanApplyId, _sessionApply, _status, _sessionPrice, _endUserId, _transactiActionType) {
-            var _this61 = this;
+            var _this58 = this;
 
             //#region handle LoanObj payments
             this.userInitiatedForPayment = true;
@@ -16564,7 +16745,7 @@
               }]
             }];
             this.payment.getCurrentPaymentApproved().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
-              _this61.dialogRef.close({
+              _this58.dialogRef.close({
                 event: 'close',
                 data: {
                   sessionApply: _sessionApply,
@@ -16743,26 +16924,22 @@
     },
 
     /***/
-    "pGuh":
-    /*!*****************************************************************************!*\
-      !*** ./src/app/shared/stripe-component/templates/app.component.template.ts ***!
-      \*****************************************************************************/
+    "pFHx":
+    /*!******************************************************************!*\
+      !*** ./src/app/shared/media-preview/media-preview.component.css ***!
+      \******************************************************************/
 
-    /*! exports provided: string */
+    /*! exports provided: default */
 
     /***/
-    function pGuh(module, __webpack_exports__, __webpack_require__) {
+    function pFHx(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
+      /* harmony default export */
 
 
-      __webpack_require__.d(__webpack_exports__, "string", function () {
-        return string;
-      });
-
-      var string = "import { Component } from \"@angular/core\"" + "\nimport { Stripe, StripeScriptTag } from \"../../../src/StripeScriptTag\"" + "\n" + "\nconst template=" + "\n`" + "\n<div style=\"padding:1em;\">" + "\n  <h2 style=\"margin-top:0;\">stripe-angular demo</h2>" + "\n  <ng-container *ngIf=\"!loaded\">Loading...</ng-container>" + "\n" + "\n  <ng-container *ngIf=\"loaded\">" + "\n" + "\n    <div *ngIf=\"changekey\" style=\"padding:1em;\">" + "\n      <form onsubmit=\"return false\" (submit)=\"apply(tempPublishableKey);changekey=false\">" + "\n        <strong>publishableKey</strong>" + "\n        <div>" + "\n          <input (keyup)=\"tempPublishableKey=$event.target.value\" [value]=\"tempPublishableKey\" style=\"width:100%\" />" + "\n        </div>" + "\n        <button type=\"submit\">apply</button>" + "\n      </form>" + "\n    </div>" + "\n    " + "\n" + "\n    <div *ngIf=\"!changekey\" style=\"padding:1em;\">" + "\n      <strong>publishableKey</strong>" + "\n      <div>{{ publishableKey }}</div>" + "\n" + "\n      <br />" + "\n      " + "\n      <button type=\"button\" (click)=\"changekey=!changekey\" style=\"width:100%\">change publishable key</button>" + "\n      " + "\n      <ng-container *ngIf=\"publishableKey=='pk_test_5JZuHhxsinNGc5JanVWWKSKq'\">" + "\n        <br />" + "\n        <br />" + "\n        <div style=\"font-size:0.75em;color:orange;\">" + "\n          <strong>WARNING</strong>: You need to enter your own key above." + "\n          <p>" + "\n            You will NOT be able to perform any additional functionality without doing so. <a href=\"https://dashboard.stripe.com/register\" target=\"_blank\">create account</a>" + "\n          </p>" + "\n        </div>" + "\n      </ng-container>" + "\n" + "\n      <br />" + "\n      <br />" + "\n" + "\n      <ng-container *ngIf=\"stripe\">" + "\n        <label for=\"card-like-element\">" + "\n          Credit or debit card" + "\n        </label>" + "\n        <div id=\"card-like-element\" style=\"background-color:white;border-radius: 5px;border:1px solid #DDD;padding:.33em;\">" + "\n          <stripe-card #stripeCard [(token)]=\"token\" (catch)=\"lastError=$event\"></stripe-card>" + "\n        </div>" + "\n        <br />" + "\n        <button type=\"button\" (click)=\"stripeCard.createToken()\">createToken</button>" + "\n        <div *ngIf=\"token\" style=\"padding:1em;\">" + "\n          <strong>Token</strong>" + "\n          <textarea wrap=\"off\" style=\"width:100%;height:175px\">{{ token | json }}</textArea>" + "\n        </div>" + "\n      </ng-container>" + "\n" + "\n      <div *ngIf=\"lastError\" style=\"color:red;\">" + "\n        <textarea wrap=\"off\" style=\"color:red;width:100%;height:175px\">{{lastError | json}}</textArea>" + "\n      </div>" + "\n" + "\n      <div *ngIf=\"!stripe\" style=\"color:red;\">" + "\n        Stripe publishable key has not yet been set" + "\n      </div>" + "\n" + "\n    </div>" + "\n  </ng-container>" + "\n</div>" + "\n`" + "\n" + "\nconst testKey = \"pk_test_5JZuHhxsinNGc5JanVWWKSKq\"" + "\n" + "\n@Component({" + "\n  selector:\"app\"," + "\n  template:template" + "\n}) export class AppComponent{" + "\n  loaded:boolean" + "\n  publishableKey = testKey" + "\n  lastError:Error" + "\n  token:any" + "\n  tempPublishableKey = testKey" + "\n  stripe:stripe.Stripe" + "\n  constructor(public StripeScriptTag:StripeScriptTag){}" + "\n" + "\n  ngOnInit(){" + "\n    //inject script tag onto document and apply publishableKey" + "\n    this.apply(this.publishableKey)" + "\n    .then( ()=>this.loaded=true )" + "\n  }" + "\n" + "\n  apply(key):Promise<stripe.Stripe>{" + "\n    this.publishableKey = key" + "\n    return this.StripeScriptTag.setPublishableKey(this.publishableKey)" + "\n    .then(stripe.Stripe=>this.stripe=stripe.Stripe)" + "\n  }" + "\n}" + "\n";
+      __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJtZWRpYS1wcmV2aWV3LmNvbXBvbmVudC5jc3MifQ== */";
       /***/
     },
 
@@ -16860,22 +17037,72 @@
     },
 
     /***/
-    "q7J+":
-    /*!***************************************************************************************************************!*\
-      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/shared/stripe-component/stripe-component.component.html ***!
-      \***************************************************************************************************************/
+    "peRX":
+    /*!*************************************************!*\
+      !*** ./src/app/shared/pipe/date-pretty.pipe.ts ***!
+      \*************************************************/
 
-    /*! exports provided: default */
+    /*! exports provided: DatePrettyPipe */
 
     /***/
-    function q7J(module, __webpack_exports__, __webpack_require__) {
+    function peRX(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
-      /* harmony default export */
+      /* harmony export (binding) */
 
 
-      __webpack_exports__["default"] = "<style>\r\n    .tool-wrap {\r\n        flex: 2 2 20em;\r\n        margin: 2em;\r\n        display: flex;\r\n        flex-direction: column;\r\n    }\r\n\r\n    .tool-panel {\r\n        flex-grow: 1;\r\n        border-radius: 5px;\r\n        background-color: #888;\r\n        text-align: left;\r\n        width: 100%;\r\n        padding: 1em;\r\n    }\r\n</style>\r\n<table cellPadding=\"0\" cellSpacing=\"0\" border=\"0\" style=\"width:100%;height:100%\">\r\n    <tr>\r\n        <td>\r\n            <br />\r\n            <div style=\"text-align: center\">\r\n                <h1 style=\"margin:0;color:white\">stripe-angular {{version}}</h1>\r\n                <p>A dashboard of testing for both Stripe and stripe-angular</p>\r\n            </div>\r\n            <ng-container *ngIf=\"!loaded\">Loading...</ng-container>\r\n\r\n            <ng-container *ngIf=\"loaded\">\r\n                <div style=\"flex-wrap:wrap;display:flex;display:flex;justify-content:center\">\r\n\r\n                    <div class=\"tool-wrap\" style=\"flex-grow:1\">\r\n                        <h3 style=\"margin:0;text-align:left;color:white\">Stripe Key</h3>\r\n                        <div style=\"flex-grow:1;border-radius:5px;background-color:#888;text-align:left;padding:1em;\">\r\n                            <ng-container *ngTemplateOutlet=\"keyInfoUi\"></ng-container>\r\n                        </div>\r\n                    </div>\r\n\r\n                    <!-- hide elements when possibly changing keys -->\r\n                    <ng-container *ngIf=\"stripe && !changekey\">\r\n                        <div class=\"tool-wrap\">\r\n                            <label for=\"card-like-element\"\r\n                                style=\"display:flex;flex-wrap:wrap;align-items:center;color:white;\">\r\n                                <h3 style=\"flex-grow:1;margin:0;text-align:left;\">Card Element</h3>\r\n                                <small>\r\n                                    <a href=\"https://stripe.com/docs/testing#cards\" style=\"color:white;\"\r\n                                        target=\"_blank\">demo card nums</a>\r\n                                </small>\r\n                            </label>\r\n\r\n                            <div class=\"tool-panel\">\r\n                                <ng-container *ngTemplateOutlet=\"cardUi\"></ng-container>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"tool-wrap\">\r\n                            <div style=\"display:flex;flex-wrap:wrap;align-items:baseline;\">\r\n                                <h3 style=\"margin:0;padding:0;flex-grow:1;color:white\">\r\n                                    <label for=\"card-like-element\">\r\n                                        Bank Account\r\n                                    </label>\r\n                                </h3>\r\n                                <small>\r\n                                    <a href=\"https://stripe.com/docs/ach#testing-ach\" style=\"color:white;\"\r\n                                        target=\"_blank\">demo accounts</a>\r\n                                </small>\r\n                            </div>\r\n                            <div class=\"tool-panel\">\r\n                                <ng-container *ngTemplateOutlet=\"bankUi\"></ng-container>\r\n                            </div>\r\n                        </div>\r\n                    </ng-container>\r\n                </div>\r\n\r\n                <ng-container *ngIf=\"storage.privateKey\">\r\n                    <br /><br />\r\n\r\n                    <div style=\"color:white;text-align:center;\">\r\n                        <h2 style=\"opacity: 50%;\">Server Functionality</h2>\r\n                        <small>Helpful tools ONLY available in this demo by using entered\r\n                            <strong>privateKey</strong></small>\r\n                        <br /><br />\r\n                    </div>\r\n\r\n                    <div style=\"flex-wrap:wrap;display:flex;display:flex;justify-content:center\">\r\n                        <div class=\"tool-wrap\">\r\n                            <div style=\"display:flex;flex-wrap:wrap;align-items: baseline;\">\r\n                                <h3 style=\"margin:0;padding:0;flex-grow:1;color:white\">\r\n                                    <label for=\"card-like-element\">\r\n                                        Create Customer\r\n                                    </label>\r\n                                </h3>\r\n                                <small>\r\n                                    <a href=\"https://stripe.com/docs/api/customers\" style=\"color:white;\"\r\n                                        target=\"_blank\">api docs</a>\r\n                                </small>\r\n                            </div>\r\n                            <div class=\"tool-panel\">\r\n                                <small style=\"display:flex;flex-wrap:wrap;color:white;\">\r\n                                    <a *ngIf=\"card.source\" (click)=\"customer.data.source = card.source.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"customer.data.source === card.source.id && '.3'\"\r\n                                        [title]=\"card.source.id\">\r\n                                        use source {{card.source.card.brand}} {{card.source.card.last4}}\r\n                                    </a>\r\n                                    <a *ngIf=\"card.payment_method\"\r\n                                        (click)=\"customer.data.payment_method = card.payment_method.id;setCustomerDefaultPayMethod(customer.data, card.payment_method)\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"customer.data.payment_method === card.payment_method.id && '.3'\"\r\n                                        [title]=\"card.payment_method.id\">\r\n                                        use method {{card.payment_method.card.brand}} {{card.payment_method.card.last4}}\r\n                                    </a>\r\n                                </small>\r\n                                <ng-container *ngTemplateOutlet=\"simpleRouteEditor;context:{config:customer}\">\r\n                                </ng-container>\r\n\r\n                                <ng-container *ngIf=\"card.payment_method && customer.result\">\r\n                                    <ng-container\r\n                                        *ngTemplateOutlet=\"customerPayMethodAttach;context:{payMethod:card.payment_method, customer:customer.result}\">\r\n                                    </ng-container>\r\n                                </ng-container>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"tool-wrap\">\r\n                            <div style=\"display:flex;flex-wrap:wrap;align-items: baseline;\">\r\n                                <h3 style=\"margin:0;padding:0;flex-grow:1;color:white\">\r\n                                    <label>\r\n                                        GET Customer\r\n                                    </label>\r\n                                </h3>\r\n                                <small>\r\n                                    <a href=\"https://stripe.com/docs/api/customers/retrieve\" style=\"color:white;\"\r\n                                        target=\"_blank\">api docs</a>\r\n                                </small>\r\n                            </div>\r\n                            <div class=\"tool-panel\">\r\n                                <small style=\"display:flex;flex-wrap:wrap;color:white;\">\r\n                                    <a *ngIf=\"customer.result\" (click)=\"customer_get.data.id = customer.result.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"customer_get.data.id === customer.result.id && '.3'\">\r\n                                        use customer {{customer.result.id}}\r\n                                    </a>\r\n                                </small>\r\n                                <ng-container *ngTemplateOutlet=\"simpleRouteEditor;context:{config:customer_get}\">\r\n                                </ng-container>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"tool-wrap\">\r\n                            <div style=\"display:flex;flex-wrap:wrap;align-items: baseline;\">\r\n                                <h3 style=\"margin:0;padding:0;flex-grow:1;color:white\">\r\n                                    <label>\r\n                                        UPDATE Customer\r\n                                    </label>\r\n                                </h3>\r\n                                <small>\r\n                                    <a href=\"https://stripe.com/docs/api/customers/update\" style=\"color:white;\"\r\n                                        target=\"_blank\">api docs</a>\r\n                                </small>\r\n                            </div>\r\n                            <div class=\"tool-panel\">\r\n                                <small style=\"display:flex;flex-wrap:wrap;color:white;\">\r\n                                    <a *ngIf=\"customer.result\"\r\n                                        (click)=\"customer_update.data = cleanCustomerUpdateData(customer.result)\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"customer_update.data.id === customer.result.id && '.3'\">\r\n                                        use customer {{customer.result.id}}\r\n                                    </a>\r\n\r\n                                    <a *ngIf=\"card.source\" (click)=\"customer_update.data.source = card.source.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"customer_update.data.source === card.source.id && '.3'\"\r\n                                        [title]=\"card.source.id\">\r\n                                        use source {{card.source.card.brand}} {{card.source.card.last4}}\r\n                                    </a>\r\n\r\n                                    <a *ngIf=\"card.payment_method\"\r\n                                        (click)=\"setCustomerDefaultPayMethod(customer_update.data, card.payment_method)\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"customer_update.data.payment_method === card.payment_method.id && '.3'\">\r\n                                        default method {{card.payment_method.card.brand}}\r\n                                        {{card.payment_method.card.last4}}\r\n                                    </a>\r\n\r\n                                </small>\r\n                                <ng-container *ngTemplateOutlet=\"simpleRouteEditor;context:{config:customer_update}\">\r\n                                </ng-container>\r\n\r\n                                <ng-container *ngIf=\"card.payment_method && customer_update.data.id\">\r\n                                    <ng-container\r\n                                        *ngTemplateOutlet=\"customerPayMethodAttach;context:{payMethod:card.payment_method, customer:customer_update.data}\">\r\n                                    </ng-container>\r\n                                </ng-container>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"tool-wrap\">\r\n                            <div style=\"display:flex;flex-wrap:wrap;align-items: baseline;\">\r\n                                <h3 style=\"margin:0;padding:0;flex-grow:1;color:white\">\r\n                                    <label>\r\n                                        GET Payment Methods\r\n                                    </label>\r\n                                </h3>\r\n                                <small>\r\n                                    <a href=\"https://stripe.com/docs/api/payment_methods/list\" style=\"color:white;\"\r\n                                        target=\"_blank\">api docs</a>\r\n                                </small>\r\n                            </div>\r\n                            <div class=\"tool-panel\">\r\n                                <small style=\"display:flex;flex-wrap:wrap;color:white;\">\r\n                                    <a *ngIf=\"customer.result\"\r\n                                        (click)=\"get_paymethods.data.customer = customer.result.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"get_paymethods.data.customer === customer.result.id && '.3'\">\r\n                                        use customer {{customer.result.id}}\r\n                                    </a>\r\n                                </small>\r\n                                <ng-container *ngTemplateOutlet=\"simpleRouteEditor;context:{config:get_paymethods}\">\r\n                                </ng-container>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"tool-wrap\">\r\n                            <div style=\"display:flex;flex-wrap:wrap;align-items: baseline;\">\r\n                                <h3 style=\"margin:0;padding:0;flex-grow:1;color:white\">\r\n                                    <label>\r\n                                        GET Payment Method\r\n                                    </label>\r\n                                </h3>\r\n                                <small>\r\n                                    <a href=\"https://stripe.com/docs/api/payment_methods/retrieve\" style=\"color:white;\"\r\n                                        target=\"_blank\">api docs</a>\r\n                                </small>\r\n                            </div>\r\n                            <div class=\"tool-panel\">\r\n                                <small style=\"display:flex;flex-wrap:wrap;color:white;\">\r\n                                    <a *ngIf=\"payment_method_get.result\"\r\n                                        (click)=\"payment_method_get.data.id = payment_method_get.result.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"payment_method_get.data.id === payment_method_get.result.id && '.3'\"\r\n                                        [title]=\"payment_method_get.result.id\">\r\n                                        use type {{payment_method_get.result.type}}\r\n                                    </a>\r\n                                </small>\r\n                                <ng-container *ngTemplateOutlet=\"simpleRouteEditor;context:{config:payment_method_get}\">\r\n                                </ng-container>\r\n\r\n                                <ng-container *ngIf=\"payment_method_get.result\">\r\n                                    <button type=\"button\"\r\n                                        (click)=\"createCustomerByPaymentMethod(payment_method_get.result)\"\r\n                                        [style.opacity]=\"payment_method_get.result.customer ? '.3' : null\">create\r\n                                        customer by payment method</button>\r\n                                </ng-container>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"tool-wrap\">\r\n                            <div style=\"display:flex;flex-wrap:wrap;align-items: baseline;\">\r\n                                <h3 style=\"margin:0;padding:0;flex-grow:1;color:white\">\r\n                                    <label>\r\n                                        UPDATE Payment Method\r\n                                    </label>\r\n                                </h3>\r\n                                <small>\r\n                                    <a href=\"https://stripe.com/docs/payments/checkout/subscriptions/update-payment-details\"\r\n                                        style=\"color:white;\" target=\"_blank\">checkout docs</a>&nbsp;\r\n                                    <a href=\"https://stripe.com/docs/api/payment_methods/update\" style=\"color:white;\"\r\n                                        target=\"_blank\">api docs</a>\r\n                                </small>\r\n                            </div>\r\n                            <div class=\"tool-panel\">\r\n                                <small style=\"display:flex;flex-wrap:wrap;color:white;\">\r\n                                    <a *ngIf=\"payment_method_get.result\"\r\n                                        (click)=\"payment_method_update.data = cleanPaymentMethodUpdateData(payment_method_get.result)\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"payment_method_update.data.id === payment_method_get.result.id && '.3'\"\r\n                                        [title]=\"payment_method_get.result.id\">\r\n                                        use pay method type {{payment_method_get.result.type}}\r\n                                    </a>\r\n                                </small>\r\n                                <ng-container\r\n                                    *ngTemplateOutlet=\"simpleRouteEditor;context:{config:payment_method_update}\">\r\n                                </ng-container>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"tool-wrap\">\r\n                            <div style=\"display:flex;flex-wrap:wrap;align-items: baseline;\">\r\n                                <h3 style=\"margin:0;padding:0;flex-grow:1;color:white\">\r\n                                    <label>\r\n                                        GET Customer Sources\r\n                                    </label>\r\n                                </h3>\r\n                                <small>\r\n                                    <a href=\"https://stripe.com/docs/api/cards/list\" style=\"color:white;\"\r\n                                        target=\"_blank\">api docs</a>\r\n                                </small>\r\n                            </div>\r\n                            <div class=\"tool-panel\">\r\n                                <small style=\"display:flex;flex-wrap:wrap;color:white;\">\r\n                                    <a *ngIf=\"customer.result\"\r\n                                        (click)=\"customer_get_sources.data.id = customer.result.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"customer_get_sources.data.id === customer.result.id && '.3'\">\r\n                                        use customer {{customer.result.id}}\r\n                                    </a>\r\n                                </small>\r\n                                <ng-container\r\n                                    *ngTemplateOutlet=\"simpleRouteEditor;context:{config:customer_get_sources}\">\r\n                                </ng-container>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"tool-wrap\">\r\n                            <div style=\"display:flex;flex-wrap:wrap;align-items: baseline;\">\r\n                                <h3 style=\"margin:0;padding:0;flex-grow:1;color:white\">\r\n                                    <label>\r\n                                        GET Source\r\n                                    </label>\r\n                                </h3>\r\n                                <small>\r\n                                    <a href=\"https://stripe.com/docs/api/sources/retrieve\" style=\"color:white;\"\r\n                                        target=\"_blank\">api docs</a>\r\n                                </small>\r\n                            </div>\r\n                            <div class=\"tool-panel\">\r\n                                <small style=\"display:flex;flex-wrap:wrap;color:white;\">\r\n                                    <a *ngIf=\"card.source\" (click)=\"source_get.data.id = card.source.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"source_get.data.id === card.source.id && '.3'\"\r\n                                        [title]=\"card.source.id\">\r\n                                        use {{card.source.card.brand}} {{card.source.card.last4}}\r\n                                    </a>\r\n                                </small>\r\n\r\n                                <ng-container *ngTemplateOutlet=\"simpleRouteEditor;context:{config:source_get}\">\r\n                                </ng-container>\r\n\r\n                                <ng-container *ngIf=\"source_get.result\">\r\n                                    <button type=\"button\" (click)=\"createCustomerByToken(source_get.result)\"\r\n                                        [style.opacity]=\"customer.data.source === source_get.result.id && '.3'\">create\r\n                                        customer by source</button>\r\n                                </ng-container>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"tool-wrap\">\r\n                            <div style=\"display:flex;flex-wrap:wrap;align-items: baseline;\">\r\n                                <h3 style=\"margin:0;padding:0;flex-grow:1;color:white\">\r\n                                    <label>\r\n                                        UPDATE Source\r\n                                    </label>\r\n                                </h3>\r\n                                <small>\r\n                                    <a href=\"https://stripe.com/docs/api/sources/update\" style=\"color:white;\"\r\n                                        target=\"_blank\">api docs</a>\r\n                                </small>\r\n                            </div>\r\n                            <div class=\"tool-panel\">\r\n                                <small style=\"display:flex;flex-wrap:wrap;color:white;\">\r\n                                    <a *ngIf=\"source_get.result\"\r\n                                        (click)=\"source_update.data = cleanSourceUpdateData(source_get.result)\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"source_update.data.id === source_get.result.id && '.3'\"\r\n                                        [title]=\"source_get.result.id\">\r\n                                        use source type {{source_get.result.type}}\r\n                                    </a>\r\n                                </small>\r\n                                <ng-container *ngTemplateOutlet=\"simpleRouteEditor;context:{config:source_update}\">\r\n                                </ng-container>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <div class=\"tool-wrap\">\r\n                            <div style=\"display:flex;flex-wrap:wrap;align-items: baseline;\">\r\n                                <h3 style=\"margin:0;padding:0;flex-grow:1;color:white\">\r\n                                    <label for=\"card-like-element\">\r\n                                        Create Pay Intent\r\n                                    </label>\r\n                                </h3>\r\n                                <small>\r\n                                    <a href=\"https://stripe.com/docs/api/payment_intents\" style=\"color:white;\"\r\n                                        target=\"_blank\">api docs</a>\r\n                                </small>\r\n                            </div>\r\n                            <div class=\"tool-panel\">\r\n                                <small style=\"display:flex;flex-wrap:wrap;color:white;\">\r\n                                    <a *ngIf=\"customer.result\" (click)=\"payintent.data.customer = customer.result.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"payintent.data.customer === customer.result.id && '.3'\">\r\n                                        use customer {{customer.result.description}}\r\n                                    </a>\r\n                                    <a *ngIf=\"customer_get.data\"\r\n                                        (click)=\"payintent.data.customer = customer_get.data.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"payintent.data.customer === customer_get.data.id && '.3'\">\r\n                                        use GET customer {{customer_get.data.id}}\r\n                                    </a>\r\n                                    <a *ngIf=\"card.payment_method\"\r\n                                        (click)=\"payintent.data.payment_method = card.payment_method.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"payintent.data.payment_method === card.payment_method.id && '.3'\"\r\n                                        [title]=\"card.payment_method.id\">\r\n                                        use method {{card.payment_method.card.brand}} {{card.payment_method.card.last4}}\r\n                                    </a>\r\n                                    <a *ngIf=\"card.source\" (click)=\"payintent.data.payment_method = card.source.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"payintent.data.payment_method === card.source.id && '.3'\"\r\n                                        [title]=\"card.source.id\">\r\n                                        use source {{card.source.card.brand}} {{card.source.card.last4}}\r\n                                    </a>\r\n                                    <a *ngIf=\"card.token\" (click)=\"payintent.data.payment_method = card.token.card.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"payintent.data.payment_method === card.token.card.id && '.3'\"\r\n                                        [title]=\"card.token.id\">\r\n                                        use token {{card.token.card.brand}} {{card.token.card.last4}}\r\n                                    </a>\r\n                                </small>\r\n\r\n                                <ng-container *ngTemplateOutlet=\"simpleRouteEditor;context:{config:payintent}\">\r\n                                </ng-container>\r\n\r\n                                <ng-container *ngIf=\"payintent.result\">\r\n                                    <button type=\"button\" (click)=\"fetchPayIntentUpdate(payintent)\">retrieve\r\n                                        update</button>\r\n                                </ng-container>\r\n\r\n                                <ng-container *ngIf=\"payintent.result?.next_action?.use_stripe_sdk?.stripe_js\">\r\n                                    <div>\r\n                                        <strong>next action:&nbsp;</strong>\r\n                                        <a [href]=\"payintent.result.next_action?.use_stripe_sdk.stripe_js\"\r\n                                            target=\"_blank\">secure payment verify link</a>\r\n                                    </div>\r\n                                </ng-container>\r\n\r\n                                <ng-container *ngIf=\"payintent.retrieve\">\r\n                                    <textarea wrap=\"off\" style=\"width:100%;height:175px\"\r\n                                        disabled>{{ payintent.retrieve | json }}</textArea>\r\n                                </ng-container>\r\n                            </div>\r\n                        </div>\r\n\r\n\r\n                        <div class=\"tool-wrap\">\r\n                            <div style=\"display:flex;flex-wrap:wrap;align-items: baseline;\">\r\n                                <h3 style=\"margin:0;padding:0;flex-grow:1;color:white\">\r\n                                    <label for=\"card-like-element\">\r\n                                        Create Charge\r\n                                    </label>\r\n                                </h3>\r\n                                <small>\r\n                                    <a href=\"https://stripe.com/docs/api/charges\" style=\"color:white;\"\r\n                                        target=\"_blank\">api docs</a>\r\n                                </small>\r\n                            </div>\r\n                            <div class=\"tool-panel\">\r\n                                <small style=\"display:flex;flex-wrap:wrap;color:white;\">\r\n                                    <a *ngIf=\"card.payment_method\"\r\n                                        (click)=\"charge.data.payment_method = card.payment_method.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [style.opacity]=\"charge.data.payment_method === card.payment_method.id && '.3'\"\r\n                                        [title]=\"card.payment_method.id\">\r\n                                        use method {{card.payment_method.card.brand}} {{card.payment_method.card.last4}}\r\n                                    </a>\r\n\r\n                                    <a *ngIf=\"card.token\" (click)=\"charge.data.source = card.token.card.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [title]=\"card.token.id\">\r\n                                        use token {{card.token.card.brand}} {{card.token.card.last4}}\r\n                                    </a>\r\n\r\n                                    <a *ngIf=\"card.source\" (click)=\"charge.data.source = card.source.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [title]=\"card.source.id\">\r\n                                        use source{{card.source.card.brand}} {{card.source.card.last4}}\r\n                                    </a>\r\n\r\n                                    <a *ngIf=\"bank.token\" (click)=\"charge.data.source = bank.token.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\"\r\n                                        [title]=\"bank.token.id\">\r\n                                        use bank {{bank.token.bank_account.bank_name}} {{bank.token.bank_account.last4}}\r\n                                    </a>\r\n\r\n                                    <a *ngIf=\"customer.result\" (click)=\"charge.data.customer=customer.result.id\"\r\n                                        style=\"text-decoration:underline;cursor:pointer;margin:1em;\">\r\n                                        use customer {{customer.result.description}}\r\n                                    </a>\r\n                                </small>\r\n                                <ng-container *ngTemplateOutlet=\"simpleRouteEditor;context:{config:charge}\">\r\n                                </ng-container>\r\n                                <div style=\"text-align:center;opacity:.5;\">\r\n                                    <small>\r\n                                        <a href=\"https://stripe.com/docs/payments/payment-intents/migration/charges\"\r\n                                            target=\"_blank\">prefer pay intents</a>\r\n                                    </small>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n\r\n                    </div>\r\n                </ng-container>\r\n\r\n                <ng-container *ngIf=\"sending\">\r\n                    <div>\r\n                        Sending to Stripe...\r\n                    </div>\r\n                </ng-container>\r\n\r\n                <div *ngIf=\"lastError\" style=\"color:red;\">\r\n                    <textarea wrap=\"off\" style=\"color:red;width:100%;height:175px\">{{lastError | json}}</textArea>\r\n                </div>\r\n\r\n                <div *ngIf=\"!stripe\" style=\"color:red;\">\r\n                    Stripe publishable key has not yet been set\r\n                </div>\r\n            </ng-container>\r\n\r\n            <div class=\"tool-wrap\" style=\"align-items: center;\">\r\n                <h2 style=\"margin:0;text-align:left;color:white;\">Best of Resources</h2>\r\n                <div style=\"border-radius:5px;background-color:#888;text-align:left;max-width:900px;padding:1em;\">\r\n                    <ng-container *ngTemplateOutlet=\"resources\"></ng-container>\r\n                </div>\r\n            </div>\r\n            <br />\r\n        </td>\r\n    </tr>\r\n</table>\r\n\r\n\r\n<ng-template #keyInfoUi>\r\n    <div *ngIf=\"!changekey else storageForm\">\r\n        <div style=\"display:flex;flex-wrap:wrap\">\r\n            <div style=\"margin:1em;\">\r\n                <strong>publishableKey</strong>\r\n                <div>{{ storage.key | slice : 0 : 16 }}...</div>\r\n            </div>\r\n\r\n            <div *ngIf=\"storage.privateKey\" style=\"margin:1em;\">\r\n                <strong>privateKey</strong>\r\n                <div>{{ storage.privateKey | slice : 0 : 8 }}...</div>\r\n            </div>\r\n        </div>\r\n\r\n        <br />\r\n\r\n        <button type=\"button\" (click)=\"copyShareUrl()\" style=\"width:50%\">copy share url</button>\r\n        <button type=\"button\" (click)=\"changekey=!changekey\" style=\"width:50%\">CHANGE API SETTINGS</button>\r\n\r\n        <ng-container *ngIf=\"publishableKey=='pk_test_5JZuHhxsinNGc5JanVWWKSKq'\">\r\n            <br />\r\n            <br />\r\n            <div style=\"font-size:0.75em;\">\r\n                <strong style=\"font-size:1.2em;color:orange;\">WARNING</strong>: You need to enter your own key above.\r\n                <p>\r\n                    You will have limited functionality without entering your own Stripe key. <a\r\n                        href=\"https://dashboard.stripe.com/register\" target=\"_blank\">\r\n                        create account</a>\r\n                </p>\r\n            </div>\r\n        </ng-container>\r\n    </div>\r\n</ng-template>\r\n\r\n<ng-template #storageForm>\r\n    <div *ngIf=\"changekey\" style=\"padding:1em;\">\r\n        <form onsubmit=\"return false\" (submit)=\"save();changekey=false\">\r\n            <strong>publishableKey</strong>\r\n            <div>\r\n                <input (keyup)=\"tempPublishableKey=$event.target.value\" [value]=\"tempPublishableKey\"\r\n                    style=\"width:100%\" />\r\n            </div>\r\n\r\n            <div style=\"display:flex;flex-wrap: wrap;\">\r\n                <div style=\"padding:.5em;\">\r\n                    <label for=\"saveKeyLocally\" style=\"align-items: center\">\r\n                        <input type=\"checkbox\" name=\"saveKeyLocally\" id=\"saveKeyLocally\"\r\n                            (change)=\"storage.saveKeyLocally = !storage.saveKeyLocally\"\r\n                            [checked]=\"storage.saveKeyLocally\" />\r\n                        <span>save Stripe key in localStorage</span>\r\n                    </label>\r\n                </div>\r\n\r\n                <div style=\"padding:.5em;\">\r\n                    <label for=\"saveRequestsLocal\" style=\"align-items: center\"\r\n                        title=\"Greatly assists coming back to this interface\">\r\n                        <input type=\"checkbox\" name=\"saveRequestsLocal\" id=\"saveRequestsLocal\"\r\n                            (change)=\"storage.saveRequestsLocal = !storage.saveRequestsLocal\"\r\n                            [checked]=\"storage.saveRequestsLocal\" />\r\n                        <span>save requests in localStorage</span>\r\n                    </label>\r\n                </div>\r\n\r\n                <div style=\"padding:.5em;\">\r\n                    <label for=\"enableServerMode\" style=\"align-items: center\">\r\n                        <input type=\"checkbox\" name=\"enableServerMode\" id=\"enableServerMode\"\r\n                            (change)=\"toggleServerMode()\" [checked]=\"enableServerMode || tempPrivateKey\" />\r\n                        <span>enable server functionality</span>\r\n                    </label>\r\n                </div>\r\n            </div>\r\n\r\n            <div *ngIf=\"enableServerMode || storage.privateKey\">\r\n                <strong style=\"color:orange;\">privateKey</strong>\r\n                <div>\r\n                    <input type=\"password\"\r\n                        (keyup)=\"tempPrivateKey=$event.target.value;log('tempPrivateKey length update' + tempPrivateKey.length)\"\r\n                        [value]=\"tempPrivateKey\" style=\"width:100%\" />\r\n                </div>\r\n                <div style=\"padding:.5em;\">\r\n                    <small style=\"opacity: 70%;\">\r\n                        This demo offers helpful server functionality that can really help close knowledge gaps\r\n                    </small>\r\n                </div>\r\n            </div>\r\n\r\n            <div style=\"display:flex;flex-wrap: wrap;\">\r\n                <div *ngIf=\"enableServerMode || storage.privateKey\" style=\"padding:.5em;\">\r\n                    <label for=\"savePrivateKeyLocally\" style=\"align-items: center\">\r\n                        <input type=\"checkbox\" name=\"savePrivateKeyLocally\" id=\"savePrivateKeyLocally\"\r\n                            (change)=\"storage.savePrivateKeyLocally = !storage.savePrivateKeyLocally\"\r\n                            [checked]=\"storage.savePrivateKeyLocally\" />\r\n                        <span>save Stripe private key in localStorage</span>\r\n                    </label>\r\n                </div>\r\n            </div>\r\n\r\n            <div style=\"text-align:center;\">\r\n                <button *ngIf=\"storage.privateKey || storage.key\" type=\"button\" (click)=\"deleteLocalStorage()\"\r\n                    style=\"background-color: black;color:white;padding:.4em;font-size:.8em;\">clear localStorage</button>\r\n                <button type=\"button\" (click)=\"changekey = !changekey\"\r\n                    style=\"background-color: black;color:white;padding:.4em;font-size:.8em;\">cancel</button>\r\n                <button type=\"submit\" style=\"padding:.4em;font-size:.8em;\">save</button>\r\n            </div>\r\n        </form>\r\n    </div>\r\n</ng-template>\r\n\r\n<ng-template #cardUi>\r\n    <div id=\"card-like-element\" style=\"background-color:white;border-radius: 5px;border:1px solid #DDD;padding:.33em;\">\r\n        <stripe-card #stripeCard (changed)=\"card.changedEvent = $event\" [options]=\"options\" [(token)]=\"card.token\"\r\n            (tokenChange)=\"sending=false\" [(source)]=\"card.source\" (sourceChange)=\"setSource($event)\"\r\n            [(paymentMethod)]=\"card.payment_method\" (paymentMethodChange)=\"setPaymentMethod($event)\"\r\n            [(complete)]=\"cardComplete\" (catch)=\"sending=false;lastError=$event\"\r\n            (invalidChange)=\"sending=false;lastError=$event\" (cardMounted)=\"log('card mounted')\"></stripe-card>\r\n    </div>\r\n\r\n    <br />\r\n\r\n    <div style=\"display:flex;flex-wrap:wrap;font-size:1em;justify-content: center\">\r\n        <div *ngIf=\"!cardComplete;else cardCompleteTemplate\" style=\"opacity:50%\">\r\n            ...awaiting card entry form above...\r\n        </div>\r\n\r\n        <ng-template #cardCompleteTemplate>\r\n            <button type=\"button\" (click)=\"lastError=null;sending=true;stripeCard.createSource(storage.requests.source)\"\r\n                style=\"font-size:1em;flex-grow:1;background-color:#99FFFF;\"\r\n                title=\"Using Payment Method instead is recommended\">\r\n                create source\r\n            </button>\r\n\r\n            <button type=\"button\"\r\n                (click)=\"lastError=null;sending=true;stripeCard.createPaymentMethod(storage.requests.paymentMethod)\"\r\n                style=\"font-size:1em;flex-grow:1;background-color:#99FFFF;\">\r\n                create payment method\r\n            </button>\r\n\r\n            <button type=\"button\" (click)=\"lastError=null;sending=true;stripeCard.createToken(extraData)\"\r\n                style=\"font-size:1em;flex-grow:1;background-color:#99FFFF;\"\r\n                title=\"Using Payment Method instead is recommended\">\r\n                create token\r\n            </button>\r\n        </ng-template>\r\n    </div>\r\n\r\n\r\n    <br />\r\n\r\n    <h3 style=\"flex-grow:1;margin:0;\">Optional Card Controls</h3>\r\n    <div *ngIf=\"editExtraData\">\r\n        <br />\r\n        <div style=\"display:flex;justify-content:space-between\">\r\n            <strong title=\"Card specific way of providing token related info (includes metadata)\">token data</strong>\r\n            <small>\r\n                <a href=\"https://stripe.com/docs/api/tokens\" target=\"_blank\">token data</a>\r\n            </small>\r\n        </div>\r\n        <textarea wrap=\"off\" style=\"width:100%;height:175px\"\r\n            (change)=\"changeExtraData($event.target.value)\">{{ extraData | json }}</textArea>\r\n    </div>\r\n\r\n    <div *ngIf=\"editPaymentMethodRequest\">\r\n        <br />\r\n        <div style=\"display:flex;justify-content:space-between\">\r\n            <div>payment method data</div>\r\n            <small>\r\n                <a href=\"https://stripe.com/docs/payments/payment-methods/overview\" target=\"_blank\">overview</a>&nbsp;\r\n                <a href=\"https://stripe.com/docs/js/payment_methods/create_payment_method\" target=\"_blank\">docs</a>\r\n            </small>\r\n        </div>\r\n        <textarea wrap=\"off\" style=\"width:100%;height:175px\"\r\n            (change)=\"changePaymentMethodRequest($event.target.value)\">{{ storage.requests.paymentMethod | json }}</textArea>\r\n        <div style=\"opacity: 0.5;font-size:0.7em;padding:1em 0;\">creating a payment method alone does not fire any web\r\n            hooks. Use Source instead</div>\r\n    </div>\r\n\r\n    <div *ngIf=\"editSourceRequest\">\r\n        <br />\r\n        <div style=\"display:flex;justify-content:space-between\">\r\n            <strong [style.color]=\"storage.temp.invalidSourceData && 'red'\">source data</strong>\r\n            <small>\r\n                <a href=\"https://stripe.com/docs/js/tokens_sources/create_source\" target=\"_blank\">docs</a>\r\n            </small>\r\n        </div>\r\n        <textarea wrap=\"off\" style=\"width:100%;height:175px\"\r\n            (change)=\"changeSourceRequest($event.target.value)\">{{ storage.requests.source | json }}</textArea>\r\n    </div>\r\n\r\n    <div *ngIf=\"editOptions\">\r\n        <br />\r\n        <div style=\"display:flex;justify-content:space-between\">\r\n            <strong>\r\n                options\r\n            </strong>\r\n            <small>\r\n                <a href=\"https://stripe.com/docs/js/elements_object/create_element?type=card\" target=\"_blank\">docs</a>\r\n            </small>\r\n        </div>\r\n        <textarea wrap=\"off\" style=\"width:100%;height:175px\"\r\n            (change)=\"changeOptions($event.target.value)\">{{ options | json }}</textArea>\r\n    </div>\r\n\r\n    <div style=\"text-align:right;display:flex;flex-wrap:wrap;\">\r\n        <button type=\"button\" (click)=\"editSourceRequest=!editSourceRequest\" style=\"flex-grow:1\"\r\n            [style.background-color]=\"editSourceRequest && '#0099CC' || null\"\r\n            title=\"Using Payment Method instead is recommended\">\r\n            source data\r\n        </button>\r\n\r\n        <button type=\"button\" (click)=\"editPaymentMethodRequest=!editPaymentMethodRequest\" style=\"flex-grow:1\"\r\n            [style.background-color]=\"editPaymentMethodRequest && '#0099CC' || null\">\r\n            payment method data\r\n        </button>\r\n\r\n        <button type=\"button\" (click)=\"editExtraData=!editExtraData\" style=\"flex-grow:1\"\r\n            [style.background-color]=\"editExtraData && '#0099CC' || null\"\r\n            title=\"Using Payment Method instead is recommended\">\r\n            token data\r\n        </button>\r\n\r\n        <button type=\"button\" (click)=\"editOptions=!editOptions\" style=\"flex-grow:1\"\r\n            [style.background-color]=\"editOptions && '#0099CC' || null\">\r\n            options\r\n        </button>\r\n    </div>\r\n\r\n    <br />\r\n\r\n    <div *ngIf=\"card.token\">\r\n        <br />\r\n        <strong>Token Response</strong>\r\n        <textarea disabled wrap=\"off\" style=\"width:100%;height:175px\">{{ card.token | json }}</textArea>\r\n    </div>\r\n\r\n    <div *ngIf=\"card.source\">\r\n        <br />\r\n        <strong>Source Response</strong>\r\n        <textarea disabled wrap=\"off\" style=\"width:100%;height:175px\">{{ card.source | json }}</textArea>\r\n    </div>\r\n\r\n    <div *ngIf=\"card.payment_method\">\r\n        <br />\r\n        <strong>Payment Method Response</strong>\r\n        <textarea disabled wrap=\"off\" style=\"width:100%;height:175px\">{{ card.payment_method | json }}</textArea>\r\n    </div>\r\n\r\n    <div style=\"text-align:right;opacity:70%\">\r\n        <small>\r\n            card complete: <strong>{{ cardComplete }}</strong>\r\n        </small>\r\n    </div>\r\n\r\n    <div *ngIf=\"card.changedEvent\">\r\n        <strong style=\"opacity: 50%;\">INFO: Change Event</strong>\r\n        <textarea wrap=\"off\" style=\"width:100%;height:175px\" disabled\r\n            (change)=\"changeExtraData($event.target.value)\">{{ card.changedEvent | json }}</textArea>\r\n    </div>\r\n</ng-template>\r\n\r\n<ng-template #bankUi>\r\n    <stripe-bank #stripeBank [(token)]=\"bank.token\" (tokenChange)=\"sending=false\"\r\n        (catch)=\"sending=false;lastError=$event\" (invalidChange)=\"sending=false;lastError=$event\"></stripe-bank>\r\n    <textarea wrap=\"off\" style=\"width:100%;height:175px\"\r\n        (change)=\"changeKey(bank, $event.target.value)\">{{ bank.data | json }}</textArea>\r\n\r\n    <br />\r\n\r\n    <div style=\"text-align:right;\">\r\n        <button type=\"button\" (click)=\"lastError=null;sending=true;stripeBank.createToken(bank.data)\">create\r\n            token</button>\r\n    </div>\r\n\r\n    <!-- bank token success output -->\r\n    <div *ngIf=\"bank.token\">\r\n        <br />\r\n        <strong>Bank Token</strong>\r\n        <textarea disabled wrap=\"off\" style=\"width:100%;height:175px\">{{ bank.token | json }}</textArea>\r\n    </div>\r\n\r\n    <ng-container *ngIf=\"storage.privateKey && bank.token?.bank_account?.id\">\r\n        <br />\r\n        <div style=\"display:flex;flex-wrap: wrap;align-items: baseline;\">\r\n            <h3 style=\"flex-grow:1;color:orange;\">Bank Server Functions</h3>\r\n            <small>(using privateKey)</small>\r\n        </div>\r\n\r\n        <button type=\"button\" (click)=\"createCustomerByToken(bank.token)\">create customer by token</button>\r\n\r\n        <div *ngIf=\"customer.result?.id\">\r\n            <br />\r\n            <div style=\"display:flex;flex-wrap:wrap;align-items:baseline;\">\r\n                <h3 style=\"flex-grow: 1;\">Verify customer micro deposits</h3>\r\n                <small>\r\n                    <a style=\"color:white;\" href=\"https://stripe.com/docs/ach#testing-ach\">test data</a>\r\n                </small>\r\n            </div>\r\n            <div style=\"display:flex;flex-wrap:wrap;\">\r\n                <div style=\"flex-grow: 1;\">\r\n                    <div>Verify Amount 1</div>\r\n                    <input style=\"width:100%\" type=\"number\" [value]=\"bank.verify.amount1\"\r\n                        (keyup)=\"bank.verify.amount1=$event.target.value\" placeholder=\"Enter 32 here\" />\r\n                </div>\r\n                <div style=\"flex-grow: 1;\">\r\n                    <div>Verify Amount 2</div>\r\n                    <input style=\"width:100%\" type=\"number\" [value]=\"bank.verify.amount2\"\r\n                        (keyup)=\"bank.verify.amount2=$event.target.value\" placeholder=\"Enter 45 here\" />\r\n                </div>\r\n            </div>\r\n            <button type=\"button\" (click)=\"verifyBank()\">verify</button>\r\n\r\n            <div *ngIf=\"bank.verifyResponse\">\r\n                <br />\r\n                <strong>Verification Result</strong>\r\n                <textarea disabled wrap=\"off\"\r\n                    style=\"width:100%;height:175px\">{{ bank.verifyResponse | json }}</textArea>\r\n            </div>\r\n        </div>\r\n    </ng-container>\r\n</ng-template>\r\n\r\n<ng-template #simpleRouteEditor let-key=\"key\" let-config=\"config\">\r\n    <textarea wrap=\"off\" style=\"width:100%;height:175px\"\r\n        (change)=\"changeKey(config, $event.target.value)\">{{ config.data | json }}</textArea>\r\n\r\n    <button type=\"button\" (click)=\"config.$send.emit(config.data)\">send request</button>\r\n\r\n    <ng-container *ngIf=\"config.load\">... loading ...</ng-container>\r\n\r\n    <ng-container *ngIf=\"config.result\">\r\n        <div *ngTemplateOutlet=\"simpleRouteResults;context:{resultAt: config.resultAt, result: config.result}\"></div>\r\n    </ng-container>\r\n</ng-template>\r\n\r\n<ng-template #simpleRouteResults let-resultAt=\"resultAt\" let-result=\"result\" let-title=\"title\">\r\n    <br />\r\n    <div style=\"display:flex;\">\r\n        <strong style=\"flex-grow:1\">{{title || 'Result'}}</strong>\r\n        <small *ngIf=\"resultAt\" style=\"opacity:.5\">{{resultAt | date : 'mediumTime' }}</small>\r\n    </div>\r\n    <textarea disabled wrap=\"off\" style=\"width:100%;height:350px\">{{ result | json }}</textArea>\r\n</ng-template>\r\n\r\n<ng-template #resources>\r\n    <div style=\"text-align:center;display:flex;justify-content: center;flex-wrap:wrap\">\r\n        <a href=\"https://github.com/AckerApple/stripe-angular/blob/gh-pages/src/components/app.component.ts\"\r\n            target=\"_blank\" style=\"flex-grow:1;margin:.2em;\">demo code on github</a>\r\n        <a href=\"https://stripe.com/docs/error-codes\" target=\"_blank\" style=\"flex-grow:1;margin:.2em;\">error-codes</a>\r\n\r\n        <a href=\"https://stripe.dev/elements-examples/\" target=\"_blank\" style=\"flex-grow:1;margin:.2em;\">stripe elements\r\n            examples</a>\r\n\r\n        <a href=\"https://stripe.com/docs/js\" target=\"_blank\" style=\"flex-grow:1;margin:.2em;\">stripe.js docs</a>\r\n\r\n        <a href=\"https://stripe.com/docs/api/sources/object#source_object-type\" target=\"_blank\"\r\n            style=\"flex-grow:1;margin:.2em;\">source types</a>\r\n\r\n        <a href=\"https://www.youtube.com/watch?v=_1EX-DrikoA\" target=\"_blank\" style=\"flex-grow:1;margin:.2em;\">Bank ACH\r\n            YouTube</a>\r\n\r\n        <a href=\"https://stripe.com/docs/payments/payment-intents/migration/charges\" target=\"_blank\"\r\n            style=\"flex-grow:1;margin:.2em;\">Pay Intent API VS. Charges API</a>\r\n\r\n        <a href=\"https://stripe.com/docs/api/payment_methods/update\" target=\"_blank\"\r\n            style=\"flex-grow:1;margin:.2em;\">update payment method</a>\r\n\r\n        <a href=\"https://stripe.com/docs/api/cards/update\" target=\"_blank\" style=\"flex-grow:1;margin:.2em;\">update\r\n            source card</a>\r\n\r\n        <a href=\"https://stripe.com/docs/api/cards/delete\" target=\"_blank\" style=\"flex-grow:1;margin:.2em;\">delete\r\n            source card</a>\r\n\r\n        <a href=\"https://support.stripe.com/questions/check-if-a-card-is-valid-without-a-charge\" target=\"_blank\"\r\n            style=\"flex-grow:1;margin:.2em;\">check card valid without charge</a>\r\n    </div>\r\n</ng-template>\r\n\r\n<ng-template #customerPayMethodAttach let-customer=\"customer\" let-payMethod=\"payMethod\">\r\n    <button (click)=\"attachCustomerPayMethod(customer.id, payMethod)\">\r\n        attach method {{payMethod.card.brand}} {{payMethod.card.last4}}\r\n    </button>\r\n\r\n    <button (click)=\"detachCustomerPayMethod(payMethod)\">\r\n        detach method {{payMethod.card.brand}} {{payMethod.card.last4}}\r\n    </button>\r\n\r\n    <ng-container *ngIf=\"customer_attach_method.result\">\r\n        <div\r\n            *ngTemplateOutlet=\"simpleRouteResults;context:{resultAt: customer_attach_method.resultAt, result: customer_attach_method.result, title: 'Attach Result'}\">\r\n        </div>\r\n    </ng-container>\r\n\r\n    <ng-container *ngIf=\"customer_detach_method.result\">\r\n        <div\r\n            *ngTemplateOutlet=\"simpleRouteResults;context:{resultAt: customer_detach_method.resultAt, result: customer_detach_method.result, title: 'Detach Result'}\">\r\n        </div>\r\n    </ng-container>\r\n</ng-template>";
+      __webpack_require__.d(__webpack_exports__, "DatePrettyPipe", function () {
+        return DatePrettyPipe;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! moment */
+      "wd/R");
+      /* harmony import */
+
+
+      var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
+
+      var DatePrettyPipe = /*#__PURE__*/function () {
+        function DatePrettyPipe() {
+          _classCallCheck2(this, DatePrettyPipe);
+        }
+
+        _createClass2(DatePrettyPipe, [{
+          key: "transform",
+          value: function transform(date2check) {
+            var currentDate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+            currentDate = currentDate ? currentDate : Date.now();
+
+            if (date2check) {
+              return moment__WEBPACK_IMPORTED_MODULE_2__(new Date(date2check)).from(new Date(currentDate));
+            }
+
+            return date2check;
+          }
+        }]);
+
+        return DatePrettyPipe;
+      }();
+
+      DatePrettyPipe = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Pipe"])({
+        name: 'datePretty'
+      })], DatePrettyPipe);
       /***/
     },
 
@@ -17007,13 +17234,19 @@
 
       var _angular_router__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! @angular/router */
-      "tyNb"); //import translate from 'google-translate';//'google-translate-open-api';
+      "tyNb");
+      /* harmony import */
+
+
+      var src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+      /*! src/app/services/utility.service */
+      "A1CT"); //import translate from 'google-translate';//'google-translate-open-api';
 
 
       var MessagesComponent = /*#__PURE__*/function () {
         //end tts
-        function MessagesComponent(socketService, authenticationService, ngZone, contactService, router, alertService) {
-          var _this62 = this;
+        function MessagesComponent(socketService, authenticationService, ngZone, contactService, router, alertService, utilityService) {
+          var _this59 = this;
 
           _classCallCheck2(this, MessagesComponent);
 
@@ -17023,6 +17256,7 @@
           this.contactService = contactService;
           this.router = router;
           this.alertService = alertService;
+          this.utilityService = utilityService;
           this.loading = false; //start speech to text vars
 
           this.voiceActiveSectionDisabled = true;
@@ -17036,15 +17270,15 @@
           }
 
           this.authenticationService.currentUser.subscribe(function (x) {
-            return _this62.currentUser = x;
+            return _this59.currentUser = x;
           });
           this.subscription = this.socketService.getNewMessageToRoomAll().subscribe(function (_currentChatObj) {
-            if (!_this62.allChatListOfRoom) {
-              _this62.allChatListOfRoom = [];
+            if (!_this59.allChatListOfRoom) {
+              _this59.allChatListOfRoom = [];
             }
 
             if (_currentChatObj) {
-              _this62.allChatListOfRoom.push(_currentChatObj);
+              _this59.allChatListOfRoom.push(_currentChatObj);
 
               $('#chat_messages').animate({
                 scrollTop: $('#chat_messages').get(0).scrollHeight
@@ -17052,12 +17286,12 @@
             }
           });
           this.socketService.listenEventToAddNewContact().subscribe(function (_currentContactObj) {
-            if (!_this62.myContactsList) {
-              _this62.myContactsList = [];
+            if (!_this59.myContactsList) {
+              _this59.myContactsList = [];
             }
 
             if (_currentContactObj) {
-              _this62.myContactsList.push(_currentContactObj);
+              _this59.myContactsList.push(_currentContactObj);
             }
           }); //start tts
 
@@ -17081,7 +17315,7 @@
             }).then(function (data) {
               // The "data" object contains the list of available voices and the voice synthesis params
               console.log("Speech is ready, voices are available", data);
-              _this62.speechData = data;
+              _this59.speechData = data;
               data.voices.forEach(function (voice) {
                 console.log(voice.name + " " + voice.lang);
               });
@@ -17105,18 +17339,18 @@
                 if (data && data['success']) {
                   //alert(JSON.stringify( data));
                   if (AVTrueChatFalse) {
-                    _this62.joinNewVCSessionWithContact(contactId, data["data"].loanId, data["data"].isGroup);
+                    _this59.joinNewVCSessionWithContact(contactId, data["data"].loanId, data["data"].isGroup);
                   } else {
-                    _this62.setCurrentContact(data["data"]);
+                    _this59.setCurrentContact(data["data"]);
                   } //this.alertService.success(data['message'], true);
 
 
-                  _this62.loading = false; //this.element_btn_click_addServiceTypes_skills_verification.click();
+                  _this59.loading = false; //this.element_btn_click_addServiceTypes_skills_verification.click();
                 } else {
                   //alert(JSON.stringify(data['message']));
-                  _this62.alertService.error(data['message']);
+                  _this59.alertService.error(data['message']);
 
-                  _this62.loading = false;
+                  _this59.loading = false;
                 }
               }, function (error) {
                 var errorMsg2show = "";
@@ -17131,9 +17365,9 @@
                   }
                 } catch (ex) {}
 
-                _this62.alertService.error(errorMsg2show);
+                _this59.alertService.error(errorMsg2show);
 
-                _this62.loading = false;
+                _this59.loading = false;
               });
             }
           }
@@ -17168,19 +17402,19 @@
         }, {
           key: "translateTextInOtherLanguage",
           value: function translateTextInOtherLanguage(string2Translate, languageCode2Translate, sendDirect2ChatT, chatId) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-              var _this63 = this;
+            return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+              var _this60 = this;
 
-              return regeneratorRuntime.wrap(function _callee3$(_context3) {
+              return regeneratorRuntime.wrap(function _callee2$(_context2) {
                 while (1) {
-                  switch (_context3.prev = _context3.next) {
+                  switch (_context2.prev = _context2.next) {
                     case 0:
                       if (!(!string2Translate || string2Translate == '' || string2Translate == null)) {
-                        _context3.next = 2;
+                        _context2.next = 2;
                         break;
                       }
 
-                      return _context3.abrupt("return");
+                      return _context2.abrupt("return");
 
                     case 2:
                       languageCode2Translate = languageCode2Translate ? languageCode2Translate : 'en';
@@ -17189,8 +17423,8 @@
                           console.log('141', data["data"]);
 
                           if (chatId) {
-                            _this63.element_ctrlChatMessage = document.getElementById(chatId);
-                            _this63.element_ctrlChatMessage.innerText = data["data"].translatedText;
+                            _this60.element_ctrlChatMessage = document.getElementById(chatId);
+                            _this60.element_ctrlChatMessage.innerText = data["data"].translatedText;
                           }
 
                           if (sendDirect2ChatT) {
@@ -17235,25 +17469,76 @@
 
                     case 4:
                     case "end":
-                      return _context3.stop();
+                      return _context2.stop();
                   }
                 }
-              }, _callee3, this);
+              }, _callee2, this);
             }));
           }
         }, {
           key: "getAllUsers",
           value: function getAllUsers() {
-            var _this64 = this;
+            var _this61 = this;
 
             var _data = {};
             this.socketService.getAllUsers(_data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (users) {
-              _this64.allUsersList = users;
+              _this61.allUsersList = users;
             });
           }
         }, {
           key: "sendMessage",
           value: function sendMessage(_roomId, _message) {
+            if (_message == null || typeof _message == 'undefined' || _message == '' || !_message) {
+              return;
+            } //#region filter message with reserved word and make it with star
+
+
+            var wordsArr2filterFromMessage = [];
+
+            var _copiedMessage = _message.toString().toLowerCase();
+
+            for (var index in wordsArr2filterFromMessage) {
+              var word2find = wordsArr2filterFromMessage[index];
+              var _temp_message = _message;
+
+              if (_copiedMessage.indexOf(word2find) > -1) {
+                var _wordLength = word2find.length;
+
+                var _startIndex = _copiedMessage.indexOf(word2find);
+
+                var _endIndex = _startIndex + _wordLength;
+
+                var _maskedWord2Replace = this.utilityService.createString('*', _wordLength);
+
+                var _word2replace = _message.substr(_startIndex, _wordLength);
+
+                _message = _temp_message.replaceAll(_word2replace, _maskedWord2Replace);
+              }
+            } //#endregion filter message with reserved word and make it with star
+
+
+            var _copiedMessage3 = _message.toString().toLowerCase().replaceAll(' ', '');
+
+            if (_copiedMessage3.match(/[0-9]{8}/)) {
+              this.alertService.error("Phone number is not allowed in message");
+              return;
+            } //#region filter message with reserved word and make it with star
+
+
+            var wordsArr2restrictFromMessage = ['@', '(a)', '-a-', '.com', '.dk', 'messenger', 'facebook', 'whatsapp', 'wechat', 'skype', 'mobile', 'emailid', 'mob', 'email'];
+
+            var _copiedMessage2 = _message.toString().toLowerCase();
+
+            for (var _index2 in wordsArr2restrictFromMessage) {
+              var _word2find = wordsArr2restrictFromMessage[_index2];
+
+              if (_copiedMessage2.indexOf(_word2find) > -1) {
+                this.alertService.error("Message contains restricted word '" + _word2find + "'");
+                return;
+              }
+            } //#endregion filter message with reserved word and make it with star
+
+
             if (_message != null && typeof _message != 'undefined' && _message != '') {
               this.socketService.sendEventWithMessageChatRoom(_roomId, this.currentUser._id, _message);
               this.message2send = '';
@@ -17262,12 +17547,12 @@
         }, {
           key: "getAllMyContacts",
           value: function getAllMyContacts() {
-            var _this65 = this;
+            var _this62 = this;
 
             var _data = {};
             var _currentUserId = this.currentUser._id;
             this.socketService.getAllMyContacts(_currentUserId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (users) {
-              _this65.myContactsList = lodash__WEBPACK_IMPORTED_MODULE_8__["filter"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](users), function (e) {
+              _this62.myContactsList = lodash__WEBPACK_IMPORTED_MODULE_8__["filter"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](users), function (e) {
                 if (e) {
                   return e._id != _currentUserId;
                 }
@@ -17277,7 +17562,7 @@
         }, {
           key: "setCurrentContact",
           value: function setCurrentContact(currentContactItem) {
-            var _this66 = this;
+            var _this63 = this;
 
             if (currentContactItem) {
               console.log(window.innerWidth);
@@ -17299,23 +17584,23 @@
                 this.socketService.sendEventToAddNewContact(_currentContactObj).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (result) {
                   if (result) {
                     if (result['success'] == true || result['success'] == false) {
-                      _this66.currentContact = result['data'];
+                      _this63.currentContact = result['data'];
                     } else {
-                      _this66.currentContact = result;
+                      _this63.currentContact = result;
                     }
                   }
 
                   try {
-                    if (_this66.currentContact) {
-                      if (!_this66.currentContact._id && _this66.currentContact[0]._id) {
-                        _this66.currentContact = _this66.currentContact[0];
+                    if (_this63.currentContact) {
+                      if (!_this63.currentContact._id && _this63.currentContact[0]._id) {
+                        _this63.currentContact = _this63.currentContact[0];
                       }
                     }
                   } catch (ex) {}
 
-                  _this66.socketService.sendEventToJoinChatRoom(_this66.currentContact._id, _this66.currentUser._id);
+                  _this63.socketService.sendEventToJoinChatRoom(_this63.currentContact._id, _this63.currentUser._id);
 
-                  _this66.getAllChatByRoomId(_this66.currentContact._id);
+                  _this63.getAllChatByRoomId(_this63.currentContact._id);
                 });
               } else {
                 this.currentContact = currentContactItem;
@@ -17327,11 +17612,11 @@
         }, {
           key: "getAllChatByRoomId",
           value: function getAllChatByRoomId(_roomId) {
-            var _this67 = this;
+            var _this64 = this;
 
             var _data = {};
             this.socketService.sendEventToGetAllChatOfRoomWithPromise(_roomId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (chats) {
-              _this67.allChatListOfRoom = chats;
+              _this64.allChatListOfRoom = chats;
               setTimeout(function () {
                 $('#chat_messages').animate({
                   scrollTop: $('#chat_messages').get(0).scrollHeight
@@ -17349,53 +17634,53 @@
         }, {
           key: "initializeVoiceRecognitionCallback",
           value: function initializeVoiceRecognitionCallback() {
-            var _this68 = this;
+            var _this65 = this;
 
             annyang.addCallback('error', function (err) {
               if (err.error === 'network') {
-                _this68.message2send = "Internet is require";
+                _this65.message2send = "Please check your internet connection.";
                 annyang.abort();
 
-                _this68.ngZone.run(function () {
-                  return _this68.voiceActiveSectionSuccess = true;
+                _this65.ngZone.run(function () {
+                  return _this65.voiceActiveSectionSuccess = true;
                 });
-              } else if (_this68.message2send === undefined) {
-                _this68.ngZone.run(function () {
-                  return _this68.voiceActiveSectionError = true;
+              } else if (_this65.message2send === undefined) {
+                _this65.ngZone.run(function () {
+                  return _this65.voiceActiveSectionError = true;
                 });
 
                 annyang.abort();
               }
             });
             annyang.addCallback('soundstart', function (res) {
-              _this68.ngZone.run(function () {
-                return _this68.voiceActiveSectionListening = true;
+              _this65.ngZone.run(function () {
+                return _this65.voiceActiveSectionListening = true;
               });
             });
             annyang.addCallback('end', function () {
-              if (_this68.message2send === undefined) {
-                _this68.ngZone.run(function () {
-                  return _this68.voiceActiveSectionError = true;
+              if (_this65.message2send === undefined) {
+                _this65.ngZone.run(function () {
+                  return _this65.voiceActiveSectionError = true;
                 });
 
                 annyang.abort();
               }
             });
             annyang.addCallback('result', function (userSaid) {
-              _this68.ngZone.run(function () {
-                return _this68.voiceActiveSectionError = false;
+              _this65.ngZone.run(function () {
+                return _this65.voiceActiveSectionError = false;
               });
 
               var queryText = userSaid[0];
               annyang.abort();
-              _this68.message2send = queryText;
+              _this65.message2send = queryText;
 
-              _this68.ngZone.run(function () {
-                return _this68.voiceActiveSectionListening = false;
+              _this65.ngZone.run(function () {
+                return _this65.voiceActiveSectionListening = false;
               });
 
-              _this68.ngZone.run(function () {
-                return _this68.voiceActiveSectionSuccess = true;
+              _this65.ngZone.run(function () {
+                return _this65.voiceActiveSectionSuccess = true;
               });
             });
           }
@@ -17543,6 +17828,8 @@
           type: _angular_router__WEBPACK_IMPORTED_MODULE_12__["Router"]
         }, {
           type: src_app_services__WEBPACK_IMPORTED_MODULE_4__["AlertService"]
+        }, {
+          type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_13__["UtilityService"]
         }];
       };
 
@@ -17551,7 +17838,7 @@
         template: _raw_loader_messages_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectionStrategy"].Default,
         styles: [_messages_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_socketio_service__WEBPACK_IMPORTED_MODULE_6__["SocketioService"], src_app_services__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"], _angular_core__WEBPACK_IMPORTED_MODULE_3__["NgZone"], src_app_services_contact_service__WEBPACK_IMPORTED_MODULE_9__["ContactService"], _angular_router__WEBPACK_IMPORTED_MODULE_12__["Router"], src_app_services__WEBPACK_IMPORTED_MODULE_4__["AlertService"]])], MessagesComponent);
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_socketio_service__WEBPACK_IMPORTED_MODULE_6__["SocketioService"], src_app_services__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"], _angular_core__WEBPACK_IMPORTED_MODULE_3__["NgZone"], src_app_services_contact_service__WEBPACK_IMPORTED_MODULE_9__["ContactService"], _angular_router__WEBPACK_IMPORTED_MODULE_12__["Router"], src_app_services__WEBPACK_IMPORTED_MODULE_4__["AlertService"], src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_13__["UtilityService"]])], MessagesComponent);
       /***/
     },
 
@@ -17634,6 +17921,16 @@
       var src_environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! src/environments/environment */
       "AytR");
+      /* harmony import */
+
+
+      var moment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      /*! moment */
+      "wd/R");
+      /* harmony import */
+
+
+      var moment__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_10__);
 
       var PaymentService = /*#__PURE__*/function () {
         function PaymentService(http, utilityService, socketService, addFundsService) {
@@ -17644,6 +17941,13 @@
           this.socketService = socketService;
           this.addFundsService = addFundsService;
           this.baseurl = src_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl + '/';
+          this.TimerExpired = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+          this.SearchDate = moment__WEBPACK_IMPORTED_MODULE_10__();
+          this.ElapsTime = 5;
+          this.MinimumTime4Extend = 3;
+          this.everySecond = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["timer"])(0, 1000);
+          this.paymentNotCompletedInTime = false;
+          this.paymentNotCompletedInTimeErrorMessageShow = false;
           /**
           * let purchaseUnits=[
                    {
@@ -17676,6 +17980,7 @@
           this.currentPayPalConfig = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
           this.currentPaymentObj = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
           this.currentPaymentApproved = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
+          this.currentPaymentFailed = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
         }
 
         _createClass2(PaymentService, [{
@@ -17737,19 +18042,55 @@
           key: "getCurrentPaymentApproved",
           value: function getCurrentPaymentApproved() {
             return this.currentPaymentApproved.asObservable();
+          }
+        }, {
+          key: "sendCurrentPaymentFailed",
+          value: function sendCurrentPaymentFailed(transactionStatus) {
+            this.currentPaymentFailed.next(transactionStatus);
+          }
+        }, {
+          key: "clearCurrentPaymentFailed",
+          value: function clearCurrentPaymentFailed() {
+            this.currentPaymentFailed.next();
+          }
+        }, {
+          key: "getCurrentPaymentFailed",
+          value: function getCurrentPaymentFailed() {
+            return this.currentPaymentFailed.asObservable();
           } //#endregion Payment Approval status
 
         }, {
+          key: "startTimerInit",
+          value: function startTimerInit() {
+            this.paymentNotCompletedInTime = false;
+            this.paymentNotCompletedInTimeErrorMessageShow = false;
+            this.stopTimer();
+
+            var _duration = this.ElapsTime + (this.minutes || 0);
+
+            this.searchEndDate = this.SearchDate.add(_duration, "minutes");
+            this.startTimer();
+          }
+        }, {
           key: "initPaymentConfigStripe",
           value: function initPaymentConfigStripe(PaymentObj) {
+            var _this66 = this;
+
             this._currentPaymentObj = PaymentObj;
             this.sendCurrentPaymentObj(this._currentPaymentObj);
+            this.socketService.listenForUpdateStatusOfLastPayment().subscribe(function (_obj) {
+              //this.socketService.emitEventWithNameAndData('request_fund_get_count_sum', this.userId);
+              _this66.sendCurrentPaymentApproved(_obj);
+
+              _this66.stopTimer();
+            });
+            this.socketService.sendEventToCheckLastPaymentReturnedSuccessOrFailed(this._currentPaymentObj);
             return this._currentPaymentObj;
           }
         }, {
           key: "initConfig",
           value: function initConfig(purchaseUnits, _transactiActionType, _userId) {
-            var _this69 = this;
+            var _this67 = this;
 
             this.purchaseUnits = purchaseUnits;
             this.amount = purchaseUnits[0].amount.value;
@@ -17777,12 +18118,12 @@
               onApprove: function onApprove(data, actions) {
                 switch (_transactiActionType) {
                   case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].funds_add:
-                    _this69.socketService.sendEventToSaveCurrentTransaction(_transactiActionType, data.orderID, _userId, data);
+                    _this67.socketService.sendEventToSaveCurrentTransaction(_transactiActionType, data.orderID, _userId, data);
 
                     break;
 
                   case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].session_accepted:
-                    _this69.socketService.sendEventToSaveCurrentTransaction(_transactiActionType, data.orderID, _userId, data);
+                    _this67.socketService.sendEventToSaveCurrentTransaction(_transactiActionType, data.orderID, _userId, data);
 
                     break;
                 }
@@ -17791,7 +18132,7 @@
                 actions.order.get().then(function (details) {
                   switch (_transactiActionType) {
                     case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].funds_add:
-                      _this69.socketService.sendEventToSaveCurrentTransactionDetails(_transactiActionType, details.id, _userId, details, null);
+                      _this67.socketService.sendEventToSaveCurrentTransactionDetails(_transactiActionType, details.id, _userId, details, null);
 
                       var _funds_obj = {
                         amount: purchaseUnits[0].amount.value,
@@ -17800,25 +18141,25 @@
                         description: ''
                       };
 
-                      _this69.socketService.emitEventWithNameAndData('fund_addnew', _funds_obj);
+                      _this67.socketService.emitEventWithNameAndData('fund_addnew', _funds_obj);
 
                       break;
 
                     case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].session_accepted:
                     case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].session_extended:
-                      _this69.socketService.sendEventToSaveCurrentTransactionDetails(_transactiActionType, details.id, _userId, details, null);
+                      _this67.socketService.sendEventToSaveCurrentTransactionDetails(_transactiActionType, details.id, _userId, details, null);
 
                       break;
                   }
 
-                  _this69.sendCurrentPaymentApproved(details);
+                  _this67.sendCurrentPaymentApproved(details);
 
                   console.log('onApprove - you can get full order details inside onApprove: ', details);
                 });
               },
               onClientAuthorization: function onClientAuthorization(data) {
                 console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-                _this69.showSuccess = true;
+                _this67.showSuccess = true;
               },
               onCancel: function onCancel(data, actions) {//console.log('OnCancel', data, actions);
               },
@@ -17833,7 +18174,7 @@
         }, {
           key: "payFromUsersWallet",
           value: function payFromUsersWallet() {
-            var _this70 = this;
+            var _this68 = this;
 
             var _funds_obj = {
               amount: this.amount,
@@ -17849,9 +18190,9 @@
             };
             this.socketService.deductAmountFromWallet(_funds_obj, _data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (_obj) {
               //this.socketService.emitEventWithNameAndData('request_fund_get_count_sum', this.userId);
-              _this70.sendCurrentPaymentApproved(_obj);
+              _this68.sendCurrentPaymentApproved(_obj);
 
-              _this70.addFundsService.getFundsCountForRequestedUser(_this70.userId);
+              _this68.addFundsService.getFundsCountForRequestedUser(_this68.userId);
             });
           }
         }, {
@@ -17890,6 +18231,64 @@
               return response;
             }));
           }
+        }, {
+          key: "stopTimer",
+          value: function stopTimer() {
+            if (this.subscription4Timer) {
+              this.subscription4Timer.unsubscribe();
+            }
+
+            this.SearchDate = moment__WEBPACK_IMPORTED_MODULE_10__();
+            this.ElapsTime = 5;
+            this.hours = null;
+            this.minutes = null;
+            this.seconds = null;
+            this.old_minutes = null;
+          }
+        }, {
+          key: "startTimer",
+          value: function startTimer() {
+            var _this69 = this;
+
+            this.subscription4Timer = this.everySecond.subscribe(function (seconds) {
+              var currentTime = moment__WEBPACK_IMPORTED_MODULE_10__();
+              _this69.remainingTime = _this69.searchEndDate.diff(currentTime);
+              _this69.remainingTime = _this69.remainingTime / 1000;
+
+              if (_this69.remainingTime <= 0) {
+                _this69.paymentNotCompletedInTime = true;
+                _this69.paymentNotCompletedInTimeErrorMessageShow = true; //stop interval here;
+
+                _this69.sendCurrentPaymentFailed(true);
+              } else {
+                _this69.minutes = Math.floor(_this69.remainingTime / 60);
+
+                if (_this69.minutes > 59) {
+                  _this69.hours = Math.floor(_this69.remainingTime / 60 / 60);
+                } else {
+                  _this69.hours = 0;
+                }
+
+                _this69.minutes = Math.floor(_this69.remainingTime / 60 - _this69.hours * 60);
+                _this69.seconds = Math.floor(_this69.remainingTime - (_this69.minutes * 60 + _this69.hours * 60 * 60));
+              }
+
+              if (_this69.seconds % 10 === 0) {
+                //this.old_minutes != this.seconds
+                //debugger;
+                _this69.old_minutes = _this69.seconds;
+
+                _this69.socketService.sendEventToCheckLastPaymentReturnedSuccessOrFailed(_this69._currentPaymentObj);
+              } else {
+                console.log("303", _this69.old_minutes, _this69.minutes);
+              }
+
+              if (_this69.minutes <= _this69.MinimumTime4Extend) {
+                _this69.paymentNotCompletedInTimeErrorMessageShow = true; //limit reached
+                //debugger;
+              }
+            });
+          }
         }]);
 
         return PaymentService;
@@ -17907,6 +18306,20 @@
         }];
       };
 
+      PaymentService.propDecorators = {
+        TimerExpired: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"]
+        }],
+        SearchDate: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }],
+        ElapsTime: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }],
+        MinimumTime4Extend: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }]
+      };
       PaymentService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClient"], _utility_service__WEBPACK_IMPORTED_MODULE_2__["UtilityService"], _socketio_service__WEBPACK_IMPORTED_MODULE_3__["SocketioService"], _add_funds_service__WEBPACK_IMPORTED_MODULE_6__["AddFundsService"]])], PaymentService);
@@ -18003,6 +18416,121 @@
       DataArrayFilterPipe = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Pipe"])({
         name: 'dataArrayFilter'
       })], DataArrayFilterPipe);
+      /***/
+    },
+
+    /***/
+    "tZK8":
+    /*!*****************************************************************!*\
+      !*** ./src/app/shared/media-preview/media-preview.component.ts ***!
+      \*****************************************************************/
+
+    /*! exports provided: MediaPreviewComponent */
+
+    /***/
+    function tZK8(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "MediaPreviewComponent", function () {
+        return MediaPreviewComponent;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _raw_loader_media_preview_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! raw-loader!./media-preview.component.html */
+      "Xbsl");
+      /* harmony import */
+
+
+      var _media_preview_component_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! ./media-preview.component.css */
+      "pFHx");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @angular/material/dialog */
+      "0IaG");
+      /* harmony import */
+
+
+      var src_app_models_role__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! src/app/models/role */
+      "z56L");
+
+      var MediaPreviewComponent = /*#__PURE__*/function () {
+        function MediaPreviewComponent(dialogRef, data, dialog) {
+          _classCallCheck2(this, MediaPreviewComponent);
+
+          this.dialogRef = dialogRef;
+          this.data = data;
+          this.dialog = dialog;
+          this.mediaSrc = null;
+          this.mimeType = null;
+          this.MediaTypes = src_app_models_role__WEBPACK_IMPORTED_MODULE_5__["MediaTypes"];
+
+          if (data && data.mediaSrc) {
+            this.mediaSrc = data.mediaSrc;
+            this.mimeType = data.mimeType || src_app_models_role__WEBPACK_IMPORTED_MODULE_5__["MediaTypes"].image;
+          } else {
+            this.closeDialog();
+          }
+        }
+
+        _createClass2(MediaPreviewComponent, [{
+          key: "closeDialog",
+          value: function closeDialog() {
+            this.dialogRef.close({
+              event: 'close',
+              data: true
+            });
+          }
+        }, {
+          key: "ngOnInit",
+          value: function ngOnInit() {}
+        }]);
+
+        return MediaPreviewComponent;
+      }();
+
+      MediaPreviewComponent.ctorParameters = function () {
+        return [{
+          type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialogRef"]
+        }, {
+          type: undefined,
+          decorators: [{
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Optional"]
+          }, {
+            type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["Inject"],
+            args: [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MAT_DIALOG_DATA"]]
+          }]
+        }, {
+          type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialog"]
+        }];
+      };
+
+      MediaPreviewComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-media-preview',
+        template: _raw_loader_media_preview_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_media_preview_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialogRef"], Object, _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialog"]])], MediaPreviewComponent);
       /***/
     },
 
@@ -18151,7 +18679,7 @@
 
       var ProfileComponent = /*#__PURE__*/function () {
         function ProfileComponent(dialog, http, formBuilder, router, authenticationService, userService, alertService, appRouterService, route, utilityService) {
-          var _this71 = this;
+          var _this70 = this;
 
           _classCallCheck2(this, ProfileComponent);
 
@@ -18232,19 +18760,19 @@
             //console.log('data => ', data)
             if (data && data['success']) {
               //alert(JSON.stringify( data));
-              _this71.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
+              _this70.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
 
 
-              _this71.loading = false;
-              _this71.isOtpSent = true; //this.element_btn_click_profile_skills_verification.click();
+              _this70.loading = false;
+              _this70.isOtpSent = true; //this.element_btn_click_profile_skills_verification.click();
             } else {
               //alert(JSON.stringify(data['message']));
-              _this71.alertService.error(data['message']);
+              _this70.alertService.error(data['message']);
 
-              _this71.loading = false;
-              _this71.isOtpSent = false;
+              _this70.loading = false;
+              _this70.isOtpSent = false;
 
-              _this71.appRouterService.appRouter('');
+              _this70.appRouterService.appRouter('');
             }
           }, function (error) {
             var errorMsg2show = "";
@@ -18259,21 +18787,21 @@
               }
             } catch (ex) {}
 
-            _this71.alertService.error(errorMsg2show);
+            _this70.alertService.error(errorMsg2show);
 
-            _this71.loading = false;
-            _this71.isOtpSent = false;
+            _this70.loading = false;
+            _this70.isOtpSent = false;
 
-            _this71.appRouterService.appRouter('');
+            _this70.appRouterService.appRouter('');
           });
           this.userService.getUserProfilePortFolioByUserId(this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this71.portfolioDataArr = data["data"];
-              _this71.loading = false;
+              _this70.portfolioDataArr = data["data"];
+              _this70.loading = false;
             } else {
-              _this71.alertService.error(data['message']);
+              _this70.alertService.error(data['message']);
 
-              _this71.loading = false;
+              _this70.loading = false;
             }
           }, function (error) {
             var errorMsg2show = "";
@@ -18288,9 +18816,9 @@
               }
             } catch (ex) {}
 
-            _this71.alertService.error(errorMsg2show);
+            _this70.alertService.error(errorMsg2show);
 
-            _this71.loading = false;
+            _this70.loading = false;
           });
         }
 
@@ -18308,22 +18836,22 @@
               role: [_userObj.role || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               appPermissions: this.formBuilder.array(_userObj.appPermissions || []),
               firstName: [_userObj.firstName || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-              middleName: [_userObj.middleName || ''],
+              middleName: [_userObj.middleName || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               lastName: [_userObj.lastName || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               userName: [_userObj.userName || ''],
-              address: [_userObj.address || ''],
+              address: [_userObj.address || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               emailAddress: [_userObj.emailAddress || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               acceptnewUpdates: [_userObj.acceptnewUpdates || ''],
               acceptTerms: [_userObj.acceptTerms || ''],
-              cityCode: [_userObj.cityCode || ''],
-              birthDate: [_userObj.birthDate || ''],
+              cityCode: [_userObj.cityCode || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              birthDate: [_userObj.birthDate || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               nationality: [_userObj.nationality || ''],
               residence: [_userObj.residence || ''],
               birthPlace: [_userObj.birthPlace || ''],
               promoCode: [_userObj.promoCode || ''],
-              mobileNo: [_userObj.mobileNo || ''],
+              mobileNo: [_userObj.mobileNo || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               gender: [_userObj.gender || ''],
-              country: [_userObj.country || ''],
+              country: [_userObj.country || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               birthDateCustomised: [_birthDate || ''],
               education: [_userObj.education || ''],
               additionalCertification: [{}],
@@ -18331,25 +18859,25 @@
               skillSets: this.formBuilder.array(_userObj.skillSets || []),
               academicDocuments: this.formBuilder.array(_userObj.academicDocuments || []),
               employmentVerifications: this.formBuilder.array(_userObj.employmentVerifications || []),
-              externalAppLinks: this.formBuilder.array(_userObj.externalAppLinks || [], []),
+              externalAppLinks: this.formBuilder.array(_userObj.externalAppLinks || [], [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]),
               hearAboutUs: [_userObj.hearAboutUs || ''],
               app_doc_type: [_userObj.app_doc_type || ''],
               isVerified: [_userObj.isVerified || ''],
               myProfileMedia: this.formBuilder.array(_userObj.myProfileMedia || []),
               myProfileDetails: [_userObj.myProfileDetails || ''],
               userType: [_userObj.userType || ''],
-              myPassportMedia: this.formBuilder.array(_userObj.myPassportMedia || []),
-              myPassportNumber: [_userObj.myPassportNumber || ''],
-              myDLMedia: this.formBuilder.array(_userObj.myDLMedia || []),
-              myDLNumber: [_userObj.myDLNumber || ''],
-              myHICardMedia: this.formBuilder.array(_userObj.myHICardMedia || []),
+              myPassportMedia: this.formBuilder.array(_userObj.myPassportMedia || [], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required),
+              myPassportNumber: [_userObj.myPassportNumber || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              myDLMedia: this.formBuilder.array(_userObj.myDLMedia || [], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required),
+              myDLNumber: [_userObj.myDLNumber || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              myHICardMedia: this.formBuilder.array(_userObj.myHICardMedia || [], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required),
+              cprNumber: [_userObj.cprNumber || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               myRKIMedia: this.formBuilder.array(_userObj.myRKIMedia || []),
-              isRKIRegistered: [_userObj.isRKIRegistered || false],
+              isRKIRegistered: [_userObj.isRKIRegistered || false, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               accountName: [_userObj.accountName || ''],
               accountNumber: [_userObj.accountNumber || ''],
               bankName: [_userObj.bankName || ''],
               regNumber: [_userObj.regNumber || ''],
-              cprNumber: [_userObj.cprNumber || ''],
               branchDetails: [_userObj.branchDetails || ''],
               mobilePayment: [_userObj.mobilePayment || ''],
               bitCoinWalletID: [_userObj.bitCoinWalletID || ''],
@@ -18382,22 +18910,22 @@
               role: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               appPermissions: this.formBuilder.array([]),
               firstName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-              middleName: [''],
+              middleName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               lastName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               userName: [''],
-              address: [''],
+              address: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               emailAddress: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               acceptnewUpdates: [''],
               acceptTerms: [''],
-              cityCode: [''],
-              birthDate: [''],
+              cityCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              birthDate: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               nationality: [''],
               residence: [''],
               birthPlace: [''],
               promoCode: [''],
-              mobileNo: [''],
+              mobileNo: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               gender: [''],
-              country: [''],
+              country: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               birthDateCustomised: [''],
               education: [''],
               additionalCertification: [{}],
@@ -18405,25 +18933,25 @@
               skillSets: this.formBuilder.array([]),
               academicDocuments: this.formBuilder.array([]),
               employmentVerifications: this.formBuilder.array([]),
-              externalAppLinks: this.formBuilder.array([], []),
+              externalAppLinks: this.formBuilder.array([], [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]),
               hearAboutUs: [''],
               app_doc_type: [''],
               isVerified: [''],
               myProfileMedia: this.formBuilder.array([]),
               myProfileDetails: [''],
               userType: [''],
-              myPassportMedia: this.formBuilder.array([]),
-              myPassportNumber: [''],
-              myDLMedia: this.formBuilder.array([]),
-              myDLNumber: [''],
-              myHICardMedia: this.formBuilder.array([]),
+              myPassportMedia: this.formBuilder.array([], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required),
+              myPassportNumber: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              myDLMedia: this.formBuilder.array([], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required),
+              myDLNumber: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              myHICardMedia: this.formBuilder.array([], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required),
+              cprNumber: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               myRKIMedia: this.formBuilder.array([]),
-              isRKIRegistered: [false],
+              isRKIRegistered: [false, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               accountName: [''],
               accountNumber: [''],
               bankName: [''],
               regNumber: [''],
-              cprNumber: [''],
               branchDetails: [''],
               mobilePayment: [''],
               bitCoinWalletID: [''],
@@ -18448,6 +18976,8 @@
         }, {
           key: "clickOnGoToNext",
           value: function clickOnGoToNext(_step) {
+            this.submitted = true;
+
             switch (_step) {
               case 1:
                 this.element_btn_click_profile_basic_details.click();
@@ -18496,7 +19026,7 @@
         }, {
           key: "onProfileUpdateSubmit",
           value: function onProfileUpdateSubmit() {
-            var _this72 = this;
+            var _this71 = this;
 
             if (this.selfProfileUrlPendingForUpload) {
               this.alertService.error("Please Save Profile First");
@@ -18535,16 +19065,16 @@
 
                 localStorage.setItem('currentUser', JSON.stringify(data['data']));
 
-                _this72.authenticationService.sendCurrentUserObj(data['data']);
+                _this71.authenticationService.sendCurrentUserObj(data['data']);
 
-                _this72.alertService.success('Your Profile is Updated successfully', true);
+                _this71.alertService.success('Your Profile is Updated successfully', true);
 
-                _this72.appRouterService.appRouter(_this72.authenticationService.currentUserValue);
+                _this71.appRouterService.appRouter(_this71.authenticationService.currentUserValue);
               } else {
                 //alert(JSON.stringify(data['message']));
-                _this72.alertService.error(data['message']);
+                _this71.alertService.error(data['message']);
 
-                _this72.loading = false;
+                _this71.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -18559,9 +19089,9 @@
                 }
               } catch (ex) {}
 
-              _this72.alertService.error(errorMsg2show);
+              _this71.alertService.error(errorMsg2show);
 
-              _this72.loading = false;
+              _this71.loading = false;
             });
           }
         }, {
@@ -18640,7 +19170,7 @@
         }, {
           key: "preview",
           value: function preview() {
-            var _this73 = this;
+            var _this72 = this;
 
             // Show preview 
             var mimeType = this.fileData.type;
@@ -18653,13 +19183,13 @@
             reader.readAsDataURL(this.fileData);
 
             reader.onload = function (_event) {
-              _this73.previewUrl = reader.result;
+              _this72.previewUrl = reader.result;
             };
           }
         }, {
           key: "onUploadAcademicDocs",
           value: function onUploadAcademicDocs() {
-            var _this74 = this;
+            var _this73 = this;
 
             var checkArray = this.profileForm.get('academicDocuments');
 
@@ -18695,15 +19225,15 @@
               observe: 'events'
             }).subscribe(function (events) {
               if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].UploadProgress) {
-                _this74.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
-                console.log(_this74.fileUploadProgress);
+                _this73.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
+                console.log(_this73.fileUploadProgress);
               } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].Response) {
-                _this74.fileUploadProgress = '';
+                _this73.fileUploadProgress = '';
                 console.log(events.body); //alert('SUCCESS !!');
 
-                _this74.fileData = null;
+                _this73.fileData = null;
 
-                _this74.alertService.success('Uploaded Successfully !!', true);
+                _this73.alertService.success('Uploaded Successfully !!', true);
 
                 var _uploadedUrl = events.body["data"].path;
 
@@ -18711,10 +19241,10 @@
                   _uploadedUrl = _uploadedUrl.substr(1);
                 }
 
-                _this74.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
-                _temp_currentFile.url = _this74.uploadedFilePath;
+                _this73.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                _temp_currentFile.url = _this73.uploadedFilePath;
 
-                _this74.onacademicDocumentsUpdate(true, null, _temp_currentFile);
+                _this73.onacademicDocumentsUpdate(true, null, _temp_currentFile);
               }
             });
           }
@@ -18766,7 +19296,7 @@
         }, {
           key: "onUploadMyProfileMedia",
           value: function onUploadMyProfileMedia() {
-            var _this75 = this;
+            var _this74 = this;
 
             var checkArray = this.profileForm.get('myProfileMedia');
 
@@ -18776,18 +19306,18 @@
             }
 
             var _loop2 = function _loop2(_index) {
-              var currentFile = _this75.myProfileFiles[_index];
+              var currentFile = _this74.myProfileFiles[_index];
 
               if (!currentFile) {
-                _this75.alertService.error("Select file first.");
+                _this74.alertService.error("Select file first.");
 
                 return "continue";
               }
 
               var formData = new FormData();
               formData.append('files', currentFile);
-              formData.append('documentId', _this75.authenticationService.currentUserValue._id);
-              _this75.fileUploadProgress = '0%';
+              formData.append('documentId', _this74.authenticationService.currentUserValue._id);
+              _this74.fileUploadProgress = '0%';
               var _temp_currentFile = {
                 name: currentFile.name,
                 type: currentFile.type,
@@ -18795,20 +19325,20 @@
                 url: null
               };
 
-              _this75.http.post(uploadAPI, formData, {
+              _this74.http.post(uploadAPI, formData, {
                 reportProgress: true,
                 observe: 'events'
               }).subscribe(function (events) {
                 if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].UploadProgress) {
-                  _this75.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
-                  console.log(_this75.fileUploadProgress);
+                  _this74.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
+                  console.log(_this74.fileUploadProgress);
                 } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].Response) {
-                  _this75.fileUploadProgress = '';
+                  _this74.fileUploadProgress = '';
                   console.log(events.body); //alert('SUCCESS !!');
 
-                  lodash__WEBPACK_IMPORTED_MODULE_12__["pullAt"](_this75.myProfileFiles, _index);
+                  lodash__WEBPACK_IMPORTED_MODULE_12__["pullAt"](_this74.myProfileFiles, _index);
 
-                  _this75.alertService.success('Uploaded Successfully !!', true);
+                  _this74.alertService.success('Uploaded Successfully !!', true);
 
                   var _uploadedUrl = events.body["data"].path;
 
@@ -18816,10 +19346,10 @@
                     _uploadedUrl = _uploadedUrl.substr(1);
                   }
 
-                  _this75.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
-                  _temp_currentFile.url = _this75.uploadedFilePath;
+                  _this74.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                  _temp_currentFile.url = _this74.uploadedFilePath;
 
-                  _this75.onMyProfileMediaUpdate(true, null, _temp_currentFile);
+                  _this74.onMyProfileMediaUpdate(true, null, _temp_currentFile);
                 }
               });
             };
@@ -18873,7 +19403,7 @@
         }, {
           key: "previewForProfile",
           value: function previewForProfile() {
-            var _this76 = this;
+            var _this75 = this;
 
             // Show preview 
             var mimeType = this.fileData4Profile.type;
@@ -18886,15 +19416,15 @@
             reader.readAsDataURL(this.fileData4Profile);
 
             reader.onload = function (_event) {
-              _this76.profileForm.get('selfProfileUrl').setValue(reader.result);
+              _this75.profileForm.get('selfProfileUrl').setValue(reader.result);
 
-              _this76.selfProfileUrlPendingForUpload = true;
+              _this75.selfProfileUrlPendingForUpload = true;
             };
           }
         }, {
           key: "onUploadForProfile",
           value: function onUploadForProfile() {
-            var _this77 = this;
+            var _this76 = this;
 
             if (!this.fileData4Profile) {
               this.alertService.error("Select file first.");
@@ -18917,15 +19447,15 @@
               observe: 'events'
             }).subscribe(function (events) {
               if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].UploadProgress) {
-                _this77.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
-                console.log(_this77.fileUploadProgress);
+                _this76.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
+                console.log(_this76.fileUploadProgress);
               } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].Response) {
-                _this77.fileUploadProgress = '';
+                _this76.fileUploadProgress = '';
                 console.log(events.body); //alert('SUCCESS !!');
 
-                _this77.fileData4Profile = null;
+                _this76.fileData4Profile = null;
 
-                _this77.alertService.success('Uploaded Successfully !!', true);
+                _this76.alertService.success('Uploaded Successfully !!', true);
 
                 var _uploadedUrl = events.body["data"].path;
 
@@ -18933,11 +19463,11 @@
                   _uploadedUrl = _uploadedUrl.substr(1);
                 }
 
-                _this77.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                _this76.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
 
-                _this77.profileForm.get('selfProfileUrl').setValue(_this77.uploadedFilePath);
+                _this76.profileForm.get('selfProfileUrl').setValue(_this76.uploadedFilePath);
 
-                _this77.selfProfileUrlPendingForUpload = false;
+                _this76.selfProfileUrlPendingForUpload = false;
               }
             });
           }
@@ -19043,7 +19573,7 @@
         }, {
           key: "onUploadAssetDocs",
           value: function onUploadAssetDocs(_keyName) {
-            var _this78 = this;
+            var _this77 = this;
 
             if (!_keyName) {
               return;
@@ -19085,15 +19615,15 @@
               observe: 'events'
             }).subscribe(function (events) {
               if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].UploadProgress) {
-                _this78.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
-                console.log(_this78.fileUploadProgress);
+                _this77.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
+                console.log(_this77.fileUploadProgress);
               } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].Response) {
-                _this78.fileUploadProgress = '';
+                _this77.fileUploadProgress = '';
                 console.log(events.body); //alert('SUCCESS !!');
 
-                _this78.fileData = null;
+                _this77.fileData = null;
 
-                _this78.alertService.success('Uploaded Successfully !!', true);
+                _this77.alertService.success('Uploaded Successfully !!', true);
 
                 var _uploadedUrl = events.body["data"].path;
 
@@ -19101,10 +19631,10 @@
                   _uploadedUrl = _uploadedUrl.substr(1);
                 }
 
-                _this78.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
-                _temp_currentFile.url = _this78.uploadedFilePath;
+                _this77.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                _temp_currentFile.url = _this77.uploadedFilePath;
 
-                _this78.onAssetDocumentsUpdate(true, null, _temp_currentFile, _keyName);
+                _this77.onAssetDocumentsUpdate(true, null, _temp_currentFile, _keyName);
               }
             });
           }
@@ -19193,7 +19723,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "\r\n<div class=\"row\">\r\n<div class=\"col-xl-11 col-10\">\r\n    <h4  class=\"mb-3 text-black-50\">\r\n        Borrowers Requests for {{utilityService.returnLoanType(LoanObj.loanType)}} of kr {{LoanObj.loanAmount}}\r\n  </h4>\r\n</div>\r\n<div class=\"col-xl-1 col-2\">\r\n  \r\n        <i class=\"icon-close float-right\" mat-button mat-dialog-close></i>\r\n  \r\n</div>\r\n</div>\r\n<div class=\"row\">\r\n    <div class=\"col-xl-12 col-12\">\r\n        <div id=\"accordion\">\r\n            <div class=\"card shadow-sm mb-3\" *ngFor=\"let LoanApplyObj of LoanObj.sessionAppliedByBorrowers;\">\r\n                <div class=\"card-header\">\r\n                    <a class=\"collapsed card-link\" data-toggle=\"collapse\" [attr.href]=\"'#collapse_' + LoanApplyObj.borrowerId\">\r\n                        {{userService.allAppUsersCollections[LoanApplyObj.borrowerId].firstName | titlecase }}\r\n                        <label class=\"badge font-weight-light text-capitalize text-cap\"\r\n                            [ngClass]=\"{'badge-success': (LoanApplyObj.status==SessionStatus.Accepted || LoanApplyObj.status==SessionStatus.Active || LoanApplyObj.status==SessionStatus.Completed || LoanApplyObj.status==SessionStatus.OngoingInitiated  || LoanApplyObj.status==SessionStatus.OngoingAccepted  || LoanApplyObj.status==SessionStatus.Ongoing), 'badge-danger': (LoanApplyObj.status==SessionStatus.Rejected || LoanApplyObj.status==SessionStatus.RejectedOngoing || LoanApplyObj.status==SessionStatus.Suspended), 'badge-info': ( LoanApplyObj.status==null || LoanApplyObj.status=='' || LoanApplyObj.status==SessionStatus.Pending)}\">{{ utilityService.returnStringWithReplacing_(LoanApplyObj.status || SessionStatus.Pending)  | titlecase }}</label>\r\n                        \r\n                       \r\n                    </a>\r\n                </div>\r\n                <div [attr.id]=\"'collapse_' + LoanApplyObj.borrowerId\" class=\"collapse show\" data-parent=\"#accordion\">\r\n                    <div class=\"card-body\">\r\n\r\n                        <h5 class=\"card-title\">New Proposed Amount: <badge class=\"badge badge-primary\">kr 3000</badge></h5>\r\n                     \r\n                         <!-- <div class=\"row\">\r\n                            <div class=\"col-xl-4 col-12\">\r\n                                <div class=\"form-group\">\r\n                                    <label for=\"loanTenureInMonths\" i18n>Tenure in Months</label>\r\n                                    <h4 class=\"text-primary\">\r\n                                        {{LoanObj.loanTenureInMonths}}\r\n                                    </h4>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xl-4 col-12\">\r\n                                <div class=\"form-group border-right\">\r\n                                    <label for=\"loanInterestRate\" i18n>Interest(%) Rate (per month)</label>\r\n                                    <h4 class=\"text-primary\">\r\n                                        {{LoanObj.loanInterestRate}}\r\n                                    </h4>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xl-4 col-12\">\r\n                                <div class=\"form-group border-right\">\r\n                                    <label for=\"loanStartDateTime\" i18n>Start Date</label>\r\n                                    <h4 class=\"text-primary\" i18n>\r\n                                        {{LoanObj.loanStartDateTime | date:'dd-MMM-YYYY'}}\r\n                                    </h4>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xl-12\">\r\n                                <p class=\"mb-2\" i18n>Description:</p>\r\n                                <div class=\"text-black-50\" i18n>\r\n                                    {{LoanObj.loanDescription}}\r\n                                </div>\r\n                            </div>\r\n                        </div>  -->\r\n                    </div>\r\n                    <div class=\"card-footer\">\r\n                        <div class=\"row\" [ngClass]=\"{ 'd-none': ready2Refund }\" [ngSwitch]=\"returnSessionApplyStatus(LoanApplyObj)\">\r\n                            <!-- the same view can be shown in more than one case -->\r\n                            <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Pending\">\r\n                                <!--\r\n                                <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\">Reject</button>\r\n                                <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\r\n                                -->\r\n                            </div>\r\n                            <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Accepted\">\r\n                                <!--\r\n                                <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button> &nbsp;\r\n                                <button class=\"btn btn-info btn-sm\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoingWithRefund)\">Apply\r\n                                    for Refund</button>\r\n                                <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)\">Proceed for\r\n                                    Execution</button>\r\n                                    -->\r\n\r\n                                    <a class=\"btn btn-success btn-sm float-right ml-2\" target=\"_blank\"  [href]=\"returnUrl4downloadCOntractPDF(LoanApplyObj._id)\" download><i class=\"icon-cloud-down\"></i>&nbsp;Download Contract</a>                            \r\n                                    <button class=\"btn btn-primary btn-sm float-right\" (click)=\"clickedOnSessionChatVideo(LoanObj, false)\"><i class=\"icon-comments\"></i>&nbsp;Chat</button>\r\n                            </div>\r\n\r\n                            <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.OngoingInitiated\">\r\n                                <!--\r\n                                <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button>\r\n                                <button [disabled]=\"true\" class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingAccepted)\">Proceed for\r\n                                    Execution</button>\r\n                                -->\r\n                            </div>\r\n                            <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.OngoingAccepted\">\r\n                                <!--\r\n                                <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button>\r\n                                <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Ongoing)\">Proceed for\r\n                                    Execution</button>\r\n                                -->\r\n                                \r\n                                <button class=\"float-right btn btn-danger btn-sm\">Reject</button>\r\n                                <button class=\"btn btn-success btn-sm float-right mr-2\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">\r\n                                    Proceed For Contract\r\n                                </button>\r\n                                <button class=\"btn btn-primary btn-sm float-right mr-2\" (click)=\"clickedOnSessionChatVideo(LoanObj, false)\"><i class=\"icon-comments\"></i>&nbsp;Chat</button>\r\n                                \r\n                            </div>\r\n                            <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Ongoing\">\r\n                                <!--\r\n                                <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Suspended)\">Reject</button>\r\n                                <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Completed)\">Completed</button>\r\n                                -->\r\n                            </div>\r\n                            <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Completed\">\r\n                                <button mat-button mat-dialog-close class=\"btn btn-success btn-sm float-right\" (click)=\"addNewRatings(LoanApplyObj)\">Rate Now</button>\r\n                            </div>\r\n                            <!--default case when there are no matches -->\r\n                            <div class=\"col-xl-12\" *ngSwitchDefault>\r\n                                <!-- \r\n                                <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\">Reject</button>\r\n                                <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\r\n                            -->\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <!--<button *ngIf=\"!check4SessionApplyStatus(LoanApplyObj)\" class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\r\n                    <button *ngIf=\"check4SessionApplyStatus(LoanApplyObj)\" class=\"btn btn-success btn-sm float-right mr-2\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)\">Proceed for Execution</button>-->\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<!--\r\n<div class=\"row\" [ngClass]=\"{ 'd-none': !userInitiatedForPayment }\">\r\n    <div class=\"col-xl-12 text-center\">\r\n        <app-payment></app-payment>\r\n    </div>\r\n</div>\r\n<div class=\"row\" [ngClass]=\"{ 'd-none': !ready2Refund }\">\r\n    <div class=\"col-xl-12\">\r\n        <div class=\"card-body\">\r\n            <div class=\"row\">\r\n                <div class=\"col-xl-12 text-center\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"mb-3 font-weight-bold\">\r\n                            Paid Amount:&nbsp;\r\n                        </label>\r\n                        <label class=\"mb-3\">\r\n                            {{refundObj.amount}}\r\n                        </label>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"mb-3 font-weight-bold\">\r\n                            Refund Charges:&nbsp;\r\n                        </label>\r\n                        <label class=\"mb-3\">\r\n                            {{refundObj.cancellationCharges}}\r\n                        </label>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"mb-3 font-weight-bold\">\r\n                            Amount to be refunded:&nbsp;\r\n                        </label>\r\n                        <label class=\"mb-3\">\r\n                            {{refundObj.finalAmount2Refund}}\r\n                        </label>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <button class=\"btn btn-danger btn-sm\" (click)=\"ready2Refund=false\">Cancel</button> &nbsp;\r\n                        <button class=\"btn btn-success btn-sm\" (click)=\"finalSubmissionForRefund()\">Refund</button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n-->";
+      __webpack_exports__["default"] = "<!-- <div class=\"row\">\r\n    <div class=\"col-xl-11 col-10\">\r\n        <h4 class=\"mb-3 text-black-50\" i18n>\r\n            Borrowers Requests for {{utilityService.returnLoanType(LoanObj.loanType)}} of kr {{LoanObj.loanAmount}}\r\n        </h4>\r\n    </div>\r\n    <div class=\"col-xl-1 col-2\">\r\n        <i class=\"icon-close float-right\" mat-button mat-dialog-close></i>\r\n    </div>\r\n</div> -->\r\n<h2 mat-dialog-title class=\"text-primary\">\r\n    <div class=\"row\">\r\n        <div class=\"col-xl-11 col-10\">\r\n            <h4 class=\"mb-3 text-black-50\" i18n>\r\n                Borrowers Requests for {{utilityService.returnLoanType(LoanObj.loanType)}} of kr {{LoanObj.loanAmount}}\r\n            </h4>\r\n        </div>\r\n        <div class=\"col-xl-1 col-2\">\r\n            <i class=\"icon-close float-right\" mat-button mat-dialog-close></i>\r\n        </div>\r\n    </div>\r\n</h2>\r\n\r\n<mat-dialog-content class=\"mat-typography\">\r\n    <div class=\"row\">\r\n        <div class=\"col-xl-12 col-12\">\r\n            <div id=\"accordion\">\r\n                <div class=\"card shadow-sm mb-3\" *ngFor=\"let LoanApplyObj of LoanObj.sessionAppliedByBorrowers;\">\r\n                    <div class=\"card-header\">\r\n                        <a class=\"collapsed card-link\" data-toggle=\"collapse\"\r\n                            [attr.href]=\"'#collapse_' + LoanApplyObj.borrowerId\" i18n>\r\n                            {{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers, false,'firstName')}}\r\n                            <label class=\"badge font-weight-light text-capitalize text-cap\"\r\n                                [ngClass]=\"{'badge-success': (LoanApplyObj.status==SessionStatus.Accepted || LoanApplyObj.status==SessionStatus.Active || LoanApplyObj.status==SessionStatus.Completed || LoanApplyObj.status==SessionStatus.OngoingInitiated  || LoanApplyObj.status==SessionStatus.OngoingAccepted  || LoanApplyObj.status==SessionStatus.Ongoing), 'badge-danger': (LoanApplyObj.status==SessionStatus.Rejected || LoanApplyObj.status==SessionStatus.RejectedOngoing || LoanApplyObj.status==SessionStatus.Suspended), 'badge-info': ( LoanApplyObj.status==null || LoanApplyObj.status=='' || LoanApplyObj.status==SessionStatus.Pending)}\">\r\n                                {{\r\n                                utilityService.returnStringWithReplacing_(LoanApplyObj.status || SessionStatus.Pending) |\r\n                                titlecase }}\r\n                            </label>\r\n                            <label class=\"badge badge-info font-weight-light text-capitalize text-cap float-right\">\r\n                                #{{LoanApplyObj.loanApplyNumber}}\r\n                            </label>\r\n                        </a>\r\n                    </div>\r\n                    <div [attr.id]=\"'collapse_' + LoanApplyObj.borrowerId\" class=\"collapse show\" data-parent=\"#accordion\">\r\n                        <div class=\"card-body\">\r\n                            <div class=\"row\">\r\n                                <div class=\"col-xl-6 col-12\">\r\n                                    <h5 class=\"card-title\" i18n>Proposed Amount: <badge class=\"badge badge-primary\">\r\n                                            {{LoanApplyObj.proposedLoanAmount || 'NA'}}</badge>\r\n                                    </h5>\r\n                                </div>\r\n                                <div class=\"col-xl-6 col-12\">\r\n                                    <h5 *ngIf=\"LoanApplyObj.loanInsuranceRequired\" class=\"card-title float-right\" i18n>Applied for Insurance with Amount: <badge\r\n                                            class=\"badge badge-primary\">\r\n                                            {{LoanApplyObj.loanInsuranceAmount || 'NA'}}</badge>\r\n                                    </h5>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\"\r\n                                *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted\">\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <div class=\"form-check-inline\">\r\n                                            <div class=\"custom-control custom-checkbox\">\r\n                                                <input [(ngModel)]=\"LoanApplyObjCurrent.isLoanAmountPaidByLender\"\r\n                                                    name=\"isLoanAmountPaidByLender\" id=\"isLoanAmountPaidByLender\"\r\n                                                    type=\"checkbox\" class=\"custom-control-input\" [value]=\"true\"\r\n                                                    [checked]=\"LoanApplyObjCurrent.isLoanAmountPaidByLender\">\r\n                                                <label for=\"isLoanAmountPaidByLender\" class=\"custom-control-label\" i18n>\r\n                                                    Is Loan Amount Transfered to Borrower </label>\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"transactionIdForLoanAmountPaidByLender\" i18n>TransactionId/Payment Ref.\r\n                                            ID</label>\r\n                                        <input type=\"text\" class=\"form-control\" placeholder=\"TransactionId/Payment Ref. ID\"\r\n                                            [(ngModel)]=\"LoanApplyObjCurrent.transactionIdForLoanAmountPaidByLender\">\r\n                                    </div>\r\n                                </div>\r\n                                \r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group\">\r\n    \r\n                                        <label for=\"transactionOnForLoanAmountPaidByLenderCustomised\" i18n>\r\n                                            Transaction Date\r\n                                        </label>\r\n                                        <input type=\"date\" [(ngModel)]=\"transactionOnForLoanAmountPaidByLenderCustomised\"\r\n                                            class=\"form-control\" />\r\n    \r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"usr\" i18n>Transaction Description</label>\r\n                                        <input type=\"transactionDescriptionForLoanAmountPaidByLender\" class=\"form-control\"\r\n                                            placeholder=\"Description\"\r\n                                            [(ngModel)]=\"LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLender\">\r\n                                    </div>\r\n                                </div>\r\n                                <br>\r\n                                <hr>\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <button class=\"btn btn-primary btn-sm float-right\"\r\n                                        (click)=\"paymentDoneByLender(LoanApplyObj)\" i18n>\r\n                                        <i class=\"icon-cloud-up\"></i>&nbsp;Update\r\n                                    </button>\r\n                                </div>\r\n                            </div>\r\n    \r\n                            <div class=\"row\" *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender\">\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"transactionIdForLoanAmountPaidByLender\" i18n>TransactionId/Payment Ref.\r\n                                            ID</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObj.transactionIdForLoanAmountPaidByLender}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"transactionOnForLoanAmountPaidByLender\" i18n>Transaction Date</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObj.transactionOnForLoanAmountPaidByLender | date:'dd-MMM-YYYY'}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group\">\r\n                                        <label for=\"createdOnForLoanAmountPaidByLender\" i18n>Updated On</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObj.createdOnForLoanAmountPaidByLender | date:'dd-MMM-YYYY'}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12\">\r\n                                    <p class=\"mb-2\" for=\"transactionDescriptionForLoanAmountPaidByLender\" i18n>Description:\r\n                                    </p>\r\n                                    <div class=\"text-black-50\" i18n>\r\n                                        {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLender}}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\" *ngIf=\"LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\r\n    \r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrower\"\r\n                                            i18n>Transaction\r\n                                            Date</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObj.transactionOnForLoanAmountPaidByLenderConfirmByBorrower |\r\n                                            date:'dd-MMM-YYYY'}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"createdOnForLoanAmountPaidByLender\" i18n>Updated On</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObj.createdOnForLoanAmountPaidByLenderConfirmByBorrower |\r\n                                            date:'dd-MMM-YYYY'}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <p class=\"mb-2\" for=\"transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\"\r\n                                        i18n>\r\n                                        Description:</p>\r\n                                    <div class=\"text-black-50\" i18n>\r\n                                        {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower}}\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row\"\r\n                                *ngIf=\"LoanApplyObjCurrent4Installment.installmentKey && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted  && LoanApplyObj.lenderId==authenticationService.currentUserValue._id\">\r\n    \r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"installmentKey\" i18n>Installment For</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObjCurrent4Installment.installmentKey}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"transactionIdForLoanAmountPaidToLender\" i18n>TransactionId/Payment Ref.\r\n                                            ID</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"transactionOnForLoanAmountPaidToLender\" i18n>Transaction\r\n                                            Date</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender |\r\n                                            date:'dd-MMM-YYYY'}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <div class=\"form-group border-right\">\r\n                                        <label for=\"createdOnForLoanAmountPaidToLender\" i18n>Updated On</label>\r\n                                        <h4 class=\"text-primary\" i18n>\r\n                                            {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender |\r\n                                            date:'dd-MMM-YYYY'}}\r\n                                        </h4>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-4 col-12\">\r\n                                    <p class=\"mb-2\" for=\"transactionDescriptionForLoanAmountPaidToLender\" i18n>\r\n                                        Note:</p>\r\n                                    <div class=\"text-black-50\" i18n>\r\n                                        {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLender}}\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <div class=\"row\"\r\n                                        *ngIf=\"LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\">\r\n                                        <div class=\"col-xl-4 col-12\">\r\n                                            <div class=\"form-group border-right\">\r\n                                                <label for=\"transactionOnForLoanAmountPaidToLenderConfirmByLender\"\r\n                                                    i18n>Confirmation: Transaction Date</label>\r\n                                                <h4 class=\"text-primary\" i18n>\r\n                                                    {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender\r\n                                                    |\r\n                                                    date:'dd-MMM-YYYY'}}\r\n                                                </h4>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-4 col-12\">\r\n                                            <div class=\"form-group border-right\">\r\n                                                <label for=\"createdOnForLoanAmountPaidToLenderConfirmByLender\"\r\n                                                    i18n>Confirmation:\r\n                                                    Updated On</label>\r\n                                                <h4 class=\"text-primary\" i18n>\r\n                                                    {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\r\n                                                    |\r\n                                                    date:'dd-MMM-YYYY'}}\r\n                                                </h4>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-4 col-12\">\r\n                                            <p class=\"mb-2\"\r\n                                                for=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\" i18n>\r\n                                                Confirmation: Note:</p>\r\n                                            <div class=\"text-black-50\" i18n>\r\n                                                {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLenderConfirmByLender}}\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-12 col-12\">\r\n                                            <button class=\"btn btn-primary btn-sm float-right\"\r\n                                                (click)=\"LoanApplyObjCurrent4Installment={};\" i18n>\r\n                                                <i class=\"icon-eye\"></i>&nbsp;Hide\r\n                                            </button>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"col-xl-12 col-12\">\r\n                                    <div class=\"row\"\r\n                                        *ngIf=\"!LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\">\r\n                                        <div class=\"col-xl-4 col-12\">\r\n                                            <div class=\"form-group\">\r\n    \r\n                                                <label for=\"transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised\"\r\n                                                    i18n>\r\n                                                    Transaction Date\r\n                                                </label>\r\n                                                <input type=\"date\"\r\n                                                    [(ngModel)]=\"transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised\"\r\n                                                    class=\"form-control\" />\r\n    \r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"col-xl-12 col-12\">\r\n                                            <div class=\"form-group\">\r\n                                                <label for=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\"\r\n                                                    i18n>Note.</label>\r\n                                                <input text=\"text\"\r\n                                                    name=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\"\r\n                                                    class=\"form-control\" placeholder=\"Description\"\r\n                                                    [(ngModel)]=\"LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\">\r\n                                            </div>\r\n                                        </div>\r\n                                        <br>\r\n                                        <hr>\r\n                                        <div class=\"col-xl-12 col-12\">\r\n                                            <button class=\"btn btn-primary btn-sm float-right\"\r\n                                                (click)=\"paymentDoneToLenderConfirmByLender(LoanApplyObj)\" i18n>\r\n                                                <i class=\"icon-cloud-up\"></i>&nbsp;Update\r\n                                            </button>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n    \r\n                            <div class=\"row\">\r\n                                <div class=\"col-xl-12 col-12 mt-3\">\r\n                                    <div class=\"table-responsive table shadow-sm\">\r\n                                        <table class=\"table mb-0\">\r\n                                            <thead>\r\n                                                <tr>\r\n                                                    <th scope=\"col\" i18n>EMI Date</th>\r\n                                                    <th scope=\"col\" i18n>Payment</th>\r\n                                                    <th *ngIf=\"returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted\"\r\n                                                        scope=\"col\" i18n>\r\n                                                        <!-- && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id-->\r\n                                                        Payment Status\r\n                                                    </th>\r\n                                                </tr>\r\n                                            </thead>\r\n                                            <tbody>\r\n                                                <tr\r\n                                                    *ngFor=\"let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index\">\r\n                                                    <td>{{utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1)\r\n                                                        | date:'dd-MMM-YYYY'}}</td>\r\n                                                    <td *ngIf=\"!LoanApplyObj.calculatedMonthlyAmountForEMI\">kr\r\n                                                        {{LoanObj.calculatedMonthlyAmountForEMI}}</td>\r\n                                                    <td *ngIf=\"LoanApplyObj.calculatedMonthlyAmountForEMI\">kr\r\n                                                        <span\r\n                                                            style=\"-webkit-text-decoration-line: line-through;text-decoration-line: line-through;\">\r\n                                                            {{LoanObj.calculatedMonthlyAmountForEMI}}\r\n                                                        </span>\r\n                                                        &nbsp;\r\n                                                        <span>\r\n                                                            {{LoanApplyObj.calculatedMonthlyAmountForEMI}}\r\n                                                        </span>\r\n                                                    </td>\r\n                                                    <td\r\n                                                        *ngIf=\"returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted\">\r\n                                                        <!--&& LoanApplyObj.borrowerId==authenticationService.currentUserValue._id-->\r\n                                                        <div\r\n                                                            *ngIf=\"!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id\">\r\n                                                            <div class=\"form-check-inline\">\r\n                                                                <div class=\"custom-control custom-checkbox\">\r\n                                                                    <!--[disabled]=\"LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]\"-->\r\n                                                                    <input\r\n                                                                        [(ngModel)]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]\"\r\n                                                                        name=\"isLoanAmountPaidByBorrower\"\r\n                                                                        id=\"isLoanAmountPaidByBorrower_{{i}}\"\r\n                                                                        type=\"checkbox\" class=\"custom-control-input\"\r\n                                                                        [value]=\"true\"\r\n                                                                        (change)=\"initiateLoanAmountPaidByBorrower($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_'+i))\"\r\n                                                                        [checked]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]\">\r\n                                                                    <label for=\"isLoanAmountPaidByBorrower_{{i}}\"\r\n                                                                        class=\"custom-control-label\" i18n>\r\n                                                                        Is Amount Transfered? </label>\r\n                                                                </div>\r\n                                                            </div>\r\n                                                        </div>\r\n                                                        <div\r\n                                                            *ngIf=\"(returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))  && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id) || (returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.lenderId==authenticationService.currentUserValue._id)\">\r\n                                                            <i class=\"icon-check\"></i>&nbsp;\r\n                                                            Paid{{returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj,\r\n                                                            utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))?'\r\n                                                            & Verified':''}}\r\n                                                            &nbsp;<i class=\"icon-eye\"\r\n                                                                (click)=\"viewCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))\"></i>&nbsp;\r\n                                                        </div>\r\n                                                        <div\r\n                                                            *ngIf=\"!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))  && LoanApplyObj.lenderId==authenticationService.currentUserValue._id\">\r\n                                                            <i class=\"icon-close\"></i>&nbsp;Not Paid\r\n                                                        </div>\r\n                                                        <div\r\n                                                            *ngIf=\"returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && !returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.lenderId==authenticationService.currentUserValue._id\">\r\n                                                            <div class=\"form-check-inline\">\r\n                                                                <div class=\"custom-control custom-checkbox\">\r\n                                                                    <!--[disabled]=\"LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]\"-->\r\n                                                                    <input\r\n                                                                        [(ngModel)]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrowerConfirmByLender_'+i]\"\r\n                                                                        name=\"isLoanAmountPaidByBorrowerConfirmByLender\"\r\n                                                                        id=\"isLoanAmountPaidByBorrowerConfirmByLender_{{i}}\"\r\n                                                                        type=\"checkbox\" class=\"custom-control-input\"\r\n                                                                        [value]=\"true\"\r\n                                                                        (change)=\"initiateLoanAmountPaidByBorrowerConfirmByLender($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrowerConfirmByLender_'+i))\"\r\n                                                                        [checked]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrowerConfirmByLender_'+i]\">\r\n                                                                    <label\r\n                                                                        for=\"isLoanAmountPaidByBorrowerConfirmByLender_{{i}}\"\r\n                                                                        class=\"custom-control-label\" i18n>\r\n                                                                        Is Amount Received? </label>\r\n                                                                </div>\r\n                                                            </div>\r\n                                                        </div>\r\n                                                    </td>\r\n                                                </tr>\r\n                                            </tbody>\r\n                                        </table>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"card-footer\">\r\n                            <div class=\"row\" [ngClass]=\"{ 'd-none': ready2Refund }\"\r\n                                [ngSwitch]=\"returnSessionApplyStatus(LoanApplyObj)\">\r\n                                <!-- the same view can be shown in more than one case -->\r\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Pending\">\r\n                                    <!--\r\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\">Reject</button>\r\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\r\n                                    -->\r\n                                    <button class=\"btn btn-primary btn-sm float-right\"\r\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\"><i\r\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\r\n                                </div>\r\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Accepted\">\r\n                                    <!--\r\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button> &nbsp;\r\n                                    <button class=\"btn btn-info btn-sm\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoingWithRefund)\">Apply\r\n                                        for Refund</button>\r\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)\">Proceed for\r\n                                        Execution</button>\r\n                                        -->\r\n    \r\n                                    <a class=\"btn btn-success btn-sm float-left ml-2\" target=\"_blank\"\r\n                                        [href]=\"returnUrl4downloadCOntractPDF(LoanApplyObj._id)\" download><i\r\n                                            class=\"icon-cloud-down\"></i>&nbsp;Download Contract</a>\r\n                                    <button class=\"btn btn-primary btn-sm float-right\"\r\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\"><i\r\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\r\n                                </div>\r\n    \r\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.OngoingInitiated\">\r\n                                    <!--\r\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button>\r\n                                    <button [disabled]=\"true\" class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingAccepted)\">Proceed for\r\n                                        Execution</button>\r\n                                    -->\r\n                                </div>\r\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.OngoingAccepted\">\r\n                                    <!--\r\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button>\r\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Ongoing)\">Proceed for\r\n                                        Execution</button>\r\n                                    -->\r\n    \r\n                                    <button *ngIf=\"LoanApplyObj.createdBy!=authenticationService.currentUserValue._id\"\r\n                                        class=\"float-right btn btn-danger btn-sm\">Reject</button>\r\n                                    <button *ngIf=\"LoanApplyObj.createdBy!=authenticationService.currentUserValue._id\"\r\n                                        class=\"btn btn-success btn-sm float-right mr-2\"\r\n                                        (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">\r\n                                        Proceed For Contract\r\n                                    </button>\r\n                                    <button class=\"btn btn-primary btn-sm float-right mr-2\"\r\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\"><i\r\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\r\n    \r\n                                </div>\r\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Ongoing\">\r\n                                    <!--\r\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Suspended)\">Reject</button>\r\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Completed)\">Completed</button>\r\n                                    -->\r\n                                </div>\r\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Completed\">\r\n                                    <button mat-button mat-dialog-close class=\"btn btn-success btn-sm float-right\"\r\n                                        (click)=\"addNewRatings(LoanApplyObj)\">Rate Now</button>\r\n                                </div>\r\n                                <!--default case when there are no matches -->\r\n                                <div class=\"col-xl-12\" *ngSwitchDefault>\r\n                                    <!-- \r\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\">Reject</button>\r\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\r\n                                -->\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <!--<button *ngIf=\"!check4SessionApplyStatus(LoanApplyObj)\" class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\r\n                        <button *ngIf=\"check4SessionApplyStatus(LoanApplyObj)\" class=\"btn btn-success btn-sm float-right mr-2\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)\">Proceed for Execution</button>-->\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</mat-dialog-content>\r\n\r\n\r\n<!--\r\n<div class=\"row\" [ngClass]=\"{ 'd-none': !userInitiatedForPayment }\">\r\n    <div class=\"col-xl-12 text-center\">\r\n        <app-payment></app-payment>\r\n    </div>\r\n</div>\r\n<div class=\"row\" [ngClass]=\"{ 'd-none': !ready2Refund }\">\r\n    <div class=\"col-xl-12\">\r\n        <div class=\"card-body\">\r\n            <div class=\"row\">\r\n                <div class=\"col-xl-12 text-center\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"mb-3 font-weight-bold\">\r\n                            Paid Amount:&nbsp;\r\n                        </label>\r\n                        <label class=\"mb-3\">\r\n                            {{refundObj.amount}}\r\n                        </label>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"mb-3 font-weight-bold\">\r\n                            Refund Charges:&nbsp;\r\n                        </label>\r\n                        <label class=\"mb-3\">\r\n                            {{refundObj.cancellationCharges}}\r\n                        </label>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <label class=\"mb-3 font-weight-bold\">\r\n                            Amount to be refunded:&nbsp;\r\n                        </label>\r\n                        <label class=\"mb-3\">\r\n                            {{refundObj.finalAmount2Refund}}\r\n                        </label>\r\n                    </div>\r\n                    <div class=\"form-group\">\r\n                        <button class=\"btn btn-danger btn-sm\" (click)=\"ready2Refund=false\">Cancel</button> &nbsp;\r\n                        <button class=\"btn btn-success btn-sm\" (click)=\"finalSubmissionForRefund()\">Refund</button>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n-->";
       /***/
     },
 

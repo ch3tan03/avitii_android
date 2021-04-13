@@ -8,7 +8,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalApplySession, ModalAppliedSessionDisplay } from '../borrower.component';
 import * as _ from 'lodash';
 import { Role, SessionStatus } from 'src/app/models';
-import { ServiceTypesService } from 'src/app/services/service-types.service';
+/*import { ServiceTypesService } from 'src/app/services/service-types.service';*/
 import { SocketioService } from 'src/app/socketio.service';
 declare var require: any
 const { overwrite, getNames } = require('country-list');
@@ -39,9 +39,10 @@ export class BrowseSessionsComponent implements OnInit {
     public utilityService: UtilityService,
     public dialog: MatDialog,
     private authenticationService: AuthenticationService,
-    private serviceTypesService: ServiceTypesService,
+    /*private serviceTypesService: ServiceTypesService,*/
   ) {
     this.countrylist = getNames();
+  /*
     this.serviceTypesService.getServiceTypesChildAll()
       .pipe(first())
       .subscribe(
@@ -74,7 +75,7 @@ export class BrowseSessionsComponent implements OnInit {
           this.alertService.error(errorMsg2show);
           this.loading = false;
         });
-
+*/
   }
 
   check4applyToSession(sessionObj) {
@@ -243,6 +244,7 @@ export class BrowseSessionsComponent implements OnInit {
             this.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
             switch (_currentSessionApply.status) {
               case SessionStatus.Pending:
+                _currentSessionApply.createdBy=this.authenticationService.currentUserValue._id;
                 this.socketService.setSessionApply(true, _currentSessionApply);
                 break;
               default:

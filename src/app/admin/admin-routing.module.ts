@@ -13,7 +13,9 @@ import { BorrowerEarningsComponent } from './borrower-earnings/borrower-earnings
 import { AppAccessPermissions } from '../models/role';
 import { AuthGuard } from '../components/_guards';
 import { AddUserComponent } from './add-user/add-user.component';
-
+import { UserLevelsComponent } from './user-levels/user-levels.component';
+import { BlogsComponent } from './blogs/blogs.component';
+import { MessagesComponent } from './../shared/messages/messages.component';
 
 const routes: Routes = [
   {
@@ -88,6 +90,23 @@ const routes: Routes = [
           appPermissions: [AppAccessPermissions.earningTransactions],
         }
       },
+      {
+        path: 'user-levels',
+        component: UserLevelsComponent,
+        canActivate: [AuthGuard],
+        data: {
+          appPermissions: [AppAccessPermissions.borrowerPayments],
+        }
+      },
+      {
+        path: 'blogs',
+        component: BlogsComponent,
+        canActivate: [AuthGuard],
+        data: {
+          appPermissions: [AppAccessPermissions.borrowerPayments],
+        }
+      },
+      { canActivate: [AuthGuard], path: 'messages', component: MessagesComponent },
     ]
   },
   // otherwise redirect to home

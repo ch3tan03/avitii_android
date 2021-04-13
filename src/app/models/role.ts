@@ -32,6 +32,7 @@ export enum AppDocumentType {
 export enum SessionStatus {
     Pending = 'pending',
     Accepted = 'accepted',
+    Approved = 'approved',
     Rejected = 'rejected',
     RejectedOngoing = 'rejected_ongoing',
     RejectedOngoingWithRefund = 'rejected_ongoing_with_refund',
@@ -69,8 +70,8 @@ export enum TransactionActionType {
     "session_accepted" = "session_accepted",
     "session_extended" = "session_extended",
     "session_ongoing" = "session_ongoing",
-    "paid_for_loan_insurance" = "paid_for_loan_insurance",
-    "paid_for_app_plan_extension" = "paid_for_app_plan_extension",
+    "insurance_purchase" = "insurance_purchase",
+    "plan_purchase" = "plan_purchase",
 }
 export enum UserType {
     new_lender = 'new_lender',
@@ -84,4 +85,13 @@ export enum UserType {
     between_borrower = "between_borrower",
     good_borrower = "good_borrower",
     super_borrower = "super_borrower",
+};
+
+export enum MediaTypes {
+    image = 'image',
+    video = 'video',
+    audio = 'audio',
+    pdf = 'pdf',
+    xls = 'xls',
+    other = 'other',
 };

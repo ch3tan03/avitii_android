@@ -1,3 +1,4 @@
+<form [formGroup]="borrowNowForm" class="theme-form">
 <!-- addSession section -->
 <div class="row" *ngIf="!userClickedOnSignLoanContract">
     <div class="col-xl-3 col-12">
@@ -64,20 +65,35 @@
             <div class="card-body">
                 <div class="theme-form">
                     <div class="row">
-                        <div class="col-xl-4 col-12 ">
-                            <div class="form-group border-right">
+                        <div class="col-xl-4 col-12 border-right">
+                            <div class="form-group">
                                 <label for="loanType" i18n>Loan Type</label>
                                 <h4 class="text-primary" i18n>
                                     {{utilityService.returnLoanType(LoanObj.loanType)}}
                                 </h4>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-12">
-                            <div class="form-group border-right">
+                        <div class="col-xl-4 col-12 border-right">
+                            <div class="form-group ">
                                 <label for="loanAmount" i18n>Loan Amount</label>
                                 <h4 class="text-primary">
                                     {{LoanObj.loanAmount}}
                                 </h4>
+                            </div>
+                            <div class="form-group bg-light2 p-2">
+                                <label for="proposedLoanAmount" i18n>
+                                    Propose a new loan amount <sub>(Optional) & amount must be hight than kr {{LoanObj.loanAmount}}</sub></label>
+                                <input type="number" formControlName="proposedLoanAmount" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.proposedLoanAmount.errors }" placeholder="Enter New Amount"/>
+                                <div *ngIf="submitted && f.proposedLoanAmount.errors"
+                                    class="invalid-feedback">
+                                    <div *ngIf="f.proposedLoanAmount.errors.required" i18n>
+                                        Proposed Loan Amount is required
+                                    </div>
+                                    <div *ngIf="f.proposedLoanAmount.min.required" i18n>
+                                        amount must be hight than kr {{LoanObj.loanAmount}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-xl-4 col-12">
@@ -88,16 +104,16 @@
                                 </h4>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-12">
-                            <div class="form-group border-right">
+                        <div class="col-xl-4 col-12 border-right">
+                            <div class="form-group ">
                                 <label for="loanInterestRate" i18n>Interest(%) Rate (per month)</label>
                                 <h4 class="text-primary">
                                     {{LoanObj.loanInterestRate}}
                                 </h4>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-12">
-                            <div class="form-group border-right">
+                        <div class="col-xl-4 col-12 border-right">
+                            <div class="form-group ">
                                 <label for="loanStartDateTime" i18n>Start Date</label>
                                 <h4 class="text-primary" i18n>
                                     {{LoanObj.loanStartDateTime | date:'dd-MMM-YYYY'}}
@@ -136,6 +152,23 @@
                                 {{LoanObj.loanDescription}}
                             </div>
                         </div>
+                        <!-- <div class="col-xl-12">
+                            <div class="form-group">
+                                <label for="proposedLoanAmount" i18n>
+                                    Propose a new loan amount <sub>(Optional) & amount must be hight than kr {{LoanObj.loanAmount}}</sub></label>
+                                <input type="number" formControlName="proposedLoanAmount" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.proposedLoanAmount.errors }" />
+                                <div *ngIf="submitted && f.proposedLoanAmount.errors"
+                                    class="invalid-feedback">
+                                    <div *ngIf="f.proposedLoanAmount.errors.required" i18n>
+                                        Proposed Loan Amount is required
+                                    </div>
+                                    <div *ngIf="f.proposedLoanAmount.min.required" i18n>
+                                        amount must be hight than kr {{LoanObj.loanAmount}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
                         <div class="col-xl-12 col-12 mt-3">
                             <div class="table-responsive table-billing-history">
                                 <table class="table mb-0">
@@ -366,10 +399,22 @@
                             </div>
                         </div>
                         <div class="col-xl-4 col-12">
-                            <div class="card shadow-sm p-2">
+                            <div class="card shadow-sm p-2" *ngIf="!f.proposedLoanAmount.value">
                                 <label for="loanAmount" i18n>Loan Amount</label>
                                 <h4 class="text-primary">
                                     {{LoanObj.loanAmount}}
+                                </h4>
+                            </div>
+                            <div class="card shadow-sm p-2" *ngIf="f.proposedLoanAmount.value">
+                                <label for="loanAmount" i18n>Loan Amount/Proposed Loan Amount</label>
+                                <h4 class="text-primary">
+                                    <span style="-webkit-text-decoration-line: line-through;text-decoration-line: line-through;">
+                                        {{LoanObj.loanAmount}}
+                                       </span>
+                                       / 
+                                       <span>
+                                        {{f.proposedLoanAmount.value}}
+                                       </span>
                                 </h4>
                             </div>
                         </div>
@@ -435,6 +480,14 @@
                             </div>
 
                         </div>
+                        <div class="col-xl-12 mt-3" *ngIf="f.loanInsuranceRequired.value">
+                            <div class="card shadow-sm p-2">
+                                <label i18n>Applied for Insurance with Amount</label>
+                                <div class="text-black-50">
+                                    {{f.loanInsuranceAmount.value}}
+                                </div>
+                            </div>
+                        </div>
 
                         <div class="col-xl-12 col-12 mt-3">
                             <div class="table-responsive table shadow-sm">
@@ -450,10 +503,17 @@
                                         <tr *ngFor="let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index">
                                             <td>{{utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1)
                                                 | date:'dd-MMM-YYYY'}}</td>
-                                            <td>kr {{LoanObj.calculatedMonthlyAmountForEMI}}</td>
-
+                                            <td *ngIf="!f.calculatedMonthlyAmountForEMI.value">kr {{LoanObj.calculatedMonthlyAmountForEMI}}</td>
+                                            <td *ngIf="f.calculatedMonthlyAmountForEMI.value">kr 
+                                               <span style="-webkit-text-decoration-line: line-through;text-decoration-line: line-through;">
+                                                {{LoanObj.calculatedMonthlyAmountForEMI}}
+                                               </span>
+                                               &nbsp; 
+                                               <span>
+                                                {{f.calculatedMonthlyAmountForEMI.value}}
+                                               </span>
+                                            </td>
                                         </tr>
-
                                     </tbody>
                                 </table>
                             </div>
@@ -566,9 +626,9 @@
                 <hr>
                 <h5>E-Signature</h5>
                 <hr>
-                <form [formGroup]="borrowNowForm" class="theme-form">
+
                     <div class="row">
-                        <div class="col-xl-6 col-6">
+                        <div class="col-xl-6 col-12">
                             <div class="form-group">
                                 <label for="eSignatureBorrowersName" i18n>Name</label>
                                 <input type="text" formControlName="eSignatureBorrowersName" class="form-control"
@@ -578,7 +638,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-6">
+                        <div class="col-xl-6 col-12">
                             <div class="form-group">
                                 <label for="eSignatureBorrowersPassportNumber" i18n>Passport or Driving Licence
                                     Number</label>
@@ -592,7 +652,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                
             </div>
             <div class="card-footer">
 
@@ -604,4 +664,5 @@
         </div>
     </div>
 </div>
+</form>
 <!-- addSession section -->

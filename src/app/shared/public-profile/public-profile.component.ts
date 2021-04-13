@@ -1,6 +1,6 @@
 import { Component, Inject, Optional, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AuthenticationService, UserService } from 'src/app/services';
+import { AlertService, AuthenticationService, UserService } from 'src/app/services';
 import { Router } from '@angular/router';
 import { Role } from 'src/app/models';
 import { UtilityService } from 'src/app/services/utility.service';
@@ -14,6 +14,18 @@ import { first } from 'rxjs/internal/operators/first';
 })
 export class PublicProfileComponent implements OnInit {
   portfolioDataArr:any=[];
+  profileAdditionalData:any={
+    numberOfLoanCreated:null,
+    numberOfSignedContract:null,
+    numberOfRepaidContract:null,
+    numberOfAmontBorrowed:null,
+    numberOfAmontRefunded:null,
+    numberOfAmountAvailableInBudget:null,
+    recommended:null,
+    notRecommended:null,
+    borrowerIsInRKI:null,
+  };
+  loading: boolean = false;
   userObj: any;
   adminViewT: boolean = false;
   Role=Role;
@@ -24,6 +36,7 @@ export class PublicProfileComponent implements OnInit {
     public dialogRef: MatDialogRef<PublicProfileComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
     private userService: UserService,
+    private alertService: AlertService,
   ) {
     this.userObj = data.userObj;
     if (data.adminViewT) {
@@ -57,7 +70,7 @@ export class PublicProfileComponent implements OnInit {
   }
 
   closeDialog() {
-    this.dialogRef.close({ event: 'close', data: true });
+    this.dialogRef.close({ event: 'close', data: this.userObj });
   }
 
   addNewRatings(_userObj, _loanId) {
@@ -77,6 +90,38 @@ export class PublicProfileComponent implements OnInit {
         break;
     }
     this.router.navigate(['/' + _parentRouting + '/ratings'], { state: { createdBy: this.authenticationService.currentUserValue._id, userId: _userObj._id, loanId: _loanId } });
+  }
+
+  updateUsersVerificationStatus(_userId, _verifiedKey, _isVerified) {
+    this.alertService.success("Please wait while we updating status of user");
+    this.userService.updateUsersDataKeyVerificationStatus(_userId, _verifiedKey, _isVerified)
+      .pipe(first())
+      .subscribe(
+        data => {
+          if (data && data['success']) {
+            this.userObj = data["data"]
+            this.alertService.success(data['message']);
+            this.loading = false;
+          } else {
+            this.alertService.error(data['message']);
+            this.loading = false;
+          }
+        },
+        error => {
+          let errorMsg2show = "";
+          //this.PaymentTransactionDetailsArray = [];
+          try {
+            if (error && error.error && error.error.message) {
+              errorMsg2show = error.error.message;
+            } else if (error && error.message) {
+              errorMsg2show = error.message;
+            } else {
+              errorMsg2show = error;
+            }
+          } catch (ex) { }
+          this.alertService.error(errorMsg2show);
+          this.loading = false;
+        });
   }
 
 }

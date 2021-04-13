@@ -1,7 +1,7 @@
 
 import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'src/app/models';
+import { TransactionActionType, User } from 'src/app/models';
 import { AuthenticationService } from 'src/app/services';
 import { NotificationService } from 'src/app/services/notification.service';
 import { UtilityService } from 'src/app/services/utility.service';
@@ -16,12 +16,12 @@ declare var jQuery: any;
 export class HeaderComponent implements AfterViewInit {
 
   currentUser: User;
-
+  TransactionActionType = TransactionActionType;
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService,
     public utilityService: UtilityService,
-    public notificationService:NotificationService
+    public notificationService: NotificationService
   ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
@@ -29,9 +29,19 @@ export class HeaderComponent implements AfterViewInit {
   logout() {
     this.router.navigate(['/logout']);
   }
-  navigate2State(state) {
+  navigate2State(state: string, stateObj: any = null) {
     state = (state ? state : '/logout');
-    this.router.navigate([state]);
+
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+        return false;
+    }
+    this.router.onSameUrlNavigation = 'reload';
+
+    if (!stateObj) {
+      this.router.navigate([state]);
+    } else {
+      this.router.navigate([state], { state: stateObj });
+    }
   }
   ngAfterViewInit(): void {
     (function ($) {

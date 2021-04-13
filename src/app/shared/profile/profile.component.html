@@ -1,5 +1,5 @@
 <div class="row pt-0 saas2">
-    <div class="col-xl-12 col-12 text-center">
+    <div class="col-xl-12 col-12 text-center" *ngIf="!f.isVerified.value">
         <h3>Submit your portfolio for verification</h3>
         <P class="my-3">Remember to fill in all fields correctly, otherwise you may risk lifetime blockage</P>
     </div>
@@ -452,7 +452,7 @@
                                         <div class="col-xl-12 mt-3">
                                         </div>
                                     </div>
-                                    <div class="form-row" *ngIf="onInitRKICheckedValue()">
+                                    <div class="form-row" *ngIf="!onInitRKICheckedValue()">
                                         <div class="col-xl-9">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" name="image"

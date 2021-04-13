@@ -27,11 +27,13 @@ import { MonthlySubscriptionComponent } from './monthly-subscription/monthly-sub
 import { IncomeProofComponent } from './income-proof/income-proof.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { PaymentCancelComponent } from './payment-cancel/payment-cancel.component';
-import { StripeComponentComponent } from './stripe-component/stripe-component.component';
+/*import { StripeComponentComponent } from './stripe-component/stripe-component.component';*/
+import { DatePrettyPipe } from './pipe/date-pretty.pipe';
+import { MediaPreviewComponent } from './media-preview/media-preview.component';
 
 @NgModule({
-  declarations: [ProfileComponent, WalletComponent, MessagesComponent, MeetingVcComponent, PaymentComponent, SortArrayByUpdatedOnPipe, FilterObjectArrayPipe, PublicProfileComponent, DataArrayFilterPipe, ModalPublicProfile, UserRatingsComponent, SessionViewComponent, MySessionsPipe, ProfilePortfolioComponent, UpdatePasswordComponent, BankDetailsComponent, MonthlySubscriptionComponent, IncomeProofComponent, PaymentSuccessComponent, PaymentCancelComponent, StripeComponentComponent],
-  exports: [ProfileComponent, WalletComponent, MessagesComponent, PaymentComponent, SessionViewComponent, MySessionsPipe],
+  declarations: [ProfileComponent, WalletComponent, MessagesComponent, MeetingVcComponent, PaymentComponent, SortArrayByUpdatedOnPipe, FilterObjectArrayPipe, PublicProfileComponent, DataArrayFilterPipe, ModalPublicProfile, UserRatingsComponent, SessionViewComponent, MySessionsPipe, ProfilePortfolioComponent, UpdatePasswordComponent, BankDetailsComponent, MonthlySubscriptionComponent, IncomeProofComponent, PaymentSuccessComponent, PaymentCancelComponent, /*StripeComponentComponent,*/ DatePrettyPipe, DatePrettyPipe, MediaPreviewComponent],
+  exports: [ProfileComponent, WalletComponent, MessagesComponent, PaymentComponent, SessionViewComponent, MySessionsPipe, DatePrettyPipe],
   imports: [
     MatDialogModule,
     CommonModule,

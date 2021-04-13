@@ -24,7 +24,7 @@
     </div> -->
     <li class="nav-item">
         <a class="nav-link" routerLink="/admin/users" routerLinkActive="active">
-            <i class="icon icon-shopping-cart"></i>
+            <i class="icon icon-user"></i>
             <span>User Mangement</span></a>
     </li>
     <!-- <li class="nav-item">
@@ -32,31 +32,42 @@
             <i class="icon icon-bag"></i>
             <span>Add User</span></a>
     </li> -->
+   
     <li class="nav-item">
-        <a class="nav-link" routerLink="/admin/payments" routerLinkActive="active">
-            <i class="icon icon-money"></i>
-            <span>Transactions</span></a>
-    </li>
-
-    
-    <!-- Nav Item - Pages Collapse Menu -->
-    <!-- <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="icon icon-bag"></i>
-            <span>My Contracts</span>
+            <i class="icon icon-credit-card"></i>
+            <span>Transactions</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                
-                <a class="collapse-item" (click)="navigate2State('/lender/my-contract')" routerLinkActive="active">My Offers</a>
-                <a class="collapse-item" (click)="navigate2State('/lender/my-contract')" routerLinkActive="active">Paid Contracts</a>
-                <a class="collapse-item" (click)="navigate2State('/lender/my-contract')" routerLinkActive="active">Unpaid Contracts</a>
-                <a class="collapse-item" (click)="navigate2State('/lender/my-contract')" routerLinkActive="active">Inkasso cases</a>
-           
+                <a class="collapse-item" (click)="navigate2State('/admin/payments',{'transactionActionType':TransactionActionType.plan_purchase})" routerLinkActive="active">Plan Purchase</a>
+                <a class="collapse-item" (click)="navigate2State('/admin/payments',{'transactionActionType':TransactionActionType.insurance_purchase})" routerLinkActive="active">Insurance Purchase</a>
+              
             </div>
         </div>
-    </li> -->
+    </li>
 
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/admin/messages" routerLinkActive="active">
+            <i class="icon icon-comments"></i>
+            <span>Messages</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/admin/user-levels" routerLinkActive="active">
+            <i class="icon icon-medall-alt"></i>
+            <span>User Levels</span></a>
+    </li>
+
+    
+
+    <li class="nav-item">
+        <a class="nav-link" routerLink="/admin/blogs" routerLinkActive="active">
+            <i class="icon icon-clipboard"></i>
+            <span>Blogs</span></a>
+    </li>
+
+ 
     <!-- <li class="nav-item">
         <a class="nav-link" routerLink="/lender/messages" routerLinkActive="active">
             <i class="icon icon-comments"></i>

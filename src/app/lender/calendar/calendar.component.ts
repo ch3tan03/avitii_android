@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { CalendarOptions } from '@fullcalendar/angular'; // useful for typechecking
 import { first } from 'rxjs/internal/operators/first';
-import { SessionStatus, User } from 'src/app/models';
+import { Role, SessionStatus, User } from 'src/app/models';
 import { AuthenticationService, AlertService, UserService } from 'src/app/services';
 import { ContactService } from 'src/app/services/contact.service';
 import { SessionsService } from 'src/app/services/sessions.service';
@@ -115,7 +115,24 @@ export class CalendarComponent implements OnInit {
     //alert('event click! ' + arg.event.id);
     let _sessionId = arg.event.id;
     let _sessionObj = this.utilityService._.filter(this.allSessionsData, { '_id': _sessionId })[0];
-    let _sessionApplyObj = this.utilityService._.first(_sessionObj.sessionAppliedByLenders);
+    
+    let _proccessedSessionObj = null;
+    switch (this.authenticationService.currentUserValue.role) {
+      case Role.Borrower:
+        _proccessedSessionObj =this.utilityService._.cloneDeep(_sessionObj);
+        _proccessedSessionObj.sessionAppliedByBorrowers = _sessionObj.sessionAppliedByBorrowers;
+        break;
+      case Role.Lender:
+        _proccessedSessionObj = this.utilityService._.cloneDeep(_sessionObj);
+        _proccessedSessionObj.sessionAppliedByBorrowers = _sessionObj.sessionAppliedByLenders;
+        break;
+      default:
+        _proccessedSessionObj = this.utilityService._.cloneDeep(_sessionObj);
+        break;
+    }
+    
+    let _sessionApplyObj = this.utilityService._.first(_proccessedSessionObj.sessionAppliedByBorrowers);
+    
     let _borrowerId = null;
     if (_sessionApplyObj) {
       _borrowerId = _sessionApplyObj.borrowerId

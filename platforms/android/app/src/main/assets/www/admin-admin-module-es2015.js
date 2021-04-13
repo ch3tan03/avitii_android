@@ -337,6 +337,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _models_role__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../models/role */ "z56L");
 /* harmony import */ var _components_guards__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../components/_guards */ "CRXG");
 /* harmony import */ var _add_user_add_user_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./add-user/add-user.component */ "4pOR");
+/* harmony import */ var _user_levels_user_levels_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./user-levels/user-levels.component */ "6pX3");
+/* harmony import */ var _blogs_blogs_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./blogs/blogs.component */ "AvT8");
+/* harmony import */ var _shared_messages_messages_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./../shared/messages/messages.component */ "rflR");
+
+
+
 
 
 
@@ -425,6 +431,23 @@ const routes = [
                     appPermissions: [_models_role__WEBPACK_IMPORTED_MODULE_12__["AppAccessPermissions"].earningTransactions],
                 }
             },
+            {
+                path: 'user-levels',
+                component: _user_levels_user_levels_component__WEBPACK_IMPORTED_MODULE_15__["UserLevelsComponent"],
+                canActivate: [_components_guards__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]],
+                data: {
+                    appPermissions: [_models_role__WEBPACK_IMPORTED_MODULE_12__["AppAccessPermissions"].borrowerPayments],
+                }
+            },
+            {
+                path: 'blogs',
+                component: _blogs_blogs_component__WEBPACK_IMPORTED_MODULE_16__["BlogsComponent"],
+                canActivate: [_components_guards__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]],
+                data: {
+                    appPermissions: [_models_role__WEBPACK_IMPORTED_MODULE_12__["AppAccessPermissions"].borrowerPayments],
+                }
+            },
+            { canActivate: [_components_guards__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]], path: 'messages', component: _shared_messages_messages_component__WEBPACK_IMPORTED_MODULE_17__["MessagesComponent"] },
         ]
     },
     // otherwise redirect to home
@@ -1144,6 +1167,211 @@ AddUserComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 /***/ }),
 
+/***/ "6pX3":
+/*!************************************************************!*\
+  !*** ./src/app/admin/user-levels/user-levels.component.ts ***!
+  \************************************************************/
+/*! exports provided: UserLevelsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserLevelsComponent", function() { return UserLevelsComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_user_levels_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./user-levels.component.html */ "utD7");
+/* harmony import */ var _user_levels_component_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user-levels.component.css */ "AyFQ");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/dialog */ "0IaG");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var src_app_models__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/models */ "VHTt");
+/* harmony import */ var src_app_services__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services */ "o0su");
+/* harmony import */ var src_app_services_app_router_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/services/app-router.service */ "KHIh");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lodash */ "LvDl");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/services/utility.service */ "A1CT");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/environments/environment */ "AytR");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const uploadAPI = src_environments_environment__WEBPACK_IMPORTED_MODULE_13__["environment"].apiUrl + '/api/post/upload/assetdata';
+const uploadAccessUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_13__["environment"].apiUrl + '/';
+let UserLevelsComponent = class UserLevelsComponent {
+    constructor(http, formBuilder, authenticationService, userService, alertService, appRouterService, utilityService, _cdr, dialog) {
+        this.http = http;
+        this.formBuilder = formBuilder;
+        this.authenticationService = authenticationService;
+        this.userService = userService;
+        this.alertService = alertService;
+        this.appRouterService = appRouterService;
+        this.utilityService = utilityService;
+        this._cdr = _cdr;
+        this.dialog = dialog;
+        this.allUserLevelsDataLenders = [];
+        this.allUserLevelsDataBorrower = [];
+        this.loading = false;
+        this.submitted = false;
+        this.SessionStatus = src_app_models__WEBPACK_IMPORTED_MODULE_6__["SessionStatus"];
+        this.userObj = null;
+        this.Role = src_app_models__WEBPACK_IMPORTED_MODULE_6__["Role"];
+        this.userObj = this.authenticationService.currentUserValue;
+        this.initForm();
+        this.fetchAllUserLevelsByUserId();
+    }
+    ngOnInit() {
+    }
+    fetchAllUserLevelsByUserId() {
+        this.userService.getUserLevelsAll(null)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])())
+            .subscribe(data => {
+            //console.log('data => ', data)
+            if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                this.allUserLevelsDataLenders = lodash__WEBPACK_IMPORTED_MODULE_11__["filter"](data["data"], { 'role': src_app_models__WEBPACK_IMPORTED_MODULE_6__["Role"].Lender });
+                this.allUserLevelsDataBorrower = lodash__WEBPACK_IMPORTED_MODULE_11__["filter"](data["data"], { 'role': src_app_models__WEBPACK_IMPORTED_MODULE_6__["Role"].Borrower });
+                //this.alertService.success(data['message'], true);
+                this.loading = false;
+                this._cdr.detectChanges();
+            }
+        }, error => {
+            let errorMsg2show = "";
+            try {
+                if (error && error.error && error.error.message) {
+                    errorMsg2show = error.error.message;
+                }
+                else if (error && error.message) {
+                    errorMsg2show = error.message;
+                }
+                else {
+                    errorMsg2show = error;
+                }
+            }
+            catch (ex) { }
+            this.alertService.error(errorMsg2show);
+            this.loading = false;
+            this.appRouterService.appRouter('');
+        });
+    }
+    get f() { return this.userUserLevelsForm.controls; }
+    onUserLevelsUpdateSubmit() {
+        this.submitted = true;
+        if (this.userUserLevelsForm.invalid) {
+            this.alertService.error("Please Provide all data");
+            return;
+        }
+        this.userService.addUpdateUserUserLevels(this.userUserLevelsForm.value)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])())
+            .subscribe(data => {
+            if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                this.alertService.success('User Level Updated successfully', true);
+                this.fetchAllUserLevelsByUserId();
+                this.submitted = false;
+                this.initForm();
+                //this.appRouterService.appRouter(this.userObj);
+            }
+            else {
+                //alert(JSON.stringify(data['message']));
+                this.alertService.error(data['message']);
+                this.loading = false;
+            }
+        }, error => {
+            let errorMsg2show = "";
+            try {
+                if (error && error.error && error.error.message) {
+                    errorMsg2show = error.error.message;
+                }
+                else if (error && error.message) {
+                    errorMsg2show = error.message;
+                }
+                else {
+                    errorMsg2show = error;
+                }
+            }
+            catch (ex) { }
+            this.alertService.error(errorMsg2show);
+            this.loading = false;
+        });
+    }
+    showEditingFormUserLevels(_userObj) {
+        this.userUserLevelsForm = this.formBuilder.group({
+            _id: [_userObj._id || ''],
+            name: [_userObj.name || '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            description: [_userObj.description || ''],
+            role: [_userObj.role || '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            minimumContract: [_userObj.minimumContract || null, [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].min(1)]],
+            minimumSpent: [_userObj.minimumSpent || null, [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].min(1)]],
+            status: [_userObj.status || src_app_models__WEBPACK_IMPORTED_MODULE_6__["SessionStatus"].Approved],
+            createdOn: [_userObj.createdOn || null],
+            updatedOn: [_userObj.updatedOn || null],
+            isDeleted: [_userObj.isDeleted || false],
+            createdBy: [_userObj.createdBy || this.authenticationService.currentUserValue._id],
+            deletedBy: [_userObj.deletedBy || ''],
+            updatedBy: [this.authenticationService.currentUserValue._id],
+        });
+    }
+    initForm() {
+        this.userUserLevelsForm = this.formBuilder.group({
+            _id: [''],
+            name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            description: [''],
+            role: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            minimumContract: [null, [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].min(1)]],
+            minimumSpent: [null, [_angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].min(1)]],
+            status: [src_app_models__WEBPACK_IMPORTED_MODULE_6__["SessionStatus"].Approved],
+            createdOn: [null],
+            updatedOn: [null],
+            isDeleted: [false],
+            createdBy: [this.authenticationService.currentUserValue._id],
+            deletedBy: [''],
+            updatedBy: [],
+        });
+    }
+};
+UserLevelsComponent.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClient"] },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"] },
+    { type: src_app_services__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"] },
+    { type: src_app_services__WEBPACK_IMPORTED_MODULE_7__["UserService"] },
+    { type: src_app_services__WEBPACK_IMPORTED_MODULE_7__["AlertService"] },
+    { type: src_app_services_app_router_service__WEBPACK_IMPORTED_MODULE_8__["AppRouterService"] },
+    { type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_12__["UtilityService"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectorRef"] },
+    { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialog"] }
+];
+UserLevelsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-user-levels',
+        template: _raw_loader_user_levels_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_user_levels_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    }),
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClient"],
+        _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"],
+        src_app_services__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"],
+        src_app_services__WEBPACK_IMPORTED_MODULE_7__["UserService"],
+        src_app_services__WEBPACK_IMPORTED_MODULE_7__["AlertService"],
+        src_app_services_app_router_service__WEBPACK_IMPORTED_MODULE_8__["AppRouterService"],
+        src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_12__["UtilityService"],
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectorRef"],
+        _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialog"]])
+], UserLevelsComponent);
+
+
+
+/***/ }),
+
 /***/ "ABg6":
 /*!**************************************************!*\
   !*** ./src/app/admin/header/header.component.ts ***!
@@ -1159,9 +1387,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _header_component_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./header.component.css */ "hP8I");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
-/* harmony import */ var src_app_services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services */ "o0su");
-/* harmony import */ var src_app_services_notification_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/notification.service */ "OC8m");
-/* harmony import */ var src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/utility.service */ "A1CT");
+/* harmony import */ var src_app_models__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/models */ "VHTt");
+/* harmony import */ var src_app_services__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services */ "o0su");
+/* harmony import */ var src_app_services_notification_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/notification.service */ "OC8m");
+/* harmony import */ var src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/services/utility.service */ "A1CT");
+
 
 
 
@@ -1176,14 +1406,24 @@ let HeaderComponent = class HeaderComponent {
         this.authenticationService = authenticationService;
         this.utilityService = utilityService;
         this.notificationService = notificationService;
+        this.TransactionActionType = src_app_models__WEBPACK_IMPORTED_MODULE_5__["TransactionActionType"];
         this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     }
     logout() {
         this.router.navigate(['/logout']);
     }
-    navigate2State(state) {
+    navigate2State(state, stateObj = null) {
         state = (state ? state : '/logout');
-        this.router.navigate([state]);
+        this.router.routeReuseStrategy.shouldReuseRoute = function () {
+            return false;
+        };
+        this.router.onSameUrlNavigation = 'reload';
+        if (!stateObj) {
+            this.router.navigate([state]);
+        }
+        else {
+            this.router.navigate([state], { state: stateObj });
+        }
     }
     ngAfterViewInit() {
         (function ($) {
@@ -1235,9 +1475,9 @@ let HeaderComponent = class HeaderComponent {
 };
 HeaderComponent.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
-    { type: src_app_services__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"] },
-    { type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_7__["UtilityService"] },
-    { type: src_app_services_notification_service__WEBPACK_IMPORTED_MODULE_6__["NotificationService"] }
+    { type: src_app_services__WEBPACK_IMPORTED_MODULE_6__["AuthenticationService"] },
+    { type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_8__["UtilityService"] },
+    { type: src_app_services_notification_service__WEBPACK_IMPORTED_MODULE_7__["NotificationService"] }
 ];
 HeaderComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
@@ -1246,12 +1486,309 @@ HeaderComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         styles: [_header_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
     }),
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
-        src_app_services__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"],
-        src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_7__["UtilityService"],
-        src_app_services_notification_service__WEBPACK_IMPORTED_MODULE_6__["NotificationService"]])
+        src_app_services__WEBPACK_IMPORTED_MODULE_6__["AuthenticationService"],
+        src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_8__["UtilityService"],
+        src_app_services_notification_service__WEBPACK_IMPORTED_MODULE_7__["NotificationService"]])
 ], HeaderComponent);
 
 
+
+/***/ }),
+
+/***/ "AvT8":
+/*!************************************************!*\
+  !*** ./src/app/admin/blogs/blogs.component.ts ***!
+  \************************************************/
+/*! exports provided: BlogsComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BlogsComponent", function() { return BlogsComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_blogs_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./blogs.component.html */ "XQ+j");
+/* harmony import */ var _blogs_component_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./blogs.component.css */ "LOaD");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/dialog */ "0IaG");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
+/* harmony import */ var src_app_models__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/models */ "VHTt");
+/* harmony import */ var src_app_services__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services */ "o0su");
+/* harmony import */ var src_app_services_app_router_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/services/app-router.service */ "KHIh");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! lodash */ "LvDl");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! src/app/services/utility.service */ "A1CT");
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! src/environments/environment */ "AytR");
+/* harmony import */ var src_app_shared_media_preview_media_preview_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! src/app/shared/media-preview/media-preview.component */ "tZK8");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const uploadAPI = src_environments_environment__WEBPACK_IMPORTED_MODULE_13__["environment"].apiUrl + '/api/post/upload/assetdata';
+const uploadAccessUrl = src_environments_environment__WEBPACK_IMPORTED_MODULE_13__["environment"].apiUrl + '/';
+let BlogsComponent = class BlogsComponent {
+    constructor(http, formBuilder, authenticationService, userService, alertService, appRouterService, utilityService, _cdr, dialog) {
+        this.http = http;
+        this.formBuilder = formBuilder;
+        this.authenticationService = authenticationService;
+        this.userService = userService;
+        this.alertService = alertService;
+        this.appRouterService = appRouterService;
+        this.utilityService = utilityService;
+        this._cdr = _cdr;
+        this.dialog = dialog;
+        this.fileData4blogsDocument = null;
+        this.fileData4blogsDocumentPendingForUpload = false;
+        this.loading = false;
+        this.submitted = false;
+        this.fileData = null;
+        this.fileData4Profile = null;
+        this.previewUrl = null;
+        this.fileUploadProgress = null;
+        this.uploadedFilePath = null;
+        this.myProfileFiles = [];
+        this.selfProfileUrlPendingForUpload = false;
+        this.portfolioDataArr = [];
+        this.SessionStatus = src_app_models__WEBPACK_IMPORTED_MODULE_6__["SessionStatus"];
+        this.userObj = null;
+        this.userObj = this.authenticationService.currentUserValue;
+        this.initForm();
+        this.fetchAllBlogsByUserId();
+    }
+    ngOnInit() {
+    }
+    fetchAllBlogsByUserId() {
+        this.userService.getBlogsAll(null)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])())
+            .subscribe(data => {
+            //console.log('data => ', data)
+            if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                this.allBlogsData = data["data"];
+                //this.alertService.success(data['message'], true);
+                this.loading = false;
+            }
+        }, error => {
+            let errorMsg2show = "";
+            try {
+                if (error && error.error && error.error.message) {
+                    errorMsg2show = error.error.message;
+                }
+                else if (error && error.message) {
+                    errorMsg2show = error.message;
+                }
+                else {
+                    errorMsg2show = error;
+                }
+            }
+            catch (ex) { }
+            this.alertService.error(errorMsg2show);
+            this.loading = false;
+            this.appRouterService.appRouter('');
+        });
+    }
+    get f() { return this.userBlogsForm.controls; }
+    onBlogsUpdateSubmit() {
+        this.submitted = true;
+        if (this.userBlogsForm.invalid) {
+            this.alertService.error("Please Provide all data");
+            return;
+        }
+        if (this.fileData4blogsDocumentPendingForUpload) {
+            this.alertService.error('Please upload document first');
+            return;
+        }
+        this.userService.addUpdateUserBlogs(this.userBlogsForm.value)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])())
+            .subscribe(data => {
+            if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                this.alertService.success('Blog Updated successfully', true);
+                this.fetchAllBlogsByUserId();
+                this.submitted = false;
+                this.initForm();
+                //this.appRouterService.appRouter(this.userObj);
+            }
+            else {
+                //alert(JSON.stringify(data['message']));
+                this.alertService.error(data['message']);
+                this.loading = false;
+            }
+        }, error => {
+            let errorMsg2show = "";
+            try {
+                if (error && error.error && error.error.message) {
+                    errorMsg2show = error.error.message;
+                }
+                else if (error && error.message) {
+                    errorMsg2show = error.message;
+                }
+                else {
+                    errorMsg2show = error;
+                }
+            }
+            catch (ex) { }
+            this.alertService.error(errorMsg2show);
+            this.loading = false;
+        });
+    }
+    showEditingFormBlogs(_userObj) {
+        this.userBlogsForm = this.formBuilder.group({
+            _id: [_userObj._id || ''],
+            title: [_userObj.title || '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            description: [_userObj.description || '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            blogsDocument: [_userObj.blogsDocument || '', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            status: [_userObj.status || src_app_models__WEBPACK_IMPORTED_MODULE_6__["SessionStatus"].Pending],
+            createdOn: [_userObj.createdOn || null],
+            updatedOn: [_userObj.updatedOn || null],
+            isDeleted: [_userObj.isDeleted || false],
+            createdBy: [_userObj.createdBy || this.authenticationService.currentUserValue._id],
+            deletedBy: [_userObj.deletedBy || ''],
+            updatedBy: [this.authenticationService.currentUserValue._id],
+        });
+    }
+    initForm() {
+        this.userBlogsForm = this.formBuilder.group({
+            _id: [''],
+            title: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            description: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            blogsDocument: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            status: [src_app_models__WEBPACK_IMPORTED_MODULE_6__["SessionStatus"].Pending],
+            createdOn: [''],
+            updatedOn: [''],
+            isDeleted: [false],
+            createdBy: [this.authenticationService.currentUserValue._id || ''],
+            deletedBy: [''],
+            updatedBy: [''],
+        });
+    }
+    onfileProgressForBlogsDocument(fileInput) {
+        this.fileData4blogsDocument = fileInput.target.files[0];
+        this.previewForBlogsDocument();
+    }
+    previewForBlogsDocument() {
+        // Show preview 
+        var mimeType = this.fileData4blogsDocument.type;
+        if (mimeType.match(/image\/*/) == null) {
+            return;
+        }
+        var reader = new FileReader();
+        reader.readAsDataURL(this.fileData4blogsDocument);
+        reader.onload = (_event) => {
+            this.userBlogsForm.get('blogsDocument').setValue(reader.result);
+            this.fileData4blogsDocumentPendingForUpload = true;
+        };
+    }
+    onUploadForBlogsDocument() {
+        if (!this.fileData4blogsDocument) {
+            this.alertService.error("Select file first.");
+            return;
+        }
+        var mimeType = this.fileData4blogsDocument.type;
+        if (mimeType.match(/image\/*/) == null) {
+            this.alertService.error("Select Image file only.");
+            return;
+        }
+        const formData = new FormData();
+        formData.append('files', this.fileData4blogsDocument);
+        formData.append('documentId', this.userObj._id + '__blogs');
+        this.fileUploadProgress = '0%';
+        this.http.post(uploadAPI, formData, {
+            reportProgress: true,
+            observe: 'events'
+        }).subscribe(events => {
+            if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpEventType"].UploadProgress) {
+                this.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
+                console.log(this.fileUploadProgress);
+            }
+            else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpEventType"].Response) {
+                this.fileUploadProgress = '';
+                console.log(events.body);
+                //alert('SUCCESS !!');
+                this.fileData4Profile = null;
+                this.alertService.success('Uploaded Successfully !!', true);
+                let _uploadedUrl = events.body["data"].path;
+                if (lodash__WEBPACK_IMPORTED_MODULE_11__["startsWith"](_uploadedUrl, '/')) {
+                    _uploadedUrl = _uploadedUrl.substr(1);
+                }
+                this.uploadedFilePath = (uploadAccessUrl + '' + _uploadedUrl);
+                this.userBlogsForm.get('blogsDocument').setValue(this.uploadedFilePath);
+                this.fileData4blogsDocumentPendingForUpload = false;
+            }
+        });
+    }
+    mediaPreviewModel(mediaSrc, mimeType) {
+        console.log('411', this.authenticationService.currentUserValue);
+        const dialogRef = this.dialog.open(src_app_shared_media_preview_media_preview_component__WEBPACK_IMPORTED_MODULE_14__["MediaPreviewComponent"], {
+            maxWidth: '100vw',
+            maxHeight: '100vh',
+            height: '70%',
+            width: '70%',
+            hasBackdrop: true,
+            data: {
+                mediaSrc: mediaSrc,
+                mimeType: mimeType
+            }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`426 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+        });
+    }
+};
+BlogsComponent.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClient"] },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"] },
+    { type: src_app_services__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"] },
+    { type: src_app_services__WEBPACK_IMPORTED_MODULE_7__["UserService"] },
+    { type: src_app_services__WEBPACK_IMPORTED_MODULE_7__["AlertService"] },
+    { type: src_app_services_app_router_service__WEBPACK_IMPORTED_MODULE_8__["AppRouterService"] },
+    { type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_12__["UtilityService"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectorRef"] },
+    { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialog"] }
+];
+BlogsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-blogs',
+        template: _raw_loader_blogs_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_blogs_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    }),
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpClient"],
+        _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"],
+        src_app_services__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"],
+        src_app_services__WEBPACK_IMPORTED_MODULE_7__["UserService"],
+        src_app_services__WEBPACK_IMPORTED_MODULE_7__["AlertService"],
+        src_app_services_app_router_service__WEBPACK_IMPORTED_MODULE_8__["AppRouterService"],
+        src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_12__["UtilityService"],
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ChangeDetectorRef"],
+        _angular_material_dialog__WEBPACK_IMPORTED_MODULE_4__["MatDialog"]])
+], BlogsComponent);
+
+
+
+/***/ }),
+
+/***/ "AyFQ":
+/*!*************************************************************!*\
+  !*** ./src/app/admin/user-levels/user-levels.component.css ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ1c2VyLWxldmVscy5jb21wb25lbnQuY3NzIn0= */");
 
 /***/ }),
 
@@ -1268,6 +1805,62 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "FiyT":
+/*!***********************************************************!*\
+  !*** ./node_modules/rxjs/internal/SubjectSubscription.js ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var Subscription_1 = __webpack_require__(/*! ./Subscription */ "zB/H");
+var SubjectSubscription = (function (_super) {
+    __extends(SubjectSubscription, _super);
+    function SubjectSubscription(subject, subscriber) {
+        var _this = _super.call(this) || this;
+        _this.subject = subject;
+        _this.subscriber = subscriber;
+        _this.closed = false;
+        return _this;
+    }
+    SubjectSubscription.prototype.unsubscribe = function () {
+        if (this.closed) {
+            return;
+        }
+        this.closed = true;
+        var subject = this.subject;
+        var observers = subject.observers;
+        this.subject = null;
+        if (!observers || observers.length === 0 || subject.isStopped || subject.closed) {
+            return;
+        }
+        var subscriberIndex = observers.indexOf(this.subscriber);
+        if (subscriberIndex !== -1) {
+            observers.splice(subscriberIndex, 1);
+        }
+    };
+    return SubjectSubscription;
+}(Subscription_1.Subscription));
+exports.SubjectSubscription = SubjectSubscription;
+//# sourceMappingURL=SubjectSubscription.js.map
+
+/***/ }),
+
 /***/ "GCkI":
 /*!************************************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/admin/user-management/user-management.component.html ***!
@@ -1277,7 +1870,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row\">\r\n    <div class=\"col-xl-12 col-md-12 mb-4\">\r\n        <div class=\"card shadow h-100\">\r\n            <div class=\"card-body p-3\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-xl-12 mb-4\">\r\n                        <div class=\"font-weight-bold mb-1 text-cm-blue\" i18n>Users</div>\r\n                    </div>\r\n                    <div class=\"col-xl-12 col-12 mb-4\">\r\n                        <div class=\"view view-cascade gradient-card-header white\">\r\n                            <table class=\"table table-striped table-responsive-md btn-table\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th class=\"d-none\" i18n>ID</th>\r\n                                        <th i18n>Email</th>\r\n                                        <th i18n>Name</th>\r\n                                        <th i18n>Role</th>\r\n                                        <th i18n>Mobile</th>\r\n                                        <th i18n>Verified</th>\r\n                                        <th i18n>#</th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <!---->\r\n                                    <tr *ngFor=\"let obj of utilityService._.values(PaymentTransactionDetailsArray)\">\r\n                                        <td class=\"d-none\" i18n>{{obj._id}}</td>\r\n                                        <td i18n>{{obj.emailAddress}}</td>\r\n                                        <td i18n>{{obj.firstName}}</td>\r\n                                        <td i18n>{{obj.role}}</td>\r\n                                        <td i18n>{{obj.mobileno}}</td>\r\n                                        <td>\r\n                                            <div\r\n                                                *ngIf=\"returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id\">\r\n                                               \r\n                                              \r\n                                                <span *ngIf=\"!obj.isVerified\"\r\n                                                (click)=\"updateUsersVerificationStatus(obj, true)\" class=\"btn text-white badge badge-warning font-weight-light\">\r\n                                                    Approve\r\n                                                </span>\r\n                                                <span *ngIf=\"obj.isVerified\"  class=\"badge badge-success font-weight-light\">Approved</span>\r\n                                              \r\n                                                \r\n                                            </div>\r\n                                        </td>\r\n                                        <td>\r\n                                            <div\r\n                                                *ngIf=\"returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id\">\r\n                                                <button *ngIf=\"obj.isVerified && returnT4CurrentUserIsSAdmin()\"\r\n                                                    class=\"btn btn-link btn-sm\" (click)=\"navigate2EditUser(obj._id)\">\r\n                                                    <i class=\"icon-pencil m-2 text-success\"></i>\r\n                                                </button>\r\n                                                <button class=\"btn btn-link btn-sm\" (click)=\"usersProfile(obj)\">\r\n                                                    <i class=\"icon-user text-success\"></i>\r\n                                                </button>\r\n                                                <button class=\"btn btn-link btn-sm\" (click)=\"deleteUserById(obj._id)\">\r\n                                                    <i class=\"icon-trash m-2 text-danger\"></i>\r\n                                                </button>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row\">\r\n  \r\n    <div class=\"col-xl-12 col-md-12 mb-4\">\r\n        <div class=\"card shadow h-100\">\r\n            <div class=\"card-header\">\r\n                <div class=\"font-weight-bold text-primary\" i18n>User Management</div>\r\n            </div>\r\n            <div class=\"card-body\">\r\n                <div class=\"row\">\r\n                    \r\n                    <div class=\"col-xl-12 col-12 mb-4\">\r\n                        <div class=\"view view-cascade gradient-card-header white\">\r\n                            <table datatable [dtOptions]=\"dtOptions\" [dtTrigger]=\"dtTrigger\"\r\n                                class=\"row-border hover table table-striped table-responsive-md btn-table\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th class=\"d-none\" i18n>ID</th>\r\n                                        <th i18n>Email</th>\r\n                                        <th i18n>Name</th>\r\n                                        <th i18n>Role</th>\r\n                                        <th i18n>Mobile</th>\r\n                                        <th i18n>Verified</th>\r\n                                        <th class=\"text-right\" i18n>Actions</th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr *ngFor=\"let obj of utilityService._.values(PaymentTransactionDetailsArray)\">\r\n                                        <td class=\"d-none\" i18n>{{obj._id}}</td>\r\n                                        <td i18n>{{obj.emailAddress}}</td>\r\n                                        <td i18n>{{obj.firstName}}</td>\r\n                                        <td i18n>{{obj.role}}</td>\r\n                                        <td i18n>{{obj.mobileNo}}</td>\r\n                                        <td>\r\n                                            <div\r\n                                                *ngIf=\"returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id\">\r\n\r\n\r\n                                                <span *ngIf=\"!obj.isVerified\"\r\n                                                    (click)=\"updateUsersVerificationStatus(obj, true)\"\r\n                                                    class=\"btn text-white badge badge-danger font-weight-light\">\r\n                                                    Pending\r\n                                                </span>\r\n                                                <span *ngIf=\"obj.isVerified\"\r\n                                                    class=\"badge badge-success font-weight-light\">\r\n                                                    Approved\r\n                                                </span>\r\n                                                \r\n\r\n                                            </div>\r\n                                        </td>\r\n                                        <td class=\"text-left\">\r\n                                            <div\r\n                                                *ngIf=\"returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id\">\r\n                                                <button *ngIf=\"obj.isVerified && returnT4CurrentUserIsSAdmin()\"\r\n                                                    class=\"btn btn-success btn-sm btn-xs mr-1\" (click)=\"navigate2EditUser(obj._id)\" data-title=\"Edit\">\r\n                                                    <i class=\"icon-pencil\"></i>\r\n                                                </button>\r\n                                                <button class=\"btn btn-success btn-sm btn-xs mr-1\" (click)=\"usersProfile(obj)\" data-title=\"View User Details\">\r\n                                                    <i class=\"icon-user\"></i>\r\n                                                </button>\r\n                                                \r\n                                                <button class=\"btn btn-success btn-sm btn-xs mr-1\" (click)=\"usersIncomeExpenseDetails(obj)\" data-title=\"Income Proof and Monthly Expenses Details\">\r\n                                                    <i class=\"icon-receipt\"></i>\r\n                                                </button>\r\n\r\n                                                <button class=\"btn btn-warning btn-sm btn-xs mr-1\" data-title=\"Block User\" *ngIf=\"obj.isVerified\" (click)=\"updateUsersVerificationStatus(obj, false)\">\r\n                                                    <i class=\"icon-lock\"></i>\r\n                                                </button>\r\n\r\n\r\n                                                <button class=\"btn btn-danger btn-sm btn-xs\" (click)=\"deleteUserById(obj._id)\" data-title=\"Delete\">\r\n                                                    <i class=\"icon-trash\"></i>\r\n                                                </button>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -1327,7 +1920,45 @@ FooterComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!--section start-->\r\n<section class=\"agency format service-bg\" id=\"home-admin\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-12 offset-lg-1\">\r\n                <div class=\"center-text\">\r\n                    <div class=\"format-container\">\r\n                        <div class=\"format-head-text\">\r\n                            <h2 class=\"about-font-header\">Welcome Admin!<span class=\"block-span\"></span></h2>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</section>\r\n<!--section end-->");
+/* harmony default export */ __webpack_exports__["default"] = ("<h2 class=\"about-font-header mb-4 text-primary font-weight-light\">Welcome Admin!<span class=\"block-span\"></span></h2>\r\n\r\n<div class=\"row\">\r\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n        <div class=\"card bg-primary text-white shadow h-100\">\r\n            <div class=\"card-body\">\r\n                <div class=\"row no-gutters align-items-center\">\r\n                    <div class=\"col mr-2\">\r\n                        <div class=\"text-xs font-weight-bold text-uppercase mb-1\">\r\n                            Total Loans\r\n                        </div>\r\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800 text-capitalize text-cap\">\r\n                         0\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-auto\">\r\n                        <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <!-- Earnings (Monthly) Card Example -->\r\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n        <div class=\"card  bg-warning text-white shadow h-100\">\r\n            <div class=\"card-body\">\r\n                <div class=\"row no-gutters align-items-center\">\r\n                    <div class=\"col mr-2\">\r\n                        <div class=\"text-xs font-weight-bold text-uppercase mb-1\">\r\n                           Total Revenue\r\n                        </div>\r\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\">\r\n                            0\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-auto\">\r\n                        <i class=\"fas fa-dollar-sign fa-2x text-gray-300\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <!-- Earnings (Monthly) Card Example -->\r\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n        <div class=\"card bg-success text-white shadow h-100\">\r\n            <div class=\"card-body\">\r\n                <div class=\"row no-gutters align-items-center\">\r\n                    <div class=\"col mr-2\">\r\n                        <div class=\"text-xs font-weight-bold text-uppercase mb-1\">\r\n                            Total Lenders\r\n                        </div>\r\n                        <div class=\"row no-gutters align-items-center\">\r\n                            <div class=\"col-auto\">\r\n                                <div class=\"h5 mb-0 mr-3 font-weight-bold text-gray-800\">0\r\n                                </div>\r\n                            </div>\r\n                            <!-- <div class=\"col\">\r\n                                            <div class=\"progress progress-sm mr-2\">\r\n                                                <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 50%\" aria-valuenow=\"50\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                                            </div>\r\n                                        </div> -->\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-auto\">\r\n                        <i class=\"fas fa-clipboard-list fa-2x text-gray-300\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <!-- Pending Requests Card Example -->\r\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n        <div class=\"card bg-secondary text-white shadow h-100\">\r\n            <div class=\"card-body\">\r\n                <div class=\"row no-gutters align-items-center\">\r\n                    <div class=\"col mr-2\">\r\n                        <div class=\"text-xs font-weight-bold text-uppercase mb-1\">\r\n                            Total Borrowers</div>\r\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\">0</div>\r\n                    </div>\r\n                    <div class=\"col-auto\">\r\n                        <i class=\"fas fa-comments fa-2x text-gray-300\"></i>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\r\n        <div class=\"card bg-primary text-white shadow\">\r\n            <div class=\"card-body\">\r\n                <div class=\"text-xs font-weight-bold text-uppercase mb-1\">\r\n                    Total Messages</div>\r\n                <div class=\"h5 mb-0 font-weight-bold\">0</div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n   \r\n\r\n   \r\n</div>\r\n\r\n\r\n");
+
+/***/ }),
+
+/***/ "LOaD":
+/*!*************************************************!*\
+  !*** ./src/app/admin/blogs/blogs.component.css ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJibG9ncy5jb21wb25lbnQuY3NzIn0= */");
+
+/***/ }),
+
+/***/ "Mxlh":
+/*!********************************************************************!*\
+  !*** ./node_modules/rxjs/internal/util/ObjectUnsubscribedError.js ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var ObjectUnsubscribedErrorImpl = (function () {
+    function ObjectUnsubscribedErrorImpl() {
+        Error.call(this);
+        this.message = 'object unsubscribed';
+        this.name = 'ObjectUnsubscribedError';
+        return this;
+    }
+    ObjectUnsubscribedErrorImpl.prototype = Object.create(Error.prototype);
+    return ObjectUnsubscribedErrorImpl;
+})();
+exports.ObjectUnsubscribedError = ObjectUnsubscribedErrorImpl;
+//# sourceMappingURL=ObjectUnsubscribedError.js.map
 
 /***/ }),
 
@@ -1353,6 +1984,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/dialog */ "0IaG");
 /* harmony import */ var src_app_models_role__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/models/role */ "z56L");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var angular_datatables__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! angular-datatables */ "njyG");
+/* harmony import */ var rxjs_internal_Subject__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs/internal/Subject */ "ds6q");
+/* harmony import */ var rxjs_internal_Subject__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_Subject__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var src_app_shared_income_proof_income_proof_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! src/app/shared/income-proof/income-proof.component */ "KRlv");
+
+
+
 
 
 
@@ -1366,13 +2004,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let UserManagementComponent = class UserManagementComponent {
-    constructor(dialog, socketService, alertService, utilityService, authenticationService, router) {
+    constructor(dialog, socketService, alertService, utilityService, authenticationService, router, elementRef) {
         this.dialog = dialog;
         this.socketService = socketService;
         this.alertService = alertService;
         this.utilityService = utilityService;
         this.authenticationService = authenticationService;
         this.router = router;
+        this.elementRef = elementRef;
+        this.dtTrigger = new rxjs_internal_Subject__WEBPACK_IMPORTED_MODULE_13__["Subject"]();
+        this.dtOptions = {};
         this.PaymentTransactionDetailsArray = null;
         this.loading = false;
         let _data = {};
@@ -1381,6 +2022,8 @@ let UserManagementComponent = class UserManagementComponent {
             .subscribe(data => {
             if (data && data['success']) {
                 this.PaymentTransactionDetailsArray = data["data"];
+                this.populateUsersDataInTable();
+                //this.rerender();
                 this.loading = false;
             }
             else {
@@ -1406,8 +2049,6 @@ let UserManagementComponent = class UserManagementComponent {
             this.loading = false;
         });
     }
-    ngOnInit() {
-    }
     updateUsersVerificationStatus(_userId, _isVerified) {
         this.alertService.success("Please wait while we updating status of user");
         this.socketService.updateUsersVerificationStatus(_userId, _isVerified)
@@ -1417,6 +2058,8 @@ let UserManagementComponent = class UserManagementComponent {
                 let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
                 usersObjArr[data["data"]["_id"]] = data["data"];
                 this.PaymentTransactionDetailsArray = usersObjArr;
+                this.populateUsersDataInTable();
+                //this.rerender();
                 this.alertService.success(data['message']);
                 this.loading = false;
             }
@@ -1452,6 +2095,8 @@ let UserManagementComponent = class UserManagementComponent {
                 let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
                 delete usersObjArr[_userId];
                 this.PaymentTransactionDetailsArray = usersObjArr;
+                this.populateUsersDataInTable();
+                //this.rerender();
                 this.alertService.success(data['message']);
                 this.loading = false;
             }
@@ -1492,6 +2137,13 @@ let UserManagementComponent = class UserManagementComponent {
             }
         });
         dialogRef.afterClosed().subscribe(result => {
+            if (result && result.data) {
+                let _userId = result.data._id;
+                let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+                delete usersObjArr[_userId];
+                usersObjArr[_userId] = result.data;
+                this.PaymentTransactionDetailsArray = usersObjArr;
+            }
             console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
         });
     }
@@ -1517,6 +2169,86 @@ let UserManagementComponent = class UserManagementComponent {
     navigate2EditUser(userId) {
         this.router.navigate(['/admin/add-user'], { state: { userId: userId } });
     }
+    //#region datatable actions
+    ngOnInit() {
+        this.populateUsersDataInTable();
+    }
+    ngOnDestroy() {
+        // Do not forget to unsubscribe the event
+        this.dtTrigger.unsubscribe();
+        if (this.elementRef && this.elementRef.nativeElement && this.elementRef.nativeElement.querySelector('.paginate_button.next')) {
+            this.elementRef.nativeElement.querySelector('.paginate_button.next')
+                .removeEventListener('click');
+        }
+    }
+    populateUsersDataInTable() {
+        this.destroyTable();
+        this.dtOptions = {
+            pagingType: 'full_numbers',
+            pageLength: 10,
+            drawCallback: () => {
+                this.elementRef.nativeElement.querySelector('.paginate_button.next')
+                    .addEventListener('click', this.onClick.bind(this));
+            }
+        };
+        this.dtTrigger.next();
+        this.rerender();
+    }
+    ngAfterViewInit() {
+        if (this.datatableElement && this.datatableElement.dtInstance) {
+            this.datatableElement.dtInstance.then((dtInstance) => {
+                dtInstance.columns().every(function () {
+                    const that = this;
+                    $('input', this.footer()).on('keyup change', function () {
+                        if (that.search() !== this['value']) {
+                            that
+                                .search(this['value'])
+                                .draw();
+                        }
+                    });
+                });
+            });
+        }
+    }
+    rerender() {
+        if (this.datatableElement && this.datatableElement.dtInstance) {
+            this.datatableElement.dtInstance.then((dtInstance) => {
+                // Destroy the table first
+                dtInstance.destroy();
+                // Call the dtTrigger to rerender again
+                this.dtTrigger.next();
+            });
+        }
+    }
+    destroyTable() {
+        if (this.datatableElement && this.datatableElement.dtInstance) {
+            this.datatableElement.dtInstance.then((dtInstance) => {
+                // Destroy the table first
+                dtInstance.destroy();
+            });
+        }
+    }
+    onClick(event) {
+    }
+    //#endregion datatable actions
+    usersIncomeExpenseDetails(userObj) {
+        console.log('241', this.authenticationService.currentUserValue);
+        const dialogRef = this.dialog.open(src_app_shared_income_proof_income_proof_component__WEBPACK_IMPORTED_MODULE_14__["IncomeProofComponent"], {
+            maxWidth: '100vw',
+            maxHeight: '100vh',
+            height: '100%',
+            width: '100%',
+            hasBackdrop: true,
+            data: {
+                userObj: userObj,
+                isOpenedInModel: true,
+                adminViewT: true
+            }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`256 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+        });
+    }
 };
 UserManagementComponent.ctorParameters = () => [
     { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialog"] },
@@ -1524,8 +2256,12 @@ UserManagementComponent.ctorParameters = () => [
     { type: src_app_services__WEBPACK_IMPORTED_MODULE_5__["AlertService"] },
     { type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_6__["UtilityService"] },
     { type: src_app_services__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_11__["Router"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_11__["Router"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ElementRef"] }
 ];
+UserManagementComponent.propDecorators = {
+    datatableElement: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"], args: [angular_datatables__WEBPACK_IMPORTED_MODULE_12__["DataTableDirective"], { static: false },] }]
+};
 UserManagementComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-user-management',
@@ -1537,7 +2273,8 @@ UserManagementComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"
         src_app_services__WEBPACK_IMPORTED_MODULE_5__["AlertService"],
         src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_6__["UtilityService"],
         src_app_services__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_11__["Router"]])
+        _angular_router__WEBPACK_IMPORTED_MODULE_11__["Router"],
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ElementRef"]])
 ], UserManagementComponent);
 
 
@@ -1553,7 +2290,7 @@ UserManagementComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row\">\r\n    <div class=\"col-xl-12 col-md-12 mb-4\">\r\n        <div class=\"card shadow h-100\">\r\n            <div class=\"card-body p-3\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-xl-12 mb-4\">\r\n                        <div class=\"font-weight-bold mb-1 text-cm-blue\">Payment Transactions</div>\r\n                    </div>\r\n                    <div class=\"col-xl-12 col-12 mb-4\">\r\n                        <div class=\"view view-cascade gradient-card-header white\">\r\n                            <table class=\"table table-striped table-responsive-md btn-table\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th class=\"d-none\">ID</th>\r\n                                        <th>Initiated By</th>\r\n                                        <th>Type</th>\r\n                                        <th>Date Time</th>\r\n                                        <th>$Amount</th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr *ngFor=\"let obj of utilityService._.values(PaymentTransactionDetailsArray)\">\r\n                                        <td class=\"d-none\">{{obj._id}}</td>\r\n                                        <td>{{obj.transactionInitiatedByUser[0].emailAddress}}</td>\r\n                                        <td>{{ utilityService.returnStringWithReplacing_(obj.transactionActionType) | titlecase }}</td>\r\n                                        <td>{{utilityService._.get( obj,'transactionDetailsObj.create_time') || obj.createdOn }}</td>\r\n                                        <td>{{obj.amount}}</td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row\">\r\n    <div class=\"col-xl-12 col-md-12 mb-4\">\r\n        <div class=\"card shadow h-100\">\r\n            <div class=\"card-body p-3\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-xl-12 mb-4\">\r\n                        <div class=\"font-weight-bold mb-1 text-cm-blue\">Payment Transactions</div>\r\n                    </div>\r\n                    <div class=\"col-xl-12 col-12 mb-4\">\r\n                        <div class=\"view view-cascade gradient-card-header white\">\r\n                            <table datatable [dtOptions]=\"dtOptions\" [dtTrigger]=\"dtTrigger\"\r\n                            class=\"row-border hover table table-striped table-responsive-md btn-table\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th class=\"d-none\">ID</th>\r\n                                        <th>Initiated By</th>\r\n                                        <th>Type</th>\r\n                                        <th>Date Time</th>\r\n                                        <th>Amount</th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr *ngFor=\"let obj of utilityService._.values(PaymentTransactionDetailsArray)\">\r\n                                        <td class=\"d-none\">{{obj._id}}</td>\r\n                                        <td>{{obj.transactionInitiatedByUser[0].emailAddress}}</td>\r\n                                        <td>{{ utilityService.returnStringWithReplacing_(obj.transactionActionType) | titlecase }}</td>\r\n                                        <td>{{(utilityService._.get( obj,'transactionDetailsObj.create_time') || obj.createdOn) | date:'dd-MMM-YYYY' }}</td>\r\n                                        <td>{{obj.amount}}</td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -1779,6 +2516,19 @@ ServicesComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 /***/ }),
 
+/***/ "XQ+j":
+/*!****************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/admin/blogs/blogs.component.html ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row mb-3\">\r\n  <div class=\"col-xl-6\">\r\n    <h4 class=\"text-primary\">Blogs</h4>\r\n  </div>\r\n  <div class=\"col-xl-6\">\r\n    <button class=\"btn btn-success btn-sm float-right\" data-toggle=\"modal\" data-target=\"#blogModal\">New</button>\r\n  </div>\r\n</div>\r\n\r\n<table class=\"table table-striped table-bordered\">\r\n  <thead>\r\n    <tr>\r\n      <th>Title</th>\r\n      <th>Description</th>\r\n      <!--<th>Status</th>-->\r\n      <th>Actions</th>\r\n    </tr>\r\n  </thead>\r\n  <tbody>\r\n    <tr *ngFor=\"let obj2show of allBlogsData\">\r\n      <td>{{obj2show.title}}</td>\r\n      <td>{{obj2show.description}}</td>\r\n      <!--<td class=\"text-capitalize text-cap\">\r\n          <span class=\"badge\" [ngClass]=\"{'badge-success': (obj2show.status==SessionStatus.Approved || obj2show.status==SessionStatus.Accepted || obj2show.status==SessionStatus.Active || obj2show.status==SessionStatus.Completed || obj2show.status==SessionStatus.OngoingInitiated  || obj2show.status==SessionStatus.OngoingAccepted  || obj2show.status==SessionStatus.Ongoing), 'badge-danger': (obj2show.status==SessionStatus.Rejected || obj2show.status==SessionStatus.RejectedOngoing || obj2show.status==SessionStatus.Suspended), 'badge-info': ( obj2show.status==null || obj2show.status=='' || obj2show.status==SessionStatus.Pending)}\">\r\n              {{obj2show.status}}\r\n          </span>\r\n      </td>\r\n    -->\r\n      <td>\r\n          <label title=\"Preview\"\r\n              (click)=\"mediaPreviewModel(obj2show.blogsDocument, 'image')\">\r\n              <i class=\"icon-eye m-2 text-success\"></i>\r\n          </label>\r\n      </td>\r\n    </tr>\r\n\r\n  </tbody>\r\n</table>\r\n<div class=\"modal fade\" id=\"blogModal\">\r\n  <div class=\"modal-dialog modal-dialog-centered  modal-lg\">\r\n    <div class=\"modal-content\">\r\n\r\n      <!-- Modal Header -->\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title text-primary\">New Blog</h4>\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\r\n      </div>\r\n\r\n      <!-- Modal body -->\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"userBlogsForm\">\r\n          <div class=\"row mb-3\">\r\n            <div class=\"col-xl-12\">\r\n              <div class=\"form-group\">\r\n                <label for=\"title\">Blog Title</label>\r\n                <input type=\"text\" formControlName=\"title\" class=\"form-control\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.title.errors }\" />\r\n                <div *ngIf=\"submitted && f.title.errors\" class=\"invalid-feedback\">\r\n                  <div *ngIf=\"f.title.errors.required\">Blog Title is required</div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xl-12\">\r\n              <div class=\"form-group\">\r\n                <label for=\"description\">Contents</label>\r\n                <textarea type=\"number\" formControlName=\"description\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.description.errors }\" cols=\"40\" rows=\"5\" class=\"form-control\"></textarea>\r\n                <div *ngIf=\"submitted && f.description.errors\" class=\"invalid-feedback\">\r\n                  <div *ngIf=\"f.description.errors.required\">\r\n                    Contents is required\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xl-12\">\r\n              <div class=\"form-group\">\r\n                <label for=\"blogsDocument\">Image Cover &nbsp;</label>\r\n\r\n                <img *ngIf=\"f.blogsDocument.value\" [src]=\"f.blogsDocument.value\"\r\n                  class=\"border img-fluid mb-3\" height=\"50\" width=\"50\" />\r\n\r\n                <input *ngIf=\"!fileData4blogsDocumentPendingForUpload\"\r\n                  id=\"ctrlUploadblogsDocument\" type=\"file\" name=\"image\" accept=\"image/*\"\r\n                  (change)=\"onfileProgressForBlogsDocument($event)\">\r\n                <i *ngIf=\"fileData4blogsDocumentPendingForUpload\"\r\n                  class=\"icon-upload m-2 cursor-pointer text-success\" (click)=\"onUploadForBlogsDocument()\">\r\n                  Upload\r\n                </i>\r\n                <div *ngIf=\"submitted && f.blogsDocument.errors\" class=\"invalid-feedback\">\r\n                  <div *ngIf=\"f.blogsDocument.errors.required\">Image Cover is required\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xl-12\">\r\n              <button class=\"btn btn-success btn-sm float-right\" (click)=\"onBlogsUpdateSubmit()\">\r\n                <i class=\"icon icon-plus\"></i>\r\n                ADD\r\n              </button>\r\n            </div>\r\n          </div>\r\n        </form>\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n</div>");
+
+/***/ }),
+
 /***/ "XUcl":
 /*!******************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/admin/footer/footer.component.html ***!
@@ -1802,6 +2552,188 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzZXJ2aWNlcy5jb21wb25lbnQuY3NzIn0= */");
+
+/***/ }),
+
+/***/ "ds6q":
+/*!***********************************************!*\
+  !*** ./node_modules/rxjs/internal/Subject.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    }
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var Observable_1 = __webpack_require__(/*! ./Observable */ "Q1FS");
+var Subscriber_1 = __webpack_require__(/*! ./Subscriber */ "FWf1");
+var Subscription_1 = __webpack_require__(/*! ./Subscription */ "zB/H");
+var ObjectUnsubscribedError_1 = __webpack_require__(/*! ./util/ObjectUnsubscribedError */ "Mxlh");
+var SubjectSubscription_1 = __webpack_require__(/*! ./SubjectSubscription */ "FiyT");
+var rxSubscriber_1 = __webpack_require__(/*! ../internal/symbol/rxSubscriber */ "p//D");
+var SubjectSubscriber = (function (_super) {
+    __extends(SubjectSubscriber, _super);
+    function SubjectSubscriber(destination) {
+        var _this = _super.call(this, destination) || this;
+        _this.destination = destination;
+        return _this;
+    }
+    return SubjectSubscriber;
+}(Subscriber_1.Subscriber));
+exports.SubjectSubscriber = SubjectSubscriber;
+var Subject = (function (_super) {
+    __extends(Subject, _super);
+    function Subject() {
+        var _this = _super.call(this) || this;
+        _this.observers = [];
+        _this.closed = false;
+        _this.isStopped = false;
+        _this.hasError = false;
+        _this.thrownError = null;
+        return _this;
+    }
+    Subject.prototype[rxSubscriber_1.rxSubscriber] = function () {
+        return new SubjectSubscriber(this);
+    };
+    Subject.prototype.lift = function (operator) {
+        var subject = new AnonymousSubject(this, this);
+        subject.operator = operator;
+        return subject;
+    };
+    Subject.prototype.next = function (value) {
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
+        }
+        if (!this.isStopped) {
+            var observers = this.observers;
+            var len = observers.length;
+            var copy = observers.slice();
+            for (var i = 0; i < len; i++) {
+                copy[i].next(value);
+            }
+        }
+    };
+    Subject.prototype.error = function (err) {
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
+        }
+        this.hasError = true;
+        this.thrownError = err;
+        this.isStopped = true;
+        var observers = this.observers;
+        var len = observers.length;
+        var copy = observers.slice();
+        for (var i = 0; i < len; i++) {
+            copy[i].error(err);
+        }
+        this.observers.length = 0;
+    };
+    Subject.prototype.complete = function () {
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
+        }
+        this.isStopped = true;
+        var observers = this.observers;
+        var len = observers.length;
+        var copy = observers.slice();
+        for (var i = 0; i < len; i++) {
+            copy[i].complete();
+        }
+        this.observers.length = 0;
+    };
+    Subject.prototype.unsubscribe = function () {
+        this.isStopped = true;
+        this.closed = true;
+        this.observers = null;
+    };
+    Subject.prototype._trySubscribe = function (subscriber) {
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
+        }
+        else {
+            return _super.prototype._trySubscribe.call(this, subscriber);
+        }
+    };
+    Subject.prototype._subscribe = function (subscriber) {
+        if (this.closed) {
+            throw new ObjectUnsubscribedError_1.ObjectUnsubscribedError();
+        }
+        else if (this.hasError) {
+            subscriber.error(this.thrownError);
+            return Subscription_1.Subscription.EMPTY;
+        }
+        else if (this.isStopped) {
+            subscriber.complete();
+            return Subscription_1.Subscription.EMPTY;
+        }
+        else {
+            this.observers.push(subscriber);
+            return new SubjectSubscription_1.SubjectSubscription(this, subscriber);
+        }
+    };
+    Subject.prototype.asObservable = function () {
+        var observable = new Observable_1.Observable();
+        observable.source = this;
+        return observable;
+    };
+    Subject.create = function (destination, source) {
+        return new AnonymousSubject(destination, source);
+    };
+    return Subject;
+}(Observable_1.Observable));
+exports.Subject = Subject;
+var AnonymousSubject = (function (_super) {
+    __extends(AnonymousSubject, _super);
+    function AnonymousSubject(destination, source) {
+        var _this = _super.call(this) || this;
+        _this.destination = destination;
+        _this.source = source;
+        return _this;
+    }
+    AnonymousSubject.prototype.next = function (value) {
+        var destination = this.destination;
+        if (destination && destination.next) {
+            destination.next(value);
+        }
+    };
+    AnonymousSubject.prototype.error = function (err) {
+        var destination = this.destination;
+        if (destination && destination.error) {
+            this.destination.error(err);
+        }
+    };
+    AnonymousSubject.prototype.complete = function () {
+        var destination = this.destination;
+        if (destination && destination.complete) {
+            this.destination.complete();
+        }
+    };
+    AnonymousSubject.prototype._subscribe = function (subscriber) {
+        var source = this.source;
+        if (source) {
+            return this.source.subscribe(subscriber);
+        }
+        else {
+            return Subscription_1.Subscription.EMPTY;
+        }
+    };
+    return AnonymousSubject;
+}(Subject));
+exports.AnonymousSubject = AnonymousSubject;
+//# sourceMappingURL=Subject.js.map
 
 /***/ }),
 
@@ -1895,6 +2827,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _borrower_earnings_borrower_earnings_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./borrower-earnings/borrower-earnings.component */ "rCAk");
 /* harmony import */ var _shared_shared_module__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../shared/shared.module */ "PCNd");
 /* harmony import */ var _add_user_add_user_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./add-user/add-user.component */ "4pOR");
+/* harmony import */ var angular_datatables__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! angular-datatables */ "njyG");
+/* harmony import */ var _user_levels_user_levels_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./user-levels/user-levels.component */ "6pX3");
+/* harmony import */ var _blogs_blogs_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./blogs/blogs.component */ "AvT8");
+
+
+
 
 
 
@@ -1916,14 +2854,14 @@ let AdminModule = class AdminModule {
 };
 AdminModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [_admin_component__WEBPACK_IMPORTED_MODULE_6__["AdminComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_7__["HomeComponent"], _header_header_component__WEBPACK_IMPORTED_MODULE_8__["HeaderComponent"], _footer_footer_component__WEBPACK_IMPORTED_MODULE_9__["FooterComponent"], _services_services_component__WEBPACK_IMPORTED_MODULE_10__["ServicesComponent"], _service_types_add_service_types_add_component__WEBPACK_IMPORTED_MODULE_11__["ServiceTypesAddComponent"], _user_management_user_management_component__WEBPACK_IMPORTED_MODULE_12__["UserManagementComponent"], _payment_transactions_payment_transactions_component__WEBPACK_IMPORTED_MODULE_13__["PaymentTransactionsComponent"], _borrower_earnings_borrower_earnings_component__WEBPACK_IMPORTED_MODULE_14__["BorrowerEarningsComponent"], _add_user_add_user_component__WEBPACK_IMPORTED_MODULE_16__["AddUserComponent"]],
+        declarations: [_admin_component__WEBPACK_IMPORTED_MODULE_6__["AdminComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_7__["HomeComponent"], _header_header_component__WEBPACK_IMPORTED_MODULE_8__["HeaderComponent"], _footer_footer_component__WEBPACK_IMPORTED_MODULE_9__["FooterComponent"], _services_services_component__WEBPACK_IMPORTED_MODULE_10__["ServicesComponent"], _service_types_add_service_types_add_component__WEBPACK_IMPORTED_MODULE_11__["ServiceTypesAddComponent"], _user_management_user_management_component__WEBPACK_IMPORTED_MODULE_12__["UserManagementComponent"], _payment_transactions_payment_transactions_component__WEBPACK_IMPORTED_MODULE_13__["PaymentTransactionsComponent"], _borrower_earnings_borrower_earnings_component__WEBPACK_IMPORTED_MODULE_14__["BorrowerEarningsComponent"], _add_user_add_user_component__WEBPACK_IMPORTED_MODULE_16__["AddUserComponent"], _user_levels_user_levels_component__WEBPACK_IMPORTED_MODULE_18__["UserLevelsComponent"], _blogs_blogs_component__WEBPACK_IMPORTED_MODULE_19__["BlogsComponent"]],
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
             _admin_routing_module__WEBPACK_IMPORTED_MODULE_5__["AdminRoutingModule"],
-            _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
             _angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__["MatDialogModule"],
             _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_4__["ScrollingModule"],
             _shared_shared_module__WEBPACK_IMPORTED_MODULE_15__["SharedModule"],
+            angular_datatables__WEBPACK_IMPORTED_MODULE_17__["DataTablesModule"]
         ]
     })
 ], AdminModule);
@@ -2131,6 +3069,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "utD7":
+/*!****************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/admin/user-levels/user-levels.component.html ***!
+  \****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row mb-3\">\r\n  <div class=\"col-xl-6\">\r\n    <h4 class=\"text-primary\">User Levels</h4>\r\n  </div>\r\n  <div class=\"col-xl-6\">\r\n    <button class=\"btn btn-success btn-sm float-right\" data-toggle=\"modal\" data-target=\"#userLevelModal\">New</button>\r\n  </div>\r\n</div>\r\n<div class=\"card mb-3\">\r\n  <div class=\"card-header\">Lenders</div>\r\n  <div class=\"card-body p-0\">\r\n    <table class=\"table\">\r\n      <thead>\r\n        <tr>\r\n          <th>User Level Name</th>\r\n          <th>Amount Spent</th>\r\n          <th>Contracts</th>\r\n          <th>Actions</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n\r\n        <tr *ngFor=\"let obj2show of allUserLevelsDataLenders\">\r\n          <td>{{obj2show.name}}</td>\r\n          <td>{{obj2show.minimumSpent}}</td>\r\n          <td>{{obj2show.minimumContract}}</td>\r\n          <td>\r\n            <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Edit\">\r\n              <i class=\"icon-pencil\"></i>\r\n            </button>\r\n\r\n            <button class=\"btn btn-danger btn-sm btn-xs\" data-title=\"Delete\">\r\n              <i class=\"icon-trash\"></i>\r\n            </button>\r\n          </td>\r\n        </tr>\r\n\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n\r\n</div>\r\n\r\n<div class=\"card\">\r\n  <div class=\"card-header\">Borrowers</div>\r\n  <div class=\"card-body p-0\">\r\n    <table class=\"table\">\r\n      <thead>\r\n        <tr>\r\n          <th>User Level Name</th>\r\n          <th>Amount Spent</th>\r\n          <th>Contracts</th>\r\n          <th>Actions</th>\r\n        </tr>\r\n      </thead>\r\n      <tbody>\r\n        <tr *ngFor=\"let obj2show of allUserLevelsDataBorrower\">\r\n          <td>{{obj2show.name}}</td>\r\n          <td>{{obj2show.minimumSpent}}</td>\r\n          <td>{{obj2show.minimumContract}}</td>\r\n          <td>\r\n            <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Edit\">\r\n              <i class=\"icon-pencil\"></i>\r\n            </button>\r\n            <button class=\"btn btn-danger btn-sm btn-xs\" data-title=\"Delete\">\r\n              <i class=\"icon-trash\"></i>\r\n            </button>\r\n          </td>\r\n        </tr>\r\n      </tbody>\r\n    </table>\r\n  </div>\r\n</div>\r\n\r\n<div class=\"modal fade\" id=\"userLevelModal\">\r\n  <div class=\"modal-dialog modal-dialog-centered  modal-lg\">\r\n    <div class=\"modal-content\">\r\n\r\n      <!-- Modal Header -->\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title text-primary\">New User Level</h4>\r\n        <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\r\n      </div>\r\n\r\n      <!-- Modal body -->\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"userUserLevelsForm\">\r\n          <div class=\"row mb-3\">\r\n            <div class=\"col-xl-12\">\r\n              <label for=\"role\">User Type</label>\r\n              <div class=\"form-group\">\r\n                <div class=\"custom-control custom-radio custom-control-inline\">\r\n                  <input name=\"role\" id=\"user_role_0\" type=\"radio\" class=\"custom-control-input\" [value]=\"Role.Lender\"\r\n                    formControlName=\"role\" [ngClass]=\"{ 'is-invalid': submitted && f.role.errors }\">\r\n                  <label for=\"user_role_0\" class=\"custom-control-label\">{{Role.Lender}}</label>\r\n                </div>\r\n                <div class=\"custom-control custom-radio custom-control-inline\">\r\n                  <input name=\"role\" id=\"user_role_1\" type=\"radio\" class=\"custom-control-input\" [value]=\"Role.Borrower\"\r\n                    formControlName=\"role\" [ngClass]=\"{ 'is-invalid': submitted && f.role.errors }\">\r\n                  <label for=\"user_role_1\" class=\"custom-control-label\">{{Role.Borrower}}</label>\r\n                </div>\r\n\r\n                <div *ngIf=\"submitted && f.role.errors\" class=\"invalid-feedback\">\r\n                  <div *ngIf=\"f.role.required\">User Type Name is required</div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"col-xl-12\">\r\n              <div class=\"form-group\">\r\n                <label for=\"name\">User Level Name</label>\r\n                <input type=\"text\" formControlName=\"name\" class=\"form-control\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.name.errors }\"\r\n                  placeholder=\"e.g. Good Lender, Best Borrower etc\" />\r\n                <div *ngIf=\"submitted && f.name.errors\" class=\"invalid-feedback\">\r\n                  <div *ngIf=\"f.name.errors.required\">User Level Name is required</div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xl-12\">\r\n              <div class=\"form-group\">\r\n                <label for=\"minimumSpent\">Min. Amount Spent</label>\r\n                <input type=\"number\" formControlName=\"minimumSpent\" class=\"form-control\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.minimumSpent.errors }\" />\r\n                <div *ngIf=\"submitted && f.minimumSpent.errors\" class=\"invalid-feedback\">\r\n                  <div *ngIf=\"f.minimumSpent.errors.required\">Min. Amount Spent is required</div>\r\n                  <div *ngIf=\"f.minimumSpent.errors.min\">Amount must be non zero</div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xl-12\">\r\n              <div class=\"form-group\">\r\n                <label for=\"minimumContract\">Number of contracts</label>\r\n                <input type=\"number\" formControlName=\"minimumContract\" class=\"form-control\"\r\n                  [ngClass]=\"{ 'is-invalid': submitted && f.minimumContract.errors }\" />\r\n                <div *ngIf=\"submitted && f.minimumContract.errors\" class=\"invalid-feedback\">\r\n                  <div *ngIf=\"f.minimumContract.errors.required\">Number of contracts is required</div>\r\n                  <div *ngIf=\"f.minimumContract.errors.min\">Amount must be non zero</div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-xl-12\">\r\n              <button class=\"btn btn-success btn-sm float-right\" (click)=\"onUserLevelsUpdateSubmit()\">\r\n                <i class=\"icon icon-plus\"></i>\r\n                ADD\r\n              </button>\r\n            </div>\r\n          </div>\r\n        </form>\r\n\r\n\r\n      </div>\r\n\r\n    </div>\r\n  </div>\r\n</div>");
+
+/***/ }),
+
 /***/ "wJwY":
 /*!******************************************************************************************!*\
   !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/admin/header/header.component.html ***!
@@ -2140,7 +3091,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ul class=\"navbar-nav bg-gradient-primary sidebar sidebar-dark accordion\" id=\"accordionSidebar\">\r\n\r\n    <!-- Sidebar - Brand -->\r\n    <a class=\"sidebar-brand d-flex align-items-center justify-content-center\">\r\n        <img class=\"img-fluid\" src=\"/assets/img/avitii-logo.png\">\r\n    </a>\r\n\r\n    <!-- Divider -->\r\n    <hr class=\"sidebar-divider my-0\">\r\n\r\n    <!-- Nav Item - Dashboard -->\r\n    <li class=\"nav-item active\">\r\n        <a class=\"nav-link\" routerLink=\"/admin\">\r\n            <i class=\"icon icon-home\"></i>\r\n            <span>Dashboard</span></a>\r\n    </li>\r\n\r\n    <!-- Divider -->\r\n    <hr class=\"sidebar-divider\">\r\n\r\n    <!-- Heading -->\r\n    <!-- <div class=\"sidebar-heading\">\r\n        Interface\r\n    </div> -->\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/admin/users\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-shopping-cart\"></i>\r\n            <span>User Mangement</span></a>\r\n    </li>\r\n    <!-- <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/admin/add-user\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-bag\"></i>\r\n            <span>Add User</span></a>\r\n    </li> -->\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/admin/payments\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-money\"></i>\r\n            <span>Transactions</span></a>\r\n    </li>\r\n\r\n    \r\n    <!-- Nav Item - Pages Collapse Menu -->\r\n    <!-- <li class=\"nav-item\">\r\n        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\" aria-expanded=\"true\" aria-controls=\"collapseTwo\">\r\n            <i class=\"icon icon-bag\"></i>\r\n            <span>My Contracts</span>\r\n        </a>\r\n        <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">\r\n            <div class=\"bg-white py-2 collapse-inner rounded\">\r\n               \r\n                <a class=\"collapse-item\" (click)=\"navigate2State('/lender/my-contract')\" routerLinkActive=\"active\">My Offers</a>\r\n                <a class=\"collapse-item\" (click)=\"navigate2State('/lender/my-contract')\" routerLinkActive=\"active\">Paid Contracts</a>\r\n                <a class=\"collapse-item\" (click)=\"navigate2State('/lender/my-contract')\" routerLinkActive=\"active\">Unpaid Contracts</a>\r\n                <a class=\"collapse-item\" (click)=\"navigate2State('/lender/my-contract')\" routerLinkActive=\"active\">Inkasso cases</a>\r\n           \r\n            </div>\r\n        </div>\r\n    </li> -->\r\n\r\n    <!-- <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/lender/messages\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-comments\"></i>\r\n            <span>Messages</span></a>\r\n    </li>\r\n\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\"  routerLink=\"/lender/messages\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-calendar\"></i>\r\n            <span>Calendar</span></a>\r\n    </li>\r\n\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\"  routerLink=\"/lender/messages\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-star\"></i>\r\n            <span>My Ratings</span></a>\r\n    </li> -->\r\n\r\n    <!-- <li class=\"nav-item\">\r\n        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapsePages\" aria-expanded=\"true\" aria-controls=\"collapsePages\">\r\n            <i class=\"icon icon-settings\"></i>\r\n            <span>Settings</span>\r\n        </a>\r\n        <div id=\"collapsePages\" class=\"collapse\" aria-labelledby=\"headingPages\" data-parent=\"#accordionSidebar\">\r\n            <div class=\"bg-white py-2 collapse-inner rounded\">\r\n             \r\n                <a class=\"collapse-item\" routerLink=\"/lender/profile\">My Profile</a>\r\n                <a class=\"collapse-item\" href=\"register.html\">Change Password</a>\r\n                <a class=\"collapse-item\" href=\"forgot-password.html\">Bank Details</a>\r\n                <a class=\"collapse-item\" href=\"forgot-password.html\">Payment Agreement</a>\r\n               \r\n            </div>\r\n        </div>\r\n    </li> -->\r\n\r\n \r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/logout\">\r\n            <i class=\"icon icon-flickr-alt\"></i>\r\n            <span>Logout</span></a>\r\n    </li>\r\n\r\n    <!-- Divider -->\r\n    <!-- <hr class=\"sidebar-divider d-none d-md-block\"> -->\r\n\r\n    <!-- Sidebar Toggler (Sidebar) -->\r\n    <!-- <div class=\"text-center d-none d-md-inline\">\r\n        <button class=\"rounded-circle border-0\" id=\"sidebarToggle\"></button>\r\n    </div> -->\r\n\r\n\r\n</ul>\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!-- Nav Start [ngClass]=\"{'dark position-relative' : (router.url!='/')}\"-->\r\n<header id=\"custom-header-nav\" class=\"ecommerce nav-fix shadow-sm p-0 d-none\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col\">\r\n                <nav>\r\n                    <a class=\"logo-light m-r-auto\" routerLink=\"/home\">\r\n                        <img class=\"img-fluid\" src=\"/assets/img/avitii-logo.png\"></a>\r\n\r\n                    <div class=\"navbar m-l-auto p-1 btn-back\" id=\"togglebtn\">\r\n                        <div class=\"responsive-btn\">\r\n                            <h5 class=\"btn-back\">back</h5>\r\n                        </div>\r\n                        <ul class=\"main-menu\">\r\n                            <li><a routerLink=\"/admin\">Home</a></li>\r\n                            <!-- <li><a routerLink=\"/admin/services\" routerLinkActive=\"active\">Services</a></li>\r\n                            <li><a routerLink=\"/admin/servicesadd\" routerLinkActive=\"active\">Services<i class=\"icon-plus m-2 text-success\"></i></a></li> -->\r\n                            <li><a routerLink=\"/admin/users\" routerLinkActive=\"active\">User Mangement</a></li>\r\n                            <li><a routerLink=\"/admin/add-user\" routerLinkActive=\"active\">User<i class=\"icon-plus m-2 text-success\"></i></a></li>\r\n                            <li><a routerLink=\"/admin/payments\" routerLinkActive=\"active\">Transactions</a></li>\r\n                            <li><a routerLink=\"/admin/earnings\" routerLinkActive=\"active\">Payments</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"top-header-right mr-1\">\r\n                        <ul>\r\n\r\n                            <li class=\"cart  d-none\">\r\n                                <a aria-expanded=\"false\" routerLink=\"/lender/messages\" routerLinkActive=\"active\">\r\n                                    <i class=\"icon-comment-alt\"></i>\r\n                                </a>\r\n\r\n                            </li>\r\n                            <li class=\"cart\">\r\n                                <a aria-expanded=\"false\" data-toggle=\"dropdown\" href=\"#\" id=\"dropdownMenuButton1\">\r\n                                    <i class=\"icon-bell bell\"></i>\r\n                                    <span *ngIf=\"(utilityService._.keys(notificationService.appNotifications).length)>0\" class=\"badge badge-primary bell-count\" [textContent]=\"utilityService._.keys(notificationService.appNotifications).length\"></span>\r\n                                </a>\r\n                                <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\" x-placement=\"bottom-end\" style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\r\n                                    <ul class=\"shopping-cart\">\r\n                                        <li *ngFor=\"let notification of utilityService._.values(notificationService.appNotifications)\">\r\n                                            <div class=\"pb-2\">\r\n                                                <div class=\"mb-1\">{{notification.message}}</div>\r\n                                                <div class=\"font-weight-light small mb-1\">{{notification.description}}</div>\r\n                                                <button class=\"btn btn-secondary btn-sm\" (click)=\"notificationService.check4Notification(notification)\">View</button>\r\n                                            </div>\r\n                                        </li>\r\n\r\n\r\n\r\n                                    </ul>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"cart\">\r\n                                <a aria-expanded=\"false\" data-toggle=\"dropdown\" href=\"#\" id=\"dropdownMenuButton1\">\r\n                                    <img class=\"userimg mt-n2\" src=\"/assets/img/user-default.png\">\r\n                                </a>\r\n                                <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\" x-placement=\"bottom-end\" style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\r\n                                    <ul class=\"shopping-cart\">\r\n                                        <li>\r\n                                            <a class=\"h6 d-block\" routerLink=\"/admin\">\r\n                                                {{currentUser.firstName}}\r\n                                                <span class=\"badge badge-primary float-right\"\r\n                                                    [textContent]=\"currentUser.role\"></span>\r\n                                            </a>\r\n                                        </li>\r\n                                        <li><a routerLink=\"/admin/profile\">Profile</a></li>\r\n                                        <hr>\r\n                                        <li>\r\n                                            <a (click)=\"logout()\">Logout</a>\r\n                                        </li>\r\n                                    </ul>\r\n                                </div>\r\n\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"responsive-btn\">\r\n                        <a class=\"toggle-nav\"><i aria-hidden=\"true\" class=\"icon-align-center text-white\"></i></a>\r\n                    </div>\r\n                </nav>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</header>\r\n<!-- Nav end-->");
+/* harmony default export */ __webpack_exports__["default"] = ("<ul class=\"navbar-nav bg-gradient-primary sidebar sidebar-dark accordion\" id=\"accordionSidebar\">\r\n\r\n    <!-- Sidebar - Brand -->\r\n    <a class=\"sidebar-brand d-flex align-items-center justify-content-center\">\r\n        <img class=\"img-fluid\" src=\"/assets/img/avitii-logo.png\">\r\n    </a>\r\n\r\n    <!-- Divider -->\r\n    <hr class=\"sidebar-divider my-0\">\r\n\r\n    <!-- Nav Item - Dashboard -->\r\n    <li class=\"nav-item active\">\r\n        <a class=\"nav-link\" routerLink=\"/admin\">\r\n            <i class=\"icon icon-home\"></i>\r\n            <span>Dashboard</span></a>\r\n    </li>\r\n\r\n    <!-- Divider -->\r\n    <hr class=\"sidebar-divider\">\r\n\r\n    <!-- Heading -->\r\n    <!-- <div class=\"sidebar-heading\">\r\n        Interface\r\n    </div> -->\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/admin/users\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-user\"></i>\r\n            <span>User Mangement</span></a>\r\n    </li>\r\n    <!-- <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/admin/add-user\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-bag\"></i>\r\n            <span>Add User</span></a>\r\n    </li> -->\r\n   \r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\" aria-expanded=\"true\" aria-controls=\"collapseTwo\">\r\n            <i class=\"icon icon-credit-card\"></i>\r\n            <span>Transactions</span>\r\n        </a>\r\n        <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">\r\n            <div class=\"bg-white py-2 collapse-inner rounded\">\r\n               \r\n                <a class=\"collapse-item\" (click)=\"navigate2State('/admin/payments',{'transactionActionType':TransactionActionType.plan_purchase})\" routerLinkActive=\"active\">Plan Purchase</a>\r\n                <a class=\"collapse-item\" (click)=\"navigate2State('/admin/payments',{'transactionActionType':TransactionActionType.insurance_purchase})\" routerLinkActive=\"active\">Insurance Purchase</a>\r\n              \r\n            </div>\r\n        </div>\r\n    </li>\r\n\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/admin/messages\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-comments\"></i>\r\n            <span>Messages</span></a>\r\n    </li>\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/admin/user-levels\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-medall-alt\"></i>\r\n            <span>User Levels</span></a>\r\n    </li>\r\n\r\n    \r\n\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/admin/blogs\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-clipboard\"></i>\r\n            <span>Blogs</span></a>\r\n    </li>\r\n\r\n \r\n    <!-- <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/lender/messages\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-comments\"></i>\r\n            <span>Messages</span></a>\r\n    </li>\r\n\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\"  routerLink=\"/lender/messages\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-calendar\"></i>\r\n            <span>Calendar</span></a>\r\n    </li>\r\n\r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\"  routerLink=\"/lender/messages\" routerLinkActive=\"active\">\r\n            <i class=\"icon icon-star\"></i>\r\n            <span>My Ratings</span></a>\r\n    </li> -->\r\n\r\n    <!-- <li class=\"nav-item\">\r\n        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapsePages\" aria-expanded=\"true\" aria-controls=\"collapsePages\">\r\n            <i class=\"icon icon-settings\"></i>\r\n            <span>Settings</span>\r\n        </a>\r\n        <div id=\"collapsePages\" class=\"collapse\" aria-labelledby=\"headingPages\" data-parent=\"#accordionSidebar\">\r\n            <div class=\"bg-white py-2 collapse-inner rounded\">\r\n             \r\n                <a class=\"collapse-item\" routerLink=\"/lender/profile\">My Profile</a>\r\n                <a class=\"collapse-item\" href=\"register.html\">Change Password</a>\r\n                <a class=\"collapse-item\" href=\"forgot-password.html\">Bank Details</a>\r\n                <a class=\"collapse-item\" href=\"forgot-password.html\">Payment Agreement</a>\r\n               \r\n            </div>\r\n        </div>\r\n    </li> -->\r\n\r\n \r\n    <li class=\"nav-item\">\r\n        <a class=\"nav-link\" routerLink=\"/logout\">\r\n            <i class=\"icon icon-flickr-alt\"></i>\r\n            <span>Logout</span></a>\r\n    </li>\r\n\r\n    <!-- Divider -->\r\n    <!-- <hr class=\"sidebar-divider d-none d-md-block\"> -->\r\n\r\n    <!-- Sidebar Toggler (Sidebar) -->\r\n    <!-- <div class=\"text-center d-none d-md-inline\">\r\n        <button class=\"rounded-circle border-0\" id=\"sidebarToggle\"></button>\r\n    </div> -->\r\n\r\n\r\n</ul>\r\n\r\n\r\n\r\n\r\n\r\n\r\n<!-- Nav Start [ngClass]=\"{'dark position-relative' : (router.url!='/')}\"-->\r\n<header id=\"custom-header-nav\" class=\"ecommerce nav-fix shadow-sm p-0 d-none\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col\">\r\n                <nav>\r\n                    <a class=\"logo-light m-r-auto\" routerLink=\"/home\">\r\n                        <img class=\"img-fluid\" src=\"/assets/img/avitii-logo.png\"></a>\r\n\r\n                    <div class=\"navbar m-l-auto p-1 btn-back\" id=\"togglebtn\">\r\n                        <div class=\"responsive-btn\">\r\n                            <h5 class=\"btn-back\">back</h5>\r\n                        </div>\r\n                        <ul class=\"main-menu\">\r\n                            <li><a routerLink=\"/admin\">Home</a></li>\r\n                            <!-- <li><a routerLink=\"/admin/services\" routerLinkActive=\"active\">Services</a></li>\r\n                            <li><a routerLink=\"/admin/servicesadd\" routerLinkActive=\"active\">Services<i class=\"icon-plus m-2 text-success\"></i></a></li> -->\r\n                            <li><a routerLink=\"/admin/users\" routerLinkActive=\"active\">User Mangement</a></li>\r\n                            <li><a routerLink=\"/admin/add-user\" routerLinkActive=\"active\">User<i class=\"icon-plus m-2 text-success\"></i></a></li>\r\n                            <li><a routerLink=\"/admin/payments\" routerLinkActive=\"active\">Transactions</a></li>\r\n                            <li><a routerLink=\"/admin/earnings\" routerLinkActive=\"active\">Payments</a></li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"top-header-right mr-1\">\r\n                        <ul>\r\n\r\n                            <li class=\"cart  d-none\">\r\n                                <a aria-expanded=\"false\" routerLink=\"/lender/messages\" routerLinkActive=\"active\">\r\n                                    <i class=\"icon-comment-alt\"></i>\r\n                                </a>\r\n\r\n                            </li>\r\n                            <li class=\"cart\">\r\n                                <a aria-expanded=\"false\" data-toggle=\"dropdown\" href=\"#\" id=\"dropdownMenuButton1\">\r\n                                    <i class=\"icon-bell bell\"></i>\r\n                                    <span *ngIf=\"(utilityService._.keys(notificationService.appNotifications).length)>0\" class=\"badge badge-primary bell-count\" [textContent]=\"utilityService._.keys(notificationService.appNotifications).length\"></span>\r\n                                </a>\r\n                                <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\" x-placement=\"bottom-end\" style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\r\n                                    <ul class=\"shopping-cart\">\r\n                                        <li *ngFor=\"let notification of utilityService._.values(notificationService.appNotifications)\">\r\n                                            <div class=\"pb-2\">\r\n                                                <div class=\"mb-1\">{{notification.message}}</div>\r\n                                                <div class=\"font-weight-light small mb-1\">{{notification.description}}</div>\r\n                                                <button class=\"btn btn-secondary btn-sm\" (click)=\"notificationService.check4Notification(notification)\">View</button>\r\n                                            </div>\r\n                                        </li>\r\n\r\n\r\n\r\n                                    </ul>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"cart\">\r\n                                <a aria-expanded=\"false\" data-toggle=\"dropdown\" href=\"#\" id=\"dropdownMenuButton1\">\r\n                                    <img class=\"userimg mt-n2\" src=\"/assets/img/user-default.png\">\r\n                                </a>\r\n                                <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\" x-placement=\"bottom-end\" style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\r\n                                    <ul class=\"shopping-cart\">\r\n                                        <li>\r\n                                            <a class=\"h6 d-block\" routerLink=\"/admin\">\r\n                                                {{currentUser.firstName}}\r\n                                                <span class=\"badge badge-primary float-right\"\r\n                                                    [textContent]=\"currentUser.role\"></span>\r\n                                            </a>\r\n                                        </li>\r\n                                        <li><a routerLink=\"/admin/profile\">Profile</a></li>\r\n                                        <hr>\r\n                                        <li>\r\n                                            <a (click)=\"logout()\">Logout</a>\r\n                                        </li>\r\n                                    </ul>\r\n                                </div>\r\n\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                    <div class=\"responsive-btn\">\r\n                        <a class=\"toggle-nav\"><i aria-hidden=\"true\" class=\"icon-align-center text-white\"></i></a>\r\n                    </div>\r\n                </nav>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</header>\r\n<!-- Nav end-->");
 
 /***/ }),
 
@@ -2175,6 +3126,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services/utility.service */ "A1CT");
 /* harmony import */ var src_app_services__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services */ "o0su");
 /* harmony import */ var src_app_socketio_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/socketio.service */ "bgkY");
+/* harmony import */ var angular_datatables__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! angular-datatables */ "njyG");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! rxjs */ "qCKp");
+/* harmony import */ var src_app_models_role__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/models/role */ "z56L");
+
+
+
 
 
 
@@ -2184,18 +3141,34 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let PaymentTransactionsComponent = class PaymentTransactionsComponent {
-    constructor(socketService, alertService, utilityService) {
+    constructor(socketService, alertService, utilityService, elementRef) {
         this.socketService = socketService;
         this.alertService = alertService;
         this.utilityService = utilityService;
+        this.elementRef = elementRef;
+        this.dtTrigger = new rxjs__WEBPACK_IMPORTED_MODULE_9__["Subject"]();
+        this.dtOptions = {};
         this.PaymentTransactionDetailsArray = null;
         this.loading = false;
-        let _data = {};
+        this.transactionActionType = null;
+        let paramobj = history.state;
+        if (paramobj) {
+            this.transactionActionType = paramobj['transactionActionType'];
+            delete history.state['transactionActionType'];
+        }
+        if (!this.transactionActionType) {
+            this.transactionActionType = [src_app_models_role__WEBPACK_IMPORTED_MODULE_10__["TransactionActionType"].plan_purchase];
+        }
+        let _data = {
+            transactionActionType: this.transactionActionType
+        };
         this.socketService.getAllPaymentTransactionDetails(_data)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["first"])())
             .subscribe(data => {
             if (data && data['success']) {
                 this.PaymentTransactionDetailsArray = data["data"];
+                this.populateUsersDataInTable();
+                //this.rerender();
                 this.loading = false;
             }
             else {
@@ -2221,14 +3194,68 @@ let PaymentTransactionsComponent = class PaymentTransactionsComponent {
             this.loading = false;
         });
     }
+    //#region datatable actions
     ngOnInit() {
+        this.populateUsersDataInTable();
+    }
+    ngOnDestroy() {
+        // Do not forget to unsubscribe the event
+        this.dtTrigger.unsubscribe();
+        if (this.elementRef && this.elementRef.nativeElement && this.elementRef.nativeElement.querySelector('.paginate_button.next')) {
+            this.elementRef.nativeElement.querySelector('.paginate_button.next')
+                .removeEventListener('click');
+        }
+    }
+    populateUsersDataInTable() {
+        this.dtOptions = {
+            pagingType: 'full_numbers',
+            pageLength: 10,
+            drawCallback: () => {
+                this.elementRef.nativeElement.querySelector('.paginate_button.next')
+                    .addEventListener('click', this.onClick.bind(this));
+            }
+        };
+        this.dtTrigger.next();
+        this.rerender();
+    }
+    ngAfterViewInit() {
+        if (this.datatableElement && this.datatableElement.dtInstance) {
+            this.datatableElement.dtInstance.then((dtInstance) => {
+                dtInstance.columns().every(function () {
+                    const that = this;
+                    $('input', this.footer()).on('keyup change', function () {
+                        if (that.search() !== this['value']) {
+                            that
+                                .search(this['value'])
+                                .draw();
+                        }
+                    });
+                });
+            });
+        }
+    }
+    rerender() {
+        if (this.datatableElement && this.datatableElement.dtInstance) {
+            this.datatableElement.dtInstance.then((dtInstance) => {
+                // Destroy the table first
+                dtInstance.destroy();
+                // Call the dtTrigger to rerender again
+                this.dtTrigger.next();
+            });
+        }
+    }
+    onClick(event) {
     }
 };
 PaymentTransactionsComponent.ctorParameters = () => [
     { type: src_app_socketio_service__WEBPACK_IMPORTED_MODULE_7__["SocketioService"] },
     { type: src_app_services__WEBPACK_IMPORTED_MODULE_6__["AlertService"] },
-    { type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_5__["UtilityService"] }
+    { type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_5__["UtilityService"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ElementRef"] }
 ];
+PaymentTransactionsComponent.propDecorators = {
+    datatableElement: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"], args: [angular_datatables__WEBPACK_IMPORTED_MODULE_8__["DataTableDirective"], { static: false },] }]
+};
 PaymentTransactionsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
         selector: 'app-payment-transactions',
@@ -2237,7 +3264,8 @@ PaymentTransactionsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__deco
     }),
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_socketio_service__WEBPACK_IMPORTED_MODULE_7__["SocketioService"],
         src_app_services__WEBPACK_IMPORTED_MODULE_6__["AlertService"],
-        src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_5__["UtilityService"]])
+        src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_5__["UtilityService"],
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ElementRef"]])
 ], PaymentTransactionsComponent);
 
 

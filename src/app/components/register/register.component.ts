@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit {
             birthPlace: [''],
             promoCode: [''],
             mobileNo: [''],
-            hearAboutUs: [''],
+            hearAboutUs: ['', Validators.required],
             app_doc_type: [AppDocumentType.user_profile]
         }, {
             validator: MustMatch('password', 'confirmPassword'),

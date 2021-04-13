@@ -189,6 +189,10 @@ export class LendNowComponent implements OnInit {
       eSignatureLendersName: ['', Validators.required],
       loanInsuranceRequired: [false],
       loanInsuranceAmount: [0],
+      proposedLoanAmount: [null],
+      loanApplyNumber: [null],
+      loanInsuranceCreatedOn: [null],
+      calculatedMonthlyAmountForEMI: [null],
     });
 
   }
@@ -200,6 +204,10 @@ export class LendNowComponent implements OnInit {
       eSignatureBorrowersName: [_userObj.eSignatureBorrowersName || '', Validators.required],
       loanInsuranceRequired: [_userObj.loanInsuranceRequired || false],
       loanInsuranceAmount: [_userObj.loanInsuranceAmount || 0],
+      proposedLoanAmount: [_userObj.proposedLoanAmount || null],
+      loanApplyNumber: [_userObj.loanApplyNumber || null],
+      loanInsuranceCreatedOn: [_userObj.loanInsuranceCreatedOn || null],
+      calculatedMonthlyAmountForEMI: [_userObj.calculatedMonthlyAmountForEMI || null],
     });
   }
 
@@ -229,26 +237,34 @@ export class LendNowComponent implements OnInit {
     if (this.lendNowForm.invalid) {
       return;
     }
-
+    if (this.lendNowForm.get('loanInsuranceRequired').value && !this.lendNowForm.get('loanInsuranceAmount').value) {
+      this.alertService.error("Please pay insurance amount first");
+      return;
+    }
     if (this.lendNowForm.get('eSignatureLendersPassportNumber').value != this.lenderUserObj.myPassportNumber) {
       this.alertService.error("Passport Number miss match. Please enter proper number");
       return;
     }
 
-
     let _currentSessionApply = {
-      sessionObj: {},
+      sessionObj: {
+        loanAmount: null
+      },
       borrowerId: null,
       lenderId: null,
       _id: null,
       status: null,
       loanId: null,
       isLoanBorrowed: false,
-      createdByUserObj: {}
+      createdByUserObj: {},
+      createdBy: null
     };
 
     _currentSessionApply = this.lendNowForm.value;
     _currentSessionApply.sessionObj = this.LoanObj;
+    if (this.lendNowForm.get('proposedLoanAmount').value) {
+      _currentSessionApply.sessionObj.loanAmount = this.lendNowForm.get('proposedLoanAmount').value;
+    }
     _currentSessionApply.borrowerId = this.borrowerUserObj._id;
     _currentSessionApply.lenderId = this.lenderUserObj._id;
     _currentSessionApply.loanId = this.LoanObj._id;
@@ -271,12 +287,20 @@ export class LendNowComponent implements OnInit {
       switch (_currentSessionApply.status) {
         case SessionStatus.Pending:
         case SessionStatus.OngoingAccepted:
+          _currentSessionApply.createdBy = this.authenticationService.currentUserValue._id;
           this.socketService.setSessionApply(true, _currentSessionApply);
           break;
         default:
           this.socketService.updateSessionApply(true, _currentSessionApply, this.lenderUserObj);
           break;
       }
+      //#region create chat group
+      let _adminUsersArray = [];
+      _adminUsersArray.push(this.lenderUserObj._id);
+      _adminUsersArray.push(this.borrowerUserObj._id);
+      let _currentContactObj = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, this.utilityService.returnLoanType(this.LoanObj.loanType) + " - " + this.borrowerUserObj.firstName, this.LoanObj._id, _currentSessionApply._id, _adminUsersArray, null, null);
+      this.socketService.sendEventToAddNewContact(_currentContactObj);
+      //#endregion create chat group
       switch (_currentSessionApply.status) {
         case SessionStatus.Accepted:
           this.alertService.success("Updated. Loan contract is available under My Contract->Accepted tab.", true);
@@ -305,7 +329,7 @@ export class LendNowComponent implements OnInit {
               calculatedMonthlyAmountForEMI: null
             };
             installment.loanStartDateTime = this.utilityService.returnDateWithAddingMonths(_LoanObj.loanStartDateTime, index + 1).format("DD-MMM-YYYY");
-            installment.calculatedMonthlyAmountForEMI = this.LoanObj.calculatedMonthlyAmountForEMI;
+            installment.calculatedMonthlyAmountForEMI = this.lendNowForm.get('calculatedMonthlyAmountForEMI').value || this.LoanObj.calculatedMonthlyAmountForEMI;
             _LoanObj.installments.push(installment);
           }
 
@@ -334,13 +358,6 @@ export class LendNowComponent implements OnInit {
                 this.loading = false;
               });
           //#endregion print PDF signed contract
-          //#region create chat group
-          let _adminUsersArray = [];
-          _adminUsersArray.push(this.lenderUserObj._id);
-          _adminUsersArray.push(this.borrowerUserObj._id);
-          let _currentContactObj = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, _LoanObj.loanType + " - " + this.borrowerUserObj.firstName, this.LoanObj._id, _currentSessionApply._id, _adminUsersArray, null, null);
-          this.socketService.sendEventToAddNewContact(_currentContactObj);
-          //#endregion create chat group
           break;
         case SessionStatus.Pending:
           this.alertService.success("Loan contract signed successfully.", true);
@@ -369,11 +386,30 @@ export class LendNowComponent implements OnInit {
 
   }
 
-  initiatePayment(event) {
+  clicked2InitiatePayment(event) {
     if (event.srcElement.checked) {
+      this.lendNowForm.get('loanInsuranceRequired').setValue(true);
+    } else {
+      this.lendNowForm.get('loanInsuranceRequired').setValue(false);
+    }
+  }
+
+  initiatePayment() {
+    this.submitted = true;
+    if (this.lendNowForm.invalid) {
+      return;
+    }
+
+    if (this.lendNowForm.get('eSignatureLendersPassportNumber').value != this.lenderUserObj.myPassportNumber) {
+      this.alertService.error("Passport Number miss match. Please enter proper number");
+      return;
+    }
+
+    if (this.lendNowForm.get('loanInsuranceRequired').value) {
+
       let _calculatedInsuranceValue = 0;
       //_calculatedInsuranceValue = (this.LoanObj.loanAmount * 20) / 100;
-      _calculatedInsuranceValue = (this.LoanObj.loanAmount / 100) * 20;
+      _calculatedInsuranceValue = this.utilityService.returnRoundedNumber((this.LoanObj.loanAmount / 100) * 20);
       this.lendNowForm.get('loanInsuranceAmount').setValue(_calculatedInsuranceValue);
       let _header4Payment = 'Insurance Payment for ' + this.utilityService.returnLoanType(this.LoanObj.loanType);
 
@@ -382,13 +418,15 @@ export class LendNowComponent implements OnInit {
         _loanApplyId = this.loanId + '__' + this.borrowerUserObj._id;
       }
       let _paymentUniqId = _loanApplyId + '__' + _.now();
-      this.initiateForPaymentForLender(this.loanId, _loanApplyId, this.lenderUserObj._id, _calculatedInsuranceValue, _header4Payment, TransactionActionType.paid_for_loan_insurance, null, null, _paymentUniqId);
+      this.initiateForPaymentForLender(this.loanId, _loanApplyId, this.lenderUserObj._id, _calculatedInsuranceValue, _header4Payment, TransactionActionType.insurance_purchase, null, null, _paymentUniqId);
     } else {
       this.userInitiatedForPayment = false;
       this.lendNowForm.get('loanInsuranceAmount').setValue(0);
     }
   }
-
+  resetStatusOfPayment() {
+    this.userInitiatedForPayment = false;
+  }
   initiateForPaymentForLender(_loanId, _loanApplyId, _endUserId, _amount4Payment, _header4Payment, _transactiActionType, _currency, _selectedPaymentMethod, _paymentUniqId) {
     //#region handle LoanObj payments
     this.userInitiatedForPayment = true;
@@ -409,7 +447,22 @@ export class LendNowComponent implements OnInit {
     };
 
     this.payment.initPaymentConfigStripe(PaymentObj);
-    //this.socketService.setSessionApplyUpdateStatus(false, _loanId, _loanApplyId, _status, this.authenticationService.currentUserValue._id);    
+    this.payment.getCurrentPaymentApproved().subscribe(_obj => {
+      if (_obj && _obj.success) {
+        let userObj = this.authenticationService.currentUserValue;
+        this.lendNowForm.get('loanInsuranceAmount').setValue(PaymentObj.amount4Payment);
+        this.lendNowForm.get('loanInsuranceRequired').setValue(true);
+        this.lendNowForm.get('loanInsuranceCreatedOn').setValue(_.now());
+        this.clickedOnVerifiedSignLoanContract();
+      } else {
+        this.alertService.error(_obj.message || "Payment failed");
+        this.lendNowForm.get('loanInsuranceAmount').setValue(0);
+        this.lendNowForm.get('loanInsuranceRequired').setValue(false);
+        this.lendNowForm.get('loanInsuranceCreatedOn').setValue(null);
+      }
+      this.resetStatusOfPayment();
+      this.payment.sendCurrentPaymentFailed(true);
+    });
     //#endregion handle LoanObj payments
   }
 

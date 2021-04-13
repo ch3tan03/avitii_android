@@ -1,409 +1,436 @@
-
-    <!-- Page Heading -->
-    <!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
+<!-- Page Heading -->
+<!-- <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
         <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Profile</a>
     </div> -->
 
-    <div class="row">
-
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-3 col-6 mb-4">
-            <div class="card border-left-primary shadow h-100">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                My Level</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">New Lender</div>
+<div [ngSwitch]="authenticationService.currentUserValue.role" class="d-none">
+    <div *ngSwitchCase="Role.Borrower">
+        <div class="jumbotron"
+            *ngIf="!authenticationService.currentUserValue.isVerified || !authenticationService.currentUserValue.isUsersBankDetailsSubmitted || !authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified">
+            <div class="text-black-50 h2 font-weight-lighter">
+                Welome, Your profile has been verified succesfully. Your need to submit your
+                <span class="badge badge-danger">Bank Details</span> and
+                <span class="badge badge-danger">Income Proof Documents</span> to access the loan market.
+            </div>
+            <hr>
+            <ul class="list-unstyled">
+                <li class="d-flex align-items-center justify-content-center mb-3 h4">
+                    Profile and personal document verification
+                    <span [ngSwitch]="authenticationService.currentUserValue.isVerified">
+                        <i *ngSwitchCase="true" class="icon icon-check-box text-success ml-3"></i>
+                        <i *ngSwitchDefault class="icon icon-pencil-alt text-danger ml-3"
+                            routerLink="/borrower/profile"></i>
+                    </span>
+                </li>
+                <li class="d-flex align-items-center justify-content-center mb-3 h4">
+                    Bank details submission
+                    <span [ngSwitch]="authenticationService.currentUserValue.isUsersBankDetailsSubmitted">
+                        <i *ngSwitchCase="true" class="icon icon-check-box text-success ml-3"></i>
+                        <i *ngSwitchDefault class="icon icon-pencil-alt text-danger ml-3"
+                            routerLink="/borrower/bank-details"></i>
+                    </span>
+                </li>
+                <li class="d-flex align-items-center justify-content-center mb-3 h4">
+                    Income Proof Documents and Mothly Expenses
+                    <span [ngSwitch]="authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified">
+                        <i *ngSwitchCase="true" class="icon icon-check-box text-success ml-3"></i>
+                        <i *ngSwitchDefault class="icon icon-pencil-alt text-danger ml-3"
+                            routerLink="/borrower/income-proof"></i>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div *ngSwitchCase="Role.Lender">
+        <div class="jumbotron"
+            *ngIf="!authenticationService.currentUserValue.isVerified || !authenticationService.currentUserValue.isUsersBankDetailsSubmitted">
+            <div class="text-black-50 h2 font-weight-lighter">
+                Welome, Your profile has been verified succesfully. Your need to submit your
+                <span class="badge badge-danger">Bank Details</span> to access the Loan Market.
+            </div>
+            <hr>
+            <ul class="list-unstyled">
+                <li class="d-flex align-items-center justify-content-center mb-3 h4">
+                    Profile and personal document verification
+                    <span [ngSwitch]="authenticationService.currentUserValue.isVerified">
+                        <i *ngSwitchCase="true" class="icon icon-check-box text-success ml-3"></i>
+                        <i *ngSwitchDefault class="icon icon-pencil-alt text-danger ml-3"
+                            routerLink="/lender/profile"></i>
+                    </span>
+                </li>
+                <li class="d-flex align-items-center justify-content-center mb-3 h4">
+                    Bank details submission
+                    <span [ngSwitch]="authenticationService.currentUserValue.isUsersBankDetailsSubmitted">
+                        <i *ngSwitchCase="true" class="icon icon-check-box text-success ml-3"></i>
+                        <i *ngSwitchDefault class="icon icon-pencil-alt text-danger ml-3"
+                            routerLink="/borrower/bank-details"></i>
+                    </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card border-left-primary shadow h-100">
+            <div class="card-body dashobard-card">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            My Level
                         </div>
-                        <div class="col-auto">
-                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-capitalize text-cap">
+                            {{utilityService.returnStringWithReplacing_(authenticationService.currentUserValue.userType)}}
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-3 col-6 mb-4">
-            <div class="card border-left-warning shadow h-100">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                Member since</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">Jan 11, 2020</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                        </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Earnings (Monthly) Card Example -->
-        <div class="col-xl-3 col-md-3 col-6 mb-4">
-            <div class="card border-left-success shadow h-100">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Paid Contracts
-                            </div>
-                            <div class="row no-gutters align-items-center">
-                                <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50</div>
-                                </div>
-                                <!-- <div class="col">
-                                    <div class="progress progress-sm mr-2">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div> -->
-                            </div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pending Requests Card Example -->
-        <div class="col-xl-3 col-md-3 col-6 mb-4">
-            <div class="card border-left-secondary shadow h-100">
-                <div class="card-body">
-                    <div class="row no-gutters align-items-center">
-                        <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
-                                Paid Loans</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                        </div>
-                        <div class="col-auto">
-                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3 col-md-3 col-6 mb-4">
-            <div class="card bg-primary text-white shadow">
-                <div class="card-body">
-                    <div class="text-xs font-weight-bold text-uppercase mb-1">
-                        Active Loan</div>
-                        <div class="h5 mb-0 font-weight-bold">18</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3 col-md-3 col-6 mb-4">
-            <div class="card bg-warning text-white shadow">
-                <div class="card-body">
-                    <div class="text-xs font-weight-bold text-uppercase mb-1">
-                        Disbursed Loans</div>
-                        <div class="h5 mb-0 font-weight-bold">18</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3 col-md-3 col-6 mb-4">
-            <div class="card bg-success text-white shadow">
-                <div class="card-body">
-                    <div class="text-xs font-weight-bold text-uppercase mb-1">
-                        Signed contracts</div>
-                        <div class="h5 mb-0 font-weight-bold">18</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-3 col-md-3 col-6 mb-4">
-            <div class="card bg-secondary text-white shadow">
-                <div class="card-body">
-                    <div class="text-xs font-weight-bold text-uppercase mb-1">
-                        Profit Overview</div>
-                        <div class="h5 mb-0 font-weight-bold">18</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="row">
-
-        <div class="col-xl-12 col-12">
-            <div class="card shadow mb-4">
-                <!-- Card Header - Dropdown -->
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Active Loans</h6>
-                    
-                </div>
-                <!-- Card Body -->
-                <div class="card-body p-0">
-                    <div class="table-responsive table-billing-history">
-                        <table class="table mb-0">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Borrower</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Refund</th>
-                                    <th scope="col">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#39201</td>
-                                    <td>06/15/2020</td>
-                                    <td>$29.99</td>
-                                    <td><span class="badge badge-light">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td>#38594</td>
-                                    <td>05/15/2020</td>
-                                    <td>$29.99</td>
-                                    <td><span class="badge badge-success">Paid</span></td>
-                                </tr>
-                                <tr>
-                                    <td>#38223</td>
-                                    <td>04/15/2020</td>
-                                    <td>$29.99</td>
-                                    <td><span class="badge badge-success">Paid</span></td>
-                                </tr>
-                                <tr>
-                                    <td>#38125</td>
-                                    <td>03/15/2020</td>
-                                    <td>$29.99</td>
-                                    <td><span class="badge badge-success">Paid</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card border-left-warning shadow h-100">
+            <div class="card-body dashobard-card">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                            Member since
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{authenticationService.currentUserValue.userVerifiedOn | date:'dd-MMM-YYYY'}}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="col-xl-12 col-12">
-            <div class="card shadow mb-4">
-               
-                <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Disbursed Loans</h6>
-                    
-                </div>
-              
-                <div class="card-body p-0">
-                    <div class="table-responsive table-billing-history">
-                        <table class="table mb-0">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Borrower</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Refund</th>
-                                    <th scope="col">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#39201</td>
-                                    <td>06/15/2020</td>
-                                    <td>$29.99</td>
-                                    <td><span class="badge badge-light">Pending</span></td>
-                                </tr>
-                                <tr>
-                                    <td>#38594</td>
-                                    <td>05/15/2020</td>
-                                    <td>$29.99</td>
-                                    <td><span class="badge badge-success">Paid</span></td>
-                                </tr>
-                                <tr>
-                                    <td>#38223</td>
-                                    <td>04/15/2020</td>
-                                    <td>$29.99</td>
-                                    <td><span class="badge badge-success">Paid</span></td>
-                                </tr>
-                                <tr>
-                                    <td>#38125</td>
-                                    <td>03/15/2020</td>
-                                    <td>$29.99</td>
-                                    <td><span class="badge badge-success">Paid</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-      
     </div>
 
-
-
-
-<div class="row d-none">
-    <div class="col-xl-12 col-12">
-
-        <section class="blog-sidebar py-0 mb-3">
-            <div class="row pl-0 pr-0">
-                <div class="col-lg-12">
-
-                    <h5 class="blog-title">upcoming sessions</h5>
-                    <div class="sidebar-container row">
-
-                        <div *ngFor="let item of utilityService._.values(allSessionsTodayList);" class="post-container d-flex col-4 float-left">
-                            <div class="w-35 m-r-25">
-                                <img alt="" class="img-fluid" src="/assets/img/na.png">
-                                <div class="badge badge-blue">
-                                    {{item.location}}
-                                </div>
-                            </div>
-                            <div>
-                                <h5 class="post-head">{{item.sessionSubject}}</h5>
-                                <h6 class="date">{{item.loanStartDateTime | date:'medium'}}</h6>
-                                <div class="mt-3">
-                                    <i class="icon-video-camera fa-lg mr-3" (click)="clickedOnSessionChatVideo(item, true)"></i>
-                                    <i class="icon-comment" (click)="clickedOnSessionChatVideo(item, false)"></i>
-                                </div>
-                            </div>
+    <!-- Earnings (Monthly) Card Example -->
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card border-left-success shadow h-100">
+            <div class="card-body dashobard-card">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Paid Contracts
                         </div>
-                        <div class="mt-2 text-center blog-agency no-item">
-                            <img src="assets/img/noresult.png" style="height: 60px;">
-                            <h5 class="mt-3 font-weight-normal">Looks like you don't have any counselling Session today</h5>
-                        </div>
-                        <!-- <div *ngIf="!utilityService._.values(allSessionsTodayList)">
-                                <div class="content_loader_sm"></div>
-                                <div class="content_loader_sm"></div>
-                            </div> -->
-                    </div>
-
-                </div>
-            </div>
-        </section>
-    </div>
-    <div class="col-xl-4 col-12">
-        <div class="row">
-            <div class="col-xl-12 col-md-6 mb-3">
-                <div class="card shadow-sm">
-                    <div class="card-body">
                         <div class="row no-gutters align-items-center">
-                            <div class="col text-center border-right">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Spent</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">${{fundService.totalSpentOnSessions4currentUser}}</div>
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{allMyPaidContractCount}}
+                                </div>
                             </div>
-                            <div class="col text-center">
-                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">My Sessions</div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{allSessionsCount}}/{{allSessionsTodayCount}}</div>
-                            </div>
+                            <!-- <div class="col">
+                                            <div class="progress progress-sm mr-2">
+                                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
+                                        </div> -->
                         </div>
                     </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-    <div class="col-xl-8 col-12">
-        <div class="row mb-3">
-            <div class="col-xl-12 col-12">
-                <div class="form-row bg-pink border p-4 shadow-sm">
-                    <div class="col-xl-10">
-                        <input type="text" class="form-control" placeholder="Find Borrower" autocomplete="off" [(ngModel)]="modalFindBorrower">
-                    </div>
-                    <div class="col-xl-2">
-                        <button class="btn btn-outline-primary btn-block" (click)="findBorrower(modalFindBorrower)">
-                            <i class="icon-search"></i> SEARCH
-                        </button>
+                    <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
                     </div>
                 </div>
             </div>
         </div>
-
     </div>
 
-    <div class="col-xl-12 col-12">
-
-
-
-
-        <div class="row mb-3">
-            <div class="col-xl-12 col-12">
-                <section class="agency blog blog-sec p-0">
-                    <div class="h6 mb-3">
-                        Borrowers
-                       
+    <!-- Pending Requests Card Example -->
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card border-left-secondary shadow h-100">
+            <div class="card-body dashobard-card">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                            Paid Loans</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{allMyPaidLoanCount}}</div>
                     </div>
-                    <div class="row">
-                        <div class="col-xl-4 col-12" *ngFor="let item of currentOnlineUserList;">
-
-
-                            <div class="card shadow-sm mb-4">
-                                <div class="bg-white blog-title card-header mb-0 text-capitalize">
-                                    {{item.firstName}}
-
-                                    <div class="center-text float-right">
-
-                                     
-                                        <span *ngIf="item.online" class="badge badge-success">Online</span>
-                                        <span *ngIf="!item.online" class="badge badge-danger">Offline</span>
-                                    </div>
-                                </div>
-                                <div class="card-body px-md-3 px-1 small">
-                                     <div class="row">  
-                                    <div class="col-xl-3">
-                                        <img class="img-fluid img-thumbnail" src="{{item.selfProfileUrl || '/assets/img/nouser.png'}}">
-                                    
-                                    </div> 
-                                        
-                                    <div class="col-xl-8 col-12">
-                                     
-
-                                        <div class="row">
-                                            <!-- <div class="col-xl-6 col-6 border-right mb-2">
-                                                <i aria-hidden="true" class="icon-timer mr-2"></i> 
-                                             {{session.loanStartDateTime | date:'MMM d, h:mm a'}} 
-                                            </div> -->
-                                            <!-- <div class="col-xl-12 col-12">
-                                                <p class="para2">
-                                                    {{item.myProfileDetails}}
-                                                </p>
-                                            </div>  -->
-                                            <div class="col-xl-6 col-6">
-                                                <i aria-hidden="true" class="icon-location-pin m-r-10"></i>
-                                                
-                                                {{item.country || 'NA'}}
-                                            </div>
-                                            <div class="col-xl-6 col-6">
-                                                <i aria-hidden="true" class="icon-bag m-r-10"></i>
-                                                
-                                                {{item.education || 'NA'}}
-                                            </div>
-                                        </div>
-                                    </div>          
-                                  
-                                  
-                                </div>
-                                </div>
-                                <div class="card-footer bg-white">
-                                    <!-- <span class="badge badge-success font-weight-normal text-capitalize btn float-left" >{{session.sessionType}}</span> -->
-                                    <div class="row">
-                                        <div class="col-xl-12">
-                                            <button class="btn btn-link text-capitalize text-success btn-sm" (click)="usersProfile(item)">
-                                                 Profile</button>
-                                            <button *ngIf="item.role=='borrower' && currentUser.role=='lender'" class="btn btn-link btn-sm text-capitalize float-right" (click)="createNewSessionWithBorrower(item._id)">
-                                                Request Consultation</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-
-
-
-
-
-                           
-                        </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
                     </div>
-                </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card bg-primary text-white shadow">
+            <div class="card-body dashobard-card">
+                <div class="text-xs font-weight-bold text-uppercase mb-1">
+                    Active Loan</div>
+                <div class="h5 mb-0 font-weight-bold">{{allMyActiveLoanCount}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card bg-warning text-white shadow">
+            <div class="card-body dashobard-card">
+                <div class="text-xs font-weight-bold text-uppercase mb-1">
+                    Disbursed Loans</div>
+                <div class="h5 mb-0 font-weight-bold">{{allMyDisbursedLoanCount}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card bg-success text-white shadow">
+            <div class="card-body dashobard-card">
+                <div class="text-xs font-weight-bold text-uppercase mb-1">
+                    UnSigned contracts</div>
+                <div class="h5 mb-0 font-weight-bold">{{allMyUnSignedContractLoanCount}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card bg-secondary text-white shadow">
+            <div class="card-body dashobard-card">
+                <div class="text-xs font-weight-bold text-uppercase mb-1">
+                    Profit Overview</div>
+                <div class="h5 mb-0 font-weight-bold">{{allMyProfitOverviewCount}}</div>
             </div>
         </div>
     </div>
 </div>
+
+<div class="row">
+
+    <div class="col-xl-12 col-12">
+        <div class="card shadow mb-4">
+
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Active Loans</h6>
+
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive table-billing-history">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Type</th>
+                                <th scope="col">Borrower Name</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Refund</th>
+                                <th scope="col">Next EMI</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let LoanObj of allSessionsData | mySessionsFilter : 'sessionAppliedByLenders[0].status' : ['accepted']:checkCreatedByUserId:checkCreatedByT">
+                                <td class="text-capitalize">{{(LoanObj.loanType || "").replace("_", " ")}}</td>
+                                <td class="text-capitalize">
+                                    {{LoanObj.nextInstallmentBorrowerFirstName}}
+                                </td>
+                                <td>{{LoanObj.loanAmount}}</td>
+                                <td>{{utilityService.returnRoundedNumber(LoanObj.calculatedMonthlyAmountForEMI *
+                                    LoanObj.loanTenureInMonths)}}</td>
+                                <td>{{LoanObj.nextInstallment | date:'dd-MMM-YYYY'}}</td>
+                                <td>
+                                    <div *ngFor="let LoanApplyObj of LoanObj.sessionAppliedByLenders">
+                                        <a>
+                                            <span *ngIf="!LoanApplyObj.isLoanAmountPaidByLender"
+                                                class="badge badge-danger">Pending</span>
+                                            <span *ngIf="LoanApplyObj.isLoanAmountPaidByLender"
+                                                class="badge badge-success">Paid</span>
+                                        </a>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <a (click)="showAppliedToSession(LoanObj)">
+                                        <span class="badge badge-primary">Details</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-12 col-12">
+        <div class="card shadow mb-4">
+
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Unsigned Contract</h6>
+
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive table-billing-history">
+                    <table class="table mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col">Type</th>
+                                <th scope="col">Borrower Name</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Refund</th>
+                                <th scope="col">Next EMI</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">#</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                *ngFor="let LoanObj of allSessionsData | mySessionsFilter : 'sessionAppliedByLenders[0].status' : ['ongoing_accepted']:checkCreatedByUserId:checkCreatedByT">
+                                <td class="text-capitalize">{{(LoanObj.loanType || "").replace("_", " ")}}</td>
+                                <td class="text-capitalize">
+                                    {{LoanObj.nextInstallmentBorrowerFirstName}}
+                                </td>
+                                <td>{{LoanObj.loanAmount}}</td>
+                                <td>{{utilityService.returnRoundedNumber(LoanObj.calculatedMonthlyAmountForEMI *
+                                    LoanObj.loanTenureInMonths)}}</td>
+                                <td>{{LoanObj.nextInstallment | date:'dd-MMM-YYYY'}}</td>
+                                <td>
+                                    <div *ngFor="let LoanApplyObj of LoanObj.sessionAppliedByLenders">
+                                        <a>
+                                            <span *ngIf="!LoanApplyObj.isLoanAmountPaidByLender"
+                                                class="badge badge-danger">Pending</span>
+                                            <span *ngIf="LoanApplyObj.isLoanAmountPaidByLender"
+                                                class="badge badge-success">Paid</span>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a (click)="showAppliedToSession(LoanObj)">
+                                        <span class="badge badge-primary">Details</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+        <div class="row d-none">
+        
+            <div class="col-xl-4 col-12">
+                <div class="row">
+        
+                    <div class="col-xl-12 col-md-6 mb-3">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col text-center border-right">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">My Wallet
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            ${{fundService.totalFund4currentUser}}</div>
+                                    </div>
+        
+                                    <div class="col text-center">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">My Sessions
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            {{allSessionsCount}}/{{allSessionsTodayCount}}</div>
+                                    </div>
+        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="col-xl-12 col-md-6 mb-3">
+        
+                        <section class="blog-sidebar pt-0">
+                            <div class="row pl-0 pr-0">
+                                <div class="col-lg-12">
+                                     <div>
+                                        <h5 class="blog-title">upcoming sessions</h5>
+                                        <div class="sidebar-container">
+                                            <div *ngFor="let item of utilityService._.values(allSessionsTodayList);" class="post-container d-flex">
+                                                <div class="w-35 m-r-25">
+                                                    <img alt="" class="img-fluid" src="/assets/img/na.png">
+                                                    <div class="badge badge-blue">
+                                                        {{item.location}}
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <h5 class="post-head">{{item.sessionSubject}}</h5>
+                                                    <h6 class="date">{{item.loanStartDateTime | date:'medium'}}</h6>
+                                                    <div class="mt-3">
+                                                        <i class="icon-video-camera fa-lg mr-3" (click)="clickedOnSessionChatVideo(item, true)"></i>
+                                                        <i class="icon-comment" (click)="clickedOnSessionChatVideo(item, false)"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-2 text-center blog-agency no-item">
+                                                <img src="assets/img/noresult.png" style="height: 60px;">
+                                                <h5 class="mt-3 font-weight-normal">Looks like you don't have any counselling Session today</h5>
+                                            </div>
+        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+        
+                </div>
+        
+            </div>
+        
+            <div class="col-xl-8 col-12">
+        
+                <section class="agency blog blog-sec blog-sidebar sider p-0">
+        
+                    <div class="h6 mb-3">
+        
+                        LATEST SESSIONS
+                       
+                    </div>
+                    <div class="card shadow-sm mb-4" *ngFor="let session of allSessionsData">
+                        <div class="bg-white blog-title card-header mb-0 text-capitalize">
+                            {{session.sessionSubject}}
+                        </div>
+                        <div class="card-body px-md-3 px-1 small">
+                             <div class="row">               
+                            <div class="col-xl-12 col-12">
+                                <p class="para2" [class.show_more]="!session._id">
+                                    {{session.loanDescription}}
+                                </p>
+                            </div>          
+                            <div class="col-xl-6 col-6 border-right mb-2">
+                                <i aria-hidden="true" class="icon-timer mr-2"></i> {{session.loanStartDateTime | date:'MMM d, h:mm a'}}
+                            </div>
+                           
+                            <div class="col-xl-6 col-6">
+                                <i aria-hidden="true" class="icon-location-pin m-r-10"></i>
+                                
+                                {{session.location}}
+                            </div>
+                          
+                        </div>
+                        </div>
+                        <div class="card-footer bg-white">
+                            <span class="badge badge-success font-weight-normal text-capitalize btn float-left" >{{session.sessionType}}</span>
+                            <a *ngIf="!check4applyToSession(session)" class="btn btn-success  text-capitalize btn-sm float-right text-white" (click)="applyToSession(session)">Apply</a>
+                            <a *ngIf="check4applyToSession(session)" class="btn btn-primary text-capitalize btn-sm float-right text-white" (click)="showAppliedToSession(session)"> Details</a>
+                        </div>
+                    </div>
+                    
+                    <div *ngIf="!allSessionsData">
+                        <div class="content_loader"></div>
+                        <div class="content_loader"></div>
+                    </div>
+        
+                </section>
+            </div>
+        </div>
+        -->

@@ -14,8 +14,8 @@
                 <div class="card-body px-5 py-4">
                     <p class="lead">One easy to understand pricing plan for all of our users! Get complete access to all
                         of our features.</p>
-                    <div class="mb-5">
-                        <div class="display-3 text-dark">$25</div>
+                    <div class="mb-2">
+                        <div class="display-3 text-dark">${{returnPaidPlanAmountUserRoleWise()}}</div>
                         per month
                     </div>
                     <ul class="list-unstyled">
@@ -48,7 +48,7 @@
                         </li>
                     </ul>
                 </div>
-                <a class="card-footer d-flex align-items-center justify-content-center" href="#!">
+                <div class="card-footer d-flex align-items-center justify-content-center cursor-pointer" href="#!" (click)="userInitiatedForPlanPurchaseOrRenewal()">
                     Pay Now
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -56,26 +56,27 @@
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>
-                </a>
+                </div>
             </div>
         </div>
         <!-- Detailed pricing column 2-->
         <div class="col-lg-6">
-            <div class="card bg-dark text-center pricing-detailed-behind">
+            <div class="card bg-dark text-center pricing-detailed-behind" *ngIf="!userInitiatedForPayment">
                 <div class="card-header justify-content-center py-3">
                     <h5 class="mb-0 text-white">Current Subsciption</h5>
                 </div>
                 <div class="card-body text-white-50 px-5 py-4">
-                    <h2 class="text-white">Trial Plan</h2>
-                    
-                    Days remaining
+                    <h2 class="text-white">{{usersCurrentPlanSubscription.planName}}</h2>
+                    Valid Untill
                     <h2 class="mt-3">
-                        <span class="badge badge-primary h3">26 Days</span>
-                    </h2>
-                    
+                        <span class="badge badge-primary h3">{{ usersCurrentPlanSubscription.userMemberShipExpireOn | date:'dd-MMM-YYYY'}}</span>
+                    </h2> 
+
+                    <div class="mt-1 text-white-50">Plan ends {{ usersCurrentPlanSubscription.userMemberShipExpireOn | datePretty}}</div>
+                                   
                 </div>
-                <a class="card-footer bg-gray-800 text-white d-flex align-items-center justify-content-center"
-                    href="#!">
+                <div class="card-footer bg-gray-800 text-white d-flex align-items-center justify-content-center cursor-pointer"
+                    (click)="userInitiatedForPlanPurchaseOrRenewal()">
                     Upgrade
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -83,7 +84,23 @@
                         <line x1="5" y1="12" x2="19" y2="12"></line>
                         <polyline points="12 5 19 12 12 19"></polyline>
                     </svg>
-                </a>
+                </div>
+            </div>
+            <div class="card bg-dark text-center pricing-detailed-behind" [hidden]="!userInitiatedForPayment">
+                <div class="card-header justify-content-center py-3">
+                    <h5 class="mb-0 text-white">Selected Plan</h5>
+                </div>
+                <div class="card-body text-white-50 px-5 py-4">
+                    <h2 class="text-white">{{usersNextPlanSubscription.planName}}</h2>
+                    Next Renewal
+                    <h2 class="mt-3">
+                        <span class="badge badge-primary h3">{{ usersNextPlanSubscription.userMemberShipExpireOn | datePretty}}</span>
+                    </h2>
+                    {{ usersNextPlanSubscription.userMemberShipExpireOn | date:'dd-MMM-YYYY'}}                               
+                </div>
+                <div class="card-footer bg-gray-800 text-white d-flex align-items-center justify-content-center">
+                    <app-payment [hidden]="!userInitiatedForPayment"></app-payment>
+                </div>
             </div>
         </div>
     </div>

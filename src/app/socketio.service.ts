@@ -310,7 +310,7 @@ export class SocketioService {
           data = result;
         }
       }
-      this.currentUsersRooms = this.utilityService._.union(this.currentUsersRooms, [this.currentUserId, AppRooms.my_app_main_room,]);
+      this.currentUsersRooms = this.utilityService._.union(this.currentUsersRooms, [this.currentUserId, AppRooms.my_app_main_room]);
       for (let _item in this.currentUsersRooms) {
         this.sendEventToJoinChatRoom(this.currentUsersRooms[_item], this.currentUserId);
       }
@@ -452,9 +452,9 @@ export class SocketioService {
     this.socket.emit('set_session_add_transactions_updated_by_lender', _sendDataOnlyMeFalseToAllTrue, _obj2Save);
   }
 
-  sendEventToJoinChatRoom(_roomId, _userId) {
+  sendEventToJoinChatRoom(_roomId, _userId, _roomIdArr:string[]=[]) {
     this.currentUsersRooms.push(_roomId);
-    this.socket.emit('join_room', { roomId: _roomId, userId: _userId });
+    this.socket.emit('join_room', { roomId: _roomId, userId: _userId, roomIdArr:_roomIdArr });
     this.requestAppNotificationWithCustomData(_roomId, [_userId]);
   }
 
@@ -471,8 +471,8 @@ export class SocketioService {
     this.socket.emit('get_all_old_chat_of_room', { roomId: _roomId });
   }
 
-  emitEventWithNameAndData(_eventName, _data) {
-    this.socket.emit(_eventName, _data);
+  emitEventWithNameAndData(_eventName, ...args) {
+    this.socket.emit(_eventName, ...args);
   }
 
   getAllUsers(_data) {
@@ -658,6 +658,56 @@ export class SocketioService {
     return fromEvent<any[]>(this.socket, 'response_session_session_apply_reject_with_refund_submit_request_and_update_all');
   }
 
+  sendEventForLoanAmountPaidByLenderWithUpdateAll(_loanId, _loanApplyId, _userId, _LoanApplyObjCurrent) {
+    let _data = {
+      loanId: _loanId,
+      loanApplyId: _loanApplyId,
+      updatedBy: _userId,
+      LoanApplyObjCurrent: _LoanApplyObjCurrent,
+      _id: _loanApplyId
+    };
+    this.socket.emit("request_session_session_apply_loan_amount_paid_by_lender_update_and_broadcast", _data);
+    return fromEvent<any[]>(this.socket, 'response_session_session_apply_loan_amount_paid_by_lender_update_and_broadcast');
+  }
+  sendEventForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(_loanId, _loanApplyId, _userId, _LoanApplyObjCurrent) {
+    let _data = {
+      loanId: _loanId,
+      loanApplyId: _loanApplyId,
+      updatedBy: _userId,
+      LoanApplyObjCurrent: _LoanApplyObjCurrent,
+      _id: _loanApplyId
+    };
+    this.socket.emit("request_session_session_apply_loan_amount_paid_by_lender_update_and_broadcast", _data);
+    return fromEvent<any[]>(this.socket, 'response_session_session_apply_loan_amount_paid_by_lender_update_and_broadcast');
+  }
+  sendEventForLoanAmountPaidToLenderWithUpdateAll(_loanId:string, _loanApplyId:string, _userId:string, _installmentKey:string, _loanTenureInMonths:number, _LoanApplyObjCurrent:any) {
+    let _data = {
+      loanId: _loanId,
+      loanApplyId: _loanApplyId,
+      updatedBy: _userId,
+      LoanApplyObjCurrent: _LoanApplyObjCurrent,
+      _id: _loanApplyId,
+      installmentKey:_installmentKey,
+      loanTenureInMonths:_loanTenureInMonths
+    };
+    this.socket.emit("request_session_session_apply_loan_amount_paid_to_lender_update_and_broadcast", _data);
+    return fromEvent<any[]>(this.socket, 'response_session_session_apply_loan_amount_paid_to_lender_update_and_broadcast');
+  }
+  
+  sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(_loanId:string, _loanApplyId:string, _userId:string, _installmentKey:string, _loanTenureInMonths:number, _LoanApplyObjCurrent:any) {
+    let _data = {
+      loanId: _loanId,
+      loanApplyId: _loanApplyId,
+      updatedBy: _userId,
+      LoanApplyObjCurrent: _LoanApplyObjCurrent,
+      _id: _loanApplyId,
+      installmentKey:_installmentKey,
+      loanTenureInMonths:_loanTenureInMonths
+    };
+    this.socket.emit("request_session_session_apply_loan_amount_paid_to_lender_update_and_broadcast", _data);
+    return fromEvent<any[]>(this.socket, 'response_session_session_apply_loan_amount_paid_to_lender_update_and_broadcast');
+  }
+
 
   addNewUser(obj2use: any) {
     this.socket.emit('request_user_add_new', obj2use);
@@ -704,6 +754,20 @@ export class SocketioService {
     return fromEvent<any[]>(this.socket, 'sessions_response_getall_bysearch_by_id');
   }
 
+  getSessionApplyCountByQuery(_sendDataOnlyMeFalseToAllTrue: boolean, _obj2Save, useAndTrueOrFalse:boolean, emitThisEvent:string) {
+    emitThisEvent = (emitThisEvent ? emitThisEvent : 'sessions_response_get_session_apply_count_by_query');
+    this.socket.emit('sessions_request_get_session_apply_count_by_query', _sendDataOnlyMeFalseToAllTrue, _obj2Save, useAndTrueOrFalse, emitThisEvent);
+    return fromEvent<any[]>(this.socket, emitThisEvent);
+  }
+
   //#endregion route client event to send server
+
+  sendEventToCheckLastPaymentReturnedSuccessOrFailed(PaymentObj) {
+    this.socket.emit("recd_to_check_last_payment_status", PaymentObj);
+  }
+
+  listenForUpdateStatusOfLastPayment() {
+    return fromEvent<any[]>(this.socket, 'recd_confirmation_of_last_payment_status');
+  }
 
 }

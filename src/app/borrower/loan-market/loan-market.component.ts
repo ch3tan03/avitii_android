@@ -6,6 +6,10 @@ import { AuthenticationService } from 'src/app/services/authentication.service';
 import { UtilityService } from 'src/app/services/utility.service';
 import { SocketioService } from 'src/app/socketio.service';
 import * as _ from 'lodash';
+import { MatDialog } from '@angular/material/dialog';
+import { PublicProfileComponent } from 'src/app/shared/public-profile/public-profile.component';
+import { first } from 'rxjs/operators';
+import { UserService } from 'src/app/services';
 
 @Component({
   selector: 'app-loan-market',
@@ -17,6 +21,8 @@ export class LoanMarketComponent implements OnInit {
   allLoanMarketData: any;
 
   constructor(
+    private userService: UserService,
+    public dialog: MatDialog,
     private socketService: SocketioService,
     public utilityService: UtilityService,
     private alertService: AlertService,
@@ -76,5 +82,51 @@ export class LoanMarketComponent implements OnInit {
       return false;
     }
   }
+  usersProfile(userObj) {
+    //#region fetch creator id
+    this.userService.getUserById(userObj._id)
+      .pipe(first())
+      .subscribe(
+        data => {
+          if (data && data['success']) {
+            console.log('84', this.authenticationService.currentUserValue);
+            const dialogRef = this.dialog.open(PublicProfileComponent, {
 
+              maxWidth: '100vw',
+              maxHeight: '100vh',
+              height: '100%',
+              width: '100%',
+              hasBackdrop: true,
+              data: {
+                userObj: _.cloneDeep(data['data']),
+                adminViewT: false
+              }
+            });
+
+            dialogRef.afterClosed().subscribe(result => {
+              console.log(`99 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+            });
+
+          } else {
+
+          }
+        },
+        error => {
+          let errorMsg2show = "";
+          try {
+            if (error && error.error && error.error.message) {
+              errorMsg2show = error.error.message;
+            } else if (error && error.message) {
+              errorMsg2show = error.message;
+            } else {
+              errorMsg2show = error;
+            }
+          } catch (ex) { }
+          this.alertService.error(errorMsg2show);
+
+        });
+    //#endregion fetch creator id
+
+  } 
+  
 }

@@ -27,7 +27,8 @@ import { SocketioService } from './socketio.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {OverlayModule} from '@angular/cdk/overlay';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { StripeModule } from "stripe-angular"
+import { StripeModule } from "stripe-angular";
+import { DataTablesModule } from "angular-datatables";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { StripeModule } from "stripe-angular"
     ChartsModule,
     BrowserAnimationsModule,
     OverlayModule,
-    StripeModule.forRoot("")
+    StripeModule.forRoot(""),
+    DataTablesModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

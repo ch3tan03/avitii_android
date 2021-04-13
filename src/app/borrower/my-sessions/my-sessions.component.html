@@ -66,7 +66,7 @@
 
 <section class="agency blog blog-sec blog-sidebar sider p-0 mt-4">
     <!-- ;-->
-    <div class="card shadow-sm mb-4" *ngFor="let LoanObj of allSessionsData | mySessionsFilter : 'sessionAppliedByBorrowers[0].status' : (SessionStatusTypeFilter.length>0 ? SessionStatusTypeFilter:['accepted']):checkCreatedByUserId:checkCreatedByT">
+    <div class="card shadow-sm mb-4" *ngFor="let LoanObj of allSessionsData | mySessionsFilter : 'sessionAppliedByBorrowers[0].status' : (SessionStatusTypeFilter.length>0 ? SessionStatusTypeFilter:['accepted']):checkCreatedByUserId:checkCreatedByT:(SessionStatusTypeFilter.indexOf(SessionStatus.Pending)>-1)">
         <div class="bg-white blog-title card-header mb-0 text-capitalize">
             {{utilityService.returnLoanType(LoanObj.loanType)}}
         </div>

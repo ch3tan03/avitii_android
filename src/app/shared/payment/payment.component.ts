@@ -31,6 +31,7 @@ export class PaymentComponent implements OnInit {
   planExpiry = null;
   paymentUniqId = null;
   transactiActionType = null;
+  alreadyClickedOnPayment: Boolean = false;
   constructor(
     public payment: PaymentService,
     public addFundsService: AddFundsService,
@@ -38,6 +39,7 @@ export class PaymentComponent implements OnInit {
   ) {
     //this.payPalConfig = this.payment.initConfig(null, null, null);
     this.selectedPaymentMethod = PaymentMethod.Online;
+    window.paymentStatusSentOnServer = false;
   }
 
   paymentThroughWallet() {
@@ -57,7 +59,8 @@ export class PaymentComponent implements OnInit {
       this.payPalConfig = payPalConfig
     });
 
-    this.payment.getCurrentPaymentObj().subscribe(_currentPaymentObj => { 
+    this.payment.getCurrentPaymentObj().subscribe(_currentPaymentObj => {
+      this.alreadyClickedOnPayment = false;
       this.currentPaymentObj = _currentPaymentObj;
       this.header4Payment = this.currentPaymentObj.header4Payment || 'Insurance Payment';
       this.amount4Payment = this.currentPaymentObj.amount4Payment || 100;
@@ -68,14 +71,19 @@ export class PaymentComponent implements OnInit {
       this.appPlanId = this.currentPaymentObj.appPlanId || null;
       this.planExpiry = this.currentPaymentObj.planExpiry || null;
       this.paymentUniqId = this.currentPaymentObj.paymentUniqId || null;
-      this.transactiActionType=_currentPaymentObj.transactiActionType;
+      this.transactiActionType = _currentPaymentObj.transactiActionType;
     });
-
+    this.payment.getCurrentPaymentFailed().subscribe(transactionStatus => {
+      this.handler.close();
+    });
 
     this.loadStripe();
   }
 
-  pay(amount) {
+  pay(amount, event) {
+    this.alreadyClickedOnPayment = true;
+    this.payment.startTimerInit();
+
     let paymentObj = {
       isLiveMode: !environment.isPaymentTestMode,
       amount: amount,
@@ -90,10 +98,10 @@ export class PaymentComponent implements OnInit {
       appPlanId: this.appPlanId,
       planExpiry: this.planExpiry,
       paymentUniqId: this.paymentUniqId,
-      transactiActionType:this.transactiActionType,
+      transactiActionType: this.transactiActionType,
       apiUrl: this.payment.returnUrChargePaymentForStripel()
     };
-    var handler = (<any>window).StripeCheckout.configure({
+    this.handler = (<any>window).StripeCheckout.configure({
       key: environment.STRIP_PAYMENT_Publishable_key,
       locale: 'auto',
       token: function (token: any) {
@@ -101,7 +109,7 @@ export class PaymentComponent implements OnInit {
         // Get the token ID to your server-side code for use.
         console.log(token);
         paymentObj.tokenId = token.id;
-
+        window.paymentStatusSentOnServer = true;
         fetch(paymentObj.apiUrl, {
           method: 'POST',
           headers: {
@@ -111,7 +119,7 @@ export class PaymentComponent implements OnInit {
         })
           .then(response => response.json())
           .then(data => {
-            paymentData = data;
+            //paymentData = data;
             console.log(data)
           });
         /*
@@ -120,17 +128,41 @@ export class PaymentComponent implements OnInit {
                 });
                 */
         //alert('Token Created!!');
+      },
+      opened: function () {
+        console.log("Form opened");
+      },
+      closed: function () {
+        if (!window.paymentStatusSentOnServer) {
+          paymentObj.tokenId = null;
+          console.log("Form Terminated");
+          fetch(paymentObj.apiUrl, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(paymentObj)
+          })
+            .then(response => response.json())
+            .then(data => {
+              //paymentData = data;
+              console.log(data)
+            });
+        } else {
+          console.log("Form closed");
+        }
       }
     });
 
-    handler.open({
+    this.handler.open({
       name: 'Avitii Lender System',
       description: this.header4Payment,
       amount: amount * 100,
       currency: this.currency,
-      email: this.authenticationService.currentUserValue.emailAddress
+      email: this.authenticationService.currentUserValue.emailAddress,
+      allowRememberMe: false
     });
-
+    event.preventDefault();
   }
 
   receivedTokenFromStripe() {

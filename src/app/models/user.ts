@@ -32,17 +32,27 @@ export class User {
     hearAboutUs: string;
     app_doc_type: string;
     token: string;
+
     isVerified: Boolean;
+    userVerifiedOn: Number;
+    appPlanId: string;
+    userMemberShipReactivatedOn: Number;
+    userMemberShipExpireOn: Number;
+
     myProfileMedia: [];
     myProfileDetails: string;
     userType: string;
-
+    
     myPassportMedia: [];
+    myPassportMediaVerified: Boolean;
     myPassportNumber: string;
     myDLMedia: [];
+    myDLMediaVerified: Boolean;
     myDLNumber: string;
     myHICardMedia: [];
+    myHICardMediaVerified: Boolean;
     myRKIMedia: [];
+    myRKIMediaVerified: Boolean;
     isRKIRegistered: Boolean;
 
     accountName: string;
@@ -65,6 +75,8 @@ export class User {
     accountOtherDetails3: string;
     accountOtherDetails4: string;
 
+    transactionIdCollection: object;
+
     createdOn: Number;
     updatedOn: Number;
     isDeleted: Boolean;
@@ -73,7 +85,14 @@ export class User {
     selfProfileUrl: string;
     online: Boolean;
     socketId: string;
+
     isRegisteredAllowed2EditProfile: Boolean;
+    isUsersBankDetailsSubmitted: Boolean;
+    isUsersIncomeAndExpenseProofVerified: Boolean;
+    totalIncome4currentUser:number;
+    totalExpense4currentUser:number;
+    totalAllowedBudget:number;
+
     constructor() {
         this.app_doc_type = AppDocumentType.user_profile;
     }

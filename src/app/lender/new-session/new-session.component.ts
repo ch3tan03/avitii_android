@@ -241,11 +241,12 @@ export class NewSessionComponent implements OnInit {
 
     let _loanStartDateTime = this.addSessionForm.get('loanStartDateTimeCustomised').value;
     let _loanEndDateTime = this.addSessionForm.get('loanEndDateTimeCustomised').value;
-
+/*
     if (!_loanStartDateTime || moment(_loanStartDateTime).isBefore(moment().add(1, 'd',))) {
       this.alertService.error("Start date must have 24 hours difference");
       return;
     }
+    */
 
     _loanEndDateTime = null;
     switch (this.addSessionForm.get('sessionType').value) {
@@ -267,7 +268,7 @@ export class NewSessionComponent implements OnInit {
     if (_loanEndDateTime) {
       loanEndDateTime_Temp = moment(_loanEndDateTime, 'YYYY-MM-DD').format('YYYY-MM-DD');
     } else {
-      loanEndDateTime_Temp = moment(_.cloneDeep(_loanStartDateTime)).add(this.addSessionForm.get('loanTenureInMonths').value, 'month').format('YYYY-MM-DD');
+      loanEndDateTime_Temp = moment(loanStartDateTime_Temp, 'YYYY-MM-DD').add(this.addSessionForm.get('loanTenureInMonths').value, 'month').format('YYYY-MM-DD');
     }
 
     //#region validate dates
@@ -282,11 +283,12 @@ export class NewSessionComponent implements OnInit {
       this.alertService.error("end time is not valid");
       return;
     }
+  /*
     if (moment(this.addSessionForm.get('loanStartDateTime').value).isBefore(moment())) {
       this.alertService.error("Loan should start in future date time only.");
       return;
     }
-
+*/
     if (moment(this.addSessionForm.get('loanStartDateTime').value).add(1, 'h').isAfter(moment(this.addSessionForm.get('loanEndDateTime').value))) {
       this.alertService.error("There must be min. 1 hour difference in Loan start and end time");
       return;
@@ -376,11 +378,8 @@ export class NewSessionComponent implements OnInit {
     let loanAmount = this.addSessionForm.get('loanAmount').value || 0;
     let loanTenureInMonths = this.addSessionForm.get('loanTenureInMonths').value || 0;
     let loanInterestRate = this.addSessionForm.get('loanInterestRate').value || 0;
-    //this._calculatedMonthlyAmountForEMI = loanAmount * loanInterestRate * (((1 + loanInterestRate) ^ loanTenureInMonths) / ((1 + loanInterestRate) ^ (loanTenureInMonths - 1)));
 
-    this._calculatedMonthlyAmountForEMI = (loanAmount + ((loanAmount * loanInterestRate * loanTenureInMonths) / 100)) / loanTenureInMonths;
-
-    this._calculatedMonthlyAmountForEMI = this.utilityService.returnRoundedNumber(this._calculatedMonthlyAmountForEMI);
+    this._calculatedMonthlyAmountForEMI = this.utilityService.fnCalculateMonthlyAmountForEMI(loanAmount, loanTenureInMonths, loanInterestRate);
 
     this.addSessionForm.get('calculatedMonthlyAmountForEMI').setValue(this._calculatedMonthlyAmountForEMI);
   }

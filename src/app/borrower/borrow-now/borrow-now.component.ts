@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { first } from 'rxjs/operators';
-import { SessionStatus } from 'src/app/models/role';
+import { SessionStatus, UserType } from 'src/app/models/role';
 import { AuthenticationService, UserService, AlertService } from 'src/app/services';
 import { AppRouterService } from 'src/app/services/app-router.service';
 import { UtilityService } from 'src/app/services/utility.service';
@@ -46,7 +46,7 @@ export class BorrowNowComponent implements OnInit {
       this.loanApplyId = paramobj['loanApplyId'];
       delete history.state['loanApplyId'];
       if (this.loanApplyId) {
-        this.clickedOnSignLoanContract();
+        this.clickedOnSignLoanContract(true);
       }
       if (this.loanId) {
         this.socketioService.getLoanMarketDataById(this.loanId)
@@ -80,7 +80,7 @@ export class BorrowNowComponent implements OnInit {
                     .subscribe(
                       data => {
                         if (data && data['success']) {
-                          
+
                           this.lenderUserObj = _.cloneDeep(data["data"]);
                           this.loading = false;
                         } else {
@@ -183,8 +183,12 @@ export class BorrowNowComponent implements OnInit {
     this.borrowNowForm = this.formBuilder.group({
       eSignatureBorrowersPassportNumber: ['', Validators.required],
       eSignatureBorrowersName: ['', Validators.required],
-      loanInsuranceRequired:[false],
+      loanInsuranceRequired: [false],
       loanInsuranceAmount: [0],
+      proposedLoanAmount: [null, Validators.min(this.LoanObj.loanAmount)],
+      loanApplyNumber: [null],
+      loanInsuranceCreatedOn: [null],
+      calculatedMonthlyAmountForEMI: [null],
     });
   }
 
@@ -194,8 +198,13 @@ export class BorrowNowComponent implements OnInit {
       eSignatureLendersName: [_userObj.eSignatureLendersName || '', Validators.required],
       eSignatureBorrowersPassportNumber: [_userObj.eSignatureBorrowersPassportNumber || '', Validators.required],
       eSignatureBorrowersName: [_userObj.eSignatureBorrowersName || '', Validators.required],
-      loanInsuranceRequired:[_userObj.loanInsuranceRequired || false],
+      loanInsuranceRequired: [_userObj.loanInsuranceRequired || false],
       loanInsuranceAmount: [_userObj.loanInsuranceAmount || 0],
+      proposedLoanAmount: [_userObj.proposedLoanAmount || null, Validators.min(this.LoanObj.loanAmount)],
+      loanApplyNumber: [_userObj.loanApplyNumber || null],
+      loanInsuranceCreatedOn: [_userObj.loanInsuranceCreatedOn || null],
+      calculatedMonthlyAmountForEMI: [_userObj.calculatedMonthlyAmountForEMI || null],
+
     });
   }
   get f() { return this.borrowNowForm.controls; }
@@ -213,9 +222,42 @@ export class BorrowNowComponent implements OnInit {
     this.returnHeaderTitleForPage();
   }
 
-  clickedOnSignLoanContract() {
+  clickedOnSignLoanContract(bypass2CheckOfProposedAmount:boolean=false) {
+    if(!bypass2CheckOfProposedAmount){
+      if (this.borrowNowForm.get('proposedLoanAmount').value) {
+        if (this.borrowNowForm.get('proposedLoanAmount').value <= this.LoanObj.loanAmount) {
+          this.alertService.error("amount must be hight than kr " + this.LoanObj.loanAmount);
+          return;
+        }
+        /*
+        if (this.borrowNowForm.get('proposedLoanAmount').value > this.borrowerUserObj.monthlyIncomeExpenseMargineAmount) {
+          this.alertService.error("amount must be lower than or equal to kr " + this.borrowerUserObj.monthlyIncomeExpenseMargineAmount);
+          return;
+        }
+        */
+  
+        if (this.borrowNowForm.get('proposedLoanAmount').value > this.returnAllowedAmountForLenderDependOnUserType()) {
+          this.alertService.error("amount must be lower than or equal to kr " + this.returnAllowedAmountForLenderDependOnUserType());
+          return;
+        }
+  
+        let _calculatedMonthlyAmountForEMI = this.utilityService.fnCalculateMonthlyAmountForEMI(this.borrowNowForm.get('proposedLoanAmount').value, this.LoanObj.loanTenureInMonths, this.LoanObj.loanInterestRate);
+        this.borrowNowForm.get('calculatedMonthlyAmountForEMI').setValue(_calculatedMonthlyAmountForEMI);
+      }
+    }
+
     this.userClickedOnSignLoanContract = true;
     this.returnHeaderTitleForPage();
+  }
+
+  returnAllowedAmountForLenderDependOnUserType() {
+    let maxLoanAmountForLender = null;
+    if (this.lenderUserObj.userType) {
+      maxLoanAmountForLender = this.utilityService.LoanAmountMaxTypes[this.lenderUserObj.userType].amount;
+    } else {
+      maxLoanAmountForLender = this.utilityService.LoanAmountMaxTypes[UserType.new_lender].amount;
+    }
+    return maxLoanAmountForLender;
   }
 
   clickedOnVerifiedSignLoanContract() {
@@ -232,18 +274,24 @@ export class BorrowNowComponent implements OnInit {
 
 
     let _currentSessionApply = {
-      sessionObj: {},
+      sessionObj: {
+        loanAmount: null
+      },
       borrowerId: null,
       lenderId: null,
       _id: null,
       status: null,
       loanId: null,
       isLoanBorrowed: false,
-      createdByUserObj: {}
+      createdByUserObj: {},
+      createdBy:null
     };
 
     _currentSessionApply = this.borrowNowForm.value;
     _currentSessionApply.sessionObj = this.LoanObj;
+    if (this.borrowNowForm.get('proposedLoanAmount').value) {
+      _currentSessionApply.sessionObj.loanAmount = this.borrowNowForm.get('proposedLoanAmount').value;
+    }
     _currentSessionApply.borrowerId = this.borrowerUserObj._id;
     _currentSessionApply.lenderId = this.lenderUserObj._id;
     _currentSessionApply.loanId = this.LoanObj._id;
@@ -265,13 +313,22 @@ export class BorrowNowComponent implements OnInit {
       this.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
       switch (_currentSessionApply.status) {
         case SessionStatus.Pending:
-        case SessionStatus.OngoingAccepted:
+          case SessionStatus.OngoingAccepted:
+          _currentSessionApply.createdBy=this.authenticationService.currentUserValue._id;
           this.socketService.setSessionApply(true, _currentSessionApply);
           break;
         default:
           this.socketService.updateSessionApply(true, _currentSessionApply, this.borrowerUserObj);
           break;
       }
+      //#region create chat group
+      let _adminUsersArray = [];
+      _adminUsersArray.push(this.lenderUserObj._id);
+      _adminUsersArray.push(this.borrowerUserObj._id);
+      let _currentContactObj = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, this.utilityService.returnLoanType(this.LoanObj.loanType) + " - " + this.borrowerUserObj.firstName, this.LoanObj._id, _currentSessionApply._id, _adminUsersArray, null, null);
+      this.socketService.sendEventToAddNewContact(_currentContactObj);
+      //#endregion create chat group
+
       switch (_currentSessionApply.status) {
         case SessionStatus.Accepted:
           this.alertService.success("Updated. Loan contract is available under My Contract->Accepted tab.", true);
@@ -286,6 +343,8 @@ export class BorrowNowComponent implements OnInit {
           };
 
           _LoanObj = _.cloneDeep(_currentSessionApply);
+
+
           _LoanObj.borrowersUserObj = _.cloneDeep(this.borrowerUserObj);
           _LoanObj.lendersUserObj = _.cloneDeep(this.lenderUserObj);
 
@@ -300,7 +359,7 @@ export class BorrowNowComponent implements OnInit {
               calculatedMonthlyAmountForEMI: null
             };
             installment.loanStartDateTime = this.utilityService.returnDateWithAddingMonths(_LoanObj.loanStartDateTime, index + 1).format("DD-MMM-YYYY");
-            installment.calculatedMonthlyAmountForEMI = this.LoanObj.calculatedMonthlyAmountForEMI;
+            installment.calculatedMonthlyAmountForEMI = this.borrowNowForm.get('calculatedMonthlyAmountForEMI').value || this.LoanObj.calculatedMonthlyAmountForEMI;
             _LoanObj.installments.push(installment);
           }
 
@@ -329,13 +388,6 @@ export class BorrowNowComponent implements OnInit {
                 this.loading = false;
               });
           //#endregion print PDF signed contract
-          //#region create chat group
-          let _adminUsersArray = [];
-          _adminUsersArray.push(this.lenderUserObj._id);
-          _adminUsersArray.push(this.borrowerUserObj._id);
-          let _currentContactObj = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, _LoanObj.loanType+" - "+this.borrowerUserObj.firstName, this.LoanObj._id, _currentSessionApply._id, _adminUsersArray, null, null);
-          this.socketService.sendEventToAddNewContact(_currentContactObj);
-          //#endregion create chat group
           break;
         case SessionStatus.Pending:
           this.alertService.success("Loan contract signed successfully.", true);
@@ -364,6 +416,6 @@ export class BorrowNowComponent implements OnInit {
 
   }
 
- 
+
 }
 

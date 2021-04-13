@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { SocketioService } from 'src/app/socketio.service';
 import { SessionsService } from 'src/app/services/sessions.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -38,11 +38,16 @@ export class MySessionsComponent implements OnInit {
     public authenticationService: AuthenticationService,
     public userService: UserService,
     public router: Router,
+    private _cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     (function ($) {
-      $('.tooltip-info').tooltip();
+      try {
+        $('.tooltip-info').tooltip();
+      } catch (ex) {
+        console.log('48', ex.message);
+      }
     })(jQuery);
 
     this.sessionsService.getSessionAllByBorrowerId(this.authenticationService.currentUserValue._id, null, null, null, true, null)
@@ -128,16 +133,28 @@ export class MySessionsComponent implements OnInit {
       if (result) {
         if (result.data) {
           console.log(`86 :: msc :: Dialog result: ${JSON.stringify(result)}`);
-          let _loanApplyId = result.data.sessionApply._id;
-          let _status = result.data.status;
-          //initiate payment here
-          //this.socketService.setSessionApplyUpdateStatus(false, _loanId, _loanApplyId, _status, this.authenticationService.currentUserValue._id, _transactionId);
-          let _allowed2CreateContactForSessionT = false;
-          switch (_status) {
-            case SessionStatus.Accepted:
-              //this.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
-              this.proccedAppliedToSession(sessionObj, _loanApplyId);
-              break;
+          if (result.data.status && result.data.sessionApply) {
+            let _loanApplyId = result.data.sessionApply._id;
+            let _status = result.data.status;
+            //initiate payment here
+            //this.socketService.setSessionApplyUpdateStatus(false, _loanId, _loanApplyId, _status, this.authenticationService.currentUserValue._id, _transactionId);
+            let _allowed2CreateContactForSessionT = false;
+            switch (_status) {
+              case SessionStatus.Accepted:
+                //this.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
+                this.proccedAppliedToSession(sessionObj, _loanApplyId);
+                break;
+            }
+          }
+          if (result.data.updatedSessionObj) {
+            
+            let _keyPairedMapObj = this.utilityService._.mapKeys(this.allSessionsData, "_id");
+
+            _keyPairedMapObj[result.data.updatedSessionObj._id] = result.data.updatedSessionObj;
+
+            this.allSessionsData = this.utilityService._.values(_keyPairedMapObj);
+
+            this._cdr.detectChanges();
           }
         }
       }
@@ -215,6 +232,7 @@ export class MySessionsComponent implements OnInit {
             this.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
             switch (_currentSessionApply.status) {
               case SessionStatus.Pending:
+                _currentSessionApply.createdBy=this.authenticationService.currentUserValue._id;
                 this.socketService.setSessionApply(true, _currentSessionApply);
                 break;
               default:

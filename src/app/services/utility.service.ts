@@ -8,9 +8,10 @@ import * as moment from 'moment';
 
 export class UtilityService {
   public _: any;
+  public moment: any;
   constructor() {
     this._ = _;
-
+    this.moment = moment;
   }
 
   public Countries: Array<string> = ['USA', 'INDIA'];
@@ -48,6 +49,12 @@ export class UtilityService {
     "cash": { "_id": "cash", "name": "Cash (local only)" },
   };
 
+  public AppPlanTypes: any = {
+    "trial_plan": { "_id": "trial_plan", "name": "Trial Plan", "amount": 0, 'expiryInMonth': 2 },
+    "paid_plan4lender": { "_id": "paid_plan4lender", "name": "Paid Plan", "amount": 25, 'expiryInMonth': 1 },
+    "paid_plan4borrower": { "_id": "paid_plan4borrower", "name": "Paid Plan", "amount": 5, 'expiryInMonth': 1 },
+  };
+
   public InsuranceTypes: any = {
     "20_5000": { "_id": "20_5000", "name": "20% of amounts lent up to 5000 ddk" },
   };
@@ -64,10 +71,26 @@ export class UtilityService {
     return moment(date).add(i, "month").startOf('month');
   }
 
+  returnEpochDateWithAddingMonths(date, i: number) {
+    //return moment(date).add(i,"month");
+    let epochDate: Number = null;
+    epochDate = moment(date).add(i, "month").valueOf();
+    return epochDate;
+  }
+
   counter(i: number) {
     return new Array(i);
   }
-  
+
+  createString(letter: string, length: number) {
+    let word = '';
+    letter = (letter ? letter : '');
+    for (let i = 0; i < length; i++) {
+      word = word + '*';
+    }
+    return word;
+  }
+
   returnTIfNowIsInBetweenSupplied(_now1, _now2) {
     let _calculated_now1 = moment(_now1).add(-30, 'minute');
     let _calculated_now2 = moment(_now2);
@@ -133,6 +156,16 @@ export class UtilityService {
       }
       return _returnLoanRepaymentType;
     }
+  }
+
+  fnCalculateMonthlyAmountForEMI(loanAmount, loanTenureInMonths, loanInterestRate) {
+    //this._calculatedMonthlyAmountForEMI = loanAmount * loanInterestRate * (((1 + loanInterestRate) ^ loanTenureInMonths) / ((1 + loanInterestRate) ^ (loanTenureInMonths - 1)));
+
+    let _calculatedMonthlyAmountForEMI = (loanAmount + ((loanAmount * loanInterestRate * loanTenureInMonths) / 100)) / loanTenureInMonths;
+
+    _calculatedMonthlyAmountForEMI = this.returnRoundedNumber(_calculatedMonthlyAmountForEMI);
+
+    return _calculatedMonthlyAmountForEMI;
   }
 
 }

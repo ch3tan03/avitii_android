@@ -41,10 +41,11 @@ export class ModalApplySession implements OnInit {
   sessionApply: any;
   arrayItems: any = [0];
   SessionExecutionType = SessionExecutionType;
+  transactionOnForLoanAmountPaidByLenderCustomised = null;
   constructor(
     public dialogRef: MatDialogRef<ModalApplySession>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
-    public utilityService: UtilityService, 
+    public utilityService: UtilityService,
   ) {
     this.LoanObj = data.sessionObj;
     this.sessionApply = {};
@@ -62,6 +63,7 @@ export class ModalApplySession implements OnInit {
       this.arrayItems.push(this.arrayItems.length);
     }
   }
+
   ngOnInit() {
   }
 
@@ -87,29 +89,228 @@ export class ModalAppliedSessionDisplay implements OnInit {
   SessionExecutionType = SessionExecutionType;
   refundObj: any = {};
   ready2Refund: boolean = false;
+
+  alreadyInitiatedForPayment: Boolean = false;
+  LoanApplyObjCurrent: any;
+  LoanApplyObjCurrent4Installment: any;
+  LoanApplyObjCurrentCheckBoxes: any;
+  transactionOnForLoanAmountPaidByLenderCustomised = null;
+  transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised = null;
   constructor(
     private alertService: AlertService,
     public socketService: SocketioService,
     public router: Router,
     public dialogRef: MatDialogRef<ModalAppliedSessionDisplay>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any, 
-    public utilityService: UtilityService, 
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
+    public utilityService: UtilityService,
     public payment: PaymentService,
     public userService: UserService,
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     public contactService: ContactService
   ) {
     this.LoanObj = data.sessionObj;
     this.endUserId = data.endUserId;
+    this.LoanApplyObjCurrent = {};
+    this.LoanApplyObjCurrentCheckBoxes = {};
+    this.LoanApplyObjCurrentCheckBoxes.visibleKeys = {};
+    this.LoanApplyObjCurrent4Installment = {};
   }
 
+  initiateLoanAmountPaidByBorrower(event, LoanApplyObj, currentRowDate, _key) {
+    if (LoanApplyObj) {
+      let _installmentKey = null
+      if (event.target.checked && !this.alreadyInitiatedForPayment) {
+
+        _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
+
+        if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+          if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+            this.alertService.error("Installment already paid");
+            return;
+          }
+        }
+        this.LoanApplyObjCurrent4Installment = {};
+        this.LoanApplyObjCurrent4Installment.installmentKey = _installmentKey;
+        this.alreadyInitiatedForPayment = true;
+      } else {
+        if (!event.target.checked) {
+          if (this.alreadyInitiatedForPayment) {
+            this.alreadyInitiatedForPayment = false;
+          }
+          this.LoanApplyObjCurrent4Installment = {};
+        }
+        event.target.checked = false;
+        this.LoanApplyObjCurrentCheckBoxes[_key] = false;
+      }
+    }
+  }
+
+  returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, currentRowDate, _key) {
+    let _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
+    if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+      if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  paymentDoneByLender(LoanApplyObj) {
+    this.LoanApplyObjCurrent._id = LoanApplyObj._id;
+    if (this.transactionOnForLoanAmountPaidByLenderCustomised) {
+      this.LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLender = Date.parse(this.utilityService.moment(this.transactionOnForLoanAmountPaidByLenderCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD'));
+    }
+    if (!this.LoanApplyObjCurrent.isLoanAmountPaidByLender || !this.LoanApplyObjCurrent.transactionIdForLoanAmountPaidByLender || !this.LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLender) {
+      this.alertService.error("All data is required");
+      return;
+    }
+    if (this.utilityService.moment(this.LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLender).isAfter(this.utilityService.moment())) {
+      this.alertService.error("Future date is not allowed");
+      return;
+    }
+    if (this.utilityService.moment(this.LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLender).isBefore(this.utilityService.moment(this.LoanObj.loanStartDateTime))) {
+      this.alertService.error("Transaction date must be newer than loan created date");
+      return;
+    }
+
+    this.LoanApplyObjCurrent.createdOnForLoanAmountPaidByLender = this.utilityService._.now();
+
+    this.socketService.sendEventForLoanAmountPaidByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, this.LoanApplyObjCurrent).pipe(first()).subscribe(details => {
+      if (details && details["success"]) {
+        this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+      }
+    });
+    this.LoanApplyObjCurrent = {};
+  }
+
+  paymentDoneToLenderConfirmByLender(LoanApplyObj) {
+    let _past_days_allowed4payment = 15;
+    let _future_days_allowed4payment = 7;
+
+    //this.LoanApplyObjCurrent4Installment.loanTenureInMonths = this.LoanObj.loanTenureInMonths;
+    //this.LoanApplyObjCurrent4Installment.installmentKey = null;
+    //this.LoanApplyObjCurrent4Installment._id = LoanApplyObj._id;
+    if (this.transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised) {
+      this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender = Date.parse(this.utilityService.moment(this.transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD 00:00:00 A'));
+    }
+    if (!this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender) {
+      this.alertService.error("All data is required");
+      return;
+    }
+    if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender).isAfter(this.utilityService.moment(this.LoanApplyObjCurrent4Installment.installmentKey).add('D', _future_days_allowed4payment))) {
+      this.alertService.error("Future date is not allowed");
+      return;
+    }
+
+    if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidByLenderConfirmByBorrower).isAfter(this.utilityService.moment().add('D', (-1) * _past_days_allowed4payment))) {
+      this.alertService.error("Historic date is not allowed");
+      return;
+    }
+    if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidByLenderConfirmByBorrower).isBefore(this.utilityService.moment().add('D',))) {
+      this.alertService.error("Future date is not allowed");
+      return;
+    }
+
+    if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+      let _old_installmentKey: string = null;
+      for (let index in LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+        if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[index]) {
+          _old_installmentKey = LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[index].installmentKey;
+        }
+      }
+      if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender).isBefore(this.utilityService.moment(_old_installmentKey))) {
+        this.alertService.error("Transaction date must be newer than installment date");
+        return;
+      }
+    } else {
+      if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender).isBefore(this.utilityService.moment(this.LoanObj.loanStartDateTime))) {
+        this.alertService.error("Transaction date must be newer than loan created date");
+        return;
+      }
+    }
+
+    this.LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender = this.utilityService._.now();
+    let _loanTenureInMonths: number = parseInt(this.LoanObj.loanTenureInMonths);
+    let _installmentKey: string = this.LoanApplyObjCurrent4Installment.installmentKey;
+    //delete this.LoanApplyObjCurrent4Installment.installmentKey;
+
+    this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, _installmentKey, _loanTenureInMonths, this.LoanApplyObjCurrent4Installment)
+      .pipe(first())
+      .subscribe(details => {
+        if (details && details["success"]) {
+          this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+        }
+      });
+    this.LoanApplyObjCurrent4Installment = {};
+  }
+
+  returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, currentRowDate, _key) {
+    let _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
+    if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+      if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+        if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey].createdOnForLoanAmountPaidToLenderConfirmByLender) {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  viewCurrentInstallmentAlreadyPaid(LoanApplyObj, currentRowDate, _key) {
+    let _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
+    if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+      if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+        if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+          this.LoanApplyObjCurrent4Installment = {};
+          this.LoanApplyObjCurrent4Installment = LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey];
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  initiateLoanAmountPaidByBorrowerConfirmByLender(event, LoanApplyObj, currentRowDate, _key) {
+    if (LoanApplyObj) {
+      let _installmentKey = null
+      if (event.target.checked && !this.alreadyInitiatedForPayment) {
+
+        _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
+        this.LoanApplyObjCurrent4Installment = {};
+        if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+          if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey]) {
+            if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey].createdOnForLoanAmountPaidToLenderConfirmByLender) {
+              this.alertService.error("Installment payment already confirmed");
+              return;
+            } else {
+              this.LoanApplyObjCurrent4Installment = {};
+              this.LoanApplyObjCurrent4Installment = LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_installmentKey];
+            }
+          }
+        }
+
+        this.LoanApplyObjCurrent4Installment.installmentKey = _installmentKey;
+        this.alreadyInitiatedForPayment = true;
+      } else {
+        if (!event.target.checked) {
+          if (this.alreadyInitiatedForPayment) {
+            this.alreadyInitiatedForPayment = false;
+          }
+          this.LoanApplyObjCurrent4Installment = {};
+        }
+        event.target.checked = false;
+        this.LoanApplyObjCurrentCheckBoxes[_key] = false;
+      }
+    }
+  }
   returnUrl4downloadCOntractPDF(sessionApplyId) {
-    let Url4downloadCOntractPDF = environment.apiUrl +'/signed_pdf_contract/' + sessionApplyId + '.pdf';
+    let Url4downloadCOntractPDF = environment.apiUrl + '/signed_pdf_contract/' + sessionApplyId + '.pdf';
     return Url4downloadCOntractPDF;
   }
 
   ngOnInit() {
   }
+
   finalSubmissionForRefund() {
     this.socketService.sendEventToRejectSessionWithRefundRequestWiUpdateAll(this.refundObj.loanId, this.refundObj.loanApplyId, this.endUserId, SessionStatus.RejectedOngoingWithRefund, this.refundObj.transactionId, this.refundObj.amount, this.refundObj.cancellationCharges, this.refundObj.finalAmount2Refund, this.refundObj.captureId, this.refundObj._id).pipe(first()).subscribe(details => {
       if (details && details["success"]) {

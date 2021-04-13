@@ -127,11 +127,14 @@
                                             <div *ngIf="f.loanInterestRate.errors.required" i18n>Interest Rate is
                                                 required
                                             </div>
-                                            <div *ngIf="f.loanInterestRate.errors.min" i18n>value must be greater than 0
+                                            <div *ngIf="f.loanInterestRate.errors.min" i18n>minimum permitted interest rate is {{loanInterestRateMin}}
+                                            </div>
+                                            <div *ngIf="f.loanInterestRate.errors.max" i18n>maximum permitted interest rate is {{loanInterestRateMax}}
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <!--
                                 <div class="col-xl-12 col-12">
                                     <div class="form-group mb-0">
                                         <label for="loanStartDateTimeCustomised" i18n>Start on</label>
@@ -150,6 +153,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            -->
                                 <!--
                                         <div class="col-xl-12 col-12">
                                             <label for="loanEndDateTimeCustomised" i18n>Ends on</label>

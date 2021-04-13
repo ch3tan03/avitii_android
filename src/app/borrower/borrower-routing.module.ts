@@ -28,6 +28,8 @@ import { MonthlySubscriptionComponent } from '../shared/monthly-subscription/mon
 import { IncomeProofComponent } from '../shared/income-proof/income-proof.component';
 import { PaymentCancelComponent } from '../shared/payment-cancel/payment-cancel.component';
 import { PaymentSuccessComponent } from '../shared/payment-success/payment-success.component';
+import { UsersIncomeExpenseVerifyGuard } from '../users-income-expense-verify.guard';
+import { BankDetailsVerifyGuard } from '../bank-details-verify.guard';
 
 const routes: Routes = [
   {
@@ -47,8 +49,8 @@ const routes: Routes = [
       { canActivate: [RolesGuard], path: 'payment-success', component: PaymentSuccessComponent },
       { canActivate: [RolesGuard], path: 'payment-cancel', component: PaymentCancelComponent },
       { canActivate: [RolesGuard], path: 'ratings', component: UserRatingsComponent },
-      { canActivate: [RolesGuard], path: 'loan-market', component: LoanMarketComponent },
-      { canActivate: [RolesGuard], path: 'make-a-loan', component: GetALoanComponent },
+      { canActivate: [RolesGuard, BankDetailsVerifyGuard, UsersIncomeExpenseVerifyGuard], path: 'loan-market', component: LoanMarketComponent },
+      { canActivate: [RolesGuard, BankDetailsVerifyGuard, UsersIncomeExpenseVerifyGuard], path: 'make-a-loan', component: GetALoanComponent },
       { canActivate: [RolesGuard], path: 'borrow-now', component: BorrowNowComponent },
       { canActivate: [RolesGuard], path: 'update-password', component: UpdatePasswordComponent },
       { canActivate: [RolesGuard], path: 'bank-details', component: BankDetailsComponent },

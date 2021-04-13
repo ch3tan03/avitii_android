@@ -66,7 +66,7 @@ export class AuthenticationService implements OnInit {
     public get currentUserValue(): User {
         return this.currentUserSubject.value;
     }
-
+    
     login(userName: string, password: string) {
         var _url2use = this.baseurl + 'api/post/user/admin/login'//`${environment.apiUrl}/users/authenticate`;
         return this.http.post<any>(_url2use, { userName, password })

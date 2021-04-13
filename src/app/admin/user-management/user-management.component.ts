@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, ViewChild, OnDestroy, OnInit } from '@angular/core';
 import { SocketioService } from 'src/app/socketio.service';
 import { AlertService, AuthenticationService } from 'src/app/services';
 import { UtilityService } from 'src/app/services/utility.service';
@@ -7,15 +7,25 @@ import { PublicProfileComponent } from 'src/app/shared/public-profile/public-pro
 import { MatDialog } from '@angular/material/dialog';
 import { Role, AppAccessPermissions } from 'src/app/models/role';
 import { Router } from '@angular/router';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs/internal/Subject';
+import { IncomeProofComponent } from 'src/app/shared/income-proof/income-proof.component';
+
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.css']
 })
-export class UserManagementComponent implements OnInit {
+export class UserManagementComponent implements OnDestroy, OnInit {
+
+  @ViewChild(DataTableDirective, { static: false })
+  datatableElement: DataTableDirective;
+  dtTrigger: Subject<any> = new Subject<any>();
+  dtOptions: DataTables.Settings = {};
 
   PaymentTransactionDetailsArray: any = null;
   loading = false;
+
 
   constructor(
     public dialog: MatDialog,
@@ -24,7 +34,8 @@ export class UserManagementComponent implements OnInit {
     public utilityService: UtilityService,
     public authenticationService: AuthenticationService,
     public router: Router,
-    ) {
+    private elementRef: ElementRef
+  ) {
     let _data = {};
 
     this.socketService.getAllUsersWithRequestData(_data, 0)
@@ -33,6 +44,8 @@ export class UserManagementComponent implements OnInit {
         data => {
           if (data && data['success']) {
             this.PaymentTransactionDetailsArray = data["data"];
+            this.populateUsersDataInTable();
+            //this.rerender();
             this.loading = false;
           } else {
             this.alertService.error(data['message']);
@@ -56,9 +69,6 @@ export class UserManagementComponent implements OnInit {
         });
   }
 
-  ngOnInit(): void {
-  }
-
   updateUsersVerificationStatus(_userId, _isVerified) {
     this.alertService.success("Please wait while we updating status of user");
     this.socketService.updateUsersVerificationStatus(_userId, _isVerified)
@@ -69,6 +79,8 @@ export class UserManagementComponent implements OnInit {
             let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
             usersObjArr[data["data"]["_id"]] = data["data"]
             this.PaymentTransactionDetailsArray = usersObjArr;
+            this.populateUsersDataInTable();
+            //this.rerender();
             this.alertService.success(data['message']);
             this.loading = false;
           } else {
@@ -103,6 +115,8 @@ export class UserManagementComponent implements OnInit {
             let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
             delete usersObjArr[_userId];
             this.PaymentTransactionDetailsArray = usersObjArr;
+            this.populateUsersDataInTable();
+            //this.rerender();
             this.alertService.success(data['message']);
             this.loading = false;
           } else {
@@ -126,6 +140,7 @@ export class UserManagementComponent implements OnInit {
           this.loading = false;
         });
   }
+
   usersProfile(userObj) {
 
     console.log('95', this.authenticationService.currentUserValue);
@@ -143,6 +158,13 @@ export class UserManagementComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
+      if (result && result.data) {
+        let _userId = result.data._id;
+        let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+        delete usersObjArr[_userId];
+        usersObjArr[_userId] = result.data;
+        this.PaymentTransactionDetailsArray = usersObjArr;
+      }
       console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
@@ -169,4 +191,97 @@ export class UserManagementComponent implements OnInit {
   navigate2EditUser(userId) {
     this.router.navigate(['/admin/add-user'], { state: { userId: userId } });
   }
+
+  //#region datatable actions
+
+  ngOnInit(): void {
+    this.populateUsersDataInTable();
+  }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
+    if (this.elementRef && this.elementRef.nativeElement && this.elementRef.nativeElement.querySelector('.paginate_button.next')) {
+      this.elementRef.nativeElement.querySelector('.paginate_button.next')
+        .removeEventListener('click');
+    }
+  }
+
+  populateUsersDataInTable() {
+    this.destroyTable();
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 10,
+      drawCallback: () => {
+        this.elementRef.nativeElement.querySelector('.paginate_button.next')
+          .addEventListener('click', this.onClick.bind(this));
+      }
+    };
+    this.dtTrigger.next();
+    this.rerender();
+  }
+
+  ngAfterViewInit(): void {
+    if (this.datatableElement && this.datatableElement.dtInstance) {
+      this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        dtInstance.columns().every(function () {
+          const that = this;
+          $('input', this.footer()).on('keyup change', function () {
+            if (that.search() !== this['value']) {
+              that
+                .search(this['value'])
+                .draw();
+            }
+          });
+        });
+      });
+    }
+  }
+
+  rerender(): void {
+    if (this.datatableElement && this.datatableElement.dtInstance) {
+      this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        // Destroy the table first
+        dtInstance.destroy();
+        // Call the dtTrigger to rerender again
+        this.dtTrigger.next();
+      });
+    }
+  }
+
+  destroyTable(): void {
+    if (this.datatableElement && this.datatableElement.dtInstance) {
+      this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => {
+        // Destroy the table first
+        dtInstance.destroy();
+      });
+    }
+  }
+
+  onClick(event): void {
+  }
+
+  //#endregion datatable actions
+  usersIncomeExpenseDetails(userObj) {
+
+    console.log('241', this.authenticationService.currentUserValue);
+    const dialogRef = this.dialog.open(IncomeProofComponent, {
+
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      hasBackdrop: true,
+      data: {
+        userObj: userObj,
+        isOpenedInModel: true,
+        adminViewT: true
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`256 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+    });
+  }
+
 }

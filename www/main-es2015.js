@@ -270,10 +270,16 @@ let UtilityService = class UtilityService {
             "paypal": { "_id": "paypal", "name": "Paypal" },
             "cash": { "_id": "cash", "name": "Cash (local only)" },
         };
+        this.AppPlanTypes = {
+            "trial_plan": { "_id": "trial_plan", "name": "Trial Plan", "amount": 0, 'expiryInMonth': 2 },
+            "paid_plan4lender": { "_id": "paid_plan4lender", "name": "Paid Plan", "amount": 25, 'expiryInMonth': 1 },
+            "paid_plan4borrower": { "_id": "paid_plan4borrower", "name": "Paid Plan", "amount": 5, 'expiryInMonth': 1 },
+        };
         this.InsuranceTypes = {
             "20_5000": { "_id": "20_5000", "name": "20% of amounts lent up to 5000 ddk" },
         };
         this._ = lodash__WEBPACK_IMPORTED_MODULE_2__;
+        this.moment = moment__WEBPACK_IMPORTED_MODULE_3__;
     }
     returnStringWithReplacing_(_string) {
         if (_string) {
@@ -285,8 +291,22 @@ let UtilityService = class UtilityService {
         //return moment(date).add(i,"month");
         return moment__WEBPACK_IMPORTED_MODULE_3__(date).add(i, "month").startOf('month');
     }
+    returnEpochDateWithAddingMonths(date, i) {
+        //return moment(date).add(i,"month");
+        let epochDate = null;
+        epochDate = moment__WEBPACK_IMPORTED_MODULE_3__(date).add(i, "month").valueOf();
+        return epochDate;
+    }
     counter(i) {
         return new Array(i);
+    }
+    createString(letter, length) {
+        let word = '';
+        letter = (letter ? letter : '');
+        for (let i = 0; i < length; i++) {
+            word = word + '*';
+        }
+        return word;
     }
     returnTIfNowIsInBetweenSupplied(_now1, _now2) {
         let _calculated_now1 = moment__WEBPACK_IMPORTED_MODULE_3__(_now1).add(-30, 'minute');
@@ -355,6 +375,12 @@ let UtilityService = class UtilityService {
             }
             return _returnLoanRepaymentType;
         }
+    }
+    fnCalculateMonthlyAmountForEMI(loanAmount, loanTenureInMonths, loanInterestRate) {
+        //this._calculatedMonthlyAmountForEMI = loanAmount * loanInterestRate * (((1 + loanInterestRate) ^ loanTenureInMonths) / ((1 + loanInterestRate) ^ (loanTenureInMonths - 1)));
+        let _calculatedMonthlyAmountForEMI = (loanAmount + ((loanAmount * loanInterestRate * loanTenureInMonths) / 100)) / loanTenureInMonths;
+        _calculatedMonthlyAmountForEMI = this.returnRoundedNumber(_calculatedMonthlyAmountForEMI);
+        return _calculatedMonthlyAmountForEMI;
     }
 };
 UtilityService.ctorParameters = () => [];
@@ -767,7 +793,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\r\n<section class=\"resume schedule pt-3 pb-4\">\r\n    <div class=\"row\">\r\n        <div class=\"col-12\">\r\n            <div class=\"cal-time\">\r\n                <div class=\"time\">\r\n                    <h2 class=\"title-text pt-1\" i18n>Sign Up</h2>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</section>\r\n<!-- register section -->\r\n<section class=\"register-page section-b-space pt-0\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-8 offset-lg-2\">\r\n            <form [formGroup]=\"registerForm\" class=\"theme-form\">\r\n                <div class=\"tab-content theme-card shadow-sm\">\r\n                    <div class=\"tab-pane active\" id=\"reg_basic_details\">\r\n                        <div class=\"form-row\">\r\n                            <div class=\"col-md-12 text-center mb-2\">\r\n                                <div class=\"btn-group shadow mb-3\">\r\n                                    <button type=\"button\" class=\"btn\" (click)=\"onClickRoleChange('borrower')\"\r\n                                        [ngClass]=\"{ 'btn-app1-theme text-white': f.role.value=='borrower', 'btn-outline-info': f.role.value!='borrower'}\"\r\n                                        i18n>\r\n                                        I'm A Borrower\r\n                                    </button>\r\n                                    <button type=\"button\" class=\"btn\" (click)=\"onClickRoleChange('lender')\"\r\n                                        [ngClass]=\"{ 'btn-app1-theme text-white': f.role.value=='lender', 'btn-outline-info': f.role.value!='lender'}\"\r\n                                        i18n>\r\n                                        I'm A Lender\r\n                                    </button>\r\n                                </div>\r\n                                <hr>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-row\">\r\n                            <div class=\"col-md-6\">\r\n                                <label for=\"firstName\" i18n>First Name</label>\r\n                                <input type=\"text\" formControlName=\"firstName\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.firstName.errors }\" />\r\n                                <div *ngIf=\"submitted && f.firstName.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.firstName.errors.required\" i18n>First Name is required</div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-6\">\r\n                                <label for=\"lastName\" i18n>Last Name</label>\r\n                                <input type=\"text\" formControlName=\"lastName\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.lastName.errors }\" />\r\n                                <div *ngIf=\"submitted && f.lastName.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.lastName.errors.required\" i18n>Last Name is required</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-row\">\r\n                            <div class=\"col-md-6\">\r\n                                <label for=\"mobileNo\" i18n>\r\n                                    <i class=\"fab fa-whatsapp text-success\"></i>\r\n                                    Mobile Number</label>\r\n                                <input type=\"text\" formControlName=\"mobileNo\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.mobileNo.errors }\" />\r\n                                <div *ngIf=\"submitted && f.mobileNo.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.mobileNo.errors.required\" i18n>Mobile Number is required</div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-6\">\r\n                                <label for=\"emailAddress\" i18n>Email<span class=\"small\"> (Link will be sent for\r\n                                        verification)</span></label>\r\n                                <input type=\"email\" formControlName=\"emailAddress\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.emailAddress.errors }\"\r\n                                    pattern=\"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$\" />\r\n                                <div *ngIf=\"submitted && f.emailAddress.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.emailAddress.errors.required\" i18n>Email is required</div>\r\n                                    <div *ngIf=\"f.emailAddress.errors.email || f.emailAddress.errors.pattern\" i18n>\r\n                                        Invalid Email format.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-row\">\r\n                            <!-- <div class=\"col-md-12\">\r\n                                <div class=\"text-gray\" i18n>\r\n                                    Verification link will be sent on mail, to complete your registration please click on mail link when received.\r\n                                </div>\r\n                                <hr>\r\n                            </div> -->\r\n                            <div class=\"col-md-6\">\r\n                                <label for=\"password\" i18n>Password</label>\r\n                                <input type=\"password\" formControlName=\"password\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\" />\r\n                                <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.password.errors.required\" i18n>Password is required</div>\r\n                                    <div *ngIf=\"f.password.errors.minlength\" i18n>Password must be at least 6 characters\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-6\">\r\n                                <label i18n>Confirm Password</label>\r\n                                <input type=\"password\" formControlName=\"confirmPassword\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.confirmPassword.errors }\" />\r\n                                <div *ngIf=\"submitted && f.confirmPassword.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.confirmPassword.errors.required\" i18n>\r\n                                        Confirm Password is required\r\n                                    </div>\r\n                                    <div *ngIf=\"f.confirmPassword.errors.mustMatch\" i18n>\r\n                                        Passwords must match\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xl-12 mb-3\">\r\n                                <label for=\"hearAboutUs\">From where you hear about us?</label>\r\n                                <select formControlName=\"hearAboutUs\" class=\"custom-select\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.hearAboutUs.errors }\">\r\n                                    <option value=\"\" selected disabled>Choose</option>\r\n                                    <option *ngFor=\"let hearAboutUs of hearAboutUslist\" [ngValue]=\"hearAboutUs\">\r\n                                        {{hearAboutUs}}</option>\r\n                                </select>\r\n                                <div *ngIf=\"submitted && f.hearAboutUs.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.hearAboutUs.errors.required\">hearAboutUs is required</div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-12\">\r\n                                <div class=\"custom-control custom-checkbox\">\r\n\r\n                                    <input type=\"checkbox\" [value]=\"true\" formControlName=\"acceptTerms\"\r\n                                        class=\"custom-control-input\" id=\"defaultUnchecked\"\r\n                                        [ngClass]=\"{ 'is-invalid': submitted && f.acceptTerms.errors }\" />\r\n                                    <label class=\"custom-control-label\" for=\"defaultUnchecked\" i18n>I accept the general\r\n                                        <a class=\"text-primary\" routerLink=\"/disclaimer\" routerLinkActive=\"active\" for=\"defaultUnchecked\">\r\n                                            Terms Of Use and Privacy Policy.\r\n                                        </a>\r\n                                    </label>\r\n                                </div>\r\n                                <div *ngIf=\"submitted && f.acceptTerms.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.acceptTerms.errors.required\" i18n> is required</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-12 text-center\">\r\n                                <hr>\r\n                                <button type=\"button\" (click)=\"onSubmitVerifyRegisterUser()\" [disabled]=\"loading\"\r\n                                    class=\"btn btn-default primary-btn  radius-0\" i18n>Submit</button>\r\n                                <img *ngIf=\"loading\" class=\"pl-3\"\r\n                                    src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\" />\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </form>\r\n        </div>\r\n    </div>\r\n</section>\r\n<!-- register section -->\r\n");
+/* harmony default export */ __webpack_exports__["default"] = ("\r\n<section class=\"resume schedule pt-3 pb-4\">\r\n    <div class=\"row\">\r\n        <div class=\"col-12\">\r\n            <div class=\"cal-time\">\r\n                <div class=\"time\">\r\n                    <h2 class=\"title-text pt-1\" i18n>Sign Up</h2>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</section>\r\n<!-- register section -->\r\n<section class=\"register-page section-b-space pt-0\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-8 offset-lg-2\">\r\n            <form [formGroup]=\"registerForm\" class=\"theme-form\">\r\n                <div class=\"tab-content theme-card shadow-sm\">\r\n                    <div class=\"tab-pane active\" id=\"reg_basic_details\">\r\n                        <div class=\"form-row\">\r\n                            <div class=\"col-md-12 text-center mb-2\">\r\n                                <div class=\"btn-group shadow mb-3\">\r\n                                    <button type=\"button\" class=\"btn\" (click)=\"onClickRoleChange('borrower')\"\r\n                                        [ngClass]=\"{ 'btn-app1-theme text-white': f.role.value=='borrower', 'btn-outline-info': f.role.value!='borrower'}\"\r\n                                        i18n>\r\n                                        I'm A Borrower\r\n                                    </button>\r\n                                    <button type=\"button\" class=\"btn\" (click)=\"onClickRoleChange('lender')\"\r\n                                        [ngClass]=\"{ 'btn-app1-theme text-white': f.role.value=='lender', 'btn-outline-info': f.role.value!='lender'}\"\r\n                                        i18n>\r\n                                        I'm A Lender\r\n                                    </button>\r\n                                </div>\r\n                                <hr>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-row\">\r\n                            <div class=\"col-md-6\">\r\n                                <label for=\"firstName\" i18n>First Name</label>\r\n                                <input type=\"text\" formControlName=\"firstName\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.firstName.errors }\" />\r\n                                <div *ngIf=\"submitted && f.firstName.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.firstName.errors.required\" i18n>First Name is required</div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-6\">\r\n                                <label for=\"lastName\" i18n>Last Name</label>\r\n                                <input type=\"text\" formControlName=\"lastName\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.lastName.errors }\" />\r\n                                <div *ngIf=\"submitted && f.lastName.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.lastName.errors.required\" i18n>Last Name is required</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-row\">\r\n                            <div class=\"col-md-6\">\r\n                                <label for=\"mobileNo\" i18n>\r\n                                    <i class=\"fab fa-whatsapp text-success\"></i>\r\n                                    Mobile Number</label>\r\n                                <input type=\"text\" formControlName=\"mobileNo\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.mobileNo.errors }\" />\r\n                                <div *ngIf=\"submitted && f.mobileNo.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.mobileNo.errors.required\" i18n>Mobile Number is required</div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-6\">\r\n                                <label for=\"emailAddress\" i18n>Email<span class=\"small\"> (Link will be sent for\r\n                                        verification)</span></label>\r\n                                <input type=\"email\" formControlName=\"emailAddress\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.emailAddress.errors }\"\r\n                                    pattern=\"^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$\" />\r\n                                <div *ngIf=\"submitted && f.emailAddress.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.emailAddress.errors.required\" i18n>Email is required</div>\r\n                                    <div *ngIf=\"f.emailAddress.errors.email || f.emailAddress.errors.pattern\" i18n>\r\n                                        Invalid Email format.</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-row\">\r\n                            <!-- <div class=\"col-md-12\">\r\n                                <div class=\"text-gray\" i18n>\r\n                                    Verification link will be sent on mail, to complete your registration please click on mail link when received.\r\n                                </div>\r\n                                <hr>\r\n                            </div> -->\r\n                            <div class=\"col-md-6\">\r\n                                <label for=\"password\" i18n>Password</label>\r\n                                <input type=\"password\" formControlName=\"password\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\" />\r\n                                <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.password.errors.required\" i18n>Password is required</div>\r\n                                    <div *ngIf=\"f.password.errors.minlength\" i18n>Password must be at least 6 characters\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-6\">\r\n                                <label i18n>Confirm Password</label>\r\n                                <input type=\"password\" formControlName=\"confirmPassword\" class=\"form-control\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.confirmPassword.errors }\" />\r\n                                <div *ngIf=\"submitted && f.confirmPassword.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.confirmPassword.errors.required\" i18n>\r\n                                        Confirm Password is required\r\n                                    </div>\r\n                                    <div *ngIf=\"f.confirmPassword.errors.mustMatch\" i18n>\r\n                                        Passwords must match\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-xl-12 mb-3\">\r\n                                <label for=\"hearAboutUs\">From where you hear about us?</label>\r\n                                <select formControlName=\"hearAboutUs\" class=\"custom-select\"\r\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.hearAboutUs.errors }\">\r\n                                    <option value=\"\" selected disabled>Choose</option>\r\n                                    <option *ngFor=\"let hearAboutUs of hearAboutUslist\" [ngValue]=\"hearAboutUs\">\r\n                                        {{hearAboutUs}}</option>\r\n                                </select>\r\n                                <div *ngIf=\"submitted && f.hearAboutUs.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.hearAboutUs.errors.required\">Hear About Us is required</div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-md-12\">\r\n                                <div class=\"custom-control custom-checkbox\">\r\n\r\n                                    <input type=\"checkbox\" [value]=\"true\" formControlName=\"acceptTerms\"\r\n                                        class=\"custom-control-input\" id=\"defaultUnchecked\"\r\n                                        [ngClass]=\"{ 'is-invalid': submitted && f.acceptTerms.errors }\" />\r\n                                    <label class=\"custom-control-label\" for=\"defaultUnchecked\" i18n>I accept the general\r\n                                        <a class=\"text-primary\" routerLink=\"/disclaimer\" routerLinkActive=\"active\" for=\"defaultUnchecked\">\r\n                                            Terms Of Use and Privacy Policy.\r\n                                        </a>\r\n                                    </label>\r\n                                </div>\r\n                                <div *ngIf=\"submitted && f.acceptTerms.errors\" class=\"invalid-feedback\">\r\n                                    <div *ngIf=\"f.acceptTerms.errors.required\" i18n> is required</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"row\">\r\n                            <div class=\"col-md-12 text-center\">\r\n                                <hr>\r\n                                <button type=\"button\" (click)=\"onSubmitVerifyRegisterUser()\" [disabled]=\"loading\"\r\n                                    class=\"btn btn-default primary-btn  radius-0\" i18n>Submit</button>\r\n                                <img *ngIf=\"loading\" class=\"pl-3\"\r\n                                    src=\"data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==\" />\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </form>\r\n        </div>\r\n    </div>\r\n</section>\r\n<!-- register section -->\r\n");
 
 /***/ }),
 
@@ -1831,7 +1857,7 @@ var HearAboutUs;
 /*!*********************************!*\
   !*** ./src/app/models/index.ts ***!
   \*********************************/
-/*! exports provided: User, Session, Role, AppAccessPermissions, ContactRole, SessionTypes, AppDocumentType, SessionStatus, PaymentMethod, SessionExecutionType, AppRooms, TransactionActionType, UserType */
+/*! exports provided: User, Session, Role, AppAccessPermissions, ContactRole, SessionTypes, AppDocumentType, SessionStatus, PaymentMethod, SessionExecutionType, AppRooms, TransactionActionType, UserType, MediaTypes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -1863,6 +1889,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TransactionActionType", function() { return _role__WEBPACK_IMPORTED_MODULE_1__["TransactionActionType"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "UserType", function() { return _role__WEBPACK_IMPORTED_MODULE_1__["UserType"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MediaTypes", function() { return _role__WEBPACK_IMPORTED_MODULE_1__["MediaTypes"]; });
 
 
 
@@ -2113,7 +2141,7 @@ let RegisterComponent = class RegisterComponent {
             birthPlace: [''],
             promoCode: [''],
             mobileNo: [''],
-            hearAboutUs: [''],
+            hearAboutUs: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
             app_doc_type: [src_app_models__WEBPACK_IMPORTED_MODULE_8__["AppDocumentType"].user_profile]
         }, {
             validator: Object(_helpers_must_match_validator__WEBPACK_IMPORTED_MODULE_10__["MustMatch"])('password', 'confirmPassword'),
@@ -2391,6 +2419,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/cdk/overlay */ "rDax");
 /* harmony import */ var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular/material/snack-bar */ "dNgK");
 /* harmony import */ var stripe_angular__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! stripe-angular */ "CnOO");
+/* harmony import */ var angular_datatables__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! angular-datatables */ "njyG");
 
 
 
@@ -2400,6 +2429,7 @@ __webpack_require__.r(__webpack_exports__);
 // used to create fake backend
 //import { fakeBackendProvider } from './components/_helpers';
 //import { routing }        from './app.routing';
+
 
 
 
@@ -2446,7 +2476,8 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             ng2_charts__WEBPACK_IMPORTED_MODULE_12__["ChartsModule"],
             _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_21__["BrowserAnimationsModule"],
             _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_22__["OverlayModule"],
-            stripe_angular__WEBPACK_IMPORTED_MODULE_24__["StripeModule"].forRoot("")
+            stripe_angular__WEBPACK_IMPORTED_MODULE_24__["StripeModule"].forRoot(""),
+            angular_datatables__WEBPACK_IMPORTED_MODULE_25__["DataTablesModule"]
         ],
         providers: [
             { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"], useClass: _components_helpers__WEBPACK_IMPORTED_MODULE_5__["JwtInterceptor"], multi: true },
@@ -2796,7 +2827,7 @@ let SocketioService = class SocketioService {
                     data = result;
                 }
             }
-            this.currentUsersRooms = this.utilityService._.union(this.currentUsersRooms, [this.currentUserId, src_app_models__WEBPACK_IMPORTED_MODULE_4__["AppRooms"].my_app_main_room,]);
+            this.currentUsersRooms = this.utilityService._.union(this.currentUsersRooms, [this.currentUserId, src_app_models__WEBPACK_IMPORTED_MODULE_4__["AppRooms"].my_app_main_room]);
             for (let _item in this.currentUsersRooms) {
                 this.sendEventToJoinChatRoom(this.currentUsersRooms[_item], this.currentUserId);
             }
@@ -2925,9 +2956,9 @@ let SocketioService = class SocketioService {
         };
         this.socket.emit('set_session_add_transactions_updated_by_lender', _sendDataOnlyMeFalseToAllTrue, _obj2Save);
     }
-    sendEventToJoinChatRoom(_roomId, _userId) {
+    sendEventToJoinChatRoom(_roomId, _userId, _roomIdArr = []) {
         this.currentUsersRooms.push(_roomId);
-        this.socket.emit('join_room', { roomId: _roomId, userId: _userId });
+        this.socket.emit('join_room', { roomId: _roomId, userId: _userId, roomIdArr: _roomIdArr });
         this.requestAppNotificationWithCustomData(_roomId, [_userId]);
     }
     sendEventToLeaveChatRoom(_roomId, _userId) {
@@ -2940,8 +2971,8 @@ let SocketioService = class SocketioService {
     sendEventToGetAllChatOfRoom(_roomId) {
         this.socket.emit('get_all_old_chat_of_room', { roomId: _roomId });
     }
-    emitEventWithNameAndData(_eventName, _data) {
-        this.socket.emit(_eventName, _data);
+    emitEventWithNameAndData(_eventName, ...args) {
+        this.socket.emit(_eventName, ...args);
     }
     getAllUsers(_data) {
         this.socket.emit("user_getall", _data);
@@ -3096,6 +3127,54 @@ let SocketioService = class SocketioService {
         this.socket.emit("request_session_session_apply_reject_with_refund_submit_request_and_update_all", _data);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_session_session_apply_reject_with_refund_submit_request_and_update_all');
     }
+    sendEventForLoanAmountPaidByLenderWithUpdateAll(_loanId, _loanApplyId, _userId, _LoanApplyObjCurrent) {
+        let _data = {
+            loanId: _loanId,
+            loanApplyId: _loanApplyId,
+            updatedBy: _userId,
+            LoanApplyObjCurrent: _LoanApplyObjCurrent,
+            _id: _loanApplyId
+        };
+        this.socket.emit("request_session_session_apply_loan_amount_paid_by_lender_update_and_broadcast", _data);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_session_session_apply_loan_amount_paid_by_lender_update_and_broadcast');
+    }
+    sendEventForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(_loanId, _loanApplyId, _userId, _LoanApplyObjCurrent) {
+        let _data = {
+            loanId: _loanId,
+            loanApplyId: _loanApplyId,
+            updatedBy: _userId,
+            LoanApplyObjCurrent: _LoanApplyObjCurrent,
+            _id: _loanApplyId
+        };
+        this.socket.emit("request_session_session_apply_loan_amount_paid_by_lender_update_and_broadcast", _data);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_session_session_apply_loan_amount_paid_by_lender_update_and_broadcast');
+    }
+    sendEventForLoanAmountPaidToLenderWithUpdateAll(_loanId, _loanApplyId, _userId, _installmentKey, _loanTenureInMonths, _LoanApplyObjCurrent) {
+        let _data = {
+            loanId: _loanId,
+            loanApplyId: _loanApplyId,
+            updatedBy: _userId,
+            LoanApplyObjCurrent: _LoanApplyObjCurrent,
+            _id: _loanApplyId,
+            installmentKey: _installmentKey,
+            loanTenureInMonths: _loanTenureInMonths
+        };
+        this.socket.emit("request_session_session_apply_loan_amount_paid_to_lender_update_and_broadcast", _data);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_session_session_apply_loan_amount_paid_to_lender_update_and_broadcast');
+    }
+    sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(_loanId, _loanApplyId, _userId, _installmentKey, _loanTenureInMonths, _LoanApplyObjCurrent) {
+        let _data = {
+            loanId: _loanId,
+            loanApplyId: _loanApplyId,
+            updatedBy: _userId,
+            LoanApplyObjCurrent: _LoanApplyObjCurrent,
+            _id: _loanApplyId,
+            installmentKey: _installmentKey,
+            loanTenureInMonths: _loanTenureInMonths
+        };
+        this.socket.emit("request_session_session_apply_loan_amount_paid_to_lender_update_and_broadcast", _data);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_session_session_apply_loan_amount_paid_to_lender_update_and_broadcast');
+    }
     addNewUser(obj2use) {
         this.socket.emit('request_user_add_new', obj2use);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_user_add_new');
@@ -3135,6 +3214,18 @@ let SocketioService = class SocketioService {
         };
         this.socket.emit('sessions_request_getall_bysearch', _sendDataOnlyMeFalseToAllTrue, _obj2Save, true, emitThisEvent);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'sessions_response_getall_bysearch_by_id');
+    }
+    getSessionApplyCountByQuery(_sendDataOnlyMeFalseToAllTrue, _obj2Save, useAndTrueOrFalse, emitThisEvent) {
+        emitThisEvent = (emitThisEvent ? emitThisEvent : 'sessions_response_get_session_apply_count_by_query');
+        this.socket.emit('sessions_request_get_session_apply_count_by_query', _sendDataOnlyMeFalseToAllTrue, _obj2Save, useAndTrueOrFalse, emitThisEvent);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, emitThisEvent);
+    }
+    //#endregion route client event to send server
+    sendEventToCheckLastPaymentReturnedSuccessOrFailed(PaymentObj) {
+        this.socket.emit("recd_to_check_last_payment_status", PaymentObj);
+    }
+    listenForUpdateStatusOfLastPayment() {
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'recd_confirmation_of_last_payment_status');
     }
 };
 SocketioService.ctorParameters = () => [
@@ -3719,9 +3810,11 @@ let UserService = class UserService {
         return this.http.post(this.baseurl + 'api/post/users/sendotp', user);
     }
     verifyOtpAndRegister(user) {
+        user["serverUrl"] = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].serverUrl;
         return this.http.post(this.baseurl + 'api/post/users/verifyotp', user);
     }
     verifyUserAndRegister(user) {
+        user["serverUrl"] = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].serverUrl;
         return this.http.post(this.baseurl + 'api/post/users/verifyuserandregister', user);
     }
     resetPasswordSendOtp2user(user) {
@@ -3800,6 +3893,133 @@ let UserService = class UserService {
     getUserProfilePortFolioByUserId(userId) {
         this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_portfolio_data', userId);
         return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_portfolio_data');
+    }
+    resetExistingUsersPasswordByUserId(_userId, _userName, _password, _password2update, _role) {
+        let newUser = {
+            _id: _userId,
+            userName: _userName,
+            password: _password,
+            role: _role,
+            password2update: _password2update
+        };
+        this.socketioService.emitEventWithNameAndData('request_user_to_reset_existing_password', newUser);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_to_reset_existing_password');
+    }
+    addUpdateUserIncomeDetails(userIncomeDetails) {
+        this.socketioService.emitEventWithNameAndData('request_user_add_update_user_income_details_data', userIncomeDetails);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_add_update_user_income_details_data');
+    }
+    getUserIncomeDetailsById(userIncomeDetailsId) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_id_user_income_details_data', userIncomeDetailsId);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_id_user_income_details_data');
+    }
+    getUserIncomeDetailsByUserId(userId) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_user_income_details_data', userId);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_user_income_details_data');
+    }
+    addUpdateUserExpenseDetails(userExpenseDetails) {
+        this.socketioService.emitEventWithNameAndData('request_user_add_update_user_expense_details_data', userExpenseDetails);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_add_update_user_expense_details_data');
+    }
+    getUserExpenseDetailsById(userExpenseDetailsId) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_id_user_expense_details_data', userExpenseDetailsId);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_id_user_expense_details_data');
+    }
+    getUserExpenseDetailsByUserId(userId) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_user_expense_details_data', userId);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_user_expense_details_data');
+    }
+    returnUsersObjFromLocal(sessionAppliedByBorrowers, lenderTrue, returnOnlyThisKey, userId = null) {
+        if (sessionAppliedByBorrowers || userId) {
+            if ((this.allAppUsersCollections && this.utilityService._.keys(this.allAppUsersCollections).length > 0) || userId) {
+                if (!userId) {
+                    let _obj = this.utilityService._.first(sessionAppliedByBorrowers);
+                    if (_obj) {
+                        if (lenderTrue) {
+                            userId = _obj.lenderId;
+                        }
+                        else {
+                            userId = _obj.borrowerId;
+                        }
+                    }
+                }
+                if (userId) {
+                    let userObj = this.utilityService._.filter(this.allAppUsersCollections, { "_id": userId })[0];
+                    if (userObj) {
+                        if (returnOnlyThisKey) {
+                            return userObj[returnOnlyThisKey];
+                        }
+                        else {
+                            return userObj;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    updateUsersIncomeVerificationStatus(_documentId, _status2update, _updatedBy) {
+        this.socketioService.emitEventWithNameAndData("request_user_update_income_verification", _documentId, _status2update, _updatedBy);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_update_income_verification');
+    }
+    updateUsersExpenseVerificationStatus(_documentId, _status2update, _updatedBy) {
+        this.socketioService.emitEventWithNameAndData("request_user_update_expense_verification", _documentId, _status2update, _updatedBy);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_update_expense_verification');
+    }
+    getUserIncomeExpenseDetailsByUserId(userId) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_user_income_expense_details_data', userId);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_user_income_expense_details_data');
+    }
+    addUpdateUserBlogs(blogs) {
+        this.socketioService.emitEventWithNameAndData('request_user_add_update_blogs_data', blogs);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_add_update_blogs_data');
+    }
+    getBlogsById(blogsId) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_id_blogs_data', blogsId);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_id_blogs_data');
+    }
+    getBlogsByUserId(userId) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_blogs_data', userId);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_blogs_data');
+    }
+    updateBlogsStatus(_documentId, _status2update, _updatedBy) {
+        this.socketioService.emitEventWithNameAndData("request_user_update_blogs_verification", _documentId, _status2update, _updatedBy);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_update_blogs_verification');
+    }
+    getBlogsAll(_skip) {
+        this.socketioService.emitEventWithNameAndData("request_user_getall_blogs", _skip);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_getall_blogs');
+    }
+    getBlogsAllByQuery(_skip) {
+        this.socketioService.emitEventWithNameAndData("request_user_getall_blogs", _skip);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_getall_blogs');
+    }
+    addUpdateUserUserLevels(userLevels) {
+        this.socketioService.emitEventWithNameAndData('request_user_add_update_user_levels_data', userLevels);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_add_update_user_levels_data');
+    }
+    getUserLevelsById(userLevelsId) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_id_user_levels_data', userLevelsId);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_id_user_levels_data');
+    }
+    getUserLevelsByUserId(userId) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_user_levels_data', userId);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_user_levels_data');
+    }
+    updateUserLevelsStatus(_documentId, _status2update, _updatedBy) {
+        this.socketioService.emitEventWithNameAndData("request_user_update_user_levels_verification", _documentId, _status2update, _updatedBy);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_update_user_levels_verification');
+    }
+    getUserLevelsAll(_skip) {
+        this.socketioService.emitEventWithNameAndData("request_user_getall_user_levels", _skip);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_getall_user_levels');
+    }
+    getUserLevelsAllByQuery(_skip) {
+        this.socketioService.emitEventWithNameAndData("request_user_getall_user_levels", _skip);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_getall_user_levels');
+    }
+    updateUsersDataKeyVerificationStatus(_userId, _verifiedKey, _isVerified) {
+        this.socketioService.emitEventWithNameAndData("request_user_internal_key_update_verification", _userId, _verifiedKey, _isVerified);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_internal_key_update_verification');
     }
 };
 UserService.ctorParameters = () => [
@@ -4170,7 +4390,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!********************************!*\
   !*** ./src/app/models/role.ts ***!
   \********************************/
-/*! exports provided: Role, AppAccessPermissions, ContactRole, SessionTypes, AppDocumentType, SessionStatus, PaymentMethod, SessionExecutionType, AppRooms, TransactionActionType, UserType */
+/*! exports provided: Role, AppAccessPermissions, ContactRole, SessionTypes, AppDocumentType, SessionStatus, PaymentMethod, SessionExecutionType, AppRooms, TransactionActionType, UserType, MediaTypes */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4186,6 +4406,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AppRooms", function() { return AppRooms; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransactionActionType", function() { return TransactionActionType; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserType", function() { return UserType; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MediaTypes", function() { return MediaTypes; });
 var Role;
 (function (Role) {
     Role["Business"] = "Business";
@@ -4228,6 +4449,7 @@ var SessionStatus;
 (function (SessionStatus) {
     SessionStatus["Pending"] = "pending";
     SessionStatus["Accepted"] = "accepted";
+    SessionStatus["Approved"] = "approved";
     SessionStatus["Rejected"] = "rejected";
     SessionStatus["RejectedOngoing"] = "rejected_ongoing";
     SessionStatus["RejectedOngoingWithRefund"] = "rejected_ongoing_with_refund";
@@ -4269,8 +4491,8 @@ var TransactionActionType;
     TransactionActionType["session_accepted"] = "session_accepted";
     TransactionActionType["session_extended"] = "session_extended";
     TransactionActionType["session_ongoing"] = "session_ongoing";
-    TransactionActionType["paid_for_loan_insurance"] = "paid_for_loan_insurance";
-    TransactionActionType["paid_for_app_plan_extension"] = "paid_for_app_plan_extension";
+    TransactionActionType["insurance_purchase"] = "insurance_purchase";
+    TransactionActionType["plan_purchase"] = "plan_purchase";
 })(TransactionActionType || (TransactionActionType = {}));
 var UserType;
 (function (UserType) {
@@ -4285,6 +4507,16 @@ var UserType;
     UserType["good_borrower"] = "good_borrower";
     UserType["super_borrower"] = "super_borrower";
 })(UserType || (UserType = {}));
+;
+var MediaTypes;
+(function (MediaTypes) {
+    MediaTypes["image"] = "image";
+    MediaTypes["video"] = "video";
+    MediaTypes["audio"] = "audio";
+    MediaTypes["pdf"] = "pdf";
+    MediaTypes["xls"] = "xls";
+    MediaTypes["other"] = "other";
+})(MediaTypes || (MediaTypes = {}));
 ;
 
 
