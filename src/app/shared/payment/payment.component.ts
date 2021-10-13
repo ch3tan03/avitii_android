@@ -107,7 +107,7 @@ export class PaymentComponent implements OnInit {
       token: function (token: any) {
         // You can access the token ID with `token.id`.
         // Get the token ID to your server-side code for use.
-        console.log(token);
+        //console.log(token);
         paymentObj.tokenId = token.id;
         window.paymentStatusSentOnServer = true;
         fetch(paymentObj.apiUrl, {
@@ -120,22 +120,22 @@ export class PaymentComponent implements OnInit {
           .then(response => response.json())
           .then(data => {
             //paymentData = data;
-            console.log(data)
+            //console.log(data)
           });
         /*
                 this.payment.chargePaymentForStripe(paymentObj).subscribe(response => {
-                  console.log('85', response);
+                  //console.log('85', response);
                 });
                 */
         //alert('Token Created!!');
       },
       opened: function () {
-        console.log("Form opened");
+        //console.log("Form opened");
       },
       closed: function () {
         if (!window.paymentStatusSentOnServer) {
           paymentObj.tokenId = null;
-          console.log("Form Terminated");
+          //console.log("Form Terminated");
           fetch(paymentObj.apiUrl, {
             method: 'POST',
             headers: {
@@ -146,10 +146,10 @@ export class PaymentComponent implements OnInit {
             .then(response => response.json())
             .then(data => {
               //paymentData = data;
-              console.log(data)
+              //console.log(data)
             });
         } else {
-          console.log("Form closed");
+          //console.log("Form closed");
         }
       }
     });
@@ -183,7 +183,7 @@ export class PaymentComponent implements OnInit {
           token: function (token: any) {
             // You can access the token ID with `token.id`.
             // Get the token ID to your server-side code for use.
-            console.log(token)
+            //console.log(token)
             alert('Payment Success!!');
           }
         });
@@ -198,7 +198,7 @@ export class PaymentComponent implements OnInit {
   cardCaptureReady = 0;
 
   onStripeInvalid( error: Error ){
-    console.log('Validation Error', error)
+    //console.log('Validation Error', error)
   }
 
   onStripeError( error: Error ){
@@ -206,15 +206,15 @@ export class PaymentComponent implements OnInit {
   }
 
   setPaymentMethod( token: stripe.paymentMethod.PaymentMethod ){
-    console.log('Stripe Payment Method', token)
+    //console.log('Stripe Payment Method', token)
   }
 
   setStripeToken( token: stripe.Token ){
-    console.log('Stripe Token', token)
+    //console.log('Stripe Token', token)
   }
 
   setStripeSource( source: stripe.Source ){
-    console.log('Stripe Source', source)
+    //console.log('Stripe Source', source)
   }
   */
 }

@@ -3,6 +3,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TransactionActionType, User } from 'src/app/models';
 import { AuthenticationService } from 'src/app/services';
+import { MessagesService } from 'src/app/services/messages.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { UtilityService } from 'src/app/services/utility.service';
 declare var $: any;
@@ -19,10 +20,12 @@ export class HeaderComponent implements AfterViewInit {
   TransactionActionType = TransactionActionType;
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     public utilityService: UtilityService,
-    public notificationService: NotificationService
+    public notificationService: NotificationService,
+    public messagesService: MessagesService
   ) {
+    this.messagesService.getAllMyContacts();
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
 
@@ -33,7 +36,7 @@ export class HeaderComponent implements AfterViewInit {
     state = (state ? state : '/logout');
 
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
-        return false;
+      return false;
     }
     this.router.onSameUrlNavigation = 'reload';
 
@@ -58,13 +61,14 @@ export class HeaderComponent implements AfterViewInit {
 
       //toggle show
       $('.toggle-nav').on('click', function (e) {
-        $('.navbar').css("right", "0px");
-        $('.navbar').show();
+
+        $('.navbar_side_panel').show();
       });
       $('.btn-back').on('click', function (e) {
-        $('.navbar').css("right", "-350px");
-        $('.navbar').hide();
+
+        $('.navbar_side_panel').hide();
       });
+
       function checkWidth() {
         var windowSize = $(window).width();
         if (windowSize <= 991) {
@@ -72,6 +76,10 @@ export class HeaderComponent implements AfterViewInit {
             $(".dropdown ~ul").not($(this).siblings()).hide("fast");
             $(".dropdown ~.mega-menu-container").not($(this).siblings()).hide("fast");
             $(this).siblings().slideToggle("fast");
+          });
+          $('.nav-item').on('click', function (e) {
+
+            $('.navbar_side_panel').hide();
           });
         }
         else if (windowSize >= 991) {

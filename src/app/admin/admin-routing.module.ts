@@ -16,6 +16,9 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { UserLevelsComponent } from './user-levels/user-levels.component';
 import { BlogsComponent } from './blogs/blogs.component';
 import { MessagesComponent } from './../shared/messages/messages.component';
+import { LoanPaymentComponent } from './loan-payment/loan-payment.component';
+import { PartnersComponent } from './partners/partners.component';
+import { CustomerReviewComponent } from './customer-review/customer-review.component';
 
 const routes: Routes = [
   {
@@ -105,8 +108,31 @@ const routes: Routes = [
         data: {
           appPermissions: [AppAccessPermissions.borrowerPayments],
         }
+      }, {
+        path: 'customer-review',
+        component: CustomerReviewComponent,
+        canActivate: [AuthGuard],
+        data: {
+          appPermissions: [AppAccessPermissions.borrowerPayments],
+        }
+      },
+      {
+        path: 'partners',
+        component: PartnersComponent,
+        canActivate: [AuthGuard],
+        data: {
+          appPermissions: [AppAccessPermissions.borrowerPayments],
+        }
       },
       { canActivate: [AuthGuard], path: 'messages', component: MessagesComponent },
+      {
+        path: 'loan-pay',
+        component: LoanPaymentComponent,
+        canActivate: [AuthGuard],
+        data: {
+          appPermissions: [AppAccessPermissions.borrowerPayments],
+        }
+      }
     ]
   },
   // otherwise redirect to home

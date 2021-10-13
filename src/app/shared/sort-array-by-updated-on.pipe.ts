@@ -5,8 +5,14 @@ import * as _ from 'lodash'
 })
 export class SortArrayByUpdatedOnPipe implements PipeTransform {
 
-  transform(array: Array<any>, args?: any): any {
-    return _.sortBy(array, [args]);
-}
+  transform(array: Array<any>, key: any, descTascF: boolean): any {
+    if (descTascF) {
+      return _.reverse(_.sortBy(array, function (value) { return new Date(value[key]); }));
+    } else {
+      return _.sortBy(array, function (value) { return new Date(value[key]); });
+    }
+    //return _.sortBy(array, [args]);
+    /*_.sortBy(array, function(value) {return new Date(value);}); */
+  }
 
 }

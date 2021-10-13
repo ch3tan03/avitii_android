@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/models';
 import { AuthenticationService } from 'src/app/services';
 import { AddFundsService } from 'src/app/services/add-funds.service';
+import { MessagesService } from 'src/app/services/messages.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { UtilityService } from 'src/app/services/utility.service';
 declare var $: any;
@@ -23,8 +24,10 @@ export class HeaderComponent implements AfterViewInit {
     private authenticationService: AuthenticationService,
     public fundService: AddFundsService,
     public utilityService: UtilityService,
-    public notificationService: NotificationService
+    public notificationService: NotificationService,
+    public messagesService: MessagesService
   ) {
+    this.messagesService.getAllMyContacts();
     this.authenticationService.currentUser.subscribe(x => {
       this.currentUser = x;
       if (this.currentUser) {
@@ -37,6 +40,10 @@ export class HeaderComponent implements AfterViewInit {
   navigate2State(state) {
     state = (state ? state : '/logout');
     this.router.navigate([state]);
+  }
+
+  showAlert() {
+    alert("Sorry, you can not create a loan contract untill 30th October.")
   }
 
   ngAfterViewInit(): void {
@@ -61,7 +68,7 @@ export class HeaderComponent implements AfterViewInit {
 
         $('.navbar_side_panel').hide();
       });
-      
+
       function checkWidth() {
         var windowSize = $(window).width();
         if (windowSize <= 991) {

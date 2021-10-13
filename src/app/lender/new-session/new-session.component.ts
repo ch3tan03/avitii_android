@@ -45,10 +45,12 @@ export class NewSessionComponent implements OnInit {
   ParentServicesTypes: any = null;
   ChildServicesTypes: any = [];
   countrylist: any = null;
+  loanInterestRateMin: number = 0;
+  loanInterestRateMax: number = 0;
   constructor(
 
     private formBuilder: FormBuilder,
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private sessionsService: SessionsService,
     private alertService: AlertService,
     private appRouterService: AppRouterService,
@@ -59,8 +61,18 @@ export class NewSessionComponent implements OnInit {
     if (!this.authenticationService.currentUserValue) {
       this.appRouterService.appRouter('');
     }
+    //#region do not allow to create new loan in last 3 day's of the month
+    let dt = this.utilityService.moment();
+    let day4monthEnd = 3;
+    if (dt.date() >= (dt.daysInMonth() - day4monthEnd)) {
+      this.appRouterService.appRouter('');
+      this.alertService.error('New loan request not allowed in end of the month, Please try again later in next month', true);
+      return;
+    }
+    //#endregion do not allow to create new loan in last 3 day's of the month
     this.currentUserRoleType = this.authenticationService.currentUserValue.userType;
     this.currentUserMaxLoanAmount = 0;
+    /*
     switch (this.currentUserRoleType) {
       case UserType.new_lender:
         this.currentUserMaxLoanAmount = this.utilityService.LoanAmountMaxTypes[UserType.new_lender].amount;
@@ -81,6 +93,16 @@ export class NewSessionComponent implements OnInit {
         this.currentUserMaxLoanAmount = this.utilityService.LoanAmountMaxTypes[UserType.new_lender].amount;
         break;
     }
+    */
+    if (this.currentUserRoleType) {
+      let maxLoanAmountForLenderObj = _.filter(this.authenticationService.allUserLevelsDataLenders, { '_id': this.currentUserRoleType });
+      if (maxLoanAmountForLenderObj && maxLoanAmountForLenderObj._id) {
+        this.currentUserMaxLoanAmount = maxLoanAmountForLenderObj.minimumSpent;
+      } else {
+        this.currentUserMaxLoanAmount = null;
+      }
+    }
+
     this.countrylist = getNames();
     this.initForm();
 
@@ -99,7 +121,7 @@ export class NewSessionComponent implements OnInit {
           .pipe(first())
           .subscribe(
             data => {
-              //console.log('data => ', data)
+              ////console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
                 this.showEditingForm(data["data"]);
@@ -134,6 +156,9 @@ export class NewSessionComponent implements OnInit {
   }
 
   showEditingForm(_userObj) {
+    this.loanInterestRateMin = 0;
+    this.loanInterestRateMax = 50;
+    let _loanInterestRateValidation = [Validators.required, Validators.min(this.loanInterestRateMin), Validators.max(this.loanInterestRateMax)];
     this.addSessionForm = this.formBuilder.group({
 
       _id: [_userObj._id || ''],
@@ -152,8 +177,8 @@ export class NewSessionComponent implements OnInit {
       status: [_userObj.status || ''],
       additionalDocuments: this.formBuilder.array(_userObj.additionalDocuments || [], []),
       loanAmount: [_userObj.loanAmount || 0, [Validators.required, Validators.min(1), Validators.max(this.currentUserMaxLoanAmount)]],
-      loanTenureInMonths: [_userObj.loanTenureInMonths || 3, [Validators.required, Validators.min(3)]],
-      loanInterestRate: [_userObj.loanInterestRate || 10, [Validators.required, Validators.min(0)]],
+      loanTenureInMonths: [_userObj.loanTenureInMonths || 1, [Validators.required, Validators.min(1)]],
+      loanInterestRate: [_userObj.loanInterestRate || 10, _loanInterestRateValidation],
       loanRepaymentType: this.formBuilder.array(_userObj.loanRepaymentType || [], Validators.required),
       loanInsuranceType: [_userObj.loanInsuranceType || ''],
       loanMaxBorrower: [_userObj.loanMaxBorrower || 1, [Validators.required, Validators.min(1)]],
@@ -179,6 +204,9 @@ export class NewSessionComponent implements OnInit {
   }
 
   initForm() {
+    this.loanInterestRateMin = 0;
+    this.loanInterestRateMax = 50;
+    let _loanInterestRateValidation = [Validators.required, Validators.min(this.loanInterestRateMin), Validators.max(this.loanInterestRateMax)];
     //_.first(this.ParentServicesTypes)['_id']
     this.initHtmlContent();
     this.addSessionForm = this.formBuilder.group({
@@ -199,8 +227,8 @@ export class NewSessionComponent implements OnInit {
       status: [SessionStatus.Pending],
       additionalDocuments: this.formBuilder.array([], []),
       loanAmount: [0, [Validators.required, Validators.min(1), Validators.max(this.currentUserMaxLoanAmount)]],
-      loanTenureInMonths: [3, [Validators.required, Validators.min(3)]],
-      loanInterestRate: [10, [Validators.required, Validators.min(0)]],
+      loanTenureInMonths: [1, [Validators.required, Validators.min(1)]],
+      loanInterestRate: [10, _loanInterestRateValidation],
       loanRepaymentType: this.formBuilder.array([], Validators.required),
       loanInsuranceType: [''],
       loanMaxBorrower: [1, [Validators.required, Validators.min(1)]],
@@ -241,12 +269,12 @@ export class NewSessionComponent implements OnInit {
 
     let _loanStartDateTime = this.addSessionForm.get('loanStartDateTimeCustomised').value;
     let _loanEndDateTime = this.addSessionForm.get('loanEndDateTimeCustomised').value;
-/*
-    if (!_loanStartDateTime || moment(_loanStartDateTime).isBefore(moment().add(1, 'd',))) {
-      this.alertService.error("Start date must have 24 hours difference");
-      return;
-    }
-    */
+    /*
+        if (!_loanStartDateTime || moment(_loanStartDateTime).isBefore(moment().add(1, 'day',))) {
+          this.alertService.error("Start date must have 24 hours difference");
+          return;
+        }
+        */
 
     _loanEndDateTime = null;
     switch (this.addSessionForm.get('sessionType').value) {
@@ -283,12 +311,12 @@ export class NewSessionComponent implements OnInit {
       this.alertService.error("end time is not valid");
       return;
     }
-  /*
-    if (moment(this.addSessionForm.get('loanStartDateTime').value).isBefore(moment())) {
-      this.alertService.error("Loan should start in future date time only.");
-      return;
-    }
-*/
+    /*
+      if (moment(this.addSessionForm.get('loanStartDateTime').value).isBefore(moment())) {
+        this.alertService.error("Loan should start in future date time only.");
+        return;
+      }
+  */
     if (moment(this.addSessionForm.get('loanStartDateTime').value).add(1, 'h').isAfter(moment(this.addSessionForm.get('loanEndDateTime').value))) {
       this.alertService.error("There must be min. 1 hour difference in Loan start and end time");
       return;
@@ -304,8 +332,10 @@ export class NewSessionComponent implements OnInit {
           data => {
             if (data && data['success']) {
               //alert(JSON.stringify( data));
-              this.alertService.success('Loan Request Updated successfully', true);
-              this.appRouterService.appRouter(this.authenticationService.currentUserValue);
+              //this.alertService.success('Loan Request Updated successfully', true);
+              //this.appRouterService.appRouter(this.authenticationService.currentUserValue);
+              this.alertService.success("Loan Request Updated successfully. Loan contract is available under My Contract->My Contract tab.", true);
+              this.appRouterService.appRouteToPath("/lender/my-contract", { selectedTab: 'received' }, true);
             } else {
               //alert(JSON.stringify(data['message']));
               this.alertService.error(data['message']);
@@ -334,8 +364,10 @@ export class NewSessionComponent implements OnInit {
             if (data && data['success']) {
 
               //alert(JSON.stringify( data));
-              this.alertService.success('New Loan added to loan market. you will receive borrowers request in received tab.', true);
-              this.appRouterService.appRouter(this.authenticationService.currentUserValue);
+              //this.alertService.success('New Loan added to loan market. you will receive borrowers request in received tab.', true);
+              //this.appRouterService.appRouter(this.authenticationService.currentUserValue);
+              this.alertService.success("New Loan added to loan market. Loan contract is available under My Contract->My Contract tab.", true);
+              this.appRouterService.appRouteToPath("/lender/my-contract", { selectedTab: 'received' }, true);
             } else {
               //alert(JSON.stringify(data['message']));
               this.alertService.error(data['message']);
@@ -370,8 +402,8 @@ export class NewSessionComponent implements OnInit {
   maxDate = moment({ year: this.year, month: this.month + 1, day: this.day, hour: this.hours, minute: this.minutes }).format('YYYY-MM-DD');
 
   date(ev) {
-    console.log(this.minDate)
-    console.log(ev.target.value)
+    //console.log(this.minDate)
+    //console.log(ev.target.value)
   }
 
   calculateMonthlyAmountForEMI() {

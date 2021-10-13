@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import { overwrite, getNames, getCode } from 'country-list';
+
+overwrite([{
+  code: 'US',
+  name: 'USA'
+}]);
 
 @Injectable({
   providedIn: 'root'
@@ -50,7 +56,7 @@ export class UtilityService {
   };
 
   public AppPlanTypes: any = {
-    "trial_plan": { "_id": "trial_plan", "name": "Trial Plan", "amount": 0, 'expiryInMonth': 2 },
+    "trial_plan": { "_id": "trial_plan", "name": "Trial Plan", "amount": 0, 'expiryInMonth': 3 },
     "paid_plan4lender": { "_id": "paid_plan4lender", "name": "Paid Plan", "amount": 25, 'expiryInMonth': 1 },
     "paid_plan4borrower": { "_id": "paid_plan4borrower", "name": "Paid Plan", "amount": 5, 'expiryInMonth': 1 },
   };
@@ -166,6 +172,53 @@ export class UtilityService {
     _calculatedMonthlyAmountForEMI = this.returnRoundedNumber(_calculatedMonthlyAmountForEMI);
 
     return _calculatedMonthlyAmountForEMI;
+  }
+
+  returnCountryCodeFromName(countryName) {
+    if (countryName) {
+      return _.toLower(getCode(countryName));
+    }
+  }
+
+  returnCountryNames() {
+    return getNames();
+  }
+  returnTIfSuppliedDateIsNotFromCurrentMonth(date) {
+    //return moment(date).add(i,"month");
+    let currentMonthsStart = moment().startOf('month')
+    return moment(date).isBefore(moment(currentMonthsStart));
+  };
+
+  returnSortedObjectArray(objArray, fieldsArray2Sort) {
+
+    //objArray.sort(fieldSorter(['field1', '-field2']));
+    ////objArray.sort(fieldSorter(['field1', '-field2', 'field3'])); // alternative
+    return objArray.sort(this.fieldSorter(fieldsArray2Sort));
+  }
+
+  fieldSorter(fields) {
+    return function (a, b) {
+      return fields
+        .map(function (o) {
+          var dir = 1;
+          if (o[0] === '-') {
+            dir = -1;
+            o = o.substring(1);
+          }
+          if (a[o] > b[o]) return dir;
+          if (a[o] < b[o]) return -(dir);
+          return 0;
+        })
+        .reduce(function firstNonZeroValue(p, n) {
+          return p ? p : n;
+        }, 0);
+    };
+  }
+  checkWhetherPlanExpiryIsInFuture(userMemberShipExpireOn) {
+    if (userMemberShipExpireOn) {
+      return moment().isBefore(moment(userMemberShipExpireOn));
+    }
+    return false;
   }
 
 }

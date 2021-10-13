@@ -25,7 +25,7 @@ export class NotificationService {
       } else {
         this.route = "Home";
       }
-      //console.log("26 :: path :: " + this.route);
+      ////console.log("26 :: path :: " + this.route);
     });
   }
 
@@ -124,6 +124,11 @@ export class NotificationService {
         this.sessionsService.getSessionAllByBorrowerId(null, loanId, loanApplyId, null, true, 'response_updated_sessions_byborrowerid');
         break;
       default:
+        if (this.route.indexOf('lender') > -1) {
+          this.socketService.getSessionAllByQuery(false, _obj2Save, 'response_updated_sessions_bylenderid');
+        } else {
+          this.sessionsService.getSessionAllByBorrowerId(null, loanId, loanApplyId, null, true, 'response_updated_sessions_byborrowerid');
+        }
         break;
     }
   }
@@ -156,12 +161,17 @@ export class NotificationService {
         this.sessionsService.getSessionAllByBorrowerId(null, loanId, loanApplyId, null, true, 'response_updated_sessions_byborrowerid');
         break;
       default:
+        if (this.route.indexOf('lender') > -1) {
+          this.socketService.getSessionAllByQuery(false, _obj2Save, 'response_updated_sessions_bylenderid');
+        } else {
+          this.sessionsService.getSessionAllByBorrowerId(null, loanId, loanApplyId, null, true, 'response_updated_sessions_byborrowerid');
+        }
         break;
     }
   }
 
   playSound() {
-    let sound = "../assets/img/sound.mp3";
+    let sound = "./../assets/img/sound.mp3";
     sound && (new Audio(sound)).play()
   }
 }

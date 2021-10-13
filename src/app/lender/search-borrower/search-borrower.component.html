@@ -33,7 +33,7 @@
                             </div> -->
                         </div>
                         <div class="col-xl-2">
-                            <button class="btn btn-outline-primary btn-block h-100" (click)="findBorrower(modalFindBorrower)">
+                            <button class="btn btn-outline-primary btn-block h-100" (click)="findBorrower(modalFindBorrower)" i18n>
                                 <i class="icon-search"></i> SEARCH
                             </button>
                         </div>
@@ -62,14 +62,14 @@
                             <div class="center-text float-right">
 
                              
-                                <span *ngIf="item.online" class="badge badge-success">Online</span>
-                                <span *ngIf="!item.online" class="badge badge-danger">Offline</span>
+                                <span *ngIf="item.online" class="badge badge-success" i18n>Online</span>
+                                <span *ngIf="!item.online" class="badge badge-danger" i18n>Offline</span>
                             </div>
                         </div>
                         <div class="card-body px-md-3 px-1 small">
                              <div class="row">  
                             <div class="col-xl-3">
-                                <img class="img-fluid img-thumbnail" src="{{item.selfProfileUrl || '/assets/img/nouser.png'}}">
+                                <img class="img-fluid img-thumbnail" src="{{item.selfProfileUrl || './assets/img/nouser.png'}}">
                             
                             </div> 
                                 

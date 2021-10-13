@@ -11,8 +11,9 @@ import * as _ from 'lodash';
 import { UtilityService } from 'src/app/services/utility.service';
 import { environment } from 'src/environments/environment';
 import { MediaPreviewComponent } from 'src/app/shared/media-preview/media-preview.component';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
-
+declare var $: any;
 const uploadAPI = environment.apiUrl + '/api/post/upload/assetdata';
 const uploadAccessUrl = environment.apiUrl + '/';
 
@@ -24,6 +25,52 @@ const uploadAccessUrl = environment.apiUrl + '/';
 
 export class BlogsComponent implements OnInit {
 
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+      spellcheck: true,
+      height: 'auto',
+      minHeight: '0',
+      maxHeight: 'auto',
+      width: 'auto',
+      minWidth: '0',
+      translate: 'yes',
+      enableToolbar: true,
+      showToolbar: true,
+      placeholder: 'Enter text here...',
+      defaultParagraphSeparator: '',
+      defaultFontName: '',
+      defaultFontSize: '',
+      fonts: [
+        {class: 'arial', name: 'Arial'},
+        {class: 'times-new-roman', name: 'Times New Roman'},
+        {class: 'calibri', name: 'Calibri'},
+        {class: 'comic-sans-ms', name: 'Comic Sans MS'}
+      ],
+      customClasses: [
+      {
+        name: 'quote',
+        class: 'quote',
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: 'titleText',
+        class: 'titleText',
+        tag: 'h1',
+      },
+    ],
+    uploadUrl: 'v1/image',
+    /*upload: (file: File) => { ... }*/
+    uploadWithCredentials: false,
+    sanitize: true,
+    toolbarPosition: 'top',
+    toolbarHiddenButtons: [
+      ['bold', 'italic'],
+      ['fontSize']
+    ]
+};
   fileData4blogsDocument: File = null;
   fileData4blogsDocumentPendingForUpload: Boolean = false;
 
@@ -42,7 +89,8 @@ export class BlogsComponent implements OnInit {
   portfolioDataArr: any = [];
   SessionStatus = SessionStatus;
   userObj: any = null;
-
+  currentObj: any = null;
+  actionButtons0Add1Edit2Delete: number = 0;
   constructor(
     private http: HttpClient,
     private formBuilder: FormBuilder,
@@ -70,7 +118,7 @@ export class BlogsComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.allBlogsData = data["data"];
@@ -116,11 +164,10 @@ export class BlogsComponent implements OnInit {
         data => {
           if (data && data['success']) {
             //alert(JSON.stringify( data));
-
             this.alertService.success('Blog Updated successfully', true);
             this.fetchAllBlogsByUserId();
             this.submitted = false;
-            this.initForm();
+            this.closeDialog();
             //this.appRouterService.appRouter(this.userObj);
           } else {
             //alert(JSON.stringify(data['message']));
@@ -141,6 +188,7 @@ export class BlogsComponent implements OnInit {
           } catch (ex) { }
           this.alertService.error(errorMsg2show);
           this.loading = false;
+          //this.closeDialog();
         });
   }
 
@@ -222,10 +270,10 @@ export class BlogsComponent implements OnInit {
     }).subscribe(events => {
       if (events.type === HttpEventType.UploadProgress) {
         this.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
-        console.log(this.fileUploadProgress);
+        //console.log(this.fileUploadProgress);
       } else if (events.type === HttpEventType.Response) {
         this.fileUploadProgress = '';
-        console.log(events.body);
+        //console.log(events.body);
         //alert('SUCCESS !!');
         this.fileData4Profile = null;
         this.alertService.success('Uploaded Successfully !!', true);
@@ -242,7 +290,7 @@ export class BlogsComponent implements OnInit {
 
   mediaPreviewModel(mediaSrc, mimeType) {
 
-    console.log('411', this.authenticationService.currentUserValue);
+    //console.log('411', this.authenticationService.currentUserValue);
     const dialogRef = this.dialog.open(MediaPreviewComponent, {
 
       maxWidth: '100vw',
@@ -257,7 +305,44 @@ export class BlogsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`426 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+      //console.log(`426 :: msc :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
+
+  EditShowBlogsForm(_userObj) {
+    this.actionButtons0Add1Edit2Delete = 1;
+    this.initForm();
+    this.showEditingFormBlogs(_userObj);
+    $("#blogModal").modal('show');
+  }
+
+  DeleteShowBlogsForm(_userObj) {
+    this.currentObj = _userObj;
+    this.actionButtons0Add1Edit2Delete = 2;
+    this.initForm();
+    this.showEditingFormBlogs(_userObj);
+    $("#blogModal").modal('show');
+  }
+
+  DeleteData() {
+    this.actionButtons0Add1Edit2Delete = 2;
+    this.initForm();
+    this.showEditingFormBlogs(this.currentObj);
+    this.userBlogsForm.get("isDeleted").setValue(true);
+    this.userBlogsForm.get("deletedBy").setValue(this.authenticationService.currentUserValue._id);
+    
+    let _temp_allPartnersData = _.mapKeys(this.allBlogsData,'_id');
+    delete _temp_allPartnersData[this.currentObj._id];
+    this.allBlogsData = _.values(_temp_allPartnersData);
+
+    this.onBlogsUpdateSubmit();
+  }
+
+  closeDialog() {
+    this.currentObj = null;
+    this.actionButtons0Add1Edit2Delete = 0;
+    this.initForm();
+    $("#blogModal").modal('hide');
+  }
+
 }

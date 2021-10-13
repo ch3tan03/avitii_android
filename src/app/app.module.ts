@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NguiInviewModule, NguiListModule, NguiUtilsModule } from '@ngui/common';
 
 //import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 // used to create fake backend
@@ -31,6 +32,7 @@ import { StripeModule } from "stripe-angular";
 import { DataTablesModule } from "angular-datatables";
 
 @NgModule({
+
   declarations: [
     AppComponent,
     AlertComponent,
@@ -54,15 +56,17 @@ import { DataTablesModule } from "angular-datatables";
     BrowserAnimationsModule,
     OverlayModule,
     StripeModule.forRoot(""),
-    DataTablesModule
+    DataTablesModule,
+    NguiListModule, 
+    NguiInviewModule, 
+    NguiUtilsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     UtilityService,
     SocketioService,
-     MatSnackBar
-
+     MatSnackBar,
     // provider used to create fake backend
 
   ],

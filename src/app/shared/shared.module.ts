@@ -15,6 +15,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { DataArrayFilterPipe } from './pipe/data-array-filter.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 import { ModalPublicProfile } from '../lender/lender.component';
 import { UserRatingsComponent } from './user-ratings/user-ratings.component';
 import { SessionViewComponent } from './session-view/session-view.component';
@@ -30,11 +31,24 @@ import { PaymentCancelComponent } from './payment-cancel/payment-cancel.componen
 /*import { StripeComponentComponent } from './stripe-component/stripe-component.component';*/
 import { DatePrettyPipe } from './pipe/date-pretty.pipe';
 import { MediaPreviewComponent } from './media-preview/media-preview.component';
+import { MediaProccessComponent } from './media-proccess/media-proccess.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+import { AngularCropperjsModule } from 'angular-cropperjs';
+import { StarComponent } from './star/star.component';
+import { RatingsListComponent } from './ratings-list/ratings-list.component';
+import { DataTablesModule } from "angular-datatables";
+import { UserRestrictionDetailsComponent } from './user-restriction-details/user-restriction-details.component';
+import { UserRestrictionListComponent } from './user-restriction-list/user-restriction-list.component';
+import { SearchComponent } from './search/search.component';
+import { MoneyTransferDataComponent } from './money-transfer-data/money-transfer-data.component';
+import { NguiInviewComponent } from './ngui-inview/ngui-inview.component';
+import { PublicProfileEditComponent } from './public-profile-edit/public-profile-edit.component';
 
 @NgModule({
-  declarations: [ProfileComponent, WalletComponent, MessagesComponent, MeetingVcComponent, PaymentComponent, SortArrayByUpdatedOnPipe, FilterObjectArrayPipe, PublicProfileComponent, DataArrayFilterPipe, ModalPublicProfile, UserRatingsComponent, SessionViewComponent, MySessionsPipe, ProfilePortfolioComponent, UpdatePasswordComponent, BankDetailsComponent, MonthlySubscriptionComponent, IncomeProofComponent, PaymentSuccessComponent, PaymentCancelComponent, /*StripeComponentComponent,*/ DatePrettyPipe, DatePrettyPipe, MediaPreviewComponent],
-  exports: [ProfileComponent, WalletComponent, MessagesComponent, PaymentComponent, SessionViewComponent, MySessionsPipe, DatePrettyPipe],
+  declarations: [ProfileComponent, WalletComponent, MessagesComponent, MeetingVcComponent, PaymentComponent, SortArrayByUpdatedOnPipe, FilterObjectArrayPipe, PublicProfileComponent, DataArrayFilterPipe, ModalPublicProfile, UserRatingsComponent, SessionViewComponent, MySessionsPipe, ProfilePortfolioComponent, UpdatePasswordComponent, BankDetailsComponent, MonthlySubscriptionComponent, IncomeProofComponent, PaymentSuccessComponent, PaymentCancelComponent, /*StripeComponentComponent,*/ DatePrettyPipe, DatePrettyPipe, MediaPreviewComponent, MediaProccessComponent, StarComponent, RatingsListComponent, UserRestrictionDetailsComponent, UserRestrictionListComponent, SearchComponent, MoneyTransferDataComponent, NguiInviewComponent, PublicProfileEditComponent],
+  exports: [ProfileComponent, WalletComponent, MessagesComponent, MeetingVcComponent, PaymentComponent, SortArrayByUpdatedOnPipe, FilterObjectArrayPipe, PublicProfileComponent, DataArrayFilterPipe, ModalPublicProfile, UserRatingsComponent, SessionViewComponent, MySessionsPipe, ProfilePortfolioComponent, UpdatePasswordComponent, BankDetailsComponent, MonthlySubscriptionComponent, IncomeProofComponent, PaymentSuccessComponent, PaymentCancelComponent, /*StripeComponentComponent,*/ DatePrettyPipe, DatePrettyPipe, MediaPreviewComponent, MediaProccessComponent, StarComponent, RatingsListComponent, UserRestrictionDetailsComponent, UserRestrictionListComponent, SearchComponent, MoneyTransferDataComponent],
   imports: [
+    ScrollingModule,
     MatDialogModule,
     CommonModule,
     FormsModule,
@@ -42,10 +56,11 @@ import { MediaPreviewComponent } from './media-preview/media-preview.component';
     NgxPayPalModule,
     RouterModule,
     NgxDropzoneModule,
-    NgPipesModule
-
-
+    NgPipesModule,
+    ImageCropperModule,
+    AngularCropperjsModule,
+    DataTablesModule
   ],
-  entryComponents: [ModalPublicProfile]
+  entryComponents: [ModalPublicProfile, MoneyTransferDataComponent]
 })
 export class SharedModule { }

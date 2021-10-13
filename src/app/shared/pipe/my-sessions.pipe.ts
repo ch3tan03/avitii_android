@@ -34,15 +34,15 @@ export class MySessionsPipe implements PipeTransform {
             if (_fieldData) {
               return valuesArr.indexOf(_fieldData.toLowerCase()) != -1
             }
-          } else {
-            debugger;
-            if (sendMasterDataBackIfChildMissingT) {
-              if (valuesArr.indexOf('pending') > -1) {
-                return true;
-              }
-            }
           }
         }
+
+        if (sendMasterDataBackIfChildMissingT) {
+          if (valuesArr.indexOf('pending') > -1) {
+            return true;
+          }
+        }
+        
       } else {
         _fieldData = _.get(it, field);
         if (_fieldData) {

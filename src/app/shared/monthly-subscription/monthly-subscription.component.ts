@@ -78,6 +78,11 @@ export class MonthlySubscriptionComponent implements OnInit {
             break;
         }
       }
+      //#region exception case check as expiry was in past so RESET date here and set to today's date
+      if (!this.checkWhetherPlanExpiryIsInFuture(this.userMemberShipExpireOn)) {
+        this.userMemberShipExpireOn = this.utilityService._.now();
+      }
+      //#endregion exception case check as expiry was in past so RESET date here and set to today's date
 
       this.userMemberShipExpireOn = this.utilityService.returnEpochDateWithAddingMonths(this.userMemberShipExpireOn, this.utilityService.AppPlanTypes[appPlanId].expiryInMonth);
       this.usersNextPlanSubscription = {
@@ -136,6 +141,10 @@ export class MonthlySubscriptionComponent implements OnInit {
       this.payment.sendCurrentPaymentFailed(true);
     });
     //#endregion handle LoanObj payments
+  }
+
+  checkWhetherPlanExpiryIsInFuture(userMemberShipExpireOn) {
+    return this.utilityService.checkWhetherPlanExpiryIsInFuture(userMemberShipExpireOn);
   }
 
 }

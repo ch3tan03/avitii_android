@@ -30,6 +30,7 @@ import { PaymentCancelComponent } from '../shared/payment-cancel/payment-cancel.
 import { PaymentSuccessComponent } from '../shared/payment-success/payment-success.component';
 import { UsersIncomeExpenseVerifyGuard } from '../users-income-expense-verify.guard';
 import { BankDetailsVerifyGuard } from '../bank-details-verify.guard';
+import { RatingsListComponent } from '../shared/ratings-list/ratings-list.component';
 
 const routes: Routes = [
   {
@@ -57,6 +58,7 @@ const routes: Routes = [
       { canActivate: [RolesGuard], path: 'my-subscriptions', component: MonthlySubscriptionComponent },
       { canActivate: [RolesGuard], path: 'income-proof', component: IncomeProofComponent },
       { canActivate: [RolesGuard], path: 'calendar', component: CalendarComponent },
+      { canActivate: [RolesGuard], path: 'my-ratings', component: RatingsListComponent },
     ]
   },
   {

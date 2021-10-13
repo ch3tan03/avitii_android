@@ -8,6 +8,7 @@ import { AlertService, AuthenticationService } from '../services';
 import { ContactService } from '../services/contact.service';
 import { UserService } from '../services/user.service';
 import { UtilityService } from '../services/utility.service';
+import { PublicProfileComponent } from '../shared/public-profile/public-profile.component';
 import { SocketioService } from '../socketio.service';
 
 @Component({
@@ -34,7 +35,7 @@ export class BorrowerComponent {
 
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`25 :: co :: Dialog result: ${JSON.stringify(result)}`);
+      //console.log(`25 :: co :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
 }
@@ -135,7 +136,7 @@ export class ModalAppliedSessionDisplay implements OnInit {
   LoanApplyObjCurrentCheckBoxes: any = {};
   transactionOnForLoanAmountPaidToLenderCustomised = null;
   alreadyVisibleForPayment: Boolean = false;
- 
+  Role = Role;
   constructor(
     private alertService: AlertService,
     public socketService: SocketioService,
@@ -154,7 +155,7 @@ export class ModalAppliedSessionDisplay implements OnInit {
     this.LoanApplyObjCurrentCheckBoxes.visibleKeys = {};
     this.LoanApplyObjCurrent4Installment = {};
   }
-  
+
   paymentDoneByLenderConfirmByBorrower(LoanApplyObj) {
     this.LoanApplyObjCurrent._id = LoanApplyObj._id;
     if (this.transactionOnForLoanAmountPaidByLenderConfirmByBorrowerCustomised) {
@@ -172,16 +173,23 @@ export class ModalAppliedSessionDisplay implements OnInit {
       this.alertService.error("Transaction date must be newer than loan created date");
       return;
     }
+    if (this.utilityService.moment(LoanApplyObj.transactionOnForLoanAmountPaidByLender).isAfter(this.utilityService.moment(this.LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLenderConfirmByBorrower))) {
+      this.alertService.error("Transaction date must be newer than loan amount transfered date");
+      return;
+    }
 
     this.LoanApplyObjCurrent.createdOnForLoanAmountPaidByLenderConfirmByBorrower = this.utilityService._.now();
 
     this.socketService.sendEventForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, this.LoanApplyObjCurrent).pipe(first()).subscribe(details => {
       if (details && details["success"]) {
-        this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+        this.updatedSessionObj = details["data"];
+        this.LoanObj = this.updatedSessionObj;
+        //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
       }
     });
     this.LoanApplyObjCurrent = {};
   }
+  updatedSessionObj: any = null;
 
   paymentDoneToLender(LoanApplyObj) {
     let _past_days_allowed4payment = 15;
@@ -190,6 +198,11 @@ export class ModalAppliedSessionDisplay implements OnInit {
     //this.LoanApplyObjCurrent4Installment.loanTenureInMonths = this.LoanObj.loanTenureInMonths;
     //this.LoanApplyObjCurrent4Installment.installmentKey = null;
     //this.LoanApplyObjCurrent4Installment._id = LoanApplyObj._id;
+    this.LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin = false;
+    if (this.returnSessionApplyStatus(LoanApplyObj) == SessionStatus.Unpaid && this.authenticationService.currentUserValue.role == Role.Admin) {
+      this.LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin = true;
+    }
+
     if (this.transactionOnForLoanAmountPaidToLenderCustomised) {
       this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender = Date.parse(this.utilityService.moment(this.transactionOnForLoanAmountPaidToLenderCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD 00:00:00 A'));
     }
@@ -197,20 +210,30 @@ export class ModalAppliedSessionDisplay implements OnInit {
       this.alertService.error("All data is required");
       return;
     }
-    if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender).isAfter(this.utilityService.moment(this.LoanApplyObjCurrent4Installment.installmentKey).add('D', _future_days_allowed4payment))) {
-      this.alertService.error("Future date is not allowed");
-      return;
+    /*
+    if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender).isAfter(this.utilityService.moment(this.LoanApplyObjCurrent4Installment.installmentKey).add(_future_days_allowed4payment, 'day'))) {
+      if (!this.LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin) {
+        this.alertService.error("Future date is not allowed");
+        return;
+      }
     }
 
-    if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidByLender).isAfter(this.utilityService.moment().add('D', (-1) * _past_days_allowed4payment))) {
+    if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender).isAfter(this.utilityService.moment().add((-1) * _past_days_allowed4payment, 'day'))) {
       this.alertService.error("Historic date is not allowed");
       return;
     }
-    if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidByLender).isBefore(this.utilityService.moment().add('D',))) {
+    
+    if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender).isBefore(this.utilityService.moment().add(_future_days_allowed4payment, 'day'))) {
+      if (!this.LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin) {
+        this.alertService.error("Future date is not allowed");
+        return;
+      }
+    }
+*/
+    if (this.utilityService.moment(this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender).isAfter(this.utilityService.moment())) {
       this.alertService.error("Future date is not allowed");
       return;
     }
-
     if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
       let _old_installmentKey: string = null;
       for (let index in LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
@@ -232,18 +255,21 @@ export class ModalAppliedSessionDisplay implements OnInit {
     this.LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender = this.utilityService._.now();
     let _loanTenureInMonths: number = parseInt(this.LoanObj.loanTenureInMonths);
     let _installmentKey: string = this.LoanApplyObjCurrent4Installment.installmentKey;
+
     //delete this.LoanApplyObjCurrent4Installment.installmentKey;
 
     this.socketService.sendEventForLoanAmountPaidToLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, _installmentKey, _loanTenureInMonths, this.LoanApplyObjCurrent4Installment)
       .pipe(first())
       .subscribe(details => {
         if (details && details["success"]) {
-          this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+          this.updatedSessionObj = details["data"];
+          this.LoanObj = this.updatedSessionObj;
+          //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
         }
       });
     this.LoanApplyObjCurrent4Installment = {};
   }
-  
+
   returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, currentRowDate, _key) {
     let _installmentKey = this.utilityService.moment(currentRowDate).format('DD-MMM-YYYY');
     if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
@@ -329,34 +355,33 @@ export class ModalAppliedSessionDisplay implements OnInit {
   }
 
   closeDialog(_sessionApply, _status) {
-    let _loanId = _sessionApply.loanId;
-    let _sessionPrice = 0;
-    let _loanApplyId = _sessionApply._id;
-    let _endUserId = this.endUserId;
-    let _transactiActionType = null;
-    switch (_status) {
-      case SessionStatus.Accepted:
-        //#region handle LoanObj accepted
-        //_sessionPrice = this.LoanObj.loanAmount;
-        //initiate payment here
-        //_transactiActionType = TransactionActionType.session_accepted;
-        //this.initiateForPaymentForLender(_loanId, _loanApplyId, _sessionApply, _status, _sessionPrice, _endUserId, _transactiActionType);
-        this.dialogRef.close({ event: 'close', data: { sessionApply: _sessionApply, status: _status } });
-        //#endregion handle LoanObj accepted
-        break;
-      case SessionStatus.Ongoing:
-        //#region handle LoanObj accepted
-        //#endregion handle LoanObj accepted
-        break;
-      case SessionStatus.RejectedOngoingWithRefund:
-        this.ready2Refund = false;
-        //#region handle LoanObj rejected with refund
+    if (_sessionApply) {
+      switch (_status) {
+        case SessionStatus.Accepted:
+          //#region handle LoanObj accepted
+          //_sessionPrice = this.LoanObj.loanAmount;
+          //initiate payment here
+          //_transactiActionType = TransactionActionType.session_accepted;
+          //this.initiateForPaymentForLender(_loanId, _loanApplyId, _sessionApply, _status, _sessionPrice, _endUserId, _transactiActionType);
+          this.dialogRef.close({ event: 'close', data: { sessionApply: _sessionApply, status: _status, updatedSessionObj: this.updatedSessionObj } });
+          //#endregion handle LoanObj accepted
+          break;
+        case SessionStatus.Ongoing:
+          //#region handle LoanObj accepted
+          //#endregion handle LoanObj accepted
+          break;
+        case SessionStatus.RejectedOngoingWithRefund:
+          this.ready2Refund = false;
+          //#region handle LoanObj rejected with refund
 
-        //#endregion handle LoanObj rejected with refund  
-        break;
-      default:
-        this.dialogRef.close({ event: 'close', data: { sessionApply: _sessionApply, status: _status } });
-        break;
+          //#endregion handle LoanObj rejected with refund  
+          break;
+        default:
+          this.dialogRef.close({ event: 'close', data: { sessionApply: _sessionApply, status: _status, updatedSessionObj: this.updatedSessionObj } });
+          break;
+      }
+    } else {
+      this.dialogRef.close({ event: 'close', data: { sessionApply: _sessionApply, status: _status, updatedSessionObj: this.updatedSessionObj } });
     }
   }
   returnSessionApplyStatus(LoanApplyObj) {
@@ -394,6 +419,269 @@ export class ModalAppliedSessionDisplay implements OnInit {
     this.dialogRef.close({ event: 'close', data: {} });
     this.router.navigate(['/' + _parentRouting + '/messages'], { state: { contactId: _contactId, AVTrueChatFalse: AVTrueChatFalse } });
   }
+  addNewRatings(_sessionApply) {
+    let _loanId = _sessionApply.loanId;
+    let _createdBy = this.authenticationService.currentUserValue._id;
+    let _userId = _sessionApply.borrowerId;
+    let _parentRouting = '';
+    switch (this.authenticationService.currentUserValue.role) {
+      case Role.Borrower:
+        _userId = _sessionApply.lenderId;
+        _parentRouting = 'borrower';
+        break;
+      case Role.Lender:
+        _userId = _sessionApply.borrowerId;
+        _parentRouting = 'lender';
+        break;
+      case Role.Admin:
+        _parentRouting = 'admin';
+        break;
+    }
+
+    let _userObj = this.userService.returnUsersObjFromLocal(null, null, null, _userId);
+    this.router.navigate(['/' + _parentRouting + '/ratings'], { state: { createdBy: _createdBy, userId: _userId, loanId: _loanId, userObj: _userObj } });
+
+  }
+  usersProfile(userObj) {
+    //#region fetch creator id
+    this.userService.getUserById(userObj._id)
+      .pipe(first())
+      .subscribe(
+        data => {
+          if (data && data['success']) {
+            //console.log('84', this.authenticationService.currentUserValue);
+            const dialogRef = this.dialog.open(PublicProfileComponent, {
+
+              maxWidth: '100vw',
+              maxHeight: '100vh',
+              height: '100%',
+              width: '100%',
+              hasBackdrop: true,
+              data: {
+                userObj: this.utilityService._.cloneDeep(data['data']),
+                adminViewT: false
+              }
+            });
+
+            dialogRef.afterClosed().subscribe(result => {
+              //console.log(`99 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+            });
+
+          } else {
+
+          }
+        },
+        error => {
+          let errorMsg2show = "";
+          try {
+            if (error && error.error && error.error.message) {
+              errorMsg2show = error.error.message;
+            } else if (error && error.message) {
+              errorMsg2show = error.message;
+            } else {
+              errorMsg2show = error;
+            }
+          } catch (ex) { }
+          this.alertService.error(errorMsg2show);
+
+        });
+    //#endregion fetch creator id
+
+  }
+
+  //#region bypass all conditions
+  LoanMoneyTransferStatusChange(event, LoanObj: any, LoanApplyObj: any, installmentKey: string = null, updateLastInstallmentPaymentStatus: boolean = false) {
+    //console.log('585', this.authenticationService.currentUserValue);
+    if (installmentKey) {
+      if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+        for (let _items in LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+          let _currentObj = LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_items];
+          if (_currentObj) {
+            if (_currentObj.createdOnForLoanAmountPaidToLender && !_currentObj.createdOnForLoanAmountPaidToLenderConfirmByLender) {
+              this.alertService.error('Last installment payment confirmation is pending from Lender', true);
+              return;
+            }
+          }
+        }
+      }
+    }
+    if (updateLastInstallmentPaymentStatus) {
+      if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+        for (let _items in LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+          let _currentObj = LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_items];
+          if (_currentObj) {
+            if (_currentObj.createdOnForLoanAmountPaidToLender && !_currentObj.createdOnForLoanAmountPaidToLenderConfirmByLender) {
+              installmentKey = _currentObj.installmentKey;
+              break;
+            }
+          }
+        }
+      }
+      if (!installmentKey) {
+        this.alertService.error('Last installment payment not done by borrower', true);
+        return;
+      }
+    }
+
+    let LoanApplyObjCurrent4Installment = {
+      isInstallmentPaidByAdmin: null,
+      transactionOnForLoanAmountPaidToLender: null,
+      transactionIdForLoanAmountPaidToLender: null,
+      installmentKey: null,
+      createdOnForLoanAmountPaidToLender: null,
+      transactionOnForLoanAmountPaidToLenderConfirmByLender: null,
+      createdOnForLoanAmountPaidToLenderConfirmByLender: null
+    };
+    if (event.srcElement.checked) {
+      //#region update status add data
+      if (installmentKey) {
+        if (!updateLastInstallmentPaymentStatus) {
+          //#region Borrower updating status for installment done
+          //#endregion Borrower updating status for installment done
+        } else {
+          //#region Lender updating status for installment done by Borrower
+          //#endregion Lender updating status for installment done by Borrower
+        }
+        //#region direct action here with BYPASS ALL CASES
+        LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin = false;
+        LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender = this.utilityService._.now();
+        LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender = 'AUTO-SAVED';
+        LoanApplyObjCurrent4Installment.installmentKey = this.utilityService.moment(installmentKey).format('DD-MMM-YYYY');
+        LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender = this.utilityService._.now();
+        LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender = this.utilityService._.now();
+        LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender = this.utilityService._.now();
+
+        let _loanTenureInMonths: number = parseInt(LoanObj.loanTenureInMonths);
+        if (_loanTenureInMonths == (this.utilityService._.keys(LoanApplyObj.installmentWiseLoanAmountPaidByBorrower).length + 1)) {
+          if (confirm("This is confirmation of last installment") == false) {
+            event.srcElement.checked = false;
+            return;
+          }
+        }
+        if (!LoanApplyObj.isLoanAmountPaidByLender) {
+          //#region direct action here with BYPASS ALL CASES
+          this.middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, true, true);
+          //#endregion direct action here with BYPASS ALL CASES
+        }
+        this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, installmentKey, _loanTenureInMonths, LoanApplyObjCurrent4Installment)
+          .pipe(first())
+          .subscribe(details => {
+            if (details && details["success"]) {
+              this.updatedSessionObj = details["data"];
+              this.LoanObj = this.updatedSessionObj;
+              //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+              //this.broadcastUpdatedEvent2All(details["data"]);
+            }
+          });
+        //#endregion direct action here with BYPASS ALL CASES
+      } else {
+        if (!LoanApplyObj.isLoanAmountPaidByLender) {
+          //#region Lender updating status for payment done
+          //#endregion Lender updating status for payment done
+        } else {
+          //#region Borrower updating status for payment done by Lender
+          //#endregion Borrower updating status for payment done by Lender
+        }
+        //#region direct action here with BYPASS ALL CASES
+        this.middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, true, false);
+        //#endregion direct action here with BYPASS ALL CASES
+      }
+      //#endregion update status add data
+    } else {
+      //#region update status remove data
+      if (installmentKey) {
+        if (!updateLastInstallmentPaymentStatus) {
+          //#region Borrower updating status for installment done
+          //#endregion Borrower updating status for installment done
+        } else {
+          //#region Lender updating status for installment done by Borrower
+          //#endregion Lender updating status for installment done by Borrower
+        }
+        //#region direct action here with BYPASS ALL CASES
+        LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin = false;
+        LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender = null;
+        LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender = null;
+        LoanApplyObjCurrent4Installment.installmentKey = this.utilityService.moment(installmentKey).format('DD-MMM-YYYY');
+        LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender = null;
+        LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender = null;
+        LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender = null;
+        LoanApplyObjCurrent4Installment["installmentKeyDeleteThisKey"] = true;
+        let _loanTenureInMonths: number = parseInt(LoanObj.loanTenureInMonths);
+        this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, installmentKey, _loanTenureInMonths, LoanApplyObjCurrent4Installment)
+          .pipe(first())
+          .subscribe(details => {
+            if (details && details["success"]) {
+              this.updatedSessionObj = details["data"];
+              this.LoanObj = this.updatedSessionObj;
+              //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+              //this.broadcastUpdatedEvent2All(details["data"]);
+            }
+          });
+        //#endregion direct action here with BYPASS ALL CASES
+      } else {
+        if (!LoanApplyObj.isLoanAmountPaidByLender) {
+          //#region Lender updating status for payment done
+          //#endregion Lender updating status for payment done
+        } else {
+          //#region Borrower updating status for payment done by Lender
+          //#endregion Borrower updating status for payment done by Lender
+        }
+        //#region direct action here with BYPASS ALL CASES
+        this.middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, false, false);
+        //#endregion direct action here with BYPASS ALL CASES
+      }
+      //#endregion update status remove data
+    }
+  }
+
+  middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj: any, addTremoveF: boolean, addedWithInstallment: boolean) {
+    let LoanApplyObjCurrent = {
+      isLoanAmountPaidByLender: null,
+      _id: null,
+      createdOnForLoanAmountPaidByLender: null,
+      transactionIdForLoanAmountPaidByLender: null,
+      transactionOnForLoanAmountPaidByLender: null,
+      transactionDescriptionForLoanAmountPaidByLender: null,
+      transactionOnForLoanAmountPaidByLenderConfirmByBorrower: null,
+      createdOnForLoanAmountPaidByLenderConfirmByBorrower: null,
+      transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower: null,
+      isLoanAmountPaidByLenderConfirmByBorrower: null,
+    };
+
+    if (addTremoveF) {
+      LoanApplyObjCurrent.isLoanAmountPaidByLender = true;
+      LoanApplyObjCurrent._id = LoanApplyObj._id;
+      LoanApplyObjCurrent.createdOnForLoanAmountPaidByLender = this.utilityService._.now();
+      LoanApplyObjCurrent.transactionIdForLoanAmountPaidByLender = 'AUTO-SAVED';
+      LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLender = this.utilityService._.now();
+      LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLender = 'This data is auto saved' + (addedWithInstallment ? ' with installment payment' : '');
+      LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower = true;
+      LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLenderConfirmByBorrower = this.utilityService._.now();
+      LoanApplyObjCurrent.createdOnForLoanAmountPaidByLenderConfirmByBorrower = this.utilityService._.now();
+      LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower = 'This data is auto saved' + (addedWithInstallment ? ' with installment payment' : '');
+    } else {
+      LoanApplyObjCurrent.isLoanAmountPaidByLender = false;
+      LoanApplyObjCurrent._id = LoanApplyObj._id;
+      LoanApplyObjCurrent.createdOnForLoanAmountPaidByLender = this.utilityService._.now();
+      LoanApplyObjCurrent.transactionIdForLoanAmountPaidByLender = 'AUTO-SAVED';
+      LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLender = this.utilityService._.now();
+      LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLender = 'This data is auto saved' + (addedWithInstallment ? ' with installment payment' : '');
+      LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower = false;
+      LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLenderConfirmByBorrower = this.utilityService._.now();
+      LoanApplyObjCurrent.createdOnForLoanAmountPaidByLenderConfirmByBorrower = this.utilityService._.now();
+      LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower = 'This data is auto saved' + (addedWithInstallment ? ' with installment payment' : '');
+    }
+    this.socketService.sendEventForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, LoanApplyObjCurrent).pipe(first()).subscribe(details => {
+      if (details && details["success"]) {
+        this.updatedSessionObj = details["data"];
+        this.LoanObj = this.updatedSessionObj;
+        //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+        //this.broadcastUpdatedEvent2All(details["data"]);
+      }
+    });
+  }
+
+  //#endregion bypass all conditions
 
 }
 //#endregion modal popup for display applied sessions

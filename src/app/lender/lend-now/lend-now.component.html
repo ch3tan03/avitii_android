@@ -58,7 +58,14 @@
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h5 class="m-0 font-weight-bold text-primary" i18n>{{headerMessage2show}}</h5>
+                <span class="float-left">
+                    <h5 class="m-0 font-weight-bold text-primary">{{headerMessage2show}}</h5>
+                </span>
+                <span>
+                    <div (click)="usersProfile(LoanObj.createdByUserObj)">
+                        <i class="icon icon-user"></i>
+                    </div>
+                </span>
             </div>
             <!-- Card Body -->
             <div class="card-body">
@@ -67,7 +74,7 @@
                         <div class="col-xl-4 col-12 ">
                             <div class="form-group border-right">
                                 <label for="loanType" i18n>Loan Type</label>
-                                <h4 class="text-primary" i18n>
+                                <h4 class="text-primary" >
                                     {{utilityService.returnLoanType(LoanObj.loanType)}}
                                 </h4>
                             </div>
@@ -99,7 +106,7 @@
                         <div class="col-xl-4 col-12">
                             <div class="form-group border-right">
                                 <label for="loanStartDateTime" i18n>Start Date</label>
-                                <h4 class="text-primary" i18n>
+                                <h4 class="text-primary" >
                                     {{LoanObj.loanStartDateTime | date:'dd-MMM-YYYY'}}
                                 </h4>
                             </div>
@@ -109,23 +116,23 @@
                                 <p class="mb-2" i18n>How to give the money</p>
 
                                 <span *ngIf="utilityService.returnLoanRepaymentType('bank',LoanObj)>-1"
-                                    class="badge font-weight-light text-uppercase mr-2 badge-success">
+                                    class="badge font-weight-light text-uppercase mr-2 badge-success" i18n>
                                     BANK
                                 </span>
                                 <span *ngIf="utilityService.returnLoanRepaymentType('cash',LoanObj)>-1"
-                                    class="badge font-weight-light text-uppercase mr-2 badge-success">
+                                    class="badge font-weight-light text-uppercase mr-2 badge-success" i18n>
                                     Cash
                                 </span>
                                 <span *ngIf="utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1"
-                                    class="badge font-weight-light text-uppercase mr-2 badge-success">
+                                    class="badge font-weight-light text-uppercase mr-2 badge-success" i18n>
                                     Revolut
                                 </span>
                                 <span *ngIf="utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1"
-                                    class="badge font-weight-light text-uppercase mr-2 badge-success">
+                                    class="badge font-weight-light text-uppercase mr-2 badge-success" i18n>
                                     Paypal
                                 </span>
                                 <span *ngIf="utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1"
-                                    class="badge font-weight-light text-uppercase badge-success">
+                                    class="badge font-weight-light text-uppercase badge-success" i18n>
                                     Skrill
                                 </span>
                             </div>
@@ -141,8 +148,8 @@
                                 <table class="table mb-0">
                                     <thead>
                                         <tr>
-                                            <th scope="col">EMI Date</th>
-                                            <th scope="col">Payment</th>
+                                            <th scope="col" i18n>EMI Date</th>
+                                            <th scope="col" i18n>Payment</th>
 
                                         </tr>
                                     </thead>
@@ -195,8 +202,8 @@
                                     <tr>
                                         <th style="width: 20%;"> #</th>
 
-                                        <th style="width: 40%;">Borrower</th>
-                                        <th style="width: 40%;">Lender</th>
+                                        <th style="width: 40%;" i18n>Borrower</th>
+                                        <th style="width: 40%;" i18n>Lender</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -219,7 +226,7 @@
 
                                     <tr>
                                         <td>
-                                            <div class="text-black-50 text-uppercase">
+                                            <div class="text-black-50 text-uppercase" i18n>
                                                 Address</div>
                                         </td>
                                         <td>
@@ -236,7 +243,7 @@
 
                                     <tr>
                                         <td>
-                                            <div class="text-black-50 text-uppercase">
+                                            <div class="text-black-50 text-uppercase" i18n>
                                                 Passport Number</div>
                                         </td>
                                         <td>
@@ -253,7 +260,7 @@
 
                                     <tr>
                                         <td>
-                                            <div class="text-black-50 text-uppercase">
+                                            <div class="text-black-50 text-uppercase" i18n>
                                                 DL Number</div>
                                         </td>
                                         <td>
@@ -270,7 +277,7 @@
 
                                     <tr>
                                         <td>
-                                            <div class="text-black-50 text-uppercase">
+                                            <div class="text-black-50 text-uppercase" i18n>
                                                 Payment Method</div>
                                         </td>
                                         <td>
@@ -278,35 +285,37 @@
                                                 BANK
 
                                                 <label for="borrowerBankName" i18n>Bank Name</label>
-                                                <h4 class="text-primary" i18n>
+                                                <h4 class="text-primary" >
                                                     {{borrowerUserObj.bankName}}
                                                 </h4>
                                                 <label for="borrowerRegNumber" i18n>Reg nr</label>
-                                                <h4 class="text-primary" i18n>
+                                                <h4 class="text-primary" >
                                                     {{borrowerUserObj.regNumber}}
                                                 </h4>
                                                 <label for="borrowerAccountNumber" i18n>Account Number</label>
-                                                <h4 class="text-primary" i18n>
+                                                <h4 class="text-primary" >
                                                     {{borrowerUserObj.accountNumber}}
                                                 </h4>
+                                                <!--
                                                 <label for="borrowerMobilePayment" i18n>Mobile payment</label>
                                                 <h4 class="text-primary" i18n>
                                                     {{borrowerUserObj.mobilePayment}}
                                                 </h4>
+                                            -->
                                             </div>
                                             <div *ngIf="utilityService.returnLoanRepaymentType('cash',LoanObj)>-1"
                                                 class="badge font-weight-light text-uppercase mr-2 badge-success">
                                                 Cash
                                             </div>
-                                            <div *ngIf="utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1">
+                                            <div *ngIf="utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1" i18n>
 
                                                 Revolut:
                                                 {{borrowerUserObj.revolutWalletID}}
                                             </div>
-                                            <div *ngIf="utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1">
+                                            <div *ngIf="utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1" i18n>
                                                 Paypal ID: {{borrowerUserObj.paypalWalletID}}
                                             </div>
-                                            <div *ngIf="utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1">
+                                            <div *ngIf="utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1" i18n>
                                                 Skrill: {{borrowerUserObj.skrillWalletID}}
                                             </div>
 
@@ -334,15 +343,15 @@
                                                 class="badge font-weight-light text-uppercase mr-2 badge-success">
                                                 Cash
                                             </div>
-                                            <div *ngIf="utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1">
+                                            <div *ngIf="utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1" i18n>
 
                                                 Revolut:
                                                 {{lenderUserObj.revolutWalletID}}
                                             </div>
-                                            <div *ngIf="utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1">
+                                            <div *ngIf="utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1" i18n>
                                                 Paypal ID: {{lenderUserObj.paypalWalletID}}
                                             </div>
-                                            <div *ngIf="utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1">
+                                            <div *ngIf="utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1" i18n>
                                                 Skrill: {{lenderUserObj.skrillWalletID}}
                                             </div>
 
@@ -473,9 +482,9 @@
                                             *ngFor="let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index">
                                             <td>{{utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1)
                                                 | date:'dd-MMM-YYYY'}}</td>
-                                            <td *ngIf="!f.calculatedMonthlyAmountForEMI.value">kr
+                                            <td *ngIf="(!f.calculatedMonthlyAmountForEMI.value) || (f.calculatedMonthlyAmountForEMI.value ==LoanObj.calculatedMonthlyAmountForEMI)">kr
                                                 {{LoanObj.calculatedMonthlyAmountForEMI}}</td>
-                                            <td *ngIf="f.calculatedMonthlyAmountForEMI.value">kr
+                                            <td *ngIf="(f.calculatedMonthlyAmountForEMI.value) && (f.calculatedMonthlyAmountForEMI.value !=LoanObj.calculatedMonthlyAmountForEMI)">kr
                                                 <span
                                                     style="-webkit-text-decoration-line: line-through;text-decoration-line: line-through;">
                                                     {{LoanObj.calculatedMonthlyAmountForEMI}}
@@ -615,7 +624,7 @@
                 <hr>
                 <form [formGroup]="lendNowForm" class="theme-form">
                     <div class="row">
-                        <div class="col-xl-6 col-12">
+                        <div class="col-xl-6 col-12 d-none">
                             <div class="form-group">
                                 <label for="eSignatureLendersName" i18n>Name</label>
                                 <input type="text" formControlName="eSignatureLendersName" class="form-control"
@@ -625,7 +634,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-6 col-12">
+                        <div class="col-xl-6 col-12 d-none">
                             <div class="form-group">
                                 <label for="eSignatureLendersPassportNumber" i18n>Passport or Driving Licence
                                     Number</label>
@@ -658,6 +667,20 @@
                             Insurance Amount <span class="badge badge-secondary">kr
                                 {{utilityService.returnRoundedNumber(((LoanObj.loanAmount || 0)/100)*20)}}</span>
                             <div class="small text-black-50">Calculated insurance will be 20% of the total loan amount.
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-12">
+                            <div class="form-check-inline">
+                                <div class="custom-control custom-checkbox">
+                                    <input name="loanAgreementCondition" id="loanAgreementCondition" type="checkbox"
+                                        class="custom-control-input" [value]="true"
+                                        (change)="clicked2LoanAgreementCondition($event)"
+                                        [checked]="f.loanAgreementCondition.value"
+                                        [ngClass]="{ 'is-invalid': submitted && f.loanAgreementCondition.errors }">
+                                    <label for="loanAgreementCondition" class="custom-control-label">
+                                        Agree to the above terms & conditions for Loan Agreement.
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>

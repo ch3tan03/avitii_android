@@ -1,0 +1,15 @@
+<!-- <div class="alert-notify" *ngIf="message" [ngClass]="{ 'alert alert-dismissible': message, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error' }">
+
+    <button type="button" class="close mt-n1" data-dismiss="alert">&times;</button>
+    {{message.text}}
+
+</div> -->
+
+
+<div *ngIf="message" class="alert alert-dismissibl alert-notify shadow" [ngClass]="{ 'alert alert-dismissible': message, 'alert-success': message.type === 'success', 'alert-danger': message.type === 'error' }">
+    <button type="button" aria-hidden="true" class="close" (click)="hidePopup()">
+        <i class="icon icon-close"></i>
+    </button>
+    <span>
+    {{message.text}}</span>
+</div>

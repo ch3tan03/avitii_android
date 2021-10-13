@@ -894,7 +894,7 @@ function getLocalStorage() {
 function getProjectLocalStorage(): localSchema {
   const storage = getUrlStorage() || getLocalStorage() || {}
 
-  console.log('storage', storage)
+  //console.log('storage', storage)
 
   storage.key = storage.key || localStorage?.stripeAnguarKey || "pk_test_5JZuHhxsinNGc5JanVWWKSKq"
   storage.privateKey = storage.privateKey || localStorage?.stripeAngularPrivateKey

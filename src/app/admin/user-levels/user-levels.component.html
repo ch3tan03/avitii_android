@@ -1,56 +1,52 @@
 <div class="row mb-3">
   <div class="col-xl-6">
-    <h4 class="text-primary">User Levels</h4>
+    <h4 class="text-primary" i18n>User Levels</h4>
   </div>
   <div class="col-xl-6">
     <button class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#userLevelModal">New</button>
   </div>
 </div>
 <div class="card mb-3">
-  <div class="card-header">Lenders</div>
+  <div class="card-header" i18n>Lenders</div>
   <div class="card-body p-0">
     <table class="table">
       <thead>
         <tr>
-          <th>User Level Name</th>
-          <th>Amount Spent</th>
-          <th>Contracts</th>
-          <th>Actions</th>
+          <th i18n>User Level Name</th>
+          <th i18n>Amount Spent</th>
+          <th i18n>Contracts</th>
+          <th i18n>Actions</th>
         </tr>
       </thead>
       <tbody>
-
         <tr *ngFor="let obj2show of allUserLevelsDataLenders">
           <td>{{obj2show.name}}</td>
           <td>{{obj2show.minimumSpent}}</td>
           <td>{{obj2show.minimumContract}}</td>
           <td>
-            <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Edit">
+            <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Edit" (click)="EditShowLevelForm(obj2show)">
               <i class="icon-pencil"></i>
             </button>
-
-            <button class="btn btn-danger btn-sm btn-xs" data-title="Delete">
+            <button class="btn btn-danger btn-sm btn-xs" data-title="Delete" (click)="DeleteShowLevelForm(obj2show)">
               <i class="icon-trash"></i>
             </button>
           </td>
         </tr>
-
       </tbody>
     </table>
   </div>
-
 </div>
 
 <div class="card">
-  <div class="card-header">Borrowers</div>
+  <div class="card-header" i18n>Borrowers</div>
   <div class="card-body p-0">
     <table class="table">
       <thead>
         <tr>
-          <th>User Level Name</th>
-          <th>Amount Spent</th>
-          <th>Contracts</th>
-          <th>Actions</th>
+          <th i18n>User Level Name</th>
+          <th i18n>Amount Spent</th>
+          <th i18n>Contracts</th>
+          <th i18n>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -59,10 +55,10 @@
           <td>{{obj2show.minimumSpent}}</td>
           <td>{{obj2show.minimumContract}}</td>
           <td>
-            <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Edit">
+            <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Edit" (click)="EditShowLevelForm(obj2show)">
               <i class="icon-pencil"></i>
             </button>
-            <button class="btn btn-danger btn-sm btn-xs" data-title="Delete">
+            <button class="btn btn-danger btn-sm btn-xs" data-title="Delete" (click)="DeleteShowLevelForm(obj2show)">
               <i class="icon-trash"></i>
             </button>
           </td>
@@ -72,14 +68,14 @@
   </div>
 </div>
 
-<div class="modal fade" id="userLevelModal">
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="userLevelModal">
   <div class="modal-dialog modal-dialog-centered  modal-lg">
     <div class="modal-content">
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title text-primary">New User Level</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-primary" i18n>New User Level</h4>
+        <button type="button" class="close" (click)="closeDialog()">&times;</button>
       </div>
 
       <!-- Modal body -->
@@ -87,51 +83,51 @@
         <form [formGroup]="userUserLevelsForm">
           <div class="row mb-3">
             <div class="col-xl-12">
-              <label for="role">User Type</label>
+              <label for="role" i18n>User Type</label>
               <div class="form-group">
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input name="role" id="user_role_0" type="radio" class="custom-control-input" [value]="Role.Lender"
+                  <input [disabled]="!!(actionButtons0Add1Edit2Delete!=0)" name="role" id="user_role_0" type="radio" class="custom-control-input" [value]="Role.Lender"
                     formControlName="role" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
                   <label for="user_role_0" class="custom-control-label">{{Role.Lender}}</label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
-                  <input name="role" id="user_role_1" type="radio" class="custom-control-input" [value]="Role.Borrower"
+                  <input [disabled]="!!(actionButtons0Add1Edit2Delete!=0)" name="role" id="user_role_1" type="radio" class="custom-control-input" [value]="Role.Borrower"
                     formControlName="role" [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
                   <label for="user_role_1" class="custom-control-label">{{Role.Borrower}}</label>
                 </div>
 
                 <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
-                  <div *ngIf="f.role.required">User Type Name is required</div>
+                  <div *ngIf="f.role.required" i18n>User Type Name is required</div>
                 </div>
               </div>
             </div>
 
             <div class="col-xl-12">
               <div class="form-group">
-                <label for="name">User Level Name</label>
-                <input type="text" formControlName="name" class="form-control"
+                <label for="name" i18n>User Level Name</label>
+                <input [disabled]="!!(actionButtons0Add1Edit2Delete==2)" type="text" formControlName="name" class="form-control"
                   [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
                   placeholder="e.g. Good Lender, Best Borrower etc" />
                 <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-                  <div *ngIf="f.name.errors.required">User Level Name is required</div>
+                  <div *ngIf="f.name.errors.required" i18n>User Level Name is required</div>
                 </div>
               </div>
             </div>
             <div class="col-xl-12">
               <div class="form-group">
-                <label for="minimumSpent">Min. Amount Spent</label>
-                <input type="number" formControlName="minimumSpent" class="form-control"
+                <label for="minimumSpent" i18n>Min. Amount Spent</label>
+                <input [disabled]="actionButtons0Add1Edit2Delete==2" type="number" formControlName="minimumSpent" class="form-control"
                   [ngClass]="{ 'is-invalid': submitted && f.minimumSpent.errors }" />
                 <div *ngIf="submitted && f.minimumSpent.errors" class="invalid-feedback">
-                  <div *ngIf="f.minimumSpent.errors.required">Min. Amount Spent is required</div>
-                  <div *ngIf="f.minimumSpent.errors.min">Amount must be non zero</div>
+                  <div *ngIf="f.minimumSpent.errors.required" i18n>Min. Amount Spent is required</div>
+                  <div *ngIf="f.minimumSpent.errors.min" i18n>Amount must be non zero</div>
                 </div>
               </div>
             </div>
             <div class="col-xl-12">
               <div class="form-group">
-                <label for="minimumContract">Number of contracts</label>
-                <input type="number" formControlName="minimumContract" class="form-control"
+                <label for="minimumContract" i18n>Number of contracts</label>
+                <input [disabled]="actionButtons0Add1Edit2Delete==2" type="number" formControlName="minimumContract" class="form-control"
                   [ngClass]="{ 'is-invalid': submitted && f.minimumContract.errors }" />
                 <div *ngIf="submitted && f.minimumContract.errors" class="invalid-feedback">
                   <div *ngIf="f.minimumContract.errors.required">Number of contracts is required</div>
@@ -139,18 +135,23 @@
                 </div>
               </div>
             </div>
-            <div class="col-xl-12">
-              <button class="btn btn-success btn-sm float-right" (click)="onUserLevelsUpdateSubmit()">
+            <div class="col-xl-12" [ngSwitch]="actionButtons0Add1Edit2Delete">
+              <button *ngSwitchCase="0" class="btn btn-success btn-sm float-right" (click)="onUserLevelsUpdateSubmit()" i18n>
                 <i class="icon icon-plus"></i>
                 ADD
+              </button>
+              <button *ngSwitchCase="1" class="btn btn-success btn-sm float-right" (click)="onUserLevelsUpdateSubmit()" i18n>
+                <i class="icon icon-pencil"></i>
+                Edit
+              </button>
+              <button *ngSwitchCase="2" class="btn btn-success btn-sm float-right" i18n (click)="DeleteData()">
+                <i class="icon icon-trash"></i>
+                Delete
               </button>
             </div>
           </div>
         </form>
-
-
       </div>
-
     </div>
   </div>
 </div>

@@ -10,7 +10,7 @@
                         <div class="form-row mb-2  mb-3">
                             <div class="col-xl-3">
                                 <div>
-                                    <img id="imgSelfProfileUrl" [src]="f.selfProfileUrl.value || imgSelfProfileUrl" onerror="this.src='/assets/img/nouser.png';" class="img-fluid" />
+                                    <img id="imgSelfProfileUrl" [src]="f.selfProfileUrl.value || imgSelfProfileUrl" onerror="this.src='./assets/img/nouser.png';" class="img-fluid" />
                                 </div>
                                 <div class="text-center">
                                     <i class="icon-pencil-alt m-2 text-success" (click)="openFileUploaderForProfile()">
@@ -24,17 +24,17 @@
                             <div class="col-xl-9">
                                 <div class="form-row mb-3">
                                     <div class="col-xl-6">
-                                        <label for="firstName">First Name</label>
+                                        <label for="firstName" i18n>First Name</label>
                                         <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
                                         <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
                                             <div *ngIf="f.firstName.errors.required">First Name is required</div>
                                         </div>
                                     </div>
                                     <div class="col-xl-6">
-                                        <label for="lastName">Last Name</label>
+                                        <label for="lastName" i18n>Last Name</label>
                                         <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
                                         <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                                            <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                                            <div *ngIf="f.lastName.errors.required" i18n>Last Name is required</div>
                                         </div>
                                     </div>
                                 </div>
@@ -42,7 +42,7 @@
                                     <div class="col-xl-12">
                                         <div class="card mb-3">
                                             <div class="card-body">
-                                                <label for="emailAddress">
+                                                <label for="emailAddress" i18n>
                                                     Email Id <sub>Please verify if email id exists before
                                                         saving the users details</sub>
                                                     <i *ngIf="isOtpSent" class="icon-check-box m-2 text-success">
@@ -54,30 +54,30 @@
                                                         <button *ngIf="!isOtpSent && !editing" class="btn btn-primary" (click)="onVerifySendOtp()">Verify</button>
                                                     </div>
                                                 </div>
-                                                <div class="mt-2" *ngIf="isOtpSent">
+                                                <div class="mt-2" *ngIf="isOtpSent" >
                                                     <strong>Default Password: avitii@987 </strong> User can reset his/her password later.
                                                 </div>
                                                 <div *ngIf="submitted && f.emailAddress.errors" class="invalid-feedback">
-                                                    <div *ngIf="f.emailAddress.errors.required">Email is required</div>
-                                                    <div *ngIf="f.emailAddress.errors.email">Invalid Email format.</div>
+                                                    <div *ngIf="f.emailAddress.errors.required" i18n>Email is required</div>
+                                                    <div *ngIf="f.emailAddress.errors.email" i18n>Invalid Email format.</div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
-                                        <label for="mobileNo">
+                                        <label for="mobileNo" i18n>
                                             <i class="icon-mobile text-success"></i>
                                             WhatsApp Number</label>
                                         <input type="number" formControlName="mobileNo" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" />
                                         <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
-                                            <div *ngIf="f.mobileNo.errors.required">WhatsApp Number is required
+                                            <div *ngIf="f.mobileNo.errors.required" i18n>WhatsApp Number is required
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row" *ngIf="f.role.value==Role.Admin">
                                     <div class="col-xl-12 mt-3">
-                                        <p class="font-weight-bold">App Permissions </p>
+                                        <p class="font-weight-bold" i18n>App Permissions </p>
                                         <div class="row">
                                             <div class="col-xl-6 mb-2" *ngFor="let data of AppAccessPermissions; let i=index">
                                                 <div class="row">
@@ -86,10 +86,10 @@
                                                     </div>
                                                     <div class="col-xl-6">
                                                         <div class="btn-group btn-group btn-group-sm">
-                                                            <button type="button" class="btn" (click)="onSkillSetsChange(data.value,true)" [ngClass]="{ 'btn-success': onInitSetCheckedValue(data.value)==true, 'btn-outline-success':onInitSetCheckedValue(data.value)==false}">
+                                                            <button type="button" class="btn" (click)="onSkillSetsChange(data.value,true)" [ngClass]="{ 'btn-success': onInitSetCheckedValue(data.value)==true, 'btn-outline-success':onInitSetCheckedValue(data.value)==false}" i18n>
                                                                 Yes
                                                             </button>
-                                                            <button type="button" class="btn" (click)="onSkillSetsChange(data.value,false)" [ngClass]="{ 'btn-danger': onInitSetCheckedValue(data.value)==false, 'btn-outline-danger':onInitSetCheckedValue(data.value)==true}">
+                                                            <button type="button" class="btn" (click)="onSkillSetsChange(data.value,false)" [ngClass]="{ 'btn-danger': onInitSetCheckedValue(data.value)==false, 'btn-outline-danger':onInitSetCheckedValue(data.value)==true}" i18n>
                                                                 No
                                                             </button>
                                                         </div>
@@ -98,7 +98,7 @@
                                             </div>
                                         </div>
                                         <div *ngIf="submitted && f.appPermissions.errors" class="error">
-                                            <div *ngIf="f.appPermissions.errors.required" class="text-red">atleast one permission is required
+                                            <div *ngIf="f.appPermissions.errors.required" class="text-red" i18n>atleast one permission is required
                                             </div>
                                         </div>
                                     </div>
@@ -117,7 +117,7 @@
                 <div class="card-footer">
                     <div class="row">
                         <div class="col-xl-12 text-center">
-                            <button type="button" (click)="onSubmitRegisterUser()" [disabled]="loading" class="btn btn-primary float-right">Save</button>
+                            <button type="button" (click)="onSubmitRegisterUser()" [disabled]="loading" class="btn btn-primary float-right" i18n>Save</button>
                         </div>
                     </div>
                 </div>

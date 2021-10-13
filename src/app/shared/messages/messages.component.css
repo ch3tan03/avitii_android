@@ -366,7 +366,7 @@ text-overflow: ellipsis;
     font-size: 0.9em;
     cursor: pointer;
     margin-right: 10px;
-    background: #f5f5f5;
+    background: #bbdefb;
     margin-bottom: 10px;
     border-radius: 15px;
   }
@@ -553,7 +553,9 @@ text-overflow: ellipsis;
     width: 100%;
     height: 60px;
     line-height: 60px;
-    background: #f5f5f5;
+    background: #66bb6a;
+    color: white;
+   
   }
   #frame .content .contact-profile img {
     width: 40px;
@@ -621,7 +623,7 @@ text-overflow: ellipsis;
     margin: 6px 0 0 8px;
   }
   #frame .content .messages ul li.replies p {
-    background: #f5f5f5;
+    background: #cacaca;
     float: right;
   }
   #frame .content .messages ul li img {

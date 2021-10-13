@@ -1,0 +1,24 @@
+<section class="resume schedule  pt-3 pb-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="cal-time">
+                    <div class="time">
+                        <h2 class="title-text pt-1">{{blogsData.title}}</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-7">
+            <!--<p class="subscribe-sub-head mb-3">{{blogsData.description}}</p>-->
+            <p class="subscribe-sub-head mb-3" [innerHTML]="blogsData.description"></p>
+        </div>
+        <div class="col-lg-5">
+            <img class="img-fluid" [src]="blogsData.blogsDocument" />
+        </div>
+    </div>
+</div>

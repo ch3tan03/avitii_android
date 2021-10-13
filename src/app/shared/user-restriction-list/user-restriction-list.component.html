@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="col-xl-12 col-md-12 mb-4">
+        <div class="card shadow h-100">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-xl-11 col-10">
+                        <div class="font-weight-bold text-primary" >
+                            {{userObj.firstName}}&nbsp;{{userObj.lastName}}
+                        </div>
+                    </div>
+                    <div *ngIf="isOpenedInModel" class="col-xl-1 col-2">
+                        <i class="icon-close float-right" mat-button mat-dialog-close></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">                   
+                    <div class="col-xl-12 col-12 mb-4">
+                        <div class="view view-cascade gradient-card-header white">
+                            <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+                                class="row-border hover table table-striped table-responsive-md btn-table">
+                                <thead>
+                                    <tr>
+                                        <th class="d-none" i18n>ID</th>
+                                        <th i18n>Comment</th>
+                                        <th i18n>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let obj of utilityService._.values(PaymentTransactionDetailsArray)">
+                                        <td class="d-none" >{{obj._id}}</td>
+                                        <td >{{obj.comment}}</td>
+                                        <td >{{obj.isVerified?'UnBlocked':'Blocked'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

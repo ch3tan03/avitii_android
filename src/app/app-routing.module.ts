@@ -12,6 +12,7 @@ import { FaqsComponent } from './components/faqs/faqs.component';
 import { DisclaimerComponent } from './components/disclaimer/disclaimer.component';
 
 import { AuthGuard,NoAuthGuard } from './components/_guards';
+import { BlogViewComponent } from './home/blog-view/blog-view.component';
 
 
 const routes: Routes = [
@@ -86,7 +87,10 @@ const routes: Routes = [
     path: 'disclaimer',
     component: DisclaimerComponent
   },
-
+  {
+    path: 'blog/:id',
+    component: BlogViewComponent
+  },
   // otherwise redirect to home
   {
     path: '**',

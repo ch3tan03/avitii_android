@@ -21,10 +21,13 @@ export class SessionsService {
     return fromEvent<Session[]>(this.socketioService.socket, 'instant_sessions_response_added');
   }
 
+  
   getSessionNewAdded() {
-    return fromEvent<Session[]>(this.socketioService.socket, 'new_sessions_response_added');
+    return fromEvent<Session[]>(this.socketioService.socket, 'sessions_response_added');
   }
-
+  getSessionUpdated() {
+    return fromEvent<Session[]>(this.socketioService.socket, 'sessions_response_updatebyid');
+  }
   getSessionAll() {
     this.socketioService.emitEventWithNameAndData('sessions_request_getall', {});
     return fromEvent<Session[]>(this.socketioService.socket, 'sessions_response_getall');
@@ -44,6 +47,11 @@ export class SessionsService {
   updateSessionById(session: Session) {
     this.socketioService.emitEventWithNameAndData('sessions_request_updatebyid', session);
     return fromEvent<Session[]>(this.socketioService.socket, 'sessions_response_updatebyid');
+  }
+  
+  deleteSessionById(sessionId:string, _deletedBy:string) {
+    this.socketioService.emitEventWithNameAndData('sessions_request_deletebyid', sessionId, _deletedBy);
+    return fromEvent<Session[]>(this.socketioService.socket, 'sessions_response_deletebyid');
   }
 
   getSessionAllByService(services: string, location: string, sessionSubject: string, loanDescription: string, useAndTrueOrFalse: boolean) {

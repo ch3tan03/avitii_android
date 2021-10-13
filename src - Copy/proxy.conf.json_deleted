@@ -1,0 +1,8 @@
+{
+    "/ajax/*": {
+        "target": "https://translate.google.com"
+    }
+}
+inside angular.json, need to add this inside serve->option
+                            ,
+                                                    "proxyConfig": "src/proxy.conf.json"

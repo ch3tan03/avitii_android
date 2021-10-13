@@ -23,6 +23,26 @@
     },
 
     /***/
+    "0MYx":
+    /*!********************************************************!*\
+      !*** ./src/app/home/blog-view/blog-view.component.css ***!
+      \********************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function MYx(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJibG9nLXZpZXcuY29tcG9uZW50LmNzcyJ9 */";
+      /***/
+    },
+
+    /***/
     1:
     /*!********************!*\
       !*** ws (ignored) ***!
@@ -401,6 +421,21 @@
 
 
       var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
+      /* harmony import */
+
+
+      var country_list__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! country-list */
+      "pHmk");
+      /* harmony import */
+
+
+      var country_list__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(country_list__WEBPACK_IMPORTED_MODULE_4__);
+
+      Object(country_list__WEBPACK_IMPORTED_MODULE_4__["overwrite"])([{
+        code: 'US',
+        name: 'USA'
+      }]);
 
       var UtilityService = /*#__PURE__*/function () {
         function UtilityService() {
@@ -502,7 +537,7 @@
               "_id": "trial_plan",
               "name": "Trial Plan",
               "amount": 0,
-              'expiryInMonth': 2
+              'expiryInMonth': 3
             },
             "paid_plan4lender": {
               "_id": "paid_plan4lender",
@@ -659,6 +694,61 @@
             _calculatedMonthlyAmountForEMI = this.returnRoundedNumber(_calculatedMonthlyAmountForEMI);
             return _calculatedMonthlyAmountForEMI;
           }
+        }, {
+          key: "returnCountryCodeFromName",
+          value: function returnCountryCodeFromName(countryName) {
+            if (countryName) {
+              return lodash__WEBPACK_IMPORTED_MODULE_2__["toLower"](Object(country_list__WEBPACK_IMPORTED_MODULE_4__["getCode"])(countryName));
+            }
+          }
+        }, {
+          key: "returnCountryNames",
+          value: function returnCountryNames() {
+            return Object(country_list__WEBPACK_IMPORTED_MODULE_4__["getNames"])();
+          }
+        }, {
+          key: "returnTIfSuppliedDateIsNotFromCurrentMonth",
+          value: function returnTIfSuppliedDateIsNotFromCurrentMonth(date) {
+            //return moment(date).add(i,"month");
+            var currentMonthsStart = moment__WEBPACK_IMPORTED_MODULE_3__().startOf('month');
+            return moment__WEBPACK_IMPORTED_MODULE_3__(date).isBefore(moment__WEBPACK_IMPORTED_MODULE_3__(currentMonthsStart));
+          }
+        }, {
+          key: "returnSortedObjectArray",
+          value: function returnSortedObjectArray(objArray, fieldsArray2Sort) {
+            //objArray.sort(fieldSorter(['field1', '-field2']));
+            ////objArray.sort(fieldSorter(['field1', '-field2', 'field3'])); // alternative
+            return objArray.sort(this.fieldSorter(fieldsArray2Sort));
+          }
+        }, {
+          key: "fieldSorter",
+          value: function fieldSorter(fields) {
+            return function (a, b) {
+              return fields.map(function (o) {
+                var dir = 1;
+
+                if (o[0] === '-') {
+                  dir = -1;
+                  o = o.substring(1);
+                }
+
+                if (a[o] > b[o]) return dir;
+                if (a[o] < b[o]) return -dir;
+                return 0;
+              }).reduce(function firstNonZeroValue(p, n) {
+                return p ? p : n;
+              }, 0);
+            };
+          }
+        }, {
+          key: "checkWhetherPlanExpiryIsInFuture",
+          value: function checkWhetherPlanExpiryIsInFuture(userMemberShipExpireOn) {
+            if (userMemberShipExpireOn) {
+              return moment__WEBPACK_IMPORTED_MODULE_3__().isBefore(moment__WEBPACK_IMPORTED_MODULE_3__(userMemberShipExpireOn));
+            }
+
+            return false;
+          }
         }]);
 
         return UtilityService;
@@ -712,31 +802,18 @@
 
       __webpack_require__.d(__webpack_exports__, "environment", function () {
         return environment;
-      }); // This file can be replaced during build by using the `fileReplacements` array.
-      // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-      // The list of file replacements can be found in `angular.json`.
-
+      });
 
       var environment = {
-        production: false,
-        apiUrl: 'https://avittii.herokuapp.com',
-        serverUrl: 'https://avittii.herokuapp.com/#',
-        SOCKET_ENDPOINT: 'https://avittii.herokuapp.com',
+        production: true,
+        apiUrl: 'https://avitii-lending.com/endpoint',
+        serverUrl: 'https://avitii-lending.com/endpoint',
+        SOCKET_ENDPOINT: 'https://avitii-lending.com',
         apiTimeout: 60000,
-        STRIP_PAYMENT_Publishable_key: 'pk_test_vfc6rPCbObD6Chgrgc4P8JBF',
-        STRIP_PAYMENT_Secret_key_UAT: 'sk_test_r56cBMsofwawtQiEgqDzmkcM',
-        isPaymentTestMode: true
-      }; //default timeout is 1 min
-
-      /*
-       * For easier debugging in development mode, you can import the following file
-       * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
-       *
-       * This import should be commented out in production mode because it will have a negative impact
-       * on performance if an error is thrown.
-       */
-      // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
-
+        STRIP_PAYMENT_Publishable_key: 'pk_live_51ITXbXEpOok5VoBk8Cs1qYisy80xTcbR2qgZLsy0phv6RpdrZw5TWM1S5TpddNJLs7wb3UDAIhxoSlOy8ajQJOIb00PlBzBvk0',
+        STRIP_PAYMENT_Secret_key_UAT: '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',
+        isPaymentTestMode: false
+      };
       /***/
     },
 
@@ -1039,7 +1116,12 @@
         }, {
           key: "getSessionNewAdded",
           value: function getSessionNewAdded() {
-            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(this.socketioService.socket, 'new_sessions_response_added');
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(this.socketioService.socket, 'sessions_response_added');
+          }
+        }, {
+          key: "getSessionUpdated",
+          value: function getSessionUpdated() {
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(this.socketioService.socket, 'sessions_response_updatebyid');
           }
         }, {
           key: "getSessionAll",
@@ -1068,6 +1150,12 @@
           value: function updateSessionById(session) {
             this.socketioService.emitEventWithNameAndData('sessions_request_updatebyid', session);
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(this.socketioService.socket, 'sessions_response_updatebyid');
+          }
+        }, {
+          key: "deleteSessionById",
+          value: function deleteSessionById(sessionId, _deletedBy) {
+            this.socketioService.emitEventWithNameAndData('sessions_request_deletebyid', sessionId, _deletedBy);
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(this.socketioService.socket, 'sessions_response_deletebyid');
           }
         }, {
           key: "getSessionAllByService",
@@ -1734,7 +1822,33 @@
         }, {
           key: "appRouteToPath",
           value: function appRouteToPath(_path) {
-            this.router.navigate([_path]);
+            var _this4 = this;
+
+            var _stateObj = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+            var delayedT = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+            if (delayedT) {
+              if (_stateObj) {
+                setTimeout(function () {
+                  _this4.router.navigate([_path], {
+                    state: _stateObj
+                  });
+                }, 500);
+              } else {
+                setTimeout(function () {
+                  _this4.router.navigate([_path]);
+                }, 500);
+              }
+            } else {
+              if (_stateObj) {
+                this.router.navigate([_path], {
+                  state: _stateObj
+                });
+              } else {
+                this.router.navigate([_path]);
+              }
+            }
           }
         }]);
 
@@ -1908,7 +2022,7 @@
 
       var NotificationService = /*#__PURE__*/function () {
         function NotificationService(socketService, utilityService, location, router, sessionsService) {
-          var _this4 = this;
+          var _this5 = this;
 
           _classCallCheck(this, NotificationService);
 
@@ -1921,10 +2035,10 @@
           this.chatNotifications = {};
           router.events.subscribe(function (val) {
             if (location.path() != "") {
-              _this4.route = location.path();
+              _this5.route = location.path();
             } else {
-              _this4.route = "Home";
-            } //console.log("26 :: path :: " + this.route);
+              _this5.route = "Home";
+            } ////console.log("26 :: path :: " + this.route);
 
           });
         }
@@ -1932,7 +2046,7 @@
         _createClass(NotificationService, [{
           key: "appNotificationsListner",
           value: function appNotificationsListner() {
-            var _this5 = this;
+            var _this6 = this;
 
             this.socketService.getNewMessageToRoomAll().subscribe(function (_currentChatObj) {
               if (_currentChatObj) {//this.chatNotifications[_currentChatObj._id] = _currentChatObj;
@@ -1941,18 +2055,18 @@
             this.socketService.getAppNotificationWithCustomData().subscribe(function (data) {
               if (data && data['success']) {
                 if (data['data']['_id']) {
-                  _this5.appNotifications[data['data']['_id']] = data['data'];
+                  _this6.appNotifications[data['data']['_id']] = data['data'];
 
-                  _this5.check4Notification(data['data'], true);
+                  _this6.check4Notification(data['data'], true);
                 } else {
-                  if (_this5.utilityService._.first(_this5.utilityService._.values(data['data']))) {
-                    if (_this5.utilityService._.first(_this5.utilityService._.values(data['data']))['_id']) {
-                      _this5.appNotifications = _this5.utilityService._.merge(_this5.utilityService._.mapKeys(_this5.utilityService._.values(_this5.appNotifications), '_id'), _this5.utilityService._.mapKeys(_this5.utilityService._.values(data['data']), '_id'));
+                  if (_this6.utilityService._.first(_this6.utilityService._.values(data['data']))) {
+                    if (_this6.utilityService._.first(_this6.utilityService._.values(data['data']))['_id']) {
+                      _this6.appNotifications = _this6.utilityService._.merge(_this6.utilityService._.mapKeys(_this6.utilityService._.values(_this6.appNotifications), '_id'), _this6.utilityService._.mapKeys(_this6.utilityService._.values(data['data']), '_id'));
 
                       for (var _items in data['data']) {
                         var currentNotificationObj = data['data'][_items];
 
-                        _this5.check4Notification(currentNotificationObj, true);
+                        _this6.check4Notification(currentNotificationObj, true);
                       }
                     }
                   }
@@ -2046,6 +2160,12 @@
                 break;
 
               default:
+                if (this.route.indexOf('lender') > -1) {
+                  this.socketService.getSessionAllByQuery(false, _obj2Save, 'response_updated_sessions_bylenderid');
+                } else {
+                  this.sessionsService.getSessionAllByBorrowerId(null, loanId, loanApplyId, null, true, 'response_updated_sessions_byborrowerid');
+                }
+
                 break;
             }
           }
@@ -2090,13 +2210,19 @@
                 break;
 
               default:
+                if (this.route.indexOf('lender') > -1) {
+                  this.socketService.getSessionAllByQuery(false, _obj2Save, 'response_updated_sessions_bylenderid');
+                } else {
+                  this.sessionsService.getSessionAllByBorrowerId(null, loanId, loanApplyId, null, true, 'response_updated_sessions_byborrowerid');
+                }
+
                 break;
             }
           }
         }, {
           key: "playSound",
           value: function playSound() {
-            var sound = "../assets/img/sound.mp3";
+            var sound = "./../assets/img/sound.mp3";
             sound && new Audio(sound).play();
           }
         }]);
@@ -2253,12 +2379,12 @@
         _createClass(AlertComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this6 = this;
+            var _this7 = this;
 
             this.subscription = this.alertService.getMessage().subscribe(function (message) {
-              _this6.message = message;
+              _this7.message = message;
               setTimeout(function () {
-                return _this6.message = null;
+                return _this7.message = null;
               }, 4000);
             });
           }
@@ -2674,7 +2800,7 @@
 
       var AppComponent = /*#__PURE__*/function () {
         function AppComponent(authenticationService, socketService, utilityService, notificationService) {
-          var _this7 = this;
+          var _this8 = this;
 
           _classCallCheck(this, AppComponent);
 
@@ -2684,18 +2810,18 @@
           this.notificationService = notificationService;
           this.subscription = this.authenticationService.getCurrentUserObj().subscribe(function (_currentUser) {
             if (_currentUser) {
-              _this7.currentUser = _currentUser;
+              _this8.currentUser = _currentUser;
 
-              _this7.socketService.setupSocketConnection(_this7.currentUser._id);
+              _this8.socketService.setupSocketConnection(_this8.currentUser._id);
 
-              if (_this7.currentUser.role) {
-                _this7.socketService.sendEventToJoinChatRoom(_models__WEBPACK_IMPORTED_MODULE_5__["AppRooms"]['my_app_main_room_for_' + _this7.currentUser.role], _this7.currentUser._id);
+              if (_this8.currentUser.role) {
+                _this8.socketService.sendEventToJoinChatRoom(_models__WEBPACK_IMPORTED_MODULE_5__["AppRooms"]['my_app_main_room_for_' + _this8.currentUser.role], _this8.currentUser._id);
               }
             } else {
-              _this7.currentUser = null;
+              _this8.currentUser = null;
             }
 
-            _this7.notificationService.appNotificationsListner();
+            _this8.notificationService.appNotificationsListner();
           });
           this.authenticationService.initCurrentUserObj();
         }
@@ -3112,7 +3238,7 @@
         }, {
           key: "onSubmit",
           value: function onSubmit() {
-            var _this8 = this;
+            var _this9 = this;
 
             this.submitted = true; // stop here if form is invalid
 
@@ -3122,7 +3248,7 @@
 
             this.loading = true;
             this.authenticationService.login(this.f.userName.value, this.f.password.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (data) {
-              _this8.appRouterService.appRouter(data);
+              _this9.appRouterService.appRouter(data);
             }, function (error) {
               var errorMsg2show = "";
 
@@ -3136,9 +3262,9 @@
                 }
               } catch (ex) {}
 
-              _this8.alertService.error(errorMsg2show);
+              _this9.alertService.error(errorMsg2show);
 
-              _this8.loading = false;
+              _this9.loading = false;
             });
           }
         }]);
@@ -3333,7 +3459,7 @@
         _createClass(RegisterComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this9 = this;
+            var _this10 = this;
 
             this.element_btn_click_reg_basic_details = document.getElementById('btn_click_reg_basic_details');
             this.element_btn_click_reg_email_verification = document.getElementById('btn_click_reg_email_verification');
@@ -3368,10 +3494,10 @@
 
               if (_id) {
                 //#region user came here to complete registration, login and send to profile page
-                _this9.authenticationService.autologin4registration(_id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (data) {
+                _this10.authenticationService.autologin4registration(_id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (data) {
                   data['isRegisteredAllowed2EditProfile'] = true;
 
-                  _this9.appRouterService.appRouterRoleWise(data, 'profile');
+                  _this10.appRouterService.appRouterRoleWise(data, 'profile');
                 }, function (error) {
                   var errorMsg2show = "";
 
@@ -3385,32 +3511,32 @@
                     }
                   } catch (ex) {}
 
-                  _this9.alertService.error(errorMsg2show);
+                  _this10.alertService.error(errorMsg2show);
 
-                  _this9.loading = false;
+                  _this10.loading = false;
                 }); //#endregion user came here to complete registration, login and send to profile page
 
               }
 
               switch (_data) {
                 case "ct":
-                  _this9._role = src_app_models__WEBPACK_IMPORTED_MODULE_8__["Role"].Borrower;
+                  _this10._role = src_app_models__WEBPACK_IMPORTED_MODULE_8__["Role"].Borrower;
                   break;
 
                 case "cr":
-                  _this9._role = src_app_models__WEBPACK_IMPORTED_MODULE_8__["Role"].Lender;
+                  _this10._role = src_app_models__WEBPACK_IMPORTED_MODULE_8__["Role"].Lender;
                   break;
 
                 case 'ad':
-                  _this9._role = src_app_models__WEBPACK_IMPORTED_MODULE_8__["Role"].Admin;
+                  _this10._role = src_app_models__WEBPACK_IMPORTED_MODULE_8__["Role"].Admin;
                   break;
 
                 default:
-                  _this9._role = src_app_models__WEBPACK_IMPORTED_MODULE_8__["Role"].Lender;
+                  _this10._role = src_app_models__WEBPACK_IMPORTED_MODULE_8__["Role"].Lender;
                   break;
               }
 
-              _this9.onClickRoleChange(_this9._role);
+              _this10.onClickRoleChange(_this10._role);
             });
           } // convenience getter for easy access to form fields
 
@@ -3429,7 +3555,7 @@
         }, {
           key: "onVerifySendOtp",
           value: function onVerifySendOtp() {
-            var _this10 = this;
+            var _this11 = this;
 
             this.isOtpSent = false;
 
@@ -3451,18 +3577,18 @@
 
                 if (data && data['success']) {
                   //alert(JSON.stringify( data));
-                  _this10.alertService.success(data['message'], true);
+                  _this11.alertService.success(data['message'], true);
 
-                  _this10.loading = false;
-                  _this10.isOtpSent = true;
+                  _this11.loading = false;
+                  _this11.isOtpSent = true;
 
-                  _this10.element_btn_click_reg_email_verification.click();
+                  _this11.element_btn_click_reg_email_verification.click();
                 } else {
                   //alert(JSON.stringify(data['message']));
-                  _this10.alertService.error(data['message']);
+                  _this11.alertService.error(data['message']);
 
-                  _this10.loading = false;
-                  _this10.isOtpSent = false;
+                  _this11.loading = false;
+                  _this11.isOtpSent = false;
                 }
               }, function (error) {
                 var errorMsg2show = "";
@@ -3477,17 +3603,17 @@
                   }
                 } catch (ex) {}
 
-                _this10.alertService.error(errorMsg2show);
+                _this11.alertService.error(errorMsg2show);
 
-                _this10.loading = false;
-                _this10.isOtpSent = false;
+                _this11.loading = false;
+                _this11.isOtpSent = false;
               });
             }
           }
         }, {
           key: "onSubmitRegisterUser",
           value: function onSubmitRegisterUser() {
-            var _this11 = this;
+            var _this12 = this;
 
             if (this.isOtpSent) {
               this.submitted = true;
@@ -3507,14 +3633,14 @@
 
                 if (data && data['success']) {
                   //alert(JSON.stringify( data));
-                  _this11.alertService.success('Registration successful', true);
+                  _this12.alertService.success('Registration successful', true);
 
-                  _this11.router.navigate(['/login']);
+                  _this12.router.navigate(['/login']);
                 } else {
                   //alert(JSON.stringify(data['message']));
-                  _this11.alertService.error(data['message']);
+                  _this12.alertService.error(data['message']);
 
-                  _this11.loading = false;
+                  _this12.loading = false;
                 }
               }, function (error) {
                 var errorMsg2show = "";
@@ -3529,9 +3655,9 @@
                   }
                 } catch (ex) {}
 
-                _this11.alertService.error(errorMsg2show);
+                _this12.alertService.error(errorMsg2show);
 
-                _this11.loading = false;
+                _this12.loading = false;
               });
             } else {
               this.alertService.error("Please Verify Email first");
@@ -3540,7 +3666,7 @@
         }, {
           key: "onSubmitVerifyRegisterUser",
           value: function onSubmitVerifyRegisterUser() {
-            var _this12 = this;
+            var _this13 = this;
 
             this.submitted = true;
 
@@ -3570,14 +3696,14 @@
 
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this12.alertService.success('Registration initiated. Sent Verification link on email, please click on link to complete registration proccess.', true);
+                _this13.alertService.success('Registration initiated. Sent Verification link on email, please click on link to complete registration proccess.', true);
 
-                _this12.router.navigate(['/login']);
+                _this13.router.navigate(['/login']);
               } else {
                 //alert(JSON.stringify(data['message']));
-                _this12.alertService.error(data['message']);
+                _this13.alertService.error(data['message']);
 
-                _this12.loading = false;
+                _this13.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -3592,9 +3718,9 @@
                 }
               } catch (ex) {}
 
-              _this12.alertService.error(errorMsg2show);
+              _this13.alertService.error(errorMsg2show);
 
-              _this12.loading = false;
+              _this13.loading = false;
             });
           }
         }]);
@@ -3684,127 +3810,133 @@
       /* harmony import */
 
 
-      var _components_helpers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var _ngui_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! @ngui/common */
+      "ZWWZ");
+      /* harmony import */
+
+
+      var _components_helpers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! ./components/_helpers */
       "H8gG");
       /* harmony import */
 
 
-      var _services_utility_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _services_utility_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
       /*! ./services/utility.service */
       "A1CT");
       /* harmony import */
 
 
-      var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ./app.component */
       "Sy1n");
       /* harmony import */
 
 
-      var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      var _app_routing_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ./app-routing.module */
       "vY5A");
       /* harmony import */
 
 
-      var _components_alert_alert_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      var _components_alert_alert_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
       /*! ./components/alert/alert.component */
       "QC9C");
       /* harmony import */
 
 
-      var _components_login_login_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      var _components_login_login_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! ./components/login/login.component */
       "W3Zi");
       /* harmony import */
 
 
-      var _components_register_register_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+      var _components_register_register_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
       /*! ./components/register/register.component */
       "XC3f");
       /* harmony import */
 
 
-      var ng2_charts__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+      var ng2_charts__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
       /*! ng2-charts */
       "LPYB");
       /* harmony import */
 
 
-      var _logout_logout_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+      var _logout_logout_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
       /*! ./logout/logout.component */
       "n1B2");
       /* harmony import */
 
 
-      var _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+      var _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
       /*! ./components/contact/contact.component */
       "G2Gn");
       /* harmony import */
 
 
-      var _components_header_header_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+      var _components_header_header_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
       /*! ./components/header/header.component */
       "2MiI");
       /* harmony import */
 
 
-      var _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+      var _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
       /*! ./components/footer/footer.component */
       "LmEr");
       /* harmony import */
 
 
-      var _components_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
+      var _components_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
       /*! ./components/forgot-password/forgot-password.component */
       "nAxv");
       /* harmony import */
 
 
-      var _components_faqs_faqs_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
+      var _components_faqs_faqs_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
       /*! ./components/faqs/faqs.component */
       "ytmU");
       /* harmony import */
 
 
-      var _components_disclaimer_disclaimer_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
+      var _components_disclaimer_disclaimer_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(
       /*! ./components/disclaimer/disclaimer.component */
       "PxG9");
       /* harmony import */
 
 
-      var _socketio_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(
+      var _socketio_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(
       /*! ./socketio.service */
       "bgkY");
       /* harmony import */
 
 
-      var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(
+      var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(
       /*! @angular/platform-browser/animations */
       "R1ws");
       /* harmony import */
 
 
-      var _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(
+      var _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(
       /*! @angular/cdk/overlay */
       "rDax");
       /* harmony import */
 
 
-      var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(
+      var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(
       /*! @angular/material/snack-bar */
       "dNgK");
       /* harmony import */
 
 
-      var stripe_angular__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(
+      var stripe_angular__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(
       /*! stripe-angular */
       "CnOO");
       /* harmony import */
 
 
-      var angular_datatables__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(
+      var angular_datatables__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(
       /*! angular-datatables */
       "njyG"); //import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
       // used to create fake backend
@@ -3817,19 +3949,18 @@
       };
 
       AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"], _components_alert_alert_component__WEBPACK_IMPORTED_MODULE_9__["AlertComponent"], _components_login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"], _components_register_register_component__WEBPACK_IMPORTED_MODULE_11__["RegisterComponent"], _logout_logout_component__WEBPACK_IMPORTED_MODULE_13__["LogoutComponent"], _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_14__["ContactComponent"], _components_header_header_component__WEBPACK_IMPORTED_MODULE_15__["HeaderComponent"], _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_16__["FooterComponent"], _components_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_17__["ForgotPasswordComponent"], _components_faqs_faqs_component__WEBPACK_IMPORTED_MODULE_18__["FaqsComponent"], _components_disclaimer_disclaimer_component__WEBPACK_IMPORTED_MODULE_19__["DisclaimerComponent"]],
-        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"], ng2_charts__WEBPACK_IMPORTED_MODULE_12__["ChartsModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_21__["BrowserAnimationsModule"], _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_22__["OverlayModule"], stripe_angular__WEBPACK_IMPORTED_MODULE_24__["StripeModule"].forRoot(""), angular_datatables__WEBPACK_IMPORTED_MODULE_25__["DataTablesModule"]],
+        declarations: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"], _components_alert_alert_component__WEBPACK_IMPORTED_MODULE_10__["AlertComponent"], _components_login_login_component__WEBPACK_IMPORTED_MODULE_11__["LoginComponent"], _components_register_register_component__WEBPACK_IMPORTED_MODULE_12__["RegisterComponent"], _logout_logout_component__WEBPACK_IMPORTED_MODULE_14__["LogoutComponent"], _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_15__["ContactComponent"], _components_header_header_component__WEBPACK_IMPORTED_MODULE_16__["HeaderComponent"], _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_17__["FooterComponent"], _components_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_18__["ForgotPasswordComponent"], _components_faqs_faqs_component__WEBPACK_IMPORTED_MODULE_19__["FaqsComponent"], _components_disclaimer_disclaimer_component__WEBPACK_IMPORTED_MODULE_20__["DisclaimerComponent"]],
+        imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"], _app_routing_module__WEBPACK_IMPORTED_MODULE_9__["AppRoutingModule"], ng2_charts__WEBPACK_IMPORTED_MODULE_13__["ChartsModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_22__["BrowserAnimationsModule"], _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_23__["OverlayModule"], stripe_angular__WEBPACK_IMPORTED_MODULE_25__["StripeModule"].forRoot(""), angular_datatables__WEBPACK_IMPORTED_MODULE_26__["DataTablesModule"], _ngui_common__WEBPACK_IMPORTED_MODULE_5__["NguiListModule"], _ngui_common__WEBPACK_IMPORTED_MODULE_5__["NguiInviewModule"], _ngui_common__WEBPACK_IMPORTED_MODULE_5__["NguiUtilsModule"]],
         providers: [{
           provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"],
-          useClass: _components_helpers__WEBPACK_IMPORTED_MODULE_5__["JwtInterceptor"],
+          useClass: _components_helpers__WEBPACK_IMPORTED_MODULE_6__["JwtInterceptor"],
           multi: true
         }, {
           provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"],
-          useClass: _components_helpers__WEBPACK_IMPORTED_MODULE_5__["ErrorInterceptor"],
+          useClass: _components_helpers__WEBPACK_IMPORTED_MODULE_6__["ErrorInterceptor"],
           multi: true
-        }, _services_utility_service__WEBPACK_IMPORTED_MODULE_6__["UtilityService"], _socketio_service__WEBPACK_IMPORTED_MODULE_20__["SocketioService"], _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_23__["MatSnackBar"] // provider used to create fake backend
-        ],
-        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]]
+        }, _services_utility_service__WEBPACK_IMPORTED_MODULE_7__["UtilityService"], _socketio_service__WEBPACK_IMPORTED_MODULE_21__["SocketioService"], _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_24__["MatSnackBar"]],
+        bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]]
       })], AppModule);
       /***/
     },
@@ -4050,7 +4181,10 @@
           this.NewMessageToRoomAll = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"](); //#endregion recd new message in Chat Room
           //#region recd new message in Chat Room
 
-          this.OldMessageToRoomAll = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"]();
+          this.OldMessageToRoomAll = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"](); //#endregion recd new message in Chat Room
+          //#region send status of socket connected or disconnected
+
+          this.SocketConnectionStatus = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"]();
           window["baseurl"] = this.baseurl;
         }
 
@@ -4242,7 +4376,7 @@
         }, {
           key: "clearOldMessageToRoomAll",
           value: function clearOldMessageToRoomAll() {
-            this.NewMessageToRoomAll.next();
+            this.OldMessageToRoomAll.next();
           }
         }, {
           key: "initOldMessageToRoomAll",
@@ -4253,21 +4387,53 @@
           key: "getOldMessageToRoomAll",
           value: function getOldMessageToRoomAll() {
             return this.OldMessageToRoomAll.asObservable();
-          } //#endregion recd new message in Chat Room
+          }
+        }, {
+          key: "sendSocketConnectionStatus",
+          value: function sendSocketConnectionStatus(isConnected) {
+            this.SocketConnectionStatus.next(isConnected);
+          }
+        }, {
+          key: "clearSocketConnectionStatus",
+          value: function clearSocketConnectionStatus() {
+            this.SocketConnectionStatus.next();
+          }
+        }, {
+          key: "initSocketConnectionStatus",
+          value: function initSocketConnectionStatus() {//this.sendSocketConnectionStatus(false);
+          }
+        }, {
+          key: "getSocketConnectionStatus",
+          value: function getSocketConnectionStatus() {
+            return this.SocketConnectionStatus.asObservable();
+          } //#endregion send status of socket connected or disconnected
           //#region handle events from server in single end point
 
         }, {
+          key: "setupSocketConnectionIfNotExists",
+          value: function setupSocketConnectionIfNotExists(_user_id) {
+            if (_user_id) {
+              try {
+                if (!this.socket || this.socket && !this.socket.connected) {
+                  this.setupSocketConnection(_user_id);
+                }
+              } catch (ex) {
+                this.setupSocketConnection(_user_id);
+              }
+            }
+          }
+        }, {
           key: "setupSocketConnection",
           value: function setupSocketConnection(_user_id) {
-            var _this13 = this;
+            var _this14 = this;
 
-            console.log("231 :: SOCKET Connection init");
+            //console.log("231 :: SOCKET Connection init");
             this.currentUserId = _user_id;
             this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].SOCKET_ENDPOINT, {
               query: "user_id=" + _user_id + ""
             });
-            this.socket.once('disconnected', function () {
-              console.log("235 :: disconnected");
+            this.socket.once('disconnected', function () {//this.sendSocketConnectionStatus(false);
+              //console.log("235 :: disconnected");
             });
             this.socket.on('send_user_online_list', function (result) {
               var data = null;
@@ -4278,11 +4444,10 @@
                 } else {
                   data = result;
                 }
-              }
+              } //console.log('Received a message from websocket service');
 
-              console.log('Received a message from websocket service');
 
-              _this13.sendCurrentOnlineUsersListObj(data);
+              _this14.sendCurrentOnlineUsersListObj(data);
             });
             this.socket.on('send_user_role_wise_list', function (result) {
               var data = null;
@@ -4293,11 +4458,10 @@
                 } else {
                   data = result;
                 }
-              }
+              } //console.log('Received a message from websocket service');
 
-              console.log('Received a message from websocket service');
 
-              _this13.sendCurrentOnlineUsersListObj(data);
+              _this14.sendCurrentOnlineUsersListObj(data);
             });
             this.socket.on('sessions_response_getlength_bysearch', function (result) {
               var data = null;
@@ -4308,11 +4472,10 @@
                 } else {
                   data = result;
                 }
-              }
+              } //console.log('140 :: Received a message from websocket service');
 
-              console.log('140 :: Received a message from websocket service');
 
-              _this13.sendCurrentSessionCount(data);
+              _this14.sendCurrentSessionCount(data);
             });
             this.socket.on('sessions_response_getall_bysearch', function (result) {
               var data = null;
@@ -4323,11 +4486,10 @@
                 } else {
                   data = result;
                 }
-              }
+              } //console.log('Received a message from websocket service :: sessions_response_getall_bysearch');
 
-              console.log('Received a message from websocket service');
 
-              _this13.sendCurrentSessionAll(data);
+              _this14.sendCurrentSessionAll(data);
             });
             this.socket.on('send_session_apply_by_session_id', function (result) {
               var data = null;
@@ -4338,13 +4500,14 @@
                 } else {
                   data = result;
                 }
-              }
+              } //console.log('Received a message from websocket service');
 
-              console.log('Received a message from websocket service');
 
-              _this13.sendCurrentSessionApply(data);
+              _this14.sendCurrentSessionApply(data);
             });
             this.socket.on('connected_successfully', function (result) {
+              _this14.sendSocketConnectionStatus(true);
+
               var data = null;
 
               if (result) {
@@ -4355,13 +4518,12 @@
                 }
               }
 
-              _this13.currentUsersRooms = _this13.utilityService._.union(_this13.currentUsersRooms, [_this13.currentUserId, src_app_models__WEBPACK_IMPORTED_MODULE_4__["AppRooms"].my_app_main_room]);
+              _this14.currentUsersRooms = _this14.utilityService._.union(_this14.currentUsersRooms, [_this14.currentUserId, src_app_models__WEBPACK_IMPORTED_MODULE_4__["AppRooms"].my_app_main_room]);
 
-              for (var _item in _this13.currentUsersRooms) {
-                _this13.sendEventToJoinChatRoom(_this13.currentUsersRooms[_item], _this13.currentUserId);
-              }
+              for (var _item in _this14.currentUsersRooms) {
+                _this14.sendEventToJoinChatRoom(_this14.currentUsersRooms[_item], _this14.currentUserId);
+              } //console.log('149 :: Received a message from websocket service :: connected_successfully', data);
 
-              console.log('149 :: Received a message from websocket service :: connected_successfully', data);
             });
             this.socket.on('new_user_joined_room', function (result) {
               var data = null;
@@ -4372,11 +4534,10 @@
                 } else {
                   data = result;
                 }
-              }
+              } //console.log('161 :: Received a message from websocket service', data);
 
-              console.log('161 :: Received a message from websocket service', data);
 
-              _this13.sendUserJoinedRoomAll(data);
+              _this14.sendUserJoinedRoomAll(data);
             });
             this.socket.on('user_left_room', function (result) {
               var data = null;
@@ -4387,11 +4548,10 @@
                 } else {
                   data = result;
                 }
-              }
+              } //console.log('166 :: Received a message from websocket service', data);
 
-              console.log('166 :: Received a message from websocket service', data);
 
-              _this13.sendUserLeftRoomAll(data);
+              _this14.sendUserLeftRoomAll(data);
             });
             this.socket.on('new_message_in_room', function (result) {
               var data = null;
@@ -4402,11 +4562,10 @@
                 } else {
                   data = result;
                 }
-              }
+              } //console.log('166 :: Received a message from websocket service', data);
 
-              console.log('166 :: Received a message from websocket service', data);
 
-              _this13.sendNewMessageToRoomAll(data);
+              _this14.sendNewMessageToRoomAll(data);
             });
             this.socket.on('get_all_old_chat_of_room', function (result) {
               var data = null;
@@ -4417,11 +4576,10 @@
                 } else {
                   data = result;
                 }
-              }
+              } //console.log('171 :: Received a message from websocket service', data);
 
-              console.log('171 :: Received a message from websocket service', data);
 
-              _this13.sendOldMessageToRoomAll(data);
+              _this14.sendOldMessageToRoomAll(data);
             });
           } //#endregion handle events from server in single end point
           //#region route client event to send server
@@ -4561,15 +4719,33 @@
             });
           }
         }, {
+          key: "sendEventToUpdateChatReceivedByUserOfRoom",
+          value: function sendEventToUpdateChatReceivedByUserOfRoom(_roomId, userId) {
+            this.socket.emit('update_chat_received_by_user_of_room', {
+              roomId: _roomId,
+              userId: userId
+            });
+          }
+        }, {
+          key: "sendEventToUpdateChatReadByUserOfRoom",
+          value: function sendEventToUpdateChatReadByUserOfRoom(_roomId, userId) {
+            this.socket.emit('update_chat_read_by_user_of_room', {
+              roomId: _roomId,
+              userId: userId
+            });
+          }
+        }, {
           key: "emitEventWithNameAndData",
           value: function emitEventWithNameAndData(_eventName) {
-            var _this$socket;
+            if (this.socket) {
+              var _this$socket;
 
-            for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-              args[_key - 1] = arguments[_key];
+              for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+                args[_key - 1] = arguments[_key];
+              }
+
+              (_this$socket = this.socket).emit.apply(_this$socket, [_eventName].concat(args));
             }
-
-            (_this$socket = this.socket).emit.apply(_this$socket, [_eventName].concat(args));
           }
         }, {
           key: "getAllUsers",
@@ -4579,8 +4755,9 @@
           }
         }, {
           key: "getAllMyContacts",
-          value: function getAllMyContacts(_data) {
-            this.socket.emit("request_contact_getall", _data);
+          value: function getAllMyContacts(_userId, role) {
+            var skip = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+            this.socket.emit("request_contact_getall", _userId, role, skip);
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_contact_getall');
           }
         }, {
@@ -4588,6 +4765,12 @@
           value: function getByIdMyContacts(_data) {
             this.socket.emit("request_contact_getbyid", _data);
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_contact_getbyid');
+          }
+        }, {
+          key: "getByIdMyContactsPendingMessages",
+          value: function getByIdMyContactsPendingMessages(_roomIdArr, userId) {
+            this.socket.emit("request_contact_pending_messages", _roomIdArr, userId);
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_contact_pending_messages');
           }
         }, {
           key: "sendEventToGetAllChatOfRoomWithPromise",
@@ -4693,6 +4876,18 @@
           value: function getByIdRatingReviewe(_ratingId) {
             this.socket.emit("request_rating_getbyid", _ratingId);
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_rating_getbyid');
+          }
+        }, {
+          key: "getByLoanIdRatingReviewe",
+          value: function getByLoanIdRatingReviewe(_obj2Save) {
+            this.socket.emit("request_rating_getby_loanid", _obj2Save);
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_rating_getby_loanid');
+          }
+        }, {
+          key: "getByQuerySummaryRatingReviewe",
+          value: function getByQuerySummaryRatingReviewe(_obj2Save) {
+            this.socket.emit("request_get_ratings_summary_by_query", _obj2Save);
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_get_ratings_summary_by_query');
           }
         }, {
           key: "deductAmountFromWallet",
@@ -4884,6 +5079,14 @@
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'sessions_response_getall_bysearch_from_lender');
           }
         }, {
+          key: "getLoanMarketDataForSearch",
+          value: function getLoanMarketDataForSearch(_obj2Save, emitThisEvent) {
+            emitThisEvent = emitThisEvent ? emitThisEvent : 'sessions_response_getall_bysearch_from_borrower';
+            var _sendDataOnlyMeFalseToAllTrue = false;
+            this.socket.emit('sessions_request_getall_bysearch', _sendDataOnlyMeFalseToAllTrue, _obj2Save, true, emitThisEvent);
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'sessions_response_getall_bysearch_from_borrower');
+          }
+        }, {
           key: "getLoanMarketDataById",
           value: function getLoanMarketDataById(loanId) {
             var emitThisEvent = 'sessions_response_getall_bysearch_by_id';
@@ -4912,6 +5115,13 @@
           key: "listenForUpdateStatusOfLastPayment",
           value: function listenForUpdateStatusOfLastPayment() {
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'recd_confirmation_of_last_payment_status');
+          }
+        }, {
+          key: "getSessionApplyAllByQuery",
+          value: function getSessionApplyAllByQuery(_sendDataOnlyMeFalseToAllTrue, _obj2Save, emitThisEvent) {
+            var useAndTrueOrFalse = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+            this.socket.emit('session_apply_request_getall_bysearch', _sendDataOnlyMeFalseToAllTrue, _obj2Save, useAndTrueOrFalse, emitThisEvent);
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'session_apply_response_getall_bysearch');
           }
         }]);
 
@@ -4982,48 +5192,124 @@
       /* harmony import */
 
 
-      var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var lodash__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! lodash */
+      "LvDl");
+      /* harmony import */
+
+
+      var lodash__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_5__);
+      /* harmony import */
+
+
+      var src_environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
       /*! src/environments/environment */
       "AytR");
       /* harmony import */
 
 
-      var _socketio_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var src_app_models__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! src/app/models */
+      "VHTt");
+      /* harmony import */
+
+
+      var _socketio_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ../socketio.service */
       "bgkY");
+      /* harmony import */
+
+
+      var _user_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! ./user.service */
+      "qfBg");
+      /* harmony import */
+
+
+      var _utility_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      /*! ./utility.service */
+      "A1CT");
 
       var AuthenticationService = /*#__PURE__*/function () {
-        function AuthenticationService(http, socketService) {
-          var _this14 = this;
+        function AuthenticationService(http, socketService, userService, utilityService) {
+          var _this15 = this;
 
           _classCallCheck(this, AuthenticationService);
 
           this.http = http;
           this.socketService = socketService;
-          this.baseurl = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + '/';
-          this.currentUserSubjectObject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+          this.userService = userService;
+          this.utilityService = utilityService;
+          this.baseurl = src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiUrl + '/';
+          this.currentUserLoanTypeWiseCountDetails = {};
+          this.currentUserAdminDashboardDataDetails = {};
+          this.allUserLevelsDataLenders = [];
+          this.allUserLevelsDataBorrower = [];
+          this.currentUserSubjectObject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"](); //this.socketService.setupSocketConnectionIfNotExists(this.utilityService.randomString(30, null));
+
           this.currentUserSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](JSON.parse(localStorage.getItem('currentUser')));
           this.currentUser = this.currentUserSubject.asObservable();
-          this.socketService.responseRecdSelfUserProfileUpdates().pipe().subscribe(function (data) {
-            if (data && data['success']) {
-              _this14.sendCurrentUserObj(data["data"]);
-            }
-          }, function (error) {
-            var errorMsg2show = ""; //this.PaymentTransactionDetailsArray = [];
+          this.socketService.SocketConnectionStatus.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["first"])()).subscribe(function (status) {
+            if (status) {
+              _this15.socketService.responseRecdSelfUserProfileUpdates().pipe().subscribe(function (data) {
+                if (data && data['success']) {
+                  _this15.sendCurrentUserObj(data["data"]);
+                }
+              }, function (error) {
+                var errorMsg2show = ""; //this.PaymentTransactionDetailsArray = [];
 
-            try {
-              if (error && error.error && error.error.message) {
-                errorMsg2show = error.error.message;
-              } else if (error && error.message) {
-                errorMsg2show = error.message;
-              } else {
-                errorMsg2show = error;
-              }
-            } catch (ex) {}
+                try {
+                  if (error && error.error && error.error.message) {
+                    errorMsg2show = error.error.message;
+                  } else if (error && error.message) {
+                    errorMsg2show = error.message;
+                  } else {
+                    errorMsg2show = error;
+                  }
+                } catch (ex) {}
+              });
+
+              _this15.fetchAllUserLevelsByUserId();
+
+              _this15.fetchAllUserLevelsByUpdateEvent();
+            }
           });
         }
 
         _createClass(AuthenticationService, [{
+          key: "returnUserTypeForUserFromSuppliedUserLevel",
+          value: function returnUserTypeForUserFromSuppliedUserLevel(userType) {
+            if (lodash__WEBPACK_IMPORTED_MODULE_5__["keys"](this.allUserLevelsDataLenders).lengtg <= 0 || lodash__WEBPACK_IMPORTED_MODULE_5__["keys"](this.allUserLevelsDataBorrower)) {
+              lodash__WEBPACK_IMPORTED_MODULE_5__["throttle"](function () {
+                this.fetchAllUserLevelsByUserId();
+              }, 5000);
+            }
+
+            var allUserLevelsDataMerged = lodash__WEBPACK_IMPORTED_MODULE_5__["union"](this.allUserLevelsDataLenders, this.allUserLevelsDataBorrower);
+
+            if (lodash__WEBPACK_IMPORTED_MODULE_5__["keys"](allUserLevelsDataMerged).length > 0) {
+              var userLevelsName = null;
+
+              if (userType) {
+                var userLevelsDataObj = lodash__WEBPACK_IMPORTED_MODULE_5__["filter"](allUserLevelsDataMerged, {
+                  '_id': userType
+                })[0];
+
+                if (userLevelsDataObj && userLevelsDataObj._id) {
+                  userLevelsName = userLevelsDataObj.name;
+                } else {
+                  userLevelsName = null;
+                }
+              }
+
+              if (userLevelsName) {
+                return userLevelsName;
+              }
+            }
+
+            return (userType || "").replace("_", " ");
+          }
+        }, {
           key: "sendCurrentUserObj",
           value: function sendCurrentUserObj(user) {
             this.currentUserSubjectObject.next(user);
@@ -5053,7 +5339,7 @@
         }, {
           key: "login",
           value: function login(userName, password) {
-            var _this15 = this;
+            var _this16 = this;
 
             var _url2use = this.baseurl + 'api/post/user/admin/login'; //`${environment.apiUrl}/users/authenticate`;
 
@@ -5061,37 +5347,7 @@
             return this.http.post(_url2use, {
               userName: userName,
               password: password
-            }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiTimeout), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (user) {
-              // login successful if there's a jwt token in the response
-              if (user && user.token) {
-                // store user details and jwt token in local storage to keep user logged in between page refreshes
-                var base = _this15.http.get(_this15.baseurl + 'session', {
-                  headers: {
-                    Authorization: "Bearer ".concat(user.token)
-                  }
-                }); ////Local storage please rome this 
-
-
-                console.log('35', base);
-                localStorage.setItem('currentUser', JSON.stringify(user));
-
-                _this15.sendCurrentUserObj(user);
-              }
-
-              return user;
-            }));
-          }
-        }, {
-          key: "autologin4registration",
-          value: function autologin4registration(_id) {
-            var _this16 = this;
-
-            var _url2use = this.baseurl + 'api/post/user/admin/login4registration'; //`${environment.apiUrl}/users/authenticate`;
-
-
-            return this.http.post(_url2use, {
-              _id: _id
-            }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiTimeout), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (user) {
+            }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiTimeout), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (user) {
               // login successful if there's a jwt token in the response
               if (user && user.token) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -5100,12 +5356,42 @@
                     Authorization: "Bearer ".concat(user.token)
                   }
                 }); ////Local storage please rome this 
+                //console.log('35', base);
 
 
-                console.log('35', base);
                 localStorage.setItem('currentUser', JSON.stringify(user));
 
                 _this16.sendCurrentUserObj(user);
+              }
+
+              return user;
+            }));
+          }
+        }, {
+          key: "autologin4registration",
+          value: function autologin4registration(_id) {
+            var _this17 = this;
+
+            var _url2use = this.baseurl + 'api/post/user/admin/login4registration'; //`${environment.apiUrl}/users/authenticate`;
+
+
+            return this.http.post(_url2use, {
+              _id: _id
+            }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiTimeout), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (user) {
+              // login successful if there's a jwt token in the response
+              if (user && user.token) {
+                // store user details and jwt token in local storage to keep user logged in between page refreshes
+                var base = _this17.http.get(_this17.baseurl + 'session', {
+                  headers: {
+                    Authorization: "Bearer ".concat(user.token)
+                  }
+                }); ////Local storage please rome this 
+                //console.log('35', base);
+
+
+                localStorage.setItem('currentUser', JSON.stringify(user));
+
+                _this17.sendCurrentUserObj(user);
               }
 
               return user;
@@ -5129,10 +5415,66 @@
           value: function generateReport4SignedContract(LoanObjData) {
             var _url2use = this.baseurl + 'api/post/app/report/signed_contract';
 
-            return this.http.post(_url2use, LoanObjData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiTimeout), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (data) {
+            return this.http.post(_url2use, LoanObjData).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiTimeout), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (data) {
               // login successful if there's a jwt token in the response
               return data;
             }));
+          }
+        }, {
+          key: "fetchAllUserLevelsByUpdateEvent",
+          value: function fetchAllUserLevelsByUpdateEvent() {
+            var _this18 = this;
+
+            this.userService.getAddUpdateUserUserLevels().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["first"])()).subscribe(function (data) {
+              ////console.log('data => ', data)
+              if (data && data['success']) {
+                _this18.fetchAllUserLevelsByUserId();
+              }
+            }, function (error) {
+              var errorMsg2show = "";
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+            });
+          }
+        }, {
+          key: "fetchAllUserLevelsByUserId",
+          value: function fetchAllUserLevelsByUserId() {
+            var _this19 = this;
+
+            this.userService.getUserLevelsAll(null).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["first"])()).subscribe(function (data) {
+              ////console.log('data => ', data)
+              if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                _this19.allUserLevelsDataLenders = _this19.utilityService.returnSortedObjectArray(lodash__WEBPACK_IMPORTED_MODULE_5__["filter"](data["data"], {
+                  'role': src_app_models__WEBPACK_IMPORTED_MODULE_7__["Role"].Lender
+                }), ['minimumContract']);
+                _this19.allUserLevelsDataBorrower = _this19.utilityService.returnSortedObjectArray(lodash__WEBPACK_IMPORTED_MODULE_5__["filter"](data["data"], {
+                  'role': src_app_models__WEBPACK_IMPORTED_MODULE_7__["Role"].Borrower
+                }), ['minimumContract']); //this.allUserLevelsDataLenders = _.filter(data["data"], { 'role': Role.Lender });
+                //this.allUserLevelsDataBorrower = _.filter(data["data"], { 'role': Role.Borrower });
+                //this.alertService.success(data['message'], true);
+              }
+            }, function (error) {
+              var errorMsg2show = "";
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+            });
           }
         }]);
 
@@ -5143,13 +5485,17 @@
         return [{
           type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
         }, {
-          type: _socketio_service__WEBPACK_IMPORTED_MODULE_6__["SocketioService"]
+          type: _socketio_service__WEBPACK_IMPORTED_MODULE_8__["SocketioService"]
+        }, {
+          type: _user_service__WEBPACK_IMPORTED_MODULE_9__["UserService"]
+        }, {
+          type: _utility_service__WEBPACK_IMPORTED_MODULE_10__["UtilityService"]
         }];
       };
 
       AuthenticationService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Directive"])(), Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _socketio_service__WEBPACK_IMPORTED_MODULE_6__["SocketioService"]])], AuthenticationService);
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _socketio_service__WEBPACK_IMPORTED_MODULE_8__["SocketioService"], _user_service__WEBPACK_IMPORTED_MODULE_9__["UserService"], _utility_service__WEBPACK_IMPORTED_MODULE_10__["UtilityService"]])], AuthenticationService);
       /***/
     },
 
@@ -5210,6 +5556,177 @@
 
 
       __webpack_exports__["default"] = "<app-header></app-header>\r\n<section class=\"resume schedule pt-3 pb-4\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-12\">\r\n                <div class=\"cal-time\">\r\n                    <div class=\"time\">\r\n                        <h2 class=\"title-text pt-1\">Get In Touch With Us</h2>\r\n\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</section>\r\n\r\n<footer class=\"event contact set-relative p-b-0\" id=\"contact\">\r\n    <div class=\"container p-b-100\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-10 offset-md-1\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-4\">\r\n                        <div class=\"title title3\">\r\n                            <div class=\"main-title\">\r\n                                <h2 class=\" text-black-50\">Partnership</h2>\r\n                            </div>\r\n\r\n                            <P class=\"text-black-50\">partner@avitii-lending.com</P>\r\n\r\n\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class=\"col-md-4\">\r\n                        <div class=\"title title3\">\r\n                            <div class=\"main-title\">\r\n                                <h2 class=\" text-black-50\" i18n>Lender Support</h2>\r\n                            </div>\r\n\r\n                            <P class=\"text-black-50\" >lender@avitii-lending.com</P>\r\n\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-md-4\">\r\n                        <div class=\"title title3\">\r\n                            <div class=\"main-title\">\r\n                                <h2 class=\" text-black-50\" i18n>Borrower Support</h2>\r\n                            </div>\r\n                            <div class=\"sub-title\">\r\n                                <P class=\"text-black-50\">borrower@avitii-lending.com </P>\r\n\r\n\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n            <div class=\"col-xl-5 offset-xl-1 col-md-6 p-r-0 map\">\r\n                <div class=\"iframe-container border-0\">\r\n                  \r\n                    <iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.801736539438!2d-0.08865598482088188!3d51.51685327963669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761cacece87517%3A0xe550bb3ead047ff2!2s65%20London%20Wall%2C%20London%20EC2M%205TU%2C%20UK!5e0!3m2!1sen!2sin!4v1616149104126!5m2!1sen!2sin\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-xl-5 p-l-0 col-md-6 set-z-index form-footer\">\r\n                <div class=\"bg-white\">\r\n\r\n                    <form [formGroup]=\"contactUsForm\" (ngSubmit)=\"sendMailForContactUs()\">\r\n                        <div class=\"row\">\r\n                            <div class=\"col-sm-6\">\r\n                                <div class=\"form-group\">\r\n                                    <label for=\"name\">Name *</label>\r\n                                    <input formControlName=\"userName\" class=\"form-control\" id=\"name\" type=\"text\" [ngClass]=\"{ 'is-invalid': submitted && f.userName.errors }\">\r\n                                    <div *ngIf=\"submitted && f.userName.errors\" class=\"invalid-feedback\">\r\n                                        <div *ngIf=\"f.userName.errors.required\">required</div>\r\n                                        <div *ngIf=\"f.userName.errors.email\">must be valid</div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-sm-6\">\r\n                                <div class=\"form-group\">\r\n                                    <label for=\"Phone\">Phone *</label>\r\n                                    <input formControlName=\"phoneNo\" class=\"form-control\" id=\"Phone\" type=\"text\" [ngClass]=\"{ 'is-invalid': submitted && f.phoneNo.errors }\">\r\n                                    <div *ngIf=\"submitted && f.phoneNo.errors\" class=\"invalid-feedback\">\r\n                                        <div *ngIf=\"f.phoneNo.errors.required\">required</div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-sm-6\">\r\n                                <div class=\"form-group\">\r\n                                    <label for=\"Email\">Email *</label>\r\n                                    <input formControlName=\"emailAddress\" class=\"form-control\" id=\"Email\" type=\"email\" [ngClass]=\"{ 'is-invalid': submitted && f.emailAddress.errors }\">\r\n                                    <div *ngIf=\"submitted && f.emailAddress.errors\" class=\"invalid-feedback\">\r\n                                        <div *ngIf=\"f.emailAddress.errors.required\">required</div>\r\n                                        <div *ngIf=\"f.emailAddress.errors.email\">must be valid</div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-sm-6\">\r\n                                <div class=\"form-group\">\r\n                                    <label for=\"Subject\">Subject *</label>\r\n                                    <input formControlName=\"subject\" class=\"form-control\" id=\"Subject\" type=\"text\">\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <label for=\"Message\">Message *</label>\r\n                            <textarea formControlName=\"message\" class=\"form-control\" id=\"Message\" type=\"text\" [ngClass]=\"{ 'is-invalid': submitted && f.message.errors }\">\r\n                                </textarea>\r\n                            <div *ngIf=\"submitted && f.message.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.message.errors.required\">required</div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"text-center\">\r\n                            <button type=\"submit\" [disabled]=\"loading\" class=\"btn btn-default primary-btn m-0-auto\">Send\r\n                                <span *ngIf=\"loading\" class=\"spinner-border spinner-border-sm\"></span>\r\n                            </button>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</footer>\r\n<app-footer></app-footer>";
+      /***/
+    },
+
+    /***/
+    "k/Fl":
+    /*!*******************************************************!*\
+      !*** ./src/app/home/blog-view/blog-view.component.ts ***!
+      \*******************************************************/
+
+    /*! exports provided: BlogViewComponent */
+
+    /***/
+    function kFl(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "BlogViewComponent", function () {
+        return BlogViewComponent;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _raw_loader_blog_view_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! raw-loader!./blog-view.component.html */
+      "u1AE");
+      /* harmony import */
+
+
+      var _blog_view_component_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! ./blog-view.component.css */
+      "0MYx");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @angular/router */
+      "tyNb");
+      /* harmony import */
+
+
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! rxjs/operators */
+      "kU1M");
+      /* harmony import */
+
+
+      var src_app_services__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! src/app/services */
+      "o0su");
+      /* harmony import */
+
+
+      var src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! src/app/services/utility.service */
+      "A1CT");
+      /* harmony import */
+
+
+      var src_app_socketio_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! src/app/socketio.service */
+      "bgkY");
+
+      var BlogViewComponent = /*#__PURE__*/function () {
+        function BlogViewComponent(alertService, userService, route, socketService, utilityService) {
+          var _this20 = this;
+
+          _classCallCheck(this, BlogViewComponent);
+
+          this.alertService = alertService;
+          this.userService = userService;
+          this.route = route;
+          this.socketService = socketService;
+          this.utilityService = utilityService;
+          this.blogsData = {};
+          this.loading = false;
+          this.route.queryParams.subscribe(function (params) {
+            var documentId = params['id'];
+
+            _this20.socketService.setupSocketConnectionIfNotExists(_this20.utilityService.randomString(30, null));
+
+            setTimeout(function () {
+              _this20.fetchBlogById(documentId);
+            }, 3000);
+          });
+        }
+
+        _createClass(BlogViewComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            var _this21 = this;
+
+            var documentId = this.route.snapshot.params.id;
+            this.socketService.setupSocketConnectionIfNotExists(this.utilityService.randomString(30, null));
+            setTimeout(function () {
+              _this21.fetchBlogById(documentId);
+            }, 3000);
+          }
+        }, {
+          key: "fetchBlogById",
+          value: function fetchBlogById(documentId) {
+            var _this22 = this;
+
+            if (!documentId) {
+              return;
+            }
+
+            this.userService.getBlogsById(documentId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (data) {
+              ////console.log('data => ', data)
+              if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                _this22.blogsData = data["data"]; //this.alertService.success(data['message'], true);
+
+                _this22.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = "";
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this22.alertService.error(errorMsg2show);
+
+              _this22.loading = false;
+            });
+          }
+        }]);
+
+        return BlogViewComponent;
+      }();
+
+      BlogViewComponent.ctorParameters = function () {
+        return [{
+          type: src_app_services__WEBPACK_IMPORTED_MODULE_6__["AlertService"]
+        }, {
+          type: src_app_services__WEBPACK_IMPORTED_MODULE_6__["UserService"]
+        }, {
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]
+        }, {
+          type: src_app_socketio_service__WEBPACK_IMPORTED_MODULE_8__["SocketioService"]
+        }, {
+          type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_7__["UtilityService"]
+        }];
+      };
+
+      BlogViewComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-blog-view',
+        template: _raw_loader_blog_view_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_blog_view_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_services__WEBPACK_IMPORTED_MODULE_6__["AlertService"], src_app_services__WEBPACK_IMPORTED_MODULE_6__["UserService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], src_app_socketio_service__WEBPACK_IMPORTED_MODULE_8__["SocketioService"], src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_7__["UtilityService"]])], BlogViewComponent);
       /***/
     },
 
@@ -5444,7 +5961,7 @@
         }, {
           key: "onforgotPasswordSendOtp",
           value: function onforgotPasswordSendOtp() {
-            var _this17 = this;
+            var _this23 = this;
 
             this.isOtpSent = false;
 
@@ -5465,16 +5982,16 @@
 
                 if (data && data['success']) {
                   //alert(JSON.stringify( data));
-                  _this17.alertService.success(data['message'], true);
+                  _this23.alertService.success(data['message'], true);
 
-                  _this17.loading = false;
-                  _this17.isOtpSent = true;
+                  _this23.loading = false;
+                  _this23.isOtpSent = true;
                 } else {
                   //alert(JSON.stringify(data['message']));
-                  _this17.alertService.error(data['message']);
+                  _this23.alertService.error(data['message']);
 
-                  _this17.loading = false;
-                  _this17.isOtpSent = false;
+                  _this23.loading = false;
+                  _this23.isOtpSent = false;
                 }
               }, function (error) {
                 var errorMsg2show = "";
@@ -5489,17 +6006,17 @@
                   }
                 } catch (ex) {}
 
-                _this17.alertService.error(errorMsg2show);
+                _this23.alertService.error(errorMsg2show);
 
-                _this17.loading = false;
-                _this17.isOtpSent = false;
+                _this23.loading = false;
+                _this23.isOtpSent = false;
               });
             }
           }
         }, {
           key: "onSubmitResetPasswordOfUser",
           value: function onSubmitResetPasswordOfUser() {
-            var _this18 = this;
+            var _this24 = this;
 
             if (this.isOtpSent) {
               this.submitted = true;
@@ -5518,14 +6035,14 @@
 
                 if (data && data['success']) {
                   //alert(JSON.stringify( data));//, {state:{ data} }
-                  _this18.alertService.success('Password reset successfully', true);
+                  _this24.alertService.success('Password reset successfully', true);
 
-                  _this18.router.navigate(['/login']);
+                  _this24.router.navigate(['/login']);
                 } else {
                   //alert(JSON.stringify(data['message']));
-                  _this18.alertService.error(data['message']);
+                  _this24.alertService.error(data['message']);
 
-                  _this18.loading = false;
+                  _this24.loading = false;
                 }
               }, function (error) {
                 var errorMsg2show = "";
@@ -5540,9 +6057,9 @@
                   }
                 } catch (ex) {}
 
-                _this18.alertService.error(errorMsg2show);
+                _this24.alertService.error(errorMsg2show);
 
-                _this18.loading = false;
+                _this24.loading = false;
               });
             } else {
               this.alertService.error("Please Verify Email first");
@@ -5791,12 +6308,13 @@
           this.utilityService = utilityService;
           this.baseurl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/';
           this.allAppUsersCollections = {};
+          this.latestUserIdArrayMissingFromLocal = [];
         }
 
         _createClass(UserService, [{
           key: "getAll",
-          value: function getAll() {
-            var _userType = null; //var _result=this.http.post<any>(`http://localhost:4444/api/get/user/getall`,{})
+          value: function getAll(user) {
+            var _role = null; //var _result=this.http.post<any>(`http://localhost:4444/api/get/user/getall`,{})
             //.pipe(user => {
             // login successful if there's a jwt token in the response
             //alert(JSON.stringify(user))
@@ -5805,10 +6323,12 @@
             //alert(JSON.stringify( _result));
             //return this.http.get<User[]>(`http://localhost:4444/api/get/user/getall`, null);
             //return this.http.get<User[]>(`${environment.apiUrl}/users`);
-            ////this.socket.emit('user_getall', _userType);
+            ////this.socket.emit('user_getall', _role);
             ////var _result = this.socket.fromEvent<User[]>('user_getall_list');
             //alert(JSON.stringify( _result));
             ////return _result;
+
+            return this.http.post(this.baseurl + 'api/post/user/getall', user, {});
           }
         }, {
           key: "getById",
@@ -5818,7 +6338,7 @@
         }, {
           key: "register",
           value: function register(user) {
-            console.log(user);
+            //console.log(user);
             return this.http.post(this.baseurl + 'api/post/user/admin/register', user); //return this.http.post(`http://localhost:4444/api/user/register`, user);
             //return this.http.post(`${environment.apiUrl}/api/user/register`, user);
             //return this.http.post(`${environment.apiUrl}/users/register`, user);
@@ -5878,6 +6398,14 @@
             return this.http.post(this.baseurl + 'api/post/user/update/byid', user);
           }
         }, {
+          key: "updateUserByIdFromAdmin",
+          value: function updateUserByIdFromAdmin(user, updatedBy) {
+            return this.http.post(this.baseurl + 'api/post/user/admin/update/byid', {
+              user: user,
+              updatedBy: updatedBy
+            });
+          }
+        }, {
           key: "authenticateAndLoginUser",
           value: function authenticateAndLoginUser(userName, password) {
             return this.http.post(this.baseurl + 'api/post/user/admin/login', {
@@ -5903,9 +6431,21 @@
         }, {
           key: "proccessAllAppUsersCollections",
           value: function proccessAllAppUsersCollections(userIdArray) {
-            var _this19 = this;
+            var _this25 = this;
 
-            if (userIdArray) {
+            if (userIdArray && Object.keys(userIdArray).length > 0) {
+              if (!this.latestUserIdArrayMissingFromLocal) {
+                this.latestUserIdArrayMissingFromLocal = [];
+              }
+
+              var existingUserIdArray = this.utilityService._.map(this.allAppUsersCollections, "userId");
+
+              this.latestUserIdArrayMissingFromLocal = this.utilityService._.difference(userIdArray, existingUserIdArray);
+
+              if (this.utilityService._.keys(existingUserIdArray).length == 0 || this.latestUserIdArrayMissingFromLocal.length > 0) {
+                this.alreadySubscribedForUsersArray = false;
+              }
+
               if (!this.alreadySubscribedForUsersArray) {
                 this.alreadySubscribedForUsersArray = true;
                 this.getAppUsersCollections(userIdArray).subscribe(function (result) {
@@ -5920,12 +6460,11 @@
                   }
 
                   if (data) {
-                    _this19.allAppUsersCollections = _this19.utilityService._.merge(_this19.allAppUsersCollections, _this19.utilityService._.mapKeys(data, '_id'));
+                    _this25.allAppUsersCollections = _this25.utilityService._.merge(_this25.allAppUsersCollections, _this25.utilityService._.mapKeys(data, '_id'));
                   }
                 });
               }
-            } else {
-              this.getAppUsersCollections(userIdArray);
+            } else {//this.getAppUsersCollections(userIdArray);
             }
           }
         }, {
@@ -6055,6 +6594,24 @@
             return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_user_income_expense_details_data');
           }
         }, {
+          key: "getUserLoanTypeWiseCountDetailsByUserId",
+          value: function getUserLoanTypeWiseCountDetailsByUserId(userId, role) {
+            this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_loan_type_wise_count_details_data', userId, role);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_loan_type_wise_count_details_data');
+          }
+        }, {
+          key: "getAdminDashboardDataOnLogin",
+          value: function getAdminDashboardDataOnLogin(userId, role) {
+            this.socketioService.emitEventWithNameAndData('request_to_get_admin_dashboard_details_data', userId, role);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_to_get_admin_dashboard_details_data');
+          }
+        }, {
+          key: "getUsersDashboardData",
+          value: function getUsersDashboardData(userId, role) {
+            this.socketioService.emitEventWithNameAndData('request_to_get_users_dashboard_details_data', userId, role);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_to_get_users_dashboard_details_data');
+          }
+        }, {
           key: "addUpdateUserBlogs",
           value: function addUpdateUserBlogs(blogs) {
             this.socketioService.emitEventWithNameAndData('request_user_add_update_blogs_data', blogs);
@@ -6097,6 +6654,11 @@
             return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_add_update_user_levels_data');
           }
         }, {
+          key: "getAddUpdateUserUserLevels",
+          value: function getAddUpdateUserUserLevels() {
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_add_update_user_levels_data');
+          }
+        }, {
           key: "getUserLevelsById",
           value: function getUserLevelsById(userLevelsId) {
             this.socketioService.emitEventWithNameAndData('request_user_get_by_id_user_levels_data', userLevelsId);
@@ -6131,6 +6693,108 @@
           value: function updateUsersDataKeyVerificationStatus(_userId, _verifiedKey, _isVerified) {
             this.socketioService.emitEventWithNameAndData("request_user_internal_key_update_verification", _userId, _verifiedKey, _isVerified);
             return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_internal_key_update_verification');
+          }
+        }, {
+          key: "addUpdateUserRestrictionDetails",
+          value: function addUpdateUserRestrictionDetails(userUserRestrictionDetails) {
+            this.socketioService.emitEventWithNameAndData('request_user_add_update_user_restriction_details_data', userUserRestrictionDetails);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_add_update_user_restriction_details_data');
+          }
+        }, {
+          key: "getUserRestrictionDetailsById",
+          value: function getUserRestrictionDetailsById(userUserRestrictionDetailsId) {
+            this.socketioService.emitEventWithNameAndData('request_user_get_by_id_user_restriction_details_data', userUserRestrictionDetailsId);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_id_user_restriction_details_data');
+          }
+        }, {
+          key: "getUserRestrictionDetailsByUserId",
+          value: function getUserRestrictionDetailsByUserId(userId) {
+            this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_user_restriction_details_data', userId);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_user_restriction_details_data');
+          }
+        }, {
+          key: "updateUserRestrictionVerificationStatus",
+          value: function updateUserRestrictionVerificationStatus(_documentId, _status2update, _updatedBy) {
+            this.socketioService.emitEventWithNameAndData("request_user_update_restriction_verification", _documentId, _status2update, _updatedBy);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_update_restriction_verification');
+          }
+        }, {
+          key: "getUserRestrictionExpenseDetailsByUserId",
+          value: function getUserRestrictionExpenseDetailsByUserId(userId) {
+            this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_user_restriction_expense_details_data', userId);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_user_restriction_expense_details_data');
+          }
+        }, {
+          key: "addUpdateUserPartners",
+          value: function addUpdateUserPartners(partners) {
+            this.socketioService.emitEventWithNameAndData('request_user_add_update_partners_data', partners);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_add_update_partners_data');
+          }
+        }, {
+          key: "getPartnersById",
+          value: function getPartnersById(partnersId) {
+            this.socketioService.emitEventWithNameAndData('request_user_get_by_id_partners_data', partnersId);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_id_partners_data');
+          }
+        }, {
+          key: "getPartnersByUserId",
+          value: function getPartnersByUserId(userId) {
+            this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_partners_data', userId);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_partners_data');
+          }
+        }, {
+          key: "updatePartnersStatus",
+          value: function updatePartnersStatus(_documentId, _status2update, _updatedBy) {
+            this.socketioService.emitEventWithNameAndData("request_user_update_partners_verification", _documentId, _status2update, _updatedBy);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_update_partners_verification');
+          }
+        }, {
+          key: "getPartnersAll",
+          value: function getPartnersAll(_skip) {
+            this.socketioService.emitEventWithNameAndData("request_user_getall_partners", _skip);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_getall_partners');
+          }
+        }, {
+          key: "getPartnersAllByQuery",
+          value: function getPartnersAllByQuery(_skip) {
+            this.socketioService.emitEventWithNameAndData("request_user_getall_partners", _skip);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_getall_partners');
+          }
+        }, {
+          key: "addUpdateUserCustomerReview",
+          value: function addUpdateUserCustomerReview(customerReview) {
+            this.socketioService.emitEventWithNameAndData('request_user_add_update_customerReview_data', customerReview);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_add_update_customerReview_data');
+          }
+        }, {
+          key: "getCustomerReviewById",
+          value: function getCustomerReviewById(customerReviewId) {
+            this.socketioService.emitEventWithNameAndData('request_user_get_by_id_customerReview_data', customerReviewId);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_id_customerReview_data');
+          }
+        }, {
+          key: "getCustomerReviewByUserId",
+          value: function getCustomerReviewByUserId(userId) {
+            this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_customerReview_data', userId);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_customerReview_data');
+          }
+        }, {
+          key: "updateCustomerReviewStatus",
+          value: function updateCustomerReviewStatus(_documentId, _status2update, _updatedBy) {
+            this.socketioService.emitEventWithNameAndData("request_user_update_customerReview_verification", _documentId, _status2update, _updatedBy);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_update_customerReview_verification');
+          }
+        }, {
+          key: "getCustomerReviewAll",
+          value: function getCustomerReviewAll(_skip) {
+            this.socketioService.emitEventWithNameAndData("request_user_getall_customerReview", _skip);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_getall_customerReview');
+          }
+        }, {
+          key: "getCustomerReviewAllByQuery",
+          value: function getCustomerReviewAllByQuery(_skip) {
+            this.socketioService.emitEventWithNameAndData("request_user_getall_customerReview", _skip);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_getall_customerReview');
           }
         }]);
 
@@ -6169,7 +6833,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<!-- Nav Start-->\r\n<header class=\"dark loding-header custom-scroll position-relative\">\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col\">\r\n        <nav>\r\n          <a class=\"logo-light m-r-auto\" href=\"#\">\r\n            <img alt=\"\" class=\"img-fluid\" src=\"/assets/img/avitii-logo.png\"></a>\r\n          <div class=\"responsive-btn\">\r\n            <a class=\"toggle-nav\"><i aria-hidden=\"true\" class=\"icon-align-center text-white\"></i></a>\r\n          </div>\r\n          <div class=\"navbar m-l-auto btn-back\" id=\"togglebtn\">\r\n            <div class=\"responsive-btn\">\r\n              <h5 class=\"btn-back\">back</h5>\r\n            </div>\r\n            <ul class=\"main-menu\">\r\n              <li><a href=\"#\">Home</a></li>\r\n              <li><a href=\"#\">About</a></li>\r\n              <li><a href=\"/login\">Login</a></li>\r\n              <li><a href=\"/register\">Register</a></li>\r\n            </ul>\r\n          </div>\r\n        </nav>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</header>\r\n<!-- Nav end-->\r\n\r\n<!--service section start-->\r\n<section class=\"agency format service-bg\" id=\"logout\">\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-md-12 offset-lg-1\">\r\n        <div class=\"center-text\">\r\n          <div class=\"format-container\">\r\n            <div class=\"format-head-text\">\r\n              <h2 class=\"about-font-header\">Successfully Logout!<span class=\"block-span\"></span></h2>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</section>\r\n<!--service section end-->";
+      __webpack_exports__["default"] = "";
       /***/
     },
 
@@ -6233,13 +6897,13 @@
         _createClass(ErrorInterceptor, [{
           key: "intercept",
           value: function intercept(request, next) {
-            var _this20 = this;
+            var _this26 = this;
 
             return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (err) {
               switch (err.status) {
                 case 401:
                   // auto logout if 401 response returned from api
-                  _this20.authenticationService.logout();
+                  _this26.authenticationService.logout();
 
                   location.reload(true);
                   break;
@@ -6289,6 +6953,26 @@
 
 
       __webpack_exports__["default"] = "nav {\r\n    padding: 10px 0;\r\n}\r\n\r\nheader nav ul .mega-menu .mega-menu-container {\r\n\r\n    min-width: auto;\r\n}\r\n\r\nheader nav ul li>a {\r\n    color: white !important;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImhlYWRlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZUFBZTtBQUNuQjs7QUFFQTs7SUFFSSxlQUFlO0FBQ25COztBQUVBO0lBQ0ksdUJBQXVCO0FBQzNCIiwiZmlsZSI6ImhlYWRlci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsibmF2IHtcclxuICAgIHBhZGRpbmc6IDEwcHggMDtcclxufVxyXG5cclxuaGVhZGVyIG5hdiB1bCAubWVnYS1tZW51IC5tZWdhLW1lbnUtY29udGFpbmVyIHtcclxuXHJcbiAgICBtaW4td2lkdGg6IGF1dG87XHJcbn1cclxuXHJcbmhlYWRlciBuYXYgdWwgbGk+YSB7XHJcbiAgICBjb2xvcjogd2hpdGUgIWltcG9ydGFudDtcclxufSJdfQ== */";
+      /***/
+    },
+
+    /***/
+    "u1AE":
+    /*!***********************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/home/blog-view/blog-view.component.html ***!
+      \***********************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function u1AE(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<section class=\"resume schedule  pt-3 pb-4\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-12\">\r\n                <div class=\"cal-time\">\r\n                    <div class=\"time\">\r\n                        <h2 class=\"title-text pt-1\">{{blogsData.title}}</h2>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</section>\r\n<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-7\">\r\n            <!--<p class=\"subscribe-sub-head mb-3\">{{blogsData.description}}</p>-->\r\n            <p class=\"subscribe-sub-head mb-3\" [innerHTML]=\"blogsData.description\"></p>\r\n        </div>\r\n        <div class=\"col-lg-5\">\r\n            <img class=\"img-fluid\" [src]=\"blogsData.blogsDocument\" />\r\n        </div>\r\n    </div>\r\n</div>";
       /***/
     },
 
@@ -6494,6 +7178,12 @@
       var _components_guards__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
       /*! ./components/_guards */
       "CRXG");
+      /* harmony import */
+
+
+      var _home_blog_view_blog_view_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+      /*! ./home/blog-view/blog-view.component */
+      "k/Fl");
 
       var routes = [//DO NOT CHNAGE below routing This will be our final structure for page restrictions as per roles
 
@@ -6531,7 +7221,7 @@
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | borrower-borrower-module */
-          [__webpack_require__.e("default~admin-admin-module~borrower-borrower-module~home-home-module~lender-lender-module"), __webpack_require__.e("default~borrower-borrower-module~lender-lender-module"), __webpack_require__.e("common"), __webpack_require__.e("borrower-borrower-module")]).then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~admin-admin-module~borrower-borrower-module~home-home-module~lender-lender-module"), __webpack_require__.e("default~borrower-borrower-module~lender-lender-module"), __webpack_require__.e("borrower-borrower-module")]).then(__webpack_require__.bind(null,
           /*! ./borrower/borrower.module */
           "0OUo")).then(function (m) {
             return m.BorrowerModule;
@@ -6562,7 +7252,7 @@
         loadChildren: function loadChildren() {
           return Promise.all(
           /*! import() | admin-admin-module */
-          [__webpack_require__.e("default~admin-admin-module~borrower-borrower-module~home-home-module~lender-lender-module"), __webpack_require__.e("common"), __webpack_require__.e("admin-admin-module")]).then(__webpack_require__.bind(null,
+          [__webpack_require__.e("default~admin-admin-module~borrower-borrower-module~home-home-module~lender-lender-module"), __webpack_require__.e("admin-admin-module")]).then(__webpack_require__.bind(null,
           /*! ./admin/admin.module */
           "jkDv")).then(function (m) {
             return m.AdminModule;
@@ -6592,6 +7282,9 @@
       }, {
         path: 'disclaimer',
         component: _components_disclaimer_disclaimer_component__WEBPACK_IMPORTED_MODULE_10__["DisclaimerComponent"]
+      }, {
+        path: 'blog/:id',
+        component: _home_blog_view_blog_view_component__WEBPACK_IMPORTED_MODULE_12__["BlogViewComponent"]
       }, // otherwise redirect to home
       {
         path: '**',
@@ -6887,9 +7580,13 @@
         SessionStatus["Active"] = "active";
         SessionStatus["Completed"] = "completed";
         SessionStatus["Suspended"] = "suspended";
+        SessionStatus["Canceled"] = "canceled";
         SessionStatus["Ongoing"] = "ongoing";
         SessionStatus["OngoingInitiated"] = "ongoing_initiated";
         SessionStatus["OngoingAccepted"] = "ongoing_accepted";
+        SessionStatus["AwaitingForApproval"] = "awaiting_for_approval";
+        SessionStatus["Unpaid"] = "unpaid";
+        SessionStatus["Inkasso"] = "inkasso";
       })(SessionStatus || (SessionStatus = {}));
 
       ;

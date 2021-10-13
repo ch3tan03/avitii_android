@@ -1274,7 +1274,7 @@ module.exports = isForced;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "$localize", function() { return $localize; });
 /**
- * @license Angular v11.2.7
+ * @license Angular v11.2.14
  * (c) 2010-2021 Google LLC. https://angular.io/
  * License: MIT
  */
@@ -5883,7 +5883,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_proposals_reflect_metadata__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_proposals_reflect_metadata__WEBPACK_IMPORTED_MODULE_0__);
 /**
  * @license
- * Copyright Google Inc. All Rights Reserved.
+ * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license

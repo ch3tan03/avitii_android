@@ -41,11 +41,11 @@ export class CalendarComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.allSessionsData = data['data'];
-            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByLenders"), 1), 'borrowerId')));
+            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId')));//_sessionAppliedByLenders
             //this.alertService.success(data['message'], true);
             this.bindDataToCalendrUI(this.allSessionsData);
             this.loading = false;
@@ -124,7 +124,7 @@ export class CalendarComponent implements OnInit {
         break;
       case Role.Lender:
         _proccessedSessionObj = this.utilityService._.cloneDeep(_sessionObj);
-        _proccessedSessionObj.sessionAppliedByBorrowers = _sessionObj.sessionAppliedByLenders;
+        _proccessedSessionObj.sessionAppliedByBorrowers = _sessionObj.sessionAppliedByBorrowers;
         break;
       default:
         _proccessedSessionObj = this.utilityService._.cloneDeep(_sessionObj);
@@ -198,7 +198,7 @@ export class CalendarComponent implements OnInit {
 
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`25 :: co :: Dialog result: ${JSON.stringify(result)}`);
+      //console.log(`25 :: co :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
 

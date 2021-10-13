@@ -7,10 +7,12 @@ import { PublicProfileComponent } from 'src/app/shared/public-profile/public-pro
 import { MatDialog } from '@angular/material/dialog';
 import { Role, AppAccessPermissions } from 'src/app/models/role';
 import { Router } from '@angular/router';
-import { DataTableDirective } from 'angular-datatables';
+import { DataTableDirective, DataTablesModule } from 'angular-datatables';
 import { Subject } from 'rxjs/internal/Subject';
 import { IncomeProofComponent } from 'src/app/shared/income-proof/income-proof.component';
-
+import { UserRestrictionDetailsComponent } from 'src/app/shared/user-restriction-details/user-restriction-details.component';
+import { UserService } from 'src/app/services/user.service';
+var that;
 @Component({
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
@@ -25,8 +27,11 @@ export class UserManagementComponent implements OnDestroy, OnInit {
 
   PaymentTransactionDetailsArray: any = null;
   loading = false;
-
-
+  Role = Role;
+  recordsTotal: number = 0;
+  nextPageIndex: number = 0;
+  totalPages: number = 0;
+  limit4Filtered: number = 0;
   constructor(
     public dialog: MatDialog,
     private socketService: SocketioService,
@@ -34,17 +39,33 @@ export class UserManagementComponent implements OnDestroy, OnInit {
     public utilityService: UtilityService,
     public authenticationService: AuthenticationService,
     public router: Router,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private userService: UserService,
   ) {
-    let _data = {};
+    this.getAllUsersWithRequestData();
+  }
 
-    this.socketService.getAllUsersWithRequestData(_data, 0)
+  getAllUsersWithRequestData(_skip: number = 0, callback: any = null) {
+    let _data = {};
+    this.socketService.getAllUsersWithRequestData(_data, _skip)
       .pipe(first())
       .subscribe(
         data => {
           if (data && data['success']) {
-            this.PaymentTransactionDetailsArray = data["data"];
-            this.populateUsersDataInTable();
+            this.PaymentTransactionDetailsArray = this.utilityService._.uniq(this.utilityService._.union((this.PaymentTransactionDetailsArray || []), data["data"]));
+            this.recordsTotal = data['metaData']['totalDocs'] || 0;
+            this.nextPageIndex = data['metaData']['nextPage'] || 0;
+            this.totalPages = data['metaData']['totalPages'] || 0;
+            this.limit4Filtered = data['metaData']['limit'] || 0;
+            if (callback) {
+              callback({
+                recordsTotal: this.recordsTotal || 0,
+                recordsFiltered: this.utilityService._.keys(this.PaymentTransactionDetailsArray).length || 0,
+                data: [],
+              });
+            } else {
+              this.populateUsersDataInTable();
+            }
             //this.rerender();
             this.loading = false;
           } else {
@@ -54,7 +75,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
         },
         error => {
           let errorMsg2show = "";
-          this.PaymentTransactionDetailsArray = [];
+          //this.PaymentTransactionDetailsArray = [];
           try {
             if (error && error.error && error.error.message) {
               errorMsg2show = error.error.message;
@@ -143,7 +164,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
 
   usersProfile(userObj) {
 
-    console.log('95', this.authenticationService.currentUserValue);
+    //console.log('95', this.authenticationService.currentUserValue);
     const dialogRef = this.dialog.open(PublicProfileComponent, {
 
       maxWidth: '100vw',
@@ -165,7 +186,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
         usersObjArr[_userId] = result.data;
         this.PaymentTransactionDetailsArray = usersObjArr;
       }
-      console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+      //console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
 
@@ -203,22 +224,55 @@ export class UserManagementComponent implements OnDestroy, OnInit {
     this.dtTrigger.unsubscribe();
     if (this.elementRef && this.elementRef.nativeElement && this.elementRef.nativeElement.querySelector('.paginate_button.next')) {
       this.elementRef.nativeElement.querySelector('.paginate_button.next')
-        .removeEventListener('click');
+        .removeEventListener('click', this.paginateButtonNext);
+      this.elementRef.nativeElement.querySelector('.paginate_button.last')
+        .removeEventListener('click', this.paginateButtonNext);
     }
   }
 
   populateUsersDataInTable() {
+    that = this;
     this.destroyTable();
     this.dtOptions = {
       pagingType: 'full_numbers',
-      pageLength: 10,
+      pageLength: 100,
+      /*
+            serverSide: true,
+            processing: false,
+            ajax: (dataTablesParameters: any, callback) => {
+              if ((dataTablesParameters.start + dataTablesParameters.length) < that.utilityService._.keys(that.PaymentTransactionDetailsArray).length) {
+                //No Action here
+          
+                callback({
+                  recordsTotal: that.recordsTotal || 0,
+                  recordsFiltered: that.utilityService._.keys(that.PaymentTransactionDetailsArray).length || 0,
+                  data: [],
+                });
+                
+                //that.getAllUsersWithRequestData((that.nextPageIndex || 1), callback);
+              } else {
+                that.getAllUsersWithRequestData((that.nextPageIndex || 1), callback);
+                //that.dtTrigger.next();
+                //that.rerender();
+            }
+      
+          },*//*,columns:[{data:"_id"},{data:"firstName"},{data:"lastName"}],*/
+/*
       drawCallback: () => {
-        this.elementRef.nativeElement.querySelector('.paginate_button.next')
-          .addEventListener('click', this.onClick.bind(this));
+        if (this.elementRef && this.elementRef.nativeElement && this.elementRef.nativeElement.querySelector('.paginate_button.next')) {
+          this.elementRef.nativeElement.querySelector('.paginate_button.next')
+            .addEventListener('click', this.paginateButtonNext);
+          this.elementRef.nativeElement.querySelector('.paginate_button.last')
+            .addEventListener('click', this.paginateButtonNext);
+        }
       }
+      */
     };
     this.dtTrigger.next();
     this.rerender();
+  }
+  paginateButtonNext() {
+    that.getAllUsersWithRequestData((that.nextPageIndex || 1));
   }
 
   ngAfterViewInit(): void {
@@ -264,7 +318,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
   //#endregion datatable actions
   usersIncomeExpenseDetails(userObj) {
 
-    console.log('241', this.authenticationService.currentUserValue);
+    //console.log('241', this.authenticationService.currentUserValue);
     const dialogRef = this.dialog.open(IncomeProofComponent, {
 
       maxWidth: '100vw',
@@ -280,7 +334,34 @@ export class UserManagementComponent implements OnDestroy, OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`256 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+      //console.log(`256 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+    });
+  }
+
+  usersRestrictionModal(userObj: any, isVerified: boolean) {
+    const dialogRef = this.dialog.open(UserRestrictionDetailsComponent, {
+
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      hasBackdrop: true,
+      data: {
+        userObj: userObj,
+        adminViewT: true,
+        isVerified: isVerified,
+        isOpenedInModel: true
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && result.data && result.data["_id"]) {
+        let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+        usersObjArr[result.data["_id"]] = result.data;
+        this.PaymentTransactionDetailsArray = usersObjArr;
+        this.populateUsersDataInTable();
+      }
+      //console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
 

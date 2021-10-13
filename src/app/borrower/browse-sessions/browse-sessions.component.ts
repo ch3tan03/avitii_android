@@ -47,7 +47,7 @@ export class BrowseSessionsComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.ParentServicesTypes = data["data"];
@@ -98,7 +98,7 @@ export class BrowseSessionsComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.allSessionsData = data['data'];
@@ -148,7 +148,7 @@ export class BrowseSessionsComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.allSessionsCount = data['data'];
@@ -189,7 +189,7 @@ export class BrowseSessionsComponent implements OnInit {
       .subscribe(
         data => {
 
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.allSessionsData = data['data'];
@@ -221,7 +221,7 @@ export class BrowseSessionsComponent implements OnInit {
   }
 
   applyToSession(sessionObj) {
-    console.log('179', this.authenticationService.currentUserValue);
+    //console.log('179', this.authenticationService.currentUserValue);
     const dialogRef = this.dialog.open(ModalApplySession, {
       backdropClass: 'custom-dialog-backdrop-class',
       panelClass: 'custom-dialog-panel-class',
@@ -270,7 +270,7 @@ export class BrowseSessionsComponent implements OnInit {
               case SessionStatus.Active:
               case SessionStatus.Ongoing:
               case SessionStatus.OngoingInitiated:
-              case SessionStatus.OngoingAccepted:
+              case SessionStatus.AwaitingForApproval:
                 this.alertService.success("Updated. Session is available under My Sessionss->Ongoing tab.", true);
                 break;
               default:
@@ -279,7 +279,7 @@ export class BrowseSessionsComponent implements OnInit {
           }
         }
       }
-      console.log(`252 :: bsc :: Dialog result: ${JSON.stringify(result)}`);
+      //console.log(`252 :: bsc :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
 
@@ -294,7 +294,7 @@ export class BrowseSessionsComponent implements OnInit {
         _proccessedSessionObj = _.cloneDeep(sessionObj);
         break;
     }
-    console.log('214', this.authenticationService.currentUserValue);
+    //console.log('214', this.authenticationService.currentUserValue);
     const dialogRef = this.dialog.open(ModalAppliedSessionDisplay, {
       backdropClass: 'custom-dialog-backdrop-class',
       panelClass: 'custom-dialog-panel-class',
@@ -305,7 +305,7 @@ export class BrowseSessionsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`191 :: bcs :: Dialog result: ${JSON.stringify(result)}`);
+      //console.log(`191 :: bcs :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
 

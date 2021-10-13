@@ -56,7 +56,7 @@ export class ProfilePortfolioComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.showEditingForm(data["data"]);
@@ -189,13 +189,13 @@ export class ProfilePortfolioComponent implements OnInit {
 
 
   onSelectMyProfileMedia(event) {
-    console.log('371 :: Added', event);
+    //console.log('371 :: Added', event);
     this.myProfileFiles.push(...event.addedFiles);
-    console.log('373', this.myProfileFiles);
+    //console.log('373', this.myProfileFiles);
   }
 
   onRemoveMyProfileMedia(event) {
-    console.log('378 :: Removed', event);
+    //console.log('378 :: Removed', event);
     this.myProfileFiles.splice(this.myProfileFiles.indexOf(event), 1);
   }
 
@@ -227,10 +227,10 @@ export class ProfilePortfolioComponent implements OnInit {
       }).subscribe(events => {
         if (events.type === HttpEventType.UploadProgress) {
           this.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
-          console.log(this.fileUploadProgress);
+          //console.log(this.fileUploadProgress);
         } else if (events.type === HttpEventType.Response) {
           this.fileUploadProgress = '';
-          console.log(events.body);
+          //console.log(events.body);
           //alert('SUCCESS !!');
           _.pullAt(this.myProfileFiles, _index);
           this.alertService.success('Uploaded Successfully !!', true);

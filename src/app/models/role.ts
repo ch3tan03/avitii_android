@@ -39,9 +39,13 @@ export enum SessionStatus {
     Active = 'active',
     Completed = 'completed',
     Suspended = 'suspended',
+    Canceled = 'canceled',
     Ongoing = 'ongoing',
     OngoingInitiated = 'ongoing_initiated',
     OngoingAccepted = 'ongoing_accepted',
+    AwaitingForApproval = 'awaiting_for_approval',
+    Unpaid = 'unpaid',
+    Inkasso = 'inkasso',
 };
 
 export enum PaymentMethod {

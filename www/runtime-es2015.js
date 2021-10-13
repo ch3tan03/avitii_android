@@ -64,7 +64,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"default~admin-admin-module~borrower-borrower-module~home-home-module~lender-lender-module":"default~admin-admin-module~borrower-borrower-module~home-home-module~lender-lender-module","common":"common","admin-admin-module":"admin-admin-module","default~borrower-borrower-module~lender-lender-module":"default~borrower-borrower-module~lender-lender-module","borrower-borrower-module":"borrower-borrower-module","lender-lender-module":"lender-lender-module","home-home-module":"home-home-module"}[chunkId]||chunkId) + "-es2015.js"
+/******/ 		return __webpack_require__.p + "" + ({"default~admin-admin-module~borrower-borrower-module~home-home-module~lender-lender-module":"default~admin-admin-module~borrower-borrower-module~home-home-module~lender-lender-module","admin-admin-module":"admin-admin-module","default~borrower-borrower-module~lender-lender-module":"default~borrower-borrower-module~lender-lender-module","borrower-borrower-module":"borrower-borrower-module","lender-lender-module":"lender-lender-module","home-home-module":"home-home-module"}[chunkId]||chunkId) + "-es2015.js"
 /******/ 	}
 /******/
 /******/ 	// The require function

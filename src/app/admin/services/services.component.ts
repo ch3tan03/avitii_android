@@ -33,7 +33,7 @@ export class ServicesComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.ParentServicesTypes = data["data"];
@@ -73,7 +73,7 @@ export class ServicesComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             this.loadServiceTypesService();
             this.alertService.success(data['message'], true);

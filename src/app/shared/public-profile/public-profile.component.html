@@ -13,7 +13,7 @@
         <div class="col-xl-3 col-12">
             <div class="card">
                 <div class="card-body">
-                    <img [src]="userObj.selfProfileUrl" onerror="this.src='/assets/img/nouser.png';"
+                    <img [src]="userObj.selfProfileUrl" onerror="this.src='./assets/img/nouser.png';"
                         class="img-fluid " />
                 </div>
                 <div class="card-footer">
@@ -22,18 +22,24 @@
                         {{userObj.middleName | titlecase}}&nbsp;
                         {{userObj.lastName | titlecase}}
                     </strong>
+
                 </div>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"> <strong>City</strong> {{userObj.cityCode | titlecase}}</li>
                 <li class="list-group-item">
-                    <strong>Country</strong> {{userObj.country | titlecase}}
+                    <strong>Country</strong>&nbsp;<span
+                        class="flag-icon flag-icon-{{utilityService.returnCountryCodeFromName(userObj.country)}} flag-icon-squared"></span>&nbsp;{{userObj.country
+                    | titlecase}}
                 </li>
                 <li class="list-group-item">
-                    <strong>Member Since</strong> {{userObj.birthDate | date}}
+                    <strong i18n>Member Since</strong> {{userObj.createdOn | date}}
                 </li>
                 <li class="list-group-item">
-                    <strong>DOB</strong> {{userObj.birthDate | date}}
+                    <strong i18n>DOB</strong> {{userObj.birthDate | date}}
+                </li>
+                <li class="list-group-item">
+                    <strong i18n>Last Login</strong> {{userObj.lastLoginTime | date:'dd-MMM-YYYY HH:mm'}}
                 </li>
                 <li *ngIf="userObj.externalAppLinks" class="list-group-item">
                     <div *ngFor="let previewUrl of userObj.externalAppLinks">
@@ -44,160 +50,311 @@
         </div>
         <div class="col-xl-9 col-12 pl-5">
             <div class="row">
-                <div class="col-xl-6 col-12" *ngIf="adminViewT">
+                <div class="col-xl-6 col-12" *ngIf="userObj.role=='borrower'">
                     <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Number of loan notices created
-                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.numberOfLoanCreated ||
+                        <li class="list-group-item d-flex justify-content-between align-items-center" i18n>
+                            Number of loan notices created:
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.totalLoanCreated ||
                                 'NA'}}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Signed contracts
-                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.numberOfSignedContract
+                        <li class="list-group-item d-flex justify-content-between align-items-center" i18n>
+                            Signed contracts:
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.totalSignedContract
                                 || 'NA'}}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" i18n>
                             Repaid contracts:
-                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.numberOfRepaidContract
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.totalRepaidContract
                                 || 'NA'}}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Total amount borrowed
-                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.numberOfAmontBorrowed
+                        <li class="list-group-item d-flex justify-content-between align-items-center" i18n>
+                            Total amount borrowed:
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.totalAmountBorrowed
                                 || 'NA'}}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Total amount refunded
-                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.numberOfAmontRefunded
+                        <li class="list-group-item d-flex justify-content-between align-items-center" i18n>
+                            Total amount refunded:
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.totalAmountRefunded
                                 || 'NA'}}</span>
                         </li>
                     </ul>
                 </div>
-                <div class="col-xl-6 col-12" *ngIf="adminViewT">
+                <div class="col-xl-6 col-12" *ngIf="userObj.role=='borrower'">
                     <ul class="list-group">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Amount available in budget
+                        <li class="list-group-item d-flex justify-content-between align-items-center" i18n>
+                            Active loan must be paid by the next payment date:
                             <span
-                                class="badge badge-primary badge-pill">{{profileAdditionalData.numberOfAmountAvailableInBudget
+                                class="badge badge-primary badge-pill">{{profileAdditionalData.totalAmountOfNextInstallment
+                                || ((utilityService.returnDateWithAddingMonths(utilityService._.now(), 1) |
+                                date:'dd-MMM-YYYY') || 'NA')}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center" i18n>
+                            Amount available in budget:
+                            <span
+                                class="badge badge-primary badge-pill">{{profileAdditionalData.totalAmountAvailableInBudget
                                 || 'NA'}}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Recommended
-                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.recommended ||
+                        <li class="list-group-item d-flex justify-content-between align-items-center" i18n>
+                            Recommended:
+                            <span class="badge badge-primary badge-pill">{{myRatingsSummaryObj.totalRecommonded ||
                                 'NA'}}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Not Recommended
-                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.notRecommended ||
+                        <li class="list-group-item d-flex justify-content-between align-items-center" i18n>
+                            Not Recommended:
+                            <span class="badge badge-primary badge-pill">{{myRatingsSummaryObj.totalNotRecommonded ||
                                 'NA'}}</span>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             This borrower is in RKI:
-                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.borrowerIsInRKI ||
+                            <span class="badge badge-primary badge-pill">{{userObj.isRKIRegistered?'Yes':'No'}}</span>
+                        </li>
+                        <!--
+                        <li class="list-group-item d-flex justify-content-between align-items-center" i18n>
+                            Email:
+                            <span class="badge badge-primary badge-pill">Vefified</span>
+                        </li>
+                    -->
+                    </ul>
+                </div>
+
+                <div class="col-xl-12 col-12" *ngIf="userObj.role=='lender'">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center" i18n>
+                            Number of loans created:
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.totalLoanCreated ||
                                 'NA'}}</span>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Email
-                            <span class="badge badge-primary badge-pill">Vefified</span>
+                        <li class="list-group-item d-flex justify-content-between align-items-center" i18n>
+                            Number of active loans:
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.totalActiveContract
+                                || 'NA'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center" i18n>
+                            Number of loans completed:
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.totalRepaidContract
+                                || 'NA'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center" i18n>
+                            Total amount lent:
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.totalAmountLent
+                                || 'NA'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center" i18n>
+                            Total amount refunded:
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.totalAmountRefunded
+                                || 'NA'}}</span>
                         </li>
                     </ul>
                 </div>
-                <div class="col-xl-12 col-12">
 
-                    <div class="my-3">
-                        <!--
-                        <span *ngIf="!adminViewT" (click)="addNewRatings(userObj)" mat-button mat-dialog-close>&nbsp;
-                            <i class="icon-star"></i>
-                        </span>
-                    -->
-                        <span *ngIf="!adminViewT">&nbsp;
-                            <i class="icon-star text-warning"></i>
-                        </span>
-                    </div>
-                </div>
             </div>
             <div class="row">
                 <div class="col-xl-12 col-12">
-                    <div class="table-responsive table-billing-history">
+                    <div class="table-responsive table-billing-history mt-4 card">
                         <table class="table mb-0">
                             <thead>
                                 <tr>
-                                    <th scope="col">Document</th>
-                                    <th scope="col">Doc Number</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col" i18n>Document</th>
+                                    <th scope="col" i18n>Doc Number</th>
+                                    <th scope="col" i18n>Status</th>
+                                    <th scope="col" *ngIf="adminViewT" i18n>View</th>
                                     <th scope="col" *ngIf="adminViewT">#</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>Passport</td>
+                                    <td i18n>Passport</td>
                                     <td>{{userObj.myPassportNumber||'NA'}}</td>
                                     <td>
-                                        <span *ngIf="userObj.myPassportMediaVerified"
-                                            class="badge badge-success">Verified</span>
-                                        <span *ngIf="!userObj.myPassportMediaVerified"
-                                            class="badge badge-danger">Unverified</span>
+                                        <span *ngIf="userObj.myPassportMediaVerified" class="badge badge-success"
+                                            i18n>Verified</span>
+                                        <span *ngIf="!userObj.myPassportMediaVerified" class="badge badge-danger"
+                                            i18n>Unverified</span>
                                     </td>
                                     <td *ngIf="adminViewT">
-                                        <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified" *ngIf="userObj.myPassportMediaVerified" (click)="updateUsersVerificationStatus(userObj._id, 'myPassportMediaVerified', !userObj.myPassportMediaVerified)">
+                                        <div *ngIf="userObj.myPassportMedia">
+                                            <div class="col-xl-2" *ngFor="let previewUrl of userObj.myPassportMedia">
+                                                <div *ngIf="previewUrl">
+                                                    <label title="Preview"
+                                                        (click)="mediaPreviewModel(previewUrl.url, 'image')">
+                                                        <i class="icon-eye m-2 text-success"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="userObj.myPassportMediaSelfVerify">
+                                            <div class="col-xl-2"
+                                                *ngFor="let previewUrl of userObj.myPassportMediaSelfVerify">
+                                                <div *ngIf="previewUrl">
+                                                    <label title="Preview"
+                                                        (click)="mediaPreviewModel(previewUrl.url, 'image')">
+                                                        <i class="icon-eye m-2 text-success"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td *ngIf="adminViewT">
+                                        <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified"
+                                            *ngIf="userObj.myPassportMediaVerified"
+                                            (click)="updateUsersVerificationStatus(userObj._id, 'myPassportMediaVerified', !userObj.myPassportMediaVerified)">
                                             <i class="icon-close"></i>
                                         </button>
-                                        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified" *ngIf="!userObj.myPassportMediaVerified" (click)="updateUsersVerificationStatus(userObj._id, 'myPassportMediaVerified', !userObj.myPassportMediaVerified)">
+                                        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified"
+                                            *ngIf="!userObj.myPassportMediaVerified"
+                                            (click)="updateUsersVerificationStatus(userObj._id, 'myPassportMediaVerified', !userObj.myPassportMediaVerified)">
                                             <i class="icon-check"></i>
+                                        </button>
+                                        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Edit"
+                                            (click)="editUsersDocuments(userObj, 'myPassportMedia')">
+                                            <i class="icon-pencil-alt"></i>
                                         </button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>Driving Licence</td>
+                                    <td i18n>Driving Licence</td>
                                     <td>{{userObj.myDLNumber||'NA'}}</td>
                                     <td>
-                                        <span *ngIf="userObj.myDLMediaVerified"
-                                            class="badge badge-success">Verified</span>
-                                        <span *ngIf="!userObj.myDLMediaVerified"
-                                            class="badge badge-danger">Unverified</span>
+                                        <span *ngIf="userObj.myDLMediaVerified" class="badge badge-success"
+                                            i18n>Verified</span>
+                                        <span *ngIf="!userObj.myDLMediaVerified" class="badge badge-danger"
+                                            i18n>Unverified</span>
                                     </td>
                                     <td *ngIf="adminViewT">
-                                        <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified" *ngIf="userObj.myDLMediaVerified" (click)="updateUsersVerificationStatus(userObj._id, 'myDLMediaVerified', !userObj.myDLMediaVerified)">
+                                        <div *ngIf="userObj.myDLMedia">
+                                            <div class="col-xl-2" *ngFor="let previewUrl of userObj.myDLMedia">
+                                                <div *ngIf="previewUrl">
+                                                    <label title="Preview"
+                                                        (click)="mediaPreviewModel(previewUrl.url, 'image')">
+                                                        <i class="icon-eye m-2 text-success"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="userObj.myDLMediaSelfVerify">
+                                            <div class="col-xl-2"
+                                                *ngFor="let previewUrl of userObj.myDLMediaSelfVerify">
+                                                <div *ngIf="previewUrl">
+                                                    <label title="Preview"
+                                                        (click)="mediaPreviewModel(previewUrl.url, 'image')">
+                                                        <i class="icon-eye m-2 text-success"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td *ngIf="adminViewT">
+                                        <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified"
+                                            *ngIf="userObj.myDLMediaVerified"
+                                            (click)="updateUsersVerificationStatus(userObj._id, 'myDLMediaVerified', !userObj.myDLMediaVerified)">
                                             <i class="icon-close"></i>
                                         </button>
-                                        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified" *ngIf="!userObj.myDLMediaVerified" (click)="updateUsersVerificationStatus(userObj._id, 'myDLMediaVerified', !userObj.myDLMediaVerified)">
+                                        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified"
+                                            *ngIf="!userObj.myDLMediaVerified"
+                                            (click)="updateUsersVerificationStatus(userObj._id, 'myDLMediaVerified', !userObj.myDLMediaVerified)">
                                             <i class="icon-check"></i>
+                                        </button>
+                                        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Edit"
+                                            (click)="editUsersDocuments(userObj, 'myDLMedia')">
+                                            <i class="icon-pencil-alt"></i>
                                         </button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>CPR Number</td>
+                                    <td i18n>CPR Number</td>
                                     <td>{{userObj.cprNumber||'NA'}}</td>
                                     <td>
-                                        <span *ngIf="userObj.myHICardMediaVerified"
-                                            class="badge badge-success">Verified</span>
-                                        <span *ngIf="!userObj.myHICardMediaVerified"
-                                            class="badge badge-danger">Unverified</span>
+                                        <span *ngIf="userObj.myHICardMediaVerified" class="badge badge-success"
+                                            i18n>Verified</span>
+                                        <span *ngIf="!userObj.myHICardMediaVerified" class="badge badge-danger"
+                                            i18n>Unverified</span>
                                     </td>
                                     <td *ngIf="adminViewT">
-                                        <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified" *ngIf="userObj.myHICardMediaVerified" (click)="updateUsersVerificationStatus(userObj._id, 'myHICardMediaVerified', !userObj.myHICardMediaVerified)">
+                                        <div *ngIf="userObj.myHICardMedia">
+                                            <div class="col-xl-2" *ngFor="let previewUrl of userObj.myHICardMedia">
+                                                <div *ngIf="previewUrl">
+                                                    <label title="Preview"
+                                                        (click)="mediaPreviewModel(previewUrl.url, 'image')">
+                                                        <i class="icon-eye m-2 text-success"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="userObj.myHICardMediaSelfVerify">
+                                            <div class="col-xl-2"
+                                                *ngFor="let previewUrl of userObj.myHICardMediaSelfVerify">
+                                                <div *ngIf="previewUrl">
+                                                    <label title="Preview"
+                                                        (click)="mediaPreviewModel(previewUrl.url, 'image')">
+                                                        <i class="icon-eye m-2 text-success"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td *ngIf="adminViewT">
+                                        <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified"
+                                            *ngIf="userObj.myHICardMediaVerified"
+                                            (click)="updateUsersVerificationStatus(userObj._id, 'myHICardMediaVerified', !userObj.myHICardMediaVerified)">
                                             <i class="icon-close"></i>
                                         </button>
-                                        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified" *ngIf="!userObj.myHICardMediaVerified" (click)="updateUsersVerificationStatus(userObj._id, 'myHICardMediaVerified', !userObj.myHICardMediaVerified)">
+                                        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified"
+                                            *ngIf="!userObj.myHICardMediaVerified"
+                                            (click)="updateUsersVerificationStatus(userObj._id, 'myHICardMediaVerified', !userObj.myHICardMediaVerified)">
                                             <i class="icon-check"></i>
+                                        </button>
+                                        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Edit"
+                                            (click)="editUsersDocuments(userObj, 'myHICardMedia')">
+                                            <i class="icon-pencil-alt"></i>
                                         </button>
                                     </td>
                                 </tr>
                                 <tr *ngIf="userObj.role=='borrower' && !userObj.isRKIRegistered">
-                                    <td>RKI Document </td>
+                                    <td i18n>RKI Document </td>
                                     <td>{{userObj.myRKINumber||'NA'}}</td>
                                     <td>
-                                        <span *ngIf="userObj.myRKIMediaVerified"
-                                            class="badge badge-success">Verified</span>
-                                        <span *ngIf="!userObj.myRKIMediaVerified"
-                                            class="badge badge-danger">Unverified</span>
+                                        <span *ngIf="userObj.myRKIMediaVerified" class="badge badge-success"
+                                            i18n>Verified</span>
+                                        <span *ngIf="!userObj.myRKIMediaVerified" class="badge badge-danger"
+                                            i18n>Unverified</span>
                                     </td>
                                     <td *ngIf="adminViewT">
-                                        <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified" *ngIf="userObj.myRKIMediaVerified" (click)="updateUsersVerificationStatus(userObj._id, 'myRKIMediaVerified', !userObj.myRKIMediaVerified)">
+                                        <div *ngIf="userObj.myRKIMedia">
+                                            <div class="col-xl-2" *ngFor="let previewUrl of userObj.myRKIMedia">
+                                                <div *ngIf="previewUrl">
+                                                    <label title="Preview"
+                                                        (click)="mediaPreviewModel(previewUrl.url, 'image')">
+                                                        <i class="icon-eye m-2 text-success"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div *ngIf="userObj.myRKIMediaSelfVerify">
+                                            <div class="col-xl-2"
+                                                *ngFor="let previewUrl of userObj.myRKIMediaSelfVerify">
+                                                <div *ngIf="previewUrl">
+                                                    <label title="Preview"
+                                                        (click)="mediaPreviewModel(previewUrl.url, 'image')">
+                                                        <i class="icon-eye m-2 text-success"></i>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td *ngIf="adminViewT">
+                                        <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified"
+                                            *ngIf="userObj.myRKIMediaVerified"
+                                            (click)="updateUsersVerificationStatus(userObj._id, 'myRKIMediaVerified', !userObj.myRKIMediaVerified)">
                                             <i class="icon-close"></i>
                                         </button>
-                                        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified" *ngIf="!userObj.myRKIMediaVerified" (click)="updateUsersVerificationStatus(userObj._id, 'myRKIMediaVerified', !userObj.myRKIMediaVerified)">
+                                        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified"
+                                            *ngIf="!userObj.myRKIMediaVerified"
+                                            (click)="updateUsersVerificationStatus(userObj._id, 'myRKIMediaVerified', !userObj.myRKIMediaVerified)">
                                             <i class="icon-check"></i>
+                                        </button>
+                                        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Edit"
+                                            (click)="editUsersDocuments(userObj, 'myRKIMedia')">
+                                            <i class="icon-pencil-alt"></i>
                                         </button>
                                     </td>
                                 </tr>
@@ -206,9 +363,88 @@
                         </table>
                     </div>
                 </div>
+                <div class="col-xl-12 col-12 mt-4">
+                    <div class="row">
+                        <div class="col-xl-6 col-12">
+                            <div class="my-3">
+                                <!--
+            <span *ngIf="!adminViewT" (click)="addNewRatings(userObj)" mat-button mat-dialog-close>&nbsp;
+                <i class="icon-star"></i>
+            </span>
+        -->
+                                <span>
+                                    &nbsp;
+                                    <i *ngIf="!myRatingsSummaryObj.totalRatingsAvg" class="icon-star"></i>
+                                    <app-star *ngIf="myRatingsSummaryObj.totalRatingsAvg"
+                                        [rating]="myRatingsSummaryObj.totalRatingsAvg">
+                                    </app-star>
 
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-12">
+                            <div class="my-3">
+                                <span>
+                                    &nbsp;
+                                    <i *ngIf="myRatingsSummaryObj.totalRatingsAvg && adminViewT" class="icon-eye"
+                                        (click)="usersRatings(userObj)"></i>
+                                </span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-xl-6 col-12">
+                            <div class="comment_sec" *ngFor="let obj of utilityService._.values(RatingDetailsArray)">
+                                <article class="row"
+                                    *ngIf="utilityService._.keys(obj.flagCommentObj).length==0 && utilityService._.keys(obj.reportedUserObj).length==0">
+                                    <div class="col-12">
+                                        <div class="blog_center">
+                                            <div>
+                                                <figure [hidden]="true" class="thumbnail">
+                                                    <img alt="" [src]="obj.createdByUserObj.selfProfileUrl"
+                                                        onerror="this.src='/assets/img/nouser.png';">
+                                                </figure>
+                                            </div>
+                                            <div class="blog_user arrow left">
+                                                <div class="panel-body">
+                                                    <div class="text-left">
+                                                        <div class="comment-user"><i class="fa fa-user"></i>
+                                                            <h6> {{obj.createdByUserObj.firstName}} </h6>
+                                                        </div>
+                                                        <div class="comment-date"><i class="fa fa-clock-o"></i>
+                                                            <h6> {{obj.createdOn |
+                                                                date:'dd-MMM-YYYY'}}</h6>
+                                                        </div>
+                                                        <div class="comment-date mt-n1">
+                                                            <app-star [rating]="obj.rating">
+                                                            </app-star>
+                                                        </div>
+                                                    </div>
+                                                    <div class="comment-post">
+                                                        <p>{{obj.title}}</p>
+                                                        <p>
+                                                            {{obj.comment}}
+                                                        </p>
+                                                        <div class="float-left">
+                                                            <span
+                                                                class="badge badge-success mr-2 font-weight text-capitalize text-cap">
+                                                                {{obj.isRecommonded?'Recommonded':''}}
+                                                            </span>
+                                                        </div>
+                                                        <hr />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-
+            <!--
             <div class="row" *ngIf="adminViewT">
                 <div class="col-xl-12 col-12">
                     <hr>
@@ -225,11 +461,11 @@
                                     <img width="1000" height="1000"
                                         *ngIf="previewUrl.type && previewUrl.type.indexOf('image/')>-1"
                                         class="img-fluid border" [src]="previewUrl.url"
-                                        onerror="this.src='/assets/img/na.png';" />
+                                        onerror="this.src='./assets/img/na.png';" />
                                     <img width="1000" height="1000"
                                         *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1"
-                                        class="img-fluid border" src="/assets/img/pdf.png"
-                                        onerror="this.src='/assets/img/na.png';" />
+                                        class="img-fluid border" src="./assets/img/pdf.png"
+                                        onerror="this.src='./assets/img/na.png';" />
                                 </div>
                             </div>
                         </div>
@@ -247,11 +483,11 @@
                                     <img width="1000" height="1000"
                                         *ngIf="previewUrl.type && previewUrl.type.indexOf('image/')>-1"
                                         class="img-fluid border" [src]="previewUrl.url"
-                                        onerror="this.src='/assets/img/na.png';" />
+                                        onerror="this.src='./assets/img/na.png';" />
                                     <img width="1000" height="1000"
                                         *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1"
-                                        class="img-fluid border" src="/assets/img/pdf.png"
-                                        onerror="this.src='/assets/img/na.png';" />
+                                        class="img-fluid border" src="./assets/img/pdf.png"
+                                        onerror="this.src='./assets/img/na.png';" />
                                 </div>
                             </div>
                         </div>
@@ -271,11 +507,11 @@
                                     <img width="1000" height="1000"
                                         *ngIf="previewUrl.type && previewUrl.type.indexOf('image/')>-1"
                                         class="img-fluid border" [src]="previewUrl.url"
-                                        onerror="this.src='/assets/img/na.png';" />
+                                        onerror="this.src='./assets/img/na.png';" />
                                     <img width="1000" height="1000"
                                         *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1"
-                                        class="img-fluid border" src="/assets/img/pdf.png"
-                                        onerror="this.src='/assets/img/na.png';" />
+                                        class="img-fluid border" src="./assets/img/pdf.png"
+                                        onerror="this.src='./assets/img/na.png';" />
                                 </div>
                             </div>
                         </div>
@@ -294,18 +530,132 @@
                                     <img width="1000" height="1000"
                                         *ngIf="previewUrl.type && previewUrl.type.indexOf('image/')>-1"
                                         class="img-fluid border" [src]="previewUrl.url"
-                                        onerror="this.src='/assets/img/na.png';" />
+                                        onerror="this.src='./assets/img/na.png';" />
                                     <img width="1000" height="1000"
                                         *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1"
-                                        class="img-fluid border" src="/assets/img/pdf.png"
-                                        onerror="this.src='/assets/img/na.png';" />
+                                        class="img-fluid border" src="./assets/img/pdf.png"
+                                        onerror="this.src='./assets/img/na.png';" />
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        -->
+            <div class="row" *ngIf="adminViewT">
+                <div class="col-xl-12 col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"> <strong>Bank Name</strong>
+                                    {{userObj.bankName | titlecase}}
+                                </li>
+                                <li class="list-group-item"> <strong>Registration Number</strong>
+                                    {{userObj.regNumber}}
+                                </li>
+                                <li class="list-group-item"> <strong>Account number</strong>
+                                    {{userObj.accountNumber}}
+                                </li>
+                                <li class="list-group-item"> <strong>IBAN Number</strong>
+                                    {{userObj.iban}}
+                                </li>
+                                <li class="list-group-item"> <strong>Bank Identifier Code</strong>
+                                    {{userObj.bic}}
+                                </li>
+                                <li class="list-group-item"> <strong>Paypal</strong>
+                                    {{userObj.paypalWalletID}}
+                                </li>
+                                <li class="list-group-item"> <strong>Skrill</strong>
+                                    {{userObj.skrillWalletID}}
+                                </li>
+                                <li class="list-group-item"> <strong>Revolut</strong>
+                                    {{userObj.revolutWalletID}}
+                                </li>
+                                <li class="list-group-item"> <strong>Bitcoin Wallet</strong>
+                                    {{userObj.bitCoinWalletID}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
 
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-12" *ngIf="userObj.bankingOldDataCollection">
+                        <div class="table-responsive table-billing-history">
+                            <table class="table mb-0">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" i18n>Changed On</th>
+                                        <th scope="col" i18n>Bank Name</th>
+                                        <th scope="col" i18n>Registration Number</th>
+                                        <th scope="col" i18n>Account number</th>
+                                        <th scope="col" i18n>IBAN Number</th>
+                                        <th scope="col" i18n>Bank Identifier Code</th>
+                                        <th scope="col" i18n>Paypal</th>
+                                        <th scope="col" i18n>Skrill</th>
+                                        <th scope="col" i18n>Revolut</th>
+                                        <th scope="col" i18n>Bitcoin Wallet</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr
+                                        *ngFor="let bankingOldData of utilityService._.values(userObj.bankingOldDataCollection)">
+                                        <td i18n>{{bankingOldData.updatedOn | date}}</td>
+                                        <td>{{bankingOldData.bankName | titlecase}}</td>
+                                        <td>{{bankingOldData.regNumber}}</td>
+                                        <td>{{bankingOldData.accountNumber}}</td>
+                                        <td>{{bankingOldData.iban}}</td>
+                                        <td>{{bankingOldData.bic}}</td>
+                                        <td>{{bankingOldData.paypalWalletID}}</td>
+                                        <td>{{bankingOldData.skrillWalletID}}</td>
+                                        <td>{{bankingOldData.revolutWalletID}}</td>
+                                        <td>{{bankingOldData.bitCoinWalletID}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--
+                        <div class="row" *ngFor="let bankingOldData of utilityService._.values(userObj.bankingOldDataCollection)">
+                            <div class="col-xl-12 col-12">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"> <strong>Bank Name</strong> 
+                                        {{bankingOldData.bankName | titlecase}}
+                                    </li>
+                                    <li class="list-group-item"> <strong>Registration Number</strong> 
+                                        {{bankingOldData.regNumber}}
+                                    </li>
+                                    <li class="list-group-item"> <strong>Account number</strong> 
+                                        {{bankingOldData.accountNumber}}
+                                    </li>
+                                    <li class="list-group-item"> <strong>IBAN Number</strong> 
+                                        {{bankingOldData.iban}}
+                                    </li>
+                                    <li class="list-group-item"> <strong>Bank Identifier Code</strong> 
+                                        {{bankingOldData.bic}}
+                                    </li>
+                                    <li class="list-group-item"> <strong>Paypal</strong> 
+                                        {{bankingOldData.paypalWalletID}}
+                                    </li>
+                                    <li class="list-group-item"> <strong>Skrill</strong> 
+                                        {{bankingOldData.skrillWalletID}}
+                                    </li>
+                                    <li class="list-group-item"> <strong>Revolut</strong> 
+                                        {{bankingOldData.revolutWalletID}}
+                                    </li>
+                                    <li class="list-group-item"> <strong>Bitcoin Wallet</strong> 
+                                        {{bankingOldData.bitCoinWalletID}}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong i18n>Changed On</strong> {{bankingOldData.updatedOn | date}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    -->
+
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </mat-dialog-content>

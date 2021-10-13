@@ -198,7 +198,7 @@ export class PaymentService {
             this.socketService.sendEventToSaveCurrentTransaction(_transactiActionType, data.orderID, _userId, data);
             break;
         }
-        console.log('onApprove - transaction was approved, but not authorized', data, actions);
+        //console.log('onApprove - transaction was approved, but not authorized', data, actions);
         actions.order.get().then(details => {
           switch (_transactiActionType) {
             case TransactionActionType.funds_add:
@@ -217,22 +217,22 @@ export class PaymentService {
               break;
           }
           this.sendCurrentPaymentApproved(details);
-          console.log('onApprove - you can get full order details inside onApprove: ', details);
+          //console.log('onApprove - you can get full order details inside onApprove: ', details);
 
         });
       },
       onClientAuthorization: (data) => {
-        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+        //console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
         this.showSuccess = true;
       },
       onCancel: (data, actions) => {
-        //console.log('OnCancel', data, actions);
+        ////console.log('OnCancel', data, actions);
       },
       onError: err => {
-        //console.log('OnError', err);
+        ////console.log('OnError', err);
       },
       onClick: (data, actions) => {
-        //console.log('onClick', data, actions);
+        ////console.log('onClick', data, actions);
       },
     };
 
@@ -276,7 +276,7 @@ export class PaymentService {
         // error, you should display the localized error message to your
         // customer using error.message.
         if (result.error) {
-          console.log(result.error.message);
+          //console.log(result.error.message);
         }
       }));
   }
@@ -331,7 +331,7 @@ export class PaymentService {
         this.old_minutes = this.seconds;
         this.socketService.sendEventToCheckLastPaymentReturnedSuccessOrFailed(this._currentPaymentObj);
       } else {
-        console.log("303", this.old_minutes, this.minutes);
+        //console.log("303", this.old_minutes, this.minutes);
       }
       if (this.minutes <= this.MinimumTime4Extend) {
         this.paymentNotCompletedInTimeErrorMessageShow = true;

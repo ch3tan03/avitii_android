@@ -61,7 +61,7 @@ export class SearchBorrowerComponent implements OnInit, OnDestroy {
     this.socketService.getUserOnlineList(false, _obj2Use4Filter, useAndTrueOrFalse);
     let _obj2Save = { createdBy: this.currentUser._id };
     this.socketService.getSessionCountByQuery(false,_obj2Save);
-    console.log('36 :: called');
+    //console.log('36 :: called');
   }
 
   ngOnInit() {
@@ -90,7 +90,7 @@ export class SearchBorrowerComponent implements OnInit, OnDestroy {
   
   usersProfile(userObj){
 
-    console.log('95', this.authenticationService.currentUserValue);
+    //console.log('95', this.authenticationService.currentUserValue);
     const dialogRef = this.dialog.open(PublicProfileComponent, {
     
       maxWidth: '100vw',
@@ -104,7 +104,7 @@ export class SearchBorrowerComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+      //console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
 }

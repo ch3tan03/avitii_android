@@ -12,6 +12,19 @@ module.exports = __webpack_require__(/*! D:\cordova\avitii\src\main.ts */"zUnb")
 
 /***/ }),
 
+/***/ "0MYx":
+/*!********************************************************!*\
+  !*** ./src/app/home/blog-view/blog-view.component.css ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJibG9nLXZpZXcuY29tcG9uZW50LmNzcyJ9 */");
+
+/***/ }),
+
 /***/ 1:
 /*!********************!*\
   !*** ws (ignored) ***!
@@ -235,10 +248,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ "wd/R");
 /* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var country_list__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! country-list */ "pHmk");
+/* harmony import */ var country_list__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(country_list__WEBPACK_IMPORTED_MODULE_4__);
 
 
 
 
+
+Object(country_list__WEBPACK_IMPORTED_MODULE_4__["overwrite"])([{
+        code: 'US',
+        name: 'USA'
+    }]);
 let UtilityService = class UtilityService {
     constructor() {
         this.Countries = ['USA', 'INDIA'];
@@ -271,7 +291,7 @@ let UtilityService = class UtilityService {
             "cash": { "_id": "cash", "name": "Cash (local only)" },
         };
         this.AppPlanTypes = {
-            "trial_plan": { "_id": "trial_plan", "name": "Trial Plan", "amount": 0, 'expiryInMonth': 2 },
+            "trial_plan": { "_id": "trial_plan", "name": "Trial Plan", "amount": 0, 'expiryInMonth': 3 },
             "paid_plan4lender": { "_id": "paid_plan4lender", "name": "Paid Plan", "amount": 25, 'expiryInMonth': 1 },
             "paid_plan4borrower": { "_id": "paid_plan4borrower", "name": "Paid Plan", "amount": 5, 'expiryInMonth': 1 },
         };
@@ -382,6 +402,51 @@ let UtilityService = class UtilityService {
         _calculatedMonthlyAmountForEMI = this.returnRoundedNumber(_calculatedMonthlyAmountForEMI);
         return _calculatedMonthlyAmountForEMI;
     }
+    returnCountryCodeFromName(countryName) {
+        if (countryName) {
+            return lodash__WEBPACK_IMPORTED_MODULE_2__["toLower"](Object(country_list__WEBPACK_IMPORTED_MODULE_4__["getCode"])(countryName));
+        }
+    }
+    returnCountryNames() {
+        return Object(country_list__WEBPACK_IMPORTED_MODULE_4__["getNames"])();
+    }
+    returnTIfSuppliedDateIsNotFromCurrentMonth(date) {
+        //return moment(date).add(i,"month");
+        let currentMonthsStart = moment__WEBPACK_IMPORTED_MODULE_3__().startOf('month');
+        return moment__WEBPACK_IMPORTED_MODULE_3__(date).isBefore(moment__WEBPACK_IMPORTED_MODULE_3__(currentMonthsStart));
+    }
+    ;
+    returnSortedObjectArray(objArray, fieldsArray2Sort) {
+        //objArray.sort(fieldSorter(['field1', '-field2']));
+        ////objArray.sort(fieldSorter(['field1', '-field2', 'field3'])); // alternative
+        return objArray.sort(this.fieldSorter(fieldsArray2Sort));
+    }
+    fieldSorter(fields) {
+        return function (a, b) {
+            return fields
+                .map(function (o) {
+                var dir = 1;
+                if (o[0] === '-') {
+                    dir = -1;
+                    o = o.substring(1);
+                }
+                if (a[o] > b[o])
+                    return dir;
+                if (a[o] < b[o])
+                    return -(dir);
+                return 0;
+            })
+                .reduce(function firstNonZeroValue(p, n) {
+                return p ? p : n;
+            }, 0);
+        };
+    }
+    checkWhetherPlanExpiryIsInFuture(userMemberShipExpireOn) {
+        if (userMemberShipExpireOn) {
+            return moment__WEBPACK_IMPORTED_MODULE_3__().isBefore(moment__WEBPACK_IMPORTED_MODULE_3__(userMemberShipExpireOn));
+        }
+        return false;
+    }
 };
 UtilityService.ctorParameters = () => [];
 UtilityService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
@@ -418,28 +483,16 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
 const environment = {
-    production: false,
-    apiUrl: 'https://avittii.herokuapp.com',
-    serverUrl: 'https://avittii.herokuapp.com/#',
-    SOCKET_ENDPOINT: 'https://avittii.herokuapp.com',
+    production: true,
+    apiUrl: 'https://avitii-lending.com/endpoint',
+    serverUrl: 'https://avitii-lending.com/endpoint',
+    SOCKET_ENDPOINT: 'https://avitii-lending.com',
     apiTimeout: 60000,
-    STRIP_PAYMENT_Publishable_key: 'pk_test_vfc6rPCbObD6Chgrgc4P8JBF',
-    STRIP_PAYMENT_Secret_key_UAT: 'sk_test_r56cBMsofwawtQiEgqDzmkcM',
-    isPaymentTestMode: true
+    STRIP_PAYMENT_Publishable_key: 'pk_live_51ITXbXEpOok5VoBk8Cs1qYisy80xTcbR2qgZLsy0phv6RpdrZw5TWM1S5TpddNJLs7wb3UDAIhxoSlOy8ajQJOIb00PlBzBvk0',
+    STRIP_PAYMENT_Secret_key_UAT: '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',
+    isPaymentTestMode: false
 };
-//default timeout is 1 min
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 
 
 /***/ }),
@@ -619,7 +672,10 @@ let SessionsService = class SessionsService {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(this.socketioService.socket, 'instant_sessions_response_added');
     }
     getSessionNewAdded() {
-        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(this.socketioService.socket, 'new_sessions_response_added');
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(this.socketioService.socket, 'sessions_response_added');
+    }
+    getSessionUpdated() {
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(this.socketioService.socket, 'sessions_response_updatebyid');
     }
     getSessionAll() {
         this.socketioService.emitEventWithNameAndData('sessions_request_getall', {});
@@ -636,6 +692,10 @@ let SessionsService = class SessionsService {
     updateSessionById(session) {
         this.socketioService.emitEventWithNameAndData('sessions_request_updatebyid', session);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(this.socketioService.socket, 'sessions_response_updatebyid');
+    }
+    deleteSessionById(sessionId, _deletedBy) {
+        this.socketioService.emitEventWithNameAndData('sessions_request_deletebyid', sessionId, _deletedBy);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["fromEvent"])(this.socketioService.socket, 'sessions_response_deletebyid');
     }
     getSessionAllByService(services, location, sessionSubject, loanDescription, useAndTrueOrFalse) {
         let _data2search = { services: services, location: location, sessionSubject: sessionSubject, loanDescription: loanDescription };
@@ -1047,8 +1107,27 @@ let AppRouterService = class AppRouterService {
                 break;
         }
     }
-    appRouteToPath(_path) {
-        this.router.navigate([_path]);
+    appRouteToPath(_path, _stateObj = null, delayedT = false) {
+        if (delayedT) {
+            if (_stateObj) {
+                setTimeout(() => {
+                    this.router.navigate([_path], { state: _stateObj });
+                }, 500);
+            }
+            else {
+                setTimeout(() => {
+                    this.router.navigate([_path]);
+                }, 500);
+            }
+        }
+        else {
+            if (_stateObj) {
+                this.router.navigate([_path], { state: _stateObj });
+            }
+            else {
+                this.router.navigate([_path]);
+            }
+        }
     }
 };
 AppRouterService.ctorParameters = () => [
@@ -1157,7 +1236,7 @@ let NotificationService = class NotificationService {
             else {
                 this.route = "Home";
             }
-            //console.log("26 :: path :: " + this.route);
+            ////console.log("26 :: path :: " + this.route);
         });
     }
     appNotificationsListner() {
@@ -1252,6 +1331,12 @@ let NotificationService = class NotificationService {
                 this.sessionsService.getSessionAllByBorrowerId(null, loanId, loanApplyId, null, true, 'response_updated_sessions_byborrowerid');
                 break;
             default:
+                if (this.route.indexOf('lender') > -1) {
+                    this.socketService.getSessionAllByQuery(false, _obj2Save, 'response_updated_sessions_bylenderid');
+                }
+                else {
+                    this.sessionsService.getSessionAllByBorrowerId(null, loanId, loanApplyId, null, true, 'response_updated_sessions_byborrowerid');
+                }
                 break;
         }
     }
@@ -1283,11 +1368,17 @@ let NotificationService = class NotificationService {
                 this.sessionsService.getSessionAllByBorrowerId(null, loanId, loanApplyId, null, true, 'response_updated_sessions_byborrowerid');
                 break;
             default:
+                if (this.route.indexOf('lender') > -1) {
+                    this.socketService.getSessionAllByQuery(false, _obj2Save, 'response_updated_sessions_bylenderid');
+                }
+                else {
+                    this.sessionsService.getSessionAllByBorrowerId(null, loanId, loanApplyId, null, true, 'response_updated_sessions_byborrowerid');
+                }
                 break;
         }
     }
     playSound() {
-        let sound = "../assets/img/sound.mp3";
+        let sound = "./../assets/img/sound.mp3";
         sound && (new Audio(sound)).play();
     }
 };
@@ -2399,27 +2490,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "3Pt+");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
-/* harmony import */ var _components_helpers__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/_helpers */ "H8gG");
-/* harmony import */ var _services_utility_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./services/utility.service */ "A1CT");
-/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./app.component */ "Sy1n");
-/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app-routing.module */ "vY5A");
-/* harmony import */ var _components_alert_alert_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/alert/alert.component */ "QC9C");
-/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/login/login.component */ "W3Zi");
-/* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/register/register.component */ "XC3f");
-/* harmony import */ var ng2_charts__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ng2-charts */ "LPYB");
-/* harmony import */ var _logout_logout_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./logout/logout.component */ "n1B2");
-/* harmony import */ var _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./components/contact/contact.component */ "G2Gn");
-/* harmony import */ var _components_header_header_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/header/header.component */ "2MiI");
-/* harmony import */ var _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/footer/footer.component */ "LmEr");
-/* harmony import */ var _components_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/forgot-password/forgot-password.component */ "nAxv");
-/* harmony import */ var _components_faqs_faqs_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/faqs/faqs.component */ "ytmU");
-/* harmony import */ var _components_disclaimer_disclaimer_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/disclaimer/disclaimer.component */ "PxG9");
-/* harmony import */ var _socketio_service__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./socketio.service */ "bgkY");
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! @angular/platform-browser/animations */ "R1ws");
-/* harmony import */ var _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/cdk/overlay */ "rDax");
-/* harmony import */ var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular/material/snack-bar */ "dNgK");
-/* harmony import */ var stripe_angular__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! stripe-angular */ "CnOO");
-/* harmony import */ var angular_datatables__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! angular-datatables */ "njyG");
+/* harmony import */ var _ngui_common__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ngui/common */ "ZWWZ");
+/* harmony import */ var _components_helpers__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/_helpers */ "H8gG");
+/* harmony import */ var _services_utility_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/utility.service */ "A1CT");
+/* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./app.component */ "Sy1n");
+/* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./app-routing.module */ "vY5A");
+/* harmony import */ var _components_alert_alert_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/alert/alert.component */ "QC9C");
+/* harmony import */ var _components_login_login_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/login/login.component */ "W3Zi");
+/* harmony import */ var _components_register_register_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./components/register/register.component */ "XC3f");
+/* harmony import */ var ng2_charts__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ng2-charts */ "LPYB");
+/* harmony import */ var _logout_logout_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./logout/logout.component */ "n1B2");
+/* harmony import */ var _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./components/contact/contact.component */ "G2Gn");
+/* harmony import */ var _components_header_header_component__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./components/header/header.component */ "2MiI");
+/* harmony import */ var _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./components/footer/footer.component */ "LmEr");
+/* harmony import */ var _components_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./components/forgot-password/forgot-password.component */ "nAxv");
+/* harmony import */ var _components_faqs_faqs_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./components/faqs/faqs.component */ "ytmU");
+/* harmony import */ var _components_disclaimer_disclaimer_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./components/disclaimer/disclaimer.component */ "PxG9");
+/* harmony import */ var _socketio_service__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./socketio.service */ "bgkY");
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! @angular/platform-browser/animations */ "R1ws");
+/* harmony import */ var _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular/cdk/overlay */ "rDax");
+/* harmony import */ var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @angular/material/snack-bar */ "dNgK");
+/* harmony import */ var stripe_angular__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! stripe-angular */ "CnOO");
+/* harmony import */ var angular_datatables__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! angular-datatables */ "njyG");
+
 
 
 
@@ -2455,40 +2548,42 @@ let AppModule = class AppModule {
 AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
         declarations: [
-            _app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"],
-            _components_alert_alert_component__WEBPACK_IMPORTED_MODULE_9__["AlertComponent"],
-            _components_login_login_component__WEBPACK_IMPORTED_MODULE_10__["LoginComponent"],
-            _components_register_register_component__WEBPACK_IMPORTED_MODULE_11__["RegisterComponent"],
-            _logout_logout_component__WEBPACK_IMPORTED_MODULE_13__["LogoutComponent"],
-            _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_14__["ContactComponent"],
-            _components_header_header_component__WEBPACK_IMPORTED_MODULE_15__["HeaderComponent"],
-            _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_16__["FooterComponent"],
-            _components_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_17__["ForgotPasswordComponent"],
-            _components_faqs_faqs_component__WEBPACK_IMPORTED_MODULE_18__["FaqsComponent"],
-            _components_disclaimer_disclaimer_component__WEBPACK_IMPORTED_MODULE_19__["DisclaimerComponent"],
+            _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"],
+            _components_alert_alert_component__WEBPACK_IMPORTED_MODULE_10__["AlertComponent"],
+            _components_login_login_component__WEBPACK_IMPORTED_MODULE_11__["LoginComponent"],
+            _components_register_register_component__WEBPACK_IMPORTED_MODULE_12__["RegisterComponent"],
+            _logout_logout_component__WEBPACK_IMPORTED_MODULE_14__["LogoutComponent"],
+            _components_contact_contact_component__WEBPACK_IMPORTED_MODULE_15__["ContactComponent"],
+            _components_header_header_component__WEBPACK_IMPORTED_MODULE_16__["HeaderComponent"],
+            _components_footer_footer_component__WEBPACK_IMPORTED_MODULE_17__["FooterComponent"],
+            _components_forgot_password_forgot_password_component__WEBPACK_IMPORTED_MODULE_18__["ForgotPasswordComponent"],
+            _components_faqs_faqs_component__WEBPACK_IMPORTED_MODULE_19__["FaqsComponent"],
+            _components_disclaimer_disclaimer_component__WEBPACK_IMPORTED_MODULE_20__["DisclaimerComponent"],
         ],
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"],
-            _app_routing_module__WEBPACK_IMPORTED_MODULE_8__["AppRoutingModule"],
-            ng2_charts__WEBPACK_IMPORTED_MODULE_12__["ChartsModule"],
-            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_21__["BrowserAnimationsModule"],
-            _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_22__["OverlayModule"],
-            stripe_angular__WEBPACK_IMPORTED_MODULE_24__["StripeModule"].forRoot(""),
-            angular_datatables__WEBPACK_IMPORTED_MODULE_25__["DataTablesModule"]
+            _app_routing_module__WEBPACK_IMPORTED_MODULE_9__["AppRoutingModule"],
+            ng2_charts__WEBPACK_IMPORTED_MODULE_13__["ChartsModule"],
+            _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_22__["BrowserAnimationsModule"],
+            _angular_cdk_overlay__WEBPACK_IMPORTED_MODULE_23__["OverlayModule"],
+            stripe_angular__WEBPACK_IMPORTED_MODULE_25__["StripeModule"].forRoot(""),
+            angular_datatables__WEBPACK_IMPORTED_MODULE_26__["DataTablesModule"],
+            _ngui_common__WEBPACK_IMPORTED_MODULE_5__["NguiListModule"],
+            _ngui_common__WEBPACK_IMPORTED_MODULE_5__["NguiInviewModule"],
+            _ngui_common__WEBPACK_IMPORTED_MODULE_5__["NguiUtilsModule"]
         ],
         providers: [
-            { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"], useClass: _components_helpers__WEBPACK_IMPORTED_MODULE_5__["JwtInterceptor"], multi: true },
-            { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"], useClass: _components_helpers__WEBPACK_IMPORTED_MODULE_5__["ErrorInterceptor"], multi: true },
-            _services_utility_service__WEBPACK_IMPORTED_MODULE_6__["UtilityService"],
-            _socketio_service__WEBPACK_IMPORTED_MODULE_20__["SocketioService"],
-            _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_23__["MatSnackBar"]
-            // provider used to create fake backend
+            { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"], useClass: _components_helpers__WEBPACK_IMPORTED_MODULE_6__["JwtInterceptor"], multi: true },
+            { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"], useClass: _components_helpers__WEBPACK_IMPORTED_MODULE_6__["ErrorInterceptor"], multi: true },
+            _services_utility_service__WEBPACK_IMPORTED_MODULE_7__["UtilityService"],
+            _socketio_service__WEBPACK_IMPORTED_MODULE_21__["SocketioService"],
+            _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_24__["MatSnackBar"],
         ],
         bootstrap: [
-            _app_component__WEBPACK_IMPORTED_MODULE_7__["AppComponent"]
+            _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]
         ]
     })
 ], AppModule);
@@ -2621,6 +2716,9 @@ let SocketioService = class SocketioService {
         //#endregion recd new message in Chat Room
         //#region recd new message in Chat Room
         this.OldMessageToRoomAll = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"]();
+        //#endregion recd new message in Chat Room
+        //#region send status of socket connected or disconnected
+        this.SocketConnectionStatus = new rxjs__WEBPACK_IMPORTED_MODULE_5__["Subject"]();
         window["baseurl"] = this.baseurl;
     }
     sendCurrentAppliedSessionObj(user) {
@@ -2735,7 +2833,7 @@ let SocketioService = class SocketioService {
         this.OldMessageToRoomAll.next(user);
     }
     clearOldMessageToRoomAll() {
-        this.NewMessageToRoomAll.next();
+        this.OldMessageToRoomAll.next();
     }
     initOldMessageToRoomAll() {
         this.sendOldMessageToRoomAll(this.OldMessageToRoomAllData);
@@ -2743,14 +2841,39 @@ let SocketioService = class SocketioService {
     getOldMessageToRoomAll() {
         return this.OldMessageToRoomAll.asObservable();
     }
-    //#endregion recd new message in Chat Room
+    sendSocketConnectionStatus(isConnected) {
+        this.SocketConnectionStatus.next(isConnected);
+    }
+    clearSocketConnectionStatus() {
+        this.SocketConnectionStatus.next();
+    }
+    initSocketConnectionStatus() {
+        //this.sendSocketConnectionStatus(false);
+    }
+    getSocketConnectionStatus() {
+        return this.SocketConnectionStatus.asObservable();
+    }
+    //#endregion send status of socket connected or disconnected
     //#region handle events from server in single end point
+    setupSocketConnectionIfNotExists(_user_id) {
+        if (_user_id) {
+            try {
+                if ((!this.socket) || (this.socket && !this.socket.connected)) {
+                    this.setupSocketConnection(_user_id);
+                }
+            }
+            catch (ex) {
+                this.setupSocketConnection(_user_id);
+            }
+        }
+    }
     setupSocketConnection(_user_id) {
-        console.log("231 :: SOCKET Connection init");
+        //console.log("231 :: SOCKET Connection init");
         this.currentUserId = _user_id;
         this.socket = socket_io_client__WEBPACK_IMPORTED_MODULE_2__(src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].SOCKET_ENDPOINT, { query: "user_id=" + _user_id + "" });
         this.socket.once('disconnected', function () {
-            console.log("235 :: disconnected");
+            //this.sendSocketConnectionStatus(false);
+            //console.log("235 :: disconnected");
         });
         this.socket.on('send_user_online_list', (result) => {
             let data = null;
@@ -2762,7 +2885,7 @@ let SocketioService = class SocketioService {
                     data = result;
                 }
             }
-            console.log('Received a message from websocket service');
+            //console.log('Received a message from websocket service');
             this.sendCurrentOnlineUsersListObj(data);
         });
         this.socket.on('send_user_role_wise_list', (result) => {
@@ -2775,7 +2898,7 @@ let SocketioService = class SocketioService {
                     data = result;
                 }
             }
-            console.log('Received a message from websocket service');
+            //console.log('Received a message from websocket service');
             this.sendCurrentOnlineUsersListObj(data);
         });
         this.socket.on('sessions_response_getlength_bysearch', (result) => {
@@ -2788,7 +2911,7 @@ let SocketioService = class SocketioService {
                     data = result;
                 }
             }
-            console.log('140 :: Received a message from websocket service');
+            //console.log('140 :: Received a message from websocket service');
             this.sendCurrentSessionCount(data);
         });
         this.socket.on('sessions_response_getall_bysearch', (result) => {
@@ -2801,7 +2924,7 @@ let SocketioService = class SocketioService {
                     data = result;
                 }
             }
-            console.log('Received a message from websocket service');
+            //console.log('Received a message from websocket service :: sessions_response_getall_bysearch');
             this.sendCurrentSessionAll(data);
         });
         this.socket.on('send_session_apply_by_session_id', (result) => {
@@ -2814,10 +2937,11 @@ let SocketioService = class SocketioService {
                     data = result;
                 }
             }
-            console.log('Received a message from websocket service');
+            //console.log('Received a message from websocket service');
             this.sendCurrentSessionApply(data);
         });
         this.socket.on('connected_successfully', (result) => {
+            this.sendSocketConnectionStatus(true);
             let data = null;
             if (result) {
                 if (result['success'] == true || result['success'] == false) {
@@ -2831,7 +2955,7 @@ let SocketioService = class SocketioService {
             for (let _item in this.currentUsersRooms) {
                 this.sendEventToJoinChatRoom(this.currentUsersRooms[_item], this.currentUserId);
             }
-            console.log('149 :: Received a message from websocket service :: connected_successfully', data);
+            //console.log('149 :: Received a message from websocket service :: connected_successfully', data);
         });
         this.socket.on('new_user_joined_room', (result) => {
             let data = null;
@@ -2843,7 +2967,7 @@ let SocketioService = class SocketioService {
                     data = result;
                 }
             }
-            console.log('161 :: Received a message from websocket service', data);
+            //console.log('161 :: Received a message from websocket service', data);
             this.sendUserJoinedRoomAll(data);
         });
         this.socket.on('user_left_room', (result) => {
@@ -2856,7 +2980,7 @@ let SocketioService = class SocketioService {
                     data = result;
                 }
             }
-            console.log('166 :: Received a message from websocket service', data);
+            //console.log('166 :: Received a message from websocket service', data);
             this.sendUserLeftRoomAll(data);
         });
         this.socket.on('new_message_in_room', (result) => {
@@ -2869,7 +2993,7 @@ let SocketioService = class SocketioService {
                     data = result;
                 }
             }
-            console.log('166 :: Received a message from websocket service', data);
+            //console.log('166 :: Received a message from websocket service', data);
             this.sendNewMessageToRoomAll(data);
         });
         this.socket.on('get_all_old_chat_of_room', (result) => {
@@ -2882,7 +3006,7 @@ let SocketioService = class SocketioService {
                     data = result;
                 }
             }
-            console.log('171 :: Received a message from websocket service', data);
+            //console.log('171 :: Received a message from websocket service', data);
             this.sendOldMessageToRoomAll(data);
         });
     }
@@ -2971,20 +3095,32 @@ let SocketioService = class SocketioService {
     sendEventToGetAllChatOfRoom(_roomId) {
         this.socket.emit('get_all_old_chat_of_room', { roomId: _roomId });
     }
+    sendEventToUpdateChatReceivedByUserOfRoom(_roomId, userId) {
+        this.socket.emit('update_chat_received_by_user_of_room', { roomId: _roomId, userId: userId });
+    }
+    sendEventToUpdateChatReadByUserOfRoom(_roomId, userId) {
+        this.socket.emit('update_chat_read_by_user_of_room', { roomId: _roomId, userId: userId });
+    }
     emitEventWithNameAndData(_eventName, ...args) {
-        this.socket.emit(_eventName, ...args);
+        if (this.socket) {
+            this.socket.emit(_eventName, ...args);
+        }
     }
     getAllUsers(_data) {
         this.socket.emit("user_getall", _data);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'user_getall_list');
     }
-    getAllMyContacts(_data) {
-        this.socket.emit("request_contact_getall", _data);
+    getAllMyContacts(_userId, role, skip = null) {
+        this.socket.emit("request_contact_getall", _userId, role, skip);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_contact_getall');
     }
     getByIdMyContacts(_data) {
         this.socket.emit("request_contact_getbyid", _data);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_contact_getbyid');
+    }
+    getByIdMyContactsPendingMessages(_roomIdArr, userId) {
+        this.socket.emit("request_contact_pending_messages", _roomIdArr, userId);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_contact_pending_messages');
     }
     sendEventToGetAllChatOfRoomWithPromise(_roomId) {
         this.socket.emit('get_all_old_chat_of_room', { roomId: _roomId });
@@ -3056,6 +3192,14 @@ let SocketioService = class SocketioService {
     getByIdRatingReviewe(_ratingId) {
         this.socket.emit("request_rating_getbyid", _ratingId);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_rating_getbyid');
+    }
+    getByLoanIdRatingReviewe(_obj2Save) {
+        this.socket.emit("request_rating_getby_loanid", _obj2Save);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_rating_getby_loanid');
+    }
+    getByQuerySummaryRatingReviewe(_obj2Save) {
+        this.socket.emit("request_get_ratings_summary_by_query", _obj2Save);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_get_ratings_summary_by_query');
     }
     deductAmountFromWallet(_fundsObj, _transactionDetails) {
         this.socket.emit("request_deduct_amount_from_wallet", _fundsObj, _transactionDetails);
@@ -3205,6 +3349,12 @@ let SocketioService = class SocketioService {
         this.socket.emit('sessions_request_getall_bysearch', _sendDataOnlyMeFalseToAllTrue, _obj2Save, true, emitThisEvent);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'sessions_response_getall_bysearch_from_lender');
     }
+    getLoanMarketDataForSearch(_obj2Save, emitThisEvent) {
+        emitThisEvent = (emitThisEvent ? emitThisEvent : 'sessions_response_getall_bysearch_from_borrower');
+        let _sendDataOnlyMeFalseToAllTrue = false;
+        this.socket.emit('sessions_request_getall_bysearch', _sendDataOnlyMeFalseToAllTrue, _obj2Save, true, emitThisEvent);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'sessions_response_getall_bysearch_from_borrower');
+    }
     getLoanMarketDataById(loanId) {
         let emitThisEvent = 'sessions_response_getall_bysearch_by_id';
         let _sendDataOnlyMeFalseToAllTrue = false;
@@ -3226,6 +3376,10 @@ let SocketioService = class SocketioService {
     }
     listenForUpdateStatusOfLastPayment() {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'recd_confirmation_of_last_payment_status');
+    }
+    getSessionApplyAllByQuery(_sendDataOnlyMeFalseToAllTrue, _obj2Save, emitThisEvent, useAndTrueOrFalse = false) {
+        this.socket.emit('session_apply_request_getall_bysearch', _sendDataOnlyMeFalseToAllTrue, _obj2Save, useAndTrueOrFalse, emitThisEvent);
+        return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'session_apply_response_getall_bysearch');
     }
 };
 SocketioService.ctorParameters = () => [
@@ -3257,8 +3411,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "qCKp");
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/environments/environment */ "AytR");
-/* harmony import */ var _socketio_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../socketio.service */ "bgkY");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! lodash */ "LvDl");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/environments/environment */ "AytR");
+/* harmony import */ var src_app_models__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/models */ "VHTt");
+/* harmony import */ var _socketio_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../socketio.service */ "bgkY");
+/* harmony import */ var _user_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./user.service */ "qfBg");
+/* harmony import */ var _utility_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./utility.service */ "A1CT");
+
+
+
+
 
 
 
@@ -3268,35 +3431,72 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AuthenticationService = class AuthenticationService {
-    constructor(http, socketService) {
+    constructor(http, socketService, userService, utilityService) {
         this.http = http;
         this.socketService = socketService;
-        this.baseurl = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl + '/';
+        this.userService = userService;
+        this.utilityService = utilityService;
+        this.baseurl = src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiUrl + '/';
+        this.currentUserLoanTypeWiseCountDetails = {};
+        this.currentUserAdminDashboardDataDetails = {};
+        this.allUserLevelsDataLenders = [];
+        this.allUserLevelsDataBorrower = [];
         this.currentUserSubjectObject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["Subject"]();
+        //this.socketService.setupSocketConnectionIfNotExists(this.utilityService.randomString(30, null));
         this.currentUserSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
-        this.socketService.responseRecdSelfUserProfileUpdates()
-            .pipe()
-            .subscribe(data => {
-            if (data && data['success']) {
-                this.sendCurrentUserObj(data["data"]);
+        this.socketService.SocketConnectionStatus.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["first"])()).subscribe((status) => {
+            if (status) {
+                this.socketService.responseRecdSelfUserProfileUpdates()
+                    .pipe()
+                    .subscribe(data => {
+                    if (data && data['success']) {
+                        this.sendCurrentUserObj(data["data"]);
+                    }
+                }, error => {
+                    let errorMsg2show = "";
+                    //this.PaymentTransactionDetailsArray = [];
+                    try {
+                        if (error && error.error && error.error.message) {
+                            errorMsg2show = error.error.message;
+                        }
+                        else if (error && error.message) {
+                            errorMsg2show = error.message;
+                        }
+                        else {
+                            errorMsg2show = error;
+                        }
+                    }
+                    catch (ex) { }
+                });
+                this.fetchAllUserLevelsByUserId();
+                this.fetchAllUserLevelsByUpdateEvent();
             }
-        }, error => {
-            let errorMsg2show = "";
-            //this.PaymentTransactionDetailsArray = [];
-            try {
-                if (error && error.error && error.error.message) {
-                    errorMsg2show = error.error.message;
-                }
-                else if (error && error.message) {
-                    errorMsg2show = error.message;
+        });
+    }
+    returnUserTypeForUserFromSuppliedUserLevel(userType) {
+        if (lodash__WEBPACK_IMPORTED_MODULE_5__["keys"](this.allUserLevelsDataLenders).lengtg <= 0 || lodash__WEBPACK_IMPORTED_MODULE_5__["keys"](this.allUserLevelsDataBorrower)) {
+            lodash__WEBPACK_IMPORTED_MODULE_5__["throttle"](function () {
+                this.fetchAllUserLevelsByUserId();
+            }, 5000);
+        }
+        let allUserLevelsDataMerged = lodash__WEBPACK_IMPORTED_MODULE_5__["union"](this.allUserLevelsDataLenders, this.allUserLevelsDataBorrower);
+        if (lodash__WEBPACK_IMPORTED_MODULE_5__["keys"](allUserLevelsDataMerged).length > 0) {
+            let userLevelsName = null;
+            if (userType) {
+                let userLevelsDataObj = lodash__WEBPACK_IMPORTED_MODULE_5__["filter"](allUserLevelsDataMerged, { '_id': userType })[0];
+                if (userLevelsDataObj && userLevelsDataObj._id) {
+                    userLevelsName = userLevelsDataObj.name;
                 }
                 else {
-                    errorMsg2show = error;
+                    userLevelsName = null;
                 }
             }
-            catch (ex) { }
-        });
+            if (userLevelsName) {
+                return userLevelsName;
+            }
+        }
+        return (userType || "").replace("_", " ");
     }
     sendCurrentUserObj(user) {
         this.currentUserSubjectObject.next(user);
@@ -3318,13 +3518,13 @@ let AuthenticationService = class AuthenticationService {
     login(userName, password) {
         var _url2use = this.baseurl + 'api/post/user/admin/login'; //`${environment.apiUrl}/users/authenticate`;
         return this.http.post(_url2use, { userName, password })
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiTimeout), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(user => {
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiTimeout), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(user => {
             // login successful if there's a jwt token in the response
             if (user && user.token) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 let base = this.http.get(this.baseurl + 'session', { headers: { Authorization: `Bearer ${user.token}` } });
                 ////Local storage please rome this 
-                console.log('35', base);
+                //console.log('35', base);
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.sendCurrentUserObj(user);
             }
@@ -3334,13 +3534,13 @@ let AuthenticationService = class AuthenticationService {
     autologin4registration(_id) {
         var _url2use = this.baseurl + 'api/post/user/admin/login4registration'; //`${environment.apiUrl}/users/authenticate`;
         return this.http.post(_url2use, { _id })
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiTimeout), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(user => {
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiTimeout), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(user => {
             // login successful if there's a jwt token in the response
             if (user && user.token) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 let base = this.http.get(this.baseurl + 'session', { headers: { Authorization: `Bearer ${user.token}` } });
                 ////Local storage please rome this 
-                console.log('35', base);
+                //console.log('35', base);
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.sendCurrentUserObj(user);
             }
@@ -3359,20 +3559,78 @@ let AuthenticationService = class AuthenticationService {
     generateReport4SignedContract(LoanObjData) {
         var _url2use = this.baseurl + 'api/post/app/report/signed_contract';
         return this.http.post(_url2use, LoanObjData)
-            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiTimeout), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(data => {
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["timeout"])(src_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiTimeout), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(data => {
             // login successful if there's a jwt token in the response
             return data;
         }));
     }
+    fetchAllUserLevelsByUpdateEvent() {
+        this.userService.getAddUpdateUserUserLevels()
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["first"])())
+            .subscribe(data => {
+            ////console.log('data => ', data)
+            if (data && data['success']) {
+                this.fetchAllUserLevelsByUserId();
+            }
+        }, error => {
+            let errorMsg2show = "";
+            try {
+                if (error && error.error && error.error.message) {
+                    errorMsg2show = error.error.message;
+                }
+                else if (error && error.message) {
+                    errorMsg2show = error.message;
+                }
+                else {
+                    errorMsg2show = error;
+                }
+            }
+            catch (ex) { }
+        });
+    }
+    fetchAllUserLevelsByUserId() {
+        this.userService.getUserLevelsAll(null)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["first"])())
+            .subscribe(data => {
+            ////console.log('data => ', data)
+            if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                this.allUserLevelsDataLenders = this.utilityService.returnSortedObjectArray(lodash__WEBPACK_IMPORTED_MODULE_5__["filter"](data["data"], { 'role': src_app_models__WEBPACK_IMPORTED_MODULE_7__["Role"].Lender }), ['minimumContract']);
+                this.allUserLevelsDataBorrower = this.utilityService.returnSortedObjectArray(lodash__WEBPACK_IMPORTED_MODULE_5__["filter"](data["data"], { 'role': src_app_models__WEBPACK_IMPORTED_MODULE_7__["Role"].Borrower }), ['minimumContract']);
+                //this.allUserLevelsDataLenders = _.filter(data["data"], { 'role': Role.Lender });
+                //this.allUserLevelsDataBorrower = _.filter(data["data"], { 'role': Role.Borrower });
+                //this.alertService.success(data['message'], true);
+            }
+        }, error => {
+            let errorMsg2show = "";
+            try {
+                if (error && error.error && error.error.message) {
+                    errorMsg2show = error.error.message;
+                }
+                else if (error && error.message) {
+                    errorMsg2show = error.message;
+                }
+                else {
+                    errorMsg2show = error;
+                }
+            }
+            catch (ex) { }
+        });
+    }
 };
 AuthenticationService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
-    { type: _socketio_service__WEBPACK_IMPORTED_MODULE_6__["SocketioService"] }
+    { type: _socketio_service__WEBPACK_IMPORTED_MODULE_8__["SocketioService"] },
+    { type: _user_service__WEBPACK_IMPORTED_MODULE_9__["UserService"] },
+    { type: _utility_service__WEBPACK_IMPORTED_MODULE_10__["UtilityService"] }
 ];
 AuthenticationService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Directive"])(),
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({ providedIn: 'root' }),
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _socketio_service__WEBPACK_IMPORTED_MODULE_6__["SocketioService"]])
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
+        _socketio_service__WEBPACK_IMPORTED_MODULE_8__["SocketioService"],
+        _user_service__WEBPACK_IMPORTED_MODULE_9__["UserService"],
+        _utility_service__WEBPACK_IMPORTED_MODULE_10__["UtilityService"]])
 ], AuthenticationService);
 
 
@@ -3415,6 +3673,115 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("<app-header></app-header>\r\n<section class=\"resume schedule pt-3 pb-4\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-12\">\r\n                <div class=\"cal-time\">\r\n                    <div class=\"time\">\r\n                        <h2 class=\"title-text pt-1\">Get In Touch With Us</h2>\r\n\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n</section>\r\n\r\n<footer class=\"event contact set-relative p-b-0\" id=\"contact\">\r\n    <div class=\"container p-b-100\">\r\n        <div class=\"row\">\r\n            <div class=\"col-md-10 offset-md-1\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-md-4\">\r\n                        <div class=\"title title3\">\r\n                            <div class=\"main-title\">\r\n                                <h2 class=\" text-black-50\">Partnership</h2>\r\n                            </div>\r\n\r\n                            <P class=\"text-black-50\">partner@avitii-lending.com</P>\r\n\r\n\r\n                        </div>\r\n                    </div>\r\n\r\n                    <div class=\"col-md-4\">\r\n                        <div class=\"title title3\">\r\n                            <div class=\"main-title\">\r\n                                <h2 class=\" text-black-50\" i18n>Lender Support</h2>\r\n                            </div>\r\n\r\n                            <P class=\"text-black-50\" >lender@avitii-lending.com</P>\r\n\r\n\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"col-md-4\">\r\n                        <div class=\"title title3\">\r\n                            <div class=\"main-title\">\r\n                                <h2 class=\" text-black-50\" i18n>Borrower Support</h2>\r\n                            </div>\r\n                            <div class=\"sub-title\">\r\n                                <P class=\"text-black-50\">borrower@avitii-lending.com </P>\r\n\r\n\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n\r\n            </div>\r\n            <div class=\"col-xl-5 offset-xl-1 col-md-6 p-r-0 map\">\r\n                <div class=\"iframe-container border-0\">\r\n                  \r\n                    <iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.801736539438!2d-0.08865598482088188!3d51.51685327963669!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48761cacece87517%3A0xe550bb3ead047ff2!2s65%20London%20Wall%2C%20London%20EC2M%205TU%2C%20UK!5e0!3m2!1sen!2sin!4v1616149104126!5m2!1sen!2sin\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\"></iframe>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-xl-5 p-l-0 col-md-6 set-z-index form-footer\">\r\n                <div class=\"bg-white\">\r\n\r\n                    <form [formGroup]=\"contactUsForm\" (ngSubmit)=\"sendMailForContactUs()\">\r\n                        <div class=\"row\">\r\n                            <div class=\"col-sm-6\">\r\n                                <div class=\"form-group\">\r\n                                    <label for=\"name\">Name *</label>\r\n                                    <input formControlName=\"userName\" class=\"form-control\" id=\"name\" type=\"text\" [ngClass]=\"{ 'is-invalid': submitted && f.userName.errors }\">\r\n                                    <div *ngIf=\"submitted && f.userName.errors\" class=\"invalid-feedback\">\r\n                                        <div *ngIf=\"f.userName.errors.required\">required</div>\r\n                                        <div *ngIf=\"f.userName.errors.email\">must be valid</div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-sm-6\">\r\n                                <div class=\"form-group\">\r\n                                    <label for=\"Phone\">Phone *</label>\r\n                                    <input formControlName=\"phoneNo\" class=\"form-control\" id=\"Phone\" type=\"text\" [ngClass]=\"{ 'is-invalid': submitted && f.phoneNo.errors }\">\r\n                                    <div *ngIf=\"submitted && f.phoneNo.errors\" class=\"invalid-feedback\">\r\n                                        <div *ngIf=\"f.phoneNo.errors.required\">required</div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-sm-6\">\r\n                                <div class=\"form-group\">\r\n                                    <label for=\"Email\">Email *</label>\r\n                                    <input formControlName=\"emailAddress\" class=\"form-control\" id=\"Email\" type=\"email\" [ngClass]=\"{ 'is-invalid': submitted && f.emailAddress.errors }\">\r\n                                    <div *ngIf=\"submitted && f.emailAddress.errors\" class=\"invalid-feedback\">\r\n                                        <div *ngIf=\"f.emailAddress.errors.required\">required</div>\r\n                                        <div *ngIf=\"f.emailAddress.errors.email\">must be valid</div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"col-sm-6\">\r\n                                <div class=\"form-group\">\r\n                                    <label for=\"Subject\">Subject *</label>\r\n                                    <input formControlName=\"subject\" class=\"form-control\" id=\"Subject\" type=\"text\">\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <label for=\"Message\">Message *</label>\r\n                            <textarea formControlName=\"message\" class=\"form-control\" id=\"Message\" type=\"text\" [ngClass]=\"{ 'is-invalid': submitted && f.message.errors }\">\r\n                                </textarea>\r\n                            <div *ngIf=\"submitted && f.message.errors\" class=\"invalid-feedback\">\r\n                                <div *ngIf=\"f.message.errors.required\">required</div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"text-center\">\r\n                            <button type=\"submit\" [disabled]=\"loading\" class=\"btn btn-default primary-btn m-0-auto\">Send\r\n                                <span *ngIf=\"loading\" class=\"spinner-border spinner-border-sm\"></span>\r\n                            </button>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</footer>\r\n<app-footer></app-footer>");
+
+/***/ }),
+
+/***/ "k/Fl":
+/*!*******************************************************!*\
+  !*** ./src/app/home/blog-view/blog-view.component.ts ***!
+  \*******************************************************/
+/*! exports provided: BlogViewComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BlogViewComponent", function() { return BlogViewComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_blog_view_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./blog-view.component.html */ "u1AE");
+/* harmony import */ var _blog_view_component_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./blog-view.component.css */ "0MYx");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+/* harmony import */ var src_app_services__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services */ "o0su");
+/* harmony import */ var src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/services/utility.service */ "A1CT");
+/* harmony import */ var src_app_socketio_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/socketio.service */ "bgkY");
+
+
+
+
+
+
+
+
+
+let BlogViewComponent = class BlogViewComponent {
+    constructor(alertService, userService, route, socketService, utilityService) {
+        this.alertService = alertService;
+        this.userService = userService;
+        this.route = route;
+        this.socketService = socketService;
+        this.utilityService = utilityService;
+        this.blogsData = {};
+        this.loading = false;
+        this.route.queryParams.subscribe(params => {
+            let documentId = params['id'];
+            this.socketService.setupSocketConnectionIfNotExists(this.utilityService.randomString(30, null));
+            setTimeout(() => {
+                this.fetchBlogById(documentId);
+            }, 3000);
+        });
+    }
+    ngOnInit() {
+        let documentId = this.route.snapshot.params.id;
+        this.socketService.setupSocketConnectionIfNotExists(this.utilityService.randomString(30, null));
+        setTimeout(() => {
+            this.fetchBlogById(documentId);
+        }, 3000);
+    }
+    fetchBlogById(documentId) {
+        if (!documentId) {
+            return;
+        }
+        this.userService.getBlogsById(documentId)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])())
+            .subscribe(data => {
+            ////console.log('data => ', data)
+            if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                this.blogsData = data["data"];
+                //this.alertService.success(data['message'], true);
+                this.loading = false;
+            }
+        }, error => {
+            let errorMsg2show = "";
+            try {
+                if (error && error.error && error.error.message) {
+                    errorMsg2show = error.error.message;
+                }
+                else if (error && error.message) {
+                    errorMsg2show = error.message;
+                }
+                else {
+                    errorMsg2show = error;
+                }
+            }
+            catch (ex) { }
+            this.alertService.error(errorMsg2show);
+            this.loading = false;
+        });
+    }
+};
+BlogViewComponent.ctorParameters = () => [
+    { type: src_app_services__WEBPACK_IMPORTED_MODULE_6__["AlertService"] },
+    { type: src_app_services__WEBPACK_IMPORTED_MODULE_6__["UserService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
+    { type: src_app_socketio_service__WEBPACK_IMPORTED_MODULE_8__["SocketioService"] },
+    { type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_7__["UtilityService"] }
+];
+BlogViewComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-blog-view',
+        template: _raw_loader_blog_view_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_blog_view_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    }),
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_services__WEBPACK_IMPORTED_MODULE_6__["AlertService"],
+        src_app_services__WEBPACK_IMPORTED_MODULE_6__["UserService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"],
+        src_app_socketio_service__WEBPACK_IMPORTED_MODULE_8__["SocketioService"],
+        src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_7__["UtilityService"]])
+], BlogViewComponent);
+
+
 
 /***/ }),
 
@@ -3779,9 +4146,10 @@ let UserService = class UserService {
         this.utilityService = utilityService;
         this.baseurl = src_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].apiUrl + '/';
         this.allAppUsersCollections = {};
+        this.latestUserIdArrayMissingFromLocal = [];
     }
-    getAll() {
-        var _userType = null;
+    getAll(user) {
+        var _role = null;
         //var _result=this.http.post<any>(`http://localhost:4444/api/get/user/getall`,{})
         //.pipe(user => {
         // login successful if there's a jwt token in the response
@@ -3791,16 +4159,17 @@ let UserService = class UserService {
         //alert(JSON.stringify( _result));
         //return this.http.get<User[]>(`http://localhost:4444/api/get/user/getall`, null);
         //return this.http.get<User[]>(`${environment.apiUrl}/users`);
-        ////this.socket.emit('user_getall', _userType);
+        ////this.socket.emit('user_getall', _role);
         ////var _result = this.socket.fromEvent<User[]>('user_getall_list');
         //alert(JSON.stringify( _result));
         ////return _result;
+        return this.http.post(this.baseurl + 'api/post/user/getall', user, {});
     }
     getById(id) {
         return this.http.get(this.baseurl + 'users/' + id);
     }
     register(user) {
-        console.log(user);
+        //console.log(user);
         return this.http.post(this.baseurl + 'api/post/user/admin/register', user);
         //return this.http.post(`http://localhost:4444/api/user/register`, user);
         //return this.http.post(`${environment.apiUrl}/api/user/register`, user);
@@ -3840,6 +4209,9 @@ let UserService = class UserService {
     updateUserById(user) {
         return this.http.post(this.baseurl + 'api/post/user/update/byid', user);
     }
+    updateUserByIdFromAdmin(user, updatedBy) {
+        return this.http.post(this.baseurl + 'api/post/user/admin/update/byid', { user, updatedBy });
+    }
     authenticateAndLoginUser(userName, password) {
         return this.http.post(this.baseurl + 'api/post/user/admin/login', { userName, password });
     }
@@ -3855,7 +4227,15 @@ let UserService = class UserService {
         return this.http.post(this.baseurl + 'api/post/app/sendmail', _message);
     }
     proccessAllAppUsersCollections(userIdArray) {
-        if (userIdArray) {
+        if (userIdArray && Object.keys(userIdArray).length > 0) {
+            if (!this.latestUserIdArrayMissingFromLocal) {
+                this.latestUserIdArrayMissingFromLocal = [];
+            }
+            let existingUserIdArray = this.utilityService._.map(this.allAppUsersCollections, "userId");
+            this.latestUserIdArrayMissingFromLocal = this.utilityService._.difference(userIdArray, existingUserIdArray);
+            if (this.utilityService._.keys(existingUserIdArray).length == 0 || this.latestUserIdArrayMissingFromLocal.length > 0) {
+                this.alreadySubscribedForUsersArray = false;
+            }
             if (!this.alreadySubscribedForUsersArray) {
                 this.alreadySubscribedForUsersArray = true;
                 this.getAppUsersCollections(userIdArray).subscribe(result => {
@@ -3875,7 +4255,7 @@ let UserService = class UserService {
             }
         }
         else {
-            this.getAppUsersCollections(userIdArray);
+            //this.getAppUsersCollections(userIdArray);
         }
     }
     getAppUsersCollections(userIdArray) {
@@ -3969,6 +4349,18 @@ let UserService = class UserService {
         this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_user_income_expense_details_data', userId);
         return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_user_income_expense_details_data');
     }
+    getUserLoanTypeWiseCountDetailsByUserId(userId, role) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_loan_type_wise_count_details_data', userId, role);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_loan_type_wise_count_details_data');
+    }
+    getAdminDashboardDataOnLogin(userId, role) {
+        this.socketioService.emitEventWithNameAndData('request_to_get_admin_dashboard_details_data', userId, role);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_to_get_admin_dashboard_details_data');
+    }
+    getUsersDashboardData(userId, role) {
+        this.socketioService.emitEventWithNameAndData('request_to_get_users_dashboard_details_data', userId, role);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_to_get_users_dashboard_details_data');
+    }
     addUpdateUserBlogs(blogs) {
         this.socketioService.emitEventWithNameAndData('request_user_add_update_blogs_data', blogs);
         return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_add_update_blogs_data');
@@ -3997,6 +4389,9 @@ let UserService = class UserService {
         this.socketioService.emitEventWithNameAndData('request_user_add_update_user_levels_data', userLevels);
         return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_add_update_user_levels_data');
     }
+    getAddUpdateUserUserLevels() {
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_add_update_user_levels_data');
+    }
     getUserLevelsById(userLevelsId) {
         this.socketioService.emitEventWithNameAndData('request_user_get_by_id_user_levels_data', userLevelsId);
         return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_id_user_levels_data');
@@ -4020,6 +4415,74 @@ let UserService = class UserService {
     updateUsersDataKeyVerificationStatus(_userId, _verifiedKey, _isVerified) {
         this.socketioService.emitEventWithNameAndData("request_user_internal_key_update_verification", _userId, _verifiedKey, _isVerified);
         return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_internal_key_update_verification');
+    }
+    addUpdateUserRestrictionDetails(userUserRestrictionDetails) {
+        this.socketioService.emitEventWithNameAndData('request_user_add_update_user_restriction_details_data', userUserRestrictionDetails);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_add_update_user_restriction_details_data');
+    }
+    getUserRestrictionDetailsById(userUserRestrictionDetailsId) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_id_user_restriction_details_data', userUserRestrictionDetailsId);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_id_user_restriction_details_data');
+    }
+    getUserRestrictionDetailsByUserId(userId) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_user_restriction_details_data', userId);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_user_restriction_details_data');
+    }
+    updateUserRestrictionVerificationStatus(_documentId, _status2update, _updatedBy) {
+        this.socketioService.emitEventWithNameAndData("request_user_update_restriction_verification", _documentId, _status2update, _updatedBy);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_update_restriction_verification');
+    }
+    getUserRestrictionExpenseDetailsByUserId(userId) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_user_restriction_expense_details_data', userId);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_user_restriction_expense_details_data');
+    }
+    addUpdateUserPartners(partners) {
+        this.socketioService.emitEventWithNameAndData('request_user_add_update_partners_data', partners);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_add_update_partners_data');
+    }
+    getPartnersById(partnersId) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_id_partners_data', partnersId);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_id_partners_data');
+    }
+    getPartnersByUserId(userId) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_partners_data', userId);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_partners_data');
+    }
+    updatePartnersStatus(_documentId, _status2update, _updatedBy) {
+        this.socketioService.emitEventWithNameAndData("request_user_update_partners_verification", _documentId, _status2update, _updatedBy);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_update_partners_verification');
+    }
+    getPartnersAll(_skip) {
+        this.socketioService.emitEventWithNameAndData("request_user_getall_partners", _skip);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_getall_partners');
+    }
+    getPartnersAllByQuery(_skip) {
+        this.socketioService.emitEventWithNameAndData("request_user_getall_partners", _skip);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_getall_partners');
+    }
+    addUpdateUserCustomerReview(customerReview) {
+        this.socketioService.emitEventWithNameAndData('request_user_add_update_customerReview_data', customerReview);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_add_update_customerReview_data');
+    }
+    getCustomerReviewById(customerReviewId) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_id_customerReview_data', customerReviewId);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_id_customerReview_data');
+    }
+    getCustomerReviewByUserId(userId) {
+        this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_customerReview_data', userId);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_by_userid_customerReview_data');
+    }
+    updateCustomerReviewStatus(_documentId, _status2update, _updatedBy) {
+        this.socketioService.emitEventWithNameAndData("request_user_update_customerReview_verification", _documentId, _status2update, _updatedBy);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_update_customerReview_verification');
+    }
+    getCustomerReviewAll(_skip) {
+        this.socketioService.emitEventWithNameAndData("request_user_getall_customerReview", _skip);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_getall_customerReview');
+    }
+    getCustomerReviewAllByQuery(_skip) {
+        this.socketioService.emitEventWithNameAndData("request_user_getall_customerReview", _skip);
+        return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_getall_customerReview');
     }
 };
 UserService.ctorParameters = () => [
@@ -4047,7 +4510,7 @@ UserService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!-- Nav Start-->\r\n<header class=\"dark loding-header custom-scroll position-relative\">\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col\">\r\n        <nav>\r\n          <a class=\"logo-light m-r-auto\" href=\"#\">\r\n            <img alt=\"\" class=\"img-fluid\" src=\"/assets/img/avitii-logo.png\"></a>\r\n          <div class=\"responsive-btn\">\r\n            <a class=\"toggle-nav\"><i aria-hidden=\"true\" class=\"icon-align-center text-white\"></i></a>\r\n          </div>\r\n          <div class=\"navbar m-l-auto btn-back\" id=\"togglebtn\">\r\n            <div class=\"responsive-btn\">\r\n              <h5 class=\"btn-back\">back</h5>\r\n            </div>\r\n            <ul class=\"main-menu\">\r\n              <li><a href=\"#\">Home</a></li>\r\n              <li><a href=\"#\">About</a></li>\r\n              <li><a href=\"/login\">Login</a></li>\r\n              <li><a href=\"/register\">Register</a></li>\r\n            </ul>\r\n          </div>\r\n        </nav>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</header>\r\n<!-- Nav end-->\r\n\r\n<!--service section start-->\r\n<section class=\"agency format service-bg\" id=\"logout\">\r\n  <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-md-12 offset-lg-1\">\r\n        <div class=\"center-text\">\r\n          <div class=\"format-container\">\r\n            <div class=\"format-head-text\">\r\n              <h2 class=\"about-font-header\">Successfully Logout!<span class=\"block-span\"></span></h2>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</section>\r\n<!--service section end-->");
+/* harmony default export */ __webpack_exports__["default"] = ("");
 
 /***/ }),
 
@@ -4114,6 +4577,19 @@ ErrorInterceptor = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("nav {\r\n    padding: 10px 0;\r\n}\r\n\r\nheader nav ul .mega-menu .mega-menu-container {\r\n\r\n    min-width: auto;\r\n}\r\n\r\nheader nav ul li>a {\r\n    color: white !important;\r\n}\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImhlYWRlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksZUFBZTtBQUNuQjs7QUFFQTs7SUFFSSxlQUFlO0FBQ25COztBQUVBO0lBQ0ksdUJBQXVCO0FBQzNCIiwiZmlsZSI6ImhlYWRlci5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsibmF2IHtcclxuICAgIHBhZGRpbmc6IDEwcHggMDtcclxufVxyXG5cclxuaGVhZGVyIG5hdiB1bCAubWVnYS1tZW51IC5tZWdhLW1lbnUtY29udGFpbmVyIHtcclxuXHJcbiAgICBtaW4td2lkdGg6IGF1dG87XHJcbn1cclxuXHJcbmhlYWRlciBuYXYgdWwgbGk+YSB7XHJcbiAgICBjb2xvcjogd2hpdGUgIWltcG9ydGFudDtcclxufSJdfQ== */");
+
+/***/ }),
+
+/***/ "u1AE":
+/*!***********************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/home/blog-view/blog-view.component.html ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<section class=\"resume schedule  pt-3 pb-4\">\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-12\">\r\n                <div class=\"cal-time\">\r\n                    <div class=\"time\">\r\n                        <h2 class=\"title-text pt-1\">{{blogsData.title}}</h2>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</section>\r\n<div class=\"container\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-7\">\r\n            <!--<p class=\"subscribe-sub-head mb-3\">{{blogsData.description}}</p>-->\r\n            <p class=\"subscribe-sub-head mb-3\" [innerHTML]=\"blogsData.description\"></p>\r\n        </div>\r\n        <div class=\"col-lg-5\">\r\n            <img class=\"img-fluid\" [src]=\"blogsData.blogsDocument\" />\r\n        </div>\r\n    </div>\r\n</div>");
 
 /***/ }),
 
@@ -4208,6 +4684,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_faqs_faqs_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/faqs/faqs.component */ "ytmU");
 /* harmony import */ var _components_disclaimer_disclaimer_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/disclaimer/disclaimer.component */ "PxG9");
 /* harmony import */ var _components_guards__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./components/_guards */ "CRXG");
+/* harmony import */ var _home_blog_view_blog_view_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./home/blog-view/blog-view.component */ "k/Fl");
+
 
 
 
@@ -4244,7 +4722,7 @@ const routes = [
         path: 'borrower',
         canActivate: [_components_guards__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]],
         data: { roles: [_models__WEBPACK_IMPORTED_MODULE_3__["Role"].Borrower] },
-        loadChildren: () => Promise.all(/*! import() | borrower-borrower-module */[__webpack_require__.e("default~admin-admin-module~borrower-borrower-module~home-home-module~lender-lender-module"), __webpack_require__.e("default~borrower-borrower-module~lender-lender-module"), __webpack_require__.e("common"), __webpack_require__.e("borrower-borrower-module")]).then(__webpack_require__.bind(null, /*! ./borrower/borrower.module */ "0OUo")).then(m => m.BorrowerModule)
+        loadChildren: () => Promise.all(/*! import() | borrower-borrower-module */[__webpack_require__.e("default~admin-admin-module~borrower-borrower-module~home-home-module~lender-lender-module"), __webpack_require__.e("default~borrower-borrower-module~lender-lender-module"), __webpack_require__.e("borrower-borrower-module")]).then(__webpack_require__.bind(null, /*! ./borrower/borrower.module */ "0OUo")).then(m => m.BorrowerModule)
     },
     {
         path: 'lender',
@@ -4257,7 +4735,7 @@ const routes = [
         canActivate: [_components_guards__WEBPACK_IMPORTED_MODULE_11__["AuthGuard"]],
         //  data: { roles: [Role.Admin] },
         data: { roles: [_models__WEBPACK_IMPORTED_MODULE_3__["Role"].Admin] },
-        loadChildren: () => Promise.all(/*! import() | admin-admin-module */[__webpack_require__.e("default~admin-admin-module~borrower-borrower-module~home-home-module~lender-lender-module"), __webpack_require__.e("common"), __webpack_require__.e("admin-admin-module")]).then(__webpack_require__.bind(null, /*! ./admin/admin.module */ "jkDv")).then(m => m.AdminModule)
+        loadChildren: () => Promise.all(/*! import() | admin-admin-module */[__webpack_require__.e("default~admin-admin-module~borrower-borrower-module~home-home-module~lender-lender-module"), __webpack_require__.e("admin-admin-module")]).then(__webpack_require__.bind(null, /*! ./admin/admin.module */ "jkDv")).then(m => m.AdminModule)
     },
     {
         path: 'login',
@@ -4289,6 +4767,10 @@ const routes = [
     {
         path: 'disclaimer',
         component: _components_disclaimer_disclaimer_component__WEBPACK_IMPORTED_MODULE_10__["DisclaimerComponent"]
+    },
+    {
+        path: 'blog/:id',
+        component: _home_blog_view_blog_view_component__WEBPACK_IMPORTED_MODULE_12__["BlogViewComponent"]
     },
     // otherwise redirect to home
     {
@@ -4456,9 +4938,13 @@ var SessionStatus;
     SessionStatus["Active"] = "active";
     SessionStatus["Completed"] = "completed";
     SessionStatus["Suspended"] = "suspended";
+    SessionStatus["Canceled"] = "canceled";
     SessionStatus["Ongoing"] = "ongoing";
     SessionStatus["OngoingInitiated"] = "ongoing_initiated";
     SessionStatus["OngoingAccepted"] = "ongoing_accepted";
+    SessionStatus["AwaitingForApproval"] = "awaiting_for_approval";
+    SessionStatus["Unpaid"] = "unpaid";
+    SessionStatus["Inkasso"] = "inkasso";
 })(SessionStatus || (SessionStatus = {}));
 ;
 var PaymentMethod;

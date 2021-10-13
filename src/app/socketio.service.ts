@@ -216,7 +216,7 @@ export class SocketioService {
   }
 
   public clearOldMessageToRoomAll() {
-    this.NewMessageToRoomAll.next();
+    this.OldMessageToRoomAll.next();
   }
 
   public initOldMessageToRoomAll() {
@@ -228,13 +228,45 @@ export class SocketioService {
   }
   //#endregion recd new message in Chat Room
 
+  //#region send status of socket connected or disconnected
+  public SocketConnectionStatus = new Subject<boolean>();
+
+  public sendSocketConnectionStatus(isConnected: boolean) {
+    this.SocketConnectionStatus.next(isConnected);
+  }
+
+  public clearSocketConnectionStatus() {
+    this.SocketConnectionStatus.next();
+  }
+
+  public initSocketConnectionStatus() {
+    //this.sendSocketConnectionStatus(false);
+  }
+
+  public getSocketConnectionStatus(): Observable<any> {
+    return this.SocketConnectionStatus.asObservable();
+  }
+  //#endregion send status of socket connected or disconnected
+
   //#region handle events from server in single end point
+  setupSocketConnectionIfNotExists(_user_id: string) {
+    if (_user_id) {
+      try {
+        if ((!this.socket) || (this.socket && !this.socket.connected)) {
+          this.setupSocketConnection(_user_id);
+        }
+      } catch (ex) {
+        this.setupSocketConnection(_user_id);
+      }
+    }
+  }
   setupSocketConnection(_user_id: string) {
-    console.log("231 :: SOCKET Connection init");
+    //console.log("231 :: SOCKET Connection init");
     this.currentUserId = _user_id;
     this.socket = io(environment.SOCKET_ENDPOINT, { query: "user_id=" + _user_id + "" });
     this.socket.once('disconnected', function () {
-      console.log("235 :: disconnected");
+      //this.sendSocketConnectionStatus(false);
+      //console.log("235 :: disconnected");
     });
     this.socket.on('send_user_online_list', (result: any) => {
       let data = null;
@@ -245,7 +277,7 @@ export class SocketioService {
           data = result;
         }
       }
-      console.log('Received a message from websocket service');
+      //console.log('Received a message from websocket service');
       this.sendCurrentOnlineUsersListObj(data);
     });
 
@@ -258,7 +290,7 @@ export class SocketioService {
           data = result;
         }
       }
-      console.log('Received a message from websocket service');
+      //console.log('Received a message from websocket service');
       this.sendCurrentOnlineUsersListObj(data);
     });
 
@@ -271,7 +303,7 @@ export class SocketioService {
           data = result;
         }
       }
-      console.log('140 :: Received a message from websocket service');
+      //console.log('140 :: Received a message from websocket service');
       this.sendCurrentSessionCount(data);
     });
 
@@ -284,7 +316,7 @@ export class SocketioService {
           data = result;
         }
       }
-      console.log('Received a message from websocket service');
+      //console.log('Received a message from websocket service :: sessions_response_getall_bysearch');
       this.sendCurrentSessionAll(data);
     });
 
@@ -297,11 +329,12 @@ export class SocketioService {
           data = result;
         }
       }
-      console.log('Received a message from websocket service');
+      //console.log('Received a message from websocket service');
       this.sendCurrentSessionApply(data);
     });
 
     this.socket.on('connected_successfully', (result: any) => {
+      this.sendSocketConnectionStatus(true);
       let data = null;
       if (result) {
         if (result['success'] == true || result['success'] == false) {
@@ -314,7 +347,7 @@ export class SocketioService {
       for (let _item in this.currentUsersRooms) {
         this.sendEventToJoinChatRoom(this.currentUsersRooms[_item], this.currentUserId);
       }
-      console.log('149 :: Received a message from websocket service :: connected_successfully', data);
+      //console.log('149 :: Received a message from websocket service :: connected_successfully', data);
     });
 
     this.socket.on('new_user_joined_room', (result: any) => {
@@ -326,7 +359,7 @@ export class SocketioService {
           data = result;
         }
       }
-      console.log('161 :: Received a message from websocket service', data);
+      //console.log('161 :: Received a message from websocket service', data);
       this.sendUserJoinedRoomAll(data);
     });
 
@@ -339,7 +372,7 @@ export class SocketioService {
           data = result;
         }
       }
-      console.log('166 :: Received a message from websocket service', data);
+      //console.log('166 :: Received a message from websocket service', data);
       this.sendUserLeftRoomAll(data);
     });
 
@@ -352,7 +385,7 @@ export class SocketioService {
           data = result;
         }
       }
-      console.log('166 :: Received a message from websocket service', data);
+      //console.log('166 :: Received a message from websocket service', data);
       this.sendNewMessageToRoomAll(data);
     });
 
@@ -365,7 +398,7 @@ export class SocketioService {
           data = result;
         }
       }
-      console.log('171 :: Received a message from websocket service', data);
+      //console.log('171 :: Received a message from websocket service', data);
       this.sendOldMessageToRoomAll(data);
     });
 
@@ -452,9 +485,9 @@ export class SocketioService {
     this.socket.emit('set_session_add_transactions_updated_by_lender', _sendDataOnlyMeFalseToAllTrue, _obj2Save);
   }
 
-  sendEventToJoinChatRoom(_roomId, _userId, _roomIdArr:string[]=[]) {
+  sendEventToJoinChatRoom(_roomId, _userId, _roomIdArr: string[] = []) {
     this.currentUsersRooms.push(_roomId);
-    this.socket.emit('join_room', { roomId: _roomId, userId: _userId, roomIdArr:_roomIdArr });
+    this.socket.emit('join_room', { roomId: _roomId, userId: _userId, roomIdArr: _roomIdArr });
     this.requestAppNotificationWithCustomData(_roomId, [_userId]);
   }
 
@@ -471,8 +504,18 @@ export class SocketioService {
     this.socket.emit('get_all_old_chat_of_room', { roomId: _roomId });
   }
 
+  sendEventToUpdateChatReceivedByUserOfRoom(_roomId: string, userId: string) {
+    this.socket.emit('update_chat_received_by_user_of_room', { roomId: _roomId, userId: userId });
+  }
+
+  sendEventToUpdateChatReadByUserOfRoom(_roomId: string, userId: string) {
+    this.socket.emit('update_chat_read_by_user_of_room', { roomId: _roomId, userId: userId });
+  }
+
   emitEventWithNameAndData(_eventName, ...args) {
-    this.socket.emit(_eventName, ...args);
+    if (this.socket) {
+      this.socket.emit(_eventName, ...args);
+    }
   }
 
   getAllUsers(_data) {
@@ -480,8 +523,8 @@ export class SocketioService {
     return fromEvent<any[]>(this.socket, 'user_getall_list');
   }
 
-  getAllMyContacts(_data) {
-    this.socket.emit("request_contact_getall", _data);
+  getAllMyContacts(_userId: string, role: string, skip: boolean = null) {
+    this.socket.emit("request_contact_getall", _userId, role, skip);
     return fromEvent<any[]>(this.socket, 'response_contact_getall');
   }
 
@@ -489,7 +532,10 @@ export class SocketioService {
     this.socket.emit("request_contact_getbyid", _data);
     return fromEvent<any[]>(this.socket, 'response_contact_getbyid');
   }
-
+  getByIdMyContactsPendingMessages(_roomIdArr, userId) {
+    this.socket.emit("request_contact_pending_messages", _roomIdArr, userId);
+    return fromEvent<any[]>(this.socket, 'response_contact_pending_messages');
+  }
   sendEventToGetAllChatOfRoomWithPromise(_roomId) {
     this.socket.emit('get_all_old_chat_of_room', { roomId: _roomId });
     return fromEvent<any[]>(this.socket, 'set_all_old_chat_of_room');
@@ -575,6 +621,16 @@ export class SocketioService {
   getByIdRatingReviewe(_ratingId) {
     this.socket.emit("request_rating_getbyid", _ratingId);
     return fromEvent<any[]>(this.socket, 'response_rating_getbyid');
+  }
+
+  getByLoanIdRatingReviewe(_obj2Save) {
+    this.socket.emit("request_rating_getby_loanid", _obj2Save);
+    return fromEvent<any[]>(this.socket, 'response_rating_getby_loanid');
+  }
+
+  getByQuerySummaryRatingReviewe(_obj2Save) {
+    this.socket.emit("request_get_ratings_summary_by_query", _obj2Save);
+    return fromEvent<any[]>(this.socket, 'response_get_ratings_summary_by_query');
   }
 
   deductAmountFromWallet(_fundsObj, _transactionDetails) {
@@ -680,29 +736,29 @@ export class SocketioService {
     this.socket.emit("request_session_session_apply_loan_amount_paid_by_lender_update_and_broadcast", _data);
     return fromEvent<any[]>(this.socket, 'response_session_session_apply_loan_amount_paid_by_lender_update_and_broadcast');
   }
-  sendEventForLoanAmountPaidToLenderWithUpdateAll(_loanId:string, _loanApplyId:string, _userId:string, _installmentKey:string, _loanTenureInMonths:number, _LoanApplyObjCurrent:any) {
+  sendEventForLoanAmountPaidToLenderWithUpdateAll(_loanId: string, _loanApplyId: string, _userId: string, _installmentKey: string, _loanTenureInMonths: number, _LoanApplyObjCurrent: any) {
     let _data = {
       loanId: _loanId,
       loanApplyId: _loanApplyId,
       updatedBy: _userId,
       LoanApplyObjCurrent: _LoanApplyObjCurrent,
       _id: _loanApplyId,
-      installmentKey:_installmentKey,
-      loanTenureInMonths:_loanTenureInMonths
+      installmentKey: _installmentKey,
+      loanTenureInMonths: _loanTenureInMonths
     };
     this.socket.emit("request_session_session_apply_loan_amount_paid_to_lender_update_and_broadcast", _data);
     return fromEvent<any[]>(this.socket, 'response_session_session_apply_loan_amount_paid_to_lender_update_and_broadcast');
   }
-  
-  sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(_loanId:string, _loanApplyId:string, _userId:string, _installmentKey:string, _loanTenureInMonths:number, _LoanApplyObjCurrent:any) {
+
+  sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(_loanId: string, _loanApplyId: string, _userId: string, _installmentKey: string, _loanTenureInMonths: number, _LoanApplyObjCurrent: any) {
     let _data = {
       loanId: _loanId,
       loanApplyId: _loanApplyId,
       updatedBy: _userId,
       LoanApplyObjCurrent: _LoanApplyObjCurrent,
       _id: _loanApplyId,
-      installmentKey:_installmentKey,
-      loanTenureInMonths:_loanTenureInMonths
+      installmentKey: _installmentKey,
+      loanTenureInMonths: _loanTenureInMonths
     };
     this.socket.emit("request_session_session_apply_loan_amount_paid_to_lender_update_and_broadcast", _data);
     return fromEvent<any[]>(this.socket, 'response_session_session_apply_loan_amount_paid_to_lender_update_and_broadcast');
@@ -743,6 +799,13 @@ export class SocketioService {
     return fromEvent<any[]>(this.socket, 'sessions_response_getall_bysearch_from_lender');
   }
 
+  getLoanMarketDataForSearch(_obj2Save, emitThisEvent) {
+    emitThisEvent = (emitThisEvent ? emitThisEvent : 'sessions_response_getall_bysearch_from_borrower');
+    let _sendDataOnlyMeFalseToAllTrue = false;
+    this.socket.emit('sessions_request_getall_bysearch', _sendDataOnlyMeFalseToAllTrue, _obj2Save, true, emitThisEvent);
+    return fromEvent<any[]>(this.socket, 'sessions_response_getall_bysearch_from_borrower');
+  }
+
   getLoanMarketDataById(loanId) {
     let emitThisEvent = 'sessions_response_getall_bysearch_by_id';
     let _sendDataOnlyMeFalseToAllTrue = false;
@@ -754,7 +817,7 @@ export class SocketioService {
     return fromEvent<any[]>(this.socket, 'sessions_response_getall_bysearch_by_id');
   }
 
-  getSessionApplyCountByQuery(_sendDataOnlyMeFalseToAllTrue: boolean, _obj2Save, useAndTrueOrFalse:boolean, emitThisEvent:string) {
+  getSessionApplyCountByQuery(_sendDataOnlyMeFalseToAllTrue: boolean, _obj2Save, useAndTrueOrFalse: boolean, emitThisEvent: string) {
     emitThisEvent = (emitThisEvent ? emitThisEvent : 'sessions_response_get_session_apply_count_by_query');
     this.socket.emit('sessions_request_get_session_apply_count_by_query', _sendDataOnlyMeFalseToAllTrue, _obj2Save, useAndTrueOrFalse, emitThisEvent);
     return fromEvent<any[]>(this.socket, emitThisEvent);
@@ -768,6 +831,11 @@ export class SocketioService {
 
   listenForUpdateStatusOfLastPayment() {
     return fromEvent<any[]>(this.socket, 'recd_confirmation_of_last_payment_status');
+  }
+
+  getSessionApplyAllByQuery(_sendDataOnlyMeFalseToAllTrue: boolean, _obj2Save, emitThisEvent: string, useAndTrueOrFalse: boolean = false) {
+    this.socket.emit('session_apply_request_getall_bysearch', _sendDataOnlyMeFalseToAllTrue, _obj2Save, useAndTrueOrFalse, emitThisEvent);
+    return fromEvent<any[]>(this.socket, 'session_apply_response_getall_bysearch');
   }
 
 }

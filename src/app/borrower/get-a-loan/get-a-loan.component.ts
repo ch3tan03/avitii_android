@@ -19,8 +19,8 @@ export class GetALoanComponent implements OnInit {
   public _ = _;
   addSessionForm: FormGroup;
   private _sessionType: string;
-  UserType = UserType;
-  currentUserRoleType: string = null;
+  //UserType = UserType;
+  //currentUserRoleType: string = null;
   currentUserMaxLoanAmount: number = 0;
   loading = false;
   submitted = false;
@@ -39,8 +39,8 @@ export class GetALoanComponent implements OnInit {
   ParentServicesTypes: any = null;
   ChildServicesTypes: any = [];
   countrylist: any = null;
-  loanInterestRateMin:number=0;
-  loanInterestRateMax:number=0;
+  loanInterestRateMin: number = 0;
+  loanInterestRateMax: number = 0;
   constructor(
 
     private formBuilder: FormBuilder,
@@ -55,9 +55,17 @@ export class GetALoanComponent implements OnInit {
     if (!this.authenticationService.currentUserValue) {
       this.appRouterService.appRouter('');
     }
-    this.currentUserRoleType = this.authenticationService.currentUserValue.userType;
+    //#region do not allow to create new loan in last 3 day's of the month
+    let dt = this.utilityService.moment();
+    let day4monthEnd = 3;
+    if (dt.date() >= (dt.daysInMonth() - day4monthEnd)) {
+      this.appRouterService.appRouter('');
+      this.alertService.error('New loan request not allowed in end of the month, Please try again later in next month', true);
+      return;
+    }
+    //#endregion do not allow to create new loan in last 3 day's of the month
+    //this.currentUserRoleType = this.authenticationService.currentUserValue.userType;
     this.currentUserMaxLoanAmount = 1000;
-
 
     this.initForm();
 
@@ -76,7 +84,7 @@ export class GetALoanComponent implements OnInit {
           .pipe(first())
           .subscribe(
             data => {
-              //console.log('data => ', data)
+              ////console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
                 this.showEditingForm(data["data"]);
@@ -111,18 +119,20 @@ export class GetALoanComponent implements OnInit {
   }
 
   showEditingForm(_userObj) {
-    let _loanInterestRateValidation = [Validators.required, Validators.min(0)];
 
+    this.loanInterestRateMin = 0;
+    this.loanInterestRateMax = 50;
+    let _loanInterestRateValidation = [Validators.required, Validators.min(this.loanInterestRateMin), Validators.max(this.loanInterestRateMax)];
     switch (this.authenticationService.currentUserValue.role) {
       case Role.Borrower:
         if (this.authenticationService.currentUserValue.isRKIRegistered) {
-          this.loanInterestRateMin=3;
-          this.loanInterestRateMax=35;
+          this.loanInterestRateMin = 3;
+          this.loanInterestRateMax = 35;
         } else {
-          this.loanInterestRateMin=1;
-          this.loanInterestRateMax=3;
+          this.loanInterestRateMin = 0;
+          this.loanInterestRateMax = 3;
         }
-        _loanInterestRateValidation = [Validators.required, Validators.min(this.loanInterestRateMin),Validators.max(this.loanInterestRateMax)];
+        _loanInterestRateValidation = [Validators.required, Validators.min(this.loanInterestRateMin), Validators.max(this.loanInterestRateMax)];
         break;
     }
 
@@ -144,7 +154,7 @@ export class GetALoanComponent implements OnInit {
       status: [_userObj.status || ''],
       additionalDocuments: this.formBuilder.array(_userObj.additionalDocuments || [], []),
       loanAmount: [_userObj.loanAmount || 0, [Validators.required, Validators.min(1), Validators.max(this.currentUserMaxLoanAmount)]],
-      loanTenureInMonths: [_userObj.loanTenureInMonths || 3, [Validators.required, Validators.min(3)]],
+      loanTenureInMonths: [_userObj.loanTenureInMonths || 1, [Validators.required, Validators.min(1)]],
       loanInterestRate: [_userObj.loanInterestRate || this.loanInterestRateMax, _loanInterestRateValidation],
       loanRepaymentType: this.formBuilder.array(_userObj.loanRepaymentType || [], Validators.required),
       loanInsuranceType: [_userObj.loanInsuranceType || ''],
@@ -171,18 +181,19 @@ export class GetALoanComponent implements OnInit {
   }
 
   initForm() {
-    let _loanInterestRateValidation = [Validators.required, Validators.min(0)];
-
+    this.loanInterestRateMin = 1;
+    this.loanInterestRateMax = 50;
+    let _loanInterestRateValidation = [Validators.required, Validators.min(this.loanInterestRateMin), Validators.max(this.loanInterestRateMax)];
     switch (this.authenticationService.currentUserValue.role) {
       case Role.Borrower:
         if (this.authenticationService.currentUserValue.isRKIRegistered) {
-          this.loanInterestRateMin=3;
-          this.loanInterestRateMax=35;
+          this.loanInterestRateMin = 3;
+          this.loanInterestRateMax = 35;
         } else {
-          this.loanInterestRateMin=1;
-          this.loanInterestRateMax=3;
+          this.loanInterestRateMin = 1;
+          this.loanInterestRateMax = 3;
         }
-        _loanInterestRateValidation = [Validators.required, Validators.min(this.loanInterestRateMin),Validators.max(this.loanInterestRateMax)];
+        _loanInterestRateValidation = [Validators.required, Validators.min(this.loanInterestRateMin), Validators.max(this.loanInterestRateMax)];
         break;
     }
     //_.first(this.ParentServicesTypes)['_id']
@@ -205,7 +216,7 @@ export class GetALoanComponent implements OnInit {
       status: [SessionStatus.Pending],
       additionalDocuments: this.formBuilder.array([], []),
       loanAmount: [0, [Validators.required, Validators.min(1), Validators.max(this.currentUserMaxLoanAmount)]],
-      loanTenureInMonths: [3, [Validators.required, Validators.min(3)]],
+      loanTenureInMonths: [1, [Validators.required, Validators.min(1)]],
       loanInterestRate: [this.loanInterestRateMax, _loanInterestRateValidation],
       loanRepaymentType: this.formBuilder.array([], Validators.required),
       loanInsuranceType: [''],
@@ -248,7 +259,7 @@ export class GetALoanComponent implements OnInit {
     let _loanStartDateTime = this.addSessionForm.get('loanStartDateTimeCustomised').value;
     let _loanEndDateTime = this.addSessionForm.get('loanEndDateTimeCustomised').value;
     /*
-        if (!_loanStartDateTime || moment(_loanStartDateTime).isBefore(moment().add(1, 'd'))) {
+        if (!_loanStartDateTime || moment(_loanStartDateTime).isBefore(moment().add(1, 'day'))) {
           this.alertService.error("Start date must have 24 hours difference");
           return;
         }
@@ -309,8 +320,10 @@ export class GetALoanComponent implements OnInit {
           data => {
             if (data && data['success']) {
               //alert(JSON.stringify( data));
-              this.alertService.success('Loan Request Updated successfully', true);
-              this.appRouterService.appRouter(this.authenticationService.currentUserValue);
+              //this.alertService.success('Loan Request Updated successfully', true);
+              //this.appRouterService.appRouter(this.authenticationService.currentUserValue);
+              this.alertService.success("Loan Request Updated successfully. Loan contract is available under My Contract->My Contract tab.", true);
+              this.appRouterService.appRouteToPath("/borrower/my-contract", { selectedTab: 'received' }, true);
             } else {
               //alert(JSON.stringify(data['message']));
               this.alertService.error(data['message']);
@@ -339,8 +352,10 @@ export class GetALoanComponent implements OnInit {
             if (data && data['success']) {
 
               //alert(JSON.stringify( data));
-              this.alertService.success('Loan Request added in loan market. Lenders request will be visible under receivers tab.', true);
-              this.appRouterService.appRouter(this.authenticationService.currentUserValue);
+              //this.alertService.success('Loan Request added in loan market. Lenders request will be visible under receivers tab.', true);
+              //this.appRouterService.appRouter(this.authenticationService.currentUserValue);
+              this.alertService.success("Loan Request added in loan market. Loan contract is available under My Contract->My Contract tab.", true);
+              this.appRouterService.appRouteToPath("/borrower/my-contract", { selectedTab: 'received' }, true);
             } else {
               //alert(JSON.stringify(data['message']));
               this.alertService.error(data['message']);
@@ -375,8 +390,8 @@ export class GetALoanComponent implements OnInit {
   maxDate = moment({ year: this.year, month: this.month + 1, day: this.day, hour: this.hours, minute: this.minutes }).format('YYYY-MM-DD');
 
   date(ev) {
-    console.log(this.minDate)
-    console.log(ev.target.value)
+    //console.log(this.minDate)
+    //console.log(ev.target.value)
   }
 
   calculateMonthlyAmountForEMI() {

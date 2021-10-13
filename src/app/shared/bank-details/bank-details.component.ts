@@ -45,7 +45,7 @@ export class BankDetailsComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.showEditingForm(data["data"]);
@@ -137,8 +137,8 @@ export class BankDetailsComponent implements OnInit {
       isRKIRegistered: [_userObj.isRKIRegistered || false],
 
       accountName: [_userObj.accountName || ''],
-      accountNumber: [_userObj.accountNumber || ''],
-      bankName: [_userObj.bankName || ''],
+      accountNumber: [_userObj.accountNumber || '', Validators.required],
+      bankName: [_userObj.bankName || '', Validators.required],
       regNumber: [_userObj.regNumber || ''],
       cprNumber: [_userObj.cprNumber || ''],
       branchDetails: [_userObj.branchDetails || ''],
@@ -148,9 +148,9 @@ export class BankDetailsComponent implements OnInit {
       revolutWalletID: [_userObj.revolutWalletID || ''],
       skrillWalletID: [_userObj.skrillWalletID || ''],
       paypalWalletID: [_userObj.paypalWalletID || ''],
-      bic: [_userObj.bic || ''],
+      bic: [_userObj.bic || '', Validators.required],
       accountType: [_userObj.accountType || ''],
-      iban: [_userObj.iban || ''],
+      iban: [_userObj.iban || '', Validators.required],
       accountOtherDetails1: [_userObj.accountOtherDetails1 || ''],
       accountOtherDetails2: [_userObj.accountOtherDetails2 || ''],
       accountOtherDetails3: [_userObj.accountOtherDetails3 || ''],

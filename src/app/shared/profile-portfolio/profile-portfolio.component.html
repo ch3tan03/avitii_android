@@ -1,4 +1,4 @@
-<h2 mat-dialog-title class="ml-n2"><button id="ctrlNavigate2Profile" (click)="navigate2Profile()" class="btn btn-link btn-sm" mat-button mat-dialog-close><i
+<h2 mat-dialog-title class="ml-n2"><button id="ctrlNavigate2Profile" (click)="navigate2Profile()" class="btn btn-link btn-sm" mat-button mat-dialog-close ><i
             class="icon-angle-left"></i> Back</button>Portfolio</h2>
 <div class="row mb-2 mb-3">
     <div class="col-xl-12 col-12">
@@ -64,8 +64,8 @@
                                         <div class="row">
                                             <div class="col-xl-2" *ngFor="let previewUrl of f.myProfileMedia.value">
                                                 <video *ngIf="previewUrl.type.indexOf('video/')>-1" class="img-fluid border" controls [src]="previewUrl.url"></video>
-                                                <img *ngIf="previewUrl.type.indexOf('image/')>-1" class="img-fluid border" [src]="previewUrl.url" onerror="this.src='/assets/img/na.png';" />
-                                                <img *ngIf="previewUrl.type.indexOf('video/')==-1 && previewUrl.type.indexOf('image/')==-1" class="img-fluid border" src="/assets/img/pdf.png" onerror="this.src='/assets/img/na.png';" />
+                                                <img *ngIf="previewUrl.type.indexOf('image/')>-1" class="img-fluid border" [src]="previewUrl.url" onerror="this.src='./assets/img/na.png';" />
+                                                <img *ngIf="previewUrl.type.indexOf('video/')==-1 && previewUrl.type.indexOf('image/')==-1" class="img-fluid border" src="./assets/img/pdf.png" onerror="this.src='./assets/img/na.png';" />
                                             </div>
                                         </div>
                                     </div>

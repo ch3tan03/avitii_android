@@ -24,6 +24,8 @@ import { MonthlySubscriptionComponent } from '../shared/monthly-subscription/mon
 import { PaymentCancelComponent } from '../shared/payment-cancel/payment-cancel.component';
 import { PaymentSuccessComponent } from '../shared/payment-success/payment-success.component';
 import { BankDetailsVerifyGuard } from '../bank-details-verify.guard';
+import { MediaProccessComponent } from '../shared/media-proccess/media-proccess.component';
+import { RatingsListComponent } from '../shared/ratings-list/ratings-list.component';
 /*import { StripeComponentComponent } from '../shared/stripe-component/stripe-component.component';*/
 
 const routes: Routes = [
@@ -52,6 +54,8 @@ const routes: Routes = [
       { canActivate: [RolesGuard], path: 'update-password', component: UpdatePasswordComponent },
       { canActivate: [RolesGuard], path: 'bank-details', component: BankDetailsComponent },
       { canActivate: [RolesGuard], path: 'my-subscriptions', component: MonthlySubscriptionComponent },
+      { canActivate: [RolesGuard], path: 'media-proccess', component: MediaProccessComponent },
+      { canActivate: [RolesGuard], path: 'my-ratings', component: RatingsListComponent },
     ]
   },
   // otherwise redirect to home

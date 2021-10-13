@@ -1,0 +1,138 @@
+<!-- <section class="agency blog blog-sec blog-sidebar sider p-0 mt-4">
+    <div class="card shadow-sm mb-4" *ngFor="let LoanMarket of allLoanMarketData">
+        <div class="bg-white blog-title card-header mb-0 text-capitalize">
+            {{LoanMarket.LoanMarketubject}}
+        </div>
+        <div class="card-body px-md-3 px-1 small">
+             <div class="row">               
+            <div class="col-xl-12 col-12">
+                <p class="para2" [class.show_more]="!LoanMarket._id">
+                    {{LoanMarket.loanAmount}}
+                </p>
+            </div>          
+            <div class="col-xl-6 col-6 border-right mb-2">
+                <i aria-hidden="true" class="icon-timer mr-2"></i> {{LoanMarket.loanStartDateTime | date:'MMM d, h:mm a'}}
+            </div>
+            <div class="col-xl-6 col-6">
+                <i aria-hidden="true" class="icon-location-pin m-r-10"></i>
+                {{LoanMarket.location}}
+            </div>
+          
+        </div>
+        </div>
+        <div class="card-footer bg-white">
+            <span class="badge badge-success font-weight-normal text-capitalize btn float-left" >{{LoanMarket.LoanMarketType}}</span>
+          
+            <a class="btn btn-primary text-capitalize  btn-sm float-right text-white" (click)="showAppliedToLoanMarket(LoanMarket)">Details</a>
+        </div>
+    </div>
+
+
+    <div class="mt-5 text-center blog-agency no-item">
+        <img src="assets/img/noresult.png">
+        <h2 class="mt-4 font-weight-normal">No Data Found</h2>
+    </div>
+</section> -->
+
+
+
+<div class="row">
+    <div class="col-xl-4 col-12 d-flex align-items-stretch mb-4" *ngFor="let LoanMarket of allLoanMarketData">
+
+        <div class="clash-card wizard w-100">
+
+            <div class="clash-card__level clash-card__level--wizard mt-3">{{(LoanMarket.createdByUserObj.userType ||
+                "").replace("_", " ")}}</div>
+            <div class="clash-card__unit-name text-capitalize">{{(LoanMarket.loanType || "").replace("_", " ")}}</div>
+            <div class="clash-card__unit-description">
+                <div class="row">
+                    <div class="col-xl-4 col-4 border-right" data-toggle="tooltip" title="Created By">
+                        <div (click)="usersProfile(LoanMarket.createdByUserObj)">
+                            <i class="icon icon-user"></i>
+                        </div>
+                        <div class="text-black-50 small">
+                            {{LoanMarket.createdByUserObj.firstName}}
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-4 border-right" data-toggle="tooltip" title="Max Applicants">
+                        <div>
+                            <i class="icon icon-check-box"></i>
+                        </div>
+                        <div class="text-black-50 small">
+                            {{LoanMarket.loanMaxBorrower}}
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-4 " data-toggle="tooltip" title="Created On">
+                        <div>
+                            <i class="icon icon-time"></i>
+                        </div>
+                        <div class="text-black-50 small">
+                            {{LoanMarket.loanStartDateTime | date:'MMM d, yy'}}
+                        </div>
+                    </div>
+                    <div class="col-xl-12 col-12 mt-2">
+                        <div class="text-black-50 small mb-1">
+                            Payment Methods
+                        </div>
+
+                        <span *ngIf="LoanMarket.loanRepaymentType.indexOf('bank')>-1"
+                            class="badge font-weight-light text-uppercase mr-2 badge-success">
+                            BANK
+                        </span>
+                        <span *ngIf="LoanMarket.loanRepaymentType.indexOf('cash')>-1"
+                            class="badge font-weight-light text-uppercase mr-2 badge-success">
+                            Cash
+                        </span>
+                        <span *ngIf="LoanMarket.loanRepaymentType.indexOf('revolut')>-1"
+                            class="badge font-weight-light text-uppercase mr-2 badge-success">
+                            Revolut
+                        </span>
+                        <span *ngIf="LoanMarket.loanRepaymentType.indexOf('paypal')>-1"
+                            class="badge font-weight-light text-uppercase mr-2 badge-success">
+                            Paypal
+                        </span>
+                        <span *ngIf="LoanMarket.loanRepaymentType.indexOf('skrill')>-1"
+                            class="badge font-weight-light text-uppercase badge-success">
+                            Skrill
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <button *ngIf="!returnT4DisableLoanBorrowOrLendIfAlreadyAccepted(LoanMarket)"
+                class="btn btn-outline-secondary btn-sm mb-2" (click)="navigate2LoanProccess(LoanMarket._id)">Borrow
+                Now</button>
+
+            <button *ngIf="returnT4DisableLoanBorrowOrLendIfAlreadyAccepted(LoanMarket)"
+                class="btn btn-outline-primary btn-sm mb-2"><i class="icon icon-check-box"></i> Contract Signed</button>
+
+            <div class="clash-card__unit-stats clash-card__unit-stats--wizard clearfix">
+                <div class="one-third">
+                    <div class="stat">{{LoanMarket.loanAmount}}</div>
+                    <div class="stat-value">Amount</div>
+                </div>
+
+                <div class="one-third">
+                    <div class="stat">
+                        {{utilityService.returnRoundedNumber(LoanMarket.calculatedMonthlyAmountForEMI*LoanMarket.loanTenureInMonths)}}
+                    </div>
+                    <div class="stat-value">Refund</div>
+                </div>
+
+                <div class="one-third no-border">
+                    <div class="stat">{{LoanMarket.loanTenureInMonths}} <sub
+                            class="month">{{LoanMarket.loanTenureInMonths>1?'Months':'Month'}}</sub></div>
+                    <div class="stat-value">Duration</div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- end clash-card goblin-->
+
+
+    </div>
+    <!-- <div class="mt-5 text-center blog-agency no-item">
+        <img src="assets/img/noresult.png">
+        <h2 class="mt-4 font-weight-normal">No Data Found</h2>
+    </div> -->
+</div>

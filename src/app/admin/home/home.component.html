@@ -1,16 +1,17 @@
 <h2 class="about-font-header mb-4 text-primary font-weight-light">Welcome Admin!<span class="block-span"></span></h2>
 
 <div class="row">
+
     <div class="col-xl-3 col-md-3 col-6 mb-4">
         <div class="card bg-primary text-white shadow h-100">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-uppercase mb-1">
-                            Total Loans
+                        <div class="text-xs font-weight-bold text-uppercase mb-1" i18n>
+                            Active Loan Amount
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800 text-capitalize text-cap">
-                         0
+                            {{authenticationService.currentUserAdminDashboardDataDetails.totalLoanAmountActive ||0}}
                         </div>
                     </div>
                     <div class="col-auto">
@@ -21,17 +22,16 @@
         </div>
     </div>
 
-    <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-3 col-md-3 col-6 mb-4">
         <div class="card  bg-warning text-white shadow h-100">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-uppercase mb-1">
-                           Total Revenue
+                        <div class="text-xs font-weight-bold text-uppercase mb-1" i18n>
+                           Total Lent Amount
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            0
+                            {{authenticationService.currentUserAdminDashboardDataDetails.totalLoanAmountLent ||0}}
                         </div>
                     </div>
                     <div class="col-auto">
@@ -42,25 +42,20 @@
         </div>
     </div>
 
-    <!-- Earnings (Monthly) Card Example -->
     <div class="col-xl-3 col-md-3 col-6 mb-4">
         <div class="card bg-success text-white shadow h-100">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-uppercase mb-1">
-                            Total Lenders
+                        <div class="text-xs font-weight-bold text-uppercase mb-1" i18n>
+                            Total Refunded Amount
                         </div>
                         <div class="row no-gutters align-items-center">
                             <div class="col-auto">
-                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">0
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                    {{authenticationService.currentUserAdminDashboardDataDetails.totalLoanAmountPaid ||0}}
                                 </div>
                             </div>
-                            <!-- <div class="col">
-                                            <div class="progress progress-sm mr-2">
-                                                <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div> -->
                         </div>
                     </div>
                     <div class="col-auto">
@@ -71,15 +66,17 @@
         </div>
     </div>
 
-    <!-- Pending Requests Card Example -->
     <div class="col-xl-3 col-md-3 col-6 mb-4">
         <div class="card bg-secondary text-white shadow h-100">
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-uppercase mb-1">
-                            Total Borrowers</div>
-                        <div class="h5 mb-0 font-weight-bold text-gray-800">0</div>
+                        <div class="text-xs font-weight-bold text-uppercase mb-1" i18n>
+                            Loan Refund %
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{authenticationService.currentUserAdminDashboardDataDetails.loanRefundInPer ||0}}
+                        </div>
                     </div>
                     <div class="col-auto">
                         <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -89,19 +86,262 @@
         </div>
     </div>
 
+    <!-- First Row Ended -->
     <div class="col-xl-3 col-md-3 col-6 mb-4">
-        <div class="card bg-primary text-white shadow">
+        <div class="card bg-primary text-white shadow h-100">
             <div class="card-body">
-                <div class="text-xs font-weight-bold text-uppercase mb-1">
-                    Total Messages</div>
-                <div class="h5 mb-0 font-weight-bold">0</div>
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1" i18n>
+                            Total Not Paid Amount
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-capitalize text-cap">
+                            {{authenticationService.currentUserAdminDashboardDataDetails.totalLoanAmountUnpaid ||0}}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-   
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card  bg-warning text-white shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1" i18n>
+                            Total Loan Amount Inkasso
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{authenticationService.currentUserAdminDashboardDataDetails.totalLoanAmountUnpaidInkasso ||0}}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-   
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card bg-success text-white shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1" i18n>
+                            Interest Rate (AVG)
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                    {{authenticationService.currentUserAdminDashboardDataDetails.AvgLoanInterestRate ||0}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card bg-secondary text-white shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1" i18n>
+                            Loan Amount (AVG)
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{authenticationService.currentUserAdminDashboardDataDetails.AvgLoanAmount ||0}}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Second Row Ended -->
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card bg-primary text-white shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1" i18n>
+                            Total Lenders
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-capitalize text-cap">
+                            {{authenticationService.currentUserAdminDashboardDataDetails.totalLenderUsers ||0}}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card  bg-warning text-white shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1" i18n>
+                            Total Borrowers
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{authenticationService.currentUserAdminDashboardDataDetails.totalBorrowerUsers ||0}}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card bg-success text-white shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1" i18n>
+                            Total Blocked Users
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                    {{authenticationService.currentUserAdminDashboardDataDetails.totalBlockedUsers ||0}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card bg-secondary text-white shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1" i18n>
+                            Total InActive Users (Last 15 Days)
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{authenticationService.currentUserAdminDashboardDataDetails.totalInActiveUsers ||0}}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Third Row Ended -->
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card bg-primary text-white shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1" i18n>
+                            Total Paying Lenders
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-capitalize text-cap">
+                            {{authenticationService.currentUserAdminDashboardDataDetails.totalUniquePayingLenders ||0}}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card  bg-warning text-white shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1" i18n>
+                            Total Paying Borrowers
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{authenticationService.currentUserAdminDashboardDataDetails.totalUniquePayingBorrowers ||0}}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card bg-success text-white shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1" i18n>
+                            Total Insurance Purchases (QTY)
+                        </div>
+                        <div class="row no-gutters align-items-center">
+                            <div class="col-auto">
+                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                    {{authenticationService.currentUserAdminDashboardDataDetails.totalNumberLoanInsuranceTaken ||0}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-3 col-6 mb-4">
+        <div class="card bg-secondary text-white shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-uppercase mb-1">
+                            
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fourth Row Ended -->   
 </div>
 
 

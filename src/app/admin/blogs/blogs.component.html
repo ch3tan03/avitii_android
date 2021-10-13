@@ -1,17 +1,17 @@
 <div class="row mb-3">
   <div class="col-xl-6">
-    <h4 class="text-primary">Blogs</h4>
+    <h4 class="text-primary" i18n>Blogs</h4>
   </div>
   <div class="col-xl-6">
-    <button class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#blogModal">New</button>
+    <button class="btn btn-success btn-sm float-right" data-toggle="modal" data-target="#blogModal" i18n>New</button>
   </div>
 </div>
 
 <table class="table table-striped table-bordered">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Description</th>
+      <th i18n>Title</th>
+      <th i18n>Description</th>
       <!--<th>Status</th>-->
       <th>Actions</th>
     </tr>
@@ -19,31 +19,37 @@
   <tbody>
     <tr *ngFor="let obj2show of allBlogsData">
       <td>{{obj2show.title}}</td>
-      <td>{{obj2show.description}}</td>
+      <!--<td>{{obj2show.description}}</td>-->
+      <td><span [innerHTML]="obj2show.description"></span></td>
       <!--<td class="text-capitalize text-cap">
-          <span class="badge" [ngClass]="{'badge-success': (obj2show.status==SessionStatus.Approved || obj2show.status==SessionStatus.Accepted || obj2show.status==SessionStatus.Active || obj2show.status==SessionStatus.Completed || obj2show.status==SessionStatus.OngoingInitiated  || obj2show.status==SessionStatus.OngoingAccepted  || obj2show.status==SessionStatus.Ongoing), 'badge-danger': (obj2show.status==SessionStatus.Rejected || obj2show.status==SessionStatus.RejectedOngoing || obj2show.status==SessionStatus.Suspended), 'badge-info': ( obj2show.status==null || obj2show.status=='' || obj2show.status==SessionStatus.Pending)}">
+          <span class="badge" [ngClass]="{'badge-success': (obj2show.status==SessionStatus.Approved || obj2show.status==SessionStatus.Accepted || obj2show.status==SessionStatus.Active || obj2show.status==SessionStatus.Completed || obj2show.status==SessionStatus.OngoingInitiated  || obj2show.status==SessionStatus.AwaitingForApproval  || obj2show.status==SessionStatus.Ongoing), 'badge-danger': (obj2show.status==SessionStatus.Rejected || obj2show.status==SessionStatus.RejectedOngoing || obj2show.status==SessionStatus.Suspended), 'badge-info': ( obj2show.status==null || obj2show.status=='' || obj2show.status==SessionStatus.Pending)}">
               {{obj2show.status}}
           </span>
       </td>
     -->
       <td>
-          <label title="Preview"
-              (click)="mediaPreviewModel(obj2show.blogsDocument, 'image')">
-              <i class="icon-eye m-2 text-success"></i>
-          </label>
+        <label title="Preview" (click)="mediaPreviewModel(obj2show.blogsDocument, 'image')">
+          <i class="icon-eye m-2 text-success"></i>
+        </label>
+        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Edit" (click)="EditShowBlogsForm(obj2show)">
+          <i class="icon-pencil"></i>
+        </button>
+        <button class="btn btn-danger btn-sm btn-xs" data-title="Delete" (click)="DeleteShowBlogsForm(obj2show)">
+          <i class="icon-trash"></i>
+        </button>
       </td>
     </tr>
 
   </tbody>
 </table>
-<div class="modal fade" id="blogModal">
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="blogModal">
   <div class="modal-dialog modal-dialog-centered  modal-lg">
     <div class="modal-content">
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title text-primary">New Blog</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-primary" i18n>New Blog</h4>
+        <button type="button" class="close" (click)="closeDialog()">&times;</button>
       </div>
 
       <!-- Modal body -->
@@ -52,9 +58,9 @@
           <div class="row mb-3">
             <div class="col-xl-12">
               <div class="form-group">
-                <label for="title">Blog Title</label>
-                <input type="text" formControlName="title" class="form-control"
-                  [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
+                <label for="title" i18n>Blog Title</label>
+                <input [disabled]="actionButtons0Add1Edit2Delete==2" type="text" formControlName="title"
+                  class="form-control" [ngClass]="{ 'is-invalid': submitted && f.title.errors }" />
                 <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
                   <div *ngIf="f.title.errors.required">Blog Title is required</div>
                 </div>
@@ -62,11 +68,19 @@
             </div>
             <div class="col-xl-12">
               <div class="form-group">
-                <label for="description">Contents</label>
-                <textarea type="number" formControlName="description"
-                  [ngClass]="{ 'is-invalid': submitted && f.description.errors }" cols="40" rows="5" class="form-control"></textarea>
+                <label for="description" i18n>Contents</label>
+              
+                <angular-editor [disabled]="actionButtons0Add1Edit2Delete==2" formControlName="description"
+                  [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+                  [config]="editorConfig"></angular-editor>
+                
+              <!--
+                <textarea [hidden]="true" [disabled]="actionButtons0Add1Edit2Delete==2" type="number" formControlName="description"
+                  [ngClass]="{ 'is-invalid': submitted && f.description.errors }" cols="40" rows="5"
+                  class="form-control"></textarea>
+              -->
                 <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
-                  <div *ngIf="f.description.errors.required">
+                  <div *ngIf="f.description.errors.required" i18n>
                     Contents is required
                   </div>
                 </div>
@@ -74,28 +88,37 @@
             </div>
             <div class="col-xl-12">
               <div class="form-group">
-                <label for="blogsDocument">Image Cover &nbsp;</label>
+                <label for="blogsDocument" i18n>Image Cover &nbsp;</label>
 
-                <img *ngIf="f.blogsDocument.value" [src]="f.blogsDocument.value"
-                  class="border img-fluid mb-3" height="50" width="50" />
+                <img *ngIf="f.blogsDocument.value" [src]="f.blogsDocument.value" class="border img-fluid mb-3"
+                  height="50" width="50" />
 
-                <input *ngIf="!fileData4blogsDocumentPendingForUpload"
+
+                <input [disabled]="actionButtons0Add1Edit2Delete==2" *ngIf="!fileData4blogsDocumentPendingForUpload"
                   id="ctrlUploadblogsDocument" type="file" name="image" accept="image/*"
                   (change)="onfileProgressForBlogsDocument($event)">
-                <i *ngIf="fileData4blogsDocumentPendingForUpload"
-                  class="icon-upload m-2 cursor-pointer text-success" (click)="onUploadForBlogsDocument()">
+                <i *ngIf="fileData4blogsDocumentPendingForUpload" class="icon-upload m-2 cursor-pointer text-success"
+                  (click)="onUploadForBlogsDocument()" i18n>
                   Upload
                 </i>
                 <div *ngIf="submitted && f.blogsDocument.errors" class="invalid-feedback">
-                  <div *ngIf="f.blogsDocument.errors.required">Image Cover is required
+                  <div *ngIf="f.blogsDocument.errors.required" i18n>Image Cover is required
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-xl-12">
-              <button class="btn btn-success btn-sm float-right" (click)="onBlogsUpdateSubmit()">
+            <div class="col-xl-12" [ngSwitch]="actionButtons0Add1Edit2Delete">
+              <button *ngSwitchCase="0" class="btn btn-success btn-sm float-right" (click)="onBlogsUpdateSubmit()" i18n>
                 <i class="icon icon-plus"></i>
                 ADD
+              </button>
+              <button *ngSwitchCase="1" class="btn btn-success btn-sm float-right" (click)="onBlogsUpdateSubmit()" i18n>
+                <i class="icon icon-pencil"></i>
+                Edit
+              </button>
+              <button *ngSwitchCase="2" class="btn btn-success btn-sm float-right" (click)="DeleteData()" i18n>
+                <i class="icon icon-trash"></i>
+                Delete
               </button>
             </div>
           </div>

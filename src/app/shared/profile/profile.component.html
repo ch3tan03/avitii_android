@@ -1,7 +1,8 @@
 <div class="row pt-0 saas2">
     <div class="col-xl-12 col-12 text-center" *ngIf="!f.isVerified.value">
-        <h3>Submit your portfolio for verification</h3>
-        <P class="my-3">Remember to fill in all fields correctly, otherwise you may risk lifetime blockage</P>
+        <h3 i18n>Submit your portfolio for verification</h3>
+        <P class="my-3" i18n>Remember to fill in all fields correctly, otherwise you may risk lifetime blockage</P>
+
     </div>
     <div class="col-xl-12 col-12">
         <section class="tab-product  p-b-0">
@@ -9,12 +10,13 @@
             <ul class="nav nav-justified nav-material nav-tabs mb-4 shadow-sm" id="top-tab" role="tablist">
                 <li class="nav-item">
                     <a id="btn_click_profile_basic_details" class="nav-link show active" data-toggle="tab"
-                        data-target="#profile_basic_details">Basic Details</a>
+                        data-target="#profile_basic_details" (click)="clickOnGoToNext(1, true)" i18n>Basic Details</a>
                     <div class="material-border"></div>
                 </li>
                 <li class="nav-item">
                     <a id="btn_click_profile_skills_verification" class="nav-link" data-toggle="tab"
-                        data-target="#profile_skills_verification">Upload Documents</a>
+                        data-target="#profile_skills_verification" (click)="clickOnGoToNext(2, true)" i18n>Upload
+                        Documents</a>
                     <div class="material-border"></div>
                 </li>
                 <!-- <li class="nav-item" *ngIf="_role == Role.Borrower">
@@ -33,22 +35,24 @@
                         <div class="col-xl-3 text-center">
                             <div class="card">
                                 <div class="card-header">
-                                    <h6 class="font-weight-bold text-primary">Change Profile Pic</h6>
+                                    <h6 class="font-weight-bold text-primary" i18n>Change Profile Pic</h6>
                                 </div>
 
                                 <div class="card-body">
-                                    <img [src]="f.selfProfileUrl.value" onerror="this.src='/assets/img/nouser.png';"
+                                    <img [src]="f.selfProfileUrl.value" onerror="this.src='./assets/img/nouser.png';"
                                         class="border img-fluid rounded-circle mb-3" />
-
+                                    <br>
                                     <i *ngIf="!selfProfileUrlPendingForUpload"
                                         class="icon-pencil-alt m-2 cursor-pointer text-success"
-                                        (click)="openFileUploaderForProfile()">
+                                        (click)="modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'selfProfileUrl', null);">
+                                        <!--openFileUploaderForProfile()-->
+
                                         <input id="ctrlUploadProfile" hidden type="file" name="image" accept="image/*"
-                                            (change)="fileProgressForProfile($event)"> Upload
+                                            (change)="fileProgressForProfile($event)"> Edit
                                     </i>
                                     <i *ngIf="selfProfileUrlPendingForUpload"
                                         class="icon-upload m-2 cursor-pointer text-success"
-                                        (click)="onUploadForProfile()"> Save
+                                        (click)="onUploadForProfile()" i18n> Save
                                     </i>
                                 </div>
 
@@ -56,12 +60,14 @@
                                     <div class="btn-group btn-group-sm shadow">
                                         <button disabled *ngIf="f.role.value !=='lender'" type="button" class="btn"
                                             (click)="onClickRoleChange('borrower')"
-                                            [ngClass]="{ 'btn-success': f.role.value=='borrower', 'btn-outline-success': f.role.value!='borrower'}">
+                                            [ngClass]="{ 'btn-success': f.role.value=='borrower', 'btn-outline-success': f.role.value!='borrower'}"
+                                            i18n>
                                             Borrower
                                         </button>
                                         <button disabled *ngIf="f.role.value !=='borrower'" type="button" class="btn"
                                             (click)="onClickRoleChange('lender')"
-                                            [ngClass]="{ 'btn-success': f.role.value=='lender', 'btn-outline-success': f.role.value!='lender'}">
+                                            [ngClass]="{ 'btn-success': f.role.value=='lender', 'btn-outline-success': f.role.value!='lender'}"
+                                            i18n>
                                             Lender
                                         </button>
                                     </div>
@@ -77,60 +83,63 @@
 
                             <div class="card">
                                 <div class="card-header">
-                                    <h6 class="font-weight-bold text-primary">Change Basic Details</h6>
+                                    <h6 class="font-weight-bold text-primary" i18n>Change Basic Details</h6>
                                 </div>
 
                                 <div class="card-body">
                                     <div class="form-row ">
                                         <div class="col-xl-12 mb-3">
-                                            <label for="firstName">First Name</label>
+                                            <label for="firstName" i18n>First Name</label>
                                             <input type="text" formControlName="firstName" class="form-control"
                                                 [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
                                             <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
-                                                <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                                                <div *ngIf="f.firstName.errors.required" i18n>First Name is required
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-xl-12 mb-3">
-                                            <label for="middleName">Middle Name</label>
+                                            <label for="middleName" i18n>Middle Name</label>
                                             <input type="text" formControlName="middleName" class="form-control"
                                                 [ngClass]="{ 'is-invalid': submitted && f.middleName.errors }" />
                                             <div *ngIf="submitted && f.middleName.errors" class="invalid-feedback">
-                                                <div *ngIf="f.middleName.errors.required">Middle Name is required</div>
+                                                <div *ngIf="f.middleName.errors.required" i18n>Middle Name is required
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-xl-12 mb-3">
-                                            <label for="lastName">Last Name</label>
+                                            <label for="lastName" i18n>Last Name</label>
                                             <input type="text" formControlName="lastName" class="form-control"
                                                 [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
                                             <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
-                                                <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                                                <div *ngIf="f.lastName.errors.required" i18n>Last Name is required</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-row">
                                         <div class="col-xl-12 mb-3">
-                                            <label for="mobileNo">
+                                            <label for="mobileNo" i18n>
                                                 <i class="icon-mobile text-success"></i>
                                                 Mobile Number</label>
                                             <input type="text" formControlName="mobileNo" class="form-control"
                                                 [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" />
                                             <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
-                                                <div *ngIf="f.mobileNo.errors.required">Mobile Number is required
+                                                <div *ngIf="f.mobileNo.errors.required" i18n>Mobile Number is required
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-xl-12 mb-3">
-                                            <label for="emailAddress">Email</label>
+                                            <label for="emailAddress" i18n>Email</label>
                                             <input type="text" disabled formControlName="emailAddress"
                                                 class="form-control"
                                                 [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }" />
                                             <div *ngIf="submitted && f.emailAddress.errors" class="invalid-feedback">
-                                                <div *ngIf="f.emailAddress.errors.required">Email is required</div>
-                                                <div *ngIf="f.emailAddress.errors.email">Invalid Email format.</div>
+                                                <div *ngIf="f.emailAddress.errors.required" i18n>Email is required</div>
+                                                <div *ngIf="f.emailAddress.errors.email" i18n>Invalid Email format.
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-xl-12 mb-3">
-                                            <label for="address" class="font-weight-bold">
+                                            <label for="address" class="font-weight-bold" i18n>
                                                 Address
                                             </label>
                                             <textarea rows="2" maxlength="500" formControlName="address"
@@ -138,7 +147,7 @@
                                                 [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
                                                     </textarea>
                                             <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
-                                                <div *ngIf="f.address.errors.required">
+                                                <div *ngIf="f.address.errors.required" i18n>
                                                     Address is required
                                                 </div>
                                             </div>
@@ -146,36 +155,39 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="col-xl-12 mb-3">
-                                            <label for="birthDateCustomised">Birthday</label>
+                                            <label for="birthDateCustomised" i18n>Birthday</label>
                                             <input type="date" formControlName="birthDateCustomised"
                                                 class="form-control"
-                                                [ngClass]="{ 'is-invalid': submitted && f.birthDateCustomised.errors }"
+                                                [ngClass]="{ 'is-invalid': submitted && f.birthDate.errors }"
                                                 [max]="maxDate" [min]="minDate" />
                                             <div *ngIf="submitted && f.birthDate.errors" class="invalid-feedback">
-                                                <div *ngIf="f.birthDateCustomised.errors.required">Email is required
+                                                <div *ngIf="f.birthDate.errors.required" i18n>Birthday is required
                                                 </div>
-                                                <div *ngIf="f.birthDateCustomised.errors.date">Invalid Email format.
+                                                <div *ngIf="f.birthDate.errors.date" i18n>Invalid date format.
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-xl-4 d-none">
                                             <div class="form-row">
                                                 <div class="col-xl-12 text-center mb-2">
-                                                    <label>Gender</label>
+                                                    <label i18n>Gender</label>
                                                     <div class="btn-group shadow mb-3">
                                                         <button type="button" class="btn"
                                                             (click)="onClickGenderChange('male')"
-                                                            [ngClass]="{ 'btn-success': f.gender.value=='male', 'btn-outline-success': f.gender.value!='male'}">
+                                                            [ngClass]="{ 'btn-success': f.gender.value=='male', 'btn-outline-success': f.gender.value!='male'}"
+                                                            i18n>
                                                             Male
                                                         </button>
                                                         <button type="button" class="btn"
                                                             (click)="onClickGenderChange('female')"
-                                                            [ngClass]="{ 'btn-success': f.gender.value=='female', 'btn-outline-success': f.gender.value!='female'}">
+                                                            [ngClass]="{ 'btn-success': f.gender.value=='female', 'btn-outline-success': f.gender.value!='female'}"
+                                                            i18n>
                                                             Female
                                                         </button>
                                                         <button type="button" class="btn"
                                                             (click)="onClickGenderChange('other')"
-                                                            [ngClass]="{ 'btn-success': f.gender.value=='other', 'btn-outline-success': f.gender.value!='other'}">
+                                                            [ngClass]="{ 'btn-success': f.gender.value=='other', 'btn-outline-success': f.gender.value!='other'}"
+                                                            i18n>
                                                             Other
                                                         </button>
                                                     </div>
@@ -183,39 +195,38 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-12 mb-3">
-                                            <label for="cityCode">City</label>
+                                            <label for="cityCode" i18n>City</label>
                                             <input type="text" formControlName="cityCode" class="form-control"
                                                 [ngClass]="{ 'is-invalid': submitted && f.cityCode.errors }" />
                                             <div *ngIf="submitted && f.cityCode.errors" class="invalid-feedback">
-                                                <div *ngIf="f.cityCode.errors.required">City is required</div>
+                                                <div *ngIf="f.cityCode.errors.required" i18n>City is required</div>
                                             </div>
                                         </div>
                                         <div class="col-xl-12 mb-3">
-                                            <label for="cityCode">Country</label>
+                                            <label for="cityCode" i18n>Country</label>
                                             <select formControlName="country" class="custom-select"
                                                 [ngClass]="{ 'is-invalid': submitted && f.country.errors }">
-                                                <option value="" selected disabled>Choose Country</option>
+                                                <option value="" selected disabled i18n>Choose Country</option>
                                                 <option *ngFor="let country of countrylist" [ngValue]="country">
                                                     {{country}}</option>
                                             </select>
                                             <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
-                                                <div *ngIf="f.country.errors.required">Country is required</div>
+                                                <div *ngIf="f.country.errors.required" i18n>Country is required</div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xl-12 mb-3">
-                                            <label for="myProfileDetails">About</label>
+                                            <label for="myProfileDetails" i18n>Describe Yourself</label>
                                             <textarea rows="2" maxlength="500" formControlName="myProfileDetails"
                                                 class="form-control"
                                                 [ngClass]="{ 'is-invalid': submitted && f.myProfileDetails.errors }">
                                                     </textarea>
                                             <div *ngIf="submitted && f.myProfileDetails.errors"
                                                 class="invalid-feedback">
-                                                <div *ngIf="f.myProfileDetails.errors.required">About My Profile is
+                                                <div *ngIf="f.myProfileDetails.errors.required" i18n>Describe Yourself
+                                                    is
                                                     required
-                                                </div>
-                                                <div *ngIf="f.myProfileDetails.errors.email">About My Profile format.
                                                 </div>
                                             </div>
                                         </div>
@@ -225,7 +236,7 @@
 
                                 <div class="card-footer">
                                     <button type="button" (click)="clickOnGoToNext(2)" [disabled]="loading"
-                                        class="btn btn-primary float-right">Next</button>
+                                        class="btn btn-primary float-right" i18n>Next</button>
                                 </div>
                             </div>
 
@@ -236,7 +247,7 @@
                 <div class="tab-pane fade" id="profile_skills_verification">
                     <div class="card">
                         <div class="card-header">
-                            <h6 class="font-weight-bold text-primary">Update Your Documents</h6>
+                            <h6 class="font-weight-bold text-primary" i18n>Update Your Documents</h6>
                         </div>
 
                         <div class="card-body">
@@ -247,21 +258,40 @@
                                     </div>
                                     <hr>
                                 </div>
-                                <div class="col-xl-3 col-12">
+                                <div class="col-xl-4 col-12">
                                     <div class="form-group">
-                                        <label class="mb-1" for="myPassportNumber">Passport Number:</label>
-                                        <input type="text" formControlName="myPassportNumber" class="form-control"
+                                        <label class="mb-1" for="myPassportNumber" i18n>Passport Number:</label>
+                                        <input type="text"
+                                            [readonly]="authenticationService.currentUserValue.myPassportNumber"
+                                            formControlName="myPassportNumber" class="form-control"
                                             [ngClass]="{ 'is-invalid': submitted && f.myPassportNumber.errors }" />
                                         <div *ngIf="submitted && f.myPassportNumber.errors" class="invalid-feedback">
-                                            <div *ngIf="f.myPassportNumber.errors.required">Passport number is required
+                                            <div *ngIf="f.myPassportNumber.errors.required" i18n>Passport number is
+                                                required
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-xl-4 col-12">
+                                    <button class="btn btn-outline-secondary btn-block mt-4"
+                                        (click)="modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myPassportMedia', null);"
+                                        i18n>
+                                        Upload Scan Copy
+                                    </button>
+                                </div>
+                                <div class="col-xl-4 col-12">
+                                    <button class="btn btn-outline-secondary btn-block mt-4"
+                                        (click)="modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myPassportMediaSelfVerify', null);"
+                                        i18n>
+                                        Upload Image of Scan Copy With Your Face
+                                    </button>
+                                </div>
+                                <!--
                                 <div class="col-xl-7 col-12">
                                     <div class="custom-file mt-4">
                                         <input type="file" class="custom-file-input" name="image" accept="image/*"
-                                            (change)="fileProgressAssetDocs($event,'lblmyPassportMedia')">
+                                            (change)="fileProgressAssetDocs($event,'lblmyPassportMedia')"
+                                            [ngClass]="{ 'is-invalid': submitted && f.myPassportMedia.errors }">
                                         <label class="custom-file-label" for="customFile"
                                             id="lblmyPassportMedia">{{lblmyPassportMediaText}}</label>
                                     </div>
@@ -272,23 +302,43 @@
                                         Upload
                                     </button>
                                 </div>
+                            -->
                             </div>
                             <div class="form-row mb-3">
-                                <div class="col-xl-3 col-12">
+                                <div class="col-xl-4 col-12">
                                     <div class="form-group">
-                                        <label class="mb-1" for="myDLNumber">Driving License Number:</label>
-                                        <input type="text" formControlName="myDLNumber" class="form-control"
+                                        <label class="mb-1" for="myDLNumber" i18n>Driving License Number:</label>
+                                        <input type="text"
+                                            [readonly]="authenticationService.currentUserValue.myDLNumber"
+                                            formControlName="myDLNumber" class="form-control"
                                             [ngClass]="{ 'is-invalid': submitted && f.myDLNumber.errors }" />
                                         <div *ngIf="submitted && f.myDLNumber.errors" class="invalid-feedback">
-                                            <div *ngIf="f.myDLNumber.errors.required">Driving License number is required
+                                            <div *ngIf="f.myDLNumber.errors.required" i18n>Driving License number is
+                                                required
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-xl-4 col-12">
+                                    <button class="btn btn-outline-secondary btn-block mt-4"
+                                        (click)="modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myDLMedia', null);"
+                                        i18n>
+                                        Upload Scan Copy
+                                    </button>
+                                </div>
+                                <div class="col-xl-4 col-12">
+                                    <button class="btn btn-outline-secondary btn-block mt-4"
+                                        (click)="modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myDLMediaSelfVerify', null);"
+                                        i18n>
+                                        Upload Image of Scan Copy With Your Face
+                                    </button>
+                                </div>
+                                <!--
                                 <div class="col-xl-7">
                                     <div class="custom-file mt-4">
                                         <input type="file" class="custom-file-input" name="image" accept="image/*"
-                                            (change)="fileProgressAssetDocs($event,'lblmyDLMedia')">
+                                            (change)="fileProgressAssetDocs($event,'lblmyDLMedia')"
+                                            [ngClass]="{ 'is-invalid': submitted && f.myDLMedia.errors }">
                                         <label class="custom-file-label" for="customFile"
                                             id="lblmyDLMedia">{{lblmyDLMediaText}}</label>
                                     </div>
@@ -299,22 +349,40 @@
                                         Upload
                                     </button>
                                 </div>
+                            -->
                             </div>
                             <div class="form-row mb-3">
-                                <div class="col-xl-3 col-12">
+                                <div class="col-xl-4 col-12">
                                     <div class="form-group">
-                                        <label class="mb-1" for="cprNumber">CPR Number:</label>
-                                        <input type="text" formControlName="cprNumber" class="form-control"
+                                        <label class="mb-1" for="cprNumber" i18n>CPR Number:</label>
+                                        <input type="text" [readonly]="authenticationService.currentUserValue.cprNumber"
+                                            formControlName="cprNumber" class="form-control"
                                             [ngClass]="{ 'is-invalid': submitted && f.cprNumber.errors }" />
                                         <div *ngIf="submitted && f.cprNumber.errors" class="invalid-feedback">
-                                            <div *ngIf="f.cprNumber.errors.required">CPR number is required</div>
+                                            <div *ngIf="f.cprNumber.errors.required" i18n>CPR number is required</div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-xl-4 col-12">
+                                    <button class="btn btn-outline-secondary btn-block mt-4"
+                                        (click)="modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myHICardMedia', null);"
+                                        i18n>
+                                        Upload Scan Copy
+                                    </button>
+                                </div>
+                                <div class="col-xl-4 col-12">
+                                    <button class="btn btn-outline-secondary btn-block mt-4"
+                                        (click)="modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myHICardMediaSelfVerify', null);"
+                                        i18n>
+                                        Upload Image of Scan Copy With Your Face
+                                    </button>
+                                </div>
+                                <!--
                                 <div class="col-xl-7">
                                     <div class="custom-file mt-4">
                                         <input type="file" class="custom-file-input" name="image" accept="image/*"
-                                            (change)="fileProgressAssetDocs($event,'lblmyHICardMedia')">
+                                            (change)="fileProgressAssetDocs($event,'lblmyHICardMedia')"
+                                            [ngClass]="{ 'is-invalid': submitted && f.myHICardMedia.errors }">
                                         <label class="custom-file-label" for="customFile"
                                             id="lblmyHICardMedia">{{lblmyHICardMediaText}}</label>
                                     </div>
@@ -325,51 +393,61 @@
                                         Upload
                                     </button>
                                 </div>
+                            -->
                             </div>
                             <div class="row">
                                 <div class="col-xl-4">
-                                    <div class="card" *ngFor="let previewUrl of f.myPassportMedia.value">
+                                    <div class="card"
+                                        *ngFor="let previewUrl of _.union(_.values(f.myPassportMedia.value),_.values(f.myPassportMediaSelfVerify.value))">
                                         <img class="card-img-top" [src]="previewUrl.url" style="height: 200px;">
-                                        <div *ngIf="fileUploadProgress">
+                                        <div *ngIf="fileUploadProgress" i18n>
                                             Upload progress: {{ fileUploadProgress }}
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body" i18n>
                                             Passport
+                                            <!--
                                             <a class="btn btn-primary btn-sm btn-xs float-right text-white"><i
                                                     class="icon icon-trash"
                                                     (click)="onUploadCleanAssetDocs('myPassportMedia')"></i></a>
+                                                    -->
                                         </div>
                                     </div>
 
 
                                 </div>
                                 <div class="col-xl-4">
-                                    <div class="card" *ngFor="let previewUrl of f.myDLMedia.value">
+                                    <div class="card"
+                                        *ngFor="let previewUrl of _.union(_.values(f.myDLMedia.value),_.values(f.myDLMediaSelfVerify.value))">
                                         <img class="card-img-top" [src]="previewUrl.url" style="height: 200px;">
-                                        <div *ngIf="fileUploadProgress">
+                                        <div *ngIf="fileUploadProgress" i18n>
                                             Upload progress: {{ fileUploadProgress }}
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body" i18n>
                                             Driving Licence
+                                            <!--
                                             <a class="btn btn-primary btn-sm btn-xs float-right text-white"><i
                                                     class="icon icon-trash"
                                                     (click)="onUploadCleanAssetDocs('myDLMedia')"></i></a>
+                                                    -->
                                         </div>
                                     </div>
 
 
                                 </div>
                                 <div class="col-xl-4">
-                                    <div class="card" *ngFor="let previewUrl of f.myHICardMedia.value">
+                                    <div class="card"
+                                        *ngFor="let previewUrl of _.union(_.values(f.myHICardMedia.value),_.values(f.myHICardMediaSelfVerify.value))">
                                         <img class="card-img-top" [src]="previewUrl.url" style="height: 200px;">
-                                        <div *ngIf="fileUploadProgress">
+                                        <div *ngIf="fileUploadProgress" i18n>
                                             Upload progress: {{ fileUploadProgress }}
                                         </div>
-                                        <div class="card-body">
+                                        <div class="card-body" i18n>
                                             Health Insurance Card
+                                            <!--
                                             <a class="btn btn-primary btn-sm btn-xs float-right text-white"><i
                                                     class="icon icon-trash"
                                                     (click)="onUploadCleanAssetDocs('myHICardMedia')"></i></a>
+                                            -->
                                         </div>
                                     </div>
 
@@ -377,39 +455,53 @@
                             </div>
                             <div class="form-row">
                                 <div class="col-xl-12 mt-3">
-                                    <label for="myProfileDetails">Social Network</label>
+                                    <label class="d-none" for="myProfileDetails" i18n>Social Network</label>
                                     <div class="form-row">
-                                        <div class="col-xl-4">
+                                        <div class="col-xl-4 d-none">
 
                                             <select [(ngModel)]="appName" class="custom-select"
                                                 [ngModelOptions]="{standalone: true}">
-                                                <option value="facebook" selected>Facebook</option>
-                                                <!--<option value="linkedin">LinkedIn</option>-->
+                                                <option value="facebook" selected i18n> Facebook</option>
+                                            
                                             </select>
                                         </div>
-                                        <div class="col-xl-8">
-
+                                        <div class="col-xl-12">
+                                            <!--
                                             <div class="input-group mb-3">
                                                 <input type="url"
                                                     pattern="/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi*"
                                                     [(ngModel)]="appLink" class="form-control"
                                                     [ngModelOptions]="{standalone: true}"
-                                                    placeholder="Facebook Profile Public Link" />
+                                                    placeholder="Facebook Profile Public Link"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.externalAppLinks.errors }" />
                                                 <div class="input-group-append">
                                                     <button class="btn btn-success"
-                                                        (click)="addExternalAppLinks(true, null, appName, appLink)">Add</button>
+                                                        (click)="addExternalAppLinks(true, null, appName, appLink)" i18n>Add</button>
                                                 </div>
                                             </div>
-
+                                        -->
+                                            <div class="form-group">
+                                                <label class="mb-1" for="externalAppLinkUrl" i18n>Facebook Profile Public Link:</label>
+                                                <input type="url"
+                                                    formControlName="externalAppLinkUrl" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.externalAppLinkUrl.errors }" />
+                                                <div *ngIf="submitted && f.externalAppLinkUrl.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.externalAppLinkUrl.errors.required" i18n>Link is required
+                                                    </div>
+                                                    <div *ngIf="f.externalAppLinkUrl.errors.pattern" i18n>Link is required*
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-xl-12">
                                             <div *ngIf="submitted && f.externalAppLinks.errors"
                                                 class="invalid-feedback">
-                                                <div *ngIf="f.externalAppLinks.errors.required">Links required</div>
+                                                <div *ngIf="f.externalAppLinks.errors.required" i18n>Links required
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-row" *ngFor="let applinks of f.externalAppLinks.value">
+                                    <div class="form-row d-none" *ngFor="let applinks of f.externalAppLinks.value">
                                         <div class="col-xl-2">
                                             {{applinks.appName | titlecase}}
                                         </div>
@@ -425,16 +517,19 @@
                                         <div class="col-xl-12 mt-3">
                                             <div class="row">
                                                 <div class="col-xl-12">
-                                                    <label class="font-weight-bold">Are you registered in RKI?</label>
+                                                    <label class="font-weight-bold" i18n>Are you registered in
+                                                        RKI?</label>
                                                     <i class="icon icon-info-alt ml-2" data-toggle="tooltip"
                                                         title="Hooray!"></i>
                                                     <div class="btn-group btn-group btn-group-sm ml-4">
                                                         <button type="button" class="btn" (click)="onRKIChange(true)"
-                                                            [ngClass]="{ 'btn-success': onInitRKICheckedValue()==true, 'btn-outline-success':onInitRKICheckedValue()==false}">
+                                                            [ngClass]="{ 'btn-success': onInitRKICheckedValue()==true, 'btn-outline-success':onInitRKICheckedValue()==false}"
+                                                            i18n>
                                                             Yes
                                                         </button>
                                                         <button type="button" class="btn" (click)="onRKIChange(false)"
-                                                            [ngClass]="{ 'btn-success': onInitRKICheckedValue()==false, 'btn-outline-success':onInitRKICheckedValue()==true}">
+                                                            [ngClass]="{ 'btn-success': onInitRKICheckedValue()==false, 'btn-outline-success':onInitRKICheckedValue()==true}"
+                                                            i18n>
                                                             No
                                                         </button>
                                                     </div>
@@ -442,7 +537,7 @@
                                             </div>
 
                                             <div *ngIf="submitted && f.isRKIRegistered.errors" class="error">
-                                                <div *ngIf="f.isRKIRegistered.errors.required" class="text-red">
+                                                <div *ngIf="f.isRKIRegistered.errors.required" class="text-red" i18n>
                                                     data required
                                                 </div>
                                             </div>
@@ -453,11 +548,13 @@
                                         </div>
                                     </div>
                                     <div class="form-row" *ngIf="!onInitRKICheckedValue()">
+                                        <!--
                                         <div class="col-xl-9">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" name="image"
                                                     accept="image/*"
-                                                    (change)="fileProgressAssetDocs($event,'lblmyRKIMedia')">
+                                                    (change)="fileProgressAssetDocs($event,'lblmyRKIMedia')"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.myRKIMedia.errors }">
                                                 <label class="custom-file-label" for="customFile"
                                                     id="lblmyRKIMedia">{{lblmyRKIMediaText}}</label>
                                             </div>
@@ -468,16 +565,34 @@
                                                 Upload
                                             </button>
                                         </div>
+                                    -->
+                                        <div class="col-xl-6 col-12">
+                                            <button class="btn btn-outline-secondary btn-block mt-4"
+                                                (click)="modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMedia', null);"
+                                                i18n>
+                                                Upload Scan Copy
+                                            </button>
+                                        </div>
+                                        <div class="col-xl-6 col-12">
+                                            <button class="btn btn-outline-secondary btn-block mt-4"
+                                                (click)="modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMediaSelfVerify', null);"
+                                                i18n>
+                                                Upload Image of Scan Copy With Your Face
+                                            </button>
+                                        </div>
                                         <div class="col-xl-4">
 
                                             <div class="row">
-                                                <div class="col-xl-12" *ngFor="let previewUrl of f.myRKIMedia.value">
+                                                <div class="col-xl-12"
+                                                    *ngFor="let previewUrl of _.union(_.values(f.myRKIMedia.value),_.values(f.myRKIMediaSelfVerify.value))">
+                                                    <!--
                                                     <i class="icon-trash text-danger"
                                                         (click)="onUploadCleanAssetDocs('myRKIMedia')"></i>
+                                                    -->
                                                     <img class="img-fluid" [src]="previewUrl.url" />
                                                 </div>
                                                 <div>
-                                                    <div *ngIf="fileUploadProgress">
+                                                    <div *ngIf="fileUploadProgress" i18n>
                                                         Upload progress: {{ fileUploadProgress }}
                                                     </div>
                                                 </div>
@@ -490,7 +605,7 @@
                         </div>
                         <div class="card-footer">
                             <button type="button" (click)="onProfileUpdateSubmit()" [disabled]="loading"
-                                class="btn btn-primary float-right">Save</button>
+                                class="btn btn-primary float-right" i18n>Save</button>
                         </div>
                     </div>
 

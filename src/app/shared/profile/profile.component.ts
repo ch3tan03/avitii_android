@@ -12,14 +12,9 @@ import { UtilityService } from 'src/app/services/utility.service';
 import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { ProfilePortfolioComponent } from '../profile-portfolio/profile-portfolio.component';
+import { MediaProccessComponent } from '../media-proccess/media-proccess.component';
 
 declare var require: any
-
-const { overwrite, getNames } = require('country-list');
-overwrite([{
-  code: 'US',
-  name: 'USA'
-}])
 
 const uploadAPI = environment.apiUrl + '/api/post/upload/assetdata';
 
@@ -37,6 +32,7 @@ export class ProfileComponent implements OnInit {
   private sub: any;
   private isOtpSent: boolean;
   public _role: string;
+  public _ = _;
   loading = false;
   submitted = false;
   Role = Role;
@@ -51,7 +47,6 @@ export class ProfileComponent implements OnInit {
   lblmyPassportMediaText = 'Choose Passport';
   lblmyDLMediaText = 'Choose Driving Licence';
   lblmyHICardMediaText = 'Choose Health Insurance Card';
-
   Roles = Object.keys(Role);
   countrylist: any = null;
   fileData: File = null;
@@ -67,25 +62,28 @@ export class ProfileComponent implements OnInit {
     private http: HttpClient,
     private formBuilder: FormBuilder,
     private router: Router,
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     private userService: UserService,
     private alertService: AlertService,
     private appRouterService: AppRouterService,
     private route: ActivatedRoute,
     public utilityService: UtilityService
   ) {
+    if (this.utilityService._.keys(this.authenticationService.allUserLevelsDataLenders).length <= 0 || this.utilityService._.keys(this.authenticationService.allUserLevelsDataBorrower).length <= 0) {
+      this.authenticationService.fetchAllUserLevelsByUserId();
+    }
     // redirect to home if already logged in
     if (!this.authenticationService.currentUserValue) {
       this.appRouterService.appRouter('');
     }
 
-    this.countrylist = getNames();
+    this.countrylist = this.utilityService.returnCountryNames();
     this.initForm();
     this.userService.getUserById(this.authenticationService.currentUserValue._id)
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.showEditingForm(data["data"]);
@@ -143,6 +141,90 @@ export class ProfileComponent implements OnInit {
           this.alertService.error(errorMsg2show);
           this.loading = false;
         });
+    this.handleConditionalValidation();
+
+  }
+
+  handleConditionalValidation() {
+    this.profileForm.get('myPassportMedia').valueChanges
+      .subscribe(userCategory => {
+        if (userCategory) {
+          this.profileForm.get('myPassportMedia').setValidators([Validators.required]);
+          this.profileForm.get('myPassportNumber').setValidators([Validators.required]);
+          this.profileForm.get('myDLMedia').setValidators(null);
+          this.profileForm.get('myDLNumber').setValidators(null);
+        } else {
+          this.profileForm.get('myPassportMedia').setValidators(null);
+          this.profileForm.get('myPassportNumber').setValidators(null);
+          this.profileForm.get('myDLMedia').setValidators([Validators.required]);
+          this.profileForm.get('myDLNumber').setValidators([Validators.required]);
+        }
+
+        this.profileForm.get('myPassportMedia').updateValueAndValidity();
+        this.profileForm.get('myPassportNumber').updateValueAndValidity();
+        this.profileForm.get('myDLMedia').updateValueAndValidity();
+        this.profileForm.get('myDLNumber').updateValueAndValidity();
+      });
+    this.profileForm.get('myPassportNumber').valueChanges
+      .subscribe(userCategory => {
+        if (userCategory) {
+          this.profileForm.get('myPassportMedia').setValidators([Validators.required]);
+          this.profileForm.get('myPassportNumber').setValidators([Validators.required]);
+          this.profileForm.get('myDLMedia').setValidators(null);
+          this.profileForm.get('myDLNumber').setValidators(null);
+        } else {
+          this.profileForm.get('myPassportMedia').setValidators(null);
+          this.profileForm.get('myPassportNumber').setValidators(null);
+          this.profileForm.get('myDLMedia').setValidators([Validators.required]);
+          this.profileForm.get('myDLNumber').setValidators([Validators.required]);
+        }
+
+        this.profileForm.get('myPassportMedia').updateValueAndValidity();
+        this.profileForm.get('myPassportNumber').updateValueAndValidity();
+        this.profileForm.get('myDLMedia').updateValueAndValidity();
+        this.profileForm.get('myDLNumber').updateValueAndValidity();
+      });
+
+    this.profileForm.get('myDLMedia').valueChanges
+      .subscribe(userCategory => {
+        if (userCategory) {
+          this.profileForm.get('myPassportMedia').setValidators(null);
+          this.profileForm.get('myPassportNumber').setValidators(null);
+          this.profileForm.get('myDLMedia').setValidators([Validators.required]);
+          this.profileForm.get('myDLNumber').setValidators([Validators.required]);
+
+        } else {
+          this.profileForm.get('myPassportMedia').setValidators([Validators.required]);
+          this.profileForm.get('myPassportNumber').setValidators([Validators.required]);
+          this.profileForm.get('myDLMedia').setValidators(null);
+          this.profileForm.get('myDLNumber').setValidators(null);
+        }
+
+        this.profileForm.get('myPassportMedia').updateValueAndValidity();
+        this.profileForm.get('myPassportNumber').updateValueAndValidity();
+        this.profileForm.get('myDLMedia').updateValueAndValidity();
+        this.profileForm.get('myDLNumber').updateValueAndValidity();
+      });
+    this.profileForm.get('myDLNumber').valueChanges
+      .subscribe(userCategory => {
+        if (userCategory) {
+          this.profileForm.get('myPassportMedia').setValidators(null);
+          this.profileForm.get('myPassportNumber').setValidators(null);
+          this.profileForm.get('myDLMedia').setValidators([Validators.required]);
+          this.profileForm.get('myDLNumber').setValidators([Validators.required]);
+
+        } else {
+          this.profileForm.get('myPassportMedia').setValidators([Validators.required]);
+          this.profileForm.get('myPassportNumber').setValidators([Validators.required]);
+          this.profileForm.get('myDLMedia').setValidators(null);
+          this.profileForm.get('myDLNumber').setValidators(null);
+        }
+
+        this.profileForm.get('myPassportMedia').updateValueAndValidity();
+        this.profileForm.get('myPassportNumber').updateValueAndValidity();
+        this.profileForm.get('myDLMedia').updateValueAndValidity();
+        this.profileForm.get('myDLNumber').updateValueAndValidity();
+      });
   }
 
   showEditingForm(_userObj) {
@@ -156,7 +238,7 @@ export class ProfileComponent implements OnInit {
       role: [_userObj.role || '', Validators.required],
       appPermissions: this.formBuilder.array(_userObj.appPermissions || []),
       firstName: [_userObj.firstName || '', Validators.required],
-      middleName: [_userObj.middleName || '', Validators.required],
+      middleName: [_userObj.middleName || ''],
       lastName: [_userObj.lastName || '', Validators.required],
       userName: [_userObj.userName || ''],
       address: [_userObj.address || '', Validators.required],
@@ -164,7 +246,7 @@ export class ProfileComponent implements OnInit {
       acceptnewUpdates: [_userObj.acceptnewUpdates || ''],
       acceptTerms: [_userObj.acceptTerms || ''],
       cityCode: [_userObj.cityCode || '', Validators.required],
-      birthDate: [_userObj.birthDate || '', Validators.required],
+      birthDate: [_userObj.birthDate || ''],
       nationality: [_userObj.nationality || ''],
       residence: [_userObj.residence || ''],
       birthPlace: [_userObj.birthPlace || ''],
@@ -180,6 +262,7 @@ export class ProfileComponent implements OnInit {
       academicDocuments: this.formBuilder.array(_userObj.academicDocuments || []),
       employmentVerifications: this.formBuilder.array(_userObj.employmentVerifications || []),
       externalAppLinks: this.formBuilder.array(_userObj.externalAppLinks || [], [Validators.required]),
+      externalAppLinkUrl: [_userObj.externalAppLinkUrl || '', Validators.required],
       hearAboutUs: [_userObj.hearAboutUs || ''],
       app_doc_type: [_userObj.app_doc_type || ''],
 
@@ -188,15 +271,19 @@ export class ProfileComponent implements OnInit {
       myProfileDetails: [_userObj.myProfileDetails || ''],
       userType: [_userObj.userType || ''],
 
-      myPassportMedia: this.formBuilder.array(_userObj.myPassportMedia || [], Validators.required),
-      myPassportNumber: [_userObj.myPassportNumber || '', Validators.required],
-      myDLMedia: this.formBuilder.array(_userObj.myDLMedia || [], Validators.required),
-      myDLNumber: [_userObj.myDLNumber || '', Validators.required],
-      myHICardMedia: this.formBuilder.array(_userObj.myHICardMedia || [], Validators.required),
-      cprNumber: [_userObj.cprNumber || '', Validators.required],
+      myPassportMedia: this.formBuilder.array(_userObj.myPassportMedia || []),/*, Validators.required */
+      myPassportMediaSelfVerify: this.formBuilder.array(_userObj.myPassportMediaSelfVerify || []),/*, Validators.required */
+      myPassportNumber: [_userObj.myPassportNumber || ''],/*, Validators.required */
+      myDLMedia: this.formBuilder.array(_userObj.myDLMedia || []),/*, Validators.required */
+      myDLMediaSelfVerify: this.formBuilder.array(_userObj.myDLMediaSelfVerify || []),/*, Validators.required */
+      myDLNumber: [_userObj.myDLNumber || ''],/*, Validators.required */
+      myHICardMedia: this.formBuilder.array(_userObj.myHICardMedia || []),/*, Validators.required */
+      myHICardMediaSelfVerify: this.formBuilder.array(_userObj.myHICardMediaSelfVerify || []),/*, Validators.required */
+      cprNumber: [_userObj.cprNumber || ''],/*, Validators.required */
 
       myRKIMedia: this.formBuilder.array(_userObj.myRKIMedia || []),
-      isRKIRegistered: [_userObj.isRKIRegistered || false, Validators.required],
+      myRKIMediaSelfVerify: this.formBuilder.array(_userObj.myRKIMediaSelfVerify || []),
+      isRKIRegistered: [_userObj.isRKIRegistered || false],/*, Validators.required */
 
       accountName: [_userObj.accountName || ''],
       accountNumber: [_userObj.accountNumber || ''],
@@ -228,6 +315,9 @@ export class ProfileComponent implements OnInit {
 
     this.onClickRoleChange(this._role);
     this.onClickGenderChange(_userObj.gender || 'male');
+    if (_userObj.externalAppLinks && _.filter(_userObj.externalAppLinks, { 'appName': this.appName }).length > 0) {
+      this.profileForm.get('externalAppLinkUrl').setValue(_.filter(_userObj.externalAppLinks, { 'appName': this.appName })[0].appLink);
+    }
   }
 
   initForm() {
@@ -237,7 +327,7 @@ export class ProfileComponent implements OnInit {
       role: ['', Validators.required],
       appPermissions: this.formBuilder.array([]),
       firstName: ['', Validators.required],
-      middleName: ['', Validators.required],
+      middleName: [''],
       lastName: ['', Validators.required],
       userName: [''],
       address: ['', Validators.required],
@@ -245,7 +335,7 @@ export class ProfileComponent implements OnInit {
       acceptnewUpdates: [''],
       acceptTerms: [''],
       cityCode: ['', Validators.required],
-      birthDate: ['', Validators.required],
+      birthDate: [''],
       nationality: [''],
       residence: [''],
       birthPlace: [''],
@@ -261,6 +351,7 @@ export class ProfileComponent implements OnInit {
       academicDocuments: this.formBuilder.array([]),
       employmentVerifications: this.formBuilder.array([]),
       externalAppLinks: this.formBuilder.array([], [Validators.required]),
+      externalAppLinkUrl: ['', Validators.required],
       hearAboutUs: [''],
       app_doc_type: [''],
 
@@ -269,15 +360,19 @@ export class ProfileComponent implements OnInit {
       myProfileDetails: [''],
       userType: [''],
 
-      myPassportMedia: this.formBuilder.array([], Validators.required),
-      myPassportNumber: ['', Validators.required],
-      myDLMedia: this.formBuilder.array([], Validators.required),
-      myDLNumber: ['', Validators.required],
-      myHICardMedia: this.formBuilder.array([], Validators.required),
-      cprNumber: ['', Validators.required],
+      myPassportMedia: this.formBuilder.array([]),/*, Validators.required */
+      myPassportMediaSelfVerify: this.formBuilder.array([]),/*, Validators.required */
+      myPassportNumber: [''],/*, Validators.required */
+      myDLMedia: this.formBuilder.array([]),/*, Validators.required */
+      myDLMediaSelfVerify: this.formBuilder.array([]),/*, Validators.required */
+      myDLNumber: [''],/*, Validators.required */
+      myHICardMedia: this.formBuilder.array([]),/*, Validators.required */
+      myHICardMediaSelfVerify: this.formBuilder.array([]),/*, Validators.required */
+      cprNumber: [''],/*, Validators.required */
 
       myRKIMedia: this.formBuilder.array([]),
-      isRKIRegistered: [false, Validators.required],
+      myRKIMediaSelfVerify: this.formBuilder.array([]),
+      isRKIRegistered: [false],/*, Validators.required */
 
       accountName: [''],
       accountNumber: [''],
@@ -307,25 +402,60 @@ export class ProfileComponent implements OnInit {
     this.element_btn_click_profile_banking = document.getElementById('btn_click_profile_banking') as HTMLElement;
   }
 
-  clickOnGoToNext(_step) {
-    this.submitted = true;
-    switch (_step) {
-      case 1:
-        this.element_btn_click_profile_basic_details.click();
-      case 2:
-        this.element_btn_click_profile_skills_verification.click();
-        break;
-      case 3:
-        if (this._role == Role.Borrower) {
-          this.element_btn_click_profile_banking.click();
-        } else {
-          this.element_btn_click_profile_portfolio.click();
-        }
-        break;
-      case 4:
-        this.element_btn_click_profile_portfolio.click();
-        break;
-    }
+  lastStepDataSaved: number = 0;
+
+  clickOnGoToNext(_step, doNotTriggerSelfT: boolean = false) {
+    setTimeout(() => {
+      this.submitted = true;
+      switch (_step) {
+        case 1:
+          if (!doNotTriggerSelfT) {
+            this.element_btn_click_profile_basic_details.click();
+          }
+          this.lastStepDataSaved = (_step - 1);
+          break;
+        case 2:
+          if (this.profileForm.controls.firstName.invalid || this.profileForm.controls.middleName.invalid || this.profileForm.controls.lastName.invalid || this.profileForm.controls.mobileNo.invalid) {
+            this.alertService.error("Please Provide all data");
+            this.clickOnGoToNext(_step - 1);
+            return;
+          }
+          if (this.profileForm.controls.emailAddress.invalid || this.profileForm.controls.address.invalid || this.profileForm.controls.birthDateCustomised.invalid || this.profileForm.controls.gender.invalid) {
+            this.alertService.error("Please Provide all data");
+            this.clickOnGoToNext(_step - 1);
+            return;
+          }
+          if (this.profileForm.controls.cityCode.invalid || this.profileForm.controls.country.invalid || this.profileForm.controls.myProfileDetails.invalid) {
+            this.alertService.error("Please Provide all data");
+            this.clickOnGoToNext(_step - 1);
+            return;
+          }
+          if (!doNotTriggerSelfT) {
+            this.element_btn_click_profile_skills_verification.click();
+          }
+          if (this.lastStepDataSaved != (_step - 1)) {
+            this.lastStepDataSaved = (_step - 1);
+            this.onProfileUpdateSubmit(true);
+          }
+          break;
+        case 3:
+          if (!doNotTriggerSelfT) {
+            if (this._role == Role.Borrower) {
+              this.element_btn_click_profile_banking.click();
+            } else {
+              this.element_btn_click_profile_portfolio.click();
+            }
+          }
+          this.lastStepDataSaved = (_step - 1);
+          break;
+        case 4:
+          if (!doNotTriggerSelfT) {
+            this.element_btn_click_profile_portfolio.click();
+          }
+          this.lastStepDataSaved = (_step - 1);
+          break;
+      }
+    }, 50);
   }
 
   ngOnInit() {
@@ -347,15 +477,26 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  onProfileUpdateSubmit() {
+  onProfileUpdateSubmit(byPassValidation: boolean = false) {
     if (this.selfProfileUrlPendingForUpload) {
       this.alertService.error("Please Save Profile First");
       return;
     }
     this.submitted = true;
-    if (this.profileForm.invalid) {
-      this.alertService.error("Please Provide all data");
+    let externalAppLinkUrl = this.profileForm.get('externalAppLinkUrl').value;
+    let dt = new RegExp("((http|https)://)(www.)?[a-zA-Z0-9@:%._\\+~#?&//=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%._\\+~#?&//=]*)")
+    if (externalAppLinkUrl && dt.test(externalAppLinkUrl)) {
+      this.removeExternalAppLinks(this.appName);
+      this.addExternalAppLinks(true, null, this.appName, this.profileForm.get('externalAppLinkUrl').value);
+    } else {
+      this.alertService.error("Please Provide app links");
       return;
+    }
+    if (!byPassValidation) {
+      if (this.profileForm.invalid) {
+        this.alertService.error("Please Provide all data");
+        return;
+      }
     }
     let _birthDate = this.profileForm.get('birthDateCustomised').value;
 
@@ -366,14 +507,17 @@ export class ProfileComponent implements OnInit {
     if (this.utilityService._returnT_4undefined(this.profileForm.get('userType').value, false)) {
       switch (this.profileForm.get('role').value) {
         case Role.Lender:
-          this.profileForm.get('userType').setValue(UserType.new_lender);
+          //this.profileForm.get('userType').setValue(UserType.new_lender);
+          this.profileForm.get('userType').setValue(this.authenticationService.allUserLevelsDataLenders[0]._id);
           break;
         case Role.Borrower:
-          this.profileForm.get('userType').setValue(UserType.new_borrower);
+          //this.profileForm.get('userType').setValue(UserType.new_borrower);
+          this.profileForm.get('userType').setValue(this.authenticationService.allUserLevelsDataBorrower[0]._id);
           break;
       }
     }
-
+    let isVerified = this.profileForm.get('isVerified').value;
+    let firstName = this.profileForm.get('firstName').value;
     this.userService.updateUserById(this.profileForm.value)
       .pipe(first())
       .subscribe(
@@ -384,8 +528,17 @@ export class ProfileComponent implements OnInit {
             //this.authenticationService.clearCurrentUserObj();
             localStorage.setItem('currentUser', JSON.stringify(data['data']));
             this.authenticationService.sendCurrentUserObj(data['data']);
-            this.alertService.success('Your Profile is Updated successfully', true);
-            this.appRouterService.appRouter(this.authenticationService.currentUserValue);
+            if (byPassValidation) {
+              this.alertService.success('Basic details of your profile is updated successfully', true);
+            } else {
+              if (!isVerified) {
+                //this.alertService.success('Dear ' + firstName + ', Thank you for uploading your documents. You have to wait for Admin to approve it all manually before your account is active. Remember to check your email for more info, or try logging in later. If there are still problems, contact support through our live chat.', true);
+                this.alertService.success('Thank you for using our platform. It can take up to 48 hours for your documents to be approved, as we go through all the documents manually.', true);
+              } else {
+                this.alertService.success('Your Profile is Updated successfully', true);
+                this.appRouterService.appRouter(this.authenticationService.currentUserValue);
+              }
+            }
           } else {
             //alert(JSON.stringify(data['message']));
             this.alertService.error(data['message']);
@@ -417,8 +570,8 @@ export class ProfileComponent implements OnInit {
   maxDate = moment({ year: this.year - 18, month: this.month, day: this.day }).format('YYYY-MM-DD');
 
   date(ev) {
-    console.log(this.minDate)
-    console.log(ev.target.value)
+    //console.log(this.minDate)
+    //console.log(ev.target.value)
   }
 
   Data: Array<any> = [
@@ -533,10 +686,10 @@ export class ProfileComponent implements OnInit {
     }).subscribe(events => {
       if (events.type === HttpEventType.UploadProgress) {
         this.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
-        console.log(this.fileUploadProgress);
+        //console.log(this.fileUploadProgress);
       } else if (events.type === HttpEventType.Response) {
         this.fileUploadProgress = '';
-        console.log(events.body);
+        //console.log(events.body);
         //alert('SUCCESS !!');
         this.fileData = null;
         this.alertService.success('Uploaded Successfully !!', true);
@@ -576,13 +729,13 @@ export class ProfileComponent implements OnInit {
   }
 
   onSelectMyProfileMedia(event) {
-    console.log('371 :: Added', event);
+    //console.log('371 :: Added', event);
     this.myProfileFiles.push(...event.addedFiles);
-    console.log('373', this.myProfileFiles);
+    //console.log('373', this.myProfileFiles);
   }
 
   onRemoveMyProfileMedia(event) {
-    console.log('378 :: Removed', event);
+    //console.log('378 :: Removed', event);
     this.myProfileFiles.splice(this.myProfileFiles.indexOf(event), 1);
   }
 
@@ -614,10 +767,10 @@ export class ProfileComponent implements OnInit {
       }).subscribe(events => {
         if (events.type === HttpEventType.UploadProgress) {
           this.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
-          console.log(this.fileUploadProgress);
+          //console.log(this.fileUploadProgress);
         } else if (events.type === HttpEventType.Response) {
           this.fileUploadProgress = '';
-          console.log(events.body);
+          //console.log(events.body);
           //alert('SUCCESS !!');
           _.pullAt(this.myProfileFiles, _index);
           this.alertService.success('Uploaded Successfully !!', true);
@@ -704,10 +857,10 @@ export class ProfileComponent implements OnInit {
     }).subscribe(events => {
       if (events.type === HttpEventType.UploadProgress) {
         this.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
-        console.log(this.fileUploadProgress);
+        //console.log(this.fileUploadProgress);
       } else if (events.type === HttpEventType.Response) {
         this.fileUploadProgress = '';
-        console.log(events.body);
+        //console.log(events.body);
         //alert('SUCCESS !!');
         this.fileData4Profile = null;
         this.alertService.success('Uploaded Successfully !!', true);
@@ -758,7 +911,7 @@ export class ProfileComponent implements OnInit {
     this.appLink = '';
     if (_addT) {
       checkArray.push(new FormControl(_obj2push));
-      this.alertService.success("External App added");
+      //this.alertService.success("External App added");
     } else {
       if (parseInt(_index) >= 0) {
         checkArray.removeAt(_index);
@@ -774,9 +927,20 @@ export class ProfileComponent implements OnInit {
       }
     }
   }
+  removeExternalAppLinks(appName) {
+    const checkArray: FormArray = this.profileForm.get('externalAppLinks') as FormArray;
+    let i: number = 0;
+    checkArray.controls.forEach((item: FormControl) => {
+      if (item.value.appName == appName) {
+        checkArray.removeAt(i);
+        return;
+      }
+      i++;
+    });
+  }
   addEditPortFolio() {
 
-    console.log('95', this.authenticationService.currentUserValue);
+    //console.log('95', this.authenticationService.currentUserValue);
     const dialogRef = this.dialog.open(ProfilePortfolioComponent, {
 
       maxWidth: '100vw',
@@ -790,7 +954,7 @@ export class ProfileComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+      //console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
 
@@ -846,10 +1010,10 @@ export class ProfileComponent implements OnInit {
     }).subscribe(events => {
       if (events.type === HttpEventType.UploadProgress) {
         this.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
-        console.log(this.fileUploadProgress);
+        //console.log(this.fileUploadProgress);
       } else if (events.type === HttpEventType.Response) {
         this.fileUploadProgress = '';
-        console.log(events.body);
+        //console.log(events.body);
         //alert('SUCCESS !!');
         this.fileData = null;
         this.alertService.success('Uploaded Successfully !!', true);
@@ -891,4 +1055,71 @@ export class ProfileComponent implements OnInit {
     }
   }
   //#endregion
+
+  //#region open media uploader with crop feature
+  modalMediaUploadWithCropFeature(documentId, attributeKey, subFolderName) {
+    switch (attributeKey) {
+      case 'selfProfileUrl':
+
+        break;
+      case 'myPassportMedia':
+      case 'myPassportMediaSelfVerify':
+      case 'myDLMedia':
+      case 'myDLMediaSelfVerify':
+      case 'myHICardMedia':
+      case 'myHICardMediaSelfVerify':
+      case 'myRKIMedia':
+      case 'myRKIMediaSelfVerify':
+        const checkArray: FormArray = this.profileForm.get(attributeKey) as FormArray;
+        if (checkArray.length >= 1) {
+          this.alertService.error("Upload MAX limit reached. Please remove existing.");
+          return;
+        }
+
+        break;
+    }
+    //console.log('912', this.authenticationService.currentUserValue);
+    const dialogRef = this.dialog.open(MediaProccessComponent, {
+
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      hasBackdrop: true,
+      data: {
+        documentId: documentId,
+        attributeKey: attributeKey,
+        subFolderName: subFolderName
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result.data) {
+          switch (result.data.attributeKey) {
+            case 'selfProfileUrl':
+              if (result.data.uploadedFilePath) {
+                this.profileForm.get('selfProfileUrl').setValue(result.data.uploadedFilePath);
+              }
+              break;
+            case 'myPassportMedia':
+            case 'myPassportMediaSelfVerify':
+            case 'myDLMedia':
+            case 'myDLMediaSelfVerify':
+            case 'myHICardMedia':
+            case 'myHICardMediaSelfVerify':
+            case 'myRKIMedia':
+            case 'myRKIMediaSelfVerify':
+              this.alertService.success("It can take up to 48 hours for your documents to be approved, as we go through all the documents manually.");
+              if (result.data.uploadedFilePath) {
+                this.onAssetDocumentsUpdate(true, null, result.data.uploadedFileObj, result.data.attributeKey);
+              }
+              break;
+          }
+        }
+      }
+      //console.log(`946 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+    });
+  }
+  //#endregion open media uploader with crop feature
 }

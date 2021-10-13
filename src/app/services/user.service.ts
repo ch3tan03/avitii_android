@@ -17,8 +17,8 @@ export class UserService {
     public utilityService: UtilityService
   ) { }
 
-  getAll() {
-    var _userType = null;
+  getAll(user: any) {
+    var _role = null;
     //var _result=this.http.post<any>(`http://localhost:4444/api/get/user/getall`,{})
     //.pipe(user => {
     // login successful if there's a jwt token in the response
@@ -28,10 +28,11 @@ export class UserService {
     //alert(JSON.stringify( _result));
     //return this.http.get<User[]>(`http://localhost:4444/api/get/user/getall`, null);
     //return this.http.get<User[]>(`${environment.apiUrl}/users`);
-    ////this.socket.emit('user_getall', _userType);
+    ////this.socket.emit('user_getall', _role);
     ////var _result = this.socket.fromEvent<User[]>('user_getall_list');
     //alert(JSON.stringify( _result));
     ////return _result;
+    return this.http.post(this.baseurl + 'api/post/user/getall', user,{});
   }
 
   getById(id: number) {
@@ -39,7 +40,7 @@ export class UserService {
   }
 
   register(user: User) {
-    console.log(user);
+    //console.log(user);
     return this.http.post(this.baseurl + 'api/post/user/admin/register', user);
     //return this.http.post(`http://localhost:4444/api/user/register`, user);
     //return this.http.post(`${environment.apiUrl}/api/user/register`, user);
@@ -51,12 +52,12 @@ export class UserService {
   }
 
   verifyOtpAndRegister(user: User) {
-    user["serverUrl"]=environment.serverUrl;
+    user["serverUrl"] = environment.serverUrl;
     return this.http.post(this.baseurl + 'api/post/users/verifyotp', user);
   }
 
   verifyUserAndRegister(user: User) {
-    user["serverUrl"]=environment.serverUrl;
+    user["serverUrl"] = environment.serverUrl;
     return this.http.post(this.baseurl + 'api/post/users/verifyuserandregister', user);
   }
 
@@ -89,6 +90,10 @@ export class UserService {
     return this.http.post(this.baseurl + 'api/post/user/update/byid', user);
   }
 
+  updateUserByIdFromAdmin(user: User, updatedBy) {
+    return this.http.post(this.baseurl + 'api/post/user/admin/update/byid', { user, updatedBy });
+  }
+
   authenticateAndLoginUser(userName: string, password: string) {
     return this.http.post<any>(this.baseurl + 'api/post/user/admin/login', { userName, password });
   }
@@ -107,12 +112,21 @@ export class UserService {
   }
   alreadySubscribedForUsersArray: boolean;
   public allAppUsersCollections: any = {};
+  latestUserIdArrayMissingFromLocal = [];
   proccessAllAppUsersCollections(userIdArray) {
-    if (userIdArray) {
+    if (userIdArray && Object.keys(userIdArray).length > 0) {
+      if (!this.latestUserIdArrayMissingFromLocal) {
+        this.latestUserIdArrayMissingFromLocal = [];
+      }
+      let existingUserIdArray = this.utilityService._.map(this.allAppUsersCollections, "userId");
+      this.latestUserIdArrayMissingFromLocal = this.utilityService._.difference(userIdArray, existingUserIdArray);
+      if (this.utilityService._.keys(existingUserIdArray).length == 0 || this.latestUserIdArrayMissingFromLocal.length > 0) {
+        this.alreadySubscribedForUsersArray = false;
+      }
+
       if (!this.alreadySubscribedForUsersArray) {
         this.alreadySubscribedForUsersArray = true;
         this.getAppUsersCollections(userIdArray).subscribe(result => {
-
           let data = null;
           if (result) {
             if (result['success'] == true || result['success'] == false) {
@@ -127,7 +141,7 @@ export class UserService {
         });
       }
     } else {
-      this.getAppUsersCollections(userIdArray);
+      //this.getAppUsersCollections(userIdArray);
     }
   }
 
@@ -236,6 +250,21 @@ export class UserService {
     return fromEvent<any[]>(this.socketioService.socket, 'response_user_get_by_userid_user_income_expense_details_data');
   }
 
+  getUserLoanTypeWiseCountDetailsByUserId(userId, role) {
+    this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_loan_type_wise_count_details_data', userId, role);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_get_by_userid_loan_type_wise_count_details_data');
+  }
+
+  getAdminDashboardDataOnLogin(userId, role) {
+    this.socketioService.emitEventWithNameAndData('request_to_get_admin_dashboard_details_data', userId, role);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_to_get_admin_dashboard_details_data');
+  }
+
+  getUsersDashboardData(userId, role) {
+    this.socketioService.emitEventWithNameAndData('request_to_get_users_dashboard_details_data', userId, role);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_to_get_users_dashboard_details_data');
+  }
+
   addUpdateUserBlogs(blogs) {
     this.socketioService.emitEventWithNameAndData('request_user_add_update_blogs_data', blogs);
     return fromEvent<any[]>(this.socketioService.socket, 'response_user_add_update_blogs_data');
@@ -271,6 +300,10 @@ export class UserService {
     return fromEvent<any[]>(this.socketioService.socket, 'response_user_add_update_user_levels_data');
   }
 
+  getAddUpdateUserUserLevels() {
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_add_update_user_levels_data');
+  }
+
   getUserLevelsById(userLevelsId) {
     this.socketioService.emitEventWithNameAndData('request_user_get_by_id_user_levels_data', userLevelsId);
     return fromEvent<any[]>(this.socketioService.socket, 'response_user_get_by_id_user_levels_data');
@@ -301,4 +334,86 @@ export class UserService {
     return fromEvent<any[]>(this.socketioService.socket, 'response_user_internal_key_update_verification');
   }
 
+  addUpdateUserRestrictionDetails(userUserRestrictionDetails) {
+    this.socketioService.emitEventWithNameAndData('request_user_add_update_user_restriction_details_data', userUserRestrictionDetails);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_add_update_user_restriction_details_data');
+  }
+
+  getUserRestrictionDetailsById(userUserRestrictionDetailsId) {
+    this.socketioService.emitEventWithNameAndData('request_user_get_by_id_user_restriction_details_data', userUserRestrictionDetailsId);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_get_by_id_user_restriction_details_data');
+  }
+
+  getUserRestrictionDetailsByUserId(userId) {
+    this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_user_restriction_details_data', userId);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_get_by_userid_user_restriction_details_data');
+  }
+  updateUserRestrictionVerificationStatus(_documentId: string, _status2update: string, _updatedBy: string) {
+    this.socketioService.emitEventWithNameAndData("request_user_update_restriction_verification", _documentId, _status2update, _updatedBy);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_update_restriction_verification');
+  }
+  getUserRestrictionExpenseDetailsByUserId(userId) {
+    this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_user_restriction_expense_details_data', userId);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_get_by_userid_user_restriction_expense_details_data');
+  }
+
+  addUpdateUserPartners(partners) {
+    this.socketioService.emitEventWithNameAndData('request_user_add_update_partners_data', partners);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_add_update_partners_data');
+  }
+
+  getPartnersById(partnersId) {
+    this.socketioService.emitEventWithNameAndData('request_user_get_by_id_partners_data', partnersId);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_get_by_id_partners_data');
+  }
+
+  getPartnersByUserId(userId) {
+    this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_partners_data', userId);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_get_by_userid_partners_data');
+  }
+
+  updatePartnersStatus(_documentId: string, _status2update: string, _updatedBy: string) {
+    this.socketioService.emitEventWithNameAndData("request_user_update_partners_verification", _documentId, _status2update, _updatedBy);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_update_partners_verification');
+  }
+
+  getPartnersAll(_skip: number) {
+    this.socketioService.emitEventWithNameAndData("request_user_getall_partners", _skip);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_getall_partners');
+  }
+
+  getPartnersAllByQuery(_skip: number) {
+    this.socketioService.emitEventWithNameAndData("request_user_getall_partners", _skip);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_getall_partners');
+  }
+
+  addUpdateUserCustomerReview(customerReview) {
+    this.socketioService.emitEventWithNameAndData('request_user_add_update_customerReview_data', customerReview);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_add_update_customerReview_data');
+  }
+
+  getCustomerReviewById(customerReviewId) {
+    this.socketioService.emitEventWithNameAndData('request_user_get_by_id_customerReview_data', customerReviewId);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_get_by_id_customerReview_data');
+  }
+
+  getCustomerReviewByUserId(userId) {
+    this.socketioService.emitEventWithNameAndData('request_user_get_by_userid_customerReview_data', userId);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_get_by_userid_customerReview_data');
+  }
+
+  updateCustomerReviewStatus(_documentId: string, _status2update: string, _updatedBy: string) {
+    this.socketioService.emitEventWithNameAndData("request_user_update_customerReview_verification", _documentId, _status2update, _updatedBy);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_update_customerReview_verification');
+  }
+
+  getCustomerReviewAll(_skip: number) {
+    this.socketioService.emitEventWithNameAndData("request_user_getall_customerReview", _skip);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_getall_customerReview');
+  }
+
+  getCustomerReviewAllByQuery(_skip: number) {
+    this.socketioService.emitEventWithNameAndData("request_user_getall_customerReview", _skip);
+    return fromEvent<any[]>(this.socketioService.socket, 'response_user_getall_customerReview');
+  }
 }

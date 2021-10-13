@@ -1,3 +1,14 @@
+<div class="row" *ngIf="isOpenedInModel">
+    <div class="col-xl-11 col-10">
+        <h4 class="mb-3 text-black-50" i18n>
+            Income proof & Monthly Expenses verification
+        </h4>
+    </div>
+    <div class="col-xl-1 col-2">
+        <i class="icon-close float-right" mat-button mat-dialog-close></i>
+    </div>
+</div>
+
 <div class="row">
     <div class="col-xl-12 col-12">
         <div id="accordion_userIncomeDetailsForm">
@@ -7,15 +18,17 @@
                         [attr.href]="'#collapse_userIncomeDetailsForm'" i18n>
                         <h6 class="m-0 font-weight-bold text-primary">
                             Update {{adminViewT?userObj.firstName+'`s':'Your'}} Income Details
-                            <span class="float-right" [ngClass]="{ 'text-success': userObj.totalAllowedBudget, 'text-danger': !userObj.totalAllowedBudget }">
+                            <span class="float-right"
+                                [ngClass]="{ 'text-success': userObj.totalAllowedBudget, 'text-danger': !userObj.totalAllowedBudget }">
                                 &nbsp;{{userObj.totalAllowedBudget}}&nbsp;
                             </span>
                             <span class="float-right">
-                                &nbsp;{{userObj.totalIncome4currentUser || 0 }}&nbsp;-&nbsp;{{userObj.totalExpense4currentUser || 0}}&nbsp;=&nbsp;
+                                &nbsp;{{userObj.totalIncome4currentUser || 0
+                                }}&nbsp;-&nbsp;{{userObj.totalExpense4currentUser || 0}}&nbsp;=&nbsp;
                             </span>
                         </h6>
                     </a>
-                    <i *ngIf="isOpenedInModel" class="icon-close float-right" mat-button mat-dialog-close></i>
+
                 </div>
                 <div [attr.id]="'collapse_userIncomeDetailsForm'" class="collapse show"
                     data-parent="#accordion_userIncomeDetailsForm">
@@ -23,31 +36,31 @@
 
                         <form [formGroup]="userIncomeDetailsForm">
                             <div class="row mb-3" *ngIf="!adminViewT">
-                                <div class="col-xl-12 mb-3">
+                                <div class="col-xl-12 mb-3" i18n>
                                     Update your mothly income proof for the verification. be careful with your income
                                     proof
                                     uploads as you cannot change your monthly income proof once uploaded.
                                 </div>
                                 <div class="col-xl-4">
                                     <div class="form-group">
-                                        <label for="incomeSource">Income Source</label>
+                                        <label for="incomeSource" i18n>Income Source</label>
                                         <input type="text" formControlName="incomeSource" class="form-control"
                                             [ngClass]="{ 'is-invalid': submittedIncomeDetails && f.incomeSource.errors }"
                                             placeholder="e.g. salaried, business, stocks etc" />
                                         <div *ngIf="submittedIncomeDetails && f.incomeSource.errors"
                                             class="invalid-feedback">
-                                            <div *ngIf="f.incomeSource.errors.required">Income Source is required</div>
+                                            <div *ngIf="f.incomeSource.errors.required" i18n>Income Source is required</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xl-4">
                                     <div class="form-group">
-                                        <label for="monthlyIncomeAmount">Monthly Income in kr</label>
+                                        <label for="monthlyIncomeAmount" i18n>Monthly Income in kr</label>
                                         <input type="number" formControlName="monthlyIncomeAmount" class="form-control"
                                             [ngClass]="{ 'is-invalid': submittedIncomeDetails && f.monthlyIncomeAmount.errors }" />
                                         <div *ngIf="submittedIncomeDetails && f.monthlyIncomeAmount.errors"
                                             class="invalid-feedback">
-                                            <div *ngIf="f.monthlyIncomeAmount.errors.required">Monthly Income is
+                                            <div *ngIf="f.monthlyIncomeAmount.errors.required" i18n>Monthly Income is
                                                 required
                                             </div>
                                         </div>
@@ -55,7 +68,8 @@
                                 </div>
                                 <div class="col-xl-4">
                                     <div class="form-group">
-                                        <label for="monthlyIncomeProofDocument">Upload proof</label>
+                                        <label for="monthlyIncomeProofDocument" i18n>Upload proof</label>
+                                        <br>
                                         <!--
                                         <input type="file" class="form-control" id="monthlyIncomeProofDocument"
                                             (change)="onfileProgressForMonthlyIncomeProofDocument($event)">
@@ -64,7 +78,7 @@
                                         <img *ngIf="f.monthlyIncomeProofDocument.value"
                                             [src]="f.monthlyIncomeProofDocument.value" class="border img-fluid mb-3"
                                             height="50" width="50" />
-
+                                        <!--
                                         <input *ngIf="!fileData4MonthlyIncomeProofDocumentPendingForUpload"
                                             id="ctrlUploadmonthlyIncomeProofDocument" type="file" name="image"
                                             accept="image/*"
@@ -74,9 +88,16 @@
                                             (click)="onUploadForMonthlyIncomeProofDocument()">
                                             Upload
                                         </i>
+                                    -->
+                                    <br>
+                                        <i class="icon-upload m-2 cursor-pointer text-success"
+                                            (click)="modalMediaUploadWithCropFeature(userObj._id + '__income_proof', 'monthlyIncomeProofDocument', null);">
+                                            {{fileData4MonthlyIncomeProofDocumentPendingForUpload?'Change':'Upload'}}
+                                        </i>
+
                                         <div *ngIf="submittedIncomeDetails && f.monthlyIncomeProofDocument.errors"
                                             class="invalid-feedback">
-                                            <div *ngIf="f.monthlyIncomeProofDocument.errors.required">Monthly Income
+                                            <div *ngIf="f.monthlyIncomeProofDocument.errors.required" i18n>Monthly Income
                                                 Proof is required
                                             </div>
                                         </div>
@@ -93,10 +114,10 @@
                             <table class="table mb-0">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Type</th>
-                                        <th scope="col">Monthly Income</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Preview</th>
+                                        <th scope="col" i18n>Type</th>
+                                        <th scope="col" i18n>Monthly Income</th>
+                                        <th scope="col" i18n>Status</th>
+                                        <th scope="col" i18n>Preview</th>
                                         <th *ngIf="adminViewT" scope="col">#</th>
                                     </tr>
                                 </thead>
@@ -106,7 +127,7 @@
                                         <td>{{obj2show.monthlyIncomeAmount}}</td>
                                         <td class="text-capitalize text-cap">
                                             <span class="badge"
-                                                [ngClass]="{'badge-success': (obj2show.monthlyIncomeStatus==SessionStatus.Approved || obj2show.monthlyIncomeStatus==SessionStatus.Accepted || obj2show.monthlyIncomeStatus==SessionStatus.Active || obj2show.monthlyIncomeStatus==SessionStatus.Completed || obj2show.monthlyIncomeStatus==SessionStatus.OngoingInitiated  || obj2show.monthlyIncomeStatus==SessionStatus.OngoingAccepted  || obj2show.monthlyIncomeStatus==SessionStatus.Ongoing), 'badge-danger': (obj2show.monthlyIncomeStatus==SessionStatus.Rejected || obj2show.monthlyIncomeStatus==SessionStatus.RejectedOngoing || obj2show.monthlyIncomeStatus==SessionStatus.Suspended), 'badge-info': ( obj2show.monthlyIncomeStatus==null || obj2show.monthlyIncomeStatus=='' || obj2show.monthlyIncomeStatus==SessionStatus.Pending)}">
+                                                [ngClass]="{'badge-success': (obj2show.monthlyIncomeStatus==SessionStatus.Approved || obj2show.monthlyIncomeStatus==SessionStatus.Accepted || obj2show.monthlyIncomeStatus==SessionStatus.Active || obj2show.monthlyIncomeStatus==SessionStatus.Completed || obj2show.monthlyIncomeStatus==SessionStatus.OngoingInitiated  || obj2show.monthlyIncomeStatus==SessionStatus.AwaitingForApproval  || obj2show.monthlyIncomeStatus==SessionStatus.Ongoing), 'badge-danger': (obj2show.monthlyIncomeStatus==SessionStatus.Rejected || obj2show.monthlyIncomeStatus==SessionStatus.RejectedOngoing || obj2show.monthlyIncomeStatus==SessionStatus.Suspended), 'badge-info': ( obj2show.monthlyIncomeStatus==null || obj2show.monthlyIncomeStatus=='' || obj2show.monthlyIncomeStatus==SessionStatus.Pending)}">
                                                 {{obj2show.monthlyIncomeStatus}}
                                             </span>
                                         </td>
@@ -156,8 +177,8 @@
             <div class="card shadow mb-4">
                 <div class="card-header py-3 flex-row align-items-center justify-content-between">
                     <a class="collapsed card-link" data-toggle="collapse"
-                        [attr.href]="'#collapse_userExpenseDetailsForm'" i18n>
-                        <h6 class="m-0 font-weight-bold text-primary">
+                        [attr.href]="'#collapse_userExpenseDetailsForm'">
+                        <h6 class="m-0 font-weight-bold text-primary" i18n>
                             Update {{adminViewT?userObj.firstName+'`s':'Your'}} Monthly Expenses
                         </h6>
                     </a>
@@ -168,32 +189,32 @@
 
                         <form [formGroup]="userExpenseDetailsForm">
                             <div class="row mb-3" *ngIf="!adminViewT">
-                                <div class="col-xl-12 mb-3">
+                                <div class="col-xl-12 mb-3" i18n>
                                     Update your existing loans or other expenses.
 
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="form-group">
-                                        <label for="usr">Expense Details</label>
+                                        <label for="usr" i18n>Expense Details</label>
                                         <label for="expenseDetails">Expense Details</label>
                                         <input type="text" formControlName="expenseDetails" class="form-control"
                                             [ngClass]="{ 'is-invalid': submittedExpenseDetails && ff.expenseDetails.errors }"
                                             placeholder="e.g. salaried, business, stocks etc" />
                                         <div *ngIf="submittedExpenseDetails && ff.expenseDetails.errors"
                                             class="invalid-feedback">
-                                            <div *ngIf="ff.expenseDetails.errors.required">Expense Details is required
+                                            <div *ngIf="ff.expenseDetails.errors.required" i18n>Expense Details is required
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xl-6">
                                     <div class="form-group">
-                                        <label for="monthlyEMIAmount">Monthly EMI</label>
+                                        <label for="monthlyEMIAmount" i18n>Monthly EMI</label>
                                         <input type="number" formControlName="monthlyEMIAmount" class="form-control"
                                             [ngClass]="{ 'is-invalid': submittedExpenseDetails && ff.monthlyEMIAmount.errors }" />
                                         <div *ngIf="submittedExpenseDetails && ff.monthlyEMIAmount.errors"
                                             class="invalid-feedback">
-                                            <div *ngIf="ff.monthlyEMIAmount.errors.required">Monthly EMI is required
+                                            <div *ngIf="ff.monthlyEMIAmount.errors.required" i18n>Monthly EMI is required
                                             </div>
                                         </div>
 
@@ -251,11 +272,11 @@
                             <table class="table mb-0">
                                 <thead>
                                     <tr>
-                                        <th scope="col">Expense Details</th>
-                                        <th scope="col">Start Date</th>
-                                        <th scope="col">Payment Date</th>
-                                        <th scope="col">Monthly EMI</th>
-                                        <th scope="col">Status</th>
+                                        <th scope="col" i18n>Expense Details</th>
+                                        <th scope="col" i18n>Start Date</th>
+                                        <th scope="col" i18n>Payment Date</th>
+                                        <th scope="col" i18n>Monthly EMI</th>
+                                        <th scope="col" i18n>Status</th>
                                         <th *ngIf="adminViewT" scope="col">#</th>
                                     </tr>
                                 </thead>
@@ -268,7 +289,7 @@
                                         <td>{{obj2show.monthlyEMIAmount}}</td>
                                         <td class="text-capitalize text-cap">
                                             <span class="badge"
-                                                [ngClass]="{'badge-success': (obj2show.monthlyExpenseStatus==SessionStatus.Approved || obj2show.monthlyExpenseStatus==SessionStatus.Accepted || obj2show.monthlyExpenseStatus==SessionStatus.Active || obj2show.monthlyExpenseStatus==SessionStatus.Completed || obj2show.monthlyExpenseStatus==SessionStatus.OngoingInitiated  || obj2show.monthlyExpenseStatus==SessionStatus.OngoingAccepted  || obj2show.monthlyExpenseStatus==SessionStatus.Ongoing), 'badge-danger': (obj2show.monthlyExpenseStatus==SessionStatus.Rejected || obj2show.monthlyExpenseStatus==SessionStatus.RejectedOngoing || obj2show.monthlyExpenseStatus==SessionStatus.Suspended), 'badge-info': ( obj2show.monthlyExpenseStatus==null || obj2show.monthlyExpenseStatus=='' || obj2show.monthlyExpenseStatus==SessionStatus.Pending)}">
+                                                [ngClass]="{'badge-success': (obj2show.monthlyExpenseStatus==SessionStatus.Approved || obj2show.monthlyExpenseStatus==SessionStatus.Accepted || obj2show.monthlyExpenseStatus==SessionStatus.Active || obj2show.monthlyExpenseStatus==SessionStatus.Completed || obj2show.monthlyExpenseStatus==SessionStatus.OngoingInitiated  || obj2show.monthlyExpenseStatus==SessionStatus.AwaitingForApproval  || obj2show.monthlyExpenseStatus==SessionStatus.Ongoing), 'badge-danger': (obj2show.monthlyExpenseStatus==SessionStatus.Rejected || obj2show.monthlyExpenseStatus==SessionStatus.RejectedOngoing || obj2show.monthlyExpenseStatus==SessionStatus.Suspended), 'badge-info': ( obj2show.monthlyExpenseStatus==null || obj2show.monthlyExpenseStatus=='' || obj2show.monthlyExpenseStatus==SessionStatus.Pending)}">
                                                 {{obj2show.monthlyExpenseStatus}}
                                             </span>
                                         </td>

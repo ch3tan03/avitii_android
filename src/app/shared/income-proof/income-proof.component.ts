@@ -11,6 +11,7 @@ import * as _ from 'lodash';
 import { UtilityService } from 'src/app/services/utility.service';
 import { environment } from 'src/environments/environment';
 import { MediaPreviewComponent } from '../media-preview/media-preview.component';
+import { MediaProccessComponent } from '../media-proccess/media-proccess.component';
 
 const uploadAPI = environment.apiUrl + '/api/post/upload/assetdata';
 
@@ -86,7 +87,7 @@ export class IncomeProofComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.allIncomeDetailsData = data["data"];
@@ -117,7 +118,7 @@ export class IncomeProofComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.allExpenseDetailsData = data["data"];
@@ -148,7 +149,7 @@ export class IncomeProofComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
 
@@ -210,6 +211,7 @@ export class IncomeProofComponent implements OnInit {
             this.alertService.success('Your Income proof is Updated successfully', true);
             this.fetchAllIncomeDetailsByUserId();
             this.submittedIncomeDetails = false;
+            this.initForm();
             //this.appRouterService.appRouter(this.userObj);
           } else {
             //alert(JSON.stringify(data['message']));
@@ -260,6 +262,7 @@ export class IncomeProofComponent implements OnInit {
             this.alertService.success('Your Expense proof is Updated successfully', true);
             this.fetchAllExpenseDetailsByUserId();
             this.submittedExpenseDetails = false;
+            this.initForm();
             //this.appRouterService.appRouter(this.userObj);
           } else {
             //alert(JSON.stringify(data['message']));
@@ -292,8 +295,8 @@ export class IncomeProofComponent implements OnInit {
   maxDate = moment({ year: this.year - 18, month: this.month, day: this.day }).format('YYYY-MM-DD');
 
   date(ev) {
-    console.log(this.minDate)
-    console.log(ev.target.value)
+    //console.log(this.minDate)
+    //console.log(ev.target.value)
   }
 
   showEditingFormIncomeDetails(_userObj) {
@@ -419,17 +422,17 @@ export class IncomeProofComponent implements OnInit {
     formData.append('files', this.fileData4MonthlyIncomeProofDocument);
     formData.append('documentId', this.userObj._id + '__income_proof');
     this.fileUploadProgress = '0%';
-
+    
     this.http.post(uploadAPI, formData, {
       reportProgress: true,
       observe: 'events'
     }).subscribe(events => {
       if (events.type === HttpEventType.UploadProgress) {
         this.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
-        console.log(this.fileUploadProgress);
+        //console.log(this.fileUploadProgress);
       } else if (events.type === HttpEventType.Response) {
         this.fileUploadProgress = '';
-        console.log(events.body);
+        //console.log(events.body);
         //alert('SUCCESS !!');
         this.fileData4Profile = null;
         this.alertService.success('Uploaded Successfully !!', true);
@@ -450,13 +453,13 @@ export class IncomeProofComponent implements OnInit {
 
   mediaPreviewModel(mediaSrc, mimeType) {
 
-    console.log('411', this.authenticationService.currentUserValue);
+    //console.log('411', this.authenticationService.currentUserValue);
     const dialogRef = this.dialog.open(MediaPreviewComponent, {
 
       maxWidth: '100vw',
       maxHeight: '100vh',
-      height: '70%',
-      width: '70%',
+      height: '100%',
+      width: '100%',
       hasBackdrop: true,
       data: {
         mediaSrc: mediaSrc,
@@ -465,7 +468,7 @@ export class IncomeProofComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`426 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+      //console.log(`426 :: msc :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
 
@@ -540,5 +543,55 @@ export class IncomeProofComponent implements OnInit {
           this.loading = false;
         });
   }
+
+    //#region open media uploader with crop feature
+    modalMediaUploadWithCropFeature(documentId, attributeKey, subFolderName) {
+      switch (attributeKey) {
+        case 'selfProfileUrl':
+  
+          break;
+        case 'myPassportMedia':
+        case 'myDLMedia':
+        case 'myHICardMedia':
+        case 'myRKIMedia':
+          const checkArray: FormArray = this.userIncomeDetailsForm.get(attributeKey) as FormArray;
+          if (checkArray.length >= 1) {
+            this.alertService.error("Upload MAX limit reached. Please remove existing.");
+            return;
+          }
+  
+          break;
+      }
+      //console.log('912', this.authenticationService.currentUserValue);
+      const dialogRef = this.dialog.open(MediaProccessComponent, {
+  
+        maxWidth: '100vw',
+        maxHeight: '100vh',
+        height: '100%',
+        width: '100%',
+        hasBackdrop: true,
+        data: {
+          documentId: documentId,
+          attributeKey: attributeKey,
+          subFolderName: subFolderName
+        }
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          if (result.data) {
+            switch (result.data.attributeKey) {
+              case 'monthlyIncomeProofDocument':
+                if (result.data.uploadedFilePath) {
+                  this.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(result.data.uploadedFilePath);
+                }
+                break;
+            }
+          }
+        }
+        //console.log(`946 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+      });
+    }
+    //#endregion open media uploader with crop feature
 
 }

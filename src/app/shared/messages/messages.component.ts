@@ -3,7 +3,7 @@ declare var jQuery: any;
 import { Component, OnInit, NgZone, ChangeDetectionStrategy } from '@angular/core';
 
 import { AuthenticationService, AlertService } from 'src/app/services';
-import { User, Role } from 'src/app/models';
+import { User, Role, SessionStatus } from 'src/app/models';
 import { SocketioService } from 'src/app/socketio.service';
 import { first } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
@@ -12,9 +12,12 @@ import { ContactService } from 'src/app/services/contact.service';
 import * as languageCodesEn from 'src/app/models/languageCodesEn.json';
 declare const annyang: any;
 import Speech from 'speak-tts';
+import { MatDialog } from '@angular/material/dialog';
 //import translate from 'google-translate';//'google-translate-open-api';
 import { Router } from '@angular/router';
 import { UtilityService } from 'src/app/services/utility.service';
+import { ModalAppliedSessionDisplay } from 'src/app/borrower/borrower.component';
+import { MessagesService } from 'src/app/services/messages.service';
 declare let window: any;
 
 @Component({
@@ -24,8 +27,9 @@ declare let window: any;
   changeDetection: ChangeDetectionStrategy.Default
 })
 export class MessagesComponent implements OnInit {
+  Role = Role;
   loading = false;
-  currentUser: User;
+  currentUser: User = <User>{};
   myContactsList: any[];
   allUsersList: any[];
   currentContact: any;
@@ -57,7 +61,10 @@ export class MessagesComponent implements OnInit {
     public router: Router,
     private alertService: AlertService,
     private utilityService: UtilityService,
+    public dialog: MatDialog,
+    public messagesService: MessagesService
   ) {
+    this.messagesService.getAllMyContacts();
     if (languageCodesEn) {
       this.languageCodes = languageCodesEn["eo"];
     }
@@ -88,7 +95,7 @@ export class MessagesComponent implements OnInit {
     //start tts
     this.speech = new Speech() // will throw an exception if not browser supported
     if (this.speech.hasBrowserSupport()) { // returns a boolean
-      console.log("speech synthesis supported")
+      //console.log("speech synthesis supported")
       this.speech.init({
         'volume': 1,
         'lang': 'en-GB',
@@ -98,15 +105,15 @@ export class MessagesComponent implements OnInit {
         'splitSentences': true,
         'listeners': {
           'onvoiceschanged': (voices) => {
-            console.log("Event voiceschanged", voices)
+            //console.log("Event voiceschanged", voices)
           }
         }
       }).then((data) => {
         // The "data" object contains the list of available voices and the voice synthesis params
-        console.log("Speech is ready, voices are available", data)
+        //console.log("Speech is ready, voices are available", data)
         this.speechData = data;
         data.voices.forEach(voice => {
-          console.log(voice.name + " " + voice.lang)
+          //console.log(voice.name + " " + voice.lang)
         });
       }).catch(e => {
         console.error("An error occured while initializing : ", e)
@@ -124,7 +131,7 @@ export class MessagesComponent implements OnInit {
           .pipe(first())
           .subscribe(
             data => {
-              //console.log('data => ', data)
+              ////console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
                 if (AVTrueChatFalse) {
@@ -191,7 +198,7 @@ export class MessagesComponent implements OnInit {
         data => {
           if (data && data['success']) {
 
-            console.log('141', data["data"]);
+            //console.log('141', data["data"]);
             if (chatId) {
               this.element_ctrlChatMessage = document.getElementById(chatId) as HTMLElement;
               this.element_ctrlChatMessage.innerText = data["data"].translatedText;
@@ -234,7 +241,7 @@ export class MessagesComponent implements OnInit {
     if (result && result.data) {
       data = result.data[0];
     }
-    console.log('139', data, result);
+    //console.log('139', data, result);
     */
   }
   getAllUsers() {
@@ -248,42 +255,49 @@ export class MessagesComponent implements OnInit {
     if (_message == null || typeof _message == 'undefined' || _message == '' || !_message) {
       return;
     }
+    switch (this.currentUser.role) {
+      case Role.Admin:
+        //NO ACTION HERE
+        break;
+      default:
+        //#region filter message with reserved word and make it with star
+        let wordsArr2filterFromMessage = [];
+        let _copiedMessage = _message.toString().toLowerCase();
+        for (let index in wordsArr2filterFromMessage) {
+          let word2find = wordsArr2filterFromMessage[index];
+          let _temp_message = _message;
+          if (_copiedMessage.indexOf(word2find) > -1) {
+            let _wordLength = word2find.length;
+            let _startIndex = _copiedMessage.indexOf(word2find);
+            let _endIndex = _startIndex + _wordLength;
+            let _maskedWord2Replace = this.utilityService.createString('*', _wordLength);
+            let _word2replace = _message.substr(_startIndex, _wordLength);
+            _message = _temp_message.replaceAll(_word2replace, _maskedWord2Replace);
+          }
+        }
+        //#endregion filter message with reserved word and make it with star
+        let _copiedMessage3 = _message.toString().toLowerCase().replaceAll(' ', '');
 
-    //#region filter message with reserved word and make it with star
-    let wordsArr2filterFromMessage = [];
-    let _copiedMessage = _message.toString().toLowerCase();
-    for (let index in wordsArr2filterFromMessage) {
-      let word2find = wordsArr2filterFromMessage[index];
-      let _temp_message = _message;
-      if (_copiedMessage.indexOf(word2find) > -1) {
-        let _wordLength = word2find.length;
-        let _startIndex = _copiedMessage.indexOf(word2find);
-        let _endIndex = _startIndex + _wordLength;
-        let _maskedWord2Replace = this.utilityService.createString('*', _wordLength);
-        let _word2replace = _message.substr(_startIndex, _wordLength);
-        _message = _temp_message.replaceAll(_word2replace, _maskedWord2Replace);
-      }
-    }
-    //#endregion filter message with reserved word and make it with star
-    let _copiedMessage3 = _message.toString().toLowerCase().replaceAll(' ', '');
-    
-      if (_copiedMessage3.match(/[0-9]{8}/)) {
-        this.alertService.error("Phone number is not allowed in message");
-        return;
-      }
-    
+        if (_copiedMessage3.match(/[0-9]{8}/)) {
+          this.alertService.error("Phone number is not allowed in message");
+          return;
+        }
 
-    //#region filter message with reserved word and make it with star
-    let wordsArr2restrictFromMessage = ['@', '(a)', '-a-', '.com', '.dk', 'messenger', 'facebook', 'whatsapp', 'wechat', 'skype', 'mobile', 'emailid', 'mob', 'email'];
-    let _copiedMessage2 = _message.toString().toLowerCase();
-    for (let index in wordsArr2restrictFromMessage) {
-      let word2find = wordsArr2restrictFromMessage[index];
-      if (_copiedMessage2.indexOf(word2find) > -1) {
-        this.alertService.error("Message contains restricted word '" + word2find + "'");
-        return;
-      }
+
+        //#region filter message with reserved word and make it with star
+        let wordsArr2restrictFromMessage = ['@', '(a)', '-a-', '.com', '.dk', 'messenger', 'facebook', 'whatsapp', 'wechat', 'skype', 'mobile', 'emailid', 'mob', 'email', 'gmail', 'trunk', 'text message', 'text-message', 'message', 'yahoo', 'outlook'];
+        let _copiedMessage2 = _message.toString().toLowerCase();
+        for (let index in wordsArr2restrictFromMessage) {
+          let word2find = wordsArr2restrictFromMessage[index];
+          if (_copiedMessage2.indexOf(word2find) > -1) {
+            this.alertService.error("Message contains restricted word '" + word2find + "'");
+            return;
+          }
+        }
+        //#endregion filter message with reserved word and make it with star
+
+        break;
     }
-    //#endregion filter message with reserved word and make it with star
 
     if (_message != null && typeof _message != 'undefined' && _message != '') {
       this.socketService.sendEventWithMessageChatRoom(_roomId, this.currentUser._id, _message);
@@ -294,7 +308,7 @@ export class MessagesComponent implements OnInit {
   getAllMyContacts() {
     let _data = {};
     let _currentUserId = this.currentUser._id;
-    this.socketService.getAllMyContacts(_currentUserId).pipe(first()).subscribe(users => {
+    this.socketService.getAllMyContacts(_currentUserId, this.currentUser.role).pipe(first()).subscribe(users => {
       this.myContactsList = _.filter(_.values(users), function (e) {
         if (e) {
           return (e._id != _currentUserId);
@@ -306,7 +320,7 @@ export class MessagesComponent implements OnInit {
   setCurrentContact(currentContactItem) {
 
     if (currentContactItem) {
-      console.log(window.innerWidth)
+      //console.log(window.innerWidth)
       if (window.innerWidth < 768) {
         $('#sidepanel').slideUp();
       }
@@ -317,7 +331,7 @@ export class MessagesComponent implements OnInit {
         let _adminUsersArray = [];
         _adminUsersArray.push(this.currentUser._id);
         _adminUsersArray.push(currentContactItem.userId ? currentContactItem.userId : currentContactItem._id);
-        let _currentContactObj = this.contactService.returnContactJsonData(this.currentUser._id, currentContactItem.firstName, null, null, _adminUsersArray, null, null);
+        let _currentContactObj = this.contactService.returnContactJsonData(this.currentUser._id, currentContactItem.firstName, null, null, _adminUsersArray, null, null, null, false);
 
         this.socketService.sendEventToAddNewContact(_currentContactObj).pipe(first()).subscribe(result => {
 
@@ -361,6 +375,7 @@ export class MessagesComponent implements OnInit {
       }, 10);
     });
   }
+
 
   ngOnDestroy() {
     // unsubscribe to ensure no memory leaks
@@ -437,7 +452,7 @@ export class MessagesComponent implements OnInit {
   }
 
   trackByFn(index, item) {
-    console.log('TrackBy:', item._id, 'at index', index);
+    //console.log('TrackBy:', item._id, 'at index', index);
     return (item._id);
   }
   //end speech to text methos
@@ -451,26 +466,21 @@ export class MessagesComponent implements OnInit {
         queue: false,
         listeners: {
           onstart: () => {
-            console.log("Start utterance");
+            //console.log("Start utterance");
           },
           onend: () => {
-            console.log("End utterance");
+            //console.log("End utterance");
           },
           onresume: () => {
-            console.log("Resume utterance");
+            //console.log("Resume utterance");
           },
           onboundary: event => {
-            console.log(
-              event.name +
-              " boundary reached after " +
-              event.elapsedTime +
-              " milliseconds."
-            );
+            //console.log(event.name +" boundary reached after " + event.elapsedTime + " milliseconds.");
           }
         }
       })
       .then(data => {
-        console.log("Success !", data);
+        //console.log("Success !", data);
       })
       .catch(e => {
         console.error("An error occurred :", e);
@@ -488,8 +498,8 @@ export class MessagesComponent implements OnInit {
   }
 
   setLanguage(i) {
-    console.log(i);
-    console.log(this.speechData.voices[i].lang + this.speechData.voices[i].name);
+    //console.log(i);
+    //console.log(this.speechData.voices[i].lang + this.speechData.voices[i].name);
     this.speech.setLanguage(this.speechData.voices[i].lang);
     this.speech.setVoice(this.speechData.voices[i].name);
   }
@@ -517,4 +527,212 @@ export class MessagesComponent implements OnInit {
     }
     this.router.navigate(['/' + _parentRouting + '/vcmeet'], { state: { roomId: _roomId, currentUser: this.currentUser, loanId: loanId } });
   }
+
+  returnNameOfAnyNonSelfUserFromList(userColl: any, concatThisSubString: string = '', mainString: string = '',) {
+    if (_.keys(userColl).length == 2) {
+      for (let _item in userColl) {
+        let usersObj = userColl[_item];
+        if (usersObj && usersObj._id && usersObj._id != this.currentUser._id) {
+          return (usersObj.firstName || '') + (concatThisSubString || '') + (mainString || '');
+        }
+      }
+    }
+    return (mainString || '');
+  }
+
+  showAppliedToSessionCallMediator(loanApplyId) {
+    let _data = {
+      '_id': loanApplyId
+    };
+    switch (this.authenticationService.currentUserValue.role) {
+      case Role.Borrower:
+        _data["borrowerId"] = this.authenticationService.currentUserValue._id;
+        break;
+      case Role.Lender:
+        _data["lenderId"] = this.authenticationService.currentUserValue._id;
+        break;
+      default:
+        break;
+    }
+    this.socketService.getSessionApplyAllByQuery(false, _data, null, true)
+      .pipe(first())
+      .subscribe(
+        data => {
+          if (data && data['success']) {
+            let sessionObj = _.first(data["data"]);
+            if (sessionObj) {
+              this.showAppliedToSession(sessionObj);
+            }
+            this.loading = false;
+          } else {
+            this.alertService.error(data['message']);
+            this.loading = false;
+          }
+        },
+        error => {
+          let errorMsg2show = "";
+          try {
+            if (error && error.error && error.error.message) {
+              errorMsg2show = error.error.message;
+            } else if (error && error.message) {
+              errorMsg2show = error.message;
+            } else {
+              errorMsg2show = error;
+            }
+          } catch (ex) { }
+          this.alertService.error(errorMsg2show);
+          this.loading = false;
+        });
+  }
+
+  showAppliedToSession(sessionObj) {
+    let _proccessedSessionObj = null;
+    switch (this.authenticationService.currentUserValue.role) {
+      case Role.Borrower:
+        _proccessedSessionObj = _.cloneDeep(sessionObj);
+        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "lenderId": this.authenticationService.currentUserValue._id });
+        break;
+      default:
+        _proccessedSessionObj = _.cloneDeep(sessionObj);
+        break;
+    }
+
+
+    //console.log('214', this.authenticationService.currentUserValue);
+    const dialogRef = this.dialog.open(ModalAppliedSessionDisplay, {
+      backdropClass: 'custom-dialog-backdrop-class',
+      panelClass: 'my_session_details_modal',
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      data: {
+        sessionObj: _proccessedSessionObj,
+        endUserId: this.authenticationService.currentUserValue._id
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result.data) {
+          if (result.data.status && result.data.sessionApply) {
+            let _loanId = result.data.sessionApply.loanId;
+            let _sessionPrice = result.data.sessionApply.loanAmount;
+            let _loanApplyId = result.data.sessionApply._id;
+            let _borrowerId = result.data.sessionApply.borrowerId;
+            let _transactionId = result.data.transactionId;
+            let _status = result.data.status;
+            //initiate payment here
+            //this.socketService.setSessionApplyUpdateStatus(false, _loanId, _loanApplyId, _status, this.authenticationService.currentUserValue._id, _transactionId);
+            let _allowed2CreateContactForSessionT = false;
+            switch (_status) {
+              case SessionStatus.Accepted:
+                //this.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
+                this.proccedAppliedToSession(sessionObj, _loanApplyId);
+                _allowed2CreateContactForSessionT = true;
+                break;
+              case SessionStatus.Pending:
+                //this.alertService.success("Added. Session is available under My Sessions->Pending tab.", true);
+                break;
+              case SessionStatus.Rejected:
+                this.socketService.setSessionApplyUpdateStatus(true, _loanId, _loanApplyId, _status, this.authenticationService.currentUserValue._id, _transactionId);
+                break;
+              case SessionStatus.RejectedOngoing:
+              case SessionStatus.RejectedOngoingWithRefund:
+              case SessionStatus.Suspended:
+                //this.alertService.success("Updated. Session is available under My Sessions->Rejected tab.", true);
+                break;
+              case SessionStatus.Completed:
+                //this.alertService.success("Updated. Session is available under My Sessions->Completed tab.", true);
+                break;
+              case SessionStatus.Active:
+              case SessionStatus.Ongoing:
+              case SessionStatus.OngoingInitiated:
+              case SessionStatus.AwaitingForApproval:
+                //this.alertService.success("Updated. Session is available under My Sessions->Ongoing tab.", true);
+                break;
+              default:
+                _allowed2CreateContactForSessionT = false;
+                break;
+            }
+          }
+          if (result.data.updatedSessionObj) {
+
+          }
+        }
+      }
+      //console.log(`129 :: Dialog result: ${JSON.stringify(result)}`);
+    });
+  }
+
+  proccedAppliedToSession(sessionObj, loanApplyId) {
+    let loanId = sessionObj._id;
+
+    let _proccessedSessionObj = null;
+    switch (this.authenticationService.currentUserValue.role) {
+      case Role.Borrower:
+        _proccessedSessionObj = _.cloneDeep(sessionObj);
+        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId": this.authenticationService.currentUserValue._id });
+        break;
+      default:
+        _proccessedSessionObj = _.cloneDeep(sessionObj);
+        break;
+    }
+    if (!loanApplyId) {
+      loanApplyId = _proccessedSessionObj.sessionAppliedByBorrowers[0]._id;
+    }
+    switch (this.authenticationService.currentUserValue.role) {
+      case Role.Borrower:
+        this.router.navigate(['/borrower/borrow-now'], { state: { loanId: loanId, loanApplyId: loanApplyId } });
+        break;
+      default:
+        this.router.navigate(['/lender/lend-now'], { state: { loanId: loanId, loanApplyId: loanApplyId } });
+        break;
+    }
+  }
+
+  updateChatReceivedByUser(_roomId: string, userId: string = this.authenticationService.currentUserValue._id) {
+    if (this.allChatListOfRoom) {
+      let chatMessage = _.filter(_.values(this.allChatListOfRoom), function (e) {
+        if (e) {
+          return (e._id == _roomId && e.userId != userId);
+        }
+      })[0];
+      if (chatMessage) {
+        if (chatMessage && chatMessage.messageReceivedUsersColl && chatMessage.messageReceivedUsersColl[userId]) {
+          return;
+        }
+      } else {
+        return;
+      }
+    }
+    this.socketService.sendEventToUpdateChatReceivedByUserOfRoom(_roomId, userId);
+  }
+
+  updateChatReadByUser(_roomId: string, userId: string = this.authenticationService.currentUserValue._id) {
+    if (this.allChatListOfRoom) {
+      let chatMessage = _.filter(_.values(this.allChatListOfRoom), function (e) {
+        if (e) {
+          return (e._id == _roomId && e.userId != userId);
+        }
+      })[0];
+      if (chatMessage) {
+        if (chatMessage && chatMessage.messageReadUsersColl && chatMessage.messageReadUsersColl[userId]) {
+          return;
+        }
+      } else {
+        return;
+      }
+    }
+    this.socketService.sendEventToUpdateChatReadByUserOfRoom(_roomId, userId);
+  }
+
+  messageViewed(chatId, message) {
+    this.updateChatReadByUser(chatId);
+  }
+
+  messageNotViewed(chatId, message) {
+    //debugger;
+  }
+
 }

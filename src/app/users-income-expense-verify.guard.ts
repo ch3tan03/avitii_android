@@ -24,15 +24,20 @@ export class UsersIncomeExpenseVerifyGuard implements CanActivate {
       } catch (ex) { }
 
       if (!currentUser.isUsersIncomeAndExpenseProofVerified) {
-          this.router.navigate([_currentUserRole+'/home']);
-          this.alertService.error("Income proof documents and mothly expenses verification is still pending. Please update to access this feature.", true);
-          return false;
+        this.router.navigate([_currentUserRole + '/home']);
+        this.alertService.error("Income proof documents and mothly expenses verification is still pending. Please update to access this feature.", true);
+        return false;
       }
       // authorised so return true	
       return true;
     }
     // not logged in so redirect to login page with the return url
-    this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+    let paramobj = this.router.getCurrentNavigation().extras.state;
+    if (paramobj) {
+      paramobj.returnUrl = state.url;
+    }
+    this.router.navigate(['/login'], { state: paramobj });
+
     return false;
   }
 

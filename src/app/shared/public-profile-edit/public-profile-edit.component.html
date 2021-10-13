@@ -1,0 +1,212 @@
+<div class="row">
+    <div class="col-xl-11 col-10">
+        <h4 class="mb-3 text-black-50" i18n>
+            Profile Edit
+        </h4>
+    </div>
+    <div class="col-xl-1 col-2">
+        <i class="icon-close float-right" mat-button (click)="closeDialog()"></i>
+    </div>
+</div>
+<mat-dialog-content class="mat-typography" style="max-height: 86vh;">
+    <form [formGroup]="profileForm">
+        <div id="profile_skills_verification">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-row mb-3">
+                        <div class="col-md-12">
+                            <div class="text-gray" i18n>
+                                Upload Passport, Driving Licence, Health Insurance Card document
+                            </div>
+                            <hr>
+                        </div>
+                        <div class="col-xl-4 col-12">
+                            <div class="form-group">
+                                <label class="mb-1" for="myPassportNumber" i18n>Passport Number:</label>
+                                <input type="text"
+                                    formControlName="myPassportNumber" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.myPassportNumber.errors }" />
+                                <div *ngIf="submitted && f.myPassportNumber.errors" class="invalid-feedback">
+                                    <div *ngIf="f.myPassportNumber.errors.required" i18n>Passport number is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-12">
+                            <button class="btn btn-outline-secondary btn-block mt-4"
+                                (click)="modalMediaUploadWithCropFeature(userObj._id, 'myPassportMedia', null);" i18n>
+                                Upload Scan Copy
+                            </button>
+                        </div>
+                        <div class="col-xl-4 col-12">
+                            <button class="btn btn-outline-secondary btn-block mt-4"
+                                (click)="modalMediaUploadWithCropFeature(userObj._id, 'myPassportMediaSelfVerify', null);"
+                                i18n>
+                                Upload Image of Scan Copy With user's Face
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-row mb-3">
+                        <div class="col-xl-4 col-12">
+                            <div class="form-group">
+                                <label class="mb-1" for="myDLNumber" i18n>Driving License Number:</label>
+                                <input type="text" formControlName="myDLNumber"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.myDLNumber.errors }" />
+                                <div *ngIf="submitted && f.myDLNumber.errors" class="invalid-feedback">
+                                    <div *ngIf="f.myDLNumber.errors.required" i18n>Driving License number is required
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-12">
+                            <button class="btn btn-outline-secondary btn-block mt-4"
+                                (click)="modalMediaUploadWithCropFeature(userObj._id, 'myDLMedia', null);" i18n>
+                                Upload Scan Copy
+                            </button>
+                        </div>
+                        <div class="col-xl-4 col-12">
+                            <button class="btn btn-outline-secondary btn-block mt-4"
+                                (click)="modalMediaUploadWithCropFeature(userObj._id, 'myDLMediaSelfVerify', null);"
+                                i18n>
+                                Upload Image of Scan Copy With user's Face
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-row mb-3">
+                        <div class="col-xl-4 col-12">
+                            <div class="form-group">
+                                <label class="mb-1" for="cprNumber" i18n>CPR Number:</label>
+                                <input type="text" formControlName="cprNumber"
+                                    class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.cprNumber.errors }" />
+                                <div *ngIf="submitted && f.cprNumber.errors" class="invalid-feedback">
+                                    <div *ngIf="f.cprNumber.errors.required" i18n>CPR number is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-12">
+                            <button class="btn btn-outline-secondary btn-block mt-4"
+                                (click)="modalMediaUploadWithCropFeature(userObj._id, 'myHICardMedia', null);" i18n>
+                                Upload Scan Copy
+                            </button>
+                        </div>
+                        <div class="col-xl-4 col-12">
+                            <button class="btn btn-outline-secondary btn-block mt-4"
+                                (click)="modalMediaUploadWithCropFeature(userObj._id, 'myHICardMediaSelfVerify', null);"
+                                i18n>
+                                Upload Image of Scan Copy With user's Face
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-4">
+                            <div class="card"
+                                *ngFor="let previewUrl of _.union(_.values(f.myPassportMedia.value),_.values(f.myPassportMediaSelfVerify.value))">
+                                <img class="card-img-top" [src]="previewUrl.url" style="height: 200px;">
+                                <div *ngIf="fileUploadProgress" i18n>
+                                    Upload progress: {{ fileUploadProgress }}
+                                </div>
+                                <div class="card-body" i18n>
+                                    Passport
+
+                                    <a class="btn btn-primary btn-sm btn-xs float-right text-white"><i
+                                            class="icon icon-trash"
+                                            (click)="onUploadCleanAssetDocs('myPassportMedia')"></i></a>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="card"
+                                *ngFor="let previewUrl of _.union(_.values(f.myDLMedia.value),_.values(f.myDLMediaSelfVerify.value))">
+                                <img class="card-img-top" [src]="previewUrl.url" style="height: 200px;">
+                                <div *ngIf="fileUploadProgress" i18n>
+                                    Upload progress: {{ fileUploadProgress }}
+                                </div>
+                                <div class="card-body" i18n>
+                                    Driving Licence
+
+                                    <a class="btn btn-primary btn-sm btn-xs float-right text-white"><i
+                                            class="icon icon-trash"
+                                            (click)="onUploadCleanAssetDocs('myDLMedia')"></i></a>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="col-xl-4">
+                            <div class="card"
+                                *ngFor="let previewUrl of _.union(_.values(f.myHICardMedia.value),_.values(f.myHICardMediaSelfVerify.value))">
+                                <img class="card-img-top" [src]="previewUrl.url" style="height: 200px;">
+                                <div *ngIf="fileUploadProgress" i18n>
+                                    Upload progress: {{ fileUploadProgress }}
+                                </div>
+                                <div class="card-body" i18n>
+                                    Health Insurance Card
+
+                                    <a class="btn btn-primary btn-sm btn-xs float-right text-white"><i
+                                            class="icon icon-trash"
+                                            (click)="onUploadCleanAssetDocs('myHICardMedia')"></i></a>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="_role == Role.Borrower">
+                        <div class="col-xl-12">
+                            <div class="row">
+                                <div class="col-xl-12 mt-3">
+                                    RKI
+                                </div>
+                            </div>
+                            <div class="form-row" *ngIf="!f.isRKIRegistered.value">
+                                <div class="col-xl-6 col-12">
+                                    <button class="btn btn-outline-secondary btn-block mt-4"
+                                        (click)="modalMediaUploadWithCropFeature(userObj._id, 'myRKIMedia', null);"
+                                        i18n>
+                                        Upload Scan Copy
+                                    </button>
+                                </div>
+                                <div class="col-xl-6 col-12">
+                                    <button class="btn btn-outline-secondary btn-block mt-4"
+                                        (click)="modalMediaUploadWithCropFeature(userObj._id, 'myRKIMediaSelfVerify', null);"
+                                        i18n>
+                                        Upload Image of Scan Copy With user's Face
+                                    </button>
+                                </div>
+                                <div class="col-xl-4">
+
+                                    <div class="row">
+                                        <div class="col-xl-12"
+                                            *ngFor="let previewUrl of _.union(_.values(f.myRKIMedia.value),_.values(f.myRKIMediaSelfVerify.value))">
+
+                                            <i class="icon-trash text-danger"
+                                                (click)="onUploadCleanAssetDocs('myRKIMedia')"></i>
+
+                                            <img class="img-fluid" [src]="previewUrl.url" />
+                                        </div>
+                                        <div>
+                                            <div *ngIf="fileUploadProgress" i18n>
+                                                Upload progress: {{ fileUploadProgress }}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="button" (click)="onUsersProfileUpdateSubmit()" [disabled]="loading"
+                        class="btn btn-primary float-right" i18n>Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</mat-dialog-content>

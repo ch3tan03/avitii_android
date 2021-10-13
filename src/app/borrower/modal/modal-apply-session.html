@@ -31,7 +31,7 @@
         <div class="col-xl-4 col-12">
             <div class="form-group ">
                 <label for="loanStartDateTime" i18n>Start Date</label>
-                <h4 class="text-primary" i18n>
+                <h4 class="text-primary" >
                     {{LoanObj.loanStartDateTime | date:'dd-MMM-YYYY'}}
                 </h4>
             </div>
@@ -41,27 +41,27 @@
                 <div>
                     <label for="loanStartDateTime" i18n>Payment Method</label>
                 </div>
-                <span *ngIf="utilityService.returnLoanRepaymentType('bank',LoanObj)>-1" class="badge  mr-2 badge-success">
+                <span *ngIf="utilityService.returnLoanRepaymentType('bank',LoanObj)>-1" class="badge  mr-2 badge-success" i18n>
                     BANK
                 </span>
-                <span *ngIf="utilityService.returnLoanRepaymentType('cash',LoanObj)>-1" class="badge  mr-2 badge-success">
+                <span *ngIf="utilityService.returnLoanRepaymentType('cash',LoanObj)>-1" class="badge  mr-2 badge-success" i18n>
                     Cash
                 </span>
                 <span *ngIf="utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1"
-                    class="badge  mr-2 badge-success">
+                    class="badge  mr-2 badge-success" i18n>
                     Revolut
                 </span>
-                <span *ngIf="utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1" class="badge  mr-2 badge-success">
+                <span *ngIf="utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1" class="badge  mr-2 badge-success" i18n>
                     Paypal
                 </span>
-                <span *ngIf="utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1" class="badge  badge-success">
+                <span *ngIf="utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1" class="badge  badge-success" i18n>
                     Skrill
                 </span>
             </div>
         </div>
         <div class="col-xl-12">
             <p class="mb-2" i18n>Description:</p>
-            <div class="text-black-50" i18n>
+            <div class="text-black-50" >
                 {{LoanObj.loanDescription}}
             </div>
         </div>

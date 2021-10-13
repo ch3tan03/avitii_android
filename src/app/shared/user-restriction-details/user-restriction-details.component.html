@@ -1,0 +1,44 @@
+<form [formGroup]="userRestrictionDetailsForm" class="mb-3">
+    <div class="card mb-3">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-xl-11 col-10">
+                    <div class="font-weight-bold text-primary" >
+                        {{userObj.firstName}}&nbsp;/&nbsp;{{userObj.emailAddress}}
+                    </div>
+                </div>
+                <div *ngIf="isOpenedInModel" class="col-xl-1 col-2">
+                    <i class="icon-close float-right" mat-button (click)="closeDialog()"></i>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-xl-12">
+                    <label *ngIf="f.isVerified.value" for="defaultUnchecked" i18n>
+                        <i class="icon-unlock text-success"></i>&nbsp;UnBlock User to access app
+                    </label>
+                    <label *ngIf="!f.isVerified.value" for="defaultUnchecked" i18n>
+                        <i class="icon-lock text-danger"></i>&nbsp;Block User to access app
+                    </label>
+                </div>
+                <div class="form-group col-xl-12">
+                    <label for="comment" i18n>Reason/Comment</label>
+                    <input type="text" formControlName="comment" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.comment.errors }" />
+                    <div *ngIf="submitted && f.comment.errors" class="invalid-feedback">
+                        <div *ngIf="f.comment.errors.required" i18n>Reason/Comment is required</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="card-footer">
+            <div class="text-right">
+                <button type="button" (click)="onUserRestrictionDetailsUpdateSubmit()" [disabled]="loading"
+                    class="btn btn-primary " i18n>Update</button>
+            </div>
+        </div>
+    </div>
+</form>
+<app-user-restriction-list [userObj]="userObj"></app-user-restriction-list>

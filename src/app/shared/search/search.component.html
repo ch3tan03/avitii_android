@@ -1,0 +1,91 @@
+<h3 class="text-primary">
+    <div class="row">
+        <div class="col-xl-11 col-10">
+            <h4 class="mb-3 text-black-50" i18n>
+                Search Filter
+            </h4>
+        </div>
+        <div class="col-xl-1 col-2">
+            <i class="icon-close float-right" mat-button (click)="closeDialog()"></i>
+        </div>
+    </div>
+</h3>
+
+<mat-dialog-content class="mat-typography" style="max-height: 86vh;">
+    <div class="row">
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label for="Country" i18n>Country</label>
+                <select [(ngModel)]="searchFilterObj.country" class="custom-select">
+                    <option [ngValue]="null" i18n>Choose Country</option>
+                    <option *ngFor="let country of countrylist" [ngValue]="country">
+                        {{country}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label for="pincode" i18n>Postal Code</label>
+                <input type="text" [(ngModel)]="searchFilterObj.pincode" class="form-control" />
+            </div>
+        </div>
+        <div class="col-xl-6" [ngClass]="{ 'col-xl-12': authenticationService.currentUserValue.role!=Role.Lender, 'col-xl-6': authenticationService.currentUserValue.role==Role.Lender}">
+            <div class="form-group">
+                <label for="userType" i18n>User Level</label>
+
+                <select *ngIf="authenticationService.currentUserValue.role==Role.Borrower"
+                    [(ngModel)]="searchFilterObj.userType" class="custom-select">
+                    <option [ngValue]="null" i18n>Select</option>
+                    <option *ngFor="let item of allUserLevelsDataLenders; let i = index" [ngValue]="item._id">
+                        {{item.name}}</option>
+                </select>
+
+                <select *ngIf="authenticationService.currentUserValue.role==Role.Lender"
+                    [(ngModel)]="searchFilterObj.userType" class="custom-select">
+                    <option [ngValue]="null" i18n>Select</option>
+                    <option *ngFor="let item of allUserLevelsDataBorrower; let i = index" [ngValue]="item._id">
+                        {{item.name}}</option>
+                </select>
+
+            </div>
+        </div>
+        <div class="col-xl-6" *ngIf="authenticationService.currentUserValue.role==Role.Lender">
+            <div class="mb-2" i18n>RKI Registered Only 
+                <i class="icon icon-info-alt ml-2" data-toggle="tooltip"
+                title="Either see Borrowers who is in RKI, or Borrowers who is not in RKI or Borrowers who are both in RKI and not in RKI"></i>
+            </div>
+           
+            <div class="btn-group btn-group btn-group-sm">
+                <button type="button" class="btn" (click)="searchFilterObj.isRKIRegistered=true;"
+                    [ngClass]="{ 'btn-success': searchFilterObj.isRKIRegistered==true, 'btn-outline-success':searchFilterObj.isRKIRegistered==false || searchFilterObj.isRKIRegistered==null}">
+                    Yes
+                </button>
+                <button type="button" class="btn" (click)="searchFilterObj.isRKIRegistered=false;"
+                    [ngClass]="{ 'btn-success': searchFilterObj.isRKIRegistered==false, 'btn-outline-success':searchFilterObj.isRKIRegistered==true || searchFilterObj.isRKIRegistered==null}">
+                    No
+                </button>
+                <button type="button" class="btn" (click)="searchFilterObj.isRKIRegistered=null;"
+                [ngClass]="{ 'btn-success': searchFilterObj.isRKIRegistered==null, 'btn-outline-success':searchFilterObj.isRKIRegistered==true || searchFilterObj.isRKIRegistered==false}">
+                Both
+            </button>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label for="loanAmountMin" i18n>Loan Amount (From)</label>
+                <input type="number" [(ngModel)]="searchFilterObj.loanAmountMin" class="form-control" />
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="form-group">
+                <label for="loanAmountMax" i18n>Loan Amount (To)</label>
+                <input type="number" [(ngModel)]="searchFilterObj.loanAmountMax" class="form-control" />
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button class="btn btn-primary btn-sm float-right" mat-button mat-dialog-close (click)="closeDialog(true)" i18n>
+        <i class="icon-filter"></i> Filter
+    </button>
+</mat-dialog-actions>

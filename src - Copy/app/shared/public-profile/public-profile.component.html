@@ -1,0 +1,311 @@
+<div class="row">
+    <div class="col-xl-11 col-10">
+        <h4 class="mb-3 text-black-50" i18n>
+            Profile
+        </h4>
+    </div>
+    <div class="col-xl-1 col-2">
+        <i class="icon-close float-right" mat-button (click)="closeDialog()"></i>
+    </div>
+</div>
+<mat-dialog-content class="mat-typography" style="max-height: 86vh;">
+    <div class="row mb-2 mb-3">
+        <div class="col-xl-3 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <img [src]="userObj.selfProfileUrl" onerror="this.src='/assets/img/nouser.png';"
+                        class="img-fluid " />
+                </div>
+                <div class="card-footer">
+                    <strong>
+                        {{userObj.firstName | titlecase}}&nbsp;
+                        {{userObj.middleName | titlecase}}&nbsp;
+                        {{userObj.lastName | titlecase}}
+                    </strong>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"> <strong>City</strong> {{userObj.cityCode | titlecase}}</li>
+                <li class="list-group-item">
+                    <strong>Country</strong> {{userObj.country | titlecase}}
+                </li>
+                <li class="list-group-item">
+                    <strong>Member Since</strong> {{userObj.birthDate | date}}
+                </li>
+                <li class="list-group-item">
+                    <strong>DOB</strong> {{userObj.birthDate | date}}
+                </li>
+                <li *ngIf="userObj.externalAppLinks" class="list-group-item">
+                    <div *ngFor="let previewUrl of userObj.externalAppLinks">
+                        <a *ngIf="previewUrl" href="{{previewUrl.appLink}}">{{previewUrl.appName}}</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-xl-9 col-12 pl-5">
+            <div class="row">
+                <div class="col-xl-6 col-12" *ngIf="adminViewT">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Number of loan notices created
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.numberOfLoanCreated ||
+                                'NA'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Signed contracts
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.numberOfSignedContract
+                                || 'NA'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Repaid contracts:
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.numberOfRepaidContract
+                                || 'NA'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Total amount borrowed
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.numberOfAmontBorrowed
+                                || 'NA'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Total amount refunded
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.numberOfAmontRefunded
+                                || 'NA'}}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xl-6 col-12" *ngIf="adminViewT">
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Amount available in budget
+                            <span
+                                class="badge badge-primary badge-pill">{{profileAdditionalData.numberOfAmountAvailableInBudget
+                                || 'NA'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Recommended
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.recommended ||
+                                'NA'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Not Recommended
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.notRecommended ||
+                                'NA'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            This borrower is in RKI:
+                            <span class="badge badge-primary badge-pill">{{profileAdditionalData.borrowerIsInRKI ||
+                                'NA'}}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Email
+                            <span class="badge badge-primary badge-pill">Vefified</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-xl-12 col-12">
+
+                    <div class="my-3">
+                        <!--
+                        <span *ngIf="!adminViewT" (click)="addNewRatings(userObj)" mat-button mat-dialog-close>&nbsp;
+                            <i class="icon-star"></i>
+                        </span>
+                    -->
+                        <span *ngIf="!adminViewT">&nbsp;
+                            <i class="icon-star text-warning"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-12 col-12">
+                    <div class="table-responsive table-billing-history">
+                        <table class="table mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Document</th>
+                                    <th scope="col">Doc Number</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col" *ngIf="adminViewT">#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Passport</td>
+                                    <td>{{userObj.myPassportNumber||'NA'}}</td>
+                                    <td>
+                                        <span *ngIf="userObj.myPassportMediaVerified"
+                                            class="badge badge-success">Verified</span>
+                                        <span *ngIf="!userObj.myPassportMediaVerified"
+                                            class="badge badge-danger">Unverified</span>
+                                    </td>
+                                    <td *ngIf="adminViewT">
+                                        <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified" *ngIf="userObj.myPassportMediaVerified" (click)="updateUsersVerificationStatus(userObj._id, 'myPassportMediaVerified', !userObj.myPassportMediaVerified)">
+                                            <i class="icon-close"></i>
+                                        </button>
+                                        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified" *ngIf="!userObj.myPassportMediaVerified" (click)="updateUsersVerificationStatus(userObj._id, 'myPassportMediaVerified', !userObj.myPassportMediaVerified)">
+                                            <i class="icon-check"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Driving Licence</td>
+                                    <td>{{userObj.myDLNumber||'NA'}}</td>
+                                    <td>
+                                        <span *ngIf="userObj.myDLMediaVerified"
+                                            class="badge badge-success">Verified</span>
+                                        <span *ngIf="!userObj.myDLMediaVerified"
+                                            class="badge badge-danger">Unverified</span>
+                                    </td>
+                                    <td *ngIf="adminViewT">
+                                        <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified" *ngIf="userObj.myDLMediaVerified" (click)="updateUsersVerificationStatus(userObj._id, 'myDLMediaVerified', !userObj.myDLMediaVerified)">
+                                            <i class="icon-close"></i>
+                                        </button>
+                                        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified" *ngIf="!userObj.myDLMediaVerified" (click)="updateUsersVerificationStatus(userObj._id, 'myDLMediaVerified', !userObj.myDLMediaVerified)">
+                                            <i class="icon-check"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>CPR Number</td>
+                                    <td>{{userObj.cprNumber||'NA'}}</td>
+                                    <td>
+                                        <span *ngIf="userObj.myHICardMediaVerified"
+                                            class="badge badge-success">Verified</span>
+                                        <span *ngIf="!userObj.myHICardMediaVerified"
+                                            class="badge badge-danger">Unverified</span>
+                                    </td>
+                                    <td *ngIf="adminViewT">
+                                        <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified" *ngIf="userObj.myHICardMediaVerified" (click)="updateUsersVerificationStatus(userObj._id, 'myHICardMediaVerified', !userObj.myHICardMediaVerified)">
+                                            <i class="icon-close"></i>
+                                        </button>
+                                        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified" *ngIf="!userObj.myHICardMediaVerified" (click)="updateUsersVerificationStatus(userObj._id, 'myHICardMediaVerified', !userObj.myHICardMediaVerified)">
+                                            <i class="icon-check"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="userObj.role=='borrower' && !userObj.isRKIRegistered">
+                                    <td>RKI Document </td>
+                                    <td>{{userObj.myRKINumber||'NA'}}</td>
+                                    <td>
+                                        <span *ngIf="userObj.myRKIMediaVerified"
+                                            class="badge badge-success">Verified</span>
+                                        <span *ngIf="!userObj.myRKIMediaVerified"
+                                            class="badge badge-danger">Unverified</span>
+                                    </td>
+                                    <td *ngIf="adminViewT">
+                                        <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified" *ngIf="userObj.myRKIMediaVerified" (click)="updateUsersVerificationStatus(userObj._id, 'myRKIMediaVerified', !userObj.myRKIMediaVerified)">
+                                            <i class="icon-close"></i>
+                                        </button>
+                                        <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified" *ngIf="!userObj.myRKIMediaVerified" (click)="updateUsersVerificationStatus(userObj._id, 'myRKIMediaVerified', !userObj.myRKIMediaVerified)">
+                                            <i class="icon-check"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row" *ngIf="adminViewT">
+                <div class="col-xl-12 col-12">
+                    <hr>
+                    <div class="row">
+                        <div class="col-xl-12"><strong>Passport
+                                Documents</strong>
+                        </div>
+                        <div *ngIf="userObj.myPassportMedia">
+                            <div class="col-xl-2" *ngFor="let previewUrl of userObj.myPassportMedia">
+                                <div *ngIf="previewUrl">
+                                    <video width="1000" height="1000"
+                                        *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')>-1"
+                                        class="img-fluid border" controls [src]="previewUrl.url"></video>
+                                    <img width="1000" height="1000"
+                                        *ngIf="previewUrl.type && previewUrl.type.indexOf('image/')>-1"
+                                        class="img-fluid border" [src]="previewUrl.url"
+                                        onerror="this.src='/assets/img/na.png';" />
+                                    <img width="1000" height="1000"
+                                        *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1"
+                                        class="img-fluid border" src="/assets/img/pdf.png"
+                                        onerror="this.src='/assets/img/na.png';" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xl-12"><strong>Driving Licence
+                                Documents</strong></div>
+                        <div *ngIf="userObj.myDLMedia">
+                            <div class="col-xl-2" *ngFor="let previewUrl of userObj.myDLMedia">
+                                <div *ngIf="previewUrl">
+                                    <video width="1000" height="1000"
+                                        *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')>-1"
+                                        class="img-fluid border" controls [src]="previewUrl.url"></video>
+                                    <img width="1000" height="1000"
+                                        *ngIf="previewUrl.type && previewUrl.type.indexOf('image/')>-1"
+                                        class="img-fluid border" [src]="previewUrl.url"
+                                        onerror="this.src='/assets/img/na.png';" />
+                                    <img width="1000" height="1000"
+                                        *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1"
+                                        class="img-fluid border" src="/assets/img/pdf.png"
+                                        onerror="this.src='/assets/img/na.png';" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-xl-12"><strong>
+                                CPR Number Documents
+                            </strong>
+                        </div>
+                        <div *ngIf="userObj.myHICardMedia">
+                            <div class="col-xl-2" *ngFor="let previewUrl of userObj.myHICardMedia">
+                                <div *ngIf="previewUrl">
+                                    <video width="1000" height="1000"
+                                        *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')>-1"
+                                        class="img-fluid border" controls [src]="previewUrl.url"></video>
+                                    <img width="1000" height="1000"
+                                        *ngIf="previewUrl.type && previewUrl.type.indexOf('image/')>-1"
+                                        class="img-fluid border" [src]="previewUrl.url"
+                                        onerror="this.src='/assets/img/na.png';" />
+                                    <img width="1000" height="1000"
+                                        *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1"
+                                        class="img-fluid border" src="/assets/img/pdf.png"
+                                        onerror="this.src='/assets/img/na.png';" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="userObj.role=='borrower' && !userObj.isRKIRegistered">
+                        <hr>
+                        <div class="col-xl-12">
+                            <strong>RKI Documents</strong>&nbsp;
+                        </div>
+                        <div *ngIf="userObj.myRKIMedia">
+                            <div class="col-xl-2" *ngFor="let previewUrl of userObj.myRKIMedia">
+                                <div *ngIf="previewUrl">
+                                    <video width="1000" height="1000"
+                                        *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')>-1"
+                                        class="img-fluid border" controls [src]="previewUrl.url"></video>
+                                    <img width="1000" height="1000"
+                                        *ngIf="previewUrl.type && previewUrl.type.indexOf('image/')>-1"
+                                        class="img-fluid border" [src]="previewUrl.url"
+                                        onerror="this.src='/assets/img/na.png';" />
+                                    <img width="1000" height="1000"
+                                        *ngIf="previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1"
+                                        class="img-fluid border" src="/assets/img/pdf.png"
+                                        onerror="this.src='/assets/img/na.png';" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</mat-dialog-content>

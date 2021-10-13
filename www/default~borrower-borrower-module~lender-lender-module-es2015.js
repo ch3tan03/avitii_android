@@ -4,7 +4,7 @@
 /*!***************************************************!*\
   !*** ./node_modules/@fullcalendar/common/main.js ***!
   \***************************************************/
-/*! exports provided: Component, Fragment, createContext, createElement, createRef, flushToDom, render, unmountComponentAtNode, BASE_OPTION_DEFAULTS, BASE_OPTION_REFINERS, BaseComponent, BgEvent, CalendarApi, CalendarContent, CalendarDataManager, CalendarDataProvider, CalendarRoot, ContentHook, CustomContentRenderContext, DateComponent, DateEnv, DateProfileGenerator, DayCellContent, DayCellRoot, DayHeader, DaySeriesModel, DayTableModel, DelayedRunner, ElementDragging, ElementScrollController, Emitter, EventApi, EventRoot, EventSourceApi, Interaction, MountHook, NamedTimeZoneImpl, NowIndicatorRoot, NowTimer, PositionCache, RefMap, RenderHook, ScrollController, ScrollResponder, Scroller, SimpleScrollGrid, Slicer, Splitter, StandardEvent, TableDateCell, TableDowCell, Theme, ViewApi, ViewContextType, ViewRoot, WeekNumberRoot, WindowScrollController, addDays, addDurations, addMs, addWeeks, allowContextMenu, allowSelection, applyMutationToEventStore, applyStyle, applyStyleProp, asCleanDays, asRoughMinutes, asRoughMs, asRoughSeconds, buildClassNameNormalizer, buildEventApis, buildEventRangeKey, buildHashFromArray, buildNavLinkData, buildSegCompareObj, buildSegTimeText, collectFromHash, combineEventUis, compareByFieldSpec, compareByFieldSpecs, compareNumbers, compareObjs, computeEdges, computeFallbackHeaderFormat, computeHeightAndMargins, computeInnerRect, computeRect, computeSegDraggable, computeSegEndResizable, computeSegStartResizable, computeShrinkWidth, computeSmallestCellWidth, computeVisibleDayRange, config, constrainPoint, createDuration, createEmptyEventStore, createEventInstance, createEventUi, createFormatter, createPlugin, diffDates, diffDayAndTime, diffDays, diffPoints, diffWeeks, diffWholeDays, diffWholeWeeks, disableCursor, elementClosest, elementMatches, enableCursor, eventTupleToStore, filterEventStoreDefs, filterHash, findDirectChildren, findElements, flexibleCompare, formatDate, formatDayString, formatIsoTimeString, formatRange, getAllowYScrolling, getCanVGrowWithinCell, getClippingParents, getDateMeta, getDayClassNames, getDefaultEventEnd, getElSeg, getEventClassNames, getIsRtlScrollbarOnLeft, getRectCenter, getRelevantEvents, getScrollGridClassNames, getScrollbarWidths, getSectionClassNames, getSectionHasLiquidHeight, getSegMeta, getSlotClassNames, getStickyFooterScrollbar, getStickyHeaderDates, getUnequalProps, globalLocales, globalPlugins, greatestDurationDenominator, guid, hasBgRendering, hasShrinkWidth, identity, interactionSettingsStore, interactionSettingsToStore, intersectRanges, intersectRects, isArraysEqual, isColPropsEqual, isDateSpansEqual, isInt, isInteractionValid, isMultiDayRange, isPropsEqual, isPropsValid, isValidDate, listenBySelector, mapHash, memoize, memoizeArraylike, memoizeHashlike, memoizeObjArg, mergeEventStores, multiplyDuration, padStart, parseBusinessHours, parseClassNames, parseDragMeta, parseEventDef, parseFieldSpecs, parseMarker, pointInsideRect, preventContextMenu, preventDefault, preventSelection, rangeContainsMarker, rangeContainsRange, rangesEqual, rangesIntersect, refineEventDef, refineProps, removeElement, removeExact, renderChunkContent, renderFill, renderMicroColGroup, renderScrollShim, requestJson, sanitizeShrinkWidth, setElSeg, setRef, sliceEventStore, sliceEvents, sortEventSegs, startOfDay, translateRect, triggerDateSelect, unpromisify, version, whenTransitionDone, wholeDivideDurations */
+/*! exports provided: Component, Fragment, createContext, createElement, createPortal, createRef, flushToDom, render, unmountComponentAtNode, BASE_OPTION_DEFAULTS, BASE_OPTION_REFINERS, BaseComponent, BgEvent, CalendarApi, CalendarContent, CalendarDataManager, CalendarDataProvider, CalendarRoot, ContentHook, CustomContentRenderContext, DateComponent, DateEnv, DateProfileGenerator, DayCellContent, DayCellRoot, DayHeader, DaySeriesModel, DayTableModel, DelayedRunner, ElementDragging, ElementScrollController, Emitter, EventApi, EventRoot, EventSourceApi, Interaction, MoreLinkRoot, MountHook, NamedTimeZoneImpl, NowIndicatorRoot, NowTimer, PositionCache, RefMap, RenderHook, ScrollController, ScrollResponder, Scroller, SegHierarchy, SimpleScrollGrid, Slicer, Splitter, StandardEvent, TableDateCell, TableDowCell, Theme, ViewApi, ViewContextType, ViewRoot, WeekNumberRoot, WindowScrollController, addDays, addDurations, addMs, addWeeks, allowContextMenu, allowSelection, applyMutationToEventStore, applyStyle, applyStyleProp, asCleanDays, asRoughMinutes, asRoughMs, asRoughSeconds, binarySearch, buildClassNameNormalizer, buildEntryKey, buildEventApis, buildEventRangeKey, buildHashFromArray, buildIsoString, buildNavLinkData, buildSegCompareObj, buildSegTimeText, collectFromHash, combineEventUis, compareByFieldSpec, compareByFieldSpecs, compareNumbers, compareObjs, computeEarliestSegStart, computeEdges, computeFallbackHeaderFormat, computeHeightAndMargins, computeInnerRect, computeRect, computeSegDraggable, computeSegEndResizable, computeSegStartResizable, computeShrinkWidth, computeSmallestCellWidth, computeVisibleDayRange, config, constrainPoint, createDuration, createEmptyEventStore, createEventInstance, createEventUi, createFormatter, createPlugin, diffDates, diffDayAndTime, diffDays, diffPoints, diffWeeks, diffWholeDays, diffWholeWeeks, disableCursor, elementClosest, elementMatches, enableCursor, eventTupleToStore, filterEventStoreDefs, filterHash, findDirectChildren, findElements, flexibleCompare, formatDate, formatDayString, formatIsoTimeString, formatRange, getAllowYScrolling, getCanVGrowWithinCell, getClippingParents, getDateMeta, getDayClassNames, getDefaultEventEnd, getElRoot, getElSeg, getEntrySpanEnd, getEventClassNames, getEventTargetViaRoot, getIsRtlScrollbarOnLeft, getRectCenter, getRelevantEvents, getScrollGridClassNames, getScrollbarWidths, getSectionClassNames, getSectionHasLiquidHeight, getSegMeta, getSlotClassNames, getStickyFooterScrollbar, getStickyHeaderDates, getUnequalProps, globalLocales, globalPlugins, greatestDurationDenominator, groupIntersectingEntries, guid, hasBgRendering, hasShrinkWidth, identity, interactionSettingsStore, interactionSettingsToStore, intersectRanges, intersectRects, intersectSpans, isArraysEqual, isColPropsEqual, isDateSelectionValid, isDateSpansEqual, isInt, isInteractionValid, isMultiDayRange, isPropsEqual, isPropsValid, isValidDate, joinSpans, listenBySelector, mapHash, memoize, memoizeArraylike, memoizeHashlike, memoizeObjArg, mergeEventStores, multiplyDuration, padStart, parseBusinessHours, parseClassNames, parseDragMeta, parseEventDef, parseFieldSpecs, parseMarker, pointInsideRect, preventContextMenu, preventDefault, preventSelection, rangeContainsMarker, rangeContainsRange, rangesEqual, rangesIntersect, refineEventDef, refineProps, removeElement, removeExact, renderChunkContent, renderFill, renderMicroColGroup, renderScrollShim, requestJson, sanitizeShrinkWidth, setElSeg, setRef, sliceEventStore, sliceEvents, sortEventSegs, startOfDay, translateRect, triggerDateSelect, unpromisify, version, whenTransitionDone, wholeDivideDurations */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -36,6 +36,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventRoot", function() { return EventRoot; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EventSourceApi", function() { return EventSourceApi; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Interaction", function() { return Interaction; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MoreLinkRoot", function() { return MoreLinkRoot; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MountHook", function() { return MountHook; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NamedTimeZoneImpl", function() { return NamedTimeZoneImpl; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NowIndicatorRoot", function() { return NowIndicatorRoot; });
@@ -46,6 +47,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ScrollController", function() { return ScrollController; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ScrollResponder", function() { return ScrollResponder; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Scroller", function() { return Scroller; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SegHierarchy", function() { return SegHierarchy; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SimpleScrollGrid", function() { return SimpleScrollGrid; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Slicer", function() { return Slicer; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Splitter", function() { return Splitter; });
@@ -71,10 +73,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "asRoughMinutes", function() { return asRoughMinutes; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "asRoughMs", function() { return asRoughMs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "asRoughSeconds", function() { return asRoughSeconds; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "binarySearch", function() { return binarySearch; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildClassNameNormalizer", function() { return buildClassNameNormalizer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildEntryKey", function() { return buildEntryKey; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildEventApis", function() { return buildEventApis; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildEventRangeKey", function() { return buildEventRangeKey; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildHashFromArray", function() { return buildHashFromArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildIsoString", function() { return buildIsoString; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildNavLinkData", function() { return buildNavLinkData; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildSegCompareObj", function() { return buildSegCompareObj; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildSegTimeText", function() { return buildSegTimeText; });
@@ -84,6 +89,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "compareByFieldSpecs", function() { return compareByFieldSpecs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "compareNumbers", function() { return compareNumbers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "compareObjs", function() { return compareObjs; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "computeEarliestSegStart", function() { return computeEarliestSegStart; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "computeEdges", function() { return computeEdges; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "computeFallbackHeaderFormat", function() { return computeFallbackHeaderFormat; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "computeHeightAndMargins", function() { return computeHeightAndMargins; });
@@ -130,8 +136,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDateMeta", function() { return getDateMeta; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDayClassNames", function() { return getDayClassNames; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDefaultEventEnd", function() { return getDefaultEventEnd; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getElRoot", function() { return getElRoot; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getElSeg", function() { return getElSeg; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEntrySpanEnd", function() { return getEntrySpanEnd; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEventClassNames", function() { return getEventClassNames; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getEventTargetViaRoot", function() { return getEventTargetViaRoot; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getIsRtlScrollbarOnLeft", function() { return getIsRtlScrollbarOnLeft; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRectCenter", function() { return getRectCenter; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getRelevantEvents", function() { return getRelevantEvents; });
@@ -147,6 +156,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "globalLocales", function() { return globalLocales; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "globalPlugins", function() { return globalPlugins; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "greatestDurationDenominator", function() { return greatestDurationDenominator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "groupIntersectingEntries", function() { return groupIntersectingEntries; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "guid", function() { return guid; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasBgRendering", function() { return hasBgRendering; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasShrinkWidth", function() { return hasShrinkWidth; });
@@ -155,8 +165,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "interactionSettingsToStore", function() { return interactionSettingsToStore; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "intersectRanges", function() { return intersectRanges; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "intersectRects", function() { return intersectRects; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "intersectSpans", function() { return intersectSpans; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isArraysEqual", function() { return isArraysEqual; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isColPropsEqual", function() { return isColPropsEqual; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDateSelectionValid", function() { return isDateSelectionValid; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isDateSpansEqual", function() { return isDateSpansEqual; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isInt", function() { return isInt; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isInteractionValid", function() { return isInteractionValid; });
@@ -164,6 +176,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPropsEqual", function() { return isPropsEqual; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isPropsValid", function() { return isPropsValid; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidDate", function() { return isValidDate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "joinSpans", function() { return joinSpans; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "listenBySelector", function() { return listenBySelector; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "mapHash", function() { return mapHash; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "memoize", function() { return memoize; });
@@ -220,6 +233,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createElement", function() { return _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createPortal", function() { return _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createPortal"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createRef", function() { return _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createRef"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "flushToDom", function() { return _vdom_js__WEBPACK_IMPORTED_MODULE_2__["flushToDom"]; });
@@ -229,9 +244,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "unmountComponentAtNode", function() { return _vdom_js__WEBPACK_IMPORTED_MODULE_2__["unmountComponentAtNode"]; });
 
 /*!
-FullCalendar v5.5.1
+FullCalendar v5.9.0
 Docs & License: https://fullcalendar.io/
-(c) 2020 Adam Shaw
+(c) 2021 Adam Shaw
 */
 
 
@@ -256,6 +271,7 @@ var EventSourceApi = /** @class */ (function () {
         this.context.dispatch({
             type: 'FETCH_EVENT_SOURCES',
             sourceIds: [this.internalEventSource.sourceId],
+            isRefetch: true,
         });
     };
     Object.defineProperty(EventSourceApi.prototype, "id", {
@@ -358,6 +374,20 @@ function applyStyleProp(el, name, val) {
     else {
         el.style[name] = val;
     }
+}
+// Event Handling
+// ----------------------------------------------------------------------------------------------------------------
+// if intercepting bubbled events at the document/window/body level,
+// and want to see originating element (the 'target'), use this util instead
+// of `ev.target` because it goes within web-component boundaries.
+function getEventTargetViaRoot(ev) {
+    var _a, _b;
+    return (_b = (_a = ev.composedPath) === null || _a === void 0 ? void 0 : _a.call(ev)[0]) !== null && _b !== void 0 ? _b : ev.target;
+}
+// Shadow DOM consuderations
+// ----------------------------------------------------------------------------------------------------------------
+function getElRoot(el) {
+    return el.getRootNode ? el.getRootNode() : document;
 }
 
 // Stops a mouse/touch event from doing it's native browser action
@@ -986,7 +1016,7 @@ function parseObject(obj) {
         milliseconds: (obj.hours || obj.hour || 0) * 60 * 60 * 1000 + // hours
             (obj.minutes || obj.minute || 0) * 60 * 1000 + // minutes
             (obj.seconds || obj.second || 0) * 1000 + // seconds
-            (obj.milliseconds || obj.millisecond || obj.ms || 0),
+            (obj.milliseconds || obj.millisecond || obj.ms || 0), // ms
     };
     var weeks = obj.weeks || obj.week;
     if (weeks) {
@@ -1644,6 +1674,7 @@ var BASE_OPTION_REFINERS = {
     defaultTimedEventDuration: createDuration,
     nextDayThreshold: createDuration,
     scrollTime: createDuration,
+    scrollTimeReset: Boolean,
     slotMinTime: createDuration,
     slotMaxTime: createDuration,
     dayPopoverFormat: createFormatter,
@@ -1697,6 +1728,7 @@ var BASE_OPTION_REFINERS = {
     unselectAuto: Boolean,
     dropAccept: identity,
     eventOrder: parseFieldSpecs,
+    eventOrderStrict: Boolean,
     handleWindowResize: Boolean,
     windowResizeDelay: Number,
     longPressDelay: Number,
@@ -1768,7 +1800,10 @@ var BASE_OPTION_REFINERS = {
     selectLongPressDelay: Number,
     eventLongPressDelay: Number,
     selectMirror: Boolean,
+    eventMaxStack: Number,
     eventMinHeight: Number,
+    eventMinWidth: Number,
+    eventShortHeight: Number,
     slotEventOverlap: Boolean,
     plugins: identity,
     firstDay: Number,
@@ -1783,6 +1818,11 @@ var BASE_OPTION_REFINERS = {
     titleFormat: identity,
     // only used by list-view, but languages define the value, so we need it in base options
     noEventsText: String,
+    moreLinkClick: identity,
+    moreLinkClassNames: identity,
+    moreLinkContent: identity,
+    moreLinkDidMount: identity,
+    moreLinkWillUnmount: identity,
 };
 // do NOT give a type here. need `typeof BASE_OPTION_DEFAULTS` to give real results.
 // raw values.
@@ -1808,6 +1848,7 @@ var BASE_OPTION_DEFAULTS = {
     editable: false,
     nowIndicator: false,
     scrollTime: '06:00:00',
+    scrollTimeReset: true,
     slotMinTime: '00:00:00',
     slotMaxTime: '24:00:00',
     showNonCurrentDates: true,
@@ -1833,6 +1874,9 @@ var BASE_OPTION_DEFAULTS = {
     expandRows: false,
     navLinks: false,
     selectable: false,
+    eventMinHeight: 15,
+    eventMinWidth: 30,
+    eventShortHeight: 30,
 };
 // calendar listeners
 // ------------------
@@ -2060,7 +2104,7 @@ function createEventUi(refined, context) {
         backgroundColor: refined.backgroundColor || refined.color || '',
         borderColor: refined.borderColor || refined.color || '',
         textColor: refined.textColor || '',
-        classNames: (refined.className || []).concat(refined.classNames || []),
+        classNames: (refined.className || []).concat(refined.classNames || []), // join singular and plural
     };
 }
 // TODO: prevent against problems with <2 args!
@@ -2526,9 +2570,15 @@ startOverride, endOverride) {
     if (displayEventEnd == null) {
         displayEventEnd = defaultDisplayEventEnd !== false;
     }
-    if (displayEventTime && !eventDef.allDay && (seg.isStart || seg.isEnd)) {
-        var segStart = startOverride || (seg.isStart ? eventInstance.range.start : (seg.start || seg.eventRange.range.start));
-        var segEnd = endOverride || (seg.isEnd ? eventInstance.range.end : (seg.end || seg.eventRange.range.end));
+    var wholeEventStart = eventInstance.range.start;
+    var wholeEventEnd = eventInstance.range.end;
+    var segStart = startOverride || seg.start || seg.eventRange.range.start;
+    var segEnd = endOverride || seg.end || seg.eventRange.range.end;
+    var isStartDay = startOfDay(wholeEventStart).valueOf() === startOfDay(segStart).valueOf();
+    var isEndDay = startOfDay(addMs(wholeEventEnd, -1)).valueOf() === startOfDay(addMs(segEnd, -1)).valueOf();
+    if (displayEventTime && !eventDef.allDay && (isStartDay || isEndDay)) {
+        segStart = isStartDay ? wholeEventStart : segStart;
+        segEnd = isEndDay ? wholeEventEnd : segEnd;
         if (displayEventEnd && eventDef.hasEnd) {
             return dateEnv.formatRange(segStart, segEnd, timeFormat, {
                 forcedStartTzo: startOverride ? null : eventInstance.forcedStartTzo,
@@ -2536,7 +2586,7 @@ startOverride, endOverride) {
             });
         }
         return dateEnv.format(segStart, timeFormat, {
-            forcedTzo: startOverride ? null : eventInstance.forcedStartTzo,
+            forcedTzo: startOverride ? null : eventInstance.forcedStartTzo, // nooooo, same
         });
     }
     return '';
@@ -3002,7 +3052,7 @@ var CalendarApi = /** @class */ (function () {
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
-        (_a = this.currentDataManager.emitter).trigger.apply(_a, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])([handlerName], args));
+        (_a = this.currentDataManager.emitter).trigger.apply(_a, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])([handlerName], args));
     };
     // View
     // -----------------------------------------------------------------------------------------------------------------
@@ -3204,7 +3254,7 @@ var CalendarApi = /** @class */ (function () {
             if (!currentData.eventStore.defs[def.defId]) {
                 this.dispatch({
                     type: 'ADD_EVENTS',
-                    eventStore: eventTupleToStore({ def: def, instance: instance }),
+                    eventStore: eventTupleToStore({ def: def, instance: instance }), // TODO: better util for two args?
                 });
                 this.triggerEventAdd(eventInput);
             }
@@ -3327,7 +3377,7 @@ var CalendarApi = /** @class */ (function () {
         this.dispatch({ type: 'REMOVE_ALL_EVENT_SOURCES' });
     };
     CalendarApi.prototype.refetchEvents = function () {
-        this.dispatch({ type: 'FETCH_EVENT_SOURCES' });
+        this.dispatch({ type: 'FETCH_EVENT_SOURCES', isRefetch: true });
     };
     // Scroll
     // -----------------------------------------------------------------------------------------------------------------
@@ -3355,6 +3405,13 @@ var EventApi = /** @class */ (function () {
         var _a, _b;
         if (name in EVENT_DATE_REFINERS) {
             console.warn('Could not set date-related prop \'name\'. Use one of the date-related methods instead.');
+            // TODO: make proper aliasing system?
+        }
+        else if (name === 'id') {
+            val = EVENT_NON_DATE_REFINERS[name](val);
+            this.mutate({
+                standardProps: { publicId: val }, // hardcoded internal name
+            });
         }
         else if (name in EVENT_NON_DATE_REFINERS) {
             val = EVENT_NON_DATE_REFINERS[name](val);
@@ -4169,7 +4226,7 @@ var RAW_EN_LOCALE = {
     code: 'en',
     week: {
         dow: 0,
-        doy: 4,
+        doy: 4, // 4 days need to be within the year to be considered the first week
     },
     direction: 'ltr',
     buttonText: {
@@ -4193,7 +4250,7 @@ function organizeRawLocales(explicitRawLocales) {
     var defaultCode = explicitRawLocales.length > 0 ? explicitRawLocales[0].code : 'en';
     var allRawLocales = globalLocales.concat(explicitRawLocales);
     var rawLocaleMap = {
-        en: RAW_EN_LOCALE,
+        en: RAW_EN_LOCALE, // necessary?
     };
     for (var _i = 0, allRawLocales_1 = allRawLocales; _i < allRawLocales_1.length; _i++) {
         var rawLocale = allRawLocales_1[_i];
@@ -4243,7 +4300,7 @@ function parseLocale(codeArg, codes, raw) {
 
 function formatDate(dateInput, options) {
     if (options === void 0) { options = {}; }
-    var dateEnv = buildDateEnv(options);
+    var dateEnv = buildDateEnv$1(options);
     var formatter = createFormatter(options);
     var dateMeta = dateEnv.createMarkerMeta(dateInput);
     if (!dateMeta) { // TODO: warning?
@@ -4254,7 +4311,7 @@ function formatDate(dateInput, options) {
     });
 }
 function formatRange(startInput, endInput, options) {
-    var dateEnv = buildDateEnv(typeof options === 'object' && options ? options : {}); // pass in if non-null object
+    var dateEnv = buildDateEnv$1(typeof options === 'object' && options ? options : {}); // pass in if non-null object
     var formatter = createFormatter(options);
     var startMeta = dateEnv.createMarkerMeta(startInput);
     var endMeta = dateEnv.createMarkerMeta(endInput);
@@ -4269,7 +4326,7 @@ function formatRange(startInput, endInput, options) {
     });
 }
 // TODO: more DRY and optimized
-function buildDateEnv(settings) {
+function buildDateEnv$1(settings) {
     var locale = buildLocale(settings.locale || 'en', organizeRawLocales([]).map); // TODO: don't hardcode 'en' everywhere
     return new DateEnv(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({ timeZone: BASE_OPTION_DEFAULTS.timeZone, calendarSystem: 'gregory' }, settings), { locale: locale }));
 }
@@ -4280,7 +4337,7 @@ var DEF_DEFAULTS = {
     daysOfWeek: [1, 2, 3, 4, 5],
     display: 'inverse-background',
     classNames: 'fc-non-business',
-    groupId: '_businessHours',
+    groupId: '_businessHours', // so multiple defs get grouped
 };
 /*
 TODO: pass around as EventDefHash!!!
@@ -4696,6 +4753,21 @@ function computeRect(el) {
         bottom: rect.bottom + window.pageYOffset,
     };
 }
+function computeClippedClientRect(el) {
+    var clippingParents = getClippingParents(el);
+    var rect = el.getBoundingClientRect();
+    for (var _i = 0, clippingParents_1 = clippingParents; _i < clippingParents_1.length; _i++) {
+        var clippingParent = clippingParents_1[_i];
+        var intersection = intersectRects(rect, clippingParent.getBoundingClientRect());
+        if (intersection) {
+            rect = intersection;
+        }
+        else {
+            return null;
+        }
+    }
+    return rect;
+}
 function computeHeightAndMargins(el) {
     return el.getBoundingClientRect().height + computeVMargins(el);
 }
@@ -5039,11 +5111,12 @@ Theme.prototype.baseIconClass = '';
 Theme.prototype.iconOverridePrefix = '';
 
 var ScrollResponder = /** @class */ (function () {
-    function ScrollResponder(execFunc, emitter, scrollTime) {
+    function ScrollResponder(execFunc, emitter, scrollTime, scrollTimeReset) {
         var _this = this;
         this.execFunc = execFunc;
         this.emitter = emitter;
         this.scrollTime = scrollTime;
+        this.scrollTimeReset = scrollTimeReset;
         this.handleScrollRequest = function (request) {
             _this.queuedRequest = Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, _this.queuedRequest || {}, request);
             _this.drain();
@@ -5055,7 +5128,7 @@ var ScrollResponder = /** @class */ (function () {
         this.emitter.off('_scrollRequest', this.handleScrollRequest);
     };
     ScrollResponder.prototype.update = function (isDatesNew) {
-        if (isDatesNew) {
+        if (isDatesNew && this.scrollTimeReset) {
             this.fireInitialScroll(); // will drain
         }
         else {
@@ -5097,7 +5170,7 @@ function buildViewContext(viewSpec, viewApi, viewOptions, dateProfileGenerator, 
             emitter.off('_resize', handler);
         },
         createScrollResponder: function (execFunc) {
-            return new ScrollResponder(execFunc, emitter, createDuration(viewOptions.scrollTime));
+            return new ScrollResponder(execFunc, emitter, createDuration(viewOptions.scrollTime), viewOptions.scrollTimeReset);
         },
         registerInteractiveComponent: registerInteractiveComponent,
         unregisterInteractiveComponent: unregisterInteractiveComponent,
@@ -5154,292 +5227,6 @@ function setRef(ref, current) {
     }
 }
 
-function reduceEventStore(eventStore, action, eventSources, dateProfile, context) {
-    switch (action.type) {
-        case 'RECEIVE_EVENTS': // raw
-            return receiveRawEvents(eventStore, eventSources[action.sourceId], action.fetchId, action.fetchRange, action.rawEvents, context);
-        case 'ADD_EVENTS': // already parsed, but not expanded
-            return addEvent(eventStore, action.eventStore, // new ones
-            dateProfile ? dateProfile.activeRange : null, context);
-        case 'RESET_EVENTS':
-            return action.eventStore;
-        case 'MERGE_EVENTS': // already parsed and expanded
-            return mergeEventStores(eventStore, action.eventStore);
-        case 'PREV': // TODO: how do we track all actions that affect dateProfile :(
-        case 'NEXT':
-        case 'CHANGE_DATE':
-        case 'CHANGE_VIEW_TYPE':
-            if (dateProfile) {
-                return expandRecurring(eventStore, dateProfile.activeRange, context);
-            }
-            return eventStore;
-        case 'REMOVE_EVENTS':
-            return excludeSubEventStore(eventStore, action.eventStore);
-        case 'REMOVE_EVENT_SOURCE':
-            return excludeEventsBySourceId(eventStore, action.sourceId);
-        case 'REMOVE_ALL_EVENT_SOURCES':
-            return filterEventStoreDefs(eventStore, function (eventDef) { return (!eventDef.sourceId // only keep events with no source id
-            ); });
-        case 'REMOVE_ALL_EVENTS':
-            return createEmptyEventStore();
-        default:
-            return eventStore;
-    }
-}
-function receiveRawEvents(eventStore, eventSource, fetchId, fetchRange, rawEvents, context) {
-    if (eventSource && // not already removed
-        fetchId === eventSource.latestFetchId // TODO: wish this logic was always in event-sources
-    ) {
-        var subset = parseEvents(transformRawEvents(rawEvents, eventSource, context), eventSource, context);
-        if (fetchRange) {
-            subset = expandRecurring(subset, fetchRange, context);
-        }
-        return mergeEventStores(excludeEventsBySourceId(eventStore, eventSource.sourceId), subset);
-    }
-    return eventStore;
-}
-function transformRawEvents(rawEvents, eventSource, context) {
-    var calEachTransform = context.options.eventDataTransform;
-    var sourceEachTransform = eventSource ? eventSource.eventDataTransform : null;
-    if (sourceEachTransform) {
-        rawEvents = transformEachRawEvent(rawEvents, sourceEachTransform);
-    }
-    if (calEachTransform) {
-        rawEvents = transformEachRawEvent(rawEvents, calEachTransform);
-    }
-    return rawEvents;
-}
-function transformEachRawEvent(rawEvents, func) {
-    var refinedEvents;
-    if (!func) {
-        refinedEvents = rawEvents;
-    }
-    else {
-        refinedEvents = [];
-        for (var _i = 0, rawEvents_1 = rawEvents; _i < rawEvents_1.length; _i++) {
-            var rawEvent = rawEvents_1[_i];
-            var refinedEvent = func(rawEvent);
-            if (refinedEvent) {
-                refinedEvents.push(refinedEvent);
-            }
-            else if (refinedEvent == null) {
-                refinedEvents.push(rawEvent);
-            } // if a different falsy value, do nothing
-        }
-    }
-    return refinedEvents;
-}
-function addEvent(eventStore, subset, expandRange, context) {
-    if (expandRange) {
-        subset = expandRecurring(subset, expandRange, context);
-    }
-    return mergeEventStores(eventStore, subset);
-}
-function rezoneEventStoreDates(eventStore, oldDateEnv, newDateEnv) {
-    var defs = eventStore.defs;
-    var instances = mapHash(eventStore.instances, function (instance) {
-        var def = defs[instance.defId];
-        if (def.allDay || def.recurringDef) {
-            return instance; // isn't dependent on timezone
-        }
-        return Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, instance), { range: {
-                start: newDateEnv.createMarker(oldDateEnv.toDate(instance.range.start, instance.forcedStartTzo)),
-                end: newDateEnv.createMarker(oldDateEnv.toDate(instance.range.end, instance.forcedEndTzo)),
-            }, forcedStartTzo: newDateEnv.canComputeOffset ? null : instance.forcedStartTzo, forcedEndTzo: newDateEnv.canComputeOffset ? null : instance.forcedEndTzo });
-    });
-    return { defs: defs, instances: instances };
-}
-function excludeEventsBySourceId(eventStore, sourceId) {
-    return filterEventStoreDefs(eventStore, function (eventDef) { return eventDef.sourceId !== sourceId; });
-}
-// QUESTION: why not just return instances? do a general object-property-exclusion util
-function excludeInstances(eventStore, removals) {
-    return {
-        defs: eventStore.defs,
-        instances: filterHash(eventStore.instances, function (instance) { return !removals[instance.instanceId]; }),
-    };
-}
-
-// high-level segmenting-aware tester functions
-// ------------------------------------------------------------------------------------------------------------------------
-function isInteractionValid(interaction, context) {
-    return isNewPropsValid({ eventDrag: interaction }, context); // HACK: the eventDrag props is used for ALL interactions
-}
-function isDateSelectionValid(dateSelection, context) {
-    return isNewPropsValid({ dateSelection: dateSelection }, context);
-}
-function isNewPropsValid(newProps, context) {
-    var calendarState = context.getCurrentData();
-    var props = Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({ businessHours: calendarState.businessHours, dateSelection: '', eventStore: calendarState.eventStore, eventUiBases: calendarState.eventUiBases, eventSelection: '', eventDrag: null, eventResize: null }, newProps);
-    return (context.pluginHooks.isPropsValid || isPropsValid)(props, context);
-}
-function isPropsValid(state, context, dateSpanMeta, filterConfig) {
-    if (dateSpanMeta === void 0) { dateSpanMeta = {}; }
-    if (state.eventDrag && !isInteractionPropsValid(state, context, dateSpanMeta, filterConfig)) {
-        return false;
-    }
-    if (state.dateSelection && !isDateSelectionPropsValid(state, context, dateSpanMeta, filterConfig)) {
-        return false;
-    }
-    return true;
-}
-// Moving Event Validation
-// ------------------------------------------------------------------------------------------------------------------------
-function isInteractionPropsValid(state, context, dateSpanMeta, filterConfig) {
-    var currentState = context.getCurrentData();
-    var interaction = state.eventDrag; // HACK: the eventDrag props is used for ALL interactions
-    var subjectEventStore = interaction.mutatedEvents;
-    var subjectDefs = subjectEventStore.defs;
-    var subjectInstances = subjectEventStore.instances;
-    var subjectConfigs = compileEventUis(subjectDefs, interaction.isEvent ?
-        state.eventUiBases :
-        { '': currentState.selectionConfig });
-    if (filterConfig) {
-        subjectConfigs = mapHash(subjectConfigs, filterConfig);
-    }
-    // exclude the subject events. TODO: exclude defs too?
-    var otherEventStore = excludeInstances(state.eventStore, interaction.affectedEvents.instances);
-    var otherDefs = otherEventStore.defs;
-    var otherInstances = otherEventStore.instances;
-    var otherConfigs = compileEventUis(otherDefs, state.eventUiBases);
-    for (var subjectInstanceId in subjectInstances) {
-        var subjectInstance = subjectInstances[subjectInstanceId];
-        var subjectRange = subjectInstance.range;
-        var subjectConfig = subjectConfigs[subjectInstance.defId];
-        var subjectDef = subjectDefs[subjectInstance.defId];
-        // constraint
-        if (!allConstraintsPass(subjectConfig.constraints, subjectRange, otherEventStore, state.businessHours, context)) {
-            return false;
-        }
-        // overlap
-        var eventOverlap = context.options.eventOverlap;
-        var eventOverlapFunc = typeof eventOverlap === 'function' ? eventOverlap : null;
-        for (var otherInstanceId in otherInstances) {
-            var otherInstance = otherInstances[otherInstanceId];
-            // intersect! evaluate
-            if (rangesIntersect(subjectRange, otherInstance.range)) {
-                var otherOverlap = otherConfigs[otherInstance.defId].overlap;
-                // consider the other event's overlap. only do this if the subject event is a "real" event
-                if (otherOverlap === false && interaction.isEvent) {
-                    return false;
-                }
-                if (subjectConfig.overlap === false) {
-                    return false;
-                }
-                if (eventOverlapFunc && !eventOverlapFunc(new EventApi(context, otherDefs[otherInstance.defId], otherInstance), // still event
-                new EventApi(context, subjectDef, subjectInstance))) {
-                    return false;
-                }
-            }
-        }
-        // allow (a function)
-        var calendarEventStore = currentState.eventStore; // need global-to-calendar, not local to component (splittable)state
-        for (var _i = 0, _a = subjectConfig.allows; _i < _a.length; _i++) {
-            var subjectAllow = _a[_i];
-            var subjectDateSpan = Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, dateSpanMeta), { range: subjectInstance.range, allDay: subjectDef.allDay });
-            var origDef = calendarEventStore.defs[subjectDef.defId];
-            var origInstance = calendarEventStore.instances[subjectInstanceId];
-            var eventApi = void 0;
-            if (origDef) { // was previously in the calendar
-                eventApi = new EventApi(context, origDef, origInstance);
-            }
-            else { // was an external event
-                eventApi = new EventApi(context, subjectDef); // no instance, because had no dates
-            }
-            if (!subjectAllow(buildDateSpanApiWithContext(subjectDateSpan, context), eventApi)) {
-                return false;
-            }
-        }
-    }
-    return true;
-}
-// Date Selection Validation
-// ------------------------------------------------------------------------------------------------------------------------
-function isDateSelectionPropsValid(state, context, dateSpanMeta, filterConfig) {
-    var relevantEventStore = state.eventStore;
-    var relevantDefs = relevantEventStore.defs;
-    var relevantInstances = relevantEventStore.instances;
-    var selection = state.dateSelection;
-    var selectionRange = selection.range;
-    var selectionConfig = context.getCurrentData().selectionConfig;
-    if (filterConfig) {
-        selectionConfig = filterConfig(selectionConfig);
-    }
-    // constraint
-    if (!allConstraintsPass(selectionConfig.constraints, selectionRange, relevantEventStore, state.businessHours, context)) {
-        return false;
-    }
-    // overlap
-    var selectOverlap = context.options.selectOverlap;
-    var selectOverlapFunc = typeof selectOverlap === 'function' ? selectOverlap : null;
-    for (var relevantInstanceId in relevantInstances) {
-        var relevantInstance = relevantInstances[relevantInstanceId];
-        // intersect! evaluate
-        if (rangesIntersect(selectionRange, relevantInstance.range)) {
-            if (selectionConfig.overlap === false) {
-                return false;
-            }
-            if (selectOverlapFunc && !selectOverlapFunc(new EventApi(context, relevantDefs[relevantInstance.defId], relevantInstance), null)) {
-                return false;
-            }
-        }
-    }
-    // allow (a function)
-    for (var _i = 0, _a = selectionConfig.allows; _i < _a.length; _i++) {
-        var selectionAllow = _a[_i];
-        var fullDateSpan = Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, dateSpanMeta), selection);
-        if (!selectionAllow(buildDateSpanApiWithContext(fullDateSpan, context), null)) {
-            return false;
-        }
-    }
-    return true;
-}
-// Constraint Utils
-// ------------------------------------------------------------------------------------------------------------------------
-function allConstraintsPass(constraints, subjectRange, otherEventStore, businessHoursUnexpanded, context) {
-    for (var _i = 0, constraints_1 = constraints; _i < constraints_1.length; _i++) {
-        var constraint = constraints_1[_i];
-        if (!anyRangesContainRange(constraintToRanges(constraint, subjectRange, otherEventStore, businessHoursUnexpanded, context), subjectRange)) {
-            return false;
-        }
-    }
-    return true;
-}
-function constraintToRanges(constraint, subjectRange, // for expanding a recurring constraint, or expanding business hours
-otherEventStore, // for if constraint is an even group ID
-businessHoursUnexpanded, // for if constraint is 'businessHours'
-context) {
-    if (constraint === 'businessHours') {
-        return eventStoreToRanges(expandRecurring(businessHoursUnexpanded, subjectRange, context));
-    }
-    if (typeof constraint === 'string') { // an group ID
-        return eventStoreToRanges(filterEventStoreDefs(otherEventStore, function (eventDef) { return eventDef.groupId === constraint; }));
-    }
-    if (typeof constraint === 'object' && constraint) { // non-null object
-        return eventStoreToRanges(expandRecurring(constraint, subjectRange, context));
-    }
-    return []; // if it's false
-}
-// TODO: move to event-store file?
-function eventStoreToRanges(eventStore) {
-    var instances = eventStore.instances;
-    var ranges = [];
-    for (var instanceId in instances) {
-        ranges.push(instances[instanceId].range);
-    }
-    return ranges;
-}
-// TODO: move to geom file?
-function anyRangesContainRange(outerRanges, innerRange) {
-    for (var _i = 0, outerRanges_1 = outerRanges; _i < outerRanges_1.length; _i++) {
-        var outerRange = outerRanges_1[_i];
-        if (rangeContainsRange(outerRange, innerRange)) {
-            return true;
-        }
-    }
-    return false;
-}
-
 /*
 an INTERACTABLE date component
 
@@ -5461,28 +5248,6 @@ var DateComponent = /** @class */ (function (_super) {
     DateComponent.prototype.queryHit = function (positionLeft, positionTop, elWidth, elHeight) {
         return null; // this should be abstract
     };
-    // Validation
-    // -----------------------------------------------------------------------------------------------------------------
-    DateComponent.prototype.isInteractionValid = function (interaction) {
-        var dateProfile = this.props.dateProfile; // HACK
-        var instances = interaction.mutatedEvents.instances;
-        if (dateProfile) { // HACK for MorePopover
-            for (var instanceId in instances) {
-                if (!rangeContainsRange(dateProfile.validRange, instances[instanceId].range)) {
-                    return false;
-                }
-            }
-        }
-        return isInteractionValid(interaction, this.context);
-    };
-    DateComponent.prototype.isDateSelectionValid = function (selection) {
-        var dateProfile = this.props.dateProfile; // HACK
-        if (dateProfile && // HACK for MorePopover
-            !rangeContainsRange(dateProfile.validRange, selection.range)) {
-            return false;
-        }
-        return isDateSelectionValid(selection, this.context);
-    };
     // Pointer Interaction Utils
     // -----------------------------------------------------------------------------------------------------------------
     DateComponent.prototype.isValidSegDownEl = function (el) {
@@ -5492,7 +5257,7 @@ var DateComponent = /** @class */ (function (_super) {
     };
     DateComponent.prototype.isValidDateDownEl = function (el) {
         return !elementClosest(el, '.fc-event:not(.fc-bg-event)') &&
-            !elementClosest(el, '.fc-daygrid-more-link') && // a "more.." link
+            !elementClosest(el, '.fc-more-link') && // a "more.." link
             !elementClosest(el, 'a[data-navlink]') && // a clickable nav link
             !elementClosest(el, '.fc-popover'); // hack
     };
@@ -5520,7 +5285,6 @@ function createPlugin(input) {
         viewPropsTransformers: input.viewPropsTransformers || [],
         isPropsValid: input.isPropsValid || null,
         externalDefTransforms: input.externalDefTransforms || [],
-        eventResizeJoinTransforms: input.eventResizeJoinTransforms || [],
         viewContainerAppends: input.viewContainerAppends || [],
         eventDropTransformers: input.eventDropTransformers || [],
         componentInteractions: input.componentInteractions || [],
@@ -5559,7 +5323,6 @@ function buildPluginHooks(pluginDefs, globalDefs) {
         viewPropsTransformers: [],
         isPropsValid: null,
         externalDefTransforms: [],
-        eventResizeJoinTransforms: [],
         viewContainerAppends: [],
         eventDropTransformers: [],
         componentInteractions: [],
@@ -5625,7 +5388,6 @@ function combineHooks(hooks0, hooks1) {
         viewPropsTransformers: hooks0.viewPropsTransformers.concat(hooks1.viewPropsTransformers),
         isPropsValid: hooks1.isPropsValid || hooks0.isPropsValid,
         externalDefTransforms: hooks0.externalDefTransforms.concat(hooks1.externalDefTransforms),
-        eventResizeJoinTransforms: hooks0.eventResizeJoinTransforms.concat(hooks1.eventResizeJoinTransforms),
         viewContainerAppends: hooks0.viewContainerAppends.concat(hooks1.viewContainerAppends),
         eventDropTransformers: hooks0.eventDropTransformers.concat(hooks1.eventDropTransformers),
         calendarInteractions: hooks0.calendarInteractions.concat(hooks1.calendarInteractions),
@@ -5778,39 +5540,56 @@ var ContentHookInner = /** @class */ (function (_super) {
         }
     };
     ContentHookInner.prototype.renderInnerContent = function () {
-        var contentTypeHandlers = this.context.pluginHooks.contentTypeHandlers;
-        var _a = this, props = _a.props, customContentInfo = _a.customContentInfo;
-        var rawVal = props.content;
-        var innerContent = normalizeContent(rawVal, props.hookProps);
-        var innerContentVDom = null;
+        var customContentInfo = this.customContentInfo; // only populated if using non-[p]react node(s)
+        var innerContent = this.getInnerContent();
+        var meta = this.getContentMeta(innerContent);
+        // initial run, or content-type changing? (from vue -> react for example)
+        if (!customContentInfo || customContentInfo.contentKey !== meta.contentKey) {
+            // clearing old value
+            if (customContentInfo) {
+                if (customContentInfo.destroy) {
+                    customContentInfo.destroy();
+                }
+                customContentInfo = this.customContentInfo = null;
+            }
+            // assigning new value
+            if (meta.contentKey) {
+                customContentInfo = this.customContentInfo = Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({ contentKey: meta.contentKey, contentVal: innerContent[meta.contentKey] }, meta.buildLifecycleFuncs());
+            }
+            // updating
+        }
+        else if (customContentInfo) {
+            customContentInfo.contentVal = innerContent[meta.contentKey];
+        }
+        return customContentInfo
+            ? [] // signal that something was specified
+            : innerContent; // assume a [p]react vdom node. use it
+    };
+    ContentHookInner.prototype.getInnerContent = function () {
+        var props = this.props;
+        var innerContent = normalizeContent(props.content, props.hookProps);
         if (innerContent === undefined) { // use the default
             innerContent = normalizeContent(props.defaultContent, props.hookProps);
         }
-        if (innerContent !== undefined) { // we allow custom content handlers to return nothing
-            if (customContentInfo) {
-                customContentInfo.contentVal = innerContent[customContentInfo.contentKey];
-            }
-            else if (typeof innerContent === 'object') {
-                // look for a prop that would indicate a custom content handler is needed
-                for (var contentKey in contentTypeHandlers) {
-                    if (innerContent[contentKey] !== undefined) {
-                        var stuff = contentTypeHandlers[contentKey]();
-                        customContentInfo = this.customContentInfo = Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({ contentKey: contentKey, contentVal: innerContent[contentKey] }, stuff);
-                        break;
-                    }
+        return innerContent == null ? null : innerContent; // convert undefined to null (better for React)
+    };
+    ContentHookInner.prototype.getContentMeta = function (innerContent) {
+        var contentTypeHandlers = this.context.pluginHooks.contentTypeHandlers;
+        var contentKey = '';
+        var buildLifecycleFuncs = null;
+        if (innerContent) { // allowed to be null, for convenience to caller
+            for (var searchKey in contentTypeHandlers) {
+                if (innerContent[searchKey] !== undefined) {
+                    contentKey = searchKey;
+                    buildLifecycleFuncs = contentTypeHandlers[searchKey];
+                    break;
                 }
             }
-            if (customContentInfo) {
-                innerContentVDom = []; // signal that something was specified
-            }
-            else {
-                innerContentVDom = innerContent; // assume a [p]react vdom node. use it
-            }
         }
-        return innerContentVDom;
+        return { contentKey: contentKey, buildLifecycleFuncs: buildLifecycleFuncs };
     };
     ContentHookInner.prototype.updateCustomContent = function () {
-        if (this.customContentInfo) {
+        if (this.customContentInfo) { // for non-[p]react
             this.customContentInfo.render(this.innerElRef.current || this.props.backupElRef.current, // the element to render into
             this.customContentInfo.contentVal);
         }
@@ -5968,7 +5747,7 @@ function buildViewSpec(viewDef, overrideConfigs, optionOverrides, dynamicOptionO
         buttonTextDefault: queryButtonText(localeDefaults) ||
             viewDef.defaults.buttonText ||
             queryButtonText(BASE_OPTION_DEFAULTS) ||
-            viewDef.type,
+            viewDef.type, // fall back to given view name
     };
 }
 // hack to get memoization working
@@ -6058,6 +5837,7 @@ var DateProfileGenerator = /** @class */ (function () {
             isValid: isValid,
             // how far the current date will move for a prev/next operation
             dateIncrement: this.buildDateIncrement(currentInfo.duration),
+            // pass a fallback (might be null) ^
         };
     };
     // Builds an object with optional start/end properties.
@@ -6316,12 +6096,7 @@ function reduceDateProfile(currentDateProfile, action, currentDate, dateProfileG
         case 'CHANGE_VIEW_TYPE':
             return dateProfileGenerator.build(action.dateMarker || currentDate);
         case 'CHANGE_DATE':
-            if (!currentDateProfile.activeRange ||
-                !rangeContainsMarker(currentDateProfile.currentRange, action.dateMarker) // don't move if date already in view
-            ) {
-                return dateProfileGenerator.build(action.dateMarker);
-            }
-            break;
+            return dateProfileGenerator.build(action.dateMarker);
         case 'PREV':
             dp = dateProfileGenerator.buildPrev(currentDateProfile, currentDate);
             if (dp.isValid) {
@@ -6360,7 +6135,7 @@ function reduceEventSources(eventSources, action, dateProfile, context) {
         case 'FETCH_EVENT_SOURCES':
             return fetchSourcesByIds(eventSources, action.sourceIds ? // why no type?
                 arrayToHash(action.sourceIds) :
-                excludeStaticSources(eventSources, context), activeRange, context);
+                excludeStaticSources(eventSources, context), activeRange, action.isRefetch || false, context);
         case 'RECEIVE_EVENTS':
         case 'RECEIVE_EVENT_ERROR':
             return receiveResponse(eventSources, action.sourceId, action.fetchId, action.fetchRange);
@@ -6372,7 +6147,7 @@ function reduceEventSources(eventSources, action, dateProfile, context) {
 }
 function reduceEventSourcesNewTimeZone(eventSources, dateProfile, context) {
     var activeRange = dateProfile ? dateProfile.activeRange : null; // need this check?
-    return fetchSourcesByIds(eventSources, excludeStaticSources(eventSources, context), activeRange, context);
+    return fetchSourcesByIds(eventSources, excludeStaticSources(eventSources, context), activeRange, true, context);
 }
 function computeEventSourcesLoading(eventSources) {
     for (var sourceId in eventSources) {
@@ -6397,7 +6172,7 @@ function removeSource(eventSourceHash, sourceId) {
     return filterHash(eventSourceHash, function (eventSource) { return eventSource.sourceId !== sourceId; });
 }
 function fetchDirtySources(sourceHash, fetchRange, context) {
-    return fetchSourcesByIds(sourceHash, filterHash(sourceHash, function (eventSource) { return isSourceDirty(eventSource, fetchRange, context); }), fetchRange, context);
+    return fetchSourcesByIds(sourceHash, filterHash(sourceHash, function (eventSource) { return isSourceDirty(eventSource, fetchRange, context); }), fetchRange, false, context);
 }
 function isSourceDirty(eventSource, fetchRange, context) {
     if (!doesSourceNeedRange(eventSource, context)) {
@@ -6409,12 +6184,12 @@ function isSourceDirty(eventSource, fetchRange, context) {
         fetchRange.start < eventSource.fetchRange.start ||
         fetchRange.end > eventSource.fetchRange.end;
 }
-function fetchSourcesByIds(prevSources, sourceIdHash, fetchRange, context) {
+function fetchSourcesByIds(prevSources, sourceIdHash, fetchRange, isRefetch, context) {
     var nextSources = {};
     for (var sourceId in prevSources) {
         var source = prevSources[sourceId];
         if (sourceIdHash[sourceId]) {
-            nextSources[sourceId] = fetchSource(source, fetchRange, context);
+            nextSources[sourceId] = fetchSource(source, fetchRange, isRefetch, context);
         }
         else {
             nextSources[sourceId] = source;
@@ -6422,13 +6197,14 @@ function fetchSourcesByIds(prevSources, sourceIdHash, fetchRange, context) {
     }
     return nextSources;
 }
-function fetchSource(eventSource, fetchRange, context) {
+function fetchSource(eventSource, fetchRange, isRefetch, context) {
     var options = context.options, calendarApi = context.calendarApi;
     var sourceDef = context.pluginHooks.eventSourceDefs[eventSource.sourceDefId];
     var fetchId = guid();
     sourceDef.fetch({
         eventSource: eventSource,
         range: fetchRange,
+        isRefetch: isRefetch,
         context: context,
     }, function (res) {
         var rawEvents = res.rawEvents;
@@ -6497,6 +6273,112 @@ function parseInitialSources(rawOptions, context) {
 function doesSourceNeedRange(eventSource, context) {
     var defs = context.pluginHooks.eventSourceDefs;
     return !defs[eventSource.sourceDefId].ignoreRange;
+}
+
+function reduceEventStore(eventStore, action, eventSources, dateProfile, context) {
+    switch (action.type) {
+        case 'RECEIVE_EVENTS': // raw
+            return receiveRawEvents(eventStore, eventSources[action.sourceId], action.fetchId, action.fetchRange, action.rawEvents, context);
+        case 'ADD_EVENTS': // already parsed, but not expanded
+            return addEvent(eventStore, action.eventStore, // new ones
+            dateProfile ? dateProfile.activeRange : null, context);
+        case 'RESET_EVENTS':
+            return action.eventStore;
+        case 'MERGE_EVENTS': // already parsed and expanded
+            return mergeEventStores(eventStore, action.eventStore);
+        case 'PREV': // TODO: how do we track all actions that affect dateProfile :(
+        case 'NEXT':
+        case 'CHANGE_DATE':
+        case 'CHANGE_VIEW_TYPE':
+            if (dateProfile) {
+                return expandRecurring(eventStore, dateProfile.activeRange, context);
+            }
+            return eventStore;
+        case 'REMOVE_EVENTS':
+            return excludeSubEventStore(eventStore, action.eventStore);
+        case 'REMOVE_EVENT_SOURCE':
+            return excludeEventsBySourceId(eventStore, action.sourceId);
+        case 'REMOVE_ALL_EVENT_SOURCES':
+            return filterEventStoreDefs(eventStore, function (eventDef) { return (!eventDef.sourceId // only keep events with no source id
+            ); });
+        case 'REMOVE_ALL_EVENTS':
+            return createEmptyEventStore();
+        default:
+            return eventStore;
+    }
+}
+function receiveRawEvents(eventStore, eventSource, fetchId, fetchRange, rawEvents, context) {
+    if (eventSource && // not already removed
+        fetchId === eventSource.latestFetchId // TODO: wish this logic was always in event-sources
+    ) {
+        var subset = parseEvents(transformRawEvents(rawEvents, eventSource, context), eventSource, context);
+        if (fetchRange) {
+            subset = expandRecurring(subset, fetchRange, context);
+        }
+        return mergeEventStores(excludeEventsBySourceId(eventStore, eventSource.sourceId), subset);
+    }
+    return eventStore;
+}
+function transformRawEvents(rawEvents, eventSource, context) {
+    var calEachTransform = context.options.eventDataTransform;
+    var sourceEachTransform = eventSource ? eventSource.eventDataTransform : null;
+    if (sourceEachTransform) {
+        rawEvents = transformEachRawEvent(rawEvents, sourceEachTransform);
+    }
+    if (calEachTransform) {
+        rawEvents = transformEachRawEvent(rawEvents, calEachTransform);
+    }
+    return rawEvents;
+}
+function transformEachRawEvent(rawEvents, func) {
+    var refinedEvents;
+    if (!func) {
+        refinedEvents = rawEvents;
+    }
+    else {
+        refinedEvents = [];
+        for (var _i = 0, rawEvents_1 = rawEvents; _i < rawEvents_1.length; _i++) {
+            var rawEvent = rawEvents_1[_i];
+            var refinedEvent = func(rawEvent);
+            if (refinedEvent) {
+                refinedEvents.push(refinedEvent);
+            }
+            else if (refinedEvent == null) {
+                refinedEvents.push(rawEvent);
+            } // if a different falsy value, do nothing
+        }
+    }
+    return refinedEvents;
+}
+function addEvent(eventStore, subset, expandRange, context) {
+    if (expandRange) {
+        subset = expandRecurring(subset, expandRange, context);
+    }
+    return mergeEventStores(eventStore, subset);
+}
+function rezoneEventStoreDates(eventStore, oldDateEnv, newDateEnv) {
+    var defs = eventStore.defs;
+    var instances = mapHash(eventStore.instances, function (instance) {
+        var def = defs[instance.defId];
+        if (def.allDay || def.recurringDef) {
+            return instance; // isn't dependent on timezone
+        }
+        return Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, instance), { range: {
+                start: newDateEnv.createMarker(oldDateEnv.toDate(instance.range.start, instance.forcedStartTzo)),
+                end: newDateEnv.createMarker(oldDateEnv.toDate(instance.range.end, instance.forcedEndTzo)),
+            }, forcedStartTzo: newDateEnv.canComputeOffset ? null : instance.forcedStartTzo, forcedEndTzo: newDateEnv.canComputeOffset ? null : instance.forcedEndTzo });
+    });
+    return { defs: defs, instances: instances };
+}
+function excludeEventsBySourceId(eventStore, sourceId) {
+    return filterEventStoreDefs(eventStore, function (eventDef) { return eventDef.sourceId !== sourceId; });
+}
+// QUESTION: why not just return instances? do a general object-property-exclusion util
+function excludeInstances(eventStore, removals) {
+    return {
+        defs: eventStore.defs,
+        instances: filterHash(eventStore.instances, function (instance) { return !removals[instance.instanceId]; }),
+    };
 }
 
 function reduceDateSelection(currentSelection, action) {
@@ -6585,7 +6467,7 @@ function parseSection(sectionStr, calendarOptions, calendarOptionOverrides, them
         if ((customButtonProps = calendarCustomButtons[buttonName])) {
             buttonClick = function (ev) {
                 if (customButtonProps.click) {
-                    customButtonProps.click.call(ev.target, ev, ev.target);
+                    customButtonProps.click.call(ev.target, ev, ev.target); // TODO: use Calendar this context?
                 }
             };
             (buttonIcon = theme.getCustomButtonIconClass(customButtonProps)) ||
@@ -6614,7 +6496,7 @@ function parseSection(sectionStr, calendarOptions, calendarOptionOverrides, them
     })); });
 }
 
-var eventSourceDef = {
+var eventSourceDef$2 = {
     ignoreRange: true,
     parseMeta: function (refined) {
         if (Array.isArray(refined.events)) {
@@ -6629,7 +6511,7 @@ var eventSourceDef = {
     },
 };
 var arrayEventSourcePlugin = createPlugin({
-    eventSourceDefs: [eventSourceDef],
+    eventSourceDefs: [eventSourceDef$2],
 });
 
 var eventSourceDef$1 = {
@@ -6713,7 +6595,7 @@ var JSON_FEED_EVENT_SOURCE_REFINERS = {
     timeZoneParam: String,
 };
 
-var eventSourceDef$2 = {
+var eventSourceDef = {
     parseMeta: function (refined) {
         if (refined.url && (refined.format === 'json' || !refined.format)) {
             return {
@@ -6740,7 +6622,7 @@ var eventSourceDef$2 = {
 };
 var jsonFeedEventSourcePlugin = createPlugin({
     eventSourceRefiners: JSON_FEED_EVENT_SOURCE_REFINERS,
-    eventSourceDefs: [eventSourceDef$2],
+    eventSourceDefs: [eventSourceDef],
 });
 function buildRequestParams(meta, range, context) {
     var dateEnv = context.dateEnv, options = context.options;
@@ -6808,7 +6690,7 @@ var recurring = {
             return {
                 allDayGuess: Boolean(!refined.startTime && !refined.endTime),
                 duration: duration,
-                typeData: recurringData,
+                typeData: recurringData, // doesn't need endTime anymore but oh well
             };
         }
         return null;
@@ -7102,7 +6984,7 @@ var CalendarDataManager = /** @class */ (function () {
         this.organizeRawLocales = memoize(organizeRawLocales);
         this.buildLocale = memoize(buildLocale);
         this.buildPluginHooks = buildBuildPluginHooks();
-        this.buildDateEnv = memoize(buildDateEnv$1);
+        this.buildDateEnv = memoize(buildDateEnv);
         this.buildTheme = memoize(buildTheme);
         this.parseToolbars = memoize(parseToolbars);
         this.buildViewSpecs = memoize(buildViewSpecs);
@@ -7218,7 +7100,9 @@ var CalendarDataManager = /** @class */ (function () {
         }
         currentDate = reduceCurrentDate(currentDate, action);
         dateProfile = reduceDateProfile(dateProfile, action, currentDate, currentViewData.dateProfileGenerator);
-        if (!rangeContainsMarker(dateProfile.currentRange, currentDate)) {
+        if (action.type === 'PREV' || // TODO: move this logic into DateProfileGenerator
+            action.type === 'NEXT' || // "
+            !rangeContainsMarker(dateProfile.currentRange, currentDate)) {
             currentDate = dateProfile.currentRange.start;
         }
         var eventSources = reduceEventSources(state.eventSources, action, dateProfile, calendarContext);
@@ -7439,7 +7323,7 @@ var CalendarDataManager = /** @class */ (function () {
     };
     return CalendarDataManager;
 }());
-function buildDateEnv$1(timeZone, explicitLocale, weekNumberCalculation, firstDay, weekText, pluginHooks, availableLocaleData, defaultSeparator) {
+function buildDateEnv(timeZone, explicitLocale, weekNumberCalculation, firstDay, weekText, pluginHooks, availableLocaleData, defaultSeparator) {
     var locale = buildLocale(explicitLocale || availableLocaleData.defaultCode, availableLocaleData.map);
     return new DateEnv({
         calendarSystem: 'gregory',
@@ -7492,6 +7376,7 @@ function buildViewUiProps(calendarContext) {
             borderColor: options.eventBorderColor,
             textColor: options.eventTextColor,
             color: options.eventColor,
+            // classNames: options.eventClassNames // render hook will handle this
         }, calendarContext),
         selectionConfig: createEventUi({
             constraint: options.selectConstraint,
@@ -7568,9 +7453,248 @@ var NamedTimeZoneImpl = /** @class */ (function () {
     return NamedTimeZoneImpl;
 }());
 
+var SegHierarchy = /** @class */ (function () {
+    function SegHierarchy() {
+        // settings
+        this.strictOrder = false;
+        this.allowReslicing = false;
+        this.maxCoord = -1; // -1 means no max
+        this.maxStackCnt = -1; // -1 means no max
+        this.levelCoords = []; // ordered
+        this.entriesByLevel = []; // parallel with levelCoords
+        this.stackCnts = {}; // TODO: use better technique!?
+    }
+    SegHierarchy.prototype.addSegs = function (inputs) {
+        var hiddenEntries = [];
+        for (var _i = 0, inputs_1 = inputs; _i < inputs_1.length; _i++) {
+            var input = inputs_1[_i];
+            this.insertEntry(input, hiddenEntries);
+        }
+        return hiddenEntries;
+    };
+    SegHierarchy.prototype.insertEntry = function (entry, hiddenEntries) {
+        var insertion = this.findInsertion(entry);
+        if (this.isInsertionValid(insertion, entry)) {
+            this.insertEntryAt(entry, insertion);
+            return 1;
+        }
+        return this.handleInvalidInsertion(insertion, entry, hiddenEntries);
+    };
+    SegHierarchy.prototype.isInsertionValid = function (insertion, entry) {
+        return (this.maxCoord === -1 || insertion.levelCoord + entry.thickness <= this.maxCoord) &&
+            (this.maxStackCnt === -1 || insertion.stackCnt < this.maxStackCnt);
+    };
+    // returns number of new entries inserted
+    SegHierarchy.prototype.handleInvalidInsertion = function (insertion, entry, hiddenEntries) {
+        if (this.allowReslicing && insertion.touchingEntry) {
+            return this.splitEntry(entry, insertion.touchingEntry, hiddenEntries);
+        }
+        hiddenEntries.push(entry);
+        return 0;
+    };
+    SegHierarchy.prototype.splitEntry = function (entry, barrier, hiddenEntries) {
+        var partCnt = 0;
+        var splitHiddenEntries = [];
+        var entrySpan = entry.span;
+        var barrierSpan = barrier.span;
+        if (entrySpan.start < barrierSpan.start) {
+            partCnt += this.insertEntry({
+                index: entry.index,
+                thickness: entry.thickness,
+                span: { start: entrySpan.start, end: barrierSpan.start },
+            }, splitHiddenEntries);
+        }
+        if (entrySpan.end > barrierSpan.end) {
+            partCnt += this.insertEntry({
+                index: entry.index,
+                thickness: entry.thickness,
+                span: { start: barrierSpan.end, end: entrySpan.end },
+            }, splitHiddenEntries);
+        }
+        if (partCnt) {
+            hiddenEntries.push.apply(hiddenEntries, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])([{
+                    index: entry.index,
+                    thickness: entry.thickness,
+                    span: intersectSpans(barrierSpan, entrySpan), // guaranteed to intersect
+                }], splitHiddenEntries));
+            return partCnt;
+        }
+        hiddenEntries.push(entry);
+        return 0;
+    };
+    SegHierarchy.prototype.insertEntryAt = function (entry, insertion) {
+        var _a = this, entriesByLevel = _a.entriesByLevel, levelCoords = _a.levelCoords;
+        if (insertion.lateral === -1) {
+            // create a new level
+            insertAt(levelCoords, insertion.level, insertion.levelCoord);
+            insertAt(entriesByLevel, insertion.level, [entry]);
+        }
+        else {
+            // insert into existing level
+            insertAt(entriesByLevel[insertion.level], insertion.lateral, entry);
+        }
+        this.stackCnts[buildEntryKey(entry)] = insertion.stackCnt;
+    };
+    SegHierarchy.prototype.findInsertion = function (newEntry) {
+        var _a = this, levelCoords = _a.levelCoords, entriesByLevel = _a.entriesByLevel, strictOrder = _a.strictOrder, stackCnts = _a.stackCnts;
+        var levelCnt = levelCoords.length;
+        var candidateCoord = 0;
+        var touchingLevel = -1;
+        var touchingLateral = -1;
+        var touchingEntry = null;
+        var stackCnt = 0;
+        for (var trackingLevel = 0; trackingLevel < levelCnt; trackingLevel += 1) {
+            var trackingCoord = levelCoords[trackingLevel];
+            // if the current level is past the placed entry, we have found a good empty space and can stop.
+            // if strictOrder, keep finding more lateral intersections.
+            if (!strictOrder && trackingCoord >= candidateCoord + newEntry.thickness) {
+                break;
+            }
+            var trackingEntries = entriesByLevel[trackingLevel];
+            var trackingEntry = void 0;
+            var searchRes = binarySearch(trackingEntries, newEntry.span.start, getEntrySpanEnd); // find first entry after newEntry's end
+            var lateralIndex = searchRes[0] + searchRes[1]; // if exact match (which doesn't collide), go to next one
+            while ( // loop through entries that horizontally intersect
+            (trackingEntry = trackingEntries[lateralIndex]) && // but not past the whole entry list
+                trackingEntry.span.start < newEntry.span.end // and not entirely past newEntry
+            ) {
+                var trackingEntryBottom = trackingCoord + trackingEntry.thickness;
+                // intersects into the top of the candidate?
+                if (trackingEntryBottom > candidateCoord) {
+                    candidateCoord = trackingEntryBottom;
+                    touchingEntry = trackingEntry;
+                    touchingLevel = trackingLevel;
+                    touchingLateral = lateralIndex;
+                }
+                // butts up against top of candidate? (will happen if just intersected as well)
+                if (trackingEntryBottom === candidateCoord) {
+                    // accumulate the highest possible stackCnt of the trackingEntries that butt up
+                    stackCnt = Math.max(stackCnt, stackCnts[buildEntryKey(trackingEntry)] + 1);
+                }
+                lateralIndex += 1;
+            }
+        }
+        // the destination level will be after touchingEntry's level. find it
+        var destLevel = 0;
+        if (touchingEntry) {
+            destLevel = touchingLevel + 1;
+            while (destLevel < levelCnt && levelCoords[destLevel] < candidateCoord) {
+                destLevel += 1;
+            }
+        }
+        // if adding to an existing level, find where to insert
+        var destLateral = -1;
+        if (destLevel < levelCnt && levelCoords[destLevel] === candidateCoord) {
+            destLateral = binarySearch(entriesByLevel[destLevel], newEntry.span.end, getEntrySpanEnd)[0];
+        }
+        return {
+            touchingLevel: touchingLevel,
+            touchingLateral: touchingLateral,
+            touchingEntry: touchingEntry,
+            stackCnt: stackCnt,
+            levelCoord: candidateCoord,
+            level: destLevel,
+            lateral: destLateral,
+        };
+    };
+    // sorted by levelCoord (lowest to highest)
+    SegHierarchy.prototype.toRects = function () {
+        var _a = this, entriesByLevel = _a.entriesByLevel, levelCoords = _a.levelCoords;
+        var levelCnt = entriesByLevel.length;
+        var rects = [];
+        for (var level = 0; level < levelCnt; level += 1) {
+            var entries = entriesByLevel[level];
+            var levelCoord = levelCoords[level];
+            for (var _i = 0, entries_1 = entries; _i < entries_1.length; _i++) {
+                var entry = entries_1[_i];
+                rects.push(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, entry), { levelCoord: levelCoord }));
+            }
+        }
+        return rects;
+    };
+    return SegHierarchy;
+}());
+function getEntrySpanEnd(entry) {
+    return entry.span.end;
+}
+function buildEntryKey(entry) {
+    return entry.index + ':' + entry.span.start;
+}
+// returns groups with entries sorted by input order
+function groupIntersectingEntries(entries) {
+    var merges = [];
+    for (var _i = 0, entries_2 = entries; _i < entries_2.length; _i++) {
+        var entry = entries_2[_i];
+        var filteredMerges = [];
+        var hungryMerge = {
+            span: entry.span,
+            entries: [entry],
+        };
+        for (var _a = 0, merges_1 = merges; _a < merges_1.length; _a++) {
+            var merge = merges_1[_a];
+            if (intersectSpans(merge.span, hungryMerge.span)) {
+                hungryMerge = {
+                    entries: merge.entries.concat(hungryMerge.entries),
+                    span: joinSpans(merge.span, hungryMerge.span),
+                };
+            }
+            else {
+                filteredMerges.push(merge);
+            }
+        }
+        filteredMerges.push(hungryMerge);
+        merges = filteredMerges;
+    }
+    return merges;
+}
+function joinSpans(span0, span1) {
+    return {
+        start: Math.min(span0.start, span1.start),
+        end: Math.max(span0.end, span1.end),
+    };
+}
+function intersectSpans(span0, span1) {
+    var start = Math.max(span0.start, span1.start);
+    var end = Math.min(span0.end, span1.end);
+    if (start < end) {
+        return { start: start, end: end };
+    }
+    return null;
+}
+// general util
+// ---------------------------------------------------------------------------------------------------------------------
+function insertAt(arr, index, item) {
+    arr.splice(index, 0, item);
+}
+function binarySearch(a, searchVal, getItemVal) {
+    var startIndex = 0;
+    var endIndex = a.length; // exclusive
+    if (!endIndex || searchVal < getItemVal(a[startIndex])) { // no items OR before first item
+        return [0, 0];
+    }
+    if (searchVal > getItemVal(a[endIndex - 1])) { // after last item
+        return [endIndex, 0];
+    }
+    while (startIndex < endIndex) {
+        var middleIndex = Math.floor(startIndex + (endIndex - startIndex) / 2);
+        var middleVal = getItemVal(a[middleIndex]);
+        if (searchVal < middleVal) {
+            endIndex = middleIndex;
+        }
+        else if (searchVal > middleVal) {
+            startIndex = middleIndex + 1;
+        }
+        else { // equal!
+            return [middleIndex, 1];
+        }
+    }
+    return [startIndex, 0];
+}
+
 var Interaction = /** @class */ (function () {
     function Interaction(settings) {
         this.component = settings.component;
+        this.isHitComboAllowed = settings.isHitComboAllowed || null;
     }
     Interaction.prototype.destroy = function () {
     };
@@ -7581,6 +7705,7 @@ function parseInteractionSettings(component, input) {
         component: component,
         el: input.el,
         useEventCenter: input.useEventCenter != null ? input.useEventCenter : true,
+        isHitComboAllowed: input.isHitComboAllowed || null,
     };
 }
 function interactionSettingsToStore(settings) {
@@ -7656,7 +7781,7 @@ var ToolbarSection = /** @class */ (function (_super) {
     ToolbarSection.prototype.render = function () {
         var _this = this;
         var children = this.props.widgetGroups.map(function (widgetGroup) { return _this.renderWidgetGroup(widgetGroup); });
-        return _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])(['div', { className: 'fc-toolbar-chunk' }], children));
+        return _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])(['div', { className: 'fc-toolbar-chunk' }], children));
     };
     ToolbarSection.prototype.renderWidgetGroup = function (widgetGroup) {
         var props = this.props;
@@ -7684,7 +7809,7 @@ var ToolbarSection = /** @class */ (function (_super) {
         }
         if (children.length > 1) {
             var groupClassName = (isOnlyButtons && theme.getClass('buttonGroup')) || '';
-            return _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])(['div', { className: groupClassName }], children));
+            return _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])(['div', { className: groupClassName }], children));
         }
         return children[0];
     };
@@ -7758,7 +7883,7 @@ var ViewContainer = /** @class */ (function (_super) {
             'fc-view-harness',
             (aspectRatio || props.liquid || props.height)
                 ? 'fc-view-harness-active' // harness controls the height
-                : 'fc-view-harness-passive',
+                : 'fc-view-harness-passive', // let the view do the height
         ];
         var height = '';
         var paddingBottom = '';
@@ -8007,7 +8132,7 @@ var CalendarContent = /** @class */ (function (_super) {
     CalendarContent.prototype.buildAppendContent = function () {
         var props = this.props;
         var children = props.pluginHooks.viewContainerAppends.map(function (buildAppendContent) { return buildAppendContent(props); });
-        return _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])([_vdom_js__WEBPACK_IMPORTED_MODULE_2__["Fragment"], {}], children));
+        return _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])([_vdom_js__WEBPACK_IMPORTED_MODULE_2__["Fragment"], {}], children));
     };
     CalendarContent.prototype.renderView = function (props) {
         var pluginHooks = props.pluginHooks;
@@ -8112,7 +8237,7 @@ function computeFallbackHeaderFormat(datesRepDistinctDays, dayCnt) {
 }
 
 var CLASS_NAME = 'fc-col-header-cell'; // do the cushion too? no
-function renderInner(hookProps) {
+function renderInner$1(hookProps) {
     return hookProps.text;
 }
 
@@ -8133,7 +8258,7 @@ var TableDateCell = /** @class */ (function (_super) {
             ? { 'data-navlink': buildNavLinkData(date), tabIndex: 0 }
             : {};
         var hookProps = Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({ date: dateEnv.toDate(date), view: viewApi }, props.extraHookProps), { text: text }), dayMeta);
-        return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(RenderHook, { hookProps: hookProps, classNames: options.dayHeaderClassNames, content: options.dayHeaderContent, defaultContent: renderInner, didMount: options.dayHeaderDidMount, willUnmount: options.dayHeaderWillUnmount }, function (rootElRef, customClassNames, innerElRef, innerContent) { return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("th", Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({ ref: rootElRef, className: classNames.concat(customClassNames).join(' '), "data-date": !dayMeta.isDisabled ? formatDayString(date) : undefined, colSpan: props.colSpan }, props.extraDataAttrs),
+        return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(RenderHook, { hookProps: hookProps, classNames: options.dayHeaderClassNames, content: options.dayHeaderContent, defaultContent: renderInner$1, didMount: options.dayHeaderDidMount, willUnmount: options.dayHeaderWillUnmount }, function (rootElRef, customClassNames, innerElRef, innerContent) { return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("th", Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({ ref: rootElRef, className: classNames.concat(customClassNames).join(' '), "data-date": !dayMeta.isDisabled ? formatDayString(date) : undefined, colSpan: props.colSpan }, props.extraDataAttrs),
             Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", { className: "fc-scrollgrid-sync-inner" }, !dayMeta.isDisabled && (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("a", Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({ ref: innerElRef, className: [
                     'fc-col-header-cell-cushion',
                     props.isSticky ? 'fc-sticky' : '',
@@ -8163,7 +8288,7 @@ var TableDowCell = /** @class */ (function (_super) {
         var text = dateEnv.format(date, props.dayHeaderFormat);
         var hookProps = Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({ // TODO: make this public?
             date: date }, dateMeta), { view: viewApi }), props.extraHookProps), { text: text });
-        return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(RenderHook, { hookProps: hookProps, classNames: options.dayHeaderClassNames, content: options.dayHeaderContent, defaultContent: renderInner, didMount: options.dayHeaderDidMount, willUnmount: options.dayHeaderWillUnmount }, function (rootElRef, customClassNames, innerElRef, innerContent) { return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("th", Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({ ref: rootElRef, className: classNames.concat(customClassNames).join(' '), colSpan: props.colSpan }, props.extraDataAttrs),
+        return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(RenderHook, { hookProps: hookProps, classNames: options.dayHeaderClassNames, content: options.dayHeaderContent, defaultContent: renderInner$1, didMount: options.dayHeaderDidMount, willUnmount: options.dayHeaderWillUnmount }, function (rootElRef, customClassNames, innerElRef, innerContent) { return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("th", Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({ ref: rootElRef, className: classNames.concat(customClassNames).join(' '), colSpan: props.colSpan }, props.extraDataAttrs),
             Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", { className: "fc-scrollgrid-sync-inner" },
                 Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("a", { className: [
                         'fc-col-header-cell-cushion',
@@ -8407,14 +8532,14 @@ var Slicer = /** @class */ (function () {
             extraArgs[_i - 4] = arguments[_i];
         }
         var eventUiBases = props.eventUiBases;
-        var eventSegs = this.sliceEventStore.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])([props.eventStore, eventUiBases, dateProfile, nextDayThreshold], extraArgs));
+        var eventSegs = this.sliceEventStore.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])([props.eventStore, eventUiBases, dateProfile, nextDayThreshold], extraArgs));
         return {
-            dateSelectionSegs: this.sliceDateSelection.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])([props.dateSelection, eventUiBases, context], extraArgs)),
-            businessHourSegs: this.sliceBusinessHours.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])([props.businessHours, dateProfile, nextDayThreshold, context], extraArgs)),
+            dateSelectionSegs: this.sliceDateSelection.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])([props.dateSelection, eventUiBases, context], extraArgs)),
+            businessHourSegs: this.sliceBusinessHours.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])([props.businessHours, dateProfile, nextDayThreshold, context], extraArgs)),
             fgEventSegs: eventSegs.fg,
             bgEventSegs: eventSegs.bg,
-            eventDrag: this.sliceEventDrag.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])([props.eventDrag, eventUiBases, dateProfile, nextDayThreshold], extraArgs)),
-            eventResize: this.sliceEventResize.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])([props.eventResize, eventUiBases, dateProfile, nextDayThreshold], extraArgs)),
+            eventDrag: this.sliceEventDrag.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])([props.eventDrag, eventUiBases, dateProfile, nextDayThreshold], extraArgs)),
+            eventResize: this.sliceEventResize.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])([props.eventResize, eventUiBases, dateProfile, nextDayThreshold], extraArgs)),
             eventSelection: props.eventSelection,
         }; // TODO: give interactionSegs?
     };
@@ -8424,7 +8549,7 @@ var Slicer = /** @class */ (function () {
         for (var _i = 2; _i < arguments.length; _i++) {
             extraArgs[_i - 2] = arguments[_i];
         }
-        return this._sliceDateSpan.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])([{ range: { start: date, end: addMs(date, 1) }, allDay: false },
+        return this._sliceDateSpan.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])([{ range: { start: date, end: addMs(date, 1) }, allDay: false },
             {},
             context], extraArgs));
     };
@@ -8436,7 +8561,7 @@ var Slicer = /** @class */ (function () {
         if (!businessHours) {
             return [];
         }
-        return this._sliceEventStore.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])([expandRecurring(businessHours, computeActiveRange(dateProfile, Boolean(nextDayThreshold)), context),
+        return this._sliceEventStore.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])([expandRecurring(businessHours, computeActiveRange(dateProfile, Boolean(nextDayThreshold)), context),
             {},
             dateProfile,
             nextDayThreshold], extraArgs)).bg;
@@ -8479,7 +8604,7 @@ var Slicer = /** @class */ (function () {
             return [];
         }
         var eventRange = fabricateEventRange(dateSpan, eventUiBases, context);
-        var segs = this.sliceRange.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])([dateSpan.range], extraArgs));
+        var segs = this.sliceRange.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])([dateSpan.range], extraArgs));
         for (var _a = 0, segs_1 = segs; _a < segs_1.length; _a++) {
             var seg = segs_1[_a];
             seg.eventRange = eventRange;
@@ -8509,7 +8634,7 @@ var Slicer = /** @class */ (function () {
                 end: addDays(dateRange.start, 1),
             };
         }
-        var segs = this.sliceRange.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])([dateRange], extraArgs));
+        var segs = this.sliceRange.apply(this, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])([dateRange], extraArgs));
         for (var _i = 0, segs_2 = segs; _i < segs_2.length; _i++) {
             var seg = segs_2[_i];
             seg.eventRange = eventRange;
@@ -8532,8 +8657,197 @@ function computeActiveRange(dateProfile, isComponentAllDay) {
     }
     return {
         start: addMs(range.start, dateProfile.slotMinTime.milliseconds),
-        end: addMs(range.end, dateProfile.slotMaxTime.milliseconds - 864e5),
+        end: addMs(range.end, dateProfile.slotMaxTime.milliseconds - 864e5), // 864e5 = ms in a day
     };
+}
+
+// high-level segmenting-aware tester functions
+// ------------------------------------------------------------------------------------------------------------------------
+function isInteractionValid(interaction, dateProfile, context) {
+    var instances = interaction.mutatedEvents.instances;
+    for (var instanceId in instances) {
+        if (!rangeContainsRange(dateProfile.validRange, instances[instanceId].range)) {
+            return false;
+        }
+    }
+    return isNewPropsValid({ eventDrag: interaction }, context); // HACK: the eventDrag props is used for ALL interactions
+}
+function isDateSelectionValid(dateSelection, dateProfile, context) {
+    if (!rangeContainsRange(dateProfile.validRange, dateSelection.range)) {
+        return false;
+    }
+    return isNewPropsValid({ dateSelection: dateSelection }, context);
+}
+function isNewPropsValid(newProps, context) {
+    var calendarState = context.getCurrentData();
+    var props = Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({ businessHours: calendarState.businessHours, dateSelection: '', eventStore: calendarState.eventStore, eventUiBases: calendarState.eventUiBases, eventSelection: '', eventDrag: null, eventResize: null }, newProps);
+    return (context.pluginHooks.isPropsValid || isPropsValid)(props, context);
+}
+function isPropsValid(state, context, dateSpanMeta, filterConfig) {
+    if (dateSpanMeta === void 0) { dateSpanMeta = {}; }
+    if (state.eventDrag && !isInteractionPropsValid(state, context, dateSpanMeta, filterConfig)) {
+        return false;
+    }
+    if (state.dateSelection && !isDateSelectionPropsValid(state, context, dateSpanMeta, filterConfig)) {
+        return false;
+    }
+    return true;
+}
+// Moving Event Validation
+// ------------------------------------------------------------------------------------------------------------------------
+function isInteractionPropsValid(state, context, dateSpanMeta, filterConfig) {
+    var currentState = context.getCurrentData();
+    var interaction = state.eventDrag; // HACK: the eventDrag props is used for ALL interactions
+    var subjectEventStore = interaction.mutatedEvents;
+    var subjectDefs = subjectEventStore.defs;
+    var subjectInstances = subjectEventStore.instances;
+    var subjectConfigs = compileEventUis(subjectDefs, interaction.isEvent ?
+        state.eventUiBases :
+        { '': currentState.selectionConfig });
+    if (filterConfig) {
+        subjectConfigs = mapHash(subjectConfigs, filterConfig);
+    }
+    // exclude the subject events. TODO: exclude defs too?
+    var otherEventStore = excludeInstances(state.eventStore, interaction.affectedEvents.instances);
+    var otherDefs = otherEventStore.defs;
+    var otherInstances = otherEventStore.instances;
+    var otherConfigs = compileEventUis(otherDefs, state.eventUiBases);
+    for (var subjectInstanceId in subjectInstances) {
+        var subjectInstance = subjectInstances[subjectInstanceId];
+        var subjectRange = subjectInstance.range;
+        var subjectConfig = subjectConfigs[subjectInstance.defId];
+        var subjectDef = subjectDefs[subjectInstance.defId];
+        // constraint
+        if (!allConstraintsPass(subjectConfig.constraints, subjectRange, otherEventStore, state.businessHours, context)) {
+            return false;
+        }
+        // overlap
+        var eventOverlap = context.options.eventOverlap;
+        var eventOverlapFunc = typeof eventOverlap === 'function' ? eventOverlap : null;
+        for (var otherInstanceId in otherInstances) {
+            var otherInstance = otherInstances[otherInstanceId];
+            // intersect! evaluate
+            if (rangesIntersect(subjectRange, otherInstance.range)) {
+                var otherOverlap = otherConfigs[otherInstance.defId].overlap;
+                // consider the other event's overlap. only do this if the subject event is a "real" event
+                if (otherOverlap === false && interaction.isEvent) {
+                    return false;
+                }
+                if (subjectConfig.overlap === false) {
+                    return false;
+                }
+                if (eventOverlapFunc && !eventOverlapFunc(new EventApi(context, otherDefs[otherInstance.defId], otherInstance), // still event
+                new EventApi(context, subjectDef, subjectInstance))) {
+                    return false;
+                }
+            }
+        }
+        // allow (a function)
+        var calendarEventStore = currentState.eventStore; // need global-to-calendar, not local to component (splittable)state
+        for (var _i = 0, _a = subjectConfig.allows; _i < _a.length; _i++) {
+            var subjectAllow = _a[_i];
+            var subjectDateSpan = Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, dateSpanMeta), { range: subjectInstance.range, allDay: subjectDef.allDay });
+            var origDef = calendarEventStore.defs[subjectDef.defId];
+            var origInstance = calendarEventStore.instances[subjectInstanceId];
+            var eventApi = void 0;
+            if (origDef) { // was previously in the calendar
+                eventApi = new EventApi(context, origDef, origInstance);
+            }
+            else { // was an external event
+                eventApi = new EventApi(context, subjectDef); // no instance, because had no dates
+            }
+            if (!subjectAllow(buildDateSpanApiWithContext(subjectDateSpan, context), eventApi)) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+// Date Selection Validation
+// ------------------------------------------------------------------------------------------------------------------------
+function isDateSelectionPropsValid(state, context, dateSpanMeta, filterConfig) {
+    var relevantEventStore = state.eventStore;
+    var relevantDefs = relevantEventStore.defs;
+    var relevantInstances = relevantEventStore.instances;
+    var selection = state.dateSelection;
+    var selectionRange = selection.range;
+    var selectionConfig = context.getCurrentData().selectionConfig;
+    if (filterConfig) {
+        selectionConfig = filterConfig(selectionConfig);
+    }
+    // constraint
+    if (!allConstraintsPass(selectionConfig.constraints, selectionRange, relevantEventStore, state.businessHours, context)) {
+        return false;
+    }
+    // overlap
+    var selectOverlap = context.options.selectOverlap;
+    var selectOverlapFunc = typeof selectOverlap === 'function' ? selectOverlap : null;
+    for (var relevantInstanceId in relevantInstances) {
+        var relevantInstance = relevantInstances[relevantInstanceId];
+        // intersect! evaluate
+        if (rangesIntersect(selectionRange, relevantInstance.range)) {
+            if (selectionConfig.overlap === false) {
+                return false;
+            }
+            if (selectOverlapFunc && !selectOverlapFunc(new EventApi(context, relevantDefs[relevantInstance.defId], relevantInstance), null)) {
+                return false;
+            }
+        }
+    }
+    // allow (a function)
+    for (var _i = 0, _a = selectionConfig.allows; _i < _a.length; _i++) {
+        var selectionAllow = _a[_i];
+        var fullDateSpan = Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, dateSpanMeta), selection);
+        if (!selectionAllow(buildDateSpanApiWithContext(fullDateSpan, context), null)) {
+            return false;
+        }
+    }
+    return true;
+}
+// Constraint Utils
+// ------------------------------------------------------------------------------------------------------------------------
+function allConstraintsPass(constraints, subjectRange, otherEventStore, businessHoursUnexpanded, context) {
+    for (var _i = 0, constraints_1 = constraints; _i < constraints_1.length; _i++) {
+        var constraint = constraints_1[_i];
+        if (!anyRangesContainRange(constraintToRanges(constraint, subjectRange, otherEventStore, businessHoursUnexpanded, context), subjectRange)) {
+            return false;
+        }
+    }
+    return true;
+}
+function constraintToRanges(constraint, subjectRange, // for expanding a recurring constraint, or expanding business hours
+otherEventStore, // for if constraint is an even group ID
+businessHoursUnexpanded, // for if constraint is 'businessHours'
+context) {
+    if (constraint === 'businessHours') {
+        return eventStoreToRanges(expandRecurring(businessHoursUnexpanded, subjectRange, context));
+    }
+    if (typeof constraint === 'string') { // an group ID
+        return eventStoreToRanges(filterEventStoreDefs(otherEventStore, function (eventDef) { return eventDef.groupId === constraint; }));
+    }
+    if (typeof constraint === 'object' && constraint) { // non-null object
+        return eventStoreToRanges(expandRecurring(constraint, subjectRange, context));
+    }
+    return []; // if it's false
+}
+// TODO: move to event-store file?
+function eventStoreToRanges(eventStore) {
+    var instances = eventStore.instances;
+    var ranges = [];
+    for (var instanceId in instances) {
+        ranges.push(instances[instanceId].range);
+    }
+    return ranges;
+}
+// TODO: move to geom file?
+function anyRangesContainRange(outerRanges, innerRange) {
+    for (var _i = 0, outerRanges_1 = outerRanges; _i < outerRanges_1.length; _i++) {
+        var outerRange = outerRanges_1[_i];
+        if (rangeContainsRange(outerRange, innerRange)) {
+            return true;
+        }
+    }
+    return false;
 }
 
 var VISIBLE_HIDDEN_RE = /^(visible|hidden)$/;
@@ -8714,7 +9028,7 @@ function renderChunkContent(sectionConfig, chunkConfig, arg) {
             style: {
                 minWidth: arg.tableMinWidth,
                 width: arg.clientWidth,
-                height: expandRows ? arg.clientHeight : '',
+                height: expandRows ? arg.clientHeight : '', // css `height` on a <table> serves as a min-height
             },
         }, arg.tableColGroupNode, Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])('tbody', {}, typeof chunkConfig.rowContent === 'function' ? chunkConfig.rowContent(arg) : chunkConfig.rowContent));
     return content;
@@ -8739,7 +9053,7 @@ function renderMicroColGroup(cols, shrinkWidth) {
                 } }));
         }
     }
-    return _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])(['colgroup', {}], colNodes));
+    return _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])(['colgroup', {}], colNodes));
 }
 function sanitizeShrinkWidth(shrinkWidth) {
     /* why 4? if we do 0, it will kill any border, which are needed for computeSmallestCellWidth
@@ -8769,7 +9083,7 @@ function getSectionClassNames(sectionConfig, wholeTableVGrow) {
     var classNames = [
         'fc-scrollgrid-section',
         "fc-scrollgrid-section-" + sectionConfig.type,
-        sectionConfig.className,
+        sectionConfig.className, // used?
     ];
     if (wholeTableVGrow && sectionConfig.liquid && sectionConfig.maxHeight == null) {
         classNames.push('fc-scrollgrid-section-liquid');
@@ -8827,6 +9141,9 @@ var SimpleScrollGrid = /** @class */ (function (_super) {
         var cols = this.processCols(props.cols);
         var microColGroupNode = this.renderMicroColGroup(cols, state.shrinkWidth);
         var classNames = getScrollGridClassNames(props.liquid, context);
+        if (props.collapsibleWidth) {
+            classNames.push('fc-scrollgrid-collapsible');
+        }
         // TODO: make DRY
         var configCnt = sectionConfigs.length;
         var configI = 0;
@@ -8854,7 +9171,7 @@ var SimpleScrollGrid = /** @class */ (function (_super) {
         return Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])('table', {
             className: classNames.join(' '),
             style: { height: props.height },
-        }, Boolean(!isBuggy && headSectionNodes.length) && _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])(['thead', {}], headSectionNodes)), Boolean(!isBuggy && bodySectionNodes.length) && _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])(['tbody', {}], bodySectionNodes)), Boolean(!isBuggy && footSectionNodes.length) && _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])(['tfoot', {}], footSectionNodes)), isBuggy && _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArrays"])(['tbody', {}], headSectionNodes, bodySectionNodes, footSectionNodes)));
+        }, Boolean(!isBuggy && headSectionNodes.length) && _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])(['thead', {}], headSectionNodes)), Boolean(!isBuggy && bodySectionNodes.length) && _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])(['tbody', {}], bodySectionNodes)), Boolean(!isBuggy && footSectionNodes.length) && _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])(['tfoot', {}], footSectionNodes)), isBuggy && _vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__spreadArray"])(['tbody', {}], headSectionNodes), bodySectionNodes), footSectionNodes)));
     };
     SimpleScrollGrid.prototype.renderSection = function (sectionConfig, microColGroupNode) {
         if ('outerContent' in sectionConfig) {
@@ -8880,7 +9197,7 @@ var SimpleScrollGrid = /** @class */ (function (_super) {
         var content = renderChunkContent(sectionConfig, chunkConfig, {
             tableColGroupNode: microColGroupNode,
             tableMinWidth: '',
-            clientWidth: scrollerClientWidths[sectionKey] !== undefined ? scrollerClientWidths[sectionKey] : null,
+            clientWidth: (!props.collapsibleWidth && scrollerClientWidths[sectionKey] !== undefined) ? scrollerClientWidths[sectionKey] : null,
             clientHeight: scrollerClientHeights[sectionKey] !== undefined ? scrollerClientHeights[sectionKey] : null,
             expandRows: sectionConfig.expandRows,
             syncRowHeights: false,
@@ -9019,7 +9336,7 @@ var StandardEvent = /** @class */ (function (_super) {
         var seg = props.seg;
         var timeFormat = context.options.eventTimeFormat || props.defaultTimeFormat;
         var timeText = buildSegTimeText(seg, timeFormat, context, props.defaultDisplayEventTime, props.defaultDisplayEventEnd);
-        return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(EventRoot, { seg: seg, timeText: timeText, disableDragging: props.disableDragging, disableResizing: props.disableResizing, defaultContent: props.defaultContent || renderInnerContent, isDragging: props.isDragging, isResizing: props.isResizing, isDateSelecting: props.isDateSelecting, isSelected: props.isSelected, isPast: props.isPast, isFuture: props.isFuture, isToday: props.isToday }, function (rootElRef, classNames, innerElRef, innerContent, hookProps) { return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("a", Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({ className: props.extraClassNames.concat(classNames).join(' '), style: {
+        return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(EventRoot, { seg: seg, timeText: timeText, disableDragging: props.disableDragging, disableResizing: props.disableResizing, defaultContent: props.defaultContent || renderInnerContent$1, isDragging: props.isDragging, isResizing: props.isResizing, isDateSelecting: props.isDateSelecting, isSelected: props.isSelected, isPast: props.isPast, isFuture: props.isFuture, isToday: props.isToday }, function (rootElRef, classNames, innerElRef, innerContent, hookProps) { return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("a", Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({ className: props.extraClassNames.concat(classNames).join(' '), style: {
                 borderColor: hookProps.borderColor,
                 backgroundColor: hookProps.backgroundColor,
             }, ref: rootElRef }, getSegAnchorAttrs(seg)),
@@ -9031,7 +9348,7 @@ var StandardEvent = /** @class */ (function (_super) {
     };
     return StandardEvent;
 }(BaseComponent));
-function renderInnerContent(innerProps) {
+function renderInnerContent$1(innerProps) {
     return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", { className: "fc-event-main-frame" },
         innerProps.timeText && (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", { className: "fc-event-time" }, innerProps.timeText)),
         Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", { className: "fc-event-title-container" },
@@ -9114,10 +9431,10 @@ var DayCellRoot = /** @class */ (function (_super) {
 function renderFill(fillType) {
     return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", { className: "fc-" + fillType }));
 }
-var BgEvent = function (props) { return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(EventRoot, { defaultContent: renderInnerContent$1, seg: props.seg /* uselesss i think */, timeText: "", disableDragging: true, disableResizing: true, isDragging: false, isResizing: false, isDateSelecting: false, isSelected: false, isPast: props.isPast, isFuture: props.isFuture, isToday: props.isToday }, function (rootElRef, classNames, innerElRef, innerContent, hookProps) { return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", { ref: rootElRef, className: ['fc-bg-event'].concat(classNames).join(' '), style: {
+var BgEvent = function (props) { return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(EventRoot, { defaultContent: renderInnerContent, seg: props.seg /* uselesss i think */, timeText: "", disableDragging: true, disableResizing: true, isDragging: false, isResizing: false, isDateSelecting: false, isSelected: false, isPast: props.isPast, isFuture: props.isFuture, isToday: props.isToday }, function (rootElRef, classNames, innerElRef, innerContent, hookProps) { return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", { ref: rootElRef, className: ['fc-bg-event'].concat(classNames).join(' '), style: {
         backgroundColor: hookProps.backgroundColor,
     } }, innerContent)); })); };
-function renderInnerContent$1(props) {
+function renderInnerContent(props) {
     var title = props.event.title;
     return title && (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", { className: "fc-event-title" }, props.event.title));
 }
@@ -9129,15 +9446,248 @@ var WeekNumberRoot = function (props) { return (Object(_vdom_js__WEBPACK_IMPORTE
     var num = dateEnv.computeWeekNumber(date); // TODO: somehow use for formatting as well?
     var text = dateEnv.format(date, format);
     var hookProps = { num: num, text: text, date: date };
-    return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(RenderHook, { hookProps: hookProps, classNames: options.weekNumberClassNames, content: options.weekNumberContent, defaultContent: renderInner$1, didMount: options.weekNumberDidMount, willUnmount: options.weekNumberWillUnmount }, props.children));
+    return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(RenderHook, { hookProps: hookProps, classNames: options.weekNumberClassNames, content: options.weekNumberContent, defaultContent: renderInner, didMount: options.weekNumberDidMount, willUnmount: options.weekNumberWillUnmount }, props.children));
 })); };
-function renderInner$1(innerProps) {
+function renderInner(innerProps) {
     return innerProps.text;
+}
+
+var PADDING_FROM_VIEWPORT = 10;
+var Popover = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__extends"])(Popover, _super);
+    function Popover() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.handleRootEl = function (el) {
+            _this.rootEl = el;
+            if (_this.props.elRef) {
+                setRef(_this.props.elRef, el);
+            }
+        };
+        // Triggered when the user clicks *anywhere* in the document, for the autoHide feature
+        _this.handleDocumentMousedown = function (ev) {
+            // only hide the popover if the click happened outside the popover
+            var target = getEventTargetViaRoot(ev);
+            if (!_this.rootEl.contains(target)) {
+                _this.handleCloseClick();
+            }
+        };
+        _this.handleCloseClick = function () {
+            var onClose = _this.props.onClose;
+            if (onClose) {
+                onClose();
+            }
+        };
+        return _this;
+    }
+    Popover.prototype.render = function () {
+        var theme = this.context.theme;
+        var props = this.props;
+        var classNames = [
+            'fc-popover',
+            theme.getClass('popover'),
+        ].concat(props.extraClassNames || []);
+        return Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createPortal"])(Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({ className: classNames.join(' ') }, props.extraAttrs, { ref: this.handleRootEl }),
+            Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", { className: 'fc-popover-header ' + theme.getClass('popoverHeader') },
+                Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("span", { className: "fc-popover-title" }, props.title),
+                Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("span", { className: 'fc-popover-close ' + theme.getIconClass('close'), onClick: this.handleCloseClick })),
+            Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", { className: 'fc-popover-body ' + theme.getClass('popoverContent') }, props.children)), props.parentEl);
+    };
+    Popover.prototype.componentDidMount = function () {
+        document.addEventListener('mousedown', this.handleDocumentMousedown);
+        this.updateSize();
+    };
+    Popover.prototype.componentWillUnmount = function () {
+        document.removeEventListener('mousedown', this.handleDocumentMousedown);
+    };
+    Popover.prototype.updateSize = function () {
+        var isRtl = this.context.isRtl;
+        var _a = this.props, alignmentEl = _a.alignmentEl, alignGridTop = _a.alignGridTop;
+        var rootEl = this.rootEl;
+        var alignmentRect = computeClippedClientRect(alignmentEl);
+        if (alignmentRect) {
+            var popoverDims = rootEl.getBoundingClientRect();
+            // position relative to viewport
+            var popoverTop = alignGridTop
+                ? elementClosest(alignmentEl, '.fc-scrollgrid').getBoundingClientRect().top
+                : alignmentRect.top;
+            var popoverLeft = isRtl ? alignmentRect.right - popoverDims.width : alignmentRect.left;
+            // constrain
+            popoverTop = Math.max(popoverTop, PADDING_FROM_VIEWPORT);
+            popoverLeft = Math.min(popoverLeft, document.documentElement.clientWidth - PADDING_FROM_VIEWPORT - popoverDims.width);
+            popoverLeft = Math.max(popoverLeft, PADDING_FROM_VIEWPORT);
+            var origin_1 = rootEl.offsetParent.getBoundingClientRect();
+            applyStyle(rootEl, {
+                top: popoverTop - origin_1.top,
+                left: popoverLeft - origin_1.left,
+            });
+        }
+    };
+    return Popover;
+}(BaseComponent));
+
+var MorePopover = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__extends"])(MorePopover, _super);
+    function MorePopover() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.handleRootEl = function (rootEl) {
+            _this.rootEl = rootEl;
+            if (rootEl) {
+                _this.context.registerInteractiveComponent(_this, {
+                    el: rootEl,
+                    useEventCenter: false,
+                });
+            }
+            else {
+                _this.context.unregisterInteractiveComponent(_this);
+            }
+        };
+        return _this;
+    }
+    MorePopover.prototype.render = function () {
+        var _a = this.context, options = _a.options, dateEnv = _a.dateEnv;
+        var props = this.props;
+        var startDate = props.startDate, todayRange = props.todayRange, dateProfile = props.dateProfile;
+        var title = dateEnv.format(startDate, options.dayPopoverFormat);
+        return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(DayCellRoot, { date: startDate, dateProfile: dateProfile, todayRange: todayRange, elRef: this.handleRootEl }, function (rootElRef, dayClassNames, dataAttrs) { return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Popover, { elRef: rootElRef, title: title, extraClassNames: ['fc-more-popover'].concat(dayClassNames), extraAttrs: dataAttrs /* TODO: make these time-based when not whole-day? */, parentEl: props.parentEl, alignmentEl: props.alignmentEl, alignGridTop: props.alignGridTop, onClose: props.onClose },
+            Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(DayCellContent, { date: startDate, dateProfile: dateProfile, todayRange: todayRange }, function (innerElRef, innerContent) { return (innerContent &&
+                Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", { className: "fc-more-popover-misc", ref: innerElRef }, innerContent)); }),
+            props.children)); }));
+    };
+    MorePopover.prototype.queryHit = function (positionLeft, positionTop, elWidth, elHeight) {
+        var _a = this, rootEl = _a.rootEl, props = _a.props;
+        if (positionLeft >= 0 && positionLeft < elWidth &&
+            positionTop >= 0 && positionTop < elHeight) {
+            return {
+                dateProfile: props.dateProfile,
+                dateSpan: Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({ allDay: true, range: {
+                        start: props.startDate,
+                        end: props.endDate,
+                    } }, props.extraDateSpan),
+                dayEl: rootEl,
+                rect: {
+                    left: 0,
+                    top: 0,
+                    right: elWidth,
+                    bottom: elHeight,
+                },
+                layer: 1, // important when comparing with hits from other components
+            };
+        }
+        return null;
+    };
+    return MorePopover;
+}(DateComponent));
+
+var MoreLinkRoot = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__extends"])(MoreLinkRoot, _super);
+    function MoreLinkRoot() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.linkElRef = Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createRef"])();
+        _this.state = {
+            isPopoverOpen: false,
+        };
+        _this.handleClick = function (ev) {
+            var _a = _this, props = _a.props, context = _a.context;
+            var moreLinkClick = context.options.moreLinkClick;
+            var date = computeRange(props).start;
+            function buildPublicSeg(seg) {
+                var _a = seg.eventRange, def = _a.def, instance = _a.instance, range = _a.range;
+                return {
+                    event: new EventApi(context, def, instance),
+                    start: context.dateEnv.toDate(range.start),
+                    end: context.dateEnv.toDate(range.end),
+                    isStart: seg.isStart,
+                    isEnd: seg.isEnd,
+                };
+            }
+            if (typeof moreLinkClick === 'function') {
+                moreLinkClick = moreLinkClick({
+                    date: date,
+                    allDay: Boolean(props.allDayDate),
+                    allSegs: props.allSegs.map(buildPublicSeg),
+                    hiddenSegs: props.hiddenSegs.map(buildPublicSeg),
+                    jsEvent: ev,
+                    view: context.viewApi,
+                });
+            }
+            if (!moreLinkClick || moreLinkClick === 'popover') {
+                _this.setState({ isPopoverOpen: true });
+            }
+            else if (typeof moreLinkClick === 'string') { // a view name
+                context.calendarApi.zoomTo(date, moreLinkClick);
+            }
+        };
+        _this.handlePopoverClose = function () {
+            _this.setState({ isPopoverOpen: false });
+        };
+        return _this;
+    }
+    MoreLinkRoot.prototype.render = function () {
+        var _this = this;
+        var props = this.props;
+        return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(ViewContextType.Consumer, null, function (context) {
+            var viewApi = context.viewApi, options = context.options, calendarApi = context.calendarApi;
+            var moreLinkText = options.moreLinkText;
+            var moreCnt = props.moreCnt;
+            var range = computeRange(props);
+            var hookProps = {
+                num: moreCnt,
+                shortText: "+" + moreCnt,
+                text: typeof moreLinkText === 'function'
+                    ? moreLinkText.call(calendarApi, moreCnt)
+                    : "+" + moreCnt + " " + moreLinkText,
+                view: viewApi,
+            };
+            return (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["Fragment"], null,
+                Boolean(props.moreCnt) && (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(RenderHook, { elRef: _this.linkElRef, hookProps: hookProps, classNames: options.moreLinkClassNames, content: options.moreLinkContent, defaultContent: props.defaultContent || renderMoreLinkInner, didMount: options.moreLinkDidMount, willUnmount: options.moreLinkWillUnmount }, function (rootElRef, customClassNames, innerElRef, innerContent) { return props.children(rootElRef, ['fc-more-link'].concat(customClassNames), innerElRef, innerContent, _this.handleClick); })),
+                _this.state.isPopoverOpen && (Object(_vdom_js__WEBPACK_IMPORTED_MODULE_2__["createElement"])(MorePopover, { startDate: range.start, endDate: range.end, dateProfile: props.dateProfile, todayRange: props.todayRange, extraDateSpan: props.extraDateSpan, parentEl: _this.parentEl, alignmentEl: props.alignmentElRef.current, alignGridTop: props.alignGridTop, onClose: _this.handlePopoverClose }, props.popoverContent()))));
+        }));
+    };
+    MoreLinkRoot.prototype.componentDidMount = function () {
+        this.updateParentEl();
+    };
+    MoreLinkRoot.prototype.componentDidUpdate = function () {
+        this.updateParentEl();
+    };
+    MoreLinkRoot.prototype.updateParentEl = function () {
+        if (this.linkElRef.current) {
+            this.parentEl = elementClosest(this.linkElRef.current, '.fc-view-harness');
+        }
+    };
+    return MoreLinkRoot;
+}(BaseComponent));
+function renderMoreLinkInner(props) {
+    return props.text;
+}
+function computeRange(props) {
+    if (props.allDayDate) {
+        return {
+            start: props.allDayDate,
+            end: addDays(props.allDayDate, 1),
+        };
+    }
+    var hiddenSegs = props.hiddenSegs;
+    return {
+        start: computeEarliestSegStart(hiddenSegs),
+        end: computeLatestSegEnd(hiddenSegs),
+    };
+}
+function computeEarliestSegStart(segs) {
+    return segs.reduce(pickEarliestStart).eventRange.range.start;
+}
+function pickEarliestStart(seg0, seg1) {
+    return seg0.eventRange.range.start < seg1.eventRange.range.start ? seg0 : seg1;
+}
+function computeLatestSegEnd(segs) {
+    return segs.reduce(pickLatestEnd).eventRange.range.end;
+}
+function pickLatestEnd(seg0, seg1) {
+    return seg0.eventRange.range.end > seg1.eventRange.range.end ? seg0 : seg1;
 }
 
 // exports
 // --------------------------------------------------------------------------------------------------
-var version = '5.5.1'; // important to type it, so .d.ts has generic string
+var version = '5.9.0'; // important to type it, so .d.ts has generic string
 
 
 //# sourceMappingURL=main.js.map
@@ -9154,19 +9704,19 @@ var version = '5.5.1'; // important to type it, so .d.ts has generic string
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return N; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hydrate", function() { return O; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createElement", function() { return a; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return a; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Fragment", function() { return y; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createRef", function() { return h; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidElement", function() { return l; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Component", function() { return p; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cloneElement", function() { return S; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createContext", function() { return q; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toChildArray", function() { return w; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "options", function() { return n; });
-var n,l,u,i,t,o,r={},f=[],e=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function c(n,l){for(var u in l)n[u]=l[u];return n}function s(n){var l=n.parentNode;l&&l.removeChild(n)}function a(n,l,u){var i,t,o,r=arguments,f={};for(o in l)"key"==o?i=l[o]:"ref"==o?t=l[o]:f[o]=l[o];if(arguments.length>3)for(u=[u],o=3;o<arguments.length;o++)u.push(r[o]);if(null!=u&&(f.children=u),"function"==typeof n&&null!=n.defaultProps)for(o in n.defaultProps)void 0===f[o]&&(f[o]=n.defaultProps[o]);return v(n,f,i,t,null)}function v(l,u,i,t,o){var r={type:l,props:u,key:i,ref:t,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==o?++n.__v:o};return null!=n.vnode&&n.vnode(r),r}function h(){return{current:null}}function y(n){return n.children}function p(n,l){this.props=n,this.context=l}function d(n,l){if(null==l)return n.__?d(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return"function"==typeof n.type?d(n):null}function _(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return _(n)}}function k(l){(!l.__d&&(l.__d=!0)&&u.push(l)&&!b.__r++||t!==n.debounceRendering)&&((t=n.debounceRendering)||i)(b)}function b(){for(var n;b.__r=u.length;)n=u.sort(function(n,l){return n.__v.__b-l.__v.__b}),u=[],n.some(function(n){var l,u,i,t,o,r;n.__d&&(o=(t=(l=n).__v).__e,(r=l.__P)&&(u=[],(i=c({},t)).__v=t.__v+1,I(r,t,i,l.__n,void 0!==r.ownerSVGElement,null!=t.__h?[o]:null,u,null==o?d(t):o,t.__h),T(u,t),t.__e!=o&&_(t)))})}function m(n,l,u,i,t,o,e,c,s,a){var h,p,_,k,b,m,w,A=i&&i.__k||f,P=A.length;for(u.__k=[],h=0;h<l.length;h++)if(null!=(k=u.__k[h]=null==(k=l[h])||"boolean"==typeof k?null:"string"==typeof k||"number"==typeof k||"bigint"==typeof k?v(null,k,null,null,k):Array.isArray(k)?v(y,{children:k},null,null,null):k.__b>0?v(k.type,k.props,k.key,null,k.__v):k)){if(k.__=u,k.__b=u.__b+1,null===(_=A[h])||_&&k.key==_.key&&k.type===_.type)A[h]=void 0;else for(p=0;p<P;p++){if((_=A[p])&&k.key==_.key&&k.type===_.type){A[p]=void 0;break}_=null}I(n,k,_=_||r,t,o,e,c,s,a),b=k.__e,(p=k.ref)&&_.ref!=p&&(w||(w=[]),_.ref&&w.push(_.ref,null,k),w.push(p,k.__c||b,k)),null!=b?(null==m&&(m=b),"function"==typeof k.type&&null!=k.__k&&k.__k===_.__k?k.__d=s=g(k,s,n):s=x(n,k,_,A,b,s),a||"option"!==u.type?"function"==typeof u.type&&(u.__d=s):n.value=""):s&&_.__e==s&&s.parentNode!=n&&(s=d(_))}for(u.__e=m,h=P;h--;)null!=A[h]&&("function"==typeof u.type&&null!=A[h].__e&&A[h].__e==u.__d&&(u.__d=d(i,h+1)),L(A[h],A[h]));if(w)for(h=0;h<w.length;h++)z(w[h],w[++h],w[++h])}function g(n,l,u){var i,t;for(i=0;i<n.__k.length;i++)(t=n.__k[i])&&(t.__=n,l="function"==typeof t.type?g(t,l,u):x(u,t,t,n.__k,t.__e,l));return l}function w(n,l){return l=l||[],null==n||"boolean"==typeof n||(Array.isArray(n)?n.some(function(n){w(n,l)}):l.push(n)),l}function x(n,l,u,i,t,o){var r,f,e;if(void 0!==l.__d)r=l.__d,l.__d=void 0;else if(null==u||t!=o||null==t.parentNode)n:if(null==o||o.parentNode!==n)n.appendChild(t),r=null;else{for(f=o,e=0;(f=f.nextSibling)&&e<i.length;e+=2)if(f==t)break n;n.insertBefore(t,o),r=o}return void 0!==r?r:t.nextSibling}function A(n,l,u,i,t){var o;for(o in u)"children"===o||"key"===o||o in l||C(n,o,null,u[o],i);for(o in l)t&&"function"!=typeof l[o]||"children"===o||"key"===o||"value"===o||"checked"===o||u[o]===l[o]||C(n,o,l[o],u[o],i)}function P(n,l,u){"-"===l[0]?n.setProperty(l,u):n[l]=null==u?"":"number"!=typeof u||e.test(l)?u:u+"px"}function C(n,l,u,i,t){var o;n:if("style"===l)if("string"==typeof u)n.style.cssText=u;else{if("string"==typeof i&&(n.style.cssText=i=""),i)for(l in i)u&&l in u||P(n.style,l,"");if(u)for(l in u)i&&u[l]===i[l]||P(n.style,l,u[l])}else if("o"===l[0]&&"n"===l[1])o=l!==(l=l.replace(/Capture$/,"")),l=l.toLowerCase()in n?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+o]=u,u?i||n.addEventListener(l,o?H:$,o):n.removeEventListener(l,o?H:$,o);else if("dangerouslySetInnerHTML"!==l){if(t)l=l.replace(/xlink[H:h]/,"h").replace(/sName$/,"s");else if("href"!==l&&"list"!==l&&"form"!==l&&"tabIndex"!==l&&"download"!==l&&l in n)try{n[l]=null==u?"":u;break n}catch(n){}"function"==typeof u||(null!=u&&(!1!==u||"a"===l[0]&&"r"===l[1])?n.setAttribute(l,u):n.removeAttribute(l))}}function $(l){this.l[l.type+!1](n.event?n.event(l):l)}function H(l){this.l[l.type+!0](n.event?n.event(l):l)}function I(l,u,i,t,o,r,f,e,s){var a,v,h,d,_,k,b,g,w,x,A,P=u.type;if(void 0!==u.constructor)return null;null!=i.__h&&(s=i.__h,e=u.__e=i.__e,u.__h=null,r=[e]),(a=n.__b)&&a(u);try{n:if("function"==typeof P){if(g=u.props,w=(a=P.contextType)&&t[a.__c],x=a?w?w.props.value:a.__:t,i.__c?b=(v=u.__c=i.__c).__=v.__E:("prototype"in P&&P.prototype.render?u.__c=v=new P(g,x):(u.__c=v=new p(g,x),v.constructor=P,v.render=M),w&&w.sub(v),v.props=g,v.state||(v.state={}),v.context=x,v.__n=t,h=v.__d=!0,v.__h=[]),null==v.__s&&(v.__s=v.state),null!=P.getDerivedStateFromProps&&(v.__s==v.state&&(v.__s=c({},v.__s)),c(v.__s,P.getDerivedStateFromProps(g,v.__s))),d=v.props,_=v.state,h)null==P.getDerivedStateFromProps&&null!=v.componentWillMount&&v.componentWillMount(),null!=v.componentDidMount&&v.__h.push(v.componentDidMount);else{if(null==P.getDerivedStateFromProps&&g!==d&&null!=v.componentWillReceiveProps&&v.componentWillReceiveProps(g,x),!v.__e&&null!=v.shouldComponentUpdate&&!1===v.shouldComponentUpdate(g,v.__s,x)||u.__v===i.__v){v.props=g,v.state=v.__s,u.__v!==i.__v&&(v.__d=!1),v.__v=u,u.__e=i.__e,u.__k=i.__k,u.__k.forEach(function(n){n&&(n.__=u)}),v.__h.length&&f.push(v);break n}null!=v.componentWillUpdate&&v.componentWillUpdate(g,v.__s,x),null!=v.componentDidUpdate&&v.__h.push(function(){v.componentDidUpdate(d,_,k)})}v.context=x,v.props=g,v.state=v.__s,(a=n.__r)&&a(u),v.__d=!1,v.__v=u,v.__P=l,a=v.render(v.props,v.state,v.context),v.state=v.__s,null!=v.getChildContext&&(t=c(c({},t),v.getChildContext())),h||null==v.getSnapshotBeforeUpdate||(k=v.getSnapshotBeforeUpdate(d,_)),A=null!=a&&a.type===y&&null==a.key?a.props.children:a,m(l,Array.isArray(A)?A:[A],u,i,t,o,r,f,e,s),v.base=u.__e,u.__h=null,v.__h.length&&f.push(v),b&&(v.__E=v.__=null),v.__e=!1}else null==r&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=j(i.__e,u,i,t,o,r,f,s);(a=n.diffed)&&a(u)}catch(l){u.__v=null,(s||null!=r)&&(u.__e=e,u.__h=!!s,r[r.indexOf(e)]=null),n.__e(l,u,i)}}function T(l,u){n.__c&&n.__c(u,l),l.some(function(u){try{l=u.__h,u.__h=[],l.some(function(n){n.call(u)})}catch(l){n.__e(l,u.__v)}})}function j(n,l,u,i,t,o,e,c){var a,v,h,y,p=u.props,d=l.props,_=l.type,k=0;if("svg"===_&&(t=!0),null!=o)for(;k<o.length;k++)if((a=o[k])&&(a===n||(_?a.localName==_:3==a.nodeType))){n=a,o[k]=null;break}if(null==n){if(null===_)return document.createTextNode(d);n=t?document.createElementNS("http://www.w3.org/2000/svg",_):document.createElement(_,d.is&&d),o=null,c=!1}if(null===_)p===d||c&&n.data===d||(n.data=d);else{if(o=o&&f.slice.call(n.childNodes),v=(p=u.props||r).dangerouslySetInnerHTML,h=d.dangerouslySetInnerHTML,!c){if(null!=o)for(p={},y=0;y<n.attributes.length;y++)p[n.attributes[y].name]=n.attributes[y].value;(h||v)&&(h&&(v&&h.__html==v.__html||h.__html===n.innerHTML)||(n.innerHTML=h&&h.__html||""))}if(A(n,d,p,t,c),h)l.__k=[];else if(k=l.props.children,m(n,Array.isArray(k)?k:[k],l,u,i,t&&"foreignObject"!==_,o,e,n.firstChild,c),null!=o)for(k=o.length;k--;)null!=o[k]&&s(o[k]);c||("value"in d&&void 0!==(k=d.value)&&(k!==n.value||"progress"===_&&!k)&&C(n,"value",k,p.value,!1),"checked"in d&&void 0!==(k=d.checked)&&k!==n.checked&&C(n,"checked",k,p.checked,!1))}return n}function z(l,u,i){try{"function"==typeof l?l(u):l.current=u}catch(l){n.__e(l,i)}}function L(l,u,i){var t,o,r;if(n.unmount&&n.unmount(l),(t=l.ref)&&(t.current&&t.current!==l.__e||z(t,null,u)),i||"function"==typeof l.type||(i=null!=(o=l.__e)),l.__e=l.__d=void 0,null!=(t=l.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount()}catch(l){n.__e(l,u)}t.base=t.__P=null}if(t=l.__k)for(r=0;r<t.length;r++)t[r]&&L(t[r],u,i);null!=o&&s(o)}function M(n,l,u){return this.constructor(n,u)}function N(l,u,i){var t,o,e;n.__&&n.__(l,u),o=(t="function"==typeof i)?null:i&&i.__k||u.__k,e=[],I(u,l=(!t&&i||u).__k=a(y,null,[l]),o||r,r,void 0!==u.ownerSVGElement,!t&&i?[i]:o?null:u.firstChild?f.slice.call(u.childNodes):null,e,!t&&i?i:o?o.__e:u.firstChild,t),T(e,l)}function O(n,l){N(n,l,O)}function S(n,l,u){var i,t,o,r=arguments,f=c({},n.props);for(o in l)"key"==o?i=l[o]:"ref"==o?t=l[o]:f[o]=l[o];if(arguments.length>3)for(u=[u],o=3;o<arguments.length;o++)u.push(r[o]);return null!=u&&(f.children=u),v(n.type,f,i||n.key,t||n.ref,null)}function q(n,l){var u={__c:l="__cC"+o++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var u,i;return this.getChildContext||(u=[],(i={})[l]=this,this.getChildContext=function(){return i},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&u.some(k)},this.sub=function(n){u.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){u.splice(u.indexOf(n),1),l&&l.call(n)}}),n.children}};return u.Provider.__=u.Consumer.contextType=u}n={__e:function(n,l){for(var u,i,t;l=l.__;)if((u=l.__c)&&!u.__)try{if((i=u.constructor)&&null!=i.getDerivedStateFromError&&(u.setState(i.getDerivedStateFromError(n)),t=u.__d),null!=u.componentDidCatch&&(u.componentDidCatch(n),t=u.__d),t)return u.__E=u}catch(l){n=l}throw n},__v:0},l=function(n){return null!=n&&void 0===n.constructor},p.prototype.setState=function(n,l){var u;u=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=c({},this.state),"function"==typeof n&&(n=n(c({},u),this.props)),n&&c(u,n),null!=n&&this.__v&&(l&&this.__h.push(l),k(this))},p.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),k(this))},p.prototype.render=y,u=[],i="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,b.__r=0,o=0;
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return S; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hydrate", function() { return q; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createElement", function() { return v; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return v; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Fragment", function() { return d; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createRef", function() { return p; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidElement", function() { return i; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Component", function() { return _; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cloneElement", function() { return B; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createContext", function() { return D; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toChildArray", function() { return A; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "options", function() { return l; });
+var n,l,u,i,t,r,o,f,e={},c=[],s=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|zoo|^ord|itera/i;function a(n,l){for(var u in l)n[u]=l[u];return n}function h(n){var l=n.parentNode;l&&l.removeChild(n)}function v(l,u,i){var t,r,o,f={};for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];if(arguments.length>2&&(f.children=arguments.length>3?n.call(arguments,2):i),"function"==typeof l&&null!=l.defaultProps)for(o in l.defaultProps)void 0===f[o]&&(f[o]=l.defaultProps[o]);return y(l,f,t,r,null)}function y(n,i,t,r,o){var f={type:n,props:i,key:t,ref:r,__k:null,__:null,__b:0,__e:null,__d:void 0,__c:null,__h:null,constructor:void 0,__v:null==o?++u:o};return null==o&&null!=l.vnode&&l.vnode(f),f}function p(){return{current:null}}function d(n){return n.children}function _(n,l){this.props=n,this.context=l}function k(n,l){if(null==l)return n.__?k(n.__,n.__.__k.indexOf(n)+1):null;for(var u;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e)return u.__e;return"function"==typeof n.type?k(n):null}function b(n){var l,u;if(null!=(n=n.__)&&null!=n.__c){for(n.__e=n.__c.base=null,l=0;l<n.__k.length;l++)if(null!=(u=n.__k[l])&&null!=u.__e){n.__e=n.__c.base=u.__e;break}return b(n)}}function m(n){(!n.__d&&(n.__d=!0)&&t.push(n)&&!g.__r++||o!==l.debounceRendering)&&((o=l.debounceRendering)||r)(g)}function g(){for(var n;g.__r=t.length;)n=t.sort(function(n,l){return n.__v.__b-l.__v.__b}),t=[],n.some(function(n){var l,u,i,t,r,o;n.__d&&(r=(t=(l=n).__v).__e,(o=l.__P)&&(u=[],(i=a({},t)).__v=t.__v+1,j(o,t,i,l.__n,void 0!==o.ownerSVGElement,null!=t.__h?[r]:null,u,null==r?k(t):r,t.__h),z(u,t),t.__e!=r&&b(t)))})}function w(n,l,u,i,t,r,o,f,s,a){var h,v,p,_,b,m,g,w=i&&i.__k||c,A=w.length;for(u.__k=[],h=0;h<l.length;h++)if(null!=(_=u.__k[h]=null==(_=l[h])||"boolean"==typeof _?null:"string"==typeof _||"number"==typeof _||"bigint"==typeof _?y(null,_,null,null,_):Array.isArray(_)?y(d,{children:_},null,null,null):_.__b>0?y(_.type,_.props,_.key,null,_.__v):_)){if(_.__=u,_.__b=u.__b+1,null===(p=w[h])||p&&_.key==p.key&&_.type===p.type)w[h]=void 0;else for(v=0;v<A;v++){if((p=w[v])&&_.key==p.key&&_.type===p.type){w[v]=void 0;break}p=null}j(n,_,p=p||e,t,r,o,f,s,a),b=_.__e,(v=_.ref)&&p.ref!=v&&(g||(g=[]),p.ref&&g.push(p.ref,null,_),g.push(v,_.__c||b,_)),null!=b?(null==m&&(m=b),"function"==typeof _.type&&_.__k===p.__k?_.__d=s=x(_,s,n):s=P(n,_,p,w,b,s),"function"==typeof u.type&&(u.__d=s)):s&&p.__e==s&&s.parentNode!=n&&(s=k(p))}for(u.__e=m,h=A;h--;)null!=w[h]&&("function"==typeof u.type&&null!=w[h].__e&&w[h].__e==u.__d&&(u.__d=k(i,h+1)),N(w[h],w[h]));if(g)for(h=0;h<g.length;h++)M(g[h],g[++h],g[++h])}function x(n,l,u){for(var i,t=n.__k,r=0;t&&r<t.length;r++)(i=t[r])&&(i.__=n,l="function"==typeof i.type?x(i,l,u):P(u,i,i,t,i.__e,l));return l}function A(n,l){return l=l||[],null==n||"boolean"==typeof n||(Array.isArray(n)?n.some(function(n){A(n,l)}):l.push(n)),l}function P(n,l,u,i,t,r){var o,f,e;if(void 0!==l.__d)o=l.__d,l.__d=void 0;else if(null==u||t!=r||null==t.parentNode)n:if(null==r||r.parentNode!==n)n.appendChild(t),o=null;else{for(f=r,e=0;(f=f.nextSibling)&&e<i.length;e+=2)if(f==t)break n;n.insertBefore(t,r),o=r}return void 0!==o?o:t.nextSibling}function C(n,l,u,i,t){var r;for(r in u)"children"===r||"key"===r||r in l||H(n,r,null,u[r],i);for(r in l)t&&"function"!=typeof l[r]||"children"===r||"key"===r||"value"===r||"checked"===r||u[r]===l[r]||H(n,r,l[r],u[r],i)}function $(n,l,u){"-"===l[0]?n.setProperty(l,u):n[l]=null==u?"":"number"!=typeof u||s.test(l)?u:u+"px"}function H(n,l,u,i,t){var r;n:if("style"===l)if("string"==typeof u)n.style.cssText=u;else{if("string"==typeof i&&(n.style.cssText=i=""),i)for(l in i)u&&l in u||$(n.style,l,"");if(u)for(l in u)i&&u[l]===i[l]||$(n.style,l,u[l])}else if("o"===l[0]&&"n"===l[1])r=l!==(l=l.replace(/Capture$/,"")),l=l.toLowerCase()in n?l.toLowerCase().slice(2):l.slice(2),n.l||(n.l={}),n.l[l+r]=u,u?i||n.addEventListener(l,r?T:I,r):n.removeEventListener(l,r?T:I,r);else if("dangerouslySetInnerHTML"!==l){if(t)l=l.replace(/xlink[H:h]/,"h").replace(/sName$/,"s");else if("href"!==l&&"list"!==l&&"form"!==l&&"tabIndex"!==l&&"download"!==l&&l in n)try{n[l]=null==u?"":u;break n}catch(n){}"function"==typeof u||(null!=u&&(!1!==u||"a"===l[0]&&"r"===l[1])?n.setAttribute(l,u):n.removeAttribute(l))}}function I(n){this.l[n.type+!1](l.event?l.event(n):n)}function T(n){this.l[n.type+!0](l.event?l.event(n):n)}function j(n,u,i,t,r,o,f,e,c){var s,h,v,y,p,k,b,m,g,x,A,P=u.type;if(void 0!==u.constructor)return null;null!=i.__h&&(c=i.__h,e=u.__e=i.__e,u.__h=null,o=[e]),(s=l.__b)&&s(u);try{n:if("function"==typeof P){if(m=u.props,g=(s=P.contextType)&&t[s.__c],x=s?g?g.props.value:s.__:t,i.__c?b=(h=u.__c=i.__c).__=h.__E:("prototype"in P&&P.prototype.render?u.__c=h=new P(m,x):(u.__c=h=new _(m,x),h.constructor=P,h.render=O),g&&g.sub(h),h.props=m,h.state||(h.state={}),h.context=x,h.__n=t,v=h.__d=!0,h.__h=[]),null==h.__s&&(h.__s=h.state),null!=P.getDerivedStateFromProps&&(h.__s==h.state&&(h.__s=a({},h.__s)),a(h.__s,P.getDerivedStateFromProps(m,h.__s))),y=h.props,p=h.state,v)null==P.getDerivedStateFromProps&&null!=h.componentWillMount&&h.componentWillMount(),null!=h.componentDidMount&&h.__h.push(h.componentDidMount);else{if(null==P.getDerivedStateFromProps&&m!==y&&null!=h.componentWillReceiveProps&&h.componentWillReceiveProps(m,x),!h.__e&&null!=h.shouldComponentUpdate&&!1===h.shouldComponentUpdate(m,h.__s,x)||u.__v===i.__v){h.props=m,h.state=h.__s,u.__v!==i.__v&&(h.__d=!1),h.__v=u,u.__e=i.__e,u.__k=i.__k,u.__k.forEach(function(n){n&&(n.__=u)}),h.__h.length&&f.push(h);break n}null!=h.componentWillUpdate&&h.componentWillUpdate(m,h.__s,x),null!=h.componentDidUpdate&&h.__h.push(function(){h.componentDidUpdate(y,p,k)})}h.context=x,h.props=m,h.state=h.__s,(s=l.__r)&&s(u),h.__d=!1,h.__v=u,h.__P=n,s=h.render(h.props,h.state,h.context),h.state=h.__s,null!=h.getChildContext&&(t=a(a({},t),h.getChildContext())),v||null==h.getSnapshotBeforeUpdate||(k=h.getSnapshotBeforeUpdate(y,p)),A=null!=s&&s.type===d&&null==s.key?s.props.children:s,w(n,Array.isArray(A)?A:[A],u,i,t,r,o,f,e,c),h.base=u.__e,u.__h=null,h.__h.length&&f.push(h),b&&(h.__E=h.__=null),h.__e=!1}else null==o&&u.__v===i.__v?(u.__k=i.__k,u.__e=i.__e):u.__e=L(i.__e,u,i,t,r,o,f,c);(s=l.diffed)&&s(u)}catch(n){u.__v=null,(c||null!=o)&&(u.__e=e,u.__h=!!c,o[o.indexOf(e)]=null),l.__e(n,u,i)}}function z(n,u){l.__c&&l.__c(u,n),n.some(function(u){try{n=u.__h,u.__h=[],n.some(function(n){n.call(u)})}catch(n){l.__e(n,u.__v)}})}function L(l,u,i,t,r,o,f,c){var s,a,v,y=i.props,p=u.props,d=u.type,_=0;if("svg"===d&&(r=!0),null!=o)for(;_<o.length;_++)if((s=o[_])&&(s===l||(d?s.localName==d:3==s.nodeType))){l=s,o[_]=null;break}if(null==l){if(null===d)return document.createTextNode(p);l=r?document.createElementNS("http://www.w3.org/2000/svg",d):document.createElement(d,p.is&&p),o=null,c=!1}if(null===d)y===p||c&&l.data===p||(l.data=p);else{if(o=o&&n.call(l.childNodes),a=(y=i.props||e).dangerouslySetInnerHTML,v=p.dangerouslySetInnerHTML,!c){if(null!=o)for(y={},_=0;_<l.attributes.length;_++)y[l.attributes[_].name]=l.attributes[_].value;(v||a)&&(v&&(a&&v.__html==a.__html||v.__html===l.innerHTML)||(l.innerHTML=v&&v.__html||""))}if(C(l,p,y,r,c),v)u.__k=[];else if(_=u.props.children,w(l,Array.isArray(_)?_:[_],u,i,t,r&&"foreignObject"!==d,o,f,o?o[0]:i.__k&&k(i,0),c),null!=o)for(_=o.length;_--;)null!=o[_]&&h(o[_]);c||("value"in p&&void 0!==(_=p.value)&&(_!==l.value||"progress"===d&&!_)&&H(l,"value",_,y.value,!1),"checked"in p&&void 0!==(_=p.checked)&&_!==l.checked&&H(l,"checked",_,y.checked,!1))}return l}function M(n,u,i){try{"function"==typeof n?n(u):n.current=u}catch(n){l.__e(n,i)}}function N(n,u,i){var t,r;if(l.unmount&&l.unmount(n),(t=n.ref)&&(t.current&&t.current!==n.__e||M(t,null,u)),null!=(t=n.__c)){if(t.componentWillUnmount)try{t.componentWillUnmount()}catch(n){l.__e(n,u)}t.base=t.__P=null}if(t=n.__k)for(r=0;r<t.length;r++)t[r]&&N(t[r],u,"function"!=typeof n.type);i||null==n.__e||h(n.__e),n.__e=n.__d=void 0}function O(n,l,u){return this.constructor(n,u)}function S(u,i,t){var r,o,f;l.__&&l.__(u,i),o=(r="function"==typeof t)?null:t&&t.__k||i.__k,f=[],j(i,u=(!r&&t||i).__k=v(d,null,[u]),o||e,e,void 0!==i.ownerSVGElement,!r&&t?[t]:o?null:i.firstChild?n.call(i.childNodes):null,f,!r&&t?t:o?o.__e:i.firstChild,r),z(f,u)}function q(n,l){S(n,l,q)}function B(l,u,i){var t,r,o,f=a({},l.props);for(o in u)"key"==o?t=u[o]:"ref"==o?r=u[o]:f[o]=u[o];return arguments.length>2&&(f.children=arguments.length>3?n.call(arguments,2):i),y(l.type,f,t||l.key,r||l.ref,null)}function D(n,l){var u={__c:l="__cC"+f++,__:n,Consumer:function(n,l){return n.children(l)},Provider:function(n){var u,i;return this.getChildContext||(u=[],(i={})[l]=this,this.getChildContext=function(){return i},this.shouldComponentUpdate=function(n){this.props.value!==n.value&&u.some(m)},this.sub=function(n){u.push(n);var l=n.componentWillUnmount;n.componentWillUnmount=function(){u.splice(u.indexOf(n),1),l&&l.call(n)}}),n.children}};return u.Provider.__=u.Consumer.contextType=u}n=c.slice,l={__e:function(n,l){for(var u,i,t;l=l.__;)if((u=l.__c)&&!u.__)try{if((i=u.constructor)&&null!=i.getDerivedStateFromError&&(u.setState(i.getDerivedStateFromError(n)),t=u.__d),null!=u.componentDidCatch&&(u.componentDidCatch(n),t=u.__d),t)return u.__E=u}catch(l){n=l}throw n}},u=0,i=function(n){return null!=n&&void 0===n.constructor},_.prototype.setState=function(n,l){var u;u=null!=this.__s&&this.__s!==this.state?this.__s:this.__s=a({},this.state),"function"==typeof n&&(n=n(a({},u),this.props)),n&&a(u,n),null!=n&&this.__v&&(l&&this.__h.push(l),m(this))},_.prototype.forceUpdate=function(n){this.__v&&(this.__e=!0,n&&this.__h.push(n),m(this))},_.prototype.render=d,t=[],r="function"==typeof Promise?Promise.prototype.then.bind(Promise.resolve()):setTimeout,g.__r=0,f=0;
 //# sourceMappingURL=preact.module.js.map
 
 
@@ -9176,7 +9726,7 @@ var n,l,u,i,t,o,r={},f=[],e=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|z
 /*!***************************************************!*\
   !*** ./node_modules/@fullcalendar/common/vdom.js ***!
   \***************************************************/
-/*! exports provided: Component, Fragment, createContext, createElement, createRef, flushToDom, render, unmountComponentAtNode */
+/*! exports provided: Component, Fragment, createContext, createElement, createPortal, createRef, flushToDom, render, unmountComponentAtNode */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9185,6 +9735,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Fragment", function() { return Fragment; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createContext", function() { return createContext; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createElement", function() { return createElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPortal", function() { return createPortal; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createRef", function() { return createRef; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "flushToDom", function() { return flushToDom; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
@@ -9199,8 +9750,10 @@ var render = FullCalendarVDom.render;
 var createRef = FullCalendarVDom.createRef;
 var Fragment = FullCalendarVDom.Fragment;
 var createContext = FullCalendarVDom.createContext;
+var createPortal = FullCalendarVDom.createPortal;
 var flushToDom = FullCalendarVDom.flushToDom;
 var unmountComponentAtNode = FullCalendarVDom.unmountComponentAtNode;
+/* eslint-enable */
 
 
 
@@ -9315,7 +9868,76 @@ RolesGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/* classes attached to <body> */\n\n.fc-not-allowed,\n.fc-not-allowed .fc-event { /* override events' custom cursors */\n  cursor: not-allowed;\n}\n\n.fc-unselectable {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n          user-select: none;\n  -webkit-touch-callout: none;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n\n.fc {\n  /* layout of immediate children */\n  display: flex;\n  flex-direction: column;\n\n  font-size: 1em\n}\n\n.fc,\n  .fc *,\n  .fc *:before,\n  .fc *:after {\n    box-sizing: border-box;\n  }\n\n.fc table {\n    border-collapse: collapse;\n    border-spacing: 0;\n    font-size: 1em; /* normalize cross-browser */\n  }\n\n.fc th {\n    text-align: center;\n  }\n\n.fc th,\n  .fc td {\n    vertical-align: top;\n    padding: 0;\n  }\n\n.fc a[data-navlink] {\n    cursor: pointer;\n  }\n\n.fc a[data-navlink]:hover {\n    text-decoration: underline;\n  }\n\n.fc-direction-ltr {\n  direction: ltr;\n  text-align: left;\n}\n\n.fc-direction-rtl {\n  direction: rtl;\n  text-align: right;\n}\n\n.fc-theme-standard td,\n  .fc-theme-standard th {\n    border: 1px solid #ddd;\n    border: 1px solid var(--fc-border-color, #ddd);\n  }\n\n/* for FF, which doesn't expand a 100% div within a table cell. use absolute positioning */\n\n/* inner-wrappers are responsible for being absolute */\n\n/* TODO: best place for this? */\n\n.fc-liquid-hack td,\n  .fc-liquid-hack th {\n    position: relative;\n  }\n\n@font-face {\n  font-family: 'fcicons';\n  src: url(\"data:application/x-font-ttf;charset=utf-8;base64,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\") format('truetype');\n  font-weight: normal;\n  font-style: normal;\n}\n\n.fc-icon {\n  /* added for fc */\n  display: inline-block;\n  width: 1em;\n  height: 1em;\n  text-align: center;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n          user-select: none;\n\n  /* use !important to prevent issues with browser extensions that change fonts */\n  font-family: 'fcicons' !important;\n  speak: none;\n  font-style: normal;\n  font-weight: normal;\n  font-variant: normal;\n  text-transform: none;\n  line-height: 1;\n\n  /* Better Font Rendering =========== */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n\n.fc-icon-chevron-left:before {\n  content: \"\\e900\";\n}\n\n.fc-icon-chevron-right:before {\n  content: \"\\e901\";\n}\n\n.fc-icon-chevrons-left:before {\n  content: \"\\e902\";\n}\n\n.fc-icon-chevrons-right:before {\n  content: \"\\e903\";\n}\n\n.fc-icon-minus-square:before {\n  content: \"\\e904\";\n}\n\n.fc-icon-plus-square:before {\n  content: \"\\e905\";\n}\n\n.fc-icon-x:before {\n  content: \"\\e906\";\n}\n\n/*\nLots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css\n\nThese styles only apply when the standard-theme is activated.\nWhen it's NOT activated, the fc-button classes won't even be in the DOM.\n*/\n\n.fc {\n\n  /* reset */\n\n}\n\n.fc .fc-button {\n    border-radius: 0;\n    overflow: visible;\n    text-transform: none;\n    margin: 0;\n    font-family: inherit;\n    font-size: inherit;\n    line-height: inherit;\n  }\n\n.fc .fc-button:focus {\n    outline: 1px dotted;\n    outline: 5px auto -webkit-focus-ring-color;\n  }\n\n.fc .fc-button {\n    -webkit-appearance: button;\n  }\n\n.fc .fc-button:not(:disabled) {\n    cursor: pointer;\n  }\n\n.fc .fc-button::-moz-focus-inner {\n    padding: 0;\n    border-style: none;\n  }\n\n.fc {\n\n  /* theme */\n\n}\n\n.fc .fc-button {\n    display: inline-block;\n    font-weight: 400;\n    text-align: center;\n    vertical-align: middle;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n            user-select: none;\n    background-color: transparent;\n    border: 1px solid transparent;\n    padding: 0.4em 0.65em;\n    font-size: 1em;\n    line-height: 1.5;\n    border-radius: 0.25em;\n  }\n\n.fc .fc-button:hover {\n    text-decoration: none;\n  }\n\n.fc .fc-button:focus {\n    outline: 0;\n    box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);\n  }\n\n.fc .fc-button:disabled {\n    opacity: 0.65;\n  }\n\n.fc {\n\n  /* \"primary\" coloring */\n\n}\n\n.fc .fc-button-primary {\n    color: #fff;\n    color: var(--fc-button-text-color, #fff);\n    background-color: #2C3E50;\n    background-color: var(--fc-button-bg-color, #2C3E50);\n    border-color: #2C3E50;\n    border-color: var(--fc-button-border-color, #2C3E50);\n  }\n\n.fc .fc-button-primary:hover {\n    color: #fff;\n    color: var(--fc-button-text-color, #fff);\n    background-color: #1e2b37;\n    background-color: var(--fc-button-hover-bg-color, #1e2b37);\n    border-color: #1a252f;\n    border-color: var(--fc-button-hover-border-color, #1a252f);\n  }\n\n.fc .fc-button-primary:disabled { /* not DRY */\n    color: #fff;\n    color: var(--fc-button-text-color, #fff);\n    background-color: #2C3E50;\n    background-color: var(--fc-button-bg-color, #2C3E50);\n    border-color: #2C3E50;\n    border-color: var(--fc-button-border-color, #2C3E50); /* overrides :hover */\n  }\n\n.fc .fc-button-primary:focus {\n    box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);\n  }\n\n.fc .fc-button-primary:not(:disabled):active,\n  .fc .fc-button-primary:not(:disabled).fc-button-active {\n    color: #fff;\n    color: var(--fc-button-text-color, #fff);\n    background-color: #1a252f;\n    background-color: var(--fc-button-active-bg-color, #1a252f);\n    border-color: #151e27;\n    border-color: var(--fc-button-active-border-color, #151e27);\n  }\n\n.fc .fc-button-primary:not(:disabled):active:focus,\n  .fc .fc-button-primary:not(:disabled).fc-button-active:focus {\n    box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);\n  }\n\n.fc {\n\n  /* icons within buttons */\n\n}\n\n.fc .fc-button .fc-icon {\n    vertical-align: middle;\n    font-size: 1.5em; /* bump up the size (but don't make it bigger than line-height of button, which is 1.5em also) */\n  }\n\n.fc .fc-button-group {\n    position: relative;\n    display: inline-flex;\n    vertical-align: middle;\n  }\n\n.fc .fc-button-group > .fc-button {\n    position: relative;\n    flex: 1 1 auto;\n  }\n\n.fc .fc-button-group > .fc-button:hover {\n    z-index: 1;\n  }\n\n.fc .fc-button-group > .fc-button:focus,\n  .fc .fc-button-group > .fc-button:active,\n  .fc .fc-button-group > .fc-button.fc-button-active {\n    z-index: 1;\n  }\n\n.fc-direction-ltr .fc-button-group > .fc-button:not(:first-child) {\n    margin-left: -1px;\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0;\n  }\n\n.fc-direction-ltr .fc-button-group > .fc-button:not(:last-child) {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n  }\n\n.fc-direction-rtl .fc-button-group > .fc-button:not(:first-child) {\n    margin-right: -1px;\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n  }\n\n.fc-direction-rtl .fc-button-group > .fc-button:not(:last-child) {\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0;\n  }\n\n.fc .fc-toolbar {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n  }\n\n.fc .fc-toolbar.fc-header-toolbar {\n    margin-bottom: 1.5em;\n  }\n\n.fc .fc-toolbar.fc-footer-toolbar {\n    margin-top: 1.5em;\n  }\n\n.fc .fc-toolbar-title {\n    font-size: 1.75em;\n    margin: 0;\n  }\n\n.fc-direction-ltr .fc-toolbar > * > :not(:first-child) {\n    margin-left: .75em; /* space between */\n  }\n\n.fc-direction-rtl .fc-toolbar > * > :not(:first-child) {\n    margin-right: .75em; /* space between */\n  }\n\n.fc-direction-rtl .fc-toolbar-ltr { /* when the toolbar-chunk positioning system is explicitly left-to-right */\n    flex-direction: row-reverse;\n  }\n\n.fc .fc-scroller {\n    -webkit-overflow-scrolling: touch;\n    position: relative; /* for abs-positioned elements within */\n  }\n\n.fc .fc-scroller-liquid {\n    height: 100%;\n  }\n\n.fc .fc-scroller-liquid-absolute {\n    position: absolute;\n    top: 0;\n    right: 0;\n    left: 0;\n    bottom: 0;\n  }\n\n.fc .fc-scroller-harness {\n    position: relative;\n    overflow: hidden;\n    direction: ltr;\n      /* hack for chrome computing the scroller's right/left wrong for rtl. undone below... */\n      /* TODO: demonstrate in codepen */\n  }\n\n.fc .fc-scroller-harness-liquid {\n    height: 100%;\n  }\n\n.fc-direction-rtl .fc-scroller-harness > .fc-scroller { /* undo above hack */\n    direction: rtl;\n  }\n\n.fc-theme-standard .fc-scrollgrid {\n    border: 1px solid #ddd;\n    border: 1px solid var(--fc-border-color, #ddd); /* bootstrap does this. match */\n  }\n\n.fc .fc-scrollgrid,\n    .fc .fc-scrollgrid table { /* all tables (self included) */\n      width: 100%; /* because tables don't normally do this */\n      table-layout: fixed;\n    }\n\n.fc .fc-scrollgrid table { /* inner tables */\n      border-top-style: hidden;\n      border-left-style: hidden;\n      border-right-style: hidden;\n    }\n\n.fc .fc-scrollgrid {\n\n    border-collapse: separate;\n    border-right-width: 0;\n    border-bottom-width: 0;\n\n  }\n\n.fc .fc-scrollgrid-liquid {\n    height: 100%;\n  }\n\n.fc .fc-scrollgrid-section { /* a <tr> */\n    height: 1px /* better than 0, for firefox */\n\n  }\n\n.fc .fc-scrollgrid-section > td {\n      height: 1px; /* needs a height so inner div within grow. better than 0, for firefox */\n    }\n\n.fc .fc-scrollgrid-section table {\n      height: 1px;\n        /* for most browsers, if a height isn't set on the table, can't do liquid-height within cells */\n        /* serves as a min-height. harmless */\n    }\n\n.fc .fc-scrollgrid-section-liquid {\n    height: auto\n\n  }\n\n.fc .fc-scrollgrid-section-liquid > td {\n      height: 100%; /* better than `auto`, for firefox */\n    }\n\n.fc .fc-scrollgrid-section > * {\n    border-top-width: 0;\n    border-left-width: 0;\n  }\n\n.fc .fc-scrollgrid-section-header > *,\n  .fc .fc-scrollgrid-section-footer > * {\n    border-bottom-width: 0;\n  }\n\n.fc .fc-scrollgrid-section-body table,\n  .fc .fc-scrollgrid-section-footer table {\n    border-bottom-style: hidden; /* head keeps its bottom border tho */\n  }\n\n.fc {\n\n  /* stickiness */\n\n}\n\n.fc .fc-scrollgrid-section-sticky > * {\n    background: #fff;\n    background: var(--fc-page-bg-color, #fff);\n    position: sticky;\n    z-index: 2; /* TODO: var */\n    /* TODO: box-shadow when sticking */\n  }\n\n.fc .fc-scrollgrid-section-header.fc-scrollgrid-section-sticky > * {\n    top: 0; /* because border-sharing causes a gap at the top */\n      /* TODO: give safari -1. has bug */\n  }\n\n.fc .fc-scrollgrid-section-footer.fc-scrollgrid-section-sticky > * {\n    bottom: 0; /* known bug: bottom-stickiness doesn't work in safari */\n  }\n\n.fc .fc-scrollgrid-sticky-shim { /* for horizontal scrollbar */\n    height: 1px; /* needs height to create scrollbars */\n    margin-bottom: -1px;\n  }\n\n.fc-sticky { /* no .fc wrap because used as child of body */\n  position: sticky;\n}\n\n.fc .fc-view-harness {\n    flex-grow: 1; /* because this harness is WITHIN the .fc's flexbox */\n    position: relative;\n  }\n\n.fc {\n\n  /* when the harness controls the height, make the view liquid */\n\n}\n\n.fc .fc-view-harness-active > .fc-view {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n  }\n\n.fc .fc-col-header-cell-cushion {\n    display: inline-block; /* x-browser for when sticky (when multi-tier header) */\n    padding: 2px 4px;\n  }\n\n.fc .fc-bg-event,\n  .fc .fc-non-business,\n  .fc .fc-highlight {\n    /* will always have a harness with position:relative/absolute, so absolutely expand */\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n  }\n\n.fc .fc-non-business {\n    background: rgba(215, 215, 215, 0.3);\n    background: var(--fc-non-business-color, rgba(215, 215, 215, 0.3));\n  }\n\n.fc .fc-bg-event {\n    background: rgb(143, 223, 130);\n    background: var(--fc-bg-event-color, rgb(143, 223, 130));\n    opacity: 0.3;\n    opacity: var(--fc-bg-event-opacity, 0.3)\n  }\n\n.fc .fc-bg-event .fc-event-title {\n      margin: .5em;\n      font-size: .85em;\n      font-size: var(--fc-small-font-size, .85em);\n      font-style: italic;\n    }\n\n.fc .fc-highlight {\n    background: rgba(188, 232, 241, 0.3);\n    background: var(--fc-highlight-color, rgba(188, 232, 241, 0.3));\n  }\n\n.fc .fc-cell-shaded,\n  .fc .fc-day-disabled {\n    background: rgba(208, 208, 208, 0.3);\n    background: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\n  }\n\n/* link resets */\n\n/* ---------------------------------------------------------------------------------------------------- */\n\na.fc-event,\na.fc-event:hover {\n  text-decoration: none;\n}\n\n/* cursor */\n\n.fc-event[href],\n.fc-event.fc-event-draggable {\n  cursor: pointer;\n}\n\n/* event text content */\n\n/* ---------------------------------------------------------------------------------------------------- */\n\n.fc-event .fc-event-main {\n    position: relative;\n    z-index: 2;\n  }\n\n/* dragging */\n\n/* ---------------------------------------------------------------------------------------------------- */\n\n.fc-event-dragging:not(.fc-event-selected) { /* MOUSE */\n    opacity: 0.75;\n  }\n\n.fc-event-dragging.fc-event-selected { /* TOUCH */\n    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);\n  }\n\n/* resizing */\n\n/* ---------------------------------------------------------------------------------------------------- */\n\n/* (subclasses should hone positioning for touch and non-touch) */\n\n.fc-event .fc-event-resizer {\n    display: none;\n    position: absolute;\n    z-index: 4;\n  }\n\n.fc-event:hover, /* MOUSE */\n.fc-event-selected { /* TOUCH */\n\n}\n\n.fc-event:hover .fc-event-resizer, .fc-event-selected .fc-event-resizer {\n    display: block;\n  }\n\n.fc-event-selected .fc-event-resizer {\n    border-radius: 4px;\n    border-radius: calc(var(--fc-event-resizer-dot-total-width, 8px) / 2);\n    border-width: 1px;\n    border-width: var(--fc-event-resizer-dot-border-width, 1px);\n    width: 8px;\n    width: var(--fc-event-resizer-dot-total-width, 8px);\n    height: 8px;\n    height: var(--fc-event-resizer-dot-total-width, 8px);\n    border-style: solid;\n    border-color: inherit;\n    background: #fff;\n    background: var(--fc-page-bg-color, #fff)\n\n    /* expand hit area */\n\n  }\n\n.fc-event-selected .fc-event-resizer:before {\n      content: '';\n      position: absolute;\n      top: -20px;\n      left: -20px;\n      right: -20px;\n      bottom: -20px;\n    }\n\n/* selecting (always TOUCH) */\n\n/* ---------------------------------------------------------------------------------------------------- */\n\n.fc-event-selected {\n  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)\n\n  /* expand hit area (subclasses should expand) */\n\n}\n\n.fc-event-selected:before {\n    content: \"\";\n    position: absolute;\n    z-index: 3;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n  }\n\n.fc-event-selected {\n\n  /* dimmer effect */\n\n}\n\n.fc-event-selected:after {\n    content: \"\";\n    background: rgba(0, 0, 0, 0.25);\n    background: var(--fc-event-selected-overlay-color, rgba(0, 0, 0, 0.25));\n    position: absolute;\n    z-index: 1;\n\n    /* assume there's a border on all sides. overcome it. */\n    /* sometimes there's NOT a border, in which case the dimmer will go over */\n    /* an adjacent border, which looks fine. */\n    top: -1px;\n    left: -1px;\n    right: -1px;\n    bottom: -1px;\n  }\n\n/*\nA HORIZONTAL event\n*/\n\n.fc-h-event { /* allowed to be top-level */\n  display: block;\n  border: 1px solid #3788d8;\n  border: 1px solid var(--fc-event-border-color, #3788d8);\n  background-color: #3788d8;\n  background-color: var(--fc-event-bg-color, #3788d8)\n\n}\n\n.fc-h-event .fc-event-main {\n    color: #fff;\n    color: var(--fc-event-text-color, #fff);\n  }\n\n.fc-h-event .fc-event-main-frame {\n    display: flex; /* for make fc-event-title-container expand */\n  }\n\n.fc-h-event .fc-event-time {\n    max-width: 100%; /* clip overflow on this element */\n    overflow: hidden;\n  }\n\n.fc-h-event .fc-event-title-container { /* serves as a container for the sticky cushion */\n    flex-grow: 1;\n    flex-shrink: 1;\n    min-width: 0; /* important for allowing to shrink all the way */\n  }\n\n.fc-h-event .fc-event-title {\n    display: inline-block; /* need this to be sticky cross-browser */\n    vertical-align: top; /* for not messing up line-height */\n    left: 0;  /* for sticky */\n    right: 0; /* for sticky */\n    max-width: 100%; /* clip overflow on this element */\n    overflow: hidden;\n  }\n\n.fc-h-event.fc-event-selected:before {\n    /* expand hit area */\n    top: -10px;\n    bottom: -10px;\n  }\n\n/* adjust border and border-radius (if there is any) for non-start/end */\n\n.fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-start),\n.fc-direction-rtl .fc-daygrid-block-event:not(.fc-event-end) {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  border-left-width: 0;\n}\n\n.fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-end),\n.fc-direction-rtl .fc-daygrid-block-event:not(.fc-event-start) {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n  border-right-width: 0;\n}\n\n/* resizers */\n\n.fc-h-event:not(.fc-event-selected) .fc-event-resizer {\n  top: 0;\n  bottom: 0;\n  width: 8px;\n  width: var(--fc-event-resizer-thickness, 8px);\n}\n\n.fc-direction-ltr .fc-h-event:not(.fc-event-selected) .fc-event-resizer-start,\n.fc-direction-rtl .fc-h-event:not(.fc-event-selected) .fc-event-resizer-end {\n  cursor: w-resize;\n  left: -4px;\n  left: calc(var(--fc-event-resizer-thickness, 8px) / -2);\n}\n\n.fc-direction-ltr .fc-h-event:not(.fc-event-selected) .fc-event-resizer-end,\n.fc-direction-rtl .fc-h-event:not(.fc-event-selected) .fc-event-resizer-start {\n  cursor: e-resize;\n  right: -4px;\n  right: calc(var(--fc-event-resizer-thickness, 8px) / -2);\n}\n\n/* resizers for TOUCH */\n\n.fc-h-event.fc-event-selected .fc-event-resizer {\n  top: 50%;\n  margin-top: -4px;\n  margin-top: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);\n}\n\n.fc-direction-ltr .fc-h-event.fc-event-selected .fc-event-resizer-start,\n.fc-direction-rtl .fc-h-event.fc-event-selected .fc-event-resizer-end {\n  left: -4px;\n  left: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);\n}\n\n.fc-direction-ltr .fc-h-event.fc-event-selected .fc-event-resizer-end,\n.fc-direction-rtl .fc-h-event.fc-event-selected .fc-event-resizer-start {\n  right: -4px;\n  right: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);\n}\n\n/*# sourceMappingURL=data:application/json;base64,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QkFBZ0I7RUFDbEI7O0FBQ0Ysd0NBQXdDLGlEQUFpRDtJQUNyRixZQUFZO0lBQ1osY0FBYztJQUNkLFlBQVksRUFBRSxpREFBaUQ7RUFDakU7O0FBQ0Y7SUFDSSxxQkFBcUIsRUFBRSx5Q0FBeUM7SUFDaEUsbUJBQW1CLEVBQUUsbUNBQW1DO0lBQ3hELE9BQU8sR0FBRyxlQUFlO0lBQ3pCLFFBQVEsRUFBRSxlQUFlO0lBQ3pCLGVBQWUsRUFBRSxrQ0FBa0M7SUFDbkQsZ0JBQWdCO0VBQ2xCOztBQUNGO0lBQ0ksb0JBQW9CO0lBQ3BCLFVBQVU7SUFDVixhQUFhO0VBQ2Y7O0FBQ0Ysd0VBQXdFOztBQUN4RTs7RUFFRSx5QkFBeUI7RUFDekIsNEJBQTRCO0VBQzVCLG9CQUFvQjtBQUN0Qjs7QUFDQTs7RUFFRSwwQkFBMEI7RUFDMUIsNkJBQTZCO0VBQzdCLHFCQUFxQjtBQUN2Qjs7QUFDQSxhQUFhOztBQUNiO0VBQ0UsTUFBTTtFQUNOLFNBQVM7RUFDVCxVQUFVO0VBQ1YsNkNBQTZDO0FBQy9DOztBQUNBOztFQUVFLGdCQUFnQjtFQUNoQixVQUFVO0VBQ1YsdURBQXVEO0FBQ3pEOztBQUNBOztFQUVFLGdCQUFnQjtFQUNoQixXQUFXO0VBQ1gsd0RBQXdEO0FBQzFEOztBQUNBLHVCQUF1Qjs7QUFDdkI7RUFDRSxRQUFRO0VBQ1IsZ0JBQWdCO0VBQ2hCLG1FQUFtRTtBQUNyRTs7QUFDQTs7RUFFRSxVQUFVO0VBQ1YsNkRBQTZEO0FBQy9EOztBQUNBOztFQUVFLFdBQVc7RUFDWCw4REFBOEQ7QUFDaEUiLCJmaWxlIjoibWFpbi5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcbi8qIGNsYXNzZXMgYXR0YWNoZWQgdG8gPGJvZHk+ICovXG5cbi5mYy1ub3QtYWxsb3dlZCxcbi5mYy1ub3QtYWxsb3dlZCAuZmMtZXZlbnQgeyAvKiBvdmVycmlkZSBldmVudHMnIGN1c3RvbSBjdXJzb3JzICovXG4gIGN1cnNvcjogbm90LWFsbG93ZWQ7XG59XG5cbi5mYy11bnNlbGVjdGFibGUge1xuICAtd2Via2l0LXVzZXItc2VsZWN0OiBub25lO1xuICAgICAtbW96LXVzZXItc2VsZWN0OiBub25lO1xuICAgICAgLW1zLXVzZXItc2VsZWN0OiBub25lO1xuICAgICAgICAgIHVzZXItc2VsZWN0OiBub25lO1xuICAtd2Via2l0LXRvdWNoLWNhbGxvdXQ6IG5vbmU7XG4gIC13ZWJraXQtdGFwLWhpZ2hsaWdodC1jb2xvcjogcmdiYSgwLCAwLCAwLCAwKTtcbn1cbi5mYyB7XG4gIC8qIGxheW91dCBvZiBpbW1lZGlhdGUgY2hpbGRyZW4gKi9cbiAgZGlzcGxheTogZmxleDtcbiAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcblxuICBmb250LXNpemU6IDFlbVxufVxuLmZjLFxuICAuZmMgKixcbiAgLmZjICo6YmVmb3JlLFxuICAuZmMgKjphZnRlciB7XG4gICAgYm94LXNpemluZzogYm9yZGVyLWJveDtcbiAgfVxuLmZjIHRhYmxlIHtcbiAgICBib3JkZXItY29sbGFwc2U6IGNvbGxhcHNlO1xuICAgIGJvcmRlci1zcGFjaW5nOiAwO1xuICAgIGZvbnQtc2l6ZTogMWVtOyAvKiBub3JtYWxpemUgY3Jvc3MtYnJvd3NlciAqL1xuICB9XG4uZmMgdGgge1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgfVxuLmZjIHRoLFxuICAuZmMgdGQge1xuICAgIHZlcnRpY2FsLWFsaWduOiB0b3A7XG4gICAgcGFkZGluZzogMDtcbiAgfVxuLmZjIGFbZGF0YS1uYXZsaW5rXSB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICB9XG4uZmMgYVtkYXRhLW5hdmxpbmtdOmhvdmVyIHtcbiAgICB0ZXh0LWRlY29yYXRpb246IHVuZGVybGluZTtcbiAgfVxuLmZjLWRpcmVjdGlvbi1sdHIge1xuICBkaXJlY3Rpb246IGx0cjtcbiAgdGV4dC1hbGlnbjogbGVmdDtcbn1cbi5mYy1kaXJlY3Rpb24tcnRsIHtcbiAgZGlyZWN0aW9uOiBydGw7XG4gIHRleHQtYWxpZ246IHJpZ2h0O1xufVxuLmZjLXRoZW1lLXN0YW5kYXJkIHRkLFxuICAuZmMtdGhlbWUtc3RhbmRhcmQgdGgge1xuICAgIGJvcmRlcjogMXB4IHNvbGlkICNkZGQ7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tZmMtYm9yZGVyLWNvbG9yLCAjZGRkKTtcbiAgfVxuLyogZm9yIEZGLCB3aGljaCBkb2Vzbid0IGV4cGFuZCBhIDEwMCUgZGl2IHdpdGhpbiBhIHRhYmxlIGNlbGwuIHVzZSBhYnNvbHV0ZSBwb3NpdGlvbmluZyAqL1xuLyogaW5uZXItd3JhcHBlcnMgYXJlIHJlc3BvbnNpYmxlIGZvciBiZWluZyBhYnNvbHV0ZSAqL1xuLyogVE9ETzogYmVzdCBwbGFjZSBmb3IgdGhpcz8gKi9cbi5mYy1saXF1aWQtaGFjayB0ZCxcbiAgLmZjLWxpcXVpZC1oYWNrIHRoIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIH1cblxuQGZvbnQtZmFjZSB7XG4gIGZvbnQtZmFtaWx5OiAnZmNpY29ucyc7XG4gIHNyYzogdXJsKFwiZGF0YTphcHBsaWNhdGlvbi94LWZvbnQtdHRmO2NoYXJzZXQ9dXRmLTg7YmFzZTY0LEFBRUFBQUFMQUlBQUF3QXdUMU12TWc4U0JmQUFBQUM4QUFBQVlHTnRZWEFYVnRLTkFBQUJIQUFBQUZSbllYTndBQUFBRUFBQUFYQUFBQUFJWjJ4NVpnWXlkeElBQUFGNEFBQUZOR2hsWVdRVUo3Y0lBQUFHckFBQUFEWm9hR1ZoQjIwRHpBQUFCdVFBQUFBa2FHMTBlQ0lBQmhRQUFBY0lBQUFBTEd4dlkyRUQ0QVU2QUFBSE5BQUFBQmh0WVhod0FBOEFqQUFBQjB3QUFBQWdibUZ0WlhzcjY5MEFBQWRzQUFBQmhuQnZjM1FBQXdBQUFBQUk5QUFBQUNBQUF3UEFBWkFBQlFBQUFwa0N6QUFBQUk4Q21RTE1BQUFCNndBekFRa0FBQUFBQUFBQUFBQUFBQUFBQUFBQkVBQUFBQUFBQUFBQUFBQUFBQUFBQUFCQUFBRHBCZ1BBLzhBQVFBUEFBRUFBQUFBQkFBQUFBQUFBQUFBQUFBQWdBQUFBQUFBREFBQUFBd0FBQUJ3QUFRQURBQUFBSEFBREFBRUFBQUFjQUFRQU9BQUFBQW9BQ0FBQ0FBSUFBUUFnNlFiLy9mLy9BQUFBQUFBZzZRRC8vZi8vQUFILzR4Y0VBQU1BQVFBQUFBQUFBQUFBQUFBQUFRQUIvLzhBRHdBQkFBQUFBQUFBQUFBQUFnQUFOemtCQUFBQUFBRUFBQUFBQUFBQUFBQUNBQUEzT1FFQUFBQUFBUUFBQUFBQUFBQUFBQUlBQURjNUFRQUFBQUFCQVdJQWpRS2VBc2tBRXdBQUpTYzNOalFuSmlJSEFRWVVGd0VXTWpjMk5DY0NudUxpRFEwTUpBei9BQTBOQVFBTUpBd05EY25pNGd3akRRd00vd0FOSXd6L0FBME5EQ01OQUFBQUFRRmlBSTBDbmdMSkFCTUFBQ1VCTmpRbkFTWWlCd1lVSHdFSEJoUVhGakkzQVo0QkFBME4vd0FNSkF3TkRlTGlEUTBNSkF5TkFRQU1JdzBCQUF3TURTTU00dUlOSXd3TkRRQUFBQUlBNGdDM0F4NENuZ0FUQUNjQUFDVW5OelkwSnlZaUR3RUdGQjhCRmpJM05qUW5JU2MzTmpRbkppSVBBUVlVSHdFV01qYzJOQ2NCODdlM0RRME1JdzNWRFEzVkRTTU1EUTBCSzdlM0RRME1KQXpWRFEzVkRDUU1EUTN6dUxjTUpBd05EZFVOSXd6V0RBd05Jd3k0dHd3a0RBME4xUTBqRE5ZTURBMGpEQUFBQWdEaUFMY0RIZ0tlQUJNQUp3QUFKVGMyTkM4QkppSUhCaFFmQVFjR0ZCY1dNamNoTnpZMEx3RW1JZ2NHRkI4QkJ3WVVGeFl5TndKSjFRME4xUTBqREEwTnQ3Y05EUXdqRGY3VjFRME4xUXdrREEwTnQ3Y05EUXdrRExmV0RDTU4xUTBORENRTXQ3Z01JdzBNRE5ZTUl3M1ZEUTBNSkF5M3VBd2pEUXdNQUFBREFGVUFBQU9yQTFVQU13Qm9BSGNBQUJNaUJnY09BUWNPQVFjT0FSVVJGQllYSGdFWEhnRVhIZ0V6SVRJMk56NEJOejRCTno0Qk5SRTBKaWN1QVNjdUFTY3VBU01GSVRJV0Z4NEJGeDRCRng0QkZSRVVCZ2NPQVFjT0FRY09BU01oSWlZbkxnRW5MZ0VuTGdFMUVUUTJOejRCTno0Qk56NEJNeE1oTWpZMU5DWWpJU0lHRlJRV005VU5HQXdMRlFrSkRnVUZCUVVGQlE0SkNSVUxEQmdOQWxZTkdBd0xGUWtKRGdVRkJRVUZCUTRKQ1JVTERCZ04vYW9DVmdRSUJBUUhBd01GQVFJQkFRSUJCUU1EQndRRUNBVDlxZ1FJQkFRSEF3TUZBUUlCQVFJQkJRTURCd1FFQ0FTQUFWWVJHUmtSL3FvUkdSa1JBMVVGQkFVT0NRa1ZEQXNaRGYyckRSa0xEQlVKQ0E0RkJRVUZCUVVPQ1FnVkRBc1pEUUpWRFJrTERCVUpDUTRGQkFWVkFnRUNCUU1DQndRRUNBWDlxd1FKQXdRSEF3TUZBUUlDQWdJQkJRTURCd1FEQ1FRQ1ZRVUlCQVFIQWdNRkFnRUMvb0FaRWhFWkdSRVNHUUFBQUFBREFGVUFBQU9yQTFVQU13Qm9BSWtBQUJNaUJnY09BUWNPQVFjT0FSVVJGQllYSGdFWEhnRVhIZ0V6SVRJMk56NEJOejRCTno0Qk5SRTBKaWN1QVNjdUFTY3VBU01GSVRJV0Z4NEJGeDRCRng0QkZSRVVCZ2NPQVFjT0FRY09BU01oSWlZbkxnRW5MZ0VuTGdFMUVUUTJOejRCTno0Qk56NEJNeE16RlJRV016STJQUUV6TWpZMU5DWXJBVFUwSmlNaUJoMEJJeUlHRlJRV005VU5HQXdMRlFrSkRnVUZCUVVGQlE0SkNSVUxEQmdOQWxZTkdBd0xGUWtKRGdVRkJRVUZCUTRKQ1JVTERCZ04vYW9DVmdRSUJBUUhBd01GQVFJQkFRSUJCUU1EQndRRUNBVDlxZ1FJQkFRSEF3TUZBUUlCQVFJQkJRTURCd1FFQ0FTQWdCa1NFaG1BRVJrWkVZQVpFaElaZ0JFWkdSRURWUVVFQlE0SkNSVU1DeGtOL2FzTkdRc01GUWtJRGdVRkJRVUZCUTRKQ0JVTUN4a05BbFVOR1FzTUZRa0pEZ1VFQlZVQ0FRSUZBd0lIQkFRSUJmMnJCQWtEQkFjREF3VUJBZ0lDQWdFRkF3TUhCQU1KQkFKVkJRZ0VCQWNDQXdVQ0FRTCtnSUFTR1JrU2dCa1NFUm1BRWhrWkVvQVpFUklaQUFBQkFPSUFqUU1lQXNrQUlBQUFFeGNIQmhRWEZqSS9BUmNXTWpjMk5DOEJOelkwSnlZaUR3RW5KaUlIQmhRWDR1TGlEUTBNSkF6aTRnd2tEQTBONHVJTkRRd2tET0xpRENRTURRMENqZUxpRFNNTURRM2g0UTBORENNTjR1SU1JdzBNRE9MaURBd05Jd3dBQUFBQkFBQUFBUUFBYTVuMHkxOFBQUFVBQ3dRQUFBQUFBTml2T1ZzQUFBQUEySzg1V3dBQUFBQURxd05WQUFBQUNBQUNBQUFBQUFBQUFBRUFBQVBBLzhBQUFBUUFBQUFBQUFPckFBRUFBQUFBQUFBQUFBQUFBQUFBQUFBTEJBQUFBQUFBQUFBQUFBQUFBZ0FBQUFRQUFXSUVBQUZpQkFBQTRnUUFBT0lFQUFCVkJBQUFWUVFBQU9JQUFBQUFBQW9BRkFBZUFFUUFhZ0NxQU9vQm5nSmtBcG9BQVFBQUFBc0FpZ0FEQUFBQUFBQUNBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQTRBcmdBQkFBQUFBQUFCQUFjQUFBQUJBQUFBQUFBQ0FBY0FZQUFCQUFBQUFBQURBQWNBTmdBQkFBQUFBQUFFQUFjQWRRQUJBQUFBQUFBRkFBc0FGUUFCQUFBQUFBQUdBQWNBU3dBQkFBQUFBQUFLQUJvQWlnQURBQUVFQ1FBQkFBNEFCd0FEQUFFRUNRQUNBQTRBWndBREFBRUVDUUFEQUE0QVBRQURBQUVFQ1FBRUFBNEFmQUFEQUFFRUNRQUZBQllBSUFBREFBRUVDUUFHQUE0QVVnQURBQUVFQ1FBS0FEUUFwR1pqYVdOdmJuTUFaZ0JqQUdrQVl3QnZBRzRBYzFabGNuTnBiMjRnTVM0d0FGWUFaUUJ5QUhNQWFRQnZBRzRBSUFBeEFDNEFNR1pqYVdOdmJuTUFaZ0JqQUdrQVl3QnZBRzRBYzJaamFXTnZibk1BWmdCakFHa0FZd0J2QUc0QWMxSmxaM1ZzWVhJQVVnQmxBR2NBZFFCc0FHRUFjbVpqYVdOdmJuTUFaZ0JqQUdrQVl3QnZBRzRBYzBadmJuUWdaMlZ1WlhKaGRHVmtJR0o1SUVsamIwMXZiMjR1QUVZQWJ3QnVBSFFBSUFCbkFHVUFiZ0JsQUhJQVlRQjBBR1VBWkFBZ0FHSUFlUUFnQUVrQVl3QnZBRTBBYndCdkFHNEFMZ0FBQUFNQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQT1cIikgZm9ybWF0KCd0cnVldHlwZScpO1xuICBmb250LXdlaWdodDogbm9ybWFsO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG59XG5cbi5mYy1pY29uIHtcbiAgLyogYWRkZWQgZm9yIGZjICovXG4gIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgd2lkdGg6IDFlbTtcbiAgaGVpZ2h0OiAxZW07XG4gIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgLXdlYmtpdC11c2VyLXNlbGVjdDogbm9uZTtcbiAgICAgLW1vei11c2VyLXNlbGVjdDogbm9uZTtcbiAgICAgIC1tcy11c2VyLXNlbGVjdDogbm9uZTtcbiAgICAgICAgICB1c2VyLXNlbGVjdDogbm9uZTtcblxuICAvKiB1c2UgIWltcG9ydGFudCB0byBwcmV2ZW50IGlzc3VlcyB3aXRoIGJyb3dzZXIgZXh0ZW5zaW9ucyB0aGF0IGNoYW5nZSBmb250cyAqL1xuICBmb250LWZhbWlseTogJ2ZjaWNvbnMnICFpbXBvcnRhbnQ7XG4gIHNwZWFrOiBub25lO1xuICBmb250LXN0eWxlOiBub3JtYWw7XG4gIGZvbnQtd2VpZ2h0OiBub3JtYWw7XG4gIGZvbnQtdmFyaWFudDogbm9ybWFsO1xuICB0ZXh0LXRyYW5zZm9ybTogbm9uZTtcbiAgbGluZS1oZWlnaHQ6IDE7XG5cbiAgLyogQmV0dGVyIEZvbnQgUmVuZGVyaW5nID09PT09PT09PT09ICovXG4gIC13ZWJraXQtZm9udC1zbW9vdGhpbmc6IGFudGlhbGlhc2VkO1xuICAtbW96LW9zeC1mb250LXNtb290aGluZzogZ3JheXNjYWxlO1xufVxuXG4uZmMtaWNvbi1jaGV2cm9uLWxlZnQ6YmVmb3JlIHtcbiAgY29udGVudDogXCJcXGU5MDBcIjtcbn1cblxuLmZjLWljb24tY2hldnJvbi1yaWdodDpiZWZvcmUge1xuICBjb250ZW50OiBcIlxcZTkwMVwiO1xufVxuXG4uZmMtaWNvbi1jaGV2cm9ucy1sZWZ0OmJlZm9yZSB7XG4gIGNvbnRlbnQ6IFwiXFxlOTAyXCI7XG59XG5cbi5mYy1pY29uLWNoZXZyb25zLXJpZ2h0OmJlZm9yZSB7XG4gIGNvbnRlbnQ6IFwiXFxlOTAzXCI7XG59XG5cbi5mYy1pY29uLW1pbnVzLXNxdWFyZTpiZWZvcmUge1xuICBjb250ZW50OiBcIlxcZTkwNFwiO1xufVxuXG4uZmMtaWNvbi1wbHVzLXNxdWFyZTpiZWZvcmUge1xuICBjb250ZW50OiBcIlxcZTkwNVwiO1xufVxuXG4uZmMtaWNvbi14OmJlZm9yZSB7XG4gIGNvbnRlbnQ6IFwiXFxlOTA2XCI7XG59XG4vKlxuTG90cyB0YWtlbiBmcm9tIEZsYXRseSAoTUlUKTogaHR0cHM6Ly9ib290c3dhdGNoLmNvbS80L2ZsYXRseS9ib290c3RyYXAuY3NzXG5cblRoZXNlIHN0eWxlcyBvbmx5IGFwcGx5IHdoZW4gdGhlIHN0YW5kYXJkLXRoZW1lIGlzIGFjdGl2YXRlZC5cbldoZW4gaXQncyBOT1QgYWN0aXZhdGVkLCB0aGUgZmMtYnV0dG9uIGNsYXNzZXMgd29uJ3QgZXZlbiBiZSBpbiB0aGUgRE9NLlxuKi9cbi5mYyB7XG5cbiAgLyogcmVzZXQgKi9cblxufVxuLmZjIC5mYy1idXR0b24ge1xuICAgIGJvcmRlci1yYWRpdXM6IDA7XG4gICAgb3ZlcmZsb3c6IHZpc2libGU7XG4gICAgdGV4dC10cmFuc2Zvcm06IG5vbmU7XG4gICAgbWFyZ2luOiAwO1xuICAgIGZvbnQtZmFtaWx5OiBpbmhlcml0O1xuICAgIGZvbnQtc2l6ZTogaW5oZXJpdDtcbiAgICBsaW5lLWhlaWdodDogaW5oZXJpdDtcbiAgfVxuLmZjIC5mYy1idXR0b246Zm9jdXMge1xuICAgIG91dGxpbmU6IDFweCBkb3R0ZWQ7XG4gICAgb3V0bGluZTogNXB4IGF1dG8gLXdlYmtpdC1mb2N1cy1yaW5nLWNvbG9yO1xuICB9XG4uZmMgLmZjLWJ1dHRvbiB7XG4gICAgLXdlYmtpdC1hcHBlYXJhbmNlOiBidXR0b247XG4gIH1cbi5mYyAuZmMtYnV0dG9uOm5vdCg6ZGlzYWJsZWQpIHtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gIH1cbi5mYyAuZmMtYnV0dG9uOjotbW96LWZvY3VzLWlubmVyIHtcbiAgICBwYWRkaW5nOiAwO1xuICAgIGJvcmRlci1zdHlsZTogbm9uZTtcbiAgfVxuLmZjIHtcblxuICAvKiB0aGVtZSAqL1xuXG59XG4uZmMgLmZjLWJ1dHRvbiB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICAgIGZvbnQtd2VpZ2h0OiA0MDA7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG4gICAgLXdlYmtpdC11c2VyLXNlbGVjdDogbm9uZTtcbiAgICAgICAtbW96LXVzZXItc2VsZWN0OiBub25lO1xuICAgICAgICAtbXMtdXNlci1zZWxlY3Q6IG5vbmU7XG4gICAgICAgICAgICB1c2VyLXNlbGVjdDogbm9uZTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB0cmFuc3BhcmVudDtcbiAgICBib3JkZXI6IDFweCBzb2xpZCB0cmFuc3BhcmVudDtcbiAgICBwYWRkaW5nOiAwLjRlbSAwLjY1ZW07XG4gICAgZm9udC1zaXplOiAxZW07XG4gICAgbGluZS1oZWlnaHQ6IDEuNTtcbiAgICBib3JkZXItcmFkaXVzOiAwLjI1ZW07XG4gIH1cbi5mYyAuZmMtYnV0dG9uOmhvdmVyIHtcbiAgICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XG4gIH1cbi5mYyAuZmMtYnV0dG9uOmZvY3VzIHtcbiAgICBvdXRsaW5lOiAwO1xuICAgIGJveC1zaGFkb3c6IDAgMCAwIDAuMnJlbSByZ2JhKDQ0LCA2MiwgODAsIDAuMjUpO1xuICB9XG4uZmMgLmZjLWJ1dHRvbjpkaXNhYmxlZCB7XG4gICAgb3BhY2l0eTogMC42NTtcbiAgfVxuLmZjIHtcblxuICAvKiBcInByaW1hcnlcIiBjb2xvcmluZyAqL1xuXG59XG4uZmMgLmZjLWJ1dHRvbi1wcmltYXJ5IHtcbiAgICBjb2xvcjogI2ZmZjtcbiAgICBjb2xvcjogdmFyKC0tZmMtYnV0dG9uLXRleHQtY29sb3IsICNmZmYpO1xuICAgIGJhY2tncm91bmQtY29sb3I6ICMyQzNFNTA7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZmMtYnV0dG9uLWJnLWNvbG9yLCAjMkMzRTUwKTtcbiAgICBib3JkZXItY29sb3I6ICMyQzNFNTA7XG4gICAgYm9yZGVyLWNvbG9yOiB2YXIoLS1mYy1idXR0b24tYm9yZGVyLWNvbG9yLCAjMkMzRTUwKTtcbiAgfVxuLmZjIC5mYy1idXR0b24tcHJpbWFyeTpob3ZlciB7XG4gICAgY29sb3I6ICNmZmY7XG4gICAgY29sb3I6IHZhcigtLWZjLWJ1dHRvbi10ZXh0LWNvbG9yLCAjZmZmKTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMWUyYjM3O1xuICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWZjLWJ1dHRvbi1ob3Zlci1iZy1jb2xvciwgIzFlMmIzNyk7XG4gICAgYm9yZGVyLWNvbG9yOiAjMWEyNTJmO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tZmMtYnV0dG9uLWhvdmVyLWJvcmRlci1jb2xvciwgIzFhMjUyZik7XG4gIH1cbi5mYyAuZmMtYnV0dG9uLXByaW1hcnk6ZGlzYWJsZWQgeyAvKiBub3QgRFJZICovXG4gICAgY29sb3I6ICNmZmY7XG4gICAgY29sb3I6IHZhcigtLWZjLWJ1dHRvbi10ZXh0LWNvbG9yLCAjZmZmKTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMkMzRTUwO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWZjLWJ1dHRvbi1iZy1jb2xvciwgIzJDM0U1MCk7XG4gICAgYm9yZGVyLWNvbG9yOiAjMkMzRTUwO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tZmMtYnV0dG9uLWJvcmRlci1jb2xvciwgIzJDM0U1MCk7IC8qIG92ZXJyaWRlcyA6aG92ZXIgKi9cbiAgfVxuLmZjIC5mYy1idXR0b24tcHJpbWFyeTpmb2N1cyB7XG4gICAgYm94LXNoYWRvdzogMCAwIDAgMC4ycmVtIHJnYmEoNzYsIDkxLCAxMDYsIDAuNSk7XG4gIH1cbi5mYyAuZmMtYnV0dG9uLXByaW1hcnk6bm90KDpkaXNhYmxlZCk6YWN0aXZlLFxuICAuZmMgLmZjLWJ1dHRvbi1wcmltYXJ5Om5vdCg6ZGlzYWJsZWQpLmZjLWJ1dHRvbi1hY3RpdmUge1xuICAgIGNvbG9yOiAjZmZmO1xuICAgIGNvbG9yOiB2YXIoLS1mYy1idXR0b24tdGV4dC1jb2xvciwgI2ZmZik7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzFhMjUyZjtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1mYy1idXR0b24tYWN0aXZlLWJnLWNvbG9yLCAjMWEyNTJmKTtcbiAgICBib3JkZXItY29sb3I6ICMxNTFlMjc7XG4gICAgYm9yZGVyLWNvbG9yOiB2YXIoLS1mYy1idXR0b24tYWN0aXZlLWJvcmRlci1jb2xvciwgIzE1MWUyNyk7XG4gIH1cbi5mYyAuZmMtYnV0dG9uLXByaW1hcnk6bm90KDpkaXNhYmxlZCk6YWN0aXZlOmZvY3VzLFxuICAuZmMgLmZjLWJ1dHRvbi1wcmltYXJ5Om5vdCg6ZGlzYWJsZWQpLmZjLWJ1dHRvbi1hY3RpdmU6Zm9jdXMge1xuICAgIGJveC1zaGFkb3c6IDAgMCAwIDAuMnJlbSByZ2JhKDc2LCA5MSwgMTA2LCAwLjUpO1xuICB9XG4uZmMge1xuXG4gIC8qIGljb25zIHdpdGhpbiBidXR0b25zICovXG5cbn1cbi5mYyAuZmMtYnV0dG9uIC5mYy1pY29uIHtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgIGZvbnQtc2l6ZTogMS41ZW07IC8qIGJ1bXAgdXAgdGhlIHNpemUgKGJ1dCBkb24ndCBtYWtlIGl0IGJpZ2dlciB0aGFuIGxpbmUtaGVpZ2h0IG9mIGJ1dHRvbiwgd2hpY2ggaXMgMS41ZW0gYWxzbykgKi9cbiAgfVxuLmZjIC5mYy1idXR0b24tZ3JvdXAge1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICBkaXNwbGF5OiBpbmxpbmUtZmxleDtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICB9XG4uZmMgLmZjLWJ1dHRvbi1ncm91cCA+IC5mYy1idXR0b24ge1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICBmbGV4OiAxIDEgYXV0bztcbiAgfVxuLmZjIC5mYy1idXR0b24tZ3JvdXAgPiAuZmMtYnV0dG9uOmhvdmVyIHtcbiAgICB6LWluZGV4OiAxO1xuICB9XG4uZmMgLmZjLWJ1dHRvbi1ncm91cCA+IC5mYy1idXR0b246Zm9jdXMsXG4gIC5mYyAuZmMtYnV0dG9uLWdyb3VwID4gLmZjLWJ1dHRvbjphY3RpdmUsXG4gIC5mYyAuZmMtYnV0dG9uLWdyb3VwID4gLmZjLWJ1dHRvbi5mYy1idXR0b24tYWN0aXZlIHtcbiAgICB6LWluZGV4OiAxO1xuICB9XG4uZmMtZGlyZWN0aW9uLWx0ciAuZmMtYnV0dG9uLWdyb3VwID4gLmZjLWJ1dHRvbjpub3QoOmZpcnN0LWNoaWxkKSB7XG4gICAgbWFyZ2luLWxlZnQ6IC0xcHg7XG4gICAgYm9yZGVyLXRvcC1sZWZ0LXJhZGl1czogMDtcbiAgICBib3JkZXItYm90dG9tLWxlZnQtcmFkaXVzOiAwO1xuICB9XG4uZmMtZGlyZWN0aW9uLWx0ciAuZmMtYnV0dG9uLWdyb3VwID4gLmZjLWJ1dHRvbjpub3QoOmxhc3QtY2hpbGQpIHtcbiAgICBib3JkZXItdG9wLXJpZ2h0LXJhZGl1czogMDtcbiAgICBib3JkZXItYm90dG9tLXJpZ2h0LXJhZGl1czogMDtcbiAgfVxuLmZjLWRpcmVjdGlvbi1ydGwgLmZjLWJ1dHRvbi1ncm91cCA+IC5mYy1idXR0b246bm90KDpmaXJzdC1jaGlsZCkge1xuICAgIG1hcmdpbi1yaWdodDogLTFweDtcbiAgICBib3JkZXItdG9wLXJpZ2h0LXJhZGl1czogMDtcbiAgICBib3JkZXItYm90dG9tLXJpZ2h0LXJhZGl1czogMDtcbiAgfVxuLmZjLWRpcmVjdGlvbi1ydGwgLmZjLWJ1dHRvbi1ncm91cCA+IC5mYy1idXR0b246bm90KDpsYXN0LWNoaWxkKSB7XG4gICAgYm9yZGVyLXRvcC1sZWZ0LXJhZGl1czogMDtcbiAgICBib3JkZXItYm90dG9tLWxlZnQtcmFkaXVzOiAwO1xuICB9XG4uZmMgLmZjLXRvb2xiYXIge1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gIH1cbi5mYyAuZmMtdG9vbGJhci5mYy1oZWFkZXItdG9vbGJhciB7XG4gICAgbWFyZ2luLWJvdHRvbTogMS41ZW07XG4gIH1cbi5mYyAuZmMtdG9vbGJhci5mYy1mb290ZXItdG9vbGJhciB7XG4gICAgbWFyZ2luLXRvcDogMS41ZW07XG4gIH1cbi5mYyAuZmMtdG9vbGJhci10aXRsZSB7XG4gICAgZm9udC1zaXplOiAxLjc1ZW07XG4gICAgbWFyZ2luOiAwO1xuICB9XG4uZmMtZGlyZWN0aW9uLWx0ciAuZmMtdG9vbGJhciA+ICogPiA6bm90KDpmaXJzdC1jaGlsZCkge1xuICAgIG1hcmdpbi1sZWZ0OiAuNzVlbTsgLyogc3BhY2UgYmV0d2VlbiAqL1xuICB9XG4uZmMtZGlyZWN0aW9uLXJ0bCAuZmMtdG9vbGJhciA+ICogPiA6bm90KDpmaXJzdC1jaGlsZCkge1xuICAgIG1hcmdpbi1yaWdodDogLjc1ZW07IC8qIHNwYWNlIGJldHdlZW4gKi9cbiAgfVxuLmZjLWRpcmVjdGlvbi1ydGwgLmZjLXRvb2xiYXItbHRyIHsgLyogd2hlbiB0aGUgdG9vbGJhci1jaHVuayBwb3NpdGlvbmluZyBzeXN0ZW0gaXMgZXhwbGljaXRseSBsZWZ0LXRvLXJpZ2h0ICovXG4gICAgZmxleC1kaXJlY3Rpb246IHJvdy1yZXZlcnNlO1xuICB9XG4uZmMgLmZjLXNjcm9sbGVyIHtcbiAgICAtd2Via2l0LW92ZXJmbG93LXNjcm9sbGluZzogdG91Y2g7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlOyAvKiBmb3IgYWJzLXBvc2l0aW9uZWQgZWxlbWVudHMgd2l0aGluICovXG4gIH1cbi5mYyAuZmMtc2Nyb2xsZXItbGlxdWlkIHtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gIH1cbi5mYyAuZmMtc2Nyb2xsZXItbGlxdWlkLWFic29sdXRlIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAwO1xuICAgIHJpZ2h0OiAwO1xuICAgIGxlZnQ6IDA7XG4gICAgYm90dG9tOiAwO1xuICB9XG4uZmMgLmZjLXNjcm9sbGVyLWhhcm5lc3Mge1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICBvdmVyZmxvdzogaGlkZGVuO1xuICAgIGRpcmVjdGlvbjogbHRyO1xuICAgICAgLyogaGFjayBmb3IgY2hyb21lIGNvbXB1dGluZyB0aGUgc2Nyb2xsZXIncyByaWdodC9sZWZ0IHdyb25nIGZvciBydGwuIHVuZG9uZSBiZWxvdy4uLiAqL1xuICAgICAgLyogVE9ETzogZGVtb25zdHJhdGUgaW4gY29kZXBlbiAqL1xuICB9XG4uZmMgLmZjLXNjcm9sbGVyLWhhcm5lc3MtbGlxdWlkIHtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gIH1cbi5mYy1kaXJlY3Rpb24tcnRsIC5mYy1zY3JvbGxlci1oYXJuZXNzID4gLmZjLXNjcm9sbGVyIHsgLyogdW5kbyBhYm92ZSBoYWNrICovXG4gICAgZGlyZWN0aW9uOiBydGw7XG4gIH1cbi5mYy10aGVtZS1zdGFuZGFyZCAuZmMtc2Nyb2xsZ3JpZCB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgI2RkZDtcbiAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1mYy1ib3JkZXItY29sb3IsICNkZGQpOyAvKiBib290c3RyYXAgZG9lcyB0aGlzLiBtYXRjaCAqL1xuICB9XG4uZmMgLmZjLXNjcm9sbGdyaWQsXG4gICAgLmZjIC5mYy1zY3JvbGxncmlkIHRhYmxlIHsgLyogYWxsIHRhYmxlcyAoc2VsZiBpbmNsdWRlZCkgKi9cbiAgICAgIHdpZHRoOiAxMDAlOyAvKiBiZWNhdXNlIHRhYmxlcyBkb24ndCBub3JtYWxseSBkbyB0aGlzICovXG4gICAgICB0YWJsZS1sYXlvdXQ6IGZpeGVkO1xuICAgIH1cbi5mYyAuZmMtc2Nyb2xsZ3JpZCB0YWJsZSB7IC8qIGlubmVyIHRhYmxlcyAqL1xuICAgICAgYm9yZGVyLXRvcC1zdHlsZTogaGlkZGVuO1xuICAgICAgYm9yZGVyLWxlZnQtc3R5bGU6IGhpZGRlbjtcbiAgICAgIGJvcmRlci1yaWdodC1zdHlsZTogaGlkZGVuO1xuICAgIH1cbi5mYyAuZmMtc2Nyb2xsZ3JpZCB7XG5cbiAgICBib3JkZXItY29sbGFwc2U6IHNlcGFyYXRlO1xuICAgIGJvcmRlci1yaWdodC13aWR0aDogMDtcbiAgICBib3JkZXItYm90dG9tLXdpZHRoOiAwO1xuXG4gIH1cbi5mYyAuZmMtc2Nyb2xsZ3JpZC1saXF1aWQge1xuICAgIGhlaWdodDogMTAwJTtcbiAgfVxuLmZjIC5mYy1zY3JvbGxncmlkLXNlY3Rpb24geyAvKiBhIDx0cj4gKi9cbiAgICBoZWlnaHQ6IDFweCAvKiBiZXR0ZXIgdGhhbiAwLCBmb3IgZmlyZWZveCAqL1xuXG4gIH1cbi5mYyAuZmMtc2Nyb2xsZ3JpZC1zZWN0aW9uID4gdGQge1xuICAgICAgaGVpZ2h0OiAxcHg7IC8qIG5lZWRzIGEgaGVpZ2h0IHNvIGlubmVyIGRpdiB3aXRoaW4gZ3Jvdy4gYmV0dGVyIHRoYW4gMCwgZm9yIGZpcmVmb3ggKi9cbiAgICB9XG4uZmMgLmZjLXNjcm9sbGdyaWQtc2VjdGlvbiB0YWJsZSB7XG4gICAgICBoZWlnaHQ6IDFweDtcbiAgICAgICAgLyogZm9yIG1vc3QgYnJvd3NlcnMsIGlmIGEgaGVpZ2h0IGlzbid0IHNldCBvbiB0aGUgdGFibGUsIGNhbid0IGRvIGxpcXVpZC1oZWlnaHQgd2l0aGluIGNlbGxzICovXG4gICAgICAgIC8qIHNlcnZlcyBhcyBhIG1pbi1oZWlnaHQuIGhhcm1sZXNzICovXG4gICAgfVxuLmZjIC5mYy1zY3JvbGxncmlkLXNlY3Rpb24tbGlxdWlkIHtcbiAgICBoZWlnaHQ6IGF1dG9cblxuICB9XG4uZmMgLmZjLXNjcm9sbGdyaWQtc2VjdGlvbi1saXF1aWQgPiB0ZCB7XG4gICAgICBoZWlnaHQ6IDEwMCU7IC8qIGJldHRlciB0aGFuIGBhdXRvYCwgZm9yIGZpcmVmb3ggKi9cbiAgICB9XG4uZmMgLmZjLXNjcm9sbGdyaWQtc2VjdGlvbiA+ICoge1xuICAgIGJvcmRlci10b3Atd2lkdGg6IDA7XG4gICAgYm9yZGVyLWxlZnQtd2lkdGg6IDA7XG4gIH1cbi5mYyAuZmMtc2Nyb2xsZ3JpZC1zZWN0aW9uLWhlYWRlciA+ICosXG4gIC5mYyAuZmMtc2Nyb2xsZ3JpZC1zZWN0aW9uLWZvb3RlciA+ICoge1xuICAgIGJvcmRlci1ib3R0b20td2lkdGg6IDA7XG4gIH1cbi5mYyAuZmMtc2Nyb2xsZ3JpZC1zZWN0aW9uLWJvZHkgdGFibGUsXG4gIC5mYyAuZmMtc2Nyb2xsZ3JpZC1zZWN0aW9uLWZvb3RlciB0YWJsZSB7XG4gICAgYm9yZGVyLWJvdHRvbS1zdHlsZTogaGlkZGVuOyAvKiBoZWFkIGtlZXBzIGl0cyBib3R0b20gYm9yZGVyIHRobyAqL1xuICB9XG4uZmMge1xuXG4gIC8qIHN0aWNraW5lc3MgKi9cblxufVxuLmZjIC5mYy1zY3JvbGxncmlkLXNlY3Rpb24tc3RpY2t5ID4gKiB7XG4gICAgYmFja2dyb3VuZDogI2ZmZjtcbiAgICBiYWNrZ3JvdW5kOiB2YXIoLS1mYy1wYWdlLWJnLWNvbG9yLCAjZmZmKTtcbiAgICBwb3NpdGlvbjogLXdlYmtpdC1zdGlja3k7XG4gICAgcG9zaXRpb246IHN0aWNreTtcbiAgICB6LWluZGV4OiAyOyAvKiBUT0RPOiB2YXIgKi9cbiAgICAvKiBUT0RPOiBib3gtc2hhZG93IHdoZW4gc3RpY2tpbmcgKi9cbiAgfVxuLmZjIC5mYy1zY3JvbGxncmlkLXNlY3Rpb24taGVhZGVyLmZjLXNjcm9sbGdyaWQtc2VjdGlvbi1zdGlja3kgPiAqIHtcbiAgICB0b3A6IDA7IC8qIGJlY2F1c2UgYm9yZGVyLXNoYXJpbmcgY2F1c2VzIGEgZ2FwIGF0IHRoZSB0b3AgKi9cbiAgICAgIC8qIFRPRE86IGdpdmUgc2FmYXJpIC0xLiBoYXMgYnVnICovXG4gIH1cbi5mYyAuZmMtc2Nyb2xsZ3JpZC1zZWN0aW9uLWZvb3Rlci5mYy1zY3JvbGxncmlkLXNlY3Rpb24tc3RpY2t5ID4gKiB7XG4gICAgYm90dG9tOiAwOyAvKiBrbm93biBidWc6IGJvdHRvbS1zdGlja2luZXNzIGRvZXNuJ3Qgd29yayBpbiBzYWZhcmkgKi9cbiAgfVxuLmZjIC5mYy1zY3JvbGxncmlkLXN0aWNreS1zaGltIHsgLyogZm9yIGhvcml6b250YWwgc2Nyb2xsYmFyICovXG4gICAgaGVpZ2h0OiAxcHg7IC8qIG5lZWRzIGhlaWdodCB0byBjcmVhdGUgc2Nyb2xsYmFycyAqL1xuICAgIG1hcmdpbi1ib3R0b206IC0xcHg7XG4gIH1cbi5mYy1zdGlja3kgeyAvKiBubyAuZmMgd3JhcCBiZWNhdXNlIHVzZWQgYXMgY2hpbGQgb2YgYm9keSAqL1xuICBwb3NpdGlvbjogLXdlYmtpdC1zdGlja3k7XG4gIHBvc2l0aW9uOiBzdGlja3k7XG59XG4uZmMgLmZjLXZpZXctaGFybmVzcyB7XG4gICAgZmxleC1ncm93OiAxOyAvKiBiZWNhdXNlIHRoaXMgaGFybmVzcyBpcyBXSVRISU4gdGhlIC5mYydzIGZsZXhib3ggKi9cbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIH1cbi5mYyB7XG5cbiAgLyogd2hlbiB0aGUgaGFybmVzcyBjb250cm9scyB0aGUgaGVpZ2h0LCBtYWtlIHRoZSB2aWV3IGxpcXVpZCAqL1xuXG59XG4uZmMgLmZjLXZpZXctaGFybmVzcy1hY3RpdmUgPiAuZmMtdmlldyB7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDogMDtcbiAgICByaWdodDogMDtcbiAgICBib3R0b206IDA7XG4gICAgbGVmdDogMDtcbiAgfVxuLmZjIC5mYy1jb2wtaGVhZGVyLWNlbGwtY3VzaGlvbiB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrOyAvKiB4LWJyb3dzZXIgZm9yIHdoZW4gc3RpY2t5ICh3aGVuIG11bHRpLXRpZXIgaGVhZGVyKSAqL1xuICAgIHBhZGRpbmc6IDJweCA0cHg7XG4gIH1cbi5mYyAuZmMtYmctZXZlbnQsXG4gIC5mYyAuZmMtbm9uLWJ1c2luZXNzLFxuICAuZmMgLmZjLWhpZ2hsaWdodCB7XG4gICAgLyogd2lsbCBhbHdheXMgaGF2ZSBhIGhhcm5lc3Mgd2l0aCBwb3NpdGlvbjpyZWxhdGl2ZS9hYnNvbHV0ZSwgc28gYWJzb2x1dGVseSBleHBhbmQgKi9cbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAwO1xuICAgIGxlZnQ6IDA7XG4gICAgcmlnaHQ6IDA7XG4gICAgYm90dG9tOiAwO1xuICB9XG4uZmMgLmZjLW5vbi1idXNpbmVzcyB7XG4gICAgYmFja2dyb3VuZDogcmdiYSgyMTUsIDIxNSwgMjE1LCAwLjMpO1xuICAgIGJhY2tncm91bmQ6IHZhcigtLWZjLW5vbi1idXNpbmVzcy1jb2xvciwgcmdiYSgyMTUsIDIxNSwgMjE1LCAwLjMpKTtcbiAgfVxuLmZjIC5mYy1iZy1ldmVudCB7XG4gICAgYmFja2dyb3VuZDogcmdiKDE0MywgMjIzLCAxMzApO1xuICAgIGJhY2tncm91bmQ6IHZhcigtLWZjLWJnLWV2ZW50LWNvbG9yLCByZ2IoMTQzLCAyMjMsIDEzMCkpO1xuICAgIG9wYWNpdHk6IDAuMztcbiAgICBvcGFjaXR5OiB2YXIoLS1mYy1iZy1ldmVudC1vcGFjaXR5LCAwLjMpXG4gIH1cbi5mYyAuZmMtYmctZXZlbnQgLmZjLWV2ZW50LXRpdGxlIHtcbiAgICAgIG1hcmdpbjogLjVlbTtcbiAgICAgIGZvbnQtc2l6ZTogLjg1ZW07XG4gICAgICBmb250LXNpemU6IHZhcigtLWZjLXNtYWxsLWZvbnQtc2l6ZSwgLjg1ZW0pO1xuICAgICAgZm9udC1zdHlsZTogaXRhbGljO1xuICAgIH1cbi5mYyAuZmMtaGlnaGxpZ2h0IHtcbiAgICBiYWNrZ3JvdW5kOiByZ2JhKDE4OCwgMjMyLCAyNDEsIDAuMyk7XG4gICAgYmFja2dyb3VuZDogdmFyKC0tZmMtaGlnaGxpZ2h0LWNvbG9yLCByZ2JhKDE4OCwgMjMyLCAyNDEsIDAuMykpO1xuICB9XG4uZmMgLmZjLWNlbGwtc2hhZGVkLFxuICAuZmMgLmZjLWRheS1kaXNhYmxlZCB7XG4gICAgYmFja2dyb3VuZDogcmdiYSgyMDgsIDIwOCwgMjA4LCAwLjMpO1xuICAgIGJhY2tncm91bmQ6IHZhcigtLWZjLW5ldXRyYWwtYmctY29sb3IsIHJnYmEoMjA4LCAyMDgsIDIwOCwgMC4zKSk7XG4gIH1cbi8qIGxpbmsgcmVzZXRzICovXG4vKiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tICovXG5hLmZjLWV2ZW50LFxuYS5mYy1ldmVudDpob3ZlciB7XG4gIHRleHQtZGVjb3JhdGlvbjogbm9uZTtcbn1cbi8qIGN1cnNvciAqL1xuLmZjLWV2ZW50W2hyZWZdLFxuLmZjLWV2ZW50LmZjLWV2ZW50LWRyYWdnYWJsZSB7XG4gIGN1cnNvcjogcG9pbnRlcjtcbn1cbi8qIGV2ZW50IHRleHQgY29udGVudCAqL1xuLyogLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSAqL1xuLmZjLWV2ZW50IC5mYy1ldmVudC1tYWluIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgei1pbmRleDogMjtcbiAgfVxuLyogZHJhZ2dpbmcgKi9cbi8qIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gKi9cbi5mYy1ldmVudC1kcmFnZ2luZzpub3QoLmZjLWV2ZW50LXNlbGVjdGVkKSB7IC8qIE1PVVNFICovXG4gICAgb3BhY2l0eTogMC43NTtcbiAgfVxuLmZjLWV2ZW50LWRyYWdnaW5nLmZjLWV2ZW50LXNlbGVjdGVkIHsgLyogVE9VQ0ggKi9cbiAgICBib3gtc2hhZG93OiAwIDJweCA3cHggcmdiYSgwLCAwLCAwLCAwLjMpO1xuICB9XG4vKiByZXNpemluZyAqL1xuLyogLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSAqL1xuLyogKHN1YmNsYXNzZXMgc2hvdWxkIGhvbmUgcG9zaXRpb25pbmcgZm9yIHRvdWNoIGFuZCBub24tdG91Y2gpICovXG4uZmMtZXZlbnQgLmZjLWV2ZW50LXJlc2l6ZXIge1xuICAgIGRpc3BsYXk6IG5vbmU7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHotaW5kZXg6IDQ7XG4gIH1cbi5mYy1ldmVudDpob3ZlciwgLyogTU9VU0UgKi9cbi5mYy1ldmVudC1zZWxlY3RlZCB7IC8qIFRPVUNIICovXG5cbn1cbi5mYy1ldmVudDpob3ZlciAuZmMtZXZlbnQtcmVzaXplciwgLmZjLWV2ZW50LXNlbGVjdGVkIC5mYy1ldmVudC1yZXNpemVyIHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgfVxuLmZjLWV2ZW50LXNlbGVjdGVkIC5mYy1ldmVudC1yZXNpemVyIHtcbiAgICBib3JkZXItcmFkaXVzOiA0cHg7XG4gICAgYm9yZGVyLXJhZGl1czogY2FsYyh2YXIoLS1mYy1ldmVudC1yZXNpemVyLWRvdC10b3RhbC13aWR0aCwgOHB4KSAvIDIpO1xuICAgIGJvcmRlci13aWR0aDogMXB4O1xuICAgIGJvcmRlci13aWR0aDogdmFyKC0tZmMtZXZlbnQtcmVzaXplci1kb3QtYm9yZGVyLXdpZHRoLCAxcHgpO1xuICAgIHdpZHRoOiA4cHg7XG4gICAgd2lkdGg6IHZhcigtLWZjLWV2ZW50LXJlc2l6ZXItZG90LXRvdGFsLXdpZHRoLCA4cHgpO1xuICAgIGhlaWdodDogOHB4O1xuICAgIGhlaWdodDogdmFyKC0tZmMtZXZlbnQtcmVzaXplci1kb3QtdG90YWwtd2lkdGgsIDhweCk7XG4gICAgYm9yZGVyLXN0eWxlOiBzb2xpZDtcbiAgICBib3JkZXItY29sb3I6IGluaGVyaXQ7XG4gICAgYmFja2dyb3VuZDogI2ZmZjtcbiAgICBiYWNrZ3JvdW5kOiB2YXIoLS1mYy1wYWdlLWJnLWNvbG9yLCAjZmZmKVxuXG4gICAgLyogZXhwYW5kIGhpdCBhcmVhICovXG5cbiAgfVxuLmZjLWV2ZW50LXNlbGVjdGVkIC5mYy1ldmVudC1yZXNpemVyOmJlZm9yZSB7XG4gICAgICBjb250ZW50OiAnJztcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIHRvcDogLTIwcHg7XG4gICAgICBsZWZ0OiAtMjBweDtcbiAgICAgIHJpZ2h0OiAtMjBweDtcbiAgICAgIGJvdHRvbTogLTIwcHg7XG4gICAgfVxuLyogc2VsZWN0aW5nIChhbHdheXMgVE9VQ0gpICovXG4vKiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tICovXG4uZmMtZXZlbnQtc2VsZWN0ZWQge1xuICBib3gtc2hhZG93OiAwIDJweCA1cHggcmdiYSgwLCAwLCAwLCAwLjIpXG5cbiAgLyogZXhwYW5kIGhpdCBhcmVhIChzdWJjbGFzc2VzIHNob3VsZCBleHBhbmQpICovXG5cbn1cbi5mYy1ldmVudC1zZWxlY3RlZDpiZWZvcmUge1xuICAgIGNvbnRlbnQ6IFwiXCI7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHotaW5kZXg6IDM7XG4gICAgdG9wOiAwO1xuICAgIGxlZnQ6IDA7XG4gICAgcmlnaHQ6IDA7XG4gICAgYm90dG9tOiAwO1xuICB9XG4uZmMtZXZlbnQtc2VsZWN0ZWQge1xuXG4gIC8qIGRpbW1lciBlZmZlY3QgKi9cblxufVxuLmZjLWV2ZW50LXNlbGVjdGVkOmFmdGVyIHtcbiAgICBjb250ZW50OiBcIlwiO1xuICAgIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC4yNSk7XG4gICAgYmFja2dyb3VuZDogdmFyKC0tZmMtZXZlbnQtc2VsZWN0ZWQtb3ZlcmxheS1jb2xvciwgcmdiYSgwLCAwLCAwLCAwLjI1KSk7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHotaW5kZXg6IDE7XG5cbiAgICAvKiBhc3N1bWUgdGhlcmUncyBhIGJvcmRlciBvbiBhbGwgc2lkZXMuIG92ZXJjb21lIGl0LiAqL1xuICAgIC8qIHNvbWV0aW1lcyB0aGVyZSdzIE5PVCBhIGJvcmRlciwgaW4gd2hpY2ggY2FzZSB0aGUgZGltbWVyIHdpbGwgZ28gb3ZlciAqL1xuICAgIC8qIGFuIGFkamFjZW50IGJvcmRlciwgd2hpY2ggbG9va3MgZmluZS4gKi9cbiAgICB0b3A6IC0xcHg7XG4gICAgbGVmdDogLTFweDtcbiAgICByaWdodDogLTFweDtcbiAgICBib3R0b206IC0xcHg7XG4gIH1cbi8qXG5BIEhPUklaT05UQUwgZXZlbnRcbiovXG4uZmMtaC1ldmVudCB7IC8qIGFsbG93ZWQgdG8gYmUgdG9wLWxldmVsICovXG4gIGRpc3BsYXk6IGJsb2NrO1xuICBib3JkZXI6IDFweCBzb2xpZCAjMzc4OGQ4O1xuICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1mYy1ldmVudC1ib3JkZXItY29sb3IsICMzNzg4ZDgpO1xuICBiYWNrZ3JvdW5kLWNvbG9yOiAjMzc4OGQ4O1xuICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1mYy1ldmVudC1iZy1jb2xvciwgIzM3ODhkOClcblxufVxuLmZjLWgtZXZlbnQgLmZjLWV2ZW50LW1haW4ge1xuICAgIGNvbG9yOiAjZmZmO1xuICAgIGNvbG9yOiB2YXIoLS1mYy1ldmVudC10ZXh0LWNvbG9yLCAjZmZmKTtcbiAgfVxuLmZjLWgtZXZlbnQgLmZjLWV2ZW50LW1haW4tZnJhbWUge1xuICAgIGRpc3BsYXk6IGZsZXg7IC8qIGZvciBtYWtlIGZjLWV2ZW50LXRpdGxlLWNvbnRhaW5lciBleHBhbmQgKi9cbiAgfVxuLmZjLWgtZXZlbnQgLmZjLWV2ZW50LXRpbWUge1xuICAgIG1heC13aWR0aDogMTAwJTsgLyogY2xpcCBvdmVyZmxvdyBvbiB0aGlzIGVsZW1lbnQgKi9cbiAgICBvdmVyZmxvdzogaGlkZGVuO1xuICB9XG4uZmMtaC1ldmVudCAuZmMtZXZlbnQtdGl0bGUtY29udGFpbmVyIHsgLyogc2VydmVzIGFzIGEgY29udGFpbmVyIGZvciB0aGUgc3RpY2t5IGN1c2hpb24gKi9cbiAgICBmbGV4LWdyb3c6IDE7XG4gICAgZmxleC1zaHJpbms6IDE7XG4gICAgbWluLXdpZHRoOiAwOyAvKiBpbXBvcnRhbnQgZm9yIGFsbG93aW5nIHRvIHNocmluayBhbGwgdGhlIHdheSAqL1xuICB9XG4uZmMtaC1ldmVudCAuZmMtZXZlbnQtdGl0bGUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jazsgLyogbmVlZCB0aGlzIHRvIGJlIHN0aWNreSBjcm9zcy1icm93c2VyICovXG4gICAgdmVydGljYWwtYWxpZ246IHRvcDsgLyogZm9yIG5vdCBtZXNzaW5nIHVwIGxpbmUtaGVpZ2h0ICovXG4gICAgbGVmdDogMDsgIC8qIGZvciBzdGlja3kgKi9cbiAgICByaWdodDogMDsgLyogZm9yIHN0aWNreSAqL1xuICAgIG1heC13aWR0aDogMTAwJTsgLyogY2xpcCBvdmVyZmxvdyBvbiB0aGlzIGVsZW1lbnQgKi9cbiAgICBvdmVyZmxvdzogaGlkZGVuO1xuICB9XG4uZmMtaC1ldmVudC5mYy1ldmVudC1zZWxlY3RlZDpiZWZvcmUge1xuICAgIC8qIGV4cGFuZCBoaXQgYXJlYSAqL1xuICAgIHRvcDogLTEwcHg7XG4gICAgYm90dG9tOiAtMTBweDtcbiAgfVxuLyogYWRqdXN0IGJvcmRlciBhbmQgYm9yZGVyLXJhZGl1cyAoaWYgdGhlcmUgaXMgYW55KSBmb3Igbm9uLXN0YXJ0L2VuZCAqL1xuLmZjLWRpcmVjdGlvbi1sdHIgLmZjLWRheWdyaWQtYmxvY2stZXZlbnQ6bm90KC5mYy1ldmVudC1zdGFydCksXG4uZmMtZGlyZWN0aW9uLXJ0bCAuZmMtZGF5Z3JpZC1ibG9jay1ldmVudDpub3QoLmZjLWV2ZW50LWVuZCkge1xuICBib3JkZXItdG9wLWxlZnQtcmFkaXVzOiAwO1xuICBib3JkZXItYm90dG9tLWxlZnQtcmFkaXVzOiAwO1xuICBib3JkZXItbGVmdC13aWR0aDogMDtcbn1cbi5mYy1kaXJlY3Rpb24tbHRyIC5mYy1kYXlncmlkLWJsb2NrLWV2ZW50Om5vdCguZmMtZXZlbnQtZW5kKSxcbi5mYy1kaXJlY3Rpb24tcnRsIC5mYy1kYXlncmlkLWJsb2NrLWV2ZW50Om5vdCguZmMtZXZlbnQtc3RhcnQpIHtcbiAgYm9yZGVyLXRvcC1yaWdodC1yYWRpdXM6IDA7XG4gIGJvcmRlci1ib3R0b20tcmlnaHQtcmFkaXVzOiAwO1xuICBib3JkZXItcmlnaHQtd2lkdGg6IDA7XG59XG4vKiByZXNpemVycyAqL1xuLmZjLWgtZXZlbnQ6bm90KC5mYy1ldmVudC1zZWxlY3RlZCkgLmZjLWV2ZW50LXJlc2l6ZXIge1xuICB0b3A6IDA7XG4gIGJvdHRvbTogMDtcbiAgd2lkdGg6IDhweDtcbiAgd2lkdGg6IHZhcigtLWZjLWV2ZW50LXJlc2l6ZXItdGhpY2tuZXNzLCA4cHgpO1xufVxuLmZjLWRpcmVjdGlvbi1sdHIgLmZjLWgtZXZlbnQ6bm90KC5mYy1ldmVudC1zZWxlY3RlZCkgLmZjLWV2ZW50LXJlc2l6ZXItc3RhcnQsXG4uZmMtZGlyZWN0aW9uLXJ0bCAuZmMtaC1ldmVudDpub3QoLmZjLWV2ZW50LXNlbGVjdGVkKSAuZmMtZXZlbnQtcmVzaXplci1lbmQge1xuICBjdXJzb3I6IHctcmVzaXplO1xuICBsZWZ0OiAtNHB4O1xuICBsZWZ0OiBjYWxjKHZhcigtLWZjLWV2ZW50LXJlc2l6ZXItdGhpY2tuZXNzLCA4cHgpIC8gLTIpO1xufVxuLmZjLWRpcmVjdGlvbi1sdHIgLmZjLWgtZXZlbnQ6bm90KC5mYy1ldmVudC1zZWxlY3RlZCkgLmZjLWV2ZW50LXJlc2l6ZXItZW5kLFxuLmZjLWRpcmVjdGlvbi1ydGwgLmZjLWgtZXZlbnQ6bm90KC5mYy1ldmVudC1zZWxlY3RlZCkgLmZjLWV2ZW50LXJlc2l6ZXItc3RhcnQge1xuICBjdXJzb3I6IGUtcmVzaXplO1xuICByaWdodDogLTRweDtcbiAgcmlnaHQ6IGNhbGModmFyKC0tZmMtZXZlbnQtcmVzaXplci10aGlja25lc3MsIDhweCkgLyAtMik7XG59XG4vKiByZXNpemVycyBmb3IgVE9VQ0ggKi9cbi5mYy1oLWV2ZW50LmZjLWV2ZW50LXNlbGVjdGVkIC5mYy1ldmVudC1yZXNpemVyIHtcbiAgdG9wOiA1MCU7XG4gIG1hcmdpbi10b3A6IC00cHg7XG4gIG1hcmdpbi10b3A6IGNhbGModmFyKC0tZmMtZXZlbnQtcmVzaXplci1kb3QtdG90YWwtd2lkdGgsIDhweCkgLyAtMik7XG59XG4uZmMtZGlyZWN0aW9uLWx0ciAuZmMtaC1ldmVudC5mYy1ldmVudC1zZWxlY3RlZCAuZmMtZXZlbnQtcmVzaXplci1zdGFydCxcbi5mYy1kaXJlY3Rpb24tcnRsIC5mYy1oLWV2ZW50LmZjLWV2ZW50LXNlbGVjdGVkIC5mYy1ldmVudC1yZXNpemVyLWVuZCB7XG4gIGxlZnQ6IC00cHg7XG4gIGxlZnQ6IGNhbGModmFyKC0tZmMtZXZlbnQtcmVzaXplci1kb3QtdG90YWwtd2lkdGgsIDhweCkgLyAtMik7XG59XG4uZmMtZGlyZWN0aW9uLWx0ciAuZmMtaC1ldmVudC5mYy1ldmVudC1zZWxlY3RlZCAuZmMtZXZlbnQtcmVzaXplci1lbmQsXG4uZmMtZGlyZWN0aW9uLXJ0bCAuZmMtaC1ldmVudC5mYy1ldmVudC1zZWxlY3RlZCAuZmMtZXZlbnQtcmVzaXplci1zdGFydCB7XG4gIHJpZ2h0OiAtNHB4O1xuICByaWdodDogY2FsYyh2YXIoLS1mYy1ldmVudC1yZXNpemVyLWRvdC10b3RhbC13aWR0aCwgOHB4KSAvIC0yKTtcbn1cbiJdfQ== */");
+/* harmony default export */ __webpack_exports__["default"] = ("\n/* classes attached to <body> */\n/* TODO: make fc-event selector work when calender in shadow DOM */\n.fc-not-allowed,\n.fc-not-allowed .fc-event { /* override events' custom cursors */\n  cursor: not-allowed;\n}\n/* TODO: not attached to body. attached to specific els. move */\n.fc-unselectable {\n  -webkit-user-select: none;\n     -moz-user-select: none;\n          user-select: none;\n  -webkit-touch-callout: none;\n  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);\n}\n.fc {\n  /* layout of immediate children */\n  display: flex;\n  flex-direction: column;\n\n  font-size: 1em\n}\n.fc,\n  .fc *,\n  .fc *:before,\n  .fc *:after {\n    box-sizing: border-box;\n  }\n.fc table {\n    border-collapse: collapse;\n    border-spacing: 0;\n    font-size: 1em; /* normalize cross-browser */\n  }\n.fc th {\n    text-align: center;\n  }\n.fc th,\n  .fc td {\n    vertical-align: top;\n    padding: 0;\n  }\n.fc a[data-navlink] {\n    cursor: pointer;\n  }\n.fc a[data-navlink]:hover {\n    text-decoration: underline;\n  }\n.fc-direction-ltr {\n  direction: ltr;\n  text-align: left;\n}\n.fc-direction-rtl {\n  direction: rtl;\n  text-align: right;\n}\n.fc-theme-standard td,\n  .fc-theme-standard th {\n    border: 1px solid #ddd;\n    border: 1px solid var(--fc-border-color, #ddd);\n  }\n/* for FF, which doesn't expand a 100% div within a table cell. use absolute positioning */\n/* inner-wrappers are responsible for being absolute */\n/* TODO: best place for this? */\n.fc-liquid-hack td,\n  .fc-liquid-hack th {\n    position: relative;\n  }\n@font-face {\n  font-family: 'fcicons';\n  src: url(\"data:application/x-font-ttf;charset=utf-8;base64,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\") format('truetype');\n  font-weight: normal;\n  font-style: normal;\n}\n.fc-icon {\n  /* added for fc */\n  display: inline-block;\n  width: 1em;\n  height: 1em;\n  text-align: center;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n          user-select: none;\n\n  /* use !important to prevent issues with browser extensions that change fonts */\n  font-family: 'fcicons' !important;\n  speak: none;\n  font-style: normal;\n  font-weight: normal;\n  font-variant: normal;\n  text-transform: none;\n  line-height: 1;\n\n  /* Better Font Rendering =========== */\n  -webkit-font-smoothing: antialiased;\n  -moz-osx-font-smoothing: grayscale;\n}\n.fc-icon-chevron-left:before {\n  content: \"\\e900\";\n}\n.fc-icon-chevron-right:before {\n  content: \"\\e901\";\n}\n.fc-icon-chevrons-left:before {\n  content: \"\\e902\";\n}\n.fc-icon-chevrons-right:before {\n  content: \"\\e903\";\n}\n.fc-icon-minus-square:before {\n  content: \"\\e904\";\n}\n.fc-icon-plus-square:before {\n  content: \"\\e905\";\n}\n.fc-icon-x:before {\n  content: \"\\e906\";\n}\n/*\nLots taken from Flatly (MIT): https://bootswatch.com/4/flatly/bootstrap.css\n\nThese styles only apply when the standard-theme is activated.\nWhen it's NOT activated, the fc-button classes won't even be in the DOM.\n*/\n.fc {\n\n  /* reset */\n\n}\n.fc .fc-button {\n    border-radius: 0;\n    overflow: visible;\n    text-transform: none;\n    margin: 0;\n    font-family: inherit;\n    font-size: inherit;\n    line-height: inherit;\n  }\n.fc .fc-button:focus {\n    outline: 1px dotted;\n    outline: 5px auto -webkit-focus-ring-color;\n  }\n.fc .fc-button {\n    -webkit-appearance: button;\n  }\n.fc .fc-button:not(:disabled) {\n    cursor: pointer;\n  }\n.fc .fc-button::-moz-focus-inner {\n    padding: 0;\n    border-style: none;\n  }\n.fc {\n\n  /* theme */\n\n}\n.fc .fc-button {\n    display: inline-block;\n    font-weight: 400;\n    text-align: center;\n    vertical-align: middle;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n            user-select: none;\n    background-color: transparent;\n    border: 1px solid transparent;\n    padding: 0.4em 0.65em;\n    font-size: 1em;\n    line-height: 1.5;\n    border-radius: 0.25em;\n  }\n.fc .fc-button:hover {\n    text-decoration: none;\n  }\n.fc .fc-button:focus {\n    outline: 0;\n    box-shadow: 0 0 0 0.2rem rgba(44, 62, 80, 0.25);\n  }\n.fc .fc-button:disabled {\n    opacity: 0.65;\n  }\n.fc {\n\n  /* \"primary\" coloring */\n\n}\n.fc .fc-button-primary {\n    color: #fff;\n    color: var(--fc-button-text-color, #fff);\n    background-color: #2C3E50;\n    background-color: var(--fc-button-bg-color, #2C3E50);\n    border-color: #2C3E50;\n    border-color: var(--fc-button-border-color, #2C3E50);\n  }\n.fc .fc-button-primary:hover {\n    color: #fff;\n    color: var(--fc-button-text-color, #fff);\n    background-color: #1e2b37;\n    background-color: var(--fc-button-hover-bg-color, #1e2b37);\n    border-color: #1a252f;\n    border-color: var(--fc-button-hover-border-color, #1a252f);\n  }\n.fc .fc-button-primary:disabled { /* not DRY */\n    color: #fff;\n    color: var(--fc-button-text-color, #fff);\n    background-color: #2C3E50;\n    background-color: var(--fc-button-bg-color, #2C3E50);\n    border-color: #2C3E50;\n    border-color: var(--fc-button-border-color, #2C3E50); /* overrides :hover */\n  }\n.fc .fc-button-primary:focus {\n    box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);\n  }\n.fc .fc-button-primary:not(:disabled):active,\n  .fc .fc-button-primary:not(:disabled).fc-button-active {\n    color: #fff;\n    color: var(--fc-button-text-color, #fff);\n    background-color: #1a252f;\n    background-color: var(--fc-button-active-bg-color, #1a252f);\n    border-color: #151e27;\n    border-color: var(--fc-button-active-border-color, #151e27);\n  }\n.fc .fc-button-primary:not(:disabled):active:focus,\n  .fc .fc-button-primary:not(:disabled).fc-button-active:focus {\n    box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);\n  }\n.fc {\n\n  /* icons within buttons */\n\n}\n.fc .fc-button .fc-icon {\n    vertical-align: middle;\n    font-size: 1.5em; /* bump up the size (but don't make it bigger than line-height of button, which is 1.5em also) */\n  }\n.fc .fc-button-group {\n    position: relative;\n    display: inline-flex;\n    vertical-align: middle;\n  }\n.fc .fc-button-group > .fc-button {\n    position: relative;\n    flex: 1 1 auto;\n  }\n.fc .fc-button-group > .fc-button:hover {\n    z-index: 1;\n  }\n.fc .fc-button-group > .fc-button:focus,\n  .fc .fc-button-group > .fc-button:active,\n  .fc .fc-button-group > .fc-button.fc-button-active {\n    z-index: 1;\n  }\n.fc-direction-ltr .fc-button-group > .fc-button:not(:first-child) {\n    margin-left: -1px;\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0;\n  }\n.fc-direction-ltr .fc-button-group > .fc-button:not(:last-child) {\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n  }\n.fc-direction-rtl .fc-button-group > .fc-button:not(:first-child) {\n    margin-right: -1px;\n    border-top-right-radius: 0;\n    border-bottom-right-radius: 0;\n  }\n.fc-direction-rtl .fc-button-group > .fc-button:not(:last-child) {\n    border-top-left-radius: 0;\n    border-bottom-left-radius: 0;\n  }\n.fc .fc-toolbar {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n  }\n.fc .fc-toolbar.fc-header-toolbar {\n    margin-bottom: 1.5em;\n  }\n.fc .fc-toolbar.fc-footer-toolbar {\n    margin-top: 1.5em;\n  }\n.fc .fc-toolbar-title {\n    font-size: 1.75em;\n    margin: 0;\n  }\n.fc-direction-ltr .fc-toolbar > * > :not(:first-child) {\n    margin-left: .75em; /* space between */\n  }\n.fc-direction-rtl .fc-toolbar > * > :not(:first-child) {\n    margin-right: .75em; /* space between */\n  }\n.fc-direction-rtl .fc-toolbar-ltr { /* when the toolbar-chunk positioning system is explicitly left-to-right */\n    flex-direction: row-reverse;\n  }\n.fc .fc-scroller {\n    -webkit-overflow-scrolling: touch;\n    position: relative; /* for abs-positioned elements within */\n  }\n.fc .fc-scroller-liquid {\n    height: 100%;\n  }\n.fc .fc-scroller-liquid-absolute {\n    position: absolute;\n    top: 0;\n    right: 0;\n    left: 0;\n    bottom: 0;\n  }\n.fc .fc-scroller-harness {\n    position: relative;\n    overflow: hidden;\n    direction: ltr;\n      /* hack for chrome computing the scroller's right/left wrong for rtl. undone below... */\n      /* TODO: demonstrate in codepen */\n  }\n.fc .fc-scroller-harness-liquid {\n    height: 100%;\n  }\n.fc-direction-rtl .fc-scroller-harness > .fc-scroller { /* undo above hack */\n    direction: rtl;\n  }\n.fc-theme-standard .fc-scrollgrid {\n    border: 1px solid #ddd;\n    border: 1px solid var(--fc-border-color, #ddd); /* bootstrap does this. match */\n  }\n.fc .fc-scrollgrid,\n    .fc .fc-scrollgrid table { /* all tables (self included) */\n      width: 100%; /* because tables don't normally do this */\n      table-layout: fixed;\n    }\n.fc .fc-scrollgrid table { /* inner tables */\n      border-top-style: hidden;\n      border-left-style: hidden;\n      border-right-style: hidden;\n    }\n.fc .fc-scrollgrid {\n\n    border-collapse: separate;\n    border-right-width: 0;\n    border-bottom-width: 0;\n\n  }\n.fc .fc-scrollgrid-liquid {\n    height: 100%;\n  }\n.fc .fc-scrollgrid-section { /* a <tr> */\n    height: 1px /* better than 0, for firefox */\n\n  }\n.fc .fc-scrollgrid-section > td {\n      height: 1px; /* needs a height so inner div within grow. better than 0, for firefox */\n    }\n.fc .fc-scrollgrid-section table {\n      height: 1px;\n        /* for most browsers, if a height isn't set on the table, can't do liquid-height within cells */\n        /* serves as a min-height. harmless */\n    }\n.fc .fc-scrollgrid-section-liquid > td {\n      height: 100%; /* better than `auto`, for firefox */\n    }\n.fc .fc-scrollgrid-section > * {\n    border-top-width: 0;\n    border-left-width: 0;\n  }\n.fc .fc-scrollgrid-section-header > *,\n  .fc .fc-scrollgrid-section-footer > * {\n    border-bottom-width: 0;\n  }\n.fc .fc-scrollgrid-section-body table,\n  .fc .fc-scrollgrid-section-footer table {\n    border-bottom-style: hidden; /* head keeps its bottom border tho */\n  }\n.fc {\n\n  /* stickiness */\n\n}\n.fc .fc-scrollgrid-section-sticky > * {\n    background: #fff;\n    background: var(--fc-page-bg-color, #fff);\n    position: -webkit-sticky;\n    position: sticky;\n    z-index: 3; /* TODO: var */\n    /* TODO: box-shadow when sticking */\n  }\n.fc .fc-scrollgrid-section-header.fc-scrollgrid-section-sticky > * {\n    top: 0; /* because border-sharing causes a gap at the top */\n      /* TODO: give safari -1. has bug */\n  }\n.fc .fc-scrollgrid-section-footer.fc-scrollgrid-section-sticky > * {\n    bottom: 0; /* known bug: bottom-stickiness doesn't work in safari */\n  }\n.fc .fc-scrollgrid-sticky-shim { /* for horizontal scrollbar */\n    height: 1px; /* needs height to create scrollbars */\n    margin-bottom: -1px;\n  }\n.fc-sticky { /* no .fc wrap because used as child of body */\n  position: -webkit-sticky;\n  position: sticky;\n}\n.fc .fc-view-harness {\n    flex-grow: 1; /* because this harness is WITHIN the .fc's flexbox */\n    position: relative;\n  }\n.fc {\n\n  /* when the harness controls the height, make the view liquid */\n\n}\n.fc .fc-view-harness-active > .fc-view {\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n  }\n.fc .fc-col-header-cell-cushion {\n    display: inline-block; /* x-browser for when sticky (when multi-tier header) */\n    padding: 2px 4px;\n  }\n.fc .fc-bg-event,\n  .fc .fc-non-business,\n  .fc .fc-highlight {\n    /* will always have a harness with position:relative/absolute, so absolutely expand */\n    position: absolute;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n  }\n.fc .fc-non-business {\n    background: rgba(215, 215, 215, 0.3);\n    background: var(--fc-non-business-color, rgba(215, 215, 215, 0.3));\n  }\n.fc .fc-bg-event {\n    background: rgb(143, 223, 130);\n    background: var(--fc-bg-event-color, rgb(143, 223, 130));\n    opacity: 0.3;\n    opacity: var(--fc-bg-event-opacity, 0.3)\n  }\n.fc .fc-bg-event .fc-event-title {\n      margin: .5em;\n      font-size: .85em;\n      font-size: var(--fc-small-font-size, .85em);\n      font-style: italic;\n    }\n.fc .fc-highlight {\n    background: rgba(188, 232, 241, 0.3);\n    background: var(--fc-highlight-color, rgba(188, 232, 241, 0.3));\n  }\n.fc .fc-cell-shaded,\n  .fc .fc-day-disabled {\n    background: rgba(208, 208, 208, 0.3);\n    background: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\n  }\n/* link resets */\n/* ---------------------------------------------------------------------------------------------------- */\na.fc-event,\na.fc-event:hover {\n  text-decoration: none;\n}\n/* cursor */\n.fc-event[href],\n.fc-event.fc-event-draggable {\n  cursor: pointer;\n}\n/* event text content */\n/* ---------------------------------------------------------------------------------------------------- */\n.fc-event .fc-event-main {\n    position: relative;\n    z-index: 2;\n  }\n/* dragging */\n/* ---------------------------------------------------------------------------------------------------- */\n.fc-event-dragging:not(.fc-event-selected) { /* MOUSE */\n    opacity: 0.75;\n  }\n.fc-event-dragging.fc-event-selected { /* TOUCH */\n    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.3);\n  }\n/* resizing */\n/* ---------------------------------------------------------------------------------------------------- */\n/* (subclasses should hone positioning for touch and non-touch) */\n.fc-event .fc-event-resizer {\n    display: none;\n    position: absolute;\n    z-index: 4;\n  }\n.fc-event:hover, /* MOUSE */\n.fc-event-selected { /* TOUCH */\n\n}\n.fc-event:hover .fc-event-resizer, .fc-event-selected .fc-event-resizer {\n    display: block;\n  }\n.fc-event-selected .fc-event-resizer {\n    border-radius: 4px;\n    border-radius: calc(var(--fc-event-resizer-dot-total-width, 8px) / 2);\n    border-width: 1px;\n    border-width: var(--fc-event-resizer-dot-border-width, 1px);\n    width: 8px;\n    width: var(--fc-event-resizer-dot-total-width, 8px);\n    height: 8px;\n    height: var(--fc-event-resizer-dot-total-width, 8px);\n    border-style: solid;\n    border-color: inherit;\n    background: #fff;\n    background: var(--fc-page-bg-color, #fff)\n\n    /* expand hit area */\n\n  }\n.fc-event-selected .fc-event-resizer:before {\n      content: '';\n      position: absolute;\n      top: -20px;\n      left: -20px;\n      right: -20px;\n      bottom: -20px;\n    }\n/* selecting (always TOUCH) */\n/* ---------------------------------------------------------------------------------------------------- */\n.fc-event-selected {\n  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2)\n\n  /* expand hit area (subclasses should expand) */\n\n}\n.fc-event-selected:before {\n    content: \"\";\n    position: absolute;\n    z-index: 3;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n  }\n.fc-event-selected {\n\n  /* dimmer effect */\n\n}\n.fc-event-selected:after {\n    content: \"\";\n    background: rgba(0, 0, 0, 0.25);\n    background: var(--fc-event-selected-overlay-color, rgba(0, 0, 0, 0.25));\n    position: absolute;\n    z-index: 1;\n\n    /* assume there's a border on all sides. overcome it. */\n    /* sometimes there's NOT a border, in which case the dimmer will go over */\n    /* an adjacent border, which looks fine. */\n    top: -1px;\n    left: -1px;\n    right: -1px;\n    bottom: -1px;\n  }\n/*\nA HORIZONTAL event\n*/\n.fc-h-event { /* allowed to be top-level */\n  display: block;\n  border: 1px solid #3788d8;\n  border: 1px solid var(--fc-event-border-color, #3788d8);\n  background-color: #3788d8;\n  background-color: var(--fc-event-bg-color, #3788d8)\n\n}\n.fc-h-event .fc-event-main {\n    color: #fff;\n    color: var(--fc-event-text-color, #fff);\n  }\n.fc-h-event .fc-event-main-frame {\n    display: flex; /* for make fc-event-title-container expand */\n  }\n.fc-h-event .fc-event-time {\n    max-width: 100%; /* clip overflow on this element */\n    overflow: hidden;\n  }\n.fc-h-event .fc-event-title-container { /* serves as a container for the sticky cushion */\n    flex-grow: 1;\n    flex-shrink: 1;\n    min-width: 0; /* important for allowing to shrink all the way */\n  }\n.fc-h-event .fc-event-title {\n    display: inline-block; /* need this to be sticky cross-browser */\n    vertical-align: top; /* for not messing up line-height */\n    left: 0;  /* for sticky */\n    right: 0; /* for sticky */\n    max-width: 100%; /* clip overflow on this element */\n    overflow: hidden;\n  }\n.fc-h-event.fc-event-selected:before {\n    /* expand hit area */\n    top: -10px;\n    bottom: -10px;\n  }\n/* adjust border and border-radius (if there is any) for non-start/end */\n.fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-start),\n.fc-direction-rtl .fc-daygrid-block-event:not(.fc-event-end) {\n  border-top-left-radius: 0;\n  border-bottom-left-radius: 0;\n  border-left-width: 0;\n}\n.fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-end),\n.fc-direction-rtl .fc-daygrid-block-event:not(.fc-event-start) {\n  border-top-right-radius: 0;\n  border-bottom-right-radius: 0;\n  border-right-width: 0;\n}\n/* resizers */\n.fc-h-event:not(.fc-event-selected) .fc-event-resizer {\n  top: 0;\n  bottom: 0;\n  width: 8px;\n  width: var(--fc-event-resizer-thickness, 8px);\n}\n.fc-direction-ltr .fc-h-event:not(.fc-event-selected) .fc-event-resizer-start,\n.fc-direction-rtl .fc-h-event:not(.fc-event-selected) .fc-event-resizer-end {\n  cursor: w-resize;\n  left: -4px;\n  left: calc(var(--fc-event-resizer-thickness, 8px) / -2);\n}\n.fc-direction-ltr .fc-h-event:not(.fc-event-selected) .fc-event-resizer-end,\n.fc-direction-rtl .fc-h-event:not(.fc-event-selected) .fc-event-resizer-start {\n  cursor: e-resize;\n  right: -4px;\n  right: calc(var(--fc-event-resizer-thickness, 8px) / -2);\n}\n/* resizers for TOUCH */\n.fc-h-event.fc-event-selected .fc-event-resizer {\n  top: 50%;\n  margin-top: -4px;\n  margin-top: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);\n}\n.fc-direction-ltr .fc-h-event.fc-event-selected .fc-event-resizer-start,\n.fc-direction-rtl .fc-h-event.fc-event-selected .fc-event-resizer-end {\n  left: -4px;\n  left: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);\n}\n.fc-direction-ltr .fc-h-event.fc-event-selected .fc-event-resizer-end,\n.fc-direction-rtl .fc-h-event.fc-event-selected .fc-event-resizer-start {\n  right: -4px;\n  right: calc(var(--fc-event-resizer-dot-total-width, 8px) / -2);\n}\n.fc .fc-popover {\n    position: absolute;\n    z-index: 9999;\n    box-shadow: 0 2px 6px rgba(0,0,0,.15);\n  }\n.fc .fc-popover-header {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n    padding: 3px 4px;\n  }\n.fc .fc-popover-title {\n    margin: 0 2px;\n  }\n.fc .fc-popover-close {\n    cursor: pointer;\n    opacity: 0.65;\n    font-size: 1.1em;\n  }\n.fc-theme-standard .fc-popover {\n    border: 1px solid #ddd;\n    border: 1px solid var(--fc-border-color, #ddd);\n    background: #fff;\n    background: var(--fc-page-bg-color, #fff);\n  }\n.fc-theme-standard .fc-popover-header {\n    background: rgba(208, 208, 208, 0.3);\n    background: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\n  }\n\n/*# sourceMappingURL=data:application/json;base64,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YWNoZWQgdG8gPGJvZHk+ICovXG4vKiBUT0RPOiBtYWtlIGZjLWV2ZW50IHNlbGVjdG9yIHdvcmsgd2hlbiBjYWxlbmRlciBpbiBzaGFkb3cgRE9NICovXG4uZmMtbm90LWFsbG93ZWQsXG4uZmMtbm90LWFsbG93ZWQgLmZjLWV2ZW50IHsgLyogb3ZlcnJpZGUgZXZlbnRzJyBjdXN0b20gY3Vyc29ycyAqL1xuICBjdXJzb3I6IG5vdC1hbGxvd2VkO1xufVxuXG4vKiBUT0RPOiBub3QgYXR0YWNoZWQgdG8gYm9keS4gYXR0YWNoZWQgdG8gc3BlY2lmaWMgZWxzLiBtb3ZlICovXG4uZmMtdW5zZWxlY3RhYmxlIHtcbiAgLXdlYmtpdC11c2VyLXNlbGVjdDogbm9uZTtcbiAgICAgLW1vei11c2VyLXNlbGVjdDogbm9uZTtcbiAgICAgIC1tcy11c2VyLXNlbGVjdDogbm9uZTtcbiAgICAgICAgICB1c2VyLXNlbGVjdDogbm9uZTtcbiAgLXdlYmtpdC10b3VjaC1jYWxsb3V0OiBub25lO1xuICAtd2Via2l0LXRhcC1oaWdobGlnaHQtY29sb3I6IHJnYmEoMCwgMCwgMCwgMCk7XG59XG4uZmMge1xuICAvKiBsYXlvdXQgb2YgaW1tZWRpYXRlIGNoaWxkcmVuICovXG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47XG5cbiAgZm9udC1zaXplOiAxZW1cbn1cbi5mYyxcbiAgLmZjICosXG4gIC5mYyAqOmJlZm9yZSxcbiAgLmZjICo6YWZ0ZXIge1xuICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XG4gIH1cbi5mYyB0YWJsZSB7XG4gICAgYm9yZGVyLWNvbGxhcHNlOiBjb2xsYXBzZTtcbiAgICBib3JkZXItc3BhY2luZzogMDtcbiAgICBmb250LXNpemU6IDFlbTsgLyogbm9ybWFsaXplIGNyb3NzLWJyb3dzZXIgKi9cbiAgfVxuLmZjIHRoIHtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIH1cbi5mYyB0aCxcbiAgLmZjIHRkIHtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogdG9wO1xuICAgIHBhZGRpbmc6IDA7XG4gIH1cbi5mYyBhW2RhdGEtbmF2bGlua10ge1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgfVxuLmZjIGFbZGF0YS1uYXZsaW5rXTpob3ZlciB7XG4gICAgdGV4dC1kZWNvcmF0aW9uOiB1bmRlcmxpbmU7XG4gIH1cbi5mYy1kaXJlY3Rpb24tbHRyIHtcbiAgZGlyZWN0aW9uOiBsdHI7XG4gIHRleHQtYWxpZ246IGxlZnQ7XG59XG4uZmMtZGlyZWN0aW9uLXJ0bCB7XG4gIGRpcmVjdGlvbjogcnRsO1xuICB0ZXh0LWFsaWduOiByaWdodDtcbn1cbi5mYy10aGVtZS1zdGFuZGFyZCB0ZCxcbiAgLmZjLXRoZW1lLXN0YW5kYXJkIHRoIHtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjZGRkO1xuICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWZjLWJvcmRlci1jb2xvciwgI2RkZCk7XG4gIH1cbi8qIGZvciBGRiwgd2hpY2ggZG9lc24ndCBleHBhbmQgYSAxMDAlIGRpdiB3aXRoaW4gYSB0YWJsZSBjZWxsLiB1c2UgYWJzb2x1dGUgcG9zaXRpb25pbmcgKi9cbi8qIGlubmVyLXdyYXBwZXJzIGFyZSByZXNwb25zaWJsZSBmb3IgYmVpbmcgYWJzb2x1dGUgKi9cbi8qIFRPRE86IGJlc3QgcGxhY2UgZm9yIHRoaXM/ICovXG4uZmMtbGlxdWlkLWhhY2sgdGQsXG4gIC5mYy1saXF1aWQtaGFjayB0aCB7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICB9XG5cbkBmb250LWZhY2Uge1xuICBmb250LWZhbWlseTogJ2ZjaWNvbnMnO1xuICBzcmM6IHVybChcImRhdGE6YXBwbGljYXRpb24veC1mb250LXR0ZjtjaGFyc2V0PXV0Zi04O2Jhc2U2NCxBQUVBQUFBTEFJQUFBd0F3VDFNdk1nOFNCZkFBQUFDOEFBQUFZR050WVhBWFZ0S05BQUFCSEFBQUFGUm5ZWE53QUFBQUVBQUFBWEFBQUFBSVoyeDVaZ1l5ZHhJQUFBRjRBQUFGTkdobFlXUVVKN2NJQUFBR3JBQUFBRFpvYUdWaEIyMER6QUFBQnVRQUFBQWthRzEwZUNJQUJoUUFBQWNJQUFBQUxHeHZZMkVENEFVNkFBQUhOQUFBQUJodFlYaHdBQThBakFBQUIwd0FBQUFnYm1GdFpYc3I2OTBBQUFkc0FBQUJobkJ2YzNRQUF3QUFBQUFJOUFBQUFDQUFBd1BBQVpBQUJRQUFBcGtDekFBQUFJOENtUUxNQUFBQjZ3QXpBUWtBQUFBQUFBQUFBQUFBQUFBQUFBQUJFQUFBQUFBQUFBQUFBQUFBQUFBQUFBQkFBQURwQmdQQS84QUFRQVBBQUVBQUFBQUJBQUFBQUFBQUFBQUFBQUFnQUFBQUFBQURBQUFBQXdBQUFCd0FBUUFEQUFBQUhBQURBQUVBQUFBY0FBUUFPQUFBQUFvQUNBQUNBQUlBQVFBZzZRYi8vZi8vQUFBQUFBQWc2UUQvL2YvL0FBSC80eGNFQUFNQUFRQUFBQUFBQUFBQUFBQUFBUUFCLy84QUR3QUJBQUFBQUFBQUFBQUFBZ0FBTnprQkFBQUFBQUVBQUFBQUFBQUFBQUFDQUFBM09RRUFBQUFBQVFBQUFBQUFBQUFBQUFJQUFEYzVBUUFBQUFBQkFXSUFqUUtlQXNrQUV3QUFKU2MzTmpRbkppSUhBUVlVRndFV01qYzJOQ2NDbnVMaURRME1KQXovQUEwTkFRQU1KQXdORGNuaTRnd2pEUXdNL3dBTkl3ei9BQTBORENNTkFBQUFBUUZpQUkwQ25nTEpBQk1BQUNVQk5qUW5BU1lpQndZVUh3RUhCaFFYRmpJM0FaNEJBQTBOL3dBTUpBd05EZUxpRFEwTUpBeU5BUUFNSXcwQkFBd01EU01NNHVJTkl3d05EUUFBQUFJQTRnQzNBeDRDbmdBVEFDY0FBQ1VuTnpZMEp5WWlEd0VHRkI4QkZqSTNOalFuSVNjM05qUW5KaUlQQVFZVUh3RVdNamMyTkNjQjg3ZTNEUTBNSXczVkRRM1ZEU01NRFEwQks3ZTNEUTBNSkF6VkRRM1ZEQ1FNRFEzenVMY01KQXdORGRVTkl3eldEQXdOSXd5NHR3d2tEQTBOMVEwakROWU1EQTBqREFBQUFnRGlBTGNESGdLZUFCTUFKd0FBSlRjMk5DOEJKaUlIQmhRZkFRY0dGQmNXTWpjaE56WTBMd0VtSWdjR0ZCOEJCd1lVRnhZeU53SkoxUTBOMVEwakRBME50N2NORFF3akRmN1YxUTBOMVF3a0RBME50N2NORFF3a0RMZldEQ01OMVEwTkRDUU10N2dNSXcwTUROWU1JdzNWRFEwTUpBeTN1QXdqRFF3TUFBQURBRlVBQUFPckExVUFNd0JvQUhjQUFCTWlCZ2NPQVFjT0FRY09BUlVSRkJZWEhnRVhIZ0VYSGdFeklUSTJOejRCTno0Qk56NEJOUkUwSmljdUFTY3VBU2N1QVNNRklUSVdGeDRCRng0QkZ4NEJGUkVVQmdjT0FRY09BUWNPQVNNaElpWW5MZ0VuTGdFbkxnRTFFVFEyTno0Qk56NEJOejRCTXhNaE1qWTFOQ1lqSVNJR0ZSUVdNOVVOR0F3TEZRa0pEZ1VGQlFVRkJRNEpDUlVMREJnTkFsWU5HQXdMRlFrSkRnVUZCUVVGQlE0SkNSVUxEQmdOL2FvQ1ZnUUlCQVFIQXdNRkFRSUJBUUlCQlFNREJ3UUVDQVQ5cWdRSUJBUUhBd01GQVFJQkFRSUJCUU1EQndRRUNBU0FBVllSR1JrUi9xb1JHUmtSQTFVRkJBVU9DUWtWREFzWkRmMnJEUmtMREJVSkNBNEZCUVVGQlFVT0NRZ1ZEQXNaRFFKVkRSa0xEQlVKQ1E0RkJBVlZBZ0VDQlFNQ0J3UUVDQVg5cXdRSkF3UUhBd01GQVFJQ0FnSUJCUU1EQndRRENRUUNWUVVJQkFRSEFnTUZBZ0VDL29BWkVoRVpHUkVTR1FBQUFBQURBRlVBQUFPckExVUFNd0JvQUlrQUFCTWlCZ2NPQVFjT0FRY09BUlVSRkJZWEhnRVhIZ0VYSGdFeklUSTJOejRCTno0Qk56NEJOUkUwSmljdUFTY3VBU2N1QVNNRklUSVdGeDRCRng0QkZ4NEJGUkVVQmdjT0FRY09BUWNPQVNNaElpWW5MZ0VuTGdFbkxnRTFFVFEyTno0Qk56NEJOejRCTXhNekZSUVdNekkyUFFFek1qWTFOQ1lyQVRVMEppTWlCaDBCSXlJR0ZSUVdNOVVOR0F3TEZRa0pEZ1VGQlFVRkJRNEpDUlVMREJnTkFsWU5HQXdMRlFrSkRnVUZCUVVGQlE0SkNSVUxEQmdOL2FvQ1ZnUUlCQVFIQXdNRkFRSUJBUUlCQlFNREJ3UUVDQVQ5cWdRSUJBUUhBd01GQVFJQkFRSUJCUU1EQndRRUNBU0FnQmtTRWhtQUVSa1pFWUFaRWhJWmdCRVpHUkVEVlFVRUJRNEpDUlVNQ3hrTi9hc05HUXNNRlFrSURnVUZCUVVGQlE0SkNCVU1DeGtOQWxVTkdRc01GUWtKRGdVRUJWVUNBUUlGQXdJSEJBUUlCZjJyQkFrREJBY0RBd1VCQWdJQ0FnRUZBd01IQkFNSkJBSlZCUWdFQkFjQ0F3VUNBUUwrZ0lBU0dSa1NnQmtTRVJtQUVoa1pFb0FaRVJJWkFBQUJBT0lBalFNZUFza0FJQUFBRXhjSEJoUVhGakkvQVJjV01qYzJOQzhCTnpZMEp5WWlEd0VuSmlJSEJoUVg0dUxpRFEwTUpBemk0Z3drREEwTjR1SU5EUXdrRE9MaURDUU1EUTBDamVMaURTTU1EUTNoNFEwTkRDTU40dUlNSXcwTURPTGlEQXdOSXd3QUFBQUJBQUFBQVFBQWE1bjB5MThQUFBVQUN3UUFBQUFBQU5pdk9Wc0FBQUFBMks4NVd3QUFBQUFEcXdOVkFBQUFDQUFDQUFBQUFBQUFBQUVBQUFQQS84QUFBQVFBQUFBQUFBT3JBQUVBQUFBQUFBQUFBQUFBQUFBQUFBQUxCQUFBQUFBQUFBQUFBQUFBQWdBQUFBUUFBV0lFQUFGaUJBQUE0Z1FBQU9JRUFBQlZCQUFBVlFRQUFPSUFBQUFBQUFvQUZBQWVBRVFBYWdDcUFPb0JuZ0prQXBvQUFRQUFBQXNBaWdBREFBQUFBQUFDQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUE0QXJnQUJBQUFBQUFBQkFBY0FBQUFCQUFBQUFBQUNBQWNBWUFBQkFBQUFBQUFEQUFjQU5nQUJBQUFBQUFBRUFBY0FkUUFCQUFBQUFBQUZBQXNBRlFBQkFBQUFBQUFHQUFjQVN3QUJBQUFBQUFBS0FCb0FpZ0FEQUFFRUNRQUJBQTRBQndBREFBRUVDUUFDQUE0QVp3QURBQUVFQ1FBREFBNEFQUUFEQUFFRUNRQUVBQTRBZkFBREFBRUVDUUFGQUJZQUlBQURBQUVFQ1FBR0FBNEFVZ0FEQUFFRUNRQUtBRFFBcEdaamFXTnZibk1BWmdCakFHa0FZd0J2QUc0QWMxWmxjbk5wYjI0Z01TNHdBRllBWlFCeUFITUFhUUJ2QUc0QUlBQXhBQzRBTUdaamFXTnZibk1BWmdCakFHa0FZd0J2QUc0QWMyWmphV052Ym5NQVpnQmpBR2tBWXdCdkFHNEFjMUpsWjNWc1lYSUFVZ0JsQUdjQWRRQnNBR0VBY21aamFXTnZibk1BWmdCakFHa0FZd0J2QUc0QWMwWnZiblFnWjJWdVpYSmhkR1ZrSUdKNUlFbGpiMDF2YjI0dUFFWUFid0J1QUhRQUlBQm5BR1VBYmdCbEFISUFZUUIwQUdVQVpBQWdBR0lBZVFBZ0FFa0FZd0J2QUUwQWJ3QnZBRzRBTGdBQUFBTUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUE9XCIpIGZvcm1hdCgndHJ1ZXR5cGUnKTtcbiAgZm9udC13ZWlnaHQ6IG5vcm1hbDtcbiAgZm9udC1zdHlsZTogbm9ybWFsO1xufVxuXG4uZmMtaWNvbiB7XG4gIC8qIGFkZGVkIGZvciBmYyAqL1xuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XG4gIHdpZHRoOiAxZW07XG4gIGhlaWdodDogMWVtO1xuICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gIC13ZWJraXQtdXNlci1zZWxlY3Q6IG5vbmU7XG4gICAgIC1tb3otdXNlci1zZWxlY3Q6IG5vbmU7XG4gICAgICAtbXMtdXNlci1zZWxlY3Q6IG5vbmU7XG4gICAgICAgICAgdXNlci1zZWxlY3Q6IG5vbmU7XG5cbiAgLyogdXNlICFpbXBvcnRhbnQgdG8gcHJldmVudCBpc3N1ZXMgd2l0aCBicm93c2VyIGV4dGVuc2lvbnMgdGhhdCBjaGFuZ2UgZm9udHMgKi9cbiAgZm9udC1mYW1pbHk6ICdmY2ljb25zJyAhaW1wb3J0YW50O1xuICBzcGVhazogbm9uZTtcbiAgZm9udC1zdHlsZTogbm9ybWFsO1xuICBmb250LXdlaWdodDogbm9ybWFsO1xuICBmb250LXZhcmlhbnQ6IG5vcm1hbDtcbiAgdGV4dC10cmFuc2Zvcm06IG5vbmU7XG4gIGxpbmUtaGVpZ2h0OiAxO1xuXG4gIC8qIEJldHRlciBGb250IFJlbmRlcmluZyA9PT09PT09PT09PSAqL1xuICAtd2Via2l0LWZvbnQtc21vb3RoaW5nOiBhbnRpYWxpYXNlZDtcbiAgLW1vei1vc3gtZm9udC1zbW9vdGhpbmc6IGdyYXlzY2FsZTtcbn1cblxuLmZjLWljb24tY2hldnJvbi1sZWZ0OmJlZm9yZSB7XG4gIGNvbnRlbnQ6IFwiXFxlOTAwXCI7XG59XG5cbi5mYy1pY29uLWNoZXZyb24tcmlnaHQ6YmVmb3JlIHtcbiAgY29udGVudDogXCJcXGU5MDFcIjtcbn1cblxuLmZjLWljb24tY2hldnJvbnMtbGVmdDpiZWZvcmUge1xuICBjb250ZW50OiBcIlxcZTkwMlwiO1xufVxuXG4uZmMtaWNvbi1jaGV2cm9ucy1yaWdodDpiZWZvcmUge1xuICBjb250ZW50OiBcIlxcZTkwM1wiO1xufVxuXG4uZmMtaWNvbi1taW51cy1zcXVhcmU6YmVmb3JlIHtcbiAgY29udGVudDogXCJcXGU5MDRcIjtcbn1cblxuLmZjLWljb24tcGx1cy1zcXVhcmU6YmVmb3JlIHtcbiAgY29udGVudDogXCJcXGU5MDVcIjtcbn1cblxuLmZjLWljb24teDpiZWZvcmUge1xuICBjb250ZW50OiBcIlxcZTkwNlwiO1xufVxuLypcbkxvdHMgdGFrZW4gZnJvbSBGbGF0bHkgKE1JVCk6IGh0dHBzOi8vYm9vdHN3YXRjaC5jb20vNC9mbGF0bHkvYm9vdHN0cmFwLmNzc1xuXG5UaGVzZSBzdHlsZXMgb25seSBhcHBseSB3aGVuIHRoZSBzdGFuZGFyZC10aGVtZSBpcyBhY3RpdmF0ZWQuXG5XaGVuIGl0J3MgTk9UIGFjdGl2YXRlZCwgdGhlIGZjLWJ1dHRvbiBjbGFzc2VzIHdvbid0IGV2ZW4gYmUgaW4gdGhlIERPTS5cbiovXG4uZmMge1xuXG4gIC8qIHJlc2V0ICovXG5cbn1cbi5mYyAuZmMtYnV0dG9uIHtcbiAgICBib3JkZXItcmFkaXVzOiAwO1xuICAgIG92ZXJmbG93OiB2aXNpYmxlO1xuICAgIHRleHQtdHJhbnNmb3JtOiBub25lO1xuICAgIG1hcmdpbjogMDtcbiAgICBmb250LWZhbWlseTogaW5oZXJpdDtcbiAgICBmb250LXNpemU6IGluaGVyaXQ7XG4gICAgbGluZS1oZWlnaHQ6IGluaGVyaXQ7XG4gIH1cbi5mYyAuZmMtYnV0dG9uOmZvY3VzIHtcbiAgICBvdXRsaW5lOiAxcHggZG90dGVkO1xuICAgIG91dGxpbmU6IDVweCBhdXRvIC13ZWJraXQtZm9jdXMtcmluZy1jb2xvcjtcbiAgfVxuLmZjIC5mYy1idXR0b24ge1xuICAgIC13ZWJraXQtYXBwZWFyYW5jZTogYnV0dG9uO1xuICB9XG4uZmMgLmZjLWJ1dHRvbjpub3QoOmRpc2FibGVkKSB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICB9XG4uZmMgLmZjLWJ1dHRvbjo6LW1vei1mb2N1cy1pbm5lciB7XG4gICAgcGFkZGluZzogMDtcbiAgICBib3JkZXItc3R5bGU6IG5vbmU7XG4gIH1cbi5mYyB7XG5cbiAgLyogdGhlbWUgKi9cblxufVxuLmZjIC5mYy1idXR0b24ge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgICBmb250LXdlaWdodDogNDAwO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICB2ZXJ0aWNhbC1hbGlnbjogbWlkZGxlO1xuICAgIC13ZWJraXQtdXNlci1zZWxlY3Q6IG5vbmU7XG4gICAgICAgLW1vei11c2VyLXNlbGVjdDogbm9uZTtcbiAgICAgICAgLW1zLXVzZXItc2VsZWN0OiBub25lO1xuICAgICAgICAgICAgdXNlci1zZWxlY3Q6IG5vbmU7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQ7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdHJhbnNwYXJlbnQ7XG4gICAgcGFkZGluZzogMC40ZW0gMC42NWVtO1xuICAgIGZvbnQtc2l6ZTogMWVtO1xuICAgIGxpbmUtaGVpZ2h0OiAxLjU7XG4gICAgYm9yZGVyLXJhZGl1czogMC4yNWVtO1xuICB9XG4uZmMgLmZjLWJ1dHRvbjpob3ZlciB7XG4gICAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xuICB9XG4uZmMgLmZjLWJ1dHRvbjpmb2N1cyB7XG4gICAgb3V0bGluZTogMDtcbiAgICBib3gtc2hhZG93OiAwIDAgMCAwLjJyZW0gcmdiYSg0NCwgNjIsIDgwLCAwLjI1KTtcbiAgfVxuLmZjIC5mYy1idXR0b246ZGlzYWJsZWQge1xuICAgIG9wYWNpdHk6IDAuNjU7XG4gIH1cbi5mYyB7XG5cbiAgLyogXCJwcmltYXJ5XCIgY29sb3JpbmcgKi9cblxufVxuLmZjIC5mYy1idXR0b24tcHJpbWFyeSB7XG4gICAgY29sb3I6ICNmZmY7XG4gICAgY29sb3I6IHZhcigtLWZjLWJ1dHRvbi10ZXh0LWNvbG9yLCAjZmZmKTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjMkMzRTUwO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWZjLWJ1dHRvbi1iZy1jb2xvciwgIzJDM0U1MCk7XG4gICAgYm9yZGVyLWNvbG9yOiAjMkMzRTUwO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tZmMtYnV0dG9uLWJvcmRlci1jb2xvciwgIzJDM0U1MCk7XG4gIH1cbi5mYyAuZmMtYnV0dG9uLXByaW1hcnk6aG92ZXIge1xuICAgIGNvbG9yOiAjZmZmO1xuICAgIGNvbG9yOiB2YXIoLS1mYy1idXR0b24tdGV4dC1jb2xvciwgI2ZmZik7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzFlMmIzNztcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1mYy1idXR0b24taG92ZXItYmctY29sb3IsICMxZTJiMzcpO1xuICAgIGJvcmRlci1jb2xvcjogIzFhMjUyZjtcbiAgICBib3JkZXItY29sb3I6IHZhcigtLWZjLWJ1dHRvbi1ob3Zlci1ib3JkZXItY29sb3IsICMxYTI1MmYpO1xuICB9XG4uZmMgLmZjLWJ1dHRvbi1wcmltYXJ5OmRpc2FibGVkIHsgLyogbm90IERSWSAqL1xuICAgIGNvbG9yOiAjZmZmO1xuICAgIGNvbG9yOiB2YXIoLS1mYy1idXR0b24tdGV4dC1jb2xvciwgI2ZmZik7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzJDM0U1MDtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1mYy1idXR0b24tYmctY29sb3IsICMyQzNFNTApO1xuICAgIGJvcmRlci1jb2xvcjogIzJDM0U1MDtcbiAgICBib3JkZXItY29sb3I6IHZhcigtLWZjLWJ1dHRvbi1ib3JkZXItY29sb3IsICMyQzNFNTApOyAvKiBvdmVycmlkZXMgOmhvdmVyICovXG4gIH1cbi5mYyAuZmMtYnV0dG9uLXByaW1hcnk6Zm9jdXMge1xuICAgIGJveC1zaGFkb3c6IDAgMCAwIDAuMnJlbSByZ2JhKDc2LCA5MSwgMTA2LCAwLjUpO1xuICB9XG4uZmMgLmZjLWJ1dHRvbi1wcmltYXJ5Om5vdCg6ZGlzYWJsZWQpOmFjdGl2ZSxcbiAgLmZjIC5mYy1idXR0b24tcHJpbWFyeTpub3QoOmRpc2FibGVkKS5mYy1idXR0b24tYWN0aXZlIHtcbiAgICBjb2xvcjogI2ZmZjtcbiAgICBjb2xvcjogdmFyKC0tZmMtYnV0dG9uLXRleHQtY29sb3IsICNmZmYpO1xuICAgIGJhY2tncm91bmQtY29sb3I6ICMxYTI1MmY7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tZmMtYnV0dG9uLWFjdGl2ZS1iZy1jb2xvciwgIzFhMjUyZik7XG4gICAgYm9yZGVyLWNvbG9yOiAjMTUxZTI3O1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tZmMtYnV0dG9uLWFjdGl2ZS1ib3JkZXItY29sb3IsICMxNTFlMjcpO1xuICB9XG4uZmMgLmZjLWJ1dHRvbi1wcmltYXJ5Om5vdCg6ZGlzYWJsZWQpOmFjdGl2ZTpmb2N1cyxcbiAgLmZjIC5mYy1idXR0b24tcHJpbWFyeTpub3QoOmRpc2FibGVkKS5mYy1idXR0b24tYWN0aXZlOmZvY3VzIHtcbiAgICBib3gtc2hhZG93OiAwIDAgMCAwLjJyZW0gcmdiYSg3NiwgOTEsIDEwNiwgMC41KTtcbiAgfVxuLmZjIHtcblxuICAvKiBpY29ucyB3aXRoaW4gYnV0dG9ucyAqL1xuXG59XG4uZmMgLmZjLWJ1dHRvbiAuZmMtaWNvbiB7XG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbiAgICBmb250LXNpemU6IDEuNWVtOyAvKiBidW1wIHVwIHRoZSBzaXplIChidXQgZG9uJ3QgbWFrZSBpdCBiaWdnZXIgdGhhbiBsaW5lLWhlaWdodCBvZiBidXR0b24sIHdoaWNoIGlzIDEuNWVtIGFsc28pICovXG4gIH1cbi5mYyAuZmMtYnV0dG9uLWdyb3VwIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgZGlzcGxheTogaW5saW5lLWZsZXg7XG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbiAgfVxuLmZjIC5mYy1idXR0b24tZ3JvdXAgPiAuZmMtYnV0dG9uIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgZmxleDogMSAxIGF1dG87XG4gIH1cbi5mYyAuZmMtYnV0dG9uLWdyb3VwID4gLmZjLWJ1dHRvbjpob3ZlciB7XG4gICAgei1pbmRleDogMTtcbiAgfVxuLmZjIC5mYy1idXR0b24tZ3JvdXAgPiAuZmMtYnV0dG9uOmZvY3VzLFxuICAuZmMgLmZjLWJ1dHRvbi1ncm91cCA+IC5mYy1idXR0b246YWN0aXZlLFxuICAuZmMgLmZjLWJ1dHRvbi1ncm91cCA+IC5mYy1idXR0b24uZmMtYnV0dG9uLWFjdGl2ZSB7XG4gICAgei1pbmRleDogMTtcbiAgfVxuLmZjLWRpcmVjdGlvbi1sdHIgLmZjLWJ1dHRvbi1ncm91cCA+IC5mYy1idXR0b246bm90KDpmaXJzdC1jaGlsZCkge1xuICAgIG1hcmdpbi1sZWZ0OiAtMXB4O1xuICAgIGJvcmRlci10b3AtbGVmdC1yYWRpdXM6IDA7XG4gICAgYm9yZGVyLWJvdHRvbS1sZWZ0LXJhZGl1czogMDtcbiAgfVxuLmZjLWRpcmVjdGlvbi1sdHIgLmZjLWJ1dHRvbi1ncm91cCA+IC5mYy1idXR0b246bm90KDpsYXN0LWNoaWxkKSB7XG4gICAgYm9yZGVyLXRvcC1yaWdodC1yYWRpdXM6IDA7XG4gICAgYm9yZGVyLWJvdHRvbS1yaWdodC1yYWRpdXM6IDA7XG4gIH1cbi5mYy1kaXJlY3Rpb24tcnRsIC5mYy1idXR0b24tZ3JvdXAgPiAuZmMtYnV0dG9uOm5vdCg6Zmlyc3QtY2hpbGQpIHtcbiAgICBtYXJnaW4tcmlnaHQ6IC0xcHg7XG4gICAgYm9yZGVyLXRvcC1yaWdodC1yYWRpdXM6IDA7XG4gICAgYm9yZGVyLWJvdHRvbS1yaWdodC1yYWRpdXM6IDA7XG4gIH1cbi5mYy1kaXJlY3Rpb24tcnRsIC5mYy1idXR0b24tZ3JvdXAgPiAuZmMtYnV0dG9uOm5vdCg6bGFzdC1jaGlsZCkge1xuICAgIGJvcmRlci10b3AtbGVmdC1yYWRpdXM6IDA7XG4gICAgYm9yZGVyLWJvdHRvbS1sZWZ0LXJhZGl1czogMDtcbiAgfVxuLmZjIC5mYy10b29sYmFyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICB9XG4uZmMgLmZjLXRvb2xiYXIuZmMtaGVhZGVyLXRvb2xiYXIge1xuICAgIG1hcmdpbi1ib3R0b206IDEuNWVtO1xuICB9XG4uZmMgLmZjLXRvb2xiYXIuZmMtZm9vdGVyLXRvb2xiYXIge1xuICAgIG1hcmdpbi10b3A6IDEuNWVtO1xuICB9XG4uZmMgLmZjLXRvb2xiYXItdGl0bGUge1xuICAgIGZvbnQtc2l6ZTogMS43NWVtO1xuICAgIG1hcmdpbjogMDtcbiAgfVxuLmZjLWRpcmVjdGlvbi1sdHIgLmZjLXRvb2xiYXIgPiAqID4gOm5vdCg6Zmlyc3QtY2hpbGQpIHtcbiAgICBtYXJnaW4tbGVmdDogLjc1ZW07IC8qIHNwYWNlIGJldHdlZW4gKi9cbiAgfVxuLmZjLWRpcmVjdGlvbi1ydGwgLmZjLXRvb2xiYXIgPiAqID4gOm5vdCg6Zmlyc3QtY2hpbGQpIHtcbiAgICBtYXJnaW4tcmlnaHQ6IC43NWVtOyAvKiBzcGFjZSBiZXR3ZWVuICovXG4gIH1cbi5mYy1kaXJlY3Rpb24tcnRsIC5mYy10b29sYmFyLWx0ciB7IC8qIHdoZW4gdGhlIHRvb2xiYXItY2h1bmsgcG9zaXRpb25pbmcgc3lzdGVtIGlzIGV4cGxpY2l0bHkgbGVmdC10by1yaWdodCAqL1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3ctcmV2ZXJzZTtcbiAgfVxuLmZjIC5mYy1zY3JvbGxlciB7XG4gICAgLXdlYmtpdC1vdmVyZmxvdy1zY3JvbGxpbmc6IHRvdWNoO1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTsgLyogZm9yIGFicy1wb3NpdGlvbmVkIGVsZW1lbnRzIHdpdGhpbiAqL1xuICB9XG4uZmMgLmZjLXNjcm9sbGVyLWxpcXVpZCB7XG4gICAgaGVpZ2h0OiAxMDAlO1xuICB9XG4uZmMgLmZjLXNjcm9sbGVyLWxpcXVpZC1hYnNvbHV0ZSB7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDogMDtcbiAgICByaWdodDogMDtcbiAgICBsZWZ0OiAwO1xuICAgIGJvdHRvbTogMDtcbiAgfVxuLmZjIC5mYy1zY3JvbGxlci1oYXJuZXNzIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgICBkaXJlY3Rpb246IGx0cjtcbiAgICAgIC8qIGhhY2sgZm9yIGNocm9tZSBjb21wdXRpbmcgdGhlIHNjcm9sbGVyJ3MgcmlnaHQvbGVmdCB3cm9uZyBmb3IgcnRsLiB1bmRvbmUgYmVsb3cuLi4gKi9cbiAgICAgIC8qIFRPRE86IGRlbW9uc3RyYXRlIGluIGNvZGVwZW4gKi9cbiAgfVxuLmZjIC5mYy1zY3JvbGxlci1oYXJuZXNzLWxpcXVpZCB7XG4gICAgaGVpZ2h0OiAxMDAlO1xuICB9XG4uZmMtZGlyZWN0aW9uLXJ0bCAuZmMtc2Nyb2xsZXItaGFybmVzcyA+IC5mYy1zY3JvbGxlciB7IC8qIHVuZG8gYWJvdmUgaGFjayAqL1xuICAgIGRpcmVjdGlvbjogcnRsO1xuICB9XG4uZmMtdGhlbWUtc3RhbmRhcmQgLmZjLXNjcm9sbGdyaWQge1xuICAgIGJvcmRlcjogMXB4IHNvbGlkICNkZGQ7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tZmMtYm9yZGVyLWNvbG9yLCAjZGRkKTsgLyogYm9vdHN0cmFwIGRvZXMgdGhpcy4gbWF0Y2ggKi9cbiAgfVxuLmZjIC5mYy1zY3JvbGxncmlkLFxuICAgIC5mYyAuZmMtc2Nyb2xsZ3JpZCB0YWJsZSB7IC8qIGFsbCB0YWJsZXMgKHNlbGYgaW5jbHVkZWQpICovXG4gICAgICB3aWR0aDogMTAwJTsgLyogYmVjYXVzZSB0YWJsZXMgZG9uJ3Qgbm9ybWFsbHkgZG8gdGhpcyAqL1xuICAgICAgdGFibGUtbGF5b3V0OiBmaXhlZDtcbiAgICB9XG4uZmMgLmZjLXNjcm9sbGdyaWQgdGFibGUgeyAvKiBpbm5lciB0YWJsZXMgKi9cbiAgICAgIGJvcmRlci10b3Atc3R5bGU6IGhpZGRlbjtcbiAgICAgIGJvcmRlci1sZWZ0LXN0eWxlOiBoaWRkZW47XG4gICAgICBib3JkZXItcmlnaHQtc3R5bGU6IGhpZGRlbjtcbiAgICB9XG4uZmMgLmZjLXNjcm9sbGdyaWQge1xuXG4gICAgYm9yZGVyLWNvbGxhcHNlOiBzZXBhcmF0ZTtcbiAgICBib3JkZXItcmlnaHQtd2lkdGg6IDA7XG4gICAgYm9yZGVyLWJvdHRvbS13aWR0aDogMDtcblxuICB9XG4uZmMgLmZjLXNjcm9sbGdyaWQtbGlxdWlkIHtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gIH1cbi5mYyAuZmMtc2Nyb2xsZ3JpZC1zZWN0aW9uIHsgLyogYSA8dHI+ICovXG4gICAgaGVpZ2h0OiAxcHggLyogYmV0dGVyIHRoYW4gMCwgZm9yIGZpcmVmb3ggKi9cblxuICB9XG4uZmMgLmZjLXNjcm9sbGdyaWQtc2VjdGlvbiA+IHRkIHtcbiAgICAgIGhlaWdodDogMXB4OyAvKiBuZWVkcyBhIGhlaWdodCBzbyBpbm5lciBkaXYgd2l0aGluIGdyb3cuIGJldHRlciB0aGFuIDAsIGZvciBmaXJlZm94ICovXG4gICAgfVxuLmZjIC5mYy1zY3JvbGxncmlkLXNlY3Rpb24gdGFibGUge1xuICAgICAgaGVpZ2h0OiAxcHg7XG4gICAgICAgIC8qIGZvciBtb3N0IGJyb3dzZXJzLCBpZiBhIGhlaWdodCBpc24ndCBzZXQgb24gdGhlIHRhYmxlLCBjYW4ndCBkbyBsaXF1aWQtaGVpZ2h0IHdpdGhpbiBjZWxscyAqL1xuICAgICAgICAvKiBzZXJ2ZXMgYXMgYSBtaW4taGVpZ2h0LiBoYXJtbGVzcyAqL1xuICAgIH1cbi5mYyAuZmMtc2Nyb2xsZ3JpZC1zZWN0aW9uLWxpcXVpZCA+IHRkIHtcbiAgICAgIGhlaWdodDogMTAwJTsgLyogYmV0dGVyIHRoYW4gYGF1dG9gLCBmb3IgZmlyZWZveCAqL1xuICAgIH1cbi5mYyAuZmMtc2Nyb2xsZ3JpZC1zZWN0aW9uID4gKiB7XG4gICAgYm9yZGVyLXRvcC13aWR0aDogMDtcbiAgICBib3JkZXItbGVmdC13aWR0aDogMDtcbiAgfVxuLmZjIC5mYy1zY3JvbGxncmlkLXNlY3Rpb24taGVhZGVyID4gKixcbiAgLmZjIC5mYy1zY3JvbGxncmlkLXNlY3Rpb24tZm9vdGVyID4gKiB7XG4gICAgYm9yZGVyLWJvdHRvbS13aWR0aDogMDtcbiAgfVxuLmZjIC5mYy1zY3JvbGxncmlkLXNlY3Rpb24tYm9keSB0YWJsZSxcbiAgLmZjIC5mYy1zY3JvbGxncmlkLXNlY3Rpb24tZm9vdGVyIHRhYmxlIHtcbiAgICBib3JkZXItYm90dG9tLXN0eWxlOiBoaWRkZW47IC8qIGhlYWQga2VlcHMgaXRzIGJvdHRvbSBib3JkZXIgdGhvICovXG4gIH1cbi5mYyB7XG5cbiAgLyogc3RpY2tpbmVzcyAqL1xuXG59XG4uZmMgLmZjLXNjcm9sbGdyaWQtc2VjdGlvbi1zdGlja3kgPiAqIHtcbiAgICBiYWNrZ3JvdW5kOiAjZmZmO1xuICAgIGJhY2tncm91bmQ6IHZhcigtLWZjLXBhZ2UtYmctY29sb3IsICNmZmYpO1xuICAgIHBvc2l0aW9uOiBzdGlja3k7XG4gICAgei1pbmRleDogMzsgLyogVE9ETzogdmFyICovXG4gICAgLyogVE9ETzogYm94LXNoYWRvdyB3aGVuIHN0aWNraW5nICovXG4gIH1cbi5mYyAuZmMtc2Nyb2xsZ3JpZC1zZWN0aW9uLWhlYWRlci5mYy1zY3JvbGxncmlkLXNlY3Rpb24tc3RpY2t5ID4gKiB7XG4gICAgdG9wOiAwOyAvKiBiZWNhdXNlIGJvcmRlci1zaGFyaW5nIGNhdXNlcyBhIGdhcCBhdCB0aGUgdG9wICovXG4gICAgICAvKiBUT0RPOiBnaXZlIHNhZmFyaSAtMS4gaGFzIGJ1ZyAqL1xuICB9XG4uZmMgLmZjLXNjcm9sbGdyaWQtc2VjdGlvbi1mb290ZXIuZmMtc2Nyb2xsZ3JpZC1zZWN0aW9uLXN0aWNreSA+ICoge1xuICAgIGJvdHRvbTogMDsgLyoga25vd24gYnVnOiBib3R0b20tc3RpY2tpbmVzcyBkb2Vzbid0IHdvcmsgaW4gc2FmYXJpICovXG4gIH1cbi5mYyAuZmMtc2Nyb2xsZ3JpZC1zdGlja3ktc2hpbSB7IC8qIGZvciBob3Jpem9udGFsIHNjcm9sbGJhciAqL1xuICAgIGhlaWdodDogMXB4OyAvKiBuZWVkcyBoZWlnaHQgdG8gY3JlYXRlIHNjcm9sbGJhcnMgKi9cbiAgICBtYXJnaW4tYm90dG9tOiAtMXB4O1xuICB9XG4uZmMtc3RpY2t5IHsgLyogbm8gLmZjIHdyYXAgYmVjYXVzZSB1c2VkIGFzIGNoaWxkIG9mIGJvZHkgKi9cbiAgcG9zaXRpb246IHN0aWNreTtcbn1cbi5mYyAuZmMtdmlldy1oYXJuZXNzIHtcbiAgICBmbGV4LWdyb3c6IDE7IC8qIGJlY2F1c2UgdGhpcyBoYXJuZXNzIGlzIFdJVEhJTiB0aGUgLmZjJ3MgZmxleGJveCAqL1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgfVxuLmZjIHtcblxuICAvKiB3aGVuIHRoZSBoYXJuZXNzIGNvbnRyb2xzIHRoZSBoZWlnaHQsIG1ha2UgdGhlIHZpZXcgbGlxdWlkICovXG5cbn1cbi5mYyAuZmMtdmlldy1oYXJuZXNzLWFjdGl2ZSA+IC5mYy12aWV3IHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAwO1xuICAgIHJpZ2h0OiAwO1xuICAgIGJvdHRvbTogMDtcbiAgICBsZWZ0OiAwO1xuICB9XG4uZmMgLmZjLWNvbC1oZWFkZXItY2VsbC1jdXNoaW9uIHtcbiAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7IC8qIHgtYnJvd3NlciBmb3Igd2hlbiBzdGlja3kgKHdoZW4gbXVsdGktdGllciBoZWFkZXIpICovXG4gICAgcGFkZGluZzogMnB4IDRweDtcbiAgfVxuLmZjIC5mYy1iZy1ldmVudCxcbiAgLmZjIC5mYy1ub24tYnVzaW5lc3MsXG4gIC5mYyAuZmMtaGlnaGxpZ2h0IHtcbiAgICAvKiB3aWxsIGFsd2F5cyBoYXZlIGEgaGFybmVzcyB3aXRoIHBvc2l0aW9uOnJlbGF0aXZlL2Fic29sdXRlLCBzbyBhYnNvbHV0ZWx5IGV4cGFuZCAqL1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDA7XG4gICAgbGVmdDogMDtcbiAgICByaWdodDogMDtcbiAgICBib3R0b206IDA7XG4gIH1cbi5mYyAuZmMtbm9uLWJ1c2luZXNzIHtcbiAgICBiYWNrZ3JvdW5kOiByZ2JhKDIxNSwgMjE1LCAyMTUsIDAuMyk7XG4gICAgYmFja2dyb3VuZDogdmFyKC0tZmMtbm9uLWJ1c2luZXNzLWNvbG9yLCByZ2JhKDIxNSwgMjE1LCAyMTUsIDAuMykpO1xuICB9XG4uZmMgLmZjLWJnLWV2ZW50IHtcbiAgICBiYWNrZ3JvdW5kOiByZ2IoMTQzLCAyMjMsIDEzMCk7XG4gICAgYmFja2dyb3VuZDogdmFyKC0tZmMtYmctZXZlbnQtY29sb3IsIHJnYigxNDMsIDIyMywgMTMwKSk7XG4gICAgb3BhY2l0eTogMC4zO1xuICAgIG9wYWNpdHk6IHZhcigtLWZjLWJnLWV2ZW50LW9wYWNpdHksIDAuMylcbiAgfVxuLmZjIC5mYy1iZy1ldmVudCAuZmMtZXZlbnQtdGl0bGUge1xuICAgICAgbWFyZ2luOiAuNWVtO1xuICAgICAgZm9udC1zaXplOiAuODVlbTtcbiAgICAgIGZvbnQtc2l6ZTogdmFyKC0tZmMtc21hbGwtZm9udC1zaXplLCAuODVlbSk7XG4gICAgICBmb250LXN0eWxlOiBpdGFsaWM7XG4gICAgfVxuLmZjIC5mYy1oaWdobGlnaHQge1xuICAgIGJhY2tncm91bmQ6IHJnYmEoMTg4LCAyMzIsIDI0MSwgMC4zKTtcbiAgICBiYWNrZ3JvdW5kOiB2YXIoLS1mYy1oaWdobGlnaHQtY29sb3IsIHJnYmEoMTg4LCAyMzIsIDI0MSwgMC4zKSk7XG4gIH1cbi5mYyAuZmMtY2VsbC1zaGFkZWQsXG4gIC5mYyAuZmMtZGF5LWRpc2FibGVkIHtcbiAgICBiYWNrZ3JvdW5kOiByZ2JhKDIwOCwgMjA4LCAyMDgsIDAuMyk7XG4gICAgYmFja2dyb3VuZDogdmFyKC0tZmMtbmV1dHJhbC1iZy1jb2xvciwgcmdiYSgyMDgsIDIwOCwgMjA4LCAwLjMpKTtcbiAgfVxuLyogbGluayByZXNldHMgKi9cbi8qIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gKi9cbmEuZmMtZXZlbnQsXG5hLmZjLWV2ZW50OmhvdmVyIHtcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xufVxuLyogY3Vyc29yICovXG4uZmMtZXZlbnRbaHJlZl0sXG4uZmMtZXZlbnQuZmMtZXZlbnQtZHJhZ2dhYmxlIHtcbiAgY3Vyc29yOiBwb2ludGVyO1xufVxuLyogZXZlbnQgdGV4dCBjb250ZW50ICovXG4vKiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tICovXG4uZmMtZXZlbnQgLmZjLWV2ZW50LW1haW4ge1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICB6LWluZGV4OiAyO1xuICB9XG4vKiBkcmFnZ2luZyAqL1xuLyogLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLSAqL1xuLmZjLWV2ZW50LWRyYWdnaW5nOm5vdCguZmMtZXZlbnQtc2VsZWN0ZWQpIHsgLyogTU9VU0UgKi9cbiAgICBvcGFjaXR5OiAwLjc1O1xuICB9XG4uZmMtZXZlbnQtZHJhZ2dpbmcuZmMtZXZlbnQtc2VsZWN0ZWQgeyAvKiBUT1VDSCAqL1xuICAgIGJveC1zaGFkb3c6IDAgMnB4IDdweCByZ2JhKDAsIDAsIDAsIDAuMyk7XG4gIH1cbi8qIHJlc2l6aW5nICovXG4vKiAtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tICovXG4vKiAoc3ViY2xhc3NlcyBzaG91bGQgaG9uZSBwb3NpdGlvbmluZyBmb3IgdG91Y2ggYW5kIG5vbi10b3VjaCkgKi9cbi5mYy1ldmVudCAuZmMtZXZlbnQtcmVzaXplciB7XG4gICAgZGlzcGxheTogbm9uZTtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgei1pbmRleDogNDtcbiAgfVxuLmZjLWV2ZW50OmhvdmVyLCAvKiBNT1VTRSAqL1xuLmZjLWV2ZW50LXNlbGVjdGVkIHsgLyogVE9VQ0ggKi9cblxufVxuLmZjLWV2ZW50OmhvdmVyIC5mYy1ldmVudC1yZXNpemVyLCAuZmMtZXZlbnQtc2VsZWN0ZWQgLmZjLWV2ZW50LXJlc2l6ZXIge1xuICAgIGRpc3BsYXk6IGJsb2NrO1xuICB9XG4uZmMtZXZlbnQtc2VsZWN0ZWQgLmZjLWV2ZW50LXJlc2l6ZXIge1xuICAgIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgICBib3JkZXItcmFkaXVzOiBjYWxjKHZhcigtLWZjLWV2ZW50LXJlc2l6ZXItZG90LXRvdGFsLXdpZHRoLCA4cHgpIC8gMik7XG4gICAgYm9yZGVyLXdpZHRoOiAxcHg7XG4gICAgYm9yZGVyLXdpZHRoOiB2YXIoLS1mYy1ldmVudC1yZXNpemVyLWRvdC1ib3JkZXItd2lkdGgsIDFweCk7XG4gICAgd2lkdGg6IDhweDtcbiAgICB3aWR0aDogdmFyKC0tZmMtZXZlbnQtcmVzaXplci1kb3QtdG90YWwtd2lkdGgsIDhweCk7XG4gICAgaGVpZ2h0OiA4cHg7XG4gICAgaGVpZ2h0OiB2YXIoLS1mYy1ldmVudC1yZXNpemVyLWRvdC10b3RhbC13aWR0aCwgOHB4KTtcbiAgICBib3JkZXItc3R5bGU6IHNvbGlkO1xuICAgIGJvcmRlci1jb2xvcjogaW5oZXJpdDtcbiAgICBiYWNrZ3JvdW5kOiAjZmZmO1xuICAgIGJhY2tncm91bmQ6IHZhcigtLWZjLXBhZ2UtYmctY29sb3IsICNmZmYpXG5cbiAgICAvKiBleHBhbmQgaGl0IGFyZWEgKi9cblxuICB9XG4uZmMtZXZlbnQtc2VsZWN0ZWQgLmZjLWV2ZW50LXJlc2l6ZXI6YmVmb3JlIHtcbiAgICAgIGNvbnRlbnQ6ICcnO1xuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgdG9wOiAtMjBweDtcbiAgICAgIGxlZnQ6IC0yMHB4O1xuICAgICAgcmlnaHQ6IC0yMHB4O1xuICAgICAgYm90dG9tOiAtMjBweDtcbiAgICB9XG4vKiBzZWxlY3RpbmcgKGFsd2F5cyBUT1VDSCkgKi9cbi8qIC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0gKi9cbi5mYy1ldmVudC1zZWxlY3RlZCB7XG4gIGJveC1zaGFkb3c6IDAgMnB4IDVweCByZ2JhKDAsIDAsIDAsIDAuMilcblxuICAvKiBleHBhbmQgaGl0IGFyZWEgKHN1YmNsYXNzZXMgc2hvdWxkIGV4cGFuZCkgKi9cblxufVxuLmZjLWV2ZW50LXNlbGVjdGVkOmJlZm9yZSB7XG4gICAgY29udGVudDogXCJcIjtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgei1pbmRleDogMztcbiAgICB0b3A6IDA7XG4gICAgbGVmdDogMDtcbiAgICByaWdodDogMDtcbiAgICBib3R0b206IDA7XG4gIH1cbi5mYy1ldmVudC1zZWxlY3RlZCB7XG5cbiAgLyogZGltbWVyIGVmZmVjdCAqL1xuXG59XG4uZmMtZXZlbnQtc2VsZWN0ZWQ6YWZ0ZXIge1xuICAgIGNvbnRlbnQ6IFwiXCI7XG4gICAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjI1KTtcbiAgICBiYWNrZ3JvdW5kOiB2YXIoLS1mYy1ldmVudC1zZWxlY3RlZC1vdmVybGF5LWNvbG9yLCByZ2JhKDAsIDAsIDAsIDAuMjUpKTtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgei1pbmRleDogMTtcblxuICAgIC8qIGFzc3VtZSB0aGVyZSdzIGEgYm9yZGVyIG9uIGFsbCBzaWRlcy4gb3ZlcmNvbWUgaXQuICovXG4gICAgLyogc29tZXRpbWVzIHRoZXJlJ3MgTk9UIGEgYm9yZGVyLCBpbiB3aGljaCBjYXNlIHRoZSBkaW1tZXIgd2lsbCBnbyBvdmVyICovXG4gICAgLyogYW4gYWRqYWNlbnQgYm9yZGVyLCB3aGljaCBsb29rcyBmaW5lLiAqL1xuICAgIHRvcDogLTFweDtcbiAgICBsZWZ0OiAtMXB4O1xuICAgIHJpZ2h0OiAtMXB4O1xuICAgIGJvdHRvbTogLTFweDtcbiAgfVxuLypcbkEgSE9SSVpPTlRBTCBldmVudFxuKi9cbi5mYy1oLWV2ZW50IHsgLyogYWxsb3dlZCB0byBiZSB0b3AtbGV2ZWwgKi9cbiAgZGlzcGxheTogYmxvY2s7XG4gIGJvcmRlcjogMXB4IHNvbGlkICMzNzg4ZDg7XG4gIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWZjLWV2ZW50LWJvcmRlci1jb2xvciwgIzM3ODhkOCk7XG4gIGJhY2tncm91bmQtY29sb3I6ICMzNzg4ZDg7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWZjLWV2ZW50LWJnLWNvbG9yLCAjMzc4OGQ4KVxuXG59XG4uZmMtaC1ldmVudCAuZmMtZXZlbnQtbWFpbiB7XG4gICAgY29sb3I6ICNmZmY7XG4gICAgY29sb3I6IHZhcigtLWZjLWV2ZW50LXRleHQtY29sb3IsICNmZmYpO1xuICB9XG4uZmMtaC1ldmVudCAuZmMtZXZlbnQtbWFpbi1mcmFtZSB7XG4gICAgZGlzcGxheTogZmxleDsgLyogZm9yIG1ha2UgZmMtZXZlbnQtdGl0bGUtY29udGFpbmVyIGV4cGFuZCAqL1xuICB9XG4uZmMtaC1ldmVudCAuZmMtZXZlbnQtdGltZSB7XG4gICAgbWF4LXdpZHRoOiAxMDAlOyAvKiBjbGlwIG92ZXJmbG93IG9uIHRoaXMgZWxlbWVudCAqL1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG4gIH1cbi5mYy1oLWV2ZW50IC5mYy1ldmVudC10aXRsZS1jb250YWluZXIgeyAvKiBzZXJ2ZXMgYXMgYSBjb250YWluZXIgZm9yIHRoZSBzdGlja3kgY3VzaGlvbiAqL1xuICAgIGZsZXgtZ3JvdzogMTtcbiAgICBmbGV4LXNocmluazogMTtcbiAgICBtaW4td2lkdGg6IDA7IC8qIGltcG9ydGFudCBmb3IgYWxsb3dpbmcgdG8gc2hyaW5rIGFsbCB0aGUgd2F5ICovXG4gIH1cbi5mYy1oLWV2ZW50IC5mYy1ldmVudC10aXRsZSB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrOyAvKiBuZWVkIHRoaXMgdG8gYmUgc3RpY2t5IGNyb3NzLWJyb3dzZXIgKi9cbiAgICB2ZXJ0aWNhbC1hbGlnbjogdG9wOyAvKiBmb3Igbm90IG1lc3NpbmcgdXAgbGluZS1oZWlnaHQgKi9cbiAgICBsZWZ0OiAwOyAgLyogZm9yIHN0aWNreSAqL1xuICAgIHJpZ2h0OiAwOyAvKiBmb3Igc3RpY2t5ICovXG4gICAgbWF4LXdpZHRoOiAxMDAlOyAvKiBjbGlwIG92ZXJmbG93IG9uIHRoaXMgZWxlbWVudCAqL1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG4gIH1cbi5mYy1oLWV2ZW50LmZjLWV2ZW50LXNlbGVjdGVkOmJlZm9yZSB7XG4gICAgLyogZXhwYW5kIGhpdCBhcmVhICovXG4gICAgdG9wOiAtMTBweDtcbiAgICBib3R0b206IC0xMHB4O1xuICB9XG4vKiBhZGp1c3QgYm9yZGVyIGFuZCBib3JkZXItcmFkaXVzIChpZiB0aGVyZSBpcyBhbnkpIGZvciBub24tc3RhcnQvZW5kICovXG4uZmMtZGlyZWN0aW9uLWx0ciAuZmMtZGF5Z3JpZC1ibG9jay1ldmVudDpub3QoLmZjLWV2ZW50LXN0YXJ0KSxcbi5mYy1kaXJlY3Rpb24tcnRsIC5mYy1kYXlncmlkLWJsb2NrLWV2ZW50Om5vdCguZmMtZXZlbnQtZW5kKSB7XG4gIGJvcmRlci10b3AtbGVmdC1yYWRpdXM6IDA7XG4gIGJvcmRlci1ib3R0b20tbGVmdC1yYWRpdXM6IDA7XG4gIGJvcmRlci1sZWZ0LXdpZHRoOiAwO1xufVxuLmZjLWRpcmVjdGlvbi1sdHIgLmZjLWRheWdyaWQtYmxvY2stZXZlbnQ6bm90KC5mYy1ldmVudC1lbmQpLFxuLmZjLWRpcmVjdGlvbi1ydGwgLmZjLWRheWdyaWQtYmxvY2stZXZlbnQ6bm90KC5mYy1ldmVudC1zdGFydCkge1xuICBib3JkZXItdG9wLXJpZ2h0LXJhZGl1czogMDtcbiAgYm9yZGVyLWJvdHRvbS1yaWdodC1yYWRpdXM6IDA7XG4gIGJvcmRlci1yaWdodC13aWR0aDogMDtcbn1cbi8qIHJlc2l6ZXJzICovXG4uZmMtaC1ldmVudDpub3QoLmZjLWV2ZW50LXNlbGVjdGVkKSAuZmMtZXZlbnQtcmVzaXplciB7XG4gIHRvcDogMDtcbiAgYm90dG9tOiAwO1xuICB3aWR0aDogOHB4O1xuICB3aWR0aDogdmFyKC0tZmMtZXZlbnQtcmVzaXplci10aGlja25lc3MsIDhweCk7XG59XG4uZmMtZGlyZWN0aW9uLWx0ciAuZmMtaC1ldmVudDpub3QoLmZjLWV2ZW50LXNlbGVjdGVkKSAuZmMtZXZlbnQtcmVzaXplci1zdGFydCxcbi5mYy1kaXJlY3Rpb24tcnRsIC5mYy1oLWV2ZW50Om5vdCguZmMtZXZlbnQtc2VsZWN0ZWQpIC5mYy1ldmVudC1yZXNpemVyLWVuZCB7XG4gIGN1cnNvcjogdy1yZXNpemU7XG4gIGxlZnQ6IC00cHg7XG4gIGxlZnQ6IGNhbGModmFyKC0tZmMtZXZlbnQtcmVzaXplci10aGlja25lc3MsIDhweCkgLyAtMik7XG59XG4uZmMtZGlyZWN0aW9uLWx0ciAuZmMtaC1ldmVudDpub3QoLmZjLWV2ZW50LXNlbGVjdGVkKSAuZmMtZXZlbnQtcmVzaXplci1lbmQsXG4uZmMtZGlyZWN0aW9uLXJ0bCAuZmMtaC1ldmVudDpub3QoLmZjLWV2ZW50LXNlbGVjdGVkKSAuZmMtZXZlbnQtcmVzaXplci1zdGFydCB7XG4gIGN1cnNvcjogZS1yZXNpemU7XG4gIHJpZ2h0OiAtNHB4O1xuICByaWdodDogY2FsYyh2YXIoLS1mYy1ldmVudC1yZXNpemVyLXRoaWNrbmVzcywgOHB4KSAvIC0yKTtcbn1cbi8qIHJlc2l6ZXJzIGZvciBUT1VDSCAqL1xuLmZjLWgtZXZlbnQuZmMtZXZlbnQtc2VsZWN0ZWQgLmZjLWV2ZW50LXJlc2l6ZXIge1xuICB0b3A6IDUwJTtcbiAgbWFyZ2luLXRvcDogLTRweDtcbiAgbWFyZ2luLXRvcDogY2FsYyh2YXIoLS1mYy1ldmVudC1yZXNpemVyLWRvdC10b3RhbC13aWR0aCwgOHB4KSAvIC0yKTtcbn1cbi5mYy1kaXJlY3Rpb24tbHRyIC5mYy1oLWV2ZW50LmZjLWV2ZW50LXNlbGVjdGVkIC5mYy1ldmVudC1yZXNpemVyLXN0YXJ0LFxuLmZjLWRpcmVjdGlvbi1ydGwgLmZjLWgtZXZlbnQuZmMtZXZlbnQtc2VsZWN0ZWQgLmZjLWV2ZW50LXJlc2l6ZXItZW5kIHtcbiAgbGVmdDogLTRweDtcbiAgbGVmdDogY2FsYyh2YXIoLS1mYy1ldmVudC1yZXNpemVyLWRvdC10b3RhbC13aWR0aCwgOHB4KSAvIC0yKTtcbn1cbi5mYy1kaXJlY3Rpb24tbHRyIC5mYy1oLWV2ZW50LmZjLWV2ZW50LXNlbGVjdGVkIC5mYy1ldmVudC1yZXNpemVyLWVuZCxcbi5mYy1kaXJlY3Rpb24tcnRsIC5mYy1oLWV2ZW50LmZjLWV2ZW50LXNlbGVjdGVkIC5mYy1ldmVudC1yZXNpemVyLXN0YXJ0IHtcbiAgcmlnaHQ6IC00cHg7XG4gIHJpZ2h0OiBjYWxjKHZhcigtLWZjLWV2ZW50LXJlc2l6ZXItZG90LXRvdGFsLXdpZHRoLCA4cHgpIC8gLTIpO1xufVxuLmZjIC5mYy1wb3BvdmVyIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgei1pbmRleDogOTk5OTtcbiAgICBib3gtc2hhZG93OiAwIDJweCA2cHggcmdiYSgwLDAsMCwuMTUpO1xuICB9XG4uZmMgLmZjLXBvcG92ZXItaGVhZGVyIHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAganVzdGlmeS1jb250ZW50OiBzcGFjZS1iZXR3ZWVuO1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgcGFkZGluZzogM3B4IDRweDtcbiAgfVxuLmZjIC5mYy1wb3BvdmVyLXRpdGxlIHtcbiAgICBtYXJnaW46IDAgMnB4O1xuICB9XG4uZmMgLmZjLXBvcG92ZXItY2xvc2Uge1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICBvcGFjaXR5OiAwLjY1O1xuICAgIGZvbnQtc2l6ZTogMS4xZW07XG4gIH1cbi5mYy10aGVtZS1zdGFuZGFyZCAuZmMtcG9wb3ZlciB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgI2RkZDtcbiAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1mYy1ib3JkZXItY29sb3IsICNkZGQpO1xuICAgIGJhY2tncm91bmQ6ICNmZmY7XG4gICAgYmFja2dyb3VuZDogdmFyKC0tZmMtcGFnZS1iZy1jb2xvciwgI2ZmZik7XG4gIH1cbi5mYy10aGVtZS1zdGFuZGFyZCAuZmMtcG9wb3Zlci1oZWFkZXIge1xuICAgIGJhY2tncm91bmQ6IHJnYmEoMjA4LCAyMDgsIDIwOCwgMC4zKTtcbiAgICBiYWNrZ3JvdW5kOiB2YXIoLS1mYy1uZXV0cmFsLWJnLWNvbG9yLCByZ2JhKDIwOCwgMjA4LCAyMDgsIDAuMykpO1xuICB9XG4iXX0= */");
+
+/***/ }),
+
+/***/ "FdF9":
+/*!**********************************************************!*\
+  !*** ./node_modules/preact/compat/dist/compat.module.js ***!
+  \**********************************************************/
+/*! exports provided: useState, useReducer, useEffect, useLayoutEffect, useRef, useImperativeHandle, useMemo, useCallback, useContext, useDebugValue, useErrorBoundary, createElement, createContext, createRef, Fragment, Component, default, version, Children, render, hydrate, unmountComponentAtNode, createPortal, createFactory, cloneElement, isValidElement, findDOMNode, PureComponent, memo, forwardRef, flushSync, unstable_batchedUpdates, StrictMode, Suspense, SuspenseList, lazy, __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "version", function() { return nn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Children", function() { return k; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return B; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hydrate", function() { return H; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unmountComponentAtNode", function() { return un; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createPortal", function() { return W; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createFactory", function() { return tn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cloneElement", function() { return rn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "isValidElement", function() { return en; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "findDOMNode", function() { return on; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PureComponent", function() { return E; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "memo", function() { return g; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "forwardRef", function() { return x; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "flushSync", function() { return cn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unstable_batchedUpdates", function() { return ln; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "StrictMode", function() { return fn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Suspense", function() { return L; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SuspenseList", function() { return M; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "lazy", function() { return F; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED", function() { return X; });
+/* harmony import */ var preact_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact/hooks */ "MOxe");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useState", function() { return preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useState"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useReducer", function() { return preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useReducer"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useEffect", function() { return preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useEffect"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useLayoutEffect", function() { return preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useRef", function() { return preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useRef"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useImperativeHandle", function() { return preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useImperativeHandle"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useMemo", function() { return preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useMemo"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useCallback", function() { return preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useCallback"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useContext", function() { return preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useContext"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useDebugValue", function() { return preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useDebugValue"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "useErrorBoundary", function() { return preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useErrorBoundary"]; });
+
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! preact */ "2mXy");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createElement", function() { return preact__WEBPACK_IMPORTED_MODULE_1__["createElement"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createContext", function() { return preact__WEBPACK_IMPORTED_MODULE_1__["createContext"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createRef", function() { return preact__WEBPACK_IMPORTED_MODULE_1__["createRef"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Fragment", function() { return preact__WEBPACK_IMPORTED_MODULE_1__["Fragment"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Component", function() { return preact__WEBPACK_IMPORTED_MODULE_1__["Component"]; });
+
+function S(n,t){for(var e in t)n[e]=t[e];return n}function C(n,t){for(var e in n)if("__source"!==e&&!(e in t))return!0;for(var r in t)if("__source"!==r&&n[r]!==t[r])return!0;return!1}function E(n){this.props=n}function g(n,t){function e(n){var e=this.props.ref,r=e==n.ref;return!r&&e&&(e.call?e(null):e.current=null),t?!t(this.props,n)||!r:C(this.props,n)}function r(t){return this.shouldComponentUpdate=e,Object(preact__WEBPACK_IMPORTED_MODULE_1__["createElement"])(n,t)}return r.displayName="Memo("+(n.displayName||n.name)+")",r.prototype.isReactComponent=!0,r.__f=!0,r}(E.prototype=new preact__WEBPACK_IMPORTED_MODULE_1__["Component"]).isPureReactComponent=!0,E.prototype.shouldComponentUpdate=function(n,t){return C(this.props,n)||C(this.state,t)};var w=preact__WEBPACK_IMPORTED_MODULE_1__["options"].__b;preact__WEBPACK_IMPORTED_MODULE_1__["options"].__b=function(n){n.type&&n.type.__f&&n.ref&&(n.props.ref=n.ref,n.ref=null),w&&w(n)};var R="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.forward_ref")||3911;function x(n){function t(t,e){var r=S({},t);return delete r.ref,n(r,(e=t.ref||e)&&("object"!=typeof e||"current"in e)?e:null)}return t.$$typeof=R,t.render=t,t.prototype.isReactComponent=t.__f=!0,t.displayName="ForwardRef("+(n.displayName||n.name)+")",t}var N=function(n,t){return null==n?null:Object(preact__WEBPACK_IMPORTED_MODULE_1__["toChildArray"])(Object(preact__WEBPACK_IMPORTED_MODULE_1__["toChildArray"])(n).map(t))},k={map:N,forEach:N,count:function(n){return n?Object(preact__WEBPACK_IMPORTED_MODULE_1__["toChildArray"])(n).length:0},only:function(n){var t=Object(preact__WEBPACK_IMPORTED_MODULE_1__["toChildArray"])(n);if(1!==t.length)throw"Children.only";return t[0]},toArray:preact__WEBPACK_IMPORTED_MODULE_1__["toChildArray"]},A=preact__WEBPACK_IMPORTED_MODULE_1__["options"].__e;preact__WEBPACK_IMPORTED_MODULE_1__["options"].__e=function(n,t,e){if(n.then)for(var r,u=t;u=u.__;)if((r=u.__c)&&r.__c)return null==t.__e&&(t.__e=e.__e,t.__k=e.__k),r.__c(n,t);A(n,t,e)};var O=preact__WEBPACK_IMPORTED_MODULE_1__["options"].unmount;function L(){this.__u=0,this.t=null,this.__b=null}function U(n){var t=n.__.__c;return t&&t.__e&&t.__e(n)}function F(n){var t,e,r;function u(u){if(t||(t=n()).then(function(n){e=n.default||n},function(n){r=n}),r)throw r;if(!e)throw t;return Object(preact__WEBPACK_IMPORTED_MODULE_1__["createElement"])(e,u)}return u.displayName="Lazy",u.__f=!0,u}function M(){this.u=null,this.o=null}preact__WEBPACK_IMPORTED_MODULE_1__["options"].unmount=function(n){var t=n.__c;t&&t.__R&&t.__R(),t&&!0===n.__h&&(n.type=null),O&&O(n)},(L.prototype=new preact__WEBPACK_IMPORTED_MODULE_1__["Component"]).__c=function(n,t){var e=t.__c,r=this;null==r.t&&(r.t=[]),r.t.push(e);var u=U(r.__v),o=!1,i=function(){o||(o=!0,e.__R=null,u?u(l):l())};e.__R=i;var l=function(){if(!--r.__u){if(r.state.__e){var n=r.state.__e;r.__v.__k[0]=function n(t,e,r){return t&&(t.__v=null,t.__k=t.__k&&t.__k.map(function(t){return n(t,e,r)}),t.__c&&t.__c.__P===e&&(t.__e&&r.insertBefore(t.__e,t.__d),t.__c.__e=!0,t.__c.__P=r)),t}(n,n.__c.__P,n.__c.__O)}var t;for(r.setState({__e:r.__b=null});t=r.t.pop();)t.forceUpdate()}},c=!0===t.__h;r.__u++||c||r.setState({__e:r.__b=r.__v.__k[0]}),n.then(i,i)},L.prototype.componentWillUnmount=function(){this.t=[]},L.prototype.render=function(n,t){if(this.__b){if(this.__v.__k){var e=document.createElement("div"),r=this.__v.__k[0].__c;this.__v.__k[0]=function n(t,e,r){return t&&(t.__c&&t.__c.__H&&(t.__c.__H.__.forEach(function(n){"function"==typeof n.__c&&n.__c()}),t.__c.__H=null),null!=(t=S({},t)).__c&&(t.__c.__P===r&&(t.__c.__P=e),t.__c=null),t.__k=t.__k&&t.__k.map(function(t){return n(t,e,r)})),t}(this.__b,e,r.__O=r.__P)}this.__b=null}var u=t.__e&&Object(preact__WEBPACK_IMPORTED_MODULE_1__["createElement"])(preact__WEBPACK_IMPORTED_MODULE_1__["Fragment"],null,n.fallback);return u&&(u.__h=null),[Object(preact__WEBPACK_IMPORTED_MODULE_1__["createElement"])(preact__WEBPACK_IMPORTED_MODULE_1__["Fragment"],null,t.__e?null:n.children),u]};var T=function(n,t,e){if(++e[1]===e[0]&&n.o.delete(t),n.props.revealOrder&&("t"!==n.props.revealOrder[0]||!n.o.size))for(e=n.u;e;){for(;e.length>3;)e.pop()();if(e[1]<e[0])break;n.u=e=e[2]}};function D(n){return this.getChildContext=function(){return n.context},n.children}function I(n){var t=this,e=n.i;t.componentWillUnmount=function(){Object(preact__WEBPACK_IMPORTED_MODULE_1__["render"])(null,t.l),t.l=null,t.i=null},t.i&&t.i!==e&&t.componentWillUnmount(),n.__v?(t.l||(t.i=e,t.l={nodeType:1,parentNode:e,childNodes:[],appendChild:function(n){this.childNodes.push(n),t.i.appendChild(n)},insertBefore:function(n,e){this.childNodes.push(n),t.i.appendChild(n)},removeChild:function(n){this.childNodes.splice(this.childNodes.indexOf(n)>>>1,1),t.i.removeChild(n)}}),Object(preact__WEBPACK_IMPORTED_MODULE_1__["render"])(Object(preact__WEBPACK_IMPORTED_MODULE_1__["createElement"])(D,{context:t.context},n.__v),t.l)):t.l&&t.componentWillUnmount()}function W(n,t){return Object(preact__WEBPACK_IMPORTED_MODULE_1__["createElement"])(I,{__v:n,i:t})}(M.prototype=new preact__WEBPACK_IMPORTED_MODULE_1__["Component"]).__e=function(n){var t=this,e=U(t.__v),r=t.o.get(n);return r[0]++,function(u){var o=function(){t.props.revealOrder?(r.push(u),T(t,n,r)):u()};e?e(o):o()}},M.prototype.render=function(n){this.u=null,this.o=new Map;var t=Object(preact__WEBPACK_IMPORTED_MODULE_1__["toChildArray"])(n.children);n.revealOrder&&"b"===n.revealOrder[0]&&t.reverse();for(var e=t.length;e--;)this.o.set(t[e],this.u=[1,0,this.u]);return n.children},M.prototype.componentDidUpdate=M.prototype.componentDidMount=function(){var n=this;this.o.forEach(function(t,e){T(n,e,t)})};var j="undefined"!=typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103,P=/^(?:accent|alignment|arabic|baseline|cap|clip(?!PathU)|color|dominant|fill|flood|font|glyph(?!R)|horiz|marker(?!H|W|U)|overline|paint|stop|strikethrough|stroke|text(?!L)|underline|unicode|units|v|vector|vert|word|writing|x(?!C))[A-Z]/,V="undefined"!=typeof document,z=function(n){return("undefined"!=typeof Symbol&&"symbol"==typeof Symbol()?/fil|che|rad/i:/fil|che|ra/i).test(n)};function B(n,t,e){return null==t.__k&&(t.textContent=""),Object(preact__WEBPACK_IMPORTED_MODULE_1__["render"])(n,t),"function"==typeof e&&e(),n?n.__c:null}function H(n,t,e){return Object(preact__WEBPACK_IMPORTED_MODULE_1__["hydrate"])(n,t),"function"==typeof e&&e(),n?n.__c:null}preact__WEBPACK_IMPORTED_MODULE_1__["Component"].prototype.isReactComponent={},["componentWillMount","componentWillReceiveProps","componentWillUpdate"].forEach(function(n){Object.defineProperty(preact__WEBPACK_IMPORTED_MODULE_1__["Component"].prototype,n,{configurable:!0,get:function(){return this["UNSAFE_"+n]},set:function(t){Object.defineProperty(this,n,{configurable:!0,writable:!0,value:t})}})});var Z=preact__WEBPACK_IMPORTED_MODULE_1__["options"].event;function Y(){}function $(){return this.cancelBubble}function q(){return this.defaultPrevented}preact__WEBPACK_IMPORTED_MODULE_1__["options"].event=function(n){return Z&&(n=Z(n)),n.persist=Y,n.isPropagationStopped=$,n.isDefaultPrevented=q,n.nativeEvent=n};var G,J={configurable:!0,get:function(){return this.class}},K=preact__WEBPACK_IMPORTED_MODULE_1__["options"].vnode;preact__WEBPACK_IMPORTED_MODULE_1__["options"].vnode=function(n){var t=n.type,e=n.props,r=e;if("string"==typeof t){var u=-1===t.indexOf("-");for(var o in r={},e){var i=e[o];V&&"children"===o&&"noscript"===t||"value"===o&&"defaultValue"in e&&null==i||("defaultValue"===o&&"value"in e&&null==e.value?o="value":"download"===o&&!0===i?i="":/ondoubleclick/i.test(o)?o="ondblclick":/^onchange(textarea|input)/i.test(o+t)&&!z(e.type)?o="oninput":/^on(Ani|Tra|Tou|BeforeInp)/.test(o)?o=o.toLowerCase():u&&P.test(o)?o=o.replace(/[A-Z0-9]/,"-$&").toLowerCase():null===i&&(i=void 0),r[o]=i)}"select"==t&&r.multiple&&Array.isArray(r.value)&&(r.value=Object(preact__WEBPACK_IMPORTED_MODULE_1__["toChildArray"])(e.children).forEach(function(n){n.props.selected=-1!=r.value.indexOf(n.props.value)})),"select"==t&&null!=r.defaultValue&&(r.value=Object(preact__WEBPACK_IMPORTED_MODULE_1__["toChildArray"])(e.children).forEach(function(n){n.props.selected=r.multiple?-1!=r.defaultValue.indexOf(n.props.value):r.defaultValue==n.props.value})),n.props=r}t&&e.class!=e.className&&(J.enumerable="className"in e,null!=e.className&&(r.class=e.className),Object.defineProperty(r,"className",J)),n.$$typeof=j,K&&K(n)};var Q=preact__WEBPACK_IMPORTED_MODULE_1__["options"].__r;preact__WEBPACK_IMPORTED_MODULE_1__["options"].__r=function(n){Q&&Q(n),G=n.__c};var X={ReactCurrentDispatcher:{current:{readContext:function(n){return G.__n[n.__c].props.value}}}},nn="17.0.2";function tn(n){return preact__WEBPACK_IMPORTED_MODULE_1__["createElement"].bind(null,n)}function en(n){return!!n&&n.$$typeof===j}function rn(n){return en(n)?preact__WEBPACK_IMPORTED_MODULE_1__["cloneElement"].apply(null,arguments):n}function un(n){return!!n.__k&&(Object(preact__WEBPACK_IMPORTED_MODULE_1__["render"])(null,n),!0)}function on(n){return n&&(n.base||1===n.nodeType&&n)||null}var ln=function(n,t){return n(t)},cn=function(n,t){return n(t)},fn=preact__WEBPACK_IMPORTED_MODULE_1__["Fragment"];/* harmony default export */ __webpack_exports__["default"] = ({useState:preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useState"],useReducer:preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useReducer"],useEffect:preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useEffect"],useLayoutEffect:preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useLayoutEffect"],useRef:preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useRef"],useImperativeHandle:preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useImperativeHandle"],useMemo:preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useMemo"],useCallback:preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useCallback"],useContext:preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useContext"],useDebugValue:preact_hooks__WEBPACK_IMPORTED_MODULE_0__["useDebugValue"],version:"17.0.2",Children:k,render:B,hydrate:H,unmountComponentAtNode:un,createPortal:W,createElement:preact__WEBPACK_IMPORTED_MODULE_1__["createElement"],createContext:preact__WEBPACK_IMPORTED_MODULE_1__["createContext"],createFactory:tn,cloneElement:rn,createRef:preact__WEBPACK_IMPORTED_MODULE_1__["createRef"],Fragment:preact__WEBPACK_IMPORTED_MODULE_1__["Fragment"],isValidElement:en,findDOMNode:on,Component:preact__WEBPACK_IMPORTED_MODULE_1__["Component"],PureComponent:E,memo:g,forwardRef:x,flushSync:cn,unstable_batchedUpdates:ln,StrictMode:preact__WEBPACK_IMPORTED_MODULE_1__["Fragment"],Suspense:L,SuspenseList:M,lazy:F,__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:X});
+//# sourceMappingURL=compat.module.js.map
+
 
 /***/ }),
 
@@ -9323,7 +9945,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!******************************************************************************************!*\
   !*** ./node_modules/@fullcalendar/angular/__ivy_ngcc__/fesm2015/fullcalendar-angular.js ***!
   \******************************************************************************************/
-/*! exports provided: Component, Fragment, createContext, createElement, createRef, flushToDom, render, unmountComponentAtNode, BASE_OPTION_DEFAULTS, BASE_OPTION_REFINERS, BaseComponent, BgEvent, CalendarApi, CalendarContent, CalendarDataManager, CalendarDataProvider, CalendarRoot, ContentHook, CustomContentRenderContext, DateComponent, DateEnv, DateProfileGenerator, DayCellContent, DayCellRoot, DayHeader, DaySeriesModel, DayTableModel, DelayedRunner, ElementDragging, ElementScrollController, Emitter, EventApi, EventRoot, EventSourceApi, Interaction, MountHook, NamedTimeZoneImpl, NowIndicatorRoot, NowTimer, PositionCache, RefMap, RenderHook, ScrollController, ScrollResponder, Scroller, SimpleScrollGrid, Slicer, Splitter, StandardEvent, TableDateCell, TableDowCell, Theme, ViewApi, ViewContextType, ViewRoot, WeekNumberRoot, WindowScrollController, addDays, addDurations, addMs, addWeeks, allowContextMenu, allowSelection, applyMutationToEventStore, applyStyle, applyStyleProp, asCleanDays, asRoughMinutes, asRoughMs, asRoughSeconds, buildClassNameNormalizer, buildEventApis, buildEventRangeKey, buildHashFromArray, buildNavLinkData, buildSegCompareObj, buildSegTimeText, collectFromHash, combineEventUis, compareByFieldSpec, compareByFieldSpecs, compareNumbers, compareObjs, computeEdges, computeFallbackHeaderFormat, computeHeightAndMargins, computeInnerRect, computeRect, computeSegDraggable, computeSegEndResizable, computeSegStartResizable, computeShrinkWidth, computeSmallestCellWidth, computeVisibleDayRange, config, constrainPoint, createDuration, createEmptyEventStore, createEventInstance, createEventUi, createFormatter, createPlugin, diffDates, diffDayAndTime, diffDays, diffPoints, diffWeeks, diffWholeDays, diffWholeWeeks, disableCursor, elementClosest, elementMatches, enableCursor, eventTupleToStore, filterEventStoreDefs, filterHash, findDirectChildren, findElements, flexibleCompare, formatDate, formatDayString, formatIsoTimeString, formatRange, getAllowYScrolling, getCanVGrowWithinCell, getClippingParents, getDateMeta, getDayClassNames, getDefaultEventEnd, getElSeg, getEventClassNames, getIsRtlScrollbarOnLeft, getRectCenter, getRelevantEvents, getScrollGridClassNames, getScrollbarWidths, getSectionClassNames, getSectionHasLiquidHeight, getSegMeta, getSlotClassNames, getStickyFooterScrollbar, getStickyHeaderDates, getUnequalProps, globalLocales, globalPlugins, greatestDurationDenominator, guid, hasBgRendering, hasShrinkWidth, identity, interactionSettingsStore, interactionSettingsToStore, intersectRanges, intersectRects, isArraysEqual, isColPropsEqual, isDateSpansEqual, isInt, isInteractionValid, isMultiDayRange, isPropsEqual, isPropsValid, isValidDate, listenBySelector, mapHash, memoize, memoizeArraylike, memoizeHashlike, memoizeObjArg, mergeEventStores, multiplyDuration, padStart, parseBusinessHours, parseClassNames, parseDragMeta, parseEventDef, parseFieldSpecs, parseMarker, pointInsideRect, preventContextMenu, preventDefault, preventSelection, rangeContainsMarker, rangeContainsRange, rangesEqual, rangesIntersect, refineEventDef, refineProps, removeElement, removeExact, renderChunkContent, renderFill, renderMicroColGroup, renderScrollShim, requestJson, sanitizeShrinkWidth, setElSeg, setRef, sliceEventStore, sliceEvents, sortEventSegs, startOfDay, translateRect, triggerDateSelect, unpromisify, version, whenTransitionDone, wholeDivideDurations, Calendar, FullCalendarComponent, FullCalendarModule */
+/*! exports provided: Component, Fragment, createContext, createElement, createPortal, createRef, flushToDom, render, unmountComponentAtNode, BASE_OPTION_DEFAULTS, BASE_OPTION_REFINERS, BaseComponent, BgEvent, CalendarApi, CalendarContent, CalendarDataManager, CalendarDataProvider, CalendarRoot, ContentHook, CustomContentRenderContext, DateComponent, DateEnv, DateProfileGenerator, DayCellContent, DayCellRoot, DayHeader, DaySeriesModel, DayTableModel, DelayedRunner, ElementDragging, ElementScrollController, Emitter, EventApi, EventRoot, EventSourceApi, Interaction, MoreLinkRoot, MountHook, NamedTimeZoneImpl, NowIndicatorRoot, NowTimer, PositionCache, RefMap, RenderHook, ScrollController, ScrollResponder, Scroller, SegHierarchy, SimpleScrollGrid, Slicer, Splitter, StandardEvent, TableDateCell, TableDowCell, Theme, ViewApi, ViewContextType, ViewRoot, WeekNumberRoot, WindowScrollController, addDays, addDurations, addMs, addWeeks, allowContextMenu, allowSelection, applyMutationToEventStore, applyStyle, applyStyleProp, asCleanDays, asRoughMinutes, asRoughMs, asRoughSeconds, binarySearch, buildClassNameNormalizer, buildEntryKey, buildEventApis, buildEventRangeKey, buildHashFromArray, buildIsoString, buildNavLinkData, buildSegCompareObj, buildSegTimeText, collectFromHash, combineEventUis, compareByFieldSpec, compareByFieldSpecs, compareNumbers, compareObjs, computeEarliestSegStart, computeEdges, computeFallbackHeaderFormat, computeHeightAndMargins, computeInnerRect, computeRect, computeSegDraggable, computeSegEndResizable, computeSegStartResizable, computeShrinkWidth, computeSmallestCellWidth, computeVisibleDayRange, config, constrainPoint, createDuration, createEmptyEventStore, createEventInstance, createEventUi, createFormatter, createPlugin, diffDates, diffDayAndTime, diffDays, diffPoints, diffWeeks, diffWholeDays, diffWholeWeeks, disableCursor, elementClosest, elementMatches, enableCursor, eventTupleToStore, filterEventStoreDefs, filterHash, findDirectChildren, findElements, flexibleCompare, formatDate, formatDayString, formatIsoTimeString, formatRange, getAllowYScrolling, getCanVGrowWithinCell, getClippingParents, getDateMeta, getDayClassNames, getDefaultEventEnd, getElRoot, getElSeg, getEntrySpanEnd, getEventClassNames, getEventTargetViaRoot, getIsRtlScrollbarOnLeft, getRectCenter, getRelevantEvents, getScrollGridClassNames, getScrollbarWidths, getSectionClassNames, getSectionHasLiquidHeight, getSegMeta, getSlotClassNames, getStickyFooterScrollbar, getStickyHeaderDates, getUnequalProps, globalLocales, globalPlugins, greatestDurationDenominator, groupIntersectingEntries, guid, hasBgRendering, hasShrinkWidth, identity, interactionSettingsStore, interactionSettingsToStore, intersectRanges, intersectRects, intersectSpans, isArraysEqual, isColPropsEqual, isDateSelectionValid, isDateSpansEqual, isInt, isInteractionValid, isMultiDayRange, isPropsEqual, isPropsValid, isValidDate, joinSpans, listenBySelector, mapHash, memoize, memoizeArraylike, memoizeHashlike, memoizeObjArg, mergeEventStores, multiplyDuration, padStart, parseBusinessHours, parseClassNames, parseDragMeta, parseEventDef, parseFieldSpecs, parseMarker, pointInsideRect, preventContextMenu, preventDefault, preventSelection, rangeContainsMarker, rangeContainsRange, rangesEqual, rangesIntersect, refineEventDef, refineProps, removeElement, removeExact, renderChunkContent, renderFill, renderMicroColGroup, renderScrollShim, requestJson, sanitizeShrinkWidth, setElSeg, setRef, sliceEventStore, sliceEvents, sortEventSegs, startOfDay, translateRect, triggerDateSelect, unpromisify, version, whenTransitionDone, wholeDivideDurations, Calendar, FullCalendarComponent, FullCalendarModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9341,6 +9963,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createContext", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["createContext"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createElement", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["createElement"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createPortal", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["createPortal"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createRef", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["createRef"]; });
 
@@ -9404,6 +10028,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Interaction", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["Interaction"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MoreLinkRoot", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["MoreLinkRoot"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MountHook", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["MountHook"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NamedTimeZoneImpl", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["NamedTimeZoneImpl"]; });
@@ -9423,6 +10049,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScrollResponder", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["ScrollResponder"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Scroller", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["Scroller"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SegHierarchy", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["SegHierarchy"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SimpleScrollGrid", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["SimpleScrollGrid"]; });
 
@@ -9474,13 +10102,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "asRoughSeconds", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["asRoughSeconds"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "binarySearch", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["binarySearch"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "buildClassNameNormalizer", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["buildClassNameNormalizer"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "buildEntryKey", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["buildEntryKey"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "buildEventApis", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["buildEventApis"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "buildEventRangeKey", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["buildEventRangeKey"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "buildHashFromArray", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["buildHashFromArray"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "buildIsoString", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["buildIsoString"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "buildNavLinkData", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["buildNavLinkData"]; });
 
@@ -9499,6 +10133,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "compareNumbers", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["compareNumbers"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "compareObjs", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["compareObjs"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "computeEarliestSegStart", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["computeEarliestSegStart"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "computeEdges", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["computeEdges"]; });
 
@@ -9592,9 +10228,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getDefaultEventEnd", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["getDefaultEventEnd"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getElRoot", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["getElRoot"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getElSeg", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["getElSeg"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getEntrySpanEnd", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["getEntrySpanEnd"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getEventClassNames", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["getEventClassNames"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getEventTargetViaRoot", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["getEventTargetViaRoot"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getIsRtlScrollbarOnLeft", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["getIsRtlScrollbarOnLeft"]; });
 
@@ -9626,6 +10268,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "greatestDurationDenominator", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["greatestDurationDenominator"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "groupIntersectingEntries", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["groupIntersectingEntries"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "guid", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["guid"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "hasBgRendering", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["hasBgRendering"]; });
@@ -9642,9 +10286,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "intersectRects", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["intersectRects"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "intersectSpans", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["intersectSpans"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isArraysEqual", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["isArraysEqual"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isColPropsEqual", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["isColPropsEqual"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isDateSelectionValid", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["isDateSelectionValid"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isDateSpansEqual", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["isDateSpansEqual"]; });
 
@@ -9659,6 +10307,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isPropsValid", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["isPropsValid"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isValidDate", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["isValidDate"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "joinSpans", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["joinSpans"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "listenBySelector", function() { return _fullcalendar_core__WEBPACK_IMPORTED_MODULE_2__["listenBySelector"]; });
 
@@ -9884,7 +10534,7 @@ class FullCalendarComponent {
     }
 }
 FullCalendarComponent.ɵfac = function FullCalendarComponent_Factory(t) { return new (t || FullCalendarComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])); };
-FullCalendarComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: FullCalendarComponent, selectors: [["full-calendar"]], inputs: { options: "options", deepChangeDetection: "deepChangeDetection" }, decls: 0, vars: 0, template: function FullCalendarComponent_Template(rf, ctx) { }, styles: ["@charset \"UTF-8\";.fc-not-allowed,.fc-not-allowed .fc-event{cursor:not-allowed}.fc-unselectable{-moz-user-select:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}.fc{display:flex;flex-direction:column;font-size:1em}.fc,.fc *,.fc :after,.fc :before{box-sizing:border-box}.fc table{border-collapse:collapse;border-spacing:0;font-size:1em}.fc th{text-align:center}.fc td,.fc th{padding:0;vertical-align:top}.fc a[data-navlink]{cursor:pointer}.fc a[data-navlink]:hover{text-decoration:underline}.fc-direction-ltr{direction:ltr;text-align:left}.fc-direction-rtl{direction:rtl;text-align:right}.fc-theme-standard td,.fc-theme-standard th{border:1px solid #ddd;border:1px solid var(--fc-border-color,#ddd)}.fc-liquid-hack td,.fc-liquid-hack th{position:relative}@font-face{font-family:fcicons;font-style:normal;font-weight:400;src:url(\"data:application/x-font-ttf;charset=utf-8;base64,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\") format(\"truetype\")}.fc-icon{-moz-osx-font-smoothing:grayscale;-moz-user-select:none;-webkit-font-smoothing:antialiased;-webkit-user-select:none;display:inline-block;font-family:fcicons!important;font-style:normal;font-variant:normal;font-weight:400;height:1em;line-height:1;speak:none;text-align:center;text-transform:none;user-select:none;width:1em}.fc-icon-chevron-left:before{content:\"\uE900\"}.fc-icon-chevron-right:before{content:\"\uE901\"}.fc-icon-chevrons-left:before{content:\"\uE902\"}.fc-icon-chevrons-right:before{content:\"\uE903\"}.fc-icon-minus-square:before{content:\"\uE904\"}.fc-icon-plus-square:before{content:\"\uE905\"}.fc-icon-x:before{content:\"\uE906\"}.fc .fc-button{border-radius:0;font-family:inherit;font-size:inherit;line-height:inherit;margin:0;overflow:visible;text-transform:none}.fc .fc-button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}.fc .fc-button{-webkit-appearance:button}.fc .fc-button:not(:disabled){cursor:pointer}.fc .fc-button::-moz-focus-inner{border-style:none;padding:0}.fc .fc-button{-moz-user-select:none;-webkit-user-select:none;background-color:transparent;border:1px solid transparent;border-radius:.25em;display:inline-block;font-size:1em;font-weight:400;line-height:1.5;padding:.4em .65em;text-align:center;user-select:none;vertical-align:middle}.fc .fc-button:hover{text-decoration:none}.fc .fc-button:focus{box-shadow:0 0 0 .2rem rgba(44,62,80,.25);outline:0}.fc .fc-button:disabled{opacity:.65}.fc .fc-button-primary{background-color:#2c3e50;background-color:var(--fc-button-bg-color,#2c3e50);border-color:#2c3e50;border-color:var(--fc-button-border-color,#2c3e50);color:#fff;color:var(--fc-button-text-color,#fff)}.fc .fc-button-primary:hover{background-color:#1e2b37;background-color:var(--fc-button-hover-bg-color,#1e2b37);border-color:#1a252f;border-color:var(--fc-button-hover-border-color,#1a252f);color:#fff;color:var(--fc-button-text-color,#fff)}.fc .fc-button-primary:disabled{background-color:#2c3e50;background-color:var(--fc-button-bg-color,#2c3e50);border-color:#2c3e50;border-color:var(--fc-button-border-color,#2c3e50);color:#fff;color:var(--fc-button-text-color,#fff)}.fc .fc-button-primary:focus{box-shadow:0 0 0 .2rem rgba(76,91,106,.5)}.fc .fc-button-primary:not(:disabled).fc-button-active,.fc .fc-button-primary:not(:disabled):active{background-color:#1a252f;background-color:var(--fc-button-active-bg-color,#1a252f);border-color:#151e27;border-color:var(--fc-button-active-border-color,#151e27);color:#fff;color:var(--fc-button-text-color,#fff)}.fc .fc-button-primary:not(:disabled).fc-button-active:focus,.fc .fc-button-primary:not(:disabled):active:focus{box-shadow:0 0 0 .2rem rgba(76,91,106,.5)}.fc .fc-button .fc-icon{font-size:1.5em;vertical-align:middle}.fc .fc-button-group{display:inline-flex;position:relative;vertical-align:middle}.fc .fc-button-group>.fc-button{flex:1 1 auto;position:relative}.fc .fc-button-group>.fc-button.fc-button-active,.fc .fc-button-group>.fc-button:active,.fc .fc-button-group>.fc-button:focus,.fc .fc-button-group>.fc-button:hover{z-index:1}.fc-direction-ltr .fc-button-group>.fc-button:not(:first-child){border-bottom-left-radius:0;border-top-left-radius:0;margin-left:-1px}.fc-direction-ltr .fc-button-group>.fc-button:not(:last-child){border-bottom-right-radius:0;border-top-right-radius:0}.fc-direction-rtl .fc-button-group>.fc-button:not(:first-child){border-bottom-right-radius:0;border-top-right-radius:0;margin-right:-1px}.fc-direction-rtl .fc-button-group>.fc-button:not(:last-child){border-bottom-left-radius:0;border-top-left-radius:0}.fc .fc-toolbar{align-items:center;display:flex;justify-content:space-between}.fc .fc-toolbar.fc-header-toolbar{margin-bottom:1.5em}.fc .fc-toolbar.fc-footer-toolbar{margin-top:1.5em}.fc .fc-toolbar-title{font-size:1.75em;margin:0}.fc-direction-ltr .fc-toolbar>*>:not(:first-child){margin-left:.75em}.fc-direction-rtl .fc-toolbar>*>:not(:first-child){margin-right:.75em}.fc-direction-rtl .fc-toolbar-ltr{flex-direction:row-reverse}.fc .fc-scroller{-webkit-overflow-scrolling:touch;position:relative}.fc .fc-scroller-liquid{height:100%}.fc .fc-scroller-liquid-absolute{bottom:0;left:0;position:absolute;right:0;top:0}.fc .fc-scroller-harness{direction:ltr;overflow:hidden;position:relative}.fc .fc-scroller-harness-liquid{height:100%}.fc-direction-rtl .fc-scroller-harness>.fc-scroller{direction:rtl}.fc-theme-standard .fc-scrollgrid{border:1px solid #ddd;border:1px solid var(--fc-border-color,#ddd)}.fc .fc-scrollgrid,.fc .fc-scrollgrid table{table-layout:fixed;width:100%}.fc .fc-scrollgrid table{border-left-style:hidden;border-right-style:hidden;border-top-style:hidden}.fc .fc-scrollgrid{border-bottom-width:0;border-collapse:separate;border-right-width:0}.fc .fc-scrollgrid-liquid{height:100%}.fc .fc-scrollgrid-section,.fc .fc-scrollgrid-section>td,.fc .fc-scrollgrid-section table{height:1px}.fc .fc-scrollgrid-section-liquid{height:auto}.fc .fc-scrollgrid-section-liquid>td{height:100%}.fc .fc-scrollgrid-section>*{border-left-width:0;border-top-width:0}.fc .fc-scrollgrid-section-footer>*,.fc .fc-scrollgrid-section-header>*{border-bottom-width:0}.fc .fc-scrollgrid-section-body table,.fc .fc-scrollgrid-section-footer table{border-bottom-style:hidden}.fc .fc-scrollgrid-section-sticky>*{background:#fff;background:var(--fc-page-bg-color,#fff);position:-webkit-sticky;position:sticky;z-index:2}.fc .fc-scrollgrid-section-header.fc-scrollgrid-section-sticky>*{top:0}.fc .fc-scrollgrid-section-footer.fc-scrollgrid-section-sticky>*{bottom:0}.fc .fc-scrollgrid-sticky-shim{height:1px;margin-bottom:-1px}.fc-sticky{position:-webkit-sticky;position:sticky}.fc .fc-view-harness{flex-grow:1;position:relative}.fc .fc-view-harness-active>.fc-view{bottom:0;left:0;position:absolute;right:0;top:0}.fc .fc-col-header-cell-cushion{display:inline-block;padding:2px 4px}.fc .fc-bg-event,.fc .fc-highlight,.fc .fc-non-business{bottom:0;left:0;position:absolute;right:0;top:0}.fc .fc-non-business{background:hsla(0,0%,84.3%,.3);background:var(--fc-non-business-color,hsla(0,0%,84.3%,.3))}.fc .fc-bg-event{background:#8fdf82;background:var(--fc-bg-event-color,#8fdf82);opacity:.3;opacity:var(--fc-bg-event-opacity,.3)}.fc .fc-bg-event .fc-event-title{font-size:.85em;font-size:var(--fc-small-font-size,.85em);font-style:italic;margin:.5em}.fc .fc-highlight{background:rgba(188,232,241,.3);background:var(--fc-highlight-color,rgba(188,232,241,.3))}.fc .fc-cell-shaded,.fc .fc-day-disabled{background:hsla(0,0%,81.6%,.3);background:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3))}a.fc-event,a.fc-event:hover{text-decoration:none}.fc-event.fc-event-draggable,.fc-event[href]{cursor:pointer}.fc-event .fc-event-main{position:relative;z-index:2}.fc-event-dragging:not(.fc-event-selected){opacity:.75}.fc-event-dragging.fc-event-selected{box-shadow:0 2px 7px rgba(0,0,0,.3)}.fc-event .fc-event-resizer{display:none;position:absolute;z-index:4}.fc-event-selected .fc-event-resizer,.fc-event:hover .fc-event-resizer{display:block}.fc-event-selected .fc-event-resizer{background:#fff;background:var(--fc-page-bg-color,#fff);border:var(--fc-event-resizer-dot-border-width,1px) solid;border-color:inherit;border-radius:4px;border-radius:calc(var(--fc-event-resizer-dot-total-width, 8px)/2);border-width:1px;height:8px;height:var(--fc-event-resizer-dot-total-width,8px);width:8px;width:var(--fc-event-resizer-dot-total-width,8px)}.fc-event-selected .fc-event-resizer:before{bottom:-20px;content:\"\";left:-20px;position:absolute;right:-20px;top:-20px}.fc-event-selected{box-shadow:0 2px 5px rgba(0,0,0,.2)}.fc-event-selected:before{bottom:0;content:\"\";left:0;position:absolute;right:0;top:0;z-index:3}.fc-event-selected:after{background:rgba(0,0,0,.25);background:var(--fc-event-selected-overlay-color,rgba(0,0,0,.25));bottom:-1px;content:\"\";left:-1px;position:absolute;right:-1px;top:-1px;z-index:1}.fc-h-event{background-color:#3788d8;background-color:var(--fc-event-bg-color,#3788d8);border:1px solid #3788d8;border:1px solid var(--fc-event-border-color,#3788d8);display:block}.fc-h-event .fc-event-main{color:#fff;color:var(--fc-event-text-color,#fff)}.fc-h-event .fc-event-main-frame{display:flex}.fc-h-event .fc-event-time{max-width:100%;overflow:hidden}.fc-h-event .fc-event-title-container{flex-grow:1;flex-shrink:1;min-width:0}.fc-h-event .fc-event-title{display:inline-block;left:0;max-width:100%;overflow:hidden;right:0;vertical-align:top}.fc-h-event.fc-event-selected:before{bottom:-10px;top:-10px}.fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-start),.fc-direction-rtl .fc-daygrid-block-event:not(.fc-event-end){border-bottom-left-radius:0;border-left-width:0;border-top-left-radius:0}.fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-end),.fc-direction-rtl .fc-daygrid-block-event:not(.fc-event-start){border-bottom-right-radius:0;border-right-width:0;border-top-right-radius:0}.fc-h-event:not(.fc-event-selected) .fc-event-resizer{bottom:0;top:0;width:8px;width:var(--fc-event-resizer-thickness,8px)}.fc-direction-ltr .fc-h-event:not(.fc-event-selected) .fc-event-resizer-start,.fc-direction-rtl .fc-h-event:not(.fc-event-selected) .fc-event-resizer-end{cursor:w-resize;left:-4px;left:calc(var(--fc-event-resizer-thickness, 8px)/-2)}.fc-direction-ltr .fc-h-event:not(.fc-event-selected) .fc-event-resizer-end,.fc-direction-rtl .fc-h-event:not(.fc-event-selected) .fc-event-resizer-start{cursor:e-resize;right:-4px;right:calc(var(--fc-event-resizer-thickness, 8px)/-2)}.fc-h-event.fc-event-selected .fc-event-resizer{margin-top:-4px;margin-top:calc(var(--fc-event-resizer-dot-total-width, 8px)/-2);top:50%}.fc-direction-ltr .fc-h-event.fc-event-selected .fc-event-resizer-start,.fc-direction-rtl .fc-h-event.fc-event-selected .fc-event-resizer-end{left:-4px;left:calc(var(--fc-event-resizer-dot-total-width, 8px)/-2)}.fc-direction-ltr .fc-h-event.fc-event-selected .fc-event-resizer-end,.fc-direction-rtl .fc-h-event.fc-event-selected .fc-event-resizer-start{right:-4px;right:calc(var(--fc-event-resizer-dot-total-width, 8px)/-2)}:root{--fc-daygrid-event-dot-width:8px}.fc .fc-popover{box-shadow:0 2px 6px rgba(0,0,0,.15);position:fixed;top:0}.fc .fc-popover-header{align-items:center;display:flex;flex-direction:row;justify-content:space-between;padding:3px 4px}.fc .fc-popover-title{margin:0 2px}.fc .fc-popover-close{cursor:pointer;font-size:1.1em;opacity:.65}.fc-theme-standard .fc-popover{background:#fff;background:var(--fc-page-bg-color,#fff);border:1px solid #ddd;border:1px solid var(--fc-border-color,#ddd)}.fc-theme-standard .fc-popover-header{background:hsla(0,0%,81.6%,.3);background:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3))}.fc-daygrid-day-events:after,.fc-daygrid-day-events:before,.fc-daygrid-day-frame:after,.fc-daygrid-day-frame:before,.fc-daygrid-event-harness:after,.fc-daygrid-event-harness:before{clear:both;content:\"\";display:table}.fc .fc-daygrid-body{position:relative;z-index:1}.fc .fc-daygrid-day.fc-day-today{background-color:rgba(255,220,40,.15);background-color:var(--fc-today-bg-color,rgba(255,220,40,.15))}.fc .fc-daygrid-day-frame{min-height:100%;position:relative}.fc .fc-daygrid-day-top{display:flex;flex-direction:row-reverse}.fc .fc-day-other .fc-daygrid-day-top{opacity:.3}.fc .fc-daygrid-day-number{padding:4px;position:relative;z-index:4}.fc .fc-daygrid-day-events{margin-top:1px}.fc .fc-daygrid-body-balanced .fc-daygrid-day-events{left:0;position:absolute;right:0}.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events{min-height:2em;position:relative}.fc .fc-daygrid-body-natural .fc-daygrid-day-events{margin-bottom:1em}.fc .fc-daygrid-event-harness{position:relative}.fc .fc-daygrid-event-harness-abs{left:0;position:absolute;right:0;top:0}.fc .fc-daygrid-bg-harness{bottom:0;position:absolute;top:0}.fc .fc-daygrid-day-bg .fc-non-business{z-index:1}.fc .fc-daygrid-day-bg .fc-bg-event{z-index:2}.fc .fc-daygrid-day-bg .fc-highlight{z-index:3}.fc .fc-daygrid-event{margin-top:1px;z-index:6}.fc .fc-daygrid-event.fc-event-mirror{z-index:7}.fc .fc-daygrid-day-bottom{font-size:.85em;margin:2px 3px 0}.fc .fc-daygrid-more-link{cursor:pointer;position:relative;z-index:4}.fc .fc-daygrid-week-number{background-color:hsla(0,0%,81.6%,.3);background-color:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3));color:grey;color:var(--fc-neutral-text-color,grey);min-width:1.5em;padding:2px;position:absolute;text-align:center;top:0;z-index:5}.fc .fc-more-popover{z-index:8}.fc .fc-more-popover .fc-popover-body{min-width:220px;padding:10px}.fc-direction-ltr .fc-daygrid-event.fc-event-start,.fc-direction-rtl .fc-daygrid-event.fc-event-end{margin-left:2px}.fc-direction-ltr .fc-daygrid-event.fc-event-end,.fc-direction-rtl .fc-daygrid-event.fc-event-start{margin-right:2px}.fc-direction-ltr .fc-daygrid-week-number{border-radius:0 0 3px 0;left:0}.fc-direction-rtl .fc-daygrid-week-number{border-radius:0 0 0 3px;right:0}.fc-liquid-hack .fc-daygrid-day-frame{position:static}.fc-daygrid-event{border-radius:3px;font-size:.85em;font-size:var(--fc-small-font-size,.85em);position:relative;white-space:nowrap}.fc-daygrid-block-event .fc-event-time{font-weight:700}.fc-daygrid-block-event .fc-event-time,.fc-daygrid-block-event .fc-event-title{padding:1px}.fc-daygrid-dot-event{align-items:center;display:flex;padding:2px 0}.fc-daygrid-dot-event .fc-event-title{flex-grow:1;flex-shrink:1;font-weight:700;min-width:0;overflow:hidden}.fc-daygrid-dot-event.fc-event-mirror,.fc-daygrid-dot-event:hover{background:rgba(0,0,0,.1)}.fc-daygrid-dot-event.fc-event-selected:before{bottom:-10px;top:-10px}.fc-daygrid-event-dot{border:4px solid #3788d8;border:calc(var(--fc-daygrid-event-dot-width, 8px)/2) solid var(--fc-event-border-color,#3788d8);border-radius:4px;border-radius:calc(var(--fc-daygrid-event-dot-width, 8px)/2);box-sizing:content-box;height:0;margin:0 4px;width:0}.fc-direction-ltr .fc-daygrid-event .fc-event-time{margin-right:3px}.fc-direction-rtl .fc-daygrid-event .fc-event-time{margin-left:3px}.fc-v-event{background-color:#3788d8;background-color:var(--fc-event-bg-color,#3788d8);border:1px solid #3788d8;border:1px solid var(--fc-event-border-color,#3788d8);display:block}.fc-v-event .fc-event-main{color:#fff;color:var(--fc-event-text-color,#fff);height:100%}.fc-v-event .fc-event-main-frame{display:flex;flex-direction:column;height:100%}.fc-v-event .fc-event-time{flex-grow:0;flex-shrink:0;max-height:100%;overflow:hidden}.fc-v-event .fc-event-title-container{flex-grow:1;flex-shrink:1;min-height:0}.fc-v-event .fc-event-title{bottom:0;max-height:100%;overflow:hidden;top:0}.fc-v-event:not(.fc-event-start){border-top-left-radius:0;border-top-right-radius:0;border-top-width:0}.fc-v-event:not(.fc-event-end){border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom-width:0}.fc-v-event.fc-event-selected:before{left:-10px;right:-10px}.fc-v-event .fc-event-resizer-start{cursor:n-resize}.fc-v-event .fc-event-resizer-end{cursor:s-resize}.fc-v-event:not(.fc-event-selected) .fc-event-resizer{height:8px;height:var(--fc-event-resizer-thickness,8px);left:0;right:0}.fc-v-event:not(.fc-event-selected) .fc-event-resizer-start{top:-4px;top:calc(var(--fc-event-resizer-thickness, 8px)/-2)}.fc-v-event:not(.fc-event-selected) .fc-event-resizer-end{bottom:-4px;bottom:calc(var(--fc-event-resizer-thickness, 8px)/-2)}.fc-v-event.fc-event-selected .fc-event-resizer{left:50%;margin-left:-4px;margin-left:calc(var(--fc-event-resizer-dot-total-width, 8px)/-2)}.fc-v-event.fc-event-selected .fc-event-resizer-start{top:-4px;top:calc(var(--fc-event-resizer-dot-total-width, 8px)/-2)}.fc-v-event.fc-event-selected .fc-event-resizer-end{bottom:-4px;bottom:calc(var(--fc-event-resizer-dot-total-width, 8px)/-2)}.fc .fc-timegrid .fc-daygrid-body{z-index:2}.fc .fc-timegrid-divider{padding:0 0 2px}.fc .fc-timegrid-body{min-height:100%;position:relative;z-index:1}.fc .fc-timegrid-axis-chunk{position:relative}.fc .fc-timegrid-axis-chunk>table,.fc .fc-timegrid-slots{position:relative;z-index:1}.fc .fc-timegrid-slot{border-bottom:0;height:1.5em}.fc .fc-timegrid-slot:empty:before{content:\"\u00A0\"}.fc .fc-timegrid-slot-minor{border-top-style:dotted}.fc .fc-timegrid-slot-label-cushion{display:inline-block;white-space:nowrap}.fc .fc-timegrid-slot-label{vertical-align:middle}.fc .fc-timegrid-axis-cushion,.fc .fc-timegrid-slot-label-cushion{padding:0 4px}.fc .fc-timegrid-axis-frame-liquid{height:100%}.fc .fc-timegrid-axis-frame{align-items:center;display:flex;justify-content:flex-end;overflow:hidden}.fc .fc-timegrid-axis-cushion{flex-shrink:0;max-width:60px}.fc-direction-ltr .fc-timegrid-slot-label-frame{text-align:right}.fc-direction-rtl .fc-timegrid-slot-label-frame{text-align:left}.fc-liquid-hack .fc-timegrid-axis-frame-liquid{bottom:0;height:auto;left:0;position:absolute;right:0;top:0}.fc .fc-timegrid-col.fc-day-today{background-color:rgba(255,220,40,.15);background-color:var(--fc-today-bg-color,rgba(255,220,40,.15))}.fc .fc-timegrid-col-frame{min-height:100%;position:relative}.fc-liquid-hack .fc-timegrid-col-frame{height:auto}.fc-liquid-hack .fc-timegrid-col-frame,.fc-media-screen .fc-timegrid-cols{bottom:0;left:0;position:absolute;right:0;top:0}.fc-media-screen .fc-timegrid-cols>table{height:100%}.fc-media-screen .fc-timegrid-col-bg,.fc-media-screen .fc-timegrid-col-events,.fc-media-screen .fc-timegrid-now-indicator-container{left:0;position:absolute;right:0;top:0}.fc-media-screen .fc-timegrid-event-harness{position:absolute}.fc .fc-timegrid-col-bg{z-index:2}.fc .fc-timegrid-col-bg .fc-non-business{z-index:1}.fc .fc-timegrid-col-bg .fc-bg-event{z-index:2}.fc .fc-timegrid-col-bg .fc-highlight{z-index:3}.fc .fc-timegrid-bg-harness{left:0;position:absolute;right:0}.fc .fc-timegrid-col-events{z-index:3}.fc .fc-timegrid-now-indicator-container{bottom:0;overflow:hidden}.fc-direction-ltr .fc-timegrid-col-events{margin:0 2.5% 0 2px}.fc-direction-rtl .fc-timegrid-col-events{margin:0 2px 0 2.5%}.fc-timegrid-event-harness-inset .fc-timegrid-event,.fc-timegrid-event.fc-event-mirror{box-shadow:0 0 0 1px #fff;box-shadow:0 0 0 1px var(--fc-page-bg-color,#fff)}.fc-timegrid-event{border-radius:3px;font-size:.85em;font-size:var(--fc-small-font-size,.85em)}.fc-timegrid-event .fc-event-main{padding:1px 1px 0}.fc-timegrid-event .fc-event-time{font-size:.85em;font-size:var(--fc-small-font-size,.85em);margin-bottom:1px;white-space:nowrap}.fc-timegrid-event-condensed .fc-event-main-frame{flex-direction:row;overflow:hidden}.fc-timegrid-event-condensed .fc-event-time:after{content:\"\u00A0-\u00A0\"}.fc-timegrid-event-condensed .fc-event-title{font-size:.85em;font-size:var(--fc-small-font-size,.85em)}.fc-media-screen .fc-timegrid-event{bottom:1px;left:0;position:absolute;right:0;top:0}.fc .fc-timegrid-now-indicator-line{border:0 solid red;border-color:var(--fc-now-indicator-color,red);border-top:1px solid var(--fc-now-indicator-color,red);left:0;position:absolute;right:0;z-index:4}.fc .fc-timegrid-now-indicator-arrow{border-color:red;border-color:var(--fc-now-indicator-color,red);border-style:solid;margin-top:-5px;position:absolute;z-index:4}.fc-direction-ltr .fc-timegrid-now-indicator-arrow{border-bottom-color:transparent;border-top-color:transparent;border-width:5px 0 5px 6px;left:0}.fc-direction-rtl .fc-timegrid-now-indicator-arrow{border-bottom-color:transparent;border-top-color:transparent;border-width:5px 6px 5px 0;right:0}:root{--fc-list-event-dot-width:10px;--fc-list-event-hover-bg-color:#f5f5f5}.fc-theme-standard .fc-list{border:1px solid #ddd;border:1px solid var(--fc-border-color,#ddd)}.fc .fc-list-empty{align-items:center;background-color:hsla(0,0%,81.6%,.3);background-color:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3));display:flex;height:100%;justify-content:center}.fc .fc-list-empty-cushion{margin:5em 0}.fc .fc-list-table{border-style:hidden;width:100%}.fc .fc-list-table tr>*{border-left:0;border-right:0}.fc .fc-list-sticky .fc-list-day>*{background:#fff;background:var(--fc-page-bg-color,#fff);position:-webkit-sticky;position:sticky;top:0}.fc .fc-list-table th{padding:0}.fc .fc-list-day-cushion,.fc .fc-list-table td{padding:8px 14px}.fc .fc-list-day-cushion:after{clear:both;content:\"\";display:table}.fc-theme-standard .fc-list-day-cushion{background-color:hsla(0,0%,81.6%,.3);background-color:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3))}.fc-direction-ltr .fc-list-day-text,.fc-direction-rtl .fc-list-day-side-text{float:left}.fc-direction-ltr .fc-list-day-side-text,.fc-direction-rtl .fc-list-day-text{float:right}.fc-direction-ltr .fc-list-table .fc-list-event-graphic{padding-right:0}.fc-direction-rtl .fc-list-table .fc-list-event-graphic{padding-left:0}.fc .fc-list-event.fc-event-forced-url{cursor:pointer}.fc .fc-list-event:hover td{background-color:#f5f5f5;background-color:var(--fc-list-event-hover-bg-color,#f5f5f5)}.fc .fc-list-event-graphic,.fc .fc-list-event-time{white-space:nowrap;width:1px}.fc .fc-list-event-dot{border:5px solid #3788d8;border:calc(var(--fc-list-event-dot-width, 10px)/2) solid var(--fc-event-border-color,#3788d8);border-radius:5px;border-radius:calc(var(--fc-list-event-dot-width, 10px)/2);box-sizing:content-box;display:inline-block;height:0;width:0}.fc .fc-list-event-title a{color:inherit;text-decoration:none}.fc .fc-list-event.fc-event-forced-url:hover a{text-decoration:underline}.fc-theme-bootstrap a:not([href]){color:inherit}.fc .fc-event,.fc .fc-scrollgrid table tr{-moz-column-break-inside:avoid;break-inside:avoid}.fc-media-print{display:block;max-width:100%}.fc-media-print .fc-bg-event,.fc-media-print .fc-non-business,.fc-media-print .fc-timegrid-axis-chunk,.fc-media-print .fc-timegrid-slots,.fc-media-print .fc-timeline-slots{display:none}.fc-media-print .fc-h-event,.fc-media-print .fc-toolbar button,.fc-media-print .fc-v-event{background:#fff!important;color:#000!important}.fc-media-print .fc-event,.fc-media-print .fc-event-main{color:#000!important}.fc-media-print .fc-timegrid-event{margin:.5em 0}.fc .fc-timeline-body{min-height:100%;position:relative;z-index:1}.fc .fc-timeline-slots{bottom:0;position:absolute;top:0;z-index:1}.fc .fc-timeline-slots>table{height:100%}.fc .fc-timeline-slot-minor{border-style:dotted}.fc .fc-timeline-slot-frame{align-items:center;display:flex;justify-content:center}.fc .fc-timeline-header-row-chrono .fc-timeline-slot-frame{justify-content:flex-start}.fc .fc-timeline-slot-cushion{padding:4px 5px;white-space:nowrap}.fc-direction-ltr .fc-timeline-slot{border-right:0!important}.fc-direction-rtl .fc-timeline-slot{border-left:0!important}.fc .fc-timeline-now-indicator-container{bottom:0;left:0;position:absolute;right:0;top:0;width:0;z-index:4}.fc .fc-timeline-now-indicator-arrow,.fc .fc-timeline-now-indicator-line{border-color:red;border-color:var(--fc-now-indicator-color,red);border-style:solid;position:absolute;top:0}.fc .fc-timeline-now-indicator-arrow{border-left-color:transparent;border-right-color:transparent;border-width:6px 5px 0;margin:0 -6px}.fc .fc-timeline-now-indicator-line{border-width:0 0 0 1px;bottom:0;margin:0 -1px}.fc .fc-timeline-events{position:relative;width:0;z-index:3}.fc .fc-timeline-event-harness{position:absolute;top:0}.fc-timeline-event{z-index:1}.fc-timeline-event.fc-event-mirror{z-index:2}.fc-timeline-event{align-items:center;border-radius:0;display:flex;font-size:.85em;font-size:var(--fc-small-font-size,.85em);margin-bottom:1px;padding:2px 1px;position:relative}.fc-timeline-event .fc-event-main{flex-grow:1;flex-shrink:1;min-width:0}.fc-timeline-event .fc-event-time{font-weight:700}.fc-timeline-event .fc-event-time,.fc-timeline-event .fc-event-title{padding:0 2px;white-space:nowrap}.fc-direction-ltr .fc-timeline-event.fc-event-end{margin-right:1px}.fc-direction-rtl .fc-timeline-event.fc-event-end{margin-left:1px}.fc-timeline-overlap-disabled .fc-timeline-event{margin-bottom:0;padding-bottom:5px;padding-top:5px}.fc-timeline-event:not(.fc-event-end):after,.fc-timeline-event:not(.fc-event-start):before{border-color:transparent #000;border-style:solid;border-width:5px;content:\"\";flex-grow:0;flex-shrink:0;height:0;margin:0 1px;opacity:.5;width:0}.fc-direction-ltr .fc-timeline-event:not(.fc-event-start):before,.fc-direction-rtl .fc-timeline-event:not(.fc-event-end):after{border-left:0}.fc-direction-ltr .fc-timeline-event:not(.fc-event-end):after,.fc-direction-rtl .fc-timeline-event:not(.fc-event-start):before{border-right:0}.fc .fc-timeline-bg{bottom:0;left:0;position:absolute;right:0;top:0;width:0;z-index:2}.fc .fc-timeline-bg .fc-non-business{z-index:1}.fc .fc-timeline-bg .fc-bg-event{z-index:2}.fc .fc-timeline-bg .fc-highlight{z-index:3}.fc .fc-timeline-bg-harness{bottom:0;position:absolute;top:0}.fc .fc-resource-timeline-divider{cursor:col-resize;width:3px}.fc .fc-resource-timeline .fc-resource-group:not([rowspan]){background:hsla(0,0%,81.6%,.3);background:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3))}.fc .fc-timeline-lane-frame{position:relative}.fc .fc-timeline-overlap-enabled .fc-timeline-lane-frame .fc-timeline-events{box-sizing:content-box;padding-bottom:10px}.fc-datagrid-cell-frame-liquid{height:100%}.fc-liquid-hack .fc-datagrid-cell-frame-liquid{bottom:0;height:auto;left:0;position:absolute;right:0;top:0}.fc .fc-datagrid-header .fc-datagrid-cell-frame{align-items:center;display:flex;justify-content:flex-start;position:relative}.fc .fc-datagrid-cell-resizer{bottom:0;cursor:col-resize;position:absolute;top:0;width:5px;z-index:1}.fc .fc-datagrid-cell-cushion{overflow:hidden;padding:8px;white-space:nowrap}.fc .fc-datagrid-expander{cursor:pointer;opacity:.65}.fc .fc-datagrid-expander .fc-icon{display:inline-block;width:1em}.fc .fc-datagrid-expander-placeholder{cursor:auto}.fc .fc-resource-timeline-flat .fc-datagrid-expander-placeholder{display:none}.fc-direction-ltr .fc-datagrid-cell-resizer{right:-3px}.fc-direction-rtl .fc-datagrid-cell-resizer{left:-3px}.fc-direction-ltr .fc-datagrid-expander{margin-right:3px}.fc-direction-rtl .fc-datagrid-expander{margin-left:3px}"], encapsulation: 2 });
+FullCalendarComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: FullCalendarComponent, selectors: [["full-calendar"]], inputs: { options: "options", deepChangeDetection: "deepChangeDetection" }, decls: 0, vars: 0, template: function FullCalendarComponent_Template(rf, ctx) { }, styles: ["@charset \"UTF-8\";.fc-not-allowed,.fc-not-allowed .fc-event{cursor:not-allowed}.fc-unselectable{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}.fc{display:flex;flex-direction:column;font-size:1em}.fc,.fc *,.fc :after,.fc :before{box-sizing:border-box}.fc table{border-collapse:collapse;border-spacing:0;font-size:1em}.fc th{text-align:center}.fc td,.fc th{vertical-align:top;padding:0}.fc a[data-navlink]{cursor:pointer}.fc a[data-navlink]:hover{text-decoration:underline}.fc-direction-ltr{direction:ltr;text-align:left}.fc-direction-rtl{direction:rtl;text-align:right}.fc-theme-standard td,.fc-theme-standard th{border:1px solid #ddd;border:1px solid var(--fc-border-color,#ddd)}.fc-liquid-hack td,.fc-liquid-hack th{position:relative}@font-face{font-family:fcicons;src:url(\"data:application/x-font-ttf;charset=utf-8;base64,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\") format(\"truetype\");font-weight:400;font-style:normal}.fc-icon{display:inline-block;width:1em;height:1em;text-align:center;-webkit-user-select:none;-moz-user-select:none;user-select:none;font-family:fcicons!important;speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.fc-icon-chevron-left:before{content:\"\uE900\"}.fc-icon-chevron-right:before{content:\"\uE901\"}.fc-icon-chevrons-left:before{content:\"\uE902\"}.fc-icon-chevrons-right:before{content:\"\uE903\"}.fc-icon-minus-square:before{content:\"\uE904\"}.fc-icon-plus-square:before{content:\"\uE905\"}.fc-icon-x:before{content:\"\uE906\"}.fc .fc-button{border-radius:0;overflow:visible;text-transform:none;margin:0;font-family:inherit;font-size:inherit;line-height:inherit}.fc .fc-button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}.fc .fc-button{-webkit-appearance:button}.fc .fc-button:not(:disabled){cursor:pointer}.fc .fc-button::-moz-focus-inner{padding:0;border-style:none}.fc .fc-button{display:inline-block;font-weight:400;text-align:center;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:.4em .65em;font-size:1em;line-height:1.5;border-radius:.25em}.fc .fc-button:hover{text-decoration:none}.fc .fc-button:focus{outline:0;box-shadow:0 0 0 .2rem rgba(44,62,80,.25)}.fc .fc-button:disabled{opacity:.65}.fc .fc-button-primary{color:#fff;color:var(--fc-button-text-color,#fff);background-color:#2c3e50;background-color:var(--fc-button-bg-color,#2c3e50);border-color:#2c3e50;border-color:var(--fc-button-border-color,#2c3e50)}.fc .fc-button-primary:hover{color:#fff;color:var(--fc-button-text-color,#fff);background-color:#1e2b37;background-color:var(--fc-button-hover-bg-color,#1e2b37);border-color:#1a252f;border-color:var(--fc-button-hover-border-color,#1a252f)}.fc .fc-button-primary:disabled{color:#fff;color:var(--fc-button-text-color,#fff);background-color:#2c3e50;background-color:var(--fc-button-bg-color,#2c3e50);border-color:#2c3e50;border-color:var(--fc-button-border-color,#2c3e50)}.fc .fc-button-primary:focus{box-shadow:0 0 0 .2rem rgba(76,91,106,.5)}.fc .fc-button-primary:not(:disabled).fc-button-active,.fc .fc-button-primary:not(:disabled):active{color:#fff;color:var(--fc-button-text-color,#fff);background-color:#1a252f;background-color:var(--fc-button-active-bg-color,#1a252f);border-color:#151e27;border-color:var(--fc-button-active-border-color,#151e27)}.fc .fc-button-primary:not(:disabled).fc-button-active:focus,.fc .fc-button-primary:not(:disabled):active:focus{box-shadow:0 0 0 .2rem rgba(76,91,106,.5)}.fc .fc-button .fc-icon{vertical-align:middle;font-size:1.5em}.fc .fc-button-group{position:relative;display:inline-flex;vertical-align:middle}.fc .fc-button-group>.fc-button{position:relative;flex:1 1 auto}.fc .fc-button-group>.fc-button.fc-button-active,.fc .fc-button-group>.fc-button:active,.fc .fc-button-group>.fc-button:focus,.fc .fc-button-group>.fc-button:hover{z-index:1}.fc-direction-ltr .fc-button-group>.fc-button:not(:first-child){margin-left:-1px;border-top-left-radius:0;border-bottom-left-radius:0}.fc-direction-ltr .fc-button-group>.fc-button:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}.fc-direction-rtl .fc-button-group>.fc-button:not(:first-child){margin-right:-1px;border-top-right-radius:0;border-bottom-right-radius:0}.fc-direction-rtl .fc-button-group>.fc-button:not(:last-child){border-top-left-radius:0;border-bottom-left-radius:0}.fc .fc-toolbar{display:flex;justify-content:space-between;align-items:center}.fc .fc-toolbar.fc-header-toolbar{margin-bottom:1.5em}.fc .fc-toolbar.fc-footer-toolbar{margin-top:1.5em}.fc .fc-toolbar-title{font-size:1.75em;margin:0}.fc-direction-ltr .fc-toolbar>*>:not(:first-child){margin-left:.75em}.fc-direction-rtl .fc-toolbar>*>:not(:first-child){margin-right:.75em}.fc-direction-rtl .fc-toolbar-ltr{flex-direction:row-reverse}.fc .fc-scroller{-webkit-overflow-scrolling:touch;position:relative}.fc .fc-scroller-liquid{height:100%}.fc .fc-scroller-liquid-absolute{position:absolute;top:0;right:0;left:0;bottom:0}.fc .fc-scroller-harness{position:relative;overflow:hidden;direction:ltr}.fc .fc-scroller-harness-liquid{height:100%}.fc-direction-rtl .fc-scroller-harness>.fc-scroller{direction:rtl}.fc-theme-standard .fc-scrollgrid{border:1px solid #ddd;border:1px solid var(--fc-border-color,#ddd)}.fc .fc-scrollgrid,.fc .fc-scrollgrid table{width:100%;table-layout:fixed}.fc .fc-scrollgrid table{border-top-style:hidden;border-left-style:hidden;border-right-style:hidden}.fc .fc-scrollgrid{border-collapse:separate;border-right-width:0;border-bottom-width:0}.fc .fc-scrollgrid-liquid{height:100%}.fc .fc-scrollgrid-section,.fc .fc-scrollgrid-section>td,.fc .fc-scrollgrid-section table{height:1px}.fc .fc-scrollgrid-section-liquid>td{height:100%}.fc .fc-scrollgrid-section>*{border-top-width:0;border-left-width:0}.fc .fc-scrollgrid-section-footer>*,.fc .fc-scrollgrid-section-header>*{border-bottom-width:0}.fc .fc-scrollgrid-section-body table,.fc .fc-scrollgrid-section-footer table{border-bottom-style:hidden}.fc .fc-scrollgrid-section-sticky>*{background:#fff;background:var(--fc-page-bg-color,#fff);position:sticky;z-index:3}.fc .fc-scrollgrid-section-header.fc-scrollgrid-section-sticky>*{top:0}.fc .fc-scrollgrid-section-footer.fc-scrollgrid-section-sticky>*{bottom:0}.fc .fc-scrollgrid-sticky-shim{height:1px;margin-bottom:-1px}.fc-sticky{position:sticky}.fc .fc-view-harness{flex-grow:1;position:relative}.fc .fc-view-harness-active>.fc-view{position:absolute;top:0;right:0;bottom:0;left:0}.fc .fc-col-header-cell-cushion{display:inline-block;padding:2px 4px}.fc .fc-bg-event,.fc .fc-highlight,.fc .fc-non-business{position:absolute;top:0;left:0;right:0;bottom:0}.fc .fc-non-business{background:hsla(0,0%,84.3%,.3);background:var(--fc-non-business-color,hsla(0,0%,84.3%,.3))}.fc .fc-bg-event{background:#8fdf82;background:var(--fc-bg-event-color,#8fdf82);opacity:.3;opacity:var(--fc-bg-event-opacity,.3)}.fc .fc-bg-event .fc-event-title{margin:.5em;font-size:.85em;font-size:var(--fc-small-font-size,.85em);font-style:italic}.fc .fc-highlight{background:rgba(188,232,241,.3);background:var(--fc-highlight-color,rgba(188,232,241,.3))}.fc .fc-cell-shaded,.fc .fc-day-disabled{background:hsla(0,0%,81.6%,.3);background:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3))}a.fc-event,a.fc-event:hover{text-decoration:none}.fc-event.fc-event-draggable,.fc-event[href]{cursor:pointer}.fc-event .fc-event-main{position:relative;z-index:2}.fc-event-dragging:not(.fc-event-selected){opacity:.75}.fc-event-dragging.fc-event-selected{box-shadow:0 2px 7px rgba(0,0,0,.3)}.fc-event .fc-event-resizer{display:none;position:absolute;z-index:4}.fc-event-selected .fc-event-resizer,.fc-event:hover .fc-event-resizer{display:block}.fc-event-selected .fc-event-resizer{border-radius:4px;border-radius:calc(var(--fc-event-resizer-dot-total-width, 8px) / 2);border-width:1px;width:8px;width:var(--fc-event-resizer-dot-total-width,8px);height:8px;height:var(--fc-event-resizer-dot-total-width,8px);border:var(--fc-event-resizer-dot-border-width,1px) solid;border-color:inherit;background:#fff;background:var(--fc-page-bg-color,#fff)}.fc-event-selected .fc-event-resizer:before{content:\"\";position:absolute;top:-20px;left:-20px;right:-20px;bottom:-20px}.fc-event-selected{box-shadow:0 2px 5px rgba(0,0,0,.2)}.fc-event-selected:before{content:\"\";position:absolute;z-index:3;top:0;left:0;right:0;bottom:0}.fc-event-selected:after{content:\"\";background:rgba(0,0,0,.25);background:var(--fc-event-selected-overlay-color,rgba(0,0,0,.25));position:absolute;z-index:1;top:-1px;left:-1px;right:-1px;bottom:-1px}.fc-h-event{display:block;border:1px solid #3788d8;border:1px solid var(--fc-event-border-color,#3788d8);background-color:#3788d8;background-color:var(--fc-event-bg-color,#3788d8)}.fc-h-event .fc-event-main{color:#fff;color:var(--fc-event-text-color,#fff)}.fc-h-event .fc-event-main-frame{display:flex}.fc-h-event .fc-event-time{max-width:100%;overflow:hidden}.fc-h-event .fc-event-title-container{flex-grow:1;flex-shrink:1;min-width:0}.fc-h-event .fc-event-title{display:inline-block;vertical-align:top;left:0;right:0;max-width:100%;overflow:hidden}.fc-h-event.fc-event-selected:before{top:-10px;bottom:-10px}.fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-start),.fc-direction-rtl .fc-daygrid-block-event:not(.fc-event-end){border-top-left-radius:0;border-bottom-left-radius:0;border-left-width:0}.fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-end),.fc-direction-rtl .fc-daygrid-block-event:not(.fc-event-start){border-top-right-radius:0;border-bottom-right-radius:0;border-right-width:0}.fc-h-event:not(.fc-event-selected) .fc-event-resizer{top:0;bottom:0;width:8px;width:var(--fc-event-resizer-thickness,8px)}.fc-direction-ltr .fc-h-event:not(.fc-event-selected) .fc-event-resizer-start,.fc-direction-rtl .fc-h-event:not(.fc-event-selected) .fc-event-resizer-end{cursor:w-resize;left:-4px;left:calc(var(--fc-event-resizer-thickness, 8px) / -2)}.fc-direction-ltr .fc-h-event:not(.fc-event-selected) .fc-event-resizer-end,.fc-direction-rtl .fc-h-event:not(.fc-event-selected) .fc-event-resizer-start{cursor:e-resize;right:-4px;right:calc(var(--fc-event-resizer-thickness, 8px) / -2)}.fc-h-event.fc-event-selected .fc-event-resizer{top:50%;margin-top:-4px;margin-top:calc(var(--fc-event-resizer-dot-total-width, 8px) / -2)}.fc-direction-ltr .fc-h-event.fc-event-selected .fc-event-resizer-start,.fc-direction-rtl .fc-h-event.fc-event-selected .fc-event-resizer-end{left:-4px;left:calc(var(--fc-event-resizer-dot-total-width, 8px) / -2)}.fc-direction-ltr .fc-h-event.fc-event-selected .fc-event-resizer-end,.fc-direction-rtl .fc-h-event.fc-event-selected .fc-event-resizer-start{right:-4px;right:calc(var(--fc-event-resizer-dot-total-width, 8px) / -2)}.fc .fc-popover{position:absolute;z-index:9999;box-shadow:0 2px 6px rgba(0,0,0,.15)}.fc .fc-popover-header{display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:3px 4px}.fc .fc-popover-title{margin:0 2px}.fc .fc-popover-close{cursor:pointer;opacity:.65;font-size:1.1em}.fc-theme-standard .fc-popover{border:1px solid #ddd;border:1px solid var(--fc-border-color,#ddd);background:#fff;background:var(--fc-page-bg-color,#fff)}.fc-theme-standard .fc-popover-header{background:hsla(0,0%,81.6%,.3);background:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3))}:root{--fc-daygrid-event-dot-width:8px}.fc-daygrid-day-events:after,.fc-daygrid-day-events:before,.fc-daygrid-day-frame:after,.fc-daygrid-day-frame:before,.fc-daygrid-event-harness:after,.fc-daygrid-event-harness:before{content:\"\";clear:both;display:table}.fc .fc-daygrid-body{position:relative;z-index:1}.fc .fc-daygrid-day.fc-day-today{background-color:rgba(255,220,40,.15);background-color:var(--fc-today-bg-color,rgba(255,220,40,.15))}.fc .fc-daygrid-day-frame{position:relative;min-height:100%}.fc .fc-daygrid-day-top{display:flex;flex-direction:row-reverse}.fc .fc-day-other .fc-daygrid-day-top{opacity:.3}.fc .fc-daygrid-day-number{position:relative;z-index:4;padding:4px}.fc .fc-daygrid-day-events{margin-top:1px}.fc .fc-daygrid-body-balanced .fc-daygrid-day-events{position:absolute;left:0;right:0}.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events{position:relative;min-height:2em}.fc .fc-daygrid-body-natural .fc-daygrid-day-events{margin-bottom:1em}.fc .fc-daygrid-event-harness{position:relative}.fc .fc-daygrid-event-harness-abs{position:absolute;top:0;left:0;right:0}.fc .fc-daygrid-bg-harness{position:absolute;top:0;bottom:0}.fc .fc-daygrid-day-bg .fc-non-business{z-index:1}.fc .fc-daygrid-day-bg .fc-bg-event{z-index:2}.fc .fc-daygrid-day-bg .fc-highlight{z-index:3}.fc .fc-daygrid-event{z-index:6;margin-top:1px}.fc .fc-daygrid-event.fc-event-mirror{z-index:7}.fc .fc-daygrid-day-bottom{font-size:.85em;padding:2px 3px 0}.fc .fc-daygrid-day-bottom:before{content:\"\";clear:both;display:table}.fc .fc-daygrid-more-link{position:relative;z-index:4;cursor:pointer}.fc .fc-daygrid-week-number{position:absolute;z-index:5;top:0;padding:2px;min-width:1.5em;text-align:center;background-color:hsla(0,0%,81.6%,.3);background-color:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3));color:grey;color:var(--fc-neutral-text-color,grey)}.fc .fc-more-popover .fc-popover-body{min-width:220px;padding:10px}.fc-direction-ltr .fc-daygrid-event.fc-event-start,.fc-direction-rtl .fc-daygrid-event.fc-event-end{margin-left:2px}.fc-direction-ltr .fc-daygrid-event.fc-event-end,.fc-direction-rtl .fc-daygrid-event.fc-event-start{margin-right:2px}.fc-direction-ltr .fc-daygrid-week-number{left:0;border-radius:0 0 3px 0}.fc-direction-rtl .fc-daygrid-week-number{right:0;border-radius:0 0 0 3px}.fc-liquid-hack .fc-daygrid-day-frame{position:static}.fc-daygrid-event{position:relative;white-space:nowrap;border-radius:3px;font-size:.85em;font-size:var(--fc-small-font-size,.85em)}.fc-daygrid-block-event .fc-event-time{font-weight:700}.fc-daygrid-block-event .fc-event-time,.fc-daygrid-block-event .fc-event-title{padding:1px}.fc-daygrid-dot-event{display:flex;align-items:center;padding:2px 0}.fc-daygrid-dot-event .fc-event-title{flex-grow:1;flex-shrink:1;min-width:0;overflow:hidden;font-weight:700}.fc-daygrid-dot-event.fc-event-mirror,.fc-daygrid-dot-event:hover{background:rgba(0,0,0,.1)}.fc-daygrid-dot-event.fc-event-selected:before{top:-10px;bottom:-10px}.fc-daygrid-event-dot{margin:0 4px;box-sizing:content-box;width:0;height:0;border:4px solid #3788d8;border:calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid var(--fc-event-border-color,#3788d8);border-radius:4px;border-radius:calc(var(--fc-daygrid-event-dot-width, 8px) / 2)}.fc-direction-ltr .fc-daygrid-event .fc-event-time{margin-right:3px}.fc-direction-rtl .fc-daygrid-event .fc-event-time{margin-left:3px}.fc-v-event{display:block;border:1px solid #3788d8;border:1px solid var(--fc-event-border-color,#3788d8);background-color:#3788d8;background-color:var(--fc-event-bg-color,#3788d8)}.fc-v-event .fc-event-main{color:#fff;color:var(--fc-event-text-color,#fff);height:100%}.fc-v-event .fc-event-main-frame{height:100%;display:flex;flex-direction:column}.fc-v-event .fc-event-time{flex-grow:0;flex-shrink:0;max-height:100%;overflow:hidden}.fc-v-event .fc-event-title-container{flex-grow:1;flex-shrink:1;min-height:0}.fc-v-event .fc-event-title{top:0;bottom:0;max-height:100%;overflow:hidden}.fc-v-event:not(.fc-event-start){border-top-width:0;border-top-left-radius:0;border-top-right-radius:0}.fc-v-event:not(.fc-event-end){border-bottom-width:0;border-bottom-left-radius:0;border-bottom-right-radius:0}.fc-v-event.fc-event-selected:before{left:-10px;right:-10px}.fc-v-event .fc-event-resizer-start{cursor:n-resize}.fc-v-event .fc-event-resizer-end{cursor:s-resize}.fc-v-event:not(.fc-event-selected) .fc-event-resizer{height:8px;height:var(--fc-event-resizer-thickness,8px);left:0;right:0}.fc-v-event:not(.fc-event-selected) .fc-event-resizer-start{top:-4px;top:calc(var(--fc-event-resizer-thickness, 8px) / -2)}.fc-v-event:not(.fc-event-selected) .fc-event-resizer-end{bottom:-4px;bottom:calc(var(--fc-event-resizer-thickness, 8px) / -2)}.fc-v-event.fc-event-selected .fc-event-resizer{left:50%;margin-left:-4px;margin-left:calc(var(--fc-event-resizer-dot-total-width, 8px) / -2)}.fc-v-event.fc-event-selected .fc-event-resizer-start{top:-4px;top:calc(var(--fc-event-resizer-dot-total-width, 8px) / -2)}.fc-v-event.fc-event-selected .fc-event-resizer-end{bottom:-4px;bottom:calc(var(--fc-event-resizer-dot-total-width, 8px) / -2)}.fc .fc-timegrid .fc-daygrid-body{z-index:2}.fc .fc-timegrid-divider{padding:0 0 2px}.fc .fc-timegrid-body{position:relative;z-index:1;min-height:100%}.fc .fc-timegrid-axis-chunk{position:relative}.fc .fc-timegrid-axis-chunk>table,.fc .fc-timegrid-slots{position:relative;z-index:1}.fc .fc-timegrid-slot{height:1.5em;border-bottom:0}.fc .fc-timegrid-slot:empty:before{content:\"\u00A0\"}.fc .fc-timegrid-slot-minor{border-top-style:dotted}.fc .fc-timegrid-slot-label-cushion{display:inline-block;white-space:nowrap}.fc .fc-timegrid-slot-label{vertical-align:middle}.fc .fc-timegrid-axis-cushion,.fc .fc-timegrid-slot-label-cushion{padding:0 4px}.fc .fc-timegrid-axis-frame-liquid{height:100%}.fc .fc-timegrid-axis-frame{overflow:hidden;display:flex;align-items:center;justify-content:flex-end}.fc .fc-timegrid-axis-cushion{max-width:60px;flex-shrink:0}.fc-direction-ltr .fc-timegrid-slot-label-frame{text-align:right}.fc-direction-rtl .fc-timegrid-slot-label-frame{text-align:left}.fc-liquid-hack .fc-timegrid-axis-frame-liquid{height:auto;position:absolute;top:0;right:0;bottom:0;left:0}.fc .fc-timegrid-col.fc-day-today{background-color:rgba(255,220,40,.15);background-color:var(--fc-today-bg-color,rgba(255,220,40,.15))}.fc .fc-timegrid-col-frame{min-height:100%;position:relative}.fc-media-screen.fc-liquid-hack .fc-timegrid-col-frame{height:auto;position:absolute;top:0;right:0;bottom:0;left:0}.fc-media-screen .fc-timegrid-cols{position:absolute;top:0;left:0;right:0;bottom:0}.fc-media-screen .fc-timegrid-cols>table{height:100%}.fc-media-screen .fc-timegrid-col-bg,.fc-media-screen .fc-timegrid-col-events,.fc-media-screen .fc-timegrid-now-indicator-container{position:absolute;top:0;left:0;right:0}.fc .fc-timegrid-col-bg{z-index:2}.fc .fc-timegrid-col-bg .fc-non-business{z-index:1}.fc .fc-timegrid-col-bg .fc-bg-event{z-index:2}.fc .fc-timegrid-col-bg .fc-highlight{z-index:3}.fc .fc-timegrid-bg-harness{position:absolute;left:0;right:0}.fc .fc-timegrid-col-events{z-index:3}.fc .fc-timegrid-now-indicator-container{bottom:0;overflow:hidden}.fc-direction-ltr .fc-timegrid-col-events{margin:0 2.5% 0 2px}.fc-direction-rtl .fc-timegrid-col-events{margin:0 2px 0 2.5%}.fc-timegrid-event-harness{position:absolute}.fc-timegrid-event-harness>.fc-timegrid-event{position:absolute;top:0;bottom:0;left:0;right:0}.fc-timegrid-event-harness-inset .fc-timegrid-event,.fc-timegrid-event.fc-event-mirror,.fc-timegrid-more-link{box-shadow:0 0 0 1px #fff;box-shadow:0 0 0 1px var(--fc-page-bg-color,#fff)}.fc-timegrid-event,.fc-timegrid-more-link{font-size:.85em;font-size:var(--fc-small-font-size,.85em);border-radius:3px}.fc-timegrid-event{margin-bottom:1px}.fc-timegrid-event .fc-event-main{padding:1px 1px 0}.fc-timegrid-event .fc-event-time{white-space:nowrap;font-size:.85em;font-size:var(--fc-small-font-size,.85em);margin-bottom:1px}.fc-timegrid-event-short .fc-event-main-frame{flex-direction:row;overflow:hidden}.fc-timegrid-event-short .fc-event-time:after{content:\"\u00A0-\u00A0\"}.fc-timegrid-event-short .fc-event-title{font-size:.85em;font-size:var(--fc-small-font-size,.85em)}.fc-timegrid-more-link{position:absolute;z-index:9999;color:inherit;color:var(--fc-more-link-text-color,inherit);background:#d0d0d0;background:var(--fc-more-link-bg-color,#d0d0d0);cursor:pointer;margin-bottom:1px}.fc-timegrid-more-link-inner{padding:3px 2px;top:0}.fc-direction-ltr .fc-timegrid-more-link{right:0}.fc-direction-rtl .fc-timegrid-more-link{left:0}.fc .fc-timegrid-now-indicator-line{position:absolute;z-index:4;left:0;right:0;border:0 solid red;border-color:var(--fc-now-indicator-color,red);border-top:1px solid var(--fc-now-indicator-color,red)}.fc .fc-timegrid-now-indicator-arrow{position:absolute;z-index:4;margin-top:-5px;border-style:solid;border-color:red;border-color:var(--fc-now-indicator-color,red)}.fc-direction-ltr .fc-timegrid-now-indicator-arrow{left:0;border-width:5px 0 5px 6px;border-top-color:transparent;border-bottom-color:transparent}.fc-direction-rtl .fc-timegrid-now-indicator-arrow{right:0;border-width:5px 6px 5px 0;border-top-color:transparent;border-bottom-color:transparent}:root{--fc-list-event-dot-width:10px;--fc-list-event-hover-bg-color:#f5f5f5}.fc-theme-standard .fc-list{border:1px solid #ddd;border:1px solid var(--fc-border-color,#ddd)}.fc .fc-list-empty{background-color:hsla(0,0%,81.6%,.3);background-color:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3));height:100%;display:flex;justify-content:center;align-items:center}.fc .fc-list-empty-cushion{margin:5em 0}.fc .fc-list-table{width:100%;border-style:hidden}.fc .fc-list-table tr>*{border-left:0;border-right:0}.fc .fc-list-sticky .fc-list-day>*{position:sticky;top:0;background:#fff;background:var(--fc-page-bg-color,#fff)}.fc .fc-list-table th{padding:0}.fc .fc-list-day-cushion,.fc .fc-list-table td{padding:8px 14px}.fc .fc-list-day-cushion:after{content:\"\";clear:both;display:table}.fc-theme-standard .fc-list-day-cushion{background-color:hsla(0,0%,81.6%,.3);background-color:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3))}.fc-direction-ltr .fc-list-day-text,.fc-direction-rtl .fc-list-day-side-text{float:left}.fc-direction-ltr .fc-list-day-side-text,.fc-direction-rtl .fc-list-day-text{float:right}.fc-direction-ltr .fc-list-table .fc-list-event-graphic{padding-right:0}.fc-direction-rtl .fc-list-table .fc-list-event-graphic{padding-left:0}.fc .fc-list-event.fc-event-forced-url{cursor:pointer}.fc .fc-list-event:hover td{background-color:#f5f5f5;background-color:var(--fc-list-event-hover-bg-color,#f5f5f5)}.fc .fc-list-event-graphic,.fc .fc-list-event-time{white-space:nowrap;width:1px}.fc .fc-list-event-dot{display:inline-block;box-sizing:content-box;width:0;height:0;border:5px solid #3788d8;border:calc(var(--fc-list-event-dot-width, 10px) / 2) solid var(--fc-event-border-color,#3788d8);border-radius:5px;border-radius:calc(var(--fc-list-event-dot-width, 10px) / 2)}.fc .fc-list-event-title a{color:inherit;text-decoration:none}.fc .fc-list-event.fc-event-forced-url:hover a{text-decoration:underline}.fc-theme-bootstrap a:not([href]){color:inherit}.fc .fc-event,.fc .fc-scrollgrid table tr{-moz-column-break-inside:avoid;break-inside:avoid}.fc-media-print{display:block;max-width:100%}.fc-media-print .fc-bg-event,.fc-media-print .fc-non-business,.fc-media-print .fc-timegrid-axis-chunk,.fc-media-print .fc-timegrid-slots,.fc-media-print .fc-timeline-slots{display:none}.fc-media-print .fc-h-event,.fc-media-print .fc-toolbar button,.fc-media-print .fc-v-event{color:#000!important;background:#fff!important}.fc-media-print .fc-event,.fc-media-print .fc-event-main{color:#000!important}.fc-media-print .fc-timegrid-event{margin:.5em 0}.fc .fc-timeline-body{min-height:100%;position:relative;z-index:1}.fc .fc-timeline-slots{position:absolute;z-index:1;top:0;bottom:0}.fc .fc-timeline-slots>table{height:100%}.fc .fc-timeline-slot-minor{border-style:dotted}.fc .fc-timeline-slot-frame{display:flex;align-items:center;justify-content:center}.fc .fc-timeline-header-row-chrono .fc-timeline-slot-frame{justify-content:flex-start}.fc .fc-timeline-header-row:last-child .fc-timeline-slot-frame{overflow:hidden}.fc .fc-timeline-slot-cushion{padding:4px 5px;white-space:nowrap}.fc-direction-ltr .fc-timeline-slot{border-right:0!important}.fc-direction-rtl .fc-timeline-slot{border-left:0!important}.fc .fc-timeline-now-indicator-container{position:absolute;z-index:4;top:0;bottom:0;left:0;right:0;width:0}.fc .fc-timeline-now-indicator-arrow,.fc .fc-timeline-now-indicator-line{position:absolute;top:0;border-style:solid;border-color:red;border-color:var(--fc-now-indicator-color,red)}.fc .fc-timeline-now-indicator-arrow{margin:0 -6px;border-width:6px 5px 0;border-left-color:transparent;border-right-color:transparent}.fc .fc-timeline-now-indicator-line{margin:0 -1px;bottom:0;border-width:0 0 0 1px}.fc .fc-timeline-events{position:relative;z-index:3;width:0}.fc .fc-timeline-event-harness,.fc .fc-timeline-more-link{position:absolute;top:0}.fc-timeline-event{z-index:1}.fc-timeline-event.fc-event-mirror{z-index:2}.fc-timeline-event{position:relative;display:flex;align-items:center;border-radius:0;padding:2px 1px;margin-bottom:1px;font-size:.85em;font-size:var(--fc-small-font-size,.85em)}.fc-timeline-event .fc-event-main{flex-grow:1;flex-shrink:1;min-width:0}.fc-timeline-event .fc-event-time{font-weight:700}.fc-timeline-event .fc-event-time,.fc-timeline-event .fc-event-title{white-space:nowrap;padding:0 2px}.fc-direction-ltr .fc-timeline-event.fc-event-end,.fc-direction-ltr .fc-timeline-more-link{margin-right:1px}.fc-direction-rtl .fc-timeline-event.fc-event-end,.fc-direction-rtl .fc-timeline-more-link{margin-left:1px}.fc-timeline-overlap-disabled .fc-timeline-event{padding-top:5px;padding-bottom:5px;margin-bottom:0}.fc-timeline-event:not(.fc-event-end):after,.fc-timeline-event:not(.fc-event-start):before{content:\"\";flex-grow:0;flex-shrink:0;opacity:.5;width:0;height:0;margin:0 1px;border-color:transparent #000;border-style:solid;border-width:5px}.fc-direction-ltr .fc-timeline-event:not(.fc-event-start):before,.fc-direction-rtl .fc-timeline-event:not(.fc-event-end):after{border-left:0}.fc-direction-ltr .fc-timeline-event:not(.fc-event-end):after,.fc-direction-rtl .fc-timeline-event:not(.fc-event-start):before{border-right:0}.fc-timeline-more-link{font-size:.85em;font-size:var(--fc-small-font-size,.85em);color:inherit;color:var(--fc-more-link-text-color,inherit);background:#d0d0d0;background:var(--fc-more-link-bg-color,#d0d0d0);padding:1px;cursor:pointer}.fc-timeline-more-link-inner{display:inline-block;left:0;right:0;padding:2px}.fc .fc-timeline-bg{position:absolute;z-index:2;top:0;bottom:0;width:0;left:0;right:0}.fc .fc-timeline-bg .fc-non-business{z-index:1}.fc .fc-timeline-bg .fc-bg-event{z-index:2}.fc .fc-timeline-bg .fc-highlight{z-index:3}.fc .fc-timeline-bg-harness{position:absolute;top:0;bottom:0}.fc .fc-resource-timeline-divider{width:3px;cursor:col-resize}.fc .fc-resource-timeline .fc-resource-group:not([rowspan]){background:hsla(0,0%,81.6%,.3);background:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3))}.fc .fc-timeline-lane-frame{position:relative}.fc .fc-timeline-overlap-enabled .fc-timeline-lane-frame .fc-timeline-events{box-sizing:content-box;padding-bottom:10px}.fc-timeline-body-expandrows td.fc-timeline-lane{position:relative}.fc-timeline-body-expandrows .fc-timeline-lane-frame{position:static}.fc-datagrid-cell-frame-liquid{height:100%}.fc-liquid-hack .fc-datagrid-cell-frame-liquid{height:auto;position:absolute;top:0;right:0;bottom:0;left:0}.fc .fc-datagrid-header .fc-datagrid-cell-frame{position:relative;display:flex;justify-content:flex-start;align-items:center}.fc .fc-datagrid-cell-resizer{position:absolute;z-index:1;top:0;bottom:0;width:5px;cursor:col-resize}.fc .fc-datagrid-cell-cushion{padding:8px;white-space:nowrap;overflow:hidden}.fc .fc-datagrid-expander{cursor:pointer;opacity:.65}.fc .fc-datagrid-expander .fc-icon{display:inline-block;width:1em}.fc .fc-datagrid-expander-placeholder{cursor:auto}.fc .fc-resource-timeline-flat .fc-datagrid-expander-placeholder{display:none}.fc-direction-ltr .fc-datagrid-cell-resizer{right:-3px}.fc-direction-rtl .fc-datagrid-cell-resizer{left:-3px}.fc-direction-ltr .fc-datagrid-expander{margin-right:3px}.fc-direction-rtl .fc-datagrid-expander{margin-left:3px}"], encapsulation: 2 });
 FullCalendarComponent.ctorParameters = () => [
     { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"] }
 ];
@@ -9899,7 +10549,7 @@ FullCalendarComponent.propDecorators = {
                 template: '',
                 encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewEncapsulation"].None // the styles are root-level, not scoped within the component
                 ,
-                styles: ["@charset \"UTF-8\";.fc-not-allowed,.fc-not-allowed .fc-event{cursor:not-allowed}.fc-unselectable{-moz-user-select:none;-webkit-tap-highlight-color:rgba(0,0,0,0);-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}.fc{display:flex;flex-direction:column;font-size:1em}.fc,.fc *,.fc :after,.fc :before{box-sizing:border-box}.fc table{border-collapse:collapse;border-spacing:0;font-size:1em}.fc th{text-align:center}.fc td,.fc th{padding:0;vertical-align:top}.fc a[data-navlink]{cursor:pointer}.fc a[data-navlink]:hover{text-decoration:underline}.fc-direction-ltr{direction:ltr;text-align:left}.fc-direction-rtl{direction:rtl;text-align:right}.fc-theme-standard td,.fc-theme-standard th{border:1px solid #ddd;border:1px solid var(--fc-border-color,#ddd)}.fc-liquid-hack td,.fc-liquid-hack th{position:relative}@font-face{font-family:fcicons;font-style:normal;font-weight:400;src:url(\"data:application/x-font-ttf;charset=utf-8;base64,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\") format(\"truetype\")}.fc-icon{-moz-osx-font-smoothing:grayscale;-moz-user-select:none;-webkit-font-smoothing:antialiased;-webkit-user-select:none;display:inline-block;font-family:fcicons!important;font-style:normal;font-variant:normal;font-weight:400;height:1em;line-height:1;speak:none;text-align:center;text-transform:none;user-select:none;width:1em}.fc-icon-chevron-left:before{content:\"\uE900\"}.fc-icon-chevron-right:before{content:\"\uE901\"}.fc-icon-chevrons-left:before{content:\"\uE902\"}.fc-icon-chevrons-right:before{content:\"\uE903\"}.fc-icon-minus-square:before{content:\"\uE904\"}.fc-icon-plus-square:before{content:\"\uE905\"}.fc-icon-x:before{content:\"\uE906\"}.fc .fc-button{border-radius:0;font-family:inherit;font-size:inherit;line-height:inherit;margin:0;overflow:visible;text-transform:none}.fc .fc-button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}.fc .fc-button{-webkit-appearance:button}.fc .fc-button:not(:disabled){cursor:pointer}.fc .fc-button::-moz-focus-inner{border-style:none;padding:0}.fc .fc-button{-moz-user-select:none;-webkit-user-select:none;background-color:transparent;border:1px solid transparent;border-radius:.25em;display:inline-block;font-size:1em;font-weight:400;line-height:1.5;padding:.4em .65em;text-align:center;user-select:none;vertical-align:middle}.fc .fc-button:hover{text-decoration:none}.fc .fc-button:focus{box-shadow:0 0 0 .2rem rgba(44,62,80,.25);outline:0}.fc .fc-button:disabled{opacity:.65}.fc .fc-button-primary{background-color:#2c3e50;background-color:var(--fc-button-bg-color,#2c3e50);border-color:#2c3e50;border-color:var(--fc-button-border-color,#2c3e50);color:#fff;color:var(--fc-button-text-color,#fff)}.fc .fc-button-primary:hover{background-color:#1e2b37;background-color:var(--fc-button-hover-bg-color,#1e2b37);border-color:#1a252f;border-color:var(--fc-button-hover-border-color,#1a252f);color:#fff;color:var(--fc-button-text-color,#fff)}.fc .fc-button-primary:disabled{background-color:#2c3e50;background-color:var(--fc-button-bg-color,#2c3e50);border-color:#2c3e50;border-color:var(--fc-button-border-color,#2c3e50);color:#fff;color:var(--fc-button-text-color,#fff)}.fc .fc-button-primary:focus{box-shadow:0 0 0 .2rem rgba(76,91,106,.5)}.fc .fc-button-primary:not(:disabled).fc-button-active,.fc .fc-button-primary:not(:disabled):active{background-color:#1a252f;background-color:var(--fc-button-active-bg-color,#1a252f);border-color:#151e27;border-color:var(--fc-button-active-border-color,#151e27);color:#fff;color:var(--fc-button-text-color,#fff)}.fc .fc-button-primary:not(:disabled).fc-button-active:focus,.fc .fc-button-primary:not(:disabled):active:focus{box-shadow:0 0 0 .2rem rgba(76,91,106,.5)}.fc .fc-button .fc-icon{font-size:1.5em;vertical-align:middle}.fc .fc-button-group{display:inline-flex;position:relative;vertical-align:middle}.fc .fc-button-group>.fc-button{flex:1 1 auto;position:relative}.fc .fc-button-group>.fc-button.fc-button-active,.fc .fc-button-group>.fc-button:active,.fc .fc-button-group>.fc-button:focus,.fc .fc-button-group>.fc-button:hover{z-index:1}.fc-direction-ltr .fc-button-group>.fc-button:not(:first-child){border-bottom-left-radius:0;border-top-left-radius:0;margin-left:-1px}.fc-direction-ltr .fc-button-group>.fc-button:not(:last-child){border-bottom-right-radius:0;border-top-right-radius:0}.fc-direction-rtl .fc-button-group>.fc-button:not(:first-child){border-bottom-right-radius:0;border-top-right-radius:0;margin-right:-1px}.fc-direction-rtl .fc-button-group>.fc-button:not(:last-child){border-bottom-left-radius:0;border-top-left-radius:0}.fc .fc-toolbar{align-items:center;display:flex;justify-content:space-between}.fc .fc-toolbar.fc-header-toolbar{margin-bottom:1.5em}.fc .fc-toolbar.fc-footer-toolbar{margin-top:1.5em}.fc .fc-toolbar-title{font-size:1.75em;margin:0}.fc-direction-ltr .fc-toolbar>*>:not(:first-child){margin-left:.75em}.fc-direction-rtl .fc-toolbar>*>:not(:first-child){margin-right:.75em}.fc-direction-rtl .fc-toolbar-ltr{flex-direction:row-reverse}.fc .fc-scroller{-webkit-overflow-scrolling:touch;position:relative}.fc .fc-scroller-liquid{height:100%}.fc .fc-scroller-liquid-absolute{bottom:0;left:0;position:absolute;right:0;top:0}.fc .fc-scroller-harness{direction:ltr;overflow:hidden;position:relative}.fc .fc-scroller-harness-liquid{height:100%}.fc-direction-rtl .fc-scroller-harness>.fc-scroller{direction:rtl}.fc-theme-standard .fc-scrollgrid{border:1px solid #ddd;border:1px solid var(--fc-border-color,#ddd)}.fc .fc-scrollgrid,.fc .fc-scrollgrid table{table-layout:fixed;width:100%}.fc .fc-scrollgrid table{border-left-style:hidden;border-right-style:hidden;border-top-style:hidden}.fc .fc-scrollgrid{border-bottom-width:0;border-collapse:separate;border-right-width:0}.fc .fc-scrollgrid-liquid{height:100%}.fc .fc-scrollgrid-section,.fc .fc-scrollgrid-section>td,.fc .fc-scrollgrid-section table{height:1px}.fc .fc-scrollgrid-section-liquid{height:auto}.fc .fc-scrollgrid-section-liquid>td{height:100%}.fc .fc-scrollgrid-section>*{border-left-width:0;border-top-width:0}.fc .fc-scrollgrid-section-footer>*,.fc .fc-scrollgrid-section-header>*{border-bottom-width:0}.fc .fc-scrollgrid-section-body table,.fc .fc-scrollgrid-section-footer table{border-bottom-style:hidden}.fc .fc-scrollgrid-section-sticky>*{background:#fff;background:var(--fc-page-bg-color,#fff);position:-webkit-sticky;position:sticky;z-index:2}.fc .fc-scrollgrid-section-header.fc-scrollgrid-section-sticky>*{top:0}.fc .fc-scrollgrid-section-footer.fc-scrollgrid-section-sticky>*{bottom:0}.fc .fc-scrollgrid-sticky-shim{height:1px;margin-bottom:-1px}.fc-sticky{position:-webkit-sticky;position:sticky}.fc .fc-view-harness{flex-grow:1;position:relative}.fc .fc-view-harness-active>.fc-view{bottom:0;left:0;position:absolute;right:0;top:0}.fc .fc-col-header-cell-cushion{display:inline-block;padding:2px 4px}.fc .fc-bg-event,.fc .fc-highlight,.fc .fc-non-business{bottom:0;left:0;position:absolute;right:0;top:0}.fc .fc-non-business{background:hsla(0,0%,84.3%,.3);background:var(--fc-non-business-color,hsla(0,0%,84.3%,.3))}.fc .fc-bg-event{background:#8fdf82;background:var(--fc-bg-event-color,#8fdf82);opacity:.3;opacity:var(--fc-bg-event-opacity,.3)}.fc .fc-bg-event .fc-event-title{font-size:.85em;font-size:var(--fc-small-font-size,.85em);font-style:italic;margin:.5em}.fc .fc-highlight{background:rgba(188,232,241,.3);background:var(--fc-highlight-color,rgba(188,232,241,.3))}.fc .fc-cell-shaded,.fc .fc-day-disabled{background:hsla(0,0%,81.6%,.3);background:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3))}a.fc-event,a.fc-event:hover{text-decoration:none}.fc-event.fc-event-draggable,.fc-event[href]{cursor:pointer}.fc-event .fc-event-main{position:relative;z-index:2}.fc-event-dragging:not(.fc-event-selected){opacity:.75}.fc-event-dragging.fc-event-selected{box-shadow:0 2px 7px rgba(0,0,0,.3)}.fc-event .fc-event-resizer{display:none;position:absolute;z-index:4}.fc-event-selected .fc-event-resizer,.fc-event:hover .fc-event-resizer{display:block}.fc-event-selected .fc-event-resizer{background:#fff;background:var(--fc-page-bg-color,#fff);border:var(--fc-event-resizer-dot-border-width,1px) solid;border-color:inherit;border-radius:4px;border-radius:calc(var(--fc-event-resizer-dot-total-width, 8px)/2);border-width:1px;height:8px;height:var(--fc-event-resizer-dot-total-width,8px);width:8px;width:var(--fc-event-resizer-dot-total-width,8px)}.fc-event-selected .fc-event-resizer:before{bottom:-20px;content:\"\";left:-20px;position:absolute;right:-20px;top:-20px}.fc-event-selected{box-shadow:0 2px 5px rgba(0,0,0,.2)}.fc-event-selected:before{bottom:0;content:\"\";left:0;position:absolute;right:0;top:0;z-index:3}.fc-event-selected:after{background:rgba(0,0,0,.25);background:var(--fc-event-selected-overlay-color,rgba(0,0,0,.25));bottom:-1px;content:\"\";left:-1px;position:absolute;right:-1px;top:-1px;z-index:1}.fc-h-event{background-color:#3788d8;background-color:var(--fc-event-bg-color,#3788d8);border:1px solid #3788d8;border:1px solid var(--fc-event-border-color,#3788d8);display:block}.fc-h-event .fc-event-main{color:#fff;color:var(--fc-event-text-color,#fff)}.fc-h-event .fc-event-main-frame{display:flex}.fc-h-event .fc-event-time{max-width:100%;overflow:hidden}.fc-h-event .fc-event-title-container{flex-grow:1;flex-shrink:1;min-width:0}.fc-h-event .fc-event-title{display:inline-block;left:0;max-width:100%;overflow:hidden;right:0;vertical-align:top}.fc-h-event.fc-event-selected:before{bottom:-10px;top:-10px}.fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-start),.fc-direction-rtl .fc-daygrid-block-event:not(.fc-event-end){border-bottom-left-radius:0;border-left-width:0;border-top-left-radius:0}.fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-end),.fc-direction-rtl .fc-daygrid-block-event:not(.fc-event-start){border-bottom-right-radius:0;border-right-width:0;border-top-right-radius:0}.fc-h-event:not(.fc-event-selected) .fc-event-resizer{bottom:0;top:0;width:8px;width:var(--fc-event-resizer-thickness,8px)}.fc-direction-ltr .fc-h-event:not(.fc-event-selected) .fc-event-resizer-start,.fc-direction-rtl .fc-h-event:not(.fc-event-selected) .fc-event-resizer-end{cursor:w-resize;left:-4px;left:calc(var(--fc-event-resizer-thickness, 8px)/-2)}.fc-direction-ltr .fc-h-event:not(.fc-event-selected) .fc-event-resizer-end,.fc-direction-rtl .fc-h-event:not(.fc-event-selected) .fc-event-resizer-start{cursor:e-resize;right:-4px;right:calc(var(--fc-event-resizer-thickness, 8px)/-2)}.fc-h-event.fc-event-selected .fc-event-resizer{margin-top:-4px;margin-top:calc(var(--fc-event-resizer-dot-total-width, 8px)/-2);top:50%}.fc-direction-ltr .fc-h-event.fc-event-selected .fc-event-resizer-start,.fc-direction-rtl .fc-h-event.fc-event-selected .fc-event-resizer-end{left:-4px;left:calc(var(--fc-event-resizer-dot-total-width, 8px)/-2)}.fc-direction-ltr .fc-h-event.fc-event-selected .fc-event-resizer-end,.fc-direction-rtl .fc-h-event.fc-event-selected .fc-event-resizer-start{right:-4px;right:calc(var(--fc-event-resizer-dot-total-width, 8px)/-2)}:root{--fc-daygrid-event-dot-width:8px}.fc .fc-popover{box-shadow:0 2px 6px rgba(0,0,0,.15);position:fixed;top:0}.fc .fc-popover-header{align-items:center;display:flex;flex-direction:row;justify-content:space-between;padding:3px 4px}.fc .fc-popover-title{margin:0 2px}.fc .fc-popover-close{cursor:pointer;font-size:1.1em;opacity:.65}.fc-theme-standard .fc-popover{background:#fff;background:var(--fc-page-bg-color,#fff);border:1px solid #ddd;border:1px solid var(--fc-border-color,#ddd)}.fc-theme-standard .fc-popover-header{background:hsla(0,0%,81.6%,.3);background:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3))}.fc-daygrid-day-events:after,.fc-daygrid-day-events:before,.fc-daygrid-day-frame:after,.fc-daygrid-day-frame:before,.fc-daygrid-event-harness:after,.fc-daygrid-event-harness:before{clear:both;content:\"\";display:table}.fc .fc-daygrid-body{position:relative;z-index:1}.fc .fc-daygrid-day.fc-day-today{background-color:rgba(255,220,40,.15);background-color:var(--fc-today-bg-color,rgba(255,220,40,.15))}.fc .fc-daygrid-day-frame{min-height:100%;position:relative}.fc .fc-daygrid-day-top{display:flex;flex-direction:row-reverse}.fc .fc-day-other .fc-daygrid-day-top{opacity:.3}.fc .fc-daygrid-day-number{padding:4px;position:relative;z-index:4}.fc .fc-daygrid-day-events{margin-top:1px}.fc .fc-daygrid-body-balanced .fc-daygrid-day-events{left:0;position:absolute;right:0}.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events{min-height:2em;position:relative}.fc .fc-daygrid-body-natural .fc-daygrid-day-events{margin-bottom:1em}.fc .fc-daygrid-event-harness{position:relative}.fc .fc-daygrid-event-harness-abs{left:0;position:absolute;right:0;top:0}.fc .fc-daygrid-bg-harness{bottom:0;position:absolute;top:0}.fc .fc-daygrid-day-bg .fc-non-business{z-index:1}.fc .fc-daygrid-day-bg .fc-bg-event{z-index:2}.fc .fc-daygrid-day-bg .fc-highlight{z-index:3}.fc .fc-daygrid-event{margin-top:1px;z-index:6}.fc .fc-daygrid-event.fc-event-mirror{z-index:7}.fc .fc-daygrid-day-bottom{font-size:.85em;margin:2px 3px 0}.fc .fc-daygrid-more-link{cursor:pointer;position:relative;z-index:4}.fc .fc-daygrid-week-number{background-color:hsla(0,0%,81.6%,.3);background-color:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3));color:grey;color:var(--fc-neutral-text-color,grey);min-width:1.5em;padding:2px;position:absolute;text-align:center;top:0;z-index:5}.fc .fc-more-popover{z-index:8}.fc .fc-more-popover .fc-popover-body{min-width:220px;padding:10px}.fc-direction-ltr .fc-daygrid-event.fc-event-start,.fc-direction-rtl .fc-daygrid-event.fc-event-end{margin-left:2px}.fc-direction-ltr .fc-daygrid-event.fc-event-end,.fc-direction-rtl .fc-daygrid-event.fc-event-start{margin-right:2px}.fc-direction-ltr .fc-daygrid-week-number{border-radius:0 0 3px 0;left:0}.fc-direction-rtl .fc-daygrid-week-number{border-radius:0 0 0 3px;right:0}.fc-liquid-hack .fc-daygrid-day-frame{position:static}.fc-daygrid-event{border-radius:3px;font-size:.85em;font-size:var(--fc-small-font-size,.85em);position:relative;white-space:nowrap}.fc-daygrid-block-event .fc-event-time{font-weight:700}.fc-daygrid-block-event .fc-event-time,.fc-daygrid-block-event .fc-event-title{padding:1px}.fc-daygrid-dot-event{align-items:center;display:flex;padding:2px 0}.fc-daygrid-dot-event .fc-event-title{flex-grow:1;flex-shrink:1;font-weight:700;min-width:0;overflow:hidden}.fc-daygrid-dot-event.fc-event-mirror,.fc-daygrid-dot-event:hover{background:rgba(0,0,0,.1)}.fc-daygrid-dot-event.fc-event-selected:before{bottom:-10px;top:-10px}.fc-daygrid-event-dot{border:4px solid #3788d8;border:calc(var(--fc-daygrid-event-dot-width, 8px)/2) solid var(--fc-event-border-color,#3788d8);border-radius:4px;border-radius:calc(var(--fc-daygrid-event-dot-width, 8px)/2);box-sizing:content-box;height:0;margin:0 4px;width:0}.fc-direction-ltr .fc-daygrid-event .fc-event-time{margin-right:3px}.fc-direction-rtl .fc-daygrid-event .fc-event-time{margin-left:3px}.fc-v-event{background-color:#3788d8;background-color:var(--fc-event-bg-color,#3788d8);border:1px solid #3788d8;border:1px solid var(--fc-event-border-color,#3788d8);display:block}.fc-v-event .fc-event-main{color:#fff;color:var(--fc-event-text-color,#fff);height:100%}.fc-v-event .fc-event-main-frame{display:flex;flex-direction:column;height:100%}.fc-v-event .fc-event-time{flex-grow:0;flex-shrink:0;max-height:100%;overflow:hidden}.fc-v-event .fc-event-title-container{flex-grow:1;flex-shrink:1;min-height:0}.fc-v-event .fc-event-title{bottom:0;max-height:100%;overflow:hidden;top:0}.fc-v-event:not(.fc-event-start){border-top-left-radius:0;border-top-right-radius:0;border-top-width:0}.fc-v-event:not(.fc-event-end){border-bottom-left-radius:0;border-bottom-right-radius:0;border-bottom-width:0}.fc-v-event.fc-event-selected:before{left:-10px;right:-10px}.fc-v-event .fc-event-resizer-start{cursor:n-resize}.fc-v-event .fc-event-resizer-end{cursor:s-resize}.fc-v-event:not(.fc-event-selected) .fc-event-resizer{height:8px;height:var(--fc-event-resizer-thickness,8px);left:0;right:0}.fc-v-event:not(.fc-event-selected) .fc-event-resizer-start{top:-4px;top:calc(var(--fc-event-resizer-thickness, 8px)/-2)}.fc-v-event:not(.fc-event-selected) .fc-event-resizer-end{bottom:-4px;bottom:calc(var(--fc-event-resizer-thickness, 8px)/-2)}.fc-v-event.fc-event-selected .fc-event-resizer{left:50%;margin-left:-4px;margin-left:calc(var(--fc-event-resizer-dot-total-width, 8px)/-2)}.fc-v-event.fc-event-selected .fc-event-resizer-start{top:-4px;top:calc(var(--fc-event-resizer-dot-total-width, 8px)/-2)}.fc-v-event.fc-event-selected .fc-event-resizer-end{bottom:-4px;bottom:calc(var(--fc-event-resizer-dot-total-width, 8px)/-2)}.fc .fc-timegrid .fc-daygrid-body{z-index:2}.fc .fc-timegrid-divider{padding:0 0 2px}.fc .fc-timegrid-body{min-height:100%;position:relative;z-index:1}.fc .fc-timegrid-axis-chunk{position:relative}.fc .fc-timegrid-axis-chunk>table,.fc .fc-timegrid-slots{position:relative;z-index:1}.fc .fc-timegrid-slot{border-bottom:0;height:1.5em}.fc .fc-timegrid-slot:empty:before{content:\"\u00A0\"}.fc .fc-timegrid-slot-minor{border-top-style:dotted}.fc .fc-timegrid-slot-label-cushion{display:inline-block;white-space:nowrap}.fc .fc-timegrid-slot-label{vertical-align:middle}.fc .fc-timegrid-axis-cushion,.fc .fc-timegrid-slot-label-cushion{padding:0 4px}.fc .fc-timegrid-axis-frame-liquid{height:100%}.fc .fc-timegrid-axis-frame{align-items:center;display:flex;justify-content:flex-end;overflow:hidden}.fc .fc-timegrid-axis-cushion{flex-shrink:0;max-width:60px}.fc-direction-ltr .fc-timegrid-slot-label-frame{text-align:right}.fc-direction-rtl .fc-timegrid-slot-label-frame{text-align:left}.fc-liquid-hack .fc-timegrid-axis-frame-liquid{bottom:0;height:auto;left:0;position:absolute;right:0;top:0}.fc .fc-timegrid-col.fc-day-today{background-color:rgba(255,220,40,.15);background-color:var(--fc-today-bg-color,rgba(255,220,40,.15))}.fc .fc-timegrid-col-frame{min-height:100%;position:relative}.fc-liquid-hack .fc-timegrid-col-frame{height:auto}.fc-liquid-hack .fc-timegrid-col-frame,.fc-media-screen .fc-timegrid-cols{bottom:0;left:0;position:absolute;right:0;top:0}.fc-media-screen .fc-timegrid-cols>table{height:100%}.fc-media-screen .fc-timegrid-col-bg,.fc-media-screen .fc-timegrid-col-events,.fc-media-screen .fc-timegrid-now-indicator-container{left:0;position:absolute;right:0;top:0}.fc-media-screen .fc-timegrid-event-harness{position:absolute}.fc .fc-timegrid-col-bg{z-index:2}.fc .fc-timegrid-col-bg .fc-non-business{z-index:1}.fc .fc-timegrid-col-bg .fc-bg-event{z-index:2}.fc .fc-timegrid-col-bg .fc-highlight{z-index:3}.fc .fc-timegrid-bg-harness{left:0;position:absolute;right:0}.fc .fc-timegrid-col-events{z-index:3}.fc .fc-timegrid-now-indicator-container{bottom:0;overflow:hidden}.fc-direction-ltr .fc-timegrid-col-events{margin:0 2.5% 0 2px}.fc-direction-rtl .fc-timegrid-col-events{margin:0 2px 0 2.5%}.fc-timegrid-event-harness-inset .fc-timegrid-event,.fc-timegrid-event.fc-event-mirror{box-shadow:0 0 0 1px #fff;box-shadow:0 0 0 1px var(--fc-page-bg-color,#fff)}.fc-timegrid-event{border-radius:3px;font-size:.85em;font-size:var(--fc-small-font-size,.85em)}.fc-timegrid-event .fc-event-main{padding:1px 1px 0}.fc-timegrid-event .fc-event-time{font-size:.85em;font-size:var(--fc-small-font-size,.85em);margin-bottom:1px;white-space:nowrap}.fc-timegrid-event-condensed .fc-event-main-frame{flex-direction:row;overflow:hidden}.fc-timegrid-event-condensed .fc-event-time:after{content:\"\u00A0-\u00A0\"}.fc-timegrid-event-condensed .fc-event-title{font-size:.85em;font-size:var(--fc-small-font-size,.85em)}.fc-media-screen .fc-timegrid-event{bottom:1px;left:0;position:absolute;right:0;top:0}.fc .fc-timegrid-now-indicator-line{border:0 solid red;border-color:var(--fc-now-indicator-color,red);border-top:1px solid var(--fc-now-indicator-color,red);left:0;position:absolute;right:0;z-index:4}.fc .fc-timegrid-now-indicator-arrow{border-color:red;border-color:var(--fc-now-indicator-color,red);border-style:solid;margin-top:-5px;position:absolute;z-index:4}.fc-direction-ltr .fc-timegrid-now-indicator-arrow{border-bottom-color:transparent;border-top-color:transparent;border-width:5px 0 5px 6px;left:0}.fc-direction-rtl .fc-timegrid-now-indicator-arrow{border-bottom-color:transparent;border-top-color:transparent;border-width:5px 6px 5px 0;right:0}:root{--fc-list-event-dot-width:10px;--fc-list-event-hover-bg-color:#f5f5f5}.fc-theme-standard .fc-list{border:1px solid #ddd;border:1px solid var(--fc-border-color,#ddd)}.fc .fc-list-empty{align-items:center;background-color:hsla(0,0%,81.6%,.3);background-color:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3));display:flex;height:100%;justify-content:center}.fc .fc-list-empty-cushion{margin:5em 0}.fc .fc-list-table{border-style:hidden;width:100%}.fc .fc-list-table tr>*{border-left:0;border-right:0}.fc .fc-list-sticky .fc-list-day>*{background:#fff;background:var(--fc-page-bg-color,#fff);position:-webkit-sticky;position:sticky;top:0}.fc .fc-list-table th{padding:0}.fc .fc-list-day-cushion,.fc .fc-list-table td{padding:8px 14px}.fc .fc-list-day-cushion:after{clear:both;content:\"\";display:table}.fc-theme-standard .fc-list-day-cushion{background-color:hsla(0,0%,81.6%,.3);background-color:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3))}.fc-direction-ltr .fc-list-day-text,.fc-direction-rtl .fc-list-day-side-text{float:left}.fc-direction-ltr .fc-list-day-side-text,.fc-direction-rtl .fc-list-day-text{float:right}.fc-direction-ltr .fc-list-table .fc-list-event-graphic{padding-right:0}.fc-direction-rtl .fc-list-table .fc-list-event-graphic{padding-left:0}.fc .fc-list-event.fc-event-forced-url{cursor:pointer}.fc .fc-list-event:hover td{background-color:#f5f5f5;background-color:var(--fc-list-event-hover-bg-color,#f5f5f5)}.fc .fc-list-event-graphic,.fc .fc-list-event-time{white-space:nowrap;width:1px}.fc .fc-list-event-dot{border:5px solid #3788d8;border:calc(var(--fc-list-event-dot-width, 10px)/2) solid var(--fc-event-border-color,#3788d8);border-radius:5px;border-radius:calc(var(--fc-list-event-dot-width, 10px)/2);box-sizing:content-box;display:inline-block;height:0;width:0}.fc .fc-list-event-title a{color:inherit;text-decoration:none}.fc .fc-list-event.fc-event-forced-url:hover a{text-decoration:underline}.fc-theme-bootstrap a:not([href]){color:inherit}.fc .fc-event,.fc .fc-scrollgrid table tr{-moz-column-break-inside:avoid;break-inside:avoid}.fc-media-print{display:block;max-width:100%}.fc-media-print .fc-bg-event,.fc-media-print .fc-non-business,.fc-media-print .fc-timegrid-axis-chunk,.fc-media-print .fc-timegrid-slots,.fc-media-print .fc-timeline-slots{display:none}.fc-media-print .fc-h-event,.fc-media-print .fc-toolbar button,.fc-media-print .fc-v-event{background:#fff!important;color:#000!important}.fc-media-print .fc-event,.fc-media-print .fc-event-main{color:#000!important}.fc-media-print .fc-timegrid-event{margin:.5em 0}.fc .fc-timeline-body{min-height:100%;position:relative;z-index:1}.fc .fc-timeline-slots{bottom:0;position:absolute;top:0;z-index:1}.fc .fc-timeline-slots>table{height:100%}.fc .fc-timeline-slot-minor{border-style:dotted}.fc .fc-timeline-slot-frame{align-items:center;display:flex;justify-content:center}.fc .fc-timeline-header-row-chrono .fc-timeline-slot-frame{justify-content:flex-start}.fc .fc-timeline-slot-cushion{padding:4px 5px;white-space:nowrap}.fc-direction-ltr .fc-timeline-slot{border-right:0!important}.fc-direction-rtl .fc-timeline-slot{border-left:0!important}.fc .fc-timeline-now-indicator-container{bottom:0;left:0;position:absolute;right:0;top:0;width:0;z-index:4}.fc .fc-timeline-now-indicator-arrow,.fc .fc-timeline-now-indicator-line{border-color:red;border-color:var(--fc-now-indicator-color,red);border-style:solid;position:absolute;top:0}.fc .fc-timeline-now-indicator-arrow{border-left-color:transparent;border-right-color:transparent;border-width:6px 5px 0;margin:0 -6px}.fc .fc-timeline-now-indicator-line{border-width:0 0 0 1px;bottom:0;margin:0 -1px}.fc .fc-timeline-events{position:relative;width:0;z-index:3}.fc .fc-timeline-event-harness{position:absolute;top:0}.fc-timeline-event{z-index:1}.fc-timeline-event.fc-event-mirror{z-index:2}.fc-timeline-event{align-items:center;border-radius:0;display:flex;font-size:.85em;font-size:var(--fc-small-font-size,.85em);margin-bottom:1px;padding:2px 1px;position:relative}.fc-timeline-event .fc-event-main{flex-grow:1;flex-shrink:1;min-width:0}.fc-timeline-event .fc-event-time{font-weight:700}.fc-timeline-event .fc-event-time,.fc-timeline-event .fc-event-title{padding:0 2px;white-space:nowrap}.fc-direction-ltr .fc-timeline-event.fc-event-end{margin-right:1px}.fc-direction-rtl .fc-timeline-event.fc-event-end{margin-left:1px}.fc-timeline-overlap-disabled .fc-timeline-event{margin-bottom:0;padding-bottom:5px;padding-top:5px}.fc-timeline-event:not(.fc-event-end):after,.fc-timeline-event:not(.fc-event-start):before{border-color:transparent #000;border-style:solid;border-width:5px;content:\"\";flex-grow:0;flex-shrink:0;height:0;margin:0 1px;opacity:.5;width:0}.fc-direction-ltr .fc-timeline-event:not(.fc-event-start):before,.fc-direction-rtl .fc-timeline-event:not(.fc-event-end):after{border-left:0}.fc-direction-ltr .fc-timeline-event:not(.fc-event-end):after,.fc-direction-rtl .fc-timeline-event:not(.fc-event-start):before{border-right:0}.fc .fc-timeline-bg{bottom:0;left:0;position:absolute;right:0;top:0;width:0;z-index:2}.fc .fc-timeline-bg .fc-non-business{z-index:1}.fc .fc-timeline-bg .fc-bg-event{z-index:2}.fc .fc-timeline-bg .fc-highlight{z-index:3}.fc .fc-timeline-bg-harness{bottom:0;position:absolute;top:0}.fc .fc-resource-timeline-divider{cursor:col-resize;width:3px}.fc .fc-resource-timeline .fc-resource-group:not([rowspan]){background:hsla(0,0%,81.6%,.3);background:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3))}.fc .fc-timeline-lane-frame{position:relative}.fc .fc-timeline-overlap-enabled .fc-timeline-lane-frame .fc-timeline-events{box-sizing:content-box;padding-bottom:10px}.fc-datagrid-cell-frame-liquid{height:100%}.fc-liquid-hack .fc-datagrid-cell-frame-liquid{bottom:0;height:auto;left:0;position:absolute;right:0;top:0}.fc .fc-datagrid-header .fc-datagrid-cell-frame{align-items:center;display:flex;justify-content:flex-start;position:relative}.fc .fc-datagrid-cell-resizer{bottom:0;cursor:col-resize;position:absolute;top:0;width:5px;z-index:1}.fc .fc-datagrid-cell-cushion{overflow:hidden;padding:8px;white-space:nowrap}.fc .fc-datagrid-expander{cursor:pointer;opacity:.65}.fc .fc-datagrid-expander .fc-icon{display:inline-block;width:1em}.fc .fc-datagrid-expander-placeholder{cursor:auto}.fc .fc-resource-timeline-flat .fc-datagrid-expander-placeholder{display:none}.fc-direction-ltr .fc-datagrid-cell-resizer{right:-3px}.fc-direction-rtl .fc-datagrid-cell-resizer{left:-3px}.fc-direction-ltr .fc-datagrid-expander{margin-right:3px}.fc-direction-rtl .fc-datagrid-expander{margin-left:3px}"]
+                styles: ["@charset \"UTF-8\";.fc-not-allowed,.fc-not-allowed .fc-event{cursor:not-allowed}.fc-unselectable{-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}.fc{display:flex;flex-direction:column;font-size:1em}.fc,.fc *,.fc :after,.fc :before{box-sizing:border-box}.fc table{border-collapse:collapse;border-spacing:0;font-size:1em}.fc th{text-align:center}.fc td,.fc th{vertical-align:top;padding:0}.fc a[data-navlink]{cursor:pointer}.fc a[data-navlink]:hover{text-decoration:underline}.fc-direction-ltr{direction:ltr;text-align:left}.fc-direction-rtl{direction:rtl;text-align:right}.fc-theme-standard td,.fc-theme-standard th{border:1px solid #ddd;border:1px solid var(--fc-border-color,#ddd)}.fc-liquid-hack td,.fc-liquid-hack th{position:relative}@font-face{font-family:fcicons;src:url(\"data:application/x-font-ttf;charset=utf-8;base64,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\") format(\"truetype\");font-weight:400;font-style:normal}.fc-icon{display:inline-block;width:1em;height:1em;text-align:center;-webkit-user-select:none;-moz-user-select:none;user-select:none;font-family:fcicons!important;speak:none;font-style:normal;font-weight:400;font-variant:normal;text-transform:none;line-height:1;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.fc-icon-chevron-left:before{content:\"\uE900\"}.fc-icon-chevron-right:before{content:\"\uE901\"}.fc-icon-chevrons-left:before{content:\"\uE902\"}.fc-icon-chevrons-right:before{content:\"\uE903\"}.fc-icon-minus-square:before{content:\"\uE904\"}.fc-icon-plus-square:before{content:\"\uE905\"}.fc-icon-x:before{content:\"\uE906\"}.fc .fc-button{border-radius:0;overflow:visible;text-transform:none;margin:0;font-family:inherit;font-size:inherit;line-height:inherit}.fc .fc-button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}.fc .fc-button{-webkit-appearance:button}.fc .fc-button:not(:disabled){cursor:pointer}.fc .fc-button::-moz-focus-inner{padding:0;border-style:none}.fc .fc-button{display:inline-block;font-weight:400;text-align:center;vertical-align:middle;-webkit-user-select:none;-moz-user-select:none;user-select:none;background-color:transparent;border:1px solid transparent;padding:.4em .65em;font-size:1em;line-height:1.5;border-radius:.25em}.fc .fc-button:hover{text-decoration:none}.fc .fc-button:focus{outline:0;box-shadow:0 0 0 .2rem rgba(44,62,80,.25)}.fc .fc-button:disabled{opacity:.65}.fc .fc-button-primary{color:#fff;color:var(--fc-button-text-color,#fff);background-color:#2c3e50;background-color:var(--fc-button-bg-color,#2c3e50);border-color:#2c3e50;border-color:var(--fc-button-border-color,#2c3e50)}.fc .fc-button-primary:hover{color:#fff;color:var(--fc-button-text-color,#fff);background-color:#1e2b37;background-color:var(--fc-button-hover-bg-color,#1e2b37);border-color:#1a252f;border-color:var(--fc-button-hover-border-color,#1a252f)}.fc .fc-button-primary:disabled{color:#fff;color:var(--fc-button-text-color,#fff);background-color:#2c3e50;background-color:var(--fc-button-bg-color,#2c3e50);border-color:#2c3e50;border-color:var(--fc-button-border-color,#2c3e50)}.fc .fc-button-primary:focus{box-shadow:0 0 0 .2rem rgba(76,91,106,.5)}.fc .fc-button-primary:not(:disabled).fc-button-active,.fc .fc-button-primary:not(:disabled):active{color:#fff;color:var(--fc-button-text-color,#fff);background-color:#1a252f;background-color:var(--fc-button-active-bg-color,#1a252f);border-color:#151e27;border-color:var(--fc-button-active-border-color,#151e27)}.fc .fc-button-primary:not(:disabled).fc-button-active:focus,.fc .fc-button-primary:not(:disabled):active:focus{box-shadow:0 0 0 .2rem rgba(76,91,106,.5)}.fc .fc-button .fc-icon{vertical-align:middle;font-size:1.5em}.fc .fc-button-group{position:relative;display:inline-flex;vertical-align:middle}.fc .fc-button-group>.fc-button{position:relative;flex:1 1 auto}.fc .fc-button-group>.fc-button.fc-button-active,.fc .fc-button-group>.fc-button:active,.fc .fc-button-group>.fc-button:focus,.fc .fc-button-group>.fc-button:hover{z-index:1}.fc-direction-ltr .fc-button-group>.fc-button:not(:first-child){margin-left:-1px;border-top-left-radius:0;border-bottom-left-radius:0}.fc-direction-ltr .fc-button-group>.fc-button:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}.fc-direction-rtl .fc-button-group>.fc-button:not(:first-child){margin-right:-1px;border-top-right-radius:0;border-bottom-right-radius:0}.fc-direction-rtl .fc-button-group>.fc-button:not(:last-child){border-top-left-radius:0;border-bottom-left-radius:0}.fc .fc-toolbar{display:flex;justify-content:space-between;align-items:center}.fc .fc-toolbar.fc-header-toolbar{margin-bottom:1.5em}.fc .fc-toolbar.fc-footer-toolbar{margin-top:1.5em}.fc .fc-toolbar-title{font-size:1.75em;margin:0}.fc-direction-ltr .fc-toolbar>*>:not(:first-child){margin-left:.75em}.fc-direction-rtl .fc-toolbar>*>:not(:first-child){margin-right:.75em}.fc-direction-rtl .fc-toolbar-ltr{flex-direction:row-reverse}.fc .fc-scroller{-webkit-overflow-scrolling:touch;position:relative}.fc .fc-scroller-liquid{height:100%}.fc .fc-scroller-liquid-absolute{position:absolute;top:0;right:0;left:0;bottom:0}.fc .fc-scroller-harness{position:relative;overflow:hidden;direction:ltr}.fc .fc-scroller-harness-liquid{height:100%}.fc-direction-rtl .fc-scroller-harness>.fc-scroller{direction:rtl}.fc-theme-standard .fc-scrollgrid{border:1px solid #ddd;border:1px solid var(--fc-border-color,#ddd)}.fc .fc-scrollgrid,.fc .fc-scrollgrid table{width:100%;table-layout:fixed}.fc .fc-scrollgrid table{border-top-style:hidden;border-left-style:hidden;border-right-style:hidden}.fc .fc-scrollgrid{border-collapse:separate;border-right-width:0;border-bottom-width:0}.fc .fc-scrollgrid-liquid{height:100%}.fc .fc-scrollgrid-section,.fc .fc-scrollgrid-section>td,.fc .fc-scrollgrid-section table{height:1px}.fc .fc-scrollgrid-section-liquid>td{height:100%}.fc .fc-scrollgrid-section>*{border-top-width:0;border-left-width:0}.fc .fc-scrollgrid-section-footer>*,.fc .fc-scrollgrid-section-header>*{border-bottom-width:0}.fc .fc-scrollgrid-section-body table,.fc .fc-scrollgrid-section-footer table{border-bottom-style:hidden}.fc .fc-scrollgrid-section-sticky>*{background:#fff;background:var(--fc-page-bg-color,#fff);position:sticky;z-index:3}.fc .fc-scrollgrid-section-header.fc-scrollgrid-section-sticky>*{top:0}.fc .fc-scrollgrid-section-footer.fc-scrollgrid-section-sticky>*{bottom:0}.fc .fc-scrollgrid-sticky-shim{height:1px;margin-bottom:-1px}.fc-sticky{position:sticky}.fc .fc-view-harness{flex-grow:1;position:relative}.fc .fc-view-harness-active>.fc-view{position:absolute;top:0;right:0;bottom:0;left:0}.fc .fc-col-header-cell-cushion{display:inline-block;padding:2px 4px}.fc .fc-bg-event,.fc .fc-highlight,.fc .fc-non-business{position:absolute;top:0;left:0;right:0;bottom:0}.fc .fc-non-business{background:hsla(0,0%,84.3%,.3);background:var(--fc-non-business-color,hsla(0,0%,84.3%,.3))}.fc .fc-bg-event{background:#8fdf82;background:var(--fc-bg-event-color,#8fdf82);opacity:.3;opacity:var(--fc-bg-event-opacity,.3)}.fc .fc-bg-event .fc-event-title{margin:.5em;font-size:.85em;font-size:var(--fc-small-font-size,.85em);font-style:italic}.fc .fc-highlight{background:rgba(188,232,241,.3);background:var(--fc-highlight-color,rgba(188,232,241,.3))}.fc .fc-cell-shaded,.fc .fc-day-disabled{background:hsla(0,0%,81.6%,.3);background:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3))}a.fc-event,a.fc-event:hover{text-decoration:none}.fc-event.fc-event-draggable,.fc-event[href]{cursor:pointer}.fc-event .fc-event-main{position:relative;z-index:2}.fc-event-dragging:not(.fc-event-selected){opacity:.75}.fc-event-dragging.fc-event-selected{box-shadow:0 2px 7px rgba(0,0,0,.3)}.fc-event .fc-event-resizer{display:none;position:absolute;z-index:4}.fc-event-selected .fc-event-resizer,.fc-event:hover .fc-event-resizer{display:block}.fc-event-selected .fc-event-resizer{border-radius:4px;border-radius:calc(var(--fc-event-resizer-dot-total-width, 8px) / 2);border-width:1px;width:8px;width:var(--fc-event-resizer-dot-total-width,8px);height:8px;height:var(--fc-event-resizer-dot-total-width,8px);border:var(--fc-event-resizer-dot-border-width,1px) solid;border-color:inherit;background:#fff;background:var(--fc-page-bg-color,#fff)}.fc-event-selected .fc-event-resizer:before{content:\"\";position:absolute;top:-20px;left:-20px;right:-20px;bottom:-20px}.fc-event-selected{box-shadow:0 2px 5px rgba(0,0,0,.2)}.fc-event-selected:before{content:\"\";position:absolute;z-index:3;top:0;left:0;right:0;bottom:0}.fc-event-selected:after{content:\"\";background:rgba(0,0,0,.25);background:var(--fc-event-selected-overlay-color,rgba(0,0,0,.25));position:absolute;z-index:1;top:-1px;left:-1px;right:-1px;bottom:-1px}.fc-h-event{display:block;border:1px solid #3788d8;border:1px solid var(--fc-event-border-color,#3788d8);background-color:#3788d8;background-color:var(--fc-event-bg-color,#3788d8)}.fc-h-event .fc-event-main{color:#fff;color:var(--fc-event-text-color,#fff)}.fc-h-event .fc-event-main-frame{display:flex}.fc-h-event .fc-event-time{max-width:100%;overflow:hidden}.fc-h-event .fc-event-title-container{flex-grow:1;flex-shrink:1;min-width:0}.fc-h-event .fc-event-title{display:inline-block;vertical-align:top;left:0;right:0;max-width:100%;overflow:hidden}.fc-h-event.fc-event-selected:before{top:-10px;bottom:-10px}.fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-start),.fc-direction-rtl .fc-daygrid-block-event:not(.fc-event-end){border-top-left-radius:0;border-bottom-left-radius:0;border-left-width:0}.fc-direction-ltr .fc-daygrid-block-event:not(.fc-event-end),.fc-direction-rtl .fc-daygrid-block-event:not(.fc-event-start){border-top-right-radius:0;border-bottom-right-radius:0;border-right-width:0}.fc-h-event:not(.fc-event-selected) .fc-event-resizer{top:0;bottom:0;width:8px;width:var(--fc-event-resizer-thickness,8px)}.fc-direction-ltr .fc-h-event:not(.fc-event-selected) .fc-event-resizer-start,.fc-direction-rtl .fc-h-event:not(.fc-event-selected) .fc-event-resizer-end{cursor:w-resize;left:-4px;left:calc(var(--fc-event-resizer-thickness, 8px) / -2)}.fc-direction-ltr .fc-h-event:not(.fc-event-selected) .fc-event-resizer-end,.fc-direction-rtl .fc-h-event:not(.fc-event-selected) .fc-event-resizer-start{cursor:e-resize;right:-4px;right:calc(var(--fc-event-resizer-thickness, 8px) / -2)}.fc-h-event.fc-event-selected .fc-event-resizer{top:50%;margin-top:-4px;margin-top:calc(var(--fc-event-resizer-dot-total-width, 8px) / -2)}.fc-direction-ltr .fc-h-event.fc-event-selected .fc-event-resizer-start,.fc-direction-rtl .fc-h-event.fc-event-selected .fc-event-resizer-end{left:-4px;left:calc(var(--fc-event-resizer-dot-total-width, 8px) / -2)}.fc-direction-ltr .fc-h-event.fc-event-selected .fc-event-resizer-end,.fc-direction-rtl .fc-h-event.fc-event-selected .fc-event-resizer-start{right:-4px;right:calc(var(--fc-event-resizer-dot-total-width, 8px) / -2)}.fc .fc-popover{position:absolute;z-index:9999;box-shadow:0 2px 6px rgba(0,0,0,.15)}.fc .fc-popover-header{display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:3px 4px}.fc .fc-popover-title{margin:0 2px}.fc .fc-popover-close{cursor:pointer;opacity:.65;font-size:1.1em}.fc-theme-standard .fc-popover{border:1px solid #ddd;border:1px solid var(--fc-border-color,#ddd);background:#fff;background:var(--fc-page-bg-color,#fff)}.fc-theme-standard .fc-popover-header{background:hsla(0,0%,81.6%,.3);background:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3))}:root{--fc-daygrid-event-dot-width:8px}.fc-daygrid-day-events:after,.fc-daygrid-day-events:before,.fc-daygrid-day-frame:after,.fc-daygrid-day-frame:before,.fc-daygrid-event-harness:after,.fc-daygrid-event-harness:before{content:\"\";clear:both;display:table}.fc .fc-daygrid-body{position:relative;z-index:1}.fc .fc-daygrid-day.fc-day-today{background-color:rgba(255,220,40,.15);background-color:var(--fc-today-bg-color,rgba(255,220,40,.15))}.fc .fc-daygrid-day-frame{position:relative;min-height:100%}.fc .fc-daygrid-day-top{display:flex;flex-direction:row-reverse}.fc .fc-day-other .fc-daygrid-day-top{opacity:.3}.fc .fc-daygrid-day-number{position:relative;z-index:4;padding:4px}.fc .fc-daygrid-day-events{margin-top:1px}.fc .fc-daygrid-body-balanced .fc-daygrid-day-events{position:absolute;left:0;right:0}.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events{position:relative;min-height:2em}.fc .fc-daygrid-body-natural .fc-daygrid-day-events{margin-bottom:1em}.fc .fc-daygrid-event-harness{position:relative}.fc .fc-daygrid-event-harness-abs{position:absolute;top:0;left:0;right:0}.fc .fc-daygrid-bg-harness{position:absolute;top:0;bottom:0}.fc .fc-daygrid-day-bg .fc-non-business{z-index:1}.fc .fc-daygrid-day-bg .fc-bg-event{z-index:2}.fc .fc-daygrid-day-bg .fc-highlight{z-index:3}.fc .fc-daygrid-event{z-index:6;margin-top:1px}.fc .fc-daygrid-event.fc-event-mirror{z-index:7}.fc .fc-daygrid-day-bottom{font-size:.85em;padding:2px 3px 0}.fc .fc-daygrid-day-bottom:before{content:\"\";clear:both;display:table}.fc .fc-daygrid-more-link{position:relative;z-index:4;cursor:pointer}.fc .fc-daygrid-week-number{position:absolute;z-index:5;top:0;padding:2px;min-width:1.5em;text-align:center;background-color:hsla(0,0%,81.6%,.3);background-color:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3));color:grey;color:var(--fc-neutral-text-color,grey)}.fc .fc-more-popover .fc-popover-body{min-width:220px;padding:10px}.fc-direction-ltr .fc-daygrid-event.fc-event-start,.fc-direction-rtl .fc-daygrid-event.fc-event-end{margin-left:2px}.fc-direction-ltr .fc-daygrid-event.fc-event-end,.fc-direction-rtl .fc-daygrid-event.fc-event-start{margin-right:2px}.fc-direction-ltr .fc-daygrid-week-number{left:0;border-radius:0 0 3px 0}.fc-direction-rtl .fc-daygrid-week-number{right:0;border-radius:0 0 0 3px}.fc-liquid-hack .fc-daygrid-day-frame{position:static}.fc-daygrid-event{position:relative;white-space:nowrap;border-radius:3px;font-size:.85em;font-size:var(--fc-small-font-size,.85em)}.fc-daygrid-block-event .fc-event-time{font-weight:700}.fc-daygrid-block-event .fc-event-time,.fc-daygrid-block-event .fc-event-title{padding:1px}.fc-daygrid-dot-event{display:flex;align-items:center;padding:2px 0}.fc-daygrid-dot-event .fc-event-title{flex-grow:1;flex-shrink:1;min-width:0;overflow:hidden;font-weight:700}.fc-daygrid-dot-event.fc-event-mirror,.fc-daygrid-dot-event:hover{background:rgba(0,0,0,.1)}.fc-daygrid-dot-event.fc-event-selected:before{top:-10px;bottom:-10px}.fc-daygrid-event-dot{margin:0 4px;box-sizing:content-box;width:0;height:0;border:4px solid #3788d8;border:calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid var(--fc-event-border-color,#3788d8);border-radius:4px;border-radius:calc(var(--fc-daygrid-event-dot-width, 8px) / 2)}.fc-direction-ltr .fc-daygrid-event .fc-event-time{margin-right:3px}.fc-direction-rtl .fc-daygrid-event .fc-event-time{margin-left:3px}.fc-v-event{display:block;border:1px solid #3788d8;border:1px solid var(--fc-event-border-color,#3788d8);background-color:#3788d8;background-color:var(--fc-event-bg-color,#3788d8)}.fc-v-event .fc-event-main{color:#fff;color:var(--fc-event-text-color,#fff);height:100%}.fc-v-event .fc-event-main-frame{height:100%;display:flex;flex-direction:column}.fc-v-event .fc-event-time{flex-grow:0;flex-shrink:0;max-height:100%;overflow:hidden}.fc-v-event .fc-event-title-container{flex-grow:1;flex-shrink:1;min-height:0}.fc-v-event .fc-event-title{top:0;bottom:0;max-height:100%;overflow:hidden}.fc-v-event:not(.fc-event-start){border-top-width:0;border-top-left-radius:0;border-top-right-radius:0}.fc-v-event:not(.fc-event-end){border-bottom-width:0;border-bottom-left-radius:0;border-bottom-right-radius:0}.fc-v-event.fc-event-selected:before{left:-10px;right:-10px}.fc-v-event .fc-event-resizer-start{cursor:n-resize}.fc-v-event .fc-event-resizer-end{cursor:s-resize}.fc-v-event:not(.fc-event-selected) .fc-event-resizer{height:8px;height:var(--fc-event-resizer-thickness,8px);left:0;right:0}.fc-v-event:not(.fc-event-selected) .fc-event-resizer-start{top:-4px;top:calc(var(--fc-event-resizer-thickness, 8px) / -2)}.fc-v-event:not(.fc-event-selected) .fc-event-resizer-end{bottom:-4px;bottom:calc(var(--fc-event-resizer-thickness, 8px) / -2)}.fc-v-event.fc-event-selected .fc-event-resizer{left:50%;margin-left:-4px;margin-left:calc(var(--fc-event-resizer-dot-total-width, 8px) / -2)}.fc-v-event.fc-event-selected .fc-event-resizer-start{top:-4px;top:calc(var(--fc-event-resizer-dot-total-width, 8px) / -2)}.fc-v-event.fc-event-selected .fc-event-resizer-end{bottom:-4px;bottom:calc(var(--fc-event-resizer-dot-total-width, 8px) / -2)}.fc .fc-timegrid .fc-daygrid-body{z-index:2}.fc .fc-timegrid-divider{padding:0 0 2px}.fc .fc-timegrid-body{position:relative;z-index:1;min-height:100%}.fc .fc-timegrid-axis-chunk{position:relative}.fc .fc-timegrid-axis-chunk>table,.fc .fc-timegrid-slots{position:relative;z-index:1}.fc .fc-timegrid-slot{height:1.5em;border-bottom:0}.fc .fc-timegrid-slot:empty:before{content:\"\u00A0\"}.fc .fc-timegrid-slot-minor{border-top-style:dotted}.fc .fc-timegrid-slot-label-cushion{display:inline-block;white-space:nowrap}.fc .fc-timegrid-slot-label{vertical-align:middle}.fc .fc-timegrid-axis-cushion,.fc .fc-timegrid-slot-label-cushion{padding:0 4px}.fc .fc-timegrid-axis-frame-liquid{height:100%}.fc .fc-timegrid-axis-frame{overflow:hidden;display:flex;align-items:center;justify-content:flex-end}.fc .fc-timegrid-axis-cushion{max-width:60px;flex-shrink:0}.fc-direction-ltr .fc-timegrid-slot-label-frame{text-align:right}.fc-direction-rtl .fc-timegrid-slot-label-frame{text-align:left}.fc-liquid-hack .fc-timegrid-axis-frame-liquid{height:auto;position:absolute;top:0;right:0;bottom:0;left:0}.fc .fc-timegrid-col.fc-day-today{background-color:rgba(255,220,40,.15);background-color:var(--fc-today-bg-color,rgba(255,220,40,.15))}.fc .fc-timegrid-col-frame{min-height:100%;position:relative}.fc-media-screen.fc-liquid-hack .fc-timegrid-col-frame{height:auto;position:absolute;top:0;right:0;bottom:0;left:0}.fc-media-screen .fc-timegrid-cols{position:absolute;top:0;left:0;right:0;bottom:0}.fc-media-screen .fc-timegrid-cols>table{height:100%}.fc-media-screen .fc-timegrid-col-bg,.fc-media-screen .fc-timegrid-col-events,.fc-media-screen .fc-timegrid-now-indicator-container{position:absolute;top:0;left:0;right:0}.fc .fc-timegrid-col-bg{z-index:2}.fc .fc-timegrid-col-bg .fc-non-business{z-index:1}.fc .fc-timegrid-col-bg .fc-bg-event{z-index:2}.fc .fc-timegrid-col-bg .fc-highlight{z-index:3}.fc .fc-timegrid-bg-harness{position:absolute;left:0;right:0}.fc .fc-timegrid-col-events{z-index:3}.fc .fc-timegrid-now-indicator-container{bottom:0;overflow:hidden}.fc-direction-ltr .fc-timegrid-col-events{margin:0 2.5% 0 2px}.fc-direction-rtl .fc-timegrid-col-events{margin:0 2px 0 2.5%}.fc-timegrid-event-harness{position:absolute}.fc-timegrid-event-harness>.fc-timegrid-event{position:absolute;top:0;bottom:0;left:0;right:0}.fc-timegrid-event-harness-inset .fc-timegrid-event,.fc-timegrid-event.fc-event-mirror,.fc-timegrid-more-link{box-shadow:0 0 0 1px #fff;box-shadow:0 0 0 1px var(--fc-page-bg-color,#fff)}.fc-timegrid-event,.fc-timegrid-more-link{font-size:.85em;font-size:var(--fc-small-font-size,.85em);border-radius:3px}.fc-timegrid-event{margin-bottom:1px}.fc-timegrid-event .fc-event-main{padding:1px 1px 0}.fc-timegrid-event .fc-event-time{white-space:nowrap;font-size:.85em;font-size:var(--fc-small-font-size,.85em);margin-bottom:1px}.fc-timegrid-event-short .fc-event-main-frame{flex-direction:row;overflow:hidden}.fc-timegrid-event-short .fc-event-time:after{content:\"\u00A0-\u00A0\"}.fc-timegrid-event-short .fc-event-title{font-size:.85em;font-size:var(--fc-small-font-size,.85em)}.fc-timegrid-more-link{position:absolute;z-index:9999;color:inherit;color:var(--fc-more-link-text-color,inherit);background:#d0d0d0;background:var(--fc-more-link-bg-color,#d0d0d0);cursor:pointer;margin-bottom:1px}.fc-timegrid-more-link-inner{padding:3px 2px;top:0}.fc-direction-ltr .fc-timegrid-more-link{right:0}.fc-direction-rtl .fc-timegrid-more-link{left:0}.fc .fc-timegrid-now-indicator-line{position:absolute;z-index:4;left:0;right:0;border:0 solid red;border-color:var(--fc-now-indicator-color,red);border-top:1px solid var(--fc-now-indicator-color,red)}.fc .fc-timegrid-now-indicator-arrow{position:absolute;z-index:4;margin-top:-5px;border-style:solid;border-color:red;border-color:var(--fc-now-indicator-color,red)}.fc-direction-ltr .fc-timegrid-now-indicator-arrow{left:0;border-width:5px 0 5px 6px;border-top-color:transparent;border-bottom-color:transparent}.fc-direction-rtl .fc-timegrid-now-indicator-arrow{right:0;border-width:5px 6px 5px 0;border-top-color:transparent;border-bottom-color:transparent}:root{--fc-list-event-dot-width:10px;--fc-list-event-hover-bg-color:#f5f5f5}.fc-theme-standard .fc-list{border:1px solid #ddd;border:1px solid var(--fc-border-color,#ddd)}.fc .fc-list-empty{background-color:hsla(0,0%,81.6%,.3);background-color:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3));height:100%;display:flex;justify-content:center;align-items:center}.fc .fc-list-empty-cushion{margin:5em 0}.fc .fc-list-table{width:100%;border-style:hidden}.fc .fc-list-table tr>*{border-left:0;border-right:0}.fc .fc-list-sticky .fc-list-day>*{position:sticky;top:0;background:#fff;background:var(--fc-page-bg-color,#fff)}.fc .fc-list-table th{padding:0}.fc .fc-list-day-cushion,.fc .fc-list-table td{padding:8px 14px}.fc .fc-list-day-cushion:after{content:\"\";clear:both;display:table}.fc-theme-standard .fc-list-day-cushion{background-color:hsla(0,0%,81.6%,.3);background-color:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3))}.fc-direction-ltr .fc-list-day-text,.fc-direction-rtl .fc-list-day-side-text{float:left}.fc-direction-ltr .fc-list-day-side-text,.fc-direction-rtl .fc-list-day-text{float:right}.fc-direction-ltr .fc-list-table .fc-list-event-graphic{padding-right:0}.fc-direction-rtl .fc-list-table .fc-list-event-graphic{padding-left:0}.fc .fc-list-event.fc-event-forced-url{cursor:pointer}.fc .fc-list-event:hover td{background-color:#f5f5f5;background-color:var(--fc-list-event-hover-bg-color,#f5f5f5)}.fc .fc-list-event-graphic,.fc .fc-list-event-time{white-space:nowrap;width:1px}.fc .fc-list-event-dot{display:inline-block;box-sizing:content-box;width:0;height:0;border:5px solid #3788d8;border:calc(var(--fc-list-event-dot-width, 10px) / 2) solid var(--fc-event-border-color,#3788d8);border-radius:5px;border-radius:calc(var(--fc-list-event-dot-width, 10px) / 2)}.fc .fc-list-event-title a{color:inherit;text-decoration:none}.fc .fc-list-event.fc-event-forced-url:hover a{text-decoration:underline}.fc-theme-bootstrap a:not([href]){color:inherit}.fc .fc-event,.fc .fc-scrollgrid table tr{-moz-column-break-inside:avoid;break-inside:avoid}.fc-media-print{display:block;max-width:100%}.fc-media-print .fc-bg-event,.fc-media-print .fc-non-business,.fc-media-print .fc-timegrid-axis-chunk,.fc-media-print .fc-timegrid-slots,.fc-media-print .fc-timeline-slots{display:none}.fc-media-print .fc-h-event,.fc-media-print .fc-toolbar button,.fc-media-print .fc-v-event{color:#000!important;background:#fff!important}.fc-media-print .fc-event,.fc-media-print .fc-event-main{color:#000!important}.fc-media-print .fc-timegrid-event{margin:.5em 0}.fc .fc-timeline-body{min-height:100%;position:relative;z-index:1}.fc .fc-timeline-slots{position:absolute;z-index:1;top:0;bottom:0}.fc .fc-timeline-slots>table{height:100%}.fc .fc-timeline-slot-minor{border-style:dotted}.fc .fc-timeline-slot-frame{display:flex;align-items:center;justify-content:center}.fc .fc-timeline-header-row-chrono .fc-timeline-slot-frame{justify-content:flex-start}.fc .fc-timeline-header-row:last-child .fc-timeline-slot-frame{overflow:hidden}.fc .fc-timeline-slot-cushion{padding:4px 5px;white-space:nowrap}.fc-direction-ltr .fc-timeline-slot{border-right:0!important}.fc-direction-rtl .fc-timeline-slot{border-left:0!important}.fc .fc-timeline-now-indicator-container{position:absolute;z-index:4;top:0;bottom:0;left:0;right:0;width:0}.fc .fc-timeline-now-indicator-arrow,.fc .fc-timeline-now-indicator-line{position:absolute;top:0;border-style:solid;border-color:red;border-color:var(--fc-now-indicator-color,red)}.fc .fc-timeline-now-indicator-arrow{margin:0 -6px;border-width:6px 5px 0;border-left-color:transparent;border-right-color:transparent}.fc .fc-timeline-now-indicator-line{margin:0 -1px;bottom:0;border-width:0 0 0 1px}.fc .fc-timeline-events{position:relative;z-index:3;width:0}.fc .fc-timeline-event-harness,.fc .fc-timeline-more-link{position:absolute;top:0}.fc-timeline-event{z-index:1}.fc-timeline-event.fc-event-mirror{z-index:2}.fc-timeline-event{position:relative;display:flex;align-items:center;border-radius:0;padding:2px 1px;margin-bottom:1px;font-size:.85em;font-size:var(--fc-small-font-size,.85em)}.fc-timeline-event .fc-event-main{flex-grow:1;flex-shrink:1;min-width:0}.fc-timeline-event .fc-event-time{font-weight:700}.fc-timeline-event .fc-event-time,.fc-timeline-event .fc-event-title{white-space:nowrap;padding:0 2px}.fc-direction-ltr .fc-timeline-event.fc-event-end,.fc-direction-ltr .fc-timeline-more-link{margin-right:1px}.fc-direction-rtl .fc-timeline-event.fc-event-end,.fc-direction-rtl .fc-timeline-more-link{margin-left:1px}.fc-timeline-overlap-disabled .fc-timeline-event{padding-top:5px;padding-bottom:5px;margin-bottom:0}.fc-timeline-event:not(.fc-event-end):after,.fc-timeline-event:not(.fc-event-start):before{content:\"\";flex-grow:0;flex-shrink:0;opacity:.5;width:0;height:0;margin:0 1px;border-color:transparent #000;border-style:solid;border-width:5px}.fc-direction-ltr .fc-timeline-event:not(.fc-event-start):before,.fc-direction-rtl .fc-timeline-event:not(.fc-event-end):after{border-left:0}.fc-direction-ltr .fc-timeline-event:not(.fc-event-end):after,.fc-direction-rtl .fc-timeline-event:not(.fc-event-start):before{border-right:0}.fc-timeline-more-link{font-size:.85em;font-size:var(--fc-small-font-size,.85em);color:inherit;color:var(--fc-more-link-text-color,inherit);background:#d0d0d0;background:var(--fc-more-link-bg-color,#d0d0d0);padding:1px;cursor:pointer}.fc-timeline-more-link-inner{display:inline-block;left:0;right:0;padding:2px}.fc .fc-timeline-bg{position:absolute;z-index:2;top:0;bottom:0;width:0;left:0;right:0}.fc .fc-timeline-bg .fc-non-business{z-index:1}.fc .fc-timeline-bg .fc-bg-event{z-index:2}.fc .fc-timeline-bg .fc-highlight{z-index:3}.fc .fc-timeline-bg-harness{position:absolute;top:0;bottom:0}.fc .fc-resource-timeline-divider{width:3px;cursor:col-resize}.fc .fc-resource-timeline .fc-resource-group:not([rowspan]){background:hsla(0,0%,81.6%,.3);background:var(--fc-neutral-bg-color,hsla(0,0%,81.6%,.3))}.fc .fc-timeline-lane-frame{position:relative}.fc .fc-timeline-overlap-enabled .fc-timeline-lane-frame .fc-timeline-events{box-sizing:content-box;padding-bottom:10px}.fc-timeline-body-expandrows td.fc-timeline-lane{position:relative}.fc-timeline-body-expandrows .fc-timeline-lane-frame{position:static}.fc-datagrid-cell-frame-liquid{height:100%}.fc-liquid-hack .fc-datagrid-cell-frame-liquid{height:auto;position:absolute;top:0;right:0;bottom:0;left:0}.fc .fc-datagrid-header .fc-datagrid-cell-frame{position:relative;display:flex;justify-content:flex-start;align-items:center}.fc .fc-datagrid-cell-resizer{position:absolute;z-index:1;top:0;bottom:0;width:5px;cursor:col-resize}.fc .fc-datagrid-cell-cushion{padding:8px;white-space:nowrap;overflow:hidden}.fc .fc-datagrid-expander{cursor:pointer;opacity:.65}.fc .fc-datagrid-expander .fc-icon{display:inline-block;width:1em}.fc .fc-datagrid-expander-placeholder{cursor:auto}.fc .fc-resource-timeline-flat .fc-datagrid-expander-placeholder{display:none}.fc-direction-ltr .fc-datagrid-cell-resizer{right:-3px}.fc-direction-rtl .fc-datagrid-cell-resizer{left:-3px}.fc-direction-ltr .fc-datagrid-expander{margin-right:3px}.fc-direction-rtl .fc-datagrid-expander{margin-left:3px}"]
             }]
     }], function () { return [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"] }]; }, { options: [{
             type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
@@ -9939,6 +10589,33 @@ FullCalendarModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefin
 
 /***/ }),
 
+/***/ "MOxe":
+/*!********************************************************!*\
+  !*** ./node_modules/preact/hooks/dist/hooks.module.js ***!
+  \********************************************************/
+/*! exports provided: useState, useReducer, useEffect, useLayoutEffect, useRef, useImperativeHandle, useMemo, useCallback, useContext, useDebugValue, useErrorBoundary */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useState", function() { return l; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useReducer", function() { return p; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useEffect", function() { return y; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useLayoutEffect", function() { return h; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useRef", function() { return s; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useImperativeHandle", function() { return _; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useMemo", function() { return A; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useCallback", function() { return F; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useContext", function() { return T; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useDebugValue", function() { return d; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useErrorBoundary", function() { return q; });
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "2mXy");
+var t,u,r,o=0,i=[],c=preact__WEBPACK_IMPORTED_MODULE_0__["options"].__b,f=preact__WEBPACK_IMPORTED_MODULE_0__["options"].__r,e=preact__WEBPACK_IMPORTED_MODULE_0__["options"].diffed,a=preact__WEBPACK_IMPORTED_MODULE_0__["options"].__c,v=preact__WEBPACK_IMPORTED_MODULE_0__["options"].unmount;function m(t,r){preact__WEBPACK_IMPORTED_MODULE_0__["options"].__h&&preact__WEBPACK_IMPORTED_MODULE_0__["options"].__h(u,t,o||r),o=0;var i=u.__H||(u.__H={__:[],__h:[]});return t>=i.__.length&&i.__.push({}),i.__[t]}function l(n){return o=1,p(w,n)}function p(n,r,o){var i=m(t++,2);return i.t=n,i.__c||(i.__=[o?o(r):w(void 0,r),function(n){var t=i.t(i.__[0],n);i.__[0]!==t&&(i.__=[t,i.__[1]],i.__c.setState({}))}],i.__c=u),i.__}function y(r,o){var i=m(t++,3);!preact__WEBPACK_IMPORTED_MODULE_0__["options"].__s&&k(i.__H,o)&&(i.__=r,i.__H=o,u.__H.__h.push(i))}function h(r,o){var i=m(t++,4);!preact__WEBPACK_IMPORTED_MODULE_0__["options"].__s&&k(i.__H,o)&&(i.__=r,i.__H=o,u.__h.push(i))}function s(n){return o=5,A(function(){return{current:n}},[])}function _(n,t,u){o=6,h(function(){"function"==typeof n?n(t()):n&&(n.current=t())},null==u?u:u.concat(n))}function A(n,u){var r=m(t++,7);return k(r.__H,u)&&(r.__=n(),r.__H=u,r.__h=n),r.__}function F(n,t){return o=8,A(function(){return n},t)}function T(n){var r=u.context[n.__c],o=m(t++,9);return o.c=n,r?(null==o.__&&(o.__=!0,r.sub(u)),r.props.value):n.__}function d(t,u){preact__WEBPACK_IMPORTED_MODULE_0__["options"].useDebugValue&&preact__WEBPACK_IMPORTED_MODULE_0__["options"].useDebugValue(u?u(t):t)}function q(n){var r=m(t++,10),o=l();return r.__=n,u.componentDidCatch||(u.componentDidCatch=function(n){r.__&&r.__(n),o[1](n)}),[o[0],function(){o[1](void 0)}]}function x(){i.forEach(function(t){if(t.__P)try{t.__H.__h.forEach(g),t.__H.__h.forEach(j),t.__H.__h=[]}catch(u){t.__H.__h=[],preact__WEBPACK_IMPORTED_MODULE_0__["options"].__e(u,t.__v)}}),i=[]}preact__WEBPACK_IMPORTED_MODULE_0__["options"].__b=function(n){u=null,c&&c(n)},preact__WEBPACK_IMPORTED_MODULE_0__["options"].__r=function(n){f&&f(n),t=0;var r=(u=n.__c).__H;r&&(r.__h.forEach(g),r.__h.forEach(j),r.__h=[])},preact__WEBPACK_IMPORTED_MODULE_0__["options"].diffed=function(t){e&&e(t);var o=t.__c;o&&o.__H&&o.__H.__h.length&&(1!==i.push(o)&&r===preact__WEBPACK_IMPORTED_MODULE_0__["options"].requestAnimationFrame||((r=preact__WEBPACK_IMPORTED_MODULE_0__["options"].requestAnimationFrame)||function(n){var t,u=function(){clearTimeout(r),b&&cancelAnimationFrame(t),setTimeout(n)},r=setTimeout(u,100);b&&(t=requestAnimationFrame(u))})(x)),u=null},preact__WEBPACK_IMPORTED_MODULE_0__["options"].__c=function(t,u){u.some(function(t){try{t.__h.forEach(g),t.__h=t.__h.filter(function(n){return!n.__||j(n)})}catch(r){u.some(function(n){n.__h&&(n.__h=[])}),u=[],preact__WEBPACK_IMPORTED_MODULE_0__["options"].__e(r,t.__v)}}),a&&a(t,u)},preact__WEBPACK_IMPORTED_MODULE_0__["options"].unmount=function(t){v&&v(t);var u=t.__c;if(u&&u.__H)try{u.__H.__.forEach(g)}catch(t){preact__WEBPACK_IMPORTED_MODULE_0__["options"].__e(t,u.__v)}};var b="function"==typeof requestAnimationFrame;function g(n){var t=u;"function"==typeof n.__c&&n.__c(),u=t}function j(n){var t=u;n.__c=n.__(),u=t}function k(n,t){return!n||n.length!==t.length||t.some(function(t,u){return t!==n[u]})}function w(n,t){return"function"==typeof t?t(n):t}
+//# sourceMappingURL=hooks.module.js.map
+
+
+/***/ }),
+
 /***/ "PN1e":
 /*!****************************************************!*\
   !*** ./node_modules/@fullcalendar/daygrid/main.js ***!
@@ -9958,9 +10635,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fullcalendar/common */ "1hAE");
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ "Yz0s");
 /*!
-FullCalendar v5.5.0
+FullCalendar v5.9.0
 Docs & License: https://fullcalendar.io/
-(c) 2020 Adam Shaw
+(c) 2021 Adam Shaw
 */
 
 
@@ -10001,7 +10678,7 @@ var TableView = /** @class */ (function (_super) {
             chunk: { content: bodyContent },
         });
         return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["ViewRoot"], { viewSpec: context.viewSpec }, function (rootElRef, classNames) { return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { ref: rootElRef, className: ['fc-daygrid'].concat(classNames).join(' ') },
-            Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["SimpleScrollGrid"], { liquid: !props.isHeightAuto && !props.forPrint, cols: [] /* TODO: make optional? */, sections: sections }))); }));
+            Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["SimpleScrollGrid"], { liquid: !props.isHeightAuto && !props.forPrint, collapsibleWidth: props.forPrint, cols: [] /* TODO: make optional? */, sections: sections }))); }));
     };
     TableView.prototype.renderHScrollLayout = function (headerRowContent, bodyContent, colCnt, dayMinWidth) {
         var ScrollGrid = this.context.pluginHooks.scrollGridImpl;
@@ -10046,7 +10723,7 @@ var TableView = /** @class */ (function (_super) {
             });
         }
         return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["ViewRoot"], { viewSpec: context.viewSpec }, function (rootElRef, classNames) { return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { ref: rootElRef, className: ['fc-daygrid'].concat(classNames).join(' ') },
-            Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ScrollGrid, { liquid: !props.isHeightAuto && !props.forPrint, colGroups: [{ cols: [{ span: colCnt, minWidth: dayMinWidth }] }], sections: sections }))); }));
+            Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(ScrollGrid, { liquid: !props.isHeightAuto && !props.forPrint, collapsibleWidth: props.forPrint, colGroups: [{ cols: [{ span: colCnt, minWidth: dayMinWidth }] }], sections: sections }))); }));
     };
     return TableView;
 }(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["DateComponent"]));
@@ -10115,64 +10792,6 @@ function renderTopInner(props) {
     return props.dayNumberText;
 }
 
-var DEFAULT_WEEK_NUM_FORMAT = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createFormatter"])({ week: 'narrow' });
-var TableCell = /** @class */ (function (_super) {
-    Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__extends"])(TableCell, _super);
-    function TableCell() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.handleRootEl = function (el) {
-            _this.rootEl = el;
-            Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["setRef"])(_this.props.elRef, el);
-        };
-        _this.handleMoreLinkClick = function (ev) {
-            var props = _this.props;
-            if (props.onMoreClick) {
-                var allSegs = props.segsByEachCol;
-                var hiddenSegs = allSegs.filter(function (seg) { return props.segIsHidden[seg.eventRange.instance.instanceId]; });
-                props.onMoreClick({
-                    date: props.date,
-                    allSegs: allSegs,
-                    hiddenSegs: hiddenSegs,
-                    moreCnt: props.moreCnt,
-                    dayEl: _this.rootEl,
-                    ev: ev,
-                });
-            }
-        };
-        return _this;
-    }
-    TableCell.prototype.render = function () {
-        var _this = this;
-        var _a = this.context, options = _a.options, viewApi = _a.viewApi;
-        var props = this.props;
-        var date = props.date, dateProfile = props.dateProfile;
-        var hookProps = {
-            num: props.moreCnt,
-            text: props.buildMoreLinkText(props.moreCnt),
-            view: viewApi,
-        };
-        var navLinkAttrs = options.navLinks
-            ? { 'data-navlink': Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["buildNavLinkData"])(date, 'week'), tabIndex: 0 }
-            : {};
-        return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["DayCellRoot"], { date: date, dateProfile: dateProfile, todayRange: props.todayRange, showDayNumber: props.showDayNumber, extraHookProps: props.extraHookProps, elRef: this.handleRootEl }, function (dayElRef, dayClassNames, rootDataAttrs, isDisabled) { return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("td", Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({ ref: dayElRef, className: ['fc-daygrid-day'].concat(dayClassNames, props.extraClassNames || []).join(' ') }, rootDataAttrs, props.extraDataAttrs),
-            Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { className: "fc-daygrid-day-frame fc-scrollgrid-sync-inner", ref: props.innerElRef /* different from hook system! RENAME */ },
-                props.showWeekNumber && (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["WeekNumberRoot"], { date: date, defaultFormat: DEFAULT_WEEK_NUM_FORMAT }, function (weekElRef, weekClassNames, innerElRef, innerContent) { return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("a", Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({ ref: weekElRef, className: ['fc-daygrid-week-number'].concat(weekClassNames).join(' ') }, navLinkAttrs), innerContent)); })),
-                !isDisabled && (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TableCellTop, { date: date, dateProfile: dateProfile, showDayNumber: props.showDayNumber, forceDayTop: props.forceDayTop, todayRange: props.todayRange, extraHookProps: props.extraHookProps })),
-                Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { className: "fc-daygrid-day-events", ref: props.fgContentElRef, style: { paddingBottom: props.fgPaddingBottom } },
-                    props.fgContent,
-                    Boolean(props.moreCnt) && (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { className: "fc-daygrid-day-bottom", style: { marginTop: props.moreMarginTop } },
-                        Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["RenderHook"], { hookProps: hookProps, classNames: options.moreLinkClassNames, content: options.moreLinkContent, defaultContent: renderMoreLinkInner, didMount: options.moreLinkDidMount, willUnmount: options.moreLinkWillUnmount }, function (rootElRef, classNames, innerElRef, innerContent) { return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("a", { ref: rootElRef, className: ['fc-daygrid-more-link'].concat(classNames).join(' '), onClick: _this.handleMoreLinkClick }, innerContent)); })))),
-                Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { className: "fc-daygrid-day-bg" }, props.bgContent)))); }));
-    };
-    return TableCell;
-}(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["DateComponent"]));
-TableCell.addPropsEquality({
-    onMoreClick: true,
-});
-function renderMoreLinkInner(props) {
-    return props.text;
-}
-
 var DEFAULT_TABLE_EVENT_TIME_FORMAT = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createFormatter"])({
     hour: 'numeric',
     minute: '2-digit',
@@ -10188,6 +10807,18 @@ function hasListItemDisplay(seg) {
         seg.isEnd // "
     );
 }
+
+var TableBlockEvent = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__extends"])(TableBlockEvent, _super);
+    function TableBlockEvent() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    TableBlockEvent.prototype.render = function () {
+        var props = this.props;
+        return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["StandardEvent"], Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({}, props, { extraClassNames: ['fc-daygrid-event', 'fc-daygrid-block-event', 'fc-h-event'], defaultTimeFormat: DEFAULT_TABLE_EVENT_TIME_FORMAT, defaultDisplayEventEnd: props.defaultDisplayEventEnd, disableResizing: !props.seg.eventRange.def.allDay })));
+    };
+    return TableBlockEvent;
+}(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["BaseComponent"]));
 
 var TableListItemEvent = /** @class */ (function (_super) {
     Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__extends"])(TableListItemEvent, _super);
@@ -10214,256 +10845,308 @@ function getSegAnchorAttrs(seg) {
     return url ? { href: url } : {};
 }
 
-var TableBlockEvent = /** @class */ (function (_super) {
-    Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__extends"])(TableBlockEvent, _super);
-    function TableBlockEvent() {
-        return _super !== null && _super.apply(this, arguments) || this;
+var TableCellMoreLink = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__extends"])(TableCellMoreLink, _super);
+    function TableCellMoreLink() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.compileSegs = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["memoize"])(compileSegs);
+        return _this;
     }
-    TableBlockEvent.prototype.render = function () {
+    TableCellMoreLink.prototype.render = function () {
         var props = this.props;
-        return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["StandardEvent"], Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({}, props, { extraClassNames: ['fc-daygrid-event', 'fc-daygrid-block-event', 'fc-h-event'], defaultTimeFormat: DEFAULT_TABLE_EVENT_TIME_FORMAT, defaultDisplayEventEnd: props.defaultDisplayEventEnd, disableResizing: !props.seg.eventRange.def.allDay })));
+        var _a = this.compileSegs(props.singlePlacements), allSegs = _a.allSegs, invisibleSegs = _a.invisibleSegs;
+        return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["MoreLinkRoot"], { dateProfile: props.dateProfile, todayRange: props.todayRange, allDayDate: props.allDayDate, moreCnt: props.moreCnt, allSegs: allSegs, hiddenSegs: invisibleSegs, alignmentElRef: props.alignmentElRef, alignGridTop: props.alignGridTop, extraDateSpan: props.extraDateSpan, popoverContent: function () {
+                var isForcedInvisible = (props.eventDrag ? props.eventDrag.affectedInstances : null) ||
+                    (props.eventResize ? props.eventResize.affectedInstances : null) ||
+                    {};
+                return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, allSegs.map(function (seg) {
+                    var instanceId = seg.eventRange.instance.instanceId;
+                    return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { className: "fc-daygrid-event-harness", key: instanceId, style: {
+                            visibility: isForcedInvisible[instanceId] ? 'hidden' : '',
+                        } }, hasListItemDisplay(seg) ? (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TableListItemEvent, Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({ seg: seg, isDragging: false, isSelected: instanceId === props.eventSelection, defaultDisplayEventEnd: false }, Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["getSegMeta"])(seg, props.todayRange)))) : (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TableBlockEvent, Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({ seg: seg, isDragging: false, isResizing: false, isDateSelecting: false, isSelected: instanceId === props.eventSelection, defaultDisplayEventEnd: false }, Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["getSegMeta"])(seg, props.todayRange))))));
+                })));
+            } }, function (rootElRef, classNames, innerElRef, innerContent, handleClick) { return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("a", { ref: rootElRef, className: ['fc-daygrid-more-link'].concat(classNames).join(' '), onClick: handleClick }, innerContent)); }));
     };
-    return TableBlockEvent;
+    return TableCellMoreLink;
 }(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["BaseComponent"]));
+function compileSegs(singlePlacements) {
+    var allSegs = [];
+    var invisibleSegs = [];
+    for (var _i = 0, singlePlacements_1 = singlePlacements; _i < singlePlacements_1.length; _i++) {
+        var placement = singlePlacements_1[_i];
+        allSegs.push(placement.seg);
+        if (!placement.isVisible) {
+            invisibleSegs.push(placement.seg);
+        }
+    }
+    return { allSegs: allSegs, invisibleSegs: invisibleSegs };
+}
 
-function computeFgSegPlacement(// for one row. TODO: print mode?
-cellModels, segs, dayMaxEvents, dayMaxEventRows, eventHeights, maxContentHeight, colCnt, eventOrderSpecs) {
-    var colPlacements = []; // if event spans multiple cols, its present in each col
-    var moreCnts = []; // by-col
-    var segIsHidden = {};
-    var segTops = {}; // always populated for each seg
-    var segMarginTops = {}; // simetimes populated for each seg
-    var moreTops = {};
-    var paddingBottoms = {}; // for each cell's inner-wrapper div
-    for (var i = 0; i < colCnt; i += 1) {
-        colPlacements.push([]);
-        moreCnts.push(0);
+var DEFAULT_WEEK_NUM_FORMAT = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createFormatter"])({ week: 'narrow' });
+var TableCell = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__extends"])(TableCell, _super);
+    function TableCell() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this.rootElRef = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createRef"])();
+        _this.handleRootEl = function (el) {
+            Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["setRef"])(_this.rootElRef, el);
+            Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["setRef"])(_this.props.elRef, el);
+        };
+        return _this;
     }
-    segs = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["sortEventSegs"])(segs, eventOrderSpecs);
-    for (var _i = 0, segs_1 = segs; _i < segs_1.length; _i++) {
-        var seg = segs_1[_i];
-        var instanceId = seg.eventRange.instance.instanceId;
-        var eventHeight = eventHeights[instanceId + ':' + seg.firstCol];
-        placeSeg(seg, eventHeight || 0); // will keep colPlacements sorted by top
-    }
+    TableCell.prototype.render = function () {
+        var _a = this, props = _a.props, context = _a.context, rootElRef = _a.rootElRef;
+        var options = context.options;
+        var date = props.date, dateProfile = props.dateProfile;
+        var navLinkAttrs = options.navLinks
+            ? { 'data-navlink': Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["buildNavLinkData"])(date, 'week'), tabIndex: 0 }
+            : {};
+        return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["DayCellRoot"], { date: date, dateProfile: dateProfile, todayRange: props.todayRange, showDayNumber: props.showDayNumber, extraHookProps: props.extraHookProps, elRef: this.handleRootEl }, function (dayElRef, dayClassNames, rootDataAttrs, isDisabled) { return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("td", Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({ ref: dayElRef, className: ['fc-daygrid-day'].concat(dayClassNames, props.extraClassNames || []).join(' ') }, rootDataAttrs, props.extraDataAttrs),
+            Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { className: "fc-daygrid-day-frame fc-scrollgrid-sync-inner", ref: props.innerElRef /* different from hook system! RENAME */ },
+                props.showWeekNumber && (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["WeekNumberRoot"], { date: date, defaultFormat: DEFAULT_WEEK_NUM_FORMAT }, function (weekElRef, weekClassNames, innerElRef, innerContent) { return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("a", Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({ ref: weekElRef, className: ['fc-daygrid-week-number'].concat(weekClassNames).join(' ') }, navLinkAttrs), innerContent)); })),
+                !isDisabled && (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TableCellTop, { date: date, dateProfile: dateProfile, showDayNumber: props.showDayNumber, forceDayTop: props.forceDayTop, todayRange: props.todayRange, extraHookProps: props.extraHookProps })),
+                Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { className: "fc-daygrid-day-events", ref: props.fgContentElRef },
+                    props.fgContent,
+                    Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { className: "fc-daygrid-day-bottom", style: { marginTop: props.moreMarginTop } },
+                        Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TableCellMoreLink, { allDayDate: date, singlePlacements: props.singlePlacements, moreCnt: props.moreCnt, alignmentElRef: rootElRef, alignGridTop: !props.showDayNumber, extraDateSpan: props.extraDateSpan, dateProfile: props.dateProfile, eventSelection: props.eventSelection, eventDrag: props.eventDrag, eventResize: props.eventResize, todayRange: props.todayRange }))),
+                Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { className: "fc-daygrid-day-bg" }, props.bgContent)))); }));
+    };
+    return TableCell;
+}(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["DateComponent"]));
+
+function computeFgSegPlacement(segs, // assumed already sorted
+dayMaxEvents, dayMaxEventRows, strictOrder, eventInstanceHeights, maxContentHeight, cells) {
+    var hierarchy = new DayGridSegHierarchy();
+    hierarchy.allowReslicing = true;
+    hierarchy.strictOrder = strictOrder;
     if (dayMaxEvents === true || dayMaxEventRows === true) {
-        limitByMaxHeight(moreCnts, segIsHidden, colPlacements, maxContentHeight); // populates moreCnts/segIsHidden
+        hierarchy.maxCoord = maxContentHeight;
+        hierarchy.hiddenConsumes = true;
     }
     else if (typeof dayMaxEvents === 'number') {
-        limitByMaxEvents(moreCnts, segIsHidden, colPlacements, dayMaxEvents); // populates moreCnts/segIsHidden
+        hierarchy.maxStackCnt = dayMaxEvents;
     }
     else if (typeof dayMaxEventRows === 'number') {
-        limitByMaxRows(moreCnts, segIsHidden, colPlacements, dayMaxEventRows); // populates moreCnts/segIsHidden
+        hierarchy.maxStackCnt = dayMaxEventRows;
+        hierarchy.hiddenConsumes = true;
     }
-    // computes segTops/segMarginTops/moreTops/paddingBottoms
-    for (var col = 0; col < colCnt; col += 1) {
-        var placements = colPlacements[col];
-        var currentNonAbsBottom = 0;
-        var currentAbsHeight = 0;
-        for (var _a = 0, placements_1 = placements; _a < placements_1.length; _a++) {
-            var placement = placements_1[_a];
-            var seg = placement.seg;
-            if (!segIsHidden[seg.eventRange.instance.instanceId]) {
-                segTops[seg.eventRange.instance.instanceId] = placement.top; // from top of container
-                if (seg.firstCol === seg.lastCol && seg.isStart && seg.isEnd) { // TODO: simpler way? NOT DRY
-                    segMarginTops[seg.eventRange.instance.instanceId] =
-                        placement.top - currentNonAbsBottom; // from previous seg bottom
-                    currentAbsHeight = 0;
-                    currentNonAbsBottom = placement.bottom;
-                }
-                else { // multi-col event, abs positioned
-                    currentAbsHeight = placement.bottom - currentNonAbsBottom;
-                }
-            }
+    // create segInputs only for segs with known heights
+    var segInputs = [];
+    var unknownHeightSegs = [];
+    for (var i = 0; i < segs.length; i += 1) {
+        var seg = segs[i];
+        var instanceId = seg.eventRange.instance.instanceId;
+        var eventHeight = eventInstanceHeights[instanceId];
+        if (eventHeight != null) {
+            segInputs.push({
+                index: i,
+                thickness: eventHeight,
+                span: {
+                    start: seg.firstCol,
+                    end: seg.lastCol + 1,
+                },
+            });
         }
-        if (currentAbsHeight) {
-            if (moreCnts[col]) {
-                moreTops[col] = currentAbsHeight;
-            }
-            else {
-                paddingBottoms[col] = currentAbsHeight;
-            }
+        else {
+            unknownHeightSegs.push(seg);
         }
     }
-    function placeSeg(seg, segHeight) {
-        if (!tryPlaceSegAt(seg, segHeight, 0)) {
-            for (var col = seg.firstCol; col <= seg.lastCol; col += 1) {
-                for (var _i = 0, _a = colPlacements[col]; _i < _a.length; _i++) { // will repeat multi-day segs!!!!!!! bad!!!!!!
-                    var placement = _a[_i];
-                    if (tryPlaceSegAt(seg, segHeight, placement.bottom)) {
-                        return;
-                    }
-                }
-            }
-        }
-    }
-    function tryPlaceSegAt(seg, segHeight, top) {
-        if (canPlaceSegAt(seg, segHeight, top)) {
-            for (var col = seg.firstCol; col <= seg.lastCol; col += 1) {
-                var placements = colPlacements[col];
-                var insertionIndex = 0;
-                while (insertionIndex < placements.length &&
-                    top >= placements[insertionIndex].top) {
-                    insertionIndex += 1;
-                }
-                placements.splice(insertionIndex, 0, {
-                    seg: seg,
-                    top: top,
-                    bottom: top + segHeight,
-                });
-            }
-            return true;
-        }
-        return false;
-    }
-    function canPlaceSegAt(seg, segHeight, top) {
+    var hiddenEntries = hierarchy.addSegs(segInputs);
+    var segRects = hierarchy.toRects();
+    var _a = placeRects(segRects, segs, cells), singleColPlacements = _a.singleColPlacements, multiColPlacements = _a.multiColPlacements, leftoverMargins = _a.leftoverMargins;
+    var moreCnts = [];
+    var moreMarginTops = [];
+    // add segs with unknown heights
+    for (var _i = 0, unknownHeightSegs_1 = unknownHeightSegs; _i < unknownHeightSegs_1.length; _i++) {
+        var seg = unknownHeightSegs_1[_i];
+        multiColPlacements[seg.firstCol].push({
+            seg: seg,
+            isVisible: false,
+            isAbsolute: true,
+            absoluteTop: 0,
+            marginTop: 0,
+        });
         for (var col = seg.firstCol; col <= seg.lastCol; col += 1) {
-            for (var _i = 0, _a = colPlacements[col]; _i < _a.length; _i++) {
-                var placement = _a[_i];
-                if (top < placement.bottom && top + segHeight > placement.top) { // collide?
-                    return false;
+            singleColPlacements[col].push({
+                seg: resliceSeg(seg, col, col + 1, cells),
+                isVisible: false,
+                isAbsolute: false,
+                absoluteTop: 0,
+                marginTop: 0,
+            });
+        }
+    }
+    // add the hidden entries
+    for (var col = 0; col < cells.length; col += 1) {
+        moreCnts.push(0);
+    }
+    for (var _b = 0, hiddenEntries_1 = hiddenEntries; _b < hiddenEntries_1.length; _b++) {
+        var hiddenEntry = hiddenEntries_1[_b];
+        var seg = segs[hiddenEntry.index];
+        var hiddenSpan = hiddenEntry.span;
+        multiColPlacements[hiddenSpan.start].push({
+            seg: resliceSeg(seg, hiddenSpan.start, hiddenSpan.end, cells),
+            isVisible: false,
+            isAbsolute: true,
+            absoluteTop: 0,
+            marginTop: 0,
+        });
+        for (var col = hiddenSpan.start; col < hiddenSpan.end; col += 1) {
+            moreCnts[col] += 1;
+            singleColPlacements[col].push({
+                seg: resliceSeg(seg, col, col + 1, cells),
+                isVisible: false,
+                isAbsolute: false,
+                absoluteTop: 0,
+                marginTop: 0,
+            });
+        }
+    }
+    // deal with leftover margins
+    for (var col = 0; col < cells.length; col += 1) {
+        moreMarginTops.push(leftoverMargins[col]);
+    }
+    return { singleColPlacements: singleColPlacements, multiColPlacements: multiColPlacements, moreCnts: moreCnts, moreMarginTops: moreMarginTops };
+}
+// rects ordered by top coord, then left
+function placeRects(allRects, segs, cells) {
+    var rectsByEachCol = groupRectsByEachCol(allRects, cells.length);
+    var singleColPlacements = [];
+    var multiColPlacements = [];
+    var leftoverMargins = [];
+    for (var col = 0; col < cells.length; col += 1) {
+        var rects = rectsByEachCol[col];
+        // compute all static segs in singlePlacements
+        var singlePlacements = [];
+        var currentHeight = 0;
+        var currentMarginTop = 0;
+        for (var _i = 0, rects_1 = rects; _i < rects_1.length; _i++) {
+            var rect = rects_1[_i];
+            var seg = segs[rect.index];
+            singlePlacements.push({
+                seg: resliceSeg(seg, col, col + 1, cells),
+                isVisible: true,
+                isAbsolute: false,
+                absoluteTop: rect.levelCoord,
+                marginTop: rect.levelCoord - currentHeight,
+            });
+            currentHeight = rect.levelCoord + rect.thickness;
+        }
+        // compute mixed static/absolute segs in multiPlacements
+        var multiPlacements = [];
+        currentHeight = 0;
+        currentMarginTop = 0;
+        for (var _a = 0, rects_2 = rects; _a < rects_2.length; _a++) {
+            var rect = rects_2[_a];
+            var seg = segs[rect.index];
+            var isAbsolute = rect.span.end - rect.span.start > 1; // multi-column?
+            var isFirstCol = rect.span.start === col;
+            currentMarginTop += rect.levelCoord - currentHeight; // amount of space since bottom of previous seg
+            currentHeight = rect.levelCoord + rect.thickness; // height will now be bottom of current seg
+            if (isAbsolute) {
+                currentMarginTop += rect.thickness;
+                if (isFirstCol) {
+                    multiPlacements.push({
+                        seg: resliceSeg(seg, rect.span.start, rect.span.end, cells),
+                        isVisible: true,
+                        isAbsolute: true,
+                        absoluteTop: rect.levelCoord,
+                        marginTop: 0,
+                    });
                 }
             }
+            else if (isFirstCol) {
+                multiPlacements.push({
+                    seg: resliceSeg(seg, rect.span.start, rect.span.end, cells),
+                    isVisible: true,
+                    isAbsolute: false,
+                    absoluteTop: rect.levelCoord,
+                    marginTop: currentMarginTop, // claim the margin
+                });
+                currentMarginTop = 0;
+            }
         }
-        return true;
+        singleColPlacements.push(singlePlacements);
+        multiColPlacements.push(multiPlacements);
+        leftoverMargins.push(currentMarginTop);
     }
-    // what does this do!?
-    for (var instanceIdAndFirstCol in eventHeights) {
-        if (!eventHeights[instanceIdAndFirstCol]) {
-            segIsHidden[instanceIdAndFirstCol.split(':')[0]] = true;
+    return { singleColPlacements: singleColPlacements, multiColPlacements: multiColPlacements, leftoverMargins: leftoverMargins };
+}
+function groupRectsByEachCol(rects, colCnt) {
+    var rectsByEachCol = [];
+    for (var col = 0; col < colCnt; col += 1) {
+        rectsByEachCol.push([]);
+    }
+    for (var _i = 0, rects_3 = rects; _i < rects_3.length; _i++) {
+        var rect = rects_3[_i];
+        for (var col = rect.span.start; col < rect.span.end; col += 1) {
+            rectsByEachCol[col].push(rect);
         }
     }
-    var segsByFirstCol = colPlacements.map(extractFirstColSegs); // operates on the sorted cols
-    var segsByEachCol = colPlacements.map(function (placements, col) {
-        var segsForCols = extractAllColSegs(placements);
-        segsForCols = resliceDaySegs(segsForCols, cellModels[col].date, col);
-        return segsForCols;
+    return rectsByEachCol;
+}
+function resliceSeg(seg, spanStart, spanEnd, cells) {
+    if (seg.firstCol === spanStart && seg.lastCol === spanEnd - 1) {
+        return seg;
+    }
+    var eventRange = seg.eventRange;
+    var origRange = eventRange.range;
+    var slicedRange = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["intersectRanges"])(origRange, {
+        start: cells[spanStart].date,
+        end: Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["addDays"])(cells[spanEnd - 1].date, 1),
     });
-    return {
-        segsByFirstCol: segsByFirstCol,
-        segsByEachCol: segsByEachCol,
-        segIsHidden: segIsHidden,
-        segTops: segTops,
-        segMarginTops: segMarginTops,
-        moreCnts: moreCnts,
-        moreTops: moreTops,
-        paddingBottoms: paddingBottoms,
+    return Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({}, seg), { firstCol: spanStart, lastCol: spanEnd - 1, eventRange: {
+            def: eventRange.def,
+            ui: Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({}, eventRange.ui), { durationEditable: false }),
+            instance: eventRange.instance,
+            range: slicedRange,
+        }, isStart: seg.isStart && slicedRange.start.valueOf() === origRange.start.valueOf(), isEnd: seg.isEnd && slicedRange.end.valueOf() === origRange.end.valueOf() });
+}
+var DayGridSegHierarchy = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__extends"])(DayGridSegHierarchy, _super);
+    function DayGridSegHierarchy() {
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        // config
+        _this.hiddenConsumes = false;
+        // allows us to keep hidden entries in the hierarchy so they take up space
+        _this.forceHidden = {};
+        return _this;
+    }
+    DayGridSegHierarchy.prototype.addSegs = function (segInputs) {
+        var _this = this;
+        var hiddenSegs = _super.prototype.addSegs.call(this, segInputs);
+        var entriesByLevel = this.entriesByLevel;
+        var excludeHidden = function (entry) { return !_this.forceHidden[Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["buildEntryKey"])(entry)]; };
+        // remove the forced-hidden segs
+        for (var level = 0; level < entriesByLevel.length; level += 1) {
+            entriesByLevel[level] = entriesByLevel[level].filter(excludeHidden);
+        }
+        return hiddenSegs;
     };
-}
-function extractFirstColSegs(oneColPlacements, col) {
-    var segs = [];
-    for (var _i = 0, oneColPlacements_1 = oneColPlacements; _i < oneColPlacements_1.length; _i++) {
-        var placement = oneColPlacements_1[_i];
-        if (placement.seg.firstCol === col) {
-            segs.push(placement.seg);
-        }
-    }
-    return segs;
-}
-function extractAllColSegs(oneColPlacements) {
-    var segs = [];
-    for (var _i = 0, oneColPlacements_2 = oneColPlacements; _i < oneColPlacements_2.length; _i++) {
-        var placement = oneColPlacements_2[_i];
-        segs.push(placement.seg);
-    }
-    return segs;
-}
-function limitByMaxHeight(hiddenCnts, segIsHidden, colPlacements, maxContentHeight) {
-    limitEvents(hiddenCnts, segIsHidden, colPlacements, true, function (placement) { return placement.bottom <= maxContentHeight; });
-}
-function limitByMaxEvents(hiddenCnts, segIsHidden, colPlacements, dayMaxEvents) {
-    limitEvents(hiddenCnts, segIsHidden, colPlacements, false, function (placement, levelIndex) { return levelIndex < dayMaxEvents; });
-}
-function limitByMaxRows(hiddenCnts, segIsHidden, colPlacements, dayMaxEventRows) {
-    limitEvents(hiddenCnts, segIsHidden, colPlacements, true, function (placement, levelIndex) { return levelIndex < dayMaxEventRows; });
-}
-/*
-populates the given hiddenCnts/segIsHidden, which are supplied empty.
-TODO: return them instead
-*/
-function limitEvents(hiddenCnts, segIsHidden, colPlacements, _moreLinkConsumesLevel, isPlacementInBounds) {
-    var colCnt = hiddenCnts.length;
-    var segIsVisible = {}; // TODO: instead, use segIsHidden with true/false?
-    var visibleColPlacements = []; // will mirror colPlacements
-    for (var col = 0; col < colCnt; col += 1) {
-        visibleColPlacements.push([]);
-    }
-    for (var col = 0; col < colCnt; col += 1) {
-        var placements = colPlacements[col];
-        var level = 0;
-        for (var _i = 0, placements_2 = placements; _i < placements_2.length; _i++) {
-            var placement = placements_2[_i];
-            if (isPlacementInBounds(placement, level)) {
-                recordVisible(placement);
-            }
-            else {
-                recordHidden(placement, level, _moreLinkConsumesLevel);
-            }
-            // only considered a level if the seg had height
-            if (placement.top !== placement.bottom) {
-                level += 1;
-            }
-        }
-    }
-    function recordVisible(placement) {
-        var seg = placement.seg;
-        var instanceId = seg.eventRange.instance.instanceId;
-        if (!segIsVisible[instanceId]) {
-            segIsVisible[instanceId] = true;
-            for (var col = seg.firstCol; col <= seg.lastCol; col += 1) {
-                var destPlacements = visibleColPlacements[col];
-                var newPosition = 0;
-                // insert while keeping top sorted in each column
-                while (newPosition < destPlacements.length &&
-                    placement.top >= destPlacements[newPosition].top) {
-                    newPosition += 1;
+    DayGridSegHierarchy.prototype.handleInvalidInsertion = function (insertion, entry, hiddenEntries) {
+        var _a = this, entriesByLevel = _a.entriesByLevel, forceHidden = _a.forceHidden;
+        var touchingEntry = insertion.touchingEntry, touchingLevel = insertion.touchingLevel, touchingLateral = insertion.touchingLateral;
+        if (this.hiddenConsumes && touchingEntry) {
+            var touchingEntryId = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["buildEntryKey"])(touchingEntry);
+            // if not already hidden
+            if (!forceHidden[touchingEntryId]) {
+                if (this.allowReslicing) {
+                    var placeholderEntry = Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({}, touchingEntry), { span: Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["intersectSpans"])(touchingEntry.span, entry.span) });
+                    var placeholderEntryId = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["buildEntryKey"])(placeholderEntry);
+                    forceHidden[placeholderEntryId] = true;
+                    entriesByLevel[touchingLevel][touchingLateral] = placeholderEntry; // replace touchingEntry with our placeholder
+                    this.splitEntry(touchingEntry, entry, hiddenEntries); // split up the touchingEntry, reinsert it
                 }
-                destPlacements.splice(newPosition, 0, placement);
-            }
-        }
-    }
-    function recordHidden(placement, currentLevel, moreLinkConsumesLevel) {
-        var seg = placement.seg;
-        var instanceId = seg.eventRange.instance.instanceId;
-        if (!segIsHidden[instanceId]) {
-            segIsHidden[instanceId] = true;
-            for (var col = seg.firstCol; col <= seg.lastCol; col += 1) {
-                hiddenCnts[col] += 1;
-                var hiddenCnt = hiddenCnts[col];
-                if (moreLinkConsumesLevel && hiddenCnt === 1 && currentLevel > 0) {
-                    var doomedLevel = currentLevel - 1;
-                    while (visibleColPlacements[col].length > doomedLevel) {
-                        recordHidden(visibleColPlacements[col].pop(), // removes
-                        visibleColPlacements[col].length, // will execute after the pop. will be the index of the removed placement
-                        false);
-                    }
+                else {
+                    forceHidden[touchingEntryId] = true;
+                    hiddenEntries.push(touchingEntry);
                 }
             }
         }
-    }
-}
-// Given the events within an array of segment objects, reslice them to be in a single day
-function resliceDaySegs(segs, dayDate, colIndex) {
-    var dayStart = dayDate;
-    var dayEnd = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["addDays"])(dayStart, 1);
-    var dayRange = { start: dayStart, end: dayEnd };
-    var newSegs = [];
-    for (var _i = 0, segs_2 = segs; _i < segs_2.length; _i++) {
-        var seg = segs_2[_i];
-        var eventRange = seg.eventRange;
-        var origRange = eventRange.range;
-        var slicedRange = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["intersectRanges"])(origRange, dayRange);
-        if (slicedRange) {
-            newSegs.push(Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({}, seg), { firstCol: colIndex, lastCol: colIndex, eventRange: {
-                    def: eventRange.def,
-                    ui: Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({}, eventRange.ui), { durationEditable: false }),
-                    instance: eventRange.instance,
-                    range: slicedRange,
-                }, isStart: seg.isStart && slicedRange.start.valueOf() === origRange.start.valueOf(), isEnd: seg.isEnd && slicedRange.end.valueOf() === origRange.end.valueOf() }));
-        }
-    }
-    return newSegs;
-}
+        return _super.prototype.handleInvalidInsertion.call(this, insertion, entry, hiddenEntries);
+    };
+    return DayGridSegHierarchy;
+}(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["SegHierarchy"]));
 
 var TableRow = /** @class */ (function (_super) {
     Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__extends"])(TableRow, _super);
@@ -10477,32 +11160,30 @@ var TableRow = /** @class */ (function (_super) {
         _this.state = {
             framePositions: null,
             maxContentHeight: null,
-            segHeights: {},
+            eventInstanceHeights: {},
         };
         return _this;
     }
     TableRow.prototype.render = function () {
         var _this = this;
         var _a = this, props = _a.props, state = _a.state, context = _a.context;
+        var options = context.options;
         var colCnt = props.cells.length;
         var businessHoursByCol = splitSegsByFirstCol(props.businessHourSegs, colCnt);
         var bgEventSegsByCol = splitSegsByFirstCol(props.bgEventSegs, colCnt);
         var highlightSegsByCol = splitSegsByFirstCol(this.getHighlightSegs(), colCnt);
         var mirrorSegsByCol = splitSegsByFirstCol(this.getMirrorSegs(), colCnt);
-        var _b = computeFgSegPlacement(props.cells, props.fgEventSegs, props.dayMaxEvents, props.dayMaxEventRows, state.segHeights, state.maxContentHeight, colCnt, context.options.eventOrder), paddingBottoms = _b.paddingBottoms, segsByFirstCol = _b.segsByFirstCol, segsByEachCol = _b.segsByEachCol, segIsHidden = _b.segIsHidden, segTops = _b.segTops, segMarginTops = _b.segMarginTops, moreCnts = _b.moreCnts, moreTops = _b.moreTops;
-        var selectedInstanceHash = // TODO: messy way to compute this
+        var _b = computeFgSegPlacement(Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["sortEventSegs"])(props.fgEventSegs, options.eventOrder), props.dayMaxEvents, props.dayMaxEventRows, options.eventOrderStrict, state.eventInstanceHeights, state.maxContentHeight, props.cells), singleColPlacements = _b.singleColPlacements, multiColPlacements = _b.multiColPlacements, moreCnts = _b.moreCnts, moreMarginTops = _b.moreMarginTops;
+        var isForcedInvisible = // TODO: messy way to compute this
          (props.eventDrag && props.eventDrag.affectedInstances) ||
             (props.eventResize && props.eventResize.affectedInstances) ||
             {};
         return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("tr", { ref: this.rootElRef },
             props.renderIntro && props.renderIntro(),
             props.cells.map(function (cell, col) {
-                var normalFgNodes = _this.renderFgSegs(segsByFirstCol[col], segIsHidden, segTops, segMarginTops, selectedInstanceHash, props.todayRange);
-                var mirrorFgNodes = _this.renderFgSegs(mirrorSegsByCol[col], {}, segTops, // use same tops as real rendering
-                {}, {}, props.todayRange, Boolean(props.eventDrag), Boolean(props.eventResize), false);
-                return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TableCell, { key: cell.key, elRef: _this.cellElRefs.createRef(cell.key), innerElRef: _this.frameElRefs.createRef(cell.key) /* FF <td> problem, but okay to use for left/right. TODO: rename prop */, dateProfile: props.dateProfile, date: cell.date, showDayNumber: props.showDayNumbers, showWeekNumber: props.showWeekNumbers && col === 0, forceDayTop: props.showWeekNumbers /* even displaying weeknum for row, not necessarily day */, todayRange: props.todayRange, extraHookProps: cell.extraHookProps, extraDataAttrs: cell.extraDataAttrs, extraClassNames: cell.extraClassNames, moreCnt: moreCnts[col], buildMoreLinkText: props.buildMoreLinkText, onMoreClick: function (arg) {
-                        props.onMoreClick(Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({}, arg), { fromCol: col }));
-                    }, segIsHidden: segIsHidden, moreMarginTop: moreTops[col] /* rename */, segsByEachCol: segsByEachCol[col], fgPaddingBottom: paddingBottoms[col], fgContentElRef: _this.fgElRefs.createRef(cell.key), fgContent: ( // Fragment scopes the keys
+                var normalFgNodes = _this.renderFgSegs(col, props.forPrint ? singleColPlacements[col] : multiColPlacements[col], props.todayRange, isForcedInvisible);
+                var mirrorFgNodes = _this.renderFgSegs(col, buildMirrorPlacements(mirrorSegsByCol[col], multiColPlacements), props.todayRange, {}, Boolean(props.eventDrag), Boolean(props.eventResize), false);
+                return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TableCell, { key: cell.key, elRef: _this.cellElRefs.createRef(cell.key), innerElRef: _this.frameElRefs.createRef(cell.key) /* FF <td> problem, but okay to use for left/right. TODO: rename prop */, dateProfile: props.dateProfile, date: cell.date, showDayNumber: props.showDayNumbers, showWeekNumber: props.showWeekNumbers && col === 0, forceDayTop: props.showWeekNumbers /* even displaying weeknum for row, not necessarily day */, todayRange: props.todayRange, eventSelection: props.eventSelection, eventDrag: props.eventDrag, eventResize: props.eventResize, extraHookProps: cell.extraHookProps, extraDataAttrs: cell.extraDataAttrs, extraClassNames: cell.extraClassNames, extraDateSpan: cell.extraDateSpan, moreCnt: moreCnts[col], moreMarginTop: moreMarginTops[col], singlePlacements: singleColPlacements[col], fgContentElRef: _this.fgElRefs.createRef(cell.key), fgContent: ( // Fragment scopes the keys
                     Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null,
                         Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, normalFgNodes),
                         Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["Fragment"], null, mirrorFgNodes))), bgContent: ( // Fragment scopes the keys
@@ -10536,28 +11217,24 @@ var TableRow = /** @class */ (function (_super) {
         }
         return [];
     };
-    TableRow.prototype.renderFgSegs = function (segs, segIsHidden, // does NOT mean display:hidden
-    segTops, segMarginTops, selectedInstanceHash, todayRange, isDragging, isResizing, isDateSelecting) {
+    TableRow.prototype.renderFgSegs = function (col, segPlacements, todayRange, isForcedInvisible, isDragging, isResizing, isDateSelecting) {
         var context = this.context;
         var eventSelection = this.props.eventSelection;
         var framePositions = this.state.framePositions;
         var defaultDisplayEventEnd = this.props.cells.length === 1; // colCnt === 1
+        var isMirror = isDragging || isResizing || isDateSelecting;
         var nodes = [];
         if (framePositions) {
-            for (var _i = 0, segs_1 = segs; _i < segs_1.length; _i++) {
-                var seg = segs_1[_i];
+            for (var _i = 0, segPlacements_1 = segPlacements; _i < segPlacements_1.length; _i++) {
+                var placement = segPlacements_1[_i];
+                var seg = placement.seg;
                 var instanceId = seg.eventRange.instance.instanceId;
-                var isMirror = isDragging || isResizing || isDateSelecting;
-                var isSelected = selectedInstanceHash[instanceId];
-                var isInvisible = segIsHidden[instanceId] || isSelected;
-                // TODO: simpler way? NOT DRY
-                var isAbsolute = segIsHidden[instanceId] || isMirror || seg.firstCol !== seg.lastCol || !seg.isStart || !seg.isEnd;
-                var marginTop = void 0;
-                var top_1 = void 0;
-                var left = void 0;
-                var right = void 0;
+                var key = instanceId + ':' + col;
+                var isVisible = placement.isVisible && !isForcedInvisible[instanceId];
+                var isAbsolute = placement.isAbsolute;
+                var left = '';
+                var right = '';
                 if (isAbsolute) {
-                    top_1 = segTops[instanceId];
                     if (context.isRtl) {
                         right = 0;
                         left = framePositions.lefts[seg.lastCol] - framePositions.lefts[seg.firstCol];
@@ -10567,20 +11244,16 @@ var TableRow = /** @class */ (function (_super) {
                         right = framePositions.rights[seg.firstCol] - framePositions.rights[seg.lastCol];
                     }
                 }
-                else {
-                    marginTop = segMarginTops[instanceId];
-                }
                 /*
                 known bug: events that are force to be list-item but span multiple days still take up space in later columns
+                todo: in print view, for multi-day events, don't display title within non-start/end segs
                 */
-                nodes.push(Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { className: 'fc-daygrid-event-harness' + (isAbsolute ? ' fc-daygrid-event-harness-abs' : ''), key: instanceId, 
-                    // in print mode when in mult cols, could collide
-                    ref: isMirror ? null : this.segHarnessRefs.createRef(instanceId + ':' + seg.firstCol), style: {
-                        visibility: isInvisible ? 'hidden' : '',
-                        marginTop: marginTop || '',
-                        top: top_1 || '',
-                        left: left || '',
-                        right: right || '',
+                nodes.push(Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { className: 'fc-daygrid-event-harness' + (isAbsolute ? ' fc-daygrid-event-harness-abs' : ''), key: key, ref: isMirror ? null : this.segHarnessRefs.createRef(key), style: {
+                        visibility: isVisible ? '' : 'hidden',
+                        marginTop: isAbsolute ? '' : placement.marginTop,
+                        top: isAbsolute ? placement.absoluteTop : '',
+                        left: left,
+                        right: right,
                     } }, hasListItemDisplay(seg) ? (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TableListItemEvent, Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({ seg: seg, isDragging: isDragging, isSelected: instanceId === eventSelection, defaultDisplayEventEnd: defaultDisplayEventEnd }, Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["getSegMeta"])(seg, todayRange)))) : (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TableBlockEvent, Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({ seg: seg, isDragging: isDragging, isResizing: isResizing, isDateSelecting: isDateSelecting, isSelected: instanceId === eventSelection, defaultDisplayEventEnd: defaultDisplayEventEnd }, Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["getSegMeta"])(seg, todayRange))))));
             }
         }
@@ -10592,8 +11265,8 @@ var TableRow = /** @class */ (function (_super) {
         var framePositions = this.state.framePositions;
         var nodes = [];
         if (framePositions) {
-            for (var _i = 0, segs_2 = segs; _i < segs_2.length; _i++) {
-                var seg = segs_2[_i];
+            for (var _i = 0, segs_1 = segs; _i < segs_1.length; _i++) {
+                var seg = segs_1[_i];
                 var leftRightCss = isRtl ? {
                     right: 0,
                     left: framePositions.lefts[seg.lastCol] - framePositions.lefts[seg.firstCol],
@@ -10606,11 +11279,13 @@ var TableRow = /** @class */ (function (_super) {
                     Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["renderFill"])(fillType)));
             }
         }
-        return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__spreadArrays"])([_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["Fragment"], {}], nodes));
+        return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"].apply(void 0, Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__spreadArray"])([_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["Fragment"], {}], nodes));
     };
     TableRow.prototype.updateSizing = function (isExternalSizingChange) {
         var _a = this, props = _a.props, frameElRefs = _a.frameElRefs;
-        if (props.clientWidth !== null) { // positioning ready?
+        if (!props.forPrint &&
+            props.clientWidth !== null // positioning ready?
+        ) {
             if (isExternalSizingChange) {
                 var frameEls = props.cells.map(function (cell) { return frameElRefs.currentMap[cell.key]; });
                 if (frameEls.length) {
@@ -10623,13 +11298,21 @@ var TableRow = /** @class */ (function (_super) {
             }
             var limitByContentHeight = props.dayMaxEvents === true || props.dayMaxEventRows === true;
             this.setState({
-                segHeights: this.computeSegHeights(),
+                eventInstanceHeights: this.queryEventInstanceHeights(),
                 maxContentHeight: limitByContentHeight ? this.computeMaxContentHeight() : null,
             });
         }
     };
-    TableRow.prototype.computeSegHeights = function () {
-        return Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["mapHash"])(this.segHarnessRefs.currentMap, function (eventHarnessEl) { return (eventHarnessEl.getBoundingClientRect().height); });
+    TableRow.prototype.queryEventInstanceHeights = function () {
+        var segElMap = this.segHarnessRefs.currentMap;
+        var eventInstanceHeights = {};
+        // get the max height amongst instance segs
+        for (var key in segElMap) {
+            var height = Math.round(segElMap[key].getBoundingClientRect().height);
+            var instanceId = key.split(':')[0]; // deconstruct how renderFgSegs makes the key
+            eventInstanceHeights[instanceId] = Math.max(eventInstanceHeights[instanceId] || 0, height);
+        }
+        return eventInstanceHeights;
     };
     TableRow.prototype.computeMaxContentHeight = function () {
         var firstKey = this.props.cells[0].key;
@@ -10643,154 +11326,33 @@ var TableRow = /** @class */ (function (_super) {
     };
     return TableRow;
 }(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["DateComponent"]));
-TableRow.addPropsEquality({
-    onMoreClick: true,
-});
 TableRow.addStateEquality({
-    segHeights: _fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["isPropsEqual"],
+    eventInstanceHeights: _fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["isPropsEqual"],
 });
-
-var PADDING_FROM_VIEWPORT = 10;
-var SCROLL_DEBOUNCE = 10;
-var Popover = /** @class */ (function (_super) {
-    Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__extends"])(Popover, _super);
-    function Popover() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.repositioner = new _fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["DelayedRunner"](_this.updateSize.bind(_this));
-        _this.handleRootEl = function (el) {
-            _this.rootEl = el;
-            if (_this.props.elRef) {
-                Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["setRef"])(_this.props.elRef, el);
-            }
-        };
-        // Triggered when the user clicks *anywhere* in the document, for the autoHide feature
-        _this.handleDocumentMousedown = function (ev) {
-            var onClose = _this.props.onClose;
-            // only hide the popover if the click happened outside the popover
-            if (onClose && !_this.rootEl.contains(ev.target)) {
-                onClose();
-            }
-        };
-        _this.handleDocumentScroll = function () {
-            _this.repositioner.request(SCROLL_DEBOUNCE);
-        };
-        _this.handleCloseClick = function () {
-            var onClose = _this.props.onClose;
-            if (onClose) {
-                onClose();
-            }
-        };
-        return _this;
+function buildMirrorPlacements(mirrorSegs, colPlacements) {
+    if (!mirrorSegs.length) {
+        return [];
     }
-    Popover.prototype.render = function () {
-        var theme = this.context.theme;
-        var props = this.props;
-        var classNames = [
-            'fc-popover',
-            theme.getClass('popover'),
-        ].concat(props.extraClassNames || []);
-        return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({ className: classNames.join(' ') }, props.extraAttrs, { ref: this.handleRootEl }),
-            Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { className: 'fc-popover-header ' + theme.getClass('popoverHeader') },
-                Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("span", { className: "fc-popover-title" }, props.title),
-                Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("span", { className: 'fc-popover-close ' + theme.getIconClass('close'), onClick: this.handleCloseClick })),
-            Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { className: 'fc-popover-body ' + theme.getClass('popoverContent') }, props.children)));
-    };
-    Popover.prototype.componentDidMount = function () {
-        document.addEventListener('mousedown', this.handleDocumentMousedown);
-        document.addEventListener('scroll', this.handleDocumentScroll);
-        this.updateSize();
-    };
-    Popover.prototype.componentWillUnmount = function () {
-        document.removeEventListener('mousedown', this.handleDocumentMousedown);
-        document.removeEventListener('scroll', this.handleDocumentScroll);
-    };
-    // TODO: adjust on window resize
-    /*
-    NOTE: the popover is position:fixed, so coordinates are relative to the viewport
-    NOTE: the PARENT calls this as well, on window resize. we would have wanted to use the repositioner,
-          but need to ensure that all other components have updated size first (for alignmentEl)
-    */
-    Popover.prototype.updateSize = function () {
-        var _a = this.props, alignmentEl = _a.alignmentEl, topAlignmentEl = _a.topAlignmentEl;
-        var rootEl = this.rootEl;
-        if (!rootEl) {
-            return; // not sure why this was null, but we shouldn't let external components call updateSize() anyway
+    var topsByInstanceId = buildAbsoluteTopHash(colPlacements); // TODO: cache this at first render?
+    return mirrorSegs.map(function (seg) { return ({
+        seg: seg,
+        isVisible: true,
+        isAbsolute: true,
+        absoluteTop: topsByInstanceId[seg.eventRange.instance.instanceId],
+        marginTop: 0,
+    }); });
+}
+function buildAbsoluteTopHash(colPlacements) {
+    var topsByInstanceId = {};
+    for (var _i = 0, colPlacements_1 = colPlacements; _i < colPlacements_1.length; _i++) {
+        var placements = colPlacements_1[_i];
+        for (var _a = 0, placements_1 = placements; _a < placements_1.length; _a++) {
+            var placement = placements_1[_a];
+            topsByInstanceId[placement.seg.eventRange.instance.instanceId] = placement.absoluteTop;
         }
-        var dims = rootEl.getBoundingClientRect(); // only used for width,height
-        var alignment = alignmentEl.getBoundingClientRect();
-        var top = topAlignmentEl ? topAlignmentEl.getBoundingClientRect().top : alignment.top;
-        top = Math.min(top, window.innerHeight - dims.height - PADDING_FROM_VIEWPORT);
-        top = Math.max(top, PADDING_FROM_VIEWPORT);
-        var left;
-        if (this.context.isRtl) {
-            left = alignment.right - dims.width;
-        }
-        else {
-            left = alignment.left;
-        }
-        left = Math.min(left, window.innerWidth - dims.width - PADDING_FROM_VIEWPORT);
-        left = Math.max(left, PADDING_FROM_VIEWPORT);
-        Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["applyStyle"])(rootEl, { top: top, left: left });
-    };
-    return Popover;
-}(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["BaseComponent"]));
-
-var MorePopover = /** @class */ (function (_super) {
-    Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__extends"])(MorePopover, _super);
-    function MorePopover() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.rootElRef = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createRef"])();
-        return _this;
     }
-    MorePopover.prototype.render = function () {
-        var _a = this.context, options = _a.options, dateEnv = _a.dateEnv;
-        var props = this.props;
-        var date = props.date, hiddenInstances = props.hiddenInstances, todayRange = props.todayRange, dateProfile = props.dateProfile, selectedInstanceId = props.selectedInstanceId;
-        var title = dateEnv.format(date, options.dayPopoverFormat);
-        return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["DayCellRoot"], { date: date, dateProfile: dateProfile, todayRange: todayRange, elRef: this.rootElRef }, function (rootElRef, dayClassNames, dataAttrs) { return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Popover, { elRef: rootElRef, title: title, extraClassNames: ['fc-more-popover'].concat(dayClassNames), extraAttrs: dataAttrs, onClose: props.onCloseClick, alignmentEl: props.alignmentEl, topAlignmentEl: props.topAlignmentEl },
-            Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["DayCellContent"], { date: date, dateProfile: dateProfile, todayRange: todayRange }, function (innerElRef, innerContent) { return (innerContent &&
-                Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { className: "fc-more-popover-misc", ref: innerElRef }, innerContent)); }),
-            props.segs.map(function (seg) {
-                var instanceId = seg.eventRange.instance.instanceId;
-                return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { className: "fc-daygrid-event-harness", key: instanceId, style: {
-                        visibility: hiddenInstances[instanceId] ? 'hidden' : '',
-                    } }, hasListItemDisplay(seg) ? (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TableListItemEvent, Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({ seg: seg, isDragging: false, isSelected: instanceId === selectedInstanceId, defaultDisplayEventEnd: false }, Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["getSegMeta"])(seg, todayRange)))) : (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TableBlockEvent, Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({ seg: seg, isDragging: false, isResizing: false, isDateSelecting: false, isSelected: instanceId === selectedInstanceId, defaultDisplayEventEnd: false }, Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["getSegMeta"])(seg, todayRange))))));
-            }))); }));
-    };
-    MorePopover.prototype.positionToHit = function (positionLeft, positionTop, originEl) {
-        var rootEl = this.rootElRef.current;
-        if (!originEl || !rootEl) { // why?
-            return null;
-        }
-        var originRect = originEl.getBoundingClientRect();
-        var elRect = rootEl.getBoundingClientRect();
-        var newOriginLeft = elRect.left - originRect.left;
-        var newOriginTop = elRect.top - originRect.top;
-        var localLeft = positionLeft - newOriginLeft;
-        var localTop = positionTop - newOriginTop;
-        var date = this.props.date;
-        if ( // ugly way to detect intersection
-        localLeft >= 0 && localLeft < elRect.width &&
-            localTop >= 0 && localTop < elRect.height) {
-            return {
-                dateSpan: {
-                    allDay: true,
-                    range: { start: date, end: Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["addDays"])(date, 1) },
-                },
-                dayEl: rootEl,
-                relativeRect: {
-                    left: newOriginLeft,
-                    top: newOriginTop,
-                    right: elRect.width,
-                    bottom: elRect.height,
-                },
-                layer: 1,
-            };
-        }
-        return null;
-    };
-    return MorePopover;
-}(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["DateComponent"]));
+    return topsByInstanceId;
+}
 
 var Table = /** @class */ (function (_super) {
     Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__extends"])(Table, _super);
@@ -10802,54 +11364,18 @@ var Table = /** @class */ (function (_super) {
         _this.splitDateSelectionSegs = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["memoize"])(splitSegsByRow);
         _this.splitEventDrag = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["memoize"])(splitInteractionByRow);
         _this.splitEventResize = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["memoize"])(splitInteractionByRow);
-        _this.buildBuildMoreLinkText = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["memoize"])(buildBuildMoreLinkText);
-        _this.morePopoverRef = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createRef"])();
         _this.rowRefs = new _fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["RefMap"]();
-        _this.state = {
-            morePopoverState: null,
-        };
         _this.handleRootEl = function (rootEl) {
             _this.rootEl = rootEl;
-            Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["setRef"])(_this.props.elRef, rootEl);
-        };
-        // TODO: bad names "more link click" versus "more click"
-        _this.handleMoreLinkClick = function (arg) {
-            var context = _this.context;
-            var dateEnv = context.dateEnv;
-            var clickOption = context.options.moreLinkClick;
-            function segForPublic(seg) {
-                var _a = seg.eventRange, def = _a.def, instance = _a.instance, range = _a.range;
-                return {
-                    event: new _fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["EventApi"](context, def, instance),
-                    start: dateEnv.toDate(range.start),
-                    end: dateEnv.toDate(range.end),
-                    isStart: seg.isStart,
-                    isEnd: seg.isEnd,
-                };
-            }
-            if (typeof clickOption === 'function') {
-                clickOption = clickOption({
-                    date: dateEnv.toDate(arg.date),
-                    allDay: true,
-                    allSegs: arg.allSegs.map(segForPublic),
-                    hiddenSegs: arg.hiddenSegs.map(segForPublic),
-                    jsEvent: arg.ev,
-                    view: context.viewApi,
-                }); // hack to handle void
-            }
-            if (!clickOption || clickOption === 'popover') {
-                _this.setState({
-                    morePopoverState: Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({}, arg), { currentFgEventSegs: _this.props.fgEventSegs, fromRow: arg.fromRow, fromCol: arg.fromCol }),
+            if (rootEl) {
+                _this.context.registerInteractiveComponent(_this, {
+                    el: rootEl,
+                    isHitComboAllowed: _this.props.isHitComboAllowed,
                 });
             }
-            else if (typeof clickOption === 'string') { // a view name
-                context.calendarApi.zoomTo(arg.date, clickOption);
+            else {
+                _this.context.unregisterInteractiveComponent(_this);
             }
-        };
-        _this.handleMorePopoverClose = function () {
-            _this.setState({
-                morePopoverState: null,
-            });
         };
         return _this;
     }
@@ -10857,7 +11383,6 @@ var Table = /** @class */ (function (_super) {
         var _this = this;
         var props = this.props;
         var dateProfile = props.dateProfile, dayMaxEventRows = props.dayMaxEventRows, dayMaxEvents = props.dayMaxEvents, expandRows = props.expandRows;
-        var morePopoverState = this.state.morePopoverState;
         var rowCnt = props.cells.length;
         var businessHourSegsByRow = this.splitBusinessHourSegs(props.businessHourSegs, rowCnt);
         var bgEventSegsByRow = this.splitBgEventSegs(props.bgEventSegs, rowCnt);
@@ -10865,7 +11390,6 @@ var Table = /** @class */ (function (_super) {
         var dateSelectionSegsByRow = this.splitDateSelectionSegs(props.dateSelectionSegs, rowCnt);
         var eventDragByRow = this.splitEventDrag(props.eventDrag, rowCnt);
         var eventResizeByRow = this.splitEventResize(props.eventResize, rowCnt);
-        var buildMoreLinkText = this.buildBuildMoreLinkText(this.context.options.moreLinkText);
         var limitViaBalanced = dayMaxEvents === true || dayMaxEventRows === true;
         // if rows can't expand to fill fixed height, can't do balanced-height event limit
         // TODO: best place to normalize these options?
@@ -10877,7 +11401,7 @@ var Table = /** @class */ (function (_super) {
         var classNames = [
             'fc-daygrid-body',
             limitViaBalanced ? 'fc-daygrid-body-balanced' : 'fc-daygrid-body-unbalanced',
-            expandRows ? '' : 'fc-daygrid-body-natural',
+            expandRows ? '' : 'fc-daygrid-body-natural', // will height of one row depend on the others?
         ];
         return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", { className: classNames.join(' '), ref: this.handleRootEl, style: {
                 // these props are important to give this wrapper correct dimensions for interactions
@@ -10895,13 +11419,7 @@ var Table = /** @class */ (function (_super) {
                     Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])("tbody", null, props.cells.map(function (cells, row) { return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(TableRow, { ref: _this.rowRefs.createRef(row), key: cells.length
                             ? cells[0].date.toISOString() /* best? or put key on cell? or use diff formatter? */
                             : row // in case there are no cells (like when resource view is loading)
-                        , showDayNumbers: rowCnt > 1, showWeekNumbers: props.showWeekNumbers, todayRange: todayRange, dateProfile: dateProfile, cells: cells, renderIntro: props.renderRowIntro, businessHourSegs: businessHourSegsByRow[row], eventSelection: props.eventSelection, bgEventSegs: bgEventSegsByRow[row].filter(isSegAllDay) /* hack */, fgEventSegs: fgEventSegsByRow[row], dateSelectionSegs: dateSelectionSegsByRow[row], eventDrag: eventDragByRow[row], eventResize: eventResizeByRow[row], dayMaxEvents: dayMaxEvents, dayMaxEventRows: dayMaxEventRows, clientWidth: props.clientWidth, clientHeight: props.clientHeight, buildMoreLinkText: buildMoreLinkText, onMoreClick: function (arg) {
-                            _this.handleMoreLinkClick(Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({}, arg), { fromRow: row }));
-                        } })); }))),
-                (!props.forPrint && morePopoverState && morePopoverState.currentFgEventSegs === props.fgEventSegs) && (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(MorePopover, { ref: _this.morePopoverRef, date: morePopoverState.date, dateProfile: dateProfile, segs: morePopoverState.allSegs, alignmentEl: morePopoverState.dayEl, topAlignmentEl: rowCnt === 1 ? props.headerAlignElRef.current : null, onCloseClick: _this.handleMorePopoverClose, selectedInstanceId: props.eventSelection, hiddenInstances: // yuck
-                    (props.eventDrag ? props.eventDrag.affectedInstances : null) ||
-                        (props.eventResize ? props.eventResize.affectedInstances : null) ||
-                        {}, todayRange: todayRange })))); })));
+                        , showDayNumbers: rowCnt > 1, showWeekNumbers: props.showWeekNumbers, todayRange: todayRange, dateProfile: dateProfile, cells: cells, renderIntro: props.renderRowIntro, businessHourSegs: businessHourSegsByRow[row], eventSelection: props.eventSelection, bgEventSegs: bgEventSegsByRow[row].filter(isSegAllDay) /* hack */, fgEventSegs: fgEventSegsByRow[row], dateSelectionSegs: dateSelectionSegsByRow[row], eventDrag: eventDragByRow[row], eventResize: eventResizeByRow[row], dayMaxEvents: dayMaxEvents, dayMaxEventRows: dayMaxEventRows, clientWidth: props.clientWidth, clientHeight: props.clientHeight, forPrint: props.forPrint })); }))))); })));
     };
     // Hit System
     // ----------------------------------------------------------------------------------------------------
@@ -10912,31 +11430,23 @@ var Table = /** @class */ (function (_super) {
         true, // horizontal
         false);
     };
-    Table.prototype.positionToHit = function (leftPosition, topPosition) {
-        var morePopover = this.morePopoverRef.current;
-        var morePopoverHit = morePopover ? morePopover.positionToHit(leftPosition, topPosition, this.rootEl) : null;
-        var morePopoverState = this.state.morePopoverState;
-        if (morePopoverHit) {
-            return Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({ row: morePopoverState.fromRow, col: morePopoverState.fromCol }, morePopoverHit);
-        }
+    Table.prototype.queryHit = function (positionLeft, positionTop) {
         var _a = this, colPositions = _a.colPositions, rowPositions = _a.rowPositions;
-        var col = colPositions.leftToIndex(leftPosition);
-        var row = rowPositions.topToIndex(topPosition);
+        var col = colPositions.leftToIndex(positionLeft);
+        var row = rowPositions.topToIndex(positionTop);
         if (row != null && col != null) {
+            var cell = this.props.cells[row][col];
             return {
-                row: row,
-                col: col,
-                dateSpan: {
-                    range: this.getCellRange(row, col),
-                    allDay: true,
-                },
+                dateProfile: this.props.dateProfile,
+                dateSpan: Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({ range: this.getCellRange(row, col), allDay: true }, cell.extraDateSpan),
                 dayEl: this.getCellEl(row, col),
-                relativeRect: {
+                rect: {
                     left: colPositions.lefts[col],
                     right: colPositions.rights[col],
                     top: rowPositions.tops[row],
                     bottom: rowPositions.bottoms[row],
                 },
+                layer: 0,
             };
         }
         return null;
@@ -10951,12 +11461,6 @@ var Table = /** @class */ (function (_super) {
     };
     return Table;
 }(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["DateComponent"]));
-function buildBuildMoreLinkText(moreLinkTextInput) {
-    if (typeof moreLinkTextInput === 'function') {
-        return moreLinkTextInput;
-    }
-    return function (num) { return "+" + num + " " + moreLinkTextInput; };
-}
 function isSegAllDay(seg) {
     return seg.eventRange.def.allDay;
 }
@@ -10980,40 +11484,11 @@ var DayTable = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.slicer = new DayTableSlicer();
         _this.tableRef = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createRef"])();
-        _this.handleRootEl = function (rootEl) {
-            if (rootEl) {
-                _this.context.registerInteractiveComponent(_this, { el: rootEl });
-            }
-            else {
-                _this.context.unregisterInteractiveComponent(_this);
-            }
-        };
         return _this;
     }
     DayTable.prototype.render = function () {
         var _a = this, props = _a.props, context = _a.context;
-        return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Table, Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({ ref: this.tableRef, elRef: this.handleRootEl }, this.slicer.sliceProps(props, props.dateProfile, props.nextDayThreshold, context, props.dayTableModel), { dateProfile: props.dateProfile, cells: props.dayTableModel.cells, colGroupNode: props.colGroupNode, tableMinWidth: props.tableMinWidth, renderRowIntro: props.renderRowIntro, dayMaxEvents: props.dayMaxEvents, dayMaxEventRows: props.dayMaxEventRows, showWeekNumbers: props.showWeekNumbers, expandRows: props.expandRows, headerAlignElRef: props.headerAlignElRef, clientWidth: props.clientWidth, clientHeight: props.clientHeight, forPrint: props.forPrint })));
-    };
-    DayTable.prototype.prepareHits = function () {
-        this.tableRef.current.prepareHits();
-    };
-    DayTable.prototype.queryHit = function (positionLeft, positionTop) {
-        var rawHit = this.tableRef.current.positionToHit(positionLeft, positionTop);
-        if (rawHit) {
-            return {
-                component: this,
-                dateSpan: rawHit.dateSpan,
-                dayEl: rawHit.dayEl,
-                rect: {
-                    left: rawHit.relativeRect.left,
-                    right: rawHit.relativeRect.right,
-                    top: rawHit.relativeRect.top,
-                    bottom: rawHit.relativeRect.bottom,
-                },
-                layer: 0,
-            };
-        }
-        return null;
+        return (Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createElement"])(Table, Object(tslib__WEBPACK_IMPORTED_MODULE_2__["__assign"])({ ref: this.tableRef }, this.slicer.sliceProps(props, props.dateProfile, props.nextDayThreshold, context, props.dayTableModel), { dateProfile: props.dateProfile, cells: props.dayTableModel.cells, colGroupNode: props.colGroupNode, tableMinWidth: props.tableMinWidth, renderRowIntro: props.renderRowIntro, dayMaxEvents: props.dayMaxEvents, dayMaxEventRows: props.dayMaxEventRows, showWeekNumbers: props.showWeekNumbers, expandRows: props.expandRows, headerAlignElRef: props.headerAlignElRef, clientWidth: props.clientWidth, clientHeight: props.clientHeight, forPrint: props.forPrint })));
     };
     return DayTable;
 }(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["DateComponent"]));
@@ -11078,17 +11553,8 @@ var TableDateProfileGenerator = /** @class */ (function (_super) {
     return TableDateProfileGenerator;
 }(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["DateProfileGenerator"]));
 
-var OPTION_REFINERS = {
-    moreLinkClick: _fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["identity"],
-    moreLinkClassNames: _fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["identity"],
-    moreLinkContent: _fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["identity"],
-    moreLinkDidMount: _fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["identity"],
-    moreLinkWillUnmount: _fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["identity"],
-};
-
 var main = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createPlugin"])({
     initialView: 'dayGridMonth',
-    optionRefiners: OPTION_REFINERS,
     views: {
         dayGrid: {
             component: DayTableView,
@@ -11129,6 +11595,8 @@ var main = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createPlugi
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "Yz0s");
 /* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! preact */ "2mXy");
+/* harmony import */ var preact_compat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! preact/compat */ "FdF9");
+
 
 
 
@@ -11144,6 +11612,7 @@ else {
         createRef: preact__WEBPACK_IMPORTED_MODULE_1__["createRef"],
         Fragment: preact__WEBPACK_IMPORTED_MODULE_1__["Fragment"],
         createContext: createContext,
+        createPortal: preact_compat__WEBPACK_IMPORTED_MODULE_2__["createPortal"],
         flushToDom: flushToDom,
         unmountComponentAtNode: unmountComponentAtNode,
     };
@@ -11158,7 +11627,7 @@ function flushToDom() {
         callbackQ.push(callback);
     }
     preact__WEBPACK_IMPORTED_MODULE_1__["options"].debounceRendering = execCallbackSync;
-    Object(preact__WEBPACK_IMPORTED_MODULE_1__["render"])(Object(preact__WEBPACK_IMPORTED_MODULE_1__["createElement"])(FakeComponent, {}), document.createElement('div'));
+    preact__WEBPACK_IMPORTED_MODULE_1__["render"](preact__WEBPACK_IMPORTED_MODULE_1__["createElement"](FakeComponent, {}), document.createElement('div'));
     while (callbackQ.length) {
         callbackQ.shift()();
     }
@@ -11169,12 +11638,12 @@ var FakeComponent = /** @class */ (function (_super) {
     function FakeComponent() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    FakeComponent.prototype.render = function () { return Object(preact__WEBPACK_IMPORTED_MODULE_1__["createElement"])('div', {}); };
+    FakeComponent.prototype.render = function () { return preact__WEBPACK_IMPORTED_MODULE_1__["createElement"]('div', {}); };
     FakeComponent.prototype.componentDidMount = function () { this.setState({}); };
     return FakeComponent;
 }(preact__WEBPACK_IMPORTED_MODULE_1__["Component"]));
 function createContext(defaultValue) {
-    var ContextType = Object(preact__WEBPACK_IMPORTED_MODULE_1__["createContext"])(defaultValue);
+    var ContextType = preact__WEBPACK_IMPORTED_MODULE_1__["createContext"](defaultValue);
     var origProvider = ContextType.Provider;
     ContextType.Provider = function () {
         var _this = this;
@@ -11204,7 +11673,7 @@ function createContext(defaultValue) {
     return ContextType;
 }
 function unmountComponentAtNode(node) {
-    Object(preact__WEBPACK_IMPORTED_MODULE_1__["render"])(null, node);
+    preact__WEBPACK_IMPORTED_MODULE_1__["render"](null, node);
 }
 
 
@@ -11214,7 +11683,7 @@ function unmountComponentAtNode(node) {
 /*!*************************************************!*\
   !*** ./node_modules/@fullcalendar/core/main.js ***!
   \*************************************************/
-/*! exports provided: Component, Fragment, createContext, createElement, createRef, flushToDom, render, unmountComponentAtNode, BASE_OPTION_DEFAULTS, BASE_OPTION_REFINERS, BaseComponent, BgEvent, CalendarApi, CalendarContent, CalendarDataManager, CalendarDataProvider, CalendarRoot, ContentHook, CustomContentRenderContext, DateComponent, DateEnv, DateProfileGenerator, DayCellContent, DayCellRoot, DayHeader, DaySeriesModel, DayTableModel, DelayedRunner, ElementDragging, ElementScrollController, Emitter, EventApi, EventRoot, EventSourceApi, Interaction, MountHook, NamedTimeZoneImpl, NowIndicatorRoot, NowTimer, PositionCache, RefMap, RenderHook, ScrollController, ScrollResponder, Scroller, SimpleScrollGrid, Slicer, Splitter, StandardEvent, TableDateCell, TableDowCell, Theme, ViewApi, ViewContextType, ViewRoot, WeekNumberRoot, WindowScrollController, addDays, addDurations, addMs, addWeeks, allowContextMenu, allowSelection, applyMutationToEventStore, applyStyle, applyStyleProp, asCleanDays, asRoughMinutes, asRoughMs, asRoughSeconds, buildClassNameNormalizer, buildEventApis, buildEventRangeKey, buildHashFromArray, buildNavLinkData, buildSegCompareObj, buildSegTimeText, collectFromHash, combineEventUis, compareByFieldSpec, compareByFieldSpecs, compareNumbers, compareObjs, computeEdges, computeFallbackHeaderFormat, computeHeightAndMargins, computeInnerRect, computeRect, computeSegDraggable, computeSegEndResizable, computeSegStartResizable, computeShrinkWidth, computeSmallestCellWidth, computeVisibleDayRange, config, constrainPoint, createDuration, createEmptyEventStore, createEventInstance, createEventUi, createFormatter, createPlugin, diffDates, diffDayAndTime, diffDays, diffPoints, diffWeeks, diffWholeDays, diffWholeWeeks, disableCursor, elementClosest, elementMatches, enableCursor, eventTupleToStore, filterEventStoreDefs, filterHash, findDirectChildren, findElements, flexibleCompare, formatDate, formatDayString, formatIsoTimeString, formatRange, getAllowYScrolling, getCanVGrowWithinCell, getClippingParents, getDateMeta, getDayClassNames, getDefaultEventEnd, getElSeg, getEventClassNames, getIsRtlScrollbarOnLeft, getRectCenter, getRelevantEvents, getScrollGridClassNames, getScrollbarWidths, getSectionClassNames, getSectionHasLiquidHeight, getSegMeta, getSlotClassNames, getStickyFooterScrollbar, getStickyHeaderDates, getUnequalProps, globalLocales, globalPlugins, greatestDurationDenominator, guid, hasBgRendering, hasShrinkWidth, identity, interactionSettingsStore, interactionSettingsToStore, intersectRanges, intersectRects, isArraysEqual, isColPropsEqual, isDateSpansEqual, isInt, isInteractionValid, isMultiDayRange, isPropsEqual, isPropsValid, isValidDate, listenBySelector, mapHash, memoize, memoizeArraylike, memoizeHashlike, memoizeObjArg, mergeEventStores, multiplyDuration, padStart, parseBusinessHours, parseClassNames, parseDragMeta, parseEventDef, parseFieldSpecs, parseMarker, pointInsideRect, preventContextMenu, preventDefault, preventSelection, rangeContainsMarker, rangeContainsRange, rangesEqual, rangesIntersect, refineEventDef, refineProps, removeElement, removeExact, renderChunkContent, renderFill, renderMicroColGroup, renderScrollShim, requestJson, sanitizeShrinkWidth, setElSeg, setRef, sliceEventStore, sliceEvents, sortEventSegs, startOfDay, translateRect, triggerDateSelect, unpromisify, version, whenTransitionDone, wholeDivideDurations, Calendar */
+/*! exports provided: Component, Fragment, createContext, createElement, createPortal, createRef, flushToDom, render, unmountComponentAtNode, BASE_OPTION_DEFAULTS, BASE_OPTION_REFINERS, BaseComponent, BgEvent, CalendarApi, CalendarContent, CalendarDataManager, CalendarDataProvider, CalendarRoot, ContentHook, CustomContentRenderContext, DateComponent, DateEnv, DateProfileGenerator, DayCellContent, DayCellRoot, DayHeader, DaySeriesModel, DayTableModel, DelayedRunner, ElementDragging, ElementScrollController, Emitter, EventApi, EventRoot, EventSourceApi, Interaction, MoreLinkRoot, MountHook, NamedTimeZoneImpl, NowIndicatorRoot, NowTimer, PositionCache, RefMap, RenderHook, ScrollController, ScrollResponder, Scroller, SegHierarchy, SimpleScrollGrid, Slicer, Splitter, StandardEvent, TableDateCell, TableDowCell, Theme, ViewApi, ViewContextType, ViewRoot, WeekNumberRoot, WindowScrollController, addDays, addDurations, addMs, addWeeks, allowContextMenu, allowSelection, applyMutationToEventStore, applyStyle, applyStyleProp, asCleanDays, asRoughMinutes, asRoughMs, asRoughSeconds, binarySearch, buildClassNameNormalizer, buildEntryKey, buildEventApis, buildEventRangeKey, buildHashFromArray, buildIsoString, buildNavLinkData, buildSegCompareObj, buildSegTimeText, collectFromHash, combineEventUis, compareByFieldSpec, compareByFieldSpecs, compareNumbers, compareObjs, computeEarliestSegStart, computeEdges, computeFallbackHeaderFormat, computeHeightAndMargins, computeInnerRect, computeRect, computeSegDraggable, computeSegEndResizable, computeSegStartResizable, computeShrinkWidth, computeSmallestCellWidth, computeVisibleDayRange, config, constrainPoint, createDuration, createEmptyEventStore, createEventInstance, createEventUi, createFormatter, createPlugin, diffDates, diffDayAndTime, diffDays, diffPoints, diffWeeks, diffWholeDays, diffWholeWeeks, disableCursor, elementClosest, elementMatches, enableCursor, eventTupleToStore, filterEventStoreDefs, filterHash, findDirectChildren, findElements, flexibleCompare, formatDate, formatDayString, formatIsoTimeString, formatRange, getAllowYScrolling, getCanVGrowWithinCell, getClippingParents, getDateMeta, getDayClassNames, getDefaultEventEnd, getElRoot, getElSeg, getEntrySpanEnd, getEventClassNames, getEventTargetViaRoot, getIsRtlScrollbarOnLeft, getRectCenter, getRelevantEvents, getScrollGridClassNames, getScrollbarWidths, getSectionClassNames, getSectionHasLiquidHeight, getSegMeta, getSlotClassNames, getStickyFooterScrollbar, getStickyHeaderDates, getUnequalProps, globalLocales, globalPlugins, greatestDurationDenominator, groupIntersectingEntries, guid, hasBgRendering, hasShrinkWidth, identity, interactionSettingsStore, interactionSettingsToStore, intersectRanges, intersectRects, intersectSpans, isArraysEqual, isColPropsEqual, isDateSelectionValid, isDateSpansEqual, isInt, isInteractionValid, isMultiDayRange, isPropsEqual, isPropsValid, isValidDate, joinSpans, listenBySelector, mapHash, memoize, memoizeArraylike, memoizeHashlike, memoizeObjArg, mergeEventStores, multiplyDuration, padStart, parseBusinessHours, parseClassNames, parseDragMeta, parseEventDef, parseFieldSpecs, parseMarker, pointInsideRect, preventContextMenu, preventDefault, preventSelection, rangeContainsMarker, rangeContainsRange, rangesEqual, rangesIntersect, refineEventDef, refineProps, removeElement, removeExact, renderChunkContent, renderFill, renderMicroColGroup, renderScrollShim, requestJson, sanitizeShrinkWidth, setElSeg, setRef, sliceEventStore, sliceEvents, sortEventSegs, startOfDay, translateRect, triggerDateSelect, unpromisify, version, whenTransitionDone, wholeDivideDurations, Calendar */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -11230,6 +11699,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createContext", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["createContext"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createElement", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["createElement"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createPortal", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["createPortal"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "createRef", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["createRef"]; });
 
@@ -11293,6 +11764,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Interaction", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["Interaction"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MoreLinkRoot", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["MoreLinkRoot"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "MountHook", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["MountHook"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "NamedTimeZoneImpl", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["NamedTimeZoneImpl"]; });
@@ -11312,6 +11785,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScrollResponder", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["ScrollResponder"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Scroller", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["Scroller"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SegHierarchy", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["SegHierarchy"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SimpleScrollGrid", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["SimpleScrollGrid"]; });
 
@@ -11363,13 +11838,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "asRoughSeconds", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["asRoughSeconds"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "binarySearch", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["binarySearch"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "buildClassNameNormalizer", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["buildClassNameNormalizer"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "buildEntryKey", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["buildEntryKey"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "buildEventApis", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["buildEventApis"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "buildEventRangeKey", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["buildEventRangeKey"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "buildHashFromArray", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["buildHashFromArray"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "buildIsoString", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["buildIsoString"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "buildNavLinkData", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["buildNavLinkData"]; });
 
@@ -11388,6 +11869,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "compareNumbers", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["compareNumbers"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "compareObjs", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["compareObjs"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "computeEarliestSegStart", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["computeEarliestSegStart"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "computeEdges", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["computeEdges"]; });
 
@@ -11481,9 +11964,15 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getDefaultEventEnd", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["getDefaultEventEnd"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getElRoot", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["getElRoot"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getElSeg", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["getElSeg"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getEntrySpanEnd", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["getEntrySpanEnd"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getEventClassNames", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["getEventClassNames"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getEventTargetViaRoot", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["getEventTargetViaRoot"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "getIsRtlScrollbarOnLeft", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["getIsRtlScrollbarOnLeft"]; });
 
@@ -11515,6 +12004,8 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "greatestDurationDenominator", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["greatestDurationDenominator"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "groupIntersectingEntries", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["groupIntersectingEntries"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "guid", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["guid"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "hasBgRendering", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["hasBgRendering"]; });
@@ -11531,9 +12022,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "intersectRects", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["intersectRects"]; });
 
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "intersectSpans", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["intersectSpans"]; });
+
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isArraysEqual", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["isArraysEqual"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isColPropsEqual", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["isColPropsEqual"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isDateSelectionValid", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["isDateSelectionValid"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isDateSpansEqual", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["isDateSpansEqual"]; });
 
@@ -11548,6 +12043,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isPropsValid", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["isPropsValid"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "isValidDate", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["isValidDate"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "joinSpans", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["joinSpans"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "listenBySelector", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["listenBySelector"]; });
 
@@ -11640,9 +12137,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "wholeDivideDurations", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["wholeDivideDurations"]; });
 
 /*!
-FullCalendar v5.5.1
+FullCalendar v5.9.0
 Docs & License: https://fullcalendar.io/
-(c) 2020 Adam Shaw
+(c) 2021 Adam Shaw
 */
 
 
@@ -11768,280 +12265,6 @@ var Calendar = /** @class */ (function (_super) {
 
 /***/ }),
 
-/***/ "Yz0s":
-/*!****************************************************************************!*\
-  !*** ./node_modules/@fullcalendar/daygrid/node_modules/tslib/tslib.es6.js ***!
-  \****************************************************************************/
-/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __createBinding, __exportStar, __values, __read, __spread, __spreadArrays, __spreadArray, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__extends", function() { return __extends; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__assign", function() { return __assign; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__rest", function() { return __rest; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__decorate", function() { return __decorate; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__param", function() { return __param; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__metadata", function() { return __metadata; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__awaiter", function() { return __awaiter; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__generator", function() { return __generator; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__createBinding", function() { return __createBinding; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__exportStar", function() { return __exportStar; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__values", function() { return __values; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__read", function() { return __read; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spread", function() { return __spread; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spreadArrays", function() { return __spreadArrays; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spreadArray", function() { return __spreadArray; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__await", function() { return __await; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncGenerator", function() { return __asyncGenerator; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncDelegator", function() { return __asyncDelegator; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncValues", function() { return __asyncValues; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function() { return __makeTemplateObject; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importStar", function() { return __importStar; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importDefault", function() { return __importDefault; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldGet", function() { return __classPrivateFieldGet; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldSet", function() { return __classPrivateFieldSet; });
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-/* global Reflect, Promise */
-
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-    return extendStatics(d, b);
-};
-
-function __extends(d, b) {
-    if (typeof b !== "function" && b !== null)
-        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
-
-var __assign = function() {
-    __assign = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
-    }
-    return __assign.apply(this, arguments);
-}
-
-function __rest(s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-}
-
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
-
-function __param(paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-}
-
-function __metadata(metadataKey, metadataValue) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-}
-
-function __awaiter(thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-}
-
-function __generator(thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-}
-
-var __createBinding = Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-});
-
-function __exportStar(m, o) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) __createBinding(o, m, p);
-}
-
-function __values(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-    if (m) return m.call(o);
-    if (o && typeof o.length === "number") return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-}
-
-function __read(o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-}
-
-/** @deprecated */
-function __spread() {
-    for (var ar = [], i = 0; i < arguments.length; i++)
-        ar = ar.concat(__read(arguments[i]));
-    return ar;
-}
-
-/** @deprecated */
-function __spreadArrays() {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
-}
-
-function __spreadArray(to, from) {
-    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
-        to[j] = from[i];
-    return to;
-}
-
-function __await(v) {
-    return this instanceof __await ? (this.v = v, this) : new __await(v);
-}
-
-function __asyncGenerator(thisArg, _arguments, generator) {
-    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-    var g = generator.apply(thisArg, _arguments || []), i, q = [];
-    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
-    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
-    function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
-    function fulfill(value) { resume("next", value); }
-    function reject(value) { resume("throw", value); }
-    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
-}
-
-function __asyncDelegator(o) {
-    var i, p;
-    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
-    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
-}
-
-function __asyncValues(o) {
-    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-    var m = o[Symbol.asyncIterator], i;
-    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
-    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
-    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
-}
-
-function __makeTemplateObject(cooked, raw) {
-    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
-    return cooked;
-};
-
-var __setModuleDefault = Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-};
-
-function __importStar(mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-}
-
-function __importDefault(mod) {
-    return (mod && mod.__esModule) ? mod : { default: mod };
-}
-
-function __classPrivateFieldGet(receiver, privateMap) {
-    if (!privateMap.has(receiver)) {
-        throw new TypeError("attempted to get private field on non-instance");
-    }
-    return privateMap.get(receiver);
-}
-
-function __classPrivateFieldSet(receiver, privateMap, value) {
-    if (!privateMap.has(receiver)) {
-        throw new TypeError("attempted to set private field on non-instance");
-    }
-    privateMap.set(receiver, value);
-    return value;
-}
-
-
-/***/ }),
-
 /***/ "aUsF":
 /*!***********************************************!*\
   !*** ./node_modules/fast-deep-equal/index.js ***!
@@ -12116,9 +12339,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fullcalendar/common */ "1hAE");
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ "Yz0s");
 /*!
-FullCalendar v5.5.0
+FullCalendar v5.9.0
 Docs & License: https://fullcalendar.io/
-(c) 2020 Adam Shaw
+(c) 2021 Adam Shaw
 */
 
 
@@ -12408,7 +12631,7 @@ var ElementMirror = /** @class */ (function () {
         this.mirrorEl = null;
         this.sourceElRect = null; // screen coords relative to viewport
         // options that can be set directly by caller
-        this.parentNode = document.body;
+        this.parentNode = document.body; // HIGHLY SUGGESTED to set this to sidestep ShadowDOM issues
         this.zIndex = 9999;
         this.revertDuration = 0;
     }
@@ -12677,9 +12900,9 @@ var AutoScroller = /** @class */ (function () {
             }
         };
     }
-    AutoScroller.prototype.start = function (pageX, pageY) {
+    AutoScroller.prototype.start = function (pageX, pageY, scrollStartEl) {
         if (this.isEnabled) {
-            this.scrollCaches = this.buildCaches();
+            this.scrollCaches = this.buildCaches(scrollStartEl);
             this.pointerScreenX = null;
             this.pointerScreenY = null;
             this.everMovedUp = false;
@@ -12785,15 +13008,15 @@ var AutoScroller = /** @class */ (function () {
         }
         return bestSide;
     };
-    AutoScroller.prototype.buildCaches = function () {
-        return this.queryScrollEls().map(function (el) {
+    AutoScroller.prototype.buildCaches = function (scrollStartEl) {
+        return this.queryScrollEls(scrollStartEl).map(function (el) {
             if (el === window) {
                 return new WindowScrollGeomCache(false); // false = don't listen to user-generated scrolls
             }
             return new ElementScrollGeomCache(el, false); // false = don't listen to user-generated scrolls
         });
     };
-    AutoScroller.prototype.queryScrollEls = function () {
+    AutoScroller.prototype.queryScrollEls = function (scrollStartEl) {
         var els = [];
         for (var _i = 0, _a = this.scrollQuery; _i < _a.length; _i++) {
             var query = _a[_i];
@@ -12801,7 +13024,7 @@ var AutoScroller = /** @class */ (function () {
                 els.push(query);
             }
             else {
-                els.push.apply(els, Array.prototype.slice.call(document.querySelectorAll(query)));
+                els.push.apply(els, Array.prototype.slice.call(Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["getElRoot"])(scrollStartEl).querySelectorAll(query)));
             }
         }
         return els;
@@ -12819,6 +13042,7 @@ var FeaturefulElementDragging = /** @class */ (function (_super) {
     Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__extends"])(FeaturefulElementDragging, _super);
     function FeaturefulElementDragging(containerEl, selector) {
         var _this = _super.call(this, containerEl) || this;
+        _this.containerEl = containerEl;
         // options that can be directly set by caller
         // the caller can also set the PointerDragging's options as well
         _this.delay = null;
@@ -12936,7 +13160,7 @@ var FeaturefulElementDragging = /** @class */ (function (_super) {
             if (!this.pointer.wasTouchScroll || this.touchScrollAllowed) {
                 this.isDragging = true;
                 this.mirrorNeedsRevert = false;
-                this.autoScroller.start(ev.pageX, ev.pageY);
+                this.autoScroller.start(ev.pageX, ev.pageY, this.containerEl);
                 this.emitter.trigger('dragstart', ev);
                 if (this.touchScrollAllowed === false) {
                     this.pointer.cancelTouchScroll();
@@ -13099,7 +13323,7 @@ var HitDragging = /** @class */ (function () {
         var adjustedPoint = origPoint;
         var subjectEl = ev.subjectEl;
         var subjectRect;
-        if (subjectEl !== document) {
+        if (subjectEl instanceof HTMLElement) { // i.e. not a Document/ShadowRoot
             subjectRect = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["computeRect"])(subjectEl);
             adjustedPoint = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["constrainPoint"])(adjustedPoint, subjectRect);
         }
@@ -13157,12 +13381,12 @@ var HitDragging = /** @class */ (function () {
                 positionLeft >= 0 && positionLeft < width &&
                     positionTop >= 0 && positionTop < height) {
                     var hit = component.queryHit(positionLeft, positionTop, width, height);
-                    var dateProfile = component.context.getCurrentData().dateProfile;
-                    if (hit &&
-                        (
-                        // make sure the hit is within activeRange, meaning it's not a deal cell
-                        Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["rangeContainsRange"])(dateProfile.activeRange, hit.dateSpan.range)) &&
+                    if (hit && (
+                    // make sure the hit is within activeRange, meaning it's not a dead cell
+                    Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["rangeContainsRange"])(hit.dateProfile.activeRange, hit.dateSpan.range)) &&
                         (!bestHit || hit.layer > bestHit.layer)) {
+                        hit.componentId = id;
+                        hit.context = component.context;
                         // TODO: better way to re-orient rectangle
                         hit.rect.left += originLeft;
                         hit.rect.right += originLeft;
@@ -13262,7 +13486,7 @@ var DateSelecting = /** @class */ (function (_super) {
             // don't bother to watch expensive moves if component won't do selection
             dragging.setIgnoreMove(!canSelect);
             // if touch, require user to hold down
-            dragging.delay = ev.isTouch ? getComponentTouchDelay(component) : null;
+            dragging.delay = ev.isTouch ? getComponentTouchDelay$1(component) : null;
         };
         _this.handleDragStart = function (ev) {
             _this.component.context.calendarApi.unselect(ev); // unselect previous selections
@@ -13272,8 +13496,14 @@ var DateSelecting = /** @class */ (function (_super) {
             var dragSelection = null;
             var isInvalid = false;
             if (hit) {
-                dragSelection = joinHitsIntoSelection(_this.hitDragging.initialHit, hit, context.pluginHooks.dateSelectionTransformers);
-                if (!dragSelection || !_this.component.isDateSelectionValid(dragSelection)) {
+                var initialHit = _this.hitDragging.initialHit;
+                var disallowed = hit.componentId === initialHit.componentId
+                    && _this.isHitComboAllowed
+                    && !_this.isHitComboAllowed(initialHit, hit);
+                if (!disallowed) {
+                    dragSelection = joinHitsIntoSelection(initialHit, hit, context.pluginHooks.dateSelectionTransformers);
+                }
+                if (!dragSelection || !Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["isDateSelectionValid"])(dragSelection, hit.dateProfile, context)) {
                     isInvalid = true;
                     dragSelection = null;
                 }
@@ -13319,7 +13549,7 @@ var DateSelecting = /** @class */ (function (_super) {
     };
     return DateSelecting;
 }(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["Interaction"]));
-function getComponentTouchDelay(component) {
+function getComponentTouchDelay$1(component) {
     var options = component.context.options;
     var delay = options.selectLongPressDelay;
     if (delay == null) {
@@ -13381,7 +13611,7 @@ var EventDragging = /** @class */ (function (_super) {
             dragging.delay =
                 // only do a touch delay if touch and this event hasn't been selected yet
                 (ev.isTouch && eventInstanceId !== component.props.eventSelection) ?
-                    getComponentTouchDelay$1(component) :
+                    getComponentTouchDelay(component) :
                     null;
             if (options.fixedMirrorParent) {
                 mirror.parentNode = options.fixedMirrorParent;
@@ -13440,8 +13670,7 @@ var EventDragging = /** @class */ (function (_super) {
                 isEvent: true,
             };
             if (hit) {
-                var receivingComponent = hit.component;
-                receivingContext = receivingComponent.context;
+                receivingContext = hit.context;
                 var receivingOptions = receivingContext.options;
                 if (initialContext === receivingContext ||
                     (receivingOptions.editable && receivingOptions.droppable)) {
@@ -13449,7 +13678,7 @@ var EventDragging = /** @class */ (function (_super) {
                     if (mutation) {
                         mutatedRelevantEvents = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["applyMutationToEventStore"])(relevantEvents, receivingContext.getCurrentData().eventUiBases, mutation, receivingContext);
                         interaction.mutatedEvents = mutatedRelevantEvents;
-                        if (!receivingComponent.isInteractionValid(interaction)) {
+                        if (!Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["isInteractionValid"])(interaction, hit.dateProfile, receivingContext)) {
                             isInvalid = true;
                             mutation = null;
                             mutatedRelevantEvents = null;
@@ -13476,7 +13705,7 @@ var EventDragging = /** @class */ (function (_super) {
                 _this.dragging.setMirrorNeedsRevert(!mutation);
                 // render the mirror if no already-rendered mirror
                 // TODO: wish we could somehow wait for dispatch to guarantee render
-                _this.dragging.setMirrorIsVisible(!hit || !document.querySelector('.fc-event-mirror'));
+                _this.dragging.setMirrorIsVisible(!hit || !Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["getElRoot"])(_this.subjectEl).querySelector('.fc-event-mirror'));
                 // assign states based on new hit
                 _this.receivingContext = receivingContext;
                 _this.validMutation = mutation;
@@ -13521,7 +13750,7 @@ var EventDragging = /** @class */ (function (_super) {
                             revert: function () {
                                 initialContext_1.dispatch({
                                     type: 'MERGE_EVENTS',
-                                    eventStore: relevantEvents_1,
+                                    eventStore: relevantEvents_1, // the pre-change data
                                 });
                             },
                         };
@@ -13575,8 +13804,8 @@ var EventDragging = /** @class */ (function (_super) {
                                 eventInstanceId: eventInstance.instanceId,
                             });
                         }
-                        receivingContext_1.emitter.trigger('drop', Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, buildDatePointApiWithContext(finalHit.dateSpan, receivingContext_1)), { draggedEl: ev.subjectEl, jsEvent: ev.origEvent, view: finalHit.component.context.viewApi }));
-                        receivingContext_1.emitter.trigger('eventReceive', Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, eventAddArg), { draggedEl: ev.subjectEl, view: finalHit.component.context.viewApi }));
+                        receivingContext_1.emitter.trigger('drop', Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, buildDatePointApiWithContext(finalHit.dateSpan, receivingContext_1)), { draggedEl: ev.subjectEl, jsEvent: ev.origEvent, view: finalHit.context.viewApi }));
+                        receivingContext_1.emitter.trigger('eventReceive', Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, eventAddArg), { draggedEl: ev.subjectEl, view: finalHit.context.viewApi }));
                     }
                 }
                 else {
@@ -13663,15 +13892,15 @@ function computeEventMutation(hit0, hit1, massagers) {
     var standardProps = {};
     if (dateSpan0.allDay !== dateSpan1.allDay) {
         standardProps.allDay = dateSpan1.allDay;
-        standardProps.hasEnd = hit1.component.context.options.allDayMaintainDuration;
+        standardProps.hasEnd = hit1.context.options.allDayMaintainDuration;
         if (dateSpan1.allDay) {
             // means date1 is already start-of-day,
             // but date0 needs to be converted
             date0 = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["startOfDay"])(date0);
         }
     }
-    var delta = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["diffDates"])(date0, date1, hit0.component.context.dateEnv, hit0.component === hit1.component ?
-        hit0.component.largeUnit :
+    var delta = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["diffDates"])(date0, date1, hit0.context.dateEnv, hit0.componentId === hit1.componentId ?
+        hit0.largeUnit :
         null);
     if (delta.milliseconds) { // has hours/minutes/seconds
         standardProps.allDay = false;
@@ -13686,7 +13915,7 @@ function computeEventMutation(hit0, hit1, massagers) {
     }
     return mutation;
 }
-function getComponentTouchDelay$1(component) {
+function getComponentTouchDelay(component) {
     var options = component.context.options;
     var delay = options.eventLongPressDelay;
     if (delay == null) {
@@ -13745,12 +13974,17 @@ var EventResizing = /** @class */ (function (_super) {
                 isEvent: true,
             };
             if (hit) {
-                mutation = computeMutation(initialHit, hit, ev.subjectEl.classList.contains('fc-event-resizer-start'), eventInstance.range, context.pluginHooks.eventResizeJoinTransforms);
+                var disallowed = hit.componentId === initialHit.componentId
+                    && _this.isHitComboAllowed
+                    && !_this.isHitComboAllowed(initialHit, hit);
+                if (!disallowed) {
+                    mutation = computeMutation(initialHit, hit, ev.subjectEl.classList.contains('fc-event-resizer-start'), eventInstance.range);
+                }
             }
             if (mutation) {
                 mutatedRelevantEvents = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["applyMutationToEventStore"])(relevantEvents, context.getCurrentData().eventUiBases, mutation, context);
                 interaction.mutatedEvents = mutatedRelevantEvents;
-                if (!_this.component.isInteractionValid(interaction)) {
+                if (!Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["isInteractionValid"])(interaction, hit.dateProfile, context)) {
                     isInvalid = true;
                     mutation = null;
                     mutatedRelevantEvents = null;
@@ -13806,7 +14040,7 @@ var EventResizing = /** @class */ (function (_super) {
                     revert: function () {
                         context.dispatch({
                             type: 'MERGE_EVENTS',
-                            eventStore: relevantEvents,
+                            eventStore: relevantEvents, // the pre-change events
                         });
                     },
                 };
@@ -13842,31 +14076,18 @@ var EventResizing = /** @class */ (function (_super) {
     };
     return EventResizing;
 }(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["Interaction"]));
-function computeMutation(hit0, hit1, isFromStart, instanceRange, transforms) {
-    var dateEnv = hit0.component.context.dateEnv;
+function computeMutation(hit0, hit1, isFromStart, instanceRange) {
+    var dateEnv = hit0.context.dateEnv;
     var date0 = hit0.dateSpan.range.start;
     var date1 = hit1.dateSpan.range.start;
-    var delta = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["diffDates"])(date0, date1, dateEnv, hit0.component.largeUnit);
-    var props = {};
-    for (var _i = 0, transforms_1 = transforms; _i < transforms_1.length; _i++) {
-        var transform = transforms_1[_i];
-        var res = transform(hit0, hit1);
-        if (res === false) {
-            return null;
-        }
-        if (res) {
-            Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(props, res);
-        }
-    }
+    var delta = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["diffDates"])(date0, date1, dateEnv, hit0.largeUnit);
     if (isFromStart) {
         if (dateEnv.add(instanceRange.start, delta) < instanceRange.end) {
-            props.startDelta = delta;
-            return props;
+            return { startDelta: delta };
         }
     }
     else if (dateEnv.add(instanceRange.end, delta) > instanceRange.start) {
-        props.endDelta = delta;
-        return props;
+        return { endDelta: delta };
     }
     return null;
 }
@@ -13885,7 +14106,7 @@ var UnselectAuto = /** @class */ (function () {
         };
         this.onDocumentPointerDown = function (pev) {
             var unselectCancel = _this.context.options.unselectCancel;
-            var downEl = pev.origEvent.target;
+            var downEl = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["getEventTargetViaRoot"])(pev.origEvent);
             _this.matchesCancel = !!Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["elementClosest"])(downEl, unselectCancel);
             _this.matchesEvent = !!Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["elementClosest"])(downEl, EventDragging.SELECTOR); // interaction started on an event?
         };
@@ -13970,11 +14191,11 @@ var ExternalElementDragging = /** @class */ (function () {
                 isEvent: _this.dragMeta.create,
             };
             if (hit) {
-                receivingContext = hit.component.context;
+                receivingContext = hit.context;
                 if (_this.canDropElOnCalendar(ev.subjectEl, receivingContext)) {
                     droppableEvent = computeEventForDateSpan(hit.dateSpan, _this.dragMeta, receivingContext);
                     interaction.mutatedEvents = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["eventTupleToStore"])(droppableEvent);
-                    isInvalid = !Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["isInteractionValid"])(interaction, receivingContext);
+                    isInvalid = !Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["isInteractionValid"])(interaction, hit.dateProfile, receivingContext);
                     if (isInvalid) {
                         interaction.mutatedEvents = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["createEmptyEventStore"])();
                         droppableEvent = null;
@@ -14002,7 +14223,7 @@ var ExternalElementDragging = /** @class */ (function () {
             _this.clearDrag();
             if (receivingContext && droppableEvent) {
                 var finalHit = _this.hitDragging.finalHit;
-                var finalView = finalHit.component.context.viewApi;
+                var finalView = finalHit.context.viewApi;
                 var dragMeta = _this.dragMeta;
                 receivingContext.emitter.trigger('drop', Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])(Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__assign"])({}, buildDatePointApiWithContext(finalHit.dateSpan, receivingContext)), { draggedEl: pev.subjectEl, jsEvent: pev.origEvent, view: finalView }));
                 if (dragMeta.create) {
@@ -14217,9 +14438,10 @@ var InferredElementDragging = /** @class */ (function (_super) {
             }
         }
         else {
-            var mirrorEl = this.mirrorSelector ?
-                document.querySelector(this.mirrorSelector) :
-                null;
+            var mirrorEl = this.mirrorSelector
+                // TODO: somehow query FullCalendars WITHIN shadow-roots
+                ? document.querySelector(this.mirrorSelector)
+                : null;
             if (mirrorEl) {
                 this.currentMirrorEl = mirrorEl;
                 mirrorEl.style.visibility = 'hidden';
@@ -14288,7 +14510,7 @@ var main = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__["createPlugi
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n:root {\n  --fc-daygrid-event-dot-width: 8px;\n}\n.fc .fc-popover {\n    position: fixed;\n    top: 0; /* for when not positioned yet */\n    box-shadow: 0 2px 6px rgba(0,0,0,.15);\n  }\n.fc .fc-popover-header {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n    align-items: center;\n    padding: 3px 4px;\n  }\n.fc .fc-popover-title {\n    margin: 0 2px;\n  }\n.fc .fc-popover-close {\n    cursor: pointer;\n    opacity: 0.65;\n    font-size: 1.1em;\n  }\n.fc-theme-standard .fc-popover {\n    border: 1px solid #ddd;\n    border: 1px solid var(--fc-border-color, #ddd);\n    background: #fff;\n    background: var(--fc-page-bg-color, #fff);\n  }\n.fc-theme-standard .fc-popover-header {\n    background: rgba(208, 208, 208, 0.3);\n    background: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\n  }\n/* help things clear margins of inner content */\n.fc-daygrid-day-frame,\n.fc-daygrid-day-events,\n.fc-daygrid-event-harness { /* for event top/bottom margins */\n}\n.fc-daygrid-day-frame:before, .fc-daygrid-day-events:before, .fc-daygrid-event-harness:before {\n  content: \"\";\n  clear: both;\n  display: table; }\n.fc-daygrid-day-frame:after, .fc-daygrid-day-events:after, .fc-daygrid-event-harness:after {\n  content: \"\";\n  clear: both;\n  display: table; }\n.fc .fc-daygrid-body { /* a <div> that wraps the table */\n    position: relative;\n    z-index: 1; /* container inner z-index's because <tr>s can't do it */\n  }\n.fc .fc-daygrid-day.fc-day-today {\n      background-color: rgba(255, 220, 40, 0.15);\n      background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15));\n    }\n.fc .fc-daygrid-day-frame {\n    position: relative;\n    min-height: 100%; /* seems to work better than `height` because sets height after rows/cells naturally do it */\n  }\n.fc {\n\n  /* cell top */\n\n}\n.fc .fc-daygrid-day-top {\n    display: flex;\n    flex-direction: row-reverse;\n  }\n.fc .fc-day-other .fc-daygrid-day-top {\n    opacity: 0.3;\n  }\n.fc {\n\n  /* day number (within cell top) */\n\n}\n.fc .fc-daygrid-day-number {\n    position: relative;\n    z-index: 4;\n    padding: 4px;\n  }\n.fc {\n\n  /* event container */\n\n}\n.fc .fc-daygrid-day-events {\n    margin-top: 1px; /* needs to be margin, not padding, so that available cell height can be computed */\n  }\n.fc {\n\n  /* positioning for balanced vs natural */\n\n}\n.fc .fc-daygrid-body-balanced .fc-daygrid-day-events {\n      position: absolute;\n      left: 0;\n      right: 0;\n    }\n.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {\n      position: relative; /* for containing abs positioned event harnesses */\n      min-height: 2em; /* in addition to being a min-height during natural height, equalizes the heights a little bit */\n    }\n.fc .fc-daygrid-body-natural { /* can coexist with -unbalanced */\n  }\n.fc .fc-daygrid-body-natural .fc-daygrid-day-events {\n      margin-bottom: 1em;\n    }\n.fc {\n\n  /* event harness */\n\n}\n.fc .fc-daygrid-event-harness {\n    position: relative;\n  }\n.fc .fc-daygrid-event-harness-abs {\n    position: absolute;\n    top: 0; /* fallback coords for when cannot yet be computed */\n    left: 0; /* */\n    right: 0; /* */\n  }\n.fc .fc-daygrid-bg-harness {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n  }\n.fc {\n\n  /* bg content */\n\n}\n.fc .fc-daygrid-day-bg .fc-non-business { z-index: 1 }\n.fc .fc-daygrid-day-bg .fc-bg-event { z-index: 2 }\n.fc .fc-daygrid-day-bg .fc-highlight { z-index: 3 }\n.fc {\n\n  /* events */\n\n}\n.fc .fc-daygrid-event {\n    z-index: 6;\n    margin-top: 1px;\n  }\n.fc .fc-daygrid-event.fc-event-mirror {\n    z-index: 7;\n  }\n.fc {\n\n  /* cell bottom (within day-events) */\n\n}\n.fc .fc-daygrid-day-bottom {\n    font-size: .85em;\n    margin: 2px 3px 0;\n  }\n.fc .fc-daygrid-more-link {\n    position: relative;\n    z-index: 4;\n    cursor: pointer;\n  }\n.fc {\n\n  /* week number (within frame) */\n\n}\n.fc .fc-daygrid-week-number {\n    position: absolute;\n    z-index: 5;\n    top: 0;\n    padding: 2px;\n    min-width: 1.5em;\n    text-align: center;\n    background-color: rgba(208, 208, 208, 0.3);\n    background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\n    color: #808080;\n    color: var(--fc-neutral-text-color, #808080);\n  }\n.fc {\n\n  /* popover */\n\n}\n.fc .fc-more-popover {\n    z-index: 8;\n  }\n.fc .fc-more-popover .fc-popover-body {\n    min-width: 220px;\n    padding: 10px;\n  }\n.fc-direction-ltr .fc-daygrid-event.fc-event-start,\n.fc-direction-rtl .fc-daygrid-event.fc-event-end {\n  margin-left: 2px;\n}\n.fc-direction-ltr .fc-daygrid-event.fc-event-end,\n.fc-direction-rtl .fc-daygrid-event.fc-event-start {\n  margin-right: 2px;\n}\n.fc-direction-ltr .fc-daygrid-week-number {\n    left: 0;\n    border-radius: 0 0 3px 0;\n  }\n.fc-direction-rtl .fc-daygrid-week-number {\n    right: 0;\n    border-radius: 0 0 0 3px;\n  }\n.fc-liquid-hack .fc-daygrid-day-frame {\n    position: static; /* will cause inner absolute stuff to expand to <td> */\n  }\n.fc-daygrid-event { /* make root-level, because will be dragged-and-dropped outside of a component root */\n  position: relative; /* for z-indexes assigned later */\n  white-space: nowrap;\n  border-radius: 3px; /* dot event needs this to when selected */\n  font-size: .85em;\n  font-size: var(--fc-small-font-size, .85em);\n}\n/* --- the rectangle (\"block\") style of event --- */\n.fc-daygrid-block-event .fc-event-time {\n    font-weight: bold;\n  }\n.fc-daygrid-block-event .fc-event-time,\n  .fc-daygrid-block-event .fc-event-title {\n    padding: 1px;\n  }\n/* --- the dot style of event --- */\n.fc-daygrid-dot-event {\n  display: flex;\n  align-items: center;\n  padding: 2px 0\n\n}\n.fc-daygrid-dot-event .fc-event-title {\n    flex-grow: 1;\n    flex-shrink: 1;\n    min-width: 0; /* important for allowing to shrink all the way */\n    overflow: hidden;\n    font-weight: bold;\n  }\n.fc-daygrid-dot-event:hover,\n  .fc-daygrid-dot-event.fc-event-mirror {\n    background: rgba(0, 0, 0, 0.1);\n  }\n.fc-daygrid-dot-event.fc-event-selected:before {\n    /* expand hit area */\n    top: -10px;\n    bottom: -10px;\n  }\n.fc-daygrid-event-dot { /* the actual dot */\n  margin: 0 4px;\n  box-sizing: content-box;\n  width: 0;\n  height: 0;\n  border: 4px solid #3788d8;\n  border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid var(--fc-event-border-color, #3788d8);\n  border-radius: 4px;\n  border-radius: calc(var(--fc-daygrid-event-dot-width, 8px) / 2);\n}\n/* --- spacing between time and title --- */\n.fc-direction-ltr .fc-daygrid-event .fc-event-time {\n    margin-right: 3px;\n  }\n.fc-direction-rtl .fc-daygrid-event .fc-event-time {\n    margin-left: 3px;\n  }\n\n/*# sourceMappingURL=data:application/json;base64,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QUFnQixFQUFFLHNEQUFzRDtFQUMxRTtBQUNGLG9CQUFvQixxRkFBcUY7RUFDdkcsa0JBQWtCLEVBQUUsaUNBQWlDO0VBQ3JELG1CQUFtQjtFQUNuQixrQkFBa0IsRUFBRSwwQ0FBMEM7RUFDOUQsZ0JBQWdCO0VBQ2hCLDJDQUEyQztBQUM3QztBQUNBLG1EQUFtRDtBQUNuRDtJQUNJLGlCQUFpQjtFQUNuQjtBQUNGOztJQUVJLFlBQVk7RUFDZDtBQUNGLG1DQUFtQztBQUNuQztFQUNFLGFBQWE7RUFDYixtQkFBbUI7RUFDbkI7O0FBRUY7QUFDQTtJQUNJLFlBQVk7SUFDWixjQUFjO0lBQ2QsWUFBWSxFQUFFLGlEQUFpRDtJQUMvRCxnQkFBZ0I7SUFDaEIsaUJBQWlCO0VBQ25CO0FBQ0Y7O0lBRUksOEJBQThCO0VBQ2hDO0FBQ0Y7SUFDSSxvQkFBb0I7SUFDcEIsVUFBVTtJQUNWLGFBQWE7RUFDZjtBQUNGLHdCQUF3QixtQkFBbUI7RUFDekMsYUFBYTtFQUNiLHVCQUF1QjtFQUN2QixRQUFRO0VBQ1IsU0FBUztFQUNULHlCQUF5QjtFQUN6QixvR0FBb0c7RUFDcEcsa0JBQWtCO0VBQ2xCLCtEQUErRDtBQUNqRTtBQUNBLDJDQUEyQztBQUMzQztJQUNJLGlCQUFpQjtFQUNuQjtBQUNGO0lBQ0ksZ0JBQWdCO0VBQ2xCIiwiZmlsZSI6Im1haW4uY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXG46cm9vdCB7XG4gIC0tZmMtZGF5Z3JpZC1ldmVudC1kb3Qtd2lkdGg6IDhweDtcbn1cbi5mYyAuZmMtcG9wb3ZlciB7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIHRvcDogMDsgLyogZm9yIHdoZW4gbm90IHBvc2l0aW9uZWQgeWV0ICovXG4gICAgYm94LXNoYWRvdzogMCAycHggNnB4IHJnYmEoMCwwLDAsLjE1KTtcbiAgfVxuLmZjIC5mYy1wb3BvdmVyLWhlYWRlciB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICAgIGp1c3RpZnktY29udGVudDogc3BhY2UtYmV0d2VlbjtcbiAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgIHBhZGRpbmc6IDNweCA0cHg7XG4gIH1cbi5mYyAuZmMtcG9wb3Zlci10aXRsZSB7XG4gICAgbWFyZ2luOiAwIDJweDtcbiAgfVxuLmZjIC5mYy1wb3BvdmVyLWNsb3NlIHtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgb3BhY2l0eTogMC42NTtcbiAgICBmb250LXNpemU6IDEuMWVtO1xuICB9XG4uZmMtdGhlbWUtc3RhbmRhcmQgLmZjLXBvcG92ZXIge1xuICAgIGJvcmRlcjogMXB4IHNvbGlkICNkZGQ7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tZmMtYm9yZGVyLWNvbG9yLCAjZGRkKTtcbiAgICBiYWNrZ3JvdW5kOiAjZmZmO1xuICAgIGJhY2tncm91bmQ6IHZhcigtLWZjLXBhZ2UtYmctY29sb3IsICNmZmYpO1xuICB9XG4uZmMtdGhlbWUtc3RhbmRhcmQgLmZjLXBvcG92ZXItaGVhZGVyIHtcbiAgICBiYWNrZ3JvdW5kOiByZ2JhKDIwOCwgMjA4LCAyMDgsIDAuMyk7XG4gICAgYmFja2dyb3VuZDogdmFyKC0tZmMtbmV1dHJhbC1iZy1jb2xvciwgcmdiYSgyMDgsIDIwOCwgMjA4LCAwLjMpKTtcbiAgfVxuLyogaGVscCB0aGluZ3MgY2xlYXIgbWFyZ2lucyBvZiBpbm5lciBjb250ZW50ICovXG4uZmMtZGF5Z3JpZC1kYXktZnJhbWUsXG4uZmMtZGF5Z3JpZC1kYXktZXZlbnRzLFxuLmZjLWRheWdyaWQtZXZlbnQtaGFybmVzcyB7IC8qIGZvciBldmVudCB0b3AvYm90dG9tIG1hcmdpbnMgKi9cbn1cbi5mYy1kYXlncmlkLWRheS1mcmFtZTpiZWZvcmUsIC5mYy1kYXlncmlkLWRheS1ldmVudHM6YmVmb3JlLCAuZmMtZGF5Z3JpZC1ldmVudC1oYXJuZXNzOmJlZm9yZSB7XG4gIGNvbnRlbnQ6IFwiXCI7XG4gIGNsZWFyOiBib3RoO1xuICBkaXNwbGF5OiB0YWJsZTsgfVxuLmZjLWRheWdyaWQtZGF5LWZyYW1lOmFmdGVyLCAuZmMtZGF5Z3JpZC1kYXktZXZlbnRzOmFmdGVyLCAuZmMtZGF5Z3JpZC1ldmVudC1oYXJuZXNzOmFmdGVyIHtcbiAgY29udGVudDogXCJcIjtcbiAgY2xlYXI6IGJvdGg7XG4gIGRpc3BsYXk6IHRhYmxlOyB9XG4uZmMgLmZjLWRheWdyaWQtYm9keSB7IC8qIGEgPGRpdj4gdGhhdCB3cmFwcyB0aGUgdGFibGUgKi9cbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgei1pbmRleDogMTsgLyogY29udGFpbmVyIGlubmVyIHotaW5kZXgncyBiZWNhdXNlIDx0cj5zIGNhbid0IGRvIGl0ICovXG4gIH1cbi5mYyAuZmMtZGF5Z3JpZC1kYXkuZmMtZGF5LXRvZGF5IHtcbiAgICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjU1LCAyMjAsIDQwLCAwLjE1KTtcbiAgICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWZjLXRvZGF5LWJnLWNvbG9yLCByZ2JhKDI1NSwgMjIwLCA0MCwgMC4xNSkpO1xuICAgIH1cbi5mYyAuZmMtZGF5Z3JpZC1kYXktZnJhbWUge1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICBtaW4taGVpZ2h0OiAxMDAlOyAvKiBzZWVtcyB0byB3b3JrIGJldHRlciB0aGFuIGBoZWlnaHRgIGJlY2F1c2Ugc2V0cyBoZWlnaHQgYWZ0ZXIgcm93cy9jZWxscyBuYXR1cmFsbHkgZG8gaXQgKi9cbiAgfVxuLmZjIHtcblxuICAvKiBjZWxsIHRvcCAqL1xuXG59XG4uZmMgLmZjLWRheWdyaWQtZGF5LXRvcCB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93LXJldmVyc2U7XG4gIH1cbi5mYyAuZmMtZGF5LW90aGVyIC5mYy1kYXlncmlkLWRheS10b3Age1xuICAgIG9wYWNpdHk6IDAuMztcbiAgfVxuLmZjIHtcblxuICAvKiBkYXkgbnVtYmVyICh3aXRoaW4gY2VsbCB0b3ApICovXG5cbn1cbi5mYyAuZmMtZGF5Z3JpZC1kYXktbnVtYmVyIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgei1pbmRleDogNDtcbiAgICBwYWRkaW5nOiA0cHg7XG4gIH1cbi5mYyB7XG5cbiAgLyogZXZlbnQgY29udGFpbmVyICovXG5cbn1cbi5mYyAuZmMtZGF5Z3JpZC1kYXktZXZlbnRzIHtcbiAgICBtYXJnaW4tdG9wOiAxcHg7IC8qIG5lZWRzIHRvIGJlIG1hcmdpbiwgbm90IHBhZGRpbmcsIHNvIHRoYXQgYXZhaWxhYmxlIGNlbGwgaGVpZ2h0IGNhbiBiZSBjb21wdXRlZCAqL1xuICB9XG4uZmMge1xuXG4gIC8qIHBvc2l0aW9uaW5nIGZvciBiYWxhbmNlZCB2cyBuYXR1cmFsICovXG5cbn1cbi5mYyAuZmMtZGF5Z3JpZC1ib2R5LWJhbGFuY2VkIC5mYy1kYXlncmlkLWRheS1ldmVudHMge1xuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgbGVmdDogMDtcbiAgICAgIHJpZ2h0OiAwO1xuICAgIH1cbi5mYyAuZmMtZGF5Z3JpZC1ib2R5LXVuYmFsYW5jZWQgLmZjLWRheWdyaWQtZGF5LWV2ZW50cyB7XG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7IC8qIGZvciBjb250YWluaW5nIGFicyBwb3NpdGlvbmVkIGV2ZW50IGhhcm5lc3NlcyAqL1xuICAgICAgbWluLWhlaWdodDogMmVtOyAvKiBpbiBhZGRpdGlvbiB0byBiZWluZyBhIG1pbi1oZWlnaHQgZHVyaW5nIG5hdHVyYWwgaGVpZ2h0LCBlcXVhbGl6ZXMgdGhlIGhlaWdodHMgYSBsaXR0bGUgYml0ICovXG4gICAgfVxuLmZjIC5mYy1kYXlncmlkLWJvZHktbmF0dXJhbCB7IC8qIGNhbiBjb2V4aXN0IHdpdGggLXVuYmFsYW5jZWQgKi9cbiAgfVxuLmZjIC5mYy1kYXlncmlkLWJvZHktbmF0dXJhbCAuZmMtZGF5Z3JpZC1kYXktZXZlbnRzIHtcbiAgICAgIG1hcmdpbi1ib3R0b206IDFlbTtcbiAgICB9XG4uZmMge1xuXG4gIC8qIGV2ZW50IGhhcm5lc3MgKi9cblxufVxuLmZjIC5mYy1kYXlncmlkLWV2ZW50LWhhcm5lc3Mge1xuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgfVxuLmZjIC5mYy1kYXlncmlkLWV2ZW50LWhhcm5lc3MtYWJzIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAwOyAvKiBmYWxsYmFjayBjb29yZHMgZm9yIHdoZW4gY2Fubm90IHlldCBiZSBjb21wdXRlZCAqL1xuICAgIGxlZnQ6IDA7IC8qICovXG4gICAgcmlnaHQ6IDA7IC8qICovXG4gIH1cbi5mYyAuZmMtZGF5Z3JpZC1iZy1oYXJuZXNzIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAwO1xuICAgIGJvdHRvbTogMDtcbiAgfVxuLmZjIHtcblxuICAvKiBiZyBjb250ZW50ICovXG5cbn1cbi5mYyAuZmMtZGF5Z3JpZC1kYXktYmcgLmZjLW5vbi1idXNpbmVzcyB7IHotaW5kZXg6IDEgfVxuLmZjIC5mYy1kYXlncmlkLWRheS1iZyAuZmMtYmctZXZlbnQgeyB6LWluZGV4OiAyIH1cbi5mYyAuZmMtZGF5Z3JpZC1kYXktYmcgLmZjLWhpZ2hsaWdodCB7IHotaW5kZXg6IDMgfVxuLmZjIHtcblxuICAvKiBldmVudHMgKi9cblxufVxuLmZjIC5mYy1kYXlncmlkLWV2ZW50IHtcbiAgICB6LWluZGV4OiA2O1xuICAgIG1hcmdpbi10b3A6IDFweDtcbiAgfVxuLmZjIC5mYy1kYXlncmlkLWV2ZW50LmZjLWV2ZW50LW1pcnJvciB7XG4gICAgei1pbmRleDogNztcbiAgfVxuLmZjIHtcblxuICAvKiBjZWxsIGJvdHRvbSAod2l0aGluIGRheS1ldmVudHMpICovXG5cbn1cbi5mYyAuZmMtZGF5Z3JpZC1kYXktYm90dG9tIHtcbiAgICBmb250LXNpemU6IC44NWVtO1xuICAgIG1hcmdpbjogMnB4IDNweCAwO1xuICB9XG4uZmMgLmZjLWRheWdyaWQtbW9yZS1saW5rIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgei1pbmRleDogNDtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gIH1cbi5mYyB7XG5cbiAgLyogd2VlayBudW1iZXIgKHdpdGhpbiBmcmFtZSkgKi9cblxufVxuLmZjIC5mYy1kYXlncmlkLXdlZWstbnVtYmVyIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgei1pbmRleDogNTtcbiAgICB0b3A6IDA7XG4gICAgcGFkZGluZzogMnB4O1xuICAgIG1pbi13aWR0aDogMS41ZW07XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjA4LCAyMDgsIDIwOCwgMC4zKTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1mYy1uZXV0cmFsLWJnLWNvbG9yLCByZ2JhKDIwOCwgMjA4LCAyMDgsIDAuMykpO1xuICAgIGNvbG9yOiAjODA4MDgwO1xuICAgIGNvbG9yOiB2YXIoLS1mYy1uZXV0cmFsLXRleHQtY29sb3IsICM4MDgwODApO1xuICB9XG4uZmMge1xuXG4gIC8qIHBvcG92ZXIgKi9cblxufVxuLmZjIC5mYy1tb3JlLXBvcG92ZXIge1xuICAgIHotaW5kZXg6IDg7XG4gIH1cbi5mYyAuZmMtbW9yZS1wb3BvdmVyIC5mYy1wb3BvdmVyLWJvZHkge1xuICAgIG1pbi13aWR0aDogMjIwcHg7XG4gICAgcGFkZGluZzogMTBweDtcbiAgfVxuLmZjLWRpcmVjdGlvbi1sdHIgLmZjLWRheWdyaWQtZXZlbnQuZmMtZXZlbnQtc3RhcnQsXG4uZmMtZGlyZWN0aW9uLXJ0bCAuZmMtZGF5Z3JpZC1ldmVudC5mYy1ldmVudC1lbmQge1xuICBtYXJnaW4tbGVmdDogMnB4O1xufVxuLmZjLWRpcmVjdGlvbi1sdHIgLmZjLWRheWdyaWQtZXZlbnQuZmMtZXZlbnQtZW5kLFxuLmZjLWRpcmVjdGlvbi1ydGwgLmZjLWRheWdyaWQtZXZlbnQuZmMtZXZlbnQtc3RhcnQge1xuICBtYXJnaW4tcmlnaHQ6IDJweDtcbn1cbi5mYy1kaXJlY3Rpb24tbHRyIC5mYy1kYXlncmlkLXdlZWstbnVtYmVyIHtcbiAgICBsZWZ0OiAwO1xuICAgIGJvcmRlci1yYWRpdXM6IDAgMCAzcHggMDtcbiAgfVxuLmZjLWRpcmVjdGlvbi1ydGwgLmZjLWRheWdyaWQtd2Vlay1udW1iZXIge1xuICAgIHJpZ2h0OiAwO1xuICAgIGJvcmRlci1yYWRpdXM6IDAgMCAwIDNweDtcbiAgfVxuLmZjLWxpcXVpZC1oYWNrIC5mYy1kYXlncmlkLWRheS1mcmFtZSB7XG4gICAgcG9zaXRpb246IHN0YXRpYzsgLyogd2lsbCBjYXVzZSBpbm5lciBhYnNvbHV0ZSBzdHVmZiB0byBleHBhbmQgdG8gPHRkPiAqL1xuICB9XG4uZmMtZGF5Z3JpZC1ldmVudCB7IC8qIG1ha2Ugcm9vdC1sZXZlbCwgYmVjYXVzZSB3aWxsIGJlIGRyYWdnZWQtYW5kLWRyb3BwZWQgb3V0c2lkZSBvZiBhIGNvbXBvbmVudCByb290ICovXG4gIHBvc2l0aW9uOiByZWxhdGl2ZTsgLyogZm9yIHotaW5kZXhlcyBhc3NpZ25lZCBsYXRlciAqL1xuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xuICBib3JkZXItcmFkaXVzOiAzcHg7IC8qIGRvdCBldmVudCBuZWVkcyB0aGlzIHRvIHdoZW4gc2VsZWN0ZWQgKi9cbiAgZm9udC1zaXplOiAuODVlbTtcbiAgZm9udC1zaXplOiB2YXIoLS1mYy1zbWFsbC1mb250LXNpemUsIC44NWVtKTtcbn1cbi8qIC0tLSB0aGUgcmVjdGFuZ2xlIChcImJsb2NrXCIpIHN0eWxlIG9mIGV2ZW50IC0tLSAqL1xuLmZjLWRheWdyaWQtYmxvY2stZXZlbnQgLmZjLWV2ZW50LXRpbWUge1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICB9XG4uZmMtZGF5Z3JpZC1ibG9jay1ldmVudCAuZmMtZXZlbnQtdGltZSxcbiAgLmZjLWRheWdyaWQtYmxvY2stZXZlbnQgLmZjLWV2ZW50LXRpdGxlIHtcbiAgICBwYWRkaW5nOiAxcHg7XG4gIH1cbi8qIC0tLSB0aGUgZG90IHN0eWxlIG9mIGV2ZW50IC0tLSAqL1xuLmZjLWRheWdyaWQtZG90LWV2ZW50IHtcbiAgZGlzcGxheTogZmxleDtcbiAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgcGFkZGluZzogMnB4IDBcblxufVxuLmZjLWRheWdyaWQtZG90LWV2ZW50IC5mYy1ldmVudC10aXRsZSB7XG4gICAgZmxleC1ncm93OiAxO1xuICAgIGZsZXgtc2hyaW5rOiAxO1xuICAgIG1pbi13aWR0aDogMDsgLyogaW1wb3J0YW50IGZvciBhbGxvd2luZyB0byBzaHJpbmsgYWxsIHRoZSB3YXkgKi9cbiAgICBvdmVyZmxvdzogaGlkZGVuO1xuICAgIGZvbnQtd2VpZ2h0OiBib2xkO1xuICB9XG4uZmMtZGF5Z3JpZC1kb3QtZXZlbnQ6aG92ZXIsXG4gIC5mYy1kYXlncmlkLWRvdC1ldmVudC5mYy1ldmVudC1taXJyb3Ige1xuICAgIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgfVxuLmZjLWRheWdyaWQtZG90LWV2ZW50LmZjLWV2ZW50LXNlbGVjdGVkOmJlZm9yZSB7XG4gICAgLyogZXhwYW5kIGhpdCBhcmVhICovXG4gICAgdG9wOiAtMTBweDtcbiAgICBib3R0b206IC0xMHB4O1xuICB9XG4uZmMtZGF5Z3JpZC1ldmVudC1kb3QgeyAvKiB0aGUgYWN0dWFsIGRvdCAqL1xuICBtYXJnaW46IDAgNHB4O1xuICBib3gtc2l6aW5nOiBjb250ZW50LWJveDtcbiAgd2lkdGg6IDA7XG4gIGhlaWdodDogMDtcbiAgYm9yZGVyOiA0cHggc29saWQgIzM3ODhkODtcbiAgYm9yZGVyOiBjYWxjKHZhcigtLWZjLWRheWdyaWQtZXZlbnQtZG90LXdpZHRoLCA4cHgpIC8gMikgc29saWQgdmFyKC0tZmMtZXZlbnQtYm9yZGVyLWNvbG9yLCAjMzc4OGQ4KTtcbiAgYm9yZGVyLXJhZGl1czogNHB4O1xuICBib3JkZXItcmFkaXVzOiBjYWxjKHZhcigtLWZjLWRheWdyaWQtZXZlbnQtZG90LXdpZHRoLCA4cHgpIC8gMik7XG59XG4vKiAtLS0gc3BhY2luZyBiZXR3ZWVuIHRpbWUgYW5kIHRpdGxlIC0tLSAqL1xuLmZjLWRpcmVjdGlvbi1sdHIgLmZjLWRheWdyaWQtZXZlbnQgLmZjLWV2ZW50LXRpbWUge1xuICAgIG1hcmdpbi1yaWdodDogM3B4O1xuICB9XG4uZmMtZGlyZWN0aW9uLXJ0bCAuZmMtZGF5Z3JpZC1ldmVudCAuZmMtZXZlbnQtdGltZSB7XG4gICAgbWFyZ2luLWxlZnQ6IDNweDtcbiAgfVxuIl19 */");
+/* harmony default export */ __webpack_exports__["default"] = ("\n:root {\n  --fc-daygrid-event-dot-width: 8px;\n}\n/* help things clear margins of inner content */\n.fc-daygrid-day-frame,\n.fc-daygrid-day-events,\n.fc-daygrid-event-harness { /* for event top/bottom margins */\n}\n.fc-daygrid-day-frame:before, .fc-daygrid-day-events:before, .fc-daygrid-event-harness:before {\n  content: \"\";\n  clear: both;\n  display: table; }\n.fc-daygrid-day-frame:after, .fc-daygrid-day-events:after, .fc-daygrid-event-harness:after {\n  content: \"\";\n  clear: both;\n  display: table; }\n.fc .fc-daygrid-body { /* a <div> that wraps the table */\n    position: relative;\n    z-index: 1; /* container inner z-index's because <tr>s can't do it */\n  }\n.fc .fc-daygrid-day.fc-day-today {\n      background-color: rgba(255, 220, 40, 0.15);\n      background-color: var(--fc-today-bg-color, rgba(255, 220, 40, 0.15));\n    }\n.fc .fc-daygrid-day-frame {\n    position: relative;\n    min-height: 100%; /* seems to work better than `height` because sets height after rows/cells naturally do it */\n  }\n.fc {\n\n  /* cell top */\n\n}\n.fc .fc-daygrid-day-top {\n    display: flex;\n    flex-direction: row-reverse;\n  }\n.fc .fc-day-other .fc-daygrid-day-top {\n    opacity: 0.3;\n  }\n.fc {\n\n  /* day number (within cell top) */\n\n}\n.fc .fc-daygrid-day-number {\n    position: relative;\n    z-index: 4;\n    padding: 4px;\n  }\n.fc {\n\n  /* event container */\n\n}\n.fc .fc-daygrid-day-events {\n    margin-top: 1px; /* needs to be margin, not padding, so that available cell height can be computed */\n  }\n.fc {\n\n  /* positioning for balanced vs natural */\n\n}\n.fc .fc-daygrid-body-balanced .fc-daygrid-day-events {\n      position: absolute;\n      left: 0;\n      right: 0;\n    }\n.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {\n      position: relative; /* for containing abs positioned event harnesses */\n      min-height: 2em; /* in addition to being a min-height during natural height, equalizes the heights a little bit */\n    }\n.fc .fc-daygrid-body-natural { /* can coexist with -unbalanced */\n  }\n.fc .fc-daygrid-body-natural .fc-daygrid-day-events {\n      margin-bottom: 1em;\n    }\n.fc {\n\n  /* event harness */\n\n}\n.fc .fc-daygrid-event-harness {\n    position: relative;\n  }\n.fc .fc-daygrid-event-harness-abs {\n    position: absolute;\n    top: 0; /* fallback coords for when cannot yet be computed */\n    left: 0; /* */\n    right: 0; /* */\n  }\n.fc .fc-daygrid-bg-harness {\n    position: absolute;\n    top: 0;\n    bottom: 0;\n  }\n.fc {\n\n  /* bg content */\n\n}\n.fc .fc-daygrid-day-bg .fc-non-business { z-index: 1 }\n.fc .fc-daygrid-day-bg .fc-bg-event { z-index: 2 }\n.fc .fc-daygrid-day-bg .fc-highlight { z-index: 3 }\n.fc {\n\n  /* events */\n\n}\n.fc .fc-daygrid-event {\n    z-index: 6;\n    margin-top: 1px;\n  }\n.fc .fc-daygrid-event.fc-event-mirror {\n    z-index: 7;\n  }\n.fc {\n\n  /* cell bottom (within day-events) */\n\n}\n.fc .fc-daygrid-day-bottom {\n    font-size: .85em;\n    padding: 2px 3px 0\n  }\n.fc .fc-daygrid-day-bottom:before {\n  content: \"\";\n  clear: both;\n  display: table; }\n.fc .fc-daygrid-more-link {\n    position: relative;\n    z-index: 4;\n    cursor: pointer;\n  }\n.fc {\n\n  /* week number (within frame) */\n\n}\n.fc .fc-daygrid-week-number {\n    position: absolute;\n    z-index: 5;\n    top: 0;\n    padding: 2px;\n    min-width: 1.5em;\n    text-align: center;\n    background-color: rgba(208, 208, 208, 0.3);\n    background-color: var(--fc-neutral-bg-color, rgba(208, 208, 208, 0.3));\n    color: #808080;\n    color: var(--fc-neutral-text-color, #808080);\n  }\n.fc {\n\n  /* popover */\n\n}\n.fc .fc-more-popover .fc-popover-body {\n    min-width: 220px;\n    padding: 10px;\n  }\n.fc-direction-ltr .fc-daygrid-event.fc-event-start,\n.fc-direction-rtl .fc-daygrid-event.fc-event-end {\n  margin-left: 2px;\n}\n.fc-direction-ltr .fc-daygrid-event.fc-event-end,\n.fc-direction-rtl .fc-daygrid-event.fc-event-start {\n  margin-right: 2px;\n}\n.fc-direction-ltr .fc-daygrid-week-number {\n    left: 0;\n    border-radius: 0 0 3px 0;\n  }\n.fc-direction-rtl .fc-daygrid-week-number {\n    right: 0;\n    border-radius: 0 0 0 3px;\n  }\n.fc-liquid-hack .fc-daygrid-day-frame {\n    position: static; /* will cause inner absolute stuff to expand to <td> */\n  }\n.fc-daygrid-event { /* make root-level, because will be dragged-and-dropped outside of a component root */\n  position: relative; /* for z-indexes assigned later */\n  white-space: nowrap;\n  border-radius: 3px; /* dot event needs this to when selected */\n  font-size: .85em;\n  font-size: var(--fc-small-font-size, .85em);\n}\n/* --- the rectangle (\"block\") style of event --- */\n.fc-daygrid-block-event .fc-event-time {\n    font-weight: bold;\n  }\n.fc-daygrid-block-event .fc-event-time,\n  .fc-daygrid-block-event .fc-event-title {\n    padding: 1px;\n  }\n/* --- the dot style of event --- */\n.fc-daygrid-dot-event {\n  display: flex;\n  align-items: center;\n  padding: 2px 0\n\n}\n.fc-daygrid-dot-event .fc-event-title {\n    flex-grow: 1;\n    flex-shrink: 1;\n    min-width: 0; /* important for allowing to shrink all the way */\n    overflow: hidden;\n    font-weight: bold;\n  }\n.fc-daygrid-dot-event:hover,\n  .fc-daygrid-dot-event.fc-event-mirror {\n    background: rgba(0, 0, 0, 0.1);\n  }\n.fc-daygrid-dot-event.fc-event-selected:before {\n    /* expand hit area */\n    top: -10px;\n    bottom: -10px;\n  }\n.fc-daygrid-event-dot { /* the actual dot */\n  margin: 0 4px;\n  box-sizing: content-box;\n  width: 0;\n  height: 0;\n  border: 4px solid #3788d8;\n  border: calc(var(--fc-daygrid-event-dot-width, 8px) / 2) solid var(--fc-event-border-color, #3788d8);\n  border-radius: 4px;\n  border-radius: calc(var(--fc-daygrid-event-dot-width, 8px) / 2);\n}\n/* --- spacing between time and title --- */\n.fc-direction-ltr .fc-daygrid-event .fc-event-time {\n    margin-right: 3px;\n  }\n.fc-direction-rtl .fc-daygrid-event .fc-event-time {\n    margin-left: 3px;\n  }\n\n/*# sourceMappingURL=data:application/json;base64,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WUFBWSxFQUFFLGlEQUFpRDtJQUMvRCxnQkFBZ0I7SUFDaEIsaUJBQWlCO0VBQ25CO0FBQ0Y7O0lBRUksOEJBQThCO0VBQ2hDO0FBQ0Y7SUFDSSxvQkFBb0I7SUFDcEIsVUFBVTtJQUNWLGFBQWE7RUFDZjtBQUNGLHdCQUF3QixtQkFBbUI7RUFDekMsYUFBYTtFQUNiLHVCQUF1QjtFQUN2QixRQUFRO0VBQ1IsU0FBUztFQUNULHlCQUF5QjtFQUN6QixvR0FBb0c7RUFDcEcsa0JBQWtCO0VBQ2xCLCtEQUErRDtBQUNqRTtBQUNBLDJDQUEyQztBQUMzQztJQUNJLGlCQUFpQjtFQUNuQjtBQUNGO0lBQ0ksZ0JBQWdCO0VBQ2xCIiwiZmlsZSI6Im1haW4uY3NzIiwic291cmNlc0NvbnRlbnQiOlsiXG46cm9vdCB7XG4gIC0tZmMtZGF5Z3JpZC1ldmVudC1kb3Qtd2lkdGg6IDhweDtcbn1cbi8qIGhlbHAgdGhpbmdzIGNsZWFyIG1hcmdpbnMgb2YgaW5uZXIgY29udGVudCAqL1xuLmZjLWRheWdyaWQtZGF5LWZyYW1lLFxuLmZjLWRheWdyaWQtZGF5LWV2ZW50cyxcbi5mYy1kYXlncmlkLWV2ZW50LWhhcm5lc3MgeyAvKiBmb3IgZXZlbnQgdG9wL2JvdHRvbSBtYXJnaW5zICovXG59XG4uZmMtZGF5Z3JpZC1kYXktZnJhbWU6YmVmb3JlLCAuZmMtZGF5Z3JpZC1kYXktZXZlbnRzOmJlZm9yZSwgLmZjLWRheWdyaWQtZXZlbnQtaGFybmVzczpiZWZvcmUge1xuICBjb250ZW50OiBcIlwiO1xuICBjbGVhcjogYm90aDtcbiAgZGlzcGxheTogdGFibGU7IH1cbi5mYy1kYXlncmlkLWRheS1mcmFtZTphZnRlciwgLmZjLWRheWdyaWQtZGF5LWV2ZW50czphZnRlciwgLmZjLWRheWdyaWQtZXZlbnQtaGFybmVzczphZnRlciB7XG4gIGNvbnRlbnQ6IFwiXCI7XG4gIGNsZWFyOiBib3RoO1xuICBkaXNwbGF5OiB0YWJsZTsgfVxuLmZjIC5mYy1kYXlncmlkLWJvZHkgeyAvKiBhIDxkaXY+IHRoYXQgd3JhcHMgdGhlIHRhYmxlICovXG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIHotaW5kZXg6IDE7IC8qIGNvbnRhaW5lciBpbm5lciB6LWluZGV4J3MgYmVjYXVzZSA8dHI+cyBjYW4ndCBkbyBpdCAqL1xuICB9XG4uZmMgLmZjLWRheWdyaWQtZGF5LmZjLWRheS10b2RheSB7XG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDI1NSwgMjIwLCA0MCwgMC4xNSk7XG4gICAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1mYy10b2RheS1iZy1jb2xvciwgcmdiYSgyNTUsIDIyMCwgNDAsIDAuMTUpKTtcbiAgICB9XG4uZmMgLmZjLWRheWdyaWQtZGF5LWZyYW1lIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgbWluLWhlaWdodDogMTAwJTsgLyogc2VlbXMgdG8gd29yayBiZXR0ZXIgdGhhbiBgaGVpZ2h0YCBiZWNhdXNlIHNldHMgaGVpZ2h0IGFmdGVyIHJvd3MvY2VsbHMgbmF0dXJhbGx5IGRvIGl0ICovXG4gIH1cbi5mYyB7XG5cbiAgLyogY2VsbCB0b3AgKi9cblxufVxuLmZjIC5mYy1kYXlncmlkLWRheS10b3Age1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IHJvdy1yZXZlcnNlO1xuICB9XG4uZmMgLmZjLWRheS1vdGhlciAuZmMtZGF5Z3JpZC1kYXktdG9wIHtcbiAgICBvcGFjaXR5OiAwLjM7XG4gIH1cbi5mYyB7XG5cbiAgLyogZGF5IG51bWJlciAod2l0aGluIGNlbGwgdG9wKSAqL1xuXG59XG4uZmMgLmZjLWRheWdyaWQtZGF5LW51bWJlciB7XG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xuICAgIHotaW5kZXg6IDQ7XG4gICAgcGFkZGluZzogNHB4O1xuICB9XG4uZmMge1xuXG4gIC8qIGV2ZW50IGNvbnRhaW5lciAqL1xuXG59XG4uZmMgLmZjLWRheWdyaWQtZGF5LWV2ZW50cyB7XG4gICAgbWFyZ2luLXRvcDogMXB4OyAvKiBuZWVkcyB0byBiZSBtYXJnaW4sIG5vdCBwYWRkaW5nLCBzbyB0aGF0IGF2YWlsYWJsZSBjZWxsIGhlaWdodCBjYW4gYmUgY29tcHV0ZWQgKi9cbiAgfVxuLmZjIHtcblxuICAvKiBwb3NpdGlvbmluZyBmb3IgYmFsYW5jZWQgdnMgbmF0dXJhbCAqL1xuXG59XG4uZmMgLmZjLWRheWdyaWQtYm9keS1iYWxhbmNlZCAuZmMtZGF5Z3JpZC1kYXktZXZlbnRzIHtcbiAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICAgIGxlZnQ6IDA7XG4gICAgICByaWdodDogMDtcbiAgICB9XG4uZmMgLmZjLWRheWdyaWQtYm9keS11bmJhbGFuY2VkIC5mYy1kYXlncmlkLWRheS1ldmVudHMge1xuICAgICAgcG9zaXRpb246IHJlbGF0aXZlOyAvKiBmb3IgY29udGFpbmluZyBhYnMgcG9zaXRpb25lZCBldmVudCBoYXJuZXNzZXMgKi9cbiAgICAgIG1pbi1oZWlnaHQ6IDJlbTsgLyogaW4gYWRkaXRpb24gdG8gYmVpbmcgYSBtaW4taGVpZ2h0IGR1cmluZyBuYXR1cmFsIGhlaWdodCwgZXF1YWxpemVzIHRoZSBoZWlnaHRzIGEgbGl0dGxlIGJpdCAqL1xuICAgIH1cbi5mYyAuZmMtZGF5Z3JpZC1ib2R5LW5hdHVyYWwgeyAvKiBjYW4gY29leGlzdCB3aXRoIC11bmJhbGFuY2VkICovXG4gIH1cbi5mYyAuZmMtZGF5Z3JpZC1ib2R5LW5hdHVyYWwgLmZjLWRheWdyaWQtZGF5LWV2ZW50cyB7XG4gICAgICBtYXJnaW4tYm90dG9tOiAxZW07XG4gICAgfVxuLmZjIHtcblxuICAvKiBldmVudCBoYXJuZXNzICovXG5cbn1cbi5mYyAuZmMtZGF5Z3JpZC1ldmVudC1oYXJuZXNzIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gIH1cbi5mYyAuZmMtZGF5Z3JpZC1ldmVudC1oYXJuZXNzLWFicyB7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDogMDsgLyogZmFsbGJhY2sgY29vcmRzIGZvciB3aGVuIGNhbm5vdCB5ZXQgYmUgY29tcHV0ZWQgKi9cbiAgICBsZWZ0OiAwOyAvKiAqL1xuICAgIHJpZ2h0OiAwOyAvKiAqL1xuICB9XG4uZmMgLmZjLWRheWdyaWQtYmctaGFybmVzcyB7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDogMDtcbiAgICBib3R0b206IDA7XG4gIH1cbi5mYyB7XG5cbiAgLyogYmcgY29udGVudCAqL1xuXG59XG4uZmMgLmZjLWRheWdyaWQtZGF5LWJnIC5mYy1ub24tYnVzaW5lc3MgeyB6LWluZGV4OiAxIH1cbi5mYyAuZmMtZGF5Z3JpZC1kYXktYmcgLmZjLWJnLWV2ZW50IHsgei1pbmRleDogMiB9XG4uZmMgLmZjLWRheWdyaWQtZGF5LWJnIC5mYy1oaWdobGlnaHQgeyB6LWluZGV4OiAzIH1cbi5mYyB7XG5cbiAgLyogZXZlbnRzICovXG5cbn1cbi5mYyAuZmMtZGF5Z3JpZC1ldmVudCB7XG4gICAgei1pbmRleDogNjtcbiAgICBtYXJnaW4tdG9wOiAxcHg7XG4gIH1cbi5mYyAuZmMtZGF5Z3JpZC1ldmVudC5mYy1ldmVudC1taXJyb3Ige1xuICAgIHotaW5kZXg6IDc7XG4gIH1cbi5mYyB7XG5cbiAgLyogY2VsbCBib3R0b20gKHdpdGhpbiBkYXktZXZlbnRzKSAqL1xuXG59XG4uZmMgLmZjLWRheWdyaWQtZGF5LWJvdHRvbSB7XG4gICAgZm9udC1zaXplOiAuODVlbTtcbiAgICBwYWRkaW5nOiAycHggM3B4IDBcbiAgfVxuLmZjIC5mYy1kYXlncmlkLWRheS1ib3R0b206YmVmb3JlIHtcbiAgY29udGVudDogXCJcIjtcbiAgY2xlYXI6IGJvdGg7XG4gIGRpc3BsYXk6IHRhYmxlOyB9XG4uZmMgLmZjLWRheWdyaWQtbW9yZS1saW5rIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgei1pbmRleDogNDtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gIH1cbi5mYyB7XG5cbiAgLyogd2VlayBudW1iZXIgKHdpdGhpbiBmcmFtZSkgKi9cblxufVxuLmZjIC5mYy1kYXlncmlkLXdlZWstbnVtYmVyIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgei1pbmRleDogNTtcbiAgICB0b3A6IDA7XG4gICAgcGFkZGluZzogMnB4O1xuICAgIG1pbi13aWR0aDogMS41ZW07XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHJnYmEoMjA4LCAyMDgsIDIwOCwgMC4zKTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1mYy1uZXV0cmFsLWJnLWNvbG9yLCByZ2JhKDIwOCwgMjA4LCAyMDgsIDAuMykpO1xuICAgIGNvbG9yOiAjODA4MDgwO1xuICAgIGNvbG9yOiB2YXIoLS1mYy1uZXV0cmFsLXRleHQtY29sb3IsICM4MDgwODApO1xuICB9XG4uZmMge1xuXG4gIC8qIHBvcG92ZXIgKi9cblxufVxuLmZjIC5mYy1tb3JlLXBvcG92ZXIgLmZjLXBvcG92ZXItYm9keSB7XG4gICAgbWluLXdpZHRoOiAyMjBweDtcbiAgICBwYWRkaW5nOiAxMHB4O1xuICB9XG4uZmMtZGlyZWN0aW9uLWx0ciAuZmMtZGF5Z3JpZC1ldmVudC5mYy1ldmVudC1zdGFydCxcbi5mYy1kaXJlY3Rpb24tcnRsIC5mYy1kYXlncmlkLWV2ZW50LmZjLWV2ZW50LWVuZCB7XG4gIG1hcmdpbi1sZWZ0OiAycHg7XG59XG4uZmMtZGlyZWN0aW9uLWx0ciAuZmMtZGF5Z3JpZC1ldmVudC5mYy1ldmVudC1lbmQsXG4uZmMtZGlyZWN0aW9uLXJ0bCAuZmMtZGF5Z3JpZC1ldmVudC5mYy1ldmVudC1zdGFydCB7XG4gIG1hcmdpbi1yaWdodDogMnB4O1xufVxuLmZjLWRpcmVjdGlvbi1sdHIgLmZjLWRheWdyaWQtd2Vlay1udW1iZXIge1xuICAgIGxlZnQ6IDA7XG4gICAgYm9yZGVyLXJhZGl1czogMCAwIDNweCAwO1xuICB9XG4uZmMtZGlyZWN0aW9uLXJ0bCAuZmMtZGF5Z3JpZC13ZWVrLW51bWJlciB7XG4gICAgcmlnaHQ6IDA7XG4gICAgYm9yZGVyLXJhZGl1czogMCAwIDAgM3B4O1xuICB9XG4uZmMtbGlxdWlkLWhhY2sgLmZjLWRheWdyaWQtZGF5LWZyYW1lIHtcbiAgICBwb3NpdGlvbjogc3RhdGljOyAvKiB3aWxsIGNhdXNlIGlubmVyIGFic29sdXRlIHN0dWZmIHRvIGV4cGFuZCB0byA8dGQ+ICovXG4gIH1cbi5mYy1kYXlncmlkLWV2ZW50IHsgLyogbWFrZSByb290LWxldmVsLCBiZWNhdXNlIHdpbGwgYmUgZHJhZ2dlZC1hbmQtZHJvcHBlZCBvdXRzaWRlIG9mIGEgY29tcG9uZW50IHJvb3QgKi9cbiAgcG9zaXRpb246IHJlbGF0aXZlOyAvKiBmb3Igei1pbmRleGVzIGFzc2lnbmVkIGxhdGVyICovXG4gIHdoaXRlLXNwYWNlOiBub3dyYXA7XG4gIGJvcmRlci1yYWRpdXM6IDNweDsgLyogZG90IGV2ZW50IG5lZWRzIHRoaXMgdG8gd2hlbiBzZWxlY3RlZCAqL1xuICBmb250LXNpemU6IC44NWVtO1xuICBmb250LXNpemU6IHZhcigtLWZjLXNtYWxsLWZvbnQtc2l6ZSwgLjg1ZW0pO1xufVxuLyogLS0tIHRoZSByZWN0YW5nbGUgKFwiYmxvY2tcIikgc3R5bGUgb2YgZXZlbnQgLS0tICovXG4uZmMtZGF5Z3JpZC1ibG9jay1ldmVudCAuZmMtZXZlbnQtdGltZSB7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIH1cbi5mYy1kYXlncmlkLWJsb2NrLWV2ZW50IC5mYy1ldmVudC10aW1lLFxuICAuZmMtZGF5Z3JpZC1ibG9jay1ldmVudCAuZmMtZXZlbnQtdGl0bGUge1xuICAgIHBhZGRpbmc6IDFweDtcbiAgfVxuLyogLS0tIHRoZSBkb3Qgc3R5bGUgb2YgZXZlbnQgLS0tICovXG4uZmMtZGF5Z3JpZC1kb3QtZXZlbnQge1xuICBkaXNwbGF5OiBmbGV4O1xuICBhbGlnbi1pdGVtczogY2VudGVyO1xuICBwYWRkaW5nOiAycHggMFxuXG59XG4uZmMtZGF5Z3JpZC1kb3QtZXZlbnQgLmZjLWV2ZW50LXRpdGxlIHtcbiAgICBmbGV4LWdyb3c6IDE7XG4gICAgZmxleC1zaHJpbms6IDE7XG4gICAgbWluLXdpZHRoOiAwOyAvKiBpbXBvcnRhbnQgZm9yIGFsbG93aW5nIHRvIHNocmluayBhbGwgdGhlIHdheSAqL1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gIH1cbi5mYy1kYXlncmlkLWRvdC1ldmVudDpob3ZlcixcbiAgLmZjLWRheWdyaWQtZG90LWV2ZW50LmZjLWV2ZW50LW1pcnJvciB7XG4gICAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjEpO1xuICB9XG4uZmMtZGF5Z3JpZC1kb3QtZXZlbnQuZmMtZXZlbnQtc2VsZWN0ZWQ6YmVmb3JlIHtcbiAgICAvKiBleHBhbmQgaGl0IGFyZWEgKi9cbiAgICB0b3A6IC0xMHB4O1xuICAgIGJvdHRvbTogLTEwcHg7XG4gIH1cbi5mYy1kYXlncmlkLWV2ZW50LWRvdCB7IC8qIHRoZSBhY3R1YWwgZG90ICovXG4gIG1hcmdpbjogMCA0cHg7XG4gIGJveC1zaXppbmc6IGNvbnRlbnQtYm94O1xuICB3aWR0aDogMDtcbiAgaGVpZ2h0OiAwO1xuICBib3JkZXI6IDRweCBzb2xpZCAjMzc4OGQ4O1xuICBib3JkZXI6IGNhbGModmFyKC0tZmMtZGF5Z3JpZC1ldmVudC1kb3Qtd2lkdGgsIDhweCkgLyAyKSBzb2xpZCB2YXIoLS1mYy1ldmVudC1ib3JkZXItY29sb3IsICMzNzg4ZDgpO1xuICBib3JkZXItcmFkaXVzOiA0cHg7XG4gIGJvcmRlci1yYWRpdXM6IGNhbGModmFyKC0tZmMtZGF5Z3JpZC1ldmVudC1kb3Qtd2lkdGgsIDhweCkgLyAyKTtcbn1cbi8qIC0tLSBzcGFjaW5nIGJldHdlZW4gdGltZSBhbmQgdGl0bGUgLS0tICovXG4uZmMtZGlyZWN0aW9uLWx0ciAuZmMtZGF5Z3JpZC1ldmVudCAuZmMtZXZlbnQtdGltZSB7XG4gICAgbWFyZ2luLXJpZ2h0OiAzcHg7XG4gIH1cbi5mYy1kaXJlY3Rpb24tcnRsIC5mYy1kYXlncmlkLWV2ZW50IC5mYy1ldmVudC10aW1lIHtcbiAgICBtYXJnaW4tbGVmdDogM3B4O1xuICB9XG4iXX0= */");
 
 /***/ }),
 
@@ -14335,7 +14557,11 @@ let BankDetailsVerifyGuard = class BankDetailsVerifyGuard {
             return true;
         }
         // not logged in so redirect to login page with the return url
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+        let paramobj = this.router.getCurrentNavigation().extras.state;
+        if (paramobj) {
+            paramobj.returnUrl = state.url;
+        }
+        this.router.navigate(['/login'], { state: paramobj });
         return false;
     }
 };

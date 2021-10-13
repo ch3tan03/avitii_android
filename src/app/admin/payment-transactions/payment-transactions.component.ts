@@ -21,6 +21,7 @@ export class PaymentTransactionsComponent implements OnInit {
   PaymentTransactionDetailsArray: any = null;
   loading = false;
   transactionActionType = null;
+  TransactionActionType=TransactionActionType;
   constructor(
     private socketService: SocketioService,
     private alertService: AlertService,

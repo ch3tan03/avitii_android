@@ -16,7 +16,7 @@
                                     <tr>
                                         <th class="d-none" i18n>ID</th>
                                         <th i18n>Email</th>
-                                        <th i18n>Name</th>
+                                        <th i18n>Full Name</th>
                                         <th i18n>Role</th>
                                         <th i18n>Mobile</th>
                                         <th i18n>Verified</th>
@@ -25,32 +25,34 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let obj of utilityService._.values(PaymentTransactionDetailsArray)">
-                                        <td class="d-none" i18n>{{obj._id}}</td>
-                                        <td i18n>{{obj.emailAddress}}</td>
-                                        <td i18n>{{obj.firstName}}</td>
-                                        <td i18n>{{obj.role}}</td>
-                                        <td i18n>{{obj.mobileNo}}</td>
+                                        <td class="d-none" >{{obj._id}}</td>
+                                        <td >{{obj.emailAddress}}</td>
+                                        <td >{{obj.firstName}}&nbsp;{{obj.middleName}}&nbsp;{{obj.lastName}}</td>
+                                        <td >{{obj.role}}</td>
+                                        <td >{{obj.mobileNo}}</td>
                                         <td>
                                             <div
                                                 *ngIf="returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id">
-
-
-                                                <span *ngIf="!obj.isVerified"
-                                                    (click)="updateUsersVerificationStatus(obj, true)"
+                                               <div *ngIf="!obj.isDeleted">
+                                                <span i18n *ngIf="!obj.isVerified"
                                                     class="btn text-white badge badge-danger font-weight-light">
                                                     Pending
                                                 </span>
-                                                <span *ngIf="obj.isVerified"
+                                                <span i18n *ngIf="obj.isVerified"
                                                     class="badge badge-success font-weight-light">
                                                     Approved
                                                 </span>
-                                                
-
+                                               </div>
+                                               <div *ngIf="obj.isDeleted">
+                                                <span class="btn text-white badge badge-danger font-weight-light" i18n>
+                                                    Deleted
+                                                </span>
+                                               </div>                                            
                                             </div>
                                         </td>
                                         <td class="text-left">
                                             <div
-                                                *ngIf="returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id">
+                                                *ngIf="!obj.isDeleted && returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id">
                                                 <button *ngIf="obj.isVerified && returnT4CurrentUserIsSAdmin()"
                                                     class="btn btn-success btn-sm btn-xs mr-1" (click)="navigate2EditUser(obj._id)" data-title="Edit">
                                                     <i class="icon-pencil"></i>
@@ -59,12 +61,15 @@
                                                     <i class="icon-user"></i>
                                                 </button>
                                                 
-                                                <button class="btn btn-success btn-sm btn-xs mr-1" (click)="usersIncomeExpenseDetails(obj)" data-title="Income Proof and Monthly Expenses Details">
+                                                <button *ngIf="obj.role==Role.Borrower" class="btn btn-success btn-sm btn-xs mr-1" (click)="usersIncomeExpenseDetails(obj)" data-title="Income Proof and Monthly Expenses Details">
                                                     <i class="icon-receipt"></i>
                                                 </button>
 
-                                                <button class="btn btn-warning btn-sm btn-xs mr-1" data-title="Block User" *ngIf="obj.isVerified" (click)="updateUsersVerificationStatus(obj, false)">
+                                                <button *ngIf="obj.isVerified" class="btn btn-warning btn-sm btn-xs mr-1" data-title="Block User" (click)="usersRestrictionModal(obj, false)">
                                                     <i class="icon-lock"></i>
+                                                </button>
+                                                <button *ngIf="!obj.isVerified" class="btn btn-success btn-sm btn-xs mr-1" data-title="Verify User" (click)="usersRestrictionModal(obj, true)">
+                                                    <i class="icon-unlock"></i>
                                                 </button>
 
 
@@ -74,6 +79,7 @@
                                             </div>
                                         </td>
                                     </tr>
+                                   
                                 </tbody>
                             </table>
                         </div>

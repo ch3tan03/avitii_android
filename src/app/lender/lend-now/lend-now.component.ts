@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { first } from 'rxjs/operators';
-import { SessionStatus, TransactionActionType } from 'src/app/models/role';
+import { Role, SessionStatus, TransactionActionType } from 'src/app/models/role';
 import { AuthenticationService, UserService, AlertService } from 'src/app/services';
 import { AppRouterService } from 'src/app/services/app-router.service';
 import { UtilityService } from 'src/app/services/utility.service';
@@ -11,6 +11,8 @@ import * as _ from 'lodash'
 import { User } from 'src/app/models';
 import { ContactService } from 'src/app/services/contact.service';
 import { PaymentService } from 'src/app/services/payment.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PublicProfileComponent } from 'src/app/shared/public-profile/public-profile.component';
 
 @Component({
   selector: 'app-lend-now',
@@ -32,7 +34,6 @@ export class LendNowComponent implements OnInit {
   constructor(
     private socketService: SocketioService,
     public utilityService: UtilityService,
-    private socketioService: SocketioService,
     private alertService: AlertService,
     private appRouterService: AppRouterService,
     private formBuilder: FormBuilder,
@@ -40,6 +41,7 @@ export class LendNowComponent implements OnInit {
     private userService: UserService,
     public contactService: ContactService,
     public payment: PaymentService,
+    public dialog: MatDialog,
   ) {
     let paramobj = history.state;
     if (paramobj) {
@@ -49,10 +51,11 @@ export class LendNowComponent implements OnInit {
       this.loanApplyId = paramobj['loanApplyId'];
       delete history.state['loanApplyId'];
       if (this.loanApplyId) {
+        this.initForm();
         this.clickedOnSignLoanContract();
       }
       if (this.loanId) {
-        this.socketioService.getLoanMarketDataById(this.loanId)
+        this.socketService.getLoanMarketDataById(this.loanId)
           .pipe(first())
           .subscribe(
             data => {
@@ -86,6 +89,11 @@ export class LendNowComponent implements OnInit {
 
                           this.borrowerUserObj = _.cloneDeep(data['data']);
                           this.loading = false;
+                          /*
+                          if (this.loanApplyId) {
+                            this.clickedOnSignLoanContract();
+                          }
+                          */
                         } else {
                           this.alertService.error(data['message']);
                           this.loading = false;
@@ -143,6 +151,9 @@ export class LendNowComponent implements OnInit {
               if (data && data['success']) {
                 this.lenderUserObj = data["data"];
                 this.loading = false;
+                if (this.loanApplyId) {
+                  this.clickedOnSignLoanContract();
+                }
               } else {
                 this.alertService.error(data['message']);
                 this.loading = false;
@@ -182,6 +193,10 @@ export class LendNowComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.initForm();
+
+  }
+  initForm() {
     this.returnHeaderTitleForPage();
 
     this.lendNowForm = this.formBuilder.group({
@@ -193,9 +208,12 @@ export class LendNowComponent implements OnInit {
       loanApplyNumber: [null],
       loanInsuranceCreatedOn: [null],
       calculatedMonthlyAmountForEMI: [null],
+      eSignatureLendersCreatedOn: [null],
+      eSignatureBorrowersCreatedOn: [null],
+      loanAgreementCondition: [null, Validators.required]
     });
-
   }
+
   showEditingForm(_userObj) {
     this.lendNowForm = this.formBuilder.group({
       eSignatureLendersPassportNumber: [_userObj.eSignatureLendersPassportNumber || '', Validators.required],
@@ -208,6 +226,9 @@ export class LendNowComponent implements OnInit {
       loanApplyNumber: [_userObj.loanApplyNumber || null],
       loanInsuranceCreatedOn: [_userObj.loanInsuranceCreatedOn || null],
       calculatedMonthlyAmountForEMI: [_userObj.calculatedMonthlyAmountForEMI || null],
+      eSignatureLendersCreatedOn: [_userObj.eSignatureLendersCreatedOn || null],
+      eSignatureBorrowersCreatedOn: [_userObj.eSignatureBorrowersCreatedOn || null],
+      loanAgreementCondition: [null, Validators.required]
     });
   }
 
@@ -229,10 +250,13 @@ export class LendNowComponent implements OnInit {
   clickedOnSignLoanContract() {
     this.userClickedOnSignLoanContract = true;
     this.returnHeaderTitleForPage();
+    if (this.lenderUserObj) {
+      this.lendNowForm.get('eSignatureLendersName').setValue(this.lenderUserObj.firstName || this.lenderUserObj.lastName);
+      this.lendNowForm.get('eSignatureLendersPassportNumber').setValue(this.lenderUserObj.myPassportNumber || this.lenderUserObj.myDLNumber);
+    }
   }
 
   clickedOnVerifiedSignLoanContract() {
-
     this.submitted = true;
     if (this.lendNowForm.invalid) {
       return;
@@ -245,7 +269,21 @@ export class LendNowComponent implements OnInit {
       this.alertService.error("Passport Number miss match. Please enter proper number");
       return;
     }
+    switch (this.authenticationService.currentUserValue.role) {
+      case Role.Lender:
+        this.lendNowForm.get('eSignatureLendersCreatedOn').setValue(_.now());
+        break;
+      case Role.Borrower:
+        this.lendNowForm.get('eSignatureBorrowersCreatedOn').setValue(_.now());
+        break;
+    }
 
+    if (!this.lendNowForm.get('calculatedMonthlyAmountForEMI').value) {
+      let _calculatedMonthlyAmountForEMI = this.LoanObj.calculatedMonthlyAmountForEMI;
+      this.lendNowForm.get('calculatedMonthlyAmountForEMI').setValue(_calculatedMonthlyAmountForEMI);
+    }
+
+    let selectedTab = null;
     let _currentSessionApply = {
       sessionObj: {
         loanAmount: null
@@ -281,12 +319,13 @@ export class LendNowComponent implements OnInit {
         _currentSessionApply.status = _currentSessionApply.status || SessionStatus.Accepted;
       } else {
         //here loan created by borrower so informing borrower as lender is interested to lend money so borrower can set to accepted status
-        _currentSessionApply.status = _currentSessionApply.status || SessionStatus.OngoingAccepted;
+        _currentSessionApply.status = _currentSessionApply.status || SessionStatus.AwaitingForApproval;
       }
       this.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
+
       switch (_currentSessionApply.status) {
         case SessionStatus.Pending:
-        case SessionStatus.OngoingAccepted:
+        case SessionStatus.AwaitingForApproval:
           _currentSessionApply.createdBy = this.authenticationService.currentUserValue._id;
           this.socketService.setSessionApply(true, _currentSessionApply);
           break;
@@ -298,12 +337,16 @@ export class LendNowComponent implements OnInit {
       let _adminUsersArray = [];
       _adminUsersArray.push(this.lenderUserObj._id);
       _adminUsersArray.push(this.borrowerUserObj._id);
-      let _currentContactObj = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, this.utilityService.returnLoanType(this.LoanObj.loanType) + " - " + this.borrowerUserObj.firstName, this.LoanObj._id, _currentSessionApply._id, _adminUsersArray, null, null);
+      /*this.borrowerUserObj.firstName + " - " + */
+      let _currentContactObj = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, this.utilityService.returnLoanType(this.LoanObj.loanType) + " - " + (this.LoanObj.loanNumber || ''), this.LoanObj._id, _currentSessionApply._id, _adminUsersArray, null, null, null, false);
       this.socketService.sendEventToAddNewContact(_currentContactObj);
       //#endregion create chat group
       switch (_currentSessionApply.status) {
+        case SessionStatus.AwaitingForApproval:
+          selectedTab = { selectedTab: 'sent' };
+          break;
         case SessionStatus.Accepted:
-          this.alertService.success("Updated. Loan contract is available under My Contract->Accepted tab.", true);
+          this.alertService.success("Updated. Loan contract is available under My Contract->Active tab.", true);
           //#region print PDF signed contract
           let _LoanObj = {
             borrowersUserObj: null,
@@ -369,7 +412,7 @@ export class LendNowComponent implements OnInit {
           this.alertService.success("Updated. Loan contract is available under My Contract->Rejected tab.", true);
           break;
         case SessionStatus.Completed:
-          this.alertService.success("Updated. Loan contract is available under My Contract->Completed tab.", true);
+          this.alertService.success("Updated. Loan contract is available under My Contract->Paid tab.", true);
           break;
         case SessionStatus.Active:
         case SessionStatus.Ongoing:
@@ -382,7 +425,7 @@ export class LendNowComponent implements OnInit {
 
     }
 
-    this.appRouterService.appRouteToPath("/lender/my-contract");
+    this.appRouterService.appRouteToPath("/lender/my-contract", selectedTab);
 
   }
 
@@ -465,6 +508,58 @@ export class LendNowComponent implements OnInit {
     });
     //#endregion handle LoanObj payments
   }
+  clicked2LoanAgreementCondition(event) {
+    if (event.srcElement.checked) {
+      this.lendNowForm.get('loanAgreementCondition').setValue(true);
+    } else {
+      this.lendNowForm.get('loanAgreementCondition').setValue(false);
+    }
+  }
+  usersProfile(userObj) {
+    //#region fetch creator id
+    this.userService.getUserById(userObj._id)
+      .pipe(first())
+      .subscribe(
+        data => {
+          if (data && data['success']) {
+            //console.log('84', this.authenticationService.currentUserValue);
+            const dialogRef = this.dialog.open(PublicProfileComponent, {
 
+              maxWidth: '100vw',
+              maxHeight: '100vh',
+              height: '100%',
+              width: '100%',
+              hasBackdrop: true,
+              data: {
+                userObj: _.cloneDeep(data['data']),
+                adminViewT: false
+              }
+            });
+
+            dialogRef.afterClosed().subscribe(result => {
+              //console.log(`99 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+            });
+
+          } else {
+
+          }
+        },
+        error => {
+          let errorMsg2show = "";
+          try {
+            if (error && error.error && error.error.message) {
+              errorMsg2show = error.error.message;
+            } else if (error && error.message) {
+              errorMsg2show = error.message;
+            } else {
+              errorMsg2show = error;
+            }
+          } catch (ex) { }
+          this.alertService.error(errorMsg2show);
+
+        });
+    //#endregion fetch creator id
+
+  }
 }
 

@@ -41,20 +41,20 @@
                 <div>
                     <label for="loanStartDateTime" i18n>Payment Method</label>
                 </div>
-                <span *ngIf="utilityService.returnLoanRepaymentType('bank',LoanObj)>-1" class="badge  mr-2 badge-success">
+                <span i18n *ngIf="utilityService.returnLoanRepaymentType('bank',LoanObj)>-1" class="badge  mr-2 badge-success">
                     BANK
                 </span>
-                <span *ngIf="utilityService.returnLoanRepaymentType('cash',LoanObj)>-1" class="badge  mr-2 badge-success">
+                <span i18n *ngIf="utilityService.returnLoanRepaymentType('cash',LoanObj)>-1" class="badge  mr-2 badge-success">
                     Cash
                 </span>
-                <span *ngIf="utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1"
+                <span i18n *ngIf="utilityService.returnLoanRepaymentType('revolut',LoanObj)>-1"
                     class="badge  mr-2 badge-success">
                     Revolut
                 </span>
-                <span *ngIf="utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1" class="badge  mr-2 badge-success">
+                <span i18n *ngIf="utilityService.returnLoanRepaymentType('paypal',LoanObj)>-1" class="badge  mr-2 badge-success">
                     Paypal
                 </span>
-                <span *ngIf="utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1" class="badge  badge-success">
+                <span *ngIf="utilityService.returnLoanRepaymentType('skrill',LoanObj)>-1" class="badge  badge-success" i18n>
                     Skrill
                 </span>
             </div>
@@ -80,7 +80,7 @@
         </div>
         <div class="col-xl-12">
             <p class="mb-2" i18n>Description:</p>
-            <div class="text-black-50" i18n>
+            <div class="text-black-50" >
                 {{LoanObj.loanDescription}}
             </div>
         </div>
@@ -90,7 +90,7 @@
   
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-    <button class="btn btn-primary btn-sm float-right" mat-button mat-dialog-close>
+    <button i18n class="btn btn-primary btn-sm float-right" mat-button mat-dialog-close>
         <i class="icon-close"></i> CLOSE
     </button>
 </mat-dialog-actions>

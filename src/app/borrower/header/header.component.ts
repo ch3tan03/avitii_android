@@ -7,12 +7,13 @@ import { SessionsService } from 'src/app/services/sessions.service';
 import * as _ from 'lodash';
 import { UtilityService } from 'src/app/services/utility.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ServiceTypesService } from 'src/app/services/service-types.service';
+/*import { ServiceTypesService } from 'src/app/services/service-types.service';*/
 import { first } from 'rxjs/operators';
 import { ModalApplySession, ModalAppliedSessionDisplay } from '../borrower.component';
 import { SocketioService } from 'src/app/socketio.service';
 import { AddFundsService } from 'src/app/services/add-funds.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { MessagesService } from 'src/app/services/messages.service';
 declare var $: any;
 declare var jQuery: any;
 
@@ -38,12 +39,14 @@ export class HeaderComponent implements AfterViewInit {
     private alertService: AlertService,
     private sessionsService: SessionsService,
     public dialog: MatDialog,
-    private serviceTypesService: ServiceTypesService,
+    /*private serviceTypesService: ServiceTypesService,*/
     public socketService: SocketioService,
     public fundService: AddFundsService,
     public utilityService: UtilityService,
-    public notificationService:NotificationService
+    public notificationService:NotificationService,
+    public messagesService:MessagesService
   ) {
+    this.messagesService.getAllMyContacts();
     this.authenticationService.currentUser.subscribe(x => {
       this.currentUser = x;
       if(!this.currentUser){
@@ -54,7 +57,7 @@ export class HeaderComponent implements AfterViewInit {
       this.sessionsService.getSessionAllWithSessionApply(this.authenticationService.currentUserValue._id)
         .subscribe(
           data => {
-            //console.log('data => ', data)
+            ////console.log('data => ', data)
             if (data && data['success']) {
               //alert(JSON.stringify( data));
               this.allSessionsData = data['data'];
@@ -139,11 +142,12 @@ export class HeaderComponent implements AfterViewInit {
     },
       error => {
       });
+      /*
     this.serviceTypesService.getServiceTypesChildAll()
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.ParentServicesTypes = data["data"];
@@ -171,7 +175,7 @@ export class HeaderComponent implements AfterViewInit {
           this.alertService.error(errorMsg2show);
           this.loading = false;
         });
-
+*/
   }
 
 
@@ -190,7 +194,7 @@ export class HeaderComponent implements AfterViewInit {
   }
 
   applyToSession(sessionObj) {
-    console.log('179', this.authenticationService.currentUserValue);
+    //console.log('179', this.authenticationService.currentUserValue);
     const dialogRef = this.dialog.open(ModalApplySession, {
       backdropClass: 'cdk-overlay-transparent-backdrop',
       maxWidth: '100vw',
@@ -227,6 +231,7 @@ export class HeaderComponent implements AfterViewInit {
             this.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
             switch (_currentSessionApply.status) {
               case SessionStatus.Pending:
+                _currentSessionApply.createdBy=this.authenticationService.currentUserValue._id;
                 this.socketService.setSessionApply(true, _currentSessionApply);
                 break;
               default:
@@ -252,7 +257,7 @@ export class HeaderComponent implements AfterViewInit {
               case SessionStatus.Active:
               case SessionStatus.Ongoing:
               case SessionStatus.OngoingInitiated:
-              case SessionStatus.OngoingAccepted:
+              case SessionStatus.AwaitingForApproval:
                 this.alertService.success("Updated. Session is available under My Sessions->Ongoing tab.", true);
                 break;
               default:
@@ -261,7 +266,7 @@ export class HeaderComponent implements AfterViewInit {
           }
         }
       }
-      console.log(`211 :: headerc :: Dialog result: ${JSON.stringify(result)}`);
+      //console.log(`211 :: headerc :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
 
@@ -278,7 +283,7 @@ export class HeaderComponent implements AfterViewInit {
     }
 
 
-    console.log('214', this.authenticationService.currentUserValue);
+    //console.log('214', this.authenticationService.currentUserValue);
     const dialogRef = this.dialog.open(ModalAppliedSessionDisplay, {
       backdropClass: 'cdk-overlay-transparent-backdrop',
       hasBackdrop: true,
@@ -293,13 +298,17 @@ export class HeaderComponent implements AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`238 :: hc :: Dialog result: ${JSON.stringify(result)}`);
+      //console.log(`238 :: hc :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
 
 
   logout() {
     this.router.navigate(['/logout']);
+  }
+
+  showAlert() {
+    alert("Sorry, you can not create a loan request untill 30th October.")
   }
 
   ngAfterViewInit(): void {

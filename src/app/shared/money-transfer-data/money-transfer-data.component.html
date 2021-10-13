@@ -1,0 +1,404 @@
+<h2 mat-dialog-title class="text-primary">
+    <div class="row">
+        <div class="col-xl-11 col-10">
+            <h4 class="mb-3 text-black-50" i18n>
+            </h4>
+        </div>
+        <div class="col-xl-1 col-2">
+            <i class="icon-close float-right" mat-button (click)="closeDialog(null, null)"></i>
+        </div>
+    </div>
+</h2>
+<mat-dialog-content class="mat-typography">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-xl-6 col-12">
+                <h3 class="text-primary" i18n>New Proposed Amount: <span class="badge badge-primary">
+                        {{LoanApplyObj.proposedLoanAmount || 'NA'}}</span>
+                </h3>
+            </div>
+            <div class="col-xl-6 col-12">
+                <h5 *ngIf="LoanApplyObj.loanInsuranceRequired" class="card-title float-right" i18n>Applied for Insurance
+                    with Amount:
+                    <span class="badge badge-primary">
+                        {{LoanApplyObj.loanInsuranceAmount || 'NA'}}</span>
+                </h5>
+            </div>
+        </div>
+        <div class="row" *ngIf="LoanApplyObj.lenderId==authenticationService.currentUserValue._id">
+            <div class="col-xl-12 col-12">
+                <div class="row"
+                    *ngIf="!LoanApplyObj.isLoanAmountPaidByLender && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted">
+                    <div class="col-xl-12 col-12">
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <div class="form-group">
+                                    <div class="form-check-inline">
+                                        <div class="custom-control custom-checkbox">
+                                            <input [(ngModel)]="LoanApplyObjCurrent.isLoanAmountPaidByLender"
+                                                name="isLoanAmountPaidByLender" id="isLoanAmountPaidByLender"
+                                                type="checkbox" class="custom-control-input" [value]="true"
+                                                [checked]="LoanApplyObjCurrent.isLoanAmountPaidByLender">
+                                            <label for="isLoanAmountPaidByLender" class="custom-control-label" i18n>
+                                                Is Loan Amount Transfered? </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group">
+                                            <label for="transactionIdForLoanAmountPaidByLender"
+                                                i18n>TransactionId/Payment Ref.
+                                                ID</label>
+                                            <input type="text" class="form-control"
+                                                placeholder="TransactionId/Payment Ref. ID"
+                                                [(ngModel)]="LoanApplyObjCurrent.transactionIdForLoanAmountPaidByLender">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group">
+
+                                            <label for="transactionOnForLoanAmountPaidByLenderCustomised" i18n>
+                                                Transaction Date
+                                            </label>
+                                            <input type="date"
+                                                [(ngModel)]="transactionOnForLoanAmountPaidByLenderCustomised"
+                                                class="form-control" />
+
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-4 col-12">
+                                        <div class="form-group">
+                                            <label for="usr" i18n>Transaction Description</label>
+                                            <input type="text" class="form-control" placeholder="Description"
+                                                [(ngModel)]="LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLender">
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <hr>
+                                    <div class="col-xl-12 col-12">
+                                        <button class="btn btn-primary btn-sm float-right"
+                                            (click)="paymentDoneByLender(LoanApplyObj)" i18n>
+                                            Update
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-xl-12 col-12" *ngIf="LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower">
+                <div class="card bg-success text-white shadow mb-4">
+                    <div class="card-body dashobard-card p-2">
+                        <div class="text-xs font-weight-bold  mb-2">
+                            Borrower's Payment confirmation</div>
+                        <hr>
+                        <div class="row">
+
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group">
+                                    <label for="transactionOnForLoanAmountPaidByLenderConfirmByBorrower"
+                                        i18n>Transaction
+                                        Date</label>
+                                    <h4 i18n>
+                                        {{LoanApplyObj.transactionOnForLoanAmountPaidByLenderConfirmByBorrower |
+                                        date:'dd-MMM-YYYY'}}
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group">
+                                    <label for="createdOnForLoanAmountPaidByLender" i18n>Updated On</label>
+                                    <h4 >
+                                        {{LoanApplyObj.createdOnForLoanAmountPaidByLenderConfirmByBorrower |
+                                        date:'dd-MMM-YYYY'}}
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <p class="mb-2 text-white"
+                                    for="transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower" i18n>
+                                    Description:</p>
+                                <div class="text-white" >
+                                    {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="row" *ngIf="LoanApplyObj.lenderId!=authenticationService.currentUserValue._id">
+            <div class="col-xl-12 col-12" *ngIf="LoanApplyObj.isLoanAmountPaidByLender">
+                <div class="card bg-gradient-primary mb-3 text-white shadow">
+                    <div class="card-body dashobard-card p-2">
+                        <div class="text-xs font-weight-bold mb-3">
+                            Lender Payment Confirmation</div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group">
+                                    <label for="transactionIdForLoanAmountPaidByLender" i18n>Transaction ID</label>
+                                    <h4 >
+                                        {{LoanApplyObj.transactionIdForLoanAmountPaidByLender}}
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group">
+                                    <label for="transactionOnForLoanAmountPaidByLender" i18n>Transaction
+                                        Date</label>
+                                    <h4 >
+                                        {{LoanApplyObj.transactionOnForLoanAmountPaidByLender | date:'dd-MMM-YYYY'}}
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group">
+                                    <label for="createdOnForLoanAmountPaidByLender" i18n>Updated On</label>
+                                    <h4 i18n>
+                                        {{LoanApplyObj.createdOnForLoanAmountPaidByLender | date:'dd-MMM-YYYY'}}
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-12">
+                                <p class="mb-2 text-white" for="transactionDescriptionForLoanAmountPaidByLender" i18n>
+                                    Description:</p>
+                                <div class="text-white" >
+                                    {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLender}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-xl-12"
+                *ngIf="!LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower && LoanApplyObj.isLoanAmountPaidByLender && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted">
+                <div class="card shadow mb-4">
+                    <div class="card-header">
+
+                        <div class="form-group mb-0">
+                            <div class="form-check-inline">
+                                <div class="custom-control custom-checkbox">
+                                    <input [(ngModel)]="LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower"
+                                        name="isLoanAmountPaidByLenderConfirmByBorrower"
+                                        id="isLoanAmountPaidByLenderConfirmByBorrower" type="checkbox"
+                                        class="custom-control-input" [value]="true"
+                                        [checked]="LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower">
+                                    <label for="isLoanAmountPaidByLenderConfirmByBorrower" class="custom-control-label"
+                                        i18n>
+                                        Is Loan Amount Received </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-xl-4 col-12">
+                                <div class="form-group">
+
+                                    <label for="transactionOnForLoanAmountPaidByLenderConfirmByBorrowerCustomised" i18n>
+                                        Payment Credit Date
+                                    </label>
+                                    <input type="date"
+                                        [(ngModel)]="transactionOnForLoanAmountPaidByLenderConfirmByBorrowerCustomised"
+                                        class="form-control" />
+
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-12">
+                                <div class="form-group">
+                                    <label for="usr" i18n>Transaction Description</label>
+                                    <input type="transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower"
+                                        class="form-control" placeholder="Description"
+                                        [(ngModel)]="LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower">
+                                </div>
+                            </div>
+
+                            <div class="col-xl-2 col-12">
+                                <button class="btn btn-primary btn-sm float-right mt-4"
+                                    (click)="paymentDoneByLenderConfirmByBorrower(LoanApplyObj)" i18n>
+                                    Update
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row"
+            *ngIf="!LoanApplyObj.isLoanAmountPaidByBorrower && LoanApplyObjCurrent4Installment.installmentKey && !LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender && ((returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted  && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id) || (returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Unpaid && authenticationService.currentUserValue.role == Role.Admin))">
+            <div class="col-xl-4 col-12">
+                <div class="form-group border-right">
+                    <label for="installmentKey" i18n>Installment For</label>
+                    <h4 class="text-primary" >
+                        {{LoanApplyObjCurrent4Installment.installmentKey}}
+                    </h4>
+                </div>
+            </div>
+            <div class="col-xl-4 col-12">
+                <div class="form-group">
+                    <label for="transactionIdForLoanAmountPaidToLender" i18n>TransactionId/Payment
+                        Ref. ID</label>
+                    <input type="text" class="form-control" placeholder="TransactionId/Payment Ref. ID"
+                        [(ngModel)]="LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender">
+                </div>
+            </div>
+            <div class="col-xl-4 col-12">
+                <div class="form-group">
+
+                    <label for="transactionOnForLoanAmountPaidToLenderCustomised" i18n>
+                        Transaction Date
+                    </label>
+                    <input type="date" [(ngModel)]="transactionOnForLoanAmountPaidToLenderCustomised"
+                        class="form-control" />
+
+                </div>
+            </div>
+            <div class="col-xl-12 col-12">
+                <div class="form-group">
+                    <label for="transactionDescriptionForLoanAmountPaidToLender" i18n>Note.</label>
+                    <input type="transactionDescriptionForLoanAmountPaidToLender" class="form-control"
+                        placeholder="Description"
+                        [(ngModel)]="LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLender">
+                </div>
+            </div>
+            <br>
+            <hr>
+            <div class="col-xl-12 col-12">
+                <button class="btn btn-primary btn-sm float-right" (click)="paymentDoneToLender(LoanApplyObj)" i18n>
+                    Update
+                </button>
+            </div>
+        </div>
+        <div class="row"
+            *ngIf="LoanApplyObjCurrent4Installment.installmentKey && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted  && LoanApplyObj.lenderId==authenticationService.currentUserValue._id">
+
+            <div class="col-xl-4 col-12">
+                <div class="form-group border-right">
+                    <label for="installmentKey" i18n>Installment For</label>
+                    <h4 class="text-primary" >
+                        {{LoanApplyObjCurrent4Installment.installmentKey}}
+                        <label *ngIf="LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin"
+                            class="badge badge-warning text-capitalize text-cap float-right" i18n>
+                            Paid By Admin
+                        </label>
+                    </h4>
+                </div>
+            </div>
+            <div class="col-xl-4 col-12">
+                <div class="form-group border-right">
+                    <label for="transactionIdForLoanAmountPaidToLender" i18n>TransactionId/Payment Ref.
+                        ID</label>
+                    <h4 class="text-primary" >
+                        {{LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender}}
+                    </h4>
+                </div>
+            </div>
+            <div class="col-xl-4 col-12">
+                <div class="form-group border-right">
+                    <label for="transactionOnForLoanAmountPaidToLender" i18n>Transaction
+                        Date</label>
+                    <h4 class="text-primary" >
+                        {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender |
+                        date:'dd-MMM-YYYY'}}
+                    </h4>
+                </div>
+            </div>
+            <div class="col-xl-4 col-12">
+                <div class="form-group border-right">
+                    <label for="createdOnForLoanAmountPaidToLender" i18n>Updated On</label>
+                    <h4 class="text-primary" >
+                        {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender |
+                        date:'dd-MMM-YYYY'}}
+                    </h4>
+                </div>
+            </div>
+            <div class="col-xl-4 col-12">
+                <p class="mb-2" for="transactionDescriptionForLoanAmountPaidToLender" i18n>
+                    Note:</p>
+                <div class="text-black-50" >
+                    {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLender}}
+                </div>
+            </div>
+            <div class="col-xl-12 col-12">
+                <div class="row"
+                    *ngIf="LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender">
+                    <div class="col-xl-4 col-12">
+                        <div class="form-group border-right">
+                            <label for="transactionOnForLoanAmountPaidToLenderConfirmByLender" i18n>Confirmation:
+                                Transaction Date</label>
+                            <h4 class="text-primary" >
+                                {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender
+                                |
+                                date:'dd-MMM-YYYY'}}
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-12">
+                        <div class="form-group border-right">
+                            <label for="createdOnForLoanAmountPaidToLenderConfirmByLender" i18n>Confirmation:
+                                Updated On</label>
+                            <h4 class="text-primary" >
+                                {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender
+                                |
+                                date:'dd-MMM-YYYY'}}
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-12">
+                        <p class="mb-2" for="transactionDescriptionForLoanAmountPaidToLenderConfirmByLender" i18n>
+                            Confirmation: Note:</p>
+                        <div class="text-black-50" >
+                            {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLenderConfirmByLender}}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-xl-12 col-12">
+                <div class="row"
+                    *ngIf="!LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender">
+                    <div class="col-xl-6 col-12">
+                        <div class="form-group">
+
+                            <label for="transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised" i18n>
+                                Transaction Date
+                            </label>
+                            <input type="date"
+                                [(ngModel)]="transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised"
+                                class="form-control" />
+
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-12">
+                        <div class="form-group">
+                            <label for="transactionDescriptionForLoanAmountPaidToLenderConfirmByLender"
+                                i18n>Note.</label>
+                            <input text="text" name="transactionDescriptionForLoanAmountPaidToLenderConfirmByLender"
+                                class="form-control" placeholder="Description"
+                                [(ngModel)]="LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLenderConfirmByLender">
+                        </div>
+                    </div>
+                    <br>
+                    <hr>
+                    <div class="col-xl-12 col-12">
+                        <button class="btn btn-primary btn-sm float-right"
+                            (click)="paymentDoneToLenderConfirmByLender(LoanApplyObj)" i18n>
+                            Update
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</mat-dialog-content>

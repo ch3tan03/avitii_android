@@ -9,6 +9,7 @@ import { ModalAppliedSessionDisplay, ModalApplySession } from '../borrower.compo
 import * as _ from 'lodash';
 import { Role, SessionStatus } from 'src/app/models';
 import { Router } from '@angular/router';
+import { PublicProfileComponent } from 'src/app/shared/public-profile/public-profile.component';
 
 declare var $: any;
 declare var jQuery: any;
@@ -29,6 +30,8 @@ export class MySessionsComponent implements OnInit {
   isLast: any;
   SessionStatus = SessionStatus;
   sessionApply: any;
+  selectedTab: string = 'active';
+  public _ = _;
   constructor(
     private socketService: SocketioService,
     private sessionsService: SessionsService,
@@ -39,14 +42,65 @@ export class MySessionsComponent implements OnInit {
     public userService: UserService,
     public router: Router,
     private _cdr: ChangeDetectorRef
-  ) { }
+  ) {
+    let paramobj = history.state;
+    if (paramobj) {
+      this.selectedTab = paramobj['selectedTab'];
+      delete history.state['selectedTab'];
+    }
+    if (!this.selectedTab) {
+      this.selectedTab = 'active';
+    }
+    this.setFilteresOfMySessionDependsOnTab(this.selectedTab);
+    this.getUserLoanTypeWiseCountDetailsByUserId();
+  }
+
+  setFilteresOfMySessionDependsOnTab(selectedTab) {
+    switch (selectedTab) {
+      case 'received':
+        this.SessionStatusTypeFilter = [SessionStatus.Pending, SessionStatus.AwaitingForApproval];
+        this.checkCreatedByUserId = this.authenticationService.currentUserValue._id;
+        this.checkCreatedByT = true;
+        break;
+      case 'sent':
+        this.SessionStatusTypeFilter = [SessionStatus.AwaitingForApproval];
+        this.checkCreatedByUserId = this.authenticationService.currentUserValue._id;
+        this.checkCreatedByT = false;
+        break;
+      case 'canceled':
+        this.SessionStatusTypeFilter = [SessionStatus.Canceled, SessionStatus.Rejected, SessionStatus.RejectedOngoing, SessionStatus.Suspended, SessionStatus.RejectedOngoingWithRefund];
+        this.checkCreatedByUserId = null;
+        this.checkCreatedByT = false;
+        break;
+      case 'active':
+        this.SessionStatusTypeFilter = [SessionStatus.Accepted];
+        this.checkCreatedByUserId = null;
+        this.checkCreatedByT = false;
+        break;
+      case 'paid':
+        this.SessionStatusTypeFilter = [SessionStatus.Completed];
+        this.checkCreatedByUserId = null;
+        this.checkCreatedByT = false;
+        break;
+      case 'unpaid':
+        this.SessionStatusTypeFilter = [SessionStatus.RejectedOngoing, SessionStatus.Suspended, SessionStatus.Unpaid];
+        this.checkCreatedByUserId = null;
+        this.checkCreatedByT = false;
+        break;
+      case 'inkasso':
+        this.SessionStatusTypeFilter = [SessionStatus.Rejected, SessionStatus.RejectedOngoingWithRefund, SessionStatus.Inkasso];
+        this.checkCreatedByUserId = null;
+        this.checkCreatedByT = false;
+        break;
+    }
+  }
 
   ngOnInit() {
     (function ($) {
       try {
         $('.tooltip-info').tooltip();
       } catch (ex) {
-        console.log('48', ex.message);
+        //console.log('48', ex.message);
       }
     })(jQuery);
 
@@ -54,11 +108,16 @@ export class MySessionsComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
-            this.allSessionsData = data['data'];
-            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId')));
+            let _keyPairedMapObj = this.utilityService._.mapKeys(this.allSessionsData, "_id");
+            for (let _items in data['data']) {
+              let _currentObj = data['data'][_items];
+              _keyPairedMapObj[_currentObj._id] = _currentObj
+            }
+            this.allSessionsData = this.utilityService._.values(_keyPairedMapObj);
+            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')));
             //this.alertService.success(data['message'], true);
             this.loading = false;
             //this.element_btn_click_addSession_skills_verification.click();
@@ -93,6 +152,7 @@ export class MySessionsComponent implements OnInit {
               _keyPairedMapObj[_currentObj._id] = _currentObj
             }
             this.allSessionsData = this.utilityService._.values(_keyPairedMapObj);
+            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')));
             this.loading = false;
           } else {
             this.loading = false;
@@ -101,6 +161,27 @@ export class MySessionsComponent implements OnInit {
         error => {
           this.loading = false;
         });
+
+    this.socketService.getCurrentSessionAll().subscribe(_allSessionsData => {
+      if (_allSessionsData) {
+        let data = { 'data': _allSessionsData };
+        let _keyPairedMapObj = this.utilityService._.mapKeys(this.allSessionsData, "_id");
+        for (let _items in data['data']) {
+          let _currentObj = data['data'][_items];
+          _keyPairedMapObj[_currentObj._id] = _currentObj
+        }
+        this.allSessionsData = this.utilityService._.values(_keyPairedMapObj);
+
+        this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')));
+
+      } else {
+        //this.allSessionsData = [];
+      }
+    });
+    let _obj2Save = {
+      createdBy: this.authenticationService.currentUserValue._id
+    };
+    this.socketService.getSessionAllByQuery(false, _obj2Save, null);
   }
 
   showAppliedToSession(sessionObj) {
@@ -115,7 +196,7 @@ export class MySessionsComponent implements OnInit {
         break;
     }
 
-    console.log('214', this.authenticationService.currentUserValue);
+    //console.log('214', this.authenticationService.currentUserValue);
     const dialogRef = this.dialog.open(ModalAppliedSessionDisplay, {
       backdropClass: 'custom-dialog-backdrop-class',
       panelClass: 'my_session_details_modal',
@@ -132,7 +213,7 @@ export class MySessionsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         if (result.data) {
-          console.log(`86 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+          //console.log(`86 :: msc :: Dialog result: ${JSON.stringify(result)}`);
           if (result.data.status && result.data.sessionApply) {
             let _loanApplyId = result.data.sessionApply._id;
             let _status = result.data.status;
@@ -144,15 +225,19 @@ export class MySessionsComponent implements OnInit {
                 //this.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
                 this.proccedAppliedToSession(sessionObj, _loanApplyId);
                 break;
+              case SessionStatus.Rejected:
+                this.socketService.setSessionApplyUpdateStatus(true, result.data.sessionApply.loanId, _loanApplyId, _status, this.authenticationService.currentUserValue._id, null);
+                break;
             }
           }
           if (result.data.updatedSessionObj) {
-            
+
             let _keyPairedMapObj = this.utilityService._.mapKeys(this.allSessionsData, "_id");
 
             _keyPairedMapObj[result.data.updatedSessionObj._id] = result.data.updatedSessionObj;
 
             this.allSessionsData = this.utilityService._.values(_keyPairedMapObj);
+            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')));
 
             this._cdr.detectChanges();
           }
@@ -206,7 +291,7 @@ export class MySessionsComponent implements OnInit {
   }
 
   sessionApplyOngoingCheck(sessionObj, sessionApply) {
-    console.log('179', this.authenticationService.currentUserValue);
+    //console.log('179', this.authenticationService.currentUserValue);
     const dialogRef = this.dialog.open(ModalApplySession, {
       maxWidth: '100vw',
       maxHeight: '100vh',
@@ -228,11 +313,17 @@ export class MySessionsComponent implements OnInit {
             if (!_currentSessionApply._id) {
               _currentSessionApply._id = _currentSessionApply.loanId + '__' + _currentSessionApply.borrowerId;
             }
+            let _loanId = _currentSessionApply.loanId;
+            let _sessionPrice = _currentSessionApply.loanAmount;
+            let _loanApplyId = _currentSessionApply._id;
+            let _borrowerId = _currentSessionApply.borrowerId;
+            let _transactionId = result.data.transactionId;
+            let _status = result.data.status;
             _currentSessionApply.status = result.data.status || SessionStatus.Pending;
             this.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
             switch (_currentSessionApply.status) {
               case SessionStatus.Pending:
-                _currentSessionApply.createdBy=this.authenticationService.currentUserValue._id;
+                _currentSessionApply.createdBy = this.authenticationService.currentUserValue._id;
                 this.socketService.setSessionApply(true, _currentSessionApply);
                 break;
               default:
@@ -247,6 +338,8 @@ export class MySessionsComponent implements OnInit {
                 this.alertService.success("Added. Session is available under My Sessions->Pending tab.", true);
                 break;
               case SessionStatus.Rejected:
+                this.socketService.setSessionApplyUpdateStatus(true, _loanId, _loanApplyId, _status, this.authenticationService.currentUserValue._id, _transactionId);
+                break;
               case SessionStatus.RejectedOngoing:
               case SessionStatus.RejectedOngoingWithRefund:
               case SessionStatus.Suspended:
@@ -258,7 +351,7 @@ export class MySessionsComponent implements OnInit {
               case SessionStatus.Active:
               case SessionStatus.Ongoing:
               case SessionStatus.OngoingInitiated:
-              case SessionStatus.OngoingAccepted:
+              case SessionStatus.AwaitingForApproval:
                 this.alertService.success("Updated. Session is available under My Sessions->Ongoing tab.", true);
                 break;
               default:
@@ -267,8 +360,124 @@ export class MySessionsComponent implements OnInit {
           }
         }
       }
-      console.log(`163 :: myc :: Dialog result: ${JSON.stringify(result)}`);
+      //console.log(`163 :: myc :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
 
+  getUserLoanTypeWiseCountDetailsByUserId() {
+    this.userService.getUserLoanTypeWiseCountDetailsByUserId(this.authenticationService.currentUserValue._id, this.authenticationService.currentUserValue.role)
+      .pipe(first())
+      .subscribe(
+        data => {
+          ////console.log('data => ', data)
+          if (data && data['success']) {
+            this.authenticationService.currentUserLoanTypeWiseCountDetails = data['data'];
+          } else {
+          }
+        },
+        error => {
+          let errorMsg2show = "";
+          try {
+            if (error && error.error && error.error.message) {
+              errorMsg2show = error.error.message;
+            } else if (error && error.message) {
+              errorMsg2show = error.message;
+            } else {
+              errorMsg2show = error;
+            }
+          } catch (ex) { }
+
+        });
+  }
+  usersProfile(userObj) {
+    //#region fetch creator id
+    this.userService.getUserById(userObj._id)
+      .pipe(first())
+      .subscribe(
+        data => {
+          if (data && data['success']) {
+            //console.log('84', this.authenticationService.currentUserValue);
+            const dialogRef = this.dialog.open(PublicProfileComponent, {
+
+              maxWidth: '100vw',
+              maxHeight: '100vh',
+              height: '100%',
+              width: '100%',
+              hasBackdrop: true,
+              data: {
+                userObj: _.cloneDeep(data['data']),
+                adminViewT: false
+              }
+            });
+
+            dialogRef.afterClosed().subscribe(result => {
+              //console.log(`99 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+            });
+
+          } else {
+
+          }
+        },
+        error => {
+          let errorMsg2show = "";
+          try {
+            if (error && error.error && error.error.message) {
+              errorMsg2show = error.error.message;
+            } else if (error && error.message) {
+              errorMsg2show = error.message;
+            } else {
+              errorMsg2show = error;
+            }
+          } catch (ex) { }
+          this.alertService.error(errorMsg2show);
+
+        });
+    //#endregion fetch creator id
+
+  }
+  deleteSessionById(sessionId) {
+    this.sessionsService.deleteSessionById(sessionId, this.authenticationService.currentUserValue._id)
+      .pipe(first())
+      .subscribe(
+        _allLoanMarketData => {
+          if (_allLoanMarketData && _allLoanMarketData['success']) {
+            //alert(JSON.stringify( data));
+            if (_allLoanMarketData) {
+              if (_allLoanMarketData["success"]) {
+                let temp_allLoanMarketData = _.mapKeys(this.allSessionsData, '_id')
+                if (_allLoanMarketData["data"].isDeleted) {
+                  delete temp_allLoanMarketData[_allLoanMarketData["data"]._id];
+                  this.alertService.success('Deleted successfully');
+                } else {
+                  temp_allLoanMarketData[_allLoanMarketData["data"]._id] = _allLoanMarketData["data"];
+                  this.alertService.success('Updated successfully');
+                }
+                this.allSessionsData = _.values(temp_allLoanMarketData);
+                this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')));
+
+                this._cdr.detectChanges();
+              }
+            }
+            this.loading = false;
+          } else {
+            //alert(JSON.stringify(data['message']));
+            this.alertService.error(_allLoanMarketData['message']);
+            this.loading = false;
+          }
+        },
+        error => {
+          let errorMsg2show = "";
+          try {
+            if (error && error.error && error.error.message) {
+              errorMsg2show = error.error.message;
+            } else if (error && error.message) {
+              errorMsg2show = error.message;
+            } else {
+              errorMsg2show = error;
+            }
+          } catch (ex) { }
+          this.alertService.error(errorMsg2show);
+          this.loading = false;
+        });
+  }
 }

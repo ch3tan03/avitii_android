@@ -10,16 +10,16 @@ export class ContactService {
   ContactRole = ContactRole;
   constructor() { }
 
-  returnContactJsonData(_createdByUserId, _groupFirstName, _loanId, _loanApplyId, _adminUsersArray, _memberUsersArray, _guestUsersArray, ) {
+  returnContactJsonData(_createdByUserId: string, _groupFirstName: string, _loanId: string, _loanApplyId: string, _adminUsersArray: string[], _memberUsersArray: string[], _guestUsersArray: string[], openRoleGroup: string[], isOneWayGroup: boolean) {
     let _contactObj = {
       _id: "",
-
       firstName: "",
-
       usersColl: {},
       isGroup: false,
       status: this.Status.Active,
-      createdBy: ""
+      createdBy: "",
+      openRoleGroup: [],
+      isOneWayGroup: false,
     };
 
     if (_groupFirstName) {
@@ -44,6 +44,9 @@ export class ContactService {
       _contactObj._id = this.returnContactIdForSession(_loanId, _loanApplyId);
       _contactObj.isGroup = true;
     }
+
+    _contactObj.openRoleGroup = openRoleGroup || [];
+    _contactObj.isOneWayGroup = (!!isOneWayGroup);
 
     return _contactObj;
   }

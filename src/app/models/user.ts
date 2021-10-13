@@ -76,6 +76,8 @@ export class User {
     accountOtherDetails4: string;
 
     transactionIdCollection: object;
+    bankingOldDataCollection: object;
+    documentsOldDataCollection: object;
 
     createdOn: Number;
     updatedOn: Number;
@@ -85,6 +87,7 @@ export class User {
     selfProfileUrl: string;
     online: Boolean;
     socketId: string;
+    lastLoginTime: Number;
 
     isRegisteredAllowed2EditProfile: Boolean;
     isUsersBankDetailsSubmitted: Boolean;

@@ -41,7 +41,7 @@ export class CalendarComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.allSessionsData = data['data'];
@@ -123,7 +123,7 @@ export class CalendarComponent implements OnInit {
         break;
       case Role.Lender:
         _proccessedSessionObj = this.utilityService._.cloneDeep(_sessionObj);
-        _proccessedSessionObj.sessionAppliedByBorrowers = _sessionObj.sessionAppliedByLenders;
+        _proccessedSessionObj.sessionAppliedByBorrowers = _sessionObj.sessionAppliedByBorrowers;//_sessionAppliedByLenders
         break;
       default:
         _proccessedSessionObj = this.utilityService._.cloneDeep(_sessionObj);
@@ -196,7 +196,7 @@ export class CalendarComponent implements OnInit {
 
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`25 :: co :: Dialog result: ${JSON.stringify(result)}`);
+      //console.log(`25 :: co :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
 

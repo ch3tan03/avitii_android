@@ -19,16 +19,22 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { DataTablesModule } from "angular-datatables";
 import { UserLevelsComponent } from './user-levels/user-levels.component';
 import { BlogsComponent } from './blogs/blogs.component';
+import { LoanPaymentComponent } from './loan-payment/loan-payment.component';
+import { CustomerReviewComponent } from './customer-review/customer-review.component';
+import { PartnersComponent } from './partners/partners.component';
+import { HttpClientModule} from '@angular/common/http';
+import { AngularEditorModule } from '@kolkov/angular-editor'
 
 @NgModule({
-  declarations: [AdminComponent, HomeComponent, HeaderComponent, FooterComponent, ServicesComponent, ServiceTypesAddComponent, UserManagementComponent, PaymentTransactionsComponent, BorrowerEarningsComponent, AddUserComponent, UserLevelsComponent, BlogsComponent],
+  declarations: [AdminComponent, HomeComponent, HeaderComponent, FooterComponent, ServicesComponent, ServiceTypesAddComponent, UserManagementComponent, PaymentTransactionsComponent, BorrowerEarningsComponent, AddUserComponent, UserLevelsComponent, BlogsComponent, LoanPaymentComponent, CustomerReviewComponent, PartnersComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,
     MatDialogModule,
     ScrollingModule,
     SharedModule,
-    DataTablesModule
+    DataTablesModule,
+    HttpClientModule, AngularEditorModule
   ]
 })
 export class AdminModule { }

@@ -48,7 +48,7 @@ export class AppRouterService {
         break;
     }
   }
-  
+
   appRouterRoleWise(_user, _path) {
     _path = (_path ? _path : '');
     let _currentUserRole = '';
@@ -74,7 +74,23 @@ export class AppRouterService {
         break;
     }
   }
-  appRouteToPath(_path) {
-    this.router.navigate([_path]);
+  appRouteToPath(_path: string, _stateObj: any = null, delayedT: boolean = false) {
+    if (delayedT) { 
+      if (_stateObj) {
+        setTimeout(()=>{
+          this.router.navigate([_path], { state: _stateObj });
+        },500);
+      } else {
+        setTimeout(()=>{
+          this.router.navigate([_path]);
+        },500);
+      }
+    } else {
+      if (_stateObj) {
+        this.router.navigate([_path], { state: _stateObj });
+      } else {
+        this.router.navigate([_path]);
+      }
+    }
   }
 }

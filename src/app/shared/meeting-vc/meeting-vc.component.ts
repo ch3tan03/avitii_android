@@ -76,7 +76,7 @@ export class MeetingVcComponent implements OnInit, OnDestroy {
 					.subscribe(
 						data => {
 							this.loanStartDateTime = this.utilityService._.now();
-							//console.log('data => ', data)
+							////console.log('data => ', data)
 							if (data && data['success']) {
 								//alert(JSON.stringify( data));
 								this.sessionObj = data['data'];
@@ -139,14 +139,14 @@ export class MeetingVcComponent implements OnInit, OnDestroy {
 						// call finished
 						this.appRouterService.appRouter(this.currentUser);
 					}, function (err) {
-						console.log(err);
+						//console.log(err);
 					});
 				}
 				jitsiplugin.onConferenceTerminated(function (data) {
 					this.videoConferenceLeft(data);
 				});
 			}, function (err) {
-				console.log(err);
+				//console.log(err);
 			});
 		} else {
 			//web case for video calling
@@ -296,7 +296,7 @@ export class MeetingVcComponent implements OnInit, OnDestroy {
 		this.socketService.sendEventToUpdateCurrentSessionExecutionDetails(_loanId, _loanApplyId, _userId, _loanStartDateTime, _loanEndDateTime, _duration, _status, _updatedOn, _transactionId, TransactionActionType.session_extended, _transactionDetailsObj).pipe(first())
 			.subscribe(
 				data => {
-					//console.log('data => ', data)
+					////console.log('data => ', data)
 					if (data && data['success']) {
 						//alert(JSON.stringify( data));
 						if (data['data']) {

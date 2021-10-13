@@ -98,7 +98,7 @@
                             <div class="row collapse" id="filter-menus">
                                 <div class="col-xl-6 mt-2">
                                     <select formControlName="services4search" class="custom-select" [ngClass]="{ 'is-invalid': submitted && f.location.errors }">
-                                        <option value="" selected>Service Type</option>
+                                        <option value="" selected i18n>Service Type</option>
                                         <option *ngFor="let item of ParentServicesTypes"
                                             [ngValue]="item._id">
                                             {{item.name}}</option>
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="col-xl-6 mt-2">
                                     <select formControlName="location4search" class="custom-select" [ngClass]="{ 'is-invalid': submitted && f.location.errors }">
-                                        <option value="" selected>Choose Location</option>
+                                        <option value="" selected i18n>Choose Location</option>
                                         <option *ngFor="let location of countrylist" [ngValue]="location">
                                             {{location}}</option>
                                     </select>
@@ -115,7 +115,7 @@
 
                         </div>
                         <div class="col-xl-2">
-                            <button class="btn btn-outline-primary btn-block h-100 mt-md-0 mt-2" (click)="sessionSearchByService()">
+                            <button class="btn btn-outline-primary btn-block h-100 mt-md-0 mt-2" (click)="sessionSearchByService()" i18n>
                                 <i class="icon-search"></i> SEARCH
                             </button>
                         </div>
@@ -127,7 +127,7 @@
         </div>
         <section class="agency blog blog-sec blog-sidebar sider p-0">
 
-            <div class="h6 mb-3">
+            <div class="h6 mb-3" i18n>
 
                 SESSION RESULT
                 <!--
@@ -172,9 +172,9 @@
                     </div>
                     <div class="card-footer bg-white">
                         <span class="badge badge-success font-weight-normal text-capitalize btn float-left" >{{session.sessionType}}</span>
-                        <a *ngIf="!check4applyToSession(session)" class="btn btn-success text-capitalize btn-sm float-right text-white" (click)="applyToSession(session)">Apply</a>
+                        <a *ngIf="!check4applyToSession(session)" class="btn btn-success text-capitalize btn-sm float-right text-white" (click)="applyToSession(session)" i18n>Apply</a>
 
-                        <a *ngIf="check4applyToSession(session)" class="btn btn-primary text-capitalize btn-sm float-right text-white" (click)="showAppliedToSession(session)"> Details</a>
+                        <a *ngIf="check4applyToSession(session)" class="btn btn-primary text-capitalize btn-sm float-right text-white" (click)="showAppliedToSession(session)" i18n> Details</a>
 
                     </div>
                 </div>

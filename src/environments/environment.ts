@@ -1,23 +1,10 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 export const environment = {
-  production: false,
-  apiUrl: 'https://avittii.herokuapp.com',
-  serverUrl: 'https://avittii.herokuapp.com/#',
-  SOCKET_ENDPOINT: 'https://avittii.herokuapp.com',
+  production: true,
+  apiUrl: 'https://avitii-lending.com/endpoint',
+  serverUrl: 'https://avitii-lending.com/endpoint',
+  SOCKET_ENDPOINT: 'https://avitii-lending.com',
   apiTimeout: 60000,
-  STRIP_PAYMENT_Publishable_key: 'pk_test_vfc6rPCbObD6Chgrgc4P8JBF',
-  STRIP_PAYMENT_Secret_key_UAT: 'sk_test_r56cBMsofwawtQiEgqDzmkcM',
-  isPaymentTestMode: true
+  STRIP_PAYMENT_Publishable_key: 'pk_live_51ITXbXEpOok5VoBk8Cs1qYisy80xTcbR2qgZLsy0phv6RpdrZw5TWM1S5TpddNJLs7wb3UDAIhxoSlOy8ajQJOIb00PlBzBvk0',
+  STRIP_PAYMENT_Secret_key_UAT: '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',
+  isPaymentTestMode: false
 };
-//default timeout is 1 min
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/dist/zone-error';  // Included with Angular CLI.

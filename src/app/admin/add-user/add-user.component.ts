@@ -228,15 +228,15 @@ export class AddUserComponent implements OnInit {
     this.isOtpSent = false;
     if (!this.isOtpSent) {
       this.submitted = true;
-      console.log('inside Submit ' + this.registerForm.invalid);
+      //console.log('inside Submit ' + this.registerForm.invalid);
       // stop here if form is invalid
       //(this.registerForm.controls.mobileNo.invalid || this.registerForm.controls.firstName.invalid || this.registerForm.controls.lastName.invalid || this.registerForm.controls.emailAddress.invalid)
       if (this.registerForm.controls.emailAddress.invalid) {
         return;
       }
-      console.log('inside');
+      //console.log('inside');
       this.loading = true;
-      console.log("Reg Data => ", this.registerForm.value);
+      //console.log("Reg Data => ", this.registerForm.value);
       this.registerForm.get('userName').setValue(this.registerForm.get('emailAddress').value);
       let _jsonData2send = this.registerForm.value;
       //delete _jsonData2send['selfProfileUrl'];
@@ -244,7 +244,7 @@ export class AddUserComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            console.log('data => ', data)
+            //console.log('data => ', data)
             if (data && data['success']) {
               //alert(JSON.stringify( data));
               this.alertService.success('Verified!', true);
@@ -290,9 +290,9 @@ export class AddUserComponent implements OnInit {
     if (this.registerForm.controls.mobileNo.invalid || this.registerForm.controls.firstName.invalid || this.registerForm.controls.lastName.invalid || this.registerForm.controls.emailAddress.invalid) {
       return;
     }
-    console.log('inside');
+    //console.log('inside');
     this.loading = true;
-    console.log("Reg Data => ", this.registerForm.value);
+    //console.log("Reg Data => ", this.registerForm.value);
     this.registerForm.get('userName').setValue(this.registerForm.get('emailAddress').value);
     let _jsonData2send = this.registerForm.value;
     //delete _jsonData2send['selfProfileUrl'];
@@ -301,7 +301,7 @@ export class AddUserComponent implements OnInit {
         .pipe(first())
         .subscribe(
           data => {
-            console.log('data => ', data)
+            //console.log('data => ', data)
             if (data && data['success']) {
               //alert(JSON.stringify( data));
               this.loading = false;
@@ -363,13 +363,13 @@ export class AddUserComponent implements OnInit {
   }
 
   onSelectMyProfileMedia(event) {
-    console.log('371 :: Added', event);
+    //console.log('371 :: Added', event);
     this.myProfileFiles.push(...event.addedFiles);
-    console.log('373', this.myProfileFiles);
+    //console.log('373', this.myProfileFiles);
   }
 
   onRemoveMyProfileMedia(event) {
-    console.log('378 :: Removed', event);
+    //console.log('378 :: Removed', event);
     this.myProfileFiles.splice(this.myProfileFiles.indexOf(event), 1);
   }
 
@@ -408,10 +408,10 @@ export class AddUserComponent implements OnInit {
       }).subscribe(events => {
         if (events.type === HttpEventType.UploadProgress) {
           this.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
-          console.log(this.fileUploadProgress);
+          //console.log(this.fileUploadProgress);
         } else if (events.type === HttpEventType.Response) {
           this.fileUploadProgress = '';
-          console.log(events.body);
+          //console.log(events.body);
           //alert('SUCCESS !!');
           this.alertService.success('Uploaded Successfully !!', true);
           let _uploadedUrl = events.body["data"].path;
@@ -508,10 +508,10 @@ export class AddUserComponent implements OnInit {
     }).subscribe(events => {
       if (events.type === HttpEventType.UploadProgress) {
         this.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
-        console.log(this.fileUploadProgress);
+        //console.log(this.fileUploadProgress);
       } else if (events.type === HttpEventType.Response) {
         this.fileUploadProgress = '';
-        console.log(events.body);
+        //console.log(events.body);
         //alert('SUCCESS !!');
         this.alertService.success('Uploaded Successfully !!', true);
         let _uploadedUrl = events.body["data"].path;

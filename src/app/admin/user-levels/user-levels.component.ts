@@ -12,7 +12,7 @@ import { UtilityService } from 'src/app/services/utility.service';
 import { environment } from 'src/environments/environment';
 import { MediaPreviewComponent } from 'src/app/shared/media-preview/media-preview.component';
 
-
+declare var $: any;
 const uploadAPI = environment.apiUrl + '/api/post/upload/assetdata';
 const uploadAccessUrl = environment.apiUrl + '/';
 
@@ -32,6 +32,8 @@ export class UserLevelsComponent implements OnInit {
   SessionStatus = SessionStatus;
   userObj: any = null;
   Role = Role;
+  currentObj: any = null;
+  actionButtons0Add1Edit2Delete: number = 0;
   constructor(
     private http: HttpClient,
     private formBuilder: FormBuilder,
@@ -59,7 +61,7 @@ export class UserLevelsComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          //console.log('data => ', data)
+          ////console.log('data => ', data)
           if (data && data['success']) {
             //alert(JSON.stringify( data));
 
@@ -102,11 +104,10 @@ export class UserLevelsComponent implements OnInit {
         data => {
           if (data && data['success']) {
             //alert(JSON.stringify( data));
-
             this.alertService.success('User Level Updated successfully', true);
             this.fetchAllUserLevelsByUserId();
             this.submitted = false;
-            this.initForm();
+            this.closeDialog();
             //this.appRouterService.appRouter(this.userObj);
           } else {
             //alert(JSON.stringify(data['message']));
@@ -127,14 +128,21 @@ export class UserLevelsComponent implements OnInit {
           } catch (ex) { }
           this.alertService.error(errorMsg2show);
           this.loading = false;
+          //this.closeDialog();
         });
   }
 
   showEditingFormUserLevels(_userObj) {
-
+/*
+      name: [{value:_userObj.name || '', disabled: this.actionButtons0Add1Edit2Delete==2}, Validators.required],
+      description: [{value:_userObj.description || '', disabled: this.actionButtons0Add1Edit2Delete==2}],
+      role: [{value:_userObj.role || '', disabled: this.actionButtons0Add1Edit2Delete!=0}, Validators.required],
+      minimumContract: [{value:_userObj.minimumContract || null, disabled: this.actionButtons0Add1Edit2Delete==2}, [Validators.required, Validators.min(1)]],
+      minimumSpent: [{value:_userObj.minimumSpent || null, disabled: this.actionButtons0Add1Edit2Delete==2}, [Validators.required, Validators.min(1)]],
+*/
     this.userUserLevelsForm = this.formBuilder.group({
       _id: [_userObj._id || ''],
-      name: [_userObj.name || '', Validators.required],
+      name: [ _userObj.name || '', Validators.required],
       description: [_userObj.description || ''],
       role: [_userObj.role || '', Validators.required],
       minimumContract: [_userObj.minimumContract || null, [Validators.required, Validators.min(1)]],
@@ -168,6 +176,46 @@ export class UserLevelsComponent implements OnInit {
       updatedBy: [],
     });
 
+  }
+
+  EditShowLevelForm(_userObj) {
+    this.actionButtons0Add1Edit2Delete = 1;
+    this.initForm();
+    this.showEditingFormUserLevels(_userObj);
+    $("#userLevelModal").modal('show');
+  }
+
+  DeleteShowLevelForm(_userObj) {
+    this.currentObj = _userObj;
+    this.actionButtons0Add1Edit2Delete = 2;
+    this.initForm();
+    this.showEditingFormUserLevels(_userObj);
+    $("#userLevelModal").modal('show');
+  }
+
+  DeleteData() {
+    this.actionButtons0Add1Edit2Delete = 2;
+    this.initForm();
+    this.showEditingFormUserLevels(this.currentObj);
+    this.userUserLevelsForm.get("isDeleted").setValue(true);
+    this.userUserLevelsForm.get("deletedBy").setValue(this.authenticationService.currentUserValue._id);
+   
+    let _temp_allPartnersData = _.mapKeys(this.allUserLevelsDataBorrower,'_id');
+    delete _temp_allPartnersData[this.currentObj._id];
+    this.allUserLevelsDataBorrower = _.values(_temp_allPartnersData);
+
+    _temp_allPartnersData = _.mapKeys(this.allUserLevelsDataLenders,'_id');
+    delete _temp_allPartnersData[this.currentObj._id];
+    this.allUserLevelsDataLenders = _.values(_temp_allPartnersData);
+
+    this.onUserLevelsUpdateSubmit();
+  }
+
+  closeDialog() {
+    this.currentObj = null;
+    this.actionButtons0Add1Edit2Delete = 0;
+    this.initForm();
+    $("#userLevelModal").modal('hide');
   }
 
 }
