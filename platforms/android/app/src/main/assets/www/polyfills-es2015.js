@@ -245,8 +245,8 @@ module.exports = Object.create || function create(O, Properties) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\cordova\avitii\src\polyfills.ts */"hN/g");
-module.exports = __webpack_require__(/*! D:\cordova\avitii\node_modules\@angular-devkit\build-angular\src\webpack\jit-polyfills.js */"rZy+");
+__webpack_require__(/*! /Users/cheta/Documents/cordova/avitii_android/src/polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! /Users/cheta/Documents/cordova/avitii_android/node_modules/@angular-devkit/build-angular/src/webpack/jit-polyfills.js */"rZy+");
 
 
 /***/ }),

@@ -9,8 +9,16 @@ jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore avitii-lending-
 
 avitii
 
-zipalign -v 4 app.aab avitii.aab
+zipalign -v 4 app.aab avitii.aab   ---windows
+/Users/cheta/Library/Android/sdk/build-tools/29.0.3/zipalign -f -v 4 app.aab avitii.aab   --- macos
 
 java -jar pepk.jar --keystore=konsult101-release-key.keystore --alias=alias_name --output=konsult101.zip --include-cert --encryptionkey=eb10fe8f7c7c9df715022017b00c6471f8ba8170b13049a11e6c09ffe3056a104a3bbe4ac5a955f4ba4fe93fc8cef27558a3eb9d2a529a2092761fb833b656cd48b9de6a
+
+
+macos
+
+export ANDROID_HOME=~/Library/Android/sdk && export PATH=${PATH}:${ANDROID_HOME}/tools && export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+
+echo 'export JAVA_HOME="/Library/Java/JavaVirtualMachines/jdk1.8.0_301.jdk/Contents/Home"' >> ~/.zshrc && source ~/.zshrc
 
 
