@@ -1,0 +1,16 @@
+
+
+keytool -genkey -v -keystore konsult101-release-key.keystore -alias alias_name -keyalg RSA -keysize 2048 -validity 10000
+
+-------
+set PATH=C:\Program Files\Java\jdk1.8.0_181\bin
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore avitii-lending-release-key.keystore app.aab alias_name
+
+avitii
+
+zipalign -v 4 app.aab avitii.aab
+
+java -jar pepk.jar --keystore=konsult101-release-key.keystore --alias=alias_name --output=konsult101.zip --include-cert --encryptionkey=eb10fe8f7c7c9df715022017b00c6471f8ba8170b13049a11e6c09ffe3056a104a3bbe4ac5a955f4ba4fe93fc8cef27558a3eb9d2a529a2092761fb833b656cd48b9de6a
+
+
