@@ -30,8 +30,6 @@ export class MessagesComponent implements OnInit {
   Role = Role;
   loading = false;
   currentUser: User = <User>{};
-  myContactsList: any[];
-  allUsersList: any[];
   currentContact: any;
   message2send: any;
   allChatListOfRoom: any[];
@@ -75,21 +73,16 @@ export class MessagesComponent implements OnInit {
         this.allChatListOfRoom = [];
       }
       if (_currentChatObj) {
-        this.allChatListOfRoom.push(_currentChatObj);
-        $('#chat_messages').animate({
-          scrollTop: $('#chat_messages').get(0).scrollHeight
-        }, 'fast');
+        if (_currentChatObj.roomId == this.currentContact._id) {
+          let mappedAllChatListOfRoom = _.mapKeys(this.allChatListOfRoom, '_id');
+          mappedAllChatListOfRoom[_currentChatObj._id] = _currentChatObj;
+          this.allChatListOfRoom = _.values(mappedAllChatListOfRoom);
 
-      }
-    });
-
-    this.socketService.listenEventToAddNewContact().subscribe(_currentContactObj => {
-
-      if (!this.myContactsList) {
-        this.myContactsList = [];
-      }
-      if (_currentContactObj) {
-        this.myContactsList.push(_currentContactObj);
+          //this.allChatListOfRoom.push(_currentChatObj);
+          $('#chat_messages').animate({
+            scrollTop: $('#chat_messages').get(0).scrollHeight
+          }, 'fast');
+        }
       }
     });
     //start tts
@@ -120,6 +113,8 @@ export class MessagesComponent implements OnInit {
       })
     }
     //end tts
+    this.messagesService.getAllMyContacts();
+    this.messagesService.getAllUsers();
     let paramobj = history.state;
     if (paramobj) {
       let contactId = paramobj['contactId'];
@@ -183,7 +178,6 @@ export class MessagesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllMyContacts();
     this.translateTextInOtherLanguage('', '', false, null);
   }
 
@@ -244,12 +238,6 @@ export class MessagesComponent implements OnInit {
     //console.log('139', data, result);
     */
   }
-  getAllUsers() {
-    let _data = {};
-    this.socketService.getAllUsers(_data).pipe(first()).subscribe(users => {
-      this.allUsersList = users;
-    });
-  }
 
   sendMessage(_roomId, _message) {
     if (_message == null || typeof _message == 'undefined' || _message == '' || !_message) {
@@ -300,21 +288,15 @@ export class MessagesComponent implements OnInit {
     }
 
     if (_message != null && typeof _message != 'undefined' && _message != '') {
-      this.socketService.sendEventWithMessageChatRoom(_roomId, this.currentUser._id, _message);
+      let createdByUserObj = {
+        firstName: this.currentUser.firstName,
+        lastName: this.currentUser.firstName,
+        emailAddress: this.currentUser.emailAddress,
+        selfProfileUrl: this.currentUser.selfProfileUrl
+      }
+      this.socketService.sendEventWithMessageChatRoom(_roomId, this.currentUser._id, _message, createdByUserObj);
       this.message2send = '';
     }
-  }
-
-  getAllMyContacts() {
-    let _data = {};
-    let _currentUserId = this.currentUser._id;
-    this.socketService.getAllMyContacts(_currentUserId, this.currentUser.role).pipe(first()).subscribe(users => {
-      this.myContactsList = _.filter(_.values(users), function (e) {
-        if (e) {
-          return (e._id != _currentUserId);
-        }
-      });
-    });
   }
 
   setCurrentContact(currentContactItem) {
@@ -365,8 +347,9 @@ export class MessagesComponent implements OnInit {
   }
 
   getAllChatByRoomId(_roomId) {
+    let _allChatListOfRoomFiltered = _.filter(this.allChatListOfRoom, { roomId: _roomId });
     let _data = {};
-    this.socketService.sendEventToGetAllChatOfRoomWithPromise(_roomId).pipe(first()).subscribe(chats => {
+    this.socketService.sendEventToGetAllChatOfRoomWithPromise(_roomId, _.keys(_allChatListOfRoomFiltered).length).pipe(first()).subscribe(chats => {
       this.allChatListOfRoom = chats;
       setTimeout(() => {
         $('#chat_messages').animate({
@@ -730,9 +713,38 @@ export class MessagesComponent implements OnInit {
   messageViewed(chatId, message) {
     this.updateChatReadByUser(chatId);
   }
+  lastScreenReached(message) {
+    if (message == 'last-message-in-app') {
+      console.log('748', _.keys(this.allChatListOfRoom).length);
+      this.getAllChatByRoomId(this.currentContact._id);
+    }
+  }
 
   messageNotViewed(chatId, message) {
     //debugger;
+  }
+
+  returnNameOfMessageSender(_chat: any, returnEmailIdT: boolean = false) {
+    try {
+      if (_chat && _chat.createdByUserObj) {
+        if (_chat.userId != this.currentUser._id) {
+          switch (_chat.createdByUserObj.role) {
+            case Role.Admin:
+              return 'Admin';
+              break;
+            default:
+              if (returnEmailIdT) {
+                return (_chat.createdByUserObj ? ((_chat.createdByUserObj.emailAddress || '')) : '');
+              } else {
+                return (_chat.createdByUserObj ? ((_chat.createdByUserObj.firstName || '') + ' ' + (_chat.createdByUserObj.lastName || '')) : '');
+              }
+              break;
+          }
+        }
+      }
+    } catch (ex) {
+    }
+    return '';
   }
 
 }

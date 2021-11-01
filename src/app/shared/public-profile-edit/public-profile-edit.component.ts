@@ -174,6 +174,7 @@ export class PublicProfileEditComponent implements OnInit {
   }
   //#region open media uploader with crop feature
   modalMediaUploadWithCropFeature(documentId, attributeKey, subFolderName) {
+    let isAdminUserT=true;
     switch (attributeKey) {
       case 'selfProfileUrl':
 
@@ -188,7 +189,7 @@ export class PublicProfileEditComponent implements OnInit {
       case 'myRKIMediaSelfVerify':
         const checkArray: FormArray = this.profileForm.get(attributeKey) as FormArray;
         if (checkArray.length >= 1) {
-          this.alertService.error("Upload MAX limit reached. Please remove existing.");
+          this.alertService.error("Upload MAX limit reached. isting.");
           return;
         }
 
@@ -205,7 +206,8 @@ export class PublicProfileEditComponent implements OnInit {
       data: {
         documentId: documentId,
         attributeKey: attributeKey,
-        subFolderName: subFolderName
+        subFolderName: subFolderName,
+        isAdminUserT:isAdminUserT
       }
     });
 

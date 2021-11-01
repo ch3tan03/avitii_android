@@ -39,6 +39,9 @@ export class RegisterComponent implements OnInit {
         private appRouterService: AppRouterService,
         private route: ActivatedRoute,
     ) {
+        if (this.utilityService._.keys(this.authenticationService.allUserLevelsDataLenders).length <= 0 || this.utilityService._.keys(this.authenticationService.allUserLevelsDataBorrower).length <= 0) {
+            this.authenticationService.fetchAllUserLevelsByUserId();
+        }
         // redirect to home if already logged in
         if (this.authenticationService.currentUserValue) {
             this.appRouterService.appRouter(this.authenticationService.currentUserValue);
@@ -73,7 +76,7 @@ export class RegisterComponent implements OnInit {
             validator: MustMatch('password', 'confirmPassword'),
             // validate: EmailValidator('emailAddress')
         });
-        this._role = Role.Lender;
+        this._role = Role.Borrower;//Role.Lender;
         this.sub = this.route.queryParams.subscribe(params => {
             let _data = params['id'];
             let _id = params["k"];
@@ -113,7 +116,7 @@ export class RegisterComponent implements OnInit {
                     this._role = Role.Admin;
                     break;
                 default:
-                    this._role = Role.Lender;
+                    this._role = Role.Borrower;//Role.Lender;
                     break;
             }
             this.onClickRoleChange(this._role);
@@ -133,21 +136,21 @@ export class RegisterComponent implements OnInit {
         this.isOtpSent = false;
         if (!this.isOtpSent) {
             this.submitted = true;
-            console.log('inside Submit ' + this.registerForm.invalid);
+            //console.log('inside Submit ' + this.registerForm.invalid);
             // stop here if form is invalid
             if (this.registerForm.controls.firstName.invalid || this.registerForm.controls.lastName.invalid || this.registerForm.controls.emailAddress.invalid) {
                 return;
             }
-            console.log('inside');
+            //console.log('inside');
             this.loading = true;
-            console.log("Reg Data => ", this.registerForm.value);
+            //console.log("Reg Data => ", this.registerForm.value);
             this.registerForm.get('emailAddress').setValue(this.utilityService._.trim(this.utilityService._.toLower(this.registerForm.get('emailAddress').value)));
             this.registerForm.get('userName').setValue(this.utilityService._.trim(this.utilityService._.toLower(this.registerForm.get('emailAddress').value)));
             this.userService.sendOtp2user(this.registerForm.value)
                 .pipe(first())
                 .subscribe(
                     data => {
-                        console.log('data => ', data)
+                        //console.log('data => ', data)
                         if (data && data['success']) {
                             //alert(JSON.stringify( data));
                             this.alertService.success(data['message'], true);
@@ -182,21 +185,21 @@ export class RegisterComponent implements OnInit {
     onSubmitRegisterUser() {
         if (this.isOtpSent) {
             this.submitted = true;
-            console.log('inside onSubmitRegisterUser ' + (this.registerForm.invalid && this.registerForm.controls.password.invalid && this.registerForm.controls.confirmPassword.invalid && this.registerForm.controls.acceptTerms.invalid && this.registerForm.controls.otp.invalid));
+            //console.log('inside onSubmitRegisterUser ' + (this.registerForm.invalid && this.registerForm.controls.password.invalid && this.registerForm.controls.confirmPassword.invalid && this.registerForm.controls.acceptTerms.invalid && this.registerForm.controls.otp.invalid));
             // stop here if form is invalid
             if (this.registerForm.controls.password.invalid || this.registerForm.controls.confirmPassword.invalid || this.registerForm.controls.acceptTerms.invalid || this.registerForm.controls.otp.invalid) {
                 return;
             }
-            console.log('inside');
+            //console.log('inside');
             this.loading = true;
-            console.log("Reg Data => ", this.registerForm.value);
+            //console.log("Reg Data => ", this.registerForm.value);
             this.registerForm.get('emailAddress').setValue(this.utilityService._.trim(this.utilityService._.toLower(this.registerForm.get('emailAddress').value)));
             this.registerForm.get('userName').setValue(this.utilityService._.trim(this.utilityService._.toLower(this.registerForm.get('emailAddress').value)));
             this.userService.verifyOtpAndRegister(this.registerForm.value)
                 .pipe(first())
                 .subscribe(
                     data => {
-                        console.log('data => ', data)
+                        //console.log('data => ', data)
                         if (data && data['success']) {
                             //alert(JSON.stringify( data));
                             this.alertService.success('Registration successful', true);
@@ -228,22 +231,33 @@ export class RegisterComponent implements OnInit {
 
     onSubmitVerifyRegisterUser() {
         this.submitted = true;
+        this.loading = true;        
+        if (this.utilityService._.keys(this.authenticationService.allUserLevelsDataLenders).length <= 0 || this.utilityService._.keys(this.authenticationService.allUserLevelsDataBorrower).length <= 0) {
+            this.authenticationService.fetchAllUserLevelsByUserId();
+            //this.alertService.error("Please wait");
+            setTimeout(() => {
+                this.onSubmitVerifyRegisterUser();
+            }, 2000);
+            return;
+        }
         if (this.registerForm.invalid) {
+            this.loading = false;
             this.alertService.error("Please Provide all data");
             return;
         }
-        this.loading = true;
-        console.log("Reg Data => ", this.registerForm.value);
+        //console.log("Reg Data => ", this.registerForm.value);
         this.registerForm.get('emailAddress').setValue(this.utilityService._.trim(this.utilityService._.toLower(this.registerForm.get('emailAddress').value)));
         this.registerForm.get('userName').setValue(this.utilityService._.trim(this.utilityService._.toLower(this.registerForm.get('emailAddress').value)));
         let _userType = null;
 
         switch (this.registerForm.get('role').value) {
             case Role.Lender:
-                this.registerForm.get('userType').setValue(UserType.new_lender);
+                //this.registerForm.get('userType').setValue(UserType.new_lender);
+                this.registerForm.get('userType').setValue(this.authenticationService.allUserLevelsDataLenders[0]._id);
                 break;
             case Role.Borrower:
-                this.registerForm.get('userType').setValue(UserType.new_borrower);
+                //this.registerForm.get('userType').setValue(UserType.new_borrower);
+                this.registerForm.get('userType').setValue(this.authenticationService.allUserLevelsDataBorrower[0]._id);
                 break;
         }
 
@@ -253,7 +267,7 @@ export class RegisterComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
-                    console.log('data => ', data)
+                    //console.log('data => ', data)
                     if (data && data['success']) {
                         //alert(JSON.stringify( data));
                         this.alertService.success('Registration initiated. Sent Verification link on email, please click on link to complete registration proccess.', true);

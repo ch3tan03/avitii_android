@@ -179,6 +179,7 @@ let PublicProfileEditComponent = class PublicProfileEditComponent {
     }
     //#region open media uploader with crop feature
     modalMediaUploadWithCropFeature(documentId, attributeKey, subFolderName) {
+        let isAdminUserT = true;
         switch (attributeKey) {
             case 'selfProfileUrl':
                 break;
@@ -192,7 +193,7 @@ let PublicProfileEditComponent = class PublicProfileEditComponent {
             case 'myRKIMediaSelfVerify':
                 const checkArray = this.profileForm.get(attributeKey);
                 if (checkArray.length >= 1) {
-                    this.alertService.error("Upload MAX limit reached. Please remove existing.");
+                    this.alertService.error("Upload MAX limit reached. isting.");
                     return;
                 }
                 break;
@@ -207,7 +208,8 @@ let PublicProfileEditComponent = class PublicProfileEditComponent {
             data: {
                 documentId: documentId,
                 attributeKey: attributeKey,
-                subFolderName: subFolderName
+                subFolderName: subFolderName,
+                isAdminUserT: isAdminUserT
             }
         });
         dialogRef.afterClosed().subscribe(result => {
@@ -3266,6 +3268,7 @@ let MessagesService = class MessagesService {
         this.currentUser = {};
         this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
         this.socketService.getNewMessageToRoomAll().subscribe(_currentChatObj => {
+            //console.log('21 :: Received a message from websocket service', _currentChatObj);
             if (_currentChatObj) {
                 this.getAllPendingMessageCountOfContact(_currentChatObj.roomId);
             }
@@ -3273,6 +3276,14 @@ let MessagesService = class MessagesService {
         this.socketService.getOldMessageToRoomAll().subscribe(_currentChatObj => {
             if (_currentChatObj) {
                 this.getAllPendingMessageCountOfContact(lodash__WEBPACK_IMPORTED_MODULE_2__["map"](_currentChatObj, 'roomId'));
+            }
+        });
+        this.socketService.listenEventToAddNewContact().subscribe(_currentContactObj => {
+            if (!this.myContactsList) {
+                this.myContactsList = [];
+            }
+            if (_currentContactObj) {
+                this.myContactsList.push(_currentContactObj);
             }
         });
     }
@@ -3318,6 +3329,13 @@ let MessagesService = class MessagesService {
     }
     ngOnInit() {
         this.getAllMyContacts();
+        this.getAllUsers();
+    }
+    getAllUsers() {
+        let _data = {};
+        this.socketService.getAllUsers(_data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])()).subscribe(users => {
+            this.allUsersList = users;
+        });
     }
 };
 MessagesService.ctorParameters = () => [
@@ -3949,7 +3967,7 @@ let IncomeProofComponent = class IncomeProofComponent {
                 //console.log(events.body);
                 //alert('SUCCESS !!');
                 this.fileData4Profile = null;
-                this.alertService.success('Uploaded Successfully !!', true);
+                this.alertService.success('Uploaded successfully', true);
                 let _uploadedUrl = events.body["data"].path;
                 if (lodash__WEBPACK_IMPORTED_MODULE_12__["startsWith"](_uploadedUrl, '/')) {
                     _uploadedUrl = _uploadedUrl.substr(1);
@@ -4065,7 +4083,7 @@ let IncomeProofComponent = class IncomeProofComponent {
             case 'myRKIMedia':
                 const checkArray = this.userIncomeDetailsForm.get(attributeKey);
                 if (checkArray.length >= 1) {
-                    this.alertService.error("Upload MAX limit reached. Please remove existing.");
+                    this.alertService.error("Your can upload document only once.");
                     return;
                 }
                 break;
@@ -4889,7 +4907,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!--\n    --old ref--\n<div class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"wallet\">\n    <label class=\"custom-control-label\" for=\"customRadio\">Use Wallet</label>\n</div>\n<div class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio2\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"online\">\n    <label class=\"custom-control-label\" for=\"customRadio2\">Pay Now</label>\n</div>\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod!=PaymentMethod.Online }\">\n    <ngx-paypal [config]=\"payPalConfig\"></ngx-paypal>\n</div>\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod==PaymentMethod.Online }\">\n    <button class=\"btn btn-success btn-sm text-white\" [disabled]=\"addFundsService.totalFund4currentUser < payment.amount\" (click)=\"paymentThroughWallet()\">\n    Pay Now</button>\n</div>\n-->\n\n<!--<link rel=\"stylesheet\" href=\"style.css\">-->\n<!----stripe card payment with redirection ref---->\n<!--\n<section>\n    <div class=\"product\">\n        <div class=\"description\">\n            <h3>{{header4Payment}}</h3>\n            <h5>{{amount4Payment}}</h5>\n        </div>\n    </div>\n    <button type=\"button\" id=\"checkout-button1\" (click)=\"initForPayment()\">Pay</button>\n</section>\n kr {{amount4Payment}}\n-->\n<div class=\"payment-backdrop text-center\">\n    <br>\n    <button [disabled]=\"alreadyClickedOnPayment\" *ngIf=\"!payment.paymentNotCompletedInTime\" (click)=\"pay(amount4Payment, $event)\" class=\"btn btn-success mt-5 btn-lg\" i18n>Pay Now  kr {{amount4Payment}}</button>\n    <div class=\"mt-4 text-white\" i18n>\n        Please Do not navigate or refresh page, while payment is in progress\n    </div>\n    <div class=\"mt-md-n2 mt-3\" *ngIf=\"payment.hours || payment.minutes || payment.seconds\">\n        <h4 class=\"text-white\"><div class=\"spinner-border text-success\" role=\"status\" i18n>\n            <span class=\"sr-only\" >Loading...</span>\n          </div> Session expires in  <i class=\"icon-timer\"></i>&nbsp;{{payment.hours}}:{{payment.minutes}}:{{payment.seconds}}</h4>\n    </div>\n    <div class=\"mt-3 \" *ngIf=\"!payment.paymentNotCompletedInTime && payment.paymentNotCompletedInTimeErrorMessageShow\">\n        <h4 class=\"text-white\" i18n>Please complete payment within time limit</h4>\n    </div>\n    <div class=\" mt-3\" *ngIf=\"payment.paymentNotCompletedInTime\">\n        <h4 class=\"text-white\" i18n>Time limit for payment is exceeded, please try again later. In case any deduction, will be revert back in 7 working day's, if not please contact support.</h4>\n    </div>\n</div>\n\n<!--\n<div *ngIf=\"invalidError\" style=\"color:red\">\n    {{ invalidError.message }}\n</div>\n\n<stripe-card #stripeCard (catch)=\"onStripeError($event)\" [(complete)]=\"cardDetailsFilledOut\" [(invalid)]=\"invalidError\"\n    (cardMounted)=\"cardCaptureReady = 1\" (paymentMethodChange)=\"setPaymentMethod($event)\"\n    (tokenChange)=\"setStripeToken($event)\" (sourceChange)=\"setStripeSource($event)\"></stripe-card>\n\n<button type=\"button\" (click)=\"stripeCard.createPaymentMethod(extraData)\">createPaymentMethod</button>\n<button type=\"button\" (click)=\"stripeCard.createSource(extraData)\">createSource</button>\n<button type=\"button\" (click)=\"stripeCard.createToken(extraData)\">createToken</button>\n-->");
+/* harmony default export */ __webpack_exports__["default"] = ("<!--\n    --old ref--\n<div class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"wallet\">\n    <label class=\"custom-control-label\" for=\"customRadio\">Use Wallet</label>\n</div>\n<div class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio2\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"online\">\n    <label class=\"custom-control-label\" for=\"customRadio2\">Pay Now</label>\n</div>\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod!=PaymentMethod.Online }\">\n    <ngx-paypal [config]=\"payPalConfig\"></ngx-paypal>\n</div>\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod==PaymentMethod.Online }\">\n    <button class=\"btn btn-success btn-sm text-white\" [disabled]=\"addFundsService.totalFund4currentUser < payment.amount\" (click)=\"paymentThroughWallet()\">\n    Pay Now</button>\n</div>\n-->\n\n<!--<link rel=\"stylesheet\" href=\"style.css\">-->\n<!----stripe card payment with redirection ref---->\n<!--\n<section>\n    <div class=\"product\">\n        <div class=\"description\">\n            <h3>{{header4Payment}}</h3>\n            <h5>{{amount4Payment}}</h5>\n        </div>\n    </div>\n    <button type=\"button\" id=\"checkout-button1\" (click)=\"initForPayment()\">Pay</button>\n</section>\n kr {{amount4Payment}}\n-->\n<div class=\"payment-backdrop text-center\">\n    <br>\n    <button [disabled]=\"alreadyClickedOnPayment\" *ngIf=\"!payment.paymentNotCompletedInTime\" (click)=\"pay(amount4Payment, $event)\" class=\"btn btn-success mt-5 btn-lg\" i18n>Pay Now $ {{amount4Payment}}</button>\n    <div class=\"mt-4 text-white\" i18n>\n        Please Do not navigate or refresh page, while payment is in progress\n    </div>\n    <div class=\"mt-md-n2 mt-3\" *ngIf=\"payment.hours || payment.minutes || payment.seconds\">\n        <h4 class=\"text-white\"><div class=\"spinner-border text-success\" role=\"status\" i18n>\n            <span class=\"sr-only\" >Loading...</span>\n          </div> Session expires in  <i class=\"icon-timer\"></i>&nbsp;{{payment.hours}}:{{payment.minutes}}:{{payment.seconds}}</h4>\n    </div>\n    <div class=\"mt-3 \" *ngIf=\"!payment.paymentNotCompletedInTime && payment.paymentNotCompletedInTimeErrorMessageShow\">\n        <h4 class=\"text-white\" i18n>Please complete payment within time limit</h4>\n    </div>\n    <div class=\" mt-3\" *ngIf=\"payment.paymentNotCompletedInTime\">\n        <h4 class=\"text-white\" i18n>Time limit for payment is exceeded, please try again later. In case any deduction, will be revert back in 7 working day's, if not please contact support.</h4>\n    </div>\n</div>\n\n<!--\n<div *ngIf=\"invalidError\" style=\"color:red\">\n    {{ invalidError.message }}\n</div>\n\n<stripe-card #stripeCard (catch)=\"onStripeError($event)\" [(complete)]=\"cardDetailsFilledOut\" [(invalid)]=\"invalidError\"\n    (cardMounted)=\"cardCaptureReady = 1\" (paymentMethodChange)=\"setPaymentMethod($event)\"\n    (tokenChange)=\"setStripeToken($event)\" (sourceChange)=\"setStripeSource($event)\"></stripe-card>\n\n<button type=\"button\" (click)=\"stripeCard.createPaymentMethod(extraData)\">createPaymentMethod</button>\n<button type=\"button\" (click)=\"stripeCard.createSource(extraData)\">createSource</button>\n<button type=\"button\" (click)=\"stripeCard.createToken(extraData)\">createToken</button>\n-->");
 
 /***/ }),
 
@@ -4971,6 +4989,8 @@ let MediaProccessComponent = class MediaProccessComponent {
             crop: this.fnCrop.bind(this),
             checkCrossOrigin: true
         };
+        this.showBlockingMessageMediatorT = false;
+        this.isAdminUserT = false;
         this.imageChangedEvent = '';
         this.croppedImage = '';
         this.canvasRotationCnt = 0;
@@ -4979,6 +4999,30 @@ let MediaProccessComponent = class MediaProccessComponent {
             this.documentId = data.documentId;
             this.attributeKey = data.attributeKey;
             this.subFolderName = data.subFolderName;
+            this.isAdminUserT = !!data.isAdminUserT;
+            switch (this.attributeKey) {
+                case 'selfProfileUrl':
+                    this.showBlockingMessageMediatorT = false;
+                    break;
+                case 'myPassportMedia':
+                case 'myPassportMediaSelfVerify':
+                case 'myDLMedia':
+                case 'myDLMediaSelfVerify':
+                case 'myHICardMedia':
+                case 'myHICardMediaSelfVerify':
+                case 'myRKIMedia':
+                case 'myRKIMediaSelfVerify':
+                    if (!this.isAdminUserT) {
+                        this.showBlockingMessageMediatorT = true;
+                    }
+                    else {
+                        this.showBlockingMessageMediatorT = false;
+                    }
+                    break;
+                default:
+                    this.showBlockingMessageMediatorT = false;
+                    break;
+            }
         }
     }
     onUploadMediaOnServer() {
@@ -5016,7 +5060,7 @@ let MediaProccessComponent = class MediaProccessComponent {
                 if (events.body["status"]) {
                     //alert('SUCCESS !!');
                     //this.fileData = null;
-                    this.alertService.success('Uploaded Successfully !!', true);
+                    this.alertService.success('Uploaded successfully', true);
                     let _uploadedUrl = events.body["data"].path;
                     if (lodash__WEBPACK_IMPORTED_MODULE_8__["startsWith"](_uploadedUrl, '/')) {
                         _uploadedUrl = _uploadedUrl.substr(1);
@@ -5126,6 +5170,13 @@ let MediaProccessComponent = class MediaProccessComponent {
         this.angularCropper.cropper.destroy();
     }
     ready(event) {
+        try {
+            //image  crop full width
+            var contData = this.angularCropper.cropper.getContainerData(); //Get container data
+            this.angularCropper.cropper.setCropBoxData({ height: contData.height, width: contData.width });
+        }
+        catch (ex) {
+        }
     }
     /*
     imageCropped(event: ImageCropperResult) {
@@ -5551,282 +5602,6 @@ UpdatePasswordComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"
         src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_9__["UtilityService"]])
 ], UpdatePasswordComponent);
 
-
-
-/***/ }),
-
-/***/ "Yz0s":
-/*!****************************************************************************!*\
-  !*** ./node_modules/@fullcalendar/daygrid/node_modules/tslib/tslib.es6.js ***!
-  \****************************************************************************/
-/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __createBinding, __exportStar, __values, __read, __spread, __spreadArrays, __spreadArray, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__extends", function() { return __extends; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__assign", function() { return __assign; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__rest", function() { return __rest; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__decorate", function() { return __decorate; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__param", function() { return __param; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__metadata", function() { return __metadata; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__awaiter", function() { return __awaiter; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__generator", function() { return __generator; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__createBinding", function() { return __createBinding; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__exportStar", function() { return __exportStar; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__values", function() { return __values; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__read", function() { return __read; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spread", function() { return __spread; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spreadArrays", function() { return __spreadArrays; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spreadArray", function() { return __spreadArray; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__await", function() { return __await; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncGenerator", function() { return __asyncGenerator; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncDelegator", function() { return __asyncDelegator; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncValues", function() { return __asyncValues; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function() { return __makeTemplateObject; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importStar", function() { return __importStar; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importDefault", function() { return __importDefault; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldGet", function() { return __classPrivateFieldGet; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldSet", function() { return __classPrivateFieldSet; });
-/*! *****************************************************************************
-Copyright (c) Microsoft Corporation.
-
-Permission to use, copy, modify, and/or distribute this software for any
-purpose with or without fee is hereby granted.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-PERFORMANCE OF THIS SOFTWARE.
-***************************************************************************** */
-/* global Reflect, Promise */
-
-var extendStatics = function(d, b) {
-    extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-    return extendStatics(d, b);
-};
-
-function __extends(d, b) {
-    if (typeof b !== "function" && b !== null)
-        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-    extendStatics(d, b);
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-}
-
-var __assign = function() {
-    __assign = Object.assign || function __assign(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-        }
-        return t;
-    }
-    return __assign.apply(this, arguments);
-}
-
-function __rest(s, e) {
-    var t = {};
-    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
-        t[p] = s[p];
-    if (s != null && typeof Object.getOwnPropertySymbols === "function")
-        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
-                t[p[i]] = s[p[i]];
-        }
-    return t;
-}
-
-function __decorate(decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-}
-
-function __param(paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-}
-
-function __metadata(metadataKey, metadataValue) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-}
-
-function __awaiter(thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-}
-
-function __generator(thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-}
-
-var __createBinding = Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-});
-
-function __exportStar(m, o) {
-    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) __createBinding(o, m, p);
-}
-
-function __values(o) {
-    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
-    if (m) return m.call(o);
-    if (o && typeof o.length === "number") return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-}
-
-function __read(o, n) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator];
-    if (!m) return o;
-    var i = m.call(o), r, ar = [], e;
-    try {
-        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
-    }
-    catch (error) { e = { error: error }; }
-    finally {
-        try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-        }
-        finally { if (e) throw e.error; }
-    }
-    return ar;
-}
-
-/** @deprecated */
-function __spread() {
-    for (var ar = [], i = 0; i < arguments.length; i++)
-        ar = ar.concat(__read(arguments[i]));
-    return ar;
-}
-
-/** @deprecated */
-function __spreadArrays() {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
-}
-
-function __spreadArray(to, from, pack) {
-    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-        if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-        }
-    }
-    return to.concat(ar || Array.prototype.slice.call(from));
-}
-
-function __await(v) {
-    return this instanceof __await ? (this.v = v, this) : new __await(v);
-}
-
-function __asyncGenerator(thisArg, _arguments, generator) {
-    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-    var g = generator.apply(thisArg, _arguments || []), i, q = [];
-    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
-    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
-    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
-    function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
-    function fulfill(value) { resume("next", value); }
-    function reject(value) { resume("throw", value); }
-    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
-}
-
-function __asyncDelegator(o) {
-    var i, p;
-    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
-    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
-}
-
-function __asyncValues(o) {
-    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-    var m = o[Symbol.asyncIterator], i;
-    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
-    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
-    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
-}
-
-function __makeTemplateObject(cooked, raw) {
-    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
-    return cooked;
-};
-
-var __setModuleDefault = Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-};
-
-function __importStar(mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-}
-
-function __importDefault(mod) {
-    return (mod && mod.__esModule) ? mod : { default: mod };
-}
-
-function __classPrivateFieldGet(receiver, state, kind, f) {
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
-}
-
-function __classPrivateFieldSet(receiver, state, value, kind, f) {
-    if (kind === "m") throw new TypeError("Private method is not writable");
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
-}
 
 
 /***/ }),
@@ -9375,7 +9150,7 @@ MeetingVcComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJtZWRpYS1wcm9jY2Vzcy5jb21wb25lbnQuY3NzIn0= */");
+/* harmony default export */ __webpack_exports__["default"] = (".save{\n    -webkit-animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both infinite alternate;\n            animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both infinite alternate;\n    transform: translate3d(0, 0, 0);\n \n  }\n  \n  @-webkit-keyframes shake {\n    10%, 90% {\n      transform: translate3d(-1px, 0, 0);\n    }\n    \n    20%, 80% {\n      transform: translate3d(2px, 0, 0);\n    }\n  \n    30%, 50%, 70% {\n      transform: translate3d(-4px, 0, 0);\n    }\n  \n    40%, 60% {\n      transform: translate3d(4px, 0, 0);\n    }\n  }\n  \n  @keyframes shake {\n    10%, 90% {\n      transform: translate3d(-1px, 0, 0);\n    }\n    \n    20%, 80% {\n      transform: translate3d(2px, 0, 0);\n    }\n  \n    30%, 50%, 70% {\n      transform: translate3d(-4px, 0, 0);\n    }\n  \n    40%, 60% {\n      transform: translate3d(4px, 0, 0);\n    }\n  }\n  \n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1lZGlhLXByb2NjZXNzLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxvRkFBNEU7WUFBNUUsNEVBQTRFO0lBQzVFLCtCQUErQjs7RUFFakM7O0VBRUE7SUFDRTtNQUNFLGtDQUFrQztJQUNwQzs7SUFFQTtNQUNFLGlDQUFpQztJQUNuQzs7SUFFQTtNQUNFLGtDQUFrQztJQUNwQzs7SUFFQTtNQUNFLGlDQUFpQztJQUNuQztFQUNGOztFQWhCQTtJQUNFO01BQ0Usa0NBQWtDO0lBQ3BDOztJQUVBO01BQ0UsaUNBQWlDO0lBQ25DOztJQUVBO01BQ0Usa0NBQWtDO0lBQ3BDOztJQUVBO01BQ0UsaUNBQWlDO0lBQ25DO0VBQ0YiLCJmaWxlIjoibWVkaWEtcHJvY2Nlc3MuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5zYXZle1xuICAgIGFuaW1hdGlvbjogc2hha2UgMC44MnMgY3ViaWMtYmV6aWVyKC4zNiwuMDcsLjE5LC45NykgYm90aCBpbmZpbml0ZSBhbHRlcm5hdGU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUzZCgwLCAwLCAwKTtcbiBcbiAgfVxuICBcbiAgQGtleWZyYW1lcyBzaGFrZSB7XG4gICAgMTAlLCA5MCUge1xuICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUzZCgtMXB4LCAwLCAwKTtcbiAgICB9XG4gICAgXG4gICAgMjAlLCA4MCUge1xuICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUzZCgycHgsIDAsIDApO1xuICAgIH1cbiAgXG4gICAgMzAlLCA1MCUsIDcwJSB7XG4gICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZTNkKC00cHgsIDAsIDApO1xuICAgIH1cbiAgXG4gICAgNDAlLCA2MCUge1xuICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUzZCg0cHgsIDAsIDApO1xuICAgIH1cbiAgfVxuICAiXX0= */");
 
 /***/ }),
 
@@ -10694,7 +10469,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row pt-0 saas2\">\n    <div class=\"col-xl-12 col-12 text-center\" *ngIf=\"!f.isVerified.value\">\n        <h3 i18n>Submit your portfolio for verification</h3>\n        <P class=\"my-3\" i18n>Remember to fill in all fields correctly, otherwise you may risk lifetime blockage</P>\n\n    </div>\n    <div class=\"col-xl-12 col-12\">\n        <section class=\"tab-product  p-b-0\">\n\n            <ul class=\"nav nav-justified nav-material nav-tabs mb-4 shadow-sm\" id=\"top-tab\" role=\"tablist\">\n                <li class=\"nav-item\">\n                    <a id=\"btn_click_profile_basic_details\" class=\"nav-link show active\" data-toggle=\"tab\"\n                        data-target=\"#profile_basic_details\" (click)=\"clickOnGoToNext(1, true)\" i18n>Basic Details</a>\n                    <div class=\"material-border\"></div>\n                </li>\n                <li class=\"nav-item\">\n                    <a id=\"btn_click_profile_skills_verification\" class=\"nav-link\" data-toggle=\"tab\"\n                        data-target=\"#profile_skills_verification\" (click)=\"clickOnGoToNext(2, true)\" i18n>Upload\n                        Documents</a>\n                    <div class=\"material-border\"></div>\n                </li>\n                <!-- <li class=\"nav-item\" *ngIf=\"_role == Role.Borrower\">\n                            <a id=\"btn_click_profile_banking\" class=\"nav-link font-weight-light\" data-toggle=\"pill\"\n                                data-target=\"#profile_banking_details\">Banking Details</a>\n                        </li> -->\n            </ul>\n\n        </section>\n\n        <form [formGroup]=\"profileForm\">\n\n            <div class=\"tab-content\">\n                <div class=\"tab-pane active\" id=\"profile_basic_details\">\n                    <div class=\"form-row mb-2  mb-3\">\n                        <div class=\"col-xl-3 text-center\">\n                            <div class=\"card\">\n                                <div class=\"card-header\">\n                                    <h6 class=\"font-weight-bold text-primary\" i18n>Change Profile Pic</h6>\n                                </div>\n\n                                <div class=\"card-body\">\n                                    <img [src]=\"f.selfProfileUrl.value\" onerror=\"this.src='./assets/img/nouser.png';\"\n                                        class=\"border img-fluid rounded-circle mb-3\" />\n                                    <br>\n                                    <i *ngIf=\"!selfProfileUrlPendingForUpload\"\n                                        class=\"icon-pencil-alt m-2 cursor-pointer text-success\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'selfProfileUrl', null);\">\n                                        <!--openFileUploaderForProfile()-->\n\n                                        <input id=\"ctrlUploadProfile\" hidden type=\"file\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressForProfile($event)\"> Edit\n                                    </i>\n                                    <i *ngIf=\"selfProfileUrlPendingForUpload\"\n                                        class=\"icon-upload m-2 cursor-pointer text-success\"\n                                        (click)=\"onUploadForProfile()\" i18n> Save\n                                    </i>\n                                </div>\n\n                                <div class=\"card-footer\">\n                                    <div class=\"btn-group btn-group-sm shadow\">\n                                        <button disabled *ngIf=\"f.role.value !=='lender'\" type=\"button\" class=\"btn\"\n                                            (click)=\"onClickRoleChange('borrower')\"\n                                            [ngClass]=\"{ 'btn-success': f.role.value=='borrower', 'btn-outline-success': f.role.value!='borrower'}\"\n                                            i18n>\n                                            Borrower\n                                        </button>\n                                        <button disabled *ngIf=\"f.role.value !=='borrower'\" type=\"button\" class=\"btn\"\n                                            (click)=\"onClickRoleChange('lender')\"\n                                            [ngClass]=\"{ 'btn-success': f.role.value=='lender', 'btn-outline-success': f.role.value!='lender'}\"\n                                            i18n>\n                                            Lender\n                                        </button>\n                                    </div>\n                                </div>\n\n                            </div>\n\n                        </div>\n\n\n\n                        <div class=\"col-xl-9\">\n\n                            <div class=\"card\">\n                                <div class=\"card-header\">\n                                    <h6 class=\"font-weight-bold text-primary\" i18n>Change Basic Details</h6>\n                                </div>\n\n                                <div class=\"card-body\">\n                                    <div class=\"form-row \">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"firstName\" i18n>First Name</label>\n                                            <input type=\"text\" formControlName=\"firstName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.firstName.errors }\" />\n                                            <div *ngIf=\"submitted && f.firstName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.firstName.errors.required\" i18n>First Name is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"middleName\" i18n>Middle Name</label>\n                                            <input type=\"text\" formControlName=\"middleName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.middleName.errors }\" />\n                                            <div *ngIf=\"submitted && f.middleName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.middleName.errors.required\" i18n>Middle Name is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"lastName\" i18n>Last Name</label>\n                                            <input type=\"text\" formControlName=\"lastName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.lastName.errors }\" />\n                                            <div *ngIf=\"submitted && f.lastName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.lastName.errors.required\" i18n>Last Name is required</div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"mobileNo\" i18n>\n                                                <i class=\"icon-mobile text-success\"></i>\n                                                Mobile Number</label>\n                                            <input type=\"text\" formControlName=\"mobileNo\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.mobileNo.errors }\" />\n                                            <div *ngIf=\"submitted && f.mobileNo.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.mobileNo.errors.required\" i18n>Mobile Number is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"emailAddress\" i18n>Email</label>\n                                            <input type=\"text\" disabled formControlName=\"emailAddress\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.emailAddress.errors }\" />\n                                            <div *ngIf=\"submitted && f.emailAddress.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.emailAddress.errors.required\" i18n>Email is required</div>\n                                                <div *ngIf=\"f.emailAddress.errors.email\" i18n>Invalid Email format.\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"address\" class=\"font-weight-bold\" i18n>\n                                                Address\n                                            </label>\n                                            <textarea rows=\"2\" maxlength=\"500\" formControlName=\"address\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.address.errors }\">\n                                                    </textarea>\n                                            <div *ngIf=\"submitted && f.address.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.address.errors.required\" i18n>\n                                                    Address is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"birthDateCustomised\" i18n>Birthday</label>\n                                            <input type=\"date\" formControlName=\"birthDateCustomised\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.birthDate.errors }\"\n                                                [max]=\"maxDate\" [min]=\"minDate\" />\n                                            <div *ngIf=\"submitted && f.birthDate.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.birthDate.errors.required\" i18n>Birthday is required\n                                                </div>\n                                                <div *ngIf=\"f.birthDate.errors.date\" i18n>Invalid date format.\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-4 d-none\">\n                                            <div class=\"form-row\">\n                                                <div class=\"col-xl-12 text-center mb-2\">\n                                                    <label i18n>Gender</label>\n                                                    <div class=\"btn-group shadow mb-3\">\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('male')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='male', 'btn-outline-success': f.gender.value!='male'}\"\n                                                            i18n>\n                                                            Male\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('female')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='female', 'btn-outline-success': f.gender.value!='female'}\"\n                                                            i18n>\n                                                            Female\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('other')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='other', 'btn-outline-success': f.gender.value!='other'}\"\n                                                            i18n>\n                                                            Other\n                                                        </button>\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"cityCode\" i18n>City</label>\n                                            <input type=\"text\" formControlName=\"cityCode\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.cityCode.errors }\" />\n                                            <div *ngIf=\"submitted && f.cityCode.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.cityCode.errors.required\" i18n>City is required</div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"cityCode\" i18n>Country</label>\n                                            <select formControlName=\"country\" class=\"custom-select\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.country.errors }\">\n                                                <option value=\"\" selected disabled i18n>Choose Country</option>\n                                                <option *ngFor=\"let country of countrylist\" [ngValue]=\"country\">\n                                                    {{country}}</option>\n                                            </select>\n                                            <div *ngIf=\"submitted && f.country.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.country.errors.required\" i18n>Country is required</div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"myProfileDetails\" i18n>Describe Yourself</label>\n                                            <textarea rows=\"2\" maxlength=\"500\" formControlName=\"myProfileDetails\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.myProfileDetails.errors }\">\n                                                    </textarea>\n                                            <div *ngIf=\"submitted && f.myProfileDetails.errors\"\n                                                class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.myProfileDetails.errors.required\" i18n>Describe Yourself\n                                                    is\n                                                    required\n                                                </div>\n                                            </div>\n                                        </div>\n\n                                    </div>\n                                </div>\n\n                                <div class=\"card-footer\">\n                                    <button type=\"button\" (click)=\"clickOnGoToNext(2)\" [disabled]=\"loading\"\n                                        class=\"btn btn-primary float-right\" i18n>Next</button>\n                                </div>\n                            </div>\n\n\n                        </div>\n                    </div>\n                </div>\n                <div class=\"tab-pane fade\" id=\"profile_skills_verification\">\n                    <div class=\"card\">\n                        <div class=\"card-header\">\n                            <h6 class=\"font-weight-bold text-primary\" i18n>Update Your Documents</h6>\n                        </div>\n\n                        <div class=\"card-body\">\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-md-12\">\n                                    <div class=\"text-gray\" i18n>\n                                        Upload your Passport, Driving Licence, Health Insurance Card document\n                                    </div>\n                                    <hr>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"myPassportNumber\" i18n>Passport Number:</label>\n                                        <input type=\"text\"\n                                            [readonly]=\"authenticationService.currentUserValue.myPassportNumber\"\n                                            formControlName=\"myPassportNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myPassportNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.myPassportNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.myPassportNumber.errors.required\" i18n>Passport number is\n                                                required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myPassportMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myPassportMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7 col-12\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyPassportMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myPassportMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyPassportMedia\">{{lblmyPassportMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myPassportMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"myDLNumber\" i18n>Driving License Number:</label>\n                                        <input type=\"text\"\n                                            [readonly]=\"authenticationService.currentUserValue.myDLNumber\"\n                                            formControlName=\"myDLNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myDLNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.myDLNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.myDLNumber.errors.required\" i18n>Driving License number is\n                                                required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myDLMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myDLMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyDLMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myDLMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyDLMedia\">{{lblmyDLMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myDLMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"cprNumber\" i18n>CPR Number:</label>\n                                        <input type=\"text\" [readonly]=\"authenticationService.currentUserValue.cprNumber\"\n                                            formControlName=\"cprNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.cprNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.cprNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.cprNumber.errors.required\" i18n>CPR number is required</div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myHICardMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myHICardMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyHICardMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myHICardMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyHICardMedia\">{{lblmyHICardMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myHICardMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"row\">\n                                <div class=\"col-xl-4\">\n                                    <div class=\"card\"\n                                        *ngFor=\"let previewUrl of _.union(_.values(f.myPassportMedia.value),_.values(f.myPassportMediaSelfVerify.value))\">\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"card-body\" i18n>\n                                            Passport\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myPassportMedia')\"></i></a>\n                                                    -->\n                                        </div>\n                                    </div>\n\n\n                                </div>\n                                <div class=\"col-xl-4\">\n                                    <div class=\"card\"\n                                        *ngFor=\"let previewUrl of _.union(_.values(f.myDLMedia.value),_.values(f.myDLMediaSelfVerify.value))\">\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"card-body\" i18n>\n                                            Driving Licence\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myDLMedia')\"></i></a>\n                                                    -->\n                                        </div>\n                                    </div>\n\n\n                                </div>\n                                <div class=\"col-xl-4\">\n                                    <div class=\"card\"\n                                        *ngFor=\"let previewUrl of _.union(_.values(f.myHICardMedia.value),_.values(f.myHICardMediaSelfVerify.value))\">\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"card-body\" i18n>\n                                            Health Insurance Card\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myHICardMedia')\"></i></a>\n                                            -->\n                                        </div>\n                                    </div>\n\n                                </div>\n                            </div>\n                            <div class=\"form-row\">\n                                <div class=\"col-xl-12 mt-3\">\n                                    <label class=\"d-none\" for=\"myProfileDetails\" i18n>Social Network</label>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-4 d-none\">\n\n                                            <select [(ngModel)]=\"appName\" class=\"custom-select\"\n                                                [ngModelOptions]=\"{standalone: true}\">\n                                                <option value=\"facebook\" selected i18n> Facebook</option>\n                                            \n                                            </select>\n                                        </div>\n                                        <div class=\"col-xl-12\">\n                                            <!--\n                                            <div class=\"input-group mb-3\">\n                                                <input type=\"url\"\n                                                    pattern=\"/(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})/gi*\"\n                                                    [(ngModel)]=\"appLink\" class=\"form-control\"\n                                                    [ngModelOptions]=\"{standalone: true}\"\n                                                    placeholder=\"Facebook Profile Public Link\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.externalAppLinks.errors }\" />\n                                                <div class=\"input-group-append\">\n                                                    <button class=\"btn btn-success\"\n                                                        (click)=\"addExternalAppLinks(true, null, appName, appLink)\" i18n>Add</button>\n                                                </div>\n                                            </div>\n                                        -->\n                                            <div class=\"form-group\">\n                                                <label class=\"mb-1\" for=\"externalAppLinkUrl\" i18n>Facebook Profile Public Link:</label>\n                                                <input type=\"url\"\n                                                    formControlName=\"externalAppLinkUrl\" class=\"form-control\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.externalAppLinkUrl.errors }\" />\n                                                <div *ngIf=\"submitted && f.externalAppLinkUrl.errors\" class=\"invalid-feedback\">\n                                                    <div *ngIf=\"f.externalAppLinkUrl.errors.required\" i18n>Link is required\n                                                    </div>\n                                                    <div *ngIf=\"f.externalAppLinkUrl.errors.pattern\" i18n>Link is required*\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12\">\n                                            <div *ngIf=\"submitted && f.externalAppLinks.errors\"\n                                                class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.externalAppLinks.errors.required\" i18n>Links required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row d-none\" *ngFor=\"let applinks of f.externalAppLinks.value\">\n                                        <div class=\"col-xl-2\">\n                                            {{applinks.appName | titlecase}}\n                                        </div>\n                                        <div class=\"col-xl-10\">\n                                            <a href=\"{{applinks.appLink}}\">{{applinks.appLink}}</a>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"row\" *ngIf=\"_role == Role.Borrower\">\n                                <div class=\"col-xl-12\">\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 mt-3\">\n                                            <div class=\"row\">\n                                                <div class=\"col-xl-12\">\n                                                    <label class=\"font-weight-bold\" i18n>Are you registered in\n                                                        RKI?</label>\n                                                    <i class=\"icon icon-info-alt ml-2\" data-toggle=\"tooltip\"\n                                                        title=\"Hooray!\"></i>\n                                                    <div class=\"btn-group btn-group btn-group-sm ml-4\">\n                                                        <button type=\"button\" class=\"btn\" (click)=\"onRKIChange(true)\"\n                                                            [ngClass]=\"{ 'btn-success': onInitRKICheckedValue()==true, 'btn-outline-success':onInitRKICheckedValue()==false}\"\n                                                            i18n>\n                                                            Yes\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\" (click)=\"onRKIChange(false)\"\n                                                            [ngClass]=\"{ 'btn-success': onInitRKICheckedValue()==false, 'btn-outline-success':onInitRKICheckedValue()==true}\"\n                                                            i18n>\n                                                            No\n                                                        </button>\n                                                    </div>\n                                                </div>\n                                            </div>\n\n                                            <div *ngIf=\"submitted && f.isRKIRegistered.errors\" class=\"error\">\n                                                <div *ngIf=\"f.isRKIRegistered.errors.required\" class=\"text-red\" i18n>\n                                                    data required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 mt-3\">\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\" *ngIf=\"!onInitRKICheckedValue()\">\n                                        <!--\n                                        <div class=\"col-xl-9\">\n                                            <div class=\"custom-file\">\n                                                <input type=\"file\" class=\"custom-file-input\" name=\"image\"\n                                                    accept=\"image/*\"\n                                                    (change)=\"fileProgressAssetDocs($event,'lblmyRKIMedia')\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.myRKIMedia.errors }\">\n                                                <label class=\"custom-file-label\" for=\"customFile\"\n                                                    id=\"lblmyRKIMedia\">{{lblmyRKIMediaText}}</label>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-3\">\n                                            <button class=\"btn btn-outline-secondary btn-block\"\n                                                (click)=\"onUploadAssetDocs('myRKIMedia')\">\n                                                Upload\n                                            </button>\n                                        </div>\n                                    -->\n                                        <div class=\"col-xl-6 col-12\">\n                                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                                (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMedia', null);\"\n                                                i18n>\n                                                Upload Scan Copy\n                                            </button>\n                                        </div>\n                                        <div class=\"col-xl-6 col-12\">\n                                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                                (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMediaSelfVerify', null);\"\n                                                i18n>\n                                                Upload Image of Scan Copy With Your Face\n                                            </button>\n                                        </div>\n                                        <div class=\"col-xl-4\">\n\n                                            <div class=\"row\">\n                                                <div class=\"col-xl-12\"\n                                                    *ngFor=\"let previewUrl of _.union(_.values(f.myRKIMedia.value),_.values(f.myRKIMediaSelfVerify.value))\">\n                                                    <!--\n                                                    <i class=\"icon-trash text-danger\"\n                                                        (click)=\"onUploadCleanAssetDocs('myRKIMedia')\"></i>\n                                                    -->\n                                                    <img class=\"img-fluid\" [src]=\"previewUrl.url\" />\n                                                </div>\n                                                <div>\n                                                    <div *ngIf=\"fileUploadProgress\" i18n>\n                                                        Upload progress: {{ fileUploadProgress }}\n                                                    </div>\n                                                </div>\n                                            </div>\n\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"card-footer\">\n                            <button type=\"button\" (click)=\"onProfileUpdateSubmit()\" [disabled]=\"loading\"\n                                class=\"btn btn-primary float-right\" i18n>Save</button>\n                        </div>\n                    </div>\n\n\n                </div>\n            </div>\n\n        </form>\n    </div>\n</div>\n<!-- register section -->");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row pt-0 saas2\">\n    <div class=\"col-xl-12 col-12 text-center\" *ngIf=\"!f.isVerified.value\">\n        <h3 i18n>Submit your portfolio for verification</h3>\n        <P class=\"my-3\" i18n>Remember to fill in all fields correctly, otherwise you may risk lifetime blockage</P>\n\n    </div>\n    <div class=\"col-xl-12 col-12\">\n        <section class=\"tab-product  p-b-0\">\n\n            <ul class=\"nav nav-justified nav-tabs mb-4 shadow-sm\" id=\"top-tab\" role=\"tablist\">\n                <li class=\"nav-item\">\n                    <a id=\"btn_click_profile_basic_details\" class=\"nav-link show active\" data-toggle=\"tab\"\n                        data-target=\"#profile_basic_details\" (click)=\"clickOnGoToNext(1, true)\" i18n>Basic Details</a>\n                    <div class=\"material-border\"></div>\n                </li>\n                <li class=\"nav-item\">\n                    <a id=\"btn_click_profile_skills_verification\" class=\"nav-link\" data-toggle=\"tab\"\n                        data-target=\"#profile_skills_verification\" (click)=\"clickOnGoToNext(2, true)\" i18n>Upload\n                        Documents</a>\n                    <div class=\"material-border\"></div>\n                </li>\n                <!-- <li class=\"nav-item\" *ngIf=\"_role == Role.Borrower\">\n                            <a id=\"btn_click_profile_banking\" class=\"nav-link font-weight-light\" data-toggle=\"pill\"\n                                data-target=\"#profile_banking_details\">Banking Details</a>\n                        </li> -->\n            </ul>\n\n        </section>\n\n        <form [formGroup]=\"profileForm\">\n\n            <div class=\"tab-content\">\n                <div class=\"tab-pane active\" id=\"profile_basic_details\">\n                    <div class=\"form-row mb-2  mb-3\">\n                        <div class=\"col-xl-3 text-center\">\n                            <div class=\"card\">\n                                <div class=\"card-header\">\n                                    <h6 class=\"font-weight-bold text-primary\" i18n>Change Profile Pic</h6>\n                                </div>\n\n                                <div class=\"card-body\">\n                                    <img [src]=\"f.selfProfileUrl.value\" onerror=\"this.src='./assets/img/nouser.png';\"\n                                        class=\"border img-fluid rounded-circle mb-3\" style=\"height: 150px;width: 150px;object-fit: cover;\"/>\n                                    <br>\n\n                                    <p>{{f.role.value ==='lender'?'Lender':'Borrower'}}</p>\n                                   \n                                    \n                                </div>\n\n                                <div class=\"card-footer\">\n                                    <i *ngIf=\"!selfProfileUrlPendingForUpload\"\n                                        class=\"icon-pencil-alt m-2 cursor-pointer btn btn-outline-primary\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'selfProfileUrl', null);\">\n                                        <!--openFileUploaderForProfile()-->\n\n                                        <input id=\"ctrlUploadProfile\" hidden type=\"file\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressForProfile($event)\"> Edit\n                                    </i>\n                                    <i *ngIf=\"selfProfileUrlPendingForUpload\"\n                                        class=\"icon-upload m-2 cursor-pointer text-success\"\n                                        (click)=\"onUploadForProfile()\" i18n> Save\n                                    </i>\n                                </div>\n\n                            </div>\n\n                        </div>\n\n\n\n                        <div class=\"col-xl-9\">\n\n                            <div class=\"card\">\n                                <div class=\"card-header\">\n                                    <h6 class=\"font-weight-bold text-primary\" i18n>Change Basic Details</h6>\n                                </div>\n\n                                <div class=\"card-body\">\n                                    <div class=\"form-row \">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"firstName\" i18n>First Name</label>\n                                            <input type=\"text\" formControlName=\"firstName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.firstName.errors }\" />\n                                            <div *ngIf=\"submitted && f.firstName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.firstName.errors.required\" i18n>First Name is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"middleName\" i18n>Middle Name</label>\n                                            <input type=\"text\" formControlName=\"middleName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.middleName.errors }\" />\n                                            <div *ngIf=\"submitted && f.middleName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.middleName.errors.required\" i18n>Middle Name is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"lastName\" i18n>Last Name</label>\n                                            <input type=\"text\" formControlName=\"lastName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.lastName.errors }\" />\n                                            <div *ngIf=\"submitted && f.lastName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.lastName.errors.required\" i18n>Last Name is required</div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"mobileNo\" i18n>\n                                                <i class=\"icon-mobile text-success\"></i>\n                                                Mobile Number</label>\n                                            <input type=\"text\" formControlName=\"mobileNo\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.mobileNo.errors }\" />\n                                            <div *ngIf=\"submitted && f.mobileNo.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.mobileNo.errors.required\" i18n>Mobile Number is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"emailAddress\" i18n>Email</label>\n                                            <input type=\"text\" disabled formControlName=\"emailAddress\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.emailAddress.errors }\" />\n                                            <div *ngIf=\"submitted && f.emailAddress.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.emailAddress.errors.required\" i18n>Email is required</div>\n                                                <div *ngIf=\"f.emailAddress.errors.email\" i18n>Invalid Email format.\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"address\" class=\"font-weight-bold\" i18n>\n                                                Address\n                                            </label>\n                                            <textarea rows=\"2\" maxlength=\"500\" formControlName=\"address\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.address.errors }\">\n                                                    </textarea>\n                                            <div *ngIf=\"submitted && f.address.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.address.errors.required\" i18n>\n                                                    Address is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"birthDateCustomised\" i18n>Birthday</label>\n                                            <input type=\"date\" formControlName=\"birthDateCustomised\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.birthDate.errors }\"\n                                                [max]=\"maxDate\" [min]=\"minDate\" />\n                                            <div *ngIf=\"submitted && f.birthDate.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.birthDate.errors.required\" i18n>Birthday is required\n                                                </div>\n                                                <div *ngIf=\"f.birthDate.errors.date\" i18n>Invalid date format.\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-4 d-none\">\n                                            <div class=\"form-row\">\n                                                <div class=\"col-xl-12 text-center mb-2\">\n                                                    <label i18n>Gender</label>\n                                                    <div class=\"btn-group shadow mb-3\">\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('male')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='male', 'btn-outline-success': f.gender.value!='male'}\"\n                                                            i18n>\n                                                            Male\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('female')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='female', 'btn-outline-success': f.gender.value!='female'}\"\n                                                            i18n>\n                                                            Female\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('other')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='other', 'btn-outline-success': f.gender.value!='other'}\"\n                                                            i18n>\n                                                            Other\n                                                        </button>\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"cityCode\" i18n>City</label>\n                                            <input type=\"text\" formControlName=\"cityCode\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.cityCode.errors }\" />\n                                            <div *ngIf=\"submitted && f.cityCode.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.cityCode.errors.required\" i18n>City is required</div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"cityCode\" i18n>Country</label>\n                                            <select formControlName=\"country\" class=\"custom-select\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.country.errors }\">\n                                                <option value=\"\" selected disabled i18n>Choose Country</option>\n                                                <option *ngFor=\"let country of countrylist\" [ngValue]=\"country\">\n                                                    {{country}}</option>\n                                            </select>\n                                            <div *ngIf=\"submitted && f.country.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.country.errors.required\" i18n>Country is required</div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"myProfileDetails\" i18n>Describe Yourself</label>\n                                            <textarea rows=\"2\" maxlength=\"500\" formControlName=\"myProfileDetails\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.myProfileDetails.errors }\">\n                                                    </textarea>\n                                            <div *ngIf=\"submitted && f.myProfileDetails.errors\"\n                                                class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.myProfileDetails.errors.required\" i18n>Describe Yourself\n                                                    is\n                                                    required\n                                                </div>\n                                            </div>\n                                        </div>\n\n                                    </div>\n                                </div>\n\n                                <div class=\"card-footer\">\n                                    <button type=\"button\" (click)=\"clickOnGoToNext(2)\" [disabled]=\"loading\"\n                                        class=\"btn btn-primary float-right\" i18n>Next</button>\n                                </div>\n                            </div>\n\n\n                        </div>\n                    </div>\n                </div>\n                <div class=\"tab-pane fade\" id=\"profile_skills_verification\">\n                    <div class=\"card\">\n                        <div class=\"card-header\">\n                            <h6 class=\"font-weight-bold text-primary\" i18n>Update Your Documents</h6>\n                        </div>\n\n                        <div class=\"card-body\">\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-md-12\">\n                                    <div class=\"text-gray\" i18n>\n                                        Upload your Passport, Driving Licence, Health Insurance Card document\n                                    </div>\n                                    <hr>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"myPassportNumber\" i18n>Passport Number:</label>\n                                        <input type=\"text\"\n                                            [readonly]=\"authenticationService.currentUserValue.myPassportNumber\"\n                                            formControlName=\"myPassportNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myPassportNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.myPassportNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.myPassportNumber.errors.required\" i18n>Passport number is\n                                                required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myPassportMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myPassportMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7 col-12\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyPassportMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myPassportMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyPassportMedia\">{{lblmyPassportMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myPassportMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"myDLNumber\" i18n>Driving License Number:</label>\n                                        <input type=\"text\"\n                                            [readonly]=\"authenticationService.currentUserValue.myDLNumber\"\n                                            formControlName=\"myDLNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myDLNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.myDLNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.myDLNumber.errors.required\" i18n>Driving License number is\n                                                required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myDLMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myDLMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyDLMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myDLMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyDLMedia\">{{lblmyDLMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myDLMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"cprNumber\" i18n>CPR Number:</label>\n                                        <input type=\"text\" [readonly]=\"authenticationService.currentUserValue.cprNumber\"\n                                            formControlName=\"cprNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.cprNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.cprNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.cprNumber.errors.required\" i18n>CPR number is required</div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myHICardMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myHICardMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyHICardMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myHICardMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyHICardMedia\">{{lblmyHICardMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myHICardMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"row\">\n                                <div class=\"col-xl-4\">\n                                    <div class=\"card\"\n                                        *ngFor=\"let previewUrl of _.union(_.values(f.myPassportMedia.value),_.values(f.myPassportMediaSelfVerify.value))\">\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"card-body\" i18n>\n                                            Passport\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myPassportMedia')\"></i></a>\n                                                    -->\n                                        </div>\n                                    </div>\n\n\n                                </div>\n                                <div class=\"col-xl-4\">\n                                    <div class=\"card\"\n                                        *ngFor=\"let previewUrl of _.union(_.values(f.myDLMedia.value),_.values(f.myDLMediaSelfVerify.value))\">\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"card-body\" i18n>\n                                            Driving Licence\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myDLMedia')\"></i></a>\n                                                    -->\n                                        </div>\n                                    </div>\n\n\n                                </div>\n                                <div class=\"col-xl-4\">\n                                    <div class=\"card\"\n                                        *ngFor=\"let previewUrl of _.union(_.values(f.myHICardMedia.value),_.values(f.myHICardMediaSelfVerify.value))\">\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"card-body\" i18n>\n                                            Health Insurance Card\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myHICardMedia')\"></i></a>\n                                            -->\n                                        </div>\n                                    </div>\n\n                                </div>\n                            </div>\n                            <div class=\"form-row\">\n                                <div class=\"col-xl-12 mt-3\">\n                                    <label class=\"d-none\" for=\"myProfileDetails\" i18n>Social Network</label>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-4 d-none\">\n\n                                            <select [(ngModel)]=\"appName\" class=\"custom-select\"\n                                                [ngModelOptions]=\"{standalone: true}\">\n                                                <option value=\"facebook\" selected i18n> Facebook</option>\n                                            \n                                            </select>\n                                        </div>\n                                        <div class=\"col-xl-12\">\n                                            <!--\n                                            <div class=\"input-group mb-3\">\n                                                <input type=\"url\"\n                                                    pattern=\"/(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})/gi*\"\n                                                    [(ngModel)]=\"appLink\" class=\"form-control\"\n                                                    [ngModelOptions]=\"{standalone: true}\"\n                                                    placeholder=\"Facebook Profile Public Link\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.externalAppLinks.errors }\" />\n                                                <div class=\"input-group-append\">\n                                                    <button class=\"btn btn-success\"\n                                                        (click)=\"addExternalAppLinks(true, null, appName, appLink)\" i18n>Add</button>\n                                                </div>\n                                            </div>\n                                        -->\n                                            <div class=\"form-group\">\n                                                <label class=\"mb-1\" for=\"externalAppLinkUrl\" i18n>Facebook Profile Public Link:</label>\n                                                <input type=\"url\"\n                                                    formControlName=\"externalAppLinkUrl\" class=\"form-control\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.externalAppLinkUrl.errors }\" />\n                                                <div *ngIf=\"submitted && f.externalAppLinkUrl.errors\" class=\"invalid-feedback\">\n                                                    <div *ngIf=\"f.externalAppLinkUrl.errors.required\" i18n>Link is required\n                                                    </div>\n                                                    <div *ngIf=\"f.externalAppLinkUrl.errors.pattern\" i18n>Link is required*\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12\">\n                                            <div *ngIf=\"submitted && f.externalAppLinks.errors\"\n                                                class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.externalAppLinks.errors.required\" i18n>Links required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row d-none\" *ngFor=\"let applinks of f.externalAppLinks.value\">\n                                        <div class=\"col-xl-2\">\n                                            {{applinks.appName | titlecase}}\n                                        </div>\n                                        <div class=\"col-xl-10\">\n                                            <a href=\"{{applinks.appLink}}\">{{applinks.appLink}}</a>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"row\" *ngIf=\"_role == Role.Borrower\">\n                                <div class=\"col-xl-12\">\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 mt-3\">\n                                            <div class=\"row\">\n                                                <div class=\"col-xl-12\">\n                                                    <label class=\"font-weight-bold\" i18n>Are you registered in\n                                                        RKI?</label>\n                                                    <i class=\"icon icon-info-alt ml-2\" data-toggle=\"tooltip\"\n                                                        title=\"Hooray!\"></i>\n                                                    <div class=\"btn-group btn-group btn-group-sm ml-4\">\n                                                        <button type=\"button\" class=\"btn\" (click)=\"onRKIChange(true)\"\n                                                            [ngClass]=\"{ 'btn-success': onInitRKICheckedValue()==true, 'btn-outline-success':onInitRKICheckedValue()==false}\"\n                                                            i18n>\n                                                            Yes\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\" (click)=\"onRKIChange(false)\"\n                                                            [ngClass]=\"{ 'btn-success': onInitRKICheckedValue()==false, 'btn-outline-success':onInitRKICheckedValue()==true}\"\n                                                            i18n>\n                                                            No\n                                                        </button>\n                                                    </div>\n                                                </div>\n                                            </div>\n\n                                            <div *ngIf=\"submitted && f.isRKIRegistered.errors\" class=\"error\">\n                                                <div *ngIf=\"f.isRKIRegistered.errors.required\" class=\"text-red\" i18n>\n                                                    data required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 mt-3\">\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\" *ngIf=\"!onInitRKICheckedValue()\">\n                                        <!--\n                                        <div class=\"col-xl-9\">\n                                            <div class=\"custom-file\">\n                                                <input type=\"file\" class=\"custom-file-input\" name=\"image\"\n                                                    accept=\"image/*\"\n                                                    (change)=\"fileProgressAssetDocs($event,'lblmyRKIMedia')\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.myRKIMedia.errors }\">\n                                                <label class=\"custom-file-label\" for=\"customFile\"\n                                                    id=\"lblmyRKIMedia\">{{lblmyRKIMediaText}}</label>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-3\">\n                                            <button class=\"btn btn-outline-secondary btn-block\"\n                                                (click)=\"onUploadAssetDocs('myRKIMedia')\">\n                                                Upload\n                                            </button>\n                                        </div>\n                                    -->\n                                        <div class=\"col-xl-6 col-12\">\n                                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                                (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMedia', null);\"\n                                                i18n>\n                                                Upload Scan Copy\n                                            </button>\n                                        </div>\n                                        <div class=\"col-xl-6 col-12\">\n                                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                                (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMediaSelfVerify', null);\"\n                                                i18n>\n                                                Upload Image of Scan Copy With Your Face\n                                            </button>\n                                        </div>\n                                        <div class=\"col-xl-4\">\n\n                                            <div class=\"row\">\n                                                <div class=\"col-xl-12\"\n                                                    *ngFor=\"let previewUrl of _.union(_.values(f.myRKIMedia.value),_.values(f.myRKIMediaSelfVerify.value))\">\n                                                    <!--\n                                                    <i class=\"icon-trash text-danger\"\n                                                        (click)=\"onUploadCleanAssetDocs('myRKIMedia')\"></i>\n                                                    -->\n                                                    <img class=\"img-fluid\" [src]=\"previewUrl.url\" />\n                                                </div>\n                                                <div>\n                                                    <div *ngIf=\"fileUploadProgress\" i18n>\n                                                        Upload progress: {{ fileUploadProgress }}\n                                                    </div>\n                                                </div>\n                                            </div>\n\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"card-footer\">\n                            <button type=\"button\" (click)=\"onProfileUpdateSubmit()\" [disabled]=\"loading\"\n                                class=\"btn btn-primary float-right\" i18n>Save</button>\n                        </div>\n                    </div>\n\n\n                </div>\n            </div>\n\n        </form>\n    </div>\n</div>\n<!-- register section -->");
 
 /***/ }),
 
@@ -10707,7 +10482,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title class=\"text-primary\">\n    <div class=\"row\">\n        <div class=\"col-xl-11 col-10\">\n            <div class=\"btn-group btn-group-sm mr-2\" *ngIf=\"isImageLoaded\">\n                <button type=\"button\" class=\"btn btn-primary\" title=\"Move Left\" (click)=\"fnCropperMoveLeft()\">\n                    <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                        <span class=\"icon-angle-left\"></span>\n                    </span>\n                </button>\n                <button type=\"button\" class=\"btn btn-primary\" title=\"Move Right\" (click)=\"fnCropperMoveRight()\">\n                    <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                        <span class=\"icon-angle-right\"></span>\n                    </span>\n                </button>\n                <button type=\"button\" class=\"btn btn-primary\" title=\"Move Up\" (click)=\"fnCropperMoveUp()\">\n                    <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                        <span class=\"icon-angle-up\"></span>\n                    </span>\n                </button>\n                <button type=\"button\" class=\"btn btn-primary\" title=\"Move Down\" (click)=\"fnCropperMoveDown()\">\n                    <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                        <span class=\"icon-angle-down\"></span>\n                    </span>\n                </button>\n            </div>\n    \n            <div class=\"btn-group btn-group-sm  mr-2\" *ngIf=\"isImageLoaded\">\n                <button type=\"button\" class=\"btn btn-primary\" title=\"Rotate Left\" (click)=\"fnCropperRotateLeft()\">\n                    <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                        <span class=\"icon-angle-double-left\"></span>\n                    </span>\n                </button>\n                <button type=\"button\" class=\"btn btn-primary\" title=\"Rotate Right\" (click)=\"fnCropperRotateRight()\">\n                    <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                        <span class=\"icon-angle-double-right\"></span>\n                    </span>\n                </button>\n                <button type=\"button\" class=\"btn btn-primary\" title=\"Reset\" (click)=\"fnCropperReset()\">\n                    <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                        <span class=\"icon-trash\"></span>\n                    </span>\n                </button>\n            </div>\n\n            <div class=\"btn-group btn-group-sm \">\n\n                <label class=\"btn btn-primary\" for=\"inputImage\" title=\"Upload image file\">\n                    <input id=\"ctrlUpload\" type=\"file\" name=\"image\" accept=\"image/*\"\n                        (change)=\"fileChangeEvent($event)\">\n                    <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                        <span class=\"icon-upload\"></span>\n                    </span>\n                </label>\n            </div>\n        </div>\n        <div class=\"col-xl-1 col-2\">\n            <i class=\"icon-close float-right\" mat-button (click)=\"closeDialog()\"></i>\n        </div>\n    </div>\n</h2>\n\n\n<div class=\"row\">\n    <div class=\"col-md-12 d-none\">\n        <!-- <h3>Toolbar:</h3> -->\n        <div class=\"btn-group d-none\">\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Zoom In\" (click)=\"fnCropperZoomIn()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-zoom-in\"></span>\n                </span>\n            </button>\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Zoom Out\" (click)=\"fnCropperZoomOut()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-zoom-out\"></span>\n                </span>\n            </button>\n        </div>\n\n      \n\n       \n\n    </div>\n    <div class=\"text-center col-md-8 col-9\" *ngIf=\"isImageLoaded\">\n       \n        <angular-cropper #angularCropper [cropperOptions]=\"config\" [imageUrl]=\"imageUrl\"\n            (ready)=\"ready($event)\">\n        </angular-cropper>\n    </div>\n    <div class=\"text-center col-md-4 col-3\" *ngIf=\"isImageLoaded\">\n        <div class=\"btn-group\">\n            <button type=\"button\" class=\"btn btn-primary btn-sm\" title=\"Upload\" (click)=\"onUploadMediaOnServer()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\" i18n>\n                    Upload\n                </span>\n            </button>\n        </div>\n        <h5>Preview</h5>\n        <img class=\"img-fluid\" [src]=\"croppedImage\" />\n        <div *ngIf=\"fileUploadProgress\" i18n>\n            Upload progress: {{ fileUploadProgress }}\n        </div>\n        <br>\n    </div>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<h2 mat-dialog-title class=\"text-primary\">\n    <div class=\"row\">\n        <div class=\"col-xl-11 col-10\">\n            <h4>Upload File</h4>\n        </div>\n        <div class=\"col-xl-1 col-2\">\n            <i class=\"icon-close float-right\" mat-button (click)=\"closeDialog()\"></i>\n        </div>\n        <div class=\"col-xl-12 col-12 mt-3\">\n\n            <input id=\"ctrlUpload\" [disabled]=\"fileUploadProgress\" type=\"file\" name=\"image\" accept=\"image/*\" (change)=\"fileChangeEvent($event)\"\n                class=\"border btn btn-light btn-sm btn-block p-3\">\n\n\n        </div>\n\n    </div>\n</h2>\n\n\n<div class=\"row\">\n    <div class=\"col-md-12 d-none\">\n        <!-- <h3>Toolbar:</h3> -->\n        <div class=\"btn-group d-none\">\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Zoom In\" (click)=\"fnCropperZoomIn()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-zoom-in\"></span>\n                </span>\n            </button>\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Zoom Out\" (click)=\"fnCropperZoomOut()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-zoom-out\"></span>\n                </span>\n            </button>\n        </div>\n\n\n\n\n\n    </div>\n    <div class=\"text-center col-md-8 col-7 \" *ngIf=\"isImageLoaded\">\n        <p class=\"small\" *ngIf=\"isImageLoaded\" class=\"mb-2\">Click on save button to upload the image. </p>\n        <angular-cropper #angularCropper [cropperOptions]=\"config\" [imageUrl]=\"imageUrl\" (ready)=\"ready($event)\">\n        </angular-cropper>\n        <div class=\"btn-group btn-group-sm mr-2 mt-2\" *ngIf=\"isImageLoaded\">\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Move Left\" (click)=\"fnCropperMoveLeft()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-angle-left\"></span>\n                </span>\n            </button>\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Move Right\" (click)=\"fnCropperMoveRight()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-angle-right\"></span>\n                </span>\n            </button>\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Move Up\" (click)=\"fnCropperMoveUp()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-angle-up\"></span>\n                </span>\n            </button>\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Move Down\" (click)=\"fnCropperMoveDown()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-angle-down\"></span>\n                </span>\n            </button>\n        </div>\n\n        <div class=\"btn-group btn-group-sm  mr-2 mt-2\" *ngIf=\"isImageLoaded\">\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Rotate Left\" (click)=\"fnCropperRotateLeft()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-angle-double-left\"></span>\n                </span>\n            </button>\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Rotate Right\" (click)=\"fnCropperRotateRight()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-angle-double-right\"></span>\n                </span>\n            </button>\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Reset\" (click)=\"fnCropperReset()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-trash\"></span>\n                </span>\n            </button>\n        </div>\n    </div>\n    <div class=\"text-center col-md-4 col-5\" *ngIf=\"isImageLoaded\">\n\n        <h5>Preview</h5>\n        <img class=\"img-fluid mt-2\" [src]=\"croppedImage\" style=\"max-height: 200px;\" />\n        <div *ngIf=\"fileUploadProgress\" i18n>\n            Upload progress: {{ fileUploadProgress }}\n        </div>\n        <br>\n        <div *ngIf=\"!showBlockingMessageMediatorT\">\n            <button type=\"button\" class=\"btn btn-success mt-3 save\" title=\"Upload\" (click)=\"onUploadMediaOnServer()\">\n                Save\n            </button>  \n        </div>\n        <div *ngIf=\"showBlockingMessageMediatorT\">\n            <button type=\"button\" class=\"btn btn-success mt-3 save\" title=\"Upload\" (click)=\"onUploadMediaOnServer()\">\n                Save\n            </button>  \n            <h5 class=\"mt-2890\">Caution! Once saved you can not change media again.</h5>\n        </div>\n        \n    </div>\n</div>");
 
 /***/ }),
 
@@ -11277,7 +11052,7 @@ let ProfilePortfolioComponent = class ProfilePortfolioComponent {
                     //console.log(events.body);
                     //alert('SUCCESS !!');
                     lodash__WEBPACK_IMPORTED_MODULE_9__["pullAt"](this.myProfileFiles, _index);
-                    this.alertService.success('Uploaded Successfully !!', true);
+                    this.alertService.success('Uploaded successfully', true);
                     let _uploadedUrl = events.body["data"].path;
                     if (lodash__WEBPACK_IMPORTED_MODULE_9__["startsWith"](_uploadedUrl, '/')) {
                         _uploadedUrl = _uploadedUrl.substr(1);
@@ -12708,7 +12483,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"frame\" class=\"mt-md-n4 message_frame\">\n    <div id=\"sidepanel\">\n        <div id=\"profile\">\n\n            <h4 class=\"text-primary\">My Loans</h4>\n            <div class=\"wrap avittiNone\">\n                <img id=\"profile-img\" src=\"./assets/img/user-default.png\" default=\"\" class=\"online\" alt=\"\" />\n                <p class=\"mt-2\"> {{currentUser.firstName | titlecase}}</p>\n                <i class=\"fa fa-chevron-down expand-button\" aria-hidden=\"true\"></i>\n            </div>\n        </div>\n        <div class=\"d-none\" id=\"search\">\n            <label for=\"\"><i class=\"icon-search\" aria-hidden=\"true\"></i></label>\n            <input type=\"text\" placeholder=\"Search contacts...\" />\n        </div>\n        <div id=\"contacts\" class=\"mt-3\">\n            <ul>\n                <li class=\"contact\" *ngFor=\"let currentContactItem of myContactsList | orderBy: ['-updatedOn']\"\n                    [ngClass]=\"{ 'active': (currentContact?._id==currentContactItem?._id) }\">\n                    <div (click)=\"setCurrentContact(currentContactItem)\" class=\"wrap\">\n                        <div class=\"d-none\" [ngSwitch]=\"currentContactItem.onlineStatus\">\n                            <span *ngSwitchCase=\"online\" class=\"contact-status online\"></span>\n                            <span *ngSwitchCase=\"busy\" class=\"contact-status busy\"></span>\n                            <span *ngSwitchCase=\"away\" class=\"contact-status away\"></span>\n                            <span *ngSwitchDefault class=\"contact-status\"></span>\n                        </div>\n\n                        <img *ngIf=\"!currentContactItem.isGroup\" src=\"./assets/img/user-default.png\" alt=\" \" />\n                        <img *ngIf=\"currentContactItem.isGroup\" src=\"./assets/img/users.png\" alt=\" \" />\n                        <div class=\"meta\">\n                            <div class=\"name\">\n                                <i *ngIf=\"messagesService.returnTotalPendingMessagesForUser(currentContactItem._id)>0\" class=\"badge badge-success float-right\" i18n> {{messagesService.returnTotalPendingMessagesForUser(currentContactItem._id)}}</i>\n                            </div>\n                            <div class=\"name\">\n                                {{returnNameOfAnyNonSelfUserFromList(currentContactItem.usersCollAdmin, '\n                                - ', currentContactItem.firstName) | titlecase}}\n                            </div>\n                            <div class=\"small font-weight-light\">\n                                {{currentContactItem.createdOn | date}}\n                                <!-- {{currentContactItem.lastMessage || 'NA'}} -->\n                            </div>\n                        </div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n        <!-- <div id=\"bottom-bar\">\n            <button id=\"addcontact\"><i class=\"fa fa-user-plus fa-fw\" aria-hidden=\"true\"></i> <span>Add\n                    contact</span></button>\n            <button id=\"settings\"><i class=\"fa fa-cog fa-fw\" aria-hidden=\"true\"></i> <span>Settings</span></button>\n        </div> -->\n    </div>\n    <div class=\"content text-center\" *ngIf=\"!currentContact\">\n        <div class=\"mt-5 text-center blog-agency no-item\">\n            <img class=\"mt-5\" src=\"assets/img/noresult.png\">\n\n            <!--            \n            <h4 class=\"font-weight-normal\">Choose A Session To Start Collaberating</h4> -->\n            <h4 class=\"text-black-50\"> Select your loan to start chatting.\n            </h4>\n\n        </div>\n        <div class=\"mt-5 d-none\">\n\n            <textarea class=\"form-control\" type=\"text\" [(ngModel)]=\"tts_textarea\"></textarea>\n            <select class=\"form-control\" #langSelect *ngIf=\"speechData\" (change)=\"setLanguage(langSelect.value)\">\n                <option [value]=\"i\" *ngFor=\"let voice of speechData.voices;let i = index;\">\n                    {{voice.name}} - {{voice.lang}}\n                </option>\n            </select>\n            <br>\n            <i class=\"icon-microphone-alt\" (click)=\"start()\" title=\"Start\"></i>\n            <button class=\"btn btn-xs d-none\" (click)=\"pause()\"> pause {{speech.volume}}</button>\n            <button class=\"btn btn-xs d-none\" (click)=\"resume()\"> resume </button>\n\n            <button class=\"btn btn-xs d-none\" (click)=\"speech.volume = speech.volume - 1\"> - </button> <button\n                class=\"btn btn-xs d-none\" (click)=\"speech.volume = speech.volume + 1\"> + </button>\n        </div>\n    </div>\n    <div class=\"content\" *ngIf=\"currentContact\">\n        <div class=\"contact-profile shadow-sm\">\n            <!-- <img src=\"./assets/img/user-default.png\" alt=\" \" /> -->\n\n            <i class=\"icon-arrow-left float-left\" (click)=\"goback_to_contacts()\"></i>\n\n            <div class=\"name m-md-3 m-0\">{{returnNameOfAnyNonSelfUserFromList(currentContact.usersCollAdmin, ' - ',\n                currentContact.firstName) | titlecase}}</div>\n            <a (click)=\"showAppliedToSessionCallMediator(currentContact._id)\">\n                <span class=\"badge badge-primary\">Details</span>\n            </a>\n            <div class=\"social-media avittiNone\" style=\"right: 0;top: 3px;position: absolute;\">\n                <select [(ngModel)]=\"currentSelectedLanguageCode\"\n                    [ngClass]=\"{ 'is-invalid': submitted && f.location.errors }\" style=\"width: 75px;\">\n                    <option value=\"\" selected>Language</option>\n                    <option *ngFor=\"let language of languageCodes\" [ngValue]=\"language.language\">\n                        {{language.name}}</option>\n                </select>\n                <a (click)=\"joinNewVCSessionWithContact(currentContact._id,currentContact.loanId,currentContact.isGroup)\"\n                    routerLinkActive=\"active\"> <i class=\"icon-video-camera fa-lg\"></i></a>\n\n                <!-- <i class=\"icon-comment \"></i> -->\n            </div>\n        </div>\n        <div id=\"chat_messages\" class=\"messages\">\n            <!--#scrollMe [scrollTop]=\"scrollMe.scrollHeight\"\n            $(\"#chat_messages\").animate({\n    scrollTop: $(\"#chat_messages\").height()\n}, 400)\n            -->\n            <ul>\n                <!--\n                <li n class=\"sent \">\n                    <img src=\"http://emilcarlsson.se./assets/mikeross.png \" alt=\" \" /> \n                    <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>\n                </li>\n                <li class=\"replies \">\n                    <img src=\"http://emilcarlsson.se./assets/harveyspecter.png \" alt=\" \" /> \n                    <p>When you're backed against the wall, break the god damn thing down.</p>\n                </li>\n            -->\n                <!-- | sortArrayByUpdatedOn:['updatedOn']-->\n\n                <li *ngFor=\"let _chat of allChatListOfRoom; trackBy $index; let i = index\"\n                    [ngClass]=\"{ 'replies': _chat.userId == currentUser._id, 'sent': _chat.userId!=currentUser._id }\">\n                    <!-- <img src=\"./assets/img/user-default.png\" alt=\" \" /> -->\n                    <ngui-inview [observerOptions]=\"myObserverOptions\" (inview)=\"messageViewed(_chat._id, _chat.message)\" (notInview)=\"messageNotViewed(_chat._id, _chat.message)\">\n                        <p *ngIf>\n                            <span id=\"{{_chat._id}}\">\n                                {{_chat.message}}\n                            </span>\n                            <i class=\"icon-microphone-alt mr-1 avittiNone\" (click)=\"start(_chat.message)\"\n                                title=\"Text To Speech\"></i>\n                            <i (click)=\"translateTextInOtherLanguage(_chat.message, currentSelectedLanguageCode, false, _chat._id)\"\n                                title=\"Speech To Text\" class=\"icon-flickr-alt avittiNone\"></i>\n                        </p>\n                    </ngui-inview>\n\n                </li>\n\n            </ul>\n        </div>\n        <div class=\"message-input\">\n            <div class=\"d-none\">\n                <div *ngIf=\"voiceActiveSectionDisabled; else voicesection;\">\n                    <button type=\"button\" (click)=\"startVoiceRecognition()\">Record</button>\n                </div>\n                <ng-template #voicesection>\n                    <ng-container *ngIf=\"!voiceActiveSectionError; else failure\">\n                        <ng-container *ngIf=\"message2send; else start\">\n                            <!-- <span>{{message2send}}</span> -->\n                        </ng-container>\n                        <ng-template #start>\n                            <ng-container *ngIf=\"voiceActiveSectionListening; else beginning\">\n                                <span>Listening...</span>\n                            </ng-container>\n                            <ng-template #beginning>\n                                <span>Start talking...</span>\n                            </ng-template>\n                        </ng-template>\n                    </ng-container>\n                    <ng-template #failure>\n                        <span>Didn't catch that</span>\n                    </ng-template>\n                    <div>\n                        <button (click)=\"closeVoiceRecognition()\">Close</button>\n                        <button (click)=\"startVoiceRecognition()\">Restart</button>\n                    </div>\n                </ng-template>\n            </div>\n\n\n            <div class=\"wrap_send_input\"\n                *ngIf=\"(!currentContact.isOneWayGroup) || (currentContact.isOneWayGroup && currentUser.role==Role.Admin)\">\n                <!-- <input (keydown.enter)=\"sendMessage(currentContact._id, message2send)\" type=\"text \" placeholder=\"Write your message... \" [(ngModel)]=\"message2send\" />\n                \n                <button [disabled]=\"returnTifCurrentContactIsNullOrEmpty(currentContact) \" class=\"submit \" (click)=\"sendMessage(currentContact._id, message2send)\">\n\t\t\t\t\t<i class=\"fa fa-paper-plane \" aria-hidden=\"true \"></i>\n                </button> -->\n                <small class=\"text-danger ml-1 mb-3\"\n                    *ngIf=\"message2send && (message2send.includes('skype') || message2send.includes('facebook') || message2send.includes('wechat') || message2send.includes('messenger') || message2send.includes('messenger')|| message2send.includes('@') || message2send.includes('(a)') || message2send.includes('-a-') || message2send.includes('.dk') || message2send.includes('.com') )\">Your\n                    message cannot have restricted keywords: messenger, facebook, whatsapp, wechat, skype, @,(a), -a-\n                    , .com, .dk\n                </small>\n                <div class=\"input-group input-group-lg shadow-lg mt-1\">\n\n                    <input type=\"text\" (keydown.enter)=\"sendMessage(currentContact._id, message2send)\" type=\"text \"\n                        placeholder=\"Write your message... \" [(ngModel)]=\"message2send\"\n                        class=\"form-control border-0 bg-light2\" placeholder=\"Start Typing...\">\n                    <div class=\"input-group-append btn-success\">\n                        <button class=\"btn btn-light d-none avittiNone\"\n                            *ngIf=\"voiceActiveSectionListening; else beginning\" (click)=\"closeVoiceRecognition()\">\n                            <span class=\"small font-weight-light mr-1\">Listening...</span> <i\n                                class=\"fas fa-headset\"></i>\n                        </button>\n                        <button *ngIf=\"!voiceActiveSectionListening\" class=\"btn btn-light avittiNone\"\n                            (click)=\"startVoiceRecognition()\">\n                            <i class=\"fas icon-microphone fa-lg\" aria-hidden=\"true \"></i>\n                        </button>\n\n\n                        <button class=\"btn btn-link\" type=\"button\"\n                            [disabled]=\"!returnTifCurrentContactIsNullOrEmpty(currentContact) && !message2send\"\n                            (click)=\"sendMessage(currentContact._id, message2send)\">\n                            <i class=\"icon-arrow-right\" aria-hidden=\"true \"></i>\n                        </button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div id=\"frame\" class=\"mt-md-n4 message_frame\">\n    <div id=\"sidepanel\">\n        <div id=\"profile\">\n\n            <h4 class=\"text-primary\">My Loans</h4>\n            <div class=\"wrap avittiNone\">\n                <img id=\"profile-img\" src=\"./assets/img/user-default.png\" default=\"\" class=\"online\" alt=\"\" />\n                <p class=\"mt-2\"> {{currentUser.firstName | titlecase}}</p>\n                <i class=\"fa fa-chevron-down expand-button\" aria-hidden=\"true\"></i>\n            </div>\n        </div>\n        <div class=\"d-none\" id=\"search\">\n            <label for=\"\"><i class=\"icon-search\" aria-hidden=\"true\"></i></label>\n            <input type=\"text\" placeholder=\"Search contacts...\" />\n        </div>\n        <div id=\"contacts\" class=\"mt-3\">\n            <ul>\n                <li class=\"contact\" *ngFor=\"let currentContactItem of messagesService.myContactsList | orderBy: ['-updatedOn']\"\n                    [ngClass]=\"{ 'active': (currentContact?._id==currentContactItem?._id) }\">\n                    <div (click)=\"setCurrentContact(currentContactItem)\" class=\"wrap\">\n                        <div class=\"d-none\" [ngSwitch]=\"currentContactItem.onlineStatus\">\n                            <span *ngSwitchCase=\"online\" class=\"contact-status online\"></span>\n                            <span *ngSwitchCase=\"busy\" class=\"contact-status busy\"></span>\n                            <span *ngSwitchCase=\"away\" class=\"contact-status away\"></span>\n                            <span *ngSwitchDefault class=\"contact-status\"></span>\n                        </div>\n\n                        <img *ngIf=\"!currentContactItem.isGroup\" src=\"./assets/img/user-default.png\" alt=\" \" />\n                        <img *ngIf=\"currentContactItem.isGroup\" src=\"./assets/img/users.png\" alt=\" \" />\n                        <div class=\"meta\">\n                            <div class=\"name\">\n                                <i *ngIf=\"messagesService.returnTotalPendingMessagesForUser(currentContactItem._id)>0\"\n                                    class=\"badge badge-success float-right\" i18n>\n                                    {{messagesService.returnTotalPendingMessagesForUser(currentContactItem._id)}}</i>\n                            </div>\n                            <div class=\"name\">\n                                {{returnNameOfAnyNonSelfUserFromList(currentContactItem.usersCollAdmin, '\n                                - ', currentContactItem.firstName) | titlecase}}\n                            </div>\n                            <div class=\"small font-weight-light\">\n                                {{currentContactItem.createdOn | date}}\n                                <!-- {{currentContactItem.lastMessage || 'NA'}} -->\n                            </div>\n                        </div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n        <!-- <div id=\"bottom-bar\">\n            <button id=\"addcontact\"><i class=\"fa fa-user-plus fa-fw\" aria-hidden=\"true\"></i> <span>Add\n                    contact</span></button>\n            <button id=\"settings\"><i class=\"fa fa-cog fa-fw\" aria-hidden=\"true\"></i> <span>Settings</span></button>\n        </div> -->\n    </div>\n    <div class=\"content text-center\" *ngIf=\"!currentContact\">\n        <div class=\"mt-5 text-center blog-agency no-item\">\n            <img class=\"mt-5\" src=\"assets/img/noresult.png\">\n\n            <!--            \n            <h4 class=\"font-weight-normal\">Choose A Session To Start Collaberating</h4> -->\n            <h4 class=\"text-black-50\"> Select your loan to start chatting.\n            </h4>\n\n        </div>\n        <div class=\"mt-5 d-none\">\n\n            <textarea class=\"form-control\" type=\"text\" [(ngModel)]=\"tts_textarea\"></textarea>\n            <select class=\"form-control\" #langSelect *ngIf=\"speechData\" (change)=\"setLanguage(langSelect.value)\">\n                <option [value]=\"i\" *ngFor=\"let voice of speechData.voices;let i = index;\">\n                    {{voice.name}} - {{voice.lang}}\n                </option>\n            </select>\n            <br>\n            <i class=\"icon-microphone-alt\" (click)=\"start()\" title=\"Start\"></i>\n            <button class=\"btn btn-xs d-none\" (click)=\"pause()\"> pause {{speech.volume}}</button>\n            <button class=\"btn btn-xs d-none\" (click)=\"resume()\"> resume </button>\n\n            <button class=\"btn btn-xs d-none\" (click)=\"speech.volume = speech.volume - 1\"> - </button> <button\n                class=\"btn btn-xs d-none\" (click)=\"speech.volume = speech.volume + 1\"> + </button>\n        </div>\n    </div>\n    <div class=\"content\" *ngIf=\"currentContact\">\n        <div class=\"contact-profile shadow-sm\">\n            <!-- <img src=\"./assets/img/user-default.png\" alt=\" \" /> -->\n\n            <i class=\"icon-arrow-left float-left\" (click)=\"goback_to_contacts()\"></i>\n\n            <div class=\"name m-md-3 m-0\">{{returnNameOfAnyNonSelfUserFromList(currentContact.usersCollAdmin, ' - ',\n                currentContact.firstName) | titlecase}}</div>\n            <a class=\"p-2 float-right my-2\" (click)=\"showAppliedToSessionCallMediator(currentContact._id)\">\n                <span class=\"badge badge-light\">Details</span>\n            </a>\n            <div class=\"social-media avittiNone\" style=\"right: 0;top: 3px;position: absolute;\">\n                <select [(ngModel)]=\"currentSelectedLanguageCode\"\n                    [ngClass]=\"{ 'is-invalid': submitted && f.location.errors }\" style=\"width: 75px;\">\n                    <option value=\"\" selected>Language</option>\n                    <option *ngFor=\"let language of languageCodes\" [ngValue]=\"language.language\">\n                        {{language.name}}</option>\n                </select>\n                <a (click)=\"joinNewVCSessionWithContact(currentContact._id,currentContact.loanId,currentContact.isGroup)\"\n                    routerLinkActive=\"active\"> <i class=\"icon-video-camera fa-lg\"></i></a>\n\n                <!-- <i class=\"icon-comment \"></i> -->\n            </div>\n        </div>\n        <div id=\"chat_messages\" class=\"messages\">\n            <!--#scrollMe [scrollTop]=\"scrollMe.scrollHeight\"\n            $(\"#chat_messages\").animate({\n    scrollTop: $(\"#chat_messages\").height()\n}, 400)\n            -->\n            <ul>\n                <!--\n                <li n class=\"sent \">\n                    <img src=\"http://emilcarlsson.se./assets/mikeross.png \" alt=\" \" /> \n                    <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>\n                </li>\n                <li class=\"replies \">\n                    <img src=\"http://emilcarlsson.se./assets/harveyspecter.png \" alt=\" \" /> \n                    <p>When you're backed against the wall, break the god damn thing down.</p>\n                </li>\n            -->\n                <!-- | sortArrayByUpdatedOn:['updatedOn']-->\n\n                <li *ngFor=\"let _chat of allChatListOfRoom; trackBy $index; let i = index\"\n                    [ngClass]=\"{ 'replies': _chat.userId == currentUser._id, 'sent': _chat.userId!=currentUser._id }\">\n                    <!-- <img src=\"./assets/img/user-default.png\" alt=\" \" /> -->\n                    <ngui-inview [observerOptions]=\"myObserverOptions\"\n                        (inview)=\"messageViewed(_chat._id, _chat.message)\"\n                        (notInview)=\"messageNotViewed(_chat._id, _chat.message)\">\n                    </ngui-inview>\n\n                    <p>\n                        <small class=\"btn-block text-cm-green font-weight-light cursor-pointer mb-1\"\n                            title=\"{{returnNameOfMessageSender(_chat,true)}}\">{{returnNameOfMessageSender(_chat)}}</small>\n                        <span class=\"chat_message_inner\" id=\"{{_chat._id}}\">\n                            {{_chat.message}}\n                        </span>\n                        <i class=\"icon-microphone-alt mr-1 avittiNone\" (click)=\"start(_chat.message)\"\n                            title=\"Text To Speech\"></i>\n                        <i (click)=\"translateTextInOtherLanguage(_chat.message, currentSelectedLanguageCode, false, _chat._id)\"\n                            title=\"Speech To Text\" class=\"icon-flickr-alt avittiNone\"></i>\n                        <br>\n                        <span class=\"small font-weight-light\">\n                            {{_chat.createdOn | date:'medium'}}\n                        </span>\n                    </p>\n                </li>\n                <!--\n                <li>\n                    <ngui-inview [observerOptions]=\"myObserverOptions\"\n                        (inview)=\"lastScreenReached('last-message-in-app')\">\n                    </ngui-inview>\n                    <span class=\"small font-weight-light\">\n                        load more...\n                    </span>\n                </li>\n                -->\n            </ul>\n        </div>\n        <div class=\"message-input\">\n            <div class=\"d-none\">\n                <div *ngIf=\"voiceActiveSectionDisabled; else voicesection;\">\n                    <button type=\"button\" (click)=\"startVoiceRecognition()\">Record</button>\n                </div>\n                <ng-template #voicesection>\n                    <ng-container *ngIf=\"!voiceActiveSectionError; else failure\">\n                        <ng-container *ngIf=\"message2send; else start\">\n                            <!-- <span>{{message2send}}</span> -->\n                        </ng-container>\n                        <ng-template #start>\n                            <ng-container *ngIf=\"voiceActiveSectionListening; else beginning\">\n                                <span>Listening...</span>\n                            </ng-container>\n                            <ng-template #beginning>\n                                <span>Start talking...</span>\n                            </ng-template>\n                        </ng-template>\n                    </ng-container>\n                    <ng-template #failure>\n                        <span>Didn't catch that</span>\n                    </ng-template>\n                    <div>\n                        <button (click)=\"closeVoiceRecognition()\">Close</button>\n                        <button (click)=\"startVoiceRecognition()\">Restart</button>\n                    </div>\n                </ng-template>\n            </div>\n\n\n            <div class=\"wrap_send_input\"\n                *ngIf=\"(!currentContact.isOneWayGroup) || (currentContact.isOneWayGroup && currentUser.role==Role.Admin)\">\n                <!-- <input (keydown.enter)=\"sendMessage(currentContact._id, message2send)\" type=\"text \" placeholder=\"Write your message... \" [(ngModel)]=\"message2send\" />\n                \n                <button [disabled]=\"returnTifCurrentContactIsNullOrEmpty(currentContact) \" class=\"submit \" (click)=\"sendMessage(currentContact._id, message2send)\">\n\t\t\t\t\t<i class=\"fa fa-paper-plane \" aria-hidden=\"true \"></i>\n                </button> -->\n                <small class=\"text-danger ml-1 mb-3\"\n                    *ngIf=\"message2send && (message2send.includes('skype') || message2send.includes('facebook') || message2send.includes('wechat') || message2send.includes('messenger') || message2send.includes('messenger')|| message2send.includes('@') || message2send.includes('(a)') || message2send.includes('-a-') || message2send.includes('.dk') || message2send.includes('.com') )\">Your\n                    message cannot have restricted keywords: messenger, facebook, whatsapp, wechat, skype, @,(a), -a-\n                    , .com, .dk\n                </small>\n                <div class=\"input-group input-group-lg shadow-lg mt-1\">\n\n                    <input type=\"text\" (keydown.enter)=\"sendMessage(currentContact._id, message2send)\" type=\"text \"\n                        placeholder=\"Write your message... \" [(ngModel)]=\"message2send\"\n                        class=\"form-control border-0 bg-light2\" placeholder=\"Start Typing...\">\n                    <div class=\"input-group-append btn-success\">\n                        <button class=\"btn btn-light d-none avittiNone\"\n                            *ngIf=\"voiceActiveSectionListening; else beginning\" (click)=\"closeVoiceRecognition()\">\n                            <span class=\"small font-weight-light mr-1\">Listening...</span> <i\n                                class=\"fas fa-headset\"></i>\n                        </button>\n                        <button *ngIf=\"!voiceActiveSectionListening\" class=\"btn btn-light avittiNone\"\n                            (click)=\"startVoiceRecognition()\">\n                            <i class=\"fas icon-microphone fa-lg\" aria-hidden=\"true \"></i>\n                        </button>\n\n\n                        <button class=\"btn btn-link\" type=\"button\"\n                            [disabled]=\"!returnTifCurrentContactIsNullOrEmpty(currentContact) && !message2send\"\n                            (click)=\"sendMessage(currentContact._id, message2send)\">\n                            <i class=\"icon-arrow-right\" aria-hidden=\"true \"></i>\n                        </button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>");
 
 /***/ }),
 
@@ -14385,7 +14160,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵc", function() { return LoadImageService; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "fXoL");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "jhN1");
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ "Yz0s");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ "sJZM");
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common */ "ofXK");
 
 
@@ -16932,18 +16707,15 @@ let MessagesComponent = class MessagesComponent {
                 this.allChatListOfRoom = [];
             }
             if (_currentChatObj) {
-                this.allChatListOfRoom.push(_currentChatObj);
-                $('#chat_messages').animate({
-                    scrollTop: $('#chat_messages').get(0).scrollHeight
-                }, 'fast');
-            }
-        });
-        this.socketService.listenEventToAddNewContact().subscribe(_currentContactObj => {
-            if (!this.myContactsList) {
-                this.myContactsList = [];
-            }
-            if (_currentContactObj) {
-                this.myContactsList.push(_currentContactObj);
+                if (_currentChatObj.roomId == this.currentContact._id) {
+                    let mappedAllChatListOfRoom = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](this.allChatListOfRoom, '_id');
+                    mappedAllChatListOfRoom[_currentChatObj._id] = _currentChatObj;
+                    this.allChatListOfRoom = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](mappedAllChatListOfRoom);
+                    //this.allChatListOfRoom.push(_currentChatObj);
+                    $('#chat_messages').animate({
+                        scrollTop: $('#chat_messages').get(0).scrollHeight
+                    }, 'fast');
+                }
             }
         });
         //start tts
@@ -16974,6 +16746,8 @@ let MessagesComponent = class MessagesComponent {
             });
         }
         //end tts
+        this.messagesService.getAllMyContacts();
+        this.messagesService.getAllUsers();
         let paramobj = history.state;
         if (paramobj) {
             let contactId = paramobj['contactId'];
@@ -17037,7 +16811,6 @@ let MessagesComponent = class MessagesComponent {
         return false;
     }
     ngOnInit() {
-        this.getAllMyContacts();
         this.translateTextInOtherLanguage('', '', false, null);
     }
     translateTextInOtherLanguage(string2Translate, languageCode2Translate, sendDirect2ChatT, chatId) {
@@ -17100,12 +16873,6 @@ let MessagesComponent = class MessagesComponent {
             */
         });
     }
-    getAllUsers() {
-        let _data = {};
-        this.socketService.getAllUsers(_data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(users => {
-            this.allUsersList = users;
-        });
-    }
     sendMessage(_roomId, _message) {
         if (_message == null || typeof _message == 'undefined' || _message == '' || !_message) {
             return;
@@ -17150,20 +16917,15 @@ let MessagesComponent = class MessagesComponent {
                 break;
         }
         if (_message != null && typeof _message != 'undefined' && _message != '') {
-            this.socketService.sendEventWithMessageChatRoom(_roomId, this.currentUser._id, _message);
+            let createdByUserObj = {
+                firstName: this.currentUser.firstName,
+                lastName: this.currentUser.firstName,
+                emailAddress: this.currentUser.emailAddress,
+                selfProfileUrl: this.currentUser.selfProfileUrl
+            };
+            this.socketService.sendEventWithMessageChatRoom(_roomId, this.currentUser._id, _message, createdByUserObj);
             this.message2send = '';
         }
-    }
-    getAllMyContacts() {
-        let _data = {};
-        let _currentUserId = this.currentUser._id;
-        this.socketService.getAllMyContacts(_currentUserId, this.currentUser.role).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(users => {
-            this.myContactsList = lodash__WEBPACK_IMPORTED_MODULE_8__["filter"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](users), function (e) {
-                if (e) {
-                    return (e._id != _currentUserId);
-                }
-            });
-        });
     }
     setCurrentContact(currentContactItem) {
         if (currentContactItem) {
@@ -17206,8 +16968,9 @@ let MessagesComponent = class MessagesComponent {
         }
     }
     getAllChatByRoomId(_roomId) {
+        let _allChatListOfRoomFiltered = lodash__WEBPACK_IMPORTED_MODULE_8__["filter"](this.allChatListOfRoom, { roomId: _roomId });
         let _data = {};
-        this.socketService.sendEventToGetAllChatOfRoomWithPromise(_roomId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(chats => {
+        this.socketService.sendEventToGetAllChatOfRoomWithPromise(_roomId, lodash__WEBPACK_IMPORTED_MODULE_8__["keys"](_allChatListOfRoomFiltered).length).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(chats => {
             this.allChatListOfRoom = chats;
             setTimeout(() => {
                 $('#chat_messages').animate({
@@ -17541,8 +17304,38 @@ let MessagesComponent = class MessagesComponent {
     messageViewed(chatId, message) {
         this.updateChatReadByUser(chatId);
     }
+    lastScreenReached(message) {
+        if (message == 'last-message-in-app') {
+            console.log('748', lodash__WEBPACK_IMPORTED_MODULE_8__["keys"](this.allChatListOfRoom).length);
+            this.getAllChatByRoomId(this.currentContact._id);
+        }
+    }
     messageNotViewed(chatId, message) {
         //debugger;
+    }
+    returnNameOfMessageSender(_chat, returnEmailIdT = false) {
+        try {
+            if (_chat && _chat.createdByUserObj) {
+                if (_chat.userId != this.currentUser._id) {
+                    switch (_chat.createdByUserObj.role) {
+                        case src_app_models__WEBPACK_IMPORTED_MODULE_5__["Role"].Admin:
+                            return 'Admin';
+                            break;
+                        default:
+                            if (returnEmailIdT) {
+                                return (_chat.createdByUserObj ? ((_chat.createdByUserObj.emailAddress || '')) : '');
+                            }
+                            else {
+                                return (_chat.createdByUserObj ? ((_chat.createdByUserObj.firstName || '') + ' ' + (_chat.createdByUserObj.lastName || '')) : '');
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+        catch (ex) {
+        }
+        return '';
     }
 };
 MessagesComponent.ctorParameters = () => [
@@ -17925,6 +17718,282 @@ PaymentService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         _add_funds_service__WEBPACK_IMPORTED_MODULE_6__["AddFundsService"]])
 ], PaymentService);
 
+
+
+/***/ }),
+
+/***/ "sJZM":
+/*!************************************************************************!*\
+  !*** ./node_modules/ngx-image-cropper/node_modules/tslib/tslib.es6.js ***!
+  \************************************************************************/
+/*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __createBinding, __exportStar, __values, __read, __spread, __spreadArrays, __spreadArray, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__extends", function() { return __extends; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__assign", function() { return __assign; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__rest", function() { return __rest; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__decorate", function() { return __decorate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__param", function() { return __param; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__metadata", function() { return __metadata; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__awaiter", function() { return __awaiter; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__generator", function() { return __generator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__createBinding", function() { return __createBinding; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__exportStar", function() { return __exportStar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__values", function() { return __values; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__read", function() { return __read; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spread", function() { return __spread; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spreadArrays", function() { return __spreadArrays; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__spreadArray", function() { return __spreadArray; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__await", function() { return __await; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncGenerator", function() { return __asyncGenerator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncDelegator", function() { return __asyncDelegator; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__asyncValues", function() { return __asyncValues; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function() { return __makeTemplateObject; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importStar", function() { return __importStar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__importDefault", function() { return __importDefault; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldGet", function() { return __classPrivateFieldGet; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "__classPrivateFieldSet", function() { return __classPrivateFieldSet; });
+/*! *****************************************************************************
+Copyright (c) Microsoft Corporation.
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+PERFORMANCE OF THIS SOFTWARE.
+***************************************************************************** */
+/* global Reflect, Promise */
+
+var extendStatics = function(d, b) {
+    extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+    return extendStatics(d, b);
+};
+
+function __extends(d, b) {
+    if (typeof b !== "function" && b !== null)
+        throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+    extendStatics(d, b);
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+}
+
+var __assign = function() {
+    __assign = Object.assign || function __assign(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+        }
+        return t;
+    }
+    return __assign.apply(this, arguments);
+}
+
+function __rest(s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+}
+
+function __decorate(decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+}
+
+function __param(paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+}
+
+function __metadata(metadataKey, metadataValue) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+}
+
+function __awaiter(thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+}
+
+function __generator(thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+}
+
+var __createBinding = Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+});
+
+function __exportStar(m, o) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) __createBinding(o, m, p);
+}
+
+function __values(o) {
+    var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
+    if (m) return m.call(o);
+    if (o && typeof o.length === "number") return {
+        next: function () {
+            if (o && i >= o.length) o = void 0;
+            return { value: o && o[i++], done: !o };
+        }
+    };
+    throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+}
+
+function __read(o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+}
+
+/** @deprecated */
+function __spread() {
+    for (var ar = [], i = 0; i < arguments.length; i++)
+        ar = ar.concat(__read(arguments[i]));
+    return ar;
+}
+
+/** @deprecated */
+function __spreadArrays() {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+}
+
+function __spreadArray(to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+}
+
+function __await(v) {
+    return this instanceof __await ? (this.v = v, this) : new __await(v);
+}
+
+function __asyncGenerator(thisArg, _arguments, generator) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var g = generator.apply(thisArg, _arguments || []), i, q = [];
+    return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i;
+    function verb(n) { if (g[n]) i[n] = function (v) { return new Promise(function (a, b) { q.push([n, v, a, b]) > 1 || resume(n, v); }); }; }
+    function resume(n, v) { try { step(g[n](v)); } catch (e) { settle(q[0][3], e); } }
+    function step(r) { r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r); }
+    function fulfill(value) { resume("next", value); }
+    function reject(value) { resume("throw", value); }
+    function settle(f, v) { if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]); }
+}
+
+function __asyncDelegator(o) {
+    var i, p;
+    return i = {}, verb("next"), verb("throw", function (e) { throw e; }), verb("return"), i[Symbol.iterator] = function () { return this; }, i;
+    function verb(n, f) { i[n] = o[n] ? function (v) { return (p = !p) ? { value: __await(o[n](v)), done: n === "return" } : f ? f(v) : v; } : f; }
+}
+
+function __asyncValues(o) {
+    if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+    var m = o[Symbol.asyncIterator], i;
+    return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () { return this; }, i);
+    function verb(n) { i[n] = o[n] && function (v) { return new Promise(function (resolve, reject) { v = o[n](v), settle(resolve, reject, v.done, v.value); }); }; }
+    function settle(resolve, reject, d, v) { Promise.resolve(v).then(function(v) { resolve({ value: v, done: d }); }, reject); }
+}
+
+function __makeTemplateObject(cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+
+var __setModuleDefault = Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+};
+
+function __importStar(mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+}
+
+function __importDefault(mod) {
+    return (mod && mod.__esModule) ? mod : { default: mod };
+}
+
+function __classPrivateFieldGet(receiver, state, kind, f) {
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+}
+
+function __classPrivateFieldSet(receiver, state, value, kind, f) {
+    if (kind === "m") throw new TypeError("Private method is not writable");
+    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+    return (kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value)), value;
+}
 
 
 /***/ }),
@@ -18537,8 +18606,10 @@ let ProfileComponent = class ProfileComponent {
             this.addExternalAppLinks(true, null, this.appName, this.profileForm.get('externalAppLinkUrl').value);
         }
         else {
-            this.alertService.error("Please Provide app links");
-            return;
+            if (!byPassValidation) {
+                this.alertService.error("Please Provide facebook link");
+                return;
+            }
         }
         if (!byPassValidation) {
             if (this.profileForm.invalid) {
@@ -18583,7 +18654,7 @@ let ProfileComponent = class ProfileComponent {
                     }
                     else {
                         this.alertService.success('Your Profile is Updated successfully', true);
-                        this.appRouterService.appRouter(this.authenticationService.currentUserValue);
+                        //  this.appRouterService.appRouter(this.authenticationService.currentUserValue);
                     }
                 }
             }
@@ -18715,7 +18786,7 @@ let ProfileComponent = class ProfileComponent {
                 //console.log(events.body);
                 //alert('SUCCESS !!');
                 this.fileData = null;
-                this.alertService.success('Uploaded Successfully !!', true);
+                this.alertService.success('Uploaded successfully', true);
                 let _uploadedUrl = events.body["data"].path;
                 if (lodash__WEBPACK_IMPORTED_MODULE_12__["startsWith"](_uploadedUrl, '/')) {
                     _uploadedUrl = _uploadedUrl.substr(1);
@@ -18795,7 +18866,7 @@ let ProfileComponent = class ProfileComponent {
                     //console.log(events.body);
                     //alert('SUCCESS !!');
                     lodash__WEBPACK_IMPORTED_MODULE_12__["pullAt"](this.myProfileFiles, _index);
-                    this.alertService.success('Uploaded Successfully !!', true);
+                    this.alertService.success('Uploaded successfully', true);
                     let _uploadedUrl = events.body["data"].path;
                     if (lodash__WEBPACK_IMPORTED_MODULE_12__["startsWith"](_uploadedUrl, '/')) {
                         _uploadedUrl = _uploadedUrl.substr(1);
@@ -18880,7 +18951,7 @@ let ProfileComponent = class ProfileComponent {
                 //console.log(events.body);
                 //alert('SUCCESS !!');
                 this.fileData4Profile = null;
-                this.alertService.success('Uploaded Successfully !!', true);
+                this.alertService.success('Uploaded successfully', true);
                 let _uploadedUrl = events.body["data"].path;
                 if (lodash__WEBPACK_IMPORTED_MODULE_12__["startsWith"](_uploadedUrl, '/')) {
                     _uploadedUrl = _uploadedUrl.substr(1);
@@ -18905,7 +18976,7 @@ let ProfileComponent = class ProfileComponent {
         var expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
         var regex = new RegExp(expression);
         if (!regex.test(appLink)) {
-            this.alertService.error("App Link is not valid");
+            this.alertService.error("FaceBook Link is not valid");
             return;
         }
         let _extenalAppExistsT = false;
@@ -18916,7 +18987,7 @@ let ProfileComponent = class ProfileComponent {
             }
         });
         if (_extenalAppExistsT) {
-            this.alertService.error("External App already exist, can not add duplicate entry. Please remove existing or update current");
+            this.alertService.error("FaceBook App link already exist, can not add duplicate entry. Please remove existing or update current");
             return;
         }
         let _obj2push = {
@@ -19026,7 +19097,7 @@ let ProfileComponent = class ProfileComponent {
                 //console.log(events.body);
                 //alert('SUCCESS !!');
                 this.fileData = null;
-                this.alertService.success('Uploaded Successfully !!', true);
+                this.alertService.success('Uploaded successfully', true);
                 let _uploadedUrl = events.body["data"].path;
                 if (lodash__WEBPACK_IMPORTED_MODULE_12__["startsWith"](_uploadedUrl, '/')) {
                     _uploadedUrl = _uploadedUrl.substr(1);
@@ -19068,6 +19139,12 @@ let ProfileComponent = class ProfileComponent {
     //#endregion
     //#region open media uploader with crop feature
     modalMediaUploadWithCropFeature(documentId, attributeKey, subFolderName) {
+        let isAdminUserT = false;
+        switch (this.profileForm.get('role').value) {
+            case src_app_models__WEBPACK_IMPORTED_MODULE_5__["Role"].Admin:
+                isAdminUserT = true;
+                break;
+        }
         switch (attributeKey) {
             case 'selfProfileUrl':
                 break;
@@ -19081,7 +19158,7 @@ let ProfileComponent = class ProfileComponent {
             case 'myRKIMediaSelfVerify':
                 const checkArray = this.profileForm.get(attributeKey);
                 if (checkArray.length >= 1) {
-                    this.alertService.error("Upload MAX limit reached. Please remove existing.");
+                    this.alertService.error("Your can upload document only once.");
                     return;
                 }
                 break;
@@ -19096,7 +19173,8 @@ let ProfileComponent = class ProfileComponent {
             data: {
                 documentId: documentId,
                 attributeKey: attributeKey,
-                subFolderName: subFolderName
+                subFolderName: subFolderName,
+                isAdminUserT: isAdminUserT
             }
         });
         dialogRef.afterClosed().subscribe(result => {
@@ -19106,6 +19184,7 @@ let ProfileComponent = class ProfileComponent {
                         case 'selfProfileUrl':
                             if (result.data.uploadedFilePath) {
                                 this.profileForm.get('selfProfileUrl').setValue(result.data.uploadedFilePath);
+                                this.onProfileUpdateSubmit(true);
                             }
                             break;
                         case 'myPassportMedia':
@@ -19116,9 +19195,10 @@ let ProfileComponent = class ProfileComponent {
                         case 'myHICardMediaSelfVerify':
                         case 'myRKIMedia':
                         case 'myRKIMediaSelfVerify':
-                            this.alertService.success("It can take up to 48 hours for your documents to be approved, as we go through all the documents manually.");
                             if (result.data.uploadedFilePath) {
+                                this.alertService.success("It can take up to 48 hours for your documents to be approved, as we go through all the documents manually.");
                                 this.onAssetDocumentsUpdate(true, null, result.data.uploadedFileObj, result.data.attributeKey);
+                                this.onProfileUpdateSubmit(true);
                             }
                             break;
                     }

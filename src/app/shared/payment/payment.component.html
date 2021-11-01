@@ -33,7 +33,7 @@
 -->
 <div class="payment-backdrop text-center">
     <br>
-    <button [disabled]="alreadyClickedOnPayment" *ngIf="!payment.paymentNotCompletedInTime" (click)="pay(amount4Payment, $event)" class="btn btn-success mt-5 btn-lg" i18n>Pay Now  kr {{amount4Payment}}</button>
+    <button [disabled]="alreadyClickedOnPayment" *ngIf="!payment.paymentNotCompletedInTime" (click)="pay(amount4Payment, $event)" class="btn btn-success mt-5 btn-lg" i18n>Pay Now $ {{amount4Payment}}</button>
     <div class="mt-4 text-white" i18n>
         Please Do not navigate or refresh page, while payment is in progress
     </div>

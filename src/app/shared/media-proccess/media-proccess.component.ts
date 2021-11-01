@@ -56,6 +56,8 @@ export class MediaProccessComponent implements OnInit {
         checkCrossOrigin: true
     };
 
+    showBlockingMessageMediatorT: boolean = false;
+    isAdminUserT: boolean = false;
     constructor(
         public dialogRef: MatDialogRef<MediaProccessComponent>,
         private alertService: AlertService,
@@ -67,6 +69,30 @@ export class MediaProccessComponent implements OnInit {
             this.documentId = data.documentId;
             this.attributeKey = data.attributeKey;
             this.subFolderName = data.subFolderName;
+            this.isAdminUserT = !!data.isAdminUserT;
+            switch (this.attributeKey) {
+                case 'selfProfileUrl':
+                    this.showBlockingMessageMediatorT = false;
+                    break;
+                case 'myPassportMedia':
+                case 'myPassportMediaSelfVerify':
+                case 'myDLMedia':
+                case 'myDLMediaSelfVerify':
+                case 'myHICardMedia':
+                case 'myHICardMediaSelfVerify':
+                case 'myRKIMedia':
+                case 'myRKIMediaSelfVerify':
+                    if (!this.isAdminUserT) {
+                        this.showBlockingMessageMediatorT = true;
+                    } else {
+                        this.showBlockingMessageMediatorT = false;
+                    }
+                    break;
+                default:
+                    this.showBlockingMessageMediatorT = false;
+                    break;
+            }
+
         }
 
     }
@@ -105,7 +131,7 @@ export class MediaProccessComponent implements OnInit {
                 if (events.body["status"]) {
                     //alert('SUCCESS !!');
                     //this.fileData = null;
-                    this.alertService.success('Uploaded Successfully !!', true);
+                    this.alertService.success('Uploaded successfully', true);
                     let _uploadedUrl = events.body["data"].path;
                     if (_.startsWith(_uploadedUrl, '/')) {
                         _uploadedUrl = _uploadedUrl.substr(1);
@@ -221,7 +247,12 @@ export class MediaProccessComponent implements OnInit {
         this.angularCropper.cropper.destroy();
     }
     ready(event: any) {
-
+        try {
+            //image  crop full width
+            var contData = this.angularCropper.cropper.getContainerData(); //Get container data
+            this.angularCropper.cropper.setCropBoxData({ height: contData.height, width: contData.width });
+        } catch (ex) {
+        }
     }
     /*
     imageCropped(event: ImageCropperResult) {

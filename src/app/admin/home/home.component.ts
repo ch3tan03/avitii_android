@@ -36,7 +36,6 @@ export class HomeComponent implements OnInit {
 
   getAdminDashboardDataOnLogin() {
     this.userService.getAdminDashboardDataOnLogin(this.authenticationService.currentUserValue._id, this.authenticationService.currentUserValue.role)
-      .pipe(first())
       .subscribe(
         data => {
           ////console.log('data => ', data)

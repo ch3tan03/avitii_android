@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
     loading = false;
     submitted = false;
     returnUrl: string;
+    paramobj: any = null;
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
         private alertService: AlertService,
         private appRouterService: AppRouterService
     ) {
+        this.paramobj = history.state;
         // redirect to home if already logged in
         this.appRouterService.onInitRouteOnHomeIfLoggedin();
     }
@@ -56,7 +58,16 @@ export class LoginComponent implements OnInit {
             .pipe(first())
             .subscribe(
                 data => {
-                    this.appRouterService.appRouter(data);
+                    if (!data['isVerified']) {
+                        data['isRegisteredAllowed2EditProfile'] = true;
+                        this.appRouterService.appRouterRoleWise(data, 'profile');
+                    } else {
+                        if (this.paramobj && this.paramobj.returnUrl) {
+                            this.appRouterService.appRouteToPath(this.paramobj.returnUrl, this.paramobj);
+                            return;
+                        }
+                        this.appRouterService.appRouter(data);
+                    }
                 },
                 error => {
                     let errorMsg2show = "";

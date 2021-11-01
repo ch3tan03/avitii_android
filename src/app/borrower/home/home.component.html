@@ -104,7 +104,7 @@
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800 text-capitalize text-cap">
                             <!--{{utilityService.returnStringWithReplacing_(authenticationService.currentUserValue.userType)}}-->
-                            {{authenticationService.returnUserTypeForUserFromSuppliedUserLevel(authenticationService.currentUserValue.userType)}}
+                            {{(authenticationService.currentUserValue.userTypeTitle || authenticationService.returnUserTypeForUserFromSuppliedUserLevel(authenticationService.currentUserValue.userType))}}
                         </div>
                     </div>
                     <div class="col-auto">

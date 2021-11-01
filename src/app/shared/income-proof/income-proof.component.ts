@@ -435,7 +435,7 @@ export class IncomeProofComponent implements OnInit {
         //console.log(events.body);
         //alert('SUCCESS !!');
         this.fileData4Profile = null;
-        this.alertService.success('Uploaded Successfully !!', true);
+        this.alertService.success('Uploaded successfully', true);
         let _uploadedUrl = events.body["data"].path;
         if (_.startsWith(_uploadedUrl, '/')) {
           _uploadedUrl = _uploadedUrl.substr(1);
@@ -556,7 +556,7 @@ export class IncomeProofComponent implements OnInit {
         case 'myRKIMedia':
           const checkArray: FormArray = this.userIncomeDetailsForm.get(attributeKey) as FormArray;
           if (checkArray.length >= 1) {
-            this.alertService.error("Upload MAX limit reached. Please remove existing.");
+            this.alertService.error("Your can upload document only once.");
             return;
           }
   

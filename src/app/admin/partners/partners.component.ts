@@ -230,7 +230,7 @@ export class PartnersComponent implements OnInit {
         //console.log(events.body);
         //alert('SUCCESS !!');
         this.fileData4Profile = null;
-        this.alertService.success('Uploaded Successfully !!', true);
+        this.alertService.success('Uploaded successfully', true);
         let _uploadedUrl = events.body["data"].path;
         if (_.startsWith(_uploadedUrl, '/')) {
           _uploadedUrl = _uploadedUrl.substr(1);

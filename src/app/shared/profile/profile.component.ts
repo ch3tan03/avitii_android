@@ -14,7 +14,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ProfilePortfolioComponent } from '../profile-portfolio/profile-portfolio.component';
 import { MediaProccessComponent } from '../media-proccess/media-proccess.component';
 
-declare var require: any
+declare var require: any;
 
 const uploadAPI = environment.apiUrl + '/api/post/upload/assetdata';
 
@@ -489,8 +489,10 @@ export class ProfileComponent implements OnInit {
       this.removeExternalAppLinks(this.appName);
       this.addExternalAppLinks(true, null, this.appName, this.profileForm.get('externalAppLinkUrl').value);
     } else {
-      this.alertService.error("Please Provide app links");
-      return;
+      if (!byPassValidation) {
+        this.alertService.error("Please Provide facebook link");
+        return;
+      }
     }
     if (!byPassValidation) {
       if (this.profileForm.invalid) {
@@ -536,7 +538,7 @@ export class ProfileComponent implements OnInit {
                 this.alertService.success('Thank you for using our platform. It can take up to 48 hours for your documents to be approved, as we go through all the documents manually.', true);
               } else {
                 this.alertService.success('Your Profile is Updated successfully', true);
-                this.appRouterService.appRouter(this.authenticationService.currentUserValue);
+                //  this.appRouterService.appRouter(this.authenticationService.currentUserValue);
               }
             }
           } else {
@@ -692,7 +694,7 @@ export class ProfileComponent implements OnInit {
         //console.log(events.body);
         //alert('SUCCESS !!');
         this.fileData = null;
-        this.alertService.success('Uploaded Successfully !!', true);
+        this.alertService.success('Uploaded successfully', true);
         let _uploadedUrl = events.body["data"].path;
         if (_.startsWith(_uploadedUrl, '/')) {
           _uploadedUrl = _uploadedUrl.substr(1);
@@ -773,7 +775,7 @@ export class ProfileComponent implements OnInit {
           //console.log(events.body);
           //alert('SUCCESS !!');
           _.pullAt(this.myProfileFiles, _index);
-          this.alertService.success('Uploaded Successfully !!', true);
+          this.alertService.success('Uploaded successfully', true);
           let _uploadedUrl = events.body["data"].path;
           if (_.startsWith(_uploadedUrl, '/')) {
             _uploadedUrl = _uploadedUrl.substr(1);
@@ -863,7 +865,7 @@ export class ProfileComponent implements OnInit {
         //console.log(events.body);
         //alert('SUCCESS !!');
         this.fileData4Profile = null;
-        this.alertService.success('Uploaded Successfully !!', true);
+        this.alertService.success('Uploaded successfully', true);
         let _uploadedUrl = events.body["data"].path;
         if (_.startsWith(_uploadedUrl, '/')) {
           _uploadedUrl = _uploadedUrl.substr(1);
@@ -889,7 +891,7 @@ export class ProfileComponent implements OnInit {
     var expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
     var regex = new RegExp(expression);
     if (!regex.test(appLink)) {
-      this.alertService.error("App Link is not valid");
+      this.alertService.error("FaceBook Link is not valid");
       return;
     }
 
@@ -901,7 +903,7 @@ export class ProfileComponent implements OnInit {
       }
     });
     if (_extenalAppExistsT) {
-      this.alertService.error("External App already exist, can not add duplicate entry. Please remove existing or update current");
+      this.alertService.error("FaceBook App link already exist, can not add duplicate entry. Please remove existing or update current");
       return;
     }
     let _obj2push = {
@@ -1016,7 +1018,7 @@ export class ProfileComponent implements OnInit {
         //console.log(events.body);
         //alert('SUCCESS !!');
         this.fileData = null;
-        this.alertService.success('Uploaded Successfully !!', true);
+        this.alertService.success('Uploaded successfully', true);
         let _uploadedUrl = events.body["data"].path;
         if (_.startsWith(_uploadedUrl, '/')) {
           _uploadedUrl = _uploadedUrl.substr(1);
@@ -1058,6 +1060,12 @@ export class ProfileComponent implements OnInit {
 
   //#region open media uploader with crop feature
   modalMediaUploadWithCropFeature(documentId, attributeKey, subFolderName) {
+    let isAdminUserT = false;
+    switch (this.profileForm.get('role').value) {
+      case Role.Admin:
+        isAdminUserT = true;
+        break;
+    }
     switch (attributeKey) {
       case 'selfProfileUrl':
 
@@ -1072,7 +1080,7 @@ export class ProfileComponent implements OnInit {
       case 'myRKIMediaSelfVerify':
         const checkArray: FormArray = this.profileForm.get(attributeKey) as FormArray;
         if (checkArray.length >= 1) {
-          this.alertService.error("Upload MAX limit reached. Please remove existing.");
+          this.alertService.error("Your can upload document only once.");
           return;
         }
 
@@ -1089,7 +1097,8 @@ export class ProfileComponent implements OnInit {
       data: {
         documentId: documentId,
         attributeKey: attributeKey,
-        subFolderName: subFolderName
+        subFolderName: subFolderName,
+        isAdminUserT: isAdminUserT
       }
     });
 
@@ -1100,6 +1109,7 @@ export class ProfileComponent implements OnInit {
             case 'selfProfileUrl':
               if (result.data.uploadedFilePath) {
                 this.profileForm.get('selfProfileUrl').setValue(result.data.uploadedFilePath);
+                this.onProfileUpdateSubmit(true);
               }
               break;
             case 'myPassportMedia':
@@ -1110,9 +1120,10 @@ export class ProfileComponent implements OnInit {
             case 'myHICardMediaSelfVerify':
             case 'myRKIMedia':
             case 'myRKIMediaSelfVerify':
-              this.alertService.success("It can take up to 48 hours for your documents to be approved, as we go through all the documents manually.");
               if (result.data.uploadedFilePath) {
+                this.alertService.success("It can take up to 48 hours for your documents to be approved, as we go through all the documents manually.");
                 this.onAssetDocumentsUpdate(true, null, result.data.uploadedFileObj, result.data.attributeKey);
+                this.onProfileUpdateSubmit(true);
               }
               break;
           }

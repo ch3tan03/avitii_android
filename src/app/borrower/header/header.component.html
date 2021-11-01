@@ -7,10 +7,10 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
-    <!-- <div class="d-inline text-white text-center mt-2">
+    <div class="text-white text-center mt-2">
         <a class="mr-1 small text-white" href="/en">English</a> |
         <a href="/da" class="ml-1 small text-white">Dansk</a>
-    </div> -->
+    </div>
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
         <a class="nav-link">
@@ -102,11 +102,11 @@
 
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
-        <a class="nav-link collapsed" data-toggle="collapse" aria-expanded="true" aria-controls="collapsePages">
+        <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
             <i class="icon icon-settings"></i>
             <span i18n>Settings</span>
         </a>
-        <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
             
                 <a class="collapse-item" routerLink="/borrower/profile" routerLinkActive="active" i18n>My Profile</a>
@@ -138,3 +138,115 @@
 </ul>
 
 
+<div class="sidebar_overlay navbar_side_panel btn-back" ></div>
+
+
+
+
+<!-- Nav Start [ngClass]="{'dark position-relative' : (router.url!='/')}"-->
+<header id="custom-header-nav" class="ecommerce nav-fix shadow-sm p-0 hide-lg">
+    
+        <div class="row">
+            <div class="col">
+                <nav>
+                    <div class="responsive-btn ml-1">
+                        <a class="toggle-nav"><i aria-hidden="true" class="icon-align-center"></i></a>
+                    </div>
+                    <a class="logo-light" routerLink="/home">
+                        <img class="img-fluid" src="./assets/img/avitii-logo-purple.png"></a>
+
+                    <!-- <div class="navbar navbar_side_panel m-l-auto p-1 btn-back" id="togglebtn">
+                     <div class="responsive-btn">
+                            <h5 class="btn-back">back</h5>
+                        </div> 
+                        <ul class="main-menu">
+                            <li><a routerLink="/lender">Home</a></li>
+
+                            <li><a routerLink="/lender/search-consulatnt" routerLinkActive="active">Search</a></li>
+                            <li><a routerLink="/lender/my-contract" routerLinkActive="active">My Contract</a></li>
+                            <li><a routerLink="/lender/make-a-loan" routerLinkActive="active"><i class="icon-plus"></i>
+                                    Make a Loan</a></li>
+
+                        </ul>
+                    </div> -->
+                    <div class="top-header-right mr-1">
+                        <ul>
+
+                            <!-- <li class="cart">
+                                <a aria-expanded="false" routerLink="/lender/messages" routerLinkActive="active">
+                                    <i class="icon-comment-alt"></i>
+                                </a>
+
+                            </li>
+                            <li class="cart">
+                                <a aria-expanded="false" data-toggle="dropdown" href="#" id="dropdownMenuButton1">
+                                    <i class="icon-bell bell"></i>
+                                    <span *ngIf="(utilityService._.keys(notificationService.appNotifications).length)>0"
+                                        class="badge badge-primary bell-count"
+                                        [textContent]="utilityService._.keys(notificationService.appNotifications).length"></span>
+                                </a>
+                                <div aria-labelledby="dropdownMenuButton1" class="dropdown-menu dropdown-menu-right"
+                                    x-placement="bottom-end"
+                                    style="position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                    <ul class="shopping-cart list-group list-group-flush">
+                                        <li class="list-group-item"
+                                            *ngFor="let notification of utilityService._.values(notificationService.appNotifications)">
+                                            <div class="pb-2">
+                                                <div class="mb-1">{{notification.message}}&nbsp;<a
+                                                        class="float-lg-right font-large text-danger"
+                                                        (click)="notificationService.check4Notification(notification)"><i
+                                                            class="icon-close" style="font-size: 0.6rem;"></i></a></div>
+                                                <div class="font-weight-light small mb-1">{{notification.description}}
+                                                </div>
+                                            </div>
+                                        </li>
+
+
+                                        <li class="no-item text-center">
+                                            <h4 class="my-4 font-weight-normal">No Notifications</h4>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li> -->
+                            <li class="cart">
+                                <a aria-expanded="false" data-toggle="dropdown"  id="dropdownMenuButton1">
+                                    <!-- <img class="userimg mt-n2" src="./assets/img/user-default.png"> -->
+                                    <i class="icon icon-user"></i>
+                                </a>
+                                <div aria-labelledby="dropdownMenuButton1" class="dropdown-menu dropdown-menu-right"
+                                    x-placement="bottom-end"
+                                    style="position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                    <ul class="shopping-cart">
+                                        <li>
+                                            <a class="h6 d-block" routerLink="/lender">
+                                                {{currentUser.firstName}}
+                                                <span class="badge badge-primary float-right"
+                                                    [textContent]="currentUser.role" i18n> Borrower</span>
+                                            </a>
+                                        </li>
+
+                                        <!-- <li>
+                                            <a class="d-block" routerLink="/lender/wallet">Wallet
+                                                <span
+                                                    class="badge badge-success float-right">${{fundService.totalFund4currentUser}}</span>
+                                            </a>
+                                        </li> -->
+                                        <li><a routerLink="/lender/profile" i18n>Profile</a></li>
+                                        <hr>
+                                        <li>
+                                            <a routerLink="/logout" i18n>Logout</a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="sidebar_overlay navbar_side_panel btn-back" style="display: none;"></div>
+                </nav>
+            </div>
+        </div>
+   
+</header>
+<!-- Nav end-->

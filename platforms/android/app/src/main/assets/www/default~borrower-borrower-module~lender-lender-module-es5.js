@@ -1320,7 +1320,7 @@
 
       var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! tslib */
-      "Yz0s");
+      "sJZM");
       /* harmony import */
 
 
@@ -14283,11 +14283,18 @@
       var src_app_services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! src/app/services */
       "o0su");
+      /* harmony import */
+
+
+      var src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! src/app/services/utility.service */
+      "A1CT");
 
       var RolesGuard = /*#__PURE__*/function () {
-        function RolesGuard(alertService, router, authenticationService) {
+        function RolesGuard(utilityService, alertService, router, authenticationService) {
           _classCallCheck(this, RolesGuard);
 
+          this.utilityService = utilityService;
           this.alertService = alertService;
           this.router = router;
           this.authenticationService = authenticationService;
@@ -14296,6 +14303,7 @@
         _createClass(RolesGuard, [{
           key: "canActivate",
           value: function canActivate(route, state) {
+            var userMemberShipExpireOn = null;
             var currentUser = this.authenticationService.currentUserValue;
 
             if (currentUser) {
@@ -14319,12 +14327,37 @@
                     }
                   }
 
+                  userMemberShipExpireOn = this.authenticationService.currentUserValue.userMemberShipExpireOn || this.utilityService.returnEpochDateWithAddingMonths(this.authenticationService.currentUserValue.userVerifiedOn, this.utilityService.AppPlanTypes['trial_plan'].expiryInMonth);
+
+                  if (!this.utilityService.checkWhetherPlanExpiryIsInFuture(userMemberShipExpireOn)) {
+                    switch (route.routeConfig.path) {
+                      case '/lender/my-subscriptions':
+                      case 'my-subscriptions':
+                        //NO Action here
+                        break;
+
+                      case '/lender/loan-market':
+                      case '/lender/make-a-loan':
+                      case 'loan-market':
+                      case 'make-a-loan':
+                        this.alertService.error("Your plan  expired. Please upgrade to use uninterrupted services.", true);
+                        this.router.navigate(['/lender/my-subscriptions']);
+                        return false;
+                        break;
+
+                      default:
+                        //NO Action here
+                        break;
+                    }
+                  }
+
                   break;
 
                 case src_app_models_role__WEBPACK_IMPORTED_MODULE_3__["Role"].Borrower:
                   if (!currentUser.isVerified) {
-                    switch (state.url) {
+                    switch (route.routeConfig.path) {
                       case '/borrower/profile':
+                      case 'profile':
                         //NO Action here
                         break;
 
@@ -14332,6 +14365,30 @@
                         this.alertService.error("Your account approval is pending. Please upload educational/work documents and complete your profile to expedite the approval process. Ignore if already uploaded.", true);
                         this.router.navigate(['/borrower/profile']);
                         return false;
+                        break;
+                    }
+                  }
+
+                  userMemberShipExpireOn = this.authenticationService.currentUserValue.userMemberShipExpireOn || this.utilityService.returnEpochDateWithAddingMonths(this.authenticationService.currentUserValue.userVerifiedOn, this.utilityService.AppPlanTypes['trial_plan'].expiryInMonth);
+
+                  if (!this.utilityService.checkWhetherPlanExpiryIsInFuture(userMemberShipExpireOn)) {
+                    switch (route.routeConfig.path) {
+                      case '/borrower/my-subscriptions':
+                      case 'my-subscriptions':
+                        //NO Action here
+                        break;
+
+                      case '/borrower/loan-market':
+                      case '/borrower/make-a-loan':
+                      case 'loan-market':
+                      case 'make-a-loan':
+                        this.alertService.error("Your plan is expired. Please upgrade to use uninterrupted services.", true);
+                        this.router.navigate(['/borrower/my-subscriptions']);
+                        return false;
+                        break;
+
+                      default:
+                        //NO Action here
                         break;
                     }
                   }
@@ -14352,10 +14409,14 @@
             } // not logged in so redirect to login page with the return url
 
 
+            var paramobj = this.router.getCurrentNavigation().extras.state;
+
+            if (paramobj) {
+              paramobj.returnUrl = route.routeConfig.path;
+            }
+
             this.router.navigate(['/login'], {
-              queryParams: {
-                returnUrl: state.url
-              }
+              state: paramobj
             });
             return false;
           }
@@ -14366,6 +14427,8 @@
 
       RolesGuard.ctorParameters = function () {
         return [{
+          type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_6__["UtilityService"]
+        }, {
           type: src_app_services__WEBPACK_IMPORTED_MODULE_5__["AlertService"]
         }, {
           type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
@@ -14376,7 +14439,7 @@
 
       RolesGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_services__WEBPACK_IMPORTED_MODULE_5__["AlertService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_services_authentication_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"]])], RolesGuard);
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_6__["UtilityService"], src_app_services__WEBPACK_IMPORTED_MODULE_5__["AlertService"], _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], src_app_services_authentication_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"]])], RolesGuard);
       /***/
     },
 
@@ -17036,7 +17099,7 @@
 
       var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! tslib */
-      "Yz0s");
+      "sJZM");
       /*!
       FullCalendar v5.9.0
       Docs & License: https://fullcalendar.io/
@@ -18568,7 +18631,7 @@
 
       var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! tslib */
-      "Yz0s");
+      "sJZM");
       /* harmony import */
 
 
@@ -18718,7 +18781,7 @@
 
       var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! tslib */
-      "Yz0s");
+      "sJZM");
       /* harmony import */
 
 
@@ -20329,7 +20392,7 @@
 
       var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! tslib */
-      "Yz0s");
+      "sJZM");
       /*!
       FullCalendar v5.9.0
       Docs & License: https://fullcalendar.io/

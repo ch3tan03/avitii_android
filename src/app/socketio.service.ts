@@ -496,12 +496,12 @@ export class SocketioService {
     this.socket.emit('leave_room', { roomId: _roomId, userId: _userId });
   }
 
-  sendEventWithMessageChatRoom(_roomId, _userId, _message) {
-    this.socket.emit('message_in_room', { roomId: _roomId, userId: _userId, message: _message });
+  sendEventWithMessageChatRoom(_roomId, _userId, _message, createdByUserObj) {
+    this.socket.emit('message_in_room', { roomId: _roomId, userId: _userId, message: _message }, createdByUserObj);
   }
 
-  sendEventToGetAllChatOfRoom(_roomId) {
-    this.socket.emit('get_all_old_chat_of_room', { roomId: _roomId });
+  sendEventToGetAllChatOfRoom(_roomId: string, skip: number) {
+    this.socket.emit('get_all_old_chat_of_room', { roomId: _roomId, skip: skip });
   }
 
   sendEventToUpdateChatReceivedByUserOfRoom(_roomId: string, userId: string) {
@@ -536,8 +536,8 @@ export class SocketioService {
     this.socket.emit("request_contact_pending_messages", _roomIdArr, userId);
     return fromEvent<any[]>(this.socket, 'response_contact_pending_messages');
   }
-  sendEventToGetAllChatOfRoomWithPromise(_roomId) {
-    this.socket.emit('get_all_old_chat_of_room', { roomId: _roomId });
+  sendEventToGetAllChatOfRoomWithPromise(_roomId: string, skip: number) {
+    this.socket.emit('get_all_old_chat_of_room', { roomId: _roomId, skip: skip });
     return fromEvent<any[]>(this.socket, 'set_all_old_chat_of_room');
   }
 
@@ -589,8 +589,8 @@ export class SocketioService {
     return fromEvent<any[]>(this.socket, 'response_borrower_payment_transaction_details');
   }
 
-  getAllUsersWithRequestData(_data, skip) {
-    this.socket.emit("request_user_getall", _data, skip);
+  getAllUsersWithRequestData(_data, skip, dataTablesParameters) {
+    this.socket.emit("request_user_getall", _data, skip, dataTablesParameters);
     return fromEvent<any[]>(this.socket, 'response_user_getall');
   }
 

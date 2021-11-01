@@ -12,19 +12,30 @@ export class MessagesService implements OnInit {
   currentUser: User = <User>{};
   myContactsList: any[];
   myPendingMessages: any[];
+  allUsersList: any[];
   constructor(
     public socketService: SocketioService,
     private authenticationService: AuthenticationService,
   ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.socketService.getNewMessageToRoomAll().subscribe(_currentChatObj => {
+      //console.log('21 :: Received a message from websocket service', _currentChatObj);
       if (_currentChatObj) {
         this.getAllPendingMessageCountOfContact(_currentChatObj.roomId);
       }
     });
     this.socketService.getOldMessageToRoomAll().subscribe(_currentChatObj => {
       if (_currentChatObj) {
-        this.getAllPendingMessageCountOfContact(_.map(_currentChatObj,'roomId'));
+        this.getAllPendingMessageCountOfContact(_.map(_currentChatObj, 'roomId'));
+      }
+    });
+    this.socketService.listenEventToAddNewContact().subscribe(_currentContactObj => {
+
+      if (!this.myContactsList) {
+        this.myContactsList = [];
+      }
+      if (_currentContactObj) {
+        this.myContactsList.push(_currentContactObj);
       }
     });
   }
@@ -74,6 +85,14 @@ export class MessagesService implements OnInit {
 
   ngOnInit() {
     this.getAllMyContacts();
+    this.getAllUsers();
+  }
+
+  getAllUsers() {
+    let _data = {};
+    this.socketService.getAllUsers(_data).pipe(first()).subscribe(users => {
+      this.allUsersList = users;
+    });
   }
 
 }

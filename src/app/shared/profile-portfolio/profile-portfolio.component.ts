@@ -233,7 +233,7 @@ export class ProfilePortfolioComponent implements OnInit {
           //console.log(events.body);
           //alert('SUCCESS !!');
           _.pullAt(this.myProfileFiles, _index);
-          this.alertService.success('Uploaded Successfully !!', true);
+          this.alertService.success('Uploaded successfully', true);
           let _uploadedUrl = events.body["data"].path;
           if (_.startsWith(_uploadedUrl, '/')) {
             _uploadedUrl = _uploadedUrl.substr(1);

@@ -51,20 +51,20 @@ export class ForgotPasswordComponent implements OnInit {
         this.isOtpSent = false;
         if (!this.isOtpSent) {
             this.submitted = true;
-            console.log('inside Submit ' + this.forgotPasswordForm.invalid);
+            //console.log('inside Submit ' + this.forgotPasswordForm.invalid);
             // stop here if form is invalid
             if (this.forgotPasswordForm.controls.userName.invalid) {
                 return;
             }
             this.forgotPasswordForm.get('emailAddress').setValue(this.forgotPasswordForm.get('userName').value);
-            console.log('inside');
+            //console.log('inside');
             this.loading = true;
-            console.log("Reg Data => ", this.forgotPasswordForm.value);
+            //console.log("Reg Data => ", this.forgotPasswordForm.value);
             this.userService.resetPasswordSendOtp2user(this.forgotPasswordForm.value)
                 .pipe(first())
                 .subscribe(
                     data => {
-                        console.log('data => ', data)
+                        //console.log('data => ', data)
                         if (data && data['success']) {
                             //alert(JSON.stringify( data));
                             this.alertService.success(data['message'], true);
@@ -99,20 +99,20 @@ export class ForgotPasswordComponent implements OnInit {
     onSubmitResetPasswordOfUser() {
         if (this.isOtpSent) {
             this.submitted = true;
-            console.log('inside onSubmitRegisterUser ' + (this.forgotPasswordForm.invalid && this.forgotPasswordForm.controls.password.invalid && this.forgotPasswordForm.controls.confirmPassword.invalid && this.forgotPasswordForm.controls.acceptTerms.invalid && this.forgotPasswordForm.controls.otp.invalid));
+            //console.log('inside onSubmitRegisterUser ' + (this.forgotPasswordForm.invalid && this.forgotPasswordForm.controls.password.invalid && this.forgotPasswordForm.controls.confirmPassword.invalid && this.forgotPasswordForm.controls.acceptTerms.invalid && this.forgotPasswordForm.controls.otp.invalid));
             // stop here if form is invalid
             if (this.forgotPasswordForm.controls.password.invalid || this.forgotPasswordForm.controls.confirmPassword.invalid || this.forgotPasswordForm.controls.otp.invalid) {
                 return;
             }
-            console.log('inside');
+            //console.log('inside');
             this.loading = true;
-            console.log("Reg Data => ", this.forgotPasswordForm.value);
+            //console.log("Reg Data => ", this.forgotPasswordForm.value);
             this.forgotPasswordForm.get('userName').setValue(this.forgotPasswordForm.get('emailAddress').value);
             this.userService.resetPasswordVerifyOtpAndUpdate(this.forgotPasswordForm.value)
                 .pipe(first())
                 .subscribe(
                     data => {
-                        console.log('data => ', data)
+                        //console.log('data => ', data)
                         if (data && data['success']) {
                             //alert(JSON.stringify( data));//, {state:{ data} }
                             this.alertService.success('Password reset successfully', true);

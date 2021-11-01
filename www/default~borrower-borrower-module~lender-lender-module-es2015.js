@@ -223,7 +223,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "whenTransitionDone", function() { return whenTransitionDone; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "wholeDivideDurations", function() { return wholeDivideDurations; });
 /* harmony import */ var _main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main.css */ "9Utz");
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ "Yz0s");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ "sJZM");
 /* harmony import */ var _vdom_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./vdom.js */ "3ok3");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Component", function() { return _vdom_js__WEBPACK_IMPORTED_MODULE_2__["Component"]; });
 
@@ -9776,6 +9776,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var src_app_models_role__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/models/role */ "z56L");
 /* harmony import */ var src_app_services_authentication_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/services/authentication.service */ "ej43");
 /* harmony import */ var src_app_services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services */ "o0su");
+/* harmony import */ var src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/utility.service */ "A1CT");
+
 
 
 
@@ -9783,12 +9785,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let RolesGuard = class RolesGuard {
-    constructor(alertService, router, authenticationService) {
+    constructor(utilityService, alertService, router, authenticationService) {
+        this.utilityService = utilityService;
         this.alertService = alertService;
         this.router = router;
         this.authenticationService = authenticationService;
     }
     canActivate(route, state) {
+        let userMemberShipExpireOn = null;
         const currentUser = this.authenticationService.currentUserValue;
         if (currentUser) {
             let _currentUserRole = '';
@@ -9810,17 +9814,58 @@ let RolesGuard = class RolesGuard {
                             return true;
                         }
                     }
+                    userMemberShipExpireOn = this.authenticationService.currentUserValue.userMemberShipExpireOn || (this.utilityService.returnEpochDateWithAddingMonths(this.authenticationService.currentUserValue.userVerifiedOn, this.utilityService.AppPlanTypes['trial_plan'].expiryInMonth));
+                    if (!this.utilityService.checkWhetherPlanExpiryIsInFuture(userMemberShipExpireOn)) {
+                        switch (route.routeConfig.path) {
+                            case '/lender/my-subscriptions':
+                            case 'my-subscriptions':
+                                //NO Action here
+                                break;
+                            case '/lender/loan-market':
+                            case '/lender/make-a-loan':
+                            case 'loan-market':
+                            case 'make-a-loan':
+                                this.alertService.error("Your plan  expired. Please upgrade to use uninterrupted services.", true);
+                                this.router.navigate(['/lender/my-subscriptions']);
+                                return false;
+                                break;
+                            default:
+                                //NO Action here
+                                break;
+                        }
+                    }
                     break;
                 case src_app_models_role__WEBPACK_IMPORTED_MODULE_3__["Role"].Borrower:
                     if (!currentUser.isVerified) {
-                        switch (state.url) {
+                        switch (route.routeConfig.path) {
                             case '/borrower/profile':
+                            case 'profile':
                                 //NO Action here
                                 break;
                             default:
                                 this.alertService.error("Your account approval is pending. Please upload educational/work documents and complete your profile to expedite the approval process. Ignore if already uploaded.", true);
                                 this.router.navigate(['/borrower/profile']);
                                 return false;
+                                break;
+                        }
+                    }
+                    userMemberShipExpireOn = this.authenticationService.currentUserValue.userMemberShipExpireOn || (this.utilityService.returnEpochDateWithAddingMonths(this.authenticationService.currentUserValue.userVerifiedOn, this.utilityService.AppPlanTypes['trial_plan'].expiryInMonth));
+                    if (!this.utilityService.checkWhetherPlanExpiryIsInFuture(userMemberShipExpireOn)) {
+                        switch (route.routeConfig.path) {
+                            case '/borrower/my-subscriptions':
+                            case 'my-subscriptions':
+                                //NO Action here
+                                break;
+                            case '/borrower/loan-market':
+                            case '/borrower/make-a-loan':
+                            case 'loan-market':
+                            case 'make-a-loan':
+                                this.alertService.error("Your plan is expired. Please upgrade to use uninterrupted services.", true);
+                                this.router.navigate(['/borrower/my-subscriptions']);
+                                return false;
+                                break;
+                            default:
+                                //NO Action here
                                 break;
                         }
                     }
@@ -9837,11 +9882,16 @@ let RolesGuard = class RolesGuard {
             return true;
         }
         // not logged in so redirect to login page with the return url
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+        let paramobj = this.router.getCurrentNavigation().extras.state;
+        if (paramobj) {
+            paramobj.returnUrl = route.routeConfig.path;
+        }
+        this.router.navigate(['/login'], { state: paramobj });
         return false;
     }
 };
 RolesGuard.ctorParameters = () => [
+    { type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_6__["UtilityService"] },
     { type: src_app_services__WEBPACK_IMPORTED_MODULE_5__["AlertService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
     { type: src_app_services_authentication_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"] }
@@ -9850,7 +9900,8 @@ RolesGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
     }),
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_services__WEBPACK_IMPORTED_MODULE_5__["AlertService"],
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_6__["UtilityService"],
+        src_app_services__WEBPACK_IMPORTED_MODULE_5__["AlertService"],
         _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
         src_app_services_authentication_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"]])
 ], RolesGuard);
@@ -10633,7 +10684,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "buildDayTableModel", function() { return buildDayTableModel; });
 /* harmony import */ var _main_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./main.css */ "pDWP");
 /* harmony import */ var _fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @fullcalendar/common */ "1hAE");
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ "Yz0s");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! tslib */ "sJZM");
 /*!
 FullCalendar v5.9.0
 Docs & License: https://fullcalendar.io/
@@ -11593,7 +11644,7 @@ var main = Object(_fullcalendar_common__WEBPACK_IMPORTED_MODULE_1__["createPlugi
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "Yz0s");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "sJZM");
 /* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! preact */ "2mXy");
 /* harmony import */ var preact_compat__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! preact/compat */ "FdF9");
 
@@ -11690,7 +11741,7 @@ function unmountComponentAtNode(node) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Calendar", function() { return Calendar; });
 /* harmony import */ var _vdom_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./vdom.js */ "VXQK");
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ "Yz0s");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ "sJZM");
 /* harmony import */ var _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @fullcalendar/common */ "1hAE");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Component", function() { return _fullcalendar_common__WEBPACK_IMPORTED_MODULE_2__["Component"]; });
 
@@ -12337,7 +12388,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PointerDragging", function() { return PointerDragging; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ThirdPartyDraggable", function() { return ThirdPartyDraggable; });
 /* harmony import */ var _fullcalendar_common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @fullcalendar/common */ "1hAE");
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ "Yz0s");
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! tslib */ "sJZM");
 /*!
 FullCalendar v5.9.0
 Docs & License: https://fullcalendar.io/

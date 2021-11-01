@@ -32,6 +32,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
   nextPageIndex: number = 0;
   totalPages: number = 0;
   limit4Filtered: number = 0;
+  recordsFiltered: number = 0;
   constructor(
     public dialog: MatDialog,
     private socketService: SocketioService,
@@ -42,25 +43,26 @@ export class UserManagementComponent implements OnDestroy, OnInit {
     private elementRef: ElementRef,
     private userService: UserService,
   ) {
-    this.getAllUsersWithRequestData();
+    //this.getAllUsersWithRequestData();
   }
 
-  getAllUsersWithRequestData(_skip: number = 0, callback: any = null) {
+  getAllUsersWithRequestData(_skip: number = 0, callback: any = null, dataTablesParameters: any = null) {
     let _data = {};
-    this.socketService.getAllUsersWithRequestData(_data, _skip)
-      .pipe(first())
+    this.socketService.getAllUsersWithRequestData(_data, _skip, dataTablesParameters)
       .subscribe(
         data => {
           if (data && data['success']) {
-            this.PaymentTransactionDetailsArray = this.utilityService._.uniq(this.utilityService._.union((this.PaymentTransactionDetailsArray || []), data["data"]));
+            //this.PaymentTransactionDetailsArray = this.utilityService._.uniq(this.utilityService._.union((this.PaymentTransactionDetailsArray || []), data["data"]));
+            this.PaymentTransactionDetailsArray = data["data"];
             this.recordsTotal = data['metaData']['totalDocs'] || 0;
             this.nextPageIndex = data['metaData']['nextPage'] || 0;
             this.totalPages = data['metaData']['totalPages'] || 0;
             this.limit4Filtered = data['metaData']['limit'] || 0;
+            this.recordsFiltered = data['metaData']['recordsFiltered'] || this.recordsTotal;
             if (callback) {
               callback({
                 recordsTotal: this.recordsTotal || 0,
-                recordsFiltered: this.utilityService._.keys(this.PaymentTransactionDetailsArray).length || 0,
+                recordsFiltered: this.recordsFiltered || 0,
                 data: [],
               });
             } else {
@@ -232,45 +234,49 @@ export class UserManagementComponent implements OnDestroy, OnInit {
 
   populateUsersDataInTable() {
     that = this;
-    this.destroyTable();
+    //this.destroyTable();
     this.dtOptions = {
       pagingType: 'full_numbers',
       pageLength: 100,
+
+      serverSide: true,
+      processing: false,
+      ajax: (dataTablesParameters: any, callback) => {
+        that.getAllUsersWithRequestData((that.nextPageIndex || 1), callback, dataTablesParameters);
+        /*
+                if ((dataTablesParameters.start + dataTablesParameters.length) < that.utilityService._.keys(that.PaymentTransactionDetailsArray).length) {
+                  //No Action here
+                  callback({
+                    recordsTotal: that.recordsTotal || 0,
+                    recordsFiltered: that.utilityService._.keys(that.PaymentTransactionDetailsArray).length || 0,
+                    data: [],
+                  });
+        
+                  //that.getAllUsersWithRequestData((that.nextPageIndex || 1), callback, dataTablesParameters);
+                } else {
+                  that.getAllUsersWithRequestData((that.nextPageIndex || 1), callback, dataTablesParameters);
+                  //that.dtTrigger.next();
+                  //that.rerender();
+                }
+                */
+        /*{"draw":3,"columns":[{"data":0,"name":"_id","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":1,"name":"emailAddress","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":2,"name":"firstName","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":3,"name":"role","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":4,"name":"mobileNo","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":5,"name":"verified","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":6,"name":"actions","searchable":false,"orderable":false,"search":{"value":"","regex":false}}],"order":[{"column":0,"dir":"asc"}],"start":0,"length":100,"search":{"value":"oo","regex":false}}*/
+
+      }, columns: [{ "data": 0, "name": "_id", "searchable": true, "orderable": true }, { "data": 1, "name": "emailAddress", "searchable": true, "orderable": true, }, { "data": 2, "name": "firstName", "searchable": true, "orderable": true, }, { "data": 3, "name": "role", "searchable": true, "orderable": true, }, { "data": 4, "name": "mobileNo", "searchable": true, "orderable": true, }, { "data": 5, "name": "verified", "searchable": true, "orderable": true, }, { "data": 6, "name": "actions", "searchable": false, "orderable": false }]
       /*
-            serverSide: true,
-            processing: false,
-            ajax: (dataTablesParameters: any, callback) => {
-              if ((dataTablesParameters.start + dataTablesParameters.length) < that.utilityService._.keys(that.PaymentTransactionDetailsArray).length) {
-                //No Action here
-          
-                callback({
-                  recordsTotal: that.recordsTotal || 0,
-                  recordsFiltered: that.utilityService._.keys(that.PaymentTransactionDetailsArray).length || 0,
-                  data: [],
-                });
-                
-                //that.getAllUsersWithRequestData((that.nextPageIndex || 1), callback);
-              } else {
-                that.getAllUsersWithRequestData((that.nextPageIndex || 1), callback);
-                //that.dtTrigger.next();
-                //that.rerender();
+            drawCallback: () => {
+              if (this.elementRef && this.elementRef.nativeElement && this.elementRef.nativeElement.querySelector('.paginate_button.next')) {
+                this.elementRef.nativeElement.querySelector('.paginate_button.next')
+                  .addEventListener('click', this.paginateButtonNext);
+                this.elementRef.nativeElement.querySelector('.paginate_button.last')
+                  .addEventListener('click', this.paginateButtonNext);
+              }
             }
-      
-          },*//*,columns:[{data:"_id"},{data:"firstName"},{data:"lastName"}],*/
-/*
-      drawCallback: () => {
-        if (this.elementRef && this.elementRef.nativeElement && this.elementRef.nativeElement.querySelector('.paginate_button.next')) {
-          this.elementRef.nativeElement.querySelector('.paginate_button.next')
-            .addEventListener('click', this.paginateButtonNext);
-          this.elementRef.nativeElement.querySelector('.paginate_button.last')
-            .addEventListener('click', this.paginateButtonNext);
-        }
-      }
-      */
+            */
     };
-    this.dtTrigger.next();
-    this.rerender();
+    //this.dtTrigger.next();
+    //this.rerender();
   }
+
   paginateButtonNext() {
     that.getAllUsersWithRequestData((that.nextPageIndex || 1));
   }

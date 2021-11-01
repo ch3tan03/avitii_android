@@ -107,15 +107,15 @@
                                 </div>
                             </div>
                             <div class="col-xl-12 mb-3">
-                                <label for="hearAboutUs">From where you hear about us?</label>
+                                <label for="hearAboutUs" i18n>From where you hear about us?</label>
                                 <select formControlName="hearAboutUs" class="custom-select"
                                     [ngClass]="{ 'is-invalid': submitted && f.hearAboutUs.errors }">
-                                    <option value="" selected disabled>Choose</option>
+                                    <option value="" selected disabled i18n>Choose</option>
                                     <option *ngFor="let hearAboutUs of hearAboutUslist" [ngValue]="hearAboutUs">
                                         {{hearAboutUs}}</option>
                                 </select>
                                 <div *ngIf="submitted && f.hearAboutUs.errors" class="invalid-feedback">
-                                    <div *ngIf="f.hearAboutUs.errors.required">Hear About Us is required</div>
+                                    <div *ngIf="f.hearAboutUs.errors.required" i18n>Hear About Us is required</div>
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -125,7 +125,7 @@
                                         class="custom-control-input" id="defaultUnchecked"
                                         [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
                                     <label class="custom-control-label" for="defaultUnchecked" i18n>I accept the general
-                                        <a class="text-primary" routerLink="/disclaimer" routerLinkActive="active" for="defaultUnchecked">
+                                        <a class="text-primary" routerLink="/disclaimer" routerLinkActive="active" for="defaultUnchecked" >
                                             Terms Of Use and Privacy Policy.
                                         </a>
                                     </label>

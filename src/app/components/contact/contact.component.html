@@ -5,7 +5,7 @@
             <div class="col-12">
                 <div class="cal-time">
                     <div class="time">
-                        <h2 class="title-text pt-1">Get In Touch With Us</h2>
+                        <h2 class="title-text pt-1" i18n>Get In Touch With Us</h2>
 
                     </div>
                 </div>
@@ -23,10 +23,10 @@
                     <div class="col-md-4">
                         <div class="title title3">
                             <div class="main-title">
-                                <h2 class=" text-black-50">Partnership</h2>
+                                <h2 class=" text-black-50" i18n>Partnership</h2>
                             </div>
 
-                            <P class="text-black-50">partner@avitii-lending.com</P>
+                            <P class="text-black-50" >partner@avitii-lending.com</P>
 
 
                         </div>
@@ -71,50 +71,50 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="name">Name *</label>
+                                    <label for="name" i18n>Name *</label>
                                     <input formControlName="userName" class="form-control" id="name" type="text" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
                                     <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
-                                        <div *ngIf="f.userName.errors.required">required</div>
-                                        <div *ngIf="f.userName.errors.email">must be valid</div>
+                                        <div *ngIf="f.userName.errors.required" i18n>required</div>
+                                        <div *ngIf="f.userName.errors.email" i18n>must be valid</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="Phone">Phone *</label>
+                                    <label for="Phone" i18n>Phone *</label>
                                     <input formControlName="phoneNo" class="form-control" id="Phone" type="text" [ngClass]="{ 'is-invalid': submitted && f.phoneNo.errors }">
                                     <div *ngIf="submitted && f.phoneNo.errors" class="invalid-feedback">
-                                        <div *ngIf="f.phoneNo.errors.required">required</div>
+                                        <div *ngIf="f.phoneNo.errors.required" i18n>required</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="Email">Email *</label>
+                                    <label for="Email" i18n>Email *</label>
                                     <input formControlName="emailAddress" class="form-control" id="Email" type="email" [ngClass]="{ 'is-invalid': submitted && f.emailAddress.errors }">
                                     <div *ngIf="submitted && f.emailAddress.errors" class="invalid-feedback">
-                                        <div *ngIf="f.emailAddress.errors.required">required</div>
-                                        <div *ngIf="f.emailAddress.errors.email">must be valid</div>
+                                        <div *ngIf="f.emailAddress.errors.required" i18n>required</div>
+                                        <div *ngIf="f.emailAddress.errors.email" i18n>must be valid</div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="Subject">Subject *</label>
+                                    <label for="Subject" i18n>Subject *</label>
                                     <input formControlName="subject" class="form-control" id="Subject" type="text">
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="Message">Message *</label>
+                            <label for="Message" i18n>Message *</label>
                             <textarea formControlName="message" class="form-control" id="Message" type="text" [ngClass]="{ 'is-invalid': submitted && f.message.errors }">
                                 </textarea>
                             <div *ngIf="submitted && f.message.errors" class="invalid-feedback">
-                                <div *ngIf="f.message.errors.required">required</div>
+                                <div *ngIf="f.message.errors.required" i18n>required</div>
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" [disabled]="loading" class="btn btn-default primary-btn m-0-auto">Send
+                            <button type="submit" [disabled]="loading" class="btn btn-default primary-btn m-0-auto" i18n>Send
                                 <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
                             </button>
                         </div>

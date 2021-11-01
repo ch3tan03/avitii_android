@@ -568,7 +568,7 @@
     float: left;
 }
 .wrapper-outlet {
-    padding-top: 5px !important;
+    padding-top: 5px;
     height: 100vh;
     overflow: auto;
 }

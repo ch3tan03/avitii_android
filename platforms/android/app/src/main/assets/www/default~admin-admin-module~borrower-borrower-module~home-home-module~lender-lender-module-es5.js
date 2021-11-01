@@ -338,6 +338,8 @@
           value: function modalMediaUploadWithCropFeature(documentId, attributeKey, subFolderName) {
             var _this5 = this;
 
+            var isAdminUserT = true;
+
             switch (attributeKey) {
               case 'selfProfileUrl':
                 break;
@@ -353,7 +355,7 @@
                 var checkArray = this.profileForm.get(attributeKey);
 
                 if (checkArray.length >= 1) {
-                  this.alertService.error("Upload MAX limit reached. Please remove existing.");
+                  this.alertService.error("Upload MAX limit reached. isting.");
                   return;
                 }
 
@@ -370,7 +372,8 @@
               data: {
                 documentId: documentId,
                 attributeKey: attributeKey,
-                subFolderName: subFolderName
+                subFolderName: subFolderName,
+                isAdminUserT: isAdminUserT
               }
             });
             dialogRef.afterClosed().subscribe(function (result) {
@@ -4889,6 +4892,7 @@
             return _this23.currentUser = x;
           });
           this.socketService.getNewMessageToRoomAll().subscribe(function (_currentChatObj) {
+            //console.log('21 :: Received a message from websocket service', _currentChatObj);
             if (_currentChatObj) {
               _this23.getAllPendingMessageCountOfContact(_currentChatObj.roomId);
             }
@@ -4896,6 +4900,15 @@
           this.socketService.getOldMessageToRoomAll().subscribe(function (_currentChatObj) {
             if (_currentChatObj) {
               _this23.getAllPendingMessageCountOfContact(lodash__WEBPACK_IMPORTED_MODULE_2__["map"](_currentChatObj, 'roomId'));
+            }
+          });
+          this.socketService.listenEventToAddNewContact().subscribe(function (_currentContactObj) {
+            if (!_this23.myContactsList) {
+              _this23.myContactsList = [];
+            }
+
+            if (_currentContactObj) {
+              _this23.myContactsList.push(_currentContactObj);
             }
           });
         }
@@ -4964,6 +4977,17 @@
           key: "ngOnInit",
           value: function ngOnInit() {
             this.getAllMyContacts();
+            this.getAllUsers();
+          }
+        }, {
+          key: "getAllUsers",
+          value: function getAllUsers() {
+            var _this26 = this;
+
+            var _data = {};
+            this.socketService.getAllUsers(_data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])()).subscribe(function (users) {
+              _this26.allUsersList = users;
+            });
           }
         }]);
 
@@ -5150,7 +5174,7 @@
 
       var WalletComponent = /*#__PURE__*/function () {
         function WalletComponent(utilityService, payment, formBuilder, addFundsService, authenticationService, alertService) {
-          var _this26 = this;
+          var _this27 = this;
 
           _classCallCheck2(this, WalletComponent);
 
@@ -5164,7 +5188,7 @@
           this.submitted = false;
           this.allFunds = [];
           this.authenticationService.currentUser.subscribe(function (x) {
-            return _this26.currentUser = x;
+            return _this27.currentUser = x;
           });
           this.currentFunds = new src_app_models_funds__WEBPACK_IMPORTED_MODULE_10__["Funds"]();
         }
@@ -5186,7 +5210,7 @@
         }, {
           key: "onSubmit",
           value: function onSubmit() {
-            var _this27 = this;
+            var _this28 = this;
 
             this.submitted = true; // stop here if form is invalid
 
@@ -5220,17 +5244,17 @@
               }]
             }];
             this.addFundsService.checkStatusOfNewFundsAdded().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (_obj) {
-              _this27.loading = false;
+              _this28.loading = false;
 
-              _this27.alertService.success('Funds Added');
+              _this28.alertService.success('Funds Added');
 
-              _this27.f.amount.setValue('');
+              _this28.f.amount.setValue('');
 
-              _this27.loadAllFunds();
+              _this28.loadAllFunds();
 
-              _this27.payPalConfig = null;
+              _this28.payPalConfig = null;
 
-              _this27.addFundsService.getFundsCountForRequestedUser(_this27.currentUser._id);
+              _this28.addFundsService.getFundsCountForRequestedUser(_this28.currentUser._id);
             });
             this.payPalConfig = this.payment.initConfig(purchaseUnits, src_app_models__WEBPACK_IMPORTED_MODULE_5__["TransactionActionType"].funds_add, this.currentUser._id);
             /*
@@ -5245,7 +5269,7 @@
         }, {
           key: "loadAllFunds",
           value: function loadAllFunds() {
-            var _this28 = this;
+            var _this29 = this;
 
             //this.addFundsService.funds_getall_funds(this.currentUser.id);
 
@@ -5258,21 +5282,21 @@
             }
             */
             this.addFundsService.funds_getall_funds(this.currentUser._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (funds) {
-              _this28.totalFund4currentUser = 0;
-              _this28.allFunds = funds;
+              _this29.totalFund4currentUser = 0;
+              _this29.allFunds = funds;
 
-              for (var item in _this28.allFunds) {
-                _this28.totalFund4currentUser = _this28.totalFund4currentUser + _this28.allFunds[item].amount;
+              for (var item in _this29.allFunds) {
+                _this29.totalFund4currentUser = _this29.totalFund4currentUser + _this29.allFunds[item].amount;
               }
             });
           }
         }, {
           key: "deleteFund",
           value: function deleteFund(id) {
-            var _this29 = this;
+            var _this30 = this;
 
             this.addFundsService.funds_delete(id, this.currentUser._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function () {
-              _this29.loadAllFunds();
+              _this30.loadAllFunds();
             });
           }
         }]);
@@ -5512,46 +5536,13 @@
         _createClass2(IncomeProofComponent, [{
           key: "fetchAllIncomeDetailsByUserId",
           value: function fetchAllIncomeDetailsByUserId() {
-            var _this30 = this;
+            var _this31 = this;
 
             this.userService.getUserIncomeDetailsByUserId(this.userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
               ////console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this30.allIncomeDetailsData = data["data"]; //this.alertService.success(data['message'], true);
-
-                _this30.loading = false;
-              }
-            }, function (error) {
-              var errorMsg2show = "";
-
-              try {
-                if (error && error.error && error.error.message) {
-                  errorMsg2show = error.error.message;
-                } else if (error && error.message) {
-                  errorMsg2show = error.message;
-                } else {
-                  errorMsg2show = error;
-                }
-              } catch (ex) {}
-
-              _this30.alertService.error(errorMsg2show);
-
-              _this30.loading = false;
-
-              _this30.appRouterService.appRouter('');
-            });
-          }
-        }, {
-          key: "fetchAllExpenseDetailsByUserId",
-          value: function fetchAllExpenseDetailsByUserId() {
-            var _this31 = this;
-
-            this.userService.getUserExpenseDetailsByUserId(this.userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
-              ////console.log('data => ', data)
-              if (data && data['success']) {
-                //alert(JSON.stringify( data));
-                _this31.allExpenseDetailsData = data["data"]; //this.alertService.success(data['message'], true);
+                _this31.allIncomeDetailsData = data["data"]; //this.alertService.success(data['message'], true);
 
                 _this31.loading = false;
               }
@@ -5576,22 +5567,15 @@
             });
           }
         }, {
-          key: "fetchSumOfIncomeExpenseDetailsByUserId",
-          value: function fetchSumOfIncomeExpenseDetailsByUserId() {
+          key: "fetchAllExpenseDetailsByUserId",
+          value: function fetchAllExpenseDetailsByUserId() {
             var _this32 = this;
 
-            this.userService.getUserIncomeExpenseDetailsByUserId(this.userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+            this.userService.getUserExpenseDetailsByUserId(this.userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
               ////console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                if (_this32.userObj._id == data["data"]["_id"]) {
-                  _this32.userObj.totalIncome4currentUser = data["data"]["totalIncome4currentUser"];
-                  _this32.userObj.totalExpense4currentUser = data["data"]["totalExpense4currentUser"];
-                  _this32.userObj.totalAllowedBudget = _this32.userObj.totalIncome4currentUser - _this32.userObj.totalExpense4currentUser;
-                }
-
-                _this32._cdr.detectChanges(); //this.alertService.success(data['message'], true);
-
+                _this32.allExpenseDetailsData = data["data"]; //this.alertService.success(data['message'], true);
 
                 _this32.loading = false;
               }
@@ -5616,50 +5600,22 @@
             });
           }
         }, {
-          key: "ngOnInit",
-          value: function ngOnInit() {} // convenience getter for easy access to form fields
-
-        }, {
-          key: "f",
-          get: function get() {
-            return this.userIncomeDetailsForm.controls;
-          }
-        }, {
-          key: "ff",
-          get: function get() {
-            return this.userExpenseDetailsForm.controls;
-          }
-        }, {
-          key: "onUserIncomeDetailsUpdateSubmit",
-          value: function onUserIncomeDetailsUpdateSubmit() {
+          key: "fetchSumOfIncomeExpenseDetailsByUserId",
+          value: function fetchSumOfIncomeExpenseDetailsByUserId() {
             var _this33 = this;
 
-            this.submittedIncomeDetails = true;
-
-            if (this.userIncomeDetailsForm.invalid) {
-              this.alertService.error("Please Provide all data");
-              return;
-            }
-
-            if (this.fileData4MonthlyIncomeProofDocumentPendingForUpload) {
-              this.alertService.error('Please upload document first');
-              return;
-            }
-
-            this.userService.addUpdateUserIncomeDetails(this.userIncomeDetailsForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+            this.userService.getUserIncomeExpenseDetailsByUserId(this.userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+              ////console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this33.alertService.success('Your Income proof is Updated successfully', true);
+                if (_this33.userObj._id == data["data"]["_id"]) {
+                  _this33.userObj.totalIncome4currentUser = data["data"]["totalIncome4currentUser"];
+                  _this33.userObj.totalExpense4currentUser = data["data"]["totalExpense4currentUser"];
+                  _this33.userObj.totalAllowedBudget = _this33.userObj.totalIncome4currentUser - _this33.userObj.totalExpense4currentUser;
+                }
 
-                _this33.fetchAllIncomeDetailsByUserId();
+                _this33._cdr.detectChanges(); //this.alertService.success(data['message'], true);
 
-                _this33.submittedIncomeDetails = false;
-
-                _this33.initForm(); //this.appRouterService.appRouter(this.userObj);
-
-              } else {
-                //alert(JSON.stringify(data['message']));
-                _this33.alertService.error(data['message']);
 
                 _this33.loading = false;
               }
@@ -5679,39 +5635,49 @@
               _this33.alertService.error(errorMsg2show);
 
               _this33.loading = false;
+
+              _this33.appRouterService.appRouter('');
             });
           }
         }, {
-          key: "onUserExpenseDetailsUpdateSubmit",
-          value: function onUserExpenseDetailsUpdateSubmit() {
+          key: "ngOnInit",
+          value: function ngOnInit() {} // convenience getter for easy access to form fields
+
+        }, {
+          key: "f",
+          get: function get() {
+            return this.userIncomeDetailsForm.controls;
+          }
+        }, {
+          key: "ff",
+          get: function get() {
+            return this.userExpenseDetailsForm.controls;
+          }
+        }, {
+          key: "onUserIncomeDetailsUpdateSubmit",
+          value: function onUserIncomeDetailsUpdateSubmit() {
             var _this34 = this;
 
-            this.submittedExpenseDetails = true;
+            this.submittedIncomeDetails = true;
 
-            if (this.userExpenseDetailsForm.invalid) {
+            if (this.userIncomeDetailsForm.invalid) {
               this.alertService.error("Please Provide all data");
               return;
             }
 
-            var _monthlyExpenseStartDateTimeCustomised = this.userExpenseDetailsForm.get('monthlyExpenseStartDateTimeCustomised').value;
-            var _monthlyExpensePaymentDateTimeCustomised = this.userExpenseDetailsForm.get('monthlyExpensePaymentDateTimeCustomised').value;
-
-            if (_monthlyExpenseStartDateTimeCustomised) {
-              this.userExpenseDetailsForm.get('monthlyExpenseStartDate').setValue(Date.parse(moment__WEBPACK_IMPORTED_MODULE_10__(_monthlyExpenseStartDateTimeCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD')));
+            if (this.fileData4MonthlyIncomeProofDocumentPendingForUpload) {
+              this.alertService.error('Please upload document first');
+              return;
             }
 
-            if (_monthlyExpensePaymentDateTimeCustomised) {
-              this.userExpenseDetailsForm.get('monthlyExpensePaymentDate').setValue(Date.parse(moment__WEBPACK_IMPORTED_MODULE_10__(_monthlyExpensePaymentDateTimeCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD')));
-            }
-
-            this.userService.addUpdateUserExpenseDetails(this.userExpenseDetailsForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+            this.userService.addUpdateUserIncomeDetails(this.userIncomeDetailsForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this34.alertService.success('Your Expense proof is Updated successfully', true);
+                _this34.alertService.success('Your Income proof is Updated successfully', true);
 
-                _this34.fetchAllExpenseDetailsByUserId();
+                _this34.fetchAllIncomeDetailsByUserId();
 
-                _this34.submittedExpenseDetails = false;
+                _this34.submittedIncomeDetails = false;
 
                 _this34.initForm(); //this.appRouterService.appRouter(this.userObj);
 
@@ -5737,6 +5703,64 @@
               _this34.alertService.error(errorMsg2show);
 
               _this34.loading = false;
+            });
+          }
+        }, {
+          key: "onUserExpenseDetailsUpdateSubmit",
+          value: function onUserExpenseDetailsUpdateSubmit() {
+            var _this35 = this;
+
+            this.submittedExpenseDetails = true;
+
+            if (this.userExpenseDetailsForm.invalid) {
+              this.alertService.error("Please Provide all data");
+              return;
+            }
+
+            var _monthlyExpenseStartDateTimeCustomised = this.userExpenseDetailsForm.get('monthlyExpenseStartDateTimeCustomised').value;
+            var _monthlyExpensePaymentDateTimeCustomised = this.userExpenseDetailsForm.get('monthlyExpensePaymentDateTimeCustomised').value;
+
+            if (_monthlyExpenseStartDateTimeCustomised) {
+              this.userExpenseDetailsForm.get('monthlyExpenseStartDate').setValue(Date.parse(moment__WEBPACK_IMPORTED_MODULE_10__(_monthlyExpenseStartDateTimeCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD')));
+            }
+
+            if (_monthlyExpensePaymentDateTimeCustomised) {
+              this.userExpenseDetailsForm.get('monthlyExpensePaymentDate').setValue(Date.parse(moment__WEBPACK_IMPORTED_MODULE_10__(_monthlyExpensePaymentDateTimeCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD')));
+            }
+
+            this.userService.addUpdateUserExpenseDetails(this.userExpenseDetailsForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+              if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                _this35.alertService.success('Your Expense proof is Updated successfully', true);
+
+                _this35.fetchAllExpenseDetailsByUserId();
+
+                _this35.submittedExpenseDetails = false;
+
+                _this35.initForm(); //this.appRouterService.appRouter(this.userObj);
+
+              } else {
+                //alert(JSON.stringify(data['message']));
+                _this35.alertService.error(data['message']);
+
+                _this35.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = "";
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this35.alertService.error(errorMsg2show);
+
+              _this35.loading = false;
             });
           }
         }, {
@@ -5827,7 +5851,7 @@
         }, {
           key: "previewForMonthlyIncomeProofDocument",
           value: function previewForMonthlyIncomeProofDocument() {
-            var _this35 = this;
+            var _this36 = this;
 
             // Show preview 
             var mimeType = this.fileData4MonthlyIncomeProofDocument.type;
@@ -5840,15 +5864,15 @@
             reader.readAsDataURL(this.fileData4MonthlyIncomeProofDocument);
 
             reader.onload = function (_event) {
-              _this35.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(reader.result);
+              _this36.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(reader.result);
 
-              _this35.fileData4MonthlyIncomeProofDocumentPendingForUpload = true;
+              _this36.fileData4MonthlyIncomeProofDocumentPendingForUpload = true;
             };
           }
         }, {
           key: "onUploadForMonthlyIncomeProofDocument",
           value: function onUploadForMonthlyIncomeProofDocument() {
-            var _this36 = this;
+            var _this37 = this;
 
             if (!this.fileData4MonthlyIncomeProofDocument) {
               this.alertService.error("Select file first.");
@@ -5871,14 +5895,14 @@
               observe: 'events'
             }).subscribe(function (events) {
               if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].UploadProgress) {
-                _this36.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
+                _this37.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
               } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].Response) {
-                _this36.fileUploadProgress = ''; //console.log(events.body);
+                _this37.fileUploadProgress = ''; //console.log(events.body);
                 //alert('SUCCESS !!');
 
-                _this36.fileData4Profile = null;
+                _this37.fileData4Profile = null;
 
-                _this36.alertService.success('Uploaded Successfully !!', true);
+                _this37.alertService.success('Uploaded successfully', true);
 
                 var _uploadedUrl = events.body["data"].path;
 
@@ -5886,11 +5910,11 @@
                   _uploadedUrl = _uploadedUrl.substr(1);
                 }
 
-                _this36.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                _this37.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
 
-                _this36.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(_this36.uploadedFilePath);
+                _this37.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(_this37.uploadedFilePath);
 
-                _this36.fileData4MonthlyIncomeProofDocumentPendingForUpload = false;
+                _this37.fileData4MonthlyIncomeProofDocumentPendingForUpload = false;
               }
             });
           }
@@ -5923,60 +5947,17 @@
         }, {
           key: "updateUsersIncomeVerificationStatus",
           value: function updateUsersIncomeVerificationStatus(_documentId, _status2update) {
-            var _this37 = this;
+            var _this38 = this;
 
             this.alertService.success("Please wait while we updating status of user");
             this.userService.updateUsersIncomeVerificationStatus(_documentId, _status2update, this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
-                _this37._cdr.detach();
-
-                var usersObjArr = _this37.utilityService._.mapKeys(_this37.allIncomeDetailsData, '_id');
-
-                usersObjArr[data["data"]["_id"]] = data["data"];
-                _this37.allIncomeDetailsData = _this37.utilityService._.values(usersObjArr);
-
-                _this37._cdr.detectChanges();
-
-                _this37.alertService.success(data['message']);
-
-                _this37.loading = false;
-              } else {
-                _this37.alertService.error(data['message']);
-
-                _this37.loading = false;
-              }
-            }, function (error) {
-              var errorMsg2show = ""; //this.PaymentTransactionDetailsArray = [];
-
-              try {
-                if (error && error.error && error.error.message) {
-                  errorMsg2show = error.error.message;
-                } else if (error && error.message) {
-                  errorMsg2show = error.message;
-                } else {
-                  errorMsg2show = error;
-                }
-              } catch (ex) {}
-
-              _this37.alertService.error(errorMsg2show);
-
-              _this37.loading = false;
-            });
-          }
-        }, {
-          key: "updateUsersExpenseVerificationStatus",
-          value: function updateUsersExpenseVerificationStatus(_documentId, _status2update) {
-            var _this38 = this;
-
-            this.alertService.success("Please wait while we updating status of user");
-            this.userService.updateUsersExpenseVerificationStatus(_documentId, _status2update, this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
-              if (data && data['success']) {
                 _this38._cdr.detach();
 
-                var usersObjArr = _this38.utilityService._.mapKeys(_this38.allExpenseDetailsData, '_id');
+                var usersObjArr = _this38.utilityService._.mapKeys(_this38.allIncomeDetailsData, '_id');
 
                 usersObjArr[data["data"]["_id"]] = data["data"];
-                _this38.allExpenseDetailsData = _this38.utilityService._.values(usersObjArr);
+                _this38.allIncomeDetailsData = _this38.utilityService._.values(usersObjArr);
 
                 _this38._cdr.detectChanges();
 
@@ -6005,12 +5986,55 @@
 
               _this38.loading = false;
             });
+          }
+        }, {
+          key: "updateUsersExpenseVerificationStatus",
+          value: function updateUsersExpenseVerificationStatus(_documentId, _status2update) {
+            var _this39 = this;
+
+            this.alertService.success("Please wait while we updating status of user");
+            this.userService.updateUsersExpenseVerificationStatus(_documentId, _status2update, this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+              if (data && data['success']) {
+                _this39._cdr.detach();
+
+                var usersObjArr = _this39.utilityService._.mapKeys(_this39.allExpenseDetailsData, '_id');
+
+                usersObjArr[data["data"]["_id"]] = data["data"];
+                _this39.allExpenseDetailsData = _this39.utilityService._.values(usersObjArr);
+
+                _this39._cdr.detectChanges();
+
+                _this39.alertService.success(data['message']);
+
+                _this39.loading = false;
+              } else {
+                _this39.alertService.error(data['message']);
+
+                _this39.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = ""; //this.PaymentTransactionDetailsArray = [];
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this39.alertService.error(errorMsg2show);
+
+              _this39.loading = false;
+            });
           } //#region open media uploader with crop feature
 
         }, {
           key: "modalMediaUploadWithCropFeature",
           value: function modalMediaUploadWithCropFeature(documentId, attributeKey, subFolderName) {
-            var _this39 = this;
+            var _this40 = this;
 
             switch (attributeKey) {
               case 'selfProfileUrl':
@@ -6023,7 +6047,7 @@
                 var checkArray = this.userIncomeDetailsForm.get(attributeKey);
 
                 if (checkArray.length >= 1) {
-                  this.alertService.error("Upload MAX limit reached. Please remove existing.");
+                  this.alertService.error("Your can upload document only once.");
                   return;
                 }
 
@@ -6049,7 +6073,7 @@
                   switch (result.data.attributeKey) {
                     case 'monthlyIncomeProofDocument':
                       if (result.data.uploadedFilePath) {
-                        _this39.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(result.data.uploadedFilePath);
+                        _this40.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(result.data.uploadedFilePath);
                       }
 
                       break;
@@ -6455,7 +6479,7 @@
         }, {
           key: "initiateForPaymentForLender",
           value: function initiateForPaymentForLender(_appPlanId, _planExpiry, _endUserId, _amount4Payment, _header4Payment, _transactiActionType, _currency, _selectedPaymentMethod, _paymentUniqId) {
-            var _this40 = this;
+            var _this41 = this;
 
             //#region handle LoanObj payments
             this.userInitiatedForPayment = true;
@@ -6476,22 +6500,22 @@
             this.payment.initPaymentConfigStripe(PaymentObj);
             this.payment.getCurrentPaymentApproved().subscribe(function (_obj) {
               if (_obj && _obj.success) {
-                var userObj = _this40.authenticationService.currentUserValue;
-                userObj.userMemberShipExpireOn = _this40.usersNextPlanSubscription.userMemberShipExpireOn;
-                userObj.appPlanId = _this40.usersNextPlanSubscription.appPlanId;
+                var userObj = _this41.authenticationService.currentUserValue;
+                userObj.userMemberShipExpireOn = _this41.usersNextPlanSubscription.userMemberShipExpireOn;
+                userObj.appPlanId = _this41.usersNextPlanSubscription.appPlanId;
 
-                _this40.authenticationService.sendCurrentUserObj(userObj);
+                _this41.authenticationService.sendCurrentUserObj(userObj);
 
-                _this40.initUsersCurrentAppPlanDetails();
+                _this41.initUsersCurrentAppPlanDetails();
 
-                _this40.alertService.success("congratulations! 1 month's subscription is purchased successfullly.");
+                _this41.alertService.success("congratulations! 1 month's subscription is purchased successfullly.");
               } else {
-                _this40.alertService.error(_obj.message || "Payment failed");
+                _this41.alertService.error(_obj.message || "Payment failed");
               }
 
-              _this40.resetStatusOfPayment();
+              _this41.resetStatusOfPayment();
 
-              _this40.payment.sendCurrentPaymentFailed(true);
+              _this41.payment.sendCurrentPaymentFailed(true);
             }); //#endregion handle LoanObj payments
           }
         }, {
@@ -7053,27 +7077,27 @@
         }, {
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this41 = this;
+            var _this42 = this;
 
             this.payment.getCurrentPayPalConfig().subscribe(function (payPalConfig) {
-              _this41.payPalConfig = payPalConfig;
+              _this42.payPalConfig = payPalConfig;
             });
             this.payment.getCurrentPaymentObj().subscribe(function (_currentPaymentObj) {
-              _this41.alreadyClickedOnPayment = false;
-              _this41.currentPaymentObj = _currentPaymentObj;
-              _this41.header4Payment = _this41.currentPaymentObj.header4Payment || 'Insurance Payment';
-              _this41.amount4Payment = _this41.currentPaymentObj.amount4Payment || 100;
-              _this41.selectedPaymentMethod = _this41.currentPaymentObj.selectedPaymentMethod || src_app_models__WEBPACK_IMPORTED_MODULE_5__["PaymentMethod"].Online;
-              _this41.currency = _this41.currentPaymentObj.currency || 'dkk';
-              _this41.loanId = _this41.currentPaymentObj.loanId || null;
-              _this41.loanApplyId = _this41.currentPaymentObj.loanApplyId || null;
-              _this41.appPlanId = _this41.currentPaymentObj.appPlanId || null;
-              _this41.planExpiry = _this41.currentPaymentObj.planExpiry || null;
-              _this41.paymentUniqId = _this41.currentPaymentObj.paymentUniqId || null;
-              _this41.transactiActionType = _currentPaymentObj.transactiActionType;
+              _this42.alreadyClickedOnPayment = false;
+              _this42.currentPaymentObj = _currentPaymentObj;
+              _this42.header4Payment = _this42.currentPaymentObj.header4Payment || 'Insurance Payment';
+              _this42.amount4Payment = _this42.currentPaymentObj.amount4Payment || 100;
+              _this42.selectedPaymentMethod = _this42.currentPaymentObj.selectedPaymentMethod || src_app_models__WEBPACK_IMPORTED_MODULE_5__["PaymentMethod"].Online;
+              _this42.currency = _this42.currentPaymentObj.currency || 'dkk';
+              _this42.loanId = _this42.currentPaymentObj.loanId || null;
+              _this42.loanApplyId = _this42.currentPaymentObj.loanApplyId || null;
+              _this42.appPlanId = _this42.currentPaymentObj.appPlanId || null;
+              _this42.planExpiry = _this42.currentPaymentObj.planExpiry || null;
+              _this42.paymentUniqId = _this42.currentPaymentObj.paymentUniqId || null;
+              _this42.transactiActionType = _currentPaymentObj.transactiActionType;
             });
             this.payment.getCurrentPaymentFailed().subscribe(function (transactionStatus) {
-              _this41.handler.close();
+              _this42.handler.close();
             });
             this.loadStripe();
           }
@@ -7163,7 +7187,7 @@
         }, {
           key: "loadStripe",
           value: function loadStripe() {
-            var _this42 = this;
+            var _this43 = this;
 
             if (!window.document.getElementById('stripe-script')) {
               var s = window.document.createElement("script");
@@ -7172,7 +7196,7 @@
               s.src = "https://checkout.stripe.com/checkout.js";
 
               s.onload = function () {
-                _this42.handler = window.StripeCheckout.configure({
+                _this43.handler = window.StripeCheckout.configure({
                   key: src_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].STRIP_PAYMENT_Publishable_key,
                   locale: 'auto',
                   token: function token(_token2) {
@@ -7312,7 +7336,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<!--\n    --old ref--\n<div class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"wallet\">\n    <label class=\"custom-control-label\" for=\"customRadio\">Use Wallet</label>\n</div>\n<div class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio2\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"online\">\n    <label class=\"custom-control-label\" for=\"customRadio2\">Pay Now</label>\n</div>\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod!=PaymentMethod.Online }\">\n    <ngx-paypal [config]=\"payPalConfig\"></ngx-paypal>\n</div>\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod==PaymentMethod.Online }\">\n    <button class=\"btn btn-success btn-sm text-white\" [disabled]=\"addFundsService.totalFund4currentUser < payment.amount\" (click)=\"paymentThroughWallet()\">\n    Pay Now</button>\n</div>\n-->\n\n<!--<link rel=\"stylesheet\" href=\"style.css\">-->\n<!----stripe card payment with redirection ref---->\n<!--\n<section>\n    <div class=\"product\">\n        <div class=\"description\">\n            <h3>{{header4Payment}}</h3>\n            <h5>{{amount4Payment}}</h5>\n        </div>\n    </div>\n    <button type=\"button\" id=\"checkout-button1\" (click)=\"initForPayment()\">Pay</button>\n</section>\n kr {{amount4Payment}}\n-->\n<div class=\"payment-backdrop text-center\">\n    <br>\n    <button [disabled]=\"alreadyClickedOnPayment\" *ngIf=\"!payment.paymentNotCompletedInTime\" (click)=\"pay(amount4Payment, $event)\" class=\"btn btn-success mt-5 btn-lg\" i18n>Pay Now  kr {{amount4Payment}}</button>\n    <div class=\"mt-4 text-white\" i18n>\n        Please Do not navigate or refresh page, while payment is in progress\n    </div>\n    <div class=\"mt-md-n2 mt-3\" *ngIf=\"payment.hours || payment.minutes || payment.seconds\">\n        <h4 class=\"text-white\"><div class=\"spinner-border text-success\" role=\"status\" i18n>\n            <span class=\"sr-only\" >Loading...</span>\n          </div> Session expires in  <i class=\"icon-timer\"></i>&nbsp;{{payment.hours}}:{{payment.minutes}}:{{payment.seconds}}</h4>\n    </div>\n    <div class=\"mt-3 \" *ngIf=\"!payment.paymentNotCompletedInTime && payment.paymentNotCompletedInTimeErrorMessageShow\">\n        <h4 class=\"text-white\" i18n>Please complete payment within time limit</h4>\n    </div>\n    <div class=\" mt-3\" *ngIf=\"payment.paymentNotCompletedInTime\">\n        <h4 class=\"text-white\" i18n>Time limit for payment is exceeded, please try again later. In case any deduction, will be revert back in 7 working day's, if not please contact support.</h4>\n    </div>\n</div>\n\n<!--\n<div *ngIf=\"invalidError\" style=\"color:red\">\n    {{ invalidError.message }}\n</div>\n\n<stripe-card #stripeCard (catch)=\"onStripeError($event)\" [(complete)]=\"cardDetailsFilledOut\" [(invalid)]=\"invalidError\"\n    (cardMounted)=\"cardCaptureReady = 1\" (paymentMethodChange)=\"setPaymentMethod($event)\"\n    (tokenChange)=\"setStripeToken($event)\" (sourceChange)=\"setStripeSource($event)\"></stripe-card>\n\n<button type=\"button\" (click)=\"stripeCard.createPaymentMethod(extraData)\">createPaymentMethod</button>\n<button type=\"button\" (click)=\"stripeCard.createSource(extraData)\">createSource</button>\n<button type=\"button\" (click)=\"stripeCard.createToken(extraData)\">createToken</button>\n-->";
+      __webpack_exports__["default"] = "<!--\n    --old ref--\n<div class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"wallet\">\n    <label class=\"custom-control-label\" for=\"customRadio\">Use Wallet</label>\n</div>\n<div class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio2\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"online\">\n    <label class=\"custom-control-label\" for=\"customRadio2\">Pay Now</label>\n</div>\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod!=PaymentMethod.Online }\">\n    <ngx-paypal [config]=\"payPalConfig\"></ngx-paypal>\n</div>\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod==PaymentMethod.Online }\">\n    <button class=\"btn btn-success btn-sm text-white\" [disabled]=\"addFundsService.totalFund4currentUser < payment.amount\" (click)=\"paymentThroughWallet()\">\n    Pay Now</button>\n</div>\n-->\n\n<!--<link rel=\"stylesheet\" href=\"style.css\">-->\n<!----stripe card payment with redirection ref---->\n<!--\n<section>\n    <div class=\"product\">\n        <div class=\"description\">\n            <h3>{{header4Payment}}</h3>\n            <h5>{{amount4Payment}}</h5>\n        </div>\n    </div>\n    <button type=\"button\" id=\"checkout-button1\" (click)=\"initForPayment()\">Pay</button>\n</section>\n kr {{amount4Payment}}\n-->\n<div class=\"payment-backdrop text-center\">\n    <br>\n    <button [disabled]=\"alreadyClickedOnPayment\" *ngIf=\"!payment.paymentNotCompletedInTime\" (click)=\"pay(amount4Payment, $event)\" class=\"btn btn-success mt-5 btn-lg\" i18n>Pay Now $ {{amount4Payment}}</button>\n    <div class=\"mt-4 text-white\" i18n>\n        Please Do not navigate or refresh page, while payment is in progress\n    </div>\n    <div class=\"mt-md-n2 mt-3\" *ngIf=\"payment.hours || payment.minutes || payment.seconds\">\n        <h4 class=\"text-white\"><div class=\"spinner-border text-success\" role=\"status\" i18n>\n            <span class=\"sr-only\" >Loading...</span>\n          </div> Session expires in  <i class=\"icon-timer\"></i>&nbsp;{{payment.hours}}:{{payment.minutes}}:{{payment.seconds}}</h4>\n    </div>\n    <div class=\"mt-3 \" *ngIf=\"!payment.paymentNotCompletedInTime && payment.paymentNotCompletedInTimeErrorMessageShow\">\n        <h4 class=\"text-white\" i18n>Please complete payment within time limit</h4>\n    </div>\n    <div class=\" mt-3\" *ngIf=\"payment.paymentNotCompletedInTime\">\n        <h4 class=\"text-white\" i18n>Time limit for payment is exceeded, please try again later. In case any deduction, will be revert back in 7 working day's, if not please contact support.</h4>\n    </div>\n</div>\n\n<!--\n<div *ngIf=\"invalidError\" style=\"color:red\">\n    {{ invalidError.message }}\n</div>\n\n<stripe-card #stripeCard (catch)=\"onStripeError($event)\" [(complete)]=\"cardDetailsFilledOut\" [(invalid)]=\"invalidError\"\n    (cardMounted)=\"cardCaptureReady = 1\" (paymentMethodChange)=\"setPaymentMethod($event)\"\n    (tokenChange)=\"setStripeToken($event)\" (sourceChange)=\"setStripeSource($event)\"></stripe-card>\n\n<button type=\"button\" (click)=\"stripeCard.createPaymentMethod(extraData)\">createPaymentMethod</button>\n<button type=\"button\" (click)=\"stripeCard.createSource(extraData)\">createSource</button>\n<button type=\"button\" (click)=\"stripeCard.createToken(extraData)\">createToken</button>\n-->";
       /***/
     },
 
@@ -7460,6 +7484,8 @@
             crop: this.fnCrop.bind(this),
             checkCrossOrigin: true
           };
+          this.showBlockingMessageMediatorT = false;
+          this.isAdminUserT = false;
           this.imageChangedEvent = '';
           this.croppedImage = '';
           this.canvasRotationCnt = 0;
@@ -7469,13 +7495,40 @@
             this.documentId = data.documentId;
             this.attributeKey = data.attributeKey;
             this.subFolderName = data.subFolderName;
+            this.isAdminUserT = !!data.isAdminUserT;
+
+            switch (this.attributeKey) {
+              case 'selfProfileUrl':
+                this.showBlockingMessageMediatorT = false;
+                break;
+
+              case 'myPassportMedia':
+              case 'myPassportMediaSelfVerify':
+              case 'myDLMedia':
+              case 'myDLMediaSelfVerify':
+              case 'myHICardMedia':
+              case 'myHICardMediaSelfVerify':
+              case 'myRKIMedia':
+              case 'myRKIMediaSelfVerify':
+                if (!this.isAdminUserT) {
+                  this.showBlockingMessageMediatorT = true;
+                } else {
+                  this.showBlockingMessageMediatorT = false;
+                }
+
+                break;
+
+              default:
+                this.showBlockingMessageMediatorT = false;
+                break;
+            }
           }
         }
 
         _createClass2(MediaProccessComponent, [{
           key: "onUploadMediaOnServer",
           value: function onUploadMediaOnServer() {
-            var _this43 = this;
+            var _this44 = this;
 
             if (!this.fileData) {
               this.alertService.error("Select file first.");
@@ -7505,14 +7558,14 @@
               observe: 'events'
             }).subscribe(function (events) {
               if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpEventType"].UploadProgress) {
-                _this43.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
+                _this44.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
               } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpEventType"].Response) {
-                _this43.fileUploadProgress = ''; //console.log(events.body);
+                _this44.fileUploadProgress = ''; //console.log(events.body);
 
                 if (events.body["status"]) {
                   //alert('SUCCESS !!');
                   //this.fileData = null;
-                  _this43.alertService.success('Uploaded Successfully !!', true);
+                  _this44.alertService.success('Uploaded successfully', true);
 
                   var _uploadedUrl = events.body["data"].path;
 
@@ -7520,12 +7573,12 @@
                     _uploadedUrl = _uploadedUrl.substr(1);
                   }
 
-                  _this43.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
-                  _this43.uploadedFileObj.url = _this43.uploadedFilePath; //this.onacademicDocumentsUpdate(true, null, this.uploadedFileObj);
+                  _this44.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                  _this44.uploadedFileObj.url = _this44.uploadedFilePath; //this.onacademicDocumentsUpdate(true, null, this.uploadedFileObj);
 
-                  _this43.closeDialog();
+                  _this44.closeDialog();
                 } else {
-                  _this43.alertService.error(events.body["message"]);
+                  _this44.alertService.error(events.body["message"]);
                 }
               }
             });
@@ -7533,16 +7586,16 @@
         }, {
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this44 = this;
+            var _this45 = this;
 
             setTimeout(function () {
-              _this44.openFileUploader();
+              _this45.openFileUploader();
             }, 1000);
           }
         }, {
           key: "fileChangeEvent",
           value: function fileChangeEvent(event) {
-            var _this45 = this;
+            var _this46 = this;
 
             this.imageChangedEvent = event;
             this.fileData = event.target.files[0];
@@ -7550,24 +7603,24 @@
             reader.readAsDataURL(this.fileData);
 
             reader.onload = function (_event) {
-              _this45.imageUrl = reader.result;
-              _this45.croppedImage = _this45.imageUrl;
-              _this45.isImageLoaded = true;
+              _this46.imageUrl = reader.result;
+              _this46.croppedImage = _this46.imageUrl;
+              _this46.isImageLoaded = true;
             };
           }
         }, {
           key: "fnCrop",
           value: function fnCrop(data) {
-            var _this46 = this;
+            var _this47 = this;
 
             var canvas = this.angularCropper.cropper.getCroppedCanvas();
             this.imageDestination = canvas.toDataURL("image/png");
             this.croppedImage = this.imageDestination;
             this.angularCropper.cropper.getCroppedCanvas().toBlob(function (blob) {
-              _this46.fileDataTemp = blob;
-              _this46.fileDataTemp["lastModifiedDate"] = new Date();
-              _this46.fileDataTemp["name"] = _this46.fileData.name;
-              _this46.fileDataTemp["mimetype"] = _this46.fileData.type;
+              _this47.fileDataTemp = blob;
+              _this47.fileDataTemp["lastModifiedDate"] = new Date();
+              _this47.fileDataTemp["name"] = _this47.fileData.name;
+              _this47.fileDataTemp["mimetype"] = _this47.fileData.type;
             });
           }
         }, {
@@ -7671,7 +7724,17 @@
           }
         }, {
           key: "ready",
-          value: function ready(event) {}
+          value: function ready(event) {
+            try {
+              //image  crop full width
+              var contData = this.angularCropper.cropper.getContainerData(); //Get container data
+
+              this.angularCropper.cropper.setCropBoxData({
+                height: contData.height,
+                width: contData.width
+              });
+            } catch (ex) {}
+          }
           /*
           imageCropped(event: ImageCropperResult) {
               this.croppedImage = event.dataUrl;
@@ -8191,7 +8254,7 @@
         }, {
           key: "onUpdatePasswordSubmit",
           value: function onUpdatePasswordSubmit() {
-            var _this47 = this;
+            var _this48 = this;
 
             this.submitted = true;
 
@@ -8202,15 +8265,15 @@
 
             this.userService.resetExistingUsersPasswordByUserId(this.profileUpdatePasswordForm.value._id, this.profileUpdatePasswordForm.value.userName, this.profileUpdatePasswordForm.value.password, this.profileUpdatePasswordForm.value.password2update, this.profileUpdatePasswordForm.value.role).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
-                _this47.submitted = false;
+                _this48.submitted = false;
 
-                _this47.showEditingForm(_this47.authenticationService.currentUserValue);
+                _this48.showEditingForm(_this48.authenticationService.currentUserValue);
 
-                _this47.alertService.success('Password Updated successfully', true);
+                _this48.alertService.success('Password Updated successfully', true);
               } else {
-                _this47.alertService.error(data['message']);
+                _this48.alertService.error(data['message']);
 
-                _this47.loading = false;
+                _this48.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -8225,9 +8288,9 @@
                 }
               } catch (ex) {}
 
-              _this47.alertService.error(errorMsg2show);
+              _this48.alertService.error(errorMsg2show);
 
-              _this47.loading = false;
+              _this48.loading = false;
             });
           }
         }, {
@@ -8276,645 +8339,6 @@
         styles: [_update_password_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["UserService"], src_app_services__WEBPACK_IMPORTED_MODULE_7__["AlertService"], src_app_services_app_router_service__WEBPACK_IMPORTED_MODULE_8__["AppRouterService"], src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_9__["UtilityService"]])], UpdatePasswordComponent);
       /***/
-    },
-
-    /***/
-    "Yz0s":
-    /*!****************************************************************************!*\
-      !*** ./node_modules/@fullcalendar/daygrid/node_modules/tslib/tslib.es6.js ***!
-      \****************************************************************************/
-
-    /*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __createBinding, __exportStar, __values, __read, __spread, __spreadArrays, __spreadArray, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
-
-    /***/
-    function Yz0s(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__extends", function () {
-        return __extends;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__assign", function () {
-        return _assign;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__rest", function () {
-        return __rest;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__decorate", function () {
-        return __decorate;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__param", function () {
-        return __param;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__metadata", function () {
-        return __metadata;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__awaiter", function () {
-        return __awaiter;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__generator", function () {
-        return __generator;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__createBinding", function () {
-        return __createBinding;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__exportStar", function () {
-        return __exportStar;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__values", function () {
-        return __values;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__read", function () {
-        return __read;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__spread", function () {
-        return __spread;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__spreadArrays", function () {
-        return __spreadArrays;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__spreadArray", function () {
-        return __spreadArray;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__await", function () {
-        return __await;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__asyncGenerator", function () {
-        return __asyncGenerator;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__asyncDelegator", function () {
-        return __asyncDelegator;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__asyncValues", function () {
-        return __asyncValues;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function () {
-        return __makeTemplateObject;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__importStar", function () {
-        return __importStar;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__importDefault", function () {
-        return __importDefault;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__classPrivateFieldGet", function () {
-        return __classPrivateFieldGet;
-      });
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "__classPrivateFieldSet", function () {
-        return __classPrivateFieldSet;
-      });
-      /*! *****************************************************************************
-      Copyright (c) Microsoft Corporation.
-      
-      Permission to use, copy, modify, and/or distribute this software for any
-      purpose with or without fee is hereby granted.
-      
-      THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
-      REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
-      AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
-      INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
-      LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
-      OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-      PERFORMANCE OF THIS SOFTWARE.
-      ***************************************************************************** */
-
-      /* global Reflect, Promise */
-
-
-      var _extendStatics = function extendStatics(d, b) {
-        _extendStatics = Object.setPrototypeOf || {
-          __proto__: []
-        } instanceof Array && function (d, b) {
-          d.__proto__ = b;
-        } || function (d, b) {
-          for (var p in b) {
-            if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
-          }
-        };
-
-        return _extendStatics(d, b);
-      };
-
-      function __extends(d, b) {
-        if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-
-        _extendStatics(d, b);
-
-        function __() {
-          this.constructor = d;
-        }
-
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-      }
-
-      var _assign = function __assign() {
-        _assign = Object.assign || function __assign(t) {
-          for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-
-            for (var p in s) {
-              if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-            }
-          }
-
-          return t;
-        };
-
-        return _assign.apply(this, arguments);
-      };
-
-      function __rest(s, e) {
-        var t = {};
-
-        for (var p in s) {
-          if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
-        }
-
-        if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
-          if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
-        }
-        return t;
-      }
-
-      function __decorate(decorators, target, key, desc) {
-        var c = arguments.length,
-            r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
-            d;
-        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
-          if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-        }
-        return c > 3 && r && Object.defineProperty(target, key, r), r;
-      }
-
-      function __param(paramIndex, decorator) {
-        return function (target, key) {
-          decorator(target, key, paramIndex);
-        };
-      }
-
-      function __metadata(metadataKey, metadataValue) {
-        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
-      }
-
-      function __awaiter(thisArg, _arguments, P, generator) {
-        function adopt(value) {
-          return value instanceof P ? value : new P(function (resolve) {
-            resolve(value);
-          });
-        }
-
-        return new (P || (P = Promise))(function (resolve, reject) {
-          function fulfilled(value) {
-            try {
-              step(generator.next(value));
-            } catch (e) {
-              reject(e);
-            }
-          }
-
-          function rejected(value) {
-            try {
-              step(generator["throw"](value));
-            } catch (e) {
-              reject(e);
-            }
-          }
-
-          function step(result) {
-            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
-          }
-
-          step((generator = generator.apply(thisArg, _arguments || [])).next());
-        });
-      }
-
-      function __generator(thisArg, body) {
-        var _ = {
-          label: 0,
-          sent: function sent() {
-            if (t[0] & 1) throw t[1];
-            return t[1];
-          },
-          trys: [],
-          ops: []
-        },
-            f,
-            y,
-            t,
-            g;
-        return g = {
-          next: verb(0),
-          "throw": verb(1),
-          "return": verb(2)
-        }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
-          return this;
-        }), g;
-
-        function verb(n) {
-          return function (v) {
-            return step([n, v]);
-          };
-        }
-
-        function step(op) {
-          if (f) throw new TypeError("Generator is already executing.");
-
-          while (_) {
-            try {
-              if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-              if (y = 0, t) op = [op[0] & 2, t.value];
-
-              switch (op[0]) {
-                case 0:
-                case 1:
-                  t = op;
-                  break;
-
-                case 4:
-                  _.label++;
-                  return {
-                    value: op[1],
-                    done: false
-                  };
-
-                case 5:
-                  _.label++;
-                  y = op[1];
-                  op = [0];
-                  continue;
-
-                case 7:
-                  op = _.ops.pop();
-
-                  _.trys.pop();
-
-                  continue;
-
-                default:
-                  if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-                    _ = 0;
-                    continue;
-                  }
-
-                  if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-                    _.label = op[1];
-                    break;
-                  }
-
-                  if (op[0] === 6 && _.label < t[1]) {
-                    _.label = t[1];
-                    t = op;
-                    break;
-                  }
-
-                  if (t && _.label < t[2]) {
-                    _.label = t[2];
-
-                    _.ops.push(op);
-
-                    break;
-                  }
-
-                  if (t[2]) _.ops.pop();
-
-                  _.trys.pop();
-
-                  continue;
-              }
-
-              op = body.call(thisArg, _);
-            } catch (e) {
-              op = [6, e];
-              y = 0;
-            } finally {
-              f = t = 0;
-            }
-          }
-
-          if (op[0] & 5) throw op[1];
-          return {
-            value: op[0] ? op[1] : void 0,
-            done: true
-          };
-        }
-      }
-
-      var __createBinding = Object.create ? function (o, m, k, k2) {
-        if (k2 === undefined) k2 = k;
-        Object.defineProperty(o, k2, {
-          enumerable: true,
-          get: function get() {
-            return m[k];
-          }
-        });
-      } : function (o, m, k, k2) {
-        if (k2 === undefined) k2 = k;
-        o[k2] = m[k];
-      };
-
-      function __exportStar(m, o) {
-        for (var p in m) {
-          if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) __createBinding(o, m, p);
-        }
-      }
-
-      function __values(o) {
-        var s = typeof Symbol === "function" && Symbol.iterator,
-            m = s && o[s],
-            i = 0;
-        if (m) return m.call(o);
-        if (o && typeof o.length === "number") return {
-          next: function next() {
-            if (o && i >= o.length) o = void 0;
-            return {
-              value: o && o[i++],
-              done: !o
-            };
-          }
-        };
-        throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
-      }
-
-      function __read(o, n) {
-        var m = typeof Symbol === "function" && o[Symbol.iterator];
-        if (!m) return o;
-        var i = m.call(o),
-            r,
-            ar = [],
-            e;
-
-        try {
-          while ((n === void 0 || n-- > 0) && !(r = i.next()).done) {
-            ar.push(r.value);
-          }
-        } catch (error) {
-          e = {
-            error: error
-          };
-        } finally {
-          try {
-            if (r && !r.done && (m = i["return"])) m.call(i);
-          } finally {
-            if (e) throw e.error;
-          }
-        }
-
-        return ar;
-      }
-      /** @deprecated */
-
-
-      function __spread() {
-        for (var ar = [], i = 0; i < arguments.length; i++) {
-          ar = ar.concat(__read(arguments[i]));
-        }
-
-        return ar;
-      }
-      /** @deprecated */
-
-
-      function __spreadArrays() {
-        for (var s = 0, i = 0, il = arguments.length; i < il; i++) {
-          s += arguments[i].length;
-        }
-
-        for (var r = Array(s), k = 0, i = 0; i < il; i++) {
-          for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) {
-            r[k] = a[j];
-          }
-        }
-
-        return r;
-      }
-
-      function __spreadArray(to, from, pack) {
-        if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
-          if (ar || !(i in from)) {
-            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-            ar[i] = from[i];
-          }
-        }
-        return to.concat(ar || Array.prototype.slice.call(from));
-      }
-
-      function __await(v) {
-        return this instanceof __await ? (this.v = v, this) : new __await(v);
-      }
-
-      function __asyncGenerator(thisArg, _arguments, generator) {
-        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-        var g = generator.apply(thisArg, _arguments || []),
-            i,
-            q = [];
-        return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () {
-          return this;
-        }, i;
-
-        function verb(n) {
-          if (g[n]) i[n] = function (v) {
-            return new Promise(function (a, b) {
-              q.push([n, v, a, b]) > 1 || resume(n, v);
-            });
-          };
-        }
-
-        function resume(n, v) {
-          try {
-            step(g[n](v));
-          } catch (e) {
-            settle(q[0][3], e);
-          }
-        }
-
-        function step(r) {
-          r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
-        }
-
-        function fulfill(value) {
-          resume("next", value);
-        }
-
-        function reject(value) {
-          resume("throw", value);
-        }
-
-        function settle(f, v) {
-          if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]);
-        }
-      }
-
-      function __asyncDelegator(o) {
-        var i, p;
-        return i = {}, verb("next"), verb("throw", function (e) {
-          throw e;
-        }), verb("return"), i[Symbol.iterator] = function () {
-          return this;
-        }, i;
-
-        function verb(n, f) {
-          i[n] = o[n] ? function (v) {
-            return (p = !p) ? {
-              value: __await(o[n](v)),
-              done: n === "return"
-            } : f ? f(v) : v;
-          } : f;
-        }
-      }
-
-      function __asyncValues(o) {
-        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
-        var m = o[Symbol.asyncIterator],
-            i;
-        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () {
-          return this;
-        }, i);
-
-        function verb(n) {
-          i[n] = o[n] && function (v) {
-            return new Promise(function (resolve, reject) {
-              v = o[n](v), settle(resolve, reject, v.done, v.value);
-            });
-          };
-        }
-
-        function settle(resolve, reject, d, v) {
-          Promise.resolve(v).then(function (v) {
-            resolve({
-              value: v,
-              done: d
-            });
-          }, reject);
-        }
-      }
-
-      function __makeTemplateObject(cooked, raw) {
-        if (Object.defineProperty) {
-          Object.defineProperty(cooked, "raw", {
-            value: raw
-          });
-        } else {
-          cooked.raw = raw;
-        }
-
-        return cooked;
-      }
-
-      ;
-
-      var __setModuleDefault = Object.create ? function (o, v) {
-        Object.defineProperty(o, "default", {
-          enumerable: true,
-          value: v
-        });
-      } : function (o, v) {
-        o["default"] = v;
-      };
-
-      function __importStar(mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k in mod) {
-          if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-        }
-
-        __setModuleDefault(result, mod);
-
-        return result;
-      }
-
-      function __importDefault(mod) {
-        return mod && mod.__esModule ? mod : {
-          "default": mod
-        };
-      }
-
-      function __classPrivateFieldGet(receiver, state, kind, f) {
-        if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
-        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-        return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
-      }
-
-      function __classPrivateFieldSet(receiver, state, value, kind, f) {
-        if (kind === "m") throw new TypeError("Private method is not writable");
-        if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
-        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
-        return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
-      }
-      /***/
-
     },
 
     /***/
@@ -9642,11 +9066,11 @@
         }, {
           key: "flatten",
           value: function flatten(array) {
-            var _this48 = this;
+            var _this49 = this;
 
             return array.reduce(function (arr, elm) {
               if (Array.isArray(elm)) {
-                return arr.concat(_this48.flatten(elm));
+                return arr.concat(_this49.flatten(elm));
               }
 
               return arr.concat(elm);
@@ -10292,10 +9716,10 @@
         }, {
           key: "groupBy",
           value: function groupBy(list, discriminator, delimiter) {
-            var _this49 = this;
+            var _this50 = this;
 
             return list.reduce(function (acc, payload) {
-              var key = _this49.extractKeyByDiscriminator(discriminator, payload, delimiter);
+              var key = _this50.extractKeyByDiscriminator(discriminator, payload, delimiter);
 
               acc[key] = Array.isArray(acc[key]) ? acc[key].concat([payload]) : [payload];
               return acc;
@@ -12517,11 +11941,11 @@
         _createClass2(LatinisePipe, [{
           key: "transform",
           value: function transform(text) {
-            var _this50 = this;
+            var _this51 = this;
 
             var chars = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '\\s';
             return isString(text) ? text.replace(/[^A-Za-z0-9]/g, function (key) {
-              return _this50.latinMap[key] || key;
+              return _this51.latinMap[key] || key;
             }) : text;
           }
         }]);
@@ -14422,17 +13846,17 @@
         }, {
           key: "handleIntersect",
           value: function handleIntersect(entries) {
-            var _this51 = this;
+            var _this52 = this;
 
             entries.forEach(function (entry) {
               if (entry['isIntersecting']) {
-                _this51.isInview = true;
+                _this52.isInview = true;
 
-                _this51.defaultInviewHandler(entry);
+                _this52.defaultInviewHandler(entry);
 
-                _this51.inview.emit(entry);
+                _this52.inview.emit(entry);
               } else {
-                _this51.notInview.emit(entry);
+                _this52.notInview.emit(entry);
               }
             });
           }
@@ -14642,7 +14066,7 @@
         }, {
           key: "onUserRestrictionDetailsUpdateSubmit",
           value: function onUserRestrictionDetailsUpdateSubmit() {
-            var _this52 = this;
+            var _this53 = this;
 
             this.submitted = true;
 
@@ -14654,19 +14078,19 @@
             this.userService.addUpdateUserRestrictionDetails(this.userRestrictionDetailsForm.value).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this52.updateUsersVerificationStatus(_this52.userObj._id, _this52.isVerified);
+                _this53.updateUsersVerificationStatus(_this53.userObj._id, _this53.isVerified);
 
-                _this52.alertService.success('Users status updated successfully', true);
+                _this53.alertService.success('Users status updated successfully', true);
 
-                _this52.submitted = false;
+                _this53.submitted = false;
 
-                _this52.initForm(); //this.appRouterService.appRouter(this.userObj);
+                _this53.initForm(); //this.appRouterService.appRouter(this.userObj);
 
               } else {
                 //alert(JSON.stringify(data['message']));
-                _this52.alertService.error(data['message']);
+                _this53.alertService.error(data['message']);
 
-                _this52.loading = false;
+                _this53.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -14681,9 +14105,9 @@
                 }
               } catch (ex) {}
 
-              _this52.alertService.error(errorMsg2show);
+              _this53.alertService.error(errorMsg2show);
 
-              _this52.loading = false;
+              _this53.loading = false;
             });
           }
         }, {
@@ -14732,20 +14156,20 @@
         }, {
           key: "updateUsersVerificationStatus",
           value: function updateUsersVerificationStatus(_userId, _isVerified) {
-            var _this53 = this;
+            var _this54 = this;
 
             this.alertService.success("Please wait while we updating status of user");
             this.socketService.updateUsersVerificationStatus(_userId, _isVerified).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
-                _this53.userObj = data["data"]; //this.rerender();
+                _this54.userObj = data["data"]; //this.rerender();
 
-                _this53.alertService.success(data['message']);
+                _this54.alertService.success(data['message']);
 
-                _this53.loading = false;
+                _this54.loading = false;
               } else {
-                _this53.alertService.error(data['message']);
+                _this54.alertService.error(data['message']);
 
-                _this53.loading = false;
+                _this54.loading = false;
               }
             }, function (error) {
               var errorMsg2show = ""; //this.PaymentTransactionDetailsArray = [];
@@ -14760,9 +14184,9 @@
                 }
               } catch (ex) {}
 
-              _this53.alertService.error(errorMsg2show);
+              _this54.alertService.error(errorMsg2show);
 
-              _this53.loading = false;
+              _this54.loading = false;
             });
           }
         }]);
@@ -14915,7 +14339,7 @@
 
       var MeetingVcComponent = /*#__PURE__*/function () {
         function MeetingVcComponent(alertService, appRouterService, socketService, ref, payment, utilityService) {
-          var _this54 = this;
+          var _this55 = this;
 
           _classCallCheck2(this, MeetingVcComponent);
 
@@ -14960,39 +14384,39 @@
 
             if (this.loanId) {
               this.socketService.getByIdSessions(this.loanId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
-                _this54.loanStartDateTime = _this54.utilityService._.now(); ////console.log('data => ', data)
+                _this55.loanStartDateTime = _this55.utilityService._.now(); ////console.log('data => ', data)
 
                 if (data && data['success']) {
                   //alert(JSON.stringify( data));
-                  _this54.sessionObj = data['data'];
+                  _this55.sessionObj = data['data'];
                   var useThisElapsTime = null;
                   var _loanEndDateTime = null;
 
-                  if (_this54.sessionObj.sessionsExecutionCollection) {
-                    for (var item in _this54.sessionObj.sessionsExecutionCollection) {
-                      if (_this54.loanStartDateTime >= _this54.sessionObj.sessionsExecutionCollection[item].loanEndDateTime) {
-                        _this54.alertService.error("You have already exceeded allotated session period.", true);
+                  if (_this55.sessionObj.sessionsExecutionCollection) {
+                    for (var item in _this55.sessionObj.sessionsExecutionCollection) {
+                      if (_this55.loanStartDateTime >= _this55.sessionObj.sessionsExecutionCollection[item].loanEndDateTime) {
+                        _this55.alertService.error("You have already exceeded allotated session period.", true);
 
-                        _this54.appRouterService.appRouter(_this54.currentUser);
+                        _this55.appRouterService.appRouter(_this55.currentUser);
 
                         return;
                       }
 
-                      _loanEndDateTime = _this54.sessionObj.sessionsExecutionCollection[item].loanEndDateTime;
-                      useThisElapsTime = (_this54.sessionObj.sessionsExecutionCollection[item].loanEndDateTime - _this54.loanStartDateTime) / 60 / 1000;
+                      _loanEndDateTime = _this55.sessionObj.sessionsExecutionCollection[item].loanEndDateTime;
+                      useThisElapsTime = (_this55.sessionObj.sessionsExecutionCollection[item].loanEndDateTime - _this55.loanStartDateTime) / 60 / 1000;
                     }
                   }
 
-                  _this54.extendCurrenSession(true, useThisElapsTime, _loanEndDateTime, null);
+                  _this55.extendCurrenSession(true, useThisElapsTime, _loanEndDateTime, null);
 
-                  _this54.startMyVcSession(); //this.alertService.success(data['message'], true);
+                  _this55.startMyVcSession(); //this.alertService.success(data['message'], true);
 
 
-                  _this54.loading = false; //this.element_btn_click_addSession_skills_verification.click();
+                  _this55.loading = false; //this.element_btn_click_addSession_skills_verification.click();
                 } else {
                   //alert(JSON.stringify(data['message']));
                   //this.alertService.error(data['message']);
-                  _this54.loading = false;
+                  _this55.loading = false;
                 }
               }, function (error) {
                 var errorMsg2show = "";
@@ -15008,7 +14432,7 @@
                 } catch (ex) {} //this.alertService.error(errorMsg2show);
 
 
-                _this54.loading = false;
+                _this55.loading = false;
               });
               return;
             }
@@ -15112,66 +14536,66 @@
         }, {
           key: "startTimer",
           value: function startTimer() {
-            var _this55 = this;
+            var _this56 = this;
 
             this.subscription = this.everySecond.subscribe(function (seconds) {
               var currentTime = moment__WEBPACK_IMPORTED_MODULE_8__();
-              _this55.remainingTime = _this55.searchEndDate.diff(currentTime);
-              _this55.remainingTime = _this55.remainingTime / 1000;
+              _this56.remainingTime = _this56.searchEndDate.diff(currentTime);
+              _this56.remainingTime = _this56.remainingTime / 1000;
 
-              if (_this55.remainingTime <= 0) {
-                _this55.alertService.error("Session time limit expired..."); //this.SearchDate = moment();
+              if (_this56.remainingTime <= 0) {
+                _this56.alertService.error("Session time limit expired..."); //this.SearchDate = moment();
                 //this.searchEndDate = this.SearchDate.add(this.ElapsTime, "minutes");
                 //this.TimerExpired.emit();
 
 
-                _this55.showExtendSessionButton = false;
+                _this56.showExtendSessionButton = false;
 
-                if (_this55.api) {
-                  _this55.api.removeEventListeners(['incomingMessage', 'outgoingMessage', 'videoConferenceLeft', 'suspendDetected']);
+                if (_this56.api) {
+                  _this56.api.removeEventListeners(['incomingMessage', 'outgoingMessage', 'videoConferenceLeft', 'suspendDetected']);
 
-                  _this55.api.dispose();
+                  _this56.api.dispose();
 
-                  _this55.alertService.error("You are now navigating back.", true);
+                  _this56.alertService.error("You are now navigating back.", true);
 
-                  _this55.appRouterService.appRouter(_this55.currentUser);
+                  _this56.appRouterService.appRouter(_this56.currentUser);
 
                   return;
                 } else if (window.cordova) {
                   jitsiplugin.destroy();
 
-                  _this55.alertService.error("You are now navigating back.", true);
+                  _this56.alertService.error("You are now navigating back.", true);
 
-                  _this55.appRouterService.appRouter(_this55.currentUser);
+                  _this56.appRouterService.appRouter(_this56.currentUser);
 
                   return;
                 }
               } else {
-                _this55.minutes = Math.floor(_this55.remainingTime / 60);
+                _this56.minutes = Math.floor(_this56.remainingTime / 60);
 
-                if (_this55.minutes > 59) {
-                  _this55.hours = Math.floor(_this55.remainingTime / 60 / 60);
+                if (_this56.minutes > 59) {
+                  _this56.hours = Math.floor(_this56.remainingTime / 60 / 60);
                 } else {
-                  _this55.hours = 0;
+                  _this56.hours = 0;
                 }
 
-                _this55.minutes = Math.floor(_this55.remainingTime / 60 - _this55.hours * 60);
-                _this55.seconds = Math.floor(_this55.remainingTime - (_this55.minutes * 60 + _this55.hours * 60 * 60));
+                _this56.minutes = Math.floor(_this56.remainingTime / 60 - _this56.hours * 60);
+                _this56.seconds = Math.floor(_this56.remainingTime - (_this56.minutes * 60 + _this56.hours * 60 * 60));
               }
 
-              if (_this55.minutes <= _this55.MinimumTime4Extend) {
-                _this55.showExtendSessionButton = true;
+              if (_this56.minutes <= _this56.MinimumTime4Extend) {
+                _this56.showExtendSessionButton = true;
               } else {
-                _this55.showExtendSessionButton = false;
+                _this56.showExtendSessionButton = false;
               }
 
-              _this55.ref.markForCheck();
+              _this56.ref.markForCheck();
             });
           }
         }, {
           key: "extendCurrenSession",
           value: function extendCurrenSession(_initT, useThisElapsTime, _loanEndDateTime, _transactionDetailsObj) {
-            var _this56 = this;
+            var _this57 = this;
 
             this.SearchDate = moment__WEBPACK_IMPORTED_MODULE_8__();
 
@@ -15210,16 +14634,16 @@
                 //alert(JSON.stringify( data));
                 if (data['data']) {
                   if (data['data']["_id"]) {
-                    _this56.sessionObj = data['data'];
+                    _this57.sessionObj = data['data'];
                   } else {
-                    _this56.sessionObj = data['data'][0];
+                    _this57.sessionObj = data['data'][0];
                   }
                 }
 
-                _this56.loading = false;
+                _this57.loading = false;
               } else {
                 //this.alertService.error(data['message']);
-                _this56.loading = false;
+                _this57.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -15235,13 +14659,13 @@
               } catch (ex) {} //this.alertService.error(errorMsg2show);
 
 
-              _this56.loading = false;
+              _this57.loading = false;
             });
           }
         }, {
           key: "initiatePayment",
           value: function initiatePayment(sessionObj, _loanApplyId) {
-            var _this57 = this;
+            var _this58 = this;
 
             this.userInitiatedForPayment = true;
             _loanApplyId = _loanApplyId ? _loanApplyId : this.roomName;
@@ -15276,7 +14700,7 @@
               }]
             }];
             this.payment.getCurrentPaymentApproved().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (details) {
-              _this57.extendCurrenSession(false, null, null, details); //this.dialogRef.close({ event: 'close', data: { sessionApply: _sessionApply, status: _status, transactionId: details.id } });
+              _this58.extendCurrenSession(false, null, null, details); //this.dialogRef.close({ event: 'close', data: { sessionApply: _sessionApply, status: _status, transactionId: details.id } });
 
             });
             this.payPalConfig = this.payment.initConfig(purchaseUnits, src_app_models__WEBPACK_IMPORTED_MODULE_10__["TransactionActionType"].session_extended, _endUserId);
@@ -15343,7 +14767,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJtZWRpYS1wcm9jY2Vzcy5jb21wb25lbnQuY3NzIn0= */";
+      __webpack_exports__["default"] = ".save{\n    -webkit-animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both infinite alternate;\n            animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both infinite alternate;\n    transform: translate3d(0, 0, 0);\n \n  }\n  \n  @-webkit-keyframes shake {\n    10%, 90% {\n      transform: translate3d(-1px, 0, 0);\n    }\n    \n    20%, 80% {\n      transform: translate3d(2px, 0, 0);\n    }\n  \n    30%, 50%, 70% {\n      transform: translate3d(-4px, 0, 0);\n    }\n  \n    40%, 60% {\n      transform: translate3d(4px, 0, 0);\n    }\n  }\n  \n  @keyframes shake {\n    10%, 90% {\n      transform: translate3d(-1px, 0, 0);\n    }\n    \n    20%, 80% {\n      transform: translate3d(2px, 0, 0);\n    }\n  \n    30%, 50%, 70% {\n      transform: translate3d(-4px, 0, 0);\n    }\n  \n    40%, 60% {\n      transform: translate3d(4px, 0, 0);\n    }\n  }\n  \n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIm1lZGlhLXByb2NjZXNzLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxvRkFBNEU7WUFBNUUsNEVBQTRFO0lBQzVFLCtCQUErQjs7RUFFakM7O0VBRUE7SUFDRTtNQUNFLGtDQUFrQztJQUNwQzs7SUFFQTtNQUNFLGlDQUFpQztJQUNuQzs7SUFFQTtNQUNFLGtDQUFrQztJQUNwQzs7SUFFQTtNQUNFLGlDQUFpQztJQUNuQztFQUNGOztFQWhCQTtJQUNFO01BQ0Usa0NBQWtDO0lBQ3BDOztJQUVBO01BQ0UsaUNBQWlDO0lBQ25DOztJQUVBO01BQ0Usa0NBQWtDO0lBQ3BDOztJQUVBO01BQ0UsaUNBQWlDO0lBQ25DO0VBQ0YiLCJmaWxlIjoibWVkaWEtcHJvY2Nlc3MuY29tcG9uZW50LmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi5zYXZle1xuICAgIGFuaW1hdGlvbjogc2hha2UgMC44MnMgY3ViaWMtYmV6aWVyKC4zNiwuMDcsLjE5LC45NykgYm90aCBpbmZpbml0ZSBhbHRlcm5hdGU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUzZCgwLCAwLCAwKTtcbiBcbiAgfVxuICBcbiAgQGtleWZyYW1lcyBzaGFrZSB7XG4gICAgMTAlLCA5MCUge1xuICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUzZCgtMXB4LCAwLCAwKTtcbiAgICB9XG4gICAgXG4gICAgMjAlLCA4MCUge1xuICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUzZCgycHgsIDAsIDApO1xuICAgIH1cbiAgXG4gICAgMzAlLCA1MCUsIDcwJSB7XG4gICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZTNkKC00cHgsIDAsIDApO1xuICAgIH1cbiAgXG4gICAgNDAlLCA2MCUge1xuICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUzZCg0cHgsIDAsIDApO1xuICAgIH1cbiAgfVxuICAiXX0= */";
       /***/
     },
 
@@ -15457,7 +14881,7 @@
 
       var PublicProfileComponent = /*#__PURE__*/function () {
         function PublicProfileComponent(utilityService, authenticationService, router, dialogRef, data, userService, alertService, socketService, dialog, _cdr) {
-          var _this58 = this;
+          var _this59 = this;
 
           _classCallCheck2(this, PublicProfileComponent);
 
@@ -15501,7 +14925,7 @@
 
           this.userService.getUserProfilePortFolioByUserId(this.userObj._id).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this58.portfolioDataArr = data["data"];
+              _this59.portfolioDataArr = data["data"];
             } else {}
           }, function (error) {
             var errorMsg2show = "";
@@ -15518,7 +14942,7 @@
           });
           this.userService.getUsersDashboardData(this.userObj._id, this.userObj.role).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this58.profileAdditionalData = data["data"];
+              _this59.profileAdditionalData = data["data"];
             } else {}
           }, function (error) {
             var errorMsg2show = "";
@@ -15538,13 +14962,13 @@
           };
           this.socketService.getByQuerySummaryRatingReviewe(_data).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this58.myRatingsSummaryObj = data["data"]; //this.rerender();
+              _this59.myRatingsSummaryObj = data["data"]; //this.rerender();
 
-              _this58.loading = false;
+              _this59.loading = false;
             } else {
-              _this58.alertService.error(data['message']);
+              _this59.alertService.error(data['message']);
 
-              _this58.loading = false;
+              _this59.loading = false;
             }
           }, function (error) {
             var errorMsg2show = "";
@@ -15559,23 +14983,23 @@
               }
             } catch (ex) {}
 
-            _this58.alertService.error(errorMsg2show);
+            _this59.alertService.error(errorMsg2show);
 
-            _this58.loading = false;
+            _this59.loading = false;
           });
           this.socketService.getByLoanIdRatingReviewe(_data).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this58.RatingDetailsArray = data["data"]; //this.rerender();
+              _this59.RatingDetailsArray = data["data"]; //this.rerender();
 
-              _this58.loading = false;
+              _this59.loading = false;
             } else {
-              _this58.alertService.error(data['message']);
+              _this59.alertService.error(data['message']);
 
-              _this58.loading = false;
+              _this59.loading = false;
             }
           }, function (error) {
             var errorMsg2show = "";
-            _this58.RatingDetailsArray = [];
+            _this59.RatingDetailsArray = [];
 
             try {
               if (error && error.error && error.error.message) {
@@ -15587,9 +15011,9 @@
               }
             } catch (ex) {}
 
-            _this58.alertService.error(errorMsg2show);
+            _this59.alertService.error(errorMsg2show);
 
-            _this58.loading = false;
+            _this59.loading = false;
           });
         }
 
@@ -15638,20 +15062,20 @@
         }, {
           key: "updateUsersVerificationStatus",
           value: function updateUsersVerificationStatus(_userId, _verifiedKey, _isVerified) {
-            var _this59 = this;
+            var _this60 = this;
 
             this.alertService.success("Please wait while we updating status of user");
             this.userService.updateUsersDataKeyVerificationStatus(_userId, _verifiedKey, _isVerified).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
-                _this59.userObj = data["data"];
+                _this60.userObj = data["data"];
 
-                _this59.alertService.success(data['message']);
+                _this60.alertService.success(data['message']);
 
-                _this59.loading = false;
+                _this60.loading = false;
               } else {
-                _this59.alertService.error(data['message']);
+                _this60.alertService.error(data['message']);
 
-                _this59.loading = false;
+                _this60.loading = false;
               }
             }, function (error) {
               var errorMsg2show = ""; //this.RatingDetailsArray = [];
@@ -15666,9 +15090,9 @@
                 }
               } catch (ex) {}
 
-              _this59.alertService.error(errorMsg2show);
+              _this60.alertService.error(errorMsg2show);
 
-              _this59.loading = false;
+              _this60.loading = false;
             });
           }
         }, {
@@ -15713,7 +15137,7 @@
         }, {
           key: "editUsersDocuments",
           value: function editUsersDocuments(userObj, _subDocumentKey) {
-            var _this60 = this;
+            var _this61 = this;
 
             //console.log('411', this.authenticationService.currentUserValue);
             var dialogRef = this.dialog.open(_public_profile_edit_public_profile_edit_component__WEBPACK_IMPORTED_MODULE_13__["PublicProfileEditComponent"], {
@@ -15729,22 +15153,22 @@
             });
             dialogRef.afterClosed().subscribe(function (result) {
               if (result && result.data) {
-                _this60.userObj.myPassportMedia = result.data.myPassportMedia;
-                _this60.userObj.myPassportMediaSelfVerify = result.data.myPassportMediaSelfVerify;
-                _this60.userObj.myPassportMediaVerified = result.data.myPassportMediaVerified;
-                _this60.userObj.myPassportNumber = result.data.myPassportNumber;
-                _this60.userObj.myDLMedia = result.data.myDLMedia;
-                _this60.userObj.myDLMediaSelfVerify = result.data.myDLMediaSelfVerify;
-                _this60.userObj.myDLMediaVerified = result.data.myDLMediaVerified;
-                _this60.userObj.myDLNumber = result.data.myDLNumber;
-                _this60.userObj.myHICardMedia = result.data.myHICardMedia;
-                _this60.userObj.myHICardMediaSelfVerify = result.data.myHICardMediaSelfVerify;
-                _this60.userObj.myHICardMediaVerified = result.data.myHICardMediaVerified;
-                _this60.userObj.myRKIMedia = result.data.myRKIMedia;
-                _this60.userObj.myRKIMediaSelfVerify = result.data.myRKIMediaSelfVerify;
-                _this60.userObj.myRKIMediaVerified = result.data.myRKIMediaVerified;
+                _this61.userObj.myPassportMedia = result.data.myPassportMedia;
+                _this61.userObj.myPassportMediaSelfVerify = result.data.myPassportMediaSelfVerify;
+                _this61.userObj.myPassportMediaVerified = result.data.myPassportMediaVerified;
+                _this61.userObj.myPassportNumber = result.data.myPassportNumber;
+                _this61.userObj.myDLMedia = result.data.myDLMedia;
+                _this61.userObj.myDLMediaSelfVerify = result.data.myDLMediaSelfVerify;
+                _this61.userObj.myDLMediaVerified = result.data.myDLMediaVerified;
+                _this61.userObj.myDLNumber = result.data.myDLNumber;
+                _this61.userObj.myHICardMedia = result.data.myHICardMedia;
+                _this61.userObj.myHICardMediaSelfVerify = result.data.myHICardMediaSelfVerify;
+                _this61.userObj.myHICardMediaVerified = result.data.myHICardMediaVerified;
+                _this61.userObj.myRKIMedia = result.data.myRKIMedia;
+                _this61.userObj.myRKIMediaSelfVerify = result.data.myRKIMediaSelfVerify;
+                _this61.userObj.myRKIMediaVerified = result.data.myRKIMediaVerified;
 
-                _this60._cdr.detectChanges();
+                _this61._cdr.detectChanges();
               } ////console.log(`426 :: msc :: Dialog result: ${JSON.stringify(result)}`);
 
             });
@@ -15919,7 +15343,7 @@
           _createClass2(ScriptService, [{
             key: "registerScript",
             value: function registerScript(url, globalVar, onReady) {
-              var _this61 = this;
+              var _this62 = this;
 
               /** @type {?} */
               var existingGlobalVar =
@@ -15950,7 +15374,7 @@
               * @return {?}
               */
               function () {
-                _this61.zone.run(
+                _this62.zone.run(
                 /**
                 * @return {?}
                 */
@@ -16238,7 +15662,7 @@
           }, {
             key: "ngOnChanges",
             value: function ngOnChanges(changes) {
-              var _this62 = this;
+              var _this63 = this;
 
               if (!this.payPalButtonContainerId) {
                 this.payPalButtonContainerId = this.generateElementId();
@@ -16258,9 +15682,9 @@
                   */
                   function (payPal) {
                     // store reference to paypal global script
-                    _this62.payPal = payPal;
+                    _this63.payPal = payPal;
 
-                    _this62.doPayPalCheck();
+                    _this63.doPayPalCheck();
                   });
                 }
               } // changes to config
@@ -16309,7 +15733,7 @@
           }, {
             key: "reinitialize",
             value: function reinitialize(config) {
-              var _this63 = this;
+              var _this64 = this;
 
               this.config = config;
               this.payPal = undefined;
@@ -16334,9 +15758,9 @@
                   */
                   function (payPal) {
                     // store reference to paypal global script
-                    _this63.payPal = payPal;
+                    _this64.payPal = payPal;
 
-                    _this63.doPayPalCheck();
+                    _this64.doPayPalCheck();
                   });
                 } else {
                   this.doPayPalCheck();
@@ -16369,7 +15793,7 @@
           }, {
             key: "initPayPalScript",
             value: function initPayPalScript(config, initPayPal) {
-              var _this64 = this;
+              var _this65 = this;
 
               this.paypalScriptService.registerPayPalScript({
                 clientId: config.clientId,
@@ -16383,7 +15807,7 @@
               * @return {?}
               */
               function (paypal) {
-                _this64.scriptLoaded.next(paypal);
+                _this65.scriptLoaded.next(paypal);
 
                 initPayPal(paypal);
               });
@@ -16408,7 +15832,7 @@
           }, {
             key: "initPayPal",
             value: function initPayPal(config, paypal) {
-              var _this65 = this;
+              var _this66 = this;
 
               // Running outside angular zone prevents infinite ngDoCheck lifecycle calls
               this.ngZone.runOutsideAngular(
@@ -16426,7 +15850,7 @@
                 * @return {?}
                 */
                 function createOrder(data, actions) {
-                  return _this65.ngZone.run(
+                  return _this66.ngZone.run(
                   /**
                   * @return {?}
                   */
@@ -16460,7 +15884,7 @@
                 * @return {?}
                 */
                 function createSubscription(data, actions) {
-                  return _this65.ngZone.run(
+                  return _this66.ngZone.run(
                   /**
                   * @return {?}
                   */
@@ -16480,7 +15904,7 @@
                 * @return {?}
                 */
                 function onShippingChange(data, actions) {
-                  return _this65.ngZone.run(
+                  return _this66.ngZone.run(
                   /**
                   * @return {?}
                   */
@@ -16502,7 +15926,7 @@
                   * @return {?}
                   */
                   function onApprove(data, actions) {
-                    return _this65.ngZone.run(
+                    return _this66.ngZone.run(
                     /**
                     * @return {?}
                     */
@@ -16528,7 +15952,7 @@
                         * @return {?}
                         */
                         function (details) {
-                          _this65.ngZone.run(
+                          _this66.ngZone.run(
                           /**
                           * @return {?}
                           */
@@ -16546,7 +15970,7 @@
                   * @return {?}
                   */
                   function onError(error) {
-                    _this65.ngZone.run(
+                    _this66.ngZone.run(
                     /**
                     * @return {?}
                     */
@@ -16563,7 +15987,7 @@
                   * @return {?}
                   */
                   function onCancel(data, actions) {
-                    _this65.ngZone.run(
+                    _this66.ngZone.run(
                     /**
                     * @return {?}
                     */
@@ -16580,7 +16004,7 @@
                   * @return {?}
                   */
                   function onClick(data, actions) {
-                    _this65.ngZone.run(
+                    _this66.ngZone.run(
                     /**
                     * @return {?}
                     */
@@ -16597,7 +16021,7 @@
                   * @return {?}
                   */
                   function onInit(data, actions) {
-                    _this65.ngZone.run(
+                    _this66.ngZone.run(
                     /**
                     * @return {?}
                     */
@@ -16614,7 +16038,7 @@
                 }), config.onShippingChange && {
                   onShippingChange: onShippingChange
                 });
-                paypal.Buttons(buttonsConfig).render("#".concat(_this65.payPalButtonContainerId));
+                paypal.Buttons(buttonsConfig).render("#".concat(_this66.payPalButtonContainerId));
               });
             }
           }]);
@@ -17268,7 +16692,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"row pt-0 saas2\">\n    <div class=\"col-xl-12 col-12 text-center\" *ngIf=\"!f.isVerified.value\">\n        <h3 i18n>Submit your portfolio for verification</h3>\n        <P class=\"my-3\" i18n>Remember to fill in all fields correctly, otherwise you may risk lifetime blockage</P>\n\n    </div>\n    <div class=\"col-xl-12 col-12\">\n        <section class=\"tab-product  p-b-0\">\n\n            <ul class=\"nav nav-justified nav-material nav-tabs mb-4 shadow-sm\" id=\"top-tab\" role=\"tablist\">\n                <li class=\"nav-item\">\n                    <a id=\"btn_click_profile_basic_details\" class=\"nav-link show active\" data-toggle=\"tab\"\n                        data-target=\"#profile_basic_details\" (click)=\"clickOnGoToNext(1, true)\" i18n>Basic Details</a>\n                    <div class=\"material-border\"></div>\n                </li>\n                <li class=\"nav-item\">\n                    <a id=\"btn_click_profile_skills_verification\" class=\"nav-link\" data-toggle=\"tab\"\n                        data-target=\"#profile_skills_verification\" (click)=\"clickOnGoToNext(2, true)\" i18n>Upload\n                        Documents</a>\n                    <div class=\"material-border\"></div>\n                </li>\n                <!-- <li class=\"nav-item\" *ngIf=\"_role == Role.Borrower\">\n                            <a id=\"btn_click_profile_banking\" class=\"nav-link font-weight-light\" data-toggle=\"pill\"\n                                data-target=\"#profile_banking_details\">Banking Details</a>\n                        </li> -->\n            </ul>\n\n        </section>\n\n        <form [formGroup]=\"profileForm\">\n\n            <div class=\"tab-content\">\n                <div class=\"tab-pane active\" id=\"profile_basic_details\">\n                    <div class=\"form-row mb-2  mb-3\">\n                        <div class=\"col-xl-3 text-center\">\n                            <div class=\"card\">\n                                <div class=\"card-header\">\n                                    <h6 class=\"font-weight-bold text-primary\" i18n>Change Profile Pic</h6>\n                                </div>\n\n                                <div class=\"card-body\">\n                                    <img [src]=\"f.selfProfileUrl.value\" onerror=\"this.src='./assets/img/nouser.png';\"\n                                        class=\"border img-fluid rounded-circle mb-3\" />\n                                    <br>\n                                    <i *ngIf=\"!selfProfileUrlPendingForUpload\"\n                                        class=\"icon-pencil-alt m-2 cursor-pointer text-success\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'selfProfileUrl', null);\">\n                                        <!--openFileUploaderForProfile()-->\n\n                                        <input id=\"ctrlUploadProfile\" hidden type=\"file\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressForProfile($event)\"> Edit\n                                    </i>\n                                    <i *ngIf=\"selfProfileUrlPendingForUpload\"\n                                        class=\"icon-upload m-2 cursor-pointer text-success\"\n                                        (click)=\"onUploadForProfile()\" i18n> Save\n                                    </i>\n                                </div>\n\n                                <div class=\"card-footer\">\n                                    <div class=\"btn-group btn-group-sm shadow\">\n                                        <button disabled *ngIf=\"f.role.value !=='lender'\" type=\"button\" class=\"btn\"\n                                            (click)=\"onClickRoleChange('borrower')\"\n                                            [ngClass]=\"{ 'btn-success': f.role.value=='borrower', 'btn-outline-success': f.role.value!='borrower'}\"\n                                            i18n>\n                                            Borrower\n                                        </button>\n                                        <button disabled *ngIf=\"f.role.value !=='borrower'\" type=\"button\" class=\"btn\"\n                                            (click)=\"onClickRoleChange('lender')\"\n                                            [ngClass]=\"{ 'btn-success': f.role.value=='lender', 'btn-outline-success': f.role.value!='lender'}\"\n                                            i18n>\n                                            Lender\n                                        </button>\n                                    </div>\n                                </div>\n\n                            </div>\n\n                        </div>\n\n\n\n                        <div class=\"col-xl-9\">\n\n                            <div class=\"card\">\n                                <div class=\"card-header\">\n                                    <h6 class=\"font-weight-bold text-primary\" i18n>Change Basic Details</h6>\n                                </div>\n\n                                <div class=\"card-body\">\n                                    <div class=\"form-row \">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"firstName\" i18n>First Name</label>\n                                            <input type=\"text\" formControlName=\"firstName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.firstName.errors }\" />\n                                            <div *ngIf=\"submitted && f.firstName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.firstName.errors.required\" i18n>First Name is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"middleName\" i18n>Middle Name</label>\n                                            <input type=\"text\" formControlName=\"middleName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.middleName.errors }\" />\n                                            <div *ngIf=\"submitted && f.middleName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.middleName.errors.required\" i18n>Middle Name is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"lastName\" i18n>Last Name</label>\n                                            <input type=\"text\" formControlName=\"lastName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.lastName.errors }\" />\n                                            <div *ngIf=\"submitted && f.lastName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.lastName.errors.required\" i18n>Last Name is required</div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"mobileNo\" i18n>\n                                                <i class=\"icon-mobile text-success\"></i>\n                                                Mobile Number</label>\n                                            <input type=\"text\" formControlName=\"mobileNo\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.mobileNo.errors }\" />\n                                            <div *ngIf=\"submitted && f.mobileNo.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.mobileNo.errors.required\" i18n>Mobile Number is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"emailAddress\" i18n>Email</label>\n                                            <input type=\"text\" disabled formControlName=\"emailAddress\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.emailAddress.errors }\" />\n                                            <div *ngIf=\"submitted && f.emailAddress.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.emailAddress.errors.required\" i18n>Email is required</div>\n                                                <div *ngIf=\"f.emailAddress.errors.email\" i18n>Invalid Email format.\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"address\" class=\"font-weight-bold\" i18n>\n                                                Address\n                                            </label>\n                                            <textarea rows=\"2\" maxlength=\"500\" formControlName=\"address\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.address.errors }\">\n                                                    </textarea>\n                                            <div *ngIf=\"submitted && f.address.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.address.errors.required\" i18n>\n                                                    Address is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"birthDateCustomised\" i18n>Birthday</label>\n                                            <input type=\"date\" formControlName=\"birthDateCustomised\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.birthDate.errors }\"\n                                                [max]=\"maxDate\" [min]=\"minDate\" />\n                                            <div *ngIf=\"submitted && f.birthDate.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.birthDate.errors.required\" i18n>Birthday is required\n                                                </div>\n                                                <div *ngIf=\"f.birthDate.errors.date\" i18n>Invalid date format.\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-4 d-none\">\n                                            <div class=\"form-row\">\n                                                <div class=\"col-xl-12 text-center mb-2\">\n                                                    <label i18n>Gender</label>\n                                                    <div class=\"btn-group shadow mb-3\">\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('male')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='male', 'btn-outline-success': f.gender.value!='male'}\"\n                                                            i18n>\n                                                            Male\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('female')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='female', 'btn-outline-success': f.gender.value!='female'}\"\n                                                            i18n>\n                                                            Female\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('other')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='other', 'btn-outline-success': f.gender.value!='other'}\"\n                                                            i18n>\n                                                            Other\n                                                        </button>\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"cityCode\" i18n>City</label>\n                                            <input type=\"text\" formControlName=\"cityCode\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.cityCode.errors }\" />\n                                            <div *ngIf=\"submitted && f.cityCode.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.cityCode.errors.required\" i18n>City is required</div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"cityCode\" i18n>Country</label>\n                                            <select formControlName=\"country\" class=\"custom-select\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.country.errors }\">\n                                                <option value=\"\" selected disabled i18n>Choose Country</option>\n                                                <option *ngFor=\"let country of countrylist\" [ngValue]=\"country\">\n                                                    {{country}}</option>\n                                            </select>\n                                            <div *ngIf=\"submitted && f.country.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.country.errors.required\" i18n>Country is required</div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"myProfileDetails\" i18n>Describe Yourself</label>\n                                            <textarea rows=\"2\" maxlength=\"500\" formControlName=\"myProfileDetails\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.myProfileDetails.errors }\">\n                                                    </textarea>\n                                            <div *ngIf=\"submitted && f.myProfileDetails.errors\"\n                                                class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.myProfileDetails.errors.required\" i18n>Describe Yourself\n                                                    is\n                                                    required\n                                                </div>\n                                            </div>\n                                        </div>\n\n                                    </div>\n                                </div>\n\n                                <div class=\"card-footer\">\n                                    <button type=\"button\" (click)=\"clickOnGoToNext(2)\" [disabled]=\"loading\"\n                                        class=\"btn btn-primary float-right\" i18n>Next</button>\n                                </div>\n                            </div>\n\n\n                        </div>\n                    </div>\n                </div>\n                <div class=\"tab-pane fade\" id=\"profile_skills_verification\">\n                    <div class=\"card\">\n                        <div class=\"card-header\">\n                            <h6 class=\"font-weight-bold text-primary\" i18n>Update Your Documents</h6>\n                        </div>\n\n                        <div class=\"card-body\">\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-md-12\">\n                                    <div class=\"text-gray\" i18n>\n                                        Upload your Passport, Driving Licence, Health Insurance Card document\n                                    </div>\n                                    <hr>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"myPassportNumber\" i18n>Passport Number:</label>\n                                        <input type=\"text\"\n                                            [readonly]=\"authenticationService.currentUserValue.myPassportNumber\"\n                                            formControlName=\"myPassportNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myPassportNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.myPassportNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.myPassportNumber.errors.required\" i18n>Passport number is\n                                                required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myPassportMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myPassportMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7 col-12\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyPassportMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myPassportMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyPassportMedia\">{{lblmyPassportMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myPassportMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"myDLNumber\" i18n>Driving License Number:</label>\n                                        <input type=\"text\"\n                                            [readonly]=\"authenticationService.currentUserValue.myDLNumber\"\n                                            formControlName=\"myDLNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myDLNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.myDLNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.myDLNumber.errors.required\" i18n>Driving License number is\n                                                required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myDLMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myDLMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyDLMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myDLMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyDLMedia\">{{lblmyDLMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myDLMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"cprNumber\" i18n>CPR Number:</label>\n                                        <input type=\"text\" [readonly]=\"authenticationService.currentUserValue.cprNumber\"\n                                            formControlName=\"cprNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.cprNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.cprNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.cprNumber.errors.required\" i18n>CPR number is required</div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myHICardMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myHICardMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyHICardMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myHICardMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyHICardMedia\">{{lblmyHICardMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myHICardMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"row\">\n                                <div class=\"col-xl-4\">\n                                    <div class=\"card\"\n                                        *ngFor=\"let previewUrl of _.union(_.values(f.myPassportMedia.value),_.values(f.myPassportMediaSelfVerify.value))\">\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"card-body\" i18n>\n                                            Passport\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myPassportMedia')\"></i></a>\n                                                    -->\n                                        </div>\n                                    </div>\n\n\n                                </div>\n                                <div class=\"col-xl-4\">\n                                    <div class=\"card\"\n                                        *ngFor=\"let previewUrl of _.union(_.values(f.myDLMedia.value),_.values(f.myDLMediaSelfVerify.value))\">\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"card-body\" i18n>\n                                            Driving Licence\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myDLMedia')\"></i></a>\n                                                    -->\n                                        </div>\n                                    </div>\n\n\n                                </div>\n                                <div class=\"col-xl-4\">\n                                    <div class=\"card\"\n                                        *ngFor=\"let previewUrl of _.union(_.values(f.myHICardMedia.value),_.values(f.myHICardMediaSelfVerify.value))\">\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"card-body\" i18n>\n                                            Health Insurance Card\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myHICardMedia')\"></i></a>\n                                            -->\n                                        </div>\n                                    </div>\n\n                                </div>\n                            </div>\n                            <div class=\"form-row\">\n                                <div class=\"col-xl-12 mt-3\">\n                                    <label class=\"d-none\" for=\"myProfileDetails\" i18n>Social Network</label>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-4 d-none\">\n\n                                            <select [(ngModel)]=\"appName\" class=\"custom-select\"\n                                                [ngModelOptions]=\"{standalone: true}\">\n                                                <option value=\"facebook\" selected i18n> Facebook</option>\n                                            \n                                            </select>\n                                        </div>\n                                        <div class=\"col-xl-12\">\n                                            <!--\n                                            <div class=\"input-group mb-3\">\n                                                <input type=\"url\"\n                                                    pattern=\"/(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})/gi*\"\n                                                    [(ngModel)]=\"appLink\" class=\"form-control\"\n                                                    [ngModelOptions]=\"{standalone: true}\"\n                                                    placeholder=\"Facebook Profile Public Link\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.externalAppLinks.errors }\" />\n                                                <div class=\"input-group-append\">\n                                                    <button class=\"btn btn-success\"\n                                                        (click)=\"addExternalAppLinks(true, null, appName, appLink)\" i18n>Add</button>\n                                                </div>\n                                            </div>\n                                        -->\n                                            <div class=\"form-group\">\n                                                <label class=\"mb-1\" for=\"externalAppLinkUrl\" i18n>Facebook Profile Public Link:</label>\n                                                <input type=\"url\"\n                                                    formControlName=\"externalAppLinkUrl\" class=\"form-control\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.externalAppLinkUrl.errors }\" />\n                                                <div *ngIf=\"submitted && f.externalAppLinkUrl.errors\" class=\"invalid-feedback\">\n                                                    <div *ngIf=\"f.externalAppLinkUrl.errors.required\" i18n>Link is required\n                                                    </div>\n                                                    <div *ngIf=\"f.externalAppLinkUrl.errors.pattern\" i18n>Link is required*\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12\">\n                                            <div *ngIf=\"submitted && f.externalAppLinks.errors\"\n                                                class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.externalAppLinks.errors.required\" i18n>Links required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row d-none\" *ngFor=\"let applinks of f.externalAppLinks.value\">\n                                        <div class=\"col-xl-2\">\n                                            {{applinks.appName | titlecase}}\n                                        </div>\n                                        <div class=\"col-xl-10\">\n                                            <a href=\"{{applinks.appLink}}\">{{applinks.appLink}}</a>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"row\" *ngIf=\"_role == Role.Borrower\">\n                                <div class=\"col-xl-12\">\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 mt-3\">\n                                            <div class=\"row\">\n                                                <div class=\"col-xl-12\">\n                                                    <label class=\"font-weight-bold\" i18n>Are you registered in\n                                                        RKI?</label>\n                                                    <i class=\"icon icon-info-alt ml-2\" data-toggle=\"tooltip\"\n                                                        title=\"Hooray!\"></i>\n                                                    <div class=\"btn-group btn-group btn-group-sm ml-4\">\n                                                        <button type=\"button\" class=\"btn\" (click)=\"onRKIChange(true)\"\n                                                            [ngClass]=\"{ 'btn-success': onInitRKICheckedValue()==true, 'btn-outline-success':onInitRKICheckedValue()==false}\"\n                                                            i18n>\n                                                            Yes\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\" (click)=\"onRKIChange(false)\"\n                                                            [ngClass]=\"{ 'btn-success': onInitRKICheckedValue()==false, 'btn-outline-success':onInitRKICheckedValue()==true}\"\n                                                            i18n>\n                                                            No\n                                                        </button>\n                                                    </div>\n                                                </div>\n                                            </div>\n\n                                            <div *ngIf=\"submitted && f.isRKIRegistered.errors\" class=\"error\">\n                                                <div *ngIf=\"f.isRKIRegistered.errors.required\" class=\"text-red\" i18n>\n                                                    data required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 mt-3\">\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\" *ngIf=\"!onInitRKICheckedValue()\">\n                                        <!--\n                                        <div class=\"col-xl-9\">\n                                            <div class=\"custom-file\">\n                                                <input type=\"file\" class=\"custom-file-input\" name=\"image\"\n                                                    accept=\"image/*\"\n                                                    (change)=\"fileProgressAssetDocs($event,'lblmyRKIMedia')\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.myRKIMedia.errors }\">\n                                                <label class=\"custom-file-label\" for=\"customFile\"\n                                                    id=\"lblmyRKIMedia\">{{lblmyRKIMediaText}}</label>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-3\">\n                                            <button class=\"btn btn-outline-secondary btn-block\"\n                                                (click)=\"onUploadAssetDocs('myRKIMedia')\">\n                                                Upload\n                                            </button>\n                                        </div>\n                                    -->\n                                        <div class=\"col-xl-6 col-12\">\n                                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                                (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMedia', null);\"\n                                                i18n>\n                                                Upload Scan Copy\n                                            </button>\n                                        </div>\n                                        <div class=\"col-xl-6 col-12\">\n                                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                                (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMediaSelfVerify', null);\"\n                                                i18n>\n                                                Upload Image of Scan Copy With Your Face\n                                            </button>\n                                        </div>\n                                        <div class=\"col-xl-4\">\n\n                                            <div class=\"row\">\n                                                <div class=\"col-xl-12\"\n                                                    *ngFor=\"let previewUrl of _.union(_.values(f.myRKIMedia.value),_.values(f.myRKIMediaSelfVerify.value))\">\n                                                    <!--\n                                                    <i class=\"icon-trash text-danger\"\n                                                        (click)=\"onUploadCleanAssetDocs('myRKIMedia')\"></i>\n                                                    -->\n                                                    <img class=\"img-fluid\" [src]=\"previewUrl.url\" />\n                                                </div>\n                                                <div>\n                                                    <div *ngIf=\"fileUploadProgress\" i18n>\n                                                        Upload progress: {{ fileUploadProgress }}\n                                                    </div>\n                                                </div>\n                                            </div>\n\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"card-footer\">\n                            <button type=\"button\" (click)=\"onProfileUpdateSubmit()\" [disabled]=\"loading\"\n                                class=\"btn btn-primary float-right\" i18n>Save</button>\n                        </div>\n                    </div>\n\n\n                </div>\n            </div>\n\n        </form>\n    </div>\n</div>\n<!-- register section -->";
+      __webpack_exports__["default"] = "<div class=\"row pt-0 saas2\">\n    <div class=\"col-xl-12 col-12 text-center\" *ngIf=\"!f.isVerified.value\">\n        <h3 i18n>Submit your portfolio for verification</h3>\n        <P class=\"my-3\" i18n>Remember to fill in all fields correctly, otherwise you may risk lifetime blockage</P>\n\n    </div>\n    <div class=\"col-xl-12 col-12\">\n        <section class=\"tab-product  p-b-0\">\n\n            <ul class=\"nav nav-justified nav-tabs mb-4 shadow-sm\" id=\"top-tab\" role=\"tablist\">\n                <li class=\"nav-item\">\n                    <a id=\"btn_click_profile_basic_details\" class=\"nav-link show active\" data-toggle=\"tab\"\n                        data-target=\"#profile_basic_details\" (click)=\"clickOnGoToNext(1, true)\" i18n>Basic Details</a>\n                    <div class=\"material-border\"></div>\n                </li>\n                <li class=\"nav-item\">\n                    <a id=\"btn_click_profile_skills_verification\" class=\"nav-link\" data-toggle=\"tab\"\n                        data-target=\"#profile_skills_verification\" (click)=\"clickOnGoToNext(2, true)\" i18n>Upload\n                        Documents</a>\n                    <div class=\"material-border\"></div>\n                </li>\n                <!-- <li class=\"nav-item\" *ngIf=\"_role == Role.Borrower\">\n                            <a id=\"btn_click_profile_banking\" class=\"nav-link font-weight-light\" data-toggle=\"pill\"\n                                data-target=\"#profile_banking_details\">Banking Details</a>\n                        </li> -->\n            </ul>\n\n        </section>\n\n        <form [formGroup]=\"profileForm\">\n\n            <div class=\"tab-content\">\n                <div class=\"tab-pane active\" id=\"profile_basic_details\">\n                    <div class=\"form-row mb-2  mb-3\">\n                        <div class=\"col-xl-3 text-center\">\n                            <div class=\"card\">\n                                <div class=\"card-header\">\n                                    <h6 class=\"font-weight-bold text-primary\" i18n>Change Profile Pic</h6>\n                                </div>\n\n                                <div class=\"card-body\">\n                                    <img [src]=\"f.selfProfileUrl.value\" onerror=\"this.src='./assets/img/nouser.png';\"\n                                        class=\"border img-fluid rounded-circle mb-3\" style=\"height: 150px;width: 150px;object-fit: cover;\"/>\n                                    <br>\n\n                                    <p>{{f.role.value ==='lender'?'Lender':'Borrower'}}</p>\n                                   \n                                    \n                                </div>\n\n                                <div class=\"card-footer\">\n                                    <i *ngIf=\"!selfProfileUrlPendingForUpload\"\n                                        class=\"icon-pencil-alt m-2 cursor-pointer btn btn-outline-primary\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'selfProfileUrl', null);\">\n                                        <!--openFileUploaderForProfile()-->\n\n                                        <input id=\"ctrlUploadProfile\" hidden type=\"file\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressForProfile($event)\"> Edit\n                                    </i>\n                                    <i *ngIf=\"selfProfileUrlPendingForUpload\"\n                                        class=\"icon-upload m-2 cursor-pointer text-success\"\n                                        (click)=\"onUploadForProfile()\" i18n> Save\n                                    </i>\n                                </div>\n\n                            </div>\n\n                        </div>\n\n\n\n                        <div class=\"col-xl-9\">\n\n                            <div class=\"card\">\n                                <div class=\"card-header\">\n                                    <h6 class=\"font-weight-bold text-primary\" i18n>Change Basic Details</h6>\n                                </div>\n\n                                <div class=\"card-body\">\n                                    <div class=\"form-row \">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"firstName\" i18n>First Name</label>\n                                            <input type=\"text\" formControlName=\"firstName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.firstName.errors }\" />\n                                            <div *ngIf=\"submitted && f.firstName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.firstName.errors.required\" i18n>First Name is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"middleName\" i18n>Middle Name</label>\n                                            <input type=\"text\" formControlName=\"middleName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.middleName.errors }\" />\n                                            <div *ngIf=\"submitted && f.middleName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.middleName.errors.required\" i18n>Middle Name is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"lastName\" i18n>Last Name</label>\n                                            <input type=\"text\" formControlName=\"lastName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.lastName.errors }\" />\n                                            <div *ngIf=\"submitted && f.lastName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.lastName.errors.required\" i18n>Last Name is required</div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"mobileNo\" i18n>\n                                                <i class=\"icon-mobile text-success\"></i>\n                                                Mobile Number</label>\n                                            <input type=\"text\" formControlName=\"mobileNo\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.mobileNo.errors }\" />\n                                            <div *ngIf=\"submitted && f.mobileNo.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.mobileNo.errors.required\" i18n>Mobile Number is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"emailAddress\" i18n>Email</label>\n                                            <input type=\"text\" disabled formControlName=\"emailAddress\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.emailAddress.errors }\" />\n                                            <div *ngIf=\"submitted && f.emailAddress.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.emailAddress.errors.required\" i18n>Email is required</div>\n                                                <div *ngIf=\"f.emailAddress.errors.email\" i18n>Invalid Email format.\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"address\" class=\"font-weight-bold\" i18n>\n                                                Address\n                                            </label>\n                                            <textarea rows=\"2\" maxlength=\"500\" formControlName=\"address\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.address.errors }\">\n                                                    </textarea>\n                                            <div *ngIf=\"submitted && f.address.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.address.errors.required\" i18n>\n                                                    Address is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"birthDateCustomised\" i18n>Birthday</label>\n                                            <input type=\"date\" formControlName=\"birthDateCustomised\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.birthDate.errors }\"\n                                                [max]=\"maxDate\" [min]=\"minDate\" />\n                                            <div *ngIf=\"submitted && f.birthDate.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.birthDate.errors.required\" i18n>Birthday is required\n                                                </div>\n                                                <div *ngIf=\"f.birthDate.errors.date\" i18n>Invalid date format.\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-4 d-none\">\n                                            <div class=\"form-row\">\n                                                <div class=\"col-xl-12 text-center mb-2\">\n                                                    <label i18n>Gender</label>\n                                                    <div class=\"btn-group shadow mb-3\">\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('male')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='male', 'btn-outline-success': f.gender.value!='male'}\"\n                                                            i18n>\n                                                            Male\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('female')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='female', 'btn-outline-success': f.gender.value!='female'}\"\n                                                            i18n>\n                                                            Female\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('other')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='other', 'btn-outline-success': f.gender.value!='other'}\"\n                                                            i18n>\n                                                            Other\n                                                        </button>\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"cityCode\" i18n>City</label>\n                                            <input type=\"text\" formControlName=\"cityCode\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.cityCode.errors }\" />\n                                            <div *ngIf=\"submitted && f.cityCode.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.cityCode.errors.required\" i18n>City is required</div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"cityCode\" i18n>Country</label>\n                                            <select formControlName=\"country\" class=\"custom-select\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.country.errors }\">\n                                                <option value=\"\" selected disabled i18n>Choose Country</option>\n                                                <option *ngFor=\"let country of countrylist\" [ngValue]=\"country\">\n                                                    {{country}}</option>\n                                            </select>\n                                            <div *ngIf=\"submitted && f.country.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.country.errors.required\" i18n>Country is required</div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"myProfileDetails\" i18n>Describe Yourself</label>\n                                            <textarea rows=\"2\" maxlength=\"500\" formControlName=\"myProfileDetails\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.myProfileDetails.errors }\">\n                                                    </textarea>\n                                            <div *ngIf=\"submitted && f.myProfileDetails.errors\"\n                                                class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.myProfileDetails.errors.required\" i18n>Describe Yourself\n                                                    is\n                                                    required\n                                                </div>\n                                            </div>\n                                        </div>\n\n                                    </div>\n                                </div>\n\n                                <div class=\"card-footer\">\n                                    <button type=\"button\" (click)=\"clickOnGoToNext(2)\" [disabled]=\"loading\"\n                                        class=\"btn btn-primary float-right\" i18n>Next</button>\n                                </div>\n                            </div>\n\n\n                        </div>\n                    </div>\n                </div>\n                <div class=\"tab-pane fade\" id=\"profile_skills_verification\">\n                    <div class=\"card\">\n                        <div class=\"card-header\">\n                            <h6 class=\"font-weight-bold text-primary\" i18n>Update Your Documents</h6>\n                        </div>\n\n                        <div class=\"card-body\">\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-md-12\">\n                                    <div class=\"text-gray\" i18n>\n                                        Upload your Passport, Driving Licence, Health Insurance Card document\n                                    </div>\n                                    <hr>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"myPassportNumber\" i18n>Passport Number:</label>\n                                        <input type=\"text\"\n                                            [readonly]=\"authenticationService.currentUserValue.myPassportNumber\"\n                                            formControlName=\"myPassportNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myPassportNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.myPassportNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.myPassportNumber.errors.required\" i18n>Passport number is\n                                                required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myPassportMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myPassportMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7 col-12\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyPassportMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myPassportMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyPassportMedia\">{{lblmyPassportMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myPassportMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"myDLNumber\" i18n>Driving License Number:</label>\n                                        <input type=\"text\"\n                                            [readonly]=\"authenticationService.currentUserValue.myDLNumber\"\n                                            formControlName=\"myDLNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myDLNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.myDLNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.myDLNumber.errors.required\" i18n>Driving License number is\n                                                required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myDLMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myDLMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyDLMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myDLMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyDLMedia\">{{lblmyDLMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myDLMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"cprNumber\" i18n>CPR Number:</label>\n                                        <input type=\"text\" [readonly]=\"authenticationService.currentUserValue.cprNumber\"\n                                            formControlName=\"cprNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.cprNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.cprNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.cprNumber.errors.required\" i18n>CPR number is required</div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myHICardMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myHICardMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyHICardMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myHICardMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyHICardMedia\">{{lblmyHICardMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myHICardMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"row\">\n                                <div class=\"col-xl-4\">\n                                    <div class=\"card\"\n                                        *ngFor=\"let previewUrl of _.union(_.values(f.myPassportMedia.value),_.values(f.myPassportMediaSelfVerify.value))\">\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"card-body\" i18n>\n                                            Passport\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myPassportMedia')\"></i></a>\n                                                    -->\n                                        </div>\n                                    </div>\n\n\n                                </div>\n                                <div class=\"col-xl-4\">\n                                    <div class=\"card\"\n                                        *ngFor=\"let previewUrl of _.union(_.values(f.myDLMedia.value),_.values(f.myDLMediaSelfVerify.value))\">\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"card-body\" i18n>\n                                            Driving Licence\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myDLMedia')\"></i></a>\n                                                    -->\n                                        </div>\n                                    </div>\n\n\n                                </div>\n                                <div class=\"col-xl-4\">\n                                    <div class=\"card\"\n                                        *ngFor=\"let previewUrl of _.union(_.values(f.myHICardMedia.value),_.values(f.myHICardMediaSelfVerify.value))\">\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"card-body\" i18n>\n                                            Health Insurance Card\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myHICardMedia')\"></i></a>\n                                            -->\n                                        </div>\n                                    </div>\n\n                                </div>\n                            </div>\n                            <div class=\"form-row\">\n                                <div class=\"col-xl-12 mt-3\">\n                                    <label class=\"d-none\" for=\"myProfileDetails\" i18n>Social Network</label>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-4 d-none\">\n\n                                            <select [(ngModel)]=\"appName\" class=\"custom-select\"\n                                                [ngModelOptions]=\"{standalone: true}\">\n                                                <option value=\"facebook\" selected i18n> Facebook</option>\n                                            \n                                            </select>\n                                        </div>\n                                        <div class=\"col-xl-12\">\n                                            <!--\n                                            <div class=\"input-group mb-3\">\n                                                <input type=\"url\"\n                                                    pattern=\"/(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})/gi*\"\n                                                    [(ngModel)]=\"appLink\" class=\"form-control\"\n                                                    [ngModelOptions]=\"{standalone: true}\"\n                                                    placeholder=\"Facebook Profile Public Link\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.externalAppLinks.errors }\" />\n                                                <div class=\"input-group-append\">\n                                                    <button class=\"btn btn-success\"\n                                                        (click)=\"addExternalAppLinks(true, null, appName, appLink)\" i18n>Add</button>\n                                                </div>\n                                            </div>\n                                        -->\n                                            <div class=\"form-group\">\n                                                <label class=\"mb-1\" for=\"externalAppLinkUrl\" i18n>Facebook Profile Public Link:</label>\n                                                <input type=\"url\"\n                                                    formControlName=\"externalAppLinkUrl\" class=\"form-control\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.externalAppLinkUrl.errors }\" />\n                                                <div *ngIf=\"submitted && f.externalAppLinkUrl.errors\" class=\"invalid-feedback\">\n                                                    <div *ngIf=\"f.externalAppLinkUrl.errors.required\" i18n>Link is required\n                                                    </div>\n                                                    <div *ngIf=\"f.externalAppLinkUrl.errors.pattern\" i18n>Link is required*\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12\">\n                                            <div *ngIf=\"submitted && f.externalAppLinks.errors\"\n                                                class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.externalAppLinks.errors.required\" i18n>Links required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row d-none\" *ngFor=\"let applinks of f.externalAppLinks.value\">\n                                        <div class=\"col-xl-2\">\n                                            {{applinks.appName | titlecase}}\n                                        </div>\n                                        <div class=\"col-xl-10\">\n                                            <a href=\"{{applinks.appLink}}\">{{applinks.appLink}}</a>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"row\" *ngIf=\"_role == Role.Borrower\">\n                                <div class=\"col-xl-12\">\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 mt-3\">\n                                            <div class=\"row\">\n                                                <div class=\"col-xl-12\">\n                                                    <label class=\"font-weight-bold\" i18n>Are you registered in\n                                                        RKI?</label>\n                                                    <i class=\"icon icon-info-alt ml-2\" data-toggle=\"tooltip\"\n                                                        title=\"Hooray!\"></i>\n                                                    <div class=\"btn-group btn-group btn-group-sm ml-4\">\n                                                        <button type=\"button\" class=\"btn\" (click)=\"onRKIChange(true)\"\n                                                            [ngClass]=\"{ 'btn-success': onInitRKICheckedValue()==true, 'btn-outline-success':onInitRKICheckedValue()==false}\"\n                                                            i18n>\n                                                            Yes\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\" (click)=\"onRKIChange(false)\"\n                                                            [ngClass]=\"{ 'btn-success': onInitRKICheckedValue()==false, 'btn-outline-success':onInitRKICheckedValue()==true}\"\n                                                            i18n>\n                                                            No\n                                                        </button>\n                                                    </div>\n                                                </div>\n                                            </div>\n\n                                            <div *ngIf=\"submitted && f.isRKIRegistered.errors\" class=\"error\">\n                                                <div *ngIf=\"f.isRKIRegistered.errors.required\" class=\"text-red\" i18n>\n                                                    data required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 mt-3\">\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\" *ngIf=\"!onInitRKICheckedValue()\">\n                                        <!--\n                                        <div class=\"col-xl-9\">\n                                            <div class=\"custom-file\">\n                                                <input type=\"file\" class=\"custom-file-input\" name=\"image\"\n                                                    accept=\"image/*\"\n                                                    (change)=\"fileProgressAssetDocs($event,'lblmyRKIMedia')\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.myRKIMedia.errors }\">\n                                                <label class=\"custom-file-label\" for=\"customFile\"\n                                                    id=\"lblmyRKIMedia\">{{lblmyRKIMediaText}}</label>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-3\">\n                                            <button class=\"btn btn-outline-secondary btn-block\"\n                                                (click)=\"onUploadAssetDocs('myRKIMedia')\">\n                                                Upload\n                                            </button>\n                                        </div>\n                                    -->\n                                        <div class=\"col-xl-6 col-12\">\n                                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                                (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMedia', null);\"\n                                                i18n>\n                                                Upload Scan Copy\n                                            </button>\n                                        </div>\n                                        <div class=\"col-xl-6 col-12\">\n                                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                                (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMediaSelfVerify', null);\"\n                                                i18n>\n                                                Upload Image of Scan Copy With Your Face\n                                            </button>\n                                        </div>\n                                        <div class=\"col-xl-4\">\n\n                                            <div class=\"row\">\n                                                <div class=\"col-xl-12\"\n                                                    *ngFor=\"let previewUrl of _.union(_.values(f.myRKIMedia.value),_.values(f.myRKIMediaSelfVerify.value))\">\n                                                    <!--\n                                                    <i class=\"icon-trash text-danger\"\n                                                        (click)=\"onUploadCleanAssetDocs('myRKIMedia')\"></i>\n                                                    -->\n                                                    <img class=\"img-fluid\" [src]=\"previewUrl.url\" />\n                                                </div>\n                                                <div>\n                                                    <div *ngIf=\"fileUploadProgress\" i18n>\n                                                        Upload progress: {{ fileUploadProgress }}\n                                                    </div>\n                                                </div>\n                                            </div>\n\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"card-footer\">\n                            <button type=\"button\" (click)=\"onProfileUpdateSubmit()\" [disabled]=\"loading\"\n                                class=\"btn btn-primary float-right\" i18n>Save</button>\n                        </div>\n                    </div>\n\n\n                </div>\n            </div>\n\n        </form>\n    </div>\n</div>\n<!-- register section -->";
       /***/
     },
 
@@ -17288,7 +16712,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<h2 mat-dialog-title class=\"text-primary\">\n    <div class=\"row\">\n        <div class=\"col-xl-11 col-10\">\n            <div class=\"btn-group btn-group-sm mr-2\" *ngIf=\"isImageLoaded\">\n                <button type=\"button\" class=\"btn btn-primary\" title=\"Move Left\" (click)=\"fnCropperMoveLeft()\">\n                    <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                        <span class=\"icon-angle-left\"></span>\n                    </span>\n                </button>\n                <button type=\"button\" class=\"btn btn-primary\" title=\"Move Right\" (click)=\"fnCropperMoveRight()\">\n                    <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                        <span class=\"icon-angle-right\"></span>\n                    </span>\n                </button>\n                <button type=\"button\" class=\"btn btn-primary\" title=\"Move Up\" (click)=\"fnCropperMoveUp()\">\n                    <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                        <span class=\"icon-angle-up\"></span>\n                    </span>\n                </button>\n                <button type=\"button\" class=\"btn btn-primary\" title=\"Move Down\" (click)=\"fnCropperMoveDown()\">\n                    <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                        <span class=\"icon-angle-down\"></span>\n                    </span>\n                </button>\n            </div>\n    \n            <div class=\"btn-group btn-group-sm  mr-2\" *ngIf=\"isImageLoaded\">\n                <button type=\"button\" class=\"btn btn-primary\" title=\"Rotate Left\" (click)=\"fnCropperRotateLeft()\">\n                    <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                        <span class=\"icon-angle-double-left\"></span>\n                    </span>\n                </button>\n                <button type=\"button\" class=\"btn btn-primary\" title=\"Rotate Right\" (click)=\"fnCropperRotateRight()\">\n                    <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                        <span class=\"icon-angle-double-right\"></span>\n                    </span>\n                </button>\n                <button type=\"button\" class=\"btn btn-primary\" title=\"Reset\" (click)=\"fnCropperReset()\">\n                    <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                        <span class=\"icon-trash\"></span>\n                    </span>\n                </button>\n            </div>\n\n            <div class=\"btn-group btn-group-sm \">\n\n                <label class=\"btn btn-primary\" for=\"inputImage\" title=\"Upload image file\">\n                    <input id=\"ctrlUpload\" type=\"file\" name=\"image\" accept=\"image/*\"\n                        (change)=\"fileChangeEvent($event)\">\n                    <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                        <span class=\"icon-upload\"></span>\n                    </span>\n                </label>\n            </div>\n        </div>\n        <div class=\"col-xl-1 col-2\">\n            <i class=\"icon-close float-right\" mat-button (click)=\"closeDialog()\"></i>\n        </div>\n    </div>\n</h2>\n\n\n<div class=\"row\">\n    <div class=\"col-md-12 d-none\">\n        <!-- <h3>Toolbar:</h3> -->\n        <div class=\"btn-group d-none\">\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Zoom In\" (click)=\"fnCropperZoomIn()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-zoom-in\"></span>\n                </span>\n            </button>\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Zoom Out\" (click)=\"fnCropperZoomOut()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-zoom-out\"></span>\n                </span>\n            </button>\n        </div>\n\n      \n\n       \n\n    </div>\n    <div class=\"text-center col-md-8 col-9\" *ngIf=\"isImageLoaded\">\n       \n        <angular-cropper #angularCropper [cropperOptions]=\"config\" [imageUrl]=\"imageUrl\"\n            (ready)=\"ready($event)\">\n        </angular-cropper>\n    </div>\n    <div class=\"text-center col-md-4 col-3\" *ngIf=\"isImageLoaded\">\n        <div class=\"btn-group\">\n            <button type=\"button\" class=\"btn btn-primary btn-sm\" title=\"Upload\" (click)=\"onUploadMediaOnServer()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\" i18n>\n                    Upload\n                </span>\n            </button>\n        </div>\n        <h5>Preview</h5>\n        <img class=\"img-fluid\" [src]=\"croppedImage\" />\n        <div *ngIf=\"fileUploadProgress\" i18n>\n            Upload progress: {{ fileUploadProgress }}\n        </div>\n        <br>\n    </div>\n</div>";
+      __webpack_exports__["default"] = "<h2 mat-dialog-title class=\"text-primary\">\n    <div class=\"row\">\n        <div class=\"col-xl-11 col-10\">\n            <h4>Upload File</h4>\n        </div>\n        <div class=\"col-xl-1 col-2\">\n            <i class=\"icon-close float-right\" mat-button (click)=\"closeDialog()\"></i>\n        </div>\n        <div class=\"col-xl-12 col-12 mt-3\">\n\n            <input id=\"ctrlUpload\" [disabled]=\"fileUploadProgress\" type=\"file\" name=\"image\" accept=\"image/*\" (change)=\"fileChangeEvent($event)\"\n                class=\"border btn btn-light btn-sm btn-block p-3\">\n\n\n        </div>\n\n    </div>\n</h2>\n\n\n<div class=\"row\">\n    <div class=\"col-md-12 d-none\">\n        <!-- <h3>Toolbar:</h3> -->\n        <div class=\"btn-group d-none\">\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Zoom In\" (click)=\"fnCropperZoomIn()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-zoom-in\"></span>\n                </span>\n            </button>\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Zoom Out\" (click)=\"fnCropperZoomOut()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-zoom-out\"></span>\n                </span>\n            </button>\n        </div>\n\n\n\n\n\n    </div>\n    <div class=\"text-center col-md-8 col-7 \" *ngIf=\"isImageLoaded\">\n        <p class=\"small\" *ngIf=\"isImageLoaded\" class=\"mb-2\">Click on save button to upload the image. </p>\n        <angular-cropper #angularCropper [cropperOptions]=\"config\" [imageUrl]=\"imageUrl\" (ready)=\"ready($event)\">\n        </angular-cropper>\n        <div class=\"btn-group btn-group-sm mr-2 mt-2\" *ngIf=\"isImageLoaded\">\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Move Left\" (click)=\"fnCropperMoveLeft()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-angle-left\"></span>\n                </span>\n            </button>\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Move Right\" (click)=\"fnCropperMoveRight()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-angle-right\"></span>\n                </span>\n            </button>\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Move Up\" (click)=\"fnCropperMoveUp()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-angle-up\"></span>\n                </span>\n            </button>\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Move Down\" (click)=\"fnCropperMoveDown()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-angle-down\"></span>\n                </span>\n            </button>\n        </div>\n\n        <div class=\"btn-group btn-group-sm  mr-2 mt-2\" *ngIf=\"isImageLoaded\">\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Rotate Left\" (click)=\"fnCropperRotateLeft()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-angle-double-left\"></span>\n                </span>\n            </button>\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Rotate Right\" (click)=\"fnCropperRotateRight()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-angle-double-right\"></span>\n                </span>\n            </button>\n            <button type=\"button\" class=\"btn btn-primary\" title=\"Reset\" (click)=\"fnCropperReset()\">\n                <span class=\"docs-tooltip\" data-toggle=\"tooltip\" title=\"\" data-original-title=\"\">\n                    <span class=\"icon-trash\"></span>\n                </span>\n            </button>\n        </div>\n    </div>\n    <div class=\"text-center col-md-4 col-5\" *ngIf=\"isImageLoaded\">\n\n        <h5>Preview</h5>\n        <img class=\"img-fluid mt-2\" [src]=\"croppedImage\" style=\"max-height: 200px;\" />\n        <div *ngIf=\"fileUploadProgress\" i18n>\n            Upload progress: {{ fileUploadProgress }}\n        </div>\n        <br>\n        <div *ngIf=\"!showBlockingMessageMediatorT\">\n            <button type=\"button\" class=\"btn btn-success mt-3 save\" title=\"Upload\" (click)=\"onUploadMediaOnServer()\">\n                Save\n            </button>  \n        </div>\n        <div *ngIf=\"showBlockingMessageMediatorT\">\n            <button type=\"button\" class=\"btn btn-success mt-3 save\" title=\"Upload\" (click)=\"onUploadMediaOnServer()\">\n                Save\n            </button>  \n            <h5 class=\"mt-2890\">Caution! Once saved you can not change media again.</h5>\n        </div>\n        \n    </div>\n</div>";
       /***/
     },
 
@@ -17472,7 +16896,7 @@
         }, {
           key: "imageLoaded",
           value: function imageLoaded(ev) {
-            var _this66 = this;
+            var _this67 = this;
 
             //
             // Unset load error state
@@ -17491,17 +16915,17 @@
             image.addEventListener('ready', function () {
               //
               // Emit ready
-              _this66.ready.emit(true); //
+              _this67.ready.emit(true); //
               // Unset loading state
 
 
-              _this66.isLoading = false; //
+              _this67.isLoading = false; //
               // Validate cropbox existance
 
-              if (_this66.cropbox) {
+              if (_this67.cropbox) {
                 //
                 // Set cropbox data
-                _this66.cropper.setCropBoxData(_this66.cropbox);
+                _this67.cropper.setCropBoxData(_this67.cropbox);
               }
             });
             /** @type {?} */
@@ -17560,7 +16984,7 @@
         }, {
           key: "exportCanvas",
           value: function exportCanvas(base64) {
-            var _this67 = this;
+            var _this68 = this;
 
             /** @type {?} */
             var imageData = this.cropper.getImageData();
@@ -17598,7 +17022,7 @@
             // Emit export data when promise is ready
 
             promise.then(function (res) {
-              _this67["export"].emit(Object.assign(data, res));
+              _this68["export"].emit(Object.assign(data, res));
             });
           }
         }]);
@@ -17947,7 +17371,7 @@
 
       var ProfilePortfolioComponent = /*#__PURE__*/function () {
         function ProfilePortfolioComponent(http, formBuilder, authenticationService, userService, alertService, appRouterService, utilityService, router) {
-          var _this68 = this;
+          var _this69 = this;
 
           _classCallCheck2(this, ProfilePortfolioComponent);
 
@@ -17978,17 +17402,17 @@
             ////console.log('data => ', data)
             if (data && data['success']) {
               //alert(JSON.stringify( data));
-              _this68.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
+              _this69.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
 
 
-              _this68.loading = false; //this.element_btn_click_profile_skills_verification.click();
+              _this69.loading = false; //this.element_btn_click_profile_skills_verification.click();
             } else {
               //alert(JSON.stringify(data['message']));
-              _this68.alertService.error(data['message']);
+              _this69.alertService.error(data['message']);
 
-              _this68.loading = false;
+              _this69.loading = false;
 
-              _this68.appRouterService.appRouter('');
+              _this69.appRouterService.appRouter('');
             }
           }, function (error) {
             var errorMsg2show = "";
@@ -18003,11 +17427,11 @@
               }
             } catch (ex) {}
 
-            _this68.alertService.error(errorMsg2show);
+            _this69.alertService.error(errorMsg2show);
 
-            _this68.loading = false;
+            _this69.loading = false;
 
-            _this68.appRouterService.appRouter('');
+            _this69.appRouterService.appRouter('');
           });
         }
 
@@ -18056,7 +17480,7 @@
         }, {
           key: "onProfileUpdateSubmit",
           value: function onProfileUpdateSubmit() {
-            var _this69 = this;
+            var _this70 = this;
 
             if (this.selfProfileUrlPendingForUpload) {
               this.alertService.error("Please Save Profile First");
@@ -18073,16 +17497,16 @@
             this.userService.addUpdateUserProfilePortFolio(this.profilePortfolioForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this69.alertService.success('Your Portfolio is Updated successfully', true);
+                _this70.alertService.success('Your Portfolio is Updated successfully', true);
 
-                _this69.element_ctrlUploadProfile = document.getElementById('ctrlNavigate2Profile');
+                _this70.element_ctrlUploadProfile = document.getElementById('ctrlNavigate2Profile');
 
-                _this69.element_ctrlUploadProfile.click();
+                _this70.element_ctrlUploadProfile.click();
               } else {
                 //alert(JSON.stringify(data['message']));
-                _this69.alertService.error(data['message']);
+                _this70.alertService.error(data['message']);
 
-                _this69.loading = false;
+                _this70.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -18097,9 +17521,9 @@
                 }
               } catch (ex) {}
 
-              _this69.alertService.error(errorMsg2show);
+              _this70.alertService.error(errorMsg2show);
 
-              _this69.loading = false;
+              _this70.loading = false;
             });
           }
         }, {
@@ -18111,7 +17535,7 @@
         }, {
           key: "preview",
           value: function preview() {
-            var _this70 = this;
+            var _this71 = this;
 
             // Show preview 
             var mimeType = this.fileData.type;
@@ -18124,7 +17548,7 @@
             reader.readAsDataURL(this.fileData);
 
             reader.onload = function (_event) {
-              _this70.previewUrl = reader.result;
+              _this71.previewUrl = reader.result;
             };
           }
         }, {
@@ -18145,7 +17569,7 @@
         }, {
           key: "onUploadMyProfileMedia",
           value: function onUploadMyProfileMedia() {
-            var _this71 = this;
+            var _this72 = this;
 
             var checkArray = this.profilePortfolioForm.get('myProfileMedia');
 
@@ -18155,18 +17579,18 @@
             }
 
             var _loop = function _loop(_index) {
-              var currentFile = _this71.myProfileFiles[_index];
+              var currentFile = _this72.myProfileFiles[_index];
 
               if (!currentFile) {
-                _this71.alertService.error("Select file first.");
+                _this72.alertService.error("Select file first.");
 
                 return "continue";
               }
 
               var formData = new FormData();
               formData.append('files', currentFile);
-              formData.append('documentId', _this71.authenticationService.currentUserValue._id);
-              _this71.fileUploadProgress = '0%';
+              formData.append('documentId', _this72.authenticationService.currentUserValue._id);
+              _this72.fileUploadProgress = '0%';
               var _temp_currentFile = {
                 name: currentFile.name,
                 type: currentFile.type,
@@ -18174,19 +17598,19 @@
                 url: null
               };
 
-              _this71.http.post(uploadAPI, formData, {
+              _this72.http.post(uploadAPI, formData, {
                 reportProgress: true,
                 observe: 'events'
               }).subscribe(function (events) {
                 if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpEventType"].UploadProgress) {
-                  _this71.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
+                  _this72.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
                 } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpEventType"].Response) {
-                  _this71.fileUploadProgress = ''; //console.log(events.body);
+                  _this72.fileUploadProgress = ''; //console.log(events.body);
                   //alert('SUCCESS !!');
 
-                  lodash__WEBPACK_IMPORTED_MODULE_9__["pullAt"](_this71.myProfileFiles, _index);
+                  lodash__WEBPACK_IMPORTED_MODULE_9__["pullAt"](_this72.myProfileFiles, _index);
 
-                  _this71.alertService.success('Uploaded Successfully !!', true);
+                  _this72.alertService.success('Uploaded successfully', true);
 
                   var _uploadedUrl = events.body["data"].path;
 
@@ -18194,10 +17618,10 @@
                     _uploadedUrl = _uploadedUrl.substr(1);
                   }
 
-                  _this71.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
-                  _temp_currentFile.url = _this71.uploadedFilePath;
+                  _this72.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                  _temp_currentFile.url = _this72.uploadedFilePath;
 
-                  _this71.onMyProfileMediaUpdate(true, null, _temp_currentFile);
+                  _this72.onMyProfileMediaUpdate(true, null, _temp_currentFile);
                 }
               });
             };
@@ -18464,7 +17888,7 @@
 
       var RatingsListComponent = /*#__PURE__*/function () {
         function RatingsListComponent(socketService, alertService, utilityService, authenticationService, appRouterService, elementRef, dialogRef, data, dialog) {
-          var _this72 = this;
+          var _this73 = this;
 
           _classCallCheck2(this, RatingsListComponent);
 
@@ -18510,20 +17934,20 @@
           };
           this.socketService.getByLoanIdRatingReviewe(_data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this72.PaymentTransactionDetailsArray = data["data"];
+              _this73.PaymentTransactionDetailsArray = data["data"];
 
-              _this72.populateUsersDataInTable(); //this.rerender();
+              _this73.populateUsersDataInTable(); //this.rerender();
 
 
-              _this72.loading = false;
+              _this73.loading = false;
             } else {
-              _this72.alertService.error(data['message']);
+              _this73.alertService.error(data['message']);
 
-              _this72.loading = false;
+              _this73.loading = false;
             }
           }, function (error) {
             var errorMsg2show = "";
-            _this72.PaymentTransactionDetailsArray = [];
+            _this73.PaymentTransactionDetailsArray = [];
 
             try {
               if (error && error.error && error.error.message) {
@@ -18535,19 +17959,19 @@
               }
             } catch (ex) {}
 
-            _this72.alertService.error(errorMsg2show);
+            _this73.alertService.error(errorMsg2show);
 
-            _this72.loading = false;
+            _this73.loading = false;
           });
           this.socketService.getByQuerySummaryRatingReviewe(_data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this72.myRatingsSummaryObj = data["data"]; //this.rerender();
+              _this73.myRatingsSummaryObj = data["data"]; //this.rerender();
 
-              _this72.loading = false;
+              _this73.loading = false;
             } else {
-              _this72.alertService.error(data['message']);
+              _this73.alertService.error(data['message']);
 
-              _this72.loading = false;
+              _this73.loading = false;
             }
           }, function (error) {
             var errorMsg2show = "";
@@ -18562,9 +17986,9 @@
               }
             } catch (ex) {}
 
-            _this72.alertService.error(errorMsg2show);
+            _this73.alertService.error(errorMsg2show);
 
-            _this72.loading = false;
+            _this73.loading = false;
           });
         } //#region datatable actions
 
@@ -18587,14 +18011,14 @@
         }, {
           key: "populateUsersDataInTable",
           value: function populateUsersDataInTable() {
-            var _this73 = this;
+            var _this74 = this;
 
             this.destroyTable();
             this.dtOptions = {
               pagingType: 'full_numbers',
               pageLength: 10,
               drawCallback: function drawCallback() {
-                _this73.elementRef.nativeElement.querySelector('.paginate_button.next').addEventListener('click', _this73.onClick.bind(_this73));
+                _this74.elementRef.nativeElement.querySelector('.paginate_button.next').addEventListener('click', _this74.onClick.bind(_this74));
               }
             };
             this.dtTrigger.next();
@@ -18619,14 +18043,14 @@
         }, {
           key: "rerender",
           value: function rerender() {
-            var _this74 = this;
+            var _this75 = this;
 
             if (this.datatableElement && this.datatableElement.dtInstance) {
               this.datatableElement.dtInstance.then(function (dtInstance) {
                 // Destroy the table first
                 dtInstance.destroy(); // Call the dtTrigger to rerender again
 
-                _this74.dtTrigger.next();
+                _this75.dtTrigger.next();
               });
             }
           }
@@ -19134,7 +18558,7 @@
           key: "readFile",
           value: function readFile() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-              var _this75 = this;
+              var _this76 = this;
 
               return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
@@ -19167,15 +18591,15 @@
                         * @return {?}
                         */
                         function (e) {
-                          console.error("FileReader failed on file ".concat(_this75.file.name, "."));
+                          console.error("FileReader failed on file ".concat(_this76.file.name, "."));
                           reject(e);
                         };
 
-                        if (!_this75.file) {
+                        if (!_this76.file) {
                           return reject('No file to read. Please provide a file using the [file] Input property.');
                         }
 
-                        reader.readAsDataURL(_this75.file);
+                        reader.readAsDataURL(_this76.file);
                       }));
 
                     case 1:
@@ -20036,18 +19460,18 @@
          * @param {?} sanitizer
          */
         function NgxDropzoneImagePreviewComponent(sanitizer) {
-          var _this76;
+          var _this77;
 
           _classCallCheck2(this, NgxDropzoneImagePreviewComponent);
 
-          _this76 = _super5.call(this, sanitizer);
+          _this77 = _super5.call(this, sanitizer);
           /**
            * The image data source.
            */
 
-          _this76.defualtImgLoading = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBzdHlsZT0ibWFyZ2luOiBhdXRvOyBiYWNrZ3JvdW5kOiByZ2IoMjQxLCAyNDIsIDI0Mykgbm9uZSByZXBlYXQgc2Nyb2xsIDAlIDAlOyBkaXNwbGF5OiBibG9jazsgc2hhcGUtcmVuZGVyaW5nOiBhdXRvOyIgd2lkdGg9IjIyNHB4IiBoZWlnaHQ9IjIyNHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPgo8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxNCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2U9IiM4NWEyYjYiIHN0cm9rZS1kYXNoYXJyYXk9IjIxLjk5MTE0ODU3NTEyODU1MiAyMS45OTExNDg1NzUxMjg1NTIiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+CiAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIGR1cj0iMS4xNjI3OTA2OTc2NzQ0MTg0cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIGtleVRpbWVzPSIwOzEiIHZhbHVlcz0iMCA1MCA1MDszNjAgNTAgNTAiPjwvYW5pbWF0ZVRyYW5zZm9ybT4KPC9jaXJjbGU+CjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjEwIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZT0iI2JiY2VkZCIgc3Ryb2tlLWRhc2hhcnJheT0iMTUuNzA3OTYzMjY3OTQ4OTY2IDE1LjcwNzk2MzI2Nzk0ODk2NiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjE1LjcwNzk2MzI2Nzk0ODk2NiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj4KICA8YW5pbWF0ZVRyYW5zZm9ybSBhdHRyaWJ1dGVOYW1lPSJ0cmFuc2Zvcm0iIHR5cGU9InJvdGF0ZSIgZHVyPSIxLjE2Mjc5MDY5NzY3NDQxODRzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIga2V5VGltZXM9IjA7MSIgdmFsdWVzPSIwIDUwIDUwOy0zNjAgNTAgNTAiPjwvYW5pbWF0ZVRyYW5zZm9ybT4KPC9jaXJjbGU+CjwhLS0gW2xkaW9dIGdlbmVyYXRlZCBieSBodHRwczovL2xvYWRpbmcuaW8vIC0tPjwvc3ZnPg==';
-          _this76.imageSrc = _this76.sanitizer.bypassSecurityTrustUrl(_this76.defualtImgLoading);
-          return _this76;
+          _this77.defualtImgLoading = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBzdHlsZT0ibWFyZ2luOiBhdXRvOyBiYWNrZ3JvdW5kOiByZ2IoMjQxLCAyNDIsIDI0Mykgbm9uZSByZXBlYXQgc2Nyb2xsIDAlIDAlOyBkaXNwbGF5OiBibG9jazsgc2hhcGUtcmVuZGVyaW5nOiBhdXRvOyIgd2lkdGg9IjIyNHB4IiBoZWlnaHQ9IjIyNHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPgo8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxNCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2U9IiM4NWEyYjYiIHN0cm9rZS1kYXNoYXJyYXk9IjIxLjk5MTE0ODU3NTEyODU1MiAyMS45OTExNDg1NzUxMjg1NTIiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+CiAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIGR1cj0iMS4xNjI3OTA2OTc2NzQ0MTg0cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIGtleVRpbWVzPSIwOzEiIHZhbHVlcz0iMCA1MCA1MDszNjAgNTAgNTAiPjwvYW5pbWF0ZVRyYW5zZm9ybT4KPC9jaXJjbGU+CjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjEwIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZT0iI2JiY2VkZCIgc3Ryb2tlLWRhc2hhcnJheT0iMTUuNzA3OTYzMjY3OTQ4OTY2IDE1LjcwNzk2MzI2Nzk0ODk2NiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjE1LjcwNzk2MzI2Nzk0ODk2NiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj4KICA8YW5pbWF0ZVRyYW5zZm9ybSBhdHRyaWJ1dGVOYW1lPSJ0cmFuc2Zvcm0iIHR5cGU9InJvdGF0ZSIgZHVyPSIxLjE2Mjc5MDY5NzY3NDQxODRzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIga2V5VGltZXM9IjA7MSIgdmFsdWVzPSIwIDUwIDUwOy0zNjAgNTAgNTAiPjwvYW5pbWF0ZVRyYW5zZm9ybT4KPC9jaXJjbGU+CjwhLS0gW2xkaW9dIGdlbmVyYXRlZCBieSBodHRwczovL2xvYWRpbmcuaW8vIC0tPjwvc3ZnPg==';
+          _this77.imageSrc = _this77.sanitizer.bypassSecurityTrustUrl(_this77.defualtImgLoading);
+          return _this77;
         }
         /**
          * @return {?}
@@ -20057,7 +19481,7 @@
         _createClass2(NgxDropzoneImagePreviewComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this77 = this;
+            var _this78 = this;
 
             this.readFile().then(
             /**
@@ -20070,7 +19494,7 @@
               * @return {?}
               */
               function () {
-                return _this77.imageSrc = img;
+                return _this78.imageSrc = img;
               });
             })["catch"](
             /**
@@ -20450,7 +19874,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div id=\"frame\" class=\"mt-md-n4 message_frame\">\n    <div id=\"sidepanel\">\n        <div id=\"profile\">\n\n            <h4 class=\"text-primary\">My Loans</h4>\n            <div class=\"wrap avittiNone\">\n                <img id=\"profile-img\" src=\"./assets/img/user-default.png\" default=\"\" class=\"online\" alt=\"\" />\n                <p class=\"mt-2\"> {{currentUser.firstName | titlecase}}</p>\n                <i class=\"fa fa-chevron-down expand-button\" aria-hidden=\"true\"></i>\n            </div>\n        </div>\n        <div class=\"d-none\" id=\"search\">\n            <label for=\"\"><i class=\"icon-search\" aria-hidden=\"true\"></i></label>\n            <input type=\"text\" placeholder=\"Search contacts...\" />\n        </div>\n        <div id=\"contacts\" class=\"mt-3\">\n            <ul>\n                <li class=\"contact\" *ngFor=\"let currentContactItem of myContactsList | orderBy: ['-updatedOn']\"\n                    [ngClass]=\"{ 'active': (currentContact?._id==currentContactItem?._id) }\">\n                    <div (click)=\"setCurrentContact(currentContactItem)\" class=\"wrap\">\n                        <div class=\"d-none\" [ngSwitch]=\"currentContactItem.onlineStatus\">\n                            <span *ngSwitchCase=\"online\" class=\"contact-status online\"></span>\n                            <span *ngSwitchCase=\"busy\" class=\"contact-status busy\"></span>\n                            <span *ngSwitchCase=\"away\" class=\"contact-status away\"></span>\n                            <span *ngSwitchDefault class=\"contact-status\"></span>\n                        </div>\n\n                        <img *ngIf=\"!currentContactItem.isGroup\" src=\"./assets/img/user-default.png\" alt=\" \" />\n                        <img *ngIf=\"currentContactItem.isGroup\" src=\"./assets/img/users.png\" alt=\" \" />\n                        <div class=\"meta\">\n                            <div class=\"name\">\n                                <i *ngIf=\"messagesService.returnTotalPendingMessagesForUser(currentContactItem._id)>0\" class=\"badge badge-success float-right\" i18n> {{messagesService.returnTotalPendingMessagesForUser(currentContactItem._id)}}</i>\n                            </div>\n                            <div class=\"name\">\n                                {{returnNameOfAnyNonSelfUserFromList(currentContactItem.usersCollAdmin, '\n                                - ', currentContactItem.firstName) | titlecase}}\n                            </div>\n                            <div class=\"small font-weight-light\">\n                                {{currentContactItem.createdOn | date}}\n                                <!-- {{currentContactItem.lastMessage || 'NA'}} -->\n                            </div>\n                        </div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n        <!-- <div id=\"bottom-bar\">\n            <button id=\"addcontact\"><i class=\"fa fa-user-plus fa-fw\" aria-hidden=\"true\"></i> <span>Add\n                    contact</span></button>\n            <button id=\"settings\"><i class=\"fa fa-cog fa-fw\" aria-hidden=\"true\"></i> <span>Settings</span></button>\n        </div> -->\n    </div>\n    <div class=\"content text-center\" *ngIf=\"!currentContact\">\n        <div class=\"mt-5 text-center blog-agency no-item\">\n            <img class=\"mt-5\" src=\"assets/img/noresult.png\">\n\n            <!--            \n            <h4 class=\"font-weight-normal\">Choose A Session To Start Collaberating</h4> -->\n            <h4 class=\"text-black-50\"> Select your loan to start chatting.\n            </h4>\n\n        </div>\n        <div class=\"mt-5 d-none\">\n\n            <textarea class=\"form-control\" type=\"text\" [(ngModel)]=\"tts_textarea\"></textarea>\n            <select class=\"form-control\" #langSelect *ngIf=\"speechData\" (change)=\"setLanguage(langSelect.value)\">\n                <option [value]=\"i\" *ngFor=\"let voice of speechData.voices;let i = index;\">\n                    {{voice.name}} - {{voice.lang}}\n                </option>\n            </select>\n            <br>\n            <i class=\"icon-microphone-alt\" (click)=\"start()\" title=\"Start\"></i>\n            <button class=\"btn btn-xs d-none\" (click)=\"pause()\"> pause {{speech.volume}}</button>\n            <button class=\"btn btn-xs d-none\" (click)=\"resume()\"> resume </button>\n\n            <button class=\"btn btn-xs d-none\" (click)=\"speech.volume = speech.volume - 1\"> - </button> <button\n                class=\"btn btn-xs d-none\" (click)=\"speech.volume = speech.volume + 1\"> + </button>\n        </div>\n    </div>\n    <div class=\"content\" *ngIf=\"currentContact\">\n        <div class=\"contact-profile shadow-sm\">\n            <!-- <img src=\"./assets/img/user-default.png\" alt=\" \" /> -->\n\n            <i class=\"icon-arrow-left float-left\" (click)=\"goback_to_contacts()\"></i>\n\n            <div class=\"name m-md-3 m-0\">{{returnNameOfAnyNonSelfUserFromList(currentContact.usersCollAdmin, ' - ',\n                currentContact.firstName) | titlecase}}</div>\n            <a (click)=\"showAppliedToSessionCallMediator(currentContact._id)\">\n                <span class=\"badge badge-primary\">Details</span>\n            </a>\n            <div class=\"social-media avittiNone\" style=\"right: 0;top: 3px;position: absolute;\">\n                <select [(ngModel)]=\"currentSelectedLanguageCode\"\n                    [ngClass]=\"{ 'is-invalid': submitted && f.location.errors }\" style=\"width: 75px;\">\n                    <option value=\"\" selected>Language</option>\n                    <option *ngFor=\"let language of languageCodes\" [ngValue]=\"language.language\">\n                        {{language.name}}</option>\n                </select>\n                <a (click)=\"joinNewVCSessionWithContact(currentContact._id,currentContact.loanId,currentContact.isGroup)\"\n                    routerLinkActive=\"active\"> <i class=\"icon-video-camera fa-lg\"></i></a>\n\n                <!-- <i class=\"icon-comment \"></i> -->\n            </div>\n        </div>\n        <div id=\"chat_messages\" class=\"messages\">\n            <!--#scrollMe [scrollTop]=\"scrollMe.scrollHeight\"\n            $(\"#chat_messages\").animate({\n    scrollTop: $(\"#chat_messages\").height()\n}, 400)\n            -->\n            <ul>\n                <!--\n                <li n class=\"sent \">\n                    <img src=\"http://emilcarlsson.se./assets/mikeross.png \" alt=\" \" /> \n                    <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>\n                </li>\n                <li class=\"replies \">\n                    <img src=\"http://emilcarlsson.se./assets/harveyspecter.png \" alt=\" \" /> \n                    <p>When you're backed against the wall, break the god damn thing down.</p>\n                </li>\n            -->\n                <!-- | sortArrayByUpdatedOn:['updatedOn']-->\n\n                <li *ngFor=\"let _chat of allChatListOfRoom; trackBy $index; let i = index\"\n                    [ngClass]=\"{ 'replies': _chat.userId == currentUser._id, 'sent': _chat.userId!=currentUser._id }\">\n                    <!-- <img src=\"./assets/img/user-default.png\" alt=\" \" /> -->\n                    <ngui-inview [observerOptions]=\"myObserverOptions\" (inview)=\"messageViewed(_chat._id, _chat.message)\" (notInview)=\"messageNotViewed(_chat._id, _chat.message)\">\n                        <p *ngIf>\n                            <span id=\"{{_chat._id}}\">\n                                {{_chat.message}}\n                            </span>\n                            <i class=\"icon-microphone-alt mr-1 avittiNone\" (click)=\"start(_chat.message)\"\n                                title=\"Text To Speech\"></i>\n                            <i (click)=\"translateTextInOtherLanguage(_chat.message, currentSelectedLanguageCode, false, _chat._id)\"\n                                title=\"Speech To Text\" class=\"icon-flickr-alt avittiNone\"></i>\n                        </p>\n                    </ngui-inview>\n\n                </li>\n\n            </ul>\n        </div>\n        <div class=\"message-input\">\n            <div class=\"d-none\">\n                <div *ngIf=\"voiceActiveSectionDisabled; else voicesection;\">\n                    <button type=\"button\" (click)=\"startVoiceRecognition()\">Record</button>\n                </div>\n                <ng-template #voicesection>\n                    <ng-container *ngIf=\"!voiceActiveSectionError; else failure\">\n                        <ng-container *ngIf=\"message2send; else start\">\n                            <!-- <span>{{message2send}}</span> -->\n                        </ng-container>\n                        <ng-template #start>\n                            <ng-container *ngIf=\"voiceActiveSectionListening; else beginning\">\n                                <span>Listening...</span>\n                            </ng-container>\n                            <ng-template #beginning>\n                                <span>Start talking...</span>\n                            </ng-template>\n                        </ng-template>\n                    </ng-container>\n                    <ng-template #failure>\n                        <span>Didn't catch that</span>\n                    </ng-template>\n                    <div>\n                        <button (click)=\"closeVoiceRecognition()\">Close</button>\n                        <button (click)=\"startVoiceRecognition()\">Restart</button>\n                    </div>\n                </ng-template>\n            </div>\n\n\n            <div class=\"wrap_send_input\"\n                *ngIf=\"(!currentContact.isOneWayGroup) || (currentContact.isOneWayGroup && currentUser.role==Role.Admin)\">\n                <!-- <input (keydown.enter)=\"sendMessage(currentContact._id, message2send)\" type=\"text \" placeholder=\"Write your message... \" [(ngModel)]=\"message2send\" />\n                \n                <button [disabled]=\"returnTifCurrentContactIsNullOrEmpty(currentContact) \" class=\"submit \" (click)=\"sendMessage(currentContact._id, message2send)\">\n\t\t\t\t\t<i class=\"fa fa-paper-plane \" aria-hidden=\"true \"></i>\n                </button> -->\n                <small class=\"text-danger ml-1 mb-3\"\n                    *ngIf=\"message2send && (message2send.includes('skype') || message2send.includes('facebook') || message2send.includes('wechat') || message2send.includes('messenger') || message2send.includes('messenger')|| message2send.includes('@') || message2send.includes('(a)') || message2send.includes('-a-') || message2send.includes('.dk') || message2send.includes('.com') )\">Your\n                    message cannot have restricted keywords: messenger, facebook, whatsapp, wechat, skype, @,(a), -a-\n                    , .com, .dk\n                </small>\n                <div class=\"input-group input-group-lg shadow-lg mt-1\">\n\n                    <input type=\"text\" (keydown.enter)=\"sendMessage(currentContact._id, message2send)\" type=\"text \"\n                        placeholder=\"Write your message... \" [(ngModel)]=\"message2send\"\n                        class=\"form-control border-0 bg-light2\" placeholder=\"Start Typing...\">\n                    <div class=\"input-group-append btn-success\">\n                        <button class=\"btn btn-light d-none avittiNone\"\n                            *ngIf=\"voiceActiveSectionListening; else beginning\" (click)=\"closeVoiceRecognition()\">\n                            <span class=\"small font-weight-light mr-1\">Listening...</span> <i\n                                class=\"fas fa-headset\"></i>\n                        </button>\n                        <button *ngIf=\"!voiceActiveSectionListening\" class=\"btn btn-light avittiNone\"\n                            (click)=\"startVoiceRecognition()\">\n                            <i class=\"fas icon-microphone fa-lg\" aria-hidden=\"true \"></i>\n                        </button>\n\n\n                        <button class=\"btn btn-link\" type=\"button\"\n                            [disabled]=\"!returnTifCurrentContactIsNullOrEmpty(currentContact) && !message2send\"\n                            (click)=\"sendMessage(currentContact._id, message2send)\">\n                            <i class=\"icon-arrow-right\" aria-hidden=\"true \"></i>\n                        </button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
+      __webpack_exports__["default"] = "<div id=\"frame\" class=\"mt-md-n4 message_frame\">\n    <div id=\"sidepanel\">\n        <div id=\"profile\">\n\n            <h4 class=\"text-primary\">My Loans</h4>\n            <div class=\"wrap avittiNone\">\n                <img id=\"profile-img\" src=\"./assets/img/user-default.png\" default=\"\" class=\"online\" alt=\"\" />\n                <p class=\"mt-2\"> {{currentUser.firstName | titlecase}}</p>\n                <i class=\"fa fa-chevron-down expand-button\" aria-hidden=\"true\"></i>\n            </div>\n        </div>\n        <div class=\"d-none\" id=\"search\">\n            <label for=\"\"><i class=\"icon-search\" aria-hidden=\"true\"></i></label>\n            <input type=\"text\" placeholder=\"Search contacts...\" />\n        </div>\n        <div id=\"contacts\" class=\"mt-3\">\n            <ul>\n                <li class=\"contact\" *ngFor=\"let currentContactItem of messagesService.myContactsList | orderBy: ['-updatedOn']\"\n                    [ngClass]=\"{ 'active': (currentContact?._id==currentContactItem?._id) }\">\n                    <div (click)=\"setCurrentContact(currentContactItem)\" class=\"wrap\">\n                        <div class=\"d-none\" [ngSwitch]=\"currentContactItem.onlineStatus\">\n                            <span *ngSwitchCase=\"online\" class=\"contact-status online\"></span>\n                            <span *ngSwitchCase=\"busy\" class=\"contact-status busy\"></span>\n                            <span *ngSwitchCase=\"away\" class=\"contact-status away\"></span>\n                            <span *ngSwitchDefault class=\"contact-status\"></span>\n                        </div>\n\n                        <img *ngIf=\"!currentContactItem.isGroup\" src=\"./assets/img/user-default.png\" alt=\" \" />\n                        <img *ngIf=\"currentContactItem.isGroup\" src=\"./assets/img/users.png\" alt=\" \" />\n                        <div class=\"meta\">\n                            <div class=\"name\">\n                                <i *ngIf=\"messagesService.returnTotalPendingMessagesForUser(currentContactItem._id)>0\"\n                                    class=\"badge badge-success float-right\" i18n>\n                                    {{messagesService.returnTotalPendingMessagesForUser(currentContactItem._id)}}</i>\n                            </div>\n                            <div class=\"name\">\n                                {{returnNameOfAnyNonSelfUserFromList(currentContactItem.usersCollAdmin, '\n                                - ', currentContactItem.firstName) | titlecase}}\n                            </div>\n                            <div class=\"small font-weight-light\">\n                                {{currentContactItem.createdOn | date}}\n                                <!-- {{currentContactItem.lastMessage || 'NA'}} -->\n                            </div>\n                        </div>\n                    </div>\n                </li>\n            </ul>\n        </div>\n        <!-- <div id=\"bottom-bar\">\n            <button id=\"addcontact\"><i class=\"fa fa-user-plus fa-fw\" aria-hidden=\"true\"></i> <span>Add\n                    contact</span></button>\n            <button id=\"settings\"><i class=\"fa fa-cog fa-fw\" aria-hidden=\"true\"></i> <span>Settings</span></button>\n        </div> -->\n    </div>\n    <div class=\"content text-center\" *ngIf=\"!currentContact\">\n        <div class=\"mt-5 text-center blog-agency no-item\">\n            <img class=\"mt-5\" src=\"assets/img/noresult.png\">\n\n            <!--            \n            <h4 class=\"font-weight-normal\">Choose A Session To Start Collaberating</h4> -->\n            <h4 class=\"text-black-50\"> Select your loan to start chatting.\n            </h4>\n\n        </div>\n        <div class=\"mt-5 d-none\">\n\n            <textarea class=\"form-control\" type=\"text\" [(ngModel)]=\"tts_textarea\"></textarea>\n            <select class=\"form-control\" #langSelect *ngIf=\"speechData\" (change)=\"setLanguage(langSelect.value)\">\n                <option [value]=\"i\" *ngFor=\"let voice of speechData.voices;let i = index;\">\n                    {{voice.name}} - {{voice.lang}}\n                </option>\n            </select>\n            <br>\n            <i class=\"icon-microphone-alt\" (click)=\"start()\" title=\"Start\"></i>\n            <button class=\"btn btn-xs d-none\" (click)=\"pause()\"> pause {{speech.volume}}</button>\n            <button class=\"btn btn-xs d-none\" (click)=\"resume()\"> resume </button>\n\n            <button class=\"btn btn-xs d-none\" (click)=\"speech.volume = speech.volume - 1\"> - </button> <button\n                class=\"btn btn-xs d-none\" (click)=\"speech.volume = speech.volume + 1\"> + </button>\n        </div>\n    </div>\n    <div class=\"content\" *ngIf=\"currentContact\">\n        <div class=\"contact-profile shadow-sm\">\n            <!-- <img src=\"./assets/img/user-default.png\" alt=\" \" /> -->\n\n            <i class=\"icon-arrow-left float-left\" (click)=\"goback_to_contacts()\"></i>\n\n            <div class=\"name m-md-3 m-0\">{{returnNameOfAnyNonSelfUserFromList(currentContact.usersCollAdmin, ' - ',\n                currentContact.firstName) | titlecase}}</div>\n            <a class=\"p-2 float-right my-2\" (click)=\"showAppliedToSessionCallMediator(currentContact._id)\">\n                <span class=\"badge badge-light\">Details</span>\n            </a>\n            <div class=\"social-media avittiNone\" style=\"right: 0;top: 3px;position: absolute;\">\n                <select [(ngModel)]=\"currentSelectedLanguageCode\"\n                    [ngClass]=\"{ 'is-invalid': submitted && f.location.errors }\" style=\"width: 75px;\">\n                    <option value=\"\" selected>Language</option>\n                    <option *ngFor=\"let language of languageCodes\" [ngValue]=\"language.language\">\n                        {{language.name}}</option>\n                </select>\n                <a (click)=\"joinNewVCSessionWithContact(currentContact._id,currentContact.loanId,currentContact.isGroup)\"\n                    routerLinkActive=\"active\"> <i class=\"icon-video-camera fa-lg\"></i></a>\n\n                <!-- <i class=\"icon-comment \"></i> -->\n            </div>\n        </div>\n        <div id=\"chat_messages\" class=\"messages\">\n            <!--#scrollMe [scrollTop]=\"scrollMe.scrollHeight\"\n            $(\"#chat_messages\").animate({\n    scrollTop: $(\"#chat_messages\").height()\n}, 400)\n            -->\n            <ul>\n                <!--\n                <li n class=\"sent \">\n                    <img src=\"http://emilcarlsson.se./assets/mikeross.png \" alt=\" \" /> \n                    <p>How the hell am I supposed to get a jury to believe you when I am not even sure that I do?!</p>\n                </li>\n                <li class=\"replies \">\n                    <img src=\"http://emilcarlsson.se./assets/harveyspecter.png \" alt=\" \" /> \n                    <p>When you're backed against the wall, break the god damn thing down.</p>\n                </li>\n            -->\n                <!-- | sortArrayByUpdatedOn:['updatedOn']-->\n\n                <li *ngFor=\"let _chat of allChatListOfRoom; trackBy $index; let i = index\"\n                    [ngClass]=\"{ 'replies': _chat.userId == currentUser._id, 'sent': _chat.userId!=currentUser._id }\">\n                    <!-- <img src=\"./assets/img/user-default.png\" alt=\" \" /> -->\n                    <ngui-inview [observerOptions]=\"myObserverOptions\"\n                        (inview)=\"messageViewed(_chat._id, _chat.message)\"\n                        (notInview)=\"messageNotViewed(_chat._id, _chat.message)\">\n                    </ngui-inview>\n\n                    <p>\n                        <small class=\"btn-block text-cm-green font-weight-light cursor-pointer mb-1\"\n                            title=\"{{returnNameOfMessageSender(_chat,true)}}\">{{returnNameOfMessageSender(_chat)}}</small>\n                        <span class=\"chat_message_inner\" id=\"{{_chat._id}}\">\n                            {{_chat.message}}\n                        </span>\n                        <i class=\"icon-microphone-alt mr-1 avittiNone\" (click)=\"start(_chat.message)\"\n                            title=\"Text To Speech\"></i>\n                        <i (click)=\"translateTextInOtherLanguage(_chat.message, currentSelectedLanguageCode, false, _chat._id)\"\n                            title=\"Speech To Text\" class=\"icon-flickr-alt avittiNone\"></i>\n                        <br>\n                        <span class=\"small font-weight-light\">\n                            {{_chat.createdOn | date:'medium'}}\n                        </span>\n                    </p>\n                </li>\n                <!--\n                <li>\n                    <ngui-inview [observerOptions]=\"myObserverOptions\"\n                        (inview)=\"lastScreenReached('last-message-in-app')\">\n                    </ngui-inview>\n                    <span class=\"small font-weight-light\">\n                        load more...\n                    </span>\n                </li>\n                -->\n            </ul>\n        </div>\n        <div class=\"message-input\">\n            <div class=\"d-none\">\n                <div *ngIf=\"voiceActiveSectionDisabled; else voicesection;\">\n                    <button type=\"button\" (click)=\"startVoiceRecognition()\">Record</button>\n                </div>\n                <ng-template #voicesection>\n                    <ng-container *ngIf=\"!voiceActiveSectionError; else failure\">\n                        <ng-container *ngIf=\"message2send; else start\">\n                            <!-- <span>{{message2send}}</span> -->\n                        </ng-container>\n                        <ng-template #start>\n                            <ng-container *ngIf=\"voiceActiveSectionListening; else beginning\">\n                                <span>Listening...</span>\n                            </ng-container>\n                            <ng-template #beginning>\n                                <span>Start talking...</span>\n                            </ng-template>\n                        </ng-template>\n                    </ng-container>\n                    <ng-template #failure>\n                        <span>Didn't catch that</span>\n                    </ng-template>\n                    <div>\n                        <button (click)=\"closeVoiceRecognition()\">Close</button>\n                        <button (click)=\"startVoiceRecognition()\">Restart</button>\n                    </div>\n                </ng-template>\n            </div>\n\n\n            <div class=\"wrap_send_input\"\n                *ngIf=\"(!currentContact.isOneWayGroup) || (currentContact.isOneWayGroup && currentUser.role==Role.Admin)\">\n                <!-- <input (keydown.enter)=\"sendMessage(currentContact._id, message2send)\" type=\"text \" placeholder=\"Write your message... \" [(ngModel)]=\"message2send\" />\n                \n                <button [disabled]=\"returnTifCurrentContactIsNullOrEmpty(currentContact) \" class=\"submit \" (click)=\"sendMessage(currentContact._id, message2send)\">\n\t\t\t\t\t<i class=\"fa fa-paper-plane \" aria-hidden=\"true \"></i>\n                </button> -->\n                <small class=\"text-danger ml-1 mb-3\"\n                    *ngIf=\"message2send && (message2send.includes('skype') || message2send.includes('facebook') || message2send.includes('wechat') || message2send.includes('messenger') || message2send.includes('messenger')|| message2send.includes('@') || message2send.includes('(a)') || message2send.includes('-a-') || message2send.includes('.dk') || message2send.includes('.com') )\">Your\n                    message cannot have restricted keywords: messenger, facebook, whatsapp, wechat, skype, @,(a), -a-\n                    , .com, .dk\n                </small>\n                <div class=\"input-group input-group-lg shadow-lg mt-1\">\n\n                    <input type=\"text\" (keydown.enter)=\"sendMessage(currentContact._id, message2send)\" type=\"text \"\n                        placeholder=\"Write your message... \" [(ngModel)]=\"message2send\"\n                        class=\"form-control border-0 bg-light2\" placeholder=\"Start Typing...\">\n                    <div class=\"input-group-append btn-success\">\n                        <button class=\"btn btn-light d-none avittiNone\"\n                            *ngIf=\"voiceActiveSectionListening; else beginning\" (click)=\"closeVoiceRecognition()\">\n                            <span class=\"small font-weight-light mr-1\">Listening...</span> <i\n                                class=\"fas fa-headset\"></i>\n                        </button>\n                        <button *ngIf=\"!voiceActiveSectionListening\" class=\"btn btn-light avittiNone\"\n                            (click)=\"startVoiceRecognition()\">\n                            <i class=\"fas icon-microphone fa-lg\" aria-hidden=\"true \"></i>\n                        </button>\n\n\n                        <button class=\"btn btn-link\" type=\"button\"\n                            [disabled]=\"!returnTifCurrentContactIsNullOrEmpty(currentContact) && !message2send\"\n                            (click)=\"sendMessage(currentContact._id, message2send)\">\n                            <i class=\"icon-arrow-right\" aria-hidden=\"true \"></i>\n                        </button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
       /***/
     },
 
@@ -20770,7 +20194,7 @@
         _createClass2(ModalAppliedSessionDisplay, [{
           key: "paymentDoneByLenderConfirmByBorrower",
           value: function paymentDoneByLenderConfirmByBorrower(LoanApplyObj) {
-            var _this78 = this;
+            var _this79 = this;
 
             this.LoanApplyObjCurrent._id = LoanApplyObj._id;
 
@@ -20801,8 +20225,8 @@
             this.LoanApplyObjCurrent.createdOnForLoanAmountPaidByLenderConfirmByBorrower = this.utilityService._.now();
             this.socketService.sendEventForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, this.LoanApplyObjCurrent).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this78.updatedSessionObj = details["data"];
-                _this78.LoanObj = _this78.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                _this79.updatedSessionObj = details["data"];
+                _this79.LoanObj = _this79.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
               }
             });
             this.LoanApplyObjCurrent = {};
@@ -20810,7 +20234,7 @@
         }, {
           key: "paymentDoneToLender",
           value: function paymentDoneToLender(LoanApplyObj) {
-            var _this79 = this;
+            var _this80 = this;
 
             var _past_days_allowed4payment = 15;
             var _future_days_allowed4payment = 7; //this.LoanApplyObjCurrent4Installment.loanTenureInMonths = this.LoanObj.loanTenureInMonths;
@@ -20885,8 +20309,8 @@
 
             this.socketService.sendEventForLoanAmountPaidToLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, _installmentKey, _loanTenureInMonths, this.LoanApplyObjCurrent4Installment).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this79.updatedSessionObj = details["data"];
-                _this79.LoanObj = _this79.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                _this80.updatedSessionObj = details["data"];
+                _this80.LoanObj = _this80.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
               }
             });
             this.LoanApplyObjCurrent4Installment = {};
@@ -21135,20 +20559,20 @@
         }, {
           key: "usersProfile",
           value: function usersProfile(userObj) {
-            var _this80 = this;
+            var _this81 = this;
 
             //#region fetch creator id
             this.userService.getUserById(userObj._id).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
                 //console.log('84', this.authenticationService.currentUserValue);
-                var dialogRef = _this80.dialog.open(_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_15__["PublicProfileComponent"], {
+                var dialogRef = _this81.dialog.open(_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_15__["PublicProfileComponent"], {
                   maxWidth: '100vw',
                   maxHeight: '100vh',
                   height: '100%',
                   width: '100%',
                   hasBackdrop: true,
                   data: {
-                    userObj: _this80.utilityService._.cloneDeep(data['data']),
+                    userObj: _this81.utilityService._.cloneDeep(data['data']),
                     adminViewT: false
                   }
                 });
@@ -21169,14 +20593,14 @@
                 }
               } catch (ex) {}
 
-              _this80.alertService.error(errorMsg2show);
+              _this81.alertService.error(errorMsg2show);
             }); //#endregion fetch creator id
           } //#region bypass all conditions
 
         }, {
           key: "LoanMoneyTransferStatusChange",
           value: function LoanMoneyTransferStatusChange(event, LoanObj, LoanApplyObj) {
-            var _this81 = this;
+            var _this82 = this;
 
             var installmentKey = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
             var updateLastInstallmentPaymentStatus = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
@@ -21261,8 +20685,8 @@
 
                 this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, installmentKey, _loanTenureInMonths, LoanApplyObjCurrent4Installment).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8__["first"])()).subscribe(function (details) {
                   if (details && details["success"]) {
-                    _this81.updatedSessionObj = details["data"];
-                    _this81.LoanObj = _this81.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                    _this82.updatedSessionObj = details["data"];
+                    _this82.LoanObj = _this82.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
                     //this.broadcastUpdatedEvent2All(details["data"]);
                   }
                 }); //#endregion direct action here with BYPASS ALL CASES
@@ -21300,8 +20724,8 @@
 
                 this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, installmentKey, _loanTenureInMonths2, LoanApplyObjCurrent4Installment).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8__["first"])()).subscribe(function (details) {
                   if (details && details["success"]) {
-                    _this81.updatedSessionObj = details["data"];
-                    _this81.LoanObj = _this81.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                    _this82.updatedSessionObj = details["data"];
+                    _this82.LoanObj = _this82.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
                     //this.broadcastUpdatedEvent2All(details["data"]);
                   }
                 }); //#endregion direct action here with BYPASS ALL CASES
@@ -21321,7 +20745,7 @@
         }, {
           key: "middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll",
           value: function middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, addTremoveF, addedWithInstallment) {
-            var _this82 = this;
+            var _this83 = this;
 
             var LoanApplyObjCurrent = {
               isLoanAmountPaidByLender: null,
@@ -21362,8 +20786,8 @@
 
             this.socketService.sendEventForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, LoanApplyObjCurrent).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this82.updatedSessionObj = details["data"];
-                _this82.LoanObj = _this82.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                _this83.updatedSessionObj = details["data"];
+                _this83.LoanObj = _this83.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
                 //this.broadcastUpdatedEvent2All(details["data"]);
               }
             });
@@ -21772,7 +21196,7 @@
         }, {
           key: "paymentDoneByLender",
           value: function paymentDoneByLender(LoanApplyObj) {
-            var _this83 = this;
+            var _this84 = this;
 
             this.LoanApplyObjCurrent._id = LoanApplyObj._id;
             this.LoanApplyObjCurrent.isLoanAmountPaidByLender = true;
@@ -21799,8 +21223,8 @@
             this.LoanApplyObjCurrent.createdOnForLoanAmountPaidByLender = this.utilityService._.now();
             this.socketService.sendEventForLoanAmountPaidByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, this.LoanApplyObjCurrent).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this83.updatedSessionObj = details["data"];
-                _this83.LoanObj = _this83.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                _this84.updatedSessionObj = details["data"];
+                _this84.LoanObj = _this84.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
               }
             });
             this.LoanApplyObjCurrent = {
@@ -21810,7 +21234,7 @@
         }, {
           key: "paymentDoneToLenderConfirmByLender",
           value: function paymentDoneToLenderConfirmByLender(LoanApplyObj) {
-            var _this84 = this;
+            var _this85 = this;
 
             var _past_days_allowed4payment = 15;
             var _future_days_allowed4payment = 7; //this.LoanApplyObjCurrent4Installment.loanTenureInMonths = this.LoanObj.loanTenureInMonths;
@@ -21874,8 +21298,8 @@
             $("#installment_deatils_modal").modal('hide');
             this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, _installmentKey, _loanTenureInMonths, this.LoanApplyObjCurrent4Installment).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this84.updatedSessionObj = details["data"];
-                _this84.LoanObj = _this84.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                _this85.updatedSessionObj = details["data"];
+                _this85.LoanObj = _this85.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
               }
             });
             this.LoanApplyObjCurrent4Installment = {};
@@ -21969,12 +21393,12 @@
         }, {
           key: "finalSubmissionForRefund",
           value: function finalSubmissionForRefund() {
-            var _this85 = this;
+            var _this86 = this;
 
             this.socketService.sendEventToRejectSessionWithRefundRequestWiUpdateAll(this.refundObj.loanId, this.refundObj.loanApplyId, this.endUserId, _models__WEBPACK_IMPORTED_MODULE_8__["SessionStatus"].RejectedOngoingWithRefund, this.refundObj.transactionId, this.refundObj.amount, this.refundObj.cancellationCharges, this.refundObj.finalAmount2Refund, this.refundObj.captureId, this.refundObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {} else {}
 
-              _this85.dialogRef.close({
+              _this86.dialogRef.close({
                 event: 'close',
                 data: null
               });
@@ -21983,7 +21407,7 @@
         }, {
           key: "closeDialog",
           value: function closeDialog(_sessionApply, _status) {
-            var _this86 = this;
+            var _this87 = this;
 
             if (_sessionApply) {
               this.payment.clearCurrentPayPalConfig();
@@ -22033,10 +21457,10 @@
 
                   this.socketService.sendEventToRejectSessionWithRefundRequest(_loanId, _loanApplyId, _endUserId, _status).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
                     if (details && details["success"]) {
-                      _this86.refundObj = details["data"];
-                      _this86.ready2Refund = true;
+                      _this87.refundObj = details["data"];
+                      _this87.ready2Refund = true;
                     } else {
-                      _this86.alertService.error(details["message"], true);
+                      _this87.alertService.error(details["message"], true);
                     } //this.dialogRef.close({ event: 'close', data: { sessionApply: _sessionApply, status: _status, transactionId: (details.id || details._id) } });
 
                   }); //#endregion handle LoanObj rejected with refund  
@@ -22068,7 +21492,7 @@
         }, {
           key: "initiateForPaymentForLender",
           value: function initiateForPaymentForLender(_loanId, _loanApplyId, _sessionApply, _status, _sessionPrice, _endUserId, _transactiActionType) {
-            var _this87 = this;
+            var _this88 = this;
 
             //#region handle LoanObj payments
             this.userInitiatedForPayment = true;
@@ -22096,7 +21520,7 @@
               }]
             }];
             this.payment.getCurrentPaymentApproved().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
-              _this87.dialogRef.close({
+              _this88.dialogRef.close({
                 event: 'close',
                 data: {
                   sessionApply: _sessionApply,
@@ -22218,20 +21642,20 @@
         }, {
           key: "usersProfile",
           value: function usersProfile(userObj) {
-            var _this88 = this;
+            var _this89 = this;
 
             //#region fetch creator id
             this.userService.getUserById(userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
                 //console.log('84', this.authenticationService.currentUserValue);
-                var dialogRef = _this88.dialog.open(_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_18__["PublicProfileComponent"], {
+                var dialogRef = _this89.dialog.open(_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_18__["PublicProfileComponent"], {
                   maxWidth: '100vw',
                   maxHeight: '100vh',
                   height: '100%',
                   width: '100%',
                   hasBackdrop: true,
                   data: {
-                    userObj: _this88.utilityService._.cloneDeep(data['data']),
+                    userObj: _this89.utilityService._.cloneDeep(data['data']),
                     adminViewT: false
                   }
                 });
@@ -22252,14 +21676,14 @@
                 }
               } catch (ex) {}
 
-              _this88.alertService.error(errorMsg2show);
+              _this89.alertService.error(errorMsg2show);
             }); //#endregion fetch creator id
           } //#region bypass all conditions
 
         }, {
           key: "LoanMoneyTransferStatusChange",
           value: function LoanMoneyTransferStatusChange(event, LoanObj, LoanApplyObj) {
-            var _this89 = this;
+            var _this90 = this;
 
             var installmentKey = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
             var updateLastInstallmentPaymentStatus = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
@@ -22344,8 +21768,8 @@
 
                 this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, installmentKey, _loanTenureInMonths, LoanApplyObjCurrent4Installment).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
                   if (details && details["success"]) {
-                    _this89.updatedSessionObj = details["data"];
-                    _this89.LoanObj = _this89.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                    _this90.updatedSessionObj = details["data"];
+                    _this90.LoanObj = _this90.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
                     //this.broadcastUpdatedEvent2All(details["data"]);
                   }
                 }); //#endregion direct action here with BYPASS ALL CASES
@@ -22383,8 +21807,8 @@
 
                 this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, installmentKey, _loanTenureInMonths3, LoanApplyObjCurrent4Installment).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
                   if (details && details["success"]) {
-                    _this89.updatedSessionObj = details["data"];
-                    _this89.LoanObj = _this89.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                    _this90.updatedSessionObj = details["data"];
+                    _this90.LoanObj = _this90.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
                     //this.broadcastUpdatedEvent2All(details["data"]);
                   }
                 }); //#endregion direct action here with BYPASS ALL CASES
@@ -22404,7 +21828,7 @@
         }, {
           key: "middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll",
           value: function middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, addTremoveF, addedWithInstallment) {
-            var _this90 = this;
+            var _this91 = this;
 
             var LoanApplyObjCurrent = {
               isLoanAmountPaidByLender: null,
@@ -22445,8 +21869,8 @@
 
             this.socketService.sendEventForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, LoanApplyObjCurrent).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this90.updatedSessionObj = details["data"];
-                _this90.LoanObj = _this90.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                _this91.updatedSessionObj = details["data"];
+                _this91.LoanObj = _this91.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
                 //this.broadcastUpdatedEvent2All(details["data"]);
               }
             });
@@ -22775,7 +22199,7 @@
 
       var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! tslib */
-      "Yz0s");
+      "sJZM");
       /* harmony import */
 
 
@@ -23097,36 +22521,9 @@
         _createClass2(CropperSettings, [{
           key: "setOptions",
           value: function setOptions(options) {
-            var _this91 = this;
-
-            Object.keys(options).filter(
-            /**
-            * @param {?} k
-            * @return {?}
-            */
-            function (k) {
-              return k in _this91;
-            }).forEach(
-            /**
-            * @param {?} k
-            * @return {?}
-            */
-            function (k) {
-              return _this91[k] = options[k];
-            });
-            this.validateOptions();
-          }
-          /**
-           * @param {?} changes
-           * @return {?}
-           */
-
-        }, {
-          key: "setOptionsFromChanges",
-          value: function setOptionsFromChanges(changes) {
             var _this92 = this;
 
-            Object.keys(changes).filter(
+            Object.keys(options).filter(
             /**
             * @param {?} k
             * @return {?}
@@ -23139,7 +22536,34 @@
             * @return {?}
             */
             function (k) {
-              return _this92[k] = changes[k].currentValue;
+              return _this92[k] = options[k];
+            });
+            this.validateOptions();
+          }
+          /**
+           * @param {?} changes
+           * @return {?}
+           */
+
+        }, {
+          key: "setOptionsFromChanges",
+          value: function setOptionsFromChanges(changes) {
+            var _this93 = this;
+
+            Object.keys(changes).filter(
+            /**
+            * @param {?} k
+            * @return {?}
+            */
+            function (k) {
+              return k in _this93;
+            }).forEach(
+            /**
+            * @param {?} k
+            * @return {?}
+            */
+            function (k) {
+              return _this93[k] = changes[k].currentValue;
             });
             this.validateOptions();
           }
@@ -24146,7 +23570,7 @@
         _createClass2(LoadImageService, [{
           key: "loadImageFile",
           value: function loadImageFile(file, cropperSettings) {
-            var _this93 = this;
+            var _this94 = this;
 
             return new Promise(
             /**
@@ -24164,7 +23588,7 @@
               * @return {?}
               */
               function (event) {
-                _this93.loadImage(event.target.result, file.type, cropperSettings).then(resolve)["catch"](reject);
+                _this94.loadImage(event.target.result, file.type, cropperSettings).then(resolve)["catch"](reject);
               };
 
               fileReader.readAsDataURL(file);
@@ -24207,7 +23631,7 @@
         }, {
           key: "loadImageFromURL",
           value: function loadImageFromURL(url, cropperSettings) {
-            var _this94 = this;
+            var _this95 = this;
 
             return new Promise(
             /**
@@ -24241,7 +23665,7 @@
                 canvas.height = img.height;
                 context.drawImage(img, 0, 0);
 
-                _this94.loadBase64Image(canvas.toDataURL(), cropperSettings).then(resolve);
+                _this95.loadBase64Image(canvas.toDataURL(), cropperSettings).then(resolve);
               };
 
               img.crossOrigin = 'anonymous';
@@ -24257,7 +23681,7 @@
         }, {
           key: "loadBase64Image",
           value: function loadBase64Image(imageBase64, cropperSettings) {
-            var _this95 = this;
+            var _this96 = this;
 
             return new Promise(
             /**
@@ -24288,7 +23712,7 @@
             * @return {?}
             */
             function (res) {
-              return _this95.transformImageBase64(res, cropperSettings);
+              return _this96.transformImageBase64(res, cropperSettings);
             });
           }
           /**
@@ -24713,7 +24137,7 @@
         _createClass2(ImageCropperComponent, [{
           key: "ngOnChanges",
           value: function ngOnChanges(changes) {
-            var _this96 = this;
+            var _this97 = this;
 
             var _a;
 
@@ -24727,14 +24151,14 @@
               * @return {?}
               */
               function (res) {
-                return _this96.setLoadedImage(res);
+                return _this97.setLoadedImage(res);
               })["catch"](
               /**
               * @param {?} err
               * @return {?}
               */
               function (err) {
-                return _this96.loadImageError(err);
+                return _this97.loadImageError(err);
               });
             }
 
@@ -24882,36 +24306,9 @@
         }, {
           key: "loadImageFile",
           value: function loadImageFile(file) {
-            var _this97 = this;
-
-            this.loadImageService.loadImageFile(file, this.settings).then(
-            /**
-            * @param {?} res
-            * @return {?}
-            */
-            function (res) {
-              return _this97.setLoadedImage(res);
-            })["catch"](
-            /**
-            * @param {?} err
-            * @return {?}
-            */
-            function (err) {
-              return _this97.loadImageError(err);
-            });
-          }
-          /**
-           * @private
-           * @param {?} imageBase64
-           * @return {?}
-           */
-
-        }, {
-          key: "loadBase64Image",
-          value: function loadBase64Image(imageBase64) {
             var _this98 = this;
 
-            this.loadImageService.loadBase64Image(imageBase64, this.settings).then(
+            this.loadImageService.loadImageFile(file, this.settings).then(
             /**
             * @param {?} res
             * @return {?}
@@ -24929,16 +24326,16 @@
           }
           /**
            * @private
-           * @param {?} url
+           * @param {?} imageBase64
            * @return {?}
            */
 
         }, {
-          key: "loadImageFromURL",
-          value: function loadImageFromURL(url) {
+          key: "loadBase64Image",
+          value: function loadBase64Image(imageBase64) {
             var _this99 = this;
 
-            this.loadImageService.loadImageFromURL(url, this.settings).then(
+            this.loadImageService.loadBase64Image(imageBase64, this.settings).then(
             /**
             * @param {?} res
             * @return {?}
@@ -24952,6 +24349,33 @@
             */
             function (err) {
               return _this99.loadImageError(err);
+            });
+          }
+          /**
+           * @private
+           * @param {?} url
+           * @return {?}
+           */
+
+        }, {
+          key: "loadImageFromURL",
+          value: function loadImageFromURL(url) {
+            var _this100 = this;
+
+            this.loadImageService.loadImageFromURL(url, this.settings).then(
+            /**
+            * @param {?} res
+            * @return {?}
+            */
+            function (res) {
+              return _this100.setLoadedImage(res);
+            })["catch"](
+            /**
+            * @param {?} err
+            * @return {?}
+            */
+            function (err) {
+              return _this100.loadImageError(err);
             });
           }
           /**
@@ -24986,7 +24410,7 @@
         }, {
           key: "imageLoadedInView",
           value: function imageLoadedInView() {
-            var _this100 = this;
+            var _this101 = this;
 
             if (this.loadedImage != null) {
               this.imageLoaded.emit(this.loadedImage);
@@ -24996,7 +24420,7 @@
               * @return {?}
               */
               function () {
-                return _this100.checkImageMaxSizeRecursively();
+                return _this101.checkImageMaxSizeRecursively();
               });
             }
           }
@@ -25008,7 +24432,7 @@
         }, {
           key: "checkImageMaxSizeRecursively",
           value: function checkImageMaxSizeRecursively() {
-            var _this101 = this;
+            var _this102 = this;
 
             if (this.setImageMaxSizeRetries > 40) {
               this.loadImageFailed.emit();
@@ -25026,7 +24450,7 @@
               * @return {?}
               */
               function () {
-                return _this101.checkImageMaxSizeRecursively();
+                return _this102.checkImageMaxSizeRecursively();
               }, 50);
             }
           }
@@ -26143,7 +25567,7 @@
         }, {
           key: "closeDialog",
           value: function closeDialog(_sessionApply, _status) {
-            var _this102 = this;
+            var _this103 = this;
 
             if (_sessionApply) {
               var _loanId = _sessionApply.loanId;
@@ -26179,10 +25603,10 @@
 
                   this.socketService.sendEventToRejectSessionWithRefundRequest(_loanId, _loanApplyId, _endUserId, _status).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (details) {
                     if (details && details["success"]) {
-                      _this102.refundObj = details["data"];
-                      _this102.ready2Refund = true;
+                      _this103.refundObj = details["data"];
+                      _this103.ready2Refund = true;
                     } else {
-                      _this102.alertService.error(details["message"], true);
+                      _this103.alertService.error(details["message"], true);
                     } //this.dialogRef.close({ event: 'close', data: { sessionApply: _sessionApply, status: _status, transactionId: (details.id || details._id) } });
 
                   }); //#endregion handle LoanObj rejected with refund  
@@ -26214,7 +25638,7 @@
         }, {
           key: "paymentDoneByLender",
           value: function paymentDoneByLender(LoanApplyObj) {
-            var _this103 = this;
+            var _this104 = this;
 
             this.LoanApplyObjCurrent._id = LoanApplyObj._id;
             this.LoanApplyObjCurrent.isLoanAmountPaidByLender = true;
@@ -26231,10 +25655,10 @@
             this.LoanApplyObjCurrent.createdOnForLoanAmountPaidByLender = this.utilityService._.now();
             this.socketService.sendEventForLoanAmountPaidByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, this.LoanApplyObjCurrent).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this103.updatedSessionObj = details["data"];
-                _this103.LoanObj = _this103.updatedSessionObj;
+                _this104.updatedSessionObj = details["data"];
+                _this104.LoanObj = _this104.updatedSessionObj;
 
-                _this103.dialogRef.close({
+                _this104.dialogRef.close({
                   event: 'close',
                   data: {
                     updatedSessionObj: details["data"]
@@ -26270,7 +25694,7 @@
         }, {
           key: "paymentDoneByLenderConfirmByBorrower",
           value: function paymentDoneByLenderConfirmByBorrower(LoanApplyObj) {
-            var _this104 = this;
+            var _this105 = this;
 
             this.LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower = true;
             this.LoanApplyObjCurrent._id = LoanApplyObj._id;
@@ -26287,10 +25711,10 @@
             this.LoanApplyObjCurrent.createdOnForLoanAmountPaidByLenderConfirmByBorrower = this.utilityService._.now();
             this.socketService.sendEventForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, this.LoanApplyObjCurrent).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this104.updatedSessionObj = details["data"];
-                _this104.LoanObj = _this104.updatedSessionObj;
+                _this105.updatedSessionObj = details["data"];
+                _this105.LoanObj = _this105.updatedSessionObj;
 
-                _this104.dialogRef.close({
+                _this105.dialogRef.close({
                   event: 'close',
                   data: {
                     updatedSessionObj: details["data"]
@@ -26364,7 +25788,7 @@
         }, {
           key: "paymentDoneToLender",
           value: function paymentDoneToLender(LoanApplyObj) {
-            var _this105 = this;
+            var _this106 = this;
 
             this.LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin = false;
 
@@ -26399,10 +25823,10 @@
 
             this.socketService.sendEventForLoanAmountPaidToLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, _installmentKey, _loanTenureInMonths, this.LoanApplyObjCurrent4Installment).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this105.updatedSessionObj = details["data"];
-                _this105.LoanObj = _this105.updatedSessionObj;
+                _this106.updatedSessionObj = details["data"];
+                _this106.LoanObj = _this106.updatedSessionObj;
 
-                _this105.dialogRef.close({
+                _this106.dialogRef.close({
                   event: 'close',
                   data: {
                     updatedSessionObj: details["data"]
@@ -26453,7 +25877,7 @@
         }, {
           key: "paymentDoneToLenderConfirmByLender",
           value: function paymentDoneToLenderConfirmByLender(LoanApplyObj) {
-            var _this106 = this;
+            var _this107 = this;
 
             if (this.transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised) {
               this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender = Date.parse(this.utilityService.moment(this.transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD 00:00:00 A'));
@@ -26485,10 +25909,10 @@
             var _installmentKey = this.LoanApplyObjCurrent4Installment.installmentKey;
             this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, _installmentKey, _loanTenureInMonths, this.LoanApplyObjCurrent4Installment).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this106.updatedSessionObj = details["data"];
-                _this106.LoanObj = _this106.updatedSessionObj;
+                _this107.updatedSessionObj = details["data"];
+                _this107.LoanObj = _this107.updatedSessionObj;
 
-                _this106.dialogRef.close({
+                _this107.dialogRef.close({
                   event: 'close',
                   data: {
                     updatedSessionObj: details["data"]
@@ -26671,7 +26095,7 @@
       var MessagesComponent = /*#__PURE__*/function () {
         //end tts
         function MessagesComponent(socketService, authenticationService, ngZone, contactService, router, alertService, utilityService, dialog, messagesService) {
-          var _this107 = this;
+          var _this108 = this;
 
           _classCallCheck2(this, MessagesComponent);
 
@@ -26700,28 +26124,23 @@
           }
 
           this.authenticationService.currentUser.subscribe(function (x) {
-            return _this107.currentUser = x;
+            return _this108.currentUser = x;
           });
           this.subscription = this.socketService.getNewMessageToRoomAll().subscribe(function (_currentChatObj) {
-            if (!_this107.allChatListOfRoom) {
-              _this107.allChatListOfRoom = [];
+            if (!_this108.allChatListOfRoom) {
+              _this108.allChatListOfRoom = [];
             }
 
             if (_currentChatObj) {
-              _this107.allChatListOfRoom.push(_currentChatObj);
+              if (_currentChatObj.roomId == _this108.currentContact._id) {
+                var mappedAllChatListOfRoom = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](_this108.allChatListOfRoom, '_id');
+                mappedAllChatListOfRoom[_currentChatObj._id] = _currentChatObj;
+                _this108.allChatListOfRoom = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](mappedAllChatListOfRoom); //this.allChatListOfRoom.push(_currentChatObj);
 
-              $('#chat_messages').animate({
-                scrollTop: $('#chat_messages').get(0).scrollHeight
-              }, 'fast');
-            }
-          });
-          this.socketService.listenEventToAddNewContact().subscribe(function (_currentContactObj) {
-            if (!_this107.myContactsList) {
-              _this107.myContactsList = [];
-            }
-
-            if (_currentContactObj) {
-              _this107.myContactsList.push(_currentContactObj);
+                $('#chat_messages').animate({
+                  scrollTop: $('#chat_messages').get(0).scrollHeight
+                }, 'fast');
+              }
             }
           }); //start tts
 
@@ -26744,7 +26163,7 @@
             }).then(function (data) {
               // The "data" object contains the list of available voices and the voice synthesis params
               //console.log("Speech is ready, voices are available", data)
-              _this107.speechData = data;
+              _this108.speechData = data;
               data.voices.forEach(function (voice) {//console.log(voice.name + " " + voice.lang)
               });
             })["catch"](function (e) {
@@ -26753,6 +26172,8 @@
           } //end tts
 
 
+          this.messagesService.getAllMyContacts();
+          this.messagesService.getAllUsers();
           var paramobj = history.state;
 
           if (paramobj) {
@@ -26767,18 +26188,18 @@
                 if (data && data['success']) {
                   //alert(JSON.stringify( data));
                   if (AVTrueChatFalse) {
-                    _this107.joinNewVCSessionWithContact(contactId, data["data"].loanId, data["data"].isGroup);
+                    _this108.joinNewVCSessionWithContact(contactId, data["data"].loanId, data["data"].isGroup);
                   } else {
-                    _this107.setCurrentContact(data["data"]);
+                    _this108.setCurrentContact(data["data"]);
                   } //this.alertService.success(data['message'], true);
 
 
-                  _this107.loading = false; //this.element_btn_click_addServiceTypes_skills_verification.click();
+                  _this108.loading = false; //this.element_btn_click_addServiceTypes_skills_verification.click();
                 } else {
                   //alert(JSON.stringify(data['message']));
-                  _this107.alertService.error(data['message']);
+                  _this108.alertService.error(data['message']);
 
-                  _this107.loading = false;
+                  _this108.loading = false;
                 }
               }, function (error) {
                 var errorMsg2show = "";
@@ -26793,9 +26214,9 @@
                   }
                 } catch (ex) {}
 
-                _this107.alertService.error(errorMsg2show);
+                _this108.alertService.error(errorMsg2show);
 
-                _this107.loading = false;
+                _this108.loading = false;
               });
             }
           }
@@ -26824,14 +26245,13 @@
         }, {
           key: "ngOnInit",
           value: function ngOnInit() {
-            this.getAllMyContacts();
             this.translateTextInOtherLanguage('', '', false, null);
           }
         }, {
           key: "translateTextInOtherLanguage",
           value: function translateTextInOtherLanguage(string2Translate, languageCode2Translate, sendDirect2ChatT, chatId) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-              var _this108 = this;
+              var _this109 = this;
 
               return regeneratorRuntime.wrap(function _callee4$(_context4) {
                 while (1) {
@@ -26850,8 +26270,8 @@
                         if (data && data['success']) {
                           //console.log('141', data["data"]);
                           if (chatId) {
-                            _this108.element_ctrlChatMessage = document.getElementById(chatId);
-                            _this108.element_ctrlChatMessage.innerText = data["data"].translatedText;
+                            _this109.element_ctrlChatMessage = document.getElementById(chatId);
+                            _this109.element_ctrlChatMessage.innerText = data["data"].translatedText;
                           }
 
                           if (sendDirect2ChatT) {
@@ -26901,16 +26321,6 @@
                 }
               }, _callee4, this);
             }));
-          }
-        }, {
-          key: "getAllUsers",
-          value: function getAllUsers() {
-            var _this109 = this;
-
-            var _data = {};
-            this.socketService.getAllUsers(_data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (users) {
-              _this109.allUsersList = users;
-            });
           }
         }, {
           key: "sendMessage",
@@ -26976,29 +26386,20 @@
             }
 
             if (_message != null && typeof _message != 'undefined' && _message != '') {
-              this.socketService.sendEventWithMessageChatRoom(_roomId, this.currentUser._id, _message);
+              var createdByUserObj = {
+                firstName: this.currentUser.firstName,
+                lastName: this.currentUser.firstName,
+                emailAddress: this.currentUser.emailAddress,
+                selfProfileUrl: this.currentUser.selfProfileUrl
+              };
+              this.socketService.sendEventWithMessageChatRoom(_roomId, this.currentUser._id, _message, createdByUserObj);
               this.message2send = '';
             }
           }
         }, {
-          key: "getAllMyContacts",
-          value: function getAllMyContacts() {
-            var _this110 = this;
-
-            var _data = {};
-            var _currentUserId = this.currentUser._id;
-            this.socketService.getAllMyContacts(_currentUserId, this.currentUser.role).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (users) {
-              _this110.myContactsList = lodash__WEBPACK_IMPORTED_MODULE_8__["filter"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](users), function (e) {
-                if (e) {
-                  return e._id != _currentUserId;
-                }
-              });
-            });
-          }
-        }, {
           key: "setCurrentContact",
           value: function setCurrentContact(currentContactItem) {
-            var _this111 = this;
+            var _this110 = this;
 
             if (currentContactItem) {
               //console.log(window.innerWidth)
@@ -27019,23 +26420,23 @@
                 this.socketService.sendEventToAddNewContact(_currentContactObj).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (result) {
                   if (result) {
                     if (result['success'] == true || result['success'] == false) {
-                      _this111.currentContact = result['data'];
+                      _this110.currentContact = result['data'];
                     } else {
-                      _this111.currentContact = result;
+                      _this110.currentContact = result;
                     }
                   }
 
                   try {
-                    if (_this111.currentContact) {
-                      if (!_this111.currentContact._id && _this111.currentContact[0]._id) {
-                        _this111.currentContact = _this111.currentContact[0];
+                    if (_this110.currentContact) {
+                      if (!_this110.currentContact._id && _this110.currentContact[0]._id) {
+                        _this110.currentContact = _this110.currentContact[0];
                       }
                     }
                   } catch (ex) {}
 
-                  _this111.socketService.sendEventToJoinChatRoom(_this111.currentContact._id, _this111.currentUser._id);
+                  _this110.socketService.sendEventToJoinChatRoom(_this110.currentContact._id, _this110.currentUser._id);
 
-                  _this111.getAllChatByRoomId(_this111.currentContact._id);
+                  _this110.getAllChatByRoomId(_this110.currentContact._id);
                 });
               } else {
                 this.currentContact = currentContactItem;
@@ -27047,11 +26448,15 @@
         }, {
           key: "getAllChatByRoomId",
           value: function getAllChatByRoomId(_roomId) {
-            var _this112 = this;
+            var _this111 = this;
+
+            var _allChatListOfRoomFiltered = lodash__WEBPACK_IMPORTED_MODULE_8__["filter"](this.allChatListOfRoom, {
+              roomId: _roomId
+            });
 
             var _data = {};
-            this.socketService.sendEventToGetAllChatOfRoomWithPromise(_roomId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (chats) {
-              _this112.allChatListOfRoom = chats;
+            this.socketService.sendEventToGetAllChatOfRoomWithPromise(_roomId, lodash__WEBPACK_IMPORTED_MODULE_8__["keys"](_allChatListOfRoomFiltered).length).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (chats) {
+              _this111.allChatListOfRoom = chats;
               setTimeout(function () {
                 $('#chat_messages').animate({
                   scrollTop: $('#chat_messages').get(0).scrollHeight
@@ -27069,53 +26474,53 @@
         }, {
           key: "initializeVoiceRecognitionCallback",
           value: function initializeVoiceRecognitionCallback() {
-            var _this113 = this;
+            var _this112 = this;
 
             annyang.addCallback('error', function (err) {
               if (err.error === 'network') {
-                _this113.message2send = "Please check your internet connection.";
+                _this112.message2send = "Please check your internet connection.";
                 annyang.abort();
 
-                _this113.ngZone.run(function () {
-                  return _this113.voiceActiveSectionSuccess = true;
+                _this112.ngZone.run(function () {
+                  return _this112.voiceActiveSectionSuccess = true;
                 });
-              } else if (_this113.message2send === undefined) {
-                _this113.ngZone.run(function () {
-                  return _this113.voiceActiveSectionError = true;
+              } else if (_this112.message2send === undefined) {
+                _this112.ngZone.run(function () {
+                  return _this112.voiceActiveSectionError = true;
                 });
 
                 annyang.abort();
               }
             });
             annyang.addCallback('soundstart', function (res) {
-              _this113.ngZone.run(function () {
-                return _this113.voiceActiveSectionListening = true;
+              _this112.ngZone.run(function () {
+                return _this112.voiceActiveSectionListening = true;
               });
             });
             annyang.addCallback('end', function () {
-              if (_this113.message2send === undefined) {
-                _this113.ngZone.run(function () {
-                  return _this113.voiceActiveSectionError = true;
+              if (_this112.message2send === undefined) {
+                _this112.ngZone.run(function () {
+                  return _this112.voiceActiveSectionError = true;
                 });
 
                 annyang.abort();
               }
             });
             annyang.addCallback('result', function (userSaid) {
-              _this113.ngZone.run(function () {
-                return _this113.voiceActiveSectionError = false;
+              _this112.ngZone.run(function () {
+                return _this112.voiceActiveSectionError = false;
               });
 
               var queryText = userSaid[0];
               annyang.abort();
-              _this113.message2send = queryText;
+              _this112.message2send = queryText;
 
-              _this113.ngZone.run(function () {
-                return _this113.voiceActiveSectionListening = false;
+              _this112.ngZone.run(function () {
+                return _this112.voiceActiveSectionListening = false;
               });
 
-              _this113.ngZone.run(function () {
-                return _this113.voiceActiveSectionSuccess = true;
+              _this112.ngZone.run(function () {
+                return _this112.voiceActiveSectionSuccess = true;
               });
             });
           }
@@ -27261,7 +26666,7 @@
         }, {
           key: "showAppliedToSessionCallMediator",
           value: function showAppliedToSessionCallMediator(loanApplyId) {
-            var _this114 = this;
+            var _this113 = this;
 
             var _data = {
               '_id': loanApplyId
@@ -27285,14 +26690,14 @@
                 var sessionObj = lodash__WEBPACK_IMPORTED_MODULE_8__["first"](data["data"]);
 
                 if (sessionObj) {
-                  _this114.showAppliedToSession(sessionObj);
+                  _this113.showAppliedToSession(sessionObj);
                 }
 
-                _this114.loading = false;
+                _this113.loading = false;
               } else {
-                _this114.alertService.error(data['message']);
+                _this113.alertService.error(data['message']);
 
-                _this114.loading = false;
+                _this113.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -27307,15 +26712,15 @@
                 }
               } catch (ex) {}
 
-              _this114.alertService.error(errorMsg2show);
+              _this113.alertService.error(errorMsg2show);
 
-              _this114.loading = false;
+              _this113.loading = false;
             });
           }
         }, {
           key: "showAppliedToSession",
           value: function showAppliedToSession(sessionObj) {
-            var _this115 = this;
+            var _this114 = this;
 
             var _proccessedSessionObj = null;
 
@@ -27362,7 +26767,7 @@
                     switch (_status) {
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Accepted:
                         //this.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
-                        _this115.proccedAppliedToSession(sessionObj, _loanApplyId);
+                        _this114.proccedAppliedToSession(sessionObj, _loanApplyId);
 
                         _allowed2CreateContactForSessionT = true;
                         break;
@@ -27372,7 +26777,7 @@
                         break;
 
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Rejected:
-                        _this115.socketService.setSessionApplyUpdateStatus(true, _loanId, _loanApplyId, _status, _this115.authenticationService.currentUserValue._id, _transactionId);
+                        _this114.socketService.setSessionApplyUpdateStatus(true, _loanId, _loanApplyId, _status, _this114.authenticationService.currentUserValue._id, _transactionId);
 
                         break;
 
@@ -27500,8 +26905,44 @@
             this.updateChatReadByUser(chatId);
           }
         }, {
+          key: "lastScreenReached",
+          value: function lastScreenReached(message) {
+            if (message == 'last-message-in-app') {
+              console.log('748', lodash__WEBPACK_IMPORTED_MODULE_8__["keys"](this.allChatListOfRoom).length);
+              this.getAllChatByRoomId(this.currentContact._id);
+            }
+          }
+        }, {
           key: "messageNotViewed",
           value: function messageNotViewed(chatId, message) {//debugger;
+          }
+        }, {
+          key: "returnNameOfMessageSender",
+          value: function returnNameOfMessageSender(_chat) {
+            var returnEmailIdT = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+            try {
+              if (_chat && _chat.createdByUserObj) {
+                if (_chat.userId != this.currentUser._id) {
+                  switch (_chat.createdByUserObj.role) {
+                    case src_app_models__WEBPACK_IMPORTED_MODULE_5__["Role"].Admin:
+                      return 'Admin';
+                      break;
+
+                    default:
+                      if (returnEmailIdT) {
+                        return _chat.createdByUserObj ? _chat.createdByUserObj.emailAddress || '' : '';
+                      } else {
+                        return _chat.createdByUserObj ? (_chat.createdByUserObj.firstName || '') + ' ' + (_chat.createdByUserObj.lastName || '') : '';
+                      }
+
+                      break;
+                  }
+                }
+              }
+            } catch (ex) {}
+
+            return '';
           }
         }]);
 
@@ -27791,15 +27232,15 @@
         }, {
           key: "initPaymentConfigStripe",
           value: function initPaymentConfigStripe(PaymentObj) {
-            var _this116 = this;
+            var _this115 = this;
 
             this._currentPaymentObj = PaymentObj;
             this.sendCurrentPaymentObj(this._currentPaymentObj);
             this.socketService.listenForUpdateStatusOfLastPayment().subscribe(function (_obj) {
               //this.socketService.emitEventWithNameAndData('request_fund_get_count_sum', this.userId);
-              _this116.sendCurrentPaymentApproved(_obj);
+              _this115.sendCurrentPaymentApproved(_obj);
 
-              _this116.stopTimer();
+              _this115.stopTimer();
             });
             this.socketService.sendEventToCheckLastPaymentReturnedSuccessOrFailed(this._currentPaymentObj);
             return this._currentPaymentObj;
@@ -27807,7 +27248,7 @@
         }, {
           key: "initConfig",
           value: function initConfig(purchaseUnits, _transactiActionType, _userId) {
-            var _this117 = this;
+            var _this116 = this;
 
             this.purchaseUnits = purchaseUnits;
             this.amount = purchaseUnits[0].amount.value;
@@ -27835,12 +27276,12 @@
               onApprove: function onApprove(data, actions) {
                 switch (_transactiActionType) {
                   case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].funds_add:
-                    _this117.socketService.sendEventToSaveCurrentTransaction(_transactiActionType, data.orderID, _userId, data);
+                    _this116.socketService.sendEventToSaveCurrentTransaction(_transactiActionType, data.orderID, _userId, data);
 
                     break;
 
                   case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].session_accepted:
-                    _this117.socketService.sendEventToSaveCurrentTransaction(_transactiActionType, data.orderID, _userId, data);
+                    _this116.socketService.sendEventToSaveCurrentTransaction(_transactiActionType, data.orderID, _userId, data);
 
                     break;
                 } //console.log('onApprove - transaction was approved, but not authorized', data, actions);
@@ -27849,7 +27290,7 @@
                 actions.order.get().then(function (details) {
                   switch (_transactiActionType) {
                     case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].funds_add:
-                      _this117.socketService.sendEventToSaveCurrentTransactionDetails(_transactiActionType, details.id, _userId, details, null);
+                      _this116.socketService.sendEventToSaveCurrentTransactionDetails(_transactiActionType, details.id, _userId, details, null);
 
                       var _funds_obj = {
                         amount: purchaseUnits[0].amount.value,
@@ -27858,24 +27299,24 @@
                         description: ''
                       };
 
-                      _this117.socketService.emitEventWithNameAndData('fund_addnew', _funds_obj);
+                      _this116.socketService.emitEventWithNameAndData('fund_addnew', _funds_obj);
 
                       break;
 
                     case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].session_accepted:
                     case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].session_extended:
-                      _this117.socketService.sendEventToSaveCurrentTransactionDetails(_transactiActionType, details.id, _userId, details, null);
+                      _this116.socketService.sendEventToSaveCurrentTransactionDetails(_transactiActionType, details.id, _userId, details, null);
 
                       break;
                   }
 
-                  _this117.sendCurrentPaymentApproved(details); //console.log('onApprove - you can get full order details inside onApprove: ', details);
+                  _this116.sendCurrentPaymentApproved(details); //console.log('onApprove - you can get full order details inside onApprove: ', details);
 
                 });
               },
               onClientAuthorization: function onClientAuthorization(data) {
                 //console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-                _this117.showSuccess = true;
+                _this116.showSuccess = true;
               },
               onCancel: function onCancel(data, actions) {////console.log('OnCancel', data, actions);
               },
@@ -27890,7 +27331,7 @@
         }, {
           key: "payFromUsersWallet",
           value: function payFromUsersWallet() {
-            var _this118 = this;
+            var _this117 = this;
 
             var _funds_obj = {
               amount: this.amount,
@@ -27906,9 +27347,9 @@
             };
             this.socketService.deductAmountFromWallet(_funds_obj, _data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (_obj) {
               //this.socketService.emitEventWithNameAndData('request_fund_get_count_sum', this.userId);
-              _this118.sendCurrentPaymentApproved(_obj);
+              _this117.sendCurrentPaymentApproved(_obj);
 
-              _this118.addFundsService.getFundsCountForRequestedUser(_this118.userId);
+              _this117.addFundsService.getFundsCountForRequestedUser(_this117.userId);
             });
           }
         }, {
@@ -27963,42 +27404,42 @@
         }, {
           key: "startTimer",
           value: function startTimer() {
-            var _this119 = this;
+            var _this118 = this;
 
             this.subscription4Timer = this.everySecond.subscribe(function (seconds) {
               var currentTime = moment__WEBPACK_IMPORTED_MODULE_10__();
-              _this119.remainingTime = _this119.searchEndDate.diff(currentTime);
-              _this119.remainingTime = _this119.remainingTime / 1000;
+              _this118.remainingTime = _this118.searchEndDate.diff(currentTime);
+              _this118.remainingTime = _this118.remainingTime / 1000;
 
-              if (_this119.remainingTime <= 0) {
-                _this119.paymentNotCompletedInTime = true;
-                _this119.paymentNotCompletedInTimeErrorMessageShow = true; //stop interval here;
+              if (_this118.remainingTime <= 0) {
+                _this118.paymentNotCompletedInTime = true;
+                _this118.paymentNotCompletedInTimeErrorMessageShow = true; //stop interval here;
 
-                _this119.sendCurrentPaymentFailed(true);
+                _this118.sendCurrentPaymentFailed(true);
               } else {
-                _this119.minutes = Math.floor(_this119.remainingTime / 60);
+                _this118.minutes = Math.floor(_this118.remainingTime / 60);
 
-                if (_this119.minutes > 59) {
-                  _this119.hours = Math.floor(_this119.remainingTime / 60 / 60);
+                if (_this118.minutes > 59) {
+                  _this118.hours = Math.floor(_this118.remainingTime / 60 / 60);
                 } else {
-                  _this119.hours = 0;
+                  _this118.hours = 0;
                 }
 
-                _this119.minutes = Math.floor(_this119.remainingTime / 60 - _this119.hours * 60);
-                _this119.seconds = Math.floor(_this119.remainingTime - (_this119.minutes * 60 + _this119.hours * 60 * 60));
+                _this118.minutes = Math.floor(_this118.remainingTime / 60 - _this118.hours * 60);
+                _this118.seconds = Math.floor(_this118.remainingTime - (_this118.minutes * 60 + _this118.hours * 60 * 60));
               }
 
-              if (_this119.seconds % 10 === 0) {
+              if (_this118.seconds % 10 === 0) {
                 //this.old_minutes != this.seconds
                 //debugger;
-                _this119.old_minutes = _this119.seconds;
+                _this118.old_minutes = _this118.seconds;
 
-                _this119.socketService.sendEventToCheckLastPaymentReturnedSuccessOrFailed(_this119._currentPaymentObj);
+                _this118.socketService.sendEventToCheckLastPaymentReturnedSuccessOrFailed(_this118._currentPaymentObj);
               } else {//console.log("303", this.old_minutes, this.minutes);
               }
 
-              if (_this119.minutes <= _this119.MinimumTime4Extend) {
-                _this119.paymentNotCompletedInTimeErrorMessageShow = true; //limit reached
+              if (_this118.minutes <= _this118.MinimumTime4Extend) {
+                _this118.paymentNotCompletedInTimeErrorMessageShow = true; //limit reached
                 //debugger;
               }
             });
@@ -28038,6 +27479,645 @@
         providedIn: 'root'
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClient"], _utility_service__WEBPACK_IMPORTED_MODULE_2__["UtilityService"], _socketio_service__WEBPACK_IMPORTED_MODULE_3__["SocketioService"], _add_funds_service__WEBPACK_IMPORTED_MODULE_6__["AddFundsService"]])], PaymentService);
       /***/
+    },
+
+    /***/
+    "sJZM":
+    /*!************************************************************************!*\
+      !*** ./node_modules/ngx-image-cropper/node_modules/tslib/tslib.es6.js ***!
+      \************************************************************************/
+
+    /*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __createBinding, __exportStar, __values, __read, __spread, __spreadArrays, __spreadArray, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
+
+    /***/
+    function sJZM(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__extends", function () {
+        return __extends;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__assign", function () {
+        return _assign;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__rest", function () {
+        return __rest;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__decorate", function () {
+        return __decorate;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__param", function () {
+        return __param;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__metadata", function () {
+        return __metadata;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__awaiter", function () {
+        return __awaiter;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__generator", function () {
+        return __generator;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__createBinding", function () {
+        return __createBinding;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__exportStar", function () {
+        return __exportStar;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__values", function () {
+        return __values;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__read", function () {
+        return __read;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__spread", function () {
+        return __spread;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__spreadArrays", function () {
+        return __spreadArrays;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__spreadArray", function () {
+        return __spreadArray;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__await", function () {
+        return __await;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__asyncGenerator", function () {
+        return __asyncGenerator;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__asyncDelegator", function () {
+        return __asyncDelegator;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__asyncValues", function () {
+        return __asyncValues;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__makeTemplateObject", function () {
+        return __makeTemplateObject;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__importStar", function () {
+        return __importStar;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__importDefault", function () {
+        return __importDefault;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__classPrivateFieldGet", function () {
+        return __classPrivateFieldGet;
+      });
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "__classPrivateFieldSet", function () {
+        return __classPrivateFieldSet;
+      });
+      /*! *****************************************************************************
+      Copyright (c) Microsoft Corporation.
+      
+      Permission to use, copy, modify, and/or distribute this software for any
+      purpose with or without fee is hereby granted.
+      
+      THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH
+      REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY
+      AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT,
+      INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM
+      LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
+      OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+      PERFORMANCE OF THIS SOFTWARE.
+      ***************************************************************************** */
+
+      /* global Reflect, Promise */
+
+
+      var _extendStatics = function extendStatics(d, b) {
+        _extendStatics = Object.setPrototypeOf || {
+          __proto__: []
+        } instanceof Array && function (d, b) {
+          d.__proto__ = b;
+        } || function (d, b) {
+          for (var p in b) {
+            if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p];
+          }
+        };
+
+        return _extendStatics(d, b);
+      };
+
+      function __extends(d, b) {
+        if (typeof b !== "function" && b !== null) throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+
+        _extendStatics(d, b);
+
+        function __() {
+          this.constructor = d;
+        }
+
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+      }
+
+      var _assign = function __assign() {
+        _assign = Object.assign || function __assign(t) {
+          for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+
+            for (var p in s) {
+              if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+            }
+          }
+
+          return t;
+        };
+
+        return _assign.apply(this, arguments);
+      };
+
+      function __rest(s, e) {
+        var t = {};
+
+        for (var p in s) {
+          if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+        }
+
+        if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+          if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i])) t[p[i]] = s[p[i]];
+        }
+        return t;
+      }
+
+      function __decorate(decorators, target, key, desc) {
+        var c = arguments.length,
+            r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc,
+            d;
+        if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);else for (var i = decorators.length - 1; i >= 0; i--) {
+          if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+        }
+        return c > 3 && r && Object.defineProperty(target, key, r), r;
+      }
+
+      function __param(paramIndex, decorator) {
+        return function (target, key) {
+          decorator(target, key, paramIndex);
+        };
+      }
+
+      function __metadata(metadataKey, metadataValue) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(metadataKey, metadataValue);
+      }
+
+      function __awaiter(thisArg, _arguments, P, generator) {
+        function adopt(value) {
+          return value instanceof P ? value : new P(function (resolve) {
+            resolve(value);
+          });
+        }
+
+        return new (P || (P = Promise))(function (resolve, reject) {
+          function fulfilled(value) {
+            try {
+              step(generator.next(value));
+            } catch (e) {
+              reject(e);
+            }
+          }
+
+          function rejected(value) {
+            try {
+              step(generator["throw"](value));
+            } catch (e) {
+              reject(e);
+            }
+          }
+
+          function step(result) {
+            result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+          }
+
+          step((generator = generator.apply(thisArg, _arguments || [])).next());
+        });
+      }
+
+      function __generator(thisArg, body) {
+        var _ = {
+          label: 0,
+          sent: function sent() {
+            if (t[0] & 1) throw t[1];
+            return t[1];
+          },
+          trys: [],
+          ops: []
+        },
+            f,
+            y,
+            t,
+            g;
+        return g = {
+          next: verb(0),
+          "throw": verb(1),
+          "return": verb(2)
+        }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+          return this;
+        }), g;
+
+        function verb(n) {
+          return function (v) {
+            return step([n, v]);
+          };
+        }
+
+        function step(op) {
+          if (f) throw new TypeError("Generator is already executing.");
+
+          while (_) {
+            try {
+              if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+              if (y = 0, t) op = [op[0] & 2, t.value];
+
+              switch (op[0]) {
+                case 0:
+                case 1:
+                  t = op;
+                  break;
+
+                case 4:
+                  _.label++;
+                  return {
+                    value: op[1],
+                    done: false
+                  };
+
+                case 5:
+                  _.label++;
+                  y = op[1];
+                  op = [0];
+                  continue;
+
+                case 7:
+                  op = _.ops.pop();
+
+                  _.trys.pop();
+
+                  continue;
+
+                default:
+                  if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+                    _ = 0;
+                    continue;
+                  }
+
+                  if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+                    _.label = op[1];
+                    break;
+                  }
+
+                  if (op[0] === 6 && _.label < t[1]) {
+                    _.label = t[1];
+                    t = op;
+                    break;
+                  }
+
+                  if (t && _.label < t[2]) {
+                    _.label = t[2];
+
+                    _.ops.push(op);
+
+                    break;
+                  }
+
+                  if (t[2]) _.ops.pop();
+
+                  _.trys.pop();
+
+                  continue;
+              }
+
+              op = body.call(thisArg, _);
+            } catch (e) {
+              op = [6, e];
+              y = 0;
+            } finally {
+              f = t = 0;
+            }
+          }
+
+          if (op[0] & 5) throw op[1];
+          return {
+            value: op[0] ? op[1] : void 0,
+            done: true
+          };
+        }
+      }
+
+      var __createBinding = Object.create ? function (o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        Object.defineProperty(o, k2, {
+          enumerable: true,
+          get: function get() {
+            return m[k];
+          }
+        });
+      } : function (o, m, k, k2) {
+        if (k2 === undefined) k2 = k;
+        o[k2] = m[k];
+      };
+
+      function __exportStar(m, o) {
+        for (var p in m) {
+          if (p !== "default" && !Object.prototype.hasOwnProperty.call(o, p)) __createBinding(o, m, p);
+        }
+      }
+
+      function __values(o) {
+        var s = typeof Symbol === "function" && Symbol.iterator,
+            m = s && o[s],
+            i = 0;
+        if (m) return m.call(o);
+        if (o && typeof o.length === "number") return {
+          next: function next() {
+            if (o && i >= o.length) o = void 0;
+            return {
+              value: o && o[i++],
+              done: !o
+            };
+          }
+        };
+        throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+      }
+
+      function __read(o, n) {
+        var m = typeof Symbol === "function" && o[Symbol.iterator];
+        if (!m) return o;
+        var i = m.call(o),
+            r,
+            ar = [],
+            e;
+
+        try {
+          while ((n === void 0 || n-- > 0) && !(r = i.next()).done) {
+            ar.push(r.value);
+          }
+        } catch (error) {
+          e = {
+            error: error
+          };
+        } finally {
+          try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+          } finally {
+            if (e) throw e.error;
+          }
+        }
+
+        return ar;
+      }
+      /** @deprecated */
+
+
+      function __spread() {
+        for (var ar = [], i = 0; i < arguments.length; i++) {
+          ar = ar.concat(__read(arguments[i]));
+        }
+
+        return ar;
+      }
+      /** @deprecated */
+
+
+      function __spreadArrays() {
+        for (var s = 0, i = 0, il = arguments.length; i < il; i++) {
+          s += arguments[i].length;
+        }
+
+        for (var r = Array(s), k = 0, i = 0; i < il; i++) {
+          for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++) {
+            r[k] = a[j];
+          }
+        }
+
+        return r;
+      }
+
+      function __spreadArray(to, from, pack) {
+        if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+          if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+          }
+        }
+        return to.concat(ar || Array.prototype.slice.call(from));
+      }
+
+      function __await(v) {
+        return this instanceof __await ? (this.v = v, this) : new __await(v);
+      }
+
+      function __asyncGenerator(thisArg, _arguments, generator) {
+        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        var g = generator.apply(thisArg, _arguments || []),
+            i,
+            q = [];
+        return i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () {
+          return this;
+        }, i;
+
+        function verb(n) {
+          if (g[n]) i[n] = function (v) {
+            return new Promise(function (a, b) {
+              q.push([n, v, a, b]) > 1 || resume(n, v);
+            });
+          };
+        }
+
+        function resume(n, v) {
+          try {
+            step(g[n](v));
+          } catch (e) {
+            settle(q[0][3], e);
+          }
+        }
+
+        function step(r) {
+          r.value instanceof __await ? Promise.resolve(r.value.v).then(fulfill, reject) : settle(q[0][2], r);
+        }
+
+        function fulfill(value) {
+          resume("next", value);
+        }
+
+        function reject(value) {
+          resume("throw", value);
+        }
+
+        function settle(f, v) {
+          if (f(v), q.shift(), q.length) resume(q[0][0], q[0][1]);
+        }
+      }
+
+      function __asyncDelegator(o) {
+        var i, p;
+        return i = {}, verb("next"), verb("throw", function (e) {
+          throw e;
+        }), verb("return"), i[Symbol.iterator] = function () {
+          return this;
+        }, i;
+
+        function verb(n, f) {
+          i[n] = o[n] ? function (v) {
+            return (p = !p) ? {
+              value: __await(o[n](v)),
+              done: n === "return"
+            } : f ? f(v) : v;
+          } : f;
+        }
+      }
+
+      function __asyncValues(o) {
+        if (!Symbol.asyncIterator) throw new TypeError("Symbol.asyncIterator is not defined.");
+        var m = o[Symbol.asyncIterator],
+            i;
+        return m ? m.call(o) : (o = typeof __values === "function" ? __values(o) : o[Symbol.iterator](), i = {}, verb("next"), verb("throw"), verb("return"), i[Symbol.asyncIterator] = function () {
+          return this;
+        }, i);
+
+        function verb(n) {
+          i[n] = o[n] && function (v) {
+            return new Promise(function (resolve, reject) {
+              v = o[n](v), settle(resolve, reject, v.done, v.value);
+            });
+          };
+        }
+
+        function settle(resolve, reject, d, v) {
+          Promise.resolve(v).then(function (v) {
+            resolve({
+              value: v,
+              done: d
+            });
+          }, reject);
+        }
+      }
+
+      function __makeTemplateObject(cooked, raw) {
+        if (Object.defineProperty) {
+          Object.defineProperty(cooked, "raw", {
+            value: raw
+          });
+        } else {
+          cooked.raw = raw;
+        }
+
+        return cooked;
+      }
+
+      ;
+
+      var __setModuleDefault = Object.create ? function (o, v) {
+        Object.defineProperty(o, "default", {
+          enumerable: true,
+          value: v
+        });
+      } : function (o, v) {
+        o["default"] = v;
+      };
+
+      function __importStar(mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k in mod) {
+          if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+        }
+
+        __setModuleDefault(result, mod);
+
+        return result;
+      }
+
+      function __importDefault(mod) {
+        return mod && mod.__esModule ? mod : {
+          "default": mod
+        };
+      }
+
+      function __classPrivateFieldGet(receiver, state, kind, f) {
+        if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
+        return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
+      }
+
+      function __classPrivateFieldSet(receiver, state, value, kind, f) {
+        if (kind === "m") throw new TypeError("Private method is not writable");
+        if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a setter");
+        if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot write private member to an object whose class did not declare it");
+        return kind === "a" ? f.call(receiver, value) : f ? f.value = value : state.set(receiver, value), value;
+      }
+      /***/
+
     },
 
     /***/
@@ -28389,7 +28469,7 @@
 
       var ProfileComponent = /*#__PURE__*/function () {
         function ProfileComponent(dialog, http, formBuilder, router, authenticationService, userService, alertService, appRouterService, route, utilityService) {
-          var _this120 = this;
+          var _this119 = this;
 
           _classCallCheck2(this, ProfileComponent);
 
@@ -28477,19 +28557,19 @@
             ////console.log('data => ', data)
             if (data && data['success']) {
               //alert(JSON.stringify( data));
-              _this120.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
+              _this119.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
 
 
-              _this120.loading = false;
-              _this120.isOtpSent = true; //this.element_btn_click_profile_skills_verification.click();
+              _this119.loading = false;
+              _this119.isOtpSent = true; //this.element_btn_click_profile_skills_verification.click();
             } else {
               //alert(JSON.stringify(data['message']));
-              _this120.alertService.error(data['message']);
+              _this119.alertService.error(data['message']);
 
-              _this120.loading = false;
-              _this120.isOtpSent = false;
+              _this119.loading = false;
+              _this119.isOtpSent = false;
 
-              _this120.appRouterService.appRouter('');
+              _this119.appRouterService.appRouter('');
             }
           }, function (error) {
             var errorMsg2show = "";
@@ -28504,21 +28584,21 @@
               }
             } catch (ex) {}
 
-            _this120.alertService.error(errorMsg2show);
+            _this119.alertService.error(errorMsg2show);
 
-            _this120.loading = false;
-            _this120.isOtpSent = false;
+            _this119.loading = false;
+            _this119.isOtpSent = false;
 
-            _this120.appRouterService.appRouter('');
+            _this119.appRouterService.appRouter('');
           });
           this.userService.getUserProfilePortFolioByUserId(this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this120.portfolioDataArr = data["data"];
-              _this120.loading = false;
+              _this119.portfolioDataArr = data["data"];
+              _this119.loading = false;
             } else {
-              _this120.alertService.error(data['message']);
+              _this119.alertService.error(data['message']);
 
-              _this120.loading = false;
+              _this119.loading = false;
             }
           }, function (error) {
             var errorMsg2show = "";
@@ -28533,9 +28613,9 @@
               }
             } catch (ex) {}
 
-            _this120.alertService.error(errorMsg2show);
+            _this119.alertService.error(errorMsg2show);
 
-            _this120.loading = false;
+            _this119.loading = false;
           });
           this.handleConditionalValidation();
         }
@@ -28543,115 +28623,115 @@
         _createClass2(ProfileComponent, [{
           key: "handleConditionalValidation",
           value: function handleConditionalValidation() {
-            var _this121 = this;
+            var _this120 = this;
 
             this.profileForm.get('myPassportMedia').valueChanges.subscribe(function (userCategory) {
               if (userCategory) {
-                _this121.profileForm.get('myPassportMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this120.profileForm.get('myPassportMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this121.profileForm.get('myPassportNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this120.profileForm.get('myPassportNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this121.profileForm.get('myDLMedia').setValidators(null);
+                _this120.profileForm.get('myDLMedia').setValidators(null);
 
-                _this121.profileForm.get('myDLNumber').setValidators(null);
+                _this120.profileForm.get('myDLNumber').setValidators(null);
               } else {
-                _this121.profileForm.get('myPassportMedia').setValidators(null);
+                _this120.profileForm.get('myPassportMedia').setValidators(null);
 
-                _this121.profileForm.get('myPassportNumber').setValidators(null);
+                _this120.profileForm.get('myPassportNumber').setValidators(null);
 
-                _this121.profileForm.get('myDLMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this120.profileForm.get('myDLMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this121.profileForm.get('myDLNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this120.profileForm.get('myDLNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
               }
 
-              _this121.profileForm.get('myPassportMedia').updateValueAndValidity();
+              _this120.profileForm.get('myPassportMedia').updateValueAndValidity();
 
-              _this121.profileForm.get('myPassportNumber').updateValueAndValidity();
+              _this120.profileForm.get('myPassportNumber').updateValueAndValidity();
 
-              _this121.profileForm.get('myDLMedia').updateValueAndValidity();
+              _this120.profileForm.get('myDLMedia').updateValueAndValidity();
 
-              _this121.profileForm.get('myDLNumber').updateValueAndValidity();
+              _this120.profileForm.get('myDLNumber').updateValueAndValidity();
             });
             this.profileForm.get('myPassportNumber').valueChanges.subscribe(function (userCategory) {
               if (userCategory) {
-                _this121.profileForm.get('myPassportMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this120.profileForm.get('myPassportMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this121.profileForm.get('myPassportNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this120.profileForm.get('myPassportNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this121.profileForm.get('myDLMedia').setValidators(null);
+                _this120.profileForm.get('myDLMedia').setValidators(null);
 
-                _this121.profileForm.get('myDLNumber').setValidators(null);
+                _this120.profileForm.get('myDLNumber').setValidators(null);
               } else {
-                _this121.profileForm.get('myPassportMedia').setValidators(null);
+                _this120.profileForm.get('myPassportMedia').setValidators(null);
 
-                _this121.profileForm.get('myPassportNumber').setValidators(null);
+                _this120.profileForm.get('myPassportNumber').setValidators(null);
 
-                _this121.profileForm.get('myDLMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this120.profileForm.get('myDLMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this121.profileForm.get('myDLNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this120.profileForm.get('myDLNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
               }
 
-              _this121.profileForm.get('myPassportMedia').updateValueAndValidity();
+              _this120.profileForm.get('myPassportMedia').updateValueAndValidity();
 
-              _this121.profileForm.get('myPassportNumber').updateValueAndValidity();
+              _this120.profileForm.get('myPassportNumber').updateValueAndValidity();
 
-              _this121.profileForm.get('myDLMedia').updateValueAndValidity();
+              _this120.profileForm.get('myDLMedia').updateValueAndValidity();
 
-              _this121.profileForm.get('myDLNumber').updateValueAndValidity();
+              _this120.profileForm.get('myDLNumber').updateValueAndValidity();
             });
             this.profileForm.get('myDLMedia').valueChanges.subscribe(function (userCategory) {
               if (userCategory) {
-                _this121.profileForm.get('myPassportMedia').setValidators(null);
+                _this120.profileForm.get('myPassportMedia').setValidators(null);
 
-                _this121.profileForm.get('myPassportNumber').setValidators(null);
+                _this120.profileForm.get('myPassportNumber').setValidators(null);
 
-                _this121.profileForm.get('myDLMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this120.profileForm.get('myDLMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this121.profileForm.get('myDLNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this120.profileForm.get('myDLNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
               } else {
-                _this121.profileForm.get('myPassportMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this120.profileForm.get('myPassportMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this121.profileForm.get('myPassportNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this120.profileForm.get('myPassportNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this121.profileForm.get('myDLMedia').setValidators(null);
+                _this120.profileForm.get('myDLMedia').setValidators(null);
 
-                _this121.profileForm.get('myDLNumber').setValidators(null);
+                _this120.profileForm.get('myDLNumber').setValidators(null);
               }
 
-              _this121.profileForm.get('myPassportMedia').updateValueAndValidity();
+              _this120.profileForm.get('myPassportMedia').updateValueAndValidity();
 
-              _this121.profileForm.get('myPassportNumber').updateValueAndValidity();
+              _this120.profileForm.get('myPassportNumber').updateValueAndValidity();
 
-              _this121.profileForm.get('myDLMedia').updateValueAndValidity();
+              _this120.profileForm.get('myDLMedia').updateValueAndValidity();
 
-              _this121.profileForm.get('myDLNumber').updateValueAndValidity();
+              _this120.profileForm.get('myDLNumber').updateValueAndValidity();
             });
             this.profileForm.get('myDLNumber').valueChanges.subscribe(function (userCategory) {
               if (userCategory) {
-                _this121.profileForm.get('myPassportMedia').setValidators(null);
+                _this120.profileForm.get('myPassportMedia').setValidators(null);
 
-                _this121.profileForm.get('myPassportNumber').setValidators(null);
+                _this120.profileForm.get('myPassportNumber').setValidators(null);
 
-                _this121.profileForm.get('myDLMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this120.profileForm.get('myDLMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this121.profileForm.get('myDLNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this120.profileForm.get('myDLNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
               } else {
-                _this121.profileForm.get('myPassportMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this120.profileForm.get('myPassportMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this121.profileForm.get('myPassportNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this120.profileForm.get('myPassportNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this121.profileForm.get('myDLMedia').setValidators(null);
+                _this120.profileForm.get('myDLMedia').setValidators(null);
 
-                _this121.profileForm.get('myDLNumber').setValidators(null);
+                _this120.profileForm.get('myDLNumber').setValidators(null);
               }
 
-              _this121.profileForm.get('myPassportMedia').updateValueAndValidity();
+              _this120.profileForm.get('myPassportMedia').updateValueAndValidity();
 
-              _this121.profileForm.get('myPassportNumber').updateValueAndValidity();
+              _this120.profileForm.get('myPassportNumber').updateValueAndValidity();
 
-              _this121.profileForm.get('myDLMedia').updateValueAndValidity();
+              _this120.profileForm.get('myDLMedia').updateValueAndValidity();
 
-              _this121.profileForm.get('myDLNumber').updateValueAndValidity();
+              _this120.profileForm.get('myDLNumber').updateValueAndValidity();
             });
           }
         }, {
@@ -28826,76 +28906,76 @@
         }, {
           key: "clickOnGoToNext",
           value: function clickOnGoToNext(_step) {
-            var _this122 = this;
+            var _this121 = this;
 
             var doNotTriggerSelfT = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
             setTimeout(function () {
-              _this122.submitted = true;
+              _this121.submitted = true;
 
               switch (_step) {
                 case 1:
                   if (!doNotTriggerSelfT) {
-                    _this122.element_btn_click_profile_basic_details.click();
+                    _this121.element_btn_click_profile_basic_details.click();
                   }
 
-                  _this122.lastStepDataSaved = _step - 1;
+                  _this121.lastStepDataSaved = _step - 1;
                   break;
 
                 case 2:
-                  if (_this122.profileForm.controls.firstName.invalid || _this122.profileForm.controls.middleName.invalid || _this122.profileForm.controls.lastName.invalid || _this122.profileForm.controls.mobileNo.invalid) {
-                    _this122.alertService.error("Please Provide all data");
+                  if (_this121.profileForm.controls.firstName.invalid || _this121.profileForm.controls.middleName.invalid || _this121.profileForm.controls.lastName.invalid || _this121.profileForm.controls.mobileNo.invalid) {
+                    _this121.alertService.error("Please Provide all data");
 
-                    _this122.clickOnGoToNext(_step - 1);
-
-                    return;
-                  }
-
-                  if (_this122.profileForm.controls.emailAddress.invalid || _this122.profileForm.controls.address.invalid || _this122.profileForm.controls.birthDateCustomised.invalid || _this122.profileForm.controls.gender.invalid) {
-                    _this122.alertService.error("Please Provide all data");
-
-                    _this122.clickOnGoToNext(_step - 1);
+                    _this121.clickOnGoToNext(_step - 1);
 
                     return;
                   }
 
-                  if (_this122.profileForm.controls.cityCode.invalid || _this122.profileForm.controls.country.invalid || _this122.profileForm.controls.myProfileDetails.invalid) {
-                    _this122.alertService.error("Please Provide all data");
+                  if (_this121.profileForm.controls.emailAddress.invalid || _this121.profileForm.controls.address.invalid || _this121.profileForm.controls.birthDateCustomised.invalid || _this121.profileForm.controls.gender.invalid) {
+                    _this121.alertService.error("Please Provide all data");
 
-                    _this122.clickOnGoToNext(_step - 1);
+                    _this121.clickOnGoToNext(_step - 1);
+
+                    return;
+                  }
+
+                  if (_this121.profileForm.controls.cityCode.invalid || _this121.profileForm.controls.country.invalid || _this121.profileForm.controls.myProfileDetails.invalid) {
+                    _this121.alertService.error("Please Provide all data");
+
+                    _this121.clickOnGoToNext(_step - 1);
 
                     return;
                   }
 
                   if (!doNotTriggerSelfT) {
-                    _this122.element_btn_click_profile_skills_verification.click();
+                    _this121.element_btn_click_profile_skills_verification.click();
                   }
 
-                  if (_this122.lastStepDataSaved != _step - 1) {
-                    _this122.lastStepDataSaved = _step - 1;
+                  if (_this121.lastStepDataSaved != _step - 1) {
+                    _this121.lastStepDataSaved = _step - 1;
 
-                    _this122.onProfileUpdateSubmit(true);
+                    _this121.onProfileUpdateSubmit(true);
                   }
 
                   break;
 
                 case 3:
                   if (!doNotTriggerSelfT) {
-                    if (_this122._role == src_app_models__WEBPACK_IMPORTED_MODULE_5__["Role"].Borrower) {
-                      _this122.element_btn_click_profile_banking.click();
+                    if (_this121._role == src_app_models__WEBPACK_IMPORTED_MODULE_5__["Role"].Borrower) {
+                      _this121.element_btn_click_profile_banking.click();
                     } else {
-                      _this122.element_btn_click_profile_portfolio.click();
+                      _this121.element_btn_click_profile_portfolio.click();
                     }
                   }
 
-                  _this122.lastStepDataSaved = _step - 1;
+                  _this121.lastStepDataSaved = _step - 1;
                   break;
 
                 case 4:
                   if (!doNotTriggerSelfT) {
-                    _this122.element_btn_click_profile_portfolio.click();
+                    _this121.element_btn_click_profile_portfolio.click();
                   }
 
-                  _this122.lastStepDataSaved = _step - 1;
+                  _this121.lastStepDataSaved = _step - 1;
                   break;
               }
             }, 50);
@@ -28926,7 +29006,7 @@
         }, {
           key: "onProfileUpdateSubmit",
           value: function onProfileUpdateSubmit() {
-            var _this123 = this;
+            var _this122 = this;
 
             var byPassValidation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
@@ -28943,8 +29023,10 @@
               this.removeExternalAppLinks(this.appName);
               this.addExternalAppLinks(true, null, this.appName, this.profileForm.get('externalAppLinkUrl').value);
             } else {
-              this.alertService.error("Please Provide app links");
-              return;
+              if (!byPassValidation) {
+                this.alertService.error("Please Provide facebook link");
+                return;
+              }
             }
 
             if (!byPassValidation) {
@@ -28983,25 +29065,24 @@
 
                 localStorage.setItem('currentUser', JSON.stringify(data['data']));
 
-                _this123.authenticationService.sendCurrentUserObj(data['data']);
+                _this122.authenticationService.sendCurrentUserObj(data['data']);
 
                 if (byPassValidation) {
-                  _this123.alertService.success('Basic details of your profile is updated successfully', true);
+                  _this122.alertService.success('Basic details of your profile is updated successfully', true);
                 } else {
                   if (!isVerified) {
                     //this.alertService.success('Dear ' + firstName + ', Thank you for uploading your documents. You have to wait for Admin to approve it all manually before your account is active. Remember to check your email for more info, or try logging in later. If there are still problems, contact support through our live chat.', true);
-                    _this123.alertService.success('Thank you for using our platform. It can take up to 48 hours for your documents to be approved, as we go through all the documents manually.', true);
+                    _this122.alertService.success('Thank you for using our platform. It can take up to 48 hours for your documents to be approved, as we go through all the documents manually.', true);
                   } else {
-                    _this123.alertService.success('Your Profile is Updated successfully', true);
+                    _this122.alertService.success('Your Profile is Updated successfully', true); //  this.appRouterService.appRouter(this.authenticationService.currentUserValue);
 
-                    _this123.appRouterService.appRouter(_this123.authenticationService.currentUserValue);
                   }
                 }
               } else {
                 //alert(JSON.stringify(data['message']));
-                _this123.alertService.error(data['message']);
+                _this122.alertService.error(data['message']);
 
-                _this123.loading = false;
+                _this122.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -29016,9 +29097,9 @@
                 }
               } catch (ex) {}
 
-              _this123.alertService.error(errorMsg2show);
+              _this122.alertService.error(errorMsg2show);
 
-              _this123.loading = false;
+              _this122.loading = false;
             });
           }
         }, {
@@ -29096,7 +29177,7 @@
         }, {
           key: "preview",
           value: function preview() {
-            var _this124 = this;
+            var _this123 = this;
 
             // Show preview 
             var mimeType = this.fileData.type;
@@ -29109,13 +29190,13 @@
             reader.readAsDataURL(this.fileData);
 
             reader.onload = function (_event) {
-              _this124.previewUrl = reader.result;
+              _this123.previewUrl = reader.result;
             };
           }
         }, {
           key: "onUploadAcademicDocs",
           value: function onUploadAcademicDocs() {
-            var _this125 = this;
+            var _this124 = this;
 
             var checkArray = this.profileForm.get('academicDocuments');
 
@@ -29151,14 +29232,14 @@
               observe: 'events'
             }).subscribe(function (events) {
               if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].UploadProgress) {
-                _this125.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
+                _this124.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
               } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].Response) {
-                _this125.fileUploadProgress = ''; //console.log(events.body);
+                _this124.fileUploadProgress = ''; //console.log(events.body);
                 //alert('SUCCESS !!');
 
-                _this125.fileData = null;
+                _this124.fileData = null;
 
-                _this125.alertService.success('Uploaded Successfully !!', true);
+                _this124.alertService.success('Uploaded successfully', true);
 
                 var _uploadedUrl = events.body["data"].path;
 
@@ -29166,10 +29247,10 @@
                   _uploadedUrl = _uploadedUrl.substr(1);
                 }
 
-                _this125.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
-                _temp_currentFile.url = _this125.uploadedFilePath;
+                _this124.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                _temp_currentFile.url = _this124.uploadedFilePath;
 
-                _this125.onacademicDocumentsUpdate(true, null, _temp_currentFile);
+                _this124.onacademicDocumentsUpdate(true, null, _temp_currentFile);
               }
             });
           }
@@ -29219,7 +29300,7 @@
         }, {
           key: "onUploadMyProfileMedia",
           value: function onUploadMyProfileMedia() {
-            var _this126 = this;
+            var _this125 = this;
 
             var checkArray = this.profileForm.get('myProfileMedia');
 
@@ -29229,18 +29310,18 @@
             }
 
             var _loop2 = function _loop2(_index) {
-              var currentFile = _this126.myProfileFiles[_index];
+              var currentFile = _this125.myProfileFiles[_index];
 
               if (!currentFile) {
-                _this126.alertService.error("Select file first.");
+                _this125.alertService.error("Select file first.");
 
                 return "continue";
               }
 
               var formData = new FormData();
               formData.append('files', currentFile);
-              formData.append('documentId', _this126.authenticationService.currentUserValue._id);
-              _this126.fileUploadProgress = '0%';
+              formData.append('documentId', _this125.authenticationService.currentUserValue._id);
+              _this125.fileUploadProgress = '0%';
               var _temp_currentFile = {
                 name: currentFile.name,
                 type: currentFile.type,
@@ -29248,19 +29329,19 @@
                 url: null
               };
 
-              _this126.http.post(uploadAPI, formData, {
+              _this125.http.post(uploadAPI, formData, {
                 reportProgress: true,
                 observe: 'events'
               }).subscribe(function (events) {
                 if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].UploadProgress) {
-                  _this126.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
+                  _this125.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
                 } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].Response) {
-                  _this126.fileUploadProgress = ''; //console.log(events.body);
+                  _this125.fileUploadProgress = ''; //console.log(events.body);
                   //alert('SUCCESS !!');
 
-                  lodash__WEBPACK_IMPORTED_MODULE_12__["pullAt"](_this126.myProfileFiles, _index);
+                  lodash__WEBPACK_IMPORTED_MODULE_12__["pullAt"](_this125.myProfileFiles, _index);
 
-                  _this126.alertService.success('Uploaded Successfully !!', true);
+                  _this125.alertService.success('Uploaded successfully', true);
 
                   var _uploadedUrl = events.body["data"].path;
 
@@ -29268,10 +29349,10 @@
                     _uploadedUrl = _uploadedUrl.substr(1);
                   }
 
-                  _this126.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
-                  _temp_currentFile.url = _this126.uploadedFilePath;
+                  _this125.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                  _temp_currentFile.url = _this125.uploadedFilePath;
 
-                  _this126.onMyProfileMediaUpdate(true, null, _temp_currentFile);
+                  _this125.onMyProfileMediaUpdate(true, null, _temp_currentFile);
                 }
               });
             };
@@ -29325,7 +29406,7 @@
         }, {
           key: "previewForProfile",
           value: function previewForProfile() {
-            var _this127 = this;
+            var _this126 = this;
 
             // Show preview 
             var mimeType = this.fileData4Profile.type;
@@ -29338,15 +29419,15 @@
             reader.readAsDataURL(this.fileData4Profile);
 
             reader.onload = function (_event) {
-              _this127.profileForm.get('selfProfileUrl').setValue(reader.result);
+              _this126.profileForm.get('selfProfileUrl').setValue(reader.result);
 
-              _this127.selfProfileUrlPendingForUpload = true;
+              _this126.selfProfileUrlPendingForUpload = true;
             };
           }
         }, {
           key: "onUploadForProfile",
           value: function onUploadForProfile() {
-            var _this128 = this;
+            var _this127 = this;
 
             if (!this.fileData4Profile) {
               this.alertService.error("Select file first.");
@@ -29369,14 +29450,14 @@
               observe: 'events'
             }).subscribe(function (events) {
               if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].UploadProgress) {
-                _this128.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
+                _this127.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
               } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].Response) {
-                _this128.fileUploadProgress = ''; //console.log(events.body);
+                _this127.fileUploadProgress = ''; //console.log(events.body);
                 //alert('SUCCESS !!');
 
-                _this128.fileData4Profile = null;
+                _this127.fileData4Profile = null;
 
-                _this128.alertService.success('Uploaded Successfully !!', true);
+                _this127.alertService.success('Uploaded successfully', true);
 
                 var _uploadedUrl = events.body["data"].path;
 
@@ -29384,11 +29465,11 @@
                   _uploadedUrl = _uploadedUrl.substr(1);
                 }
 
-                _this128.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                _this127.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
 
-                _this128.profileForm.get('selfProfileUrl').setValue(_this128.uploadedFilePath);
+                _this127.profileForm.get('selfProfileUrl').setValue(_this127.uploadedFilePath);
 
-                _this128.selfProfileUrlPendingForUpload = false;
+                _this127.selfProfileUrlPendingForUpload = false;
               }
             });
           }
@@ -29413,7 +29494,7 @@
             var regex = new RegExp(expression);
 
             if (!regex.test(appLink)) {
-              this.alertService.error("App Link is not valid");
+              this.alertService.error("FaceBook Link is not valid");
               return;
             }
 
@@ -29426,7 +29507,7 @@
             });
 
             if (_extenalAppExistsT) {
-              this.alertService.error("External App already exist, can not add duplicate entry. Please remove existing or update current");
+              this.alertService.error("FaceBook App link already exist, can not add duplicate entry. Please remove existing or update current");
               return;
             }
 
@@ -29506,7 +29587,7 @@
         }, {
           key: "onUploadAssetDocs",
           value: function onUploadAssetDocs(_keyName) {
-            var _this129 = this;
+            var _this128 = this;
 
             if (!_keyName) {
               return;
@@ -29548,14 +29629,14 @@
               observe: 'events'
             }).subscribe(function (events) {
               if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].UploadProgress) {
-                _this129.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
+                _this128.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
               } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].Response) {
-                _this129.fileUploadProgress = ''; //console.log(events.body);
+                _this128.fileUploadProgress = ''; //console.log(events.body);
                 //alert('SUCCESS !!');
 
-                _this129.fileData = null;
+                _this128.fileData = null;
 
-                _this129.alertService.success('Uploaded Successfully !!', true);
+                _this128.alertService.success('Uploaded successfully', true);
 
                 var _uploadedUrl = events.body["data"].path;
 
@@ -29563,10 +29644,10 @@
                   _uploadedUrl = _uploadedUrl.substr(1);
                 }
 
-                _this129.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
-                _temp_currentFile.url = _this129.uploadedFilePath;
+                _this128.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                _temp_currentFile.url = _this128.uploadedFilePath;
 
-                _this129.onAssetDocumentsUpdate(true, null, _temp_currentFile, _keyName);
+                _this128.onAssetDocumentsUpdate(true, null, _temp_currentFile, _keyName);
               }
             });
           }
@@ -29607,7 +29688,15 @@
         }, {
           key: "modalMediaUploadWithCropFeature",
           value: function modalMediaUploadWithCropFeature(documentId, attributeKey, subFolderName) {
-            var _this130 = this;
+            var _this129 = this;
+
+            var isAdminUserT = false;
+
+            switch (this.profileForm.get('role').value) {
+              case src_app_models__WEBPACK_IMPORTED_MODULE_5__["Role"].Admin:
+                isAdminUserT = true;
+                break;
+            }
 
             switch (attributeKey) {
               case 'selfProfileUrl':
@@ -29624,7 +29713,7 @@
                 var checkArray = this.profileForm.get(attributeKey);
 
                 if (checkArray.length >= 1) {
-                  this.alertService.error("Upload MAX limit reached. Please remove existing.");
+                  this.alertService.error("Your can upload document only once.");
                   return;
                 }
 
@@ -29641,7 +29730,8 @@
               data: {
                 documentId: documentId,
                 attributeKey: attributeKey,
-                subFolderName: subFolderName
+                subFolderName: subFolderName,
+                isAdminUserT: isAdminUserT
               }
             });
             dialogRef.afterClosed().subscribe(function (result) {
@@ -29650,7 +29740,9 @@
                   switch (result.data.attributeKey) {
                     case 'selfProfileUrl':
                       if (result.data.uploadedFilePath) {
-                        _this130.profileForm.get('selfProfileUrl').setValue(result.data.uploadedFilePath);
+                        _this129.profileForm.get('selfProfileUrl').setValue(result.data.uploadedFilePath);
+
+                        _this129.onProfileUpdateSubmit(true);
                       }
 
                       break;
@@ -29663,10 +29755,12 @@
                     case 'myHICardMediaSelfVerify':
                     case 'myRKIMedia':
                     case 'myRKIMediaSelfVerify':
-                      _this130.alertService.success("It can take up to 48 hours for your documents to be approved, as we go through all the documents manually.");
-
                       if (result.data.uploadedFilePath) {
-                        _this130.onAssetDocumentsUpdate(true, null, result.data.uploadedFileObj, result.data.attributeKey);
+                        _this129.alertService.success("It can take up to 48 hours for your documents to be approved, as we go through all the documents manually.");
+
+                        _this129.onAssetDocumentsUpdate(true, null, result.data.uploadedFileObj, result.data.attributeKey);
+
+                        _this129.onProfileUpdateSubmit(true);
                       }
 
                       break;

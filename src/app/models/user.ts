@@ -42,7 +42,8 @@ export class User {
     myProfileMedia: [];
     myProfileDetails: string;
     userType: string;
-    
+    userTypeTitle:string;
+
     myPassportMedia: [];
     myPassportMediaVerified: Boolean;
     myPassportNumber: string;

@@ -58,7 +58,7 @@
 
             <div class="clash-card__level clash-card__level--goblin mt-3">
                 <!--{{(LoanMarket.createdByUserObj.userType || "").replace("_", " ")}}-->
-                {{authenticationService.returnUserTypeForUserFromSuppliedUserLevel(LoanMarket.createdByUserObj.userType)}}
+                {{( LoanMarket.createdByUserObj.userTypeTitle || authenticationService.returnUserTypeForUserFromSuppliedUserLevel(LoanMarket.createdByUserObj.userType))}}
             </div>
             <div class="clash-card__unit-name text-capitalize">{{(LoanMarket.loanType || "").replace("_", " ")}}</div>
             <div class="clash-card__unit-description">

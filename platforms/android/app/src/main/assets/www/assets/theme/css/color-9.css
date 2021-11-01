@@ -46,11 +46,11 @@ a {
     font-weight: 500;
     line-height: normal;
 }
-h2,
+/* h2,
 h3,
 h4 {
     color: #844adb;
-}
+} */
 h5,
 h6,
 p {
@@ -1046,12 +1046,7 @@ section {
 .pricing .price-container .price-feature-container .set-abs img.pricing-img {
     width: 100% !important;
 }
-.pricing .price-container.hover-overlay:hover {
-    background: url("../images/gym/price.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
+
 .pricing .price-container.hover-overlay:hover .font-primary {
     color: #fff;
 }
@@ -1670,9 +1665,7 @@ section {
 .subscribe .form-group .flex {
     position: relative;
 }
-.subscribe.app1 {
-    background: url("../images/app_landing1/subscribe/subscribe.png");
-}
+
 .subscribe.app1 .button-primary {
     right: 4%;
 }
@@ -2032,10 +2025,7 @@ body.menu-on:before {
     background-position: bottom;
     height: 100vh;
 }
-.header .bg.app1-header {
-    background-image: url("../images/app_landing1/header-1-bg.png");
-    overflow: hidden;
-}
+
 .header .bg.app2-header {
     background-image: -webkit-gradient(linear, left top, left bottom, from(#5e57ea), to(#9647db));
     background-image: linear-gradient(#5e57ea, #9647db);
@@ -2051,19 +2041,7 @@ body.menu-on:before {
     position: absolute;
     bottom: 0;
 }
-.header .bg.app2-header .transparent-img {
-    background-image: url("../images/app_landing2/h2-bg.png");
-}
-.header .bg.header3 {
-    background-image: url("../images/event/event_slider.jpg");
-    background-attachment: fixed;
-    background-position: 0 0;
-    background-repeat: repeat;
-    -webkit-animation: slide 50s linear infinite;
-    animation: slide 50s linear infinite;
-    will-change: background-position;
-    background-size: auto;
-}
+
 @-webkit-keyframes slide {
     from {
         background-position: 0 0;
@@ -2081,13 +2059,7 @@ body.menu-on:before {
     width: 100%;
     position: absolute;
 }
-.header .bg.header4 {
-    background-image: url("../images/hedaer-images/h3-bg.jpg");
-}
-.header .bg.gym-header {
-    background-image: url("../images/gym/header.jpg");
-    background-position: top;
-}
+
 .header .bg.gym-header h1 {
     text-align: center;
     text-transform: uppercase;
@@ -2099,25 +2071,15 @@ body.menu-on:before {
 .header .bg.gym-header .header-sub-text p {
     padding: 0 95px;
 }
-.header .bg.music-bg {
-    background-image: url("../images/music/slider.jpg");
-    background-attachment: fixed;
-}
-.header .bg.resume {
-    background-image: url("../images/resume/h7-bg-text.png");
-    background-size: contain;
-}
-.header .bg.saas1-header {
-    background-image: url("../images/saas1/slider-banner.jpg");
-}
+
+
+
 .header .bg.saas2-bg {
-    background-image: url("../images/xqw/slider.png");
+    background-image: url("~src/assets/theme/images/xqw/slider.png");
 }
-.header .bg.yogas {
-    background-image: url("../images/yoga-img/Layer-8.png");
-}
+
 .header .bg.agency {
-    background-image: url("../images/agency/slider/slider.png");
+    background-image: url("~src/assets/theme/images/agency/slider/slider.png");
     background-position: right;
 }
 .header .rotate {
@@ -2163,40 +2125,8 @@ body.menu-on:before {
     -webkit-animation: ripple3 3s linear infinite;
     animation: ripple3 3s linear infinite;
 }
-.header .wave {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    -webkit-animation: move-img 10s linear infinite;
-    animation: move-img 10s linear infinite;
-    background-image: url("../images/app_landing2/wave.png");
-    height: 40px;
-    background-size: contain;
-}
-.header .wave:before {
-    content: "";
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    -webkit-animation: move-img-reverse 10s linear infinite;
-    animation: move-img-reverse 10s linear infinite;
-    background-image: url("../images/app_landing2/wave.png");
-    height: 40px;
-    background-size: contain;
-    opacity: 0.4;
-}
-.header .wave:after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    -webkit-animation: move-img 20s linear infinite;
-    animation: move-img 20s linear infinite;
-    background-image: url("../images/app_landing2/wave.png");
-    height: 45px;
-    background-size: contain;
-    opacity: 0.4;
-}
+
+
 .header .img-mobile {
     bottom: -17%;
     left: 50%;
@@ -2210,8 +2140,7 @@ body.menu-on:before {
     width: 326px;
     -webkit-animation: move-img 10s linear infinite;
     animation: move-img 10s linear infinite;
-    background-image: url("../images/app_landing2/wave-orange.png");
-    height: 34px;
+
     background-size: contain;
     left: 50%;
     -webkit-transform: translate(-50%, 0);
@@ -2220,30 +2149,8 @@ body.menu-on:before {
     animation-delay: 0.55s;
     z-index: 3;
 }
-.header .wave-orange:before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    width: 326px;
-    -webkit-animation: move-img-reverse 10s linear infinite;
-    animation: move-img-reverse 10s linear infinite;
-    background-image: url("../images/app_landing2/wave-orange.png");
-    height: 34px;
-    opacity: 0.4;
-    background-size: contain;
-}
-.header .wave-orange:after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    opacity: 0.4;
-    width: 326px;
-    -webkit-animation: move-img 40s linear infinite;
-    animation: move-img 40s linear infinite;
-    background-image: url("../images/app_landing2/wave-orange.png");
-    height: 34px;
-    background-size: contain;
-}
+
+
 .header .event-content .timer {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -2773,12 +2680,9 @@ footer .footer-lists.contacts li i {
 footer i.fa {
     font-size: 16px;
 }
-footer.footer2.bg {
-    background: url("../images/app_landing2/l-2-footer.png") no-repeat top;
-    background-size: cover;
-}
+
 footer.footer2.saas2 {
-    background: url("../images/xqw/footer.png") no-repeat top;
+    background: url("~src/assets/theme/images/xqw/footer.png") no-repeat top;
     background-size: cover;
 }
 footer.footer2.saas2 .footer-padding {
@@ -2813,9 +2717,7 @@ footer.dark {
     background-image: -webkit-gradient(linear, left top, left bottom, from(#5e57ea), to(#9647db)) !important;
     background-image: linear-gradient(#5e57ea, #9647db) !important;
 }
-footer.dark.app2 {
-    background: url("../images/app_landing2/l-2-footer-dark.png") no-repeat top !important;
-}
+
 footer.dark h1,
 footer.dark h2,
 footer.dark h3,
@@ -2859,12 +2761,7 @@ footer.light.event form {
 footer.bg-light-inner {
     background: #f8f8f8;
 }
-.videos .video {
-    background-image: url("../images/app_landing1/video-pic.jpg");
-    z-index: 1;
-    padding: 125px 0;
-    border-radius: 10px;
-}
+
 .videos .frame {
     -webkit-animation: movebounce 10s linear infinite;
     animation: movebounce 10s linear infinite;
@@ -2903,13 +2800,7 @@ footer.bg-light-inner {
 .videos .video-description p:last-child {
     margin-bottom: 0;
 }
-.videos .bg {
-    background: url("../images/video/bg-videol-2.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    float: right;
-}
+
 .videos .bg .button2 {
     padding: 188px 265px;
 }
@@ -2946,12 +2837,7 @@ footer.bg-light-inner {
 .videos .review-video-box .texture .unset-width img {
     width: auto;
 }
-.videos.saas1 .video {
-    background-image: url("../images/saas1/video-pic.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
+
 .booking .btn-default {
     font-weight: 500;
     padding: 18px 45px;
@@ -3310,44 +3196,8 @@ footer.bg-light-inner {
 .music .music-container .play-bg:after {
     width: 260%;
 }
-.music.bg-album {
-    background: url("../images/music/album.jpg");
-    background-attachment: fixed;
-    background-position: center top;
-}
-.music.bg-artist {
-    background: url("../images/music/artist/bg.jpg");
-    background-position: top;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-.music.bg-gallery {
-    background: url("../images/music/gallery/bg.jpg");
-    background-position: top;
-    background-size: cover;
-    background-repeat: no-repeat;
-    overflow: hidden;
-    background-attachment: fixed;
-}
-.music.bg-video {
-    background: url("../images/music/video-bg.jpg");
-    background-position: top;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-.music.bg-footer {
-    background: url("../images/music/footer-bg.jpg");
-    background-position: top;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
-.music.sponsor {
-    background: url("../images/music/sponser/bg.jpg");
-    background-position: top;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
+
+
 .music.sponsor .row > div:last-child(1) .sponsor-img {
     margin-bottom: 0;
 }
@@ -3754,12 +3604,7 @@ footer.bg-light-inner {
     background-color: white;
     color: #844adb;
 }
-.music .sponsor.bg-music {
-    background: url("../images/music/sponser/bg.jpg");
-    background-position: top;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
+
 .music .sponsor .set-margin {
     margin-bottom: -50px;
 }
@@ -4006,49 +3851,7 @@ footer.bg-light-inner {
 .wedding .rightfadediv {
     width: 160px;
 }
-.wedding.bg {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: bottom;
-}
-.wedding.bg.slider-bg {
-    background-image: url("../images/wedding-img/slider/slider-bg.jpg");
-    background-attachment: fixed;
-}
-.wedding.bg.wedding-bg {
-    background-image: url("../images/wedding-img/bg2.jpg");
-}
-.wedding.bg.jenny-bg {
-    background-image: url("../images/wedding-img/backgrounds/jenny-bg.png");
-}
-.wedding.bg.countdown-bg {
-    background-image: url("../images/wedding-img/backgrounds/countdown-bg.png");
-}
-.wedding.bg.countdown-bg .counter-container .gradient-text {
-    margin-top: 20px;
-    line-height: 1.1;
-}
-.wedding.bg.when-where-bg {
-    background-image: url("../images/wedding-img/backgrounds/when-where.png");
-}
-.wedding.bg.wishes-bg {
-    background-image: url("../images/wedding-img/backgrounds/wishes.png");
-}
-.wedding.bg.attend-bg {
-    background-image: url("../images/wedding-img/backgrounds/attend.png");
-}
-.wedding .owl-theme .owl-dots {
-    margin-top: 45px !important;
-}
-.wedding .gradient-text {
-    background: -webkit-linear-gradient(#9647db, #5e57ea);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-weight: 600;
-}
-.wedding .wedding-banner .frem {
-    position: relative;
-}
+
 .wedding .wedding-banner .text-container .couple-text .banner-text {
     font-family: "Alex Brush", cursive;
     font-size: calc(20px + (80 - 20) * ((100vw - 300px) / (1920 - 300)));
@@ -4186,9 +3989,7 @@ footer.bg-light-inner {
 .yoga.brand-slider {
     padding: 50px 0;
 }
-.yoga.img-1 {
-    background: url("../images/yoga-img/schedule-bg.jpg");
-}
+
 .yoga.img-1.bg {
     background-position: center;
     background-repeat: no-repeat;
@@ -4478,57 +4279,9 @@ footer.bg-light-inner {
     background-size: cover;
     position: relative;
 }
-.agency.service-bg {
-    background: url("../images/agency/service/services-backgrondpng.png");
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-    overflow: hidden;
-    padding-bottom: 0;
-}
-.agency.video-bg {
-    background: url("../images/agency/videos/video-background.png");
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-.agency.counter-bg {
-    background: url("../images/agency/counter/counter-background.png");
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-.agency.price-bg {
-    background: url("../images/agency/price/bg.png");
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-.agency.expert-bg {
-    background: url("../images/agency/team/expert-background.png");
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-.agency.blog-bg {
-    background: url("../images/agency/blog/background.png");
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
-.agency.testimonial-bg {
-    background: url("../images/agency/testimonial/bg.png");
-    background-position: top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    position: relative;
-}
+
+
+
 .agency.testimonial-bg span {
     color: rgba(255, 255, 255, 0.7);
 }
@@ -5327,12 +5080,7 @@ footer.bg-light-inner {
 .testimonial.event .owl-nav {
     margin: 0;
 }
-.testimonial.gym {
-    background: url("../images/gym/testimonial/testimonial-bg.jpg");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-}
+
 .testimonial.music {
     background-position: center;
 }
@@ -5690,14 +5438,7 @@ footer.bg-light-inner {
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
 }
-.saas1.build-bg {
-    background-image: url("../images/saas1/banner-2.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    position: relative;
-    counter-reset: section;
-    min-height: 740px;
-}
+
 .saas1.build-bg .container {
     margin-bottom: 5%;
     margin-top: 5%;
@@ -5800,10 +5541,7 @@ footer.bg-light-inner {
 .saas1.build-bg .build-box ul li:last-child {
     margin-bottom: 0;
 }
-.saas1.howitwork {
-    background-image: url("../images/saas1/work-bg.png");
-    background-size: cover;
-}
+
 .saas1.howitwork .work-tab .nav-pills .nav-link {
     padding: 0 55px;
     position: relative;
@@ -5864,12 +5602,7 @@ footer.bg-light-inner {
 .saas1.howitwork .work-tab .nav-pills .nav-link span:before {
     left: 45px;
 }
-.saas1.pricing {
-    background-color: #071828;
-    background-image: url("../images/saas1/banner-2.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-}
+
 .saas1.pricing .container {
     margin-bottom: 0;
 }
@@ -6013,11 +5746,7 @@ footer.bg-light-inner {
     transform: scale(1.05);
     opacity: 1;
 }
-.saas1 .testimonial-bg {
-    background-image: url("../images/saas1/work-bg.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-}
+
 .saas1.testimonial .testimonial {
     padding: 20px 0 20px 0;
     margin-right: 40px;
@@ -6104,15 +5833,7 @@ footer.bg-light-inner {
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
-.saas1.testimonial .video-box {
-    background-image: url("../images/saas1/video-pic.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100%;
-    margin-right: 50px;
-    position: relative;
-    border-radius: 10px;
-}
+
 .saas1.testimonial .video-box img {
     position: absolute;
     top: 0;
@@ -6122,12 +5843,7 @@ footer.bg-light-inner {
     margin: auto;
     cursor: pointer;
 }
-.saas1.subscribe {
-    background-color: #071828;
-    background-image: url("../images/saas1/banner-2.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-}
+
 .saas1.subscribe h6 {
     margin-top: 15px;
     margin-bottom: 0;
@@ -6242,12 +5958,7 @@ footer.bg-light-inner {
     transform: rotate(0deg);
     margin-right: 15px;
 }
-.saas1.blog {
-    background-color: #071828;
-    background-image: url("../images/saas1/banner-2.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-}
+
 .saas1.blog .blog-post-slider .slick-slide {
     margin: 0 15px;
 }
@@ -6433,7 +6144,7 @@ header.ecommerce .responsive-btn i {
 .saas2.feature {
     position: relative;
     overflow: hidden;
-    background-image: url("../images/xqw/background.png");
+    background-image: url("~src/assets/theme/images/xqw/background.png");
     background-size: contain;
     background-position: right;
 }
@@ -6470,7 +6181,7 @@ header.ecommerce .responsive-btn i {
     bottom: 0;
 }
 .saas2.quick-sol {
-    background: url("../images/xqw/background/quick-sol.png");
+    background: url("~src/assets/theme/images/xqw/background/quick-sol.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -6522,7 +6233,7 @@ header.ecommerce .responsive-btn i {
     margin-top: 30px;
 }
 .saas2.laptop-slider {
-    background: url("../images/xqw/background/screenshot-bg.png");
+    background: url("~src/assets/theme/images/xqw/background/screenshot-bg.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -6588,7 +6299,7 @@ header.ecommerce .responsive-btn i {
     max-width: 790px;
 }
 .saas2.testimonial {
-    background: url("../images/xqw/background/bg-testimonial.png");
+    background: url("~src/assets/theme/images/xqw/background/bg-testimonial.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -6788,17 +6499,7 @@ header.ecommerce .responsive-btn i {
     border-radius: 100%;
     background-color: #844adb;
 }
-.event.bg-img {
-    background-image: url("../images/event/bg1.jpg");
-}
-.event.bg-img2 {
-    background-image: url("../images/event/h3-bg.jpg");
-}
-.event.bg-img3 {
-    background-image: url("../images/event/counter-bg.jpg");
-    background-size: cover;
-    background-position: center center;
-}
+
 .event.bg-about {
     position: relative;
     background-attachment: fixed;
@@ -7070,25 +6771,7 @@ header.ecommerce .responsive-btn i {
     margin-right: 12px;
     padding: 22px;
 }
-.gym.bg-schedule {
-    background-image: url("../images/gym/bg.png");
-    background-repeat: no-repeat;
-    background-position: right;
-    background-size: 1150px;
-    background-color: #000;
-}
-.gym.bg-cal-bmi {
-    background-image: url("../images/gym/calculat-bg.jpg");
-    background-repeat: no-repeat;
-    background-position: right;
-    background-size: cover;
-    background-color: #000;
-}
-.gym.bg-img3 {
-    background-image: url("../images/gym/counter/bg.jpg");
-    background-size: cover;
-    background-position: center center;
-}
+
 .gym .owl-carousel .owl-dots {
     line-height: 0.5;
 }
@@ -7540,14 +7223,14 @@ header.ecommerce .responsive-btn i {
 .breadcrumb-section:not(.breadcrumb-left),
 .breadcrumb-section:not(.breadcrumb-right),
 .breadcrumb-section:not(.breadcrumb-slider) {
-    background: url("../images/inner-page/breadcrumb.jpg");
+    background: url("~src/assets/theme/images/inner-page/breadcrumb.jpg");
     background-position: center;
     background-size: cover;
     background-blend-mode: overlay;
 }
 .breadcrumb-section.breadcrumb-left,
 .breadcrumb-section.breadcrumb-right {
-    background: url("../images/inner-page/breadcrumb-plain.jpg");
+    background: url("~src/assets/theme/images/inner-page/breadcrumb-plain.jpg");
 }
 .breadcrumb-section li {
     line-height: normal;
@@ -7559,7 +7242,7 @@ header.ecommerce .responsive-btn i {
     background: linear-gradient(200deg, #9647db, #5e57ea);
 }
 .breadcrumb-section.bg1 {
-    background: url("../images/inner-page/breadcrumb-bg.jpg");
+    background: url("~src/assets/theme/images/inner-page/breadcrumb-bg.jpg");
     background-position: center;
     background-size: cover;
     background-blend-mode: overlay;
@@ -7700,7 +7383,7 @@ header.ecommerce .responsive-btn i {
     transition: 0.9s;
 }
 .breadcrumb-section.breadcrumb-slider .img-slider .bg1 {
-    background: url("../images/inner-page/breadcrumb-bg.jpg");
+    background: url("~src/assets/theme/images/inner-page/breadcrumb-bg.jpg");
     height: 60vh;
     background-size: cover;
     background-position: center;
@@ -7709,7 +7392,7 @@ header.ecommerce .responsive-btn i {
     background-color: #00000094;
 }
 .breadcrumb-section.breadcrumb-slider .img-slider .bg2 {
-    background: url("../images/inner-page/blogs/1.jpg");
+    background: url("~src/assets/theme/images/inner-page/blogs/1.jpg");
     height: 60vh;
     background-size: cover;
     background-position: center;
@@ -7718,7 +7401,7 @@ header.ecommerce .responsive-btn i {
     background-color: #00000094;
 }
 .breadcrumb-section.breadcrumb-slider .img-slider .bg3 {
-    background: url("../images/inner-page/breadcrumb-bg.jpg");
+    background: url("~src/assets/theme/images/inner-page/breadcrumb-bg.jpg");
     height: 60vh;
     background-size: cover;
     background-position: center;
@@ -7727,7 +7410,7 @@ header.ecommerce .responsive-btn i {
     background-color: #00000094;
 }
 .breadcrumb-section.breadcrumb-slider .img-slider .bg4 {
-    background: url("../images/inner-page/blogs/1.jpg");
+    background: url("~src/assets/theme/images/inner-page/blogs/1.jpg");
     height: 60vh;
     background-size: cover;
     background-position: center;
@@ -7851,7 +7534,7 @@ header.ecommerce .responsive-btn i {
     display: flex;
 }
 .blog-sec.videos .video {
-    background: url("../images/agency/blog/21.jpg");
+ 
     background-blend-mode: overlay;
     background-color: #00000094;
     background-size: cover;
@@ -7859,7 +7542,7 @@ header.ecommerce .responsive-btn i {
     padding: 200px 0;
 }
 .blog-sec.detail2 .bg-blog-detail {
-    background: url("../images/inner-page/blogs/1.jpg");
+    background: url("~src/assets/theme/images/inner-page/blogs/1.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -8239,7 +7922,7 @@ header.ecommerce .responsive-btn i {
     pointer-events: none;
 }
 .section-404 .stars {
-    background: url("../images/404/overlay_stars.svg");
+    background: url("~src/assets/theme/images/404/overlay_stars.svg");
     background-repeat: repeat;
     background-size: contain;
     background-position: left top;
@@ -8294,7 +7977,7 @@ header.ecommerce .responsive-btn i {
     min-height: 100vh;
 }
 .coming-soon.coming-soon-2 {
-    background: url("../images/inner-page/maintain-soon/friend.jpg");
+    background: url("~src/assets/theme/images/inner-page/maintain-soon/friend.jpg");
     background-position: center;
     background-size: cover;
     min-height: 100%;
@@ -8302,7 +7985,7 @@ header.ecommerce .responsive-btn i {
     background-color: rgba(0, 0, 0, 0.6);
 }
 .coming-soon .bg-coming-soon {
-    background: url("../images/inner-page/maintain-soon/bg-come-soon.jpg");
+    background: url("~src/assets/theme/images/inner-page/maintain-soon/bg-come-soon.jpg");
     background-position: center;
     background-size: cover;
     height: 100%;
@@ -8422,7 +8105,7 @@ header.ecommerce .responsive-btn i {
     text-align: center;
 }
 .portfolio-section.videos .video {
-    background: url("../images/agency/blog/21.jpg");
+
     background-blend-mode: overlay;
     background-color: #00000094;
     background-position: center;
@@ -9484,7 +9167,7 @@ header.ecommerce .responsive-btn i {
     -ms-appearance: none;
     -o-appearance: none;
     -moz-appearance: none;
-    background: url("../images/inner-page/dropdown.png") no-repeat 95%;
+    background: url("~src/assets/theme/images/inner-page/dropdown.png") no-repeat 95%;
 }
 .checkout-page .checkout-form input[type="text"],
 .checkout-page .checkout-form input[type="email"],
@@ -10252,7 +9935,7 @@ header.ecommerce .responsive-btn i {
     -webkit-appearance: none;
     -moz-appearance: none;
     cursor: pointer;
-    background: url("../images/inner-page/dropdown.png") no-repeat 95%;
+    background: url("~src/assets/theme/images/inner-page/dropdown.png") no-repeat 95%;
 }
 .collection-product-wrapper .product-top-filter .product-filter-content .product-page-per-view select:focus,
 .collection-product-wrapper .product-top-filter .product-filter-content .product-page-filter select:focus,
@@ -10299,7 +9982,7 @@ header.ecommerce .responsive-btn i {
     position: relative;
     cursor: pointer;
     width: 22%;
-    background: url("../images/inner-page/dropdown.png") no-repeat 95%;
+    background: url("~src/assets/theme/images/inner-page/dropdown.png") no-repeat 95%;
 }
 .collection-product-wrapper .product-top-filter .popup-filter .sidebar-popup a {
     font-size: 16px;
@@ -12148,21 +11831,7 @@ header.ecommerce .responsive-btn i {
     box-shadow: 0 3px 15px 3px rgba(46, 97, 220, 0.35);
     overflow-y: scroll;
 }
-.parallex-section .img-1 {
-    background: url("../images/portfolio/portfolio-new/1.jpg");
-}
-.parallex-section .img-2 {
-    background: url("../images/portfolio/portfolio-new/4.jpg");
-}
-.parallex-section .img-3 {
-    background: url("../images/portfolio/portfolio-new/2.jpg");
-}
-.parallex-section .img-4 {
-    background: url("../images/portfolio/portfolio-new/5.jpg");
-}
-.parallex-section .img-5 {
-    background: url("../images/portfolio/portfolio-new/3.jpg");
-}
+
 .parallex-section .parallex-container {
     background-position: center;
     background-size: cover;
@@ -12201,26 +11870,7 @@ header.ecommerce .responsive-btn i {
 .center-slide {
     height: 100vh;
 }
-.multiple-carousel .img1,
-.center-slide .img1 {
-    background: url("../images/portfolio/multiple-carousel/5.jpg");
-}
-.multiple-carousel .img2,
-.center-slide .img2 {
-    background: url("../images/portfolio/multiple-carousel/4.jpg");
-}
-.multiple-carousel .img3,
-.center-slide .img3 {
-    background: url("../images/portfolio/multiple-carousel/3.jpg");
-}
-.multiple-carousel .img4,
-.center-slide .img4 {
-    background: url("../images/portfolio/multiple-carousel/2.jpg");
-}
-.multiple-carousel .img5,
-.center-slide .img5 {
-    background: url("../images/portfolio/multiple-carousel/1.jpg");
-}
+
 .multiple-carousel .imgs-carousel,
 .center-slide .imgs-carousel {
     background-repeat: no-repeat;
@@ -12295,7 +11945,7 @@ header.ecommerce .responsive-btn i {
     opacity: 1;
 }
 .maintenance-sec {
-    background: url("../images/inner-page/maintain-soon/bg-maintenance.jpg");
+    background: url("~src/assets/theme/images/inner-page/maintain-soon/bg-maintenance.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -12389,13 +12039,7 @@ header.ecommerce .responsive-btn i {
     transition: all 500ms;
     background: #ef6767;
 }
-.creative-content {
-    background: url("../images/creative/1.png");
-    background-size: cover;
-    height: 100vh;
-    background-repeat: no-repeat;
-    background-position: bottom;
-}
+
 .creative body,
 .creative h1,
 .creative h2,
@@ -12439,12 +12083,7 @@ header.ecommerce .responsive-btn i {
     border-top: 1px solid #f5f5f8;
     width: 40px;
 }
-.portfolio-metro.bg {
-    background: url("../images/portfolio/portfolio-new/font.png");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
+
 .portfolio-metro body,
 .portfolio-metro h1,
 .portfolio-metro h2,
@@ -13521,7 +13160,7 @@ footer.saas1 h5 {
 .product-full-tab .nav-material.nav-tabs .nav-item .nav-link {
     color: #212121;
     text-align: center;
-    padding: 10px;
+    padding: 10px 3px;
     text-transform: capitalize;
     border: 0;
     font-size: 14px;
