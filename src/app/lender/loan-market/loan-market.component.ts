@@ -74,6 +74,7 @@ export class LoanMarketComponent implements OnInit {
     if (loanMarket && _.keys(loanMarket.sessionAppliedByBorrowers).length > 0) {
       //#region proccess only if any one applied to current loan request
       let _list_of_pending_loans = null;
+      let _list_of_accepted_loans = null;
       let roleId2Check = null;
       let _list_of_pending_or_accepted_loans_by_me = null;
       //#region check whether anyone have applied to current loan or not
@@ -86,6 +87,22 @@ export class LoanMarketComponent implements OnInit {
             case SessionStatus.Accepted:
             case SessionStatus.AwaitingForApproval:
               return false;//return true;
+              break;
+            default:
+              return false;
+              break;
+          }
+        }
+      });
+      _list_of_accepted_loans = _.filter(loanMarket.sessionAppliedByBorrowers, function (e) {
+        if (e) {
+          switch (e.status) {
+            case SessionStatus.Pending:
+              return false;
+              break;
+            case SessionStatus.Accepted:
+            case SessionStatus.AwaitingForApproval:
+              return true;//return true;
               break;
             default:
               return false;
@@ -120,7 +137,11 @@ export class LoanMarketComponent implements OnInit {
       if (_list_of_pending_or_accepted_loans_by_me.length > 0) {
         return true;
       } else {
-        return !(_list_of_pending_loans.length > 0);//!!(_list_of_pending_or_accepted_loans.length >= loanMarket.loanMaxBorrower);
+        if (loanMarket.loanMaxBorrower > 1) {
+          return !(_list_of_accepted_loans.length < loanMarket.loanMaxBorrower);
+        } else {
+          return !(_list_of_pending_loans.length > 0);
+        }
       }
       //#endregion return boolean value for current request
       //#endregion proccess only if any one applied to current loan request

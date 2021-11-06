@@ -98,8 +98,8 @@ margin-left: 7px;
   }
   .wrapper-outlet {
     padding-top: 50px !important;
-    margin: 0 5px;
-    margin: 0 -10px;
+    /* margin: 0 5px;
+    margin: 0 -10px; */
 }
 header.ecommerce nav .top-header-right ul.shopping-cart li{
   display: block;

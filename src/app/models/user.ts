@@ -33,7 +33,7 @@ export class User {
     app_doc_type: string;
     token: string;
 
-    isVerified: Boolean;
+    isVerified: Number;
     userVerifiedOn: Number;
     appPlanId: string;
     userMemberShipReactivatedOn: Number;
@@ -45,15 +45,15 @@ export class User {
     userTypeTitle:string;
 
     myPassportMedia: [];
-    myPassportMediaVerified: Boolean;
+    myPassportMediaVerified: Number;
     myPassportNumber: string;
     myDLMedia: [];
-    myDLMediaVerified: Boolean;
+    myDLMediaVerified: Number;
     myDLNumber: string;
     myHICardMedia: [];
-    myHICardMediaVerified: Boolean;
+    myHICardMediaVerified: Number;
     myRKIMedia: [];
-    myRKIMediaVerified: Boolean;
+    myRKIMediaVerified: Number;
     isRKIRegistered: Boolean;
 
     accountName: string;
@@ -92,7 +92,7 @@ export class User {
 
     isRegisteredAllowed2EditProfile: Boolean;
     isUsersBankDetailsSubmitted: Boolean;
-    isUsersIncomeAndExpenseProofVerified: Boolean;
+    isUsersIncomeAndExpenseProofVerified: Number;
     totalIncome4currentUser:number;
     totalExpense4currentUser:number;
     totalAllowedBudget:number;

@@ -107,8 +107,40 @@ export class MonthlySubscriptionComponent implements OnInit {
   }
 
   initiateForPaymentForLender(_appPlanId, _planExpiry, _endUserId, _amount4Payment, _header4Payment, _transactiActionType, _currency, _selectedPaymentMethod, _paymentUniqId) {
+    _currency = _currency || 'USD';
     //#region handle LoanObj payments
     this.userInitiatedForPayment = true;
+    //#region paypal payment init
+    let purchaseUnits = [
+      {
+        amount: {
+          currency_code: _currency,
+          value: _amount4Payment,
+          breakdown: {
+            item_total: {
+              currency_code: _currency,
+              value: _amount4Payment
+            }
+          }
+        },
+        items: [
+          {
+            name: _transactiActionType,
+            quantity: '1',
+            category: 'DIGITAL_GOODS',
+            unit_amount: {
+              currency_code: _currency,
+              value: _amount4Payment,
+            },
+          }
+        ]
+      }
+    ];
+    this.payment.paymentWithMultipleOptions = false;
+    if (this.payment.paymentWithMultipleOptions) {
+      this.payment.initConfig(purchaseUnits, _transactiActionType, _endUserId);
+    }
+    //#endregion paypal payment init
     this.payment.getCurrentPaymentApproved().pipe(first()).subscribe(details => {
     });
     let PaymentObj = {

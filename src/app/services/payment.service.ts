@@ -30,6 +30,7 @@ export class PaymentService {
   @Input() ElapsTime: number = 5;
   @Input() MinimumTime4Extend: number = 3;
   remainingTime: number;
+  public paymentWithMultipleOptions: Boolean = false;
   public hours: number;
   public minutes: number;
   public seconds: number;
@@ -168,6 +169,9 @@ export class PaymentService {
   }
 
   public initConfig(purchaseUnits, _transactiActionType, _userId): IPayPalConfig {
+    if (!this.paymentWithMultipleOptions) {
+      return;
+    }
     this.purchaseUnits = purchaseUnits;
     this.amount = purchaseUnits[0].amount.value
     this.custom_id = purchaseUnits[0].amount.custom_id;
@@ -175,9 +179,7 @@ export class PaymentService {
     this.userId = _userId;
     this.payPalConfig = {
       currency: 'USD',
-      // clientId: 'AWQej8JvY8p0D8u8exibTzxRgoyJmpYPpfFow5JGwemPl1TwqD5I021E4dDdJIixQnsNt-FWc7qZYyCj',
-      //clientId: 'AW-FXPoxErPamrI9YqZJyhfrSZEt_Y7doZulV2hge-QKrmqcQimbx9U9XJKGT6IX__GVGLcloTx9fOhb',
-      clientId: 'AfRY8egQeUtW4fEQ6-pxINgBqRdJSBOX-LaCZtMpDA7ry-vqcZdc9BJ6qoXj8JAhA238sZKLksJMbi09',
+      clientId: 'Ad1KVnnQlzEWlucZ7WM-IoJj7LcGRu_Qmh2FS9Gll6dm-8yr4r14IwZwPRti9RLmigX11V60231gk5EC',
       createOrderOnClient: (data) => <ICreateOrderRequest>{
         intent: 'CAPTURE',
         purchase_units: purchaseUnits
@@ -190,6 +192,7 @@ export class PaymentService {
         layout: 'vertical'
       },
       onApprove: (data, actions) => {
+        this.startTimerInit();
         switch (_transactiActionType) {
           case TransactionActionType.funds_add:
             this.socketService.sendEventToSaveCurrentTransaction(_transactiActionType, data.orderID, _userId, data);
@@ -215,8 +218,12 @@ export class PaymentService {
             case TransactionActionType.session_extended:
               this.socketService.sendEventToSaveCurrentTransactionDetails(_transactiActionType, details.id, _userId, details, null);
               break;
+            default:
+              this.socketService.emitEventWithNameAndData('recd_new_transaction_details_from_payment_api', this._currentPaymentObj, details);
+              break;
           }
           this.sendCurrentPaymentApproved(details);
+          this.stopTimer();
           //console.log('onApprove - you can get full order details inside onApprove: ', details);
 
         });
@@ -227,9 +234,13 @@ export class PaymentService {
       },
       onCancel: (data, actions) => {
         ////console.log('OnCancel', data, actions);
+        this.sendCurrentPaymentApproved({ success: false, message: '' });
+        this.stopTimer();
       },
       onError: err => {
         ////console.log('OnError', err);
+        this.sendCurrentPaymentApproved({ success: false, message: '' });
+        this.stopTimer();
       },
       onClick: (data, actions) => {
         ////console.log('onClick', data, actions);
@@ -326,7 +337,7 @@ export class PaymentService {
         this.seconds = Math.floor(this.remainingTime - ((this.minutes * 60) + (this.hours * 60 * 60)));
       }
 
-      if ((this.seconds%10)===0) {//this.old_minutes != this.seconds
+      if ((this.seconds % 10) === 0) {//this.old_minutes != this.seconds
         //debugger;
         this.old_minutes = this.seconds;
         this.socketService.sendEventToCheckLastPaymentReturnedSuccessOrFailed(this._currentPaymentObj);

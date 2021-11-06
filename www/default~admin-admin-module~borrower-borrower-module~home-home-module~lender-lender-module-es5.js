@@ -491,7 +491,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"row\">\n    <div class=\"col-xl-11 col-10\">\n        <h4 class=\"mb-3 text-black-50\" i18n>\n            Profile Edit\n        </h4>\n    </div>\n    <div class=\"col-xl-1 col-2\">\n        <i class=\"icon-close float-right\" mat-button (click)=\"closeDialog()\"></i>\n    </div>\n</div>\n<mat-dialog-content class=\"mat-typography\" style=\"max-height: 86vh;\">\n    <form [formGroup]=\"profileForm\">\n        <div id=\"profile_skills_verification\">\n            <div class=\"card\">\n                <div class=\"card-body\">\n                    <div class=\"form-row mb-3\">\n                        <div class=\"col-md-12\">\n                            <div class=\"text-gray\" i18n>\n                                Upload Passport, Driving Licence, Health Insurance Card document\n                            </div>\n                            <hr>\n                        </div>\n                        <div class=\"col-xl-4 col-12\">\n                            <div class=\"form-group\">\n                                <label class=\"mb-1\" for=\"myPassportNumber\" i18n>Passport Number:</label>\n                                <input type=\"text\"\n                                    formControlName=\"myPassportNumber\" class=\"form-control\"\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.myPassportNumber.errors }\" />\n                                <div *ngIf=\"submitted && f.myPassportNumber.errors\" class=\"invalid-feedback\">\n                                    <div *ngIf=\"f.myPassportNumber.errors.required\" i18n>Passport number is required\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"col-xl-4 col-12\">\n                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                (click)=\"modalMediaUploadWithCropFeature(userObj._id, 'myPassportMedia', null);\" i18n>\n                                Upload Scan Copy\n                            </button>\n                        </div>\n                        <div class=\"col-xl-4 col-12\">\n                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                (click)=\"modalMediaUploadWithCropFeature(userObj._id, 'myPassportMediaSelfVerify', null);\"\n                                i18n>\n                                Upload Image of Scan Copy With user's Face\n                            </button>\n                        </div>\n                    </div>\n                    <div class=\"form-row mb-3\">\n                        <div class=\"col-xl-4 col-12\">\n                            <div class=\"form-group\">\n                                <label class=\"mb-1\" for=\"myDLNumber\" i18n>Driving License Number:</label>\n                                <input type=\"text\" formControlName=\"myDLNumber\"\n                                    class=\"form-control\"\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.myDLNumber.errors }\" />\n                                <div *ngIf=\"submitted && f.myDLNumber.errors\" class=\"invalid-feedback\">\n                                    <div *ngIf=\"f.myDLNumber.errors.required\" i18n>Driving License number is required\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"col-xl-4 col-12\">\n                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                (click)=\"modalMediaUploadWithCropFeature(userObj._id, 'myDLMedia', null);\" i18n>\n                                Upload Scan Copy\n                            </button>\n                        </div>\n                        <div class=\"col-xl-4 col-12\">\n                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                (click)=\"modalMediaUploadWithCropFeature(userObj._id, 'myDLMediaSelfVerify', null);\"\n                                i18n>\n                                Upload Image of Scan Copy With user's Face\n                            </button>\n                        </div>\n                    </div>\n                    <div class=\"form-row mb-3\">\n                        <div class=\"col-xl-4 col-12\">\n                            <div class=\"form-group\">\n                                <label class=\"mb-1\" for=\"cprNumber\" i18n>CPR Number:</label>\n                                <input type=\"text\" formControlName=\"cprNumber\"\n                                    class=\"form-control\"\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.cprNumber.errors }\" />\n                                <div *ngIf=\"submitted && f.cprNumber.errors\" class=\"invalid-feedback\">\n                                    <div *ngIf=\"f.cprNumber.errors.required\" i18n>CPR number is required</div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"col-xl-4 col-12\">\n                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                (click)=\"modalMediaUploadWithCropFeature(userObj._id, 'myHICardMedia', null);\" i18n>\n                                Upload Scan Copy\n                            </button>\n                        </div>\n                        <div class=\"col-xl-4 col-12\">\n                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                (click)=\"modalMediaUploadWithCropFeature(userObj._id, 'myHICardMediaSelfVerify', null);\"\n                                i18n>\n                                Upload Image of Scan Copy With user's Face\n                            </button>\n                        </div>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-xl-4\">\n                            <div class=\"card\"\n                                *ngFor=\"let previewUrl of _.union(_.values(f.myPassportMedia.value),_.values(f.myPassportMediaSelfVerify.value))\">\n                                <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                <div *ngIf=\"fileUploadProgress\" i18n>\n                                    Upload progress: {{ fileUploadProgress }}\n                                </div>\n                                <div class=\"card-body\" i18n>\n                                    Passport\n\n                                    <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                            class=\"icon icon-trash\"\n                                            (click)=\"onUploadCleanAssetDocs('myPassportMedia')\"></i></a>\n\n                                </div>\n                            </div>\n\n\n                        </div>\n                        <div class=\"col-xl-4\">\n                            <div class=\"card\"\n                                *ngFor=\"let previewUrl of _.union(_.values(f.myDLMedia.value),_.values(f.myDLMediaSelfVerify.value))\">\n                                <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                <div *ngIf=\"fileUploadProgress\" i18n>\n                                    Upload progress: {{ fileUploadProgress }}\n                                </div>\n                                <div class=\"card-body\" i18n>\n                                    Driving Licence\n\n                                    <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                            class=\"icon icon-trash\"\n                                            (click)=\"onUploadCleanAssetDocs('myDLMedia')\"></i></a>\n\n                                </div>\n                            </div>\n\n\n                        </div>\n                        <div class=\"col-xl-4\">\n                            <div class=\"card\"\n                                *ngFor=\"let previewUrl of _.union(_.values(f.myHICardMedia.value),_.values(f.myHICardMediaSelfVerify.value))\">\n                                <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                <div *ngIf=\"fileUploadProgress\" i18n>\n                                    Upload progress: {{ fileUploadProgress }}\n                                </div>\n                                <div class=\"card-body\" i18n>\n                                    Health Insurance Card\n\n                                    <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                            class=\"icon icon-trash\"\n                                            (click)=\"onUploadCleanAssetDocs('myHICardMedia')\"></i></a>\n\n                                </div>\n                            </div>\n\n                        </div>\n                    </div>\n                    <div class=\"row\" *ngIf=\"_role == Role.Borrower\">\n                        <div class=\"col-xl-12\">\n                            <div class=\"row\">\n                                <div class=\"col-xl-12 mt-3\">\n                                    RKI\n                                </div>\n                            </div>\n                            <div class=\"form-row\" *ngIf=\"!f.isRKIRegistered.value\">\n                                <div class=\"col-xl-6 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(userObj._id, 'myRKIMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-6 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(userObj._id, 'myRKIMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With user's Face\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4\">\n\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12\"\n                                            *ngFor=\"let previewUrl of _.union(_.values(f.myRKIMedia.value),_.values(f.myRKIMediaSelfVerify.value))\">\n\n                                            <i class=\"icon-trash text-danger\"\n                                                (click)=\"onUploadCleanAssetDocs('myRKIMedia')\"></i>\n\n                                            <img class=\"img-fluid\" [src]=\"previewUrl.url\" />\n                                        </div>\n                                        <div>\n                                            <div *ngIf=\"fileUploadProgress\" i18n>\n                                                Upload progress: {{ fileUploadProgress }}\n                                            </div>\n                                        </div>\n                                    </div>\n\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"card-footer\">\n                    <button type=\"button\" (click)=\"onUsersProfileUpdateSubmit()\" [disabled]=\"loading\"\n                        class=\"btn btn-primary float-right\" i18n>Save</button>\n                </div>\n            </div>\n        </div>\n    </form>\n</mat-dialog-content>";
+      __webpack_exports__["default"] = "<div class=\"row\">\n    <div class=\"col-xl-11 col-10\">\n        <h4 class=\"mb-3 text-black-50\" i18n>\n            Profile Edit\n        </h4>\n    </div>\n    <div class=\"col-xl-1 col-2\">\n        <i class=\"icon-close float-right\" mat-button (click)=\"closeDialog()\"></i>\n    </div>\n</div>\n<mat-dialog-content class=\"mat-typography\" style=\"max-height: 86vh;\">\n    <form [formGroup]=\"profileForm\">\n        <div id=\"profile_skills_verification\">\n            <div class=\"card\">\n                <div class=\"card-body\">\n                    <div class=\"form-row mb-3\">\n                        <div class=\"col-md-12\">\n                            <div class=\"text-gray\" i18n>\n                                Upload Passport, Driving Licence, Health Insurance Card document\n                            </div>\n                            <hr>\n                        </div>\n                        <div class=\"col-xl-4 col-12\">\n                            <div class=\"form-group\">\n                                <label class=\"mb-1\" for=\"myPassportNumber\" i18n>Passport Number:</label>\n                                <input type=\"text\"\n                                    formControlName=\"myPassportNumber\" class=\"form-control\"\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.myPassportNumber.errors }\" />\n                                <div *ngIf=\"submitted && f.myPassportNumber.errors\" class=\"invalid-feedback\">\n                                    <div *ngIf=\"f.myPassportNumber.errors.required\" i18n>Passport number is required\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"col-xl-4 col-12\">\n                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                (click)=\"modalMediaUploadWithCropFeature(userObj._id, 'myPassportMedia', null);\" i18n>\n                                Upload Scan Copy\n                            </button>\n                        </div>\n                        <div class=\"col-xl-4 col-12\">\n                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                (click)=\"modalMediaUploadWithCropFeature(userObj._id, 'myPassportMediaSelfVerify', null);\"\n                                i18n>\n                                Upload Image of Scan Copy With user's Face\n                            </button>\n                        </div>\n                    </div>\n                    <div class=\"form-row mb-3\">\n                        <div class=\"col-xl-4 col-12\">\n                            <div class=\"form-group\">\n                                <label class=\"mb-1\" for=\"myDLNumber\" i18n>Driving License Number:</label>\n                                <input type=\"text\" formControlName=\"myDLNumber\"\n                                    class=\"form-control\"\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.myDLNumber.errors }\" />\n                                <div *ngIf=\"submitted && f.myDLNumber.errors\" class=\"invalid-feedback\">\n                                    <div *ngIf=\"f.myDLNumber.errors.required\" i18n>Driving License number is required\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"col-xl-4 col-12\">\n                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                (click)=\"modalMediaUploadWithCropFeature(userObj._id, 'myDLMedia', null);\" i18n>\n                                Upload Scan Copy\n                            </button>\n                        </div>\n                        <div class=\"col-xl-4 col-12\">\n                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                (click)=\"modalMediaUploadWithCropFeature(userObj._id, 'myDLMediaSelfVerify', null);\"\n                                i18n>\n                                Upload Image of Scan Copy With user's Face\n                            </button>\n                        </div>\n                    </div>\n                    <div class=\"form-row mb-3\">\n                        <div class=\"col-xl-4 col-12\">\n                            <div class=\"form-group\">\n                                <label class=\"mb-1\" for=\"cprNumber\" i18n>CPR Number:</label>\n                                <input type=\"text\" formControlName=\"cprNumber\"\n                                    class=\"form-control\"\n                                    [ngClass]=\"{ 'is-invalid': submitted && f.cprNumber.errors }\" />\n                                <div *ngIf=\"submitted && f.cprNumber.errors\" class=\"invalid-feedback\">\n                                    <div *ngIf=\"f.cprNumber.errors.required\" i18n>CPR number is required</div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"col-xl-4 col-12\">\n                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                (click)=\"modalMediaUploadWithCropFeature(userObj._id, 'myHICardMedia', null);\" i18n>\n                                Upload Scan Copy\n                            </button>\n                        </div>\n                        <div class=\"col-xl-4 col-12\">\n                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                (click)=\"modalMediaUploadWithCropFeature(userObj._id, 'myHICardMediaSelfVerify', null);\"\n                                i18n>\n                                Upload Image of Scan Copy With user's Face\n                            </button>\n                        </div>\n                    </div>\n                    <div class=\"row\">\n                        <div class=\"col-xl-4\">\n                            <div class=\"card\"\n                                *ngFor=\"let previewUrl of _.union(_.values(f.myPassportMedia.value))\">\n                                <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                <div *ngIf=\"fileUploadProgress\" i18n>\n                                    Upload progress: {{ fileUploadProgress }}\n                                </div>\n                                <div class=\"card-body\" i18n>\n                                    Passport\n\n                                    <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                            class=\"icon icon-trash\"\n                                            (click)=\"onUploadCleanAssetDocs('myPassportMedia')\"></i></a>\n\n                                </div>\n                            </div>\n                            <div class=\"card\"\n                                *ngFor=\"let previewUrl of _.union(_.values(f.myPassportMediaSelfVerify.value))\">\n                                <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                <div *ngIf=\"fileUploadProgress\" i18n>\n                                    Upload progress: {{ fileUploadProgress }}\n                                </div>\n                                <div class=\"card-body\" i18n>\n                                    Passport\n\n                                    <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                            class=\"icon icon-trash\"\n                                            (click)=\"onUploadCleanAssetDocs('myPassportMediaSelfVerify')\"></i></a>\n\n                                </div>\n                            </div>\n\n\n                        </div>\n                        <div class=\"col-xl-4\">\n                            <div class=\"card\"\n                                *ngFor=\"let previewUrl of _.union(_.values(f.myDLMedia.value))\">\n                                <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                <div *ngIf=\"fileUploadProgress\" i18n>\n                                    Upload progress: {{ fileUploadProgress }}\n                                </div>\n                                <div class=\"card-body\" i18n>\n                                    Driving Licence\n\n                                    <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                            class=\"icon icon-trash\"\n                                            (click)=\"onUploadCleanAssetDocs('myDLMedia')\"></i></a>\n\n                                </div>\n                            </div>\n                            <div class=\"card\"\n                            *ngFor=\"let previewUrl of _.union(_.values(f.myDLMediaSelfVerify.value))\">\n                            <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                            <div *ngIf=\"fileUploadProgress\" i18n>\n                                Upload progress: {{ fileUploadProgress }}\n                            </div>\n                            <div class=\"card-body\" i18n>\n                                Driving Licence\n\n                                <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                        class=\"icon icon-trash\"\n                                        (click)=\"onUploadCleanAssetDocs('myDLMediaSelfVerify')\"></i></a>\n\n                            </div>\n                        </div>\n\n                        </div>\n                        <div class=\"col-xl-4\">\n                            <div class=\"card\"\n                                *ngFor=\"let previewUrl of _.union(_.values(f.myHICardMedia.value))\">\n                                <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                <div *ngIf=\"fileUploadProgress\" i18n>\n                                    Upload progress: {{ fileUploadProgress }}\n                                </div>\n                                <div class=\"card-body\" i18n>\n                                    Health Insurance Card\n\n                                    <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                            class=\"icon icon-trash\"\n                                            (click)=\"onUploadCleanAssetDocs('myHICardMedia')\"></i></a>\n\n                                </div>\n                            </div>\n                            <div class=\"card\"\n                            *ngFor=\"let previewUrl of _.union(_.values(f.myHICardMediaSelfVerify.value))\">\n                            <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                            <div *ngIf=\"fileUploadProgress\" i18n>\n                                Upload progress: {{ fileUploadProgress }}\n                            </div>\n                            <div class=\"card-body\" i18n>\n                                Health Insurance Card\n\n                                <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                        class=\"icon icon-trash\"\n                                        (click)=\"onUploadCleanAssetDocs('myHICardMediaSelfVerify')\"></i></a>\n\n                            </div>\n                        </div>\n                        </div>\n                    </div>\n                    <div class=\"row\" *ngIf=\"_role == Role.Borrower\">\n                        <div class=\"col-xl-12\">\n                            <div class=\"row\">\n                                <div class=\"col-xl-12 mt-3\" i18n>\n                                    RKI\n                                </div>\n                            </div>\n                            <div class=\"form-row\" *ngIf=\"!f.isRKIRegistered.value\">\n                                <div class=\"col-xl-6 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(userObj._id, 'myRKIMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-6 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(userObj._id, 'myRKIMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With user's Face\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4\">\n\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12\"\n                                            *ngFor=\"let previewUrl of _.union(_.values(f.myRKIMedia.value))\">\n\n                                            <i class=\"icon-trash text-danger\"\n                                                (click)=\"onUploadCleanAssetDocs('myRKIMedia')\"></i>\n\n                                            <img class=\"img-fluid\" [src]=\"previewUrl.url\" />\n                                        </div>\n                                        <div class=\"col-xl-12\"\n                                            *ngFor=\"let previewUrl of _.union(_.values(f.myRKIMediaSelfVerify.value))\">\n\n                                            <i class=\"icon-trash text-danger\"\n                                                (click)=\"onUploadCleanAssetDocs('myRKIMediaSelfVerify')\"></i>\n\n                                            <img class=\"img-fluid\" [src]=\"previewUrl.url\" />\n                                        </div>\n                                        <div>\n                                            <div *ngIf=\"fileUploadProgress\" i18n>\n                                                Upload progress: {{ fileUploadProgress }}\n                                            </div>\n                                        </div>\n                                    </div>\n\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"card-footer\">\n                    <button type=\"button\" (click)=\"onUsersProfileUpdateSubmit()\" [disabled]=\"loading\"\n                        class=\"btn btn-primary float-right\" i18n>Save</button>\n                </div>\n            </div>\n        </div>\n    </form>\n</mat-dialog-content>";
       /***/
     },
 
@@ -3330,7 +3330,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<form [formGroup]=\"profileUpdatePasswordForm\">\n    <div class=\"card mb-3 shadow\">\n        <div class=\"card-header\">\n            <h5 class=\"font-weight-bold text-primary\" i18n>Update Password</h5>\n        </div>\n        <div class=\"card-body\">\n\n            <div class=\"row\">\n                <div class=\"form-group col-xl-12\">\n                    <label for=\"password\" i18n>Old Password</label>\n                    <input type=\"text\" formControlName=\"password\" class=\"form-control\"\n                        [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\" />\n                    <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\n                        <div *ngIf=\"f.password.errors.required\" i18n>Old Password is required</div>\n                    </div>\n                </div>\n\n                <div class=\"form-group col-xl-12\">\n                    <label for=\"password2update\" i18n>New Password</label>\n                    <input type=\"text\" formControlName=\"password2update\" class=\"form-control\"\n                        [ngClass]=\"{ 'is-invalid': submitted && f.password2update.errors }\" />\n                    <div *ngIf=\"submitted && f.password2update.errors\" class=\"invalid-feedback\">\n                        <div *ngIf=\"f.password2update.errors.required\" i18n>Old Password is required</div>\n                    </div>\n                </div>\n\n                <div class=\"form-group col-xl-12\">\n                    <label i18n>Confirm Password</label>\n                    <input type=\"password\" formControlName=\"confirmPassword\" class=\"form-control\"\n                        [ngClass]=\"{ 'is-invalid': submitted && f.confirmPassword.errors }\" />\n                    <div *ngIf=\"submitted && f.confirmPassword.errors\" class=\"invalid-feedback\">\n                        <div *ngIf=\"f.confirmPassword.errors.required\" i18n>\n                            Confirm Password is required\n                        </div>\n                        <div *ngIf=\"f.confirmPassword.errors.mustMatch\" i18n>\n                            Passwords must match\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"card-footer\">\n            <button type=\"button\" (click)=\"onUpdatePasswordSubmit()\" [disabled]=\"loading\"\n            class=\"btn btn-primary float-right\" i18n>Update</button>\n        </div>\n    </div>\n</form>";
+      __webpack_exports__["default"] = "<form [formGroup]=\"profileUpdatePasswordForm\">\n    <div class=\"card mb-3 shadow\">\n        <div class=\"card-header\">\n            <h5 class=\"font-weight-bold text-primary\" i18n>Update Password</h5>\n        </div>\n        <div class=\"card-body\">\n\n            <div class=\"row\">\n                <!--\n                <div class=\"form-group col-xl-12\">\n                    <label for=\"password\" i18n>Old Password</label>\n                    <input type=\"text\" formControlName=\"password\" class=\"form-control\"\n                        [ngClass]=\"{ 'is-invalid': submitted && f.password.errors }\" />\n                    <div *ngIf=\"submitted && f.password.errors\" class=\"invalid-feedback\">\n                        <div *ngIf=\"f.password.errors.required\" i18n>Old Password is required</div>\n                    </div>\n                </div>\n            -->\n                <div class=\"form-group col-xl-12\">\n                    <label for=\"password2update\" i18n>New Password</label>\n                    <input type=\"text\" formControlName=\"password2update\" class=\"form-control\"\n                        [ngClass]=\"{ 'is-invalid': submitted && f.password2update.errors }\" />\n                    <div *ngIf=\"submitted && f.password2update.errors\" class=\"invalid-feedback\">\n                        <div *ngIf=\"f.password2update.errors.required\" i18n>Old Password is required</div>\n                    </div>\n                </div>\n\n                <div class=\"form-group col-xl-12\">\n                    <label i18n>Confirm Password</label>\n                    <input type=\"password\" formControlName=\"confirmPassword\" class=\"form-control\"\n                        [ngClass]=\"{ 'is-invalid': submitted && f.confirmPassword.errors }\" />\n                    <div *ngIf=\"submitted && f.confirmPassword.errors\" class=\"invalid-feedback\">\n                        <div *ngIf=\"f.confirmPassword.errors.required\" i18n>\n                            Confirm Password is required\n                        </div>\n                        <div *ngIf=\"f.confirmPassword.errors.mustMatch\" i18n>\n                            Passwords must match\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"card-footer\">\n            <button type=\"button\" (click)=\"onUpdatePasswordSubmit()\" [disabled]=\"loading\"\n            class=\"btn btn-primary float-right\" i18n>Update</button>\n        </div>\n    </div>\n</form>";
       /***/
     },
 
@@ -3660,6 +3660,118 @@
     },
 
     /***/
+    "4ioA":
+    /*!*******************************************************************!*\
+      !*** ./src/app/shared/payment-paypal/payment-paypal.component.ts ***!
+      \*******************************************************************/
+
+    /*! exports provided: PaymentPaypalComponent */
+
+    /***/
+    function ioA(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "PaymentPaypalComponent", function () {
+        return PaymentPaypalComponent;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _raw_loader_payment_paypal_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! raw-loader!./payment-paypal.component.html */
+      "OdM1");
+      /* harmony import */
+
+
+      var _payment_paypal_component_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! ./payment-paypal.component.css */
+      "uzbu");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var src_app_services_payment_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! src/app/services/payment.service */
+      "s5zK");
+      /* harmony import */
+
+
+      var src_app_models__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! src/app/models */
+      "VHTt");
+      /* harmony import */
+
+
+      var src_app_services_add_funds_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! src/app/services/add-funds.service */
+      "3gPe");
+
+      var PaymentPaypalComponent = /*#__PURE__*/function () {
+        function PaymentPaypalComponent(payment, addFundsService) {
+          _classCallCheck2(this, PaymentPaypalComponent);
+
+          this.payment = payment;
+          this.addFundsService = addFundsService;
+          this.PaymentMethod = src_app_models__WEBPACK_IMPORTED_MODULE_5__["PaymentMethod"];
+        }
+
+        _createClass2(PaymentPaypalComponent, [{
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            var _this20 = this;
+
+            this.payment.getCurrentPayPalConfig().subscribe(function (payPalConfig) {
+              _this20.selectedPaymentMethod = src_app_models__WEBPACK_IMPORTED_MODULE_5__["PaymentMethod"].Online;
+              _this20.payPalConfig = payPalConfig;
+            });
+          }
+        }, {
+          key: "payPalConfigInit",
+          value: function payPalConfigInit(purchaseUnits, _transactiActionType, _userId) {
+            this.payPalConfig = this.payment.initConfig(purchaseUnits, _transactiActionType, _userId);
+          }
+        }, {
+          key: "paymentThroughWallet",
+          value: function paymentThroughWallet() {
+            this.payment.payFromUsersWallet();
+          }
+        }]);
+
+        return PaymentPaypalComponent;
+      }();
+
+      PaymentPaypalComponent.ctorParameters = function () {
+        return [{
+          type: src_app_services_payment_service__WEBPACK_IMPORTED_MODULE_4__["PaymentService"]
+        }, {
+          type: src_app_services_add_funds_service__WEBPACK_IMPORTED_MODULE_6__["AddFundsService"]
+        }];
+      };
+
+      PaymentPaypalComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-payment-paypal',
+        template: _raw_loader_payment_paypal_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_payment_paypal_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [src_app_services_payment_service__WEBPACK_IMPORTED_MODULE_4__["PaymentService"], src_app_services_add_funds_service__WEBPACK_IMPORTED_MODULE_6__["AddFundsService"]])], PaymentPaypalComponent);
+      /***/
+    },
+
+    /***/
     "4tmY":
     /*!*********************************************************************************************************!*\
       !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/borrower/modal/modal-applied-session-display.html ***!
@@ -3675,7 +3787,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<h2 mat-dialog-title class=\"text-primary\">\n    <div class=\"row\">\n        <div class=\"col-xl-11 col-10\">\n            <h4 class=\"text-black-50\" i18n>\n                Lenders Requests for {{utilityService.returnLoanType(LoanObj.loanType)}} of kr {{LoanObj.loanAmount}}\n            </h4>\n        </div>\n        <div class=\"col-xl-1 col-2\">\n            <i class=\"icon-close float-right\" mat-button (click)=\"closeDialog(null, null)\"></i>\n        </div>\n    </div>\n</h2>\n\n<mat-dialog-content class=\"mat-typography\">\n    <div class=\"row\">\n        <div class=\"col-xl-12\">\n            <div id=\"accordion\">\n                <div class=\"card shadow-sm mb-3\" *ngFor=\"let LoanApplyObj of LoanObj.sessionAppliedByBorrowers;\">\n                    <div class=\"card-header\">\n                        <span (click)=\"usersProfile(userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers, true))\"> <i class=\"icon icon-user\" ></i>   {{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers, true,'firstName')}}</span>\n                       \n                        <a class=\"collapsed card-link\" data-toggle=\"collapse\"\n                            [attr.href]=\"'#collapse_' + LoanApplyObj.borrowerId\">\n                           \n                          \n                            <label class=\"badge font-weight-light text-capitalize text-cap\"\n                                [ngClass]=\"{'badge-success': (LoanApplyObj.status==SessionStatus.Accepted || LoanApplyObj.status==SessionStatus.Active || LoanApplyObj.status==SessionStatus.Completed || LoanApplyObj.status==SessionStatus.OngoingInitiated  || LoanApplyObj.status==SessionStatus.AwaitingForApproval  || LoanApplyObj.status==SessionStatus.Ongoing), 'badge-danger': (LoanApplyObj.status==SessionStatus.Rejected || LoanApplyObj.status==SessionStatus.RejectedOngoing || LoanApplyObj.status==SessionStatus.Suspended), 'badge-info': ( LoanApplyObj.status==null || LoanApplyObj.status=='' || LoanApplyObj.status==SessionStatus.Pending)}\">{{\n                                utilityService.returnStringWithReplacing_(LoanApplyObj.status || SessionStatus.Pending)\n                                | titlecase }}</label>\n                            <label class=\"badge badge-warning text-capitalize text-cap float-right\">\n                                Loan Number: {{LoanApplyObj.loanApplyNumber}}\n                            </label>\n                        </a>\n                    </div>\n                    <div [attr.id]=\"'collapse_' + LoanApplyObj.borrowerId\" class=\"collapse show\"\n                        data-parent=\"#accordion\">\n                        <div class=\"card-body\">\n                            <div class=\"row\">\n                                <div class=\"col-xl-6 col-12\">\n                                    <h3 class=\"text-primary\">New Proposed Amount: <badge class=\"badge badge-primary\">\n                                            {{LoanApplyObj.proposedLoanAmount || 'NA'}}</badge>\n                                    </h3>\n                                </div>\n                                <div class=\"col-xl-6 col-12\">\n                                    <h5 *ngIf=\"LoanApplyObj.loanInsuranceRequired\" class=\"card-title float-right\" i18n>Applied for Insurance with Amount: <badge\n                                            class=\"badge badge-primary\">\n                                            {{LoanApplyObj.loanInsuranceAmount || 'NA'}}</badge>\n                                    </h5>\n                                </div>\n                            </div>\n                            <div class=\"row\">\n                                <div class=\"col-xl-12 col-12\" *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender\">\n                                    <div class=\"card bg-gradient-primary mb-3 text-white shadow\">\n                                        <div class=\"card-body dashobard-card p-2\">\n                                            <div class=\"text-xs font-weight-bold mb-3\" i18n>\n                                                Lender Payment Confirmation</div>\n                                                <hr>\n                                                <div class=\"row\" >\n                                                    <div class=\"col-xl-3 col-12\">\n                                                        <div class=\"form-group\">\n                                                            <label for=\"transactionIdForLoanAmountPaidByLender\" i18n>Transaction ID/Payment\n                                                                Ref. ID</label>\n                                                            <h4 i18n>\n                                                                {{LoanApplyObj.transactionIdForLoanAmountPaidByLender}}\n                                                            </h4>\n                                                        </div>\n                                                    </div>\n                                                    <div class=\"col-xl-3 col-12\">\n                                                        <div class=\"form-group\">\n                                                            <label for=\"transactionOnForLoanAmountPaidByLender\" i18n>Transaction\n                                                                Date</label>\n                                                            <h4  >\n                                                                {{LoanApplyObj.transactionOnForLoanAmountPaidByLender | date:'dd-MMM-YYYY'}}\n                                                            </h4>\n                                                        </div>\n                                                    </div>\n                                                    <div class=\"col-xl-3 col-12\">\n                                                        <div class=\"form-group\">\n                                                            <label for=\"createdOnForLoanAmountPaidByLender\" i18n>Updated On</label>\n                                                            <h4  >\n                                                                {{LoanApplyObj.createdOnForLoanAmountPaidByLender | date:'dd-MMM-YYYY'}}\n                                                            </h4>\n                                                        </div>\n                                                    </div>\n                                                    <div class=\"col-xl-3 col-12\">\n                                                        <p class=\"mb-2 text-white\" for=\"transactionDescriptionForLoanAmountPaidByLender\" i18n>\n                                                            Description:</p>\n                                                        <div class=\"text-white\" >\n                                                            {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLender}}\n                                                        </div>\n                                                    </div>\n                                                </div>\n                                        </div>\n                                    </div>\n                                    \n                                </div>\n                                <div class=\"col-xl-12 col-12\"  *ngIf=\"LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                    <div class=\"card bg-success text-white shadow mb-4\">\n                                        <div class=\"card-body dashobard-card p-2\">\n                                            <div class=\"text-xs font-weight-bold  mb-2\" i18n>\n                                                Borrower's Payment confirmation</div>\n                                                <hr>\n                                                <div class=\"row\">\n\n                                                    <div class=\"col-xl-4 col-12\">\n                                                        <div class=\"form-group\">\n                                                            <label for=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrower\"\n                                                                i18n>Transaction\n                                                                Date</label>\n                                                            <h4  >\n                                                                {{LoanApplyObj.transactionOnForLoanAmountPaidByLenderConfirmByBorrower |\n                                                                date:'dd-MMM-YYYY'}}\n                                                            </h4>\n                                                        </div>\n                                                    </div>\n                                                    <div class=\"col-xl-4 col-12\">\n                                                        <div class=\"form-group\">\n                                                            <label for=\"createdOnForLoanAmountPaidByLender\" i18n>Updated On</label>\n                                                            <h4 >\n                                                                {{LoanApplyObj.createdOnForLoanAmountPaidByLenderConfirmByBorrower |\n                                                                date:'dd-MMM-YYYY'}}\n                                                            </h4>\n                                                        </div>\n                                                    </div>\n                                                    <div class=\"col-xl-4 col-12\">\n                                                        <p class=\"mb-2 text-white\"\n                                                            for=\"transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\" i18n>\n                                                            Description:</p>\n                                                        <div class=\"text-white\">\n                                                            {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower}}\n                                                        </div>\n                                                    </div>\n                                                </div>\n                                        </div>\n                                    </div>\n                                  \n                                </div>\n\n                            </div>\n                           \n                            \n                            <div class=\"row\" *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower && LoanApplyObj.isLoanAmountPaidByLender && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id\">\n                                <div class=\"col-xl-12\">\n                                    <div class=\"card shadow mb-4\">\n                                        <div class=\"card-header\">\n                                          \n                                                <div class=\"form-group mb-0\">\n                                                    <div class=\"form-check-inline\">\n                                                        <div class=\"custom-control custom-checkbox\">\n                                                            <input\n                                                                [(ngModel)]=\"LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower\"\n                                                                name=\"isLoanAmountPaidByLenderConfirmByBorrower\"\n                                                                id=\"isLoanAmountPaidByLenderConfirmByBorrower\" type=\"checkbox\"\n                                                                class=\"custom-control-input\" [value]=\"true\"\n                                                                [checked]=\"LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                                            <label for=\"isLoanAmountPaidByLenderConfirmByBorrower\"\n                                                                class=\"custom-control-label\" i18n>\n                                                                Is Loan Amount Received </label>\n                                                        </div>\n                                                    </div>\n                                                </div>\n                                           \n                                        </div>\n                                        <div class=\"card-body\">\n                                            <div class=\"row\"\n                                            >\n                                            \n                                            <div class=\"col-xl-4 col-12\">\n                                                <div class=\"form-group\">\n            \n                                                    <label for=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrowerCustomised\"\n                                                        i18n>\n                                                        Payment Credit Date\n                                                    </label>\n                                                    <input type=\"date\"\n                                                        [(ngModel)]=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrowerCustomised\"\n                                                        class=\"form-control\" />\n            \n                                                </div>\n                                            </div>\n                                            <div class=\"col-xl-6 col-12\">\n                                                <div class=\"form-group\">\n                                                    <label for=\"usr\" i18n>Transaction Description</label>\n                                                    <input type=\"transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\"\n                                                        class=\"form-control\" placeholder=\"Description\"\n                                                        [(ngModel)]=\"LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\">\n                                                </div>\n                                            </div>\n                                           \n                                            <div class=\"col-xl-2 col-12\">\n                                                <button class=\"btn btn-primary btn-sm float-right mt-4\"\n                                                    (click)=\"paymentDoneByLenderConfirmByBorrower(LoanApplyObj)\" i18n>\n                                                   Update\n                                                </button>\n                                            </div>\n                                        </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div class=\"modal fade\" id=\"installment_deatils_modal\">\n                                <div class=\"modal-dialog modal-dialog-centered modal-lg\">\n                                  <div class=\"modal-content\">\n                                \n                                    <div class=\"modal-header\">\n                                      <h4 class=\"modal-title\" i18n>Installment Details</h4>\n                                      <button type=\"button\" class=\"close\" data-dismiss=\"modal\" (click)=\"LoanApplyObjCurrent4Installment={};\">&times;</button>\n                                    </div>\n                                    \n                                  \n                                    <div class=\"modal-body\">\n                                        <div class=\"row\" *ngIf=\"LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender\">\n                                            <div class=\"col-xl-4 col-12\">\n                                                <div class=\"form-group border-right\">\n                                                    <label for=\"installmentKey\" i18n>Installment For</label>\n                                                    <h4 class=\"text-primary\" >\n                                                        {{LoanApplyObjCurrent4Installment.installmentKey}}\n                                                        <label *ngIf=\"LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin\" class=\"badge badge-warning text-capitalize text-cap float-right\" i18n>\n                                                            Paid By Admin\n                                                        </label>\n                                                    </h4>\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xl-4 col-12\">\n                                                <div class=\"form-group border-right\">\n                                                    <label for=\"transactionIdForLoanAmountPaidToLender\" i18n>Transaction ID/Payment\n                                                        Ref.\n                                                        ID</label>\n                                                    <h4 class=\"text-primary\" >\n                                                        {{LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender}}\n                                                    </h4>\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xl-4 col-12\">\n                                                <div class=\"form-group border-right\">\n                                                    <label for=\"transactionOnForLoanAmountPaidToLender\" i18n>Transaction\n                                                        Date</label>\n                                                    <h4 class=\"text-primary\" >\n                                                        {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender |\n                                                        date:'dd-MMM-YYYY'}}\n                                                    </h4>\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xl-4 col-12\">\n                                                <div class=\"form-group border-right\">\n                                                    <label for=\"createdOnForLoanAmountPaidToLender\" i18n>Updated On</label>\n                                                    <h4 class=\"text-primary\" >\n                                                        {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender |\n                                                        date:'dd-MMM-YYYY'}}\n                                                    </h4>\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xl-4 col-12\">\n                                                <p class=\"mb-2\" for=\"transactionDescriptionForLoanAmountPaidToLender\" i18n>\n                                                    Note:</p>\n                                                <div class=\"text-black-50\" >\n                                                    {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLender}}\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xl-4 col-12\">\n                                                <div class=\"form-group border-right\">\n                                                    <label for=\"transactionOnForLoanAmountPaidToLenderConfirmByLender\"\n                                                        i18n>Confirmation: Transaction Date</label>\n                                                    <h4 class=\"text-primary\" >\n                                                        {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender\n                                                        |\n                                                        date:'dd-MMM-YYYY'}}\n                                                    </h4>\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xl-4 col-12\">\n                                                <div class=\"form-group border-right\">\n                                                    <label for=\"createdOnForLoanAmountPaidToLenderConfirmByLender\"\n                                                        i18n>Confirmation: Updated On</label>\n                                                    <h4 class=\"text-primary\" >\n                                                        {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\n                                                        |\n                                                        date:'dd-MMM-YYYY'}}\n                                                    </h4>\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xl-4 col-12\">\n                                                <p class=\"mb-2\" for=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\"\n                                                    i18n>\n                                                    Confirmation: Note:</p>\n                                                <div class=\"text-black-50\" >\n                                                    {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLenderConfirmByLender}}\n                                                </div>\n                                            </div>\n                                           \n                                        </div>\n                                    </div>\n                                    \n                                 \n                                    <div class=\"modal-footer\">\n                                      <button type=\"button\" class=\"btn btn-secondary\" (click)=\"LoanApplyObjCurrent4Installment={};\" data-dismiss=\"modal\" i18n>Close</button>\n                                    </div>\n                                    \n                                  </div>\n                                </div>\n                              </div>\n                           \n\n                            <div class=\"row\"\n                                *ngIf=\"!LoanApplyObj.isLoanAmountPaidByBorrower && LoanApplyObjCurrent4Installment.installmentKey && !LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender && ((returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted  && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id) || (returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Unpaid && authenticationService.currentUserValue.role == Role.Admin))\">\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group border-right\">\n                                        <label for=\"installmentKey\" i18n>Installment For</label>\n                                        <h4 class=\"text-primary\" >\n                                            {{LoanApplyObjCurrent4Installment.installmentKey}}\n                                        </h4>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label for=\"transactionIdForLoanAmountPaidToLender\" i18n>TransactionId/Payment\n                                            Ref. ID</label>\n                                        <input type=\"text\" class=\"form-control\"\n                                            placeholder=\"TransactionId/Payment Ref. ID\"\n                                            [(ngModel)]=\"LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender\">\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n\n                                        <label for=\"transactionOnForLoanAmountPaidToLenderCustomised\" i18n>\n                                            Transaction Date\n                                        </label>\n                                        <input type=\"date\"\n                                            [(ngModel)]=\"transactionOnForLoanAmountPaidToLenderCustomised\"\n                                            class=\"form-control\" />\n\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-12 col-12\">\n                                    <div class=\"form-group\">\n                                        <label for=\"transactionDescriptionForLoanAmountPaidToLender\" i18n>Note.</label>\n                                        <input type=\"transactionDescriptionForLoanAmountPaidToLender\"\n                                            class=\"form-control\" placeholder=\"Description\"\n                                            [(ngModel)]=\"LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLender\">\n                                    </div>\n                                </div>\n                                <br>\n                                <hr>\n                                <div class=\"col-xl-12 col-12\">\n                                    <button class=\"btn btn-primary btn-sm float-right\"\n                                        (click)=\"paymentDoneToLender(LoanApplyObj)\" i18n>\n                                       Update\n                                    </button>\n                                </div>\n                            </div>\n                            <div class=\"row\">\n                                <div class=\"col-xl-12 col-12 mt-3\">\n                                    <div class=\"table-responsive table shadow-sm\">\n                                        <table class=\"table mb-0\">\n                                            <thead>\n                                                <tr>\n                                                    <th scope=\"col\" i18n>EMI Date</th>\n                                                    <th scope=\"col\" i18n>Payment</th>\n                                                    <th *ngIf=\"returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted || (returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Unpaid && authenticationService.currentUserValue.role == Role.Admin && LoanApplyObj.loanInsuranceRequired)\"\n                                                        scope=\"col\" i18n>\n                                                        <!-- && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id-->\n                                                        Payment Status\n                                                    </th>\n                                                </tr>\n                                            </thead>\n                                            <tbody>\n                                                <tr\n                                                    *ngFor=\"let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index\">\n                                                    <td>{{utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1)\n                                                        | date:'dd-MMM-YYYY'}}</td>\n                                                    <td *ngIf=\"(!LoanApplyObj.calculatedMonthlyAmountForEMI) || (LoanApplyObj.calculatedMonthlyAmountForEMI==LoanObj.calculatedMonthlyAmountForEMI)\">kr\n                                                        {{LoanObj.calculatedMonthlyAmountForEMI}}\n                                                    </td>\n                                                    <td *ngIf=\"(LoanApplyObj.calculatedMonthlyAmountForEMI) && (LoanApplyObj.calculatedMonthlyAmountForEMI!=LoanObj.calculatedMonthlyAmountForEMI)\">kr\n                                                        <span\n                                                            style=\"-webkit-text-decoration-line: line-through;text-decoration-line: line-through;\">\n                                                            {{LoanObj.calculatedMonthlyAmountForEMI}}\n                                                        </span>\n                                                        &nbsp;\n                                                        <span>\n                                                            {{LoanApplyObj.calculatedMonthlyAmountForEMI}}\n                                                        </span>\n                                                    </td>\n                                                    <td\n                                                        *ngIf=\"returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted\">\n                                                        <!--&& LoanApplyObj.borrowerId==authenticationService.currentUserValue._id-->\n                                                        <div\n                                                            *ngIf=\"!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && (LoanApplyObj.borrowerId==authenticationService.currentUserValue._id)\">\n                                                            <div class=\"form-check-inline d-none blocked4bypass\">\n                                                                <div class=\"custom-control custom-checkbox\">\n                                                                    <!--[disabled]=\"LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]\"-->\n                                                                    <input\n                                                                        [(ngModel)]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]\"\n                                                                        name=\"isLoanAmountPaidByBorrower\"\n                                                                        id=\"isLoanAmountPaidByBorrower_{{i}}\"\n                                                                        type=\"checkbox\" class=\"custom-control-input\"\n                                                                        [value]=\"true\"\n                                                                        (change)=\"initiateLoanAmountPaidByBorrower($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_'+i))\"\n                                                                        [checked]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]\"\n                                                                        [disabled]=\"!LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\"\n                                                                        >\n                                                                    <label for=\"isLoanAmountPaidByBorrower_{{i}}\"\n                                                                        class=\"custom-control-label\" i18n>\n                                                                        Is Amount Transfered? </label>\n                                                                </div>\n                                                            </div>\n                                                            <div class=\"form-check-inline\">\n                                                                <div class=\"custom-control custom-checkbox\">\n                                                                    <input name=\"isLoanAmountPaidByBorrower\"\n                                                                        id=\"isLoanAmountPaidByBorrower\" type=\"checkbox\"\n                                                                        class=\"custom-control-input\" [value]=\"true\"\n                                                                        (change)=\"LoanMoneyTransferStatusChange($event, LoanObj, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1))\"\n                                                                        [checked]=\"LoanApplyObj.isLoanAmountPaidByBorrower\">\n                                                                    <label for=\"isLoanAmountPaidByBorrower\"\n                                                                        class=\"custom-control-label\" i18n>\n                                                                        Installment Money Transfered\n                                                                    </label>\n                                                                </div>\n                                                            </div>\n                                                        </div>\n                                                        <div\n                                                            *ngIf=\"returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && (\n                                                                (LoanApplyObj.borrowerId==authenticationService.currentUserValue._id) || (returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.lenderId==authenticationService.currentUserValue._id) || (authenticationService.currentUserValue.role == Role.Admin))\">\n                                                            <i class=\"icon-check\"></i>&nbsp;\n                                                            Paid{{returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj,\n                                                            utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))?'\n                                                            & Verified':''}}\n                                                            &nbsp;<i class=\"icon-eye\"\n                                                                (click)=\"viewCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))\" data-toggle=\"modal\" data-target=\"#installment_deatils_modal\"></i>&nbsp;\n                                                        </div>\n                                                        <div\n                                                            *ngIf=\"!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))  && (LoanApplyObj.lenderId==authenticationService.currentUserValue._id || authenticationService.currentUserValue.role == Role.Admin)\" i18n>\n                                                            <i class=\"icon-close\"></i>&nbsp;Not Paid\n                                                        </div>\n                                                        <div\n                                                            *ngIf=\"returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && !returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.lenderId==authenticationService.currentUserValue._id\">\n                                                            <div class=\"form-check-inline\">\n                                                                <div class=\"custom-control custom-checkbox\">\n                                                                    <!--[disabled]=\"LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]\"-->\n                                                                    <input\n                                                                        [(ngModel)]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrowerConfirmByLender_'+i]\"\n                                                                        name=\"isLoanAmountPaidByBorrowerConfirmByLender\"\n                                                                        id=\"isLoanAmountPaidByBorrowerConfirmByLender_{{i}}\"\n                                                                        type=\"checkbox\" class=\"custom-control-input\"\n                                                                        [value]=\"true\"\n                                                                        (change)=\"initiateLoanAmountPaidByBorrowerConfirmByLender($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrowerConfirmByLender_'+i))\"\n                                                                        [checked]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrowerConfirmByLender_'+i]\">\n                                                                    <label\n                                                                        for=\"isLoanAmountPaidByBorrowerConfirmByLender_{{i}}\"\n                                                                        class=\"custom-control-label\" i18n>\n                                                                        Is Amount Received? </label>\n                                                                </div>\n                                                            </div>\n                                                        </div>\n                                                    </td>\n                                                    <td\n                                                        *ngIf=\"returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Unpaid && authenticationService.currentUserValue.role == Role.Admin && LoanApplyObj.loanInsuranceRequired\">\n                                                        <!--&& LoanApplyObj.borrowerId==authenticationService.currentUserValue._id-->\n                                                        <div\n                                                            *ngIf=\"!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && (authenticationService.currentUserValue.role == Role.Admin)\">\n                                                            <div class=\"form-check-inline\">\n                                                                <div class=\"custom-control custom-checkbox\">\n                                                                    <!--[disabled]=\"LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]\"-->\n                                                                    <input\n                                                                        [(ngModel)]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]\"\n                                                                        name=\"isLoanAmountPaidByBorrower\"\n                                                                        id=\"isLoanAmountPaidByBorrower_{{i}}\"\n                                                                        type=\"checkbox\" class=\"custom-control-input\"\n                                                                        [value]=\"true\"\n                                                                        (change)=\"initiateLoanAmountPaidByBorrower($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_'+i))\"\n                                                                        [checked]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]\">\n                                                                    <label for=\"isLoanAmountPaidByBorrower_{{i}}\"\n                                                                        class=\"custom-control-label\" i18n>\n                                                                        Is Amount Transfered? </label>\n                                                                </div>\n                                                            </div>\n                                                        </div>\n                                                    </td>\n                                                </tr>\n                                            </tbody>\n                                        </table>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"card-footer\">\n                            <div class=\"row\" [ngClass]=\"{ 'd-none': ready2Refund }\"\n                                [ngSwitch]=\"returnSessionApplyStatus(LoanApplyObj)\">\n                                <!-- the same view can be shown in more than one case -->\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Pending\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\">Reject</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\n                                    -->\n                                    <button class=\"btn btn-primary btn-sm float-right mr-2\"\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\" i18n><i\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\n                                </div>\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Accepted\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button> &nbsp;\n                                    <button class=\"btn btn-info btn-sm\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoingWithRefund)\">Apply\n                                        for Refund</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)\">Proceed for\n                                        Execution</button>\n                                        -->\n                                    <a class=\"btn btn-success btn-sm float-left ml-2\" target=\"_blank\"\n                                        [href]=\"returnUrl4downloadCOntractPDF(LoanApplyObj._id)\" download i18n><i\n                                            class=\"icon-cloud-down\"></i>&nbsp;Download Contract</a>\n                                    <button class=\"btn btn-primary btn-sm float-right\"\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\" i18n><i\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\n                                </div>\n\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.OngoingInitiated\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button>\n                                    <button [disabled]=\"true\" class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.AwaitingForApproval)\">Proceed for\n                                        Execution</button>\n                                    -->\n                                </div>\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.AwaitingForApproval\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Ongoing)\">Proceed for\n                                        Execution</button>\n                                    -->\n                                    <button *ngIf=\"LoanApplyObj.createdBy!=authenticationService.currentUserValue._id\"\n                                    (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\" class=\"float-right btn btn-danger btn-sm\" i18n>Reject</button>\n                                    <button *ngIf=\"LoanApplyObj.createdBy!=authenticationService.currentUserValue._id\"\n                                        class=\"btn btn-success btn-sm float-right\"\n                                        (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\" i18n>\n                                        Proceed for Contract Sign\n                                    </button>\n                                    <button class=\"btn btn-primary btn-sm float-right mr-2\"\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\" i18n><i\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\n                                </div>\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Ongoing\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Suspended)\">Reject</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Completed)\">Completed</button>\n                                    -->\n                                </div>\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Completed\">\n                                    <button mat-button mat-dialog-close class=\"btn btn-success btn-sm float-right\"\n                                        (click)=\"addNewRatings(LoanApplyObj)\" i18n>Rate Now</button>\n                                </div>\n                                <!--default case when there are no matches -->\n                                <div class=\"col-xl-12\" *ngSwitchDefault>\n                                    <!-- \n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\">Reject</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\n                                -->\n                                </div>\n                            </div>\n                        </div>\n                        <!--<button *ngIf=\"!check4SessionApplyStatus(LoanApplyObj)\" class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\n                        <button *ngIf=\"check4SessionApplyStatus(LoanApplyObj)\" class=\"btn btn-success btn-sm float-right mr-2\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)\">Proceed for Execution</button>-->\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</mat-dialog-content>\n\n<!-- <mat-dialog-actions align=\"end\">\n    <button class=\"btn btn-primary btn-sm float-right\" mat-button mat-dialog-close>\n        <i class=\"icon-close\"></i> CLOSE\n    </button>\n</mat-dialog-actions> -->\n\n\n\n\n<!--\n<div class=\"row\" [ngClass]=\"{ 'd-none': !userInitiatedForPayment }\">\n    <div class=\"col-xl-12 text-center\">\n        <app-payment></app-payment>\n    </div>\n</div>\n<div class=\"row\" [ngClass]=\"{ 'd-none': !ready2Refund }\">\n    <div class=\"col-xl-12\">\n        <div class=\"card-body\">\n            <div class=\"row\">\n                <div class=\"col-xl-12 text-center\">\n                    <div class=\"form-group\">\n                        <label class=\"mb-3 font-weight-bold\">\n                            Paid Amount:&nbsp;\n                        </label>\n                        <label class=\"mb-3\">\n                            {{refundObj.amount}}\n                        </label>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"mb-3 font-weight-bold\">\n                            Refund Charges:&nbsp;\n                        </label>\n                        <label class=\"mb-3\">\n                            {{refundObj.cancellationCharges}}\n                        </label>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"mb-3 font-weight-bold\">\n                            Amount to be refunded:&nbsp;\n                        </label>\n                        <label class=\"mb-3\">\n                            {{refundObj.finalAmount2Refund}}\n                        </label>\n                    </div>\n                    <div class=\"form-group\">\n                        <button class=\"btn btn-danger btn-sm\" (click)=\"ready2Refund=false\">Cancel</button> &nbsp;\n                        <button class=\"btn btn-success btn-sm\" (click)=\"finalSubmissionForRefund()\">Refund</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n-->";
+      __webpack_exports__["default"] = "<h2 mat-dialog-title class=\"text-primary\">\n    <div class=\"row\">\n        <div class=\"col-xl-11 col-10\">\n            <h4 class=\"text-black-50\" i18n>\n                Lenders Requests for {{utilityService.returnLoanType(LoanObj.loanType)}} of kr {{LoanObj.loanAmount}}\n            </h4>\n        </div>\n        <div class=\"col-xl-1 col-2\">\n            <i class=\"icon-close float-right\" mat-button (click)=\"closeDialog(null, null)\"></i>\n        </div>\n    </div>\n</h2>\n\n<mat-dialog-content class=\"mat-typography\">\n    <div class=\"row\">\n        <div class=\"col-xl-12\">\n            <div id=\"accordion\">\n                <div class=\"card shadow-sm mb-3\" *ngFor=\"let LoanApplyObj of LoanObj.sessionAppliedByBorrowers | mySessionsFilter : 'status' : (SessionStatusTypeFilter.length>0 ? SessionStatusTypeFilter:['accepted']):null:null:null;\">\n                    <div class=\"card-header\">\n                        <span (click)=\"usersProfile(LoanApplyObj.lenderId)\">{{LoanApplyObj.lenderId.firstName}}</span>\n                        <span class=\"badge badge-info mx-2 cursor-pointer\" i18n (click)=\"usersProfile(LoanApplyObj.lenderId)\">View Profile</span>\n                        <!--userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers, true, null, LoanApplyObj.lenderId._id)-->\n                        <a class=\"collapsed card-link\" data-toggle=\"collapse\"\n                            [attr.href]=\"'#collapse_' + LoanApplyObj.borrowerId._id\">\n                           \n                          \n                            <label class=\"badge font-weight-light text-capitalize text-cap\"\n                                [ngClass]=\"{'badge-success': (LoanApplyObj.status==SessionStatus.Accepted || LoanApplyObj.status==SessionStatus.Active || LoanApplyObj.status==SessionStatus.Completed || LoanApplyObj.status==SessionStatus.OngoingInitiated  || LoanApplyObj.status==SessionStatus.AwaitingForApproval  || LoanApplyObj.status==SessionStatus.Ongoing), 'badge-danger': (LoanApplyObj.status==SessionStatus.Rejected || LoanApplyObj.status==SessionStatus.RejectedOngoing || LoanApplyObj.status==SessionStatus.Suspended), 'badge-info': ( LoanApplyObj.status==null || LoanApplyObj.status=='' || LoanApplyObj.status==SessionStatus.Pending)}\">{{\n                                utilityService.returnStringWithReplacing_(LoanApplyObj.status || SessionStatus.Pending)\n                                | titlecase }}</label>\n                            <label class=\"badge badge-warning text-capitalize text-cap ml-2\">\n                                Loan Number: {{LoanApplyObj.loanApplyNumber}}\n                            </label>\n                        </a>\n\n                        <a class=\"collapsed card-link cursor-pointer float-right\" data-toggle=\"collapse\"\n                        [attr.href]=\"'#collapse_' + LoanApplyObj.borrowerId._id\" i18n>\n                        <i class=\"icon-arrow-circle-down\"></i>\n                    </a>\n                    </div>\n                    <div [attr.id]=\"'collapse_' + LoanApplyObj.borrowerId._id\" class=\"collapse\"\n                        data-parent=\"#accordion\">\n                        <div class=\"card-body\">\n                            <div class=\"row\">\n                                <div class=\"col-xl-6 col-12\">\n                                    <h3 i18n>Bank Details</h3>\n\n                                            <ul class=\"list-group list-group-flush\">\n                                                <li class=\"list-group-item\"> <strong>Bank Name</strong>\n                                                    {{LoanApplyObj.lenderId.bankName}}\n                                                    <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                                        true,'bankName', LoanApplyObj.lenderId._id) | titlecase}}-->\n                                                </li>\n                                                <li class=\"list-group-item\"> <strong>Registration Number</strong>\n                                                    {{LoanApplyObj.lenderId.regNumber}}\n                                                    <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                                        true,'regNumber', LoanApplyObj.lenderId._id)}}-->\n                                                </li>\n                                                <li class=\"list-group-item\"> <strong>Account number</strong>\n                                                    {{LoanApplyObj.lenderId.accountNumber}}\n                                                    <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                                        true,'accountNumber', LoanApplyObj.lenderId._id)}}-->\n                                                </li>\n                                                <li class=\"list-group-item\"> <strong>IBAN Number</strong>\n                                                    {{LoanApplyObj.lenderId.iban}}\n                                                    <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                                        true,'iban', LoanApplyObj.lenderId._id)}}-->\n                                                </li>\n                                                <li class=\"list-group-item\"> <strong>Bank Identifier Code</strong>\n                                                    {{LoanApplyObj.lenderId.bic}}\n                                                    <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                                        true,'bic', LoanApplyObj.lenderId._id)}}-->\n                                                </li>\n                                               \n                                            </ul>\n                                        \n                                </div>\n                                <div class=\"col-xl-6 col-12\">\n                                    <h3 i18n>Other Payment Details</h3>\n\n                                            <ul class=\"list-group list-group-flush\">\n                                              \n                                               \n                                                <li class=\"list-group-item\"> <strong>Paypal</strong>\n                                                    {{LoanApplyObj.lenderId.paypalWalletID}}\n                                                    <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                                        true,'paypalWalletID', LoanApplyObj.lenderId._id)}}-->\n                                                </li>\n                                                <li class=\"list-group-item\"> <strong>Skrill</strong>\n                                                    {{LoanApplyObj.lenderId.skrillWalletID}}\n                                                    <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                                        true,'skrillWalletID', LoanApplyObj.lenderId._id)}}-->\n                                                </li>\n                                                <li class=\"list-group-item\"> <strong>Revolut</strong>\n                                                    {{LoanApplyObj.lenderId.revolutWalletID}}\n                                                    <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                                        true,'revolutWalletID', LoanApplyObj.lenderId._id)}}-->\n                                                </li>\n                                                <li class=\"list-group-item\"> <strong>Bitcoin Wallet</strong>\n                                                    {{LoanApplyObj.lenderId.bitCoinWalletID}}\n                                                    <!--\n                                                    {{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                                        true,'bitCoinWalletID', LoanApplyObj.lenderId._id)}}\n                                                        -->\n                                                </li>\n                                            </ul>\n                                        \n                                </div>\n                                <div class=\"col-xl-12 col-12\">\n                                    <div class=\"alert alert-success\" i18n>\n                                       You can use these payment methods to transfer the payment.\n                                      </div>\n                                </div>\n                            </div>\n\n                            <div class=\"row\">\n                                <div class=\"col-xl-6 col-12\" *ngIf=\"LoanApplyObj.proposedLoanAmount\">\n                                    <h3 class=\"text-primary\">New Proposed Amount: <badge class=\"badge badge-primary\">\n                                            {{LoanApplyObj.proposedLoanAmount || 'NA'}}</badge>\n                                    </h3>\n                                </div>\n                                <div class=\"col-xl-6 col-12\" *ngIf=\"LoanApplyObj.loanInsuranceRequired\">\n                                    <h5  class=\"card-title float-right\" i18n>Applied for Insurance with Amount: <badge\n                                            class=\"badge badge-primary\">\n                                            {{LoanApplyObj.loanInsuranceAmount || 'NA'}}</badge>\n                                    </h5>\n                                </div>\n                            </div>\n\n                            <div class=\"row\">\n                                <div class=\"col-xl-6 col-12\" *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender\">\n                                    <div class=\"card bg-gradient-primary mb-3 text-white shadow\">\n                                        <div class=\"card-body dashobard-card p-2\">\n                                            <div class=\"text-xs font-weight-bold mb-3\" i18n>\n                                                Lender Payment Confirmation</div>\n                                                <hr>\n                                                <div class=\"row\" >\n                                                    <div class=\"col-xl-3 col-12\">\n                                                        <div class=\"form-group\">\n                                                            <label for=\"transactionIdForLoanAmountPaidByLender\" i18n>Transaction ID/Payment\n                                                                Ref. ID</label>\n                                                            <h4 i18n>\n                                                                {{LoanApplyObj.transactionIdForLoanAmountPaidByLender}}\n                                                            </h4>\n                                                        </div>\n                                                    </div>\n                                                    <div class=\"col-xl-3 col-12\">\n                                                        <div class=\"form-group\">\n                                                            <label for=\"transactionOnForLoanAmountPaidByLender\" i18n>Transaction\n                                                                Date</label>\n                                                            <h4  >\n                                                                {{LoanApplyObj.transactionOnForLoanAmountPaidByLender | date:'dd-MMM-YYYY'}}\n                                                            </h4>\n                                                        </div>\n                                                    </div>\n                                                    <div class=\"col-xl-3 col-12\">\n                                                        <div class=\"form-group\">\n                                                            <label for=\"createdOnForLoanAmountPaidByLender\" i18n>Updated On</label>\n                                                            <h4  >\n                                                                {{LoanApplyObj.createdOnForLoanAmountPaidByLender | date:'dd-MMM-YYYY'}}\n                                                            </h4>\n                                                        </div>\n                                                    </div>\n                                                    <div class=\"col-xl-3 col-12\">\n                                                        <p class=\"mb-2 text-white\" for=\"transactionDescriptionForLoanAmountPaidByLender\" i18n>\n                                                            Description:</p>\n                                                        <div class=\"text-white\" >\n                                                            {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLender}}\n                                                        </div>\n                                                    </div>\n                                                </div>\n                                        </div>\n                                    </div>\n                                    \n                                </div>\n                                <div class=\"col-xl-6 col-12\"  *ngIf=\"LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                    <div class=\"card bg-success text-white shadow mb-4\">\n                                        <div class=\"card-body dashobard-card p-2\">\n                                            <div class=\"text-xs font-weight-bold  mb-2\" i18n>\n                                                Borrower's Payment confirmation</div>\n                                                <hr>\n                                                <div class=\"row\">\n\n                                                    <div class=\"col-xl-4 col-12\">\n                                                        <div class=\"form-group\">\n                                                            <label for=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrower\"\n                                                                i18n>Transaction\n                                                                Date</label>\n                                                            <h4  >\n                                                                {{LoanApplyObj.transactionOnForLoanAmountPaidByLenderConfirmByBorrower |\n                                                                date:'dd-MMM-YYYY'}}\n                                                            </h4>\n                                                        </div>\n                                                    </div>\n                                                    <div class=\"col-xl-4 col-12\">\n                                                        <div class=\"form-group\">\n                                                            <label for=\"createdOnForLoanAmountPaidByLender\" i18n>Updated On</label>\n                                                            <h4 >\n                                                                {{LoanApplyObj.createdOnForLoanAmountPaidByLenderConfirmByBorrower |\n                                                                date:'dd-MMM-YYYY'}}\n                                                            </h4>\n                                                        </div>\n                                                    </div>\n                                                    <div class=\"col-xl-4 col-12\">\n                                                        <p class=\"mb-2 text-white\"\n                                                            for=\"transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\" i18n>\n                                                            Description:</p>\n                                                        <div class=\"text-white\">\n                                                            {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower}}\n                                                        </div>\n                                                    </div>\n                                                </div>\n                                        </div>\n                                    </div>\n                                  \n                                </div>\n\n                            </div>\n                           \n                            \n                            <div class=\"row\" *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower && LoanApplyObj.isLoanAmountPaidByLender && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted && LoanApplyObj.borrowerId._id==authenticationService.currentUserValue._id\">\n                                <div class=\"col-xl-12\">\n                                    <div class=\"card shadow mb-4\">\n                                        <div class=\"card-header\">\n                                          \n                                                <div class=\"form-group mb-0\">\n                                                    <div class=\"form-check-inline\">\n                                                        <div class=\"custom-control custom-checkbox\">\n                                                            <input [disabled]=\"true\"\n                                                                [(ngModel)]=\"LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower\"\n                                                                name=\"isLoanAmountPaidByLenderConfirmByBorrower\"\n                                                                id=\"isLoanAmountPaidByLenderConfirmByBorrower\" type=\"checkbox\"\n                                                                class=\"custom-control-input\" [value]=\"true\"\n                                                                [checked]=\"LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                                            <label for=\"isLoanAmountPaidByLenderConfirmByBorrower\"\n                                                                class=\"custom-control-label\" i18n>\n                                                                Is Loan Amount Received </label>\n                                                        </div>\n                                                    </div>\n                                                </div>\n                                           \n                                        </div>\n                                        <div class=\"card-body\">\n                                            <div class=\"row\"\n                                            >\n                                            \n                                            <div class=\"col-xl-4 col-12\">\n                                                <div class=\"form-group\">\n            \n                                                    <label for=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrowerCustomised\"\n                                                        i18n>\n                                                        Payment Credit Date\n                                                    </label>\n                                                    <input type=\"date\"\n                                                        [(ngModel)]=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrowerCustomised\"\n                                                        class=\"form-control\" />\n            \n                                                </div>\n                                            </div>\n                                            <div class=\"col-xl-6 col-12\">\n                                                <div class=\"form-group\">\n                                                    <label for=\"usr\" i18n>Transaction Description</label>\n                                                    <input type=\"transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\"\n                                                        class=\"form-control\" placeholder=\"Description\"\n                                                        [(ngModel)]=\"LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\">\n                                                </div>\n                                            </div>\n                                           \n                                            <div class=\"col-xl-2 col-12\">\n                                                <button class=\"btn btn-primary btn-sm float-right mt-4\"\n                                                    (click)=\"paymentDoneByLenderConfirmByBorrower(LoanApplyObj)\" i18n>\n                                                   Update\n                                                </button>\n                                            </div>\n                                        </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n\n                            <div class=\"modal fade\" id=\"installment_deatils_modal\">\n                                <div class=\"modal-dialog modal-dialog-centered modal-lg\">\n                                  <div class=\"modal-content\">\n                                \n                                    <div class=\"modal-header\">\n                                      <h4 class=\"modal-title\" i18n>Installment Details</h4>\n                                      <button type=\"button\" class=\"close\" data-dismiss=\"modal\" (click)=\"LoanApplyObjCurrent4Installment={};\">&times;</button>\n                                    </div>\n                                    \n                                  \n                                    <div class=\"modal-body\">\n                                        <div class=\"row\" *ngIf=\"LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender\">\n                                            <div class=\"col-xl-4 col-12\">\n                                                <div class=\"form-group border-right\">\n                                                    <label for=\"installmentKey\" i18n>Installment For</label>\n                                                    <h4 class=\"text-primary\" >\n                                                        {{LoanApplyObjCurrent4Installment.installmentKey}}\n                                                        <label *ngIf=\"LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin\" class=\"badge badge-warning text-capitalize text-cap float-right\" i18n>\n                                                            Paid By Admin\n                                                        </label>\n                                                    </h4>\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xl-4 col-12\">\n                                                <div class=\"form-group border-right\">\n                                                    <label for=\"transactionIdForLoanAmountPaidToLender\" i18n>Transaction ID/Payment\n                                                        Ref.\n                                                        ID</label>\n                                                    <h4 class=\"text-primary\" >\n                                                        {{LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender}}\n                                                    </h4>\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xl-4 col-12\">\n                                                <div class=\"form-group border-right\">\n                                                    <label for=\"transactionOnForLoanAmountPaidToLender\" i18n>Transaction\n                                                        Date</label>\n                                                    <h4 class=\"text-primary\" >\n                                                        {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender |\n                                                        date:'dd-MMM-YYYY'}}\n                                                    </h4>\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xl-4 col-12\">\n                                                <div class=\"form-group border-right\">\n                                                    <label for=\"createdOnForLoanAmountPaidToLender\" i18n>Updated On</label>\n                                                    <h4 class=\"text-primary\" >\n                                                        {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender |\n                                                        date:'dd-MMM-YYYY'}}\n                                                    </h4>\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xl-4 col-12\">\n                                                <p class=\"mb-2\" for=\"transactionDescriptionForLoanAmountPaidToLender\" i18n>\n                                                    Note:</p>\n                                                <div class=\"text-black-50\" >\n                                                    {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLender}}\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xl-4 col-12\">\n                                                <div class=\"form-group border-right\">\n                                                    <label for=\"transactionOnForLoanAmountPaidToLenderConfirmByLender\"\n                                                        i18n>Confirmation: Transaction Date</label>\n                                                    <h4 class=\"text-primary\" >\n                                                        {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender\n                                                        |\n                                                        date:'dd-MMM-YYYY'}}\n                                                    </h4>\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xl-4 col-12\">\n                                                <div class=\"form-group border-right\">\n                                                    <label for=\"createdOnForLoanAmountPaidToLenderConfirmByLender\"\n                                                        i18n>Confirmation: Updated On</label>\n                                                    <h4 class=\"text-primary\" >\n                                                        {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\n                                                        |\n                                                        date:'dd-MMM-YYYY'}}\n                                                    </h4>\n                                                </div>\n                                            </div>\n                                            <div class=\"col-xl-4 col-12\">\n                                                <p class=\"mb-2\" for=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\"\n                                                    i18n>\n                                                    Confirmation: Note:</p>\n                                                <div class=\"text-black-50\" >\n                                                    {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLenderConfirmByLender}}\n                                                </div>\n                                            </div>\n                                           \n                                        </div>\n                                    </div>\n                                    \n                                 \n                                    <div class=\"modal-footer\">\n                                      <button type=\"button\" class=\"btn btn-secondary\" (click)=\"LoanApplyObjCurrent4Installment={};\" data-dismiss=\"modal\" i18n>Close</button>\n                                    </div>\n                                    \n                                  </div>\n                                </div>\n                              </div>\n                           \n\n                            <div class=\"row\"\n                                *ngIf=\"!LoanApplyObj.isLoanAmountPaidByBorrower && LoanApplyObjCurrent4Installment.installmentKey && !LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender && ((returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted  && LoanApplyObj.borrowerId._id==authenticationService.currentUserValue._id) || (returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Unpaid && authenticationService.currentUserValue.role == Role.Admin))\">\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group border-right\">\n                                        <label for=\"installmentKey\" i18n>Installment For</label>\n                                        <h4 class=\"text-primary\" >\n                                            {{LoanApplyObjCurrent4Installment.installmentKey}}\n                                        </h4>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label for=\"transactionIdForLoanAmountPaidToLender\" i18n>TransactionId/Payment\n                                            Ref. ID</label>\n                                        <input type=\"text\" class=\"form-control\"\n                                            placeholder=\"TransactionId/Payment Ref. ID\"\n                                            [(ngModel)]=\"LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender\">\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n\n                                        <label for=\"transactionOnForLoanAmountPaidToLenderCustomised\" i18n>\n                                            Transaction Date\n                                        </label>\n                                        <input type=\"date\"\n                                            [(ngModel)]=\"transactionOnForLoanAmountPaidToLenderCustomised\"\n                                            class=\"form-control\" />\n\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-12 col-12\">\n                                    <div class=\"form-group\">\n                                        <label for=\"transactionDescriptionForLoanAmountPaidToLender\" i18n>Note.</label>\n                                        <input type=\"transactionDescriptionForLoanAmountPaidToLender\"\n                                            class=\"form-control\" placeholder=\"Description\"\n                                            [(ngModel)]=\"LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLender\">\n                                    </div>\n                                </div>\n                                <br>\n                                <hr>\n                                <div class=\"col-xl-12 col-12\">\n                                    <button class=\"btn btn-primary btn-sm float-right\"\n                                        (click)=\"paymentDoneToLender(LoanApplyObj)\" i18n>\n                                       Update\n                                    </button>\n                                </div>\n                            </div>\n                            <div class=\"row\">\n                                <div class=\"col-xl-12 col-12 mt-3\">\n                                    <div class=\"table-responsive table shadow-sm\">\n                                        <table class=\"table mb-0\">\n                                            <thead>\n                                                <tr>\n                                                    <th scope=\"col\" i18n>EMI Date</th>\n                                                    <th scope=\"col\" i18n>Payment</th>\n                                                    <th *ngIf=\"returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted || (returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Unpaid && authenticationService.currentUserValue.role == Role.Admin && LoanApplyObj.loanInsuranceRequired)\"\n                                                        scope=\"col\" i18n>\n                                                        <!-- && LoanApplyObj.borrowerId._id==authenticationService.currentUserValue._id-->\n                                                        Payment Status\n                                                    </th>\n                                                </tr>\n                                            </thead>\n                                            <tbody>\n                                                <tr\n                                                    *ngFor=\"let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index\">\n                                                    <td>{{utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1)\n                                                        | date:'dd-MMM-YYYY'}}</td>\n                                                    <td *ngIf=\"(!LoanApplyObj.calculatedMonthlyAmountForEMI) || (LoanApplyObj.calculatedMonthlyAmountForEMI==LoanObj.calculatedMonthlyAmountForEMI)\">kr\n                                                        {{LoanObj.calculatedMonthlyAmountForEMI}}\n                                                    </td>\n                                                    <td *ngIf=\"(LoanApplyObj.calculatedMonthlyAmountForEMI) && (LoanApplyObj.calculatedMonthlyAmountForEMI!=LoanObj.calculatedMonthlyAmountForEMI)\">kr\n                                                        <span\n                                                            style=\"-webkit-text-decoration-line: line-through;text-decoration-line: line-through;\">\n                                                            {{LoanObj.calculatedMonthlyAmountForEMI}}\n                                                        </span>\n                                                        &nbsp;\n                                                        <span>\n                                                            {{LoanApplyObj.calculatedMonthlyAmountForEMI}}\n                                                        </span>\n                                                    </td>\n                                                    <td\n                                                        *ngIf=\"returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted\">\n                                                        <!--&& LoanApplyObj.borrowerId._id==authenticationService.currentUserValue._id-->\n                                                        <div\n                                                            *ngIf=\"!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && (LoanApplyObj.borrowerId._id==authenticationService.currentUserValue._id)\">\n                                                            <div class=\"form-check-inline d-none blocked4bypass\">\n                                                                <div class=\"custom-control custom-checkbox\">\n                                                                    <!--[disabled]=\"LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]\"-->\n                                                                    <input [disabled]=\"true\"\n                                                                        [(ngModel)]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]\"\n                                                                        name=\"isLoanAmountPaidByBorrower\"\n                                                                        id=\"isLoanAmountPaidByBorrower_{{i}}\"\n                                                                        type=\"checkbox\" class=\"custom-control-input\"\n                                                                        [value]=\"true\"\n                                                                        (change)=\"initiateLoanAmountPaidByBorrower($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_'+i))\"\n                                                                        [checked]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]\"\n                                                                        [disabled]=\"!LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\"\n                                                                        >\n                                                                    <label for=\"isLoanAmountPaidByBorrower_{{i}}\"\n                                                                        class=\"custom-control-label\" i18n>\n                                                                        Is Amount Transfered? </label>\n                                                                </div>\n                                                            </div>\n                                                            <div class=\"form-check-inline\">\n                                                                <div class=\"custom-control custom-checkbox\">\n                                                                    <input [disabled]=\"true\" name=\"isLoanAmountPaidByBorrower\"\n                                                                        id=\"isLoanAmountPaidByBorrower\" type=\"checkbox\"\n                                                                        class=\"custom-control-input\" [value]=\"true\"\n                                                                        (change)=\"LoanMoneyTransferStatusChange($event, LoanObj, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1))\"\n                                                                        [checked]=\"LoanApplyObj.isLoanAmountPaidByBorrower\">\n                                                                    <label for=\"isLoanAmountPaidByBorrower\"\n                                                                        class=\"custom-control-label\" i18n>\n                                                                        Installment Money Transfered\n                                                                    </label>\n                                                                </div>\n                                                            </div>\n                                                        </div>\n                                                        <div\n                                                            *ngIf=\"returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && (\n                                                                (LoanApplyObj.borrowerId._id==authenticationService.currentUserValue._id) || (returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id) || (authenticationService.currentUserValue.role == Role.Admin))\">\n                                                            <i class=\"icon-check\"></i>&nbsp;\n                                                            Paid{{returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj,\n                                                            utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))?'\n                                                            & Verified':''}}\n                                                            &nbsp;<i class=\"icon-eye\"\n                                                                (click)=\"viewCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))\" data-toggle=\"modal\" data-target=\"#installment_deatils_modal\"></i>&nbsp;\n                                                        </div>\n                                                        <div\n                                                            *ngIf=\"!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))  && (LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id || authenticationService.currentUserValue.role == Role.Admin)\" i18n>\n                                                            <i class=\"icon-close\"></i>&nbsp;Not Paid\n                                                        </div>\n                                                        <div\n                                                            *ngIf=\"returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && !returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\">\n                                                            <div class=\"form-check-inline\">\n                                                                <div class=\"custom-control custom-checkbox\">\n                                                                    <!--[disabled]=\"LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]\"-->\n                                                                    <input [disabled]=\"true\"\n                                                                        [(ngModel)]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrowerConfirmByLender_'+i]\"\n                                                                        name=\"isLoanAmountPaidByBorrowerConfirmByLender\"\n                                                                        id=\"isLoanAmountPaidByBorrowerConfirmByLender_{{i}}\"\n                                                                        type=\"checkbox\" class=\"custom-control-input\"\n                                                                        [value]=\"true\"\n                                                                        (change)=\"initiateLoanAmountPaidByBorrowerConfirmByLender($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrowerConfirmByLender_'+i))\"\n                                                                        [checked]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrowerConfirmByLender_'+i]\">\n                                                                    <label\n                                                                        for=\"isLoanAmountPaidByBorrowerConfirmByLender_{{i}}\"\n                                                                        class=\"custom-control-label\" i18n>\n                                                                        Is Amount Received? </label>\n                                                                </div>\n                                                            </div>\n                                                        </div>\n                                                    </td>\n                                                    <td\n                                                        *ngIf=\"returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Unpaid && authenticationService.currentUserValue.role == Role.Admin && LoanApplyObj.loanInsuranceRequired\">\n                                                        <!--&& LoanApplyObj.borrowerId._id==authenticationService.currentUserValue._id-->\n                                                        <div\n                                                            *ngIf=\"!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && (authenticationService.currentUserValue.role == Role.Admin)\">\n                                                            <div class=\"form-check-inline\">\n                                                                <div class=\"custom-control custom-checkbox\">\n                                                                    <!--[disabled]=\"LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]\"-->\n                                                                    <input [disabled]=\"true\"\n                                                                        [(ngModel)]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]\"\n                                                                        name=\"isLoanAmountPaidByBorrower\"\n                                                                        id=\"isLoanAmountPaidByBorrower_{{i}}\"\n                                                                        type=\"checkbox\" class=\"custom-control-input\"\n                                                                        [value]=\"true\"\n                                                                        (change)=\"initiateLoanAmountPaidByBorrower($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_'+i))\"\n                                                                        [checked]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]\">\n                                                                    <label for=\"isLoanAmountPaidByBorrower_{{i}}\"\n                                                                        class=\"custom-control-label\" i18n>\n                                                                        Is Amount Transfered? </label>\n                                                                </div>\n                                                            </div>\n                                                        </div>\n                                                    </td>\n                                                </tr>\n                                            </tbody>\n                                        </table>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"card-footer\">\n                            <div class=\"row\" [ngClass]=\"{ 'd-none': ready2Refund }\"\n                                [ngSwitch]=\"returnSessionApplyStatus(LoanApplyObj)\">\n                                <!-- the same view can be shown in more than one case -->\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Pending\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\">Reject</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\n                                    -->\n                                    <button class=\"btn btn-primary btn-sm float-right mr-2\"\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\" i18n><i\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\n                                </div>\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Accepted\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button> &nbsp;\n                                    <button class=\"btn btn-info btn-sm\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoingWithRefund)\">Apply\n                                        for Refund</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)\">Proceed for\n                                        Execution</button>\n                                        -->\n                                    <a class=\"btn btn-success btn-sm float-left ml-2\" target=\"_blank\"\n                                        [href]=\"returnUrl4downloadCOntractPDF(LoanApplyObj._id)\" download i18n><i\n                                            class=\"icon-cloud-down\"></i>&nbsp;Download Contract</a>\n                                    <button class=\"btn btn-primary btn-sm float-right\"\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\" i18n><i\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\n                                </div>\n\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.OngoingInitiated\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button>\n                                    <button [disabled]=\"true\" class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.AwaitingForApproval)\">Proceed for\n                                        Execution</button>\n                                    -->\n                                </div>\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.AwaitingForApproval\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Ongoing)\">Proceed for\n                                        Execution</button>\n                                    -->\n                                    <button *ngIf=\"LoanApplyObj.createdBy!=authenticationService.currentUserValue._id\"\n                                    (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\" class=\"float-right btn btn-danger btn-sm\" i18n>Reject</button>\n                                    <button *ngIf=\"LoanApplyObj.createdBy!=authenticationService.currentUserValue._id\"\n                                        class=\"btn btn-success btn-sm float-right\"\n                                        (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\" i18n>\n                                        Proceed for Contract Sign\n                                    </button>\n                                    <button class=\"btn btn-primary btn-sm float-right mr-2\"\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\" i18n><i\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\n                                </div>\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Ongoing\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Suspended)\">Reject</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Completed)\">Completed</button>\n                                    -->\n                                </div>\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Completed\">\n                                    <button mat-button mat-dialog-close class=\"btn btn-success btn-sm float-right\"\n                                        (click)=\"addNewRatings(LoanApplyObj)\" i18n>Rate Now</button>\n                                </div>\n                                <!--default case when there are no matches -->\n                                <div class=\"col-xl-12\" *ngSwitchDefault>\n                                    <!-- \n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\">Reject</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\n                                -->\n                                </div>\n                            </div>\n                        </div>\n                        <!--<button *ngIf=\"!check4SessionApplyStatus(LoanApplyObj)\" class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\n                        <button *ngIf=\"check4SessionApplyStatus(LoanApplyObj)\" class=\"btn btn-success btn-sm float-right mr-2\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)\">Proceed for Execution</button>-->\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</mat-dialog-content>\n\n<!-- <mat-dialog-actions align=\"end\">\n    <button class=\"btn btn-primary btn-sm float-right\" mat-button mat-dialog-close>\n        <i class=\"icon-close\"></i> CLOSE\n    </button>\n</mat-dialog-actions> -->\n\n\n\n\n<!--\n<div class=\"row\" [ngClass]=\"{ 'd-none': !userInitiatedForPayment }\">\n    <div class=\"col-xl-12 text-center\">\n        <app-payment></app-payment>\n    </div>\n</div>\n<div class=\"row\" [ngClass]=\"{ 'd-none': !ready2Refund }\">\n    <div class=\"col-xl-12\">\n        <div class=\"card-body\">\n            <div class=\"row\">\n                <div class=\"col-xl-12 text-center\">\n                    <div class=\"form-group\">\n                        <label class=\"mb-3 font-weight-bold\">\n                            Paid Amount:&nbsp;\n                        </label>\n                        <label class=\"mb-3\">\n                            {{refundObj.amount}}\n                        </label>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"mb-3 font-weight-bold\">\n                            Refund Charges:&nbsp;\n                        </label>\n                        <label class=\"mb-3\">\n                            {{refundObj.cancellationCharges}}\n                        </label>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"mb-3 font-weight-bold\">\n                            Amount to be refunded:&nbsp;\n                        </label>\n                        <label class=\"mb-3\">\n                            {{refundObj.finalAmount2Refund}}\n                        </label>\n                    </div>\n                    <div class=\"form-group\">\n                        <button class=\"btn btn-danger btn-sm\" (click)=\"ready2Refund=false\">Cancel</button> &nbsp;\n                        <button class=\"btn btn-success btn-sm\" (click)=\"finalSubmissionForRefund()\">Refund</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n-->";
       /***/
     },
 
@@ -3764,7 +3876,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"row\">\n    <div class=\"col-xl-11 col-10\">\n        <h4 class=\"mb-3 text-black-50\" i18n>\n            Profile\n        </h4>\n    </div>\n    <div class=\"col-xl-1 col-2\">\n        <i class=\"icon-close float-right\" mat-button (click)=\"closeDialog()\"></i>\n    </div>\n</div>\n<mat-dialog-content class=\"mat-typography\" style=\"max-height: 86vh;\">\n    <div class=\"row mb-2 mb-3\">\n        <div class=\"col-xl-3 col-12\">\n            <div class=\"card\">\n                <div class=\"card-body\">\n                    <img [src]=\"userObj.selfProfileUrl\" onerror=\"this.src='./assets/img/nouser.png';\"\n                        class=\"img-fluid \" />\n                </div>\n                <div class=\"card-footer\">\n                    <strong>\n                        {{userObj.firstName | titlecase}}&nbsp;\n                        {{userObj.middleName | titlecase}}&nbsp;\n                        {{userObj.lastName | titlecase}}\n                    </strong>\n\n                </div>\n            </div>\n            <ul class=\"list-group list-group-flush\">\n                <li class=\"list-group-item\"> <strong>City</strong> {{userObj.cityCode | titlecase}}</li>\n                <li class=\"list-group-item\">\n                    <strong>Country</strong>&nbsp;<span\n                        class=\"flag-icon flag-icon-{{utilityService.returnCountryCodeFromName(userObj.country)}} flag-icon-squared\"></span>&nbsp;{{userObj.country\n                    | titlecase}}\n                </li>\n                <li class=\"list-group-item\">\n                    <strong i18n>Member Since</strong> {{userObj.createdOn | date}}\n                </li>\n                <li class=\"list-group-item\">\n                    <strong i18n>DOB</strong> {{userObj.birthDate | date}}\n                </li>\n                <li class=\"list-group-item\">\n                    <strong i18n>Last Login</strong> {{userObj.lastLoginTime | date:'dd-MMM-YYYY HH:mm'}}\n                </li>\n                <li *ngIf=\"userObj.externalAppLinks\" class=\"list-group-item\">\n                    <div *ngFor=\"let previewUrl of userObj.externalAppLinks\">\n                        <a *ngIf=\"previewUrl\" href=\"{{previewUrl.appLink}}\">{{previewUrl.appName}}</a>\n                    </div>\n                </li>\n            </ul>\n        </div>\n        <div class=\"col-xl-9 col-12 pl-5\">\n            <div class=\"row\">\n                <div class=\"col-xl-6 col-12\" *ngIf=\"userObj.role=='borrower'\">\n                    <ul class=\"list-group\">\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Number of loan notices created:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalLoanCreated ||\n                                'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Signed contracts:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalSignedContract\n                                || 'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Repaid contracts:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalRepaidContract\n                                || 'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Total amount borrowed:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalAmountBorrowed\n                                || 'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Total amount refunded:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalAmountRefunded\n                                || 'NA'}}</span>\n                        </li>\n                    </ul>\n                </div>\n                <div class=\"col-xl-6 col-12\" *ngIf=\"userObj.role=='borrower'\">\n                    <ul class=\"list-group\">\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Active loan must be paid by the next payment date:\n                            <span\n                                class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalAmountOfNextInstallment\n                                || ((utilityService.returnDateWithAddingMonths(utilityService._.now(), 1) |\n                                date:'dd-MMM-YYYY') || 'NA')}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Amount available in budget:\n                            <span\n                                class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalAmountAvailableInBudget\n                                || 'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Recommended:\n                            <span class=\"badge badge-primary badge-pill\">{{myRatingsSummaryObj.totalRecommonded ||\n                                'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Not Recommended:\n                            <span class=\"badge badge-primary badge-pill\">{{myRatingsSummaryObj.totalNotRecommonded ||\n                                'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\">\n                            This borrower is in RKI:\n                            <span class=\"badge badge-primary badge-pill\">{{userObj.isRKIRegistered?'Yes':'No'}}</span>\n                        </li>\n                        <!--\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Email:\n                            <span class=\"badge badge-primary badge-pill\">Vefified</span>\n                        </li>\n                    -->\n                    </ul>\n                </div>\n\n                <div class=\"col-xl-12 col-12\" *ngIf=\"userObj.role=='lender'\">\n                    <ul class=\"list-group\">\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Number of loans created:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalLoanCreated ||\n                                'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Number of active loans:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalActiveContract\n                                || 'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Number of loans completed:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalRepaidContract\n                                || 'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Total amount lent:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalAmountLent\n                                || 'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Total amount refunded:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalAmountRefunded\n                                || 'NA'}}</span>\n                        </li>\n                    </ul>\n                </div>\n\n            </div>\n            <div class=\"row\">\n                <div class=\"col-xl-12 col-12\">\n                    <div class=\"table-responsive table-billing-history mt-4 card\">\n                        <table class=\"table mb-0\">\n                            <thead>\n                                <tr>\n                                    <th scope=\"col\" i18n>Document</th>\n                                    <th scope=\"col\" i18n>Doc Number</th>\n                                    <th scope=\"col\" i18n>Status</th>\n                                    <th scope=\"col\" *ngIf=\"adminViewT\" i18n>View</th>\n                                    <th scope=\"col\" *ngIf=\"adminViewT\">#</th>\n                                </tr>\n                            </thead>\n                            <tbody>\n                                <tr>\n                                    <td i18n>Passport</td>\n                                    <td>{{userObj.myPassportNumber||'NA'}}</td>\n                                    <td>\n                                        <span *ngIf=\"userObj.myPassportMediaVerified\" class=\"badge badge-success\"\n                                            i18n>Verified</span>\n                                        <span *ngIf=\"!userObj.myPassportMediaVerified\" class=\"badge badge-danger\"\n                                            i18n>Unverified</span>\n                                    </td>\n                                    <td *ngIf=\"adminViewT\">\n                                        <div *ngIf=\"userObj.myPassportMedia\">\n                                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myPassportMedia\">\n                                                <div *ngIf=\"previewUrl\">\n                                                    <label title=\"Preview\"\n                                                        (click)=\"mediaPreviewModel(previewUrl.url, 'image')\">\n                                                        <i class=\"icon-eye m-2 text-success\"></i>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div *ngIf=\"userObj.myPassportMediaSelfVerify\">\n                                            <div class=\"col-xl-2\"\n                                                *ngFor=\"let previewUrl of userObj.myPassportMediaSelfVerify\">\n                                                <div *ngIf=\"previewUrl\">\n                                                    <label title=\"Preview\"\n                                                        (click)=\"mediaPreviewModel(previewUrl.url, 'image')\">\n                                                        <i class=\"icon-eye m-2 text-success\"></i>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </td>\n                                    <td *ngIf=\"adminViewT\">\n                                        <button class=\"btn btn-danger btn-sm btn-xs mr-1\" data-title=\"Unverified\"\n                                            *ngIf=\"userObj.myPassportMediaVerified\"\n                                            (click)=\"updateUsersVerificationStatus(userObj._id, 'myPassportMediaVerified', !userObj.myPassportMediaVerified)\">\n                                            <i class=\"icon-close\"></i>\n                                        </button>\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verified\"\n                                            *ngIf=\"!userObj.myPassportMediaVerified\"\n                                            (click)=\"updateUsersVerificationStatus(userObj._id, 'myPassportMediaVerified', !userObj.myPassportMediaVerified)\">\n                                            <i class=\"icon-check\"></i>\n                                        </button>\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Edit\"\n                                            (click)=\"editUsersDocuments(userObj, 'myPassportMedia')\">\n                                            <i class=\"icon-pencil-alt\"></i>\n                                        </button>\n                                    </td>\n                                </tr>\n                                <tr>\n                                    <td i18n>Driving Licence</td>\n                                    <td>{{userObj.myDLNumber||'NA'}}</td>\n                                    <td>\n                                        <span *ngIf=\"userObj.myDLMediaVerified\" class=\"badge badge-success\"\n                                            i18n>Verified</span>\n                                        <span *ngIf=\"!userObj.myDLMediaVerified\" class=\"badge badge-danger\"\n                                            i18n>Unverified</span>\n                                    </td>\n                                    <td *ngIf=\"adminViewT\">\n                                        <div *ngIf=\"userObj.myDLMedia\">\n                                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myDLMedia\">\n                                                <div *ngIf=\"previewUrl\">\n                                                    <label title=\"Preview\"\n                                                        (click)=\"mediaPreviewModel(previewUrl.url, 'image')\">\n                                                        <i class=\"icon-eye m-2 text-success\"></i>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div *ngIf=\"userObj.myDLMediaSelfVerify\">\n                                            <div class=\"col-xl-2\"\n                                                *ngFor=\"let previewUrl of userObj.myDLMediaSelfVerify\">\n                                                <div *ngIf=\"previewUrl\">\n                                                    <label title=\"Preview\"\n                                                        (click)=\"mediaPreviewModel(previewUrl.url, 'image')\">\n                                                        <i class=\"icon-eye m-2 text-success\"></i>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </td>\n                                    <td *ngIf=\"adminViewT\">\n                                        <button class=\"btn btn-danger btn-sm btn-xs mr-1\" data-title=\"Unverified\"\n                                            *ngIf=\"userObj.myDLMediaVerified\"\n                                            (click)=\"updateUsersVerificationStatus(userObj._id, 'myDLMediaVerified', !userObj.myDLMediaVerified)\">\n                                            <i class=\"icon-close\"></i>\n                                        </button>\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verified\"\n                                            *ngIf=\"!userObj.myDLMediaVerified\"\n                                            (click)=\"updateUsersVerificationStatus(userObj._id, 'myDLMediaVerified', !userObj.myDLMediaVerified)\">\n                                            <i class=\"icon-check\"></i>\n                                        </button>\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Edit\"\n                                            (click)=\"editUsersDocuments(userObj, 'myDLMedia')\">\n                                            <i class=\"icon-pencil-alt\"></i>\n                                        </button>\n                                    </td>\n                                </tr>\n                                <tr>\n                                    <td i18n>CPR Number</td>\n                                    <td>{{userObj.cprNumber||'NA'}}</td>\n                                    <td>\n                                        <span *ngIf=\"userObj.myHICardMediaVerified\" class=\"badge badge-success\"\n                                            i18n>Verified</span>\n                                        <span *ngIf=\"!userObj.myHICardMediaVerified\" class=\"badge badge-danger\"\n                                            i18n>Unverified</span>\n                                    </td>\n                                    <td *ngIf=\"adminViewT\">\n                                        <div *ngIf=\"userObj.myHICardMedia\">\n                                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myHICardMedia\">\n                                                <div *ngIf=\"previewUrl\">\n                                                    <label title=\"Preview\"\n                                                        (click)=\"mediaPreviewModel(previewUrl.url, 'image')\">\n                                                        <i class=\"icon-eye m-2 text-success\"></i>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div *ngIf=\"userObj.myHICardMediaSelfVerify\">\n                                            <div class=\"col-xl-2\"\n                                                *ngFor=\"let previewUrl of userObj.myHICardMediaSelfVerify\">\n                                                <div *ngIf=\"previewUrl\">\n                                                    <label title=\"Preview\"\n                                                        (click)=\"mediaPreviewModel(previewUrl.url, 'image')\">\n                                                        <i class=\"icon-eye m-2 text-success\"></i>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </td>\n                                    <td *ngIf=\"adminViewT\">\n                                        <button class=\"btn btn-danger btn-sm btn-xs mr-1\" data-title=\"Unverified\"\n                                            *ngIf=\"userObj.myHICardMediaVerified\"\n                                            (click)=\"updateUsersVerificationStatus(userObj._id, 'myHICardMediaVerified', !userObj.myHICardMediaVerified)\">\n                                            <i class=\"icon-close\"></i>\n                                        </button>\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verified\"\n                                            *ngIf=\"!userObj.myHICardMediaVerified\"\n                                            (click)=\"updateUsersVerificationStatus(userObj._id, 'myHICardMediaVerified', !userObj.myHICardMediaVerified)\">\n                                            <i class=\"icon-check\"></i>\n                                        </button>\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Edit\"\n                                            (click)=\"editUsersDocuments(userObj, 'myHICardMedia')\">\n                                            <i class=\"icon-pencil-alt\"></i>\n                                        </button>\n                                    </td>\n                                </tr>\n                                <tr *ngIf=\"userObj.role=='borrower' && !userObj.isRKIRegistered\">\n                                    <td i18n>RKI Document </td>\n                                    <td>{{userObj.myRKINumber||'NA'}}</td>\n                                    <td>\n                                        <span *ngIf=\"userObj.myRKIMediaVerified\" class=\"badge badge-success\"\n                                            i18n>Verified</span>\n                                        <span *ngIf=\"!userObj.myRKIMediaVerified\" class=\"badge badge-danger\"\n                                            i18n>Unverified</span>\n                                    </td>\n                                    <td *ngIf=\"adminViewT\">\n                                        <div *ngIf=\"userObj.myRKIMedia\">\n                                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myRKIMedia\">\n                                                <div *ngIf=\"previewUrl\">\n                                                    <label title=\"Preview\"\n                                                        (click)=\"mediaPreviewModel(previewUrl.url, 'image')\">\n                                                        <i class=\"icon-eye m-2 text-success\"></i>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div *ngIf=\"userObj.myRKIMediaSelfVerify\">\n                                            <div class=\"col-xl-2\"\n                                                *ngFor=\"let previewUrl of userObj.myRKIMediaSelfVerify\">\n                                                <div *ngIf=\"previewUrl\">\n                                                    <label title=\"Preview\"\n                                                        (click)=\"mediaPreviewModel(previewUrl.url, 'image')\">\n                                                        <i class=\"icon-eye m-2 text-success\"></i>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </td>\n                                    <td *ngIf=\"adminViewT\">\n                                        <button class=\"btn btn-danger btn-sm btn-xs mr-1\" data-title=\"Unverified\"\n                                            *ngIf=\"userObj.myRKIMediaVerified\"\n                                            (click)=\"updateUsersVerificationStatus(userObj._id, 'myRKIMediaVerified', !userObj.myRKIMediaVerified)\">\n                                            <i class=\"icon-close\"></i>\n                                        </button>\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verified\"\n                                            *ngIf=\"!userObj.myRKIMediaVerified\"\n                                            (click)=\"updateUsersVerificationStatus(userObj._id, 'myRKIMediaVerified', !userObj.myRKIMediaVerified)\">\n                                            <i class=\"icon-check\"></i>\n                                        </button>\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Edit\"\n                                            (click)=\"editUsersDocuments(userObj, 'myRKIMedia')\">\n                                            <i class=\"icon-pencil-alt\"></i>\n                                        </button>\n                                    </td>\n                                </tr>\n\n                            </tbody>\n                        </table>\n                    </div>\n                </div>\n                <div class=\"col-xl-12 col-12 mt-4\">\n                    <div class=\"row\">\n                        <div class=\"col-xl-6 col-12\">\n                            <div class=\"my-3\">\n                                <!--\n            <span *ngIf=\"!adminViewT\" (click)=\"addNewRatings(userObj)\" mat-button mat-dialog-close>&nbsp;\n                <i class=\"icon-star\"></i>\n            </span>\n        -->\n                                <span>\n                                    &nbsp;\n                                    <i *ngIf=\"!myRatingsSummaryObj.totalRatingsAvg\" class=\"icon-star\"></i>\n                                    <app-star *ngIf=\"myRatingsSummaryObj.totalRatingsAvg\"\n                                        [rating]=\"myRatingsSummaryObj.totalRatingsAvg\">\n                                    </app-star>\n\n                                </span>\n                            </div>\n                        </div>\n                        <div class=\"col-xl-6 col-12\">\n                            <div class=\"my-3\">\n                                <span>\n                                    &nbsp;\n                                    <i *ngIf=\"myRatingsSummaryObj.totalRatingsAvg && adminViewT\" class=\"icon-eye\"\n                                        (click)=\"usersRatings(userObj)\"></i>\n                                </span>\n                            </div>\n\n                        </div>\n                    </div>\n                    <div class=\"row mt-4\">\n                        <div class=\"col-xl-6 col-12\">\n                            <div class=\"comment_sec\" *ngFor=\"let obj of utilityService._.values(RatingDetailsArray)\">\n                                <article class=\"row\"\n                                    *ngIf=\"utilityService._.keys(obj.flagCommentObj).length==0 && utilityService._.keys(obj.reportedUserObj).length==0\">\n                                    <div class=\"col-12\">\n                                        <div class=\"blog_center\">\n                                            <div>\n                                                <figure [hidden]=\"true\" class=\"thumbnail\">\n                                                    <img alt=\"\" [src]=\"obj.createdByUserObj.selfProfileUrl\"\n                                                        onerror=\"this.src='/assets/img/nouser.png';\">\n                                                </figure>\n                                            </div>\n                                            <div class=\"blog_user arrow left\">\n                                                <div class=\"panel-body\">\n                                                    <div class=\"text-left\">\n                                                        <div class=\"comment-user\"><i class=\"fa fa-user\"></i>\n                                                            <h6> {{obj.createdByUserObj.firstName}} </h6>\n                                                        </div>\n                                                        <div class=\"comment-date\"><i class=\"fa fa-clock-o\"></i>\n                                                            <h6> {{obj.createdOn |\n                                                                date:'dd-MMM-YYYY'}}</h6>\n                                                        </div>\n                                                        <div class=\"comment-date mt-n1\">\n                                                            <app-star [rating]=\"obj.rating\">\n                                                            </app-star>\n                                                        </div>\n                                                    </div>\n                                                    <div class=\"comment-post\">\n                                                        <p>{{obj.title}}</p>\n                                                        <p>\n                                                            {{obj.comment}}\n                                                        </p>\n                                                        <div class=\"float-left\">\n                                                            <span\n                                                                class=\"badge badge-success mr-2 font-weight text-capitalize text-cap\">\n                                                                {{obj.isRecommonded?'Recommonded':''}}\n                                                            </span>\n                                                        </div>\n                                                        <hr />\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </article>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <!--\n            <div class=\"row\" *ngIf=\"adminViewT\">\n                <div class=\"col-xl-12 col-12\">\n                    <hr>\n                    <div class=\"row\">\n                        <div class=\"col-xl-12\"><strong>Passport\n                                Documents</strong>\n                        </div>\n                        <div *ngIf=\"userObj.myPassportMedia\">\n                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myPassportMedia\">\n                                <div *ngIf=\"previewUrl\">\n                                    <video width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')>-1\"\n                                        class=\"img-fluid border\" controls [src]=\"previewUrl.url\"></video>\n                                    <img width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('image/')>-1\"\n                                        class=\"img-fluid border\" [src]=\"previewUrl.url\"\n                                        onerror=\"this.src='./assets/img/na.png';\" />\n                                    <img width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1\"\n                                        class=\"img-fluid border\" src=\"./assets/img/pdf.png\"\n                                        onerror=\"this.src='./assets/img/na.png';\" />\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <hr>\n                    <div class=\"row\">\n                        <div class=\"col-xl-12\"><strong>Driving Licence\n                                Documents</strong></div>\n                        <div *ngIf=\"userObj.myDLMedia\">\n                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myDLMedia\">\n                                <div *ngIf=\"previewUrl\">\n                                    <video width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')>-1\"\n                                        class=\"img-fluid border\" controls [src]=\"previewUrl.url\"></video>\n                                    <img width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('image/')>-1\"\n                                        class=\"img-fluid border\" [src]=\"previewUrl.url\"\n                                        onerror=\"this.src='./assets/img/na.png';\" />\n                                    <img width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1\"\n                                        class=\"img-fluid border\" src=\"./assets/img/pdf.png\"\n                                        onerror=\"this.src='./assets/img/na.png';\" />\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <hr>\n                    <div class=\"row\">\n                        <div class=\"col-xl-12\"><strong>\n                                CPR Number Documents\n                            </strong>\n                        </div>\n                        <div *ngIf=\"userObj.myHICardMedia\">\n                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myHICardMedia\">\n                                <div *ngIf=\"previewUrl\">\n                                    <video width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')>-1\"\n                                        class=\"img-fluid border\" controls [src]=\"previewUrl.url\"></video>\n                                    <img width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('image/')>-1\"\n                                        class=\"img-fluid border\" [src]=\"previewUrl.url\"\n                                        onerror=\"this.src='./assets/img/na.png';\" />\n                                    <img width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1\"\n                                        class=\"img-fluid border\" src=\"./assets/img/pdf.png\"\n                                        onerror=\"this.src='./assets/img/na.png';\" />\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"row\" *ngIf=\"userObj.role=='borrower' && !userObj.isRKIRegistered\">\n                        <hr>\n                        <div class=\"col-xl-12\">\n                            <strong>RKI Documents</strong>&nbsp;\n                        </div>\n                        <div *ngIf=\"userObj.myRKIMedia\">\n                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myRKIMedia\">\n                                <div *ngIf=\"previewUrl\">\n                                    <video width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')>-1\"\n                                        class=\"img-fluid border\" controls [src]=\"previewUrl.url\"></video>\n                                    <img width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('image/')>-1\"\n                                        class=\"img-fluid border\" [src]=\"previewUrl.url\"\n                                        onerror=\"this.src='./assets/img/na.png';\" />\n                                    <img width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1\"\n                                        class=\"img-fluid border\" src=\"./assets/img/pdf.png\"\n                                        onerror=\"this.src='./assets/img/na.png';\" />\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        -->\n            <div class=\"row\" *ngIf=\"adminViewT\">\n                <div class=\"col-xl-12 col-12\">\n                    <div class=\"card\">\n                        <div class=\"card-body\">\n                            <ul class=\"list-group list-group-flush\">\n                                <li class=\"list-group-item\"> <strong>Bank Name</strong>\n                                    {{userObj.bankName | titlecase}}\n                                </li>\n                                <li class=\"list-group-item\"> <strong>Registration Number</strong>\n                                    {{userObj.regNumber}}\n                                </li>\n                                <li class=\"list-group-item\"> <strong>Account number</strong>\n                                    {{userObj.accountNumber}}\n                                </li>\n                                <li class=\"list-group-item\"> <strong>IBAN Number</strong>\n                                    {{userObj.iban}}\n                                </li>\n                                <li class=\"list-group-item\"> <strong>Bank Identifier Code</strong>\n                                    {{userObj.bic}}\n                                </li>\n                                <li class=\"list-group-item\"> <strong>Paypal</strong>\n                                    {{userObj.paypalWalletID}}\n                                </li>\n                                <li class=\"list-group-item\"> <strong>Skrill</strong>\n                                    {{userObj.skrillWalletID}}\n                                </li>\n                                <li class=\"list-group-item\"> <strong>Revolut</strong>\n                                    {{userObj.revolutWalletID}}\n                                </li>\n                                <li class=\"list-group-item\"> <strong>Bitcoin Wallet</strong>\n                                    {{userObj.bitCoinWalletID}}\n                                </li>\n                            </ul>\n                        </div>\n                        <div class=\"card-footer\">\n\n                        </div>\n                    </div>\n                    <div class=\"col-xl-12 col-12\" *ngIf=\"userObj.bankingOldDataCollection\">\n                        <div class=\"table-responsive table-billing-history\">\n                            <table class=\"table mb-0\">\n                                <thead>\n                                    <tr>\n                                        <th scope=\"col\" i18n>Changed On</th>\n                                        <th scope=\"col\" i18n>Bank Name</th>\n                                        <th scope=\"col\" i18n>Registration Number</th>\n                                        <th scope=\"col\" i18n>Account number</th>\n                                        <th scope=\"col\" i18n>IBAN Number</th>\n                                        <th scope=\"col\" i18n>Bank Identifier Code</th>\n                                        <th scope=\"col\" i18n>Paypal</th>\n                                        <th scope=\"col\" i18n>Skrill</th>\n                                        <th scope=\"col\" i18n>Revolut</th>\n                                        <th scope=\"col\" i18n>Bitcoin Wallet</th>\n                                    </tr>\n                                </thead>\n                                <tbody>\n                                    <tr\n                                        *ngFor=\"let bankingOldData of utilityService._.values(userObj.bankingOldDataCollection)\">\n                                        <td i18n>{{bankingOldData.updatedOn | date}}</td>\n                                        <td>{{bankingOldData.bankName | titlecase}}</td>\n                                        <td>{{bankingOldData.regNumber}}</td>\n                                        <td>{{bankingOldData.accountNumber}}</td>\n                                        <td>{{bankingOldData.iban}}</td>\n                                        <td>{{bankingOldData.bic}}</td>\n                                        <td>{{bankingOldData.paypalWalletID}}</td>\n                                        <td>{{bankingOldData.skrillWalletID}}</td>\n                                        <td>{{bankingOldData.revolutWalletID}}</td>\n                                        <td>{{bankingOldData.bitCoinWalletID}}</td>\n                                    </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                        <!--\n                        <div class=\"row\" *ngFor=\"let bankingOldData of utilityService._.values(userObj.bankingOldDataCollection)\">\n                            <div class=\"col-xl-12 col-12\">\n                                <ul class=\"list-group list-group-flush\">\n                                    <li class=\"list-group-item\"> <strong>Bank Name</strong> \n                                        {{bankingOldData.bankName | titlecase}}\n                                    </li>\n                                    <li class=\"list-group-item\"> <strong>Registration Number</strong> \n                                        {{bankingOldData.regNumber}}\n                                    </li>\n                                    <li class=\"list-group-item\"> <strong>Account number</strong> \n                                        {{bankingOldData.accountNumber}}\n                                    </li>\n                                    <li class=\"list-group-item\"> <strong>IBAN Number</strong> \n                                        {{bankingOldData.iban}}\n                                    </li>\n                                    <li class=\"list-group-item\"> <strong>Bank Identifier Code</strong> \n                                        {{bankingOldData.bic}}\n                                    </li>\n                                    <li class=\"list-group-item\"> <strong>Paypal</strong> \n                                        {{bankingOldData.paypalWalletID}}\n                                    </li>\n                                    <li class=\"list-group-item\"> <strong>Skrill</strong> \n                                        {{bankingOldData.skrillWalletID}}\n                                    </li>\n                                    <li class=\"list-group-item\"> <strong>Revolut</strong> \n                                        {{bankingOldData.revolutWalletID}}\n                                    </li>\n                                    <li class=\"list-group-item\"> <strong>Bitcoin Wallet</strong> \n                                        {{bankingOldData.bitCoinWalletID}}\n                                    </li>\n                                    <li class=\"list-group-item\">\n                                        <strong i18n>Changed On</strong> {{bankingOldData.updatedOn | date}}\n                                    </li>\n                                </ul>\n                            </div>\n                        </div>\n                    -->\n\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</mat-dialog-content>";
+      __webpack_exports__["default"] = "<div class=\"row\">\n    <div class=\"col-xl-11 col-10\">\n        <h4 class=\"mb-3 text-black-50\" i18n>\n            Profile\n        </h4>\n    </div>\n    <div class=\"col-xl-1 col-2\">\n        <i class=\"icon-close float-right\" mat-button (click)=\"closeDialog()\"></i>\n    </div>\n</div>\n<mat-dialog-content class=\"mat-typography\" style=\"max-height: 86vh;\">\n    <div class=\"row mb-2 mb-3\">\n        <div class=\"col-xl-3 col-12\">\n            <div class=\"card\">\n                <div class=\"card-header\">\n                    <span class=\"badge badge-primary badge-pill text-capitalize pull-left\">{{userObj.role || 'NA'}}</span>\n                    <span class=\"badge badge-primary badge-pill text-capitalize pull-right\">{{userObj.userTypeTitle || authenticationService.returnUserTypeForUserFromSuppliedUserLevel(userObj.userType)}}</span>\n                </div>\n                <div class=\"card-body\">\n                    <img [src]=\"userObj.selfProfileUrl\" onerror=\"this.src='./assets/img/nouser.png';\"\n                        class=\"img-fluid \" />\n                </div>\n                <div class=\"card-footer\">                    \n                    <strong>\n                        {{userObj.firstName | titlecase}}&nbsp;\n                        {{userObj.middleName | titlecase}}&nbsp;\n                        {{userObj.lastName | titlecase}}\n                    </strong>\n\n                </div>\n            </div>\n            <ul class=\"list-group list-group-flush\">\n                <li class=\"list-group-item\"> <strong>City</strong> {{userObj.cityCode | titlecase}}</li>\n                <li class=\"list-group-item\">\n                    <strong>Country</strong>&nbsp;<span\n                        class=\"flag-icon flag-icon-{{utilityService.returnCountryCodeFromName(userObj.country)}} flag-icon-squared\"></span>&nbsp;{{userObj.country\n                    | titlecase}}\n                </li>\n                <li class=\"list-group-item\">\n                    <strong i18n>Member Since</strong> {{userObj.createdOn | date}}\n                </li>\n                <li class=\"list-group-item\">\n                    <strong i18n>DOB</strong> {{userObj.birthDate | date}}\n                </li>\n                <li class=\"list-group-item\">\n                    <strong i18n>Last Login</strong> {{userObj.lastLoginTime | date:'dd-MMM-YYYY HH:mm'}}\n                </li>\n                \n            </ul>\n        </div>\n        <div class=\"col-xl-9 col-12 pl-5\">\n            <div class=\"row\">\n                <div class=\"col-xl-6 col-12\" *ngIf=\"userObj.role=='borrower'\">\n                    <ul class=\"list-group\">\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Number of loan notices created:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalLoanCreated ||\n                                'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Signed contracts:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalSignedContract\n                                || 'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Repaid contracts:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalRepaidContract\n                                || 'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Total amount borrowed:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalAmountBorrowed\n                                || 'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Total amount refunded:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalAmountRefunded\n                                || 'NA'}}</span>\n                        </li>\n                    </ul>\n                </div>\n                <div class=\"col-xl-6 col-12\" *ngIf=\"userObj.role=='borrower'\">\n                    <ul class=\"list-group\">\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Active loan must be paid by the next payment date:\n                            <span\n                                class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalAmountOfNextInstallment\n                                || ((utilityService.returnDateWithAddingMonths(utilityService._.now(), 1) |\n                                date:'dd-MMM-YYYY') || 'NA')}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Amount available in budget:\n                            <span\n                                class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalAmountAvailableInBudget\n                                || 'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Recommended:\n                            <span class=\"badge badge-primary badge-pill\">{{myRatingsSummaryObj.totalRecommonded ||\n                                'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Not Recommended:\n                            <span class=\"badge badge-primary badge-pill\">{{myRatingsSummaryObj.totalNotRecommonded ||\n                                'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\">\n                            This borrower is in RKI:\n                            <span class=\"badge badge-primary badge-pill\">{{userObj.isRKIRegistered?'Yes':'No'}}</span>\n                        </li>\n                        <!--\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Email:\n                            <span class=\"badge badge-primary badge-pill\">Vefified</span>\n                        </li>\n                    -->\n                    </ul>\n                </div>\n\n                <div class=\"col-xl-12 col-12\" *ngIf=\"userObj.role=='lender'\">\n                    <ul class=\"list-group\">\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Number of loans created:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalLoanCreated ||\n                                'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Number of active loans:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalActiveContract\n                                || 'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Number of loans completed:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalRepaidContract\n                                || 'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Total amount lent:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalAmountLent\n                                || 'NA'}}</span>\n                        </li>\n                        <li class=\"list-group-item d-flex justify-content-between align-items-center\" i18n>\n                            Total amount refunded:\n                            <span class=\"badge badge-primary badge-pill\">{{profileAdditionalData.totalAmountRefunded\n                                || 'NA'}}</span>\n                        </li>\n                    </ul>\n                </div>\n\n            </div>\n            <div class=\"row\">\n                <div class=\"col-xl-12 col-12\">\n                    <div class=\"table-responsive table-billing-history mt-4 card\">\n                        <table class=\"table mb-0\">\n                            <thead>\n                                <tr>\n                                    <th scope=\"col\" i18n>Document</th>\n                                    <th scope=\"col\"  *ngIf=\"adminViewT\"  i18n>Doc Number</th>\n                                    <th scope=\"col\" i18n>Status</th>\n                                    <th scope=\"col\" *ngIf=\"adminViewT\" i18n>View</th>\n                                    <th scope=\"col\" *ngIf=\"adminViewT\">#</th>\n                                </tr>\n                            </thead>\n                            <tbody>\n                                <tr>\n                                    <td i18n>Passport</td>\n                                    <td  *ngIf=\"adminViewT\" >{{userObj.myPassportNumber||'NA'}}</td>\n                                    <td>\n                                        <span [ngSwitch]=\"userObj.myPassportMediaVerified\" i18n>\n                                            <i *ngSwitchCase=\"2\" class=\"badge badge-danger font-weight-light\">Rejected</i>\n                                            <i *ngSwitchCase=\"1\" class=\"badge badge-success font-weight-light\">Verified</i>\n                                            <i *ngSwitchDefault class=\"badge badge-danger font-weight-light\">Pending</i>\n                                        </span>\n                                        <!--\n                                        <span *ngIf=\"userObj.myPassportMediaVerified\" class=\"badge badge-success\"\n                                            i18n>Verified</span>\n                                        <span *ngIf=\"!userObj.myPassportMediaVerified\" class=\"badge badge-danger\"\n                                            i18n>Unverified</span>\n                                        -->\n                                    </td>\n                                    <td *ngIf=\"adminViewT\">\n                                        <div *ngIf=\"userObj.myPassportMedia\">\n                                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myPassportMedia\">\n                                                <div *ngIf=\"previewUrl\">\n                                                    <label title=\"Preview\"\n                                                        (click)=\"mediaPreviewModel(previewUrl.url, 'image')\">\n                                                        <i class=\"icon-eye m-2 text-success\"></i>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div *ngIf=\"userObj.myPassportMediaSelfVerify\">\n                                            <div class=\"col-xl-2\"\n                                                *ngFor=\"let previewUrl of userObj.myPassportMediaSelfVerify\">\n                                                <div *ngIf=\"previewUrl\">\n                                                    <label title=\"Preview\"\n                                                        (click)=\"mediaPreviewModel(previewUrl.url, 'image')\">\n                                                        <i class=\"icon-eye m-2 text-success\"></i>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </td>\n                                    <td *ngIf=\"adminViewT\">\n                                        <button class=\"btn btn-danger btn-sm btn-xs mr-1\" data-title=\"Unverified\"\n                                            *ngIf=\"userObj.myPassportMediaVerified==1\"\n                                            (click)=\"updateUsersVerificationStatus(userObj._id, 'myPassportMediaVerified', 2)\">\n                                            <i class=\"icon-close\"></i>\n                                        </button>\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verified\"\n                                            *ngIf=\"userObj.myPassportMediaVerified==0 || userObj.myPassportMediaVerified==2\"\n                                            (click)=\"updateUsersVerificationStatus(userObj._id, 'myPassportMediaVerified', 1)\">\n                                            <i class=\"icon-check\"></i>\n                                        </button>\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Edit\"\n                                            (click)=\"editUsersDocuments(userObj, 'myPassportMedia')\">\n                                            <i class=\"icon-pencil-alt\"></i>\n                                        </button>\n                                    </td>\n                                </tr>\n                                <tr>\n                                    <td i18n>Driving Licence</td>\n                                    <td  *ngIf=\"adminViewT\" >{{userObj.myDLNumber||'NA'}}</td>\n                                    <td>\n                                        <span [ngSwitch]=\"userObj.myDLMediaVerified\" i18n>\n                                            <i *ngSwitchCase=\"2\" class=\"badge badge-danger font-weight-light\">Rejected</i>\n                                            <i *ngSwitchCase=\"1\" class=\"badge badge-success font-weight-light\">Verified</i>\n                                            <i *ngSwitchDefault class=\"badge badge-danger font-weight-light\">Pending</i>\n                                        </span>\n                                        <!--\n                                        <span *ngIf=\"userObj.myDLMediaVerified\" class=\"badge badge-success\"\n                                            i18n>Verified</span>\n                                        <span *ngIf=\"!userObj.myDLMediaVerified\" class=\"badge badge-danger\"\n                                            i18n>Unverified</span>\n                                            -->\n                                    </td>\n                                    <td *ngIf=\"adminViewT\">\n                                        <div *ngIf=\"userObj.myDLMedia\">\n                                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myDLMedia\">\n                                                <div *ngIf=\"previewUrl\">\n                                                    <label title=\"Preview\"\n                                                        (click)=\"mediaPreviewModel(previewUrl.url, 'image')\">\n                                                        <i class=\"icon-eye m-2 text-success\"></i>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div *ngIf=\"userObj.myDLMediaSelfVerify\">\n                                            <div class=\"col-xl-2\"\n                                                *ngFor=\"let previewUrl of userObj.myDLMediaSelfVerify\">\n                                                <div *ngIf=\"previewUrl\">\n                                                    <label title=\"Preview\"\n                                                        (click)=\"mediaPreviewModel(previewUrl.url, 'image')\">\n                                                        <i class=\"icon-eye m-2 text-success\"></i>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </td>\n                                    <td *ngIf=\"adminViewT\">\n                                        <button class=\"btn btn-danger btn-sm btn-xs mr-1\" data-title=\"Unverified\"\n                                            *ngIf=\"userObj.myDLMediaVerified==1\"\n                                            (click)=\"updateUsersVerificationStatus(userObj._id, 'myDLMediaVerified', 2)\">\n                                            <i class=\"icon-close\"></i>\n                                        </button>\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verified\"\n                                            *ngIf=\"userObj.myDLMediaVerified==0 || userObj.myDLMediaVerified==2\"\n                                            (click)=\"updateUsersVerificationStatus(userObj._id, 'myDLMediaVerified', 1)\">\n                                            <i class=\"icon-check\"></i>\n                                        </button>\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Edit\"\n                                            (click)=\"editUsersDocuments(userObj, 'myDLMedia')\">\n                                            <i class=\"icon-pencil-alt\"></i>\n                                        </button>\n                                    </td>\n                                </tr>\n                                <tr>\n                                    <td i18n>CPR Number</td>\n                                    <td  *ngIf=\"adminViewT\" >{{userObj.cprNumber||'NA'}}</td>\n                                    <td>\n                                        <span [ngSwitch]=\"userObj.myHICardMediaVerified\" i18n>\n                                            <i *ngSwitchCase=\"2\" class=\"badge badge-danger font-weight-light\">Rejected</i>\n                                            <i *ngSwitchCase=\"1\" class=\"badge badge-success font-weight-light\">Verified</i>\n                                            <i *ngSwitchDefault class=\"badge badge-danger font-weight-light\">Pending</i>\n                                        </span>\n                                        <!--\n                                        <span *ngIf=\"userObj.myHICardMediaVerified\" class=\"badge badge-success\"\n                                            i18n>Verified</span>\n                                        <span *ngIf=\"!userObj.myHICardMediaVerified\" class=\"badge badge-danger\"\n                                            i18n>Unverified</span>\n                                        -->\n                                    </td>\n                                    <td *ngIf=\"adminViewT\">\n                                        <div *ngIf=\"userObj.myHICardMedia\">\n                                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myHICardMedia\">\n                                                <div *ngIf=\"previewUrl\">\n                                                    <label title=\"Preview\"\n                                                        (click)=\"mediaPreviewModel(previewUrl.url, 'image')\">\n                                                        <i class=\"icon-eye m-2 text-success\"></i>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div *ngIf=\"userObj.myHICardMediaSelfVerify\">\n                                            <div class=\"col-xl-2\"\n                                                *ngFor=\"let previewUrl of userObj.myHICardMediaSelfVerify\">\n                                                <div *ngIf=\"previewUrl\">\n                                                    <label title=\"Preview\"\n                                                        (click)=\"mediaPreviewModel(previewUrl.url, 'image')\">\n                                                        <i class=\"icon-eye m-2 text-success\"></i>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </td>\n                                    <td *ngIf=\"adminViewT\">\n                                        <button class=\"btn btn-danger btn-sm btn-xs mr-1\" data-title=\"Unverified\"\n                                            *ngIf=\"userObj.myHICardMediaVerified==1\"\n                                            (click)=\"updateUsersVerificationStatus(userObj._id, 'myHICardMediaVerified', 2)\">\n                                            <i class=\"icon-close\"></i>\n                                        </button>\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verified\"\n                                            *ngIf=\"userObj.myHICardMediaVerified==0 || userObj.myHICardMediaVerified==2\"\n                                            (click)=\"updateUsersVerificationStatus(userObj._id, 'myHICardMediaVerified', 1)\">\n                                            <i class=\"icon-check\"></i>\n                                        </button>\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Edit\"\n                                            (click)=\"editUsersDocuments(userObj, 'myHICardMedia')\">\n                                            <i class=\"icon-pencil-alt\"></i>\n                                        </button>\n                                    </td>\n                                </tr>\n                                <tr *ngIf=\"userObj.role=='borrower' && !userObj.isRKIRegistered\">\n                                    <td i18n>RKI Document </td>\n                                    <td  *ngIf=\"adminViewT\" >{{userObj.myRKINumber||'NA'}}</td>\n                                    <td>\n                                        <span [ngSwitch]=\"userObj.myRKIMediaVerified\" i18n>\n                                            <i *ngSwitchCase=\"2\" class=\"badge badge-danger font-weight-light\">Rejected</i>\n                                            <i *ngSwitchCase=\"1\" class=\"badge badge-success font-weight-light\">Verified</i>\n                                            <i *ngSwitchDefault class=\"badge badge-danger font-weight-light\">Pending</i>\n                                        </span>\n                                        <!--\n                                        <span *ngIf=\"userObj.myRKIMediaVerified\" class=\"badge badge-success\"\n                                            i18n>Verified</span>\n                                        <span *ngIf=\"!userObj.myRKIMediaVerified\" class=\"badge badge-danger\"\n                                            i18n>Unverified</span>\n                                            -->\n                                    </td>\n                                    <td *ngIf=\"adminViewT\">\n                                        <div *ngIf=\"userObj.myRKIMedia\">\n                                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myRKIMedia\">\n                                                <div *ngIf=\"previewUrl\">\n                                                    <label title=\"Preview\"\n                                                        (click)=\"mediaPreviewModel(previewUrl.url, 'image')\">\n                                                        <i class=\"icon-eye m-2 text-success\"></i>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div *ngIf=\"userObj.myRKIMediaSelfVerify\">\n                                            <div class=\"col-xl-2\"\n                                                *ngFor=\"let previewUrl of userObj.myRKIMediaSelfVerify\">\n                                                <div *ngIf=\"previewUrl\">\n                                                    <label title=\"Preview\"\n                                                        (click)=\"mediaPreviewModel(previewUrl.url, 'image')\">\n                                                        <i class=\"icon-eye m-2 text-success\"></i>\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </td>\n                                    <td *ngIf=\"adminViewT\">\n                                        <button class=\"btn btn-danger btn-sm btn-xs mr-1\" data-title=\"Blocked\"\n                                            *ngIf=\"userObj.myRKIMediaVerified==1\"\n                                            (click)=\"updateUsersVerificationStatus(userObj._id, 'myRKIMediaVerified', 2)\">\n                                            <i class=\"icon-close\"></i>\n                                        </button>\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verified\"\n                                            *ngIf=\"userObj.myRKIMediaVerified==0 || userObj.myRKIMediaVerified==2\"\n                                            (click)=\"updateUsersVerificationStatus(userObj._id, 'myRKIMediaVerified', 1)\">\n                                            <i class=\"icon-check\"></i>\n                                        </button>\n                                        <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Edit\"\n                                            (click)=\"editUsersDocuments(userObj, 'myRKIMedia')\">\n                                            <i class=\"icon-pencil-alt\"></i>\n                                        </button>\n                                    </td>\n                                </tr>\n\n                            </tbody>\n                        </table>\n                      \n                    </div>\n                    <div class=\"table-responsive table-billing-history mt-4 card\">\n                        <table class=\"table mb-0\" *ngIf=\"utilityService._.keys(userObj.externalAppLinks).length>0\" >\n                            <tbody>\n                            <tr>\n                                <td>\n                                    <span *ngFor=\"let previewUrl of userObj.externalAppLinks\">\n                                        <a class=\"text-bold mr-2\">{{previewUrl.appName}} :</a> \n                                        <a *ngIf=\"previewUrl\" target=\"_blank\" href=\"{{previewUrl.appLink}}\">{{previewUrl.appLink}}</a>\n                                    </span>\n                                </td>\n                                <td>\n                                    <span>\n                                        <span [ngSwitch]=\"userObj.externalAppLinksVerified\" i18n>\n                                            <i *ngSwitchCase=\"2\" class=\"badge badge-danger font-weight-light\">Rejected</i>\n                                            <i *ngSwitchCase=\"1\" class=\"badge badge-success font-weight-light\">Verified</i>\n                                            <i *ngSwitchDefault class=\"badge badge-danger font-weight-light\">Pending</i>\n                                        </span>\n    <!--\n                                        <span *ngIf=\"userObj.externalAppLinksVerified\" class=\"badge badge-success\"\n                                            i18n>Verified</span>\n                                        <span *ngIf=\"!userObj.externalAppLinksVerified\" class=\"badge badge-danger\"\n                                            i18n>Unverified</span>\n                                    -->\n                                        \n                                    </span> \n                                </td>\n                                \n                                <td *ngIf=\"adminViewT\">\n                                    <button class=\"btn btn-danger btn-sm btn-xs mr-1\" data-title=\"Unverified\"\n                                        *ngIf=\"userObj.externalAppLinksVerified==1\"\n                                        (click)=\"updateUsersVerificationStatus(userObj._id, 'externalAppLinksVerified', 2)\">\n                                        <i class=\"icon-close\"></i>\n                                    </button>\n                                    <button class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verified\"\n                                        *ngIf=\"userObj.externalAppLinksVerified==0 || userObj.externalAppLinksVerified==2\"\n                                        (click)=\"updateUsersVerificationStatus(userObj._id, 'externalAppLinksVerified', 1)\">\n                                        <i class=\"icon-check\"></i>\n                                    </button>\n                                </td>\n                            </tr>\n                        </tbody>\n                        </table>\n                    </div>\n                </div>\n                <div class=\"col-xl-12 col-12 mt-4\" *ngIf=\"myRatingsSummaryObj.totalRatingsAvg\">\n                    <div class=\"row\">\n                        <div class=\"col-xl-6 col-12\">\n                            <div class=\"my-3\">\n                                <!--\n            <span *ngIf=\"!adminViewT\" (click)=\"addNewRatings(userObj)\" mat-button mat-dialog-close>&nbsp;\n                <i class=\"icon-star\"></i>\n            </span>\n        -->\n                                <span>\n                                    &nbsp;\n                                    <!--<i *ngIf=\"!myRatingsSummaryObj.totalRatingsAvg\" class=\"icon-star\"></i>-->\n                                    <app-star *ngIf=\"myRatingsSummaryObj.totalRatingsAvg\"\n                                        [rating]=\"myRatingsSummaryObj.totalRatingsAvg\">\n                                    </app-star>\n\n                                </span>\n                            </div>\n                        </div>\n                        <div class=\"col-xl-6 col-12\">\n                            <div class=\"my-3\">\n                                <span>\n                                    &nbsp;\n                                    <i *ngIf=\"myRatingsSummaryObj.totalRatingsAvg && adminViewT\" class=\"icon-eye\"\n                                        (click)=\"usersRatings(userObj)\"></i>\n                                </span>\n                            </div>\n\n                        </div>\n                    </div>\n                    <div class=\"row mt-4\">\n                        <div class=\"col-xl-6 col-12\">\n                            <div class=\"comment_sec\" *ngFor=\"let obj of utilityService._.values(RatingDetailsArray)\">\n                                <article class=\"row\"\n                                    *ngIf=\"utilityService._.keys(obj.flagCommentObj).length==0 && utilityService._.keys(obj.reportedUserObj).length==0\">\n                                    <div class=\"col-12\">\n                                        <div class=\"blog_center\">\n                                            <div>\n                                                <figure [hidden]=\"true\" class=\"thumbnail\">\n                                                    <img alt=\"\" [src]=\"obj.createdByUserObj.selfProfileUrl\"\n                                                        onerror=\"this.src='/assets/img/nouser.png';\">\n                                                </figure>\n                                            </div>\n                                            <div class=\"blog_user arrow left\">\n                                                <div class=\"panel-body\">\n                                                    <div class=\"text-left\">\n                                                        <div class=\"comment-user\"><i class=\"fa fa-user\"></i>\n                                                            <h6> {{obj.createdByUserObj.firstName}} </h6>\n                                                        </div>\n                                                        <div class=\"comment-date\"><i class=\"fa fa-clock-o\"></i>\n                                                            <h6> {{obj.createdOn |\n                                                                date:'dd-MMM-YYYY'}}</h6>\n                                                        </div>\n                                                        <div class=\"comment-date mt-n1\">\n                                                            <app-star [rating]=\"obj.rating\">\n                                                            </app-star>\n                                                        </div>\n                                                    </div>\n                                                    <div class=\"comment-post\">\n                                                        <p>{{obj.title}}</p>\n                                                        <p>\n                                                            {{obj.comment}}\n                                                        </p>\n                                                        <div class=\"float-left\">\n                                                            <span\n                                                                class=\"badge badge-success mr-2 font-weight text-capitalize text-cap\">\n                                                                {{obj.isRecommonded?'Recommonded':''}}\n                                                            </span>\n                                                        </div>\n                                                        <hr />\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </article>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <!--\n            <div class=\"row\" *ngIf=\"adminViewT\">\n                <div class=\"col-xl-12 col-12\">\n                    <hr>\n                    <div class=\"row\">\n                        <div class=\"col-xl-12\"><strong>Passport\n                                Documents</strong>\n                        </div>\n                        <div *ngIf=\"userObj.myPassportMedia\">\n                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myPassportMedia\">\n                                <div *ngIf=\"previewUrl\">\n                                    <video width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')>-1\"\n                                        class=\"img-fluid border\" controls [src]=\"previewUrl.url\"></video>\n                                    <img width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('image/')>-1\"\n                                        class=\"img-fluid border\" [src]=\"previewUrl.url\"\n                                        onerror=\"this.src='./assets/img/na.png';\" />\n                                    <img width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1\"\n                                        class=\"img-fluid border\" src=\"./assets/img/pdf.png\"\n                                        onerror=\"this.src='./assets/img/na.png';\" />\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <hr>\n                    <div class=\"row\">\n                        <div class=\"col-xl-12\"><strong>Driving Licence\n                                Documents</strong></div>\n                        <div *ngIf=\"userObj.myDLMedia\">\n                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myDLMedia\">\n                                <div *ngIf=\"previewUrl\">\n                                    <video width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')>-1\"\n                                        class=\"img-fluid border\" controls [src]=\"previewUrl.url\"></video>\n                                    <img width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('image/')>-1\"\n                                        class=\"img-fluid border\" [src]=\"previewUrl.url\"\n                                        onerror=\"this.src='./assets/img/na.png';\" />\n                                    <img width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1\"\n                                        class=\"img-fluid border\" src=\"./assets/img/pdf.png\"\n                                        onerror=\"this.src='./assets/img/na.png';\" />\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <hr>\n                    <div class=\"row\">\n                        <div class=\"col-xl-12\"><strong>\n                                CPR Number Documents\n                            </strong>\n                        </div>\n                        <div *ngIf=\"userObj.myHICardMedia\">\n                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myHICardMedia\">\n                                <div *ngIf=\"previewUrl\">\n                                    <video width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')>-1\"\n                                        class=\"img-fluid border\" controls [src]=\"previewUrl.url\"></video>\n                                    <img width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('image/')>-1\"\n                                        class=\"img-fluid border\" [src]=\"previewUrl.url\"\n                                        onerror=\"this.src='./assets/img/na.png';\" />\n                                    <img width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1\"\n                                        class=\"img-fluid border\" src=\"./assets/img/pdf.png\"\n                                        onerror=\"this.src='./assets/img/na.png';\" />\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                    <div class=\"row\" *ngIf=\"userObj.role=='borrower' && !userObj.isRKIRegistered\">\n                        <hr>\n                        <div class=\"col-xl-12\">\n                            <strong>RKI Documents</strong>&nbsp;\n                        </div>\n                        <div *ngIf=\"userObj.myRKIMedia\">\n                            <div class=\"col-xl-2\" *ngFor=\"let previewUrl of userObj.myRKIMedia\">\n                                <div *ngIf=\"previewUrl\">\n                                    <video width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')>-1\"\n                                        class=\"img-fluid border\" controls [src]=\"previewUrl.url\"></video>\n                                    <img width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('image/')>-1\"\n                                        class=\"img-fluid border\" [src]=\"previewUrl.url\"\n                                        onerror=\"this.src='./assets/img/na.png';\" />\n                                    <img width=\"1000\" height=\"1000\"\n                                        *ngIf=\"previewUrl.type && previewUrl.type.indexOf('video/')==-1 && previewUrl.type && previewUrl.type.indexOf('image/')==-1\"\n                                        class=\"img-fluid border\" src=\"./assets/img/pdf.png\"\n                                        onerror=\"this.src='./assets/img/na.png';\" />\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        -->\n            <div class=\"row\">\n                <div class=\"col-xl-12 col-12\">\n                    <div class=\"card\">\n                        <div class=\"card-body\">\n                            <ul class=\"list-group list-group-flush\">\n                                <li class=\"list-group-item\"> <strong>Bank Name</strong>\n                                    {{userObj.bankName | titlecase}}\n                                </li>\n                                <li class=\"list-group-item\"> <strong>Registration Number</strong>\n                                    {{userObj.regNumber}}\n                                </li>\n                                <li class=\"list-group-item\"> <strong>Account number</strong>\n                                    {{userObj.accountNumber}}\n                                </li>\n                                <li class=\"list-group-item\"> <strong>IBAN Number</strong>\n                                    {{userObj.iban}}\n                                </li>\n                                <li class=\"list-group-item\"> <strong>Bank Identifier Code</strong>\n                                    {{userObj.bic}}\n                                </li>\n                                <li class=\"list-group-item\"> <strong>Paypal</strong>\n                                    {{userObj.paypalWalletID}}\n                                </li>\n                                <li class=\"list-group-item\"> <strong>Skrill</strong>\n                                    {{userObj.skrillWalletID}}\n                                </li>\n                                <li class=\"list-group-item\"> <strong>Revolut</strong>\n                                    {{userObj.revolutWalletID}}\n                                </li>\n                                <li class=\"list-group-item\"> <strong>Bitcoin Wallet</strong>\n                                    {{userObj.bitCoinWalletID}}\n                                </li>\n                            </ul>\n                        </div>\n                        <div class=\"card-footer\">\n\n                        </div>\n                    </div>\n                    <div class=\"col-xl-12 col-12\" *ngIf=\"adminViewT && userObj.bankingOldDataCollection\">\n                        <div class=\"table-responsive table-billing-history\">\n                            <table class=\"table mb-0\">\n                                <thead>\n                                    <tr>\n                                        <th scope=\"col\" i18n>Changed On</th>\n                                        <th scope=\"col\" i18n>Bank Name</th>\n                                        <th scope=\"col\" i18n>Registration Number</th>\n                                        <th scope=\"col\" i18n>Account number</th>\n                                        <th scope=\"col\" i18n>IBAN Number</th>\n                                        <th scope=\"col\" i18n>Bank Identifier Code</th>\n                                        <th scope=\"col\" i18n>Paypal</th>\n                                        <th scope=\"col\" i18n>Skrill</th>\n                                        <th scope=\"col\" i18n>Revolut</th>\n                                        <th scope=\"col\" i18n>Bitcoin Wallet</th>\n                                    </tr>\n                                </thead>\n                                <tbody>\n                                    <tr\n                                        *ngFor=\"let bankingOldData of utilityService._.values(userObj.bankingOldDataCollection)\">\n                                        <td i18n>{{bankingOldData.updatedOn | date}}</td>\n                                        <td>{{bankingOldData.bankName | titlecase}}</td>\n                                        <td>{{bankingOldData.regNumber}}</td>\n                                        <td>{{bankingOldData.accountNumber}}</td>\n                                        <td>{{bankingOldData.iban}}</td>\n                                        <td>{{bankingOldData.bic}}</td>\n                                        <td>{{bankingOldData.paypalWalletID}}</td>\n                                        <td>{{bankingOldData.skrillWalletID}}</td>\n                                        <td>{{bankingOldData.revolutWalletID}}</td>\n                                        <td>{{bankingOldData.bitCoinWalletID}}</td>\n                                    </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                        <!--\n                        <div class=\"row\" *ngFor=\"let bankingOldData of utilityService._.values(userObj.bankingOldDataCollection)\">\n                            <div class=\"col-xl-12 col-12\">\n                                <ul class=\"list-group list-group-flush\">\n                                    <li class=\"list-group-item\"> <strong>Bank Name</strong> \n                                        {{bankingOldData.bankName | titlecase}}\n                                    </li>\n                                    <li class=\"list-group-item\"> <strong>Registration Number</strong> \n                                        {{bankingOldData.regNumber}}\n                                    </li>\n                                    <li class=\"list-group-item\"> <strong>Account number</strong> \n                                        {{bankingOldData.accountNumber}}\n                                    </li>\n                                    <li class=\"list-group-item\"> <strong>IBAN Number</strong> \n                                        {{bankingOldData.iban}}\n                                    </li>\n                                    <li class=\"list-group-item\"> <strong>Bank Identifier Code</strong> \n                                        {{bankingOldData.bic}}\n                                    </li>\n                                    <li class=\"list-group-item\"> <strong>Paypal</strong> \n                                        {{bankingOldData.paypalWalletID}}\n                                    </li>\n                                    <li class=\"list-group-item\"> <strong>Skrill</strong> \n                                        {{bankingOldData.skrillWalletID}}\n                                    </li>\n                                    <li class=\"list-group-item\"> <strong>Revolut</strong> \n                                        {{bankingOldData.revolutWalletID}}\n                                    </li>\n                                    <li class=\"list-group-item\"> <strong>Bitcoin Wallet</strong> \n                                        {{bankingOldData.bitCoinWalletID}}\n                                    </li>\n                                    <li class=\"list-group-item\">\n                                        <strong i18n>Changed On</strong> {{bankingOldData.updatedOn | date}}\n                                    </li>\n                                </ul>\n                            </div>\n                        </div>\n                    -->\n\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</mat-dialog-content>";
       /***/
     },
 
@@ -4239,16 +4351,16 @@
         _createClass2(SearchComponent, [{
           key: "fetchAllUserLevelsByUserId",
           value: function fetchAllUserLevelsByUserId() {
-            var _this20 = this;
+            var _this21 = this;
 
             this.userService.getUserLevelsAll(null).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (data) {
               ////console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this20.allUserLevelsDataLenders = _this20.utilityService._.filter(data["data"], {
+                _this21.allUserLevelsDataLenders = _this21.utilityService._.filter(data["data"], {
                   'role': src_app_models__WEBPACK_IMPORTED_MODULE_6__["Role"].Lender
                 });
-                _this20.allUserLevelsDataBorrower = _this20.utilityService._.filter(data["data"], {
+                _this21.allUserLevelsDataBorrower = _this21.utilityService._.filter(data["data"], {
                   'role': src_app_models__WEBPACK_IMPORTED_MODULE_6__["Role"].Borrower
                 }); //this.alertService.success(data['message'], true);
               }
@@ -4525,7 +4637,7 @@
 
       var BankDetailsComponent = /*#__PURE__*/function () {
         function BankDetailsComponent(dialog, http, formBuilder, router, authenticationService, userService, alertService, appRouterService, route, utilityService) {
-          var _this21 = this;
+          var _this22 = this;
 
           _classCallCheck2(this, BankDetailsComponent);
 
@@ -4552,19 +4664,19 @@
             ////console.log('data => ', data)
             if (data && data['success']) {
               //alert(JSON.stringify( data));
-              _this21.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
+              _this22.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
 
 
-              _this21.loading = false;
-              _this21.isOtpSent = true; //this.element_btn_click_profile_skills_verification.click();
+              _this22.loading = false;
+              _this22.isOtpSent = true; //this.element_btn_click_profile_skills_verification.click();
             } else {
               //alert(JSON.stringify(data['message']));
-              _this21.alertService.error(data['message']);
+              _this22.alertService.error(data['message']);
 
-              _this21.loading = false;
-              _this21.isOtpSent = false;
+              _this22.loading = false;
+              _this22.isOtpSent = false;
 
-              _this21.appRouterService.appRouter('');
+              _this22.appRouterService.appRouter('');
             }
           }, function (error) {
             var errorMsg2show = "";
@@ -4579,12 +4691,12 @@
               }
             } catch (ex) {}
 
-            _this21.alertService.error(errorMsg2show);
+            _this22.alertService.error(errorMsg2show);
 
-            _this21.loading = false;
-            _this21.isOtpSent = false;
+            _this22.loading = false;
+            _this22.isOtpSent = false;
 
-            _this21.appRouterService.appRouter('');
+            _this22.appRouterService.appRouter('');
           });
         }
 
@@ -4737,7 +4849,7 @@
         }, {
           key: "onBankDetailsUpdateSubmit",
           value: function onBankDetailsUpdateSubmit() {
-            var _this22 = this;
+            var _this23 = this;
 
             this.submitted = true;
 
@@ -4753,16 +4865,16 @@
 
                 localStorage.setItem('currentUser', JSON.stringify(data['data']));
 
-                _this22.authenticationService.sendCurrentUserObj(data['data']);
+                _this23.authenticationService.sendCurrentUserObj(data['data']);
 
-                _this22.alertService.success('Bank details updated', true);
+                _this23.alertService.success('Bank details updated', true);
 
-                _this22.appRouterService.appRouter(_this22.authenticationService.currentUserValue);
+                _this23.appRouterService.appRouter(_this23.authenticationService.currentUserValue);
               } else {
                 //alert(JSON.stringify(data['message']));
-                _this22.alertService.error(data['message']);
+                _this23.alertService.error(data['message']);
 
-                _this22.loading = false;
+                _this23.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -4777,9 +4889,9 @@
                 }
               } catch (ex) {}
 
-              _this22.alertService.error(errorMsg2show);
+              _this23.alertService.error(errorMsg2show);
 
-              _this22.loading = false;
+              _this23.loading = false;
             });
           }
         }]);
@@ -4881,7 +4993,7 @@
 
       var MessagesService = /*#__PURE__*/function () {
         function MessagesService(socketService, authenticationService) {
-          var _this23 = this;
+          var _this24 = this;
 
           _classCallCheck2(this, MessagesService);
 
@@ -4889,26 +5001,26 @@
           this.authenticationService = authenticationService;
           this.currentUser = {};
           this.authenticationService.currentUser.subscribe(function (x) {
-            return _this23.currentUser = x;
+            return _this24.currentUser = x;
           });
           this.socketService.getNewMessageToRoomAll().subscribe(function (_currentChatObj) {
             //console.log('21 :: Received a message from websocket service', _currentChatObj);
             if (_currentChatObj) {
-              _this23.getAllPendingMessageCountOfContact(_currentChatObj.roomId);
+              _this24.getAllPendingMessageCountOfContact(_currentChatObj.roomId);
             }
           });
           this.socketService.getOldMessageToRoomAll().subscribe(function (_currentChatObj) {
             if (_currentChatObj) {
-              _this23.getAllPendingMessageCountOfContact(lodash__WEBPACK_IMPORTED_MODULE_2__["map"](_currentChatObj, 'roomId'));
+              _this24.getAllPendingMessageCountOfContact(lodash__WEBPACK_IMPORTED_MODULE_2__["map"](_currentChatObj, 'roomId'));
             }
           });
           this.socketService.listenEventToAddNewContact().subscribe(function (_currentContactObj) {
-            if (!_this23.myContactsList) {
-              _this23.myContactsList = [];
+            if (!_this24.myContactsList) {
+              _this24.myContactsList = [];
             }
 
             if (_currentContactObj) {
-              _this23.myContactsList.push(_currentContactObj);
+              _this24.myContactsList.push(_currentContactObj);
             }
           });
         }
@@ -4916,23 +5028,23 @@
         _createClass2(MessagesService, [{
           key: "getAllMyContacts",
           value: function getAllMyContacts() {
-            var _this24 = this;
+            var _this25 = this;
 
             var _currentUserId = this.currentUser._id;
             this.socketService.getAllMyContacts(_currentUserId, this.currentUser.role).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])()).subscribe(function (users) {
-              _this24.myContactsList = lodash__WEBPACK_IMPORTED_MODULE_2__["filter"](lodash__WEBPACK_IMPORTED_MODULE_2__["values"](users), function (e) {
+              _this25.myContactsList = lodash__WEBPACK_IMPORTED_MODULE_2__["filter"](lodash__WEBPACK_IMPORTED_MODULE_2__["values"](users), function (e) {
                 if (e) {
                   return e._id != _currentUserId;
                 }
               });
 
-              _this24.getAllPendingMessageCountOfContact();
+              _this25.getAllPendingMessageCountOfContact();
             });
           }
         }, {
           key: "getAllPendingMessageCountOfContact",
           value: function getAllPendingMessageCountOfContact() {
-            var _this25 = this;
+            var _this26 = this;
 
             var _roomIdArr = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
@@ -4944,7 +5056,7 @@
 
             this.socketService.getByIdMyContactsPendingMessages(_roomIdArr, _currentUserId).subscribe(function (users) {
               if (users && users['success']) {
-                _this25.myPendingMessages = users['data'];
+                _this26.myPendingMessages = users['data'];
                 /*
                 totalPendingMessages
                 _id
@@ -4982,11 +5094,11 @@
         }, {
           key: "getAllUsers",
           value: function getAllUsers() {
-            var _this26 = this;
+            var _this27 = this;
 
             var _data = {};
-            this.socketService.getAllUsers(_data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])()).subscribe(function (users) {
-              _this26.allUsersList = users;
+            this.socketService.getAllUsers(_data, null, null, null).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["first"])()).subscribe(function (users) {
+              _this27.allUsersList = users;
             });
           }
         }]);
@@ -5174,7 +5286,7 @@
 
       var WalletComponent = /*#__PURE__*/function () {
         function WalletComponent(utilityService, payment, formBuilder, addFundsService, authenticationService, alertService) {
-          var _this27 = this;
+          var _this28 = this;
 
           _classCallCheck2(this, WalletComponent);
 
@@ -5188,7 +5300,7 @@
           this.submitted = false;
           this.allFunds = [];
           this.authenticationService.currentUser.subscribe(function (x) {
-            return _this27.currentUser = x;
+            return _this28.currentUser = x;
           });
           this.currentFunds = new src_app_models_funds__WEBPACK_IMPORTED_MODULE_10__["Funds"]();
         }
@@ -5210,7 +5322,7 @@
         }, {
           key: "onSubmit",
           value: function onSubmit() {
-            var _this28 = this;
+            var _this29 = this;
 
             this.submitted = true; // stop here if form is invalid
 
@@ -5244,17 +5356,17 @@
               }]
             }];
             this.addFundsService.checkStatusOfNewFundsAdded().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (_obj) {
-              _this28.loading = false;
+              _this29.loading = false;
 
-              _this28.alertService.success('Funds Added');
+              _this29.alertService.success('Funds Added');
 
-              _this28.f.amount.setValue('');
+              _this29.f.amount.setValue('');
 
-              _this28.loadAllFunds();
+              _this29.loadAllFunds();
 
-              _this28.payPalConfig = null;
+              _this29.payPalConfig = null;
 
-              _this28.addFundsService.getFundsCountForRequestedUser(_this28.currentUser._id);
+              _this29.addFundsService.getFundsCountForRequestedUser(_this29.currentUser._id);
             });
             this.payPalConfig = this.payment.initConfig(purchaseUnits, src_app_models__WEBPACK_IMPORTED_MODULE_5__["TransactionActionType"].funds_add, this.currentUser._id);
             /*
@@ -5269,7 +5381,7 @@
         }, {
           key: "loadAllFunds",
           value: function loadAllFunds() {
-            var _this29 = this;
+            var _this30 = this;
 
             //this.addFundsService.funds_getall_funds(this.currentUser.id);
 
@@ -5282,21 +5394,21 @@
             }
             */
             this.addFundsService.funds_getall_funds(this.currentUser._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (funds) {
-              _this29.totalFund4currentUser = 0;
-              _this29.allFunds = funds;
+              _this30.totalFund4currentUser = 0;
+              _this30.allFunds = funds;
 
-              for (var item in _this29.allFunds) {
-                _this29.totalFund4currentUser = _this29.totalFund4currentUser + _this29.allFunds[item].amount;
+              for (var item in _this30.allFunds) {
+                _this30.totalFund4currentUser = _this30.totalFund4currentUser + _this30.allFunds[item].amount;
               }
             });
           }
         }, {
           key: "deleteFund",
           value: function deleteFund(id) {
-            var _this30 = this;
+            var _this31 = this;
 
             this.addFundsService.funds_delete(id, this.currentUser._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function () {
-              _this30.loadAllFunds();
+              _this31.loadAllFunds();
             });
           }
         }]);
@@ -5531,51 +5643,24 @@
           this.fetchAllIncomeDetailsByUserId();
           this.fetchAllExpenseDetailsByUserId();
           this.fetchSumOfIncomeExpenseDetailsByUserId();
+
+          if (this.userObj) {
+            var obj4Budget = this.utilityService.returnCalculatedAllowedBudgetObj(this.userObj.totalIncome4currentUser, this.userObj.totalExpense4currentUser);
+            this.userObj.totalAllowedBudget = obj4Budget.totalAllowedBudgetFinal;
+            this.maxPercentageAllowed2user = obj4Budget.maxPercentageAllowed2user;
+          }
         }
 
         _createClass2(IncomeProofComponent, [{
           key: "fetchAllIncomeDetailsByUserId",
           value: function fetchAllIncomeDetailsByUserId() {
-            var _this31 = this;
+            var _this32 = this;
 
             this.userService.getUserIncomeDetailsByUserId(this.userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
               ////console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this31.allIncomeDetailsData = data["data"]; //this.alertService.success(data['message'], true);
-
-                _this31.loading = false;
-              }
-            }, function (error) {
-              var errorMsg2show = "";
-
-              try {
-                if (error && error.error && error.error.message) {
-                  errorMsg2show = error.error.message;
-                } else if (error && error.message) {
-                  errorMsg2show = error.message;
-                } else {
-                  errorMsg2show = error;
-                }
-              } catch (ex) {}
-
-              _this31.alertService.error(errorMsg2show);
-
-              _this31.loading = false;
-
-              _this31.appRouterService.appRouter('');
-            });
-          }
-        }, {
-          key: "fetchAllExpenseDetailsByUserId",
-          value: function fetchAllExpenseDetailsByUserId() {
-            var _this32 = this;
-
-            this.userService.getUserExpenseDetailsByUserId(this.userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
-              ////console.log('data => ', data)
-              if (data && data['success']) {
-                //alert(JSON.stringify( data));
-                _this32.allExpenseDetailsData = data["data"]; //this.alertService.success(data['message'], true);
+                _this32.allIncomeDetailsData = data["data"]; //this.alertService.success(data['message'], true);
 
                 _this32.loading = false;
               }
@@ -5600,22 +5685,15 @@
             });
           }
         }, {
-          key: "fetchSumOfIncomeExpenseDetailsByUserId",
-          value: function fetchSumOfIncomeExpenseDetailsByUserId() {
+          key: "fetchAllExpenseDetailsByUserId",
+          value: function fetchAllExpenseDetailsByUserId() {
             var _this33 = this;
 
-            this.userService.getUserIncomeExpenseDetailsByUserId(this.userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+            this.userService.getUserExpenseDetailsByUserId(this.userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
               ////console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                if (_this33.userObj._id == data["data"]["_id"]) {
-                  _this33.userObj.totalIncome4currentUser = data["data"]["totalIncome4currentUser"];
-                  _this33.userObj.totalExpense4currentUser = data["data"]["totalExpense4currentUser"];
-                  _this33.userObj.totalAllowedBudget = _this33.userObj.totalIncome4currentUser - _this33.userObj.totalExpense4currentUser;
-                }
-
-                _this33._cdr.detectChanges(); //this.alertService.success(data['message'], true);
-
+                _this33.allExpenseDetailsData = data["data"]; //this.alertService.success(data['message'], true);
 
                 _this33.loading = false;
               }
@@ -5640,50 +5718,26 @@
             });
           }
         }, {
-          key: "ngOnInit",
-          value: function ngOnInit() {} // convenience getter for easy access to form fields
-
-        }, {
-          key: "f",
-          get: function get() {
-            return this.userIncomeDetailsForm.controls;
-          }
-        }, {
-          key: "ff",
-          get: function get() {
-            return this.userExpenseDetailsForm.controls;
-          }
-        }, {
-          key: "onUserIncomeDetailsUpdateSubmit",
-          value: function onUserIncomeDetailsUpdateSubmit() {
+          key: "fetchSumOfIncomeExpenseDetailsByUserId",
+          value: function fetchSumOfIncomeExpenseDetailsByUserId() {
             var _this34 = this;
 
-            this.submittedIncomeDetails = true;
-
-            if (this.userIncomeDetailsForm.invalid) {
-              this.alertService.error("Please Provide all data");
-              return;
-            }
-
-            if (this.fileData4MonthlyIncomeProofDocumentPendingForUpload) {
-              this.alertService.error('Please upload document first');
-              return;
-            }
-
-            this.userService.addUpdateUserIncomeDetails(this.userIncomeDetailsForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+            this.userService.getUserIncomeExpenseDetailsByUserId(this.userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+              ////console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this34.alertService.success('Your Income proof is Updated successfully', true);
+                if (_this34.userObj._id == data["data"]["_id"]) {
+                  _this34.userObj.totalIncome4currentUser = data["data"]["totalIncome4currentUser"];
+                  _this34.userObj.totalExpense4currentUser = data["data"]["totalExpense4currentUser"];
 
-                _this34.fetchAllIncomeDetailsByUserId();
+                  var obj4Budget = _this34.utilityService.returnCalculatedAllowedBudgetObj(_this34.userObj.totalIncome4currentUser, _this34.userObj.totalExpense4currentUser);
 
-                _this34.submittedIncomeDetails = false;
+                  _this34.userObj.totalAllowedBudget = obj4Budget.totalAllowedBudgetFinal;
+                  _this34.maxPercentageAllowed2user = obj4Budget.maxPercentageAllowed2user;
+                }
 
-                _this34.initForm(); //this.appRouterService.appRouter(this.userObj);
+                _this34._cdr.detectChanges(); //this.alertService.success(data['message'], true);
 
-              } else {
-                //alert(JSON.stringify(data['message']));
-                _this34.alertService.error(data['message']);
 
                 _this34.loading = false;
               }
@@ -5703,39 +5757,49 @@
               _this34.alertService.error(errorMsg2show);
 
               _this34.loading = false;
+
+              _this34.appRouterService.appRouter('');
             });
           }
         }, {
-          key: "onUserExpenseDetailsUpdateSubmit",
-          value: function onUserExpenseDetailsUpdateSubmit() {
+          key: "ngOnInit",
+          value: function ngOnInit() {} // convenience getter for easy access to form fields
+
+        }, {
+          key: "f",
+          get: function get() {
+            return this.userIncomeDetailsForm.controls;
+          }
+        }, {
+          key: "ff",
+          get: function get() {
+            return this.userExpenseDetailsForm.controls;
+          }
+        }, {
+          key: "onUserIncomeDetailsUpdateSubmit",
+          value: function onUserIncomeDetailsUpdateSubmit() {
             var _this35 = this;
 
-            this.submittedExpenseDetails = true;
+            this.submittedIncomeDetails = true;
 
-            if (this.userExpenseDetailsForm.invalid) {
+            if (this.userIncomeDetailsForm.invalid) {
               this.alertService.error("Please Provide all data");
               return;
             }
 
-            var _monthlyExpenseStartDateTimeCustomised = this.userExpenseDetailsForm.get('monthlyExpenseStartDateTimeCustomised').value;
-            var _monthlyExpensePaymentDateTimeCustomised = this.userExpenseDetailsForm.get('monthlyExpensePaymentDateTimeCustomised').value;
-
-            if (_monthlyExpenseStartDateTimeCustomised) {
-              this.userExpenseDetailsForm.get('monthlyExpenseStartDate').setValue(Date.parse(moment__WEBPACK_IMPORTED_MODULE_10__(_monthlyExpenseStartDateTimeCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD')));
+            if (this.fileData4MonthlyIncomeProofDocumentPendingForUpload) {
+              this.alertService.error('Please upload document first');
+              return;
             }
 
-            if (_monthlyExpensePaymentDateTimeCustomised) {
-              this.userExpenseDetailsForm.get('monthlyExpensePaymentDate').setValue(Date.parse(moment__WEBPACK_IMPORTED_MODULE_10__(_monthlyExpensePaymentDateTimeCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD')));
-            }
-
-            this.userService.addUpdateUserExpenseDetails(this.userExpenseDetailsForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+            this.userService.addUpdateUserIncomeDetails(this.userIncomeDetailsForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this35.alertService.success('Your Expense proof is Updated successfully', true);
+                _this35.alertService.success('Your Income proof is Updated successfully', true);
 
-                _this35.fetchAllExpenseDetailsByUserId();
+                _this35.fetchAllIncomeDetailsByUserId();
 
-                _this35.submittedExpenseDetails = false;
+                _this35.submittedIncomeDetails = false;
 
                 _this35.initForm(); //this.appRouterService.appRouter(this.userObj);
 
@@ -5761,6 +5825,64 @@
               _this35.alertService.error(errorMsg2show);
 
               _this35.loading = false;
+            });
+          }
+        }, {
+          key: "onUserExpenseDetailsUpdateSubmit",
+          value: function onUserExpenseDetailsUpdateSubmit() {
+            var _this36 = this;
+
+            this.submittedExpenseDetails = true;
+
+            if (this.userExpenseDetailsForm.invalid) {
+              this.alertService.error("Please Provide all data");
+              return;
+            }
+
+            var _monthlyExpenseStartDateTimeCustomised = this.userExpenseDetailsForm.get('monthlyExpenseStartDateTimeCustomised').value;
+            var _monthlyExpensePaymentDateTimeCustomised = this.userExpenseDetailsForm.get('monthlyExpensePaymentDateTimeCustomised').value;
+
+            if (_monthlyExpenseStartDateTimeCustomised) {
+              this.userExpenseDetailsForm.get('monthlyExpenseStartDate').setValue(Date.parse(moment__WEBPACK_IMPORTED_MODULE_10__(_monthlyExpenseStartDateTimeCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD')));
+            }
+
+            if (_monthlyExpensePaymentDateTimeCustomised) {
+              this.userExpenseDetailsForm.get('monthlyExpensePaymentDate').setValue(Date.parse(moment__WEBPACK_IMPORTED_MODULE_10__(_monthlyExpensePaymentDateTimeCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD')));
+            }
+
+            this.userService.addUpdateUserExpenseDetails(this.userExpenseDetailsForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+              if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                _this36.alertService.success('Your Expense proof is Updated successfully', true);
+
+                _this36.fetchAllExpenseDetailsByUserId();
+
+                _this36.submittedExpenseDetails = false;
+
+                _this36.initForm(); //this.appRouterService.appRouter(this.userObj);
+
+              } else {
+                //alert(JSON.stringify(data['message']));
+                _this36.alertService.error(data['message']);
+
+                _this36.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = "";
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this36.alertService.error(errorMsg2show);
+
+              _this36.loading = false;
             });
           }
         }, {
@@ -5851,7 +5973,7 @@
         }, {
           key: "previewForMonthlyIncomeProofDocument",
           value: function previewForMonthlyIncomeProofDocument() {
-            var _this36 = this;
+            var _this37 = this;
 
             // Show preview 
             var mimeType = this.fileData4MonthlyIncomeProofDocument.type;
@@ -5864,15 +5986,15 @@
             reader.readAsDataURL(this.fileData4MonthlyIncomeProofDocument);
 
             reader.onload = function (_event) {
-              _this36.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(reader.result);
+              _this37.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(reader.result);
 
-              _this36.fileData4MonthlyIncomeProofDocumentPendingForUpload = true;
+              _this37.fileData4MonthlyIncomeProofDocumentPendingForUpload = true;
             };
           }
         }, {
           key: "onUploadForMonthlyIncomeProofDocument",
           value: function onUploadForMonthlyIncomeProofDocument() {
-            var _this37 = this;
+            var _this38 = this;
 
             if (!this.fileData4MonthlyIncomeProofDocument) {
               this.alertService.error("Select file first.");
@@ -5895,14 +6017,14 @@
               observe: 'events'
             }).subscribe(function (events) {
               if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].UploadProgress) {
-                _this37.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
+                _this38.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
               } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].Response) {
-                _this37.fileUploadProgress = ''; //console.log(events.body);
+                _this38.fileUploadProgress = ''; //console.log(events.body);
                 //alert('SUCCESS !!');
 
-                _this37.fileData4Profile = null;
+                _this38.fileData4Profile = null;
 
-                _this37.alertService.success('Uploaded successfully', true);
+                _this38.alertService.success('Uploaded successfully', true);
 
                 var _uploadedUrl = events.body["data"].path;
 
@@ -5910,11 +6032,11 @@
                   _uploadedUrl = _uploadedUrl.substr(1);
                 }
 
-                _this37.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                _this38.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
 
-                _this37.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(_this37.uploadedFilePath);
+                _this38.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(_this38.uploadedFilePath);
 
-                _this37.fileData4MonthlyIncomeProofDocumentPendingForUpload = false;
+                _this38.fileData4MonthlyIncomeProofDocumentPendingForUpload = false;
               }
             });
           }
@@ -5947,60 +6069,17 @@
         }, {
           key: "updateUsersIncomeVerificationStatus",
           value: function updateUsersIncomeVerificationStatus(_documentId, _status2update) {
-            var _this38 = this;
+            var _this39 = this;
 
             this.alertService.success("Please wait while we updating status of user");
             this.userService.updateUsersIncomeVerificationStatus(_documentId, _status2update, this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
-                _this38._cdr.detach();
-
-                var usersObjArr = _this38.utilityService._.mapKeys(_this38.allIncomeDetailsData, '_id');
-
-                usersObjArr[data["data"]["_id"]] = data["data"];
-                _this38.allIncomeDetailsData = _this38.utilityService._.values(usersObjArr);
-
-                _this38._cdr.detectChanges();
-
-                _this38.alertService.success(data['message']);
-
-                _this38.loading = false;
-              } else {
-                _this38.alertService.error(data['message']);
-
-                _this38.loading = false;
-              }
-            }, function (error) {
-              var errorMsg2show = ""; //this.PaymentTransactionDetailsArray = [];
-
-              try {
-                if (error && error.error && error.error.message) {
-                  errorMsg2show = error.error.message;
-                } else if (error && error.message) {
-                  errorMsg2show = error.message;
-                } else {
-                  errorMsg2show = error;
-                }
-              } catch (ex) {}
-
-              _this38.alertService.error(errorMsg2show);
-
-              _this38.loading = false;
-            });
-          }
-        }, {
-          key: "updateUsersExpenseVerificationStatus",
-          value: function updateUsersExpenseVerificationStatus(_documentId, _status2update) {
-            var _this39 = this;
-
-            this.alertService.success("Please wait while we updating status of user");
-            this.userService.updateUsersExpenseVerificationStatus(_documentId, _status2update, this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
-              if (data && data['success']) {
                 _this39._cdr.detach();
 
-                var usersObjArr = _this39.utilityService._.mapKeys(_this39.allExpenseDetailsData, '_id');
+                var usersObjArr = _this39.utilityService._.mapKeys(_this39.allIncomeDetailsData, '_id');
 
                 usersObjArr[data["data"]["_id"]] = data["data"];
-                _this39.allExpenseDetailsData = _this39.utilityService._.values(usersObjArr);
+                _this39.allIncomeDetailsData = _this39.utilityService._.values(usersObjArr);
 
                 _this39._cdr.detectChanges();
 
@@ -6029,12 +6108,55 @@
 
               _this39.loading = false;
             });
+          }
+        }, {
+          key: "updateUsersExpenseVerificationStatus",
+          value: function updateUsersExpenseVerificationStatus(_documentId, _status2update) {
+            var _this40 = this;
+
+            this.alertService.success("Please wait while we updating status of user");
+            this.userService.updateUsersExpenseVerificationStatus(_documentId, _status2update, this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
+              if (data && data['success']) {
+                _this40._cdr.detach();
+
+                var usersObjArr = _this40.utilityService._.mapKeys(_this40.allExpenseDetailsData, '_id');
+
+                usersObjArr[data["data"]["_id"]] = data["data"];
+                _this40.allExpenseDetailsData = _this40.utilityService._.values(usersObjArr);
+
+                _this40._cdr.detectChanges();
+
+                _this40.alertService.success(data['message']);
+
+                _this40.loading = false;
+              } else {
+                _this40.alertService.error(data['message']);
+
+                _this40.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = ""; //this.PaymentTransactionDetailsArray = [];
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this40.alertService.error(errorMsg2show);
+
+              _this40.loading = false;
+            });
           } //#region open media uploader with crop feature
 
         }, {
           key: "modalMediaUploadWithCropFeature",
           value: function modalMediaUploadWithCropFeature(documentId, attributeKey, subFolderName) {
-            var _this40 = this;
+            var _this41 = this;
 
             switch (attributeKey) {
               case 'selfProfileUrl':
@@ -6073,7 +6195,7 @@
                   switch (result.data.attributeKey) {
                     case 'monthlyIncomeProofDocument':
                       if (result.data.uploadedFilePath) {
-                        _this40.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(result.data.uploadedFilePath);
+                        _this41.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(result.data.uploadedFilePath);
                       }
 
                       break;
@@ -6281,7 +6403,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"row\">\n    <div class=\"col-xl-12 col-md-12 mb-4\">\n        <div class=\"card shadow h-100\">\n            <div class=\"card-header\">\n                <div class=\"row\">\n                    <div class=\"col-xl-11 col-10\">\n                        <div class=\"font-weight-bold text-primary\" >\n                            {{userObj.firstName}}&nbsp;{{userObj.lastName}}\n                        </div>\n                    </div>\n                    <div *ngIf=\"isOpenedInModel\" class=\"col-xl-1 col-2\">\n                        <i class=\"icon-close float-right\" mat-button mat-dialog-close></i>\n                    </div>\n                </div>\n            </div>\n            <div class=\"card-body\">\n                <div class=\"row\">                   \n                    <div class=\"col-xl-12 col-12 mb-4\">\n                        <div class=\"view view-cascade gradient-card-header white\">\n                            <table datatable [dtOptions]=\"dtOptions\" [dtTrigger]=\"dtTrigger\"\n                                class=\"row-border hover table table-striped table-responsive-md btn-table\">\n                                <thead>\n                                    <tr>\n                                        <th class=\"d-none\" i18n>ID</th>\n                                        <th i18n>Comment</th>\n                                        <th i18n>Status</th>\n                                    </tr>\n                                </thead>\n                                <tbody>\n                                    <tr *ngFor=\"let obj of utilityService._.values(PaymentTransactionDetailsArray)\">\n                                        <td class=\"d-none\" >{{obj._id}}</td>\n                                        <td >{{obj.comment}}</td>\n                                        <td >{{obj.isVerified?'UnBlocked':'Blocked'}}</td>\n                                    </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
+      __webpack_exports__["default"] = "<div class=\"row\">\n    <div class=\"col-xl-12 col-md-12 mb-4\">\n        <div class=\"card shadow h-100\">\n            <div class=\"card-header\">\n                <div class=\"row\">\n                    <div class=\"col-xl-11 col-10\">\n                        <div class=\"font-weight-bold text-primary\">\n                            {{userObj.firstName}}&nbsp;{{userObj.lastName}}\n                        </div>\n                    </div>\n                    <div *ngIf=\"isOpenedInModel\" class=\"col-xl-1 col-2\">\n                        <i class=\"icon-close float-right\" mat-button mat-dialog-close></i>\n                    </div>\n                </div>\n            </div>\n            <div class=\"card-body\">\n                <div class=\"row\">\n                    <div class=\"col-xl-12 col-12 mb-4\">\n                        <div class=\"view view-cascade gradient-card-header white\">\n                            <table datatable [dtOptions]=\"dtOptions\" [dtTrigger]=\"dtTrigger\"\n                                class=\"row-border hover table table-striped table-responsive-md btn-table\">\n                                <thead>\n                                    <tr>\n                                        <th class=\"d-none\" i18n>ID</th>\n                                        <th i18n>Comment</th>\n                                        <th i18n>Status</th>\n                                    </tr>\n                                </thead>\n                                <tbody>\n                                    <tr *ngFor=\"let obj of utilityService._.values(PaymentTransactionDetailsArray)\">\n                                        <td class=\"d-none\">{{obj._id}}</td>\n                                        <td>{{obj.comment}}</td>\n                                        <td>\n                                            <span [ngSwitch]=\"obj.isVerified\" i18n>\n                                                <i *ngSwitchCase=\"2\" class=\"badge badge-danger font-weight-light\">Blocked</i>\n                                                <i *ngSwitchCase=\"1\" class=\"badge badge-success font-weight-light\">UnBlocked/Verified</i>\n                                                <i *ngSwitchDefault class=\"badge badge-danger font-weight-light\">Pending</i>\n                                            </span>\n                                            <!--{{obj.isVerified?'UnBlocked':'Blocked'}}-->\n                                        </td>\n                                    </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
       /***/
     },
 
@@ -6479,10 +6601,40 @@
         }, {
           key: "initiateForPaymentForLender",
           value: function initiateForPaymentForLender(_appPlanId, _planExpiry, _endUserId, _amount4Payment, _header4Payment, _transactiActionType, _currency, _selectedPaymentMethod, _paymentUniqId) {
-            var _this41 = this;
+            var _this42 = this;
 
-            //#region handle LoanObj payments
-            this.userInitiatedForPayment = true;
+            _currency = _currency || 'USD'; //#region handle LoanObj payments
+
+            this.userInitiatedForPayment = true; //#region paypal payment init
+
+            var purchaseUnits = [{
+              amount: {
+                currency_code: _currency,
+                value: _amount4Payment,
+                breakdown: {
+                  item_total: {
+                    currency_code: _currency,
+                    value: _amount4Payment
+                  }
+                }
+              },
+              items: [{
+                name: _transactiActionType,
+                quantity: '1',
+                category: 'DIGITAL_GOODS',
+                unit_amount: {
+                  currency_code: _currency,
+                  value: _amount4Payment
+                }
+              }]
+            }];
+            this.payment.paymentWithMultipleOptions = false;
+
+            if (this.payment.paymentWithMultipleOptions) {
+              this.payment.initConfig(purchaseUnits, _transactiActionType, _endUserId);
+            } //#endregion paypal payment init
+
+
             this.payment.getCurrentPaymentApproved().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (details) {});
             var PaymentObj = {
               transactiActionType: _transactiActionType,
@@ -6500,22 +6652,22 @@
             this.payment.initPaymentConfigStripe(PaymentObj);
             this.payment.getCurrentPaymentApproved().subscribe(function (_obj) {
               if (_obj && _obj.success) {
-                var userObj = _this41.authenticationService.currentUserValue;
-                userObj.userMemberShipExpireOn = _this41.usersNextPlanSubscription.userMemberShipExpireOn;
-                userObj.appPlanId = _this41.usersNextPlanSubscription.appPlanId;
+                var userObj = _this42.authenticationService.currentUserValue;
+                userObj.userMemberShipExpireOn = _this42.usersNextPlanSubscription.userMemberShipExpireOn;
+                userObj.appPlanId = _this42.usersNextPlanSubscription.appPlanId;
 
-                _this41.authenticationService.sendCurrentUserObj(userObj);
+                _this42.authenticationService.sendCurrentUserObj(userObj);
 
-                _this41.initUsersCurrentAppPlanDetails();
+                _this42.initUsersCurrentAppPlanDetails();
 
-                _this41.alertService.success("congratulations! 1 month's subscription is purchased successfullly.");
+                _this42.alertService.success("congratulations! 1 month's subscription is purchased successfullly.");
               } else {
-                _this41.alertService.error(_obj.message || "Payment failed");
+                _this42.alertService.error(_obj.message || "Payment failed");
               }
 
-              _this41.resetStatusOfPayment();
+              _this42.resetStatusOfPayment();
 
-              _this41.payment.sendCurrentPaymentFailed(true);
+              _this42.payment.sendCurrentPaymentFailed(true);
             }); //#endregion handle LoanObj payments
           }
         }, {
@@ -6567,6 +6719,26 @@
 
 
       __webpack_exports__["default"] = ".crop {\n    overflow: hidden;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInN0YXIuY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLGdCQUFnQjtBQUNwQiIsImZpbGUiOiJzdGFyLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY3JvcCB7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcbn0iXX0= */";
+      /***/
+    },
+
+    /***/
+    "OdM1":
+    /*!***********************************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/shared/payment-paypal/payment-paypal.component.html ***!
+      \***********************************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function OdM1(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<div [hidden]=\"true\" class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"wallet\">\n    <label class=\"custom-control-label\" for=\"customRadio\">Use Wallet</label>\n</div>\n<div [hidden]=\"true\" class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio2\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"online\">\n    <label class=\"custom-control-label\" for=\"customRadio2\">Pay Now</label>\n</div>\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod!=PaymentMethod.Online }\">\n    <ngx-paypal [config]=\"payPalConfig\"></ngx-paypal>\n</div>\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod==PaymentMethod.Online }\">\n    <button class=\"btn btn-success btn-sm text-white\" [disabled]=\"addFundsService.totalFund4currentUser < payment.amount\" (click)=\"paymentThroughWallet()\">\n    Pay Now</button>\n</div>";
       /***/
     },
 
@@ -6853,6 +7025,12 @@
       var _public_profile_edit_public_profile_edit_component__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(
       /*! ./public-profile-edit/public-profile-edit.component */
       "+4fs");
+      /* harmony import */
+
+
+      var _payment_paypal_payment_paypal_component__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(
+      /*! ./payment-paypal/payment-paypal.component */
+      "4ioA");
       /*import { StripeComponentComponent } from './stripe-component/stripe-component.component';*/
 
 
@@ -6863,7 +7041,7 @@
       SharedModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         declarations: [_profile_profile_component__WEBPACK_IMPORTED_MODULE_5__["ProfileComponent"], _wallet_wallet_component__WEBPACK_IMPORTED_MODULE_6__["WalletComponent"], _messages_messages_component__WEBPACK_IMPORTED_MODULE_7__["MessagesComponent"], _meeting_vc_meeting_vc_component__WEBPACK_IMPORTED_MODULE_8__["MeetingVcComponent"], _payment_payment_component__WEBPACK_IMPORTED_MODULE_9__["PaymentComponent"], _sort_array_by_updated_on_pipe__WEBPACK_IMPORTED_MODULE_10__["SortArrayByUpdatedOnPipe"], _filter_object_array_pipe__WEBPACK_IMPORTED_MODULE_11__["FilterObjectArrayPipe"], _public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_12__["PublicProfileComponent"], _pipe_data_array_filter_pipe__WEBPACK_IMPORTED_MODULE_15__["DataArrayFilterPipe"], _lender_lender_component__WEBPACK_IMPORTED_MODULE_18__["ModalPublicProfile"], _user_ratings_user_ratings_component__WEBPACK_IMPORTED_MODULE_19__["UserRatingsComponent"], _session_view_session_view_component__WEBPACK_IMPORTED_MODULE_20__["SessionViewComponent"], _pipe_my_sessions_pipe__WEBPACK_IMPORTED_MODULE_21__["MySessionsPipe"], _profile_portfolio_profile_portfolio_component__WEBPACK_IMPORTED_MODULE_23__["ProfilePortfolioComponent"], _update_password_update_password_component__WEBPACK_IMPORTED_MODULE_24__["UpdatePasswordComponent"], _bank_details_bank_details_component__WEBPACK_IMPORTED_MODULE_25__["BankDetailsComponent"], _monthly_subscription_monthly_subscription_component__WEBPACK_IMPORTED_MODULE_26__["MonthlySubscriptionComponent"], _income_proof_income_proof_component__WEBPACK_IMPORTED_MODULE_27__["IncomeProofComponent"], _payment_success_payment_success_component__WEBPACK_IMPORTED_MODULE_28__["PaymentSuccessComponent"], _payment_cancel_payment_cancel_component__WEBPACK_IMPORTED_MODULE_29__["PaymentCancelComponent"],
         /*StripeComponentComponent,*/
-        _pipe_date_pretty_pipe__WEBPACK_IMPORTED_MODULE_30__["DatePrettyPipe"], _pipe_date_pretty_pipe__WEBPACK_IMPORTED_MODULE_30__["DatePrettyPipe"], _media_preview_media_preview_component__WEBPACK_IMPORTED_MODULE_31__["MediaPreviewComponent"], _media_proccess_media_proccess_component__WEBPACK_IMPORTED_MODULE_32__["MediaProccessComponent"], _star_star_component__WEBPACK_IMPORTED_MODULE_35__["StarComponent"], _ratings_list_ratings_list_component__WEBPACK_IMPORTED_MODULE_36__["RatingsListComponent"], _user_restriction_details_user_restriction_details_component__WEBPACK_IMPORTED_MODULE_38__["UserRestrictionDetailsComponent"], _user_restriction_list_user_restriction_list_component__WEBPACK_IMPORTED_MODULE_39__["UserRestrictionListComponent"], _search_search_component__WEBPACK_IMPORTED_MODULE_40__["SearchComponent"], _money_transfer_data_money_transfer_data_component__WEBPACK_IMPORTED_MODULE_41__["MoneyTransferDataComponent"], _ngui_inview_ngui_inview_component__WEBPACK_IMPORTED_MODULE_42__["NguiInviewComponent"], _public_profile_edit_public_profile_edit_component__WEBPACK_IMPORTED_MODULE_43__["PublicProfileEditComponent"]],
+        _pipe_date_pretty_pipe__WEBPACK_IMPORTED_MODULE_30__["DatePrettyPipe"], _pipe_date_pretty_pipe__WEBPACK_IMPORTED_MODULE_30__["DatePrettyPipe"], _media_preview_media_preview_component__WEBPACK_IMPORTED_MODULE_31__["MediaPreviewComponent"], _media_proccess_media_proccess_component__WEBPACK_IMPORTED_MODULE_32__["MediaProccessComponent"], _star_star_component__WEBPACK_IMPORTED_MODULE_35__["StarComponent"], _ratings_list_ratings_list_component__WEBPACK_IMPORTED_MODULE_36__["RatingsListComponent"], _user_restriction_details_user_restriction_details_component__WEBPACK_IMPORTED_MODULE_38__["UserRestrictionDetailsComponent"], _user_restriction_list_user_restriction_list_component__WEBPACK_IMPORTED_MODULE_39__["UserRestrictionListComponent"], _search_search_component__WEBPACK_IMPORTED_MODULE_40__["SearchComponent"], _money_transfer_data_money_transfer_data_component__WEBPACK_IMPORTED_MODULE_41__["MoneyTransferDataComponent"], _ngui_inview_ngui_inview_component__WEBPACK_IMPORTED_MODULE_42__["NguiInviewComponent"], _public_profile_edit_public_profile_edit_component__WEBPACK_IMPORTED_MODULE_43__["PublicProfileEditComponent"], _payment_paypal_payment_paypal_component__WEBPACK_IMPORTED_MODULE_44__["PaymentPaypalComponent"]],
         exports: [_profile_profile_component__WEBPACK_IMPORTED_MODULE_5__["ProfileComponent"], _wallet_wallet_component__WEBPACK_IMPORTED_MODULE_6__["WalletComponent"], _messages_messages_component__WEBPACK_IMPORTED_MODULE_7__["MessagesComponent"], _meeting_vc_meeting_vc_component__WEBPACK_IMPORTED_MODULE_8__["MeetingVcComponent"], _payment_payment_component__WEBPACK_IMPORTED_MODULE_9__["PaymentComponent"], _sort_array_by_updated_on_pipe__WEBPACK_IMPORTED_MODULE_10__["SortArrayByUpdatedOnPipe"], _filter_object_array_pipe__WEBPACK_IMPORTED_MODULE_11__["FilterObjectArrayPipe"], _public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_12__["PublicProfileComponent"], _pipe_data_array_filter_pipe__WEBPACK_IMPORTED_MODULE_15__["DataArrayFilterPipe"], _lender_lender_component__WEBPACK_IMPORTED_MODULE_18__["ModalPublicProfile"], _user_ratings_user_ratings_component__WEBPACK_IMPORTED_MODULE_19__["UserRatingsComponent"], _session_view_session_view_component__WEBPACK_IMPORTED_MODULE_20__["SessionViewComponent"], _pipe_my_sessions_pipe__WEBPACK_IMPORTED_MODULE_21__["MySessionsPipe"], _profile_portfolio_profile_portfolio_component__WEBPACK_IMPORTED_MODULE_23__["ProfilePortfolioComponent"], _update_password_update_password_component__WEBPACK_IMPORTED_MODULE_24__["UpdatePasswordComponent"], _bank_details_bank_details_component__WEBPACK_IMPORTED_MODULE_25__["BankDetailsComponent"], _monthly_subscription_monthly_subscription_component__WEBPACK_IMPORTED_MODULE_26__["MonthlySubscriptionComponent"], _income_proof_income_proof_component__WEBPACK_IMPORTED_MODULE_27__["IncomeProofComponent"], _payment_success_payment_success_component__WEBPACK_IMPORTED_MODULE_28__["PaymentSuccessComponent"], _payment_cancel_payment_cancel_component__WEBPACK_IMPORTED_MODULE_29__["PaymentCancelComponent"],
         /*StripeComponentComponent,*/
         _pipe_date_pretty_pipe__WEBPACK_IMPORTED_MODULE_30__["DatePrettyPipe"], _pipe_date_pretty_pipe__WEBPACK_IMPORTED_MODULE_30__["DatePrettyPipe"], _media_preview_media_preview_component__WEBPACK_IMPORTED_MODULE_31__["MediaPreviewComponent"], _media_proccess_media_proccess_component__WEBPACK_IMPORTED_MODULE_32__["MediaProccessComponent"], _star_star_component__WEBPACK_IMPORTED_MODULE_35__["StarComponent"], _ratings_list_ratings_list_component__WEBPACK_IMPORTED_MODULE_36__["RatingsListComponent"], _user_restriction_details_user_restriction_details_component__WEBPACK_IMPORTED_MODULE_38__["UserRestrictionDetailsComponent"], _user_restriction_list_user_restriction_list_component__WEBPACK_IMPORTED_MODULE_39__["UserRestrictionListComponent"], _search_search_component__WEBPACK_IMPORTED_MODULE_40__["SearchComponent"], _money_transfer_data_money_transfer_data_component__WEBPACK_IMPORTED_MODULE_41__["MoneyTransferDataComponent"]],
@@ -7049,7 +7227,7 @@
           this.currentPaymentObj = {};
           this.PaymentMethod = src_app_models__WEBPACK_IMPORTED_MODULE_5__["PaymentMethod"];
           this.handler = null;
-          this.currency = 'dkk';
+          this.currency = '$';
           this.loanId = null;
           this.loanApplyId = null;
           this.appPlanId = null;
@@ -7077,27 +7255,27 @@
         }, {
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this42 = this;
+            var _this43 = this;
 
             this.payment.getCurrentPayPalConfig().subscribe(function (payPalConfig) {
-              _this42.payPalConfig = payPalConfig;
+              _this43.payPalConfig = payPalConfig;
             });
             this.payment.getCurrentPaymentObj().subscribe(function (_currentPaymentObj) {
-              _this42.alreadyClickedOnPayment = false;
-              _this42.currentPaymentObj = _currentPaymentObj;
-              _this42.header4Payment = _this42.currentPaymentObj.header4Payment || 'Insurance Payment';
-              _this42.amount4Payment = _this42.currentPaymentObj.amount4Payment || 100;
-              _this42.selectedPaymentMethod = _this42.currentPaymentObj.selectedPaymentMethod || src_app_models__WEBPACK_IMPORTED_MODULE_5__["PaymentMethod"].Online;
-              _this42.currency = _this42.currentPaymentObj.currency || 'dkk';
-              _this42.loanId = _this42.currentPaymentObj.loanId || null;
-              _this42.loanApplyId = _this42.currentPaymentObj.loanApplyId || null;
-              _this42.appPlanId = _this42.currentPaymentObj.appPlanId || null;
-              _this42.planExpiry = _this42.currentPaymentObj.planExpiry || null;
-              _this42.paymentUniqId = _this42.currentPaymentObj.paymentUniqId || null;
-              _this42.transactiActionType = _currentPaymentObj.transactiActionType;
+              _this43.alreadyClickedOnPayment = false;
+              _this43.currentPaymentObj = _currentPaymentObj;
+              _this43.header4Payment = _this43.currentPaymentObj.header4Payment || 'Insurance Payment';
+              _this43.amount4Payment = _this43.currentPaymentObj.amount4Payment || 100;
+              _this43.selectedPaymentMethod = _this43.currentPaymentObj.selectedPaymentMethod || src_app_models__WEBPACK_IMPORTED_MODULE_5__["PaymentMethod"].Online;
+              _this43.currency = _this43.currentPaymentObj.currency || '$';
+              _this43.loanId = _this43.currentPaymentObj.loanId || null;
+              _this43.loanApplyId = _this43.currentPaymentObj.loanApplyId || null;
+              _this43.appPlanId = _this43.currentPaymentObj.appPlanId || null;
+              _this43.planExpiry = _this43.currentPaymentObj.planExpiry || null;
+              _this43.paymentUniqId = _this43.currentPaymentObj.paymentUniqId || null;
+              _this43.transactiActionType = _currentPaymentObj.transactiActionType;
             });
             this.payment.getCurrentPaymentFailed().subscribe(function (transactionStatus) {
-              _this42.handler.close();
+              _this43.handler.close();
             });
             this.loadStripe();
           }
@@ -7187,7 +7365,7 @@
         }, {
           key: "loadStripe",
           value: function loadStripe() {
-            var _this43 = this;
+            var _this44 = this;
 
             if (!window.document.getElementById('stripe-script')) {
               var s = window.document.createElement("script");
@@ -7196,7 +7374,7 @@
               s.src = "https://checkout.stripe.com/checkout.js";
 
               s.onload = function () {
-                _this43.handler = window.StripeCheckout.configure({
+                _this44.handler = window.StripeCheckout.configure({
                   key: src_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].STRIP_PAYMENT_Publishable_key,
                   locale: 'auto',
                   token: function token(_token2) {
@@ -7336,7 +7514,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<!--\n    --old ref--\n<div class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"wallet\">\n    <label class=\"custom-control-label\" for=\"customRadio\">Use Wallet</label>\n</div>\n<div class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio2\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"online\">\n    <label class=\"custom-control-label\" for=\"customRadio2\">Pay Now</label>\n</div>\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod!=PaymentMethod.Online }\">\n    <ngx-paypal [config]=\"payPalConfig\"></ngx-paypal>\n</div>\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod==PaymentMethod.Online }\">\n    <button class=\"btn btn-success btn-sm text-white\" [disabled]=\"addFundsService.totalFund4currentUser < payment.amount\" (click)=\"paymentThroughWallet()\">\n    Pay Now</button>\n</div>\n-->\n\n<!--<link rel=\"stylesheet\" href=\"style.css\">-->\n<!----stripe card payment with redirection ref---->\n<!--\n<section>\n    <div class=\"product\">\n        <div class=\"description\">\n            <h3>{{header4Payment}}</h3>\n            <h5>{{amount4Payment}}</h5>\n        </div>\n    </div>\n    <button type=\"button\" id=\"checkout-button1\" (click)=\"initForPayment()\">Pay</button>\n</section>\n kr {{amount4Payment}}\n-->\n<div class=\"payment-backdrop text-center\">\n    <br>\n    <button [disabled]=\"alreadyClickedOnPayment\" *ngIf=\"!payment.paymentNotCompletedInTime\" (click)=\"pay(amount4Payment, $event)\" class=\"btn btn-success mt-5 btn-lg\" i18n>Pay Now $ {{amount4Payment}}</button>\n    <div class=\"mt-4 text-white\" i18n>\n        Please Do not navigate or refresh page, while payment is in progress\n    </div>\n    <div class=\"mt-md-n2 mt-3\" *ngIf=\"payment.hours || payment.minutes || payment.seconds\">\n        <h4 class=\"text-white\"><div class=\"spinner-border text-success\" role=\"status\" i18n>\n            <span class=\"sr-only\" >Loading...</span>\n          </div> Session expires in  <i class=\"icon-timer\"></i>&nbsp;{{payment.hours}}:{{payment.minutes}}:{{payment.seconds}}</h4>\n    </div>\n    <div class=\"mt-3 \" *ngIf=\"!payment.paymentNotCompletedInTime && payment.paymentNotCompletedInTimeErrorMessageShow\">\n        <h4 class=\"text-white\" i18n>Please complete payment within time limit</h4>\n    </div>\n    <div class=\" mt-3\" *ngIf=\"payment.paymentNotCompletedInTime\">\n        <h4 class=\"text-white\" i18n>Time limit for payment is exceeded, please try again later. In case any deduction, will be revert back in 7 working day's, if not please contact support.</h4>\n    </div>\n</div>\n\n<!--\n<div *ngIf=\"invalidError\" style=\"color:red\">\n    {{ invalidError.message }}\n</div>\n\n<stripe-card #stripeCard (catch)=\"onStripeError($event)\" [(complete)]=\"cardDetailsFilledOut\" [(invalid)]=\"invalidError\"\n    (cardMounted)=\"cardCaptureReady = 1\" (paymentMethodChange)=\"setPaymentMethod($event)\"\n    (tokenChange)=\"setStripeToken($event)\" (sourceChange)=\"setStripeSource($event)\"></stripe-card>\n\n<button type=\"button\" (click)=\"stripeCard.createPaymentMethod(extraData)\">createPaymentMethod</button>\n<button type=\"button\" (click)=\"stripeCard.createSource(extraData)\">createSource</button>\n<button type=\"button\" (click)=\"stripeCard.createToken(extraData)\">createToken</button>\n-->";
+      __webpack_exports__["default"] = "<!--\n    --old ref--\n<div class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"wallet\">\n    <label class=\"custom-control-label\" for=\"customRadio\">Use Wallet</label>\n</div>\n<div class=\"custom-control custom-radio custom-control-inline\">\n    <input type=\"radio\" class=\"custom-control-input\" id=\"customRadio2\" [(ngModel)]=\"selectedPaymentMethod\" name=\"selectedPaymentMethod\" value=\"online\">\n    <label class=\"custom-control-label\" for=\"customRadio2\">Pay Now</label>\n</div>\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod!=PaymentMethod.Online }\">\n    <ngx-paypal [config]=\"payPalConfig\"></ngx-paypal>\n</div>\n<div [ngClass]=\"{ 'd-none': selectedPaymentMethod==PaymentMethod.Online }\">\n    <button class=\"btn btn-success btn-sm text-white\" [disabled]=\"addFundsService.totalFund4currentUser < payment.amount\" (click)=\"paymentThroughWallet()\">\n    Pay Now</button>\n</div>\n-->\n\n<!--<link rel=\"stylesheet\" href=\"style.css\">-->\n<!----stripe card payment with redirection ref---->\n<!--\n<section>\n    <div class=\"product\">\n        <div class=\"description\">\n            <h3>{{header4Payment}}</h3>\n            <h5>{{amount4Payment}}</h5>\n        </div>\n    </div>\n    <button type=\"button\" id=\"checkout-button1\" (click)=\"initForPayment()\">Pay</button>\n</section>\n kr {{amount4Payment}}\n-->\n<div class=\"payment-backdrop text-center\">\n    <br>\n    <div *ngIf=\"!payment.paymentNotCompletedInTime && !payment.paymentWithMultipleOptions\">\n        <button [disabled]=\"alreadyClickedOnPayment\" (click)=\"pay(amount4Payment, $event)\"\n            class=\"btn btn-success mt-5 btn-lg\" i18n>Pay Now $\n            {{amount4Payment}}</button>\n    </div>\n\n    <div *ngIf=\"!payment.paymentNotCompletedInTime && payment.paymentWithMultipleOptions\">\n        <button [disabled]=\"alreadyClickedOnPayment\" (click)=\"pay(amount4Payment, $event)\"\n            class=\"btn btn-success mt-5 btn-lg\" i18n>Pay Now Using Stripe $\n            {{amount4Payment}}</button>\n        <br>OR <br>\n    </div>\n    <div class=\"row\" [hidden]=\"!payment.paymentNotCompletedInTime && !payment.paymentWithMultipleOptions\">\n        <div class=\"col-xl-12 text-center\">\n            <app-payment-paypal></app-payment-paypal>\n        </div>\n    </div>\n\n    <div class=\"mt-4 text-white\" i18n>\n        Please Do not navigate or refresh page, while payment is in progress\n    </div>\n    <div class=\"mt-md-n2 mt-3\" *ngIf=\"payment.hours || payment.minutes || payment.seconds\">\n        <h4 class=\"text-white\">\n            <div class=\"spinner-border text-success\" role=\"status\" i18n>\n                <span class=\"sr-only\">Loading...</span>\n            </div> Session expires in <i\n                class=\"icon-timer\"></i>&nbsp;{{payment.hours}}:{{payment.minutes}}:{{payment.seconds}}\n        </h4>\n    </div>\n    <div class=\"mt-3 \" *ngIf=\"!payment.paymentNotCompletedInTime && payment.paymentNotCompletedInTimeErrorMessageShow\">\n        <h4 class=\"text-white\" i18n>Please complete payment within time limit</h4>\n    </div>\n    <div class=\" mt-3\" *ngIf=\"payment.paymentNotCompletedInTime\">\n        <h4 class=\"text-white\" i18n>Time limit for payment is exceeded, please try again later. In case any deduction,\n            will be revert back in 7 working day's, if not please contact support.</h4>\n    </div>\n</div>\n\n<!--\n<div *ngIf=\"invalidError\" style=\"color:red\">\n    {{ invalidError.message }}\n</div>\n\n<stripe-card #stripeCard (catch)=\"onStripeError($event)\" [(complete)]=\"cardDetailsFilledOut\" [(invalid)]=\"invalidError\"\n    (cardMounted)=\"cardCaptureReady = 1\" (paymentMethodChange)=\"setPaymentMethod($event)\"\n    (tokenChange)=\"setStripeToken($event)\" (sourceChange)=\"setStripeSource($event)\"></stripe-card>\n\n<button type=\"button\" (click)=\"stripeCard.createPaymentMethod(extraData)\">createPaymentMethod</button>\n<button type=\"button\" (click)=\"stripeCard.createSource(extraData)\">createSource</button>\n<button type=\"button\" (click)=\"stripeCard.createToken(extraData)\">createToken</button>\n-->";
       /***/
     },
 
@@ -7528,7 +7706,7 @@
         _createClass2(MediaProccessComponent, [{
           key: "onUploadMediaOnServer",
           value: function onUploadMediaOnServer() {
-            var _this44 = this;
+            var _this45 = this;
 
             if (!this.fileData) {
               this.alertService.error("Select file first.");
@@ -7558,14 +7736,14 @@
               observe: 'events'
             }).subscribe(function (events) {
               if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpEventType"].UploadProgress) {
-                _this44.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
+                _this45.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
               } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpEventType"].Response) {
-                _this44.fileUploadProgress = ''; //console.log(events.body);
+                _this45.fileUploadProgress = ''; //console.log(events.body);
 
                 if (events.body["status"]) {
                   //alert('SUCCESS !!');
                   //this.fileData = null;
-                  _this44.alertService.success('Uploaded successfully', true);
+                  _this45.alertService.success('Uploaded successfully', true);
 
                   var _uploadedUrl = events.body["data"].path;
 
@@ -7573,12 +7751,12 @@
                     _uploadedUrl = _uploadedUrl.substr(1);
                   }
 
-                  _this44.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
-                  _this44.uploadedFileObj.url = _this44.uploadedFilePath; //this.onacademicDocumentsUpdate(true, null, this.uploadedFileObj);
+                  _this45.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                  _this45.uploadedFileObj.url = _this45.uploadedFilePath; //this.onacademicDocumentsUpdate(true, null, this.uploadedFileObj);
 
-                  _this44.closeDialog();
+                  _this45.closeDialog();
                 } else {
-                  _this44.alertService.error(events.body["message"]);
+                  _this45.alertService.error(events.body["message"]);
                 }
               }
             });
@@ -7586,16 +7764,16 @@
         }, {
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this45 = this;
+            var _this46 = this;
 
             setTimeout(function () {
-              _this45.openFileUploader();
+              _this46.openFileUploader();
             }, 1000);
           }
         }, {
           key: "fileChangeEvent",
           value: function fileChangeEvent(event) {
-            var _this46 = this;
+            var _this47 = this;
 
             this.imageChangedEvent = event;
             this.fileData = event.target.files[0];
@@ -7603,24 +7781,24 @@
             reader.readAsDataURL(this.fileData);
 
             reader.onload = function (_event) {
-              _this46.imageUrl = reader.result;
-              _this46.croppedImage = _this46.imageUrl;
-              _this46.isImageLoaded = true;
+              _this47.imageUrl = reader.result;
+              _this47.croppedImage = _this47.imageUrl;
+              _this47.isImageLoaded = true;
             };
           }
         }, {
           key: "fnCrop",
           value: function fnCrop(data) {
-            var _this47 = this;
+            var _this48 = this;
 
             var canvas = this.angularCropper.cropper.getCroppedCanvas();
             this.imageDestination = canvas.toDataURL("image/png");
             this.croppedImage = this.imageDestination;
             this.angularCropper.cropper.getCroppedCanvas().toBlob(function (blob) {
-              _this47.fileDataTemp = blob;
-              _this47.fileDataTemp["lastModifiedDate"] = new Date();
-              _this47.fileDataTemp["name"] = _this47.fileData.name;
-              _this47.fileDataTemp["mimetype"] = _this47.fileData.type;
+              _this48.fileDataTemp = blob;
+              _this48.fileDataTemp["lastModifiedDate"] = new Date();
+              _this48.fileDataTemp["name"] = _this48.fileData.name;
+              _this48.fileDataTemp["mimetype"] = _this48.fileData.type;
             });
           }
         }, {
@@ -8124,7 +8302,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"row\">\n    <div class=\"col-xl-12\">\n        <i class=\"icon-close float-right\" mat-button mat-dialog-close></i>\n    </div>\n</div>\n\n    <div class=\"row\" [ngSwitch]=\"mimeType\">\n        <!-- the same view can be shown in more than one case -->\n        <div class=\"col-xl-12\" *ngSwitchCase=\"MediaTypes.video\">\n        </div>\n        <div class=\"col-xl-12\" *ngSwitchCase=\"MediaTypes.audio\">\n        </div>\n        <div class=\"col-xl-12 text-center\" *ngSwitchCase=\"MediaTypes.image\">\n            <img class=\"img-fluid\" [src]=\"mediaSrc\"  />\n        </div>\n        <div class=\"col-xl-12 text-center\" *ngSwitchDefault>\n            <img class=\"img-fluid\" [src]=\"mediaSrc\" />\n        </div>\n    </div>\n\n";
+      __webpack_exports__["default"] = "\n\n<div class=\"row\">\n    <div class=\"col-xl-11 col-10\">\n        <h4 class=\"mb-3 text-black-50\" i18n>\n            Preview\n        </h4>\n    </div>\n    <div class=\"col-xl-1 col-2\">\n        <i class=\"icon-close float-right\" mat-button (click)=\"closeDialog()\"></i>\n    </div>\n</div>\n<mat-dialog-content class=\"mat-typography\" style=\"max-height: 86vh;\">\n    <div class=\"row\" [ngSwitch]=\"mimeType\">\n        <!-- the same view can be shown in more than one case -->\n        <div class=\"col-xl-12\" *ngSwitchCase=\"MediaTypes.video\">\n        </div>\n        <div class=\"col-xl-12\" *ngSwitchCase=\"MediaTypes.audio\">\n        </div>\n        <div class=\"col-xl-12 text-center\" *ngSwitchCase=\"MediaTypes.image\">\n            <img class=\"img-fluid\" style=\"height: 86vh;\" [src]=\"mediaSrc\"  />\n        </div>\n        <div class=\"col-xl-12 text-center\" *ngSwitchDefault>\n            <img class=\"img-fluid\" style=\"height: 86vh;\" [src]=\"mediaSrc\" />\n        </div>\n    </div>\n</mat-dialog-content>\n";
       /***/
     },
 
@@ -8144,7 +8322,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"row\" *ngIf=\"isOpenedInModel\">\n    <div class=\"col-xl-11 col-10\">\n        <h4 class=\"mb-3 text-black-50\" i18n>\n            Income proof & Monthly Expenses verification\n        </h4>\n    </div>\n    <div class=\"col-xl-1 col-2\">\n        <i class=\"icon-close float-right\" mat-button mat-dialog-close></i>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-xl-12 col-12\">\n        <div id=\"accordion_userIncomeDetailsForm\">\n            <div class=\"card shadow mb-4\">\n                <div class=\"card-header py-3 flex-row align-items-center justify-content-between\">\n                    <a class=\"collapsed card-link\" data-toggle=\"collapse\"\n                        [attr.href]=\"'#collapse_userIncomeDetailsForm'\" i18n>\n                        <h6 class=\"m-0 font-weight-bold text-primary\">\n                            Update {{adminViewT?userObj.firstName+'`s':'Your'}} Income Details\n                            <span class=\"float-right\"\n                                [ngClass]=\"{ 'text-success': userObj.totalAllowedBudget, 'text-danger': !userObj.totalAllowedBudget }\">\n                                &nbsp;{{userObj.totalAllowedBudget}}&nbsp;\n                            </span>\n                            <span class=\"float-right\">\n                                &nbsp;{{userObj.totalIncome4currentUser || 0\n                                }}&nbsp;-&nbsp;{{userObj.totalExpense4currentUser || 0}}&nbsp;=&nbsp;\n                            </span>\n                        </h6>\n                    </a>\n\n                </div>\n                <div [attr.id]=\"'collapse_userIncomeDetailsForm'\" class=\"collapse show\"\n                    data-parent=\"#accordion_userIncomeDetailsForm\">\n                    <div class=\"card-body\">\n\n                        <form [formGroup]=\"userIncomeDetailsForm\">\n                            <div class=\"row mb-3\" *ngIf=\"!adminViewT\">\n                                <div class=\"col-xl-12 mb-3\" i18n>\n                                    Update your mothly income proof for the verification. be careful with your income\n                                    proof\n                                    uploads as you cannot change your monthly income proof once uploaded.\n                                </div>\n                                <div class=\"col-xl-4\">\n                                    <div class=\"form-group\">\n                                        <label for=\"incomeSource\" i18n>Income Source</label>\n                                        <input type=\"text\" formControlName=\"incomeSource\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submittedIncomeDetails && f.incomeSource.errors }\"\n                                            placeholder=\"e.g. salaried, business, stocks etc\" />\n                                        <div *ngIf=\"submittedIncomeDetails && f.incomeSource.errors\"\n                                            class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.incomeSource.errors.required\" i18n>Income Source is required</div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4\">\n                                    <div class=\"form-group\">\n                                        <label for=\"monthlyIncomeAmount\" i18n>Monthly Income in kr</label>\n                                        <input type=\"number\" formControlName=\"monthlyIncomeAmount\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submittedIncomeDetails && f.monthlyIncomeAmount.errors }\" />\n                                        <div *ngIf=\"submittedIncomeDetails && f.monthlyIncomeAmount.errors\"\n                                            class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.monthlyIncomeAmount.errors.required\" i18n>Monthly Income is\n                                                required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4\">\n                                    <div class=\"form-group\">\n                                        <label for=\"monthlyIncomeProofDocument\" i18n>Upload proof</label>\n                                        <br>\n                                        <!--\n                                        <input type=\"file\" class=\"form-control\" id=\"monthlyIncomeProofDocument\"\n                                            (change)=\"onfileProgressForMonthlyIncomeProofDocument($event)\">\n                                        -->\n\n                                        <img *ngIf=\"f.monthlyIncomeProofDocument.value\"\n                                            [src]=\"f.monthlyIncomeProofDocument.value\" class=\"border img-fluid mb-3\"\n                                            height=\"50\" width=\"50\" />\n                                        <!--\n                                        <input *ngIf=\"!fileData4MonthlyIncomeProofDocumentPendingForUpload\"\n                                            id=\"ctrlUploadmonthlyIncomeProofDocument\" type=\"file\" name=\"image\"\n                                            accept=\"image/*\"\n                                            (change)=\"onfileProgressForMonthlyIncomeProofDocument($event)\">\n                                        <i *ngIf=\"fileData4MonthlyIncomeProofDocumentPendingForUpload\"\n                                            class=\"icon-upload m-2 cursor-pointer text-success\"\n                                            (click)=\"onUploadForMonthlyIncomeProofDocument()\">\n                                            Upload\n                                        </i>\n                                    -->\n                                    <br>\n                                        <i class=\"icon-upload m-2 cursor-pointer text-success\"\n                                            (click)=\"modalMediaUploadWithCropFeature(userObj._id + '__income_proof', 'monthlyIncomeProofDocument', null);\">\n                                            {{fileData4MonthlyIncomeProofDocumentPendingForUpload?'Change':'Upload'}}\n                                        </i>\n\n                                        <div *ngIf=\"submittedIncomeDetails && f.monthlyIncomeProofDocument.errors\"\n                                            class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.monthlyIncomeProofDocument.errors.required\" i18n>Monthly Income\n                                                Proof is required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-12\">\n                                    <button class=\"btn btn-success btn-sm float-right\"\n                                        (click)=\"onUserIncomeDetailsUpdateSubmit()\"><i class=\"icon icon-plus\"></i>\n                                        ADD</button>\n                                </div>\n                            </div>\n                        </form>\n                        <div class=\"table-responsive table-billing-history\">\n                            <table class=\"table mb-0\">\n                                <thead>\n                                    <tr>\n                                        <th scope=\"col\" i18n>Type</th>\n                                        <th scope=\"col\" i18n>Monthly Income</th>\n                                        <th scope=\"col\" i18n>Status</th>\n                                        <th scope=\"col\" i18n>Preview</th>\n                                        <th *ngIf=\"adminViewT\" scope=\"col\">#</th>\n                                    </tr>\n                                </thead>\n                                <tbody>\n                                    <tr *ngFor=\"let obj2show of allIncomeDetailsData\">\n                                        <td>{{obj2show.incomeSource}}</td>\n                                        <td>{{obj2show.monthlyIncomeAmount}}</td>\n                                        <td class=\"text-capitalize text-cap\">\n                                            <span class=\"badge\"\n                                                [ngClass]=\"{'badge-success': (obj2show.monthlyIncomeStatus==SessionStatus.Approved || obj2show.monthlyIncomeStatus==SessionStatus.Accepted || obj2show.monthlyIncomeStatus==SessionStatus.Active || obj2show.monthlyIncomeStatus==SessionStatus.Completed || obj2show.monthlyIncomeStatus==SessionStatus.OngoingInitiated  || obj2show.monthlyIncomeStatus==SessionStatus.AwaitingForApproval  || obj2show.monthlyIncomeStatus==SessionStatus.Ongoing), 'badge-danger': (obj2show.monthlyIncomeStatus==SessionStatus.Rejected || obj2show.monthlyIncomeStatus==SessionStatus.RejectedOngoing || obj2show.monthlyIncomeStatus==SessionStatus.Suspended), 'badge-info': ( obj2show.monthlyIncomeStatus==null || obj2show.monthlyIncomeStatus=='' || obj2show.monthlyIncomeStatus==SessionStatus.Pending)}\">\n                                                {{obj2show.monthlyIncomeStatus}}\n                                            </span>\n                                        </td>\n                                        <td>\n                                            <label title=\"Preview\"\n                                                (click)=\"mediaPreviewModel(obj2show.monthlyIncomeProofDocument, 'image')\">\n                                                <i class=\"icon-eye m-2 text-success\"></i>\n                                            </label>\n                                        </td>\n                                        <td *ngIf=\"adminViewT\">\n                                            <div [ngSwitch]=\"obj2show.monthlyIncomeStatus\">\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Pending\">\n                                                    <button title=\"Approve\" class=\"btn btn-link btn-sm\"\n                                                        (click)=\"updateUsersIncomeVerificationStatus(obj2show._id, SessionStatus.Approved)\">\n                                                        <i class=\"icon-check m-2 text-success\"></i>\n                                                    </button>\n                                                    <button title=\"Reject\" class=\"btn btn-link btn-sm\"\n                                                        (click)=\"updateUsersIncomeVerificationStatus(obj2show._id, SessionStatus.Rejected)\">\n                                                        <i class=\"icon-close m-2 text-danger\"></i>\n                                                    </button>\n                                                </div>\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Approved\">\n                                                    <button title=\"Reject\" class=\"btn btn-link btn-sm\"\n                                                        (click)=\"updateUsersIncomeVerificationStatus(obj2show._id, SessionStatus.Rejected)\">\n                                                        <i class=\"icon-close m-2 text-danger\"></i>\n                                                    </button>\n                                                </div>\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Rejected\">\n                                                    <button title=\"Approve\" class=\"btn btn-link btn-sm\"\n                                                        (click)=\"updateUsersIncomeVerificationStatus(obj2show._id, SessionStatus.Approved)\">\n                                                        <i class=\"icon-check m-2 text-success\"></i>\n                                                    </button>\n                                                </div>\n                                            </div>\n                                        </td>\n                                    </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-xl-12 col-12\">\n        <div id=\"accordion_userExpenseDetailsForm\">\n            <div class=\"card shadow mb-4\">\n                <div class=\"card-header py-3 flex-row align-items-center justify-content-between\">\n                    <a class=\"collapsed card-link\" data-toggle=\"collapse\"\n                        [attr.href]=\"'#collapse_userExpenseDetailsForm'\">\n                        <h6 class=\"m-0 font-weight-bold text-primary\" i18n>\n                            Update {{adminViewT?userObj.firstName+'`s':'Your'}} Monthly Expenses\n                        </h6>\n                    </a>\n                </div>\n                <div [attr.id]=\"'collapse_userExpenseDetailsForm'\" class=\"collapse show\"\n                    data-parent=\"#accordion_userExpenseDetailsForm\">\n                    <div class=\"card-body\">\n\n                        <form [formGroup]=\"userExpenseDetailsForm\">\n                            <div class=\"row mb-3\" *ngIf=\"!adminViewT\">\n                                <div class=\"col-xl-12 mb-3\" i18n>\n                                    Update your existing loans or other expenses.\n\n                                </div>\n                                <div class=\"col-xl-6\">\n                                    <div class=\"form-group\">\n                                        <label for=\"usr\" i18n>Expense Details</label>\n                                        <label for=\"expenseDetails\">Expense Details</label>\n                                        <input type=\"text\" formControlName=\"expenseDetails\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submittedExpenseDetails && ff.expenseDetails.errors }\"\n                                            placeholder=\"e.g. salaried, business, stocks etc\" />\n                                        <div *ngIf=\"submittedExpenseDetails && ff.expenseDetails.errors\"\n                                            class=\"invalid-feedback\">\n                                            <div *ngIf=\"ff.expenseDetails.errors.required\" i18n>Expense Details is required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-6\">\n                                    <div class=\"form-group\">\n                                        <label for=\"monthlyEMIAmount\" i18n>Monthly EMI</label>\n                                        <input type=\"number\" formControlName=\"monthlyEMIAmount\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submittedExpenseDetails && ff.monthlyEMIAmount.errors }\" />\n                                        <div *ngIf=\"submittedExpenseDetails && ff.monthlyEMIAmount.errors\"\n                                            class=\"invalid-feedback\">\n                                            <div *ngIf=\"ff.monthlyEMIAmount.errors.required\" i18n>Monthly EMI is required\n                                            </div>\n                                        </div>\n\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-6\">\n                                    <div class=\"form-group\">\n\n                                        <label for=\"monthlyExpenseStartDateTimeCustomised\" i18n>Start Date</label>\n                                        <input type=\"date\" formControlName=\"monthlyExpenseStartDateTimeCustomised\"\n                                            class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submittedExpenseDetails && ff.monthlyExpenseStartDateTimeCustomised.errors }\" />\n                                        <div *ngIf=\"submittedExpenseDetails && ff.monthlyExpenseStartDateTimeCustomised.errors\"\n                                            class=\"invalid-feedback\">\n                                            <div *ngIf=\"ff.monthlyExpenseStartDateTimeCustomised.errors.required\" i18n>\n                                                Start Date\n                                                is required\n                                            </div>\n                                            <div *ngIf=\"ff.monthlyExpenseStartDateTimeCustomised.errors.date\" i18n>\n                                                Invalid Date\n                                                format.\n                                            </div>\n                                        </div>\n\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-6\">\n                                    <div class=\"form-group\">\n                                        <label for=\"monthlyExpensePaymentDateTimeCustomised\" i18n>Payment Date</label>\n                                        <input type=\"date\" formControlName=\"monthlyExpensePaymentDateTimeCustomised\"\n                                            class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submittedExpenseDetails && ff.monthlyExpensePaymentDateTimeCustomised.errors }\" />\n                                        <div *ngIf=\"submittedExpenseDetails && ff.monthlyExpensePaymentDateTimeCustomised.errors\"\n                                            class=\"invalid-feedback\">\n                                            <div *ngIf=\"ff.monthlyExpensePaymentDateTimeCustomised.errors.required\"\n                                                i18n>Payment\n                                                Date is required\n                                            </div>\n                                            <div *ngIf=\"ff.monthlyExpensePaymentDateTimeCustomised.errors.date\" i18n>\n                                                Invalid Date\n                                                format.\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-12\">\n                                    <button class=\"btn btn-success btn-sm float-right\"\n                                        (click)=\"onUserExpenseDetailsUpdateSubmit()\"><i class=\"icon icon-plus\"></i>\n                                        ADD</button>\n                                </div>\n\n                            </div>\n                        </form>\n                        <div class=\"table-responsive table-billing-history\">\n                            <table class=\"table mb-0\">\n                                <thead>\n                                    <tr>\n                                        <th scope=\"col\" i18n>Expense Details</th>\n                                        <th scope=\"col\" i18n>Start Date</th>\n                                        <th scope=\"col\" i18n>Payment Date</th>\n                                        <th scope=\"col\" i18n>Monthly EMI</th>\n                                        <th scope=\"col\" i18n>Status</th>\n                                        <th *ngIf=\"adminViewT\" scope=\"col\">#</th>\n                                    </tr>\n                                </thead>\n                                <tbody>\n                                    <tr>\n                                    <tr *ngFor=\"let obj2show of allExpenseDetailsData\">\n                                        <td>{{obj2show.expenseDetails}}</td>\n                                        <td>{{obj2show.monthlyExpenseStartDate | date:'dd-MMM-YYYY'}}</td>\n                                        <td>{{obj2show.monthlyExpensePaymentDate | date:'dd-MMM-YYYY'}}</td>\n                                        <td>{{obj2show.monthlyEMIAmount}}</td>\n                                        <td class=\"text-capitalize text-cap\">\n                                            <span class=\"badge\"\n                                                [ngClass]=\"{'badge-success': (obj2show.monthlyExpenseStatus==SessionStatus.Approved || obj2show.monthlyExpenseStatus==SessionStatus.Accepted || obj2show.monthlyExpenseStatus==SessionStatus.Active || obj2show.monthlyExpenseStatus==SessionStatus.Completed || obj2show.monthlyExpenseStatus==SessionStatus.OngoingInitiated  || obj2show.monthlyExpenseStatus==SessionStatus.AwaitingForApproval  || obj2show.monthlyExpenseStatus==SessionStatus.Ongoing), 'badge-danger': (obj2show.monthlyExpenseStatus==SessionStatus.Rejected || obj2show.monthlyExpenseStatus==SessionStatus.RejectedOngoing || obj2show.monthlyExpenseStatus==SessionStatus.Suspended), 'badge-info': ( obj2show.monthlyExpenseStatus==null || obj2show.monthlyExpenseStatus=='' || obj2show.monthlyExpenseStatus==SessionStatus.Pending)}\">\n                                                {{obj2show.monthlyExpenseStatus}}\n                                            </span>\n                                        </td>\n                                        <td *ngIf=\"adminViewT\">\n                                            <div [ngSwitch]=\"obj2show.monthlyExpenseStatus\">\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Pending\">\n                                                    <button title=\"Approve\" class=\"btn btn-link btn-sm\"\n                                                        (click)=\"updateUsersExpenseVerificationStatus(obj2show._id, SessionStatus.Approved)\">\n                                                        <i class=\"icon-check m-2 text-success\"></i>\n                                                    </button>\n                                                    <button title=\"Reject\" class=\"btn btn-link btn-sm\"\n                                                        (click)=\"updateUsersExpenseVerificationStatus(obj2show._id, SessionStatus.Rejected)\">\n                                                        <i class=\"icon-close m-2 text-danger\"></i>\n                                                    </button>\n                                                </div>\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Approved\">\n                                                    <button title=\"Reject\" class=\"btn btn-link btn-sm\"\n                                                        (click)=\"updateUsersExpenseVerificationStatus(obj2show._id, SessionStatus.Rejected)\">\n                                                        <i class=\"icon-close m-2 text-danger\"></i>\n                                                    </button>\n                                                </div>\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Rejected\">\n                                                    <button title=\"Approve\" class=\"btn btn-link btn-sm\"\n                                                        (click)=\"updateUsersExpenseVerificationStatus(obj2show._id, SessionStatus.Approved)\">\n                                                        <i class=\"icon-check m-2 text-success\"></i>\n                                                    </button>\n                                                </div>\n                                            </div>\n                                        </td>\n                                    </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
+      __webpack_exports__["default"] = "<div class=\"row\" *ngIf=\"isOpenedInModel\">\n    <div class=\"col-xl-11 col-10\">\n        <h4 class=\"mb-3 text-black-50\" i18n>\n            Income proof & Monthly Expenses verification\n        </h4>\n    </div>\n    <div class=\"col-xl-1 col-2\">\n        <i class=\"icon-close float-right\" mat-button mat-dialog-close></i>\n    </div>\n</div>\n\n<div class=\"row\">\n    <div class=\"col-xl-12 col-12\">\n        <div id=\"accordion_userIncomeDetailsForm\">\n            <div class=\"card shadow mb-4\">\n                <div class=\"card-header py-3 flex-row align-items-center justify-content-between\">\n                    <a class=\"collapsed card-link\" data-toggle=\"collapse\"\n                        [attr.href]=\"'#collapse_userIncomeDetailsForm'\" i18n>\n                        <h6 class=\"m-0 font-weight-bold text-primary\">\n                            Update {{adminViewT?userObj.firstName+'`s':'Your'}} Income Details\n                            <!-- <span class=\"float-right\"\n                                [ngClass]=\"{ 'text-success': userObj.totalAllowedBudget, 'text-danger': !userObj.totalAllowedBudget }\">\n                                &nbsp;{{userObj.totalAllowedBudget}}&nbsp;({{maxPercentageAllowed2user||0}}%)\n                            </span>\n                            <span class=\"float-right\">\n                                &nbsp;{{userObj.totalIncome4currentUser || 0\n                                }}&nbsp;-&nbsp;{{userObj.totalExpense4currentUser || 0}}&nbsp;=&nbsp;\n                            </span> -->\n                        </h6>\n                    </a>\n                </div>\n                <div [attr.id]=\"'collapse_userIncomeDetailsForm'\" class=\"collapse show\"\n                    data-parent=\"#accordion_userIncomeDetailsForm\">\n                    <div class=\"card-body\">\n\n                        <form [formGroup]=\"userIncomeDetailsForm\">\n                            <div class=\"row mb-3\" *ngIf=\"!adminViewT\">\n                                <div class=\"col-xl-12 mb-3\" i18n>\n                                    Update your mothly income proof for the verification. be careful with your income\n                                    proof\n                                    uploads as you cannot change your monthly income proof once uploaded.\n                                </div>\n                                <div class=\"col-xl-4\">\n                                    <div class=\"form-group\">\n                                        <label for=\"incomeSource\" i18n>Income Source</label>\n                                        <input type=\"text\" formControlName=\"incomeSource\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submittedIncomeDetails && f.incomeSource.errors }\"\n                                            placeholder=\"e.g. salaried, business, stocks etc\" />\n                                        <div *ngIf=\"submittedIncomeDetails && f.incomeSource.errors\"\n                                            class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.incomeSource.errors.required\" i18n>Income Source is required</div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4\">\n                                    <div class=\"form-group\">\n                                        <label for=\"monthlyIncomeAmount\" i18n>Monthly Income in kr</label>\n                                        <input type=\"number\" formControlName=\"monthlyIncomeAmount\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submittedIncomeDetails && f.monthlyIncomeAmount.errors }\" />\n                                        <div *ngIf=\"submittedIncomeDetails && f.monthlyIncomeAmount.errors\"\n                                            class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.monthlyIncomeAmount.errors.required\" i18n>Monthly Income is\n                                                required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4\">\n                                    <div class=\"form-group\">\n                                        <label for=\"monthlyIncomeProofDocument\" i18n>Upload proof</label>\n                                        <br>\n                                        <!--\n                                        <input type=\"file\" class=\"form-control\" id=\"monthlyIncomeProofDocument\"\n                                            (change)=\"onfileProgressForMonthlyIncomeProofDocument($event)\">\n                                        -->\n\n                                        <img *ngIf=\"f.monthlyIncomeProofDocument.value\"\n                                            [src]=\"f.monthlyIncomeProofDocument.value\" class=\"border img-fluid mb-3\"\n                                            height=\"50\" width=\"50\" />\n                                        <!--\n                                        <input *ngIf=\"!fileData4MonthlyIncomeProofDocumentPendingForUpload\"\n                                            id=\"ctrlUploadmonthlyIncomeProofDocument\" type=\"file\" name=\"image\"\n                                            accept=\"image/*\"\n                                            (change)=\"onfileProgressForMonthlyIncomeProofDocument($event)\">\n                                        <i *ngIf=\"fileData4MonthlyIncomeProofDocumentPendingForUpload\"\n                                            class=\"icon-upload m-2 cursor-pointer text-success\"\n                                            (click)=\"onUploadForMonthlyIncomeProofDocument()\">\n                                            Upload\n                                        </i>\n                                    -->\n                                    <br>\n                                        <i class=\"icon-upload m-2 cursor-pointer text-success\"\n                                            (click)=\"modalMediaUploadWithCropFeature(userObj._id + '__income_proof', 'monthlyIncomeProofDocument', null);\">\n                                            {{fileData4MonthlyIncomeProofDocumentPendingForUpload?'Change':'Upload'}}\n                                        </i>\n\n                                        <div *ngIf=\"submittedIncomeDetails && f.monthlyIncomeProofDocument.errors\"\n                                            class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.monthlyIncomeProofDocument.errors.required\" i18n>Monthly Income\n                                                Proof is required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-12\">\n                                    <button class=\"btn btn-success btn-sm float-right\"\n                                        (click)=\"onUserIncomeDetailsUpdateSubmit()\"><i class=\"icon icon-plus\"></i>\n                                        ADD</button>\n                                </div>\n                            </div>\n                        </form>\n                        <div class=\"table-responsive table-billing-history\">\n                            <table class=\"table mb-0\">\n                                <thead>\n                                    <tr>\n                                        <th scope=\"col\" i18n>Type</th>\n                                        <th scope=\"col\" i18n>Monthly Income</th>\n                                        <th scope=\"col\" i18n>Status</th>\n                                        <th scope=\"col\" i18n>Preview</th>\n                                        <th *ngIf=\"adminViewT\" scope=\"col\">#</th>\n                                    </tr>\n                                </thead>\n                                <tbody>\n                                    <tr *ngFor=\"let obj2show of allIncomeDetailsData\">\n                                        <td>{{obj2show.incomeSource}}</td>\n                                        <td>{{obj2show.monthlyIncomeAmount}}</td>\n                                        <td class=\"text-capitalize text-cap\">\n                                            <span class=\"badge\"\n                                                [ngClass]=\"{'badge-success': (obj2show.monthlyIncomeStatus==SessionStatus.Approved || obj2show.monthlyIncomeStatus==SessionStatus.Accepted || obj2show.monthlyIncomeStatus==SessionStatus.Active || obj2show.monthlyIncomeStatus==SessionStatus.Completed || obj2show.monthlyIncomeStatus==SessionStatus.OngoingInitiated  || obj2show.monthlyIncomeStatus==SessionStatus.AwaitingForApproval  || obj2show.monthlyIncomeStatus==SessionStatus.Ongoing), 'badge-danger': (obj2show.monthlyIncomeStatus==SessionStatus.Rejected || obj2show.monthlyIncomeStatus==SessionStatus.RejectedOngoing || obj2show.monthlyIncomeStatus==SessionStatus.Suspended), 'badge-info': ( obj2show.monthlyIncomeStatus==null || obj2show.monthlyIncomeStatus=='' || obj2show.monthlyIncomeStatus==SessionStatus.Pending)}\">\n                                                {{obj2show.monthlyIncomeStatus}}\n                                            </span>\n                                        </td>\n                                        <td>\n                                            <label title=\"Preview\"\n                                                (click)=\"mediaPreviewModel(obj2show.monthlyIncomeProofDocument, 'image')\">\n                                                <i class=\"icon-eye m-2 text-success\"></i>\n                                            </label>\n                                        </td>\n                                        <td *ngIf=\"adminViewT\">\n                                            <div [ngSwitch]=\"obj2show.monthlyIncomeStatus\">\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Pending\">\n                                                    <button title=\"Approve\" class=\"btn btn-link btn-sm\"\n                                                        (click)=\"updateUsersIncomeVerificationStatus(obj2show._id, SessionStatus.Approved)\">\n                                                        <i class=\"icon-check m-2 text-success\"></i>\n                                                    </button>\n                                                    <button title=\"Reject\" class=\"btn btn-link btn-sm\"\n                                                        (click)=\"updateUsersIncomeVerificationStatus(obj2show._id, SessionStatus.Rejected)\">\n                                                        <i class=\"icon-close m-2 text-danger\"></i>\n                                                    </button>\n                                                </div>\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Approved\">\n                                                    <button title=\"Reject\" class=\"btn btn-link btn-sm\"\n                                                        (click)=\"updateUsersIncomeVerificationStatus(obj2show._id, SessionStatus.Rejected)\">\n                                                        <i class=\"icon-close m-2 text-danger\"></i>\n                                                    </button>\n                                                </div>\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Rejected\">\n                                                    <button title=\"Approve\" class=\"btn btn-link btn-sm\"\n                                                        (click)=\"updateUsersIncomeVerificationStatus(obj2show._id, SessionStatus.Approved)\">\n                                                        <i class=\"icon-check m-2 text-success\"></i>\n                                                    </button>\n                                                </div>\n                                            </div>\n                                        </td>\n                                    </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n    <div class=\"col-xl-12 col-12\">\n        <div id=\"accordion_userExpenseDetailsForm\">\n            <div class=\"card shadow mb-4\">\n                <div class=\"card-header py-3 flex-row align-items-center justify-content-between\">\n                    <a class=\"collapsed card-link\" data-toggle=\"collapse\"\n                        [attr.href]=\"'#collapse_userExpenseDetailsForm'\">\n                        <h6 class=\"m-0 font-weight-bold text-primary\" i18n>\n                            Update {{adminViewT?userObj.firstName+'`s':'Your'}} Monthly Expenses\n                        </h6>\n                    </a>\n                </div>\n                <div [attr.id]=\"'collapse_userExpenseDetailsForm'\" class=\"collapse show\"\n                    data-parent=\"#accordion_userExpenseDetailsForm\">\n                    <div class=\"card-body\">\n\n                        <form [formGroup]=\"userExpenseDetailsForm\">\n                            <div class=\"row mb-3\" *ngIf=\"!adminViewT\">\n                                <div class=\"col-xl-12 mb-3\" i18n>\n                                    Update your existing loans or other expenses.\n\n                                </div>\n                                <div class=\"col-xl-6\">\n                                    <div class=\"form-group\">\n                                        <label for=\"usr\" i18n>Expense Details</label>\n                                        <label for=\"expenseDetails\">Expense Details</label>\n                                        <input type=\"text\" formControlName=\"expenseDetails\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submittedExpenseDetails && ff.expenseDetails.errors }\"\n                                            placeholder=\"e.g. salaried, business, stocks etc\" />\n                                        <div *ngIf=\"submittedExpenseDetails && ff.expenseDetails.errors\"\n                                            class=\"invalid-feedback\">\n                                            <div *ngIf=\"ff.expenseDetails.errors.required\" i18n>Expense Details is required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-6\">\n                                    <div class=\"form-group\">\n                                        <label for=\"monthlyEMIAmount\" i18n>Monthly EMI</label>\n                                        <input type=\"number\" formControlName=\"monthlyEMIAmount\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submittedExpenseDetails && ff.monthlyEMIAmount.errors }\" />\n                                        <div *ngIf=\"submittedExpenseDetails && ff.monthlyEMIAmount.errors\"\n                                            class=\"invalid-feedback\">\n                                            <div *ngIf=\"ff.monthlyEMIAmount.errors.required\" i18n>Monthly EMI is required\n                                            </div>\n                                        </div>\n\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-6\">\n                                    <div class=\"form-group\">\n\n                                        <label for=\"monthlyExpenseStartDateTimeCustomised\" i18n>Start Date</label>\n                                        <input type=\"date\" formControlName=\"monthlyExpenseStartDateTimeCustomised\"\n                                            class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submittedExpenseDetails && ff.monthlyExpenseStartDateTimeCustomised.errors }\" />\n                                        <div *ngIf=\"submittedExpenseDetails && ff.monthlyExpenseStartDateTimeCustomised.errors\"\n                                            class=\"invalid-feedback\">\n                                            <div *ngIf=\"ff.monthlyExpenseStartDateTimeCustomised.errors.required\" i18n>\n                                                Start Date\n                                                is required\n                                            </div>\n                                            <div *ngIf=\"ff.monthlyExpenseStartDateTimeCustomised.errors.date\" i18n>\n                                                Invalid Date\n                                                format.\n                                            </div>\n                                        </div>\n\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-6\">\n                                    <div class=\"form-group\">\n                                        <label for=\"monthlyExpensePaymentDateTimeCustomised\" i18n>Payment Date</label>\n                                        <input type=\"date\" formControlName=\"monthlyExpensePaymentDateTimeCustomised\"\n                                            class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submittedExpenseDetails && ff.monthlyExpensePaymentDateTimeCustomised.errors }\" />\n                                        <div *ngIf=\"submittedExpenseDetails && ff.monthlyExpensePaymentDateTimeCustomised.errors\"\n                                            class=\"invalid-feedback\">\n                                            <div *ngIf=\"ff.monthlyExpensePaymentDateTimeCustomised.errors.required\"\n                                                i18n>Payment\n                                                Date is required\n                                            </div>\n                                            <div *ngIf=\"ff.monthlyExpensePaymentDateTimeCustomised.errors.date\" i18n>\n                                                Invalid Date\n                                                format.\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-12\">\n                                    <button class=\"btn btn-success btn-sm float-right\"\n                                        (click)=\"onUserExpenseDetailsUpdateSubmit()\"><i class=\"icon icon-plus\"></i>\n                                        ADD</button>\n                                </div>\n\n                            </div>\n                        </form>\n                        <div class=\"table-responsive table-billing-history\">\n                            <table class=\"table mb-0\">\n                                <thead>\n                                    <tr>\n                                        <th scope=\"col\" i18n>Expense Details</th>\n                                        <th scope=\"col\" i18n>Start Date</th>\n                                        <th scope=\"col\" i18n>Payment Date</th>\n                                        <th scope=\"col\" i18n>Monthly EMI</th>\n                                        <th scope=\"col\" i18n>Status</th>\n                                        <th *ngIf=\"adminViewT\" scope=\"col\">#</th>\n                                    </tr>\n                                </thead>\n                                <tbody>\n                                    <tr>\n                                    <tr *ngFor=\"let obj2show of allExpenseDetailsData\">\n                                        <td>{{obj2show.expenseDetails}}</td>\n                                        <td>{{obj2show.monthlyExpenseStartDate | date:'dd-MMM-YYYY'}}</td>\n                                        <td>{{obj2show.monthlyExpensePaymentDate | date:'dd-MMM-YYYY'}}</td>\n                                        <td>{{obj2show.monthlyEMIAmount}}</td>\n                                        <td class=\"text-capitalize text-cap\">\n                                            <span class=\"badge\"\n                                                [ngClass]=\"{'badge-success': (obj2show.monthlyExpenseStatus==SessionStatus.Approved || obj2show.monthlyExpenseStatus==SessionStatus.Accepted || obj2show.monthlyExpenseStatus==SessionStatus.Active || obj2show.monthlyExpenseStatus==SessionStatus.Completed || obj2show.monthlyExpenseStatus==SessionStatus.OngoingInitiated  || obj2show.monthlyExpenseStatus==SessionStatus.AwaitingForApproval  || obj2show.monthlyExpenseStatus==SessionStatus.Ongoing), 'badge-danger': (obj2show.monthlyExpenseStatus==SessionStatus.Rejected || obj2show.monthlyExpenseStatus==SessionStatus.RejectedOngoing || obj2show.monthlyExpenseStatus==SessionStatus.Suspended), 'badge-info': ( obj2show.monthlyExpenseStatus==null || obj2show.monthlyExpenseStatus=='' || obj2show.monthlyExpenseStatus==SessionStatus.Pending)}\">\n                                                {{obj2show.monthlyExpenseStatus}}\n                                            </span>\n                                        </td>\n                                        <td *ngIf=\"adminViewT\">\n                                            <div [ngSwitch]=\"obj2show.monthlyExpenseStatus\">\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Pending\">\n                                                    <button title=\"Approve\" class=\"btn btn-link btn-sm\"\n                                                        (click)=\"updateUsersExpenseVerificationStatus(obj2show._id, SessionStatus.Approved)\">\n                                                        <i class=\"icon-check m-2 text-success\"></i>\n                                                    </button>\n                                                    <button title=\"Reject\" class=\"btn btn-link btn-sm\"\n                                                        (click)=\"updateUsersExpenseVerificationStatus(obj2show._id, SessionStatus.Rejected)\">\n                                                        <i class=\"icon-close m-2 text-danger\"></i>\n                                                    </button>\n                                                </div>\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Approved\">\n                                                    <button title=\"Reject\" class=\"btn btn-link btn-sm\"\n                                                        (click)=\"updateUsersExpenseVerificationStatus(obj2show._id, SessionStatus.Rejected)\">\n                                                        <i class=\"icon-close m-2 text-danger\"></i>\n                                                    </button>\n                                                </div>\n                                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Rejected\">\n                                                    <button title=\"Approve\" class=\"btn btn-link btn-sm\"\n                                                        (click)=\"updateUsersExpenseVerificationStatus(obj2show._id, SessionStatus.Approved)\">\n                                                        <i class=\"icon-check m-2 text-success\"></i>\n                                                    </button>\n                                                </div>\n                                            </div>\n                                        </td>\n                                    </tr>\n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
       /***/
     },
 
@@ -8254,7 +8432,7 @@
         }, {
           key: "onUpdatePasswordSubmit",
           value: function onUpdatePasswordSubmit() {
-            var _this48 = this;
+            var _this49 = this;
 
             this.submitted = true;
 
@@ -8265,15 +8443,15 @@
 
             this.userService.resetExistingUsersPasswordByUserId(this.profileUpdatePasswordForm.value._id, this.profileUpdatePasswordForm.value.userName, this.profileUpdatePasswordForm.value.password, this.profileUpdatePasswordForm.value.password2update, this.profileUpdatePasswordForm.value.role).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
-                _this48.submitted = false;
+                _this49.submitted = false;
 
-                _this48.showEditingForm(_this48.authenticationService.currentUserValue);
+                _this49.showEditingForm(_this49.authenticationService.currentUserValue);
 
-                _this48.alertService.success('Password Updated successfully', true);
+                _this49.alertService.success('Password Updated successfully', true);
               } else {
-                _this48.alertService.error(data['message']);
+                _this49.alertService.error(data['message']);
 
-                _this48.loading = false;
+                _this49.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -8288,9 +8466,9 @@
                 }
               } catch (ex) {}
 
-              _this48.alertService.error(errorMsg2show);
+              _this49.alertService.error(errorMsg2show);
 
-              _this48.loading = false;
+              _this49.loading = false;
             });
           }
         }, {
@@ -9066,11 +9244,11 @@
         }, {
           key: "flatten",
           value: function flatten(array) {
-            var _this49 = this;
+            var _this50 = this;
 
             return array.reduce(function (arr, elm) {
               if (Array.isArray(elm)) {
-                return arr.concat(_this49.flatten(elm));
+                return arr.concat(_this50.flatten(elm));
               }
 
               return arr.concat(elm);
@@ -9716,10 +9894,10 @@
         }, {
           key: "groupBy",
           value: function groupBy(list, discriminator, delimiter) {
-            var _this50 = this;
+            var _this51 = this;
 
             return list.reduce(function (acc, payload) {
-              var key = _this50.extractKeyByDiscriminator(discriminator, payload, delimiter);
+              var key = _this51.extractKeyByDiscriminator(discriminator, payload, delimiter);
 
               acc[key] = Array.isArray(acc[key]) ? acc[key].concat([payload]) : [payload];
               return acc;
@@ -11941,11 +12119,11 @@
         _createClass2(LatinisePipe, [{
           key: "transform",
           value: function transform(text) {
-            var _this51 = this;
+            var _this52 = this;
 
             var chars = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '\\s';
             return isString(text) ? text.replace(/[^A-Za-z0-9]/g, function (key) {
-              return _this51.latinMap[key] || key;
+              return _this52.latinMap[key] || key;
             }) : text;
           }
         }]);
@@ -13846,17 +14024,17 @@
         }, {
           key: "handleIntersect",
           value: function handleIntersect(entries) {
-            var _this52 = this;
+            var _this53 = this;
 
             entries.forEach(function (entry) {
               if (entry['isIntersecting']) {
-                _this52.isInview = true;
+                _this53.isInview = true;
 
-                _this52.defaultInviewHandler(entry);
+                _this53.defaultInviewHandler(entry);
 
-                _this52.inview.emit(entry);
+                _this53.inview.emit(entry);
               } else {
-                _this52.notInview.emit(entry);
+                _this53.notInview.emit(entry);
               }
             });
           }
@@ -14042,14 +14220,14 @@
           this.userObj = null;
           this.isOpenedInModel = false;
           this.adminViewT = false;
-          this.isVerified = false;
+          this.isVerified = 0;
           this.submitted = false;
 
           if (data && data.isOpenedInModel) {
             this.isOpenedInModel = true;
             this.userObj = data.userObj;
             this.adminViewT = !!data.adminViewT;
-            this.isVerified = !!data.isVerified;
+            this.isVerified = data.isVerified || 0;
           } else {
             this.appRouterService.appRouter('');
             return;
@@ -14066,7 +14244,7 @@
         }, {
           key: "onUserRestrictionDetailsUpdateSubmit",
           value: function onUserRestrictionDetailsUpdateSubmit() {
-            var _this53 = this;
+            var _this54 = this;
 
             this.submitted = true;
 
@@ -14078,19 +14256,19 @@
             this.userService.addUpdateUserRestrictionDetails(this.userRestrictionDetailsForm.value).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this53.updateUsersVerificationStatus(_this53.userObj._id, _this53.isVerified);
+                _this54.updateUsersVerificationStatus(_this54.userObj._id, _this54.isVerified);
 
-                _this53.alertService.success('Users status updated successfully', true);
+                _this54.alertService.success('Users status updated successfully', true);
 
-                _this53.submitted = false;
+                _this54.submitted = false;
 
-                _this53.initForm(); //this.appRouterService.appRouter(this.userObj);
+                _this54.initForm(); //this.appRouterService.appRouter(this.userObj);
 
               } else {
                 //alert(JSON.stringify(data['message']));
-                _this53.alertService.error(data['message']);
+                _this54.alertService.error(data['message']);
 
-                _this53.loading = false;
+                _this54.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -14105,9 +14283,9 @@
                 }
               } catch (ex) {}
 
-              _this53.alertService.error(errorMsg2show);
+              _this54.alertService.error(errorMsg2show);
 
-              _this53.loading = false;
+              _this54.loading = false;
             });
           }
         }, {
@@ -14119,7 +14297,7 @@
             this.userRestrictionDetailsForm = this.formBuilder.group({
               _id: [_userObj._id || ''],
               comment: [_userObj.comment || '', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-              isVerified: [_userObj.isVerified || false, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              isVerified: [_userObj.isVerified || 0, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               userId: [_userObj.userId || this.userObj._id],
               createdOn: [_userObj.createdOn || ''],
               updatedOn: [_userObj.updatedOn || ''],
@@ -14135,7 +14313,7 @@
             this.userRestrictionDetailsForm = this.formBuilder.group({
               _id: [''],
               comment: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-              isVerified: [this.isVerified || false, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              isVerified: [this.isVerified || 0, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
               userId: [this.userObj._id],
               createdOn: [''],
               updatedOn: [''],
@@ -14156,20 +14334,20 @@
         }, {
           key: "updateUsersVerificationStatus",
           value: function updateUsersVerificationStatus(_userId, _isVerified) {
-            var _this54 = this;
+            var _this55 = this;
 
             this.alertService.success("Please wait while we updating status of user");
             this.socketService.updateUsersVerificationStatus(_userId, _isVerified).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
-                _this54.userObj = data["data"]; //this.rerender();
+                _this55.userObj = data["data"]; //this.rerender();
 
-                _this54.alertService.success(data['message']);
+                _this55.alertService.success(data['message']);
 
-                _this54.loading = false;
+                _this55.loading = false;
               } else {
-                _this54.alertService.error(data['message']);
+                _this55.alertService.error(data['message']);
 
-                _this54.loading = false;
+                _this55.loading = false;
               }
             }, function (error) {
               var errorMsg2show = ""; //this.PaymentTransactionDetailsArray = [];
@@ -14184,9 +14362,9 @@
                 }
               } catch (ex) {}
 
-              _this54.alertService.error(errorMsg2show);
+              _this55.alertService.error(errorMsg2show);
 
-              _this54.loading = false;
+              _this55.loading = false;
             });
           }
         }]);
@@ -14339,7 +14517,7 @@
 
       var MeetingVcComponent = /*#__PURE__*/function () {
         function MeetingVcComponent(alertService, appRouterService, socketService, ref, payment, utilityService) {
-          var _this55 = this;
+          var _this56 = this;
 
           _classCallCheck2(this, MeetingVcComponent);
 
@@ -14384,39 +14562,39 @@
 
             if (this.loanId) {
               this.socketService.getByIdSessions(this.loanId).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
-                _this55.loanStartDateTime = _this55.utilityService._.now(); ////console.log('data => ', data)
+                _this56.loanStartDateTime = _this56.utilityService._.now(); ////console.log('data => ', data)
 
                 if (data && data['success']) {
                   //alert(JSON.stringify( data));
-                  _this55.sessionObj = data['data'];
+                  _this56.sessionObj = data['data'];
                   var useThisElapsTime = null;
                   var _loanEndDateTime = null;
 
-                  if (_this55.sessionObj.sessionsExecutionCollection) {
-                    for (var item in _this55.sessionObj.sessionsExecutionCollection) {
-                      if (_this55.loanStartDateTime >= _this55.sessionObj.sessionsExecutionCollection[item].loanEndDateTime) {
-                        _this55.alertService.error("You have already exceeded allotated session period.", true);
+                  if (_this56.sessionObj.sessionsExecutionCollection) {
+                    for (var item in _this56.sessionObj.sessionsExecutionCollection) {
+                      if (_this56.loanStartDateTime >= _this56.sessionObj.sessionsExecutionCollection[item].loanEndDateTime) {
+                        _this56.alertService.error("You have already exceeded allotated session period.", true);
 
-                        _this55.appRouterService.appRouter(_this55.currentUser);
+                        _this56.appRouterService.appRouter(_this56.currentUser);
 
                         return;
                       }
 
-                      _loanEndDateTime = _this55.sessionObj.sessionsExecutionCollection[item].loanEndDateTime;
-                      useThisElapsTime = (_this55.sessionObj.sessionsExecutionCollection[item].loanEndDateTime - _this55.loanStartDateTime) / 60 / 1000;
+                      _loanEndDateTime = _this56.sessionObj.sessionsExecutionCollection[item].loanEndDateTime;
+                      useThisElapsTime = (_this56.sessionObj.sessionsExecutionCollection[item].loanEndDateTime - _this56.loanStartDateTime) / 60 / 1000;
                     }
                   }
 
-                  _this55.extendCurrenSession(true, useThisElapsTime, _loanEndDateTime, null);
+                  _this56.extendCurrenSession(true, useThisElapsTime, _loanEndDateTime, null);
 
-                  _this55.startMyVcSession(); //this.alertService.success(data['message'], true);
+                  _this56.startMyVcSession(); //this.alertService.success(data['message'], true);
 
 
-                  _this55.loading = false; //this.element_btn_click_addSession_skills_verification.click();
+                  _this56.loading = false; //this.element_btn_click_addSession_skills_verification.click();
                 } else {
                   //alert(JSON.stringify(data['message']));
                   //this.alertService.error(data['message']);
-                  _this55.loading = false;
+                  _this56.loading = false;
                 }
               }, function (error) {
                 var errorMsg2show = "";
@@ -14432,7 +14610,7 @@
                 } catch (ex) {} //this.alertService.error(errorMsg2show);
 
 
-                _this55.loading = false;
+                _this56.loading = false;
               });
               return;
             }
@@ -14536,66 +14714,66 @@
         }, {
           key: "startTimer",
           value: function startTimer() {
-            var _this56 = this;
+            var _this57 = this;
 
             this.subscription = this.everySecond.subscribe(function (seconds) {
               var currentTime = moment__WEBPACK_IMPORTED_MODULE_8__();
-              _this56.remainingTime = _this56.searchEndDate.diff(currentTime);
-              _this56.remainingTime = _this56.remainingTime / 1000;
+              _this57.remainingTime = _this57.searchEndDate.diff(currentTime);
+              _this57.remainingTime = _this57.remainingTime / 1000;
 
-              if (_this56.remainingTime <= 0) {
-                _this56.alertService.error("Session time limit expired..."); //this.SearchDate = moment();
+              if (_this57.remainingTime <= 0) {
+                _this57.alertService.error("Session time limit expired..."); //this.SearchDate = moment();
                 //this.searchEndDate = this.SearchDate.add(this.ElapsTime, "minutes");
                 //this.TimerExpired.emit();
 
 
-                _this56.showExtendSessionButton = false;
+                _this57.showExtendSessionButton = false;
 
-                if (_this56.api) {
-                  _this56.api.removeEventListeners(['incomingMessage', 'outgoingMessage', 'videoConferenceLeft', 'suspendDetected']);
+                if (_this57.api) {
+                  _this57.api.removeEventListeners(['incomingMessage', 'outgoingMessage', 'videoConferenceLeft', 'suspendDetected']);
 
-                  _this56.api.dispose();
+                  _this57.api.dispose();
 
-                  _this56.alertService.error("You are now navigating back.", true);
+                  _this57.alertService.error("You are now navigating back.", true);
 
-                  _this56.appRouterService.appRouter(_this56.currentUser);
+                  _this57.appRouterService.appRouter(_this57.currentUser);
 
                   return;
                 } else if (window.cordova) {
                   jitsiplugin.destroy();
 
-                  _this56.alertService.error("You are now navigating back.", true);
+                  _this57.alertService.error("You are now navigating back.", true);
 
-                  _this56.appRouterService.appRouter(_this56.currentUser);
+                  _this57.appRouterService.appRouter(_this57.currentUser);
 
                   return;
                 }
               } else {
-                _this56.minutes = Math.floor(_this56.remainingTime / 60);
+                _this57.minutes = Math.floor(_this57.remainingTime / 60);
 
-                if (_this56.minutes > 59) {
-                  _this56.hours = Math.floor(_this56.remainingTime / 60 / 60);
+                if (_this57.minutes > 59) {
+                  _this57.hours = Math.floor(_this57.remainingTime / 60 / 60);
                 } else {
-                  _this56.hours = 0;
+                  _this57.hours = 0;
                 }
 
-                _this56.minutes = Math.floor(_this56.remainingTime / 60 - _this56.hours * 60);
-                _this56.seconds = Math.floor(_this56.remainingTime - (_this56.minutes * 60 + _this56.hours * 60 * 60));
+                _this57.minutes = Math.floor(_this57.remainingTime / 60 - _this57.hours * 60);
+                _this57.seconds = Math.floor(_this57.remainingTime - (_this57.minutes * 60 + _this57.hours * 60 * 60));
               }
 
-              if (_this56.minutes <= _this56.MinimumTime4Extend) {
-                _this56.showExtendSessionButton = true;
+              if (_this57.minutes <= _this57.MinimumTime4Extend) {
+                _this57.showExtendSessionButton = true;
               } else {
-                _this56.showExtendSessionButton = false;
+                _this57.showExtendSessionButton = false;
               }
 
-              _this56.ref.markForCheck();
+              _this57.ref.markForCheck();
             });
           }
         }, {
           key: "extendCurrenSession",
           value: function extendCurrenSession(_initT, useThisElapsTime, _loanEndDateTime, _transactionDetailsObj) {
-            var _this57 = this;
+            var _this58 = this;
 
             this.SearchDate = moment__WEBPACK_IMPORTED_MODULE_8__();
 
@@ -14634,16 +14812,16 @@
                 //alert(JSON.stringify( data));
                 if (data['data']) {
                   if (data['data']["_id"]) {
-                    _this57.sessionObj = data['data'];
+                    _this58.sessionObj = data['data'];
                   } else {
-                    _this57.sessionObj = data['data'][0];
+                    _this58.sessionObj = data['data'][0];
                   }
                 }
 
-                _this57.loading = false;
+                _this58.loading = false;
               } else {
                 //this.alertService.error(data['message']);
-                _this57.loading = false;
+                _this58.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -14659,13 +14837,13 @@
               } catch (ex) {} //this.alertService.error(errorMsg2show);
 
 
-              _this57.loading = false;
+              _this58.loading = false;
             });
           }
         }, {
           key: "initiatePayment",
           value: function initiatePayment(sessionObj, _loanApplyId) {
-            var _this58 = this;
+            var _this59 = this;
 
             this.userInitiatedForPayment = true;
             _loanApplyId = _loanApplyId ? _loanApplyId : this.roomName;
@@ -14700,7 +14878,7 @@
               }]
             }];
             this.payment.getCurrentPaymentApproved().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (details) {
-              _this58.extendCurrenSession(false, null, null, details); //this.dialogRef.close({ event: 'close', data: { sessionApply: _sessionApply, status: _status, transactionId: details.id } });
+              _this59.extendCurrenSession(false, null, null, details); //this.dialogRef.close({ event: 'close', data: { sessionApply: _sessionApply, status: _status, transactionId: details.id } });
 
             });
             this.payPalConfig = this.payment.initConfig(purchaseUnits, src_app_models__WEBPACK_IMPORTED_MODULE_10__["TransactionActionType"].session_extended, _endUserId);
@@ -14881,7 +15059,7 @@
 
       var PublicProfileComponent = /*#__PURE__*/function () {
         function PublicProfileComponent(utilityService, authenticationService, router, dialogRef, data, userService, alertService, socketService, dialog, _cdr) {
-          var _this59 = this;
+          var _this60 = this;
 
           _classCallCheck2(this, PublicProfileComponent);
 
@@ -14925,7 +15103,7 @@
 
           this.userService.getUserProfilePortFolioByUserId(this.userObj._id).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this59.portfolioDataArr = data["data"];
+              _this60.portfolioDataArr = data["data"];
             } else {}
           }, function (error) {
             var errorMsg2show = "";
@@ -14942,7 +15120,7 @@
           });
           this.userService.getUsersDashboardData(this.userObj._id, this.userObj.role).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this59.profileAdditionalData = data["data"];
+              _this60.profileAdditionalData = data["data"];
             } else {}
           }, function (error) {
             var errorMsg2show = "";
@@ -14962,13 +15140,12 @@
           };
           this.socketService.getByQuerySummaryRatingReviewe(_data).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this59.myRatingsSummaryObj = data["data"]; //this.rerender();
+              _this60.myRatingsSummaryObj = data["data"]; //this.rerender();
 
-              _this59.loading = false;
+              _this60.loading = false;
             } else {
-              _this59.alertService.error(data['message']);
-
-              _this59.loading = false;
+              //this.alertService.error(data['message']);
+              _this60.loading = false;
             }
           }, function (error) {
             var errorMsg2show = "";
@@ -14983,23 +15160,22 @@
               }
             } catch (ex) {}
 
-            _this59.alertService.error(errorMsg2show);
+            _this60.alertService.error(errorMsg2show);
 
-            _this59.loading = false;
+            _this60.loading = false;
           });
           this.socketService.getByLoanIdRatingReviewe(_data).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this59.RatingDetailsArray = data["data"]; //this.rerender();
+              _this60.RatingDetailsArray = data["data"]; //this.rerender();
 
-              _this59.loading = false;
+              _this60.loading = false;
             } else {
-              _this59.alertService.error(data['message']);
-
-              _this59.loading = false;
+              //this.alertService.error(data['message']);
+              _this60.loading = false;
             }
           }, function (error) {
             var errorMsg2show = "";
-            _this59.RatingDetailsArray = [];
+            _this60.RatingDetailsArray = [];
 
             try {
               if (error && error.error && error.error.message) {
@@ -15011,9 +15187,9 @@
               }
             } catch (ex) {}
 
-            _this59.alertService.error(errorMsg2show);
+            _this60.alertService.error(errorMsg2show);
 
-            _this59.loading = false;
+            _this60.loading = false;
           });
         }
 
@@ -15062,20 +15238,20 @@
         }, {
           key: "updateUsersVerificationStatus",
           value: function updateUsersVerificationStatus(_userId, _verifiedKey, _isVerified) {
-            var _this60 = this;
+            var _this61 = this;
 
             this.alertService.success("Please wait while we updating status of user");
             this.userService.updateUsersDataKeyVerificationStatus(_userId, _verifiedKey, _isVerified).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
-                _this60.userObj = data["data"];
+                _this61.userObj = data["data"];
 
-                _this60.alertService.success(data['message']);
+                _this61.alertService.success(data['message']);
 
-                _this60.loading = false;
+                _this61.loading = false;
               } else {
-                _this60.alertService.error(data['message']);
+                _this61.alertService.error(data['message']);
 
-                _this60.loading = false;
+                _this61.loading = false;
               }
             }, function (error) {
               var errorMsg2show = ""; //this.RatingDetailsArray = [];
@@ -15090,9 +15266,9 @@
                 }
               } catch (ex) {}
 
-              _this60.alertService.error(errorMsg2show);
+              _this61.alertService.error(errorMsg2show);
 
-              _this60.loading = false;
+              _this61.loading = false;
             });
           }
         }, {
@@ -15123,8 +15299,8 @@
             var dialogRef = this.dialog.open(_media_preview_media_preview_component__WEBPACK_IMPORTED_MODULE_12__["MediaPreviewComponent"], {
               maxWidth: '100vw',
               maxHeight: '100vh',
-              height: '70%',
-              width: '70%',
+              height: '98%',
+              width: '98%',
               hasBackdrop: true,
               data: {
                 mediaSrc: mediaSrc,
@@ -15137,7 +15313,7 @@
         }, {
           key: "editUsersDocuments",
           value: function editUsersDocuments(userObj, _subDocumentKey) {
-            var _this61 = this;
+            var _this62 = this;
 
             //console.log('411', this.authenticationService.currentUserValue);
             var dialogRef = this.dialog.open(_public_profile_edit_public_profile_edit_component__WEBPACK_IMPORTED_MODULE_13__["PublicProfileEditComponent"], {
@@ -15153,22 +15329,22 @@
             });
             dialogRef.afterClosed().subscribe(function (result) {
               if (result && result.data) {
-                _this61.userObj.myPassportMedia = result.data.myPassportMedia;
-                _this61.userObj.myPassportMediaSelfVerify = result.data.myPassportMediaSelfVerify;
-                _this61.userObj.myPassportMediaVerified = result.data.myPassportMediaVerified;
-                _this61.userObj.myPassportNumber = result.data.myPassportNumber;
-                _this61.userObj.myDLMedia = result.data.myDLMedia;
-                _this61.userObj.myDLMediaSelfVerify = result.data.myDLMediaSelfVerify;
-                _this61.userObj.myDLMediaVerified = result.data.myDLMediaVerified;
-                _this61.userObj.myDLNumber = result.data.myDLNumber;
-                _this61.userObj.myHICardMedia = result.data.myHICardMedia;
-                _this61.userObj.myHICardMediaSelfVerify = result.data.myHICardMediaSelfVerify;
-                _this61.userObj.myHICardMediaVerified = result.data.myHICardMediaVerified;
-                _this61.userObj.myRKIMedia = result.data.myRKIMedia;
-                _this61.userObj.myRKIMediaSelfVerify = result.data.myRKIMediaSelfVerify;
-                _this61.userObj.myRKIMediaVerified = result.data.myRKIMediaVerified;
+                _this62.userObj.myPassportMedia = result.data.myPassportMedia;
+                _this62.userObj.myPassportMediaSelfVerify = result.data.myPassportMediaSelfVerify;
+                _this62.userObj.myPassportMediaVerified = result.data.myPassportMediaVerified;
+                _this62.userObj.myPassportNumber = result.data.myPassportNumber;
+                _this62.userObj.myDLMedia = result.data.myDLMedia;
+                _this62.userObj.myDLMediaSelfVerify = result.data.myDLMediaSelfVerify;
+                _this62.userObj.myDLMediaVerified = result.data.myDLMediaVerified;
+                _this62.userObj.myDLNumber = result.data.myDLNumber;
+                _this62.userObj.myHICardMedia = result.data.myHICardMedia;
+                _this62.userObj.myHICardMediaSelfVerify = result.data.myHICardMediaSelfVerify;
+                _this62.userObj.myHICardMediaVerified = result.data.myHICardMediaVerified;
+                _this62.userObj.myRKIMedia = result.data.myRKIMedia;
+                _this62.userObj.myRKIMediaSelfVerify = result.data.myRKIMediaSelfVerify;
+                _this62.userObj.myRKIMediaVerified = result.data.myRKIMediaVerified;
 
-                _this61._cdr.detectChanges();
+                _this62._cdr.detectChanges();
               } ////console.log(`426 :: msc :: Dialog result: ${JSON.stringify(result)}`);
 
             });
@@ -15343,7 +15519,7 @@
           _createClass2(ScriptService, [{
             key: "registerScript",
             value: function registerScript(url, globalVar, onReady) {
-              var _this62 = this;
+              var _this63 = this;
 
               /** @type {?} */
               var existingGlobalVar =
@@ -15374,7 +15550,7 @@
               * @return {?}
               */
               function () {
-                _this62.zone.run(
+                _this63.zone.run(
                 /**
                 * @return {?}
                 */
@@ -15662,7 +15838,7 @@
           }, {
             key: "ngOnChanges",
             value: function ngOnChanges(changes) {
-              var _this63 = this;
+              var _this64 = this;
 
               if (!this.payPalButtonContainerId) {
                 this.payPalButtonContainerId = this.generateElementId();
@@ -15682,9 +15858,9 @@
                   */
                   function (payPal) {
                     // store reference to paypal global script
-                    _this63.payPal = payPal;
+                    _this64.payPal = payPal;
 
-                    _this63.doPayPalCheck();
+                    _this64.doPayPalCheck();
                   });
                 }
               } // changes to config
@@ -15733,7 +15909,7 @@
           }, {
             key: "reinitialize",
             value: function reinitialize(config) {
-              var _this64 = this;
+              var _this65 = this;
 
               this.config = config;
               this.payPal = undefined;
@@ -15758,9 +15934,9 @@
                   */
                   function (payPal) {
                     // store reference to paypal global script
-                    _this64.payPal = payPal;
+                    _this65.payPal = payPal;
 
-                    _this64.doPayPalCheck();
+                    _this65.doPayPalCheck();
                   });
                 } else {
                   this.doPayPalCheck();
@@ -15793,7 +15969,7 @@
           }, {
             key: "initPayPalScript",
             value: function initPayPalScript(config, initPayPal) {
-              var _this65 = this;
+              var _this66 = this;
 
               this.paypalScriptService.registerPayPalScript({
                 clientId: config.clientId,
@@ -15807,7 +15983,7 @@
               * @return {?}
               */
               function (paypal) {
-                _this65.scriptLoaded.next(paypal);
+                _this66.scriptLoaded.next(paypal);
 
                 initPayPal(paypal);
               });
@@ -15832,7 +16008,7 @@
           }, {
             key: "initPayPal",
             value: function initPayPal(config, paypal) {
-              var _this66 = this;
+              var _this67 = this;
 
               // Running outside angular zone prevents infinite ngDoCheck lifecycle calls
               this.ngZone.runOutsideAngular(
@@ -15850,7 +16026,7 @@
                 * @return {?}
                 */
                 function createOrder(data, actions) {
-                  return _this66.ngZone.run(
+                  return _this67.ngZone.run(
                   /**
                   * @return {?}
                   */
@@ -15884,7 +16060,7 @@
                 * @return {?}
                 */
                 function createSubscription(data, actions) {
-                  return _this66.ngZone.run(
+                  return _this67.ngZone.run(
                   /**
                   * @return {?}
                   */
@@ -15904,7 +16080,7 @@
                 * @return {?}
                 */
                 function onShippingChange(data, actions) {
-                  return _this66.ngZone.run(
+                  return _this67.ngZone.run(
                   /**
                   * @return {?}
                   */
@@ -15926,7 +16102,7 @@
                   * @return {?}
                   */
                   function onApprove(data, actions) {
-                    return _this66.ngZone.run(
+                    return _this67.ngZone.run(
                     /**
                     * @return {?}
                     */
@@ -15952,7 +16128,7 @@
                         * @return {?}
                         */
                         function (details) {
-                          _this66.ngZone.run(
+                          _this67.ngZone.run(
                           /**
                           * @return {?}
                           */
@@ -15970,7 +16146,7 @@
                   * @return {?}
                   */
                   function onError(error) {
-                    _this66.ngZone.run(
+                    _this67.ngZone.run(
                     /**
                     * @return {?}
                     */
@@ -15987,7 +16163,7 @@
                   * @return {?}
                   */
                   function onCancel(data, actions) {
-                    _this66.ngZone.run(
+                    _this67.ngZone.run(
                     /**
                     * @return {?}
                     */
@@ -16004,7 +16180,7 @@
                   * @return {?}
                   */
                   function onClick(data, actions) {
-                    _this66.ngZone.run(
+                    _this67.ngZone.run(
                     /**
                     * @return {?}
                     */
@@ -16021,7 +16197,7 @@
                   * @return {?}
                   */
                   function onInit(data, actions) {
-                    _this66.ngZone.run(
+                    _this67.ngZone.run(
                     /**
                     * @return {?}
                     */
@@ -16038,7 +16214,7 @@
                 }), config.onShippingChange && {
                   onShippingChange: onShippingChange
                 });
-                paypal.Buttons(buttonsConfig).render("#".concat(_this66.payPalButtonContainerId));
+                paypal.Buttons(buttonsConfig).render("#".concat(_this67.payPalButtonContainerId));
               });
             }
           }]);
@@ -16616,6 +16792,7 @@
               if (field && _splittedArr.length == 2) {
                 var master_objAttr = field.replace('[0]', '').split('.')[0];
                 var child_objAttr = field.replace('[0]', '').split('.')[1];
+                var atLeastOneSatisfyCaseT = false;
 
                 for (var index in it[master_objAttr]) {
                   var _obj = it[master_objAttr][index];
@@ -16624,14 +16801,22 @@
                     _fieldData = _obj[child_objAttr];
 
                     if (_fieldData) {
-                      return valuesArr.indexOf(_fieldData.toLowerCase()) != -1;
+                      if (valuesArr.indexOf(_fieldData.toLowerCase()) != -1) {
+                        atLeastOneSatisfyCaseT = true;
+                      }
                     }
                   }
                 }
 
-                if (sendMasterDataBackIfChildMissingT) {
-                  if (valuesArr.indexOf('pending') > -1) {
-                    return true;
+                if (atLeastOneSatisfyCaseT) {
+                  return true;
+                }
+
+                if (!_fieldData) {
+                  if (sendMasterDataBackIfChildMissingT) {
+                    if (valuesArr.indexOf('pending') > -1) {
+                      return true;
+                    }
                   }
                 }
               } else {
@@ -16692,7 +16877,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"row pt-0 saas2\">\n    <div class=\"col-xl-12 col-12 text-center\" *ngIf=\"!f.isVerified.value\">\n        <h3 i18n>Submit your portfolio for verification</h3>\n        <P class=\"my-3\" i18n>Remember to fill in all fields correctly, otherwise you may risk lifetime blockage</P>\n\n    </div>\n    <div class=\"col-xl-12 col-12\">\n        <section class=\"tab-product  p-b-0\">\n\n            <ul class=\"nav nav-justified nav-tabs mb-4 shadow-sm\" id=\"top-tab\" role=\"tablist\">\n                <li class=\"nav-item\">\n                    <a id=\"btn_click_profile_basic_details\" class=\"nav-link show active\" data-toggle=\"tab\"\n                        data-target=\"#profile_basic_details\" (click)=\"clickOnGoToNext(1, true)\" i18n>Basic Details</a>\n                    <div class=\"material-border\"></div>\n                </li>\n                <li class=\"nav-item\">\n                    <a id=\"btn_click_profile_skills_verification\" class=\"nav-link\" data-toggle=\"tab\"\n                        data-target=\"#profile_skills_verification\" (click)=\"clickOnGoToNext(2, true)\" i18n>Upload\n                        Documents</a>\n                    <div class=\"material-border\"></div>\n                </li>\n                <!-- <li class=\"nav-item\" *ngIf=\"_role == Role.Borrower\">\n                            <a id=\"btn_click_profile_banking\" class=\"nav-link font-weight-light\" data-toggle=\"pill\"\n                                data-target=\"#profile_banking_details\">Banking Details</a>\n                        </li> -->\n            </ul>\n\n        </section>\n\n        <form [formGroup]=\"profileForm\">\n\n            <div class=\"tab-content\">\n                <div class=\"tab-pane active\" id=\"profile_basic_details\">\n                    <div class=\"form-row mb-2  mb-3\">\n                        <div class=\"col-xl-3 text-center\">\n                            <div class=\"card\">\n                                <div class=\"card-header\">\n                                    <h6 class=\"font-weight-bold text-primary\" i18n>Change Profile Pic</h6>\n                                </div>\n\n                                <div class=\"card-body\">\n                                    <img [src]=\"f.selfProfileUrl.value\" onerror=\"this.src='./assets/img/nouser.png';\"\n                                        class=\"border img-fluid rounded-circle mb-3\" style=\"height: 150px;width: 150px;object-fit: cover;\"/>\n                                    <br>\n\n                                    <p>{{f.role.value ==='lender'?'Lender':'Borrower'}}</p>\n                                   \n                                    \n                                </div>\n\n                                <div class=\"card-footer\">\n                                    <i *ngIf=\"!selfProfileUrlPendingForUpload\"\n                                        class=\"icon-pencil-alt m-2 cursor-pointer btn btn-outline-primary\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'selfProfileUrl', null);\">\n                                        <!--openFileUploaderForProfile()-->\n\n                                        <input id=\"ctrlUploadProfile\" hidden type=\"file\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressForProfile($event)\"> Edit\n                                    </i>\n                                    <i *ngIf=\"selfProfileUrlPendingForUpload\"\n                                        class=\"icon-upload m-2 cursor-pointer text-success\"\n                                        (click)=\"onUploadForProfile()\" i18n> Save\n                                    </i>\n                                </div>\n\n                            </div>\n\n                        </div>\n\n\n\n                        <div class=\"col-xl-9\">\n\n                            <div class=\"card\">\n                                <div class=\"card-header\">\n                                    <h6 class=\"font-weight-bold text-primary\" i18n>Change Basic Details</h6>\n                                </div>\n\n                                <div class=\"card-body\">\n                                    <div class=\"form-row \">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"firstName\" i18n>First Name</label>\n                                            <input type=\"text\" formControlName=\"firstName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.firstName.errors }\" />\n                                            <div *ngIf=\"submitted && f.firstName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.firstName.errors.required\" i18n>First Name is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"middleName\" i18n>Middle Name</label>\n                                            <input type=\"text\" formControlName=\"middleName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.middleName.errors }\" />\n                                            <div *ngIf=\"submitted && f.middleName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.middleName.errors.required\" i18n>Middle Name is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"lastName\" i18n>Last Name</label>\n                                            <input type=\"text\" formControlName=\"lastName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.lastName.errors }\" />\n                                            <div *ngIf=\"submitted && f.lastName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.lastName.errors.required\" i18n>Last Name is required</div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"mobileNo\" i18n>\n                                                <i class=\"icon-mobile text-success\"></i>\n                                                Mobile Number</label>\n                                            <input type=\"text\" formControlName=\"mobileNo\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.mobileNo.errors }\" />\n                                            <div *ngIf=\"submitted && f.mobileNo.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.mobileNo.errors.required\" i18n>Mobile Number is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"emailAddress\" i18n>Email</label>\n                                            <input type=\"text\" disabled formControlName=\"emailAddress\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.emailAddress.errors }\" />\n                                            <div *ngIf=\"submitted && f.emailAddress.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.emailAddress.errors.required\" i18n>Email is required</div>\n                                                <div *ngIf=\"f.emailAddress.errors.email\" i18n>Invalid Email format.\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"address\" class=\"font-weight-bold\" i18n>\n                                                Address\n                                            </label>\n                                            <textarea rows=\"2\" maxlength=\"500\" formControlName=\"address\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.address.errors }\">\n                                                    </textarea>\n                                            <div *ngIf=\"submitted && f.address.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.address.errors.required\" i18n>\n                                                    Address is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"birthDateCustomised\" i18n>Birthday</label>\n                                            <input type=\"date\" formControlName=\"birthDateCustomised\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.birthDate.errors }\"\n                                                [max]=\"maxDate\" [min]=\"minDate\" />\n                                            <div *ngIf=\"submitted && f.birthDate.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.birthDate.errors.required\" i18n>Birthday is required\n                                                </div>\n                                                <div *ngIf=\"f.birthDate.errors.date\" i18n>Invalid date format.\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-4 d-none\">\n                                            <div class=\"form-row\">\n                                                <div class=\"col-xl-12 text-center mb-2\">\n                                                    <label i18n>Gender</label>\n                                                    <div class=\"btn-group shadow mb-3\">\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('male')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='male', 'btn-outline-success': f.gender.value!='male'}\"\n                                                            i18n>\n                                                            Male\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('female')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='female', 'btn-outline-success': f.gender.value!='female'}\"\n                                                            i18n>\n                                                            Female\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('other')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='other', 'btn-outline-success': f.gender.value!='other'}\"\n                                                            i18n>\n                                                            Other\n                                                        </button>\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"cityCode\" i18n>City</label>\n                                            <input type=\"text\" formControlName=\"cityCode\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.cityCode.errors }\" />\n                                            <div *ngIf=\"submitted && f.cityCode.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.cityCode.errors.required\" i18n>City is required</div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"cityCode\" i18n>Country</label>\n                                            <select formControlName=\"country\" class=\"custom-select\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.country.errors }\">\n                                                <option value=\"\" selected disabled i18n>Choose Country</option>\n                                                <option *ngFor=\"let country of countrylist\" [ngValue]=\"country\">\n                                                    {{country}}</option>\n                                            </select>\n                                            <div *ngIf=\"submitted && f.country.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.country.errors.required\" i18n>Country is required</div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"myProfileDetails\" i18n>Describe Yourself</label>\n                                            <textarea rows=\"2\" maxlength=\"500\" formControlName=\"myProfileDetails\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.myProfileDetails.errors }\">\n                                                    </textarea>\n                                            <div *ngIf=\"submitted && f.myProfileDetails.errors\"\n                                                class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.myProfileDetails.errors.required\" i18n>Describe Yourself\n                                                    is\n                                                    required\n                                                </div>\n                                            </div>\n                                        </div>\n\n                                    </div>\n                                </div>\n\n                                <div class=\"card-footer\">\n                                    <button type=\"button\" (click)=\"clickOnGoToNext(2)\" [disabled]=\"loading\"\n                                        class=\"btn btn-primary float-right\" i18n>Next</button>\n                                </div>\n                            </div>\n\n\n                        </div>\n                    </div>\n                </div>\n                <div class=\"tab-pane fade\" id=\"profile_skills_verification\">\n                    <div class=\"card\">\n                        <div class=\"card-header\">\n                            <h6 class=\"font-weight-bold text-primary\" i18n>Update Your Documents</h6>\n                        </div>\n\n                        <div class=\"card-body\">\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-md-12\">\n                                    <div class=\"text-gray\" i18n>\n                                        Upload your Passport, Driving Licence, Health Insurance Card document\n                                    </div>\n                                    <hr>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"myPassportNumber\" i18n>Passport Number:</label>\n                                        <input type=\"text\"\n                                            [readonly]=\"authenticationService.currentUserValue.myPassportNumber\"\n                                            formControlName=\"myPassportNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myPassportNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.myPassportNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.myPassportNumber.errors.required\" i18n>Passport number is\n                                                required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myPassportMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myPassportMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7 col-12\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyPassportMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myPassportMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyPassportMedia\">{{lblmyPassportMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myPassportMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"myDLNumber\" i18n>Driving License Number:</label>\n                                        <input type=\"text\"\n                                            [readonly]=\"authenticationService.currentUserValue.myDLNumber\"\n                                            formControlName=\"myDLNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myDLNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.myDLNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.myDLNumber.errors.required\" i18n>Driving License number is\n                                                required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myDLMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myDLMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyDLMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myDLMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyDLMedia\">{{lblmyDLMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myDLMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"cprNumber\" i18n>CPR Number:</label>\n                                        <input type=\"text\" [readonly]=\"authenticationService.currentUserValue.cprNumber\"\n                                            formControlName=\"cprNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.cprNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.cprNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.cprNumber.errors.required\" i18n>CPR number is required</div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myHICardMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myHICardMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyHICardMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myHICardMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyHICardMedia\">{{lblmyHICardMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myHICardMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"row\">\n                                <div class=\"col-xl-4\">\n                                    <div class=\"card\"\n                                        *ngFor=\"let previewUrl of _.union(_.values(f.myPassportMedia.value),_.values(f.myPassportMediaSelfVerify.value))\">\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"card-body\" i18n>\n                                            Passport\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myPassportMedia')\"></i></a>\n                                                    -->\n                                        </div>\n                                    </div>\n\n\n                                </div>\n                                <div class=\"col-xl-4\">\n                                    <div class=\"card\"\n                                        *ngFor=\"let previewUrl of _.union(_.values(f.myDLMedia.value),_.values(f.myDLMediaSelfVerify.value))\">\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"card-body\" i18n>\n                                            Driving Licence\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myDLMedia')\"></i></a>\n                                                    -->\n                                        </div>\n                                    </div>\n\n\n                                </div>\n                                <div class=\"col-xl-4\">\n                                    <div class=\"card\"\n                                        *ngFor=\"let previewUrl of _.union(_.values(f.myHICardMedia.value),_.values(f.myHICardMediaSelfVerify.value))\">\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 200px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"card-body\" i18n>\n                                            Health Insurance Card\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myHICardMedia')\"></i></a>\n                                            -->\n                                        </div>\n                                    </div>\n\n                                </div>\n                            </div>\n                            <div class=\"form-row\">\n                                <div class=\"col-xl-12 mt-3\">\n                                    <label class=\"d-none\" for=\"myProfileDetails\" i18n>Social Network</label>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-4 d-none\">\n\n                                            <select [(ngModel)]=\"appName\" class=\"custom-select\"\n                                                [ngModelOptions]=\"{standalone: true}\">\n                                                <option value=\"facebook\" selected i18n> Facebook</option>\n                                            \n                                            </select>\n                                        </div>\n                                        <div class=\"col-xl-12\">\n                                            <!--\n                                            <div class=\"input-group mb-3\">\n                                                <input type=\"url\"\n                                                    pattern=\"/(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})/gi*\"\n                                                    [(ngModel)]=\"appLink\" class=\"form-control\"\n                                                    [ngModelOptions]=\"{standalone: true}\"\n                                                    placeholder=\"Facebook Profile Public Link\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.externalAppLinks.errors }\" />\n                                                <div class=\"input-group-append\">\n                                                    <button class=\"btn btn-success\"\n                                                        (click)=\"addExternalAppLinks(true, null, appName, appLink)\" i18n>Add</button>\n                                                </div>\n                                            </div>\n                                        -->\n                                            <div class=\"form-group\">\n                                                <label class=\"mb-1\" for=\"externalAppLinkUrl\" i18n>Facebook Profile Public Link:</label>\n                                                <input type=\"url\"\n                                                    formControlName=\"externalAppLinkUrl\" class=\"form-control\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.externalAppLinkUrl.errors }\" />\n                                                <div *ngIf=\"submitted && f.externalAppLinkUrl.errors\" class=\"invalid-feedback\">\n                                                    <div *ngIf=\"f.externalAppLinkUrl.errors.required\" i18n>Link is required\n                                                    </div>\n                                                    <div *ngIf=\"f.externalAppLinkUrl.errors.pattern\" i18n>Link is required*\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12\">\n                                            <div *ngIf=\"submitted && f.externalAppLinks.errors\"\n                                                class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.externalAppLinks.errors.required\" i18n>Links required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row d-none\" *ngFor=\"let applinks of f.externalAppLinks.value\">\n                                        <div class=\"col-xl-2\">\n                                            {{applinks.appName | titlecase}}\n                                        </div>\n                                        <div class=\"col-xl-10\">\n                                            <a href=\"{{applinks.appLink}}\">{{applinks.appLink}}</a>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"row\" *ngIf=\"_role == Role.Borrower\">\n                                <div class=\"col-xl-12\">\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 mt-3\">\n                                            <div class=\"row\">\n                                                <div class=\"col-xl-12\">\n                                                    <label class=\"font-weight-bold\" i18n>Are you registered in\n                                                        RKI?</label>\n                                                    <i class=\"icon icon-info-alt ml-2\" data-toggle=\"tooltip\"\n                                                        title=\"Hooray!\"></i>\n                                                    <div class=\"btn-group btn-group btn-group-sm ml-4\">\n                                                        <button type=\"button\" class=\"btn\" (click)=\"onRKIChange(true)\"\n                                                            [ngClass]=\"{ 'btn-success': onInitRKICheckedValue()==true, 'btn-outline-success':onInitRKICheckedValue()==false}\"\n                                                            i18n>\n                                                            Yes\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\" (click)=\"onRKIChange(false)\"\n                                                            [ngClass]=\"{ 'btn-success': onInitRKICheckedValue()==false, 'btn-outline-success':onInitRKICheckedValue()==true}\"\n                                                            i18n>\n                                                            No\n                                                        </button>\n                                                    </div>\n                                                </div>\n                                            </div>\n\n                                            <div *ngIf=\"submitted && f.isRKIRegistered.errors\" class=\"error\">\n                                                <div *ngIf=\"f.isRKIRegistered.errors.required\" class=\"text-red\" i18n>\n                                                    data required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 mt-3\">\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\" *ngIf=\"!onInitRKICheckedValue()\">\n                                        <!--\n                                        <div class=\"col-xl-9\">\n                                            <div class=\"custom-file\">\n                                                <input type=\"file\" class=\"custom-file-input\" name=\"image\"\n                                                    accept=\"image/*\"\n                                                    (change)=\"fileProgressAssetDocs($event,'lblmyRKIMedia')\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.myRKIMedia.errors }\">\n                                                <label class=\"custom-file-label\" for=\"customFile\"\n                                                    id=\"lblmyRKIMedia\">{{lblmyRKIMediaText}}</label>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-3\">\n                                            <button class=\"btn btn-outline-secondary btn-block\"\n                                                (click)=\"onUploadAssetDocs('myRKIMedia')\">\n                                                Upload\n                                            </button>\n                                        </div>\n                                    -->\n                                        <div class=\"col-xl-6 col-12\">\n                                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                                (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMedia', null);\"\n                                                i18n>\n                                                Upload Scan Copy\n                                            </button>\n                                        </div>\n                                        <div class=\"col-xl-6 col-12\">\n                                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                                (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMediaSelfVerify', null);\"\n                                                i18n>\n                                                Upload Image of Scan Copy With Your Face\n                                            </button>\n                                        </div>\n                                        <div class=\"col-xl-4\">\n\n                                            <div class=\"row\">\n                                                <div class=\"col-xl-12\"\n                                                    *ngFor=\"let previewUrl of _.union(_.values(f.myRKIMedia.value),_.values(f.myRKIMediaSelfVerify.value))\">\n                                                    <!--\n                                                    <i class=\"icon-trash text-danger\"\n                                                        (click)=\"onUploadCleanAssetDocs('myRKIMedia')\"></i>\n                                                    -->\n                                                    <img class=\"img-fluid\" [src]=\"previewUrl.url\" />\n                                                </div>\n                                                <div>\n                                                    <div *ngIf=\"fileUploadProgress\" i18n>\n                                                        Upload progress: {{ fileUploadProgress }}\n                                                    </div>\n                                                </div>\n                                            </div>\n\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                        <div class=\"card-footer\">\n                            <button type=\"button\" (click)=\"onProfileUpdateSubmit()\" [disabled]=\"loading\"\n                                class=\"btn btn-primary float-right\" i18n>Save</button>\n                        </div>\n                    </div>\n\n\n                </div>\n            </div>\n\n        </form>\n    </div>\n</div>\n<!-- register section -->";
+      __webpack_exports__["default"] = "<div class=\"row pt-0 saas2\">\n    <div class=\"col-xl-12 col-12 text-center\" *ngIf=\"!f.isVerified.value || f.isVerified.value==2\">\n        <div [ngSwitch]=\"authenticationService.currentUserValue.role\">\n            <div *ngSwitchCase=\"Role.Borrower\">\n                <div \n                    *ngIf=\"(authenticationService.currentUserValue.isVerified==0 || authenticationService.currentUserValue.isVerified==2) || !authenticationService.currentUserValue.isUsersBankDetailsSubmitted || (authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified==0 || authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified==2)\">\n                    <div class=\"text-black  font-weight-lighter\" i18n>\n                        Welome{{authenticationService.currentUserValue.isVerified==1?', Your profile has been verified\n                        succesfully':''}}. Your need to submit your\n                        <span class=\"badge badge-danger mr-1\">Profile Details</span>\n                        <span class=\"badge badge-danger\">Bank Details</span> and\n                        <span class=\"badge badge-danger\">Income Proof Documents</span> to access the loan market. Remember to fill in all fields correctly, otherwise you may risk lifetime blockage\n                    </div>\n                    <hr>\n                    <ul class=\"list-unstyled\">\n                        <li class=\"d-flex align-items-center justify-content-center mb-2\" i18n>\n                            Profile and personal document verification\n                            <span [ngSwitch]=\"authenticationService.currentUserValue.isVerified\">\n                                <i *ngSwitchCase=\"1\" class=\"icon icon-check-box text-success ml-3\"></i>\n                                <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\n                                    routerLink=\"/borrower/profile\"></i>\n                            </span>\n                        </li>\n                        <li class=\"d-flex align-items-center justify-content-center mb-2\" i18n>\n                            Bank details submission\n                            <span [ngSwitch]=\"authenticationService.currentUserValue.isUsersBankDetailsSubmitted\">\n                                <i *ngSwitchCase=\"true\" class=\"icon icon-check-box text-success ml-3\"></i>\n                                <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\n                                    routerLink=\"/borrower/bank-details\"></i>\n                            </span>\n                        </li>\n                        <li class=\"d-flex align-items-center justify-content-center mb-2\" i18n>\n                            Income Proof Documents and Mothly Expenses\n                            <span\n                                [ngSwitch]=\"authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified\">\n                                <i *ngSwitchCase=\"1\" class=\"icon icon-check-box text-success ml-3\"></i>\n                                <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\n                                    routerLink=\"/borrower/income-proof\"></i>\n                            </span>\n                        </li>\n                    </ul>\n                </div>\n            </div>\n            <div *ngSwitchCase=\"Role.Lender\">\n                <div class=\"jumbotron\"\n                    *ngIf=\"(authenticationService.currentUserValue.isVerified==0 || authenticationService.currentUserValue.isVerified==2) || !authenticationService.currentUserValue.isUsersBankDetailsSubmitted\">\n                    <div class=\"text-black-50 h2 font-weight-lighter\" i18n>\n                        Welome, Your profile has been verified succesfully. Your need to submit your\n                        <span class=\"badge badge-danger\">Bank Details</span> to access the Loan Market.\n                    </div>\n                    <hr>\n                    <ul class=\"list-unstyled\">\n                        <li class=\"d-flex align-items-center justify-content-center mb-3 h4\" i18n>\n                            Profile and personal document verification\n                            <span [ngSwitch]=\"authenticationService.currentUserValue.isVerified\">\n                                <i *ngSwitchCase=\"1\" class=\"icon icon-check-box text-success ml-3\"></i>\n                                <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\n                                    routerLink=\"/lender/profile\"></i>\n                            </span>\n                        </li>\n                        <li class=\"d-flex align-items-center justify-content-center mb-3 h4\" i18n>\n                            Bank details submission\n                            <span [ngSwitch]=\"authenticationService.currentUserValue.isUsersBankDetailsSubmitted\">\n                                <i *ngSwitchCase=\"true\" class=\"icon icon-check-box text-success ml-3\"></i>\n                                <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\n                                    routerLink=\"/lender/bank-details\"></i>\n                            </span>\n                        </li>\n                    </ul>\n                </div>\n            </div>\n        </div>\n        <!-- <h3 i18n>Submit your portfolio for verification</h3> -->\n        <!-- <P class=\"my-3\" i18n>Remember to fill in all fields correctly, otherwise you may risk lifetime blockage</P> -->\n    </div>\n    <div class=\"col-xl-12 col-12\">\n        <section class=\"tab-product  p-b-0\">\n\n            <ul class=\"nav nav-justified nav-tabs mb-4 shadow-sm\" id=\"top-tab\" role=\"tablist\">\n                <li class=\"nav-item\">\n                    <a id=\"btn_click_profile_basic_details\" class=\"nav-link show active\" data-toggle=\"tab\"\n                        data-target=\"#profile_basic_details\" (click)=\"clickOnGoToNext(1, true)\" i18n>Basic Details</a>\n                    <div class=\"material-border\"></div>\n                </li>\n                <li class=\"nav-item\">\n                    <a id=\"btn_click_profile_skills_verification\" class=\"nav-link\" data-toggle=\"tab\"\n                        data-target=\"#profile_skills_verification\" (click)=\"clickOnGoToNext(2, true)\" i18n>Upload\n                        Documents</a>\n                    <div class=\"material-border\"></div>\n                </li>\n                <!-- <li class=\"nav-item\" *ngIf=\"_role == Role.Borrower\">\n                            <a id=\"btn_click_profile_banking\" class=\"nav-link font-weight-light\" data-toggle=\"pill\"\n                                data-target=\"#profile_banking_details\">Banking Details</a>\n                        </li> -->\n            </ul>\n\n        </section>\n\n        <form [formGroup]=\"profileForm\">\n\n            <div class=\"tab-content\">\n                <div class=\"tab-pane active\" id=\"profile_basic_details\">\n                    <div class=\"form-row mb-2  mb-3\">\n                        <div class=\"col-xl-3 text-center\">\n                            <div class=\"card\">\n                                <div class=\"card-header\">\n                                    <h6 class=\"font-weight-bold text-primary\" i18n>Change Profile Pic</h6>\n                                </div>\n\n                                <div class=\"card-body\">\n                                    <img [src]=\"f.selfProfileUrl.value\" onerror=\"this.src='./assets/img/nouser.png';\"\n                                        class=\"border img-fluid rounded-circle mb-3\"\n                                        style=\"height: 150px;width: 150px;object-fit: cover;\" />\n                                    <br>\n\n                                    <p>{{f.role.value ==='lender'?'Lender':'Borrower'}}</p>\n\n\n                                </div>\n\n                                <div class=\"card-footer\">\n                                    <i *ngIf=\"!selfProfileUrlPendingForUpload\"\n                                        class=\"icon-pencil-alt m-2 cursor-pointer btn btn-outline-primary\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'selfProfileUrl', null);\">\n                                        <!--openFileUploaderForProfile()-->\n\n                                        <input id=\"ctrlUploadProfile\" hidden type=\"file\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressForProfile($event)\"> Edit\n                                    </i>\n                                    <i *ngIf=\"selfProfileUrlPendingForUpload\"\n                                        class=\"icon-upload m-2 cursor-pointer text-success\"\n                                        (click)=\"onUploadForProfile()\" i18n> Save\n                                    </i>\n                                </div>\n\n                            </div>\n\n                        </div>\n\n\n\n                        <div class=\"col-xl-9\">\n\n                            <div class=\"card\">\n                                <div class=\"card-header\">\n                                    <h6 class=\"font-weight-bold text-primary\" i18n>Change Basic Details</h6>\n                                </div>\n\n                                <div class=\"card-body\">\n                                    <div class=\"form-row \">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"firstName\" i18n>First Name</label>\n                                            <input type=\"text\" formControlName=\"firstName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.firstName.errors }\" />\n                                            <div *ngIf=\"submitted && f.firstName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.firstName.errors.required\" i18n>First Name is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"middleName\" i18n>Middle Name</label>\n                                            <input type=\"text\" formControlName=\"middleName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.middleName.errors }\" />\n                                            <div *ngIf=\"submitted && f.middleName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.middleName.errors.required\" i18n>Middle Name is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"lastName\" i18n>Last Name</label>\n                                            <input type=\"text\" formControlName=\"lastName\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.lastName.errors }\" />\n                                            <div *ngIf=\"submitted && f.lastName.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.lastName.errors.required\" i18n>Last Name is required</div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"mobileNo\" i18n>\n                                                <i class=\"icon-mobile text-success\"></i>\n                                                Mobile Number</label>\n                                            <input type=\"text\" formControlName=\"mobileNo\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.mobileNo.errors }\" />\n                                            <div *ngIf=\"submitted && f.mobileNo.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.mobileNo.errors.required\" i18n>Mobile Number is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"emailAddress\" i18n>Email</label>\n                                            <input type=\"text\" disabled formControlName=\"emailAddress\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.emailAddress.errors }\" />\n                                            <div *ngIf=\"submitted && f.emailAddress.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.emailAddress.errors.required\" i18n>Email is required</div>\n                                                <div *ngIf=\"f.emailAddress.errors.email\" i18n>Invalid Email format.\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"address\" class=\"font-weight-bold\" i18n>\n                                                Address\n                                            </label>\n                                            <textarea rows=\"2\" maxlength=\"500\" formControlName=\"address\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.address.errors }\">\n                                                    </textarea>\n                                            <div *ngIf=\"submitted && f.address.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.address.errors.required\" i18n>\n                                                    Address is required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"birthDateCustomised\" i18n>Birthday</label>\n                                            <input type=\"date\" formControlName=\"birthDateCustomised\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.birthDate.errors }\"\n                                                [max]=\"maxDate\" [min]=\"minDate\" />\n                                            <div *ngIf=\"submitted && f.birthDate.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.birthDate.errors.required\" i18n>Birthday is required\n                                                </div>\n                                                <div *ngIf=\"f.birthDate.errors.date\" i18n>Invalid date format.\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-4 d-none\">\n                                            <div class=\"form-row\">\n                                                <div class=\"col-xl-12 text-center mb-2\">\n                                                    <label i18n>Gender</label>\n                                                    <div class=\"btn-group shadow mb-3\">\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('male')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='male', 'btn-outline-success': f.gender.value!='male'}\"\n                                                            i18n>\n                                                            Male\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('female')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='female', 'btn-outline-success': f.gender.value!='female'}\"\n                                                            i18n>\n                                                            Female\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\"\n                                                            (click)=\"onClickGenderChange('other')\"\n                                                            [ngClass]=\"{ 'btn-success': f.gender.value=='other', 'btn-outline-success': f.gender.value!='other'}\"\n                                                            i18n>\n                                                            Other\n                                                        </button>\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"cityCode\" i18n>City</label>\n                                            <input type=\"text\" formControlName=\"cityCode\" class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.cityCode.errors }\" />\n                                            <div *ngIf=\"submitted && f.cityCode.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.cityCode.errors.required\" i18n>City is required</div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"cityCode\" i18n>Country</label>\n                                            <select formControlName=\"country\" class=\"custom-select\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.country.errors }\">\n                                                <option value=\"\" selected disabled i18n>Choose Country</option>\n                                                <option *ngFor=\"let country of countrylist\" [ngValue]=\"country\">\n                                                    {{country}}</option>\n                                            </select>\n                                            <div *ngIf=\"submitted && f.country.errors\" class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.country.errors.required\" i18n>Country is required</div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 mb-3\">\n                                            <label for=\"myProfileDetails\" i18n>Describe Yourself</label>\n                                            <textarea rows=\"2\" maxlength=\"500\" formControlName=\"myProfileDetails\"\n                                                class=\"form-control\"\n                                                [ngClass]=\"{ 'is-invalid': submitted && f.myProfileDetails.errors }\">\n                                                    </textarea>\n                                            <div *ngIf=\"submitted && f.myProfileDetails.errors\"\n                                                class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.myProfileDetails.errors.required\" i18n>Describe Yourself\n                                                    is\n                                                    required\n                                                </div>\n                                            </div>\n                                        </div>\n\n                                    </div>\n                                </div>\n\n                                <div class=\"card-footer\">\n                                    <button type=\"button\" (click)=\"clickOnGoToNext(2)\" [disabled]=\"loading\"\n                                        class=\"btn btn-primary float-right\" i18n>Next</button>\n                                </div>\n                            </div>\n\n\n                        </div>\n                    </div>\n                </div>\n                <div class=\"tab-pane fade\" id=\"profile_skills_verification\">\n                    <div class=\"card\">\n                        <div class=\"card-header\">\n                            <h6 class=\"font-weight-bold text-primary\" i18n>Update Your Documents</h6>\n                        </div>\n\n                        <div class=\"card-body\">\n                            <div class=\"form-row\">\n                                <div class=\"col-xl-12 mt-3\">\n                                    <label class=\"d-none\" for=\"myProfileDetails\" i18n>Social Network</label>\n                                    <div class=\"form-row\">\n                                        <div class=\"col-xl-4 d-none\">\n\n                                            <select [(ngModel)]=\"appName\" class=\"custom-select\"\n                                                [ngModelOptions]=\"{standalone: true}\">\n                                                <option value=\"facebook\" selected i18n> Facebook</option>\n\n                                            </select>\n                                        </div>\n                                        <div class=\"col-xl-12\">\n                                            <!--\n                                            <div class=\"input-group mb-3\">\n                                                <input type=\"url\"\n                                                    pattern=\"/(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]+\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]+\\.[^\\s]{2,})/gi*\"\n                                                    [(ngModel)]=\"appLink\" class=\"form-control\"\n                                                    [ngModelOptions]=\"{standalone: true}\"\n                                                    placeholder=\"Facebook Profile Public Link\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.externalAppLinks.errors }\" />\n                                                <div class=\"input-group-append\">\n                                                    <button class=\"btn btn-success\"\n                                                        (click)=\"addExternalAppLinks(true, null, appName, appLink)\" i18n>Add</button>\n                                                </div>\n                                            </div>\n                                        -->\n                                            <div class=\"form-group\">\n                                                <label class=\"mb-1\" for=\"externalAppLinkUrl\" i18n>Facebook Profile\n                                                    Public Link:</label>\n                                                <input type=\"url\" formControlName=\"externalAppLinkUrl\"\n                                                    class=\"form-control\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.externalAppLinkUrl.errors }\" />\n                                                <div *ngIf=\"submitted && f.externalAppLinkUrl.errors\"\n                                                    class=\"invalid-feedback\">\n                                                    <div *ngIf=\"f.externalAppLinkUrl.errors.required\" i18n>Link is\n                                                        required\n                                                    </div>\n                                                    <div *ngIf=\"f.externalAppLinkUrl.errors.pattern\" i18n>Link is\n                                                        required*\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-12\">\n                                            <div *ngIf=\"submitted && f.externalAppLinks.errors\"\n                                                class=\"invalid-feedback\">\n                                                <div *ngIf=\"f.externalAppLinks.errors.required\" i18n>Links required\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"form-row d-none\" *ngFor=\"let applinks of f.externalAppLinks.value\">\n                                        <div class=\"col-xl-2\">\n                                            {{applinks.appName | titlecase}}\n                                        </div>\n                                        <div class=\"col-xl-10\">\n                                            <a href=\"{{applinks.appLink}}\">{{applinks.appLink}}</a>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-md-12\">\n                                    <div class=\"text-gray\" i18n>\n                                        Upload your Passport, Driving Licence, Health Insurance Card document\n                                    </div>\n                                    <hr>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"myPassportNumber\" i18n>Passport Number:</label>\n                                        <input type=\"text\"\n                                            [readonly]=\"authenticationService.currentUserValue.myPassportNumber\"\n                                            formControlName=\"myPassportNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myPassportNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.myPassportNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.myPassportNumber.errors.required\" i18n>Passport number is\n                                                required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myPassportMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myPassportMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7 col-12\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyPassportMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myPassportMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyPassportMedia\">{{lblmyPassportMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myPassportMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"myDLNumber\" i18n>Driving License Number:</label>\n                                        <input type=\"text\"\n                                            [readonly]=\"authenticationService.currentUserValue.myDLNumber\"\n                                            formControlName=\"myDLNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myDLNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.myDLNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.myDLNumber.errors.required\" i18n>Driving License number is\n                                                required\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myDLMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myDLMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyDLMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myDLMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyDLMedia\">{{lblmyDLMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myDLMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"form-row mb-3\">\n                                <div class=\"col-xl-4 col-12\">\n                                    <div class=\"form-group\">\n                                        <label class=\"mb-1\" for=\"cprNumber\" i18n>CPR Number:</label>\n                                        <input type=\"text\" [readonly]=\"authenticationService.currentUserValue.cprNumber\"\n                                            formControlName=\"cprNumber\" class=\"form-control\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.cprNumber.errors }\" />\n                                        <div *ngIf=\"submitted && f.cprNumber.errors\" class=\"invalid-feedback\">\n                                            <div *ngIf=\"f.cprNumber.errors.required\" i18n>CPR number is required</div>\n                                        </div>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myHICardMedia', null);\"\n                                        i18n>\n                                        Upload Scan Copy\n                                    </button>\n                                </div>\n                                <div class=\"col-xl-4 col-12\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myHICardMediaSelfVerify', null);\"\n                                        i18n>\n                                        Upload Image of Scan Copy With Your Face\n                                    </button>\n                                </div>\n                                <!--\n                                <div class=\"col-xl-7\">\n                                    <div class=\"custom-file mt-4\">\n                                        <input type=\"file\" class=\"custom-file-input\" name=\"image\" accept=\"image/*\"\n                                            (change)=\"fileProgressAssetDocs($event,'lblmyHICardMedia')\"\n                                            [ngClass]=\"{ 'is-invalid': submitted && f.myHICardMedia.errors }\">\n                                        <label class=\"custom-file-label\" for=\"customFile\"\n                                            id=\"lblmyHICardMedia\">{{lblmyHICardMediaText}}</label>\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-2\">\n                                    <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                        (click)=\"onUploadAssetDocs('myHICardMedia')\">\n                                        Upload\n                                    </button>\n                                </div>\n                            -->\n                            </div>\n                            <div class=\"row mb-4\" *ngIf=\"_role == Role.Borrower\">\n                                <div class=\"col-xl-12 \">\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-4 mt-1\">\n                                            <div class=\"row\">\n                                                <div class=\"col-xl-12 \">\n                                                    <label class=\"font-weight-bold\" i18n>Are you registered in\n                                                        RKI?</label>\n                                                    <i class=\"icon icon-info-alt ml-2\" data-toggle=\"tooltip\"\n                                                        title=\"Hooray!\"></i>\n                                                    <div class=\"btn-group btn-group btn-group-sm ml-4\">\n                                                        <button type=\"button\" class=\"btn\" (click)=\"onRKIChange(true)\"\n                                                            [ngClass]=\"{ 'btn-success': onInitRKICheckedValue()==true, 'btn-outline-success':onInitRKICheckedValue()==false}\"\n                                                            i18n>\n                                                            Yes\n                                                        </button>\n                                                        <button type=\"button\" class=\"btn\" (click)=\"onRKIChange(false)\"\n                                                            [ngClass]=\"{ 'btn-success': onInitRKICheckedValue()==false, 'btn-outline-success':onInitRKICheckedValue()==true}\"\n                                                            i18n>\n                                                            No\n                                                        </button>\n                                                    </div>\n                                                </div>\n                                            </div>\n\n                                            <div *ngIf=\"submitted && f.isRKIRegistered.errors\" class=\"error\">\n                                                <div *ngIf=\"f.isRKIRegistered.errors.required\" class=\"text-red\" i18n>\n                                                    data required\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-4 col-12 mt-1\" *ngIf=\"!onInitRKICheckedValue()\">\n                                            <button class=\"btn btn-outline-secondary btn-block\"\n                                                (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMedia', null);\"\n                                                i18n>\n                                                Upload Scan Copy\n                                            </button>\n                                        </div>\n                                      \n                                    </div>\n                                   \n                                    <div class=\"form-row\" *ngIf=\"!onInitRKICheckedValue()\">\n                                        <!--\n                                        <div class=\"col-xl-9\">\n                                            <div class=\"custom-file\">\n                                                <input type=\"file\" class=\"custom-file-input\" name=\"image\"\n                                                    accept=\"image/*\"\n                                                    (change)=\"fileProgressAssetDocs($event,'lblmyRKIMedia')\"\n                                                    [ngClass]=\"{ 'is-invalid': submitted && f.myRKIMedia.errors }\">\n                                                <label class=\"custom-file-label\" for=\"customFile\"\n                                                    id=\"lblmyRKIMedia\">{{lblmyRKIMediaText}}</label>\n                                            </div>\n                                        </div>\n                                        <div class=\"col-xl-3\">\n                                            <button class=\"btn btn-outline-secondary btn-block\"\n                                                (click)=\"onUploadAssetDocs('myRKIMedia')\">\n                                                Upload\n                                            </button>\n                                        </div>\n                                    -->\n                                       \n                                       <!---\n                                        <div class=\"col-xl-6 col-12\">\n                                            <button class=\"btn btn-outline-secondary btn-block mt-4\"\n                                                (click)=\"modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMediaSelfVerify', null);\"\n                                                i18n>\n                                                Upload Image of Scan Copy With Your Face\n                                            </button>\n                                        </div>\n                                    -->\n                                       \n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"row jumbotron px-1 px-2 py-3 row\">\n                                <div class=\"col-xl-12 col-12 mb-3\">\n                                    <strong i18n> Document Previews</strong>\n                                </div>\n                                <div class=\"col-xl-2 col-6\" *ngFor=\"let previewUrl of _.union(_.values(f.myPassportMedia.value),_.values(f.myPassportMediaSelfVerify.value))\">\n                                    <div class=\"card mb1\"\n                                        >\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 100px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"p-1\" i18n>\n                                            Passport\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myPassportMedia')\"></i></a>\n                                                    -->\n                                        </div>\n                                    </div>\n\n\n                                </div>\n                                <div class=\"col-xl-2 col-6\" *ngFor=\"let previewUrl of _.union(_.values(f.myDLMedia.value),_.values(f.myDLMediaSelfVerify.value))\">\n                                    <div class=\"card mb-1\"\n                                        >\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 100px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"p-1\" i18n>\n                                            Driving Licence\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myDLMedia')\"></i></a>\n                                                    -->\n                                        </div>\n                                    </div>\n\n\n                                </div>\n                                <div class=\"col-xl-2 col-6\" *ngFor=\"let previewUrl of _.union(_.values(f.myHICardMedia.value),_.values(f.myHICardMediaSelfVerify.value))\">\n                                    <div class=\"card\"\n                                        >\n                                        <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 100px;\">\n                                        <div *ngIf=\"fileUploadProgress\" i18n>\n                                            Upload progress: {{ fileUploadProgress }}\n                                        </div>\n                                        <div class=\"p-1\" i18n>\n                                            Health Insurance Card\n                                            <!--\n                                            <a class=\"btn btn-primary btn-sm btn-xs float-right text-white\"><i\n                                                    class=\"icon icon-trash\"\n                                                    (click)=\"onUploadCleanAssetDocs('myHICardMedia')\"></i></a>\n                                            -->\n                                        </div>\n                                    </div>\n\n                                </div>\n                                <div class=\"col-xl-2 col-6\" *ngFor=\"let previewUrl of _.union(_.values(f.myRKIMedia.value),_.values(f.myHICardMediaSelfVerify.value))\">\n                                    <div class=\"card\"\n                                    >\n                                    <img class=\"card-img-top\" [src]=\"previewUrl.url\" style=\"height: 100px;\">\n                                    <div *ngIf=\"fileUploadProgress\" i18n>\n                                        Upload progress: {{ fileUploadProgress }}\n                                    </div>\n                                    <div class=\"p-1\" i18n>\n                                        RKI\n                                    </div>\n                                   \n                                </div>\n                                </div>\n                            </div>\n\n                       \n                         \n                        </div>\n                        <div class=\"card-footer\">\n                            <button type=\"button\" (click)=\"onProfileUpdateSubmit()\" [disabled]=\"loading\"\n                                class=\"btn btn-primary float-right\" i18n>Save</button>\n                        </div>\n                    </div>\n\n\n                </div>\n            </div>\n\n        </form>\n    </div>\n</div>\n<!-- register section -->";
       /***/
     },
 
@@ -16896,7 +17081,7 @@
         }, {
           key: "imageLoaded",
           value: function imageLoaded(ev) {
-            var _this67 = this;
+            var _this68 = this;
 
             //
             // Unset load error state
@@ -16915,17 +17100,17 @@
             image.addEventListener('ready', function () {
               //
               // Emit ready
-              _this67.ready.emit(true); //
+              _this68.ready.emit(true); //
               // Unset loading state
 
 
-              _this67.isLoading = false; //
+              _this68.isLoading = false; //
               // Validate cropbox existance
 
-              if (_this67.cropbox) {
+              if (_this68.cropbox) {
                 //
                 // Set cropbox data
-                _this67.cropper.setCropBoxData(_this67.cropbox);
+                _this68.cropper.setCropBoxData(_this68.cropbox);
               }
             });
             /** @type {?} */
@@ -16984,7 +17169,7 @@
         }, {
           key: "exportCanvas",
           value: function exportCanvas(base64) {
-            var _this68 = this;
+            var _this69 = this;
 
             /** @type {?} */
             var imageData = this.cropper.getImageData();
@@ -17022,7 +17207,7 @@
             // Emit export data when promise is ready
 
             promise.then(function (res) {
-              _this68["export"].emit(Object.assign(data, res));
+              _this69["export"].emit(Object.assign(data, res));
             });
           }
         }]);
@@ -17371,7 +17556,7 @@
 
       var ProfilePortfolioComponent = /*#__PURE__*/function () {
         function ProfilePortfolioComponent(http, formBuilder, authenticationService, userService, alertService, appRouterService, utilityService, router) {
-          var _this69 = this;
+          var _this70 = this;
 
           _classCallCheck2(this, ProfilePortfolioComponent);
 
@@ -17402,17 +17587,17 @@
             ////console.log('data => ', data)
             if (data && data['success']) {
               //alert(JSON.stringify( data));
-              _this69.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
+              _this70.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
 
 
-              _this69.loading = false; //this.element_btn_click_profile_skills_verification.click();
+              _this70.loading = false; //this.element_btn_click_profile_skills_verification.click();
             } else {
               //alert(JSON.stringify(data['message']));
-              _this69.alertService.error(data['message']);
+              _this70.alertService.error(data['message']);
 
-              _this69.loading = false;
+              _this70.loading = false;
 
-              _this69.appRouterService.appRouter('');
+              _this70.appRouterService.appRouter('');
             }
           }, function (error) {
             var errorMsg2show = "";
@@ -17427,11 +17612,11 @@
               }
             } catch (ex) {}
 
-            _this69.alertService.error(errorMsg2show);
+            _this70.alertService.error(errorMsg2show);
 
-            _this69.loading = false;
+            _this70.loading = false;
 
-            _this69.appRouterService.appRouter('');
+            _this70.appRouterService.appRouter('');
           });
         }
 
@@ -17480,7 +17665,7 @@
         }, {
           key: "onProfileUpdateSubmit",
           value: function onProfileUpdateSubmit() {
-            var _this70 = this;
+            var _this71 = this;
 
             if (this.selfProfileUrlPendingForUpload) {
               this.alertService.error("Please Save Profile First");
@@ -17497,16 +17682,16 @@
             this.userService.addUpdateUserProfilePortFolio(this.profilePortfolioForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this70.alertService.success('Your Portfolio is Updated successfully', true);
+                _this71.alertService.success('Your Portfolio is Updated successfully', true);
 
-                _this70.element_ctrlUploadProfile = document.getElementById('ctrlNavigate2Profile');
+                _this71.element_ctrlUploadProfile = document.getElementById('ctrlNavigate2Profile');
 
-                _this70.element_ctrlUploadProfile.click();
+                _this71.element_ctrlUploadProfile.click();
               } else {
                 //alert(JSON.stringify(data['message']));
-                _this70.alertService.error(data['message']);
+                _this71.alertService.error(data['message']);
 
-                _this70.loading = false;
+                _this71.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -17521,9 +17706,9 @@
                 }
               } catch (ex) {}
 
-              _this70.alertService.error(errorMsg2show);
+              _this71.alertService.error(errorMsg2show);
 
-              _this70.loading = false;
+              _this71.loading = false;
             });
           }
         }, {
@@ -17535,7 +17720,7 @@
         }, {
           key: "preview",
           value: function preview() {
-            var _this71 = this;
+            var _this72 = this;
 
             // Show preview 
             var mimeType = this.fileData.type;
@@ -17548,7 +17733,7 @@
             reader.readAsDataURL(this.fileData);
 
             reader.onload = function (_event) {
-              _this71.previewUrl = reader.result;
+              _this72.previewUrl = reader.result;
             };
           }
         }, {
@@ -17569,7 +17754,7 @@
         }, {
           key: "onUploadMyProfileMedia",
           value: function onUploadMyProfileMedia() {
-            var _this72 = this;
+            var _this73 = this;
 
             var checkArray = this.profilePortfolioForm.get('myProfileMedia');
 
@@ -17579,18 +17764,18 @@
             }
 
             var _loop = function _loop(_index) {
-              var currentFile = _this72.myProfileFiles[_index];
+              var currentFile = _this73.myProfileFiles[_index];
 
               if (!currentFile) {
-                _this72.alertService.error("Select file first.");
+                _this73.alertService.error("Select file first.");
 
                 return "continue";
               }
 
               var formData = new FormData();
               formData.append('files', currentFile);
-              formData.append('documentId', _this72.authenticationService.currentUserValue._id);
-              _this72.fileUploadProgress = '0%';
+              formData.append('documentId', _this73.authenticationService.currentUserValue._id);
+              _this73.fileUploadProgress = '0%';
               var _temp_currentFile = {
                 name: currentFile.name,
                 type: currentFile.type,
@@ -17598,19 +17783,19 @@
                 url: null
               };
 
-              _this72.http.post(uploadAPI, formData, {
+              _this73.http.post(uploadAPI, formData, {
                 reportProgress: true,
                 observe: 'events'
               }).subscribe(function (events) {
                 if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpEventType"].UploadProgress) {
-                  _this72.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
+                  _this73.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
                 } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpEventType"].Response) {
-                  _this72.fileUploadProgress = ''; //console.log(events.body);
+                  _this73.fileUploadProgress = ''; //console.log(events.body);
                   //alert('SUCCESS !!');
 
-                  lodash__WEBPACK_IMPORTED_MODULE_9__["pullAt"](_this72.myProfileFiles, _index);
+                  lodash__WEBPACK_IMPORTED_MODULE_9__["pullAt"](_this73.myProfileFiles, _index);
 
-                  _this72.alertService.success('Uploaded successfully', true);
+                  _this73.alertService.success('Uploaded successfully', true);
 
                   var _uploadedUrl = events.body["data"].path;
 
@@ -17618,10 +17803,10 @@
                     _uploadedUrl = _uploadedUrl.substr(1);
                   }
 
-                  _this72.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
-                  _temp_currentFile.url = _this72.uploadedFilePath;
+                  _this73.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                  _temp_currentFile.url = _this73.uploadedFilePath;
 
-                  _this72.onMyProfileMediaUpdate(true, null, _temp_currentFile);
+                  _this73.onMyProfileMediaUpdate(true, null, _temp_currentFile);
                 }
               });
             };
@@ -17730,7 +17915,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<h2 mat-dialog-title class=\"text-primary\">\n    <div class=\"row\">\n        <div class=\"col-xl-11 col-10\">\n            <h4 class=\"mb-3 text-black-50\" i18n>\n            </h4>\n        </div>\n        <div class=\"col-xl-1 col-2\">\n            <i class=\"icon-close float-right\" mat-button (click)=\"closeDialog(null, null)\"></i>\n        </div>\n    </div>\n</h2>\n<mat-dialog-content class=\"mat-typography\">\n    <div class=\"card-body\">\n        <div class=\"row\">\n            <div class=\"col-xl-6 col-12\">\n                <h3 class=\"text-primary\" i18n>New Proposed Amount: <span class=\"badge badge-primary\">\n                        {{LoanApplyObj.proposedLoanAmount || 'NA'}}</span>\n                </h3>\n            </div>\n            <div class=\"col-xl-6 col-12\">\n                <h5 *ngIf=\"LoanApplyObj.loanInsuranceRequired\" class=\"card-title float-right\" i18n>Applied for Insurance\n                    with Amount:\n                    <span class=\"badge badge-primary\">\n                        {{LoanApplyObj.loanInsuranceAmount || 'NA'}}</span>\n                </h5>\n            </div>\n        </div>\n        <div class=\"row\" *ngIf=\"LoanApplyObj.lenderId==authenticationService.currentUserValue._id\">\n            <div class=\"col-xl-12 col-12\">\n                <div class=\"row\"\n                    *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted\">\n                    <div class=\"col-xl-12 col-12\">\n                        <div class=\"card shadow mb-4\">\n                            <div class=\"card-header py-3\">\n                                <div class=\"form-group\">\n                                    <div class=\"form-check-inline\">\n                                        <div class=\"custom-control custom-checkbox\">\n                                            <input [(ngModel)]=\"LoanApplyObjCurrent.isLoanAmountPaidByLender\"\n                                                name=\"isLoanAmountPaidByLender\" id=\"isLoanAmountPaidByLender\"\n                                                type=\"checkbox\" class=\"custom-control-input\" [value]=\"true\"\n                                                [checked]=\"LoanApplyObjCurrent.isLoanAmountPaidByLender\">\n                                            <label for=\"isLoanAmountPaidByLender\" class=\"custom-control-label\" i18n>\n                                                Is Loan Amount Transfered? </label>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"card-body\">\n                                <div class=\"row\">\n                                    <div class=\"col-xl-4 col-12\">\n                                        <div class=\"form-group\">\n                                            <label for=\"transactionIdForLoanAmountPaidByLender\"\n                                                i18n>TransactionId/Payment Ref.\n                                                ID</label>\n                                            <input type=\"text\" class=\"form-control\"\n                                                placeholder=\"TransactionId/Payment Ref. ID\"\n                                                [(ngModel)]=\"LoanApplyObjCurrent.transactionIdForLoanAmountPaidByLender\">\n                                        </div>\n                                    </div>\n\n                                    <div class=\"col-xl-4 col-12\">\n                                        <div class=\"form-group\">\n\n                                            <label for=\"transactionOnForLoanAmountPaidByLenderCustomised\" i18n>\n                                                Transaction Date\n                                            </label>\n                                            <input type=\"date\"\n                                                [(ngModel)]=\"transactionOnForLoanAmountPaidByLenderCustomised\"\n                                                class=\"form-control\" />\n\n                                        </div>\n                                    </div>\n                                    <div class=\"col-xl-4 col-12\">\n                                        <div class=\"form-group\">\n                                            <label for=\"usr\" i18n>Transaction Description</label>\n                                            <input type=\"text\" class=\"form-control\" placeholder=\"Description\"\n                                                [(ngModel)]=\"LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLender\">\n                                        </div>\n                                    </div>\n                                    <br>\n                                    <hr>\n                                    <div class=\"col-xl-12 col-12\">\n                                        <button class=\"btn btn-primary btn-sm float-right\"\n                                            (click)=\"paymentDoneByLender(LoanApplyObj)\" i18n>\n                                            Update\n                                        </button>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n\n                </div>\n            </div>\n            <div class=\"col-xl-12 col-12\" *ngIf=\"LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                <div class=\"card bg-success text-white shadow mb-4\">\n                    <div class=\"card-body dashobard-card p-2\">\n                        <div class=\"text-xs font-weight-bold  mb-2\">\n                            Borrower's Payment confirmation</div>\n                        <hr>\n                        <div class=\"row\">\n\n                            <div class=\"col-xl-4 col-12\">\n                                <div class=\"form-group\">\n                                    <label for=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrower\"\n                                        i18n>Transaction\n                                        Date</label>\n                                    <h4 i18n>\n                                        {{LoanApplyObj.transactionOnForLoanAmountPaidByLenderConfirmByBorrower |\n                                        date:'dd-MMM-YYYY'}}\n                                    </h4>\n                                </div>\n                            </div>\n                            <div class=\"col-xl-4 col-12\">\n                                <div class=\"form-group\">\n                                    <label for=\"createdOnForLoanAmountPaidByLender\" i18n>Updated On</label>\n                                    <h4 >\n                                        {{LoanApplyObj.createdOnForLoanAmountPaidByLenderConfirmByBorrower |\n                                        date:'dd-MMM-YYYY'}}\n                                    </h4>\n                                </div>\n                            </div>\n                            <div class=\"col-xl-4 col-12\">\n                                <p class=\"mb-2 text-white\"\n                                    for=\"transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\" i18n>\n                                    Description:</p>\n                                <div class=\"text-white\" >\n                                    {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower}}\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n        </div>\n        <div class=\"row\" *ngIf=\"LoanApplyObj.lenderId!=authenticationService.currentUserValue._id\">\n            <div class=\"col-xl-12 col-12\" *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender\">\n                <div class=\"card bg-gradient-primary mb-3 text-white shadow\">\n                    <div class=\"card-body dashobard-card p-2\">\n                        <div class=\"text-xs font-weight-bold mb-3\">\n                            Lender Payment Confirmation</div>\n                        <hr>\n                        <div class=\"row\">\n                            <div class=\"col-xl-4 col-12\">\n                                <div class=\"form-group\">\n                                    <label for=\"transactionIdForLoanAmountPaidByLender\" i18n>Transaction ID</label>\n                                    <h4 >\n                                        {{LoanApplyObj.transactionIdForLoanAmountPaidByLender}}\n                                    </h4>\n                                </div>\n                            </div>\n                            <div class=\"col-xl-4 col-12\">\n                                <div class=\"form-group\">\n                                    <label for=\"transactionOnForLoanAmountPaidByLender\" i18n>Transaction\n                                        Date</label>\n                                    <h4 >\n                                        {{LoanApplyObj.transactionOnForLoanAmountPaidByLender | date:'dd-MMM-YYYY'}}\n                                    </h4>\n                                </div>\n                            </div>\n                            <div class=\"col-xl-4 col-12\">\n                                <div class=\"form-group\">\n                                    <label for=\"createdOnForLoanAmountPaidByLender\" i18n>Updated On</label>\n                                    <h4 i18n>\n                                        {{LoanApplyObj.createdOnForLoanAmountPaidByLender | date:'dd-MMM-YYYY'}}\n                                    </h4>\n                                </div>\n                            </div>\n                            <div class=\"col-xl-12 col-12\">\n                                <p class=\"mb-2 text-white\" for=\"transactionDescriptionForLoanAmountPaidByLender\" i18n>\n                                    Description:</p>\n                                <div class=\"text-white\" >\n                                    {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLender}}\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n            <div class=\"col-xl-12\"\n                *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower && LoanApplyObj.isLoanAmountPaidByLender && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted\">\n                <div class=\"card shadow mb-4\">\n                    <div class=\"card-header\">\n\n                        <div class=\"form-group mb-0\">\n                            <div class=\"form-check-inline\">\n                                <div class=\"custom-control custom-checkbox\">\n                                    <input [(ngModel)]=\"LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower\"\n                                        name=\"isLoanAmountPaidByLenderConfirmByBorrower\"\n                                        id=\"isLoanAmountPaidByLenderConfirmByBorrower\" type=\"checkbox\"\n                                        class=\"custom-control-input\" [value]=\"true\"\n                                        [checked]=\"LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                    <label for=\"isLoanAmountPaidByLenderConfirmByBorrower\" class=\"custom-control-label\"\n                                        i18n>\n                                        Is Loan Amount Received </label>\n                                </div>\n                            </div>\n                        </div>\n\n                    </div>\n                    <div class=\"card-body\">\n                        <div class=\"row\">\n\n                            <div class=\"col-xl-4 col-12\">\n                                <div class=\"form-group\">\n\n                                    <label for=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrowerCustomised\" i18n>\n                                        Payment Credit Date\n                                    </label>\n                                    <input type=\"date\"\n                                        [(ngModel)]=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrowerCustomised\"\n                                        class=\"form-control\" />\n\n                                </div>\n                            </div>\n                            <div class=\"col-xl-6 col-12\">\n                                <div class=\"form-group\">\n                                    <label for=\"usr\" i18n>Transaction Description</label>\n                                    <input type=\"transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\"\n                                        class=\"form-control\" placeholder=\"Description\"\n                                        [(ngModel)]=\"LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\">\n                                </div>\n                            </div>\n\n                            <div class=\"col-xl-2 col-12\">\n                                <button class=\"btn btn-primary btn-sm float-right mt-4\"\n                                    (click)=\"paymentDoneByLenderConfirmByBorrower(LoanApplyObj)\" i18n>\n                                    Update\n                                </button>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"row\"\n            *ngIf=\"!LoanApplyObj.isLoanAmountPaidByBorrower && LoanApplyObjCurrent4Installment.installmentKey && !LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender && ((returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted  && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id) || (returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Unpaid && authenticationService.currentUserValue.role == Role.Admin))\">\n            <div class=\"col-xl-4 col-12\">\n                <div class=\"form-group border-right\">\n                    <label for=\"installmentKey\" i18n>Installment For</label>\n                    <h4 class=\"text-primary\" >\n                        {{LoanApplyObjCurrent4Installment.installmentKey}}\n                    </h4>\n                </div>\n            </div>\n            <div class=\"col-xl-4 col-12\">\n                <div class=\"form-group\">\n                    <label for=\"transactionIdForLoanAmountPaidToLender\" i18n>TransactionId/Payment\n                        Ref. ID</label>\n                    <input type=\"text\" class=\"form-control\" placeholder=\"TransactionId/Payment Ref. ID\"\n                        [(ngModel)]=\"LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender\">\n                </div>\n            </div>\n            <div class=\"col-xl-4 col-12\">\n                <div class=\"form-group\">\n\n                    <label for=\"transactionOnForLoanAmountPaidToLenderCustomised\" i18n>\n                        Transaction Date\n                    </label>\n                    <input type=\"date\" [(ngModel)]=\"transactionOnForLoanAmountPaidToLenderCustomised\"\n                        class=\"form-control\" />\n\n                </div>\n            </div>\n            <div class=\"col-xl-12 col-12\">\n                <div class=\"form-group\">\n                    <label for=\"transactionDescriptionForLoanAmountPaidToLender\" i18n>Note.</label>\n                    <input type=\"transactionDescriptionForLoanAmountPaidToLender\" class=\"form-control\"\n                        placeholder=\"Description\"\n                        [(ngModel)]=\"LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLender\">\n                </div>\n            </div>\n            <br>\n            <hr>\n            <div class=\"col-xl-12 col-12\">\n                <button class=\"btn btn-primary btn-sm float-right\" (click)=\"paymentDoneToLender(LoanApplyObj)\" i18n>\n                    Update\n                </button>\n            </div>\n        </div>\n        <div class=\"row\"\n            *ngIf=\"LoanApplyObjCurrent4Installment.installmentKey && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted  && LoanApplyObj.lenderId==authenticationService.currentUserValue._id\">\n\n            <div class=\"col-xl-4 col-12\">\n                <div class=\"form-group border-right\">\n                    <label for=\"installmentKey\" i18n>Installment For</label>\n                    <h4 class=\"text-primary\" >\n                        {{LoanApplyObjCurrent4Installment.installmentKey}}\n                        <label *ngIf=\"LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin\"\n                            class=\"badge badge-warning text-capitalize text-cap float-right\" i18n>\n                            Paid By Admin\n                        </label>\n                    </h4>\n                </div>\n            </div>\n            <div class=\"col-xl-4 col-12\">\n                <div class=\"form-group border-right\">\n                    <label for=\"transactionIdForLoanAmountPaidToLender\" i18n>TransactionId/Payment Ref.\n                        ID</label>\n                    <h4 class=\"text-primary\" >\n                        {{LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender}}\n                    </h4>\n                </div>\n            </div>\n            <div class=\"col-xl-4 col-12\">\n                <div class=\"form-group border-right\">\n                    <label for=\"transactionOnForLoanAmountPaidToLender\" i18n>Transaction\n                        Date</label>\n                    <h4 class=\"text-primary\" >\n                        {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender |\n                        date:'dd-MMM-YYYY'}}\n                    </h4>\n                </div>\n            </div>\n            <div class=\"col-xl-4 col-12\">\n                <div class=\"form-group border-right\">\n                    <label for=\"createdOnForLoanAmountPaidToLender\" i18n>Updated On</label>\n                    <h4 class=\"text-primary\" >\n                        {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender |\n                        date:'dd-MMM-YYYY'}}\n                    </h4>\n                </div>\n            </div>\n            <div class=\"col-xl-4 col-12\">\n                <p class=\"mb-2\" for=\"transactionDescriptionForLoanAmountPaidToLender\" i18n>\n                    Note:</p>\n                <div class=\"text-black-50\" >\n                    {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLender}}\n                </div>\n            </div>\n            <div class=\"col-xl-12 col-12\">\n                <div class=\"row\"\n                    *ngIf=\"LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\">\n                    <div class=\"col-xl-4 col-12\">\n                        <div class=\"form-group border-right\">\n                            <label for=\"transactionOnForLoanAmountPaidToLenderConfirmByLender\" i18n>Confirmation:\n                                Transaction Date</label>\n                            <h4 class=\"text-primary\" >\n                                {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender\n                                |\n                                date:'dd-MMM-YYYY'}}\n                            </h4>\n                        </div>\n                    </div>\n                    <div class=\"col-xl-4 col-12\">\n                        <div class=\"form-group border-right\">\n                            <label for=\"createdOnForLoanAmountPaidToLenderConfirmByLender\" i18n>Confirmation:\n                                Updated On</label>\n                            <h4 class=\"text-primary\" >\n                                {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\n                                |\n                                date:'dd-MMM-YYYY'}}\n                            </h4>\n                        </div>\n                    </div>\n                    <div class=\"col-xl-4 col-12\">\n                        <p class=\"mb-2\" for=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\" i18n>\n                            Confirmation: Note:</p>\n                        <div class=\"text-black-50\" >\n                            {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLenderConfirmByLender}}\n                        </div>\n                    </div>\n\n                </div>\n            </div>\n            <div class=\"col-xl-12 col-12\">\n                <div class=\"row\"\n                    *ngIf=\"!LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\">\n                    <div class=\"col-xl-6 col-12\">\n                        <div class=\"form-group\">\n\n                            <label for=\"transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised\" i18n>\n                                Transaction Date\n                            </label>\n                            <input type=\"date\"\n                                [(ngModel)]=\"transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised\"\n                                class=\"form-control\" />\n\n                        </div>\n                    </div>\n                    <div class=\"col-xl-6 col-12\">\n                        <div class=\"form-group\">\n                            <label for=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\"\n                                i18n>Note.</label>\n                            <input text=\"text\" name=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\"\n                                class=\"form-control\" placeholder=\"Description\"\n                                [(ngModel)]=\"LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\">\n                        </div>\n                    </div>\n                    <br>\n                    <hr>\n                    <div class=\"col-xl-12 col-12\">\n                        <button class=\"btn btn-primary btn-sm float-right\"\n                            (click)=\"paymentDoneToLenderConfirmByLender(LoanApplyObj)\" i18n>\n                            Update\n                        </button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</mat-dialog-content>";
+      __webpack_exports__["default"] = "<h2 mat-dialog-title class=\"text-primary\">\n    <div class=\"row\">\n        <div class=\"col-xl-11 col-10\">\n            <h4 class=\"mb-3 text-black-50\" i18n>\n            </h4>\n        </div>\n        <div class=\"col-xl-1 col-2\">\n            <i class=\"icon-close float-right\" mat-button (click)=\"closeDialog(null, null)\"></i>\n        </div>\n    </div>\n</h2>\n<mat-dialog-content class=\"mat-typography\">\n    <div class=\"card-body\">\n        <div class=\"row\">\n            <div class=\"col-xl-6 col-12\">\n                <h3 class=\"text-primary\" i18n>New Proposed Amount: <span class=\"badge badge-primary\">\n                        {{LoanApplyObj.proposedLoanAmount || 'NA'}}</span>\n                </h3>\n            </div>\n            <div class=\"col-xl-6 col-12\">\n                <h5 *ngIf=\"LoanApplyObj.loanInsuranceRequired\" class=\"card-title float-right\" i18n>Applied for Insurance\n                    with Amount:\n                    <span class=\"badge badge-primary\">\n                        {{LoanApplyObj.loanInsuranceAmount || 'NA'}}</span>\n                </h5>\n            </div>\n        </div>\n        <div class=\"row\" *ngIf=\"LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\">\n            <div class=\"col-xl-12 col-12\">\n                <div class=\"row\"\n                    *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted\">\n                    <div class=\"col-xl-12 col-12\">\n                        <div class=\"card shadow mb-4\">\n                            <div class=\"card-header py-3\">\n                                <div class=\"form-group\">\n                                    <div class=\"form-check-inline\">\n                                        <div class=\"custom-control custom-checkbox\">\n                                            <input [(ngModel)]=\"LoanApplyObjCurrent.isLoanAmountPaidByLender\"\n                                                name=\"isLoanAmountPaidByLender\" id=\"isLoanAmountPaidByLender\"\n                                                type=\"checkbox\" class=\"custom-control-input\" [value]=\"true\"\n                                                [checked]=\"LoanApplyObjCurrent.isLoanAmountPaidByLender\">\n                                            <label for=\"isLoanAmountPaidByLender\" class=\"custom-control-label\" i18n>\n                                                Is Loan Amount Transfered? </label>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n                            <div class=\"card-body\">\n                                <div class=\"row\">\n                                    <div class=\"col-xl-4 col-12\">\n                                        <div class=\"form-group\">\n                                            <label for=\"transactionIdForLoanAmountPaidByLender\"\n                                                i18n>TransactionId/Payment Ref.\n                                                ID</label>\n                                            <input type=\"text\" class=\"form-control\"\n                                                placeholder=\"TransactionId/Payment Ref. ID\"\n                                                [(ngModel)]=\"LoanApplyObjCurrent.transactionIdForLoanAmountPaidByLender\">\n                                        </div>\n                                    </div>\n\n                                    <div class=\"col-xl-4 col-12\">\n                                        <div class=\"form-group\">\n\n                                            <label for=\"transactionOnForLoanAmountPaidByLenderCustomised\" i18n>\n                                                Transaction Date\n                                            </label>\n                                            <input type=\"date\"\n                                                [(ngModel)]=\"transactionOnForLoanAmountPaidByLenderCustomised\"\n                                                class=\"form-control\" />\n\n                                        </div>\n                                    </div>\n                                    <div class=\"col-xl-4 col-12\">\n                                        <div class=\"form-group\">\n                                            <label for=\"usr\" i18n>Transaction Description</label>\n                                            <input type=\"text\" class=\"form-control\" placeholder=\"Description\"\n                                                [(ngModel)]=\"LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLender\">\n                                        </div>\n                                    </div>\n                                    <br>\n                                    <hr>\n                                    <div class=\"col-xl-12 col-12\">\n                                        <button class=\"btn btn-primary btn-sm float-right\"\n                                            (click)=\"paymentDoneByLender(LoanApplyObj)\" i18n>\n                                            Update\n                                        </button>\n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n\n                </div>\n            </div>\n            <div class=\"col-xl-12 col-12\" *ngIf=\"LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                <div class=\"card bg-success text-white shadow mb-4\">\n                    <div class=\"card-body dashobard-card p-2\">\n                        <div class=\"text-xs font-weight-bold  mb-2\">\n                            Borrower's Payment confirmation</div>\n                        <hr>\n                        <div class=\"row\">\n\n                            <div class=\"col-xl-4 col-12\">\n                                <div class=\"form-group\">\n                                    <label for=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrower\"\n                                        i18n>Transaction\n                                        Date</label>\n                                    <h4 i18n>\n                                        {{LoanApplyObj.transactionOnForLoanAmountPaidByLenderConfirmByBorrower |\n                                        date:'dd-MMM-YYYY'}}\n                                    </h4>\n                                </div>\n                            </div>\n                            <div class=\"col-xl-4 col-12\">\n                                <div class=\"form-group\">\n                                    <label for=\"createdOnForLoanAmountPaidByLender\" i18n>Updated On</label>\n                                    <h4 >\n                                        {{LoanApplyObj.createdOnForLoanAmountPaidByLenderConfirmByBorrower |\n                                        date:'dd-MMM-YYYY'}}\n                                    </h4>\n                                </div>\n                            </div>\n                            <div class=\"col-xl-4 col-12\">\n                                <p class=\"mb-2 text-white\"\n                                    for=\"transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\" i18n>\n                                    Description:</p>\n                                <div class=\"text-white\" >\n                                    {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower}}\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n        </div>\n        <div class=\"row\" *ngIf=\"LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id\">\n            <div class=\"col-xl-12 col-12\" *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender\">\n                <div class=\"card bg-gradient-primary mb-3 text-white shadow\">\n                    <div class=\"card-body dashobard-card p-2\">\n                        <div class=\"text-xs font-weight-bold mb-3\">\n                            Lender Payment Confirmation</div>\n                        <hr>\n                        <div class=\"row\">\n                            <div class=\"col-xl-4 col-12\">\n                                <div class=\"form-group\">\n                                    <label for=\"transactionIdForLoanAmountPaidByLender\" i18n>Transaction ID</label>\n                                    <h4 >\n                                        {{LoanApplyObj.transactionIdForLoanAmountPaidByLender}}\n                                    </h4>\n                                </div>\n                            </div>\n                            <div class=\"col-xl-4 col-12\">\n                                <div class=\"form-group\">\n                                    <label for=\"transactionOnForLoanAmountPaidByLender\" i18n>Transaction\n                                        Date</label>\n                                    <h4 >\n                                        {{LoanApplyObj.transactionOnForLoanAmountPaidByLender | date:'dd-MMM-YYYY'}}\n                                    </h4>\n                                </div>\n                            </div>\n                            <div class=\"col-xl-4 col-12\">\n                                <div class=\"form-group\">\n                                    <label for=\"createdOnForLoanAmountPaidByLender\" i18n>Updated On</label>\n                                    <h4 i18n>\n                                        {{LoanApplyObj.createdOnForLoanAmountPaidByLender | date:'dd-MMM-YYYY'}}\n                                    </h4>\n                                </div>\n                            </div>\n                            <div class=\"col-xl-12 col-12\">\n                                <p class=\"mb-2 text-white\" for=\"transactionDescriptionForLoanAmountPaidByLender\" i18n>\n                                    Description:</p>\n                                <div class=\"text-white\" >\n                                    {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLender}}\n                                </div>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n\n            </div>\n            <div class=\"col-xl-12\"\n                *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower && LoanApplyObj.isLoanAmountPaidByLender && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted\">\n                <div class=\"card shadow mb-4\">\n                    <div class=\"card-header\">\n\n                        <div class=\"form-group mb-0\">\n                            <div class=\"form-check-inline\">\n                                <div class=\"custom-control custom-checkbox\">\n                                    <input [(ngModel)]=\"LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower\"\n                                        name=\"isLoanAmountPaidByLenderConfirmByBorrower\"\n                                        id=\"isLoanAmountPaidByLenderConfirmByBorrower\" type=\"checkbox\"\n                                        class=\"custom-control-input\" [value]=\"true\"\n                                        [checked]=\"LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                    <label for=\"isLoanAmountPaidByLenderConfirmByBorrower\" class=\"custom-control-label\"\n                                        i18n>\n                                        Is Loan Amount Received </label>\n                                </div>\n                            </div>\n                        </div>\n\n                    </div>\n                    <div class=\"card-body\">\n                        <div class=\"row\">\n\n                            <div class=\"col-xl-4 col-12\">\n                                <div class=\"form-group\">\n\n                                    <label for=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrowerCustomised\" i18n>\n                                        Payment Credit Date\n                                    </label>\n                                    <input type=\"date\"\n                                        [(ngModel)]=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrowerCustomised\"\n                                        class=\"form-control\" />\n\n                                </div>\n                            </div>\n                            <div class=\"col-xl-6 col-12\">\n                                <div class=\"form-group\">\n                                    <label for=\"usr\" i18n>Transaction Description</label>\n                                    <input type=\"transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\"\n                                        class=\"form-control\" placeholder=\"Description\"\n                                        [(ngModel)]=\"LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\">\n                                </div>\n                            </div>\n\n                            <div class=\"col-xl-2 col-12\">\n                                <button class=\"btn btn-primary btn-sm float-right mt-4\"\n                                    (click)=\"paymentDoneByLenderConfirmByBorrower(LoanApplyObj)\" i18n>\n                                    Update\n                                </button>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n        <div class=\"row\"\n            *ngIf=\"!LoanApplyObj.isLoanAmountPaidByBorrower && LoanApplyObjCurrent4Installment.installmentKey && !LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender && ((returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted  && LoanApplyObj.borrowerId._id==authenticationService.currentUserValue._id) || (returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Unpaid && authenticationService.currentUserValue.role == Role.Admin))\">\n            <div class=\"col-xl-4 col-12\">\n                <div class=\"form-group border-right\">\n                    <label for=\"installmentKey\" i18n>Installment For</label>\n                    <h4 class=\"text-primary\" >\n                        {{LoanApplyObjCurrent4Installment.installmentKey}}\n                    </h4>\n                </div>\n            </div>\n            <div class=\"col-xl-4 col-12\">\n                <div class=\"form-group\">\n                    <label for=\"transactionIdForLoanAmountPaidToLender\" i18n>TransactionId/Payment\n                        Ref. ID</label>\n                    <input type=\"text\" class=\"form-control\" placeholder=\"TransactionId/Payment Ref. ID\"\n                        [(ngModel)]=\"LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender\">\n                </div>\n            </div>\n            <div class=\"col-xl-4 col-12\">\n                <div class=\"form-group\">\n\n                    <label for=\"transactionOnForLoanAmountPaidToLenderCustomised\" i18n>\n                        Transaction Date\n                    </label>\n                    <input type=\"date\" [(ngModel)]=\"transactionOnForLoanAmountPaidToLenderCustomised\"\n                        class=\"form-control\" />\n\n                </div>\n            </div>\n            <div class=\"col-xl-12 col-12\">\n                <div class=\"form-group\">\n                    <label for=\"transactionDescriptionForLoanAmountPaidToLender\" i18n>Note.</label>\n                    <input type=\"transactionDescriptionForLoanAmountPaidToLender\" class=\"form-control\"\n                        placeholder=\"Description\"\n                        [(ngModel)]=\"LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLender\">\n                </div>\n            </div>\n            <br>\n            <hr>\n            <div class=\"col-xl-12 col-12\">\n                <button class=\"btn btn-primary btn-sm float-right\" (click)=\"paymentDoneToLender(LoanApplyObj)\" i18n>\n                    Update\n                </button>\n            </div>\n        </div>\n        <div class=\"row\"\n            *ngIf=\"LoanApplyObjCurrent4Installment.installmentKey && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted  && LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\">\n\n            <div class=\"col-xl-4 col-12\">\n                <div class=\"form-group border-right\">\n                    <label for=\"installmentKey\" i18n>Installment For</label>\n                    <h4 class=\"text-primary\" >\n                        {{LoanApplyObjCurrent4Installment.installmentKey}}\n                        <label *ngIf=\"LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin\"\n                            class=\"badge badge-warning text-capitalize text-cap float-right\" i18n>\n                            Paid By Admin\n                        </label>\n                    </h4>\n                </div>\n            </div>\n            <div class=\"col-xl-4 col-12\">\n                <div class=\"form-group border-right\">\n                    <label for=\"transactionIdForLoanAmountPaidToLender\" i18n>TransactionId/Payment Ref.\n                        ID</label>\n                    <h4 class=\"text-primary\" >\n                        {{LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender}}\n                    </h4>\n                </div>\n            </div>\n            <div class=\"col-xl-4 col-12\">\n                <div class=\"form-group border-right\">\n                    <label for=\"transactionOnForLoanAmountPaidToLender\" i18n>Transaction\n                        Date</label>\n                    <h4 class=\"text-primary\" >\n                        {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender |\n                        date:'dd-MMM-YYYY'}}\n                    </h4>\n                </div>\n            </div>\n            <div class=\"col-xl-4 col-12\">\n                <div class=\"form-group border-right\">\n                    <label for=\"createdOnForLoanAmountPaidToLender\" i18n>Updated On</label>\n                    <h4 class=\"text-primary\" >\n                        {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender |\n                        date:'dd-MMM-YYYY'}}\n                    </h4>\n                </div>\n            </div>\n            <div class=\"col-xl-4 col-12\">\n                <p class=\"mb-2\" for=\"transactionDescriptionForLoanAmountPaidToLender\" i18n>\n                    Note:</p>\n                <div class=\"text-black-50\" >\n                    {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLender}}\n                </div>\n            </div>\n            <div class=\"col-xl-12 col-12\">\n                <div class=\"row\"\n                    *ngIf=\"LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\">\n                    <div class=\"col-xl-4 col-12\">\n                        <div class=\"form-group border-right\">\n                            <label for=\"transactionOnForLoanAmountPaidToLenderConfirmByLender\" i18n>Confirmation:\n                                Transaction Date</label>\n                            <h4 class=\"text-primary\" >\n                                {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender\n                                |\n                                date:'dd-MMM-YYYY'}}\n                            </h4>\n                        </div>\n                    </div>\n                    <div class=\"col-xl-4 col-12\">\n                        <div class=\"form-group border-right\">\n                            <label for=\"createdOnForLoanAmountPaidToLenderConfirmByLender\" i18n>Confirmation:\n                                Updated On</label>\n                            <h4 class=\"text-primary\" >\n                                {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\n                                |\n                                date:'dd-MMM-YYYY'}}\n                            </h4>\n                        </div>\n                    </div>\n                    <div class=\"col-xl-4 col-12\">\n                        <p class=\"mb-2\" for=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\" i18n>\n                            Confirmation: Note:</p>\n                        <div class=\"text-black-50\" >\n                            {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLenderConfirmByLender}}\n                        </div>\n                    </div>\n\n                </div>\n            </div>\n            <div class=\"col-xl-12 col-12\">\n                <div class=\"row\"\n                    *ngIf=\"!LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\">\n                    <div class=\"col-xl-6 col-12\">\n                        <div class=\"form-group\">\n\n                            <label for=\"transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised\" i18n>\n                                Transaction Date\n                            </label>\n                            <input type=\"date\"\n                                [(ngModel)]=\"transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised\"\n                                class=\"form-control\" />\n\n                        </div>\n                    </div>\n                    <div class=\"col-xl-6 col-12\">\n                        <div class=\"form-group\">\n                            <label for=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\"\n                                i18n>Note.</label>\n                            <input text=\"text\" name=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\"\n                                class=\"form-control\" placeholder=\"Description\"\n                                [(ngModel)]=\"LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\">\n                        </div>\n                    </div>\n                    <br>\n                    <hr>\n                    <div class=\"col-xl-12 col-12\">\n                        <button class=\"btn btn-primary btn-sm float-right\"\n                            (click)=\"paymentDoneToLenderConfirmByLender(LoanApplyObj)\" i18n>\n                            Update\n                        </button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</mat-dialog-content>";
       /***/
     },
 
@@ -17888,7 +18073,7 @@
 
       var RatingsListComponent = /*#__PURE__*/function () {
         function RatingsListComponent(socketService, alertService, utilityService, authenticationService, appRouterService, elementRef, dialogRef, data, dialog) {
-          var _this73 = this;
+          var _this74 = this;
 
           _classCallCheck2(this, RatingsListComponent);
 
@@ -17934,20 +18119,20 @@
           };
           this.socketService.getByLoanIdRatingReviewe(_data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this73.PaymentTransactionDetailsArray = data["data"];
+              _this74.PaymentTransactionDetailsArray = data["data"];
 
-              _this73.populateUsersDataInTable(); //this.rerender();
+              _this74.populateUsersDataInTable(); //this.rerender();
 
 
-              _this73.loading = false;
+              _this74.loading = false;
             } else {
-              _this73.alertService.error(data['message']);
+              _this74.alertService.error(data['message']);
 
-              _this73.loading = false;
+              _this74.loading = false;
             }
           }, function (error) {
             var errorMsg2show = "";
-            _this73.PaymentTransactionDetailsArray = [];
+            _this74.PaymentTransactionDetailsArray = [];
 
             try {
               if (error && error.error && error.error.message) {
@@ -17959,19 +18144,19 @@
               }
             } catch (ex) {}
 
-            _this73.alertService.error(errorMsg2show);
+            _this74.alertService.error(errorMsg2show);
 
-            _this73.loading = false;
+            _this74.loading = false;
           });
           this.socketService.getByQuerySummaryRatingReviewe(_data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this73.myRatingsSummaryObj = data["data"]; //this.rerender();
+              _this74.myRatingsSummaryObj = data["data"]; //this.rerender();
 
-              _this73.loading = false;
+              _this74.loading = false;
             } else {
-              _this73.alertService.error(data['message']);
+              _this74.alertService.error(data['message']);
 
-              _this73.loading = false;
+              _this74.loading = false;
             }
           }, function (error) {
             var errorMsg2show = "";
@@ -17986,9 +18171,9 @@
               }
             } catch (ex) {}
 
-            _this73.alertService.error(errorMsg2show);
+            _this74.alertService.error(errorMsg2show);
 
-            _this73.loading = false;
+            _this74.loading = false;
           });
         } //#region datatable actions
 
@@ -18011,14 +18196,14 @@
         }, {
           key: "populateUsersDataInTable",
           value: function populateUsersDataInTable() {
-            var _this74 = this;
+            var _this75 = this;
 
             this.destroyTable();
             this.dtOptions = {
               pagingType: 'full_numbers',
               pageLength: 10,
               drawCallback: function drawCallback() {
-                _this74.elementRef.nativeElement.querySelector('.paginate_button.next').addEventListener('click', _this74.onClick.bind(_this74));
+                _this75.elementRef.nativeElement.querySelector('.paginate_button.next').addEventListener('click', _this75.onClick.bind(_this75));
               }
             };
             this.dtTrigger.next();
@@ -18043,14 +18228,14 @@
         }, {
           key: "rerender",
           value: function rerender() {
-            var _this75 = this;
+            var _this76 = this;
 
             if (this.datatableElement && this.datatableElement.dtInstance) {
               this.datatableElement.dtInstance.then(function (dtInstance) {
                 // Destroy the table first
                 dtInstance.destroy(); // Call the dtTrigger to rerender again
 
-                _this75.dtTrigger.next();
+                _this76.dtTrigger.next();
               });
             }
           }
@@ -18558,7 +18743,7 @@
           key: "readFile",
           value: function readFile() {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_1__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-              var _this76 = this;
+              var _this77 = this;
 
               return regeneratorRuntime.wrap(function _callee$(_context) {
                 while (1) {
@@ -18591,15 +18776,15 @@
                         * @return {?}
                         */
                         function (e) {
-                          console.error("FileReader failed on file ".concat(_this76.file.name, "."));
+                          console.error("FileReader failed on file ".concat(_this77.file.name, "."));
                           reject(e);
                         };
 
-                        if (!_this76.file) {
+                        if (!_this77.file) {
                           return reject('No file to read. Please provide a file using the [file] Input property.');
                         }
 
-                        reader.readAsDataURL(_this76.file);
+                        reader.readAsDataURL(_this77.file);
                       }));
 
                     case 1:
@@ -19460,18 +19645,18 @@
          * @param {?} sanitizer
          */
         function NgxDropzoneImagePreviewComponent(sanitizer) {
-          var _this77;
+          var _this78;
 
           _classCallCheck2(this, NgxDropzoneImagePreviewComponent);
 
-          _this77 = _super5.call(this, sanitizer);
+          _this78 = _super5.call(this, sanitizer);
           /**
            * The image data source.
            */
 
-          _this77.defualtImgLoading = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBzdHlsZT0ibWFyZ2luOiBhdXRvOyBiYWNrZ3JvdW5kOiByZ2IoMjQxLCAyNDIsIDI0Mykgbm9uZSByZXBlYXQgc2Nyb2xsIDAlIDAlOyBkaXNwbGF5OiBibG9jazsgc2hhcGUtcmVuZGVyaW5nOiBhdXRvOyIgd2lkdGg9IjIyNHB4IiBoZWlnaHQ9IjIyNHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPgo8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxNCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2U9IiM4NWEyYjYiIHN0cm9rZS1kYXNoYXJyYXk9IjIxLjk5MTE0ODU3NTEyODU1MiAyMS45OTExNDg1NzUxMjg1NTIiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+CiAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIGR1cj0iMS4xNjI3OTA2OTc2NzQ0MTg0cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIGtleVRpbWVzPSIwOzEiIHZhbHVlcz0iMCA1MCA1MDszNjAgNTAgNTAiPjwvYW5pbWF0ZVRyYW5zZm9ybT4KPC9jaXJjbGU+CjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjEwIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZT0iI2JiY2VkZCIgc3Ryb2tlLWRhc2hhcnJheT0iMTUuNzA3OTYzMjY3OTQ4OTY2IDE1LjcwNzk2MzI2Nzk0ODk2NiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjE1LjcwNzk2MzI2Nzk0ODk2NiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj4KICA8YW5pbWF0ZVRyYW5zZm9ybSBhdHRyaWJ1dGVOYW1lPSJ0cmFuc2Zvcm0iIHR5cGU9InJvdGF0ZSIgZHVyPSIxLjE2Mjc5MDY5NzY3NDQxODRzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIga2V5VGltZXM9IjA7MSIgdmFsdWVzPSIwIDUwIDUwOy0zNjAgNTAgNTAiPjwvYW5pbWF0ZVRyYW5zZm9ybT4KPC9jaXJjbGU+CjwhLS0gW2xkaW9dIGdlbmVyYXRlZCBieSBodHRwczovL2xvYWRpbmcuaW8vIC0tPjwvc3ZnPg==';
-          _this77.imageSrc = _this77.sanitizer.bypassSecurityTrustUrl(_this77.defualtImgLoading);
-          return _this77;
+          _this78.defualtImgLoading = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiBzdHlsZT0ibWFyZ2luOiBhdXRvOyBiYWNrZ3JvdW5kOiByZ2IoMjQxLCAyNDIsIDI0Mykgbm9uZSByZXBlYXQgc2Nyb2xsIDAlIDAlOyBkaXNwbGF5OiBibG9jazsgc2hhcGUtcmVuZGVyaW5nOiBhdXRvOyIgd2lkdGg9IjIyNHB4IiBoZWlnaHQ9IjIyNHB4IiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgcHJlc2VydmVBc3BlY3RSYXRpbz0ieE1pZFlNaWQiPgo8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxNCIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2U9IiM4NWEyYjYiIHN0cm9rZS1kYXNoYXJyYXk9IjIxLjk5MTE0ODU3NTEyODU1MiAyMS45OTExNDg1NzUxMjg1NTIiIGZpbGw9Im5vbmUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+CiAgPGFuaW1hdGVUcmFuc2Zvcm0gYXR0cmlidXRlTmFtZT0idHJhbnNmb3JtIiB0eXBlPSJyb3RhdGUiIGR1cj0iMS4xNjI3OTA2OTc2NzQ0MTg0cyIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIGtleVRpbWVzPSIwOzEiIHZhbHVlcz0iMCA1MCA1MDszNjAgNTAgNTAiPjwvYW5pbWF0ZVRyYW5zZm9ybT4KPC9jaXJjbGU+CjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjEwIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZT0iI2JiY2VkZCIgc3Ryb2tlLWRhc2hhcnJheT0iMTUuNzA3OTYzMjY3OTQ4OTY2IDE1LjcwNzk2MzI2Nzk0ODk2NiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjE1LjcwNzk2MzI2Nzk0ODk2NiIgZmlsbD0ibm9uZSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj4KICA8YW5pbWF0ZVRyYW5zZm9ybSBhdHRyaWJ1dGVOYW1lPSJ0cmFuc2Zvcm0iIHR5cGU9InJvdGF0ZSIgZHVyPSIxLjE2Mjc5MDY5NzY3NDQxODRzIiByZXBlYXRDb3VudD0iaW5kZWZpbml0ZSIga2V5VGltZXM9IjA7MSIgdmFsdWVzPSIwIDUwIDUwOy0zNjAgNTAgNTAiPjwvYW5pbWF0ZVRyYW5zZm9ybT4KPC9jaXJjbGU+CjwhLS0gW2xkaW9dIGdlbmVyYXRlZCBieSBodHRwczovL2xvYWRpbmcuaW8vIC0tPjwvc3ZnPg==';
+          _this78.imageSrc = _this78.sanitizer.bypassSecurityTrustUrl(_this78.defualtImgLoading);
+          return _this78;
         }
         /**
          * @return {?}
@@ -19481,7 +19666,7 @@
         _createClass2(NgxDropzoneImagePreviewComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this78 = this;
+            var _this79 = this;
 
             this.readFile().then(
             /**
@@ -19494,7 +19679,7 @@
               * @return {?}
               */
               function () {
-                return _this78.imageSrc = img;
+                return _this79.imageSrc = img;
               });
             })["catch"](
             /**
@@ -20072,7 +20257,7 @@
             this.LoanApplyObj = {};
             this.LoanApplyObj.loanId = this.LoanObj._id;
             this.LoanApplyObj.loanAmount = this.LoanObj.loanAmount;
-            this.LoanApplyObj.borrowerId = data.borrowerId;
+            this.LoanApplyObj.borrowerId = data.borrowerId._id;
             this.LoanApplyObj.sessionExecutionType = _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionExecutionType"].FixedPrice;
             this.LoanApplyObj.mileStoneProposal = [];
             this.LoanApplyObj.mileStoneProposal.push({
@@ -20183,18 +20368,76 @@
           this.transactionOnForLoanAmountPaidToLenderCustomised = null;
           this.alreadyVisibleForPayment = false;
           this.Role = _models_role__WEBPACK_IMPORTED_MODULE_10__["Role"];
+          this.SessionStatusTypeFilter = [];
+          this.checkCreatedByUserId = null;
+          this.checkCreatedByT = true;
           this.updatedSessionObj = null;
           this.LoanObj = data.sessionObj;
           this.LoanApplyObjCurrent = {};
           this.LoanApplyObjCurrentCheckBoxes = {};
           this.LoanApplyObjCurrentCheckBoxes.visibleKeys = {};
           this.LoanApplyObjCurrent4Installment = {};
+          this.setFilteresOfMySessionDependsOnTab(data.selectedTab);
         }
 
         _createClass2(ModalAppliedSessionDisplay, [{
+          key: "setFilteresOfMySessionDependsOnTab",
+          value: function setFilteresOfMySessionDependsOnTab(selectedTab) {
+            //this.selectedTab = selectedTab;
+            switch (selectedTab) {
+              case 'received':
+                this.SessionStatusTypeFilter = [_models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Pending, _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].AwaitingForApproval];
+                this.checkCreatedByUserId = this.authenticationService.currentUserValue._id;
+                this.checkCreatedByT = true;
+                break;
+
+              case 'sent':
+                this.SessionStatusTypeFilter = [_models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].AwaitingForApproval];
+                this.checkCreatedByUserId = this.authenticationService.currentUserValue._id;
+                this.checkCreatedByT = false;
+                break;
+
+              case 'canceled':
+                this.SessionStatusTypeFilter = [_models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Canceled, _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Rejected, _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].RejectedOngoing, _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Suspended, _models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].RejectedOngoingWithRefund];
+                this.checkCreatedByUserId = null;
+                this.checkCreatedByT = false;
+                break;
+
+              case 'active':
+                this.SessionStatusTypeFilter = [_models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Accepted];
+                this.checkCreatedByUserId = null;
+                this.checkCreatedByT = false;
+                break;
+
+              case 'paid':
+                this.SessionStatusTypeFilter = [_models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Completed];
+                this.checkCreatedByUserId = null;
+                this.checkCreatedByT = false;
+                break;
+
+              case 'unpaid':
+                this.SessionStatusTypeFilter = [_models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Unpaid];
+                this.checkCreatedByUserId = null;
+                this.checkCreatedByT = false;
+                break;
+
+              case 'inkasso':
+                this.SessionStatusTypeFilter = [_models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"].Inkasso];
+                this.checkCreatedByUserId = null;
+                this.checkCreatedByT = false;
+                break;
+
+              default:
+                this.SessionStatusTypeFilter = this.utilityService._.values(_models_role__WEBPACK_IMPORTED_MODULE_10__["SessionStatus"]);
+                this.checkCreatedByUserId = null;
+                this.checkCreatedByT = false;
+                break;
+            }
+          }
+        }, {
           key: "paymentDoneByLenderConfirmByBorrower",
           value: function paymentDoneByLenderConfirmByBorrower(LoanApplyObj) {
-            var _this79 = this;
+            var _this80 = this;
 
             this.LoanApplyObjCurrent._id = LoanApplyObj._id;
 
@@ -20225,8 +20468,8 @@
             this.LoanApplyObjCurrent.createdOnForLoanAmountPaidByLenderConfirmByBorrower = this.utilityService._.now();
             this.socketService.sendEventForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, this.LoanApplyObjCurrent).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this79.updatedSessionObj = details["data"];
-                _this79.LoanObj = _this79.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                _this80.updatedSessionObj = details["data"];
+                _this80.LoanObj = _this80.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
               }
             });
             this.LoanApplyObjCurrent = {};
@@ -20234,7 +20477,7 @@
         }, {
           key: "paymentDoneToLender",
           value: function paymentDoneToLender(LoanApplyObj) {
-            var _this80 = this;
+            var _this81 = this;
 
             var _past_days_allowed4payment = 15;
             var _future_days_allowed4payment = 7; //this.LoanApplyObjCurrent4Installment.loanTenureInMonths = this.LoanObj.loanTenureInMonths;
@@ -20309,8 +20552,8 @@
 
             this.socketService.sendEventForLoanAmountPaidToLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, _installmentKey, _loanTenureInMonths, this.LoanApplyObjCurrent4Installment).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this80.updatedSessionObj = details["data"];
-                _this80.LoanObj = _this80.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                _this81.updatedSessionObj = details["data"];
+                _this81.LoanObj = _this81.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
               }
             });
             this.LoanApplyObjCurrent4Installment = {};
@@ -20526,17 +20769,19 @@
           value: function addNewRatings(_sessionApply) {
             var _loanId = _sessionApply.loanId;
             var _createdBy = this.authenticationService.currentUserValue._id;
-            var _userId = _sessionApply.borrowerId;
+
+            var _userId = _sessionApply.borrowerId._id || _sessionApply.borrowerId;
+
             var _parentRouting = '';
 
             switch (this.authenticationService.currentUserValue.role) {
               case _models_role__WEBPACK_IMPORTED_MODULE_10__["Role"].Borrower:
-                _userId = _sessionApply.lenderId;
+                _userId = _sessionApply.lenderId._id || _sessionApply.lenderId;
                 _parentRouting = 'borrower';
                 break;
 
               case _models_role__WEBPACK_IMPORTED_MODULE_10__["Role"].Lender:
-                _userId = _sessionApply.borrowerId;
+                _userId = _sessionApply.borrowerId._id || _sessionApply.borrowerId;
                 _parentRouting = 'lender';
                 break;
 
@@ -20559,20 +20804,20 @@
         }, {
           key: "usersProfile",
           value: function usersProfile(userObj) {
-            var _this81 = this;
+            var _this82 = this;
 
             //#region fetch creator id
             this.userService.getUserById(userObj._id).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
                 //console.log('84', this.authenticationService.currentUserValue);
-                var dialogRef = _this81.dialog.open(_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_15__["PublicProfileComponent"], {
+                var dialogRef = _this82.dialog.open(_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_15__["PublicProfileComponent"], {
                   maxWidth: '100vw',
                   maxHeight: '100vh',
                   height: '100%',
                   width: '100%',
                   hasBackdrop: true,
                   data: {
-                    userObj: _this81.utilityService._.cloneDeep(data['data']),
+                    userObj: _this82.utilityService._.cloneDeep(data['data']),
                     adminViewT: false
                   }
                 });
@@ -20593,14 +20838,14 @@
                 }
               } catch (ex) {}
 
-              _this81.alertService.error(errorMsg2show);
+              _this82.alertService.error(errorMsg2show);
             }); //#endregion fetch creator id
           } //#region bypass all conditions
 
         }, {
           key: "LoanMoneyTransferStatusChange",
           value: function LoanMoneyTransferStatusChange(event, LoanObj, LoanApplyObj) {
-            var _this82 = this;
+            var _this83 = this;
 
             var installmentKey = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
             var updateLastInstallmentPaymentStatus = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
@@ -20685,8 +20930,8 @@
 
                 this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, installmentKey, _loanTenureInMonths, LoanApplyObjCurrent4Installment).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8__["first"])()).subscribe(function (details) {
                   if (details && details["success"]) {
-                    _this82.updatedSessionObj = details["data"];
-                    _this82.LoanObj = _this82.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                    _this83.updatedSessionObj = details["data"];
+                    _this83.LoanObj = _this83.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
                     //this.broadcastUpdatedEvent2All(details["data"]);
                   }
                 }); //#endregion direct action here with BYPASS ALL CASES
@@ -20724,8 +20969,8 @@
 
                 this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, installmentKey, _loanTenureInMonths2, LoanApplyObjCurrent4Installment).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8__["first"])()).subscribe(function (details) {
                   if (details && details["success"]) {
-                    _this82.updatedSessionObj = details["data"];
-                    _this82.LoanObj = _this82.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                    _this83.updatedSessionObj = details["data"];
+                    _this83.LoanObj = _this83.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
                     //this.broadcastUpdatedEvent2All(details["data"]);
                   }
                 }); //#endregion direct action here with BYPASS ALL CASES
@@ -20745,7 +20990,7 @@
         }, {
           key: "middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll",
           value: function middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, addTremoveF, addedWithInstallment) {
-            var _this83 = this;
+            var _this84 = this;
 
             var LoanApplyObjCurrent = {
               isLoanAmountPaidByLender: null,
@@ -20786,8 +21031,8 @@
 
             this.socketService.sendEventForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, LoanApplyObjCurrent).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_8__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this83.updatedSessionObj = details["data"];
-                _this83.LoanObj = _this83.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                _this84.updatedSessionObj = details["data"];
+                _this84.LoanObj = _this84.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
                 //this.broadcastUpdatedEvent2All(details["data"]);
               }
             });
@@ -21052,7 +21297,7 @@
           this.sessionApply = {};
           this.sessionApply.loanId = this.LoanObj._id;
           this.sessionApply.loanAmount = this.LoanObj.loanAmount;
-          this.sessionApply.borrowerId = data.borrowerId;
+          this.sessionApply.borrowerId._id = data.borrowerId._id;
           this.sessionApply.sessionExecutionType = _models__WEBPACK_IMPORTED_MODULE_8__["SessionExecutionType"].FixedPrice;
           this.sessionApply.mileStoneProposal = [];
           this.sessionApply.mileStoneProposal.push({
@@ -21136,6 +21381,9 @@
           this.transactionOnForLoanAmountPaidByLenderCustomised = null;
           this.transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised = null;
           this.Role = _models__WEBPACK_IMPORTED_MODULE_8__["Role"];
+          this.SessionStatusTypeFilter = [];
+          this.checkCreatedByUserId = null;
+          this.checkCreatedByT = true;
           this.updatedSessionObj = null;
           this.LoanObj = data.sessionObj;
           this.endUserId = data.endUserId;
@@ -21145,9 +21393,64 @@
           this.LoanApplyObjCurrentCheckBoxes = {};
           this.LoanApplyObjCurrentCheckBoxes.visibleKeys = {};
           this.LoanApplyObjCurrent4Installment = {};
+          this.setFilteresOfMySessionDependsOnTab(data.selectedTab);
         }
 
         _createClass2(ModalAppliedSessionDisplay, [{
+          key: "setFilteresOfMySessionDependsOnTab",
+          value: function setFilteresOfMySessionDependsOnTab(selectedTab) {
+            //this.selectedTab = selectedTab;
+            switch (selectedTab) {
+              case 'received':
+                this.SessionStatusTypeFilter = [_models__WEBPACK_IMPORTED_MODULE_8__["SessionStatus"].Pending, _models__WEBPACK_IMPORTED_MODULE_8__["SessionStatus"].AwaitingForApproval];
+                this.checkCreatedByUserId = this.authenticationService.currentUserValue._id;
+                this.checkCreatedByT = true;
+                break;
+
+              case 'sent':
+                this.SessionStatusTypeFilter = [_models__WEBPACK_IMPORTED_MODULE_8__["SessionStatus"].AwaitingForApproval];
+                this.checkCreatedByUserId = this.authenticationService.currentUserValue._id;
+                this.checkCreatedByT = false;
+                break;
+
+              case 'canceled':
+                this.SessionStatusTypeFilter = [_models__WEBPACK_IMPORTED_MODULE_8__["SessionStatus"].Canceled, _models__WEBPACK_IMPORTED_MODULE_8__["SessionStatus"].Rejected, _models__WEBPACK_IMPORTED_MODULE_8__["SessionStatus"].RejectedOngoing, _models__WEBPACK_IMPORTED_MODULE_8__["SessionStatus"].Suspended, _models__WEBPACK_IMPORTED_MODULE_8__["SessionStatus"].RejectedOngoingWithRefund];
+                this.checkCreatedByUserId = null;
+                this.checkCreatedByT = false;
+                break;
+
+              case 'active':
+                this.SessionStatusTypeFilter = [_models__WEBPACK_IMPORTED_MODULE_8__["SessionStatus"].Accepted];
+                this.checkCreatedByUserId = null;
+                this.checkCreatedByT = false;
+                break;
+
+              case 'paid':
+                this.SessionStatusTypeFilter = [_models__WEBPACK_IMPORTED_MODULE_8__["SessionStatus"].Completed];
+                this.checkCreatedByUserId = null;
+                this.checkCreatedByT = false;
+                break;
+
+              case 'unpaid':
+                this.SessionStatusTypeFilter = [_models__WEBPACK_IMPORTED_MODULE_8__["SessionStatus"].Unpaid];
+                this.checkCreatedByUserId = null;
+                this.checkCreatedByT = false;
+                break;
+
+              case 'inkasso':
+                this.SessionStatusTypeFilter = [_models__WEBPACK_IMPORTED_MODULE_8__["SessionStatus"].Inkasso];
+                this.checkCreatedByUserId = null;
+                this.checkCreatedByT = false;
+                break;
+
+              default:
+                this.SessionStatusTypeFilter = this.utilityService._.values(_models__WEBPACK_IMPORTED_MODULE_8__["SessionStatus"]);
+                this.checkCreatedByUserId = null;
+                this.checkCreatedByT = false;
+                break;
+            }
+          }
+        }, {
           key: "initiateLoanAmountPaidByBorrower",
           value: function initiateLoanAmountPaidByBorrower(event, LoanApplyObj, currentRowDate, _key) {
             if (LoanApplyObj) {
@@ -21196,7 +21499,7 @@
         }, {
           key: "paymentDoneByLender",
           value: function paymentDoneByLender(LoanApplyObj) {
-            var _this84 = this;
+            var _this85 = this;
 
             this.LoanApplyObjCurrent._id = LoanApplyObj._id;
             this.LoanApplyObjCurrent.isLoanAmountPaidByLender = true;
@@ -21223,8 +21526,8 @@
             this.LoanApplyObjCurrent.createdOnForLoanAmountPaidByLender = this.utilityService._.now();
             this.socketService.sendEventForLoanAmountPaidByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, this.LoanApplyObjCurrent).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this84.updatedSessionObj = details["data"];
-                _this84.LoanObj = _this84.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                _this85.updatedSessionObj = details["data"];
+                _this85.LoanObj = _this85.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
               }
             });
             this.LoanApplyObjCurrent = {
@@ -21234,7 +21537,7 @@
         }, {
           key: "paymentDoneToLenderConfirmByLender",
           value: function paymentDoneToLenderConfirmByLender(LoanApplyObj) {
-            var _this85 = this;
+            var _this86 = this;
 
             var _past_days_allowed4payment = 15;
             var _future_days_allowed4payment = 7; //this.LoanApplyObjCurrent4Installment.loanTenureInMonths = this.LoanObj.loanTenureInMonths;
@@ -21298,8 +21601,8 @@
             $("#installment_deatils_modal").modal('hide');
             this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, _installmentKey, _loanTenureInMonths, this.LoanApplyObjCurrent4Installment).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this85.updatedSessionObj = details["data"];
-                _this85.LoanObj = _this85.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                _this86.updatedSessionObj = details["data"];
+                _this86.LoanObj = _this86.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
               }
             });
             this.LoanApplyObjCurrent4Installment = {};
@@ -21393,12 +21696,12 @@
         }, {
           key: "finalSubmissionForRefund",
           value: function finalSubmissionForRefund() {
-            var _this86 = this;
+            var _this87 = this;
 
             this.socketService.sendEventToRejectSessionWithRefundRequestWiUpdateAll(this.refundObj.loanId, this.refundObj.loanApplyId, this.endUserId, _models__WEBPACK_IMPORTED_MODULE_8__["SessionStatus"].RejectedOngoingWithRefund, this.refundObj.transactionId, this.refundObj.amount, this.refundObj.cancellationCharges, this.refundObj.finalAmount2Refund, this.refundObj.captureId, this.refundObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {} else {}
 
-              _this86.dialogRef.close({
+              _this87.dialogRef.close({
                 event: 'close',
                 data: null
               });
@@ -21407,7 +21710,7 @@
         }, {
           key: "closeDialog",
           value: function closeDialog(_sessionApply, _status) {
-            var _this87 = this;
+            var _this88 = this;
 
             if (_sessionApply) {
               this.payment.clearCurrentPayPalConfig();
@@ -21457,10 +21760,10 @@
 
                   this.socketService.sendEventToRejectSessionWithRefundRequest(_loanId, _loanApplyId, _endUserId, _status).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
                     if (details && details["success"]) {
-                      _this87.refundObj = details["data"];
-                      _this87.ready2Refund = true;
+                      _this88.refundObj = details["data"];
+                      _this88.ready2Refund = true;
                     } else {
-                      _this87.alertService.error(details["message"], true);
+                      _this88.alertService.error(details["message"], true);
                     } //this.dialogRef.close({ event: 'close', data: { sessionApply: _sessionApply, status: _status, transactionId: (details.id || details._id) } });
 
                   }); //#endregion handle LoanObj rejected with refund  
@@ -21492,7 +21795,7 @@
         }, {
           key: "initiateForPaymentForLender",
           value: function initiateForPaymentForLender(_loanId, _loanApplyId, _sessionApply, _status, _sessionPrice, _endUserId, _transactiActionType) {
-            var _this88 = this;
+            var _this89 = this;
 
             //#region handle LoanObj payments
             this.userInitiatedForPayment = true;
@@ -21520,7 +21823,7 @@
               }]
             }];
             this.payment.getCurrentPaymentApproved().pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
-              _this88.dialogRef.close({
+              _this89.dialogRef.close({
                 event: 'close',
                 data: {
                   sessionApply: _sessionApply,
@@ -21575,17 +21878,19 @@
           value: function addNewRatings(_sessionApply) {
             var _loanId = _sessionApply.loanId;
             var _createdBy = this.authenticationService.currentUserValue._id;
-            var _userId = _sessionApply.borrowerId;
+
+            var _userId = _sessionApply.borrowerId._id || _sessionApply.borrowerId;
+
             var _parentRouting = '';
 
             switch (this.authenticationService.currentUserValue.role) {
               case _models__WEBPACK_IMPORTED_MODULE_8__["Role"].Borrower:
-                _userId = _sessionApply.lenderId;
+                _userId = _sessionApply.lenderId._id || _sessionApply.lenderId;
                 _parentRouting = 'borrower';
                 break;
 
               case _models__WEBPACK_IMPORTED_MODULE_8__["Role"].Lender:
-                _userId = _sessionApply.borrowerId;
+                _userId = _sessionApply.borrowerId._id || _sessionApply.borrowerId;
                 _parentRouting = 'lender';
                 break;
 
@@ -21642,20 +21947,20 @@
         }, {
           key: "usersProfile",
           value: function usersProfile(userObj) {
-            var _this89 = this;
+            var _this90 = this;
 
             //#region fetch creator id
             this.userService.getUserById(userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
                 //console.log('84', this.authenticationService.currentUserValue);
-                var dialogRef = _this89.dialog.open(_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_18__["PublicProfileComponent"], {
+                var dialogRef = _this90.dialog.open(_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_18__["PublicProfileComponent"], {
                   maxWidth: '100vw',
                   maxHeight: '100vh',
                   height: '100%',
                   width: '100%',
                   hasBackdrop: true,
                   data: {
-                    userObj: _this89.utilityService._.cloneDeep(data['data']),
+                    userObj: _this90.utilityService._.cloneDeep(data['data']),
                     adminViewT: false
                   }
                 });
@@ -21676,14 +21981,14 @@
                 }
               } catch (ex) {}
 
-              _this89.alertService.error(errorMsg2show);
+              _this90.alertService.error(errorMsg2show);
             }); //#endregion fetch creator id
           } //#region bypass all conditions
 
         }, {
           key: "LoanMoneyTransferStatusChange",
           value: function LoanMoneyTransferStatusChange(event, LoanObj, LoanApplyObj) {
-            var _this90 = this;
+            var _this91 = this;
 
             var installmentKey = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
             var updateLastInstallmentPaymentStatus = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
@@ -21768,8 +22073,8 @@
 
                 this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, installmentKey, _loanTenureInMonths, LoanApplyObjCurrent4Installment).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
                   if (details && details["success"]) {
-                    _this90.updatedSessionObj = details["data"];
-                    _this90.LoanObj = _this90.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                    _this91.updatedSessionObj = details["data"];
+                    _this91.LoanObj = _this91.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
                     //this.broadcastUpdatedEvent2All(details["data"]);
                   }
                 }); //#endregion direct action here with BYPASS ALL CASES
@@ -21807,8 +22112,8 @@
 
                 this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, installmentKey, _loanTenureInMonths3, LoanApplyObjCurrent4Installment).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
                   if (details && details["success"]) {
-                    _this90.updatedSessionObj = details["data"];
-                    _this90.LoanObj = _this90.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                    _this91.updatedSessionObj = details["data"];
+                    _this91.LoanObj = _this91.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
                     //this.broadcastUpdatedEvent2All(details["data"]);
                   }
                 }); //#endregion direct action here with BYPASS ALL CASES
@@ -21828,7 +22133,7 @@
         }, {
           key: "middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll",
           value: function middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, addTremoveF, addedWithInstallment) {
-            var _this91 = this;
+            var _this92 = this;
 
             var LoanApplyObjCurrent = {
               isLoanAmountPaidByLender: null,
@@ -21869,8 +22174,8 @@
 
             this.socketService.sendEventForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, LoanApplyObjCurrent).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this91.updatedSessionObj = details["data"];
-                _this91.LoanObj = _this91.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
+                _this92.updatedSessionObj = details["data"];
+                _this92.LoanObj = _this92.updatedSessionObj; //this.dialogRef.close({ event: 'close', data: { updatedSessionObj: details["data"] } });
                 //this.broadcastUpdatedEvent2All(details["data"]);
               }
             });
@@ -22199,7 +22504,7 @@
 
       var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! tslib */
-      "sJZM");
+      "rigp");
       /* harmony import */
 
 
@@ -22521,36 +22826,9 @@
         _createClass2(CropperSettings, [{
           key: "setOptions",
           value: function setOptions(options) {
-            var _this92 = this;
-
-            Object.keys(options).filter(
-            /**
-            * @param {?} k
-            * @return {?}
-            */
-            function (k) {
-              return k in _this92;
-            }).forEach(
-            /**
-            * @param {?} k
-            * @return {?}
-            */
-            function (k) {
-              return _this92[k] = options[k];
-            });
-            this.validateOptions();
-          }
-          /**
-           * @param {?} changes
-           * @return {?}
-           */
-
-        }, {
-          key: "setOptionsFromChanges",
-          value: function setOptionsFromChanges(changes) {
             var _this93 = this;
 
-            Object.keys(changes).filter(
+            Object.keys(options).filter(
             /**
             * @param {?} k
             * @return {?}
@@ -22563,7 +22841,34 @@
             * @return {?}
             */
             function (k) {
-              return _this93[k] = changes[k].currentValue;
+              return _this93[k] = options[k];
+            });
+            this.validateOptions();
+          }
+          /**
+           * @param {?} changes
+           * @return {?}
+           */
+
+        }, {
+          key: "setOptionsFromChanges",
+          value: function setOptionsFromChanges(changes) {
+            var _this94 = this;
+
+            Object.keys(changes).filter(
+            /**
+            * @param {?} k
+            * @return {?}
+            */
+            function (k) {
+              return k in _this94;
+            }).forEach(
+            /**
+            * @param {?} k
+            * @return {?}
+            */
+            function (k) {
+              return _this94[k] = changes[k].currentValue;
             });
             this.validateOptions();
           }
@@ -23570,7 +23875,7 @@
         _createClass2(LoadImageService, [{
           key: "loadImageFile",
           value: function loadImageFile(file, cropperSettings) {
-            var _this94 = this;
+            var _this95 = this;
 
             return new Promise(
             /**
@@ -23588,7 +23893,7 @@
               * @return {?}
               */
               function (event) {
-                _this94.loadImage(event.target.result, file.type, cropperSettings).then(resolve)["catch"](reject);
+                _this95.loadImage(event.target.result, file.type, cropperSettings).then(resolve)["catch"](reject);
               };
 
               fileReader.readAsDataURL(file);
@@ -23631,7 +23936,7 @@
         }, {
           key: "loadImageFromURL",
           value: function loadImageFromURL(url, cropperSettings) {
-            var _this95 = this;
+            var _this96 = this;
 
             return new Promise(
             /**
@@ -23665,7 +23970,7 @@
                 canvas.height = img.height;
                 context.drawImage(img, 0, 0);
 
-                _this95.loadBase64Image(canvas.toDataURL(), cropperSettings).then(resolve);
+                _this96.loadBase64Image(canvas.toDataURL(), cropperSettings).then(resolve);
               };
 
               img.crossOrigin = 'anonymous';
@@ -23681,7 +23986,7 @@
         }, {
           key: "loadBase64Image",
           value: function loadBase64Image(imageBase64, cropperSettings) {
-            var _this96 = this;
+            var _this97 = this;
 
             return new Promise(
             /**
@@ -23712,7 +24017,7 @@
             * @return {?}
             */
             function (res) {
-              return _this96.transformImageBase64(res, cropperSettings);
+              return _this97.transformImageBase64(res, cropperSettings);
             });
           }
           /**
@@ -24137,7 +24442,7 @@
         _createClass2(ImageCropperComponent, [{
           key: "ngOnChanges",
           value: function ngOnChanges(changes) {
-            var _this97 = this;
+            var _this98 = this;
 
             var _a;
 
@@ -24151,14 +24456,14 @@
               * @return {?}
               */
               function (res) {
-                return _this97.setLoadedImage(res);
+                return _this98.setLoadedImage(res);
               })["catch"](
               /**
               * @param {?} err
               * @return {?}
               */
               function (err) {
-                return _this97.loadImageError(err);
+                return _this98.loadImageError(err);
               });
             }
 
@@ -24306,36 +24611,9 @@
         }, {
           key: "loadImageFile",
           value: function loadImageFile(file) {
-            var _this98 = this;
-
-            this.loadImageService.loadImageFile(file, this.settings).then(
-            /**
-            * @param {?} res
-            * @return {?}
-            */
-            function (res) {
-              return _this98.setLoadedImage(res);
-            })["catch"](
-            /**
-            * @param {?} err
-            * @return {?}
-            */
-            function (err) {
-              return _this98.loadImageError(err);
-            });
-          }
-          /**
-           * @private
-           * @param {?} imageBase64
-           * @return {?}
-           */
-
-        }, {
-          key: "loadBase64Image",
-          value: function loadBase64Image(imageBase64) {
             var _this99 = this;
 
-            this.loadImageService.loadBase64Image(imageBase64, this.settings).then(
+            this.loadImageService.loadImageFile(file, this.settings).then(
             /**
             * @param {?} res
             * @return {?}
@@ -24353,16 +24631,16 @@
           }
           /**
            * @private
-           * @param {?} url
+           * @param {?} imageBase64
            * @return {?}
            */
 
         }, {
-          key: "loadImageFromURL",
-          value: function loadImageFromURL(url) {
+          key: "loadBase64Image",
+          value: function loadBase64Image(imageBase64) {
             var _this100 = this;
 
-            this.loadImageService.loadImageFromURL(url, this.settings).then(
+            this.loadImageService.loadBase64Image(imageBase64, this.settings).then(
             /**
             * @param {?} res
             * @return {?}
@@ -24376,6 +24654,33 @@
             */
             function (err) {
               return _this100.loadImageError(err);
+            });
+          }
+          /**
+           * @private
+           * @param {?} url
+           * @return {?}
+           */
+
+        }, {
+          key: "loadImageFromURL",
+          value: function loadImageFromURL(url) {
+            var _this101 = this;
+
+            this.loadImageService.loadImageFromURL(url, this.settings).then(
+            /**
+            * @param {?} res
+            * @return {?}
+            */
+            function (res) {
+              return _this101.setLoadedImage(res);
+            })["catch"](
+            /**
+            * @param {?} err
+            * @return {?}
+            */
+            function (err) {
+              return _this101.loadImageError(err);
             });
           }
           /**
@@ -24410,7 +24715,7 @@
         }, {
           key: "imageLoadedInView",
           value: function imageLoadedInView() {
-            var _this101 = this;
+            var _this102 = this;
 
             if (this.loadedImage != null) {
               this.imageLoaded.emit(this.loadedImage);
@@ -24420,7 +24725,7 @@
               * @return {?}
               */
               function () {
-                return _this101.checkImageMaxSizeRecursively();
+                return _this102.checkImageMaxSizeRecursively();
               });
             }
           }
@@ -24432,7 +24737,7 @@
         }, {
           key: "checkImageMaxSizeRecursively",
           value: function checkImageMaxSizeRecursively() {
-            var _this102 = this;
+            var _this103 = this;
 
             if (this.setImageMaxSizeRetries > 40) {
               this.loadImageFailed.emit();
@@ -24450,7 +24755,7 @@
               * @return {?}
               */
               function () {
-                return _this102.checkImageMaxSizeRecursively();
+                return _this103.checkImageMaxSizeRecursively();
               }, 50);
             }
           }
@@ -25567,7 +25872,7 @@
         }, {
           key: "closeDialog",
           value: function closeDialog(_sessionApply, _status) {
-            var _this103 = this;
+            var _this104 = this;
 
             if (_sessionApply) {
               var _loanId = _sessionApply.loanId;
@@ -25603,10 +25908,10 @@
 
                   this.socketService.sendEventToRejectSessionWithRefundRequest(_loanId, _loanApplyId, _endUserId, _status).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (details) {
                     if (details && details["success"]) {
-                      _this103.refundObj = details["data"];
-                      _this103.ready2Refund = true;
+                      _this104.refundObj = details["data"];
+                      _this104.ready2Refund = true;
                     } else {
-                      _this103.alertService.error(details["message"], true);
+                      _this104.alertService.error(details["message"], true);
                     } //this.dialogRef.close({ event: 'close', data: { sessionApply: _sessionApply, status: _status, transactionId: (details.id || details._id) } });
 
                   }); //#endregion handle LoanObj rejected with refund  
@@ -25638,7 +25943,7 @@
         }, {
           key: "paymentDoneByLender",
           value: function paymentDoneByLender(LoanApplyObj) {
-            var _this104 = this;
+            var _this105 = this;
 
             this.LoanApplyObjCurrent._id = LoanApplyObj._id;
             this.LoanApplyObjCurrent.isLoanAmountPaidByLender = true;
@@ -25655,10 +25960,10 @@
             this.LoanApplyObjCurrent.createdOnForLoanAmountPaidByLender = this.utilityService._.now();
             this.socketService.sendEventForLoanAmountPaidByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, this.LoanApplyObjCurrent).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this104.updatedSessionObj = details["data"];
-                _this104.LoanObj = _this104.updatedSessionObj;
+                _this105.updatedSessionObj = details["data"];
+                _this105.LoanObj = _this105.updatedSessionObj;
 
-                _this104.dialogRef.close({
+                _this105.dialogRef.close({
                   event: 'close',
                   data: {
                     updatedSessionObj: details["data"]
@@ -25694,7 +25999,7 @@
         }, {
           key: "paymentDoneByLenderConfirmByBorrower",
           value: function paymentDoneByLenderConfirmByBorrower(LoanApplyObj) {
-            var _this105 = this;
+            var _this106 = this;
 
             this.LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower = true;
             this.LoanApplyObjCurrent._id = LoanApplyObj._id;
@@ -25711,10 +26016,10 @@
             this.LoanApplyObjCurrent.createdOnForLoanAmountPaidByLenderConfirmByBorrower = this.utilityService._.now();
             this.socketService.sendEventForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, this.LoanApplyObjCurrent).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this105.updatedSessionObj = details["data"];
-                _this105.LoanObj = _this105.updatedSessionObj;
+                _this106.updatedSessionObj = details["data"];
+                _this106.LoanObj = _this106.updatedSessionObj;
 
-                _this105.dialogRef.close({
+                _this106.dialogRef.close({
                   event: 'close',
                   data: {
                     updatedSessionObj: details["data"]
@@ -25788,7 +26093,7 @@
         }, {
           key: "paymentDoneToLender",
           value: function paymentDoneToLender(LoanApplyObj) {
-            var _this106 = this;
+            var _this107 = this;
 
             this.LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin = false;
 
@@ -25823,10 +26128,10 @@
 
             this.socketService.sendEventForLoanAmountPaidToLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, _installmentKey, _loanTenureInMonths, this.LoanApplyObjCurrent4Installment).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this106.updatedSessionObj = details["data"];
-                _this106.LoanObj = _this106.updatedSessionObj;
+                _this107.updatedSessionObj = details["data"];
+                _this107.LoanObj = _this107.updatedSessionObj;
 
-                _this106.dialogRef.close({
+                _this107.dialogRef.close({
                   event: 'close',
                   data: {
                     updatedSessionObj: details["data"]
@@ -25877,7 +26182,7 @@
         }, {
           key: "paymentDoneToLenderConfirmByLender",
           value: function paymentDoneToLenderConfirmByLender(LoanApplyObj) {
-            var _this107 = this;
+            var _this108 = this;
 
             if (this.transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised) {
               this.LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender = Date.parse(this.utilityService.moment(this.transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised, 'YYYY-MM-DD').format('YYYY-MM-DD 00:00:00 A'));
@@ -25909,10 +26214,10 @@
             var _installmentKey = this.LoanApplyObjCurrent4Installment.installmentKey;
             this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, _installmentKey, _loanTenureInMonths, this.LoanApplyObjCurrent4Installment).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (details) {
               if (details && details["success"]) {
-                _this107.updatedSessionObj = details["data"];
-                _this107.LoanObj = _this107.updatedSessionObj;
+                _this108.updatedSessionObj = details["data"];
+                _this108.LoanObj = _this108.updatedSessionObj;
 
-                _this107.dialogRef.close({
+                _this108.dialogRef.close({
                   event: 'close',
                   data: {
                     updatedSessionObj: details["data"]
@@ -26095,7 +26400,7 @@
       var MessagesComponent = /*#__PURE__*/function () {
         //end tts
         function MessagesComponent(socketService, authenticationService, ngZone, contactService, router, alertService, utilityService, dialog, messagesService) {
-          var _this108 = this;
+          var _this109 = this;
 
           _classCallCheck2(this, MessagesComponent);
 
@@ -26124,18 +26429,18 @@
           }
 
           this.authenticationService.currentUser.subscribe(function (x) {
-            return _this108.currentUser = x;
+            return _this109.currentUser = x;
           });
           this.subscription = this.socketService.getNewMessageToRoomAll().subscribe(function (_currentChatObj) {
-            if (!_this108.allChatListOfRoom) {
-              _this108.allChatListOfRoom = [];
+            if (!_this109.allChatListOfRoom) {
+              _this109.allChatListOfRoom = [];
             }
 
             if (_currentChatObj) {
-              if (_currentChatObj.roomId == _this108.currentContact._id) {
-                var mappedAllChatListOfRoom = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](_this108.allChatListOfRoom, '_id');
+              if (_currentChatObj.roomId == _this109.currentContact._id) {
+                var mappedAllChatListOfRoom = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](_this109.allChatListOfRoom, '_id');
                 mappedAllChatListOfRoom[_currentChatObj._id] = _currentChatObj;
-                _this108.allChatListOfRoom = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](mappedAllChatListOfRoom); //this.allChatListOfRoom.push(_currentChatObj);
+                _this109.allChatListOfRoom = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](mappedAllChatListOfRoom); //this.allChatListOfRoom.push(_currentChatObj);
 
                 $('#chat_messages').animate({
                   scrollTop: $('#chat_messages').get(0).scrollHeight
@@ -26163,7 +26468,7 @@
             }).then(function (data) {
               // The "data" object contains the list of available voices and the voice synthesis params
               //console.log("Speech is ready, voices are available", data)
-              _this108.speechData = data;
+              _this109.speechData = data;
               data.voices.forEach(function (voice) {//console.log(voice.name + " " + voice.lang)
               });
             })["catch"](function (e) {
@@ -26188,18 +26493,18 @@
                 if (data && data['success']) {
                   //alert(JSON.stringify( data));
                   if (AVTrueChatFalse) {
-                    _this108.joinNewVCSessionWithContact(contactId, data["data"].loanId, data["data"].isGroup);
+                    _this109.joinNewVCSessionWithContact(contactId, data["data"].loanId, data["data"].isGroup);
                   } else {
-                    _this108.setCurrentContact(data["data"]);
+                    _this109.setCurrentContact(data["data"]);
                   } //this.alertService.success(data['message'], true);
 
 
-                  _this108.loading = false; //this.element_btn_click_addServiceTypes_skills_verification.click();
+                  _this109.loading = false; //this.element_btn_click_addServiceTypes_skills_verification.click();
                 } else {
                   //alert(JSON.stringify(data['message']));
-                  _this108.alertService.error(data['message']);
+                  _this109.alertService.error(data['message']);
 
-                  _this108.loading = false;
+                  _this109.loading = false;
                 }
               }, function (error) {
                 var errorMsg2show = "";
@@ -26214,9 +26519,9 @@
                   }
                 } catch (ex) {}
 
-                _this108.alertService.error(errorMsg2show);
+                _this109.alertService.error(errorMsg2show);
 
-                _this108.loading = false;
+                _this109.loading = false;
               });
             }
           }
@@ -26251,7 +26556,7 @@
           key: "translateTextInOtherLanguage",
           value: function translateTextInOtherLanguage(string2Translate, languageCode2Translate, sendDirect2ChatT, chatId) {
             return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-              var _this109 = this;
+              var _this110 = this;
 
               return regeneratorRuntime.wrap(function _callee4$(_context4) {
                 while (1) {
@@ -26270,8 +26575,8 @@
                         if (data && data['success']) {
                           //console.log('141', data["data"]);
                           if (chatId) {
-                            _this109.element_ctrlChatMessage = document.getElementById(chatId);
-                            _this109.element_ctrlChatMessage.innerText = data["data"].translatedText;
+                            _this110.element_ctrlChatMessage = document.getElementById(chatId);
+                            _this110.element_ctrlChatMessage.innerText = data["data"].translatedText;
                           }
 
                           if (sendDirect2ChatT) {
@@ -26399,7 +26704,7 @@
         }, {
           key: "setCurrentContact",
           value: function setCurrentContact(currentContactItem) {
-            var _this110 = this;
+            var _this111 = this;
 
             if (currentContactItem) {
               //console.log(window.innerWidth)
@@ -26420,23 +26725,23 @@
                 this.socketService.sendEventToAddNewContact(_currentContactObj).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (result) {
                   if (result) {
                     if (result['success'] == true || result['success'] == false) {
-                      _this110.currentContact = result['data'];
+                      _this111.currentContact = result['data'];
                     } else {
-                      _this110.currentContact = result;
+                      _this111.currentContact = result;
                     }
                   }
 
                   try {
-                    if (_this110.currentContact) {
-                      if (!_this110.currentContact._id && _this110.currentContact[0]._id) {
-                        _this110.currentContact = _this110.currentContact[0];
+                    if (_this111.currentContact) {
+                      if (!_this111.currentContact._id && _this111.currentContact[0]._id) {
+                        _this111.currentContact = _this111.currentContact[0];
                       }
                     }
                   } catch (ex) {}
 
-                  _this110.socketService.sendEventToJoinChatRoom(_this110.currentContact._id, _this110.currentUser._id);
+                  _this111.socketService.sendEventToJoinChatRoom(_this111.currentContact._id, _this111.currentUser._id);
 
-                  _this110.getAllChatByRoomId(_this110.currentContact._id);
+                  _this111.getAllChatByRoomId(_this111.currentContact._id);
                 });
               } else {
                 this.currentContact = currentContactItem;
@@ -26448,7 +26753,7 @@
         }, {
           key: "getAllChatByRoomId",
           value: function getAllChatByRoomId(_roomId) {
-            var _this111 = this;
+            var _this112 = this;
 
             var _allChatListOfRoomFiltered = lodash__WEBPACK_IMPORTED_MODULE_8__["filter"](this.allChatListOfRoom, {
               roomId: _roomId
@@ -26456,7 +26761,7 @@
 
             var _data = {};
             this.socketService.sendEventToGetAllChatOfRoomWithPromise(_roomId, lodash__WEBPACK_IMPORTED_MODULE_8__["keys"](_allChatListOfRoomFiltered).length).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (chats) {
-              _this111.allChatListOfRoom = chats;
+              _this112.allChatListOfRoom = chats;
               setTimeout(function () {
                 $('#chat_messages').animate({
                   scrollTop: $('#chat_messages').get(0).scrollHeight
@@ -26474,53 +26779,53 @@
         }, {
           key: "initializeVoiceRecognitionCallback",
           value: function initializeVoiceRecognitionCallback() {
-            var _this112 = this;
+            var _this113 = this;
 
             annyang.addCallback('error', function (err) {
               if (err.error === 'network') {
-                _this112.message2send = "Please check your internet connection.";
+                _this113.message2send = "Please check your internet connection.";
                 annyang.abort();
 
-                _this112.ngZone.run(function () {
-                  return _this112.voiceActiveSectionSuccess = true;
+                _this113.ngZone.run(function () {
+                  return _this113.voiceActiveSectionSuccess = true;
                 });
-              } else if (_this112.message2send === undefined) {
-                _this112.ngZone.run(function () {
-                  return _this112.voiceActiveSectionError = true;
+              } else if (_this113.message2send === undefined) {
+                _this113.ngZone.run(function () {
+                  return _this113.voiceActiveSectionError = true;
                 });
 
                 annyang.abort();
               }
             });
             annyang.addCallback('soundstart', function (res) {
-              _this112.ngZone.run(function () {
-                return _this112.voiceActiveSectionListening = true;
+              _this113.ngZone.run(function () {
+                return _this113.voiceActiveSectionListening = true;
               });
             });
             annyang.addCallback('end', function () {
-              if (_this112.message2send === undefined) {
-                _this112.ngZone.run(function () {
-                  return _this112.voiceActiveSectionError = true;
+              if (_this113.message2send === undefined) {
+                _this113.ngZone.run(function () {
+                  return _this113.voiceActiveSectionError = true;
                 });
 
                 annyang.abort();
               }
             });
             annyang.addCallback('result', function (userSaid) {
-              _this112.ngZone.run(function () {
-                return _this112.voiceActiveSectionError = false;
+              _this113.ngZone.run(function () {
+                return _this113.voiceActiveSectionError = false;
               });
 
               var queryText = userSaid[0];
               annyang.abort();
-              _this112.message2send = queryText;
+              _this113.message2send = queryText;
 
-              _this112.ngZone.run(function () {
-                return _this112.voiceActiveSectionListening = false;
+              _this113.ngZone.run(function () {
+                return _this113.voiceActiveSectionListening = false;
               });
 
-              _this112.ngZone.run(function () {
-                return _this112.voiceActiveSectionSuccess = true;
+              _this113.ngZone.run(function () {
+                return _this113.voiceActiveSectionSuccess = true;
               });
             });
           }
@@ -26666,7 +26971,7 @@
         }, {
           key: "showAppliedToSessionCallMediator",
           value: function showAppliedToSessionCallMediator(loanApplyId) {
-            var _this113 = this;
+            var _this114 = this;
 
             var _data = {
               '_id': loanApplyId
@@ -26690,14 +26995,14 @@
                 var sessionObj = lodash__WEBPACK_IMPORTED_MODULE_8__["first"](data["data"]);
 
                 if (sessionObj) {
-                  _this113.showAppliedToSession(sessionObj);
+                  _this114.showAppliedToSession(sessionObj);
                 }
 
-                _this113.loading = false;
+                _this114.loading = false;
               } else {
-                _this113.alertService.error(data['message']);
+                _this114.alertService.error(data['message']);
 
-                _this113.loading = false;
+                _this114.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -26712,15 +27017,15 @@
                 }
               } catch (ex) {}
 
-              _this113.alertService.error(errorMsg2show);
+              _this114.alertService.error(errorMsg2show);
 
-              _this113.loading = false;
+              _this114.loading = false;
             });
           }
         }, {
           key: "showAppliedToSession",
           value: function showAppliedToSession(sessionObj) {
-            var _this114 = this;
+            var _this115 = this;
 
             var _proccessedSessionObj = null;
 
@@ -26728,7 +27033,9 @@
               case src_app_models__WEBPACK_IMPORTED_MODULE_5__["Role"].Borrower:
                 _proccessedSessionObj = lodash__WEBPACK_IMPORTED_MODULE_8__["cloneDeep"](sessionObj);
                 _proccessedSessionObj.sessionAppliedByBorrowers = lodash__WEBPACK_IMPORTED_MODULE_8__["filter"](sessionObj.sessionAppliedByBorrowers, {
-                  "lenderId": this.authenticationService.currentUserValue._id
+                  "lenderId": {
+                    "_id": this.authenticationService.currentUserValue._id
+                  }
                 });
                 break;
 
@@ -26757,7 +27064,6 @@
                     var _loanId = result.data.sessionApply.loanId;
                     var _sessionPrice = result.data.sessionApply.loanAmount;
                     var _loanApplyId = result.data.sessionApply._id;
-                    var _borrowerId = result.data.sessionApply.borrowerId;
                     var _transactionId = result.data.transactionId;
                     var _status = result.data.status; //initiate payment here
                     //this.socketService.setSessionApplyUpdateStatus(false, _loanId, _loanApplyId, _status, this.authenticationService.currentUserValue._id, _transactionId);
@@ -26767,7 +27073,7 @@
                     switch (_status) {
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Accepted:
                         //this.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
-                        _this114.proccedAppliedToSession(sessionObj, _loanApplyId);
+                        _this115.proccedAppliedToSession(sessionObj, _loanApplyId);
 
                         _allowed2CreateContactForSessionT = true;
                         break;
@@ -26777,7 +27083,7 @@
                         break;
 
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Rejected:
-                        _this114.socketService.setSessionApplyUpdateStatus(true, _loanId, _loanApplyId, _status, _this114.authenticationService.currentUserValue._id, _transactionId);
+                        _this115.socketService.setSessionApplyUpdateStatus(true, _loanId, _loanApplyId, _status, _this115.authenticationService.currentUserValue._id, _transactionId);
 
                         break;
 
@@ -26820,7 +27126,9 @@
               case src_app_models__WEBPACK_IMPORTED_MODULE_5__["Role"].Borrower:
                 _proccessedSessionObj = lodash__WEBPACK_IMPORTED_MODULE_8__["cloneDeep"](sessionObj);
                 _proccessedSessionObj.sessionAppliedByBorrowers = lodash__WEBPACK_IMPORTED_MODULE_8__["filter"](sessionObj.sessionAppliedByBorrowers, {
-                  "borrowerId": this.authenticationService.currentUserValue._id
+                  "borrowerId": {
+                    "_id": this.authenticationService.currentUserValue._id
+                  }
                 });
                 break;
 
@@ -26981,516 +27289,15 @@
     },
 
     /***/
-    "ruKX":
-    /*!****************************************************************************************!*\
-      !*** ./src/app/shared/user-restriction-details/user-restriction-details.component.css ***!
-      \****************************************************************************************/
-
-    /*! exports provided: default */
-
-    /***/
-    function ruKX(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony default export */
-
-
-      __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ1c2VyLXJlc3RyaWN0aW9uLWRldGFpbHMuY29tcG9uZW50LmNzcyJ9 */";
-      /***/
-    },
-
-    /***/
-    "s5zK":
-    /*!*********************************************!*\
-      !*** ./src/app/services/payment.service.ts ***!
-      \*********************************************/
-
-    /*! exports provided: PaymentService */
-
-    /***/
-    function s5zK(module, __webpack_exports__, __webpack_require__) {
-      "use strict";
-
-      __webpack_require__.r(__webpack_exports__);
-      /* harmony export (binding) */
-
-
-      __webpack_require__.d(__webpack_exports__, "PaymentService", function () {
-        return PaymentService;
-      });
-      /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
-      /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "fXoL");
-      /* harmony import */
-
-
-      var _utility_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! ./utility.service */
-      "A1CT");
-      /* harmony import */
-
-
-      var _socketio_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! ../socketio.service */
-      "bgkY");
-      /* harmony import */
-
-
-      var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! rxjs */
-      "qCKp");
-      /* harmony import */
-
-
-      var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! rxjs/operators */
-      "kU1M");
-      /* harmony import */
-
-
-      var _add_funds_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! ./add-funds.service */
-      "3gPe");
-      /* harmony import */
-
-
-      var _models_role__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! ../models/role */
-      "z56L");
-      /* harmony import */
-
-
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
-      /*! @angular/common/http */
-      "tk/3");
-      /* harmony import */
-
-
-      var src_environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
-      /*! src/environments/environment */
-      "AytR");
-      /* harmony import */
-
-
-      var moment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
-      /*! moment */
-      "wd/R");
-      /* harmony import */
-
-
-      var moment__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_10__);
-
-      var PaymentService = /*#__PURE__*/function () {
-        function PaymentService(http, utilityService, socketService, addFundsService) {
-          _classCallCheck2(this, PaymentService);
-
-          this.http = http;
-          this.utilityService = utilityService;
-          this.socketService = socketService;
-          this.addFundsService = addFundsService;
-          this.baseurl = src_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl + '/';
-          this.TimerExpired = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
-          this.SearchDate = moment__WEBPACK_IMPORTED_MODULE_10__();
-          this.ElapsTime = 5;
-          this.MinimumTime4Extend = 3;
-          this.everySecond = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["timer"])(0, 1000);
-          this.paymentNotCompletedInTime = false;
-          this.paymentNotCompletedInTimeErrorMessageShow = false;
-          /**
-          * let purchaseUnits=[
-                   {
-                     amount: {
-                       currency_code: 'USD',
-                       value: '0.01',
-                       breakdown: {
-                         item_total: {
-                           currency_code: 'USD',
-                           value: '0.01'
-                         }
-                       }
-                     },
-                     items: [
-                       {
-                         name: 'Enterprise Subscription',
-                         quantity: '1',
-                         category: 'DIGITAL_GOODS',
-                         unit_amount: {
-                           currency_code: 'USD',
-                           value: '0.01',
-                         },
-                       }
-                     ]
-                   }
-                 ]
-          */
-          //#region Online User List
-
-          this.currentPayPalConfig = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
-          this.currentPaymentObj = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
-          this.currentPaymentApproved = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
-          this.currentPaymentFailed = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
-        }
-
-        _createClass2(PaymentService, [{
-          key: "sendCurrentPayPalConfig",
-          value: function sendCurrentPayPalConfig(payPalConfig) {
-            this.currentPayPalConfig.next(payPalConfig);
-          }
-        }, {
-          key: "clearCurrentPayPalConfig",
-          value: function clearCurrentPayPalConfig() {
-            this.currentPayPalConfig.next();
-          }
-        }, {
-          key: "initCurrentPayPalConfig",
-          value: function initCurrentPayPalConfig() {
-            this.sendCurrentPayPalConfig(this.payPalConfig);
-          }
-        }, {
-          key: "getCurrentPayPalConfig",
-          value: function getCurrentPayPalConfig() {
-            return this.currentPayPalConfig.asObservable();
-          }
-        }, {
-          key: "sendCurrentPaymentObj",
-          value: function sendCurrentPaymentObj(_currentPaymentObj) {
-            this.currentPaymentObj.next(_currentPaymentObj);
-          }
-        }, {
-          key: "clearCurrentPaymentObj",
-          value: function clearCurrentPaymentObj() {
-            this.currentPaymentObj.next();
-          }
-        }, {
-          key: "initCurrentPaymentObj",
-          value: function initCurrentPaymentObj() {
-            this.sendCurrentPaymentObj(this._currentPaymentObj);
-          }
-        }, {
-          key: "getCurrentPaymentObj",
-          value: function getCurrentPaymentObj() {
-            return this.currentPaymentObj.asObservable();
-          }
-        }, {
-          key: "sendCurrentPaymentApproved",
-          value: function sendCurrentPaymentApproved(transactionStatus) {
-            this.currentPaymentApproved.next(transactionStatus);
-          }
-        }, {
-          key: "clearCurrentPaymentApproved",
-          value: function clearCurrentPaymentApproved() {
-            this.currentPaymentApproved.next();
-          }
-        }, {
-          key: "initCurrentPaymentApproved",
-          value: function initCurrentPaymentApproved() {
-            this.sendCurrentPayPalConfig(this.transactionStatus);
-          }
-        }, {
-          key: "getCurrentPaymentApproved",
-          value: function getCurrentPaymentApproved() {
-            return this.currentPaymentApproved.asObservable();
-          }
-        }, {
-          key: "sendCurrentPaymentFailed",
-          value: function sendCurrentPaymentFailed(transactionStatus) {
-            this.currentPaymentFailed.next(transactionStatus);
-          }
-        }, {
-          key: "clearCurrentPaymentFailed",
-          value: function clearCurrentPaymentFailed() {
-            this.currentPaymentFailed.next();
-          }
-        }, {
-          key: "getCurrentPaymentFailed",
-          value: function getCurrentPaymentFailed() {
-            return this.currentPaymentFailed.asObservable();
-          } //#endregion Payment Approval status
-
-        }, {
-          key: "startTimerInit",
-          value: function startTimerInit() {
-            this.paymentNotCompletedInTime = false;
-            this.paymentNotCompletedInTimeErrorMessageShow = false;
-            this.stopTimer();
-
-            var _duration = this.ElapsTime + (this.minutes || 0);
-
-            this.searchEndDate = this.SearchDate.add(_duration, "minutes");
-            this.startTimer();
-          }
-        }, {
-          key: "initPaymentConfigStripe",
-          value: function initPaymentConfigStripe(PaymentObj) {
-            var _this115 = this;
-
-            this._currentPaymentObj = PaymentObj;
-            this.sendCurrentPaymentObj(this._currentPaymentObj);
-            this.socketService.listenForUpdateStatusOfLastPayment().subscribe(function (_obj) {
-              //this.socketService.emitEventWithNameAndData('request_fund_get_count_sum', this.userId);
-              _this115.sendCurrentPaymentApproved(_obj);
-
-              _this115.stopTimer();
-            });
-            this.socketService.sendEventToCheckLastPaymentReturnedSuccessOrFailed(this._currentPaymentObj);
-            return this._currentPaymentObj;
-          }
-        }, {
-          key: "initConfig",
-          value: function initConfig(purchaseUnits, _transactiActionType, _userId) {
-            var _this116 = this;
-
-            this.purchaseUnits = purchaseUnits;
-            this.amount = purchaseUnits[0].amount.value;
-            this.custom_id = purchaseUnits[0].amount.custom_id;
-            this.transactionActionType = _transactiActionType;
-            this.userId = _userId;
-            this.payPalConfig = {
-              currency: 'USD',
-              // clientId: 'AWQej8JvY8p0D8u8exibTzxRgoyJmpYPpfFow5JGwemPl1TwqD5I021E4dDdJIixQnsNt-FWc7qZYyCj',
-              //clientId: 'AW-FXPoxErPamrI9YqZJyhfrSZEt_Y7doZulV2hge-QKrmqcQimbx9U9XJKGT6IX__GVGLcloTx9fOhb',
-              clientId: 'AfRY8egQeUtW4fEQ6-pxINgBqRdJSBOX-LaCZtMpDA7ry-vqcZdc9BJ6qoXj8JAhA238sZKLksJMbi09',
-              createOrderOnClient: function createOrderOnClient(data) {
-                return {
-                  intent: 'CAPTURE',
-                  purchase_units: purchaseUnits
-                };
-              },
-              advanced: {
-                commit: 'true'
-              },
-              style: {
-                label: 'paypal',
-                layout: 'vertical'
-              },
-              onApprove: function onApprove(data, actions) {
-                switch (_transactiActionType) {
-                  case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].funds_add:
-                    _this116.socketService.sendEventToSaveCurrentTransaction(_transactiActionType, data.orderID, _userId, data);
-
-                    break;
-
-                  case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].session_accepted:
-                    _this116.socketService.sendEventToSaveCurrentTransaction(_transactiActionType, data.orderID, _userId, data);
-
-                    break;
-                } //console.log('onApprove - transaction was approved, but not authorized', data, actions);
-
-
-                actions.order.get().then(function (details) {
-                  switch (_transactiActionType) {
-                    case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].funds_add:
-                      _this116.socketService.sendEventToSaveCurrentTransactionDetails(_transactiActionType, details.id, _userId, details, null);
-
-                      var _funds_obj = {
-                        amount: purchaseUnits[0].amount.value,
-                        created_by: _userId,
-                        transactionId: details.id,
-                        description: ''
-                      };
-
-                      _this116.socketService.emitEventWithNameAndData('fund_addnew', _funds_obj);
-
-                      break;
-
-                    case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].session_accepted:
-                    case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].session_extended:
-                      _this116.socketService.sendEventToSaveCurrentTransactionDetails(_transactiActionType, details.id, _userId, details, null);
-
-                      break;
-                  }
-
-                  _this116.sendCurrentPaymentApproved(details); //console.log('onApprove - you can get full order details inside onApprove: ', details);
-
-                });
-              },
-              onClientAuthorization: function onClientAuthorization(data) {
-                //console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
-                _this116.showSuccess = true;
-              },
-              onCancel: function onCancel(data, actions) {////console.log('OnCancel', data, actions);
-              },
-              onError: function onError(err) {////console.log('OnError', err);
-              },
-              onClick: function onClick(data, actions) {////console.log('onClick', data, actions);
-              }
-            };
-            this.sendCurrentPayPalConfig(this.payPalConfig);
-            return this.payPalConfig;
-          }
-        }, {
-          key: "payFromUsersWallet",
-          value: function payFromUsersWallet() {
-            var _this117 = this;
-
-            var _funds_obj = {
-              amount: this.amount,
-              created_by: this.userId,
-              transactionId: this.custom_id,
-              description: 'Paid from wallet'
-            };
-            var _data = {
-              transactionId: '',
-              transactionActionType: this.transactionActionType,
-              createdBy: this.userId,
-              transactionDetailsObj: null
-            };
-            this.socketService.deductAmountFromWallet(_funds_obj, _data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (_obj) {
-              //this.socketService.emitEventWithNameAndData('request_fund_get_count_sum', this.userId);
-              _this117.sendCurrentPaymentApproved(_obj);
-
-              _this117.addFundsService.getFundsCountForRequestedUser(_this117.userId);
-            });
-          }
-        }, {
-          key: "checkoutPaymentForStripe",
-          value: function checkoutPaymentForStripe(stripe, paymentObj) {
-            var _url2use = this.baseurl + 'api/post/app/payment/checkout';
-
-            return this.http.post(_url2use, paymentObj).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["timeout"])(src_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiTimeout), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (response) {
-              return response;
-            })).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (session) {
-              return stripe.redirectToCheckout({
-                sessionId: session.id
-              });
-            })).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (result) {
-              // If redirectToCheckout fails due to a browser or network
-              // error, you should display the localized error message to your
-              // customer using error.message.
-              if (result.error) {//console.log(result.error.message);
-              }
-            }));
-          }
-        }, {
-          key: "returnUrChargePaymentForStripel",
-          value: function returnUrChargePaymentForStripel() {
-            var _url2use = this.baseurl + 'api/post/app/payment/charges';
-
-            return _url2use;
-          }
-        }, {
-          key: "chargePaymentForStripe",
-          value: function chargePaymentForStripe(stripe, paymentObj) {
-            var _url2use = this.returnUrChargePaymentForStripel();
-
-            return this.http.post(_url2use, paymentObj).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["timeout"])(src_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiTimeout), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (response) {
-              return response;
-            }));
-          }
-        }, {
-          key: "stopTimer",
-          value: function stopTimer() {
-            if (this.subscription4Timer) {
-              this.subscription4Timer.unsubscribe();
-            }
-
-            this.SearchDate = moment__WEBPACK_IMPORTED_MODULE_10__();
-            this.ElapsTime = 5;
-            this.hours = null;
-            this.minutes = null;
-            this.seconds = null;
-            this.old_minutes = null;
-          }
-        }, {
-          key: "startTimer",
-          value: function startTimer() {
-            var _this118 = this;
-
-            this.subscription4Timer = this.everySecond.subscribe(function (seconds) {
-              var currentTime = moment__WEBPACK_IMPORTED_MODULE_10__();
-              _this118.remainingTime = _this118.searchEndDate.diff(currentTime);
-              _this118.remainingTime = _this118.remainingTime / 1000;
-
-              if (_this118.remainingTime <= 0) {
-                _this118.paymentNotCompletedInTime = true;
-                _this118.paymentNotCompletedInTimeErrorMessageShow = true; //stop interval here;
-
-                _this118.sendCurrentPaymentFailed(true);
-              } else {
-                _this118.minutes = Math.floor(_this118.remainingTime / 60);
-
-                if (_this118.minutes > 59) {
-                  _this118.hours = Math.floor(_this118.remainingTime / 60 / 60);
-                } else {
-                  _this118.hours = 0;
-                }
-
-                _this118.minutes = Math.floor(_this118.remainingTime / 60 - _this118.hours * 60);
-                _this118.seconds = Math.floor(_this118.remainingTime - (_this118.minutes * 60 + _this118.hours * 60 * 60));
-              }
-
-              if (_this118.seconds % 10 === 0) {
-                //this.old_minutes != this.seconds
-                //debugger;
-                _this118.old_minutes = _this118.seconds;
-
-                _this118.socketService.sendEventToCheckLastPaymentReturnedSuccessOrFailed(_this118._currentPaymentObj);
-              } else {//console.log("303", this.old_minutes, this.minutes);
-              }
-
-              if (_this118.minutes <= _this118.MinimumTime4Extend) {
-                _this118.paymentNotCompletedInTimeErrorMessageShow = true; //limit reached
-                //debugger;
-              }
-            });
-          }
-        }]);
-
-        return PaymentService;
-      }();
-
-      PaymentService.ctorParameters = function () {
-        return [{
-          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClient"]
-        }, {
-          type: _utility_service__WEBPACK_IMPORTED_MODULE_2__["UtilityService"]
-        }, {
-          type: _socketio_service__WEBPACK_IMPORTED_MODULE_3__["SocketioService"]
-        }, {
-          type: _add_funds_service__WEBPACK_IMPORTED_MODULE_6__["AddFundsService"]
-        }];
-      };
-
-      PaymentService.propDecorators = {
-        TimerExpired: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"]
-        }],
-        SearchDate: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
-        }],
-        ElapsTime: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
-        }],
-        MinimumTime4Extend: [{
-          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
-        }]
-      };
-      PaymentService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClient"], _utility_service__WEBPACK_IMPORTED_MODULE_2__["UtilityService"], _socketio_service__WEBPACK_IMPORTED_MODULE_3__["SocketioService"], _add_funds_service__WEBPACK_IMPORTED_MODULE_6__["AddFundsService"]])], PaymentService);
-      /***/
-    },
-
-    /***/
-    "sJZM":
-    /*!************************************************************************!*\
-      !*** ./node_modules/ngx-image-cropper/node_modules/tslib/tslib.es6.js ***!
-      \************************************************************************/
+    "rigp":
+    /*!***************************************************************************!*\
+      !*** ./node_modules/@fullcalendar/common/node_modules/tslib/tslib.es6.js ***!
+      \***************************************************************************/
 
     /*! exports provided: __extends, __assign, __rest, __decorate, __param, __metadata, __awaiter, __generator, __createBinding, __exportStar, __values, __read, __spread, __spreadArrays, __spreadArray, __await, __asyncGenerator, __asyncDelegator, __asyncValues, __makeTemplateObject, __importStar, __importDefault, __classPrivateFieldGet, __classPrivateFieldSet */
 
     /***/
-    function sJZM(module, __webpack_exports__, __webpack_require__) {
+    function rigp(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
@@ -28121,6 +27928,533 @@
     },
 
     /***/
+    "ruKX":
+    /*!****************************************************************************************!*\
+      !*** ./src/app/shared/user-restriction-details/user-restriction-details.component.css ***!
+      \****************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function ruKX(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ1c2VyLXJlc3RyaWN0aW9uLWRldGFpbHMuY29tcG9uZW50LmNzcyJ9 */";
+      /***/
+    },
+
+    /***/
+    "s5zK":
+    /*!*********************************************!*\
+      !*** ./src/app/services/payment.service.ts ***!
+      \*********************************************/
+
+    /*! exports provided: PaymentService */
+
+    /***/
+    function s5zK(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "PaymentService", function () {
+        return PaymentService;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var _utility_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! ./utility.service */
+      "A1CT");
+      /* harmony import */
+
+
+      var _socketio_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! ../socketio.service */
+      "bgkY");
+      /* harmony import */
+
+
+      var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! rxjs */
+      "qCKp");
+      /* harmony import */
+
+
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! rxjs/operators */
+      "kU1M");
+      /* harmony import */
+
+
+      var _add_funds_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! ./add-funds.service */
+      "3gPe");
+      /* harmony import */
+
+
+      var _models_role__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! ../models/role */
+      "z56L");
+      /* harmony import */
+
+
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! @angular/common/http */
+      "tk/3");
+      /* harmony import */
+
+
+      var src_environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! src/environments/environment */
+      "AytR");
+      /* harmony import */
+
+
+      var moment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      /*! moment */
+      "wd/R");
+      /* harmony import */
+
+
+      var moment__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_10__);
+
+      var PaymentService = /*#__PURE__*/function () {
+        function PaymentService(http, utilityService, socketService, addFundsService) {
+          _classCallCheck2(this, PaymentService);
+
+          this.http = http;
+          this.utilityService = utilityService;
+          this.socketService = socketService;
+          this.addFundsService = addFundsService;
+          this.baseurl = src_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl + '/';
+          this.TimerExpired = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"]();
+          this.SearchDate = moment__WEBPACK_IMPORTED_MODULE_10__();
+          this.ElapsTime = 5;
+          this.MinimumTime4Extend = 3;
+          this.paymentWithMultipleOptions = false;
+          this.everySecond = Object(rxjs__WEBPACK_IMPORTED_MODULE_4__["timer"])(0, 1000);
+          this.paymentNotCompletedInTime = false;
+          this.paymentNotCompletedInTimeErrorMessageShow = false;
+          /**
+          * let purchaseUnits=[
+                   {
+                     amount: {
+                       currency_code: 'USD',
+                       value: '0.01',
+                       breakdown: {
+                         item_total: {
+                           currency_code: 'USD',
+                           value: '0.01'
+                         }
+                       }
+                     },
+                     items: [
+                       {
+                         name: 'Enterprise Subscription',
+                         quantity: '1',
+                         category: 'DIGITAL_GOODS',
+                         unit_amount: {
+                           currency_code: 'USD',
+                           value: '0.01',
+                         },
+                       }
+                     ]
+                   }
+                 ]
+          */
+          //#region Online User List
+
+          this.currentPayPalConfig = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
+          this.currentPaymentObj = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
+          this.currentPaymentApproved = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
+          this.currentPaymentFailed = new rxjs__WEBPACK_IMPORTED_MODULE_4__["Subject"]();
+        }
+
+        _createClass2(PaymentService, [{
+          key: "sendCurrentPayPalConfig",
+          value: function sendCurrentPayPalConfig(payPalConfig) {
+            this.currentPayPalConfig.next(payPalConfig);
+          }
+        }, {
+          key: "clearCurrentPayPalConfig",
+          value: function clearCurrentPayPalConfig() {
+            this.currentPayPalConfig.next();
+          }
+        }, {
+          key: "initCurrentPayPalConfig",
+          value: function initCurrentPayPalConfig() {
+            this.sendCurrentPayPalConfig(this.payPalConfig);
+          }
+        }, {
+          key: "getCurrentPayPalConfig",
+          value: function getCurrentPayPalConfig() {
+            return this.currentPayPalConfig.asObservable();
+          }
+        }, {
+          key: "sendCurrentPaymentObj",
+          value: function sendCurrentPaymentObj(_currentPaymentObj) {
+            this.currentPaymentObj.next(_currentPaymentObj);
+          }
+        }, {
+          key: "clearCurrentPaymentObj",
+          value: function clearCurrentPaymentObj() {
+            this.currentPaymentObj.next();
+          }
+        }, {
+          key: "initCurrentPaymentObj",
+          value: function initCurrentPaymentObj() {
+            this.sendCurrentPaymentObj(this._currentPaymentObj);
+          }
+        }, {
+          key: "getCurrentPaymentObj",
+          value: function getCurrentPaymentObj() {
+            return this.currentPaymentObj.asObservable();
+          }
+        }, {
+          key: "sendCurrentPaymentApproved",
+          value: function sendCurrentPaymentApproved(transactionStatus) {
+            this.currentPaymentApproved.next(transactionStatus);
+          }
+        }, {
+          key: "clearCurrentPaymentApproved",
+          value: function clearCurrentPaymentApproved() {
+            this.currentPaymentApproved.next();
+          }
+        }, {
+          key: "initCurrentPaymentApproved",
+          value: function initCurrentPaymentApproved() {
+            this.sendCurrentPayPalConfig(this.transactionStatus);
+          }
+        }, {
+          key: "getCurrentPaymentApproved",
+          value: function getCurrentPaymentApproved() {
+            return this.currentPaymentApproved.asObservable();
+          }
+        }, {
+          key: "sendCurrentPaymentFailed",
+          value: function sendCurrentPaymentFailed(transactionStatus) {
+            this.currentPaymentFailed.next(transactionStatus);
+          }
+        }, {
+          key: "clearCurrentPaymentFailed",
+          value: function clearCurrentPaymentFailed() {
+            this.currentPaymentFailed.next();
+          }
+        }, {
+          key: "getCurrentPaymentFailed",
+          value: function getCurrentPaymentFailed() {
+            return this.currentPaymentFailed.asObservable();
+          } //#endregion Payment Approval status
+
+        }, {
+          key: "startTimerInit",
+          value: function startTimerInit() {
+            this.paymentNotCompletedInTime = false;
+            this.paymentNotCompletedInTimeErrorMessageShow = false;
+            this.stopTimer();
+
+            var _duration = this.ElapsTime + (this.minutes || 0);
+
+            this.searchEndDate = this.SearchDate.add(_duration, "minutes");
+            this.startTimer();
+          }
+        }, {
+          key: "initPaymentConfigStripe",
+          value: function initPaymentConfigStripe(PaymentObj) {
+            var _this116 = this;
+
+            this._currentPaymentObj = PaymentObj;
+            this.sendCurrentPaymentObj(this._currentPaymentObj);
+            this.socketService.listenForUpdateStatusOfLastPayment().subscribe(function (_obj) {
+              //this.socketService.emitEventWithNameAndData('request_fund_get_count_sum', this.userId);
+              _this116.sendCurrentPaymentApproved(_obj);
+
+              _this116.stopTimer();
+            });
+            this.socketService.sendEventToCheckLastPaymentReturnedSuccessOrFailed(this._currentPaymentObj);
+            return this._currentPaymentObj;
+          }
+        }, {
+          key: "initConfig",
+          value: function initConfig(purchaseUnits, _transactiActionType, _userId) {
+            var _this117 = this;
+
+            if (!this.paymentWithMultipleOptions) {
+              return;
+            }
+
+            this.purchaseUnits = purchaseUnits;
+            this.amount = purchaseUnits[0].amount.value;
+            this.custom_id = purchaseUnits[0].amount.custom_id;
+            this.transactionActionType = _transactiActionType;
+            this.userId = _userId;
+            this.payPalConfig = {
+              currency: 'USD',
+              clientId: 'Ad1KVnnQlzEWlucZ7WM-IoJj7LcGRu_Qmh2FS9Gll6dm-8yr4r14IwZwPRti9RLmigX11V60231gk5EC',
+              createOrderOnClient: function createOrderOnClient(data) {
+                return {
+                  intent: 'CAPTURE',
+                  purchase_units: purchaseUnits
+                };
+              },
+              advanced: {
+                commit: 'true'
+              },
+              style: {
+                label: 'paypal',
+                layout: 'vertical'
+              },
+              onApprove: function onApprove(data, actions) {
+                _this117.startTimerInit();
+
+                switch (_transactiActionType) {
+                  case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].funds_add:
+                    _this117.socketService.sendEventToSaveCurrentTransaction(_transactiActionType, data.orderID, _userId, data);
+
+                    break;
+
+                  case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].session_accepted:
+                    _this117.socketService.sendEventToSaveCurrentTransaction(_transactiActionType, data.orderID, _userId, data);
+
+                    break;
+                } //console.log('onApprove - transaction was approved, but not authorized', data, actions);
+
+
+                actions.order.get().then(function (details) {
+                  switch (_transactiActionType) {
+                    case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].funds_add:
+                      _this117.socketService.sendEventToSaveCurrentTransactionDetails(_transactiActionType, details.id, _userId, details, null);
+
+                      var _funds_obj = {
+                        amount: purchaseUnits[0].amount.value,
+                        created_by: _userId,
+                        transactionId: details.id,
+                        description: ''
+                      };
+
+                      _this117.socketService.emitEventWithNameAndData('fund_addnew', _funds_obj);
+
+                      break;
+
+                    case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].session_accepted:
+                    case _models_role__WEBPACK_IMPORTED_MODULE_7__["TransactionActionType"].session_extended:
+                      _this117.socketService.sendEventToSaveCurrentTransactionDetails(_transactiActionType, details.id, _userId, details, null);
+
+                      break;
+
+                    default:
+                      _this117.socketService.emitEventWithNameAndData('recd_new_transaction_details_from_payment_api', _this117._currentPaymentObj, details);
+
+                      break;
+                  }
+
+                  _this117.sendCurrentPaymentApproved(details);
+
+                  _this117.stopTimer(); //console.log('onApprove - you can get full order details inside onApprove: ', details);
+
+                });
+              },
+              onClientAuthorization: function onClientAuthorization(data) {
+                //console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+                _this117.showSuccess = true;
+              },
+              onCancel: function onCancel(data, actions) {
+                ////console.log('OnCancel', data, actions);
+                _this117.sendCurrentPaymentApproved({
+                  success: false,
+                  message: ''
+                });
+
+                _this117.stopTimer();
+              },
+              onError: function onError(err) {
+                ////console.log('OnError', err);
+                _this117.sendCurrentPaymentApproved({
+                  success: false,
+                  message: ''
+                });
+
+                _this117.stopTimer();
+              },
+              onClick: function onClick(data, actions) {////console.log('onClick', data, actions);
+              }
+            };
+            this.sendCurrentPayPalConfig(this.payPalConfig);
+            return this.payPalConfig;
+          }
+        }, {
+          key: "payFromUsersWallet",
+          value: function payFromUsersWallet() {
+            var _this118 = this;
+
+            var _funds_obj = {
+              amount: this.amount,
+              created_by: this.userId,
+              transactionId: this.custom_id,
+              description: 'Paid from wallet'
+            };
+            var _data = {
+              transactionId: '',
+              transactionActionType: this.transactionActionType,
+              createdBy: this.userId,
+              transactionDetailsObj: null
+            };
+            this.socketService.deductAmountFromWallet(_funds_obj, _data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (_obj) {
+              //this.socketService.emitEventWithNameAndData('request_fund_get_count_sum', this.userId);
+              _this118.sendCurrentPaymentApproved(_obj);
+
+              _this118.addFundsService.getFundsCountForRequestedUser(_this118.userId);
+            });
+          }
+        }, {
+          key: "checkoutPaymentForStripe",
+          value: function checkoutPaymentForStripe(stripe, paymentObj) {
+            var _url2use = this.baseurl + 'api/post/app/payment/checkout';
+
+            return this.http.post(_url2use, paymentObj).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["timeout"])(src_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiTimeout), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (response) {
+              return response;
+            })).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (session) {
+              return stripe.redirectToCheckout({
+                sessionId: session.id
+              });
+            })).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (result) {
+              // If redirectToCheckout fails due to a browser or network
+              // error, you should display the localized error message to your
+              // customer using error.message.
+              if (result.error) {//console.log(result.error.message);
+              }
+            }));
+          }
+        }, {
+          key: "returnUrChargePaymentForStripel",
+          value: function returnUrChargePaymentForStripel() {
+            var _url2use = this.baseurl + 'api/post/app/payment/charges';
+
+            return _url2use;
+          }
+        }, {
+          key: "chargePaymentForStripe",
+          value: function chargePaymentForStripe(stripe, paymentObj) {
+            var _url2use = this.returnUrChargePaymentForStripel();
+
+            return this.http.post(_url2use, paymentObj).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["timeout"])(src_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiTimeout), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(function (response) {
+              return response;
+            }));
+          }
+        }, {
+          key: "stopTimer",
+          value: function stopTimer() {
+            if (this.subscription4Timer) {
+              this.subscription4Timer.unsubscribe();
+            }
+
+            this.SearchDate = moment__WEBPACK_IMPORTED_MODULE_10__();
+            this.ElapsTime = 5;
+            this.hours = null;
+            this.minutes = null;
+            this.seconds = null;
+            this.old_minutes = null;
+          }
+        }, {
+          key: "startTimer",
+          value: function startTimer() {
+            var _this119 = this;
+
+            this.subscription4Timer = this.everySecond.subscribe(function (seconds) {
+              var currentTime = moment__WEBPACK_IMPORTED_MODULE_10__();
+              _this119.remainingTime = _this119.searchEndDate.diff(currentTime);
+              _this119.remainingTime = _this119.remainingTime / 1000;
+
+              if (_this119.remainingTime <= 0) {
+                _this119.paymentNotCompletedInTime = true;
+                _this119.paymentNotCompletedInTimeErrorMessageShow = true; //stop interval here;
+
+                _this119.sendCurrentPaymentFailed(true);
+              } else {
+                _this119.minutes = Math.floor(_this119.remainingTime / 60);
+
+                if (_this119.minutes > 59) {
+                  _this119.hours = Math.floor(_this119.remainingTime / 60 / 60);
+                } else {
+                  _this119.hours = 0;
+                }
+
+                _this119.minutes = Math.floor(_this119.remainingTime / 60 - _this119.hours * 60);
+                _this119.seconds = Math.floor(_this119.remainingTime - (_this119.minutes * 60 + _this119.hours * 60 * 60));
+              }
+
+              if (_this119.seconds % 10 === 0) {
+                //this.old_minutes != this.seconds
+                //debugger;
+                _this119.old_minutes = _this119.seconds;
+
+                _this119.socketService.sendEventToCheckLastPaymentReturnedSuccessOrFailed(_this119._currentPaymentObj);
+              } else {//console.log("303", this.old_minutes, this.minutes);
+              }
+
+              if (_this119.minutes <= _this119.MinimumTime4Extend) {
+                _this119.paymentNotCompletedInTimeErrorMessageShow = true; //limit reached
+                //debugger;
+              }
+            });
+          }
+        }]);
+
+        return PaymentService;
+      }();
+
+      PaymentService.ctorParameters = function () {
+        return [{
+          type: _angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClient"]
+        }, {
+          type: _utility_service__WEBPACK_IMPORTED_MODULE_2__["UtilityService"]
+        }, {
+          type: _socketio_service__WEBPACK_IMPORTED_MODULE_3__["SocketioService"]
+        }, {
+          type: _add_funds_service__WEBPACK_IMPORTED_MODULE_6__["AddFundsService"]
+        }];
+      };
+
+      PaymentService.propDecorators = {
+        TimerExpired: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"]
+        }],
+        SearchDate: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }],
+        ElapsTime: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }],
+        MinimumTime4Extend: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"]
+        }]
+      };
+      PaymentService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_8__["HttpClient"], _utility_service__WEBPACK_IMPORTED_MODULE_2__["UtilityService"], _socketio_service__WEBPACK_IMPORTED_MODULE_3__["SocketioService"], _add_funds_service__WEBPACK_IMPORTED_MODULE_6__["AddFundsService"]])], PaymentService);
+      /***/
+    },
+
+    /***/
     "sa14":
     /*!********************************************************************!*\
       !*** ./src/app/shared/public-profile/public-profile.component.css ***!
@@ -28469,7 +28803,7 @@
 
       var ProfileComponent = /*#__PURE__*/function () {
         function ProfileComponent(dialog, http, formBuilder, router, authenticationService, userService, alertService, appRouterService, route, utilityService) {
-          var _this119 = this;
+          var _this120 = this;
 
           _classCallCheck2(this, ProfileComponent);
 
@@ -28557,19 +28891,19 @@
             ////console.log('data => ', data)
             if (data && data['success']) {
               //alert(JSON.stringify( data));
-              _this119.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
+              _this120.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
 
 
-              _this119.loading = false;
-              _this119.isOtpSent = true; //this.element_btn_click_profile_skills_verification.click();
+              _this120.loading = false;
+              _this120.isOtpSent = true; //this.element_btn_click_profile_skills_verification.click();
             } else {
               //alert(JSON.stringify(data['message']));
-              _this119.alertService.error(data['message']);
+              _this120.alertService.error(data['message']);
 
-              _this119.loading = false;
-              _this119.isOtpSent = false;
+              _this120.loading = false;
+              _this120.isOtpSent = false;
 
-              _this119.appRouterService.appRouter('');
+              _this120.appRouterService.appRouter('');
             }
           }, function (error) {
             var errorMsg2show = "";
@@ -28584,21 +28918,21 @@
               }
             } catch (ex) {}
 
-            _this119.alertService.error(errorMsg2show);
+            _this120.alertService.error(errorMsg2show);
 
-            _this119.loading = false;
-            _this119.isOtpSent = false;
+            _this120.loading = false;
+            _this120.isOtpSent = false;
 
-            _this119.appRouterService.appRouter('');
+            _this120.appRouterService.appRouter('');
           });
           this.userService.getUserProfilePortFolioByUserId(this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this119.portfolioDataArr = data["data"];
-              _this119.loading = false;
+              _this120.portfolioDataArr = data["data"];
+              _this120.loading = false;
             } else {
-              _this119.alertService.error(data['message']);
+              _this120.alertService.error(data['message']);
 
-              _this119.loading = false;
+              _this120.loading = false;
             }
           }, function (error) {
             var errorMsg2show = "";
@@ -28613,9 +28947,9 @@
               }
             } catch (ex) {}
 
-            _this119.alertService.error(errorMsg2show);
+            _this120.alertService.error(errorMsg2show);
 
-            _this119.loading = false;
+            _this120.loading = false;
           });
           this.handleConditionalValidation();
         }
@@ -28623,115 +28957,115 @@
         _createClass2(ProfileComponent, [{
           key: "handleConditionalValidation",
           value: function handleConditionalValidation() {
-            var _this120 = this;
+            var _this121 = this;
 
             this.profileForm.get('myPassportMedia').valueChanges.subscribe(function (userCategory) {
               if (userCategory) {
-                _this120.profileForm.get('myPassportMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this121.profileForm.get('myPassportMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this120.profileForm.get('myPassportNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this121.profileForm.get('myPassportNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this120.profileForm.get('myDLMedia').setValidators(null);
+                _this121.profileForm.get('myDLMedia').setValidators(null);
 
-                _this120.profileForm.get('myDLNumber').setValidators(null);
+                _this121.profileForm.get('myDLNumber').setValidators(null);
               } else {
-                _this120.profileForm.get('myPassportMedia').setValidators(null);
+                _this121.profileForm.get('myPassportMedia').setValidators(null);
 
-                _this120.profileForm.get('myPassportNumber').setValidators(null);
+                _this121.profileForm.get('myPassportNumber').setValidators(null);
 
-                _this120.profileForm.get('myDLMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this121.profileForm.get('myDLMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this120.profileForm.get('myDLNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this121.profileForm.get('myDLNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
               }
 
-              _this120.profileForm.get('myPassportMedia').updateValueAndValidity();
+              _this121.profileForm.get('myPassportMedia').updateValueAndValidity();
 
-              _this120.profileForm.get('myPassportNumber').updateValueAndValidity();
+              _this121.profileForm.get('myPassportNumber').updateValueAndValidity();
 
-              _this120.profileForm.get('myDLMedia').updateValueAndValidity();
+              _this121.profileForm.get('myDLMedia').updateValueAndValidity();
 
-              _this120.profileForm.get('myDLNumber').updateValueAndValidity();
+              _this121.profileForm.get('myDLNumber').updateValueAndValidity();
             });
             this.profileForm.get('myPassportNumber').valueChanges.subscribe(function (userCategory) {
               if (userCategory) {
-                _this120.profileForm.get('myPassportMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this121.profileForm.get('myPassportMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this120.profileForm.get('myPassportNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this121.profileForm.get('myPassportNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this120.profileForm.get('myDLMedia').setValidators(null);
+                _this121.profileForm.get('myDLMedia').setValidators(null);
 
-                _this120.profileForm.get('myDLNumber').setValidators(null);
+                _this121.profileForm.get('myDLNumber').setValidators(null);
               } else {
-                _this120.profileForm.get('myPassportMedia').setValidators(null);
+                _this121.profileForm.get('myPassportMedia').setValidators(null);
 
-                _this120.profileForm.get('myPassportNumber').setValidators(null);
+                _this121.profileForm.get('myPassportNumber').setValidators(null);
 
-                _this120.profileForm.get('myDLMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this121.profileForm.get('myDLMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this120.profileForm.get('myDLNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this121.profileForm.get('myDLNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
               }
 
-              _this120.profileForm.get('myPassportMedia').updateValueAndValidity();
+              _this121.profileForm.get('myPassportMedia').updateValueAndValidity();
 
-              _this120.profileForm.get('myPassportNumber').updateValueAndValidity();
+              _this121.profileForm.get('myPassportNumber').updateValueAndValidity();
 
-              _this120.profileForm.get('myDLMedia').updateValueAndValidity();
+              _this121.profileForm.get('myDLMedia').updateValueAndValidity();
 
-              _this120.profileForm.get('myDLNumber').updateValueAndValidity();
+              _this121.profileForm.get('myDLNumber').updateValueAndValidity();
             });
             this.profileForm.get('myDLMedia').valueChanges.subscribe(function (userCategory) {
               if (userCategory) {
-                _this120.profileForm.get('myPassportMedia').setValidators(null);
+                _this121.profileForm.get('myPassportMedia').setValidators(null);
 
-                _this120.profileForm.get('myPassportNumber').setValidators(null);
+                _this121.profileForm.get('myPassportNumber').setValidators(null);
 
-                _this120.profileForm.get('myDLMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this121.profileForm.get('myDLMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this120.profileForm.get('myDLNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this121.profileForm.get('myDLNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
               } else {
-                _this120.profileForm.get('myPassportMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this121.profileForm.get('myPassportMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this120.profileForm.get('myPassportNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this121.profileForm.get('myPassportNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this120.profileForm.get('myDLMedia').setValidators(null);
+                _this121.profileForm.get('myDLMedia').setValidators(null);
 
-                _this120.profileForm.get('myDLNumber').setValidators(null);
+                _this121.profileForm.get('myDLNumber').setValidators(null);
               }
 
-              _this120.profileForm.get('myPassportMedia').updateValueAndValidity();
+              _this121.profileForm.get('myPassportMedia').updateValueAndValidity();
 
-              _this120.profileForm.get('myPassportNumber').updateValueAndValidity();
+              _this121.profileForm.get('myPassportNumber').updateValueAndValidity();
 
-              _this120.profileForm.get('myDLMedia').updateValueAndValidity();
+              _this121.profileForm.get('myDLMedia').updateValueAndValidity();
 
-              _this120.profileForm.get('myDLNumber').updateValueAndValidity();
+              _this121.profileForm.get('myDLNumber').updateValueAndValidity();
             });
             this.profileForm.get('myDLNumber').valueChanges.subscribe(function (userCategory) {
               if (userCategory) {
-                _this120.profileForm.get('myPassportMedia').setValidators(null);
+                _this121.profileForm.get('myPassportMedia').setValidators(null);
 
-                _this120.profileForm.get('myPassportNumber').setValidators(null);
+                _this121.profileForm.get('myPassportNumber').setValidators(null);
 
-                _this120.profileForm.get('myDLMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this121.profileForm.get('myDLMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this120.profileForm.get('myDLNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this121.profileForm.get('myDLNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
               } else {
-                _this120.profileForm.get('myPassportMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this121.profileForm.get('myPassportMedia').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this120.profileForm.get('myPassportNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
+                _this121.profileForm.get('myPassportNumber').setValidators([_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]);
 
-                _this120.profileForm.get('myDLMedia').setValidators(null);
+                _this121.profileForm.get('myDLMedia').setValidators(null);
 
-                _this120.profileForm.get('myDLNumber').setValidators(null);
+                _this121.profileForm.get('myDLNumber').setValidators(null);
               }
 
-              _this120.profileForm.get('myPassportMedia').updateValueAndValidity();
+              _this121.profileForm.get('myPassportMedia').updateValueAndValidity();
 
-              _this120.profileForm.get('myPassportNumber').updateValueAndValidity();
+              _this121.profileForm.get('myPassportNumber').updateValueAndValidity();
 
-              _this120.profileForm.get('myDLMedia').updateValueAndValidity();
+              _this121.profileForm.get('myDLMedia').updateValueAndValidity();
 
-              _this120.profileForm.get('myDLNumber').updateValueAndValidity();
+              _this121.profileForm.get('myDLNumber').updateValueAndValidity();
             });
           }
         }, {
@@ -28906,76 +29240,76 @@
         }, {
           key: "clickOnGoToNext",
           value: function clickOnGoToNext(_step) {
-            var _this121 = this;
+            var _this122 = this;
 
             var doNotTriggerSelfT = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
             setTimeout(function () {
-              _this121.submitted = true;
+              _this122.submitted = true;
 
               switch (_step) {
                 case 1:
                   if (!doNotTriggerSelfT) {
-                    _this121.element_btn_click_profile_basic_details.click();
+                    _this122.element_btn_click_profile_basic_details.click();
                   }
 
-                  _this121.lastStepDataSaved = _step - 1;
+                  _this122.lastStepDataSaved = _step - 1;
                   break;
 
                 case 2:
-                  if (_this121.profileForm.controls.firstName.invalid || _this121.profileForm.controls.middleName.invalid || _this121.profileForm.controls.lastName.invalid || _this121.profileForm.controls.mobileNo.invalid) {
-                    _this121.alertService.error("Please Provide all data");
+                  if (_this122.profileForm.controls.firstName.invalid || _this122.profileForm.controls.middleName.invalid || _this122.profileForm.controls.lastName.invalid || _this122.profileForm.controls.mobileNo.invalid) {
+                    _this122.alertService.error("Please Provide all data");
 
-                    _this121.clickOnGoToNext(_step - 1);
-
-                    return;
-                  }
-
-                  if (_this121.profileForm.controls.emailAddress.invalid || _this121.profileForm.controls.address.invalid || _this121.profileForm.controls.birthDateCustomised.invalid || _this121.profileForm.controls.gender.invalid) {
-                    _this121.alertService.error("Please Provide all data");
-
-                    _this121.clickOnGoToNext(_step - 1);
+                    _this122.clickOnGoToNext(_step - 1);
 
                     return;
                   }
 
-                  if (_this121.profileForm.controls.cityCode.invalid || _this121.profileForm.controls.country.invalid || _this121.profileForm.controls.myProfileDetails.invalid) {
-                    _this121.alertService.error("Please Provide all data");
+                  if (_this122.profileForm.controls.emailAddress.invalid || _this122.profileForm.controls.address.invalid || _this122.profileForm.controls.birthDateCustomised.invalid || _this122.profileForm.controls.gender.invalid) {
+                    _this122.alertService.error("Please Provide all data");
 
-                    _this121.clickOnGoToNext(_step - 1);
+                    _this122.clickOnGoToNext(_step - 1);
+
+                    return;
+                  }
+
+                  if (_this122.profileForm.controls.cityCode.invalid || _this122.profileForm.controls.country.invalid || _this122.profileForm.controls.myProfileDetails.invalid) {
+                    _this122.alertService.error("Please Provide all data");
+
+                    _this122.clickOnGoToNext(_step - 1);
 
                     return;
                   }
 
                   if (!doNotTriggerSelfT) {
-                    _this121.element_btn_click_profile_skills_verification.click();
+                    _this122.element_btn_click_profile_skills_verification.click();
                   }
 
-                  if (_this121.lastStepDataSaved != _step - 1) {
-                    _this121.lastStepDataSaved = _step - 1;
+                  if (_this122.lastStepDataSaved != _step - 1) {
+                    _this122.lastStepDataSaved = _step - 1;
 
-                    _this121.onProfileUpdateSubmit(true);
+                    _this122.onProfileUpdateSubmit(true);
                   }
 
                   break;
 
                 case 3:
                   if (!doNotTriggerSelfT) {
-                    if (_this121._role == src_app_models__WEBPACK_IMPORTED_MODULE_5__["Role"].Borrower) {
-                      _this121.element_btn_click_profile_banking.click();
+                    if (_this122._role == src_app_models__WEBPACK_IMPORTED_MODULE_5__["Role"].Borrower) {
+                      _this122.element_btn_click_profile_banking.click();
                     } else {
-                      _this121.element_btn_click_profile_portfolio.click();
+                      _this122.element_btn_click_profile_portfolio.click();
                     }
                   }
 
-                  _this121.lastStepDataSaved = _step - 1;
+                  _this122.lastStepDataSaved = _step - 1;
                   break;
 
                 case 4:
                   if (!doNotTriggerSelfT) {
-                    _this121.element_btn_click_profile_portfolio.click();
+                    _this122.element_btn_click_profile_portfolio.click();
                   }
 
-                  _this121.lastStepDataSaved = _step - 1;
+                  _this122.lastStepDataSaved = _step - 1;
                   break;
               }
             }, 50);
@@ -29006,7 +29340,7 @@
         }, {
           key: "onProfileUpdateSubmit",
           value: function onProfileUpdateSubmit() {
-            var _this122 = this;
+            var _this123 = this;
 
             var byPassValidation = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
@@ -29065,24 +29399,24 @@
 
                 localStorage.setItem('currentUser', JSON.stringify(data['data']));
 
-                _this122.authenticationService.sendCurrentUserObj(data['data']);
+                _this123.authenticationService.sendCurrentUserObj(data['data']);
 
                 if (byPassValidation) {
-                  _this122.alertService.success('Basic details of your profile is updated successfully', true);
+                  _this123.alertService.success('Basic details of your profile is updated successfully', true);
                 } else {
-                  if (!isVerified) {
+                  if (!isVerified || isVerified == 2) {
                     //this.alertService.success('Dear ' + firstName + ', Thank you for uploading your documents. You have to wait for Admin to approve it all manually before your account is active. Remember to check your email for more info, or try logging in later. If there are still problems, contact support through our live chat.', true);
-                    _this122.alertService.success('Thank you for using our platform. It can take up to 48 hours for your documents to be approved, as we go through all the documents manually.', true);
+                    _this123.alertService.success('Thank you for using our platform. It can take up to 48 hours for your documents to be approved, as we go through all the documents manually.', true);
                   } else {
-                    _this122.alertService.success('Your Profile is Updated successfully', true); //  this.appRouterService.appRouter(this.authenticationService.currentUserValue);
+                    _this123.alertService.success('Your Profile is Updated successfully', true); //  this.appRouterService.appRouter(this.authenticationService.currentUserValue);
 
                   }
                 }
               } else {
                 //alert(JSON.stringify(data['message']));
-                _this122.alertService.error(data['message']);
+                _this123.alertService.error(data['message']);
 
-                _this122.loading = false;
+                _this123.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -29097,9 +29431,9 @@
                 }
               } catch (ex) {}
 
-              _this122.alertService.error(errorMsg2show);
+              _this123.alertService.error(errorMsg2show);
 
-              _this122.loading = false;
+              _this123.loading = false;
             });
           }
         }, {
@@ -29177,7 +29511,7 @@
         }, {
           key: "preview",
           value: function preview() {
-            var _this123 = this;
+            var _this124 = this;
 
             // Show preview 
             var mimeType = this.fileData.type;
@@ -29190,13 +29524,13 @@
             reader.readAsDataURL(this.fileData);
 
             reader.onload = function (_event) {
-              _this123.previewUrl = reader.result;
+              _this124.previewUrl = reader.result;
             };
           }
         }, {
           key: "onUploadAcademicDocs",
           value: function onUploadAcademicDocs() {
-            var _this124 = this;
+            var _this125 = this;
 
             var checkArray = this.profileForm.get('academicDocuments');
 
@@ -29232,14 +29566,14 @@
               observe: 'events'
             }).subscribe(function (events) {
               if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].UploadProgress) {
-                _this124.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
+                _this125.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
               } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].Response) {
-                _this124.fileUploadProgress = ''; //console.log(events.body);
+                _this125.fileUploadProgress = ''; //console.log(events.body);
                 //alert('SUCCESS !!');
 
-                _this124.fileData = null;
+                _this125.fileData = null;
 
-                _this124.alertService.success('Uploaded successfully', true);
+                _this125.alertService.success('Uploaded successfully', true);
 
                 var _uploadedUrl = events.body["data"].path;
 
@@ -29247,10 +29581,10 @@
                   _uploadedUrl = _uploadedUrl.substr(1);
                 }
 
-                _this124.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
-                _temp_currentFile.url = _this124.uploadedFilePath;
+                _this125.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                _temp_currentFile.url = _this125.uploadedFilePath;
 
-                _this124.onacademicDocumentsUpdate(true, null, _temp_currentFile);
+                _this125.onacademicDocumentsUpdate(true, null, _temp_currentFile);
               }
             });
           }
@@ -29300,7 +29634,7 @@
         }, {
           key: "onUploadMyProfileMedia",
           value: function onUploadMyProfileMedia() {
-            var _this125 = this;
+            var _this126 = this;
 
             var checkArray = this.profileForm.get('myProfileMedia');
 
@@ -29310,18 +29644,18 @@
             }
 
             var _loop2 = function _loop2(_index) {
-              var currentFile = _this125.myProfileFiles[_index];
+              var currentFile = _this126.myProfileFiles[_index];
 
               if (!currentFile) {
-                _this125.alertService.error("Select file first.");
+                _this126.alertService.error("Select file first.");
 
                 return "continue";
               }
 
               var formData = new FormData();
               formData.append('files', currentFile);
-              formData.append('documentId', _this125.authenticationService.currentUserValue._id);
-              _this125.fileUploadProgress = '0%';
+              formData.append('documentId', _this126.authenticationService.currentUserValue._id);
+              _this126.fileUploadProgress = '0%';
               var _temp_currentFile = {
                 name: currentFile.name,
                 type: currentFile.type,
@@ -29329,19 +29663,19 @@
                 url: null
               };
 
-              _this125.http.post(uploadAPI, formData, {
+              _this126.http.post(uploadAPI, formData, {
                 reportProgress: true,
                 observe: 'events'
               }).subscribe(function (events) {
                 if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].UploadProgress) {
-                  _this125.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
+                  _this126.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
                 } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].Response) {
-                  _this125.fileUploadProgress = ''; //console.log(events.body);
+                  _this126.fileUploadProgress = ''; //console.log(events.body);
                   //alert('SUCCESS !!');
 
-                  lodash__WEBPACK_IMPORTED_MODULE_12__["pullAt"](_this125.myProfileFiles, _index);
+                  lodash__WEBPACK_IMPORTED_MODULE_12__["pullAt"](_this126.myProfileFiles, _index);
 
-                  _this125.alertService.success('Uploaded successfully', true);
+                  _this126.alertService.success('Uploaded successfully', true);
 
                   var _uploadedUrl = events.body["data"].path;
 
@@ -29349,10 +29683,10 @@
                     _uploadedUrl = _uploadedUrl.substr(1);
                   }
 
-                  _this125.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
-                  _temp_currentFile.url = _this125.uploadedFilePath;
+                  _this126.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                  _temp_currentFile.url = _this126.uploadedFilePath;
 
-                  _this125.onMyProfileMediaUpdate(true, null, _temp_currentFile);
+                  _this126.onMyProfileMediaUpdate(true, null, _temp_currentFile);
                 }
               });
             };
@@ -29406,7 +29740,7 @@
         }, {
           key: "previewForProfile",
           value: function previewForProfile() {
-            var _this126 = this;
+            var _this127 = this;
 
             // Show preview 
             var mimeType = this.fileData4Profile.type;
@@ -29419,15 +29753,15 @@
             reader.readAsDataURL(this.fileData4Profile);
 
             reader.onload = function (_event) {
-              _this126.profileForm.get('selfProfileUrl').setValue(reader.result);
+              _this127.profileForm.get('selfProfileUrl').setValue(reader.result);
 
-              _this126.selfProfileUrlPendingForUpload = true;
+              _this127.selfProfileUrlPendingForUpload = true;
             };
           }
         }, {
           key: "onUploadForProfile",
           value: function onUploadForProfile() {
-            var _this127 = this;
+            var _this128 = this;
 
             if (!this.fileData4Profile) {
               this.alertService.error("Select file first.");
@@ -29450,14 +29784,14 @@
               observe: 'events'
             }).subscribe(function (events) {
               if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].UploadProgress) {
-                _this127.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
+                _this128.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
               } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].Response) {
-                _this127.fileUploadProgress = ''; //console.log(events.body);
+                _this128.fileUploadProgress = ''; //console.log(events.body);
                 //alert('SUCCESS !!');
 
-                _this127.fileData4Profile = null;
+                _this128.fileData4Profile = null;
 
-                _this127.alertService.success('Uploaded successfully', true);
+                _this128.alertService.success('Uploaded successfully', true);
 
                 var _uploadedUrl = events.body["data"].path;
 
@@ -29465,11 +29799,11 @@
                   _uploadedUrl = _uploadedUrl.substr(1);
                 }
 
-                _this127.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                _this128.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
 
-                _this127.profileForm.get('selfProfileUrl').setValue(_this127.uploadedFilePath);
+                _this128.profileForm.get('selfProfileUrl').setValue(_this128.uploadedFilePath);
 
-                _this127.selfProfileUrlPendingForUpload = false;
+                _this128.selfProfileUrlPendingForUpload = false;
               }
             });
           }
@@ -29587,7 +29921,7 @@
         }, {
           key: "onUploadAssetDocs",
           value: function onUploadAssetDocs(_keyName) {
-            var _this128 = this;
+            var _this129 = this;
 
             if (!_keyName) {
               return;
@@ -29629,14 +29963,14 @@
               observe: 'events'
             }).subscribe(function (events) {
               if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].UploadProgress) {
-                _this128.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
+                _this129.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
               } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpEventType"].Response) {
-                _this128.fileUploadProgress = ''; //console.log(events.body);
+                _this129.fileUploadProgress = ''; //console.log(events.body);
                 //alert('SUCCESS !!');
 
-                _this128.fileData = null;
+                _this129.fileData = null;
 
-                _this128.alertService.success('Uploaded successfully', true);
+                _this129.alertService.success('Uploaded successfully', true);
 
                 var _uploadedUrl = events.body["data"].path;
 
@@ -29644,10 +29978,10 @@
                   _uploadedUrl = _uploadedUrl.substr(1);
                 }
 
-                _this128.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
-                _temp_currentFile.url = _this128.uploadedFilePath;
+                _this129.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                _temp_currentFile.url = _this129.uploadedFilePath;
 
-                _this128.onAssetDocumentsUpdate(true, null, _temp_currentFile, _keyName);
+                _this129.onAssetDocumentsUpdate(true, null, _temp_currentFile, _keyName);
               }
             });
           }
@@ -29688,7 +30022,7 @@
         }, {
           key: "modalMediaUploadWithCropFeature",
           value: function modalMediaUploadWithCropFeature(documentId, attributeKey, subFolderName) {
-            var _this129 = this;
+            var _this130 = this;
 
             var isAdminUserT = false;
 
@@ -29740,9 +30074,9 @@
                   switch (result.data.attributeKey) {
                     case 'selfProfileUrl':
                       if (result.data.uploadedFilePath) {
-                        _this129.profileForm.get('selfProfileUrl').setValue(result.data.uploadedFilePath);
+                        _this130.profileForm.get('selfProfileUrl').setValue(result.data.uploadedFilePath);
 
-                        _this129.onProfileUpdateSubmit(true);
+                        _this130.onProfileUpdateSubmit(true);
                       }
 
                       break;
@@ -29756,11 +30090,11 @@
                     case 'myRKIMedia':
                     case 'myRKIMediaSelfVerify':
                       if (result.data.uploadedFilePath) {
-                        _this129.alertService.success("It can take up to 48 hours for your documents to be approved, as we go through all the documents manually.");
+                        _this130.alertService.success("It can take up to 48 hours for your documents to be approved, as we go through all the documents manually.");
 
-                        _this129.onAssetDocumentsUpdate(true, null, result.data.uploadedFileObj, result.data.attributeKey);
+                        _this130.onAssetDocumentsUpdate(true, null, result.data.uploadedFileObj, result.data.attributeKey);
 
-                        _this129.onProfileUpdateSubmit(true);
+                        _this130.onProfileUpdateSubmit(true);
                       }
 
                       break;
@@ -33478,6 +33812,26 @@
     },
 
     /***/
+    "uzbu":
+    /*!********************************************************************!*\
+      !*** ./src/app/shared/payment-paypal/payment-paypal.component.css ***!
+      \********************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function uzbu(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJwYXltZW50LXBheXBhbC5jb21wb25lbnQuY3NzIn0= */";
+      /***/
+    },
+
+    /***/
     "vAC1":
     /*!*******************************************************************************************************!*\
       !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/lender/modal/modal-applied-session-display.html ***!
@@ -33493,7 +33847,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<!-- <div class=\"row\">\n    <div class=\"col-xl-11 col-10\">\n        <h4 class=\"mb-3 text-black-50\" i18n>\n            Borrowers Requests for {{utilityService.returnLoanType(LoanObj.loanType)}} of kr {{LoanObj.loanAmount}}\n        </h4>\n    </div>\n    <div class=\"col-xl-1 col-2\">\n        <i class=\"icon-close float-right\" mat-button mat-dialog-close></i>\n    </div>\n</div> -->\n<h2 mat-dialog-title class=\"text-primary\">\n    <div class=\"row\">\n        <div class=\"col-xl-11 col-10\">\n            <h4 class=\"mb-3 text-black-50\" i18n>\n                Borrowers Requests for {{utilityService.returnLoanType(LoanObj.loanType)}} of kr {{LoanObj.loanAmount}}\n            </h4>\n        </div>\n        <div class=\"col-xl-1 col-2\">\n            <i class=\"icon-close float-right\" mat-button (click)=\"closeDialog(null, null)\"></i>\n        </div>\n    </div>\n</h2>\n\n<mat-dialog-content class=\"mat-typography\">\n    <div class=\"row\">\n        <div class=\"col-xl-12 col-12\">\n            <div id=\"accordion\">\n                <div class=\"card shadow-sm mb-3\" *ngFor=\"let LoanApplyObj of LoanObj.sessionAppliedByBorrowers;\">\n                    <div class=\"card-header\">\n                        <span\n                            (click)=\"usersProfile(userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers, false))\">\n                            <i class=\"icon icon-user\"></i>\n\n                            {{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                            false,'firstName')}}\n                        </span>\n\n                        <a class=\"collapsed card-link\" data-toggle=\"collapse\"\n                            [attr.href]=\"'#collapse_' + LoanApplyObj.borrowerId\" i18n>\n\n                            <label class=\"badge font-weight-light text-capitalize text-cap\"\n                                [ngClass]=\"{'badge-success': (LoanApplyObj.status==SessionStatus.Accepted || LoanApplyObj.status==SessionStatus.Active || LoanApplyObj.status==SessionStatus.Completed || LoanApplyObj.status==SessionStatus.OngoingInitiated  || LoanApplyObj.status==SessionStatus.AwaitingForApproval  || LoanApplyObj.status==SessionStatus.Ongoing), 'badge-danger': (LoanApplyObj.status==SessionStatus.Rejected || LoanApplyObj.status==SessionStatus.RejectedOngoing || LoanApplyObj.status==SessionStatus.Suspended), 'badge-info': ( LoanApplyObj.status==null || LoanApplyObj.status=='' || LoanApplyObj.status==SessionStatus.Pending)}\">\n                                {{\n                                utilityService.returnStringWithReplacing_(LoanApplyObj.status || SessionStatus.Pending)\n                                |\n                                titlecase }}\n                            </label>\n                            <label class=\"badge badge-warning text-capitalize text-cap float-right\">\n                                Loan Number: {{LoanApplyObj.loanApplyNumber}}\n                            </label>\n                        </a>\n                    </div>\n                    <div [attr.id]=\"'collapse_' + LoanApplyObj.borrowerId\" class=\"collapse show\"\n                        data-parent=\"#accordion\">\n                        <div class=\"card-body\">\n                            <div class=\"row\">\n                                <div class=\"col-xl-6 col-12\">\n                                    <h3 class=\"text-primary\" i18n>New Proposed Amount: <badge\n                                            class=\"badge badge-primary\">\n                                            {{LoanApplyObj.proposedLoanAmount || 'NA'}}</badge>\n                                    </h3>\n                                </div>\n                                <div class=\"col-xl-6 col-12\">\n                                    <h5 *ngIf=\"LoanApplyObj.loanInsuranceRequired\" class=\"card-title float-right\" i18n>\n                                        Applied for Insurance with Amount: <badge class=\"badge badge-primary\">\n                                            {{LoanApplyObj.loanInsuranceAmount || 'NA'}}</badge>\n                                    </h5>\n                                </div>\n                            </div>\n\n                            <div class=\"row\"\n                                *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted\">\n                                <div class=\"col-xl-12 col-12\">\n                                    <div class=\"card shadow mb-4\">\n                                        <div class=\"card-header py-3\">\n                                            <div class=\"form-group d-none blocked4bypass\">\n                                                <div class=\"form-check-inline\">\n                                                    <div class=\"custom-control custom-checkbox\">\n                                                        <input\n                                                            [(ngModel)]=\"LoanApplyObjCurrent.isLoanAmountPaidByLender\"\n                                                            name=\"isLoanAmountPaidByLender\"\n                                                            id=\"isLoanAmountPaidByLender\" type=\"checkbox\"\n                                                            class=\"custom-control-input\" [value]=\"true\"\n                                                            [checked]=\"LoanApplyObjCurrent.isLoanAmountPaidByLender\"\n                                                            (change)=\"LoanMoneyTransferStatusChange($event, LoanObj, LoanApplyObj)\"\n                                                            >\n                                                        <label for=\"isLoanAmountPaidByLender\"\n                                                            class=\"custom-control-label\" i18n>\n                                                            Is Loan Amount Transfered? </label>\n                                                    </div>\n                                                </div>\n                                            </div>\n                                            <div\n                                                *ngIf=\"LoanApplyObj.lenderId==authenticationService.currentUserValue._id\">\n                                                <div class=\"form-group\" *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender\">\n                                                    <!--\n                                                    <span (click)=\"LoanMoneyTransferStatusModel(LoanApplyObj.sessionForBorrower, LoanApplyObj)\" class=\"badge badge-success\">\n                                                        is Money Transfered?\n                                                    </span>\n                                                -->\n                                                \n                                                    <div class=\"form-check-inline\">\n                                                        <div class=\"custom-control custom-checkbox\">\n                                                            <input [(ngModel)]=\"LoanApplyObj.isLoanAmountPaidByLender\" name=\"isLoanAmountPaidByLender\"\n                                                                id=\"isLoanAmountPaidByLender\" type=\"checkbox\"\n                                                                class=\"custom-control-input\" [value]=\"true\"\n                                                                (change)=\"LoanMoneyTransferStatusChange($event, LoanObj, LoanApplyObj)\"\n                                                                [checked]=\"LoanApplyObj.isLoanAmountPaidByLender\">\n                                                            <label for=\"isLoanAmountPaidByLender\"\n                                                                class=\"custom-control-label\" i18n>\n                                                                Money Transfered\n                                                            </label>\n                                                        </div>\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"card-body d-none blocked4bypass\">\n                                            <div class=\"row\">\n\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group\">\n                                                        <label for=\"transactionIdForLoanAmountPaidByLender\"\n                                                            i18n>TransactionId/Payment Ref.\n                                                            ID</label>\n                                                        <input type=\"text\" class=\"form-control\"\n                                                            placeholder=\"TransactionId/Payment Ref. ID\"\n                                                            [(ngModel)]=\"LoanApplyObjCurrent.transactionIdForLoanAmountPaidByLender\">\n                                                    </div>\n                                                </div>\n\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group\">\n\n                                                        <label for=\"transactionOnForLoanAmountPaidByLenderCustomised\"\n                                                            i18n>\n                                                            Transaction Date\n                                                        </label>\n                                                        <input type=\"date\"\n                                                            [(ngModel)]=\"transactionOnForLoanAmountPaidByLenderCustomised\"\n                                                            class=\"form-control\" />\n\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group\">\n                                                        <label for=\"usr\" i18n>Transaction Description</label>\n                                                        <input type=\"transactionDescriptionForLoanAmountPaidByLender\"\n                                                            class=\"form-control\" placeholder=\"Description\"\n                                                            [(ngModel)]=\"LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLender\">\n                                                    </div>\n                                                </div>\n                                                <br>\n                                                <hr>\n                                                <div class=\"col-xl-12 col-12\">\n                                                    <button class=\"btn btn-primary btn-sm float-right\"\n                                                        (click)=\"paymentDoneByLender(LoanApplyObj)\" i18n>\n                                                        Update\n                                                    </button>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n\n                            </div>\n\n\n\n                            <div class=\"row\">\n                                <div class=\"col-xl-6 col-12\">\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 col-12\" *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender\">\n                                            <div class=\"card bg-gradient-primary mb-3 text-white shadow\">\n                                                <div class=\"card-body dashobard-card p-2\">\n                                                    <div class=\"text-xs font-weight-bold mb-3\" i18n>\n                                                        Lender Payment Confirmation</div>\n                                                    <hr>\n                                                    <div class=\"row\">\n                                                        <div class=\"col-xl-4 col-12\">\n                                                            <div class=\"form-group\">\n                                                                <label for=\"transactionIdForLoanAmountPaidByLender\"\n                                                                    i18n>Transaction ID</label>\n                                                                <h4>\n                                                                    {{LoanApplyObj.transactionIdForLoanAmountPaidByLender}}\n                                                                </h4>\n                                                            </div>\n                                                        </div>\n                                                        <div class=\"col-xl-4 col-12\">\n                                                            <div class=\"form-group\">\n                                                                <label for=\"transactionOnForLoanAmountPaidByLender\"\n                                                                    i18n>Transaction\n                                                                    Date</label>\n                                                                <h4>\n                                                                    {{LoanApplyObj.transactionOnForLoanAmountPaidByLender\n                                                                    | date:'dd-MMM-YYYY'}}\n                                                                </h4>\n                                                            </div>\n                                                        </div>\n                                                        <div class=\"col-xl-4 col-12\">\n                                                            <div class=\"form-group\">\n                                                                <label for=\"createdOnForLoanAmountPaidByLender\"\n                                                                    i18n>Updated On</label>\n                                                                <h4>\n                                                                    {{LoanApplyObj.createdOnForLoanAmountPaidByLender |\n                                                                    date:'dd-MMM-YYYY'}}\n                                                                </h4>\n                                                            </div>\n                                                        </div>\n                                                        <div class=\"col-xl-12 col-12\">\n                                                            <p class=\"mb-2 text-white\"\n                                                                for=\"transactionDescriptionForLoanAmountPaidByLender\"\n                                                                i18n>\n                                                                Description:</p>\n                                                            <div class=\"text-white\">\n                                                                {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLender}}\n                                                            </div>\n                                                        </div>\n                                                    </div>\n                                                </div>\n                                            </div>\n\n                                        </div>\n                                        <div class=\"col-xl-12 col-12\"\n                                            *ngIf=\"LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                            <div class=\"card bg-success text-white shadow mb-4\">\n                                                <div class=\"card-body dashobard-card p-2\">\n                                                    <div class=\"text-xs font-weight-bold  mb-2\" i18n>\n                                                        Borrower's Payment confirmation</div>\n                                                    <hr>\n                                                    <div class=\"row\">\n\n                                                        <div class=\"col-xl-4 col-12\">\n                                                            <div class=\"form-group\">\n                                                                <label\n                                                                    for=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrower\"\n                                                                    i18n>Transaction\n                                                                    Date</label>\n                                                                <h4>\n                                                                    {{LoanApplyObj.transactionOnForLoanAmountPaidByLenderConfirmByBorrower\n                                                                    |\n                                                                    date:'dd-MMM-YYYY'}}\n                                                                </h4>\n                                                            </div>\n                                                        </div>\n                                                        <div class=\"col-xl-4 col-12\">\n                                                            <div class=\"form-group\">\n                                                                <label for=\"createdOnForLoanAmountPaidByLender\"\n                                                                    i18n>Updated On</label>\n                                                                <h4>\n                                                                    {{LoanApplyObj.createdOnForLoanAmountPaidByLenderConfirmByBorrower\n                                                                    |\n                                                                    date:'dd-MMM-YYYY'}}\n                                                                </h4>\n                                                            </div>\n                                                        </div>\n                                                        <div class=\"col-xl-4 col-12\">\n                                                            <p class=\"mb-2 text-white\"\n                                                                for=\"transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\"\n                                                                i18n>\n                                                                Description:</p>\n                                                            <div class=\"text-white\">\n                                                                {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower}}\n                                                            </div>\n                                                        </div>\n                                                    </div>\n                                                </div>\n                                            </div>\n\n                                        </div>\n\n                                    </div>\n                                </div>\n                                <div class=\"col-xl-6 col-12\">\n                                    <div class=\"row\">\n                                        <div class=\"col-xl-12 col-12\">\n                                            <div class=\"table-responsive table shadow border\">\n                                                <table class=\"table mb-0\">\n                                                    <thead>\n                                                        <tr>\n                                                            <th scope=\"col\" i18n>EMI Date</th>\n                                                            <th scope=\"col\" i18n>Payment</th>\n                                                            <th *ngIf=\"returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted\"\n                                                                scope=\"col\" i18n>\n                                                                <!-- && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id-->\n                                                                Payment Status\n                                                            </th>\n                                                        </tr>\n                                                    </thead>\n                                                    <tbody>\n                                                        <tr\n                                                            *ngFor=\"let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index\">\n                                                            <td>{{utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1)\n                                                                | date:'dd-MMM-YYYY'}}</td>\n                                                            <td\n                                                                *ngIf=\"(!LoanApplyObj.calculatedMonthlyAmountForEMI) || (LoanApplyObj.calculatedMonthlyAmountForEMI==LoanObj.calculatedMonthlyAmountForEMI)\">\n                                                                kr\n                                                                {{LoanObj.calculatedMonthlyAmountForEMI}}</td>\n                                                            <td\n                                                                *ngIf=\"(LoanApplyObj.calculatedMonthlyAmountForEMI) && (LoanApplyObj.calculatedMonthlyAmountForEMI!=LoanObj.calculatedMonthlyAmountForEMI)\">\n                                                                kr\n                                                                <span\n                                                                    style=\"-webkit-text-decoration-line: line-through;text-decoration-line: line-through;\">\n                                                                    {{LoanObj.calculatedMonthlyAmountForEMI}}\n                                                                </span>\n                                                                &nbsp;\n                                                                <span>\n                                                                    {{LoanApplyObj.calculatedMonthlyAmountForEMI}}\n                                                                </span>\n                                                            </td>\n                                                            <td\n                                                                *ngIf=\"returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted\">\n                                                                <!--&& LoanApplyObj.borrowerId==authenticationService.currentUserValue._id-->\n                                                                <div\n                                                                    *ngIf=\"!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && (LoanApplyObj.borrowerId==authenticationService.currentUserValue._id)\">\n                                                                    <div class=\"form-check-inline\">\n                                                                        <div class=\"custom-control custom-checkbox\">\n                                                                            <!--[disabled]=\"LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]\"-->\n                                                                            <input\n                                                                                [(ngModel)]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]\"\n                                                                                name=\"isLoanAmountPaidByBorrower\"\n                                                                                id=\"isLoanAmountPaidByBorrower_{{i}}\"\n                                                                                type=\"checkbox\"\n                                                                                class=\"custom-control-input\"\n                                                                                [value]=\"true\"\n                                                                                (change)=\"initiateLoanAmountPaidByBorrower($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_'+i))\"\n                                                                                [checked]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]\">\n                                                                            <label\n                                                                                for=\"isLoanAmountPaidByBorrower_{{i}}\"\n                                                                                class=\"custom-control-label\" i18n>\n                                                                                Is Amount Transfered? </label>\n                                                                        </div>\n                                                                    </div>\n                                                                </div>\n                                                                <div\n                                                                    *ngIf=\"(returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))  && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id) || (returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.lenderId==authenticationService.currentUserValue._id)\">\n                                                                    <i class=\"icon-check\"></i>&nbsp;\n                                                                    Paid{{returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj,\n                                                                    utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))?'\n                                                                    & Verified':''}}\n                                                                    &nbsp;\n\n                                                                    <i class=\"icon-eye cursor-pointer\"\n                                                                        data-toggle=\"modal\"\n                                                                        data-target=\"#installment_deatils_modal\"\n                                                                        (click)=\"viewCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))\"></i>&nbsp;\n                                                                </div>\n                                                                <div *ngIf=\"!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))  && LoanApplyObj.lenderId==authenticationService.currentUserValue._id\"\n                                                                    i18n>\n                                                                    <i class=\"icon-close\"></i>&nbsp;Not Paid\n                                                                </div>\n                                                                <div\n                                                                    *ngIf=\"returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && !returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.lenderId==authenticationService.currentUserValue._id\">\n                                                                    <div class=\"form-check-inline\">\n                                                                        <div class=\"custom-control custom-checkbox\">\n                                                                            <!--[disabled]=\"LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]\"-->\n                                                                            <input\n                                                                                [(ngModel)]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrowerConfirmByLender_'+i]\"\n                                                                                name=\"isLoanAmountPaidByBorrowerConfirmByLender\"\n                                                                                id=\"isLoanAmountPaidByBorrowerConfirmByLender_{{i}}\"\n                                                                                type=\"checkbox\"\n                                                                                class=\"custom-control-input\"\n                                                                                [value]=\"true\"\n                                                                                (change)=\"initiateLoanAmountPaidByBorrowerConfirmByLender($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrowerConfirmByLender_'+i))\"\n                                                                                [checked]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrowerConfirmByLender_'+i]\">\n                                                                            <label\n                                                                                for=\"isLoanAmountPaidByBorrowerConfirmByLender_{{i}}\"\n                                                                                class=\"custom-control-label\" i18n>\n                                                                                Is Amount Received? </label>\n                                                                        </div>\n                                                                    </div>\n                                                                </div>\n                                                            </td>\n                                                        </tr>\n                                                    </tbody>\n                                                </table>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n                            </div>\n\n\n\n                            <div class=\"modal fade\" id=\"installment_deatils_modal\">\n                                <div class=\"modal-dialog modal-dialog-centered modal-lg\">\n                                    <div class=\"modal-content\">\n\n                                        <div class=\"modal-header\">\n                                            <h4 class=\"modal-title\" i18n>Installment Details</h4>\n                                            <button type=\"button\" class=\"close\" data-dismiss=\"modal\"\n                                                (click)=\"hideInstallmentPaymentModal()\">&times;</button>\n                                        </div>\n\n\n                                        <div class=\"modal-body\">\n                                            <div class=\"row\"\n                                                *ngIf=\"LoanApplyObjCurrent4Installment.installmentKey && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted  && LoanApplyObj.lenderId==authenticationService.currentUserValue._id\">\n\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group border-right\">\n                                                        <label for=\"installmentKey\" i18n>Installment For</label>\n                                                        <h4 class=\"text-primary\">\n                                                            {{LoanApplyObjCurrent4Installment.installmentKey}}\n                                                            <label\n                                                                *ngIf=\"LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin\"\n                                                                class=\"badge badge-warning text-capitalize text-cap float-right\"\n                                                                i18n>\n                                                                Paid By Admin\n                                                            </label>\n                                                        </h4>\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group border-right\">\n                                                        <label for=\"transactionIdForLoanAmountPaidToLender\"\n                                                            i18n>TransactionId/Payment Ref.\n                                                            ID</label>\n                                                        <h4 class=\"text-primary\">\n                                                            {{LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender}}\n                                                        </h4>\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group border-right\">\n                                                        <label for=\"transactionOnForLoanAmountPaidToLender\"\n                                                            i18n>Transaction\n                                                            Date</label>\n                                                        <h4 class=\"text-primary\">\n                                                            {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender\n                                                            |\n                                                            date:'dd-MMM-YYYY'}}\n                                                        </h4>\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group border-right\">\n                                                        <label for=\"createdOnForLoanAmountPaidToLender\" i18n>Updated\n                                                            On</label>\n                                                        <h4 class=\"text-primary\">\n                                                            {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender\n                                                            |\n                                                            date:'dd-MMM-YYYY'}}\n                                                        </h4>\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <p class=\"mb-2\"\n                                                        for=\"transactionDescriptionForLoanAmountPaidToLender\" i18n>\n                                                        Note:</p>\n                                                    <div class=\"text-black-50\">\n                                                        {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLender}}\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-12 col-12\">\n                                                    <div class=\"row\"\n                                                        *ngIf=\"LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\">\n                                                        <div class=\"col-xl-4 col-12\">\n                                                            <div class=\"form-group border-right\">\n                                                                <label\n                                                                    for=\"transactionOnForLoanAmountPaidToLenderConfirmByLender\"\n                                                                    i18n>Confirmation: Transaction Date</label>\n                                                                <h4 class=\"text-primary\">\n                                                                    {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender\n                                                                    |\n                                                                    date:'dd-MMM-YYYY'}}\n                                                                </h4>\n                                                            </div>\n                                                        </div>\n                                                        <div class=\"col-xl-4 col-12\">\n                                                            <div class=\"form-group border-right\">\n                                                                <label\n                                                                    for=\"createdOnForLoanAmountPaidToLenderConfirmByLender\"\n                                                                    i18n>Confirmation:\n                                                                    Updated On</label>\n                                                                <h4 class=\"text-primary\">\n                                                                    {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\n                                                                    |\n                                                                    date:'dd-MMM-YYYY'}}\n                                                                </h4>\n                                                            </div>\n                                                        </div>\n                                                        <div class=\"col-xl-4 col-12\">\n                                                            <p class=\"mb-2\"\n                                                                for=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\"\n                                                                i18n>\n                                                                Confirmation: Note:</p>\n                                                            <div class=\"text-black-50\">\n                                                                {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLenderConfirmByLender}}\n                                                            </div>\n                                                        </div>\n\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-12 col-12\">\n                                                    <div class=\"row\"\n                                                        *ngIf=\"!LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\">\n                                                        <div class=\"col-xl-6 col-12\">\n                                                            <div class=\"form-group\">\n\n                                                                <label\n                                                                    for=\"transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised\"\n                                                                    i18n>\n                                                                    Transaction Date\n                                                                </label>\n                                                                <input type=\"date\"\n                                                                    [(ngModel)]=\"transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised\"\n                                                                    class=\"form-control\" />\n\n                                                            </div>\n                                                        </div>\n                                                        <div class=\"col-xl-6 col-12\">\n                                                            <div class=\"form-group\">\n                                                                <label\n                                                                    for=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\"\n                                                                    i18n>Note.</label>\n                                                                <input text=\"text\"\n                                                                    name=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\"\n                                                                    class=\"form-control\" placeholder=\"Description\"\n                                                                    [(ngModel)]=\"LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\">\n                                                            </div>\n                                                        </div>\n                                                        <br>\n                                                        <hr>\n                                                        <div class=\"col-xl-12 col-12\">\n                                                            <button class=\"btn btn-primary btn-sm float-right\"\n                                                                (click)=\"paymentDoneToLenderConfirmByLender(LoanApplyObj)\"\n                                                                i18n>\n                                                                Update\n                                                            </button>\n                                                        </div>\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n\n\n                                        <div class=\"modal-footer\">\n                                            <button type=\"button\" class=\"btn btn-secondary\"\n                                                (click)=\"hideInstallmentPaymentModal()\" data-dismiss=\"modal\"\n                                                i18n>Close</button>\n                                        </div>\n\n                                    </div>\n                                </div>\n                            </div>\n\n\n\n                        </div>\n                        <div class=\"card-footer\">\n                            <div class=\"row\" [ngClass]=\"{ 'd-none': ready2Refund }\"\n                                [ngSwitch]=\"returnSessionApplyStatus(LoanApplyObj)\">\n                                <!-- the same view can be shown in more than one case -->\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Pending\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\">Reject</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\n                                    -->\n                                    <button class=\"btn btn-primary btn-sm float-right\"\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\"><i\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\n                                </div>\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Accepted\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button> &nbsp;\n                                    <button class=\"btn btn-info btn-sm\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoingWithRefund)\">Apply\n                                        for Refund</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)\">Proceed for\n                                        Execution</button>\n                                        -->\n\n                                    <a class=\"btn btn-success btn-sm float-left ml-2\" i18n target=\"_blank\"\n                                        [href]=\"returnUrl4downloadCOntractPDF(LoanApplyObj._id)\" download><i\n                                            class=\"icon-cloud-down\"></i>&nbsp;Download Contract</a>\n                                    <button i18n class=\"btn btn-primary btn-sm float-right\"\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\"><i\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\n                                </div>\n\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.OngoingInitiated\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button>\n                                    <button [disabled]=\"true\" class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.AwaitingForApproval)\">Proceed for\n                                        Execution</button>\n                                    -->\n                                </div>\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.AwaitingForApproval\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Ongoing)\">Proceed for\n                                        Execution</button>\n                                    -->\n\n                                    <button *ngIf=\"LoanApplyObj.createdBy!=authenticationService.currentUserValue._id\"\n                                        (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\"\n                                        class=\"float-right btn btn-danger btn-sm\" i18n>Reject</button>\n                                    <button *ngIf=\"LoanApplyObj.createdBy!=authenticationService.currentUserValue._id\"\n                                        class=\"btn btn-success btn-sm float-right mr-2\"\n                                        (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\" i18n>\n                                        Proceed For Contract\n                                    </button>\n                                    <button class=\"btn btn-primary btn-sm float-right mr-2\"\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\" i18n><i\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\n\n                                </div>\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Ongoing\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Suspended)\">Reject</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Completed)\">Completed</button>\n                                    -->\n                                </div>\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Completed\">\n                                    <button mat-button mat-dialog-close class=\"btn btn-success btn-sm float-right\"\n                                        (click)=\"addNewRatings(LoanApplyObj)\" i18n>Rate Now</button>\n                                </div>\n                                <!--default case when there are no matches -->\n                                <div class=\"col-xl-12\" *ngSwitchDefault>\n                                    <!-- \n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\">Reject</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\n                                -->\n                                </div>\n                            </div>\n                        </div>\n                        <!--<button *ngIf=\"!check4SessionApplyStatus(LoanApplyObj)\" class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\n                        <button *ngIf=\"check4SessionApplyStatus(LoanApplyObj)\" class=\"btn btn-success btn-sm float-right mr-2\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)\">Proceed for Execution</button>-->\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</mat-dialog-content>\n\n\n<!--\n<div class=\"row\" [ngClass]=\"{ 'd-none': !userInitiatedForPayment }\">\n    <div class=\"col-xl-12 text-center\">\n        <app-payment></app-payment>\n    </div>\n</div>\n<div class=\"row\" [ngClass]=\"{ 'd-none': !ready2Refund }\">\n    <div class=\"col-xl-12\">\n        <div class=\"card-body\">\n            <div class=\"row\">\n                <div class=\"col-xl-12 text-center\">\n                    <div class=\"form-group\">\n                        <label class=\"mb-3 font-weight-bold\">\n                            Paid Amount:&nbsp;\n                        </label>\n                        <label class=\"mb-3\">\n                            {{refundObj.amount}}\n                        </label>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"mb-3 font-weight-bold\">\n                            Refund Charges:&nbsp;\n                        </label>\n                        <label class=\"mb-3\">\n                            {{refundObj.cancellationCharges}}\n                        </label>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"mb-3 font-weight-bold\">\n                            Amount to be refunded:&nbsp;\n                        </label>\n                        <label class=\"mb-3\">\n                            {{refundObj.finalAmount2Refund}}\n                        </label>\n                    </div>\n                    <div class=\"form-group\">\n                        <button class=\"btn btn-danger btn-sm\" (click)=\"ready2Refund=false\">Cancel</button> &nbsp;\n                        <button class=\"btn btn-success btn-sm\" (click)=\"finalSubmissionForRefund()\">Refund</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n-->";
+      __webpack_exports__["default"] = "<!-- <div class=\"row\">\n    <div class=\"col-xl-11 col-10\">\n        <h4 class=\"mb-3 text-black-50\" i18n>\n            Borrowers Requests for {{utilityService.returnLoanType(LoanObj.loanType)}} of kr {{LoanObj.loanAmount}}\n        </h4>\n    </div>\n    <div class=\"col-xl-1 col-2\">\n        <i class=\"icon-close float-right\" mat-button mat-dialog-close></i>\n    </div>\n</div> -->\n<h2 mat-dialog-title class=\"text-primary\">\n    <div class=\"row\">\n        <div class=\"col-xl-11 col-10\">\n            <h4 class=\"mb-3 text-black-50\" i18n>\n                Borrowers Requests for {{utilityService.returnLoanType(LoanObj.loanType)}} of kr {{LoanObj.loanAmount}}\n            </h4>\n        </div>\n        <div class=\"col-xl-1 col-2\">\n            <i class=\"icon-close float-right\" mat-button (click)=\"closeDialog(null, null)\"></i>\n        </div>\n    </div>\n</h2>\n\n<mat-dialog-content class=\"mat-typography\">\n    <div class=\"row\">\n        <div class=\"col-xl-12 col-12\">\n            <div id=\"accordion\">\n                <div class=\"card shadow-sm mb-3\"\n                    *ngFor=\"let LoanApplyObj of LoanObj.sessionAppliedByBorrowers | mySessionsFilter : 'status' : (SessionStatusTypeFilter.length>0 ? SessionStatusTypeFilter:['accepted']):null:null:null;\">\n                    <div class=\"card-header\">\n                        <span>\n                            {{LoanApplyObj.borrowerId.firstName}}\n                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                            false,'firstName', LoanApplyObj.borrowerId._id)}}-->\n                        </span>\n                        <span class=\"badge badge-info mx-2 cursor-pointer\" i18n\n                            (click)=\"usersProfile(LoanApplyObj.borrowerId)\">View\n                            Profile</span>\n<!--userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers, false, null, LoanApplyObj.borrowerId._id)-->\n                        <a i18n>\n\n                            <label class=\"badge font-weight-light text-capitalize text-cap\"\n                                [ngClass]=\"{'badge-success': (LoanApplyObj.status==SessionStatus.Accepted || LoanApplyObj.status==SessionStatus.Active || LoanApplyObj.status==SessionStatus.Completed || LoanApplyObj.status==SessionStatus.OngoingInitiated  || LoanApplyObj.status==SessionStatus.AwaitingForApproval  || LoanApplyObj.status==SessionStatus.Ongoing), 'badge-danger': (LoanApplyObj.status==SessionStatus.Rejected || LoanApplyObj.status==SessionStatus.RejectedOngoing || LoanApplyObj.status==SessionStatus.Suspended), 'badge-info': ( LoanApplyObj.status==null || LoanApplyObj.status=='' || LoanApplyObj.status==SessionStatus.Pending)}\">\n                                {{\n                                utilityService.returnStringWithReplacing_(LoanApplyObj.status || SessionStatus.Pending)\n                                |\n                                titlecase }}\n                            </label>\n                            <label class=\"badge badge-warning text-capitalize text-cap ml-2\">\n                                Loan Number: {{LoanApplyObj.loanApplyNumber}}\n                            </label>\n                        </a>\n                        <a class=\"collapsed card-link cursor-pointer float-right\" data-toggle=\"collapse\"\n                            [attr.href]=\"'#collapse_' + LoanApplyObj.borrowerId._id\" i18n>\n                            <i class=\"icon-arrow-circle-down\"></i>\n                        </a>\n                    </div>\n                    <div [attr.id]=\"'collapse_' + LoanApplyObj.borrowerId._id\" class=\"collapse \"\n                        data-parent=\"#accordion\">\n                        <div class=\"card-body\">\n                            <div class=\"row\">\n                                <div class=\"col-xl-6 col-12\">\n                                    <h3>Bank Details</h3>\n\n\n                                    <ul class=\"list-group list-group-flush list-group-item-warning\">\n                                        <li class=\"list-group-item\"> <strong>Bank Name: </strong>\n                                            {{LoanApplyObj.borrowerId.bankName}}\n                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                            false,'bankName', LoanApplyObj.borrowerId._id) | titlecase}}-->\n                                        </li>\n                                        <li class=\"list-group-item\"> <strong>Registration Number: </strong>\n                                            {{LoanApplyObj.borrowerId.regNumber}}\n                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                            false,'regNumber', LoanApplyObj.borrowerId._id)}}-->\n                                        </li>\n                                        <li class=\"list-group-item\"> <strong>Account number: </strong>\n                                            {{LoanApplyObj.borrowerId.accountNumber}}\n                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                            false,'accountNumber', LoanApplyObj.borrowerId._id)}}-->\n                                        </li>\n                                        <li class=\"list-group-item\"> <strong>IBAN Number: </strong>\n                                            {{LoanApplyObj.borrowerId.iban}}\n                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                            false,'iban', LoanApplyObj.borrowerId._id)}}-->\n                                        </li>\n                                        <li class=\"list-group-item\"> <strong>Bank Identifier Code: </strong>\n                                            {{LoanApplyObj.borrowerId.paypalWalletID}}\n                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                            false,'bic', LoanApplyObj.borrowerId._id)}}-->\n                                        </li>\n\n\n                                    </ul>\n\n                                </div>\n                                <div class=\"col-xl-6 col-12\">\n                                    <h3>Other Payment Details</h3>\n\n\n                                    <ul class=\"list-group list-group-flush list-group-item-warning\">\n\n\n                                        <li class=\"list-group-item\"> <strong>Paypal: </strong>\n                                            {{LoanApplyObj.borrowerId.paypalWalletID}}\n                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                            false,'paypalWalletID', LoanApplyObj.borrowerId._id)}}-->\n                                        </li>\n                                        <li class=\"list-group-item\"> <strong>Skrill: </strong>\n                                            {{LoanApplyObj.borrowerId.skrillWalletID}}\n                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                            false,'skrillWalletID', LoanApplyObj.borrowerId._id)}}-->\n                                        </li>\n                                        <li class=\"list-group-item\"> <strong>Revolut: </strong>\n                                            {{LoanApplyObj.borrowerId.revolutWalletID}}\n                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                            false,'revolutWalletID', LoanApplyObj.borrowerId._id)}}-->\n                                        </li>\n                                        <li class=\"list-group-item\"> <strong>Bitcoin Wallet</strong>\n                                            {{LoanApplyObj.borrowerId.bitCoinWalletID}}\n                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                            false,'bitCoinWalletID', LoanApplyObj.borrowerId._id)}}-->\n                                        </li>\n                                    </ul>\n\n                                </div>\n                                <div class=\"col-xl-12 col-12\">\n                                    <div class=\"alert alert-success\" i18n>\n                                        You can use these payment methods to transfer the payment.\n                                    </div>\n                                </div>\n\n                            </div>\n\n                            <div class=\"row\">\n                                <div class=\"col-xl-6 col-12\" *ngIf=\"LoanApplyObj.proposedLoanAmount\">\n                                    <h3 class=\"text-primary\" i18n>New Proposed Amount: <badge\n                                            class=\"badge badge-primary\">\n                                            {{LoanApplyObj.proposedLoanAmount || 'NA'}}</badge>\n                                    </h3>\n                                </div>\n                                <div class=\"col-xl-6 col-12\" *ngIf=\"LoanApplyObj.loanInsuranceRequired\">\n                                    <h5 class=\"card-title float-right\" i18n>\n                                        Applied for Insurance with Amount: <badge class=\"badge badge-primary\">\n                                            {{LoanApplyObj.loanInsuranceAmount || 'NA'}}</badge>\n                                    </h5>\n                                </div>\n                            </div>\n\n                            <div class=\"row\"\n                                *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted && false\">\n                                <div class=\"col-xl-12 col-12\">\n                                    <div class=\"card shadow mb-4\">\n                                        <div class=\"card-header py-3\">\n                                            <div class=\"form-group d-none blocked4bypass\">\n                                                <div class=\"form-check-inline\">\n                                                    <div class=\"custom-control custom-checkbox\">\n                                                        <input [disabled]=\"true\"\n                                                            [(ngModel)]=\"LoanApplyObjCurrent.isLoanAmountPaidByLender\"\n                                                            name=\"isLoanAmountPaidByLender\"\n                                                            id=\"isLoanAmountPaidByLender\" type=\"checkbox\"\n                                                            class=\"custom-control-input\" [value]=\"true\"\n                                                            [checked]=\"LoanApplyObjCurrent.isLoanAmountPaidByLender\"\n                                                            (change)=\"LoanMoneyTransferStatusChange($event, LoanObj, LoanApplyObj)\">\n                                                        <label for=\"isLoanAmountPaidByLender\"\n                                                            class=\"custom-control-label\" i18n>\n                                                            Is Loan Amount Transfered? </label>\n                                                    </div>\n                                                </div>\n                                            </div>\n                                            <div\n                                                *ngIf=\"LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\">\n                                                <div class=\"form-group\" *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender\">\n                                                    <!--\n                                                    <span (click)=\"LoanMoneyTransferStatusModel(LoanApplyObj.sessionForBorrower, LoanApplyObj)\" class=\"badge badge-success\">\n                                                        is Money Transfered?\n                                                    </span>\n                                                -->\n\n                                                    <div class=\"form-check-inline\">\n                                                        <div class=\"custom-control custom-checkbox\">\n                                                            <input [disabled]=\"true\"\n                                                                [(ngModel)]=\"LoanApplyObj.isLoanAmountPaidByLender\"\n                                                                name=\"isLoanAmountPaidByLender\"\n                                                                id=\"isLoanAmountPaidByLender\" type=\"checkbox\"\n                                                                class=\"custom-control-input\" [value]=\"true\"\n                                                                (change)=\"LoanMoneyTransferStatusChange($event, LoanObj, LoanApplyObj)\"\n                                                                [checked]=\"LoanApplyObj.isLoanAmountPaidByLender\">\n                                                            <label for=\"isLoanAmountPaidByLender\"\n                                                                class=\"custom-control-label\" i18n>\n                                                                Money Transfered\n                                                            </label>\n                                                        </div>\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"card-body d-none blocked4bypass\">\n                                            <div class=\"row\">\n\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group\">\n                                                        <label for=\"transactionIdForLoanAmountPaidByLender\"\n                                                            i18n>TransactionId/Payment Ref.\n                                                            ID</label>\n                                                        <input type=\"text\" class=\"form-control\"\n                                                            placeholder=\"TransactionId/Payment Ref. ID\"\n                                                            [(ngModel)]=\"LoanApplyObjCurrent.transactionIdForLoanAmountPaidByLender\">\n                                                    </div>\n                                                </div>\n\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group\">\n\n                                                        <label for=\"transactionOnForLoanAmountPaidByLenderCustomised\"\n                                                            i18n>\n                                                            Transaction Date\n                                                        </label>\n                                                        <input type=\"date\"\n                                                            [(ngModel)]=\"transactionOnForLoanAmountPaidByLenderCustomised\"\n                                                            class=\"form-control\" />\n\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group\">\n                                                        <label for=\"usr\" i18n>Transaction Description</label>\n                                                        <input type=\"transactionDescriptionForLoanAmountPaidByLender\"\n                                                            class=\"form-control\" placeholder=\"Description\"\n                                                            [(ngModel)]=\"LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLender\">\n                                                    </div>\n                                                </div>\n                                                <br>\n                                                <hr>\n                                                <div class=\"col-xl-12 col-12\">\n                                                    <button class=\"btn btn-primary btn-sm float-right\"\n                                                        (click)=\"paymentDoneByLender(LoanApplyObj)\" i18n>\n                                                        Update\n                                                    </button>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n                                </div>\n\n                            </div>\n\n\n\n                            <div class=\"row\">\n\n                                <div class=\"col-xl-6 col-12\" *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender\">\n                                    <div class=\"card bg-gradient-primary mb-3 text-white shadow\">\n                                        <div class=\"card-body dashobard-card p-2\">\n                                            <div class=\"text-xs font-weight-bold mb-3\" i18n>\n                                                Lender Payment Confirmation</div>\n                                            <hr>\n                                            <div class=\"row\">\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group\">\n                                                        <label for=\"transactionIdForLoanAmountPaidByLender\"\n                                                            i18n>Transaction ID</label>\n                                                        <h4>\n                                                            {{LoanApplyObj.transactionIdForLoanAmountPaidByLender}}\n                                                        </h4>\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group\">\n                                                        <label for=\"transactionOnForLoanAmountPaidByLender\"\n                                                            i18n>Transaction\n                                                            Date</label>\n                                                        <h4>\n                                                            {{LoanApplyObj.transactionOnForLoanAmountPaidByLender\n                                                            | date:'dd-MMM-YYYY'}}\n                                                        </h4>\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group\">\n                                                        <label for=\"createdOnForLoanAmountPaidByLender\" i18n>Updated\n                                                            On</label>\n                                                        <h4>\n                                                            {{LoanApplyObj.createdOnForLoanAmountPaidByLender |\n                                                            date:'dd-MMM-YYYY'}}\n                                                        </h4>\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-12 col-12\">\n                                                    <p class=\"mb-2 text-white\"\n                                                        for=\"transactionDescriptionForLoanAmountPaidByLender\" i18n>\n                                                        Description:</p>\n                                                    <div class=\"text-white\">\n                                                        {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLender}}\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n\n                                </div>\n                                <div class=\"col-xl-6 col-12\"\n                                    *ngIf=\"LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                    <div class=\"card bg-success text-white shadow mb-4\">\n                                        <div class=\"card-body dashobard-card p-2\">\n                                            <div class=\"text-xs font-weight-bold  mb-2\" i18n>\n                                                Borrower's Payment confirmation</div>\n                                            <hr>\n                                            <div class=\"row\">\n\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group\">\n                                                        <label\n                                                            for=\"transactionOnForLoanAmountPaidByLenderConfirmByBorrower\"\n                                                            i18n>Transaction\n                                                            Date</label>\n                                                        <h4>\n                                                            {{LoanApplyObj.transactionOnForLoanAmountPaidByLenderConfirmByBorrower\n                                                            |\n                                                            date:'dd-MMM-YYYY'}}\n                                                        </h4>\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group\">\n                                                        <label for=\"createdOnForLoanAmountPaidByLender\" i18n>Updated\n                                                            On</label>\n                                                        <h4>\n                                                            {{LoanApplyObj.createdOnForLoanAmountPaidByLenderConfirmByBorrower\n                                                            |\n                                                            date:'dd-MMM-YYYY'}}\n                                                        </h4>\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <p class=\"mb-2 text-white\"\n                                                        for=\"transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower\"\n                                                        i18n>\n                                                        Description:</p>\n                                                    <div class=\"text-white\">\n                                                        {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower}}\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n                                    </div>\n\n                                </div>\n\n\n                                <div class=\"col-xl-12 col-12\">\n\n                                    <div class=\"table-responsive table  border\">\n                                        <table class=\"table mb-0\">\n                                            <thead>\n                                                <tr>\n                                                    <th scope=\"col\" i18n>EMI Date</th>\n                                                    <th scope=\"col\" i18n>Payment</th>\n                                                    <th *ngIf=\"returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted\"\n                                                        scope=\"col\" i18n>\n                                                        <!-- && LoanApplyObj.borrowerId._id==authenticationService.currentUserValue._id-->\n                                                        Payment Status\n                                                    </th>\n                                                </tr>\n                                            </thead>\n                                            <tbody>\n                                                <tr\n                                                    *ngFor=\"let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index\">\n                                                    <td>{{utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1)\n                                                        | date:'dd-MMM-YYYY'}}</td>\n                                                    <td\n                                                        *ngIf=\"(!LoanApplyObj.calculatedMonthlyAmountForEMI) || (LoanApplyObj.calculatedMonthlyAmountForEMI==LoanObj.calculatedMonthlyAmountForEMI)\">\n                                                        kr\n                                                        {{LoanObj.calculatedMonthlyAmountForEMI}}</td>\n                                                    <td\n                                                        *ngIf=\"(LoanApplyObj.calculatedMonthlyAmountForEMI) && (LoanApplyObj.calculatedMonthlyAmountForEMI!=LoanObj.calculatedMonthlyAmountForEMI)\">\n                                                        kr\n                                                        <span\n                                                            style=\"-webkit-text-decoration-line: line-through;text-decoration-line: line-through;\">\n                                                            {{LoanObj.calculatedMonthlyAmountForEMI}}\n                                                        </span>\n                                                        &nbsp;\n                                                        <span>\n                                                            {{LoanApplyObj.calculatedMonthlyAmountForEMI}}\n                                                        </span>\n                                                    </td>\n                                                    <td\n                                                        *ngIf=\"returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted\">\n                                                        <!--&& LoanApplyObj.borrowerId._id==authenticationService.currentUserValue._id-->\n                                                        <div\n                                                            *ngIf=\"!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && (LoanApplyObj.borrowerId._id==authenticationService.currentUserValue._id)\">\n                                                            <div class=\"form-check-inline\">\n                                                                <div class=\"custom-control custom-checkbox\">\n                                                                    <!--[disabled]=\"LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]\"-->\n                                                                    <input [disabled]=\"true\"\n                                                                        [(ngModel)]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]\"\n                                                                        name=\"isLoanAmountPaidByBorrower\"\n                                                                        id=\"isLoanAmountPaidByBorrower_{{i}}\"\n                                                                        type=\"checkbox\" class=\"custom-control-input\"\n                                                                        [value]=\"true\"\n                                                                        (change)=\"initiateLoanAmountPaidByBorrower($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_'+i))\"\n                                                                        [checked]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]\">\n                                                                    <label for=\"isLoanAmountPaidByBorrower_{{i}}\"\n                                                                        class=\"custom-control-label\" i18n>\n                                                                        Is Amount Transfered? </label>\n                                                                </div>\n                                                            </div>\n                                                        </div>\n                                                        <div\n                                                            *ngIf=\"(returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))  && LoanApplyObj.borrowerId._id==authenticationService.currentUserValue._id) || (returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id)\">\n                                                            <i class=\"icon-check\"></i>&nbsp;\n                                                            Paid{{returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj,\n                                                            utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))?'\n                                                            & Verified':''}}\n                                                            &nbsp;\n\n                                                            <i class=\"icon-eye cursor-pointer\" data-toggle=\"modal\"\n                                                                data-target=\"#installment_deatils_modal\"\n                                                                (click)=\"viewCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))\"></i>&nbsp;\n                                                        </div>\n                                                        <div *ngIf=\"!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))  && LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\"\n                                                            i18n>\n                                                            <i class=\"icon-close\"></i>&nbsp;Not Paid\n                                                        </div>\n                                                        <div\n                                                            *ngIf=\"returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && !returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\">\n                                                            <div class=\"form-check-inline\">\n                                                                <div class=\"custom-control custom-checkbox\">\n                                                                    <!--[disabled]=\"LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]\"-->\n                                                                    <input [disabled]=\"true\"\n                                                                        [(ngModel)]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrowerConfirmByLender_'+i]\"\n                                                                        name=\"isLoanAmountPaidByBorrowerConfirmByLender\"\n                                                                        id=\"isLoanAmountPaidByBorrowerConfirmByLender_{{i}}\"\n                                                                        type=\"checkbox\" class=\"custom-control-input\"\n                                                                        [value]=\"true\"\n                                                                        (change)=\"initiateLoanAmountPaidByBorrowerConfirmByLender($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrowerConfirmByLender_'+i))\"\n                                                                        [checked]=\"LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrowerConfirmByLender_'+i]\">\n                                                                    <label\n                                                                        for=\"isLoanAmountPaidByBorrowerConfirmByLender_{{i}}\"\n                                                                        class=\"custom-control-label\" i18n>\n                                                                        Is Amount Received? </label>\n                                                                </div>\n                                                            </div>\n                                                        </div>\n                                                    </td>\n                                                </tr>\n                                            </tbody>\n                                        </table>\n                                    </div>\n\n                                </div>\n                            </div>\n\n\n\n                            <div class=\"modal fade\" id=\"installment_deatils_modal\">\n                                <div class=\"modal-dialog modal-dialog-centered modal-lg\">\n                                    <div class=\"modal-content\">\n\n                                        <div class=\"modal-header\">\n                                            <h4 class=\"modal-title\" i18n>Installment Details</h4>\n                                            <button type=\"button\" class=\"close\" data-dismiss=\"modal\"\n                                                (click)=\"hideInstallmentPaymentModal()\">&times;</button>\n                                        </div>\n\n\n                                        <div class=\"modal-body\">\n                                            <div class=\"row\"\n                                                *ngIf=\"LoanApplyObjCurrent4Installment.installmentKey && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted  && LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\">\n\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group border-right\">\n                                                        <label for=\"installmentKey\" i18n>Installment For</label>\n                                                        <h4 class=\"text-primary\">\n                                                            {{LoanApplyObjCurrent4Installment.installmentKey}}\n                                                            <label\n                                                                *ngIf=\"LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin\"\n                                                                class=\"badge badge-warning text-capitalize text-cap float-right\"\n                                                                i18n>\n                                                                Paid By Admin\n                                                            </label>\n                                                        </h4>\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group border-right\">\n                                                        <label for=\"transactionIdForLoanAmountPaidToLender\"\n                                                            i18n>TransactionId/Payment Ref.\n                                                            ID</label>\n                                                        <h4 class=\"text-primary\">\n                                                            {{LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender}}\n                                                        </h4>\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group border-right\">\n                                                        <label for=\"transactionOnForLoanAmountPaidToLender\"\n                                                            i18n>Transaction\n                                                            Date</label>\n                                                        <h4 class=\"text-primary\">\n                                                            {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender\n                                                            |\n                                                            date:'dd-MMM-YYYY'}}\n                                                        </h4>\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <div class=\"form-group border-right\">\n                                                        <label for=\"createdOnForLoanAmountPaidToLender\" i18n>Updated\n                                                            On</label>\n                                                        <h4 class=\"text-primary\">\n                                                            {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender\n                                                            |\n                                                            date:'dd-MMM-YYYY'}}\n                                                        </h4>\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-4 col-12\">\n                                                    <p class=\"mb-2\"\n                                                        for=\"transactionDescriptionForLoanAmountPaidToLender\" i18n>\n                                                        Note:</p>\n                                                    <div class=\"text-black-50\">\n                                                        {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLender}}\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-12 col-12\">\n                                                    <div class=\"row\"\n                                                        *ngIf=\"LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\">\n                                                        <div class=\"col-xl-4 col-12\">\n                                                            <div class=\"form-group border-right\">\n                                                                <label\n                                                                    for=\"transactionOnForLoanAmountPaidToLenderConfirmByLender\"\n                                                                    i18n>Confirmation: Transaction Date</label>\n                                                                <h4 class=\"text-primary\">\n                                                                    {{LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender\n                                                                    |\n                                                                    date:'dd-MMM-YYYY'}}\n                                                                </h4>\n                                                            </div>\n                                                        </div>\n                                                        <div class=\"col-xl-4 col-12\">\n                                                            <div class=\"form-group border-right\">\n                                                                <label\n                                                                    for=\"createdOnForLoanAmountPaidToLenderConfirmByLender\"\n                                                                    i18n>Confirmation:\n                                                                    Updated On</label>\n                                                                <h4 class=\"text-primary\">\n                                                                    {{LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\n                                                                    |\n                                                                    date:'dd-MMM-YYYY'}}\n                                                                </h4>\n                                                            </div>\n                                                        </div>\n                                                        <div class=\"col-xl-4 col-12\">\n                                                            <p class=\"mb-2\"\n                                                                for=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\"\n                                                                i18n>\n                                                                Confirmation: Note:</p>\n                                                            <div class=\"text-black-50\">\n                                                                {{LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLenderConfirmByLender}}\n                                                            </div>\n                                                        </div>\n\n                                                    </div>\n                                                </div>\n                                                <div class=\"col-xl-12 col-12\">\n                                                    <div class=\"row\"\n                                                        *ngIf=\"!LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender\">\n                                                        <div class=\"col-xl-6 col-12\">\n                                                            <div class=\"form-group\">\n\n                                                                <label\n                                                                    for=\"transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised\"\n                                                                    i18n>\n                                                                    Transaction Date\n                                                                </label>\n                                                                <input type=\"date\"\n                                                                    [(ngModel)]=\"transactionOnForLoanAmountPaidToLenderConfirmByLenderCustomised\"\n                                                                    class=\"form-control\" />\n\n                                                            </div>\n                                                        </div>\n                                                        <div class=\"col-xl-6 col-12\">\n                                                            <div class=\"form-group\">\n                                                                <label\n                                                                    for=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\"\n                                                                    i18n>Note.</label>\n                                                                <input text=\"text\"\n                                                                    name=\"transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\"\n                                                                    class=\"form-control\" placeholder=\"Description\"\n                                                                    [(ngModel)]=\"LoanApplyObjCurrent4Installment.transactionDescriptionForLoanAmountPaidToLenderConfirmByLender\">\n                                                            </div>\n                                                        </div>\n                                                        <br>\n                                                        <hr>\n                                                        <div class=\"col-xl-12 col-12\">\n                                                            <button class=\"btn btn-primary btn-sm float-right\"\n                                                                (click)=\"paymentDoneToLenderConfirmByLender(LoanApplyObj)\"\n                                                                i18n>\n                                                                Update\n                                                            </button>\n                                                        </div>\n                                                    </div>\n                                                </div>\n                                            </div>\n                                        </div>\n\n\n                                        <div class=\"modal-footer\">\n                                            <button type=\"button\" class=\"btn btn-secondary\"\n                                                (click)=\"hideInstallmentPaymentModal()\" data-dismiss=\"modal\"\n                                                i18n>Close</button>\n                                        </div>\n\n                                    </div>\n                                </div>\n                            </div>\n\n\n\n                        </div>\n                        <div class=\"card-footer\">\n                            <div class=\"row\" [ngClass]=\"{ 'd-none': ready2Refund }\"\n                                [ngSwitch]=\"returnSessionApplyStatus(LoanApplyObj)\">\n                                <!-- the same view can be shown in more than one case -->\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Pending\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\">Reject</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\n                                    -->\n                                    <button class=\"btn btn-primary btn-sm float-right\"\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\"><i\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\n                                </div>\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Accepted\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button> &nbsp;\n                                    <button class=\"btn btn-info btn-sm\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoingWithRefund)\">Apply\n                                        for Refund</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)\">Proceed for\n                                        Execution</button>\n                                        -->\n\n                                    <a class=\"btn btn-success btn-sm float-left ml-2\" i18n target=\"_blank\"\n                                        [href]=\"returnUrl4downloadCOntractPDF(LoanApplyObj._id)\" download><i\n                                            class=\"icon-cloud-down\"></i>&nbsp;Download Contract</a>\n                                    <button i18n class=\"btn btn-primary btn-sm float-right\"\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\"><i\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\n                                </div>\n\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.OngoingInitiated\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button>\n                                    <button [disabled]=\"true\" class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.AwaitingForApproval)\">Proceed for\n                                        Execution</button>\n                                    -->\n                                </div>\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.AwaitingForApproval\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.RejectedOngoing)\">Reject</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Ongoing)\">Proceed for\n                                        Execution</button>\n                                    -->\n\n                                    <button *ngIf=\"LoanApplyObj.createdBy!=authenticationService.currentUserValue._id\"\n                                        (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\"\n                                        class=\"float-right btn btn-danger btn-sm\" i18n>Reject</button>\n                                    <button *ngIf=\"LoanApplyObj.createdBy!=authenticationService.currentUserValue._id\"\n                                        class=\"btn btn-success btn-sm float-right mr-2\"\n                                        (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\" i18n>\n                                        Proceed For Contract\n                                    </button>\n                                    <button class=\"btn btn-primary btn-sm float-right mr-2\"\n                                        (click)=\"clickedOnSessionChatVideo(LoanObj, false)\" i18n><i\n                                            class=\"icon-comments\"></i>&nbsp;Chat</button>\n\n                                </div>\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Ongoing\">\n                                    <!--\n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Suspended)\">Reject</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Completed)\">Completed</button>\n                                    -->\n                                </div>\n                                <div class=\"col-xl-12\" *ngSwitchCase=\"SessionStatus.Completed\">\n                                    <button mat-button mat-dialog-close class=\"btn btn-success btn-sm float-right\"\n                                        (click)=\"addNewRatings(LoanApplyObj)\" i18n>Rate Now</button>\n                                </div>\n                                <!--default case when there are no matches -->\n                                <div class=\"col-xl-12\" *ngSwitchDefault>\n                                    <!-- \n                                    <button class=\"btn btn-danger btn-sm float-left\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Rejected)\">Reject</button>\n                                    <button class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\n                                -->\n                                </div>\n                            </div>\n                        </div>\n                        <!--<button *ngIf=\"!check4SessionApplyStatus(LoanApplyObj)\" class=\"btn btn-success btn-sm float-right\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.Accepted)\">Accept</button>\n                        <button *ngIf=\"check4SessionApplyStatus(LoanApplyObj)\" class=\"btn btn-success btn-sm float-right mr-2\" (click)=\"closeDialog(LoanApplyObj, SessionStatus.OngoingInitiated)\">Proceed for Execution</button>-->\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</mat-dialog-content>\n\n\n<!--\n<div class=\"row\" [ngClass]=\"{ 'd-none': !userInitiatedForPayment }\">\n    <div class=\"col-xl-12 text-center\">\n        <app-payment></app-payment>\n    </div>\n</div>\n<div class=\"row\" [ngClass]=\"{ 'd-none': !ready2Refund }\">\n    <div class=\"col-xl-12\">\n        <div class=\"card-body\">\n            <div class=\"row\">\n                <div class=\"col-xl-12 text-center\">\n                    <div class=\"form-group\">\n                        <label class=\"mb-3 font-weight-bold\">\n                            Paid Amount:&nbsp;\n                        </label>\n                        <label class=\"mb-3\">\n                            {{refundObj.amount}}\n                        </label>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"mb-3 font-weight-bold\">\n                            Refund Charges:&nbsp;\n                        </label>\n                        <label class=\"mb-3\">\n                            {{refundObj.cancellationCharges}}\n                        </label>\n                    </div>\n                    <div class=\"form-group\">\n                        <label class=\"mb-3 font-weight-bold\">\n                            Amount to be refunded:&nbsp;\n                        </label>\n                        <label class=\"mb-3\">\n                            {{refundObj.finalAmount2Refund}}\n                        </label>\n                    </div>\n                    <div class=\"form-group\">\n                        <button class=\"btn btn-danger btn-sm\" (click)=\"ready2Refund=false\">Cancel</button> &nbsp;\n                        <button class=\"btn btn-success btn-sm\" (click)=\"finalSubmissionForRefund()\">Refund</button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n-->";
       /***/
     },
 

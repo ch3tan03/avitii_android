@@ -41,7 +41,7 @@ export class PublicProfileComponent implements OnInit {
   RatingDetailsArray: any = [];
   constructor(
     public utilityService: UtilityService,
-    private authenticationService: AuthenticationService,
+    public authenticationService: AuthenticationService,
     public router: Router,
     public dialogRef: MatDialogRef<PublicProfileComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any,
@@ -112,7 +112,7 @@ export class PublicProfileComponent implements OnInit {
             //this.rerender();
             this.loading = false;
           } else {
-            this.alertService.error(data['message']);
+            //this.alertService.error(data['message']);
             this.loading = false;
           }
         },
@@ -140,7 +140,7 @@ export class PublicProfileComponent implements OnInit {
             //this.rerender();
             this.loading = false;
           } else {
-            this.alertService.error(data['message']);
+            //this.alertService.error(data['message']);
             this.loading = false;
           }
         },
@@ -250,8 +250,8 @@ export class PublicProfileComponent implements OnInit {
 
       maxWidth: '100vw',
       maxHeight: '100vh',
-      height: '70%',
-      width: '70%',
+      height: '98%',
+      width: '98%',
       hasBackdrop: true,
       data: {
         mediaSrc: mediaSrc,

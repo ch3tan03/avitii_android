@@ -12,11 +12,15 @@
     <div class="row mb-2 mb-3">
         <div class="col-xl-3 col-12">
             <div class="card">
+                <div class="card-header">
+                    <span class="badge badge-primary badge-pill text-capitalize pull-left">{{userObj.role || 'NA'}}</span>
+                    <span class="badge badge-primary badge-pill text-capitalize pull-right">{{userObj.userTypeTitle || authenticationService.returnUserTypeForUserFromSuppliedUserLevel(userObj.userType)}}</span>
+                </div>
                 <div class="card-body">
                     <img [src]="userObj.selfProfileUrl" onerror="this.src='./assets/img/nouser.png';"
                         class="img-fluid " />
                 </div>
-                <div class="card-footer">
+                <div class="card-footer">                    
                     <strong>
                         {{userObj.firstName | titlecase}}&nbsp;
                         {{userObj.middleName | titlecase}}&nbsp;
@@ -41,11 +45,7 @@
                 <li class="list-group-item">
                     <strong i18n>Last Login</strong> {{userObj.lastLoginTime | date:'dd-MMM-YYYY HH:mm'}}
                 </li>
-                <li *ngIf="userObj.externalAppLinks" class="list-group-item">
-                    <div *ngFor="let previewUrl of userObj.externalAppLinks">
-                        <a *ngIf="previewUrl" href="{{previewUrl.appLink}}">{{previewUrl.appName}}</a>
-                    </div>
-                </li>
+                
             </ul>
         </div>
         <div class="col-xl-9 col-12 pl-5">
@@ -155,7 +155,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col" i18n>Document</th>
-                                    <th scope="col" i18n>Doc Number</th>
+                                    <th scope="col"  *ngIf="adminViewT"  i18n>Doc Number</th>
                                     <th scope="col" i18n>Status</th>
                                     <th scope="col" *ngIf="adminViewT" i18n>View</th>
                                     <th scope="col" *ngIf="adminViewT">#</th>
@@ -164,12 +164,19 @@
                             <tbody>
                                 <tr>
                                     <td i18n>Passport</td>
-                                    <td>{{userObj.myPassportNumber||'NA'}}</td>
+                                    <td  *ngIf="adminViewT" >{{userObj.myPassportNumber||'NA'}}</td>
                                     <td>
+                                        <span [ngSwitch]="userObj.myPassportMediaVerified" i18n>
+                                            <i *ngSwitchCase="2" class="badge badge-danger font-weight-light">Rejected</i>
+                                            <i *ngSwitchCase="1" class="badge badge-success font-weight-light">Verified</i>
+                                            <i *ngSwitchDefault class="badge badge-danger font-weight-light">Pending</i>
+                                        </span>
+                                        <!--
                                         <span *ngIf="userObj.myPassportMediaVerified" class="badge badge-success"
                                             i18n>Verified</span>
                                         <span *ngIf="!userObj.myPassportMediaVerified" class="badge badge-danger"
                                             i18n>Unverified</span>
+                                        -->
                                     </td>
                                     <td *ngIf="adminViewT">
                                         <div *ngIf="userObj.myPassportMedia">
@@ -196,13 +203,13 @@
                                     </td>
                                     <td *ngIf="adminViewT">
                                         <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified"
-                                            *ngIf="userObj.myPassportMediaVerified"
-                                            (click)="updateUsersVerificationStatus(userObj._id, 'myPassportMediaVerified', !userObj.myPassportMediaVerified)">
+                                            *ngIf="userObj.myPassportMediaVerified==1"
+                                            (click)="updateUsersVerificationStatus(userObj._id, 'myPassportMediaVerified', 2)">
                                             <i class="icon-close"></i>
                                         </button>
                                         <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified"
-                                            *ngIf="!userObj.myPassportMediaVerified"
-                                            (click)="updateUsersVerificationStatus(userObj._id, 'myPassportMediaVerified', !userObj.myPassportMediaVerified)">
+                                            *ngIf="userObj.myPassportMediaVerified==0 || userObj.myPassportMediaVerified==2"
+                                            (click)="updateUsersVerificationStatus(userObj._id, 'myPassportMediaVerified', 1)">
                                             <i class="icon-check"></i>
                                         </button>
                                         <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Edit"
@@ -213,12 +220,19 @@
                                 </tr>
                                 <tr>
                                     <td i18n>Driving Licence</td>
-                                    <td>{{userObj.myDLNumber||'NA'}}</td>
+                                    <td  *ngIf="adminViewT" >{{userObj.myDLNumber||'NA'}}</td>
                                     <td>
+                                        <span [ngSwitch]="userObj.myDLMediaVerified" i18n>
+                                            <i *ngSwitchCase="2" class="badge badge-danger font-weight-light">Rejected</i>
+                                            <i *ngSwitchCase="1" class="badge badge-success font-weight-light">Verified</i>
+                                            <i *ngSwitchDefault class="badge badge-danger font-weight-light">Pending</i>
+                                        </span>
+                                        <!--
                                         <span *ngIf="userObj.myDLMediaVerified" class="badge badge-success"
                                             i18n>Verified</span>
                                         <span *ngIf="!userObj.myDLMediaVerified" class="badge badge-danger"
                                             i18n>Unverified</span>
+                                            -->
                                     </td>
                                     <td *ngIf="adminViewT">
                                         <div *ngIf="userObj.myDLMedia">
@@ -245,13 +259,13 @@
                                     </td>
                                     <td *ngIf="adminViewT">
                                         <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified"
-                                            *ngIf="userObj.myDLMediaVerified"
-                                            (click)="updateUsersVerificationStatus(userObj._id, 'myDLMediaVerified', !userObj.myDLMediaVerified)">
+                                            *ngIf="userObj.myDLMediaVerified==1"
+                                            (click)="updateUsersVerificationStatus(userObj._id, 'myDLMediaVerified', 2)">
                                             <i class="icon-close"></i>
                                         </button>
                                         <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified"
-                                            *ngIf="!userObj.myDLMediaVerified"
-                                            (click)="updateUsersVerificationStatus(userObj._id, 'myDLMediaVerified', !userObj.myDLMediaVerified)">
+                                            *ngIf="userObj.myDLMediaVerified==0 || userObj.myDLMediaVerified==2"
+                                            (click)="updateUsersVerificationStatus(userObj._id, 'myDLMediaVerified', 1)">
                                             <i class="icon-check"></i>
                                         </button>
                                         <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Edit"
@@ -262,12 +276,19 @@
                                 </tr>
                                 <tr>
                                     <td i18n>CPR Number</td>
-                                    <td>{{userObj.cprNumber||'NA'}}</td>
+                                    <td  *ngIf="adminViewT" >{{userObj.cprNumber||'NA'}}</td>
                                     <td>
+                                        <span [ngSwitch]="userObj.myHICardMediaVerified" i18n>
+                                            <i *ngSwitchCase="2" class="badge badge-danger font-weight-light">Rejected</i>
+                                            <i *ngSwitchCase="1" class="badge badge-success font-weight-light">Verified</i>
+                                            <i *ngSwitchDefault class="badge badge-danger font-weight-light">Pending</i>
+                                        </span>
+                                        <!--
                                         <span *ngIf="userObj.myHICardMediaVerified" class="badge badge-success"
                                             i18n>Verified</span>
                                         <span *ngIf="!userObj.myHICardMediaVerified" class="badge badge-danger"
                                             i18n>Unverified</span>
+                                        -->
                                     </td>
                                     <td *ngIf="adminViewT">
                                         <div *ngIf="userObj.myHICardMedia">
@@ -294,13 +315,13 @@
                                     </td>
                                     <td *ngIf="adminViewT">
                                         <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified"
-                                            *ngIf="userObj.myHICardMediaVerified"
-                                            (click)="updateUsersVerificationStatus(userObj._id, 'myHICardMediaVerified', !userObj.myHICardMediaVerified)">
+                                            *ngIf="userObj.myHICardMediaVerified==1"
+                                            (click)="updateUsersVerificationStatus(userObj._id, 'myHICardMediaVerified', 2)">
                                             <i class="icon-close"></i>
                                         </button>
                                         <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified"
-                                            *ngIf="!userObj.myHICardMediaVerified"
-                                            (click)="updateUsersVerificationStatus(userObj._id, 'myHICardMediaVerified', !userObj.myHICardMediaVerified)">
+                                            *ngIf="userObj.myHICardMediaVerified==0 || userObj.myHICardMediaVerified==2"
+                                            (click)="updateUsersVerificationStatus(userObj._id, 'myHICardMediaVerified', 1)">
                                             <i class="icon-check"></i>
                                         </button>
                                         <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Edit"
@@ -311,12 +332,19 @@
                                 </tr>
                                 <tr *ngIf="userObj.role=='borrower' && !userObj.isRKIRegistered">
                                     <td i18n>RKI Document </td>
-                                    <td>{{userObj.myRKINumber||'NA'}}</td>
+                                    <td  *ngIf="adminViewT" >{{userObj.myRKINumber||'NA'}}</td>
                                     <td>
+                                        <span [ngSwitch]="userObj.myRKIMediaVerified" i18n>
+                                            <i *ngSwitchCase="2" class="badge badge-danger font-weight-light">Rejected</i>
+                                            <i *ngSwitchCase="1" class="badge badge-success font-weight-light">Verified</i>
+                                            <i *ngSwitchDefault class="badge badge-danger font-weight-light">Pending</i>
+                                        </span>
+                                        <!--
                                         <span *ngIf="userObj.myRKIMediaVerified" class="badge badge-success"
                                             i18n>Verified</span>
                                         <span *ngIf="!userObj.myRKIMediaVerified" class="badge badge-danger"
                                             i18n>Unverified</span>
+                                            -->
                                     </td>
                                     <td *ngIf="adminViewT">
                                         <div *ngIf="userObj.myRKIMedia">
@@ -342,14 +370,14 @@
                                         </div>
                                     </td>
                                     <td *ngIf="adminViewT">
-                                        <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified"
-                                            *ngIf="userObj.myRKIMediaVerified"
-                                            (click)="updateUsersVerificationStatus(userObj._id, 'myRKIMediaVerified', !userObj.myRKIMediaVerified)">
+                                        <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Blocked"
+                                            *ngIf="userObj.myRKIMediaVerified==1"
+                                            (click)="updateUsersVerificationStatus(userObj._id, 'myRKIMediaVerified', 2)">
                                             <i class="icon-close"></i>
                                         </button>
                                         <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified"
-                                            *ngIf="!userObj.myRKIMediaVerified"
-                                            (click)="updateUsersVerificationStatus(userObj._id, 'myRKIMediaVerified', !userObj.myRKIMediaVerified)">
+                                            *ngIf="userObj.myRKIMediaVerified==0 || userObj.myRKIMediaVerified==2"
+                                            (click)="updateUsersVerificationStatus(userObj._id, 'myRKIMediaVerified', 1)">
                                             <i class="icon-check"></i>
                                         </button>
                                         <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Edit"
@@ -361,9 +389,53 @@
 
                             </tbody>
                         </table>
+                      
+                    </div>
+                    <div class="table-responsive table-billing-history mt-4 card">
+                        <table class="table mb-0" *ngIf="utilityService._.keys(userObj.externalAppLinks).length>0" >
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <span *ngFor="let previewUrl of userObj.externalAppLinks">
+                                        <a class="text-bold mr-2">{{previewUrl.appName}} :</a> 
+                                        <a *ngIf="previewUrl" target="_blank" href="{{previewUrl.appLink}}">{{previewUrl.appLink}}</a>
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>
+                                        <span [ngSwitch]="userObj.externalAppLinksVerified" i18n>
+                                            <i *ngSwitchCase="2" class="badge badge-danger font-weight-light">Rejected</i>
+                                            <i *ngSwitchCase="1" class="badge badge-success font-weight-light">Verified</i>
+                                            <i *ngSwitchDefault class="badge badge-danger font-weight-light">Pending</i>
+                                        </span>
+    <!--
+                                        <span *ngIf="userObj.externalAppLinksVerified" class="badge badge-success"
+                                            i18n>Verified</span>
+                                        <span *ngIf="!userObj.externalAppLinksVerified" class="badge badge-danger"
+                                            i18n>Unverified</span>
+                                    -->
+                                        
+                                    </span> 
+                                </td>
+                                
+                                <td *ngIf="adminViewT">
+                                    <button class="btn btn-danger btn-sm btn-xs mr-1" data-title="Unverified"
+                                        *ngIf="userObj.externalAppLinksVerified==1"
+                                        (click)="updateUsersVerificationStatus(userObj._id, 'externalAppLinksVerified', 2)">
+                                        <i class="icon-close"></i>
+                                    </button>
+                                    <button class="btn btn-success btn-sm btn-xs mr-1" data-title="Verified"
+                                        *ngIf="userObj.externalAppLinksVerified==0 || userObj.externalAppLinksVerified==2"
+                                        (click)="updateUsersVerificationStatus(userObj._id, 'externalAppLinksVerified', 1)">
+                                        <i class="icon-check"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                        </table>
                     </div>
                 </div>
-                <div class="col-xl-12 col-12 mt-4">
+                <div class="col-xl-12 col-12 mt-4" *ngIf="myRatingsSummaryObj.totalRatingsAvg">
                     <div class="row">
                         <div class="col-xl-6 col-12">
                             <div class="my-3">
@@ -374,7 +446,7 @@
         -->
                                 <span>
                                     &nbsp;
-                                    <i *ngIf="!myRatingsSummaryObj.totalRatingsAvg" class="icon-star"></i>
+                                    <!--<i *ngIf="!myRatingsSummaryObj.totalRatingsAvg" class="icon-star"></i>-->
                                     <app-star *ngIf="myRatingsSummaryObj.totalRatingsAvg"
                                         [rating]="myRatingsSummaryObj.totalRatingsAvg">
                                     </app-star>
@@ -542,7 +614,7 @@
                 </div>
             </div>
         -->
-            <div class="row" *ngIf="adminViewT">
+            <div class="row">
                 <div class="col-xl-12 col-12">
                     <div class="card">
                         <div class="card-body">
@@ -580,7 +652,7 @@
 
                         </div>
                     </div>
-                    <div class="col-xl-12 col-12" *ngIf="userObj.bankingOldDataCollection">
+                    <div class="col-xl-12 col-12" *ngIf="adminViewT && userObj.bankingOldDataCollection">
                         <div class="table-responsive table-billing-history">
                             <table class="table mb-0">
                                 <thead>

@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.avitiilending.dev" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.avitiilending.dev" version="1.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Avitii</name>
-    <description>Powered by Piralo Live</description>
+    <description>Powered by Piralo</description>
     <author email="support@piralo.com" href="https://piralo.com/">Piralo</author>
     <content src="index.html" />
     <access origin="*" />

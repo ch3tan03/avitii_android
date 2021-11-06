@@ -45,7 +45,9 @@ export class CalendarComponent implements OnInit {
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.allSessionsData = data['data'];
-            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')));
+            this.filterAllSessionsDataForAppliedCurrentUserOnly();
+
+            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')),'_id')));
             //this.alertService.success(data['message'], true);
             this.bindDataToCalendrUI(this.allSessionsData);
             this.loading = false;
@@ -133,7 +135,7 @@ export class CalendarComponent implements OnInit {
     let _sessionApplyObj = this.utilityService._.first(_proccessedSessionObj.sessionAppliedByBorrowers);
     let _borrowerId = null;
     if (_sessionApplyObj) {
-      _borrowerId = _sessionApplyObj.borrowerId
+      _borrowerId = _sessionApplyObj.borrowerId._id
     }
 
     this.showDataOfLoanObjInModal(_sessionObj, _sessionApplyObj, _borrowerId);
@@ -199,5 +201,27 @@ export class CalendarComponent implements OnInit {
       //console.log(`25 :: co :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
-
+  filterAllSessionsDataForAppliedCurrentUserOnly() {
+    if (this.allSessionsData) {
+      let allSessionsDataKeyPaired = {};
+      for (let _items in this.allSessionsData) {
+        let _proccessedSessionObj = {
+          _id: null,
+          sessionAppliedByBorrowers: []
+        };
+        let sessionObj = this.allSessionsData[_items];
+        switch (this.authenticationService.currentUserValue.role) {
+          case Role.Borrower:
+            _proccessedSessionObj =this.utilityService._.cloneDeep(sessionObj);
+            _proccessedSessionObj.sessionAppliedByBorrowers = this.utilityService._.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId":{"_id": this.authenticationService.currentUserValue._id }});
+            break;
+          default:
+            _proccessedSessionObj = this.utilityService._.cloneDeep(sessionObj);
+            break;
+        }
+        allSessionsDataKeyPaired[_proccessedSessionObj._id] = _proccessedSessionObj;
+      }
+      this.allSessionsData = this.utilityService._.values(allSessionsDataKeyPaired);
+    }
+  }
 }

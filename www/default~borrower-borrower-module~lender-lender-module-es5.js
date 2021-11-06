@@ -1320,7 +1320,7 @@
 
       var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! tslib */
-      "sJZM");
+      "rigp");
       /* harmony import */
 
 
@@ -14315,7 +14315,7 @@
 
               switch (_currentUserRole) {
                 case src_app_models_role__WEBPACK_IMPORTED_MODULE_3__["Role"].Lender:
-                  if (!currentUser.isVerified) {
+                  if (!currentUser.isVerified || currentUser.isVerified == 2) {
                     if (!currentUser.isRegisteredAllowed2EditProfile) {
                       this.router.navigate(['/logout']);
                       this.alertService.error("Approval is still pending. We will notify you when approved.", true);
@@ -14354,15 +14354,19 @@
                   break;
 
                 case src_app_models_role__WEBPACK_IMPORTED_MODULE_3__["Role"].Borrower:
-                  if (!currentUser.isVerified) {
+                  if (!currentUser.isVerified || currentUser.isVerified == 2) {
                     switch (route.routeConfig.path) {
                       case '/borrower/profile':
                       case 'profile':
+                      case '/borrower/bank-details':
+                      case 'bank-details':
+                      case '/borrower/income-proof':
+                      case 'income-proof':
                         //NO Action here
                         break;
 
                       default:
-                        this.alertService.error("Your account approval is pending. Please upload educational/work documents and complete your profile to expedite the approval process. Ignore if already uploaded.", true);
+                        this.alertService.error("Your account approval is pending. Please upload documents and complete your profile to expedite the approval process. Ignore if already uploaded.", true);
                         this.router.navigate(['/borrower/profile']);
                         return false;
                         break;
@@ -17099,7 +17103,7 @@
 
       var tslib__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
       /*! tslib */
-      "sJZM");
+      "rigp");
       /*!
       FullCalendar v5.9.0
       Docs & License: https://fullcalendar.io/
@@ -18631,7 +18635,7 @@
 
       var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
       /*! tslib */
-      "sJZM");
+      "rigp");
       /* harmony import */
 
 
@@ -18781,7 +18785,7 @@
 
       var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! tslib */
-      "sJZM");
+      "rigp");
       /* harmony import */
 
 
@@ -20392,7 +20396,7 @@
 
       var tslib__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
       /*! tslib */
-      "sJZM");
+      "rigp");
       /*!
       FullCalendar v5.9.0
       Docs & License: https://fullcalendar.io/

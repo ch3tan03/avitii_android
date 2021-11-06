@@ -25,18 +25,19 @@
     <div class="row">
         <div class="col-xl-12 col-12">
             <div id="accordion">
-                <div class="card shadow-sm mb-3" *ngFor="let LoanApplyObj of LoanObj.sessionAppliedByBorrowers;">
+                <div class="card shadow-sm mb-3"
+                    *ngFor="let LoanApplyObj of LoanObj.sessionAppliedByBorrowers | mySessionsFilter : 'status' : (SessionStatusTypeFilter.length>0 ? SessionStatusTypeFilter:['accepted']):null:null:null;">
                     <div class="card-header">
-                        <span
-                            (click)="usersProfile(userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers, false))">
-                            <i class="icon icon-user"></i>
-
-                            {{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,
-                            false,'firstName')}}
+                        <span>
+                            {{LoanApplyObj.borrowerId.firstName}}
+                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,
+                            false,'firstName', LoanApplyObj.borrowerId._id)}}-->
                         </span>
-
-                        <a class="collapsed card-link" data-toggle="collapse"
-                            [attr.href]="'#collapse_' + LoanApplyObj.borrowerId" i18n>
+                        <span class="badge badge-info mx-2 cursor-pointer" i18n
+                            (click)="usersProfile(LoanApplyObj.borrowerId)">View
+                            Profile</span>
+<!--userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers, false, null, LoanApplyObj.borrowerId._id)-->
+                        <a i18n>
 
                             <label class="badge font-weight-light text-capitalize text-cap"
                                 [ngClass]="{'badge-success': (LoanApplyObj.status==SessionStatus.Accepted || LoanApplyObj.status==SessionStatus.Active || LoanApplyObj.status==SessionStatus.Completed || LoanApplyObj.status==SessionStatus.OngoingInitiated  || LoanApplyObj.status==SessionStatus.AwaitingForApproval  || LoanApplyObj.status==SessionStatus.Ongoing), 'badge-danger': (LoanApplyObj.status==SessionStatus.Rejected || LoanApplyObj.status==SessionStatus.RejectedOngoing || LoanApplyObj.status==SessionStatus.Suspended), 'badge-info': ( LoanApplyObj.status==null || LoanApplyObj.status=='' || LoanApplyObj.status==SessionStatus.Pending)}">
@@ -45,23 +46,101 @@
                                 |
                                 titlecase }}
                             </label>
-                            <label class="badge badge-warning text-capitalize text-cap float-right">
+                            <label class="badge badge-warning text-capitalize text-cap ml-2">
                                 Loan Number: {{LoanApplyObj.loanApplyNumber}}
                             </label>
                         </a>
+                        <a class="collapsed card-link cursor-pointer float-right" data-toggle="collapse"
+                            [attr.href]="'#collapse_' + LoanApplyObj.borrowerId._id" i18n>
+                            <i class="icon-arrow-circle-down"></i>
+                        </a>
                     </div>
-                    <div [attr.id]="'collapse_' + LoanApplyObj.borrowerId" class="collapse show"
+                    <div [attr.id]="'collapse_' + LoanApplyObj.borrowerId._id" class="collapse "
                         data-parent="#accordion">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-xl-6 col-12">
+                                    <h3>Bank Details</h3>
+
+
+                                    <ul class="list-group list-group-flush list-group-item-warning">
+                                        <li class="list-group-item"> <strong>Bank Name: </strong>
+                                            {{LoanApplyObj.borrowerId.bankName}}
+                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,
+                                            false,'bankName', LoanApplyObj.borrowerId._id) | titlecase}}-->
+                                        </li>
+                                        <li class="list-group-item"> <strong>Registration Number: </strong>
+                                            {{LoanApplyObj.borrowerId.regNumber}}
+                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,
+                                            false,'regNumber', LoanApplyObj.borrowerId._id)}}-->
+                                        </li>
+                                        <li class="list-group-item"> <strong>Account number: </strong>
+                                            {{LoanApplyObj.borrowerId.accountNumber}}
+                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,
+                                            false,'accountNumber', LoanApplyObj.borrowerId._id)}}-->
+                                        </li>
+                                        <li class="list-group-item"> <strong>IBAN Number: </strong>
+                                            {{LoanApplyObj.borrowerId.iban}}
+                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,
+                                            false,'iban', LoanApplyObj.borrowerId._id)}}-->
+                                        </li>
+                                        <li class="list-group-item"> <strong>Bank Identifier Code: </strong>
+                                            {{LoanApplyObj.borrowerId.paypalWalletID}}
+                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,
+                                            false,'bic', LoanApplyObj.borrowerId._id)}}-->
+                                        </li>
+
+
+                                    </ul>
+
+                                </div>
+                                <div class="col-xl-6 col-12">
+                                    <h3>Other Payment Details</h3>
+
+
+                                    <ul class="list-group list-group-flush list-group-item-warning">
+
+
+                                        <li class="list-group-item"> <strong>Paypal: </strong>
+                                            {{LoanApplyObj.borrowerId.paypalWalletID}}
+                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,
+                                            false,'paypalWalletID', LoanApplyObj.borrowerId._id)}}-->
+                                        </li>
+                                        <li class="list-group-item"> <strong>Skrill: </strong>
+                                            {{LoanApplyObj.borrowerId.skrillWalletID}}
+                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,
+                                            false,'skrillWalletID', LoanApplyObj.borrowerId._id)}}-->
+                                        </li>
+                                        <li class="list-group-item"> <strong>Revolut: </strong>
+                                            {{LoanApplyObj.borrowerId.revolutWalletID}}
+                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,
+                                            false,'revolutWalletID', LoanApplyObj.borrowerId._id)}}-->
+                                        </li>
+                                        <li class="list-group-item"> <strong>Bitcoin Wallet</strong>
+                                            {{LoanApplyObj.borrowerId.bitCoinWalletID}}
+                                            <!--{{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,
+                                            false,'bitCoinWalletID', LoanApplyObj.borrowerId._id)}}-->
+                                        </li>
+                                    </ul>
+
+                                </div>
+                                <div class="col-xl-12 col-12">
+                                    <div class="alert alert-success" i18n>
+                                        You can use these payment methods to transfer the payment.
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xl-6 col-12" *ngIf="LoanApplyObj.proposedLoanAmount">
                                     <h3 class="text-primary" i18n>New Proposed Amount: <badge
                                             class="badge badge-primary">
                                             {{LoanApplyObj.proposedLoanAmount || 'NA'}}</badge>
                                     </h3>
                                 </div>
-                                <div class="col-xl-6 col-12">
-                                    <h5 *ngIf="LoanApplyObj.loanInsuranceRequired" class="card-title float-right" i18n>
+                                <div class="col-xl-6 col-12" *ngIf="LoanApplyObj.loanInsuranceRequired">
+                                    <h5 class="card-title float-right" i18n>
                                         Applied for Insurance with Amount: <badge class="badge badge-primary">
                                             {{LoanApplyObj.loanInsuranceAmount || 'NA'}}</badge>
                                     </h5>
@@ -69,21 +148,20 @@
                             </div>
 
                             <div class="row"
-                                *ngIf="!LoanApplyObj.isLoanAmountPaidByLender && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted">
+                                *ngIf="!LoanApplyObj.isLoanAmountPaidByLender && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted && false">
                                 <div class="col-xl-12 col-12">
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
                                             <div class="form-group d-none blocked4bypass">
                                                 <div class="form-check-inline">
                                                     <div class="custom-control custom-checkbox">
-                                                        <input
+                                                        <input [disabled]="true"
                                                             [(ngModel)]="LoanApplyObjCurrent.isLoanAmountPaidByLender"
                                                             name="isLoanAmountPaidByLender"
                                                             id="isLoanAmountPaidByLender" type="checkbox"
                                                             class="custom-control-input" [value]="true"
                                                             [checked]="LoanApplyObjCurrent.isLoanAmountPaidByLender"
-                                                            (change)="LoanMoneyTransferStatusChange($event, LoanObj, LoanApplyObj)"
-                                                            >
+                                                            (change)="LoanMoneyTransferStatusChange($event, LoanObj, LoanApplyObj)">
                                                         <label for="isLoanAmountPaidByLender"
                                                             class="custom-control-label" i18n>
                                                             Is Loan Amount Transfered? </label>
@@ -91,17 +169,19 @@
                                                 </div>
                                             </div>
                                             <div
-                                                *ngIf="LoanApplyObj.lenderId==authenticationService.currentUserValue._id">
+                                                *ngIf="LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id">
                                                 <div class="form-group" *ngIf="!LoanApplyObj.isLoanAmountPaidByLender">
                                                     <!--
                                                     <span (click)="LoanMoneyTransferStatusModel(LoanApplyObj.sessionForBorrower, LoanApplyObj)" class="badge badge-success">
                                                         is Money Transfered?
                                                     </span>
                                                 -->
-                                                
+
                                                     <div class="form-check-inline">
                                                         <div class="custom-control custom-checkbox">
-                                                            <input [(ngModel)]="LoanApplyObj.isLoanAmountPaidByLender" name="isLoanAmountPaidByLender"
+                                                            <input [disabled]="true"
+                                                                [(ngModel)]="LoanApplyObj.isLoanAmountPaidByLender"
+                                                                name="isLoanAmountPaidByLender"
                                                                 id="isLoanAmountPaidByLender" type="checkbox"
                                                                 class="custom-control-input" [value]="true"
                                                                 (change)="LoanMoneyTransferStatusChange($event, LoanObj, LoanApplyObj)"
@@ -168,215 +248,206 @@
 
 
                             <div class="row">
-                                <div class="col-xl-6 col-12">
-                                    <div class="row">
-                                        <div class="col-xl-12 col-12" *ngIf="LoanApplyObj.isLoanAmountPaidByLender">
-                                            <div class="card bg-gradient-primary mb-3 text-white shadow">
-                                                <div class="card-body dashobard-card p-2">
-                                                    <div class="text-xs font-weight-bold mb-3" i18n>
-                                                        Lender Payment Confirmation</div>
-                                                    <hr>
-                                                    <div class="row">
-                                                        <div class="col-xl-4 col-12">
-                                                            <div class="form-group">
-                                                                <label for="transactionIdForLoanAmountPaidByLender"
-                                                                    i18n>Transaction ID</label>
-                                                                <h4>
-                                                                    {{LoanApplyObj.transactionIdForLoanAmountPaidByLender}}
-                                                                </h4>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-4 col-12">
-                                                            <div class="form-group">
-                                                                <label for="transactionOnForLoanAmountPaidByLender"
-                                                                    i18n>Transaction
-                                                                    Date</label>
-                                                                <h4>
-                                                                    {{LoanApplyObj.transactionOnForLoanAmountPaidByLender
-                                                                    | date:'dd-MMM-YYYY'}}
-                                                                </h4>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-4 col-12">
-                                                            <div class="form-group">
-                                                                <label for="createdOnForLoanAmountPaidByLender"
-                                                                    i18n>Updated On</label>
-                                                                <h4>
-                                                                    {{LoanApplyObj.createdOnForLoanAmountPaidByLender |
-                                                                    date:'dd-MMM-YYYY'}}
-                                                                </h4>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-12 col-12">
-                                                            <p class="mb-2 text-white"
-                                                                for="transactionDescriptionForLoanAmountPaidByLender"
-                                                                i18n>
-                                                                Description:</p>
-                                                            <div class="text-white">
-                                                                {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLender}}
-                                                            </div>
-                                                        </div>
+
+                                <div class="col-xl-6 col-12" *ngIf="LoanApplyObj.isLoanAmountPaidByLender">
+                                    <div class="card bg-gradient-primary mb-3 text-white shadow">
+                                        <div class="card-body dashobard-card p-2">
+                                            <div class="text-xs font-weight-bold mb-3" i18n>
+                                                Lender Payment Confirmation</div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-xl-4 col-12">
+                                                    <div class="form-group">
+                                                        <label for="transactionIdForLoanAmountPaidByLender"
+                                                            i18n>Transaction ID</label>
+                                                        <h4>
+                                                            {{LoanApplyObj.transactionIdForLoanAmountPaidByLender}}
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-12">
+                                                    <div class="form-group">
+                                                        <label for="transactionOnForLoanAmountPaidByLender"
+                                                            i18n>Transaction
+                                                            Date</label>
+                                                        <h4>
+                                                            {{LoanApplyObj.transactionOnForLoanAmountPaidByLender
+                                                            | date:'dd-MMM-YYYY'}}
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-12">
+                                                    <div class="form-group">
+                                                        <label for="createdOnForLoanAmountPaidByLender" i18n>Updated
+                                                            On</label>
+                                                        <h4>
+                                                            {{LoanApplyObj.createdOnForLoanAmountPaidByLender |
+                                                            date:'dd-MMM-YYYY'}}
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-12 col-12">
+                                                    <p class="mb-2 text-white"
+                                                        for="transactionDescriptionForLoanAmountPaidByLender" i18n>
+                                                        Description:</p>
+                                                    <div class="text-white">
+                                                        {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLender}}
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
-                                        <div class="col-xl-12 col-12"
-                                            *ngIf="LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower">
-                                            <div class="card bg-success text-white shadow mb-4">
-                                                <div class="card-body dashobard-card p-2">
-                                                    <div class="text-xs font-weight-bold  mb-2" i18n>
-                                                        Borrower's Payment confirmation</div>
-                                                    <hr>
-                                                    <div class="row">
-
-                                                        <div class="col-xl-4 col-12">
-                                                            <div class="form-group">
-                                                                <label
-                                                                    for="transactionOnForLoanAmountPaidByLenderConfirmByBorrower"
-                                                                    i18n>Transaction
-                                                                    Date</label>
-                                                                <h4>
-                                                                    {{LoanApplyObj.transactionOnForLoanAmountPaidByLenderConfirmByBorrower
-                                                                    |
-                                                                    date:'dd-MMM-YYYY'}}
-                                                                </h4>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-4 col-12">
-                                                            <div class="form-group">
-                                                                <label for="createdOnForLoanAmountPaidByLender"
-                                                                    i18n>Updated On</label>
-                                                                <h4>
-                                                                    {{LoanApplyObj.createdOnForLoanAmountPaidByLenderConfirmByBorrower
-                                                                    |
-                                                                    date:'dd-MMM-YYYY'}}
-                                                                </h4>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-4 col-12">
-                                                            <p class="mb-2 text-white"
-                                                                for="transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower"
-                                                                i18n>
-                                                                Description:</p>
-                                                            <div class="text-white">
-                                                                {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower}}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
-
                                     </div>
+
                                 </div>
-                                <div class="col-xl-6 col-12">
-                                    <div class="row">
-                                        <div class="col-xl-12 col-12">
-                                            <div class="table-responsive table shadow border">
-                                                <table class="table mb-0">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col" i18n>EMI Date</th>
-                                                            <th scope="col" i18n>Payment</th>
-                                                            <th *ngIf="returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted"
-                                                                scope="col" i18n>
-                                                                <!-- && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id-->
-                                                                Payment Status
-                                                            </th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr
-                                                            *ngFor="let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index">
-                                                            <td>{{utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1)
-                                                                | date:'dd-MMM-YYYY'}}</td>
-                                                            <td
-                                                                *ngIf="(!LoanApplyObj.calculatedMonthlyAmountForEMI) || (LoanApplyObj.calculatedMonthlyAmountForEMI==LoanObj.calculatedMonthlyAmountForEMI)">
-                                                                kr
-                                                                {{LoanObj.calculatedMonthlyAmountForEMI}}</td>
-                                                            <td
-                                                                *ngIf="(LoanApplyObj.calculatedMonthlyAmountForEMI) && (LoanApplyObj.calculatedMonthlyAmountForEMI!=LoanObj.calculatedMonthlyAmountForEMI)">
-                                                                kr
-                                                                <span
-                                                                    style="-webkit-text-decoration-line: line-through;text-decoration-line: line-through;">
-                                                                    {{LoanObj.calculatedMonthlyAmountForEMI}}
-                                                                </span>
-                                                                &nbsp;
-                                                                <span>
-                                                                    {{LoanApplyObj.calculatedMonthlyAmountForEMI}}
-                                                                </span>
-                                                            </td>
-                                                            <td
-                                                                *ngIf="returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted">
-                                                                <!--&& LoanApplyObj.borrowerId==authenticationService.currentUserValue._id-->
-                                                                <div
-                                                                    *ngIf="!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && (LoanApplyObj.borrowerId==authenticationService.currentUserValue._id)">
-                                                                    <div class="form-check-inline">
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <!--[disabled]="LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]"-->
-                                                                            <input
-                                                                                [(ngModel)]="LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]"
-                                                                                name="isLoanAmountPaidByBorrower"
-                                                                                id="isLoanAmountPaidByBorrower_{{i}}"
-                                                                                type="checkbox"
-                                                                                class="custom-control-input"
-                                                                                [value]="true"
-                                                                                (change)="initiateLoanAmountPaidByBorrower($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_'+i))"
-                                                                                [checked]="LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]">
-                                                                            <label
-                                                                                for="isLoanAmountPaidByBorrower_{{i}}"
-                                                                                class="custom-control-label" i18n>
-                                                                                Is Amount Transfered? </label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div
-                                                                    *ngIf="(returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))  && LoanApplyObj.borrowerId==authenticationService.currentUserValue._id) || (returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.lenderId==authenticationService.currentUserValue._id)">
-                                                                    <i class="icon-check"></i>&nbsp;
-                                                                    Paid{{returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj,
-                                                                    utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))?'
-                                                                    & Verified':''}}
-                                                                    &nbsp;
+                                <div class="col-xl-6 col-12"
+                                    *ngIf="LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower">
+                                    <div class="card bg-success text-white shadow mb-4">
+                                        <div class="card-body dashobard-card p-2">
+                                            <div class="text-xs font-weight-bold  mb-2" i18n>
+                                                Borrower's Payment confirmation</div>
+                                            <hr>
+                                            <div class="row">
 
-                                                                    <i class="icon-eye cursor-pointer"
-                                                                        data-toggle="modal"
-                                                                        data-target="#installment_deatils_modal"
-                                                                        (click)="viewCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))"></i>&nbsp;
-                                                                </div>
-                                                                <div *ngIf="!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))  && LoanApplyObj.lenderId==authenticationService.currentUserValue._id"
-                                                                    i18n>
-                                                                    <i class="icon-close"></i>&nbsp;Not Paid
-                                                                </div>
-                                                                <div
-                                                                    *ngIf="returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && !returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.lenderId==authenticationService.currentUserValue._id">
-                                                                    <div class="form-check-inline">
-                                                                        <div class="custom-control custom-checkbox">
-                                                                            <!--[disabled]="LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]"-->
-                                                                            <input
-                                                                                [(ngModel)]="LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrowerConfirmByLender_'+i]"
-                                                                                name="isLoanAmountPaidByBorrowerConfirmByLender"
-                                                                                id="isLoanAmountPaidByBorrowerConfirmByLender_{{i}}"
-                                                                                type="checkbox"
-                                                                                class="custom-control-input"
-                                                                                [value]="true"
-                                                                                (change)="initiateLoanAmountPaidByBorrowerConfirmByLender($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrowerConfirmByLender_'+i))"
-                                                                                [checked]="LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrowerConfirmByLender_'+i]">
-                                                                            <label
-                                                                                for="isLoanAmountPaidByBorrowerConfirmByLender_{{i}}"
-                                                                                class="custom-control-label" i18n>
-                                                                                Is Amount Received? </label>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
+                                                <div class="col-xl-4 col-12">
+                                                    <div class="form-group">
+                                                        <label
+                                                            for="transactionOnForLoanAmountPaidByLenderConfirmByBorrower"
+                                                            i18n>Transaction
+                                                            Date</label>
+                                                        <h4>
+                                                            {{LoanApplyObj.transactionOnForLoanAmountPaidByLenderConfirmByBorrower
+                                                            |
+                                                            date:'dd-MMM-YYYY'}}
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-12">
+                                                    <div class="form-group">
+                                                        <label for="createdOnForLoanAmountPaidByLender" i18n>Updated
+                                                            On</label>
+                                                        <h4>
+                                                            {{LoanApplyObj.createdOnForLoanAmountPaidByLenderConfirmByBorrower
+                                                            |
+                                                            date:'dd-MMM-YYYY'}}
+                                                        </h4>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-12">
+                                                    <p class="mb-2 text-white"
+                                                        for="transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower"
+                                                        i18n>
+                                                        Description:</p>
+                                                    <div class="text-white">
+                                                        {{LoanApplyObj.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower}}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                </div>
+
+
+                                <div class="col-xl-12 col-12">
+
+                                    <div class="table-responsive table  border">
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" i18n>EMI Date</th>
+                                                    <th scope="col" i18n>Payment</th>
+                                                    <th *ngIf="returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted"
+                                                        scope="col" i18n>
+                                                        <!-- && LoanApplyObj.borrowerId._id==authenticationService.currentUserValue._id-->
+                                                        Payment Status
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    *ngFor="let in of utilityService.counter(LoanObj.loanTenureInMonths) ;let i = index">
+                                                    <td>{{utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1)
+                                                        | date:'dd-MMM-YYYY'}}</td>
+                                                    <td
+                                                        *ngIf="(!LoanApplyObj.calculatedMonthlyAmountForEMI) || (LoanApplyObj.calculatedMonthlyAmountForEMI==LoanObj.calculatedMonthlyAmountForEMI)">
+                                                        kr
+                                                        {{LoanObj.calculatedMonthlyAmountForEMI}}</td>
+                                                    <td
+                                                        *ngIf="(LoanApplyObj.calculatedMonthlyAmountForEMI) && (LoanApplyObj.calculatedMonthlyAmountForEMI!=LoanObj.calculatedMonthlyAmountForEMI)">
+                                                        kr
+                                                        <span
+                                                            style="-webkit-text-decoration-line: line-through;text-decoration-line: line-through;">
+                                                            {{LoanObj.calculatedMonthlyAmountForEMI}}
+                                                        </span>
+                                                        &nbsp;
+                                                        <span>
+                                                            {{LoanApplyObj.calculatedMonthlyAmountForEMI}}
+                                                        </span>
+                                                    </td>
+                                                    <td
+                                                        *ngIf="returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted">
+                                                        <!--&& LoanApplyObj.borrowerId._id==authenticationService.currentUserValue._id-->
+                                                        <div
+                                                            *ngIf="!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && (LoanApplyObj.borrowerId._id==authenticationService.currentUserValue._id)">
+                                                            <div class="form-check-inline">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <!--[disabled]="LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]"-->
+                                                                    <input [disabled]="true"
+                                                                        [(ngModel)]="LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]"
+                                                                        name="isLoanAmountPaidByBorrower"
+                                                                        id="isLoanAmountPaidByBorrower_{{i}}"
+                                                                        type="checkbox" class="custom-control-input"
+                                                                        [value]="true"
+                                                                        (change)="initiateLoanAmountPaidByBorrower($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_'+i))"
+                                                                        [checked]="LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrower_'+i]">
+                                                                    <label for="isLoanAmountPaidByBorrower_{{i}}"
+                                                                        class="custom-control-label" i18n>
+                                                                        Is Amount Transfered? </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            *ngIf="(returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))  && LoanApplyObj.borrowerId._id==authenticationService.currentUserValue._id) || (returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id)">
+                                                            <i class="icon-check"></i>&nbsp;
+                                                            Paid{{returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj,
+                                                            utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))?'
+                                                            & Verified':''}}
+                                                            &nbsp;
+
+                                                            <i class="icon-eye cursor-pointer" data-toggle="modal"
+                                                                data-target="#installment_deatils_modal"
+                                                                (click)="viewCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))"></i>&nbsp;
+                                                        </div>
+                                                        <div *ngIf="!returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i))  && LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id"
+                                                            i18n>
+                                                            <i class="icon-close"></i>&nbsp;Not Paid
+                                                        </div>
+                                                        <div
+                                                            *ngIf="returnT4IfCurrentInstallmentAlreadyPaid(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && !returnT4IfCurrentInstallmentAlreadyPaidConfirmByLender(LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrower_isEnable'+i)) && LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id">
+                                                            <div class="form-check-inline">
+                                                                <div class="custom-control custom-checkbox">
+                                                                    <!--[disabled]="LoanApplyObjCurrentCheckBoxes.visibleKeys['isLoanAmountPaidByBorrower_isEnable'+i]"-->
+                                                                    <input [disabled]="true"
+                                                                        [(ngModel)]="LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrowerConfirmByLender_'+i]"
+                                                                        name="isLoanAmountPaidByBorrowerConfirmByLender"
+                                                                        id="isLoanAmountPaidByBorrowerConfirmByLender_{{i}}"
+                                                                        type="checkbox" class="custom-control-input"
+                                                                        [value]="true"
+                                                                        (change)="initiateLoanAmountPaidByBorrowerConfirmByLender($event, LoanApplyObj, utilityService.returnDateWithAddingMonths(LoanObj.loanStartDateTime,i+1),('isLoanAmountPaidByBorrowerConfirmByLender_'+i))"
+                                                                        [checked]="LoanApplyObjCurrentCheckBoxes['isLoanAmountPaidByBorrowerConfirmByLender_'+i]">
+                                                                    <label
+                                                                        for="isLoanAmountPaidByBorrowerConfirmByLender_{{i}}"
+                                                                        class="custom-control-label" i18n>
+                                                                        Is Amount Received? </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
                                 </div>
                             </div>
 
@@ -395,7 +466,7 @@
 
                                         <div class="modal-body">
                                             <div class="row"
-                                                *ngIf="LoanApplyObjCurrent4Installment.installmentKey && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted  && LoanApplyObj.lenderId==authenticationService.currentUserValue._id">
+                                                *ngIf="LoanApplyObjCurrent4Installment.installmentKey && returnSessionApplyStatus(LoanApplyObj)==SessionStatus.Accepted  && LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id">
 
                                                 <div class="col-xl-4 col-12">
                                                     <div class="form-group border-right">

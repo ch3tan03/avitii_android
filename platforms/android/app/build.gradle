@@ -197,7 +197,7 @@ android {
         if(cdvTargetSdkVersion != null) {
             targetSdkVersion cdvTargetSdkVersion
         }
-        versionCode 1004
+        versionCode 1006
 
     }
 

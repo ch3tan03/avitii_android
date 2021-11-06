@@ -1,8 +1,77 @@
 <div class="row pt-0 saas2">
-    <div class="col-xl-12 col-12 text-center" *ngIf="!f.isVerified.value">
-        <h3 i18n>Submit your portfolio for verification</h3>
-        <P class="my-3" i18n>Remember to fill in all fields correctly, otherwise you may risk lifetime blockage</P>
-
+    <div class="col-xl-12 col-12 text-center" *ngIf="!f.isVerified.value || f.isVerified.value==2">
+        <div [ngSwitch]="authenticationService.currentUserValue.role">
+            <div *ngSwitchCase="Role.Borrower">
+                <div 
+                    *ngIf="(authenticationService.currentUserValue.isVerified==0 || authenticationService.currentUserValue.isVerified==2) || !authenticationService.currentUserValue.isUsersBankDetailsSubmitted || (authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified==0 || authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified==2)">
+                    <div class="text-black  font-weight-lighter" i18n>
+                        Welome{{authenticationService.currentUserValue.isVerified==1?', Your profile has been verified
+                        succesfully':''}}. Your need to submit your
+                        <span class="badge badge-danger mr-1">Profile Details</span>
+                        <span class="badge badge-danger">Bank Details</span> and
+                        <span class="badge badge-danger">Income Proof Documents</span> to access the loan market. Remember to fill in all fields correctly, otherwise you may risk lifetime blockage
+                    </div>
+                    <hr>
+                    <ul class="list-unstyled">
+                        <li class="d-flex align-items-center justify-content-center mb-2" i18n>
+                            Profile and personal document verification
+                            <span [ngSwitch]="authenticationService.currentUserValue.isVerified">
+                                <i *ngSwitchCase="1" class="icon icon-check-box text-success ml-3"></i>
+                                <i *ngSwitchDefault class="icon icon-pencil-alt text-danger ml-3"
+                                    routerLink="/borrower/profile"></i>
+                            </span>
+                        </li>
+                        <li class="d-flex align-items-center justify-content-center mb-2" i18n>
+                            Bank details submission
+                            <span [ngSwitch]="authenticationService.currentUserValue.isUsersBankDetailsSubmitted">
+                                <i *ngSwitchCase="true" class="icon icon-check-box text-success ml-3"></i>
+                                <i *ngSwitchDefault class="icon icon-pencil-alt text-danger ml-3"
+                                    routerLink="/borrower/bank-details"></i>
+                            </span>
+                        </li>
+                        <li class="d-flex align-items-center justify-content-center mb-2" i18n>
+                            Income Proof Documents and Mothly Expenses
+                            <span
+                                [ngSwitch]="authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified">
+                                <i *ngSwitchCase="1" class="icon icon-check-box text-success ml-3"></i>
+                                <i *ngSwitchDefault class="icon icon-pencil-alt text-danger ml-3"
+                                    routerLink="/borrower/income-proof"></i>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div *ngSwitchCase="Role.Lender">
+                <div class="jumbotron"
+                    *ngIf="(authenticationService.currentUserValue.isVerified==0 || authenticationService.currentUserValue.isVerified==2) || !authenticationService.currentUserValue.isUsersBankDetailsSubmitted">
+                    <div class="text-black-50 h2 font-weight-lighter" i18n>
+                        Welome, Your profile has been verified succesfully. Your need to submit your
+                        <span class="badge badge-danger">Bank Details</span> to access the Loan Market.
+                    </div>
+                    <hr>
+                    <ul class="list-unstyled">
+                        <li class="d-flex align-items-center justify-content-center mb-3 h4" i18n>
+                            Profile and personal document verification
+                            <span [ngSwitch]="authenticationService.currentUserValue.isVerified">
+                                <i *ngSwitchCase="1" class="icon icon-check-box text-success ml-3"></i>
+                                <i *ngSwitchDefault class="icon icon-pencil-alt text-danger ml-3"
+                                    routerLink="/lender/profile"></i>
+                            </span>
+                        </li>
+                        <li class="d-flex align-items-center justify-content-center mb-3 h4" i18n>
+                            Bank details submission
+                            <span [ngSwitch]="authenticationService.currentUserValue.isUsersBankDetailsSubmitted">
+                                <i *ngSwitchCase="true" class="icon icon-check-box text-success ml-3"></i>
+                                <i *ngSwitchDefault class="icon icon-pencil-alt text-danger ml-3"
+                                    routerLink="/lender/bank-details"></i>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- <h3 i18n>Submit your portfolio for verification</h3> -->
+        <!-- <P class="my-3" i18n>Remember to fill in all fields correctly, otherwise you may risk lifetime blockage</P> -->
     </div>
     <div class="col-xl-12 col-12">
         <section class="tab-product  p-b-0">
@@ -40,12 +109,13 @@
 
                                 <div class="card-body">
                                     <img [src]="f.selfProfileUrl.value" onerror="this.src='./assets/img/nouser.png';"
-                                        class="border img-fluid rounded-circle mb-3" style="height: 150px;width: 150px;object-fit: cover;"/>
+                                        class="border img-fluid rounded-circle mb-3"
+                                        style="height: 150px;width: 150px;object-fit: cover;" />
                                     <br>
 
                                     <p>{{f.role.value ==='lender'?'Lender':'Borrower'}}</p>
-                                   
-                                    
+
+
                                 </div>
 
                                 <div class="card-footer">
@@ -241,6 +311,68 @@
                         </div>
 
                         <div class="card-body">
+                            <div class="form-row">
+                                <div class="col-xl-12 mt-3">
+                                    <label class="d-none" for="myProfileDetails" i18n>Social Network</label>
+                                    <div class="form-row">
+                                        <div class="col-xl-4 d-none">
+
+                                            <select [(ngModel)]="appName" class="custom-select"
+                                                [ngModelOptions]="{standalone: true}">
+                                                <option value="facebook" selected i18n> Facebook</option>
+
+                                            </select>
+                                        </div>
+                                        <div class="col-xl-12">
+                                            <!--
+                                            <div class="input-group mb-3">
+                                                <input type="url"
+                                                    pattern="/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi*"
+                                                    [(ngModel)]="appLink" class="form-control"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    placeholder="Facebook Profile Public Link"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.externalAppLinks.errors }" />
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-success"
+                                                        (click)="addExternalAppLinks(true, null, appName, appLink)" i18n>Add</button>
+                                                </div>
+                                            </div>
+                                        -->
+                                            <div class="form-group">
+                                                <label class="mb-1" for="externalAppLinkUrl" i18n>Facebook Profile
+                                                    Public Link:</label>
+                                                <input type="url" formControlName="externalAppLinkUrl"
+                                                    class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.externalAppLinkUrl.errors }" />
+                                                <div *ngIf="submitted && f.externalAppLinkUrl.errors"
+                                                    class="invalid-feedback">
+                                                    <div *ngIf="f.externalAppLinkUrl.errors.required" i18n>Link is
+                                                        required
+                                                    </div>
+                                                    <div *ngIf="f.externalAppLinkUrl.errors.pattern" i18n>Link is
+                                                        required*
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-12">
+                                            <div *ngIf="submitted && f.externalAppLinks.errors"
+                                                class="invalid-feedback">
+                                                <div *ngIf="f.externalAppLinks.errors.required" i18n>Links required
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row d-none" *ngFor="let applinks of f.externalAppLinks.value">
+                                        <div class="col-xl-2">
+                                            {{applinks.appName | titlecase}}
+                                        </div>
+                                        <div class="col-xl-10">
+                                            <a href="{{applinks.appLink}}">{{applinks.appLink}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-row mb-3">
                                 <div class="col-md-12">
                                     <div class="text-gray" i18n>
@@ -385,128 +517,12 @@
                                 </div>
                             -->
                             </div>
-                            <div class="row">
-                                <div class="col-xl-4">
-                                    <div class="card"
-                                        *ngFor="let previewUrl of _.union(_.values(f.myPassportMedia.value),_.values(f.myPassportMediaSelfVerify.value))">
-                                        <img class="card-img-top" [src]="previewUrl.url" style="height: 200px;">
-                                        <div *ngIf="fileUploadProgress" i18n>
-                                            Upload progress: {{ fileUploadProgress }}
-                                        </div>
-                                        <div class="card-body" i18n>
-                                            Passport
-                                            <!--
-                                            <a class="btn btn-primary btn-sm btn-xs float-right text-white"><i
-                                                    class="icon icon-trash"
-                                                    (click)="onUploadCleanAssetDocs('myPassportMedia')"></i></a>
-                                                    -->
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                                <div class="col-xl-4">
-                                    <div class="card"
-                                        *ngFor="let previewUrl of _.union(_.values(f.myDLMedia.value),_.values(f.myDLMediaSelfVerify.value))">
-                                        <img class="card-img-top" [src]="previewUrl.url" style="height: 200px;">
-                                        <div *ngIf="fileUploadProgress" i18n>
-                                            Upload progress: {{ fileUploadProgress }}
-                                        </div>
-                                        <div class="card-body" i18n>
-                                            Driving Licence
-                                            <!--
-                                            <a class="btn btn-primary btn-sm btn-xs float-right text-white"><i
-                                                    class="icon icon-trash"
-                                                    (click)="onUploadCleanAssetDocs('myDLMedia')"></i></a>
-                                                    -->
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                                <div class="col-xl-4">
-                                    <div class="card"
-                                        *ngFor="let previewUrl of _.union(_.values(f.myHICardMedia.value),_.values(f.myHICardMediaSelfVerify.value))">
-                                        <img class="card-img-top" [src]="previewUrl.url" style="height: 200px;">
-                                        <div *ngIf="fileUploadProgress" i18n>
-                                            Upload progress: {{ fileUploadProgress }}
-                                        </div>
-                                        <div class="card-body" i18n>
-                                            Health Insurance Card
-                                            <!--
-                                            <a class="btn btn-primary btn-sm btn-xs float-right text-white"><i
-                                                    class="icon icon-trash"
-                                                    (click)="onUploadCleanAssetDocs('myHICardMedia')"></i></a>
-                                            -->
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-xl-12 mt-3">
-                                    <label class="d-none" for="myProfileDetails" i18n>Social Network</label>
-                                    <div class="form-row">
-                                        <div class="col-xl-4 d-none">
-
-                                            <select [(ngModel)]="appName" class="custom-select"
-                                                [ngModelOptions]="{standalone: true}">
-                                                <option value="facebook" selected i18n> Facebook</option>
-                                            
-                                            </select>
-                                        </div>
-                                        <div class="col-xl-12">
-                                            <!--
-                                            <div class="input-group mb-3">
-                                                <input type="url"
-                                                    pattern="/(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi*"
-                                                    [(ngModel)]="appLink" class="form-control"
-                                                    [ngModelOptions]="{standalone: true}"
-                                                    placeholder="Facebook Profile Public Link"
-                                                    [ngClass]="{ 'is-invalid': submitted && f.externalAppLinks.errors }" />
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-success"
-                                                        (click)="addExternalAppLinks(true, null, appName, appLink)" i18n>Add</button>
-                                                </div>
-                                            </div>
-                                        -->
-                                            <div class="form-group">
-                                                <label class="mb-1" for="externalAppLinkUrl" i18n>Facebook Profile Public Link:</label>
-                                                <input type="url"
-                                                    formControlName="externalAppLinkUrl" class="form-control"
-                                                    [ngClass]="{ 'is-invalid': submitted && f.externalAppLinkUrl.errors }" />
-                                                <div *ngIf="submitted && f.externalAppLinkUrl.errors" class="invalid-feedback">
-                                                    <div *ngIf="f.externalAppLinkUrl.errors.required" i18n>Link is required
-                                                    </div>
-                                                    <div *ngIf="f.externalAppLinkUrl.errors.pattern" i18n>Link is required*
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xl-12">
-                                            <div *ngIf="submitted && f.externalAppLinks.errors"
-                                                class="invalid-feedback">
-                                                <div *ngIf="f.externalAppLinks.errors.required" i18n>Links required
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row d-none" *ngFor="let applinks of f.externalAppLinks.value">
-                                        <div class="col-xl-2">
-                                            {{applinks.appName | titlecase}}
-                                        </div>
-                                        <div class="col-xl-10">
-                                            <a href="{{applinks.appLink}}">{{applinks.appLink}}</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row" *ngIf="_role == Role.Borrower">
-                                <div class="col-xl-12">
+                            <div class="row mb-4" *ngIf="_role == Role.Borrower">
+                                <div class="col-xl-12 ">
                                     <div class="row">
-                                        <div class="col-xl-12 mt-3">
+                                        <div class="col-xl-4 mt-1">
                                             <div class="row">
-                                                <div class="col-xl-12">
+                                                <div class="col-xl-12 ">
                                                     <label class="font-weight-bold" i18n>Are you registered in
                                                         RKI?</label>
                                                     <i class="icon icon-info-alt ml-2" data-toggle="tooltip"
@@ -532,11 +548,16 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xl-12 mt-3">
+                                        <div class="col-xl-4 col-12 mt-1" *ngIf="!onInitRKICheckedValue()">
+                                            <button class="btn btn-outline-secondary btn-block"
+                                                (click)="modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMedia', null);"
+                                                i18n>
+                                                Upload Scan Copy
+                                            </button>
                                         </div>
+                                      
                                     </div>
+                                   
                                     <div class="form-row" *ngIf="!onInitRKICheckedValue()">
                                         <!--
                                         <div class="col-xl-9">
@@ -556,13 +577,8 @@
                                             </button>
                                         </div>
                                     -->
-                                        <div class="col-xl-6 col-12">
-                                            <button class="btn btn-outline-secondary btn-block mt-4"
-                                                (click)="modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMedia', null);"
-                                                i18n>
-                                                Upload Scan Copy
-                                            </button>
-                                        </div>
+                                       
+                                       <!---
                                         <div class="col-xl-6 col-12">
                                             <button class="btn btn-outline-secondary btn-block mt-4"
                                                 (click)="modalMediaUploadWithCropFeature(authenticationService.currentUserValue._id, 'myRKIMediaSelfVerify', null);"
@@ -570,28 +586,88 @@
                                                 Upload Image of Scan Copy With Your Face
                                             </button>
                                         </div>
-                                        <div class="col-xl-4">
-
-                                            <div class="row">
-                                                <div class="col-xl-12"
-                                                    *ngFor="let previewUrl of _.union(_.values(f.myRKIMedia.value),_.values(f.myRKIMediaSelfVerify.value))">
-                                                    <!--
-                                                    <i class="icon-trash text-danger"
-                                                        (click)="onUploadCleanAssetDocs('myRKIMedia')"></i>
-                                                    -->
-                                                    <img class="img-fluid" [src]="previewUrl.url" />
-                                                </div>
-                                                <div>
-                                                    <div *ngIf="fileUploadProgress" i18n>
-                                                        Upload progress: {{ fileUploadProgress }}
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        </div>
+                                    -->
+                                       
                                     </div>
                                 </div>
                             </div>
+                            <div class="row jumbotron px-1 px-2 py-3 row">
+                                <div class="col-xl-12 col-12 mb-3">
+                                    <strong i18n> Document Previews</strong>
+                                </div>
+                                <div class="col-xl-2 col-6" *ngFor="let previewUrl of _.union(_.values(f.myPassportMedia.value),_.values(f.myPassportMediaSelfVerify.value))">
+                                    <div class="card mb1"
+                                        >
+                                        <img class="card-img-top" [src]="previewUrl.url" style="height: 100px;">
+                                        <div *ngIf="fileUploadProgress" i18n>
+                                            Upload progress: {{ fileUploadProgress }}
+                                        </div>
+                                        <div class="p-1" i18n>
+                                            Passport
+                                            <!--
+                                            <a class="btn btn-primary btn-sm btn-xs float-right text-white"><i
+                                                    class="icon icon-trash"
+                                                    (click)="onUploadCleanAssetDocs('myPassportMedia')"></i></a>
+                                                    -->
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-xl-2 col-6" *ngFor="let previewUrl of _.union(_.values(f.myDLMedia.value),_.values(f.myDLMediaSelfVerify.value))">
+                                    <div class="card mb-1"
+                                        >
+                                        <img class="card-img-top" [src]="previewUrl.url" style="height: 100px;">
+                                        <div *ngIf="fileUploadProgress" i18n>
+                                            Upload progress: {{ fileUploadProgress }}
+                                        </div>
+                                        <div class="p-1" i18n>
+                                            Driving Licence
+                                            <!--
+                                            <a class="btn btn-primary btn-sm btn-xs float-right text-white"><i
+                                                    class="icon icon-trash"
+                                                    (click)="onUploadCleanAssetDocs('myDLMedia')"></i></a>
+                                                    -->
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="col-xl-2 col-6" *ngFor="let previewUrl of _.union(_.values(f.myHICardMedia.value),_.values(f.myHICardMediaSelfVerify.value))">
+                                    <div class="card"
+                                        >
+                                        <img class="card-img-top" [src]="previewUrl.url" style="height: 100px;">
+                                        <div *ngIf="fileUploadProgress" i18n>
+                                            Upload progress: {{ fileUploadProgress }}
+                                        </div>
+                                        <div class="p-1" i18n>
+                                            Health Insurance Card
+                                            <!--
+                                            <a class="btn btn-primary btn-sm btn-xs float-right text-white"><i
+                                                    class="icon icon-trash"
+                                                    (click)="onUploadCleanAssetDocs('myHICardMedia')"></i></a>
+                                            -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-2 col-6" *ngFor="let previewUrl of _.union(_.values(f.myRKIMedia.value),_.values(f.myHICardMediaSelfVerify.value))">
+                                    <div class="card"
+                                    >
+                                    <img class="card-img-top" [src]="previewUrl.url" style="height: 100px;">
+                                    <div *ngIf="fileUploadProgress" i18n>
+                                        Upload progress: {{ fileUploadProgress }}
+                                    </div>
+                                    <div class="p-1" i18n>
+                                        RKI
+                                    </div>
+                                   
+                                </div>
+                                </div>
+                            </div>
+
+                       
+                         
                         </div>
                         <div class="card-footer">
                             <button type="button" (click)="onProfileUpdateSubmit()" [disabled]="loading"

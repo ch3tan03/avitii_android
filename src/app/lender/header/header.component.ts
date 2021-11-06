@@ -68,7 +68,10 @@ export class HeaderComponent implements AfterViewInit {
 
         $('.navbar_side_panel').hide();
       });
-
+      $('#accordionSidebar').on('click', function (e) {
+        $('.navbar').css("right", "-350px");
+        $('.navbar_side_panel').hide();
+      });
       function checkWidth() {
         var windowSize = $(window).width();
         if (windowSize <= 991) {

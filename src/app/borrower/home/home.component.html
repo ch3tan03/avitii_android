@@ -7,9 +7,9 @@
 <div [ngSwitch]="authenticationService.currentUserValue.role">
     <div *ngSwitchCase="Role.Borrower">
         <div class="jumbotron"
-            *ngIf="!authenticationService.currentUserValue.isVerified || !authenticationService.currentUserValue.isUsersBankDetailsSubmitted || !authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified">
+            *ngIf="(authenticationService.currentUserValue.isVerified==0 || authenticationService.currentUserValue.isVerified==2) || !authenticationService.currentUserValue.isUsersBankDetailsSubmitted || (authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified==0 || authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified==2)">
             <div class="text-black-50 h2 font-weight-lighter" i18n>
-                Welome, Your profile has been verified succesfully. Your need to submit your
+                Welome{{authenticationService.currentUserValue.isVerified==1?', Your profile has been verified succesfully':''}}. Your need to submit your
                 <span class="badge badge-danger" >Bank Details</span> and
                 <span class="badge badge-danger" >Income Proof Documents</span> to access the loan market.
             </div>
@@ -18,7 +18,7 @@
                 <li class="d-flex align-items-center justify-content-center mb-3 h4" i18n>
                     Profile and personal document verification
                     <span [ngSwitch]="authenticationService.currentUserValue.isVerified">
-                        <i *ngSwitchCase="true" class="icon icon-check-box text-success ml-3"></i>
+                        <i *ngSwitchCase="1" class="icon icon-check-box text-success ml-3"></i>
                         <i *ngSwitchDefault class="icon icon-pencil-alt text-danger ml-3"
                             routerLink="/borrower/profile"></i>
                     </span>
@@ -34,7 +34,7 @@
                 <li class="d-flex align-items-center justify-content-center mb-3 h4" i18n>
                     Income Proof Documents and Mothly Expenses
                     <span [ngSwitch]="authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified">
-                        <i *ngSwitchCase="true" class="icon icon-check-box text-success ml-3"></i>
+                        <i *ngSwitchCase="1" class="icon icon-check-box text-success ml-3"></i>
                         <i *ngSwitchDefault class="icon icon-pencil-alt text-danger ml-3"
                             routerLink="/borrower/income-proof"></i>
                     </span>
@@ -44,9 +44,9 @@
     </div>
     <div *ngSwitchCase="Role.Lender">
         <div class="jumbotron"
-            *ngIf="!authenticationService.currentUserValue.isVerified || !authenticationService.currentUserValue.isUsersBankDetailsSubmitted">
+            *ngIf="(authenticationService.currentUserValue.isVerified==0 || authenticationService.currentUserValue.isVerified==2) || !authenticationService.currentUserValue.isUsersBankDetailsSubmitted">
             <div class="text-black-50 h2 font-weight-lighter" i18n>
-                Welome, Your profile has been verified succesfully. Your need to submit your
+                Welome{{authenticationService.currentUserValue.isVerified==1?', Your profile has been verified succesfully':''}}. Your need to submit your
                 <span class="badge badge-danger">Bank Details</span> to access the Loan Market.
             </div>
             <hr>
@@ -54,7 +54,7 @@
                 <li class="d-flex align-items-center justify-content-center mb-3 h4" i18n>
                     Profile and personal document verification
                     <span [ngSwitch]="authenticationService.currentUserValue.isVerified">
-                        <i *ngSwitchCase="true" class="icon icon-check-box text-success ml-3"></i>
+                        <i *ngSwitchCase="1" class="icon icon-check-box text-success ml-3"></i>
                         <i *ngSwitchDefault class="icon icon-pencil-alt text-danger ml-3"
                             routerLink="/lender/profile"></i>
                     </span>
@@ -220,7 +220,7 @@
                         <thead>
                             <tr>
                                 <th scope="col" i18n>Type</th>
-                                <th scope="col">
+                                <th scope="col" i18n>
                                     {{Role.Lender!=authenticationService.currentUserValue.role?'Lender
                                     Name':'Borrower Name'}}
                                 </th>
@@ -228,19 +228,23 @@
                                 <th scope="col" i18n>Refund</th>
                                 <th scope="col" i18n>Next EMI</th>
                                 <th scope="col" i18n>Status</th>
-                                <th scope="col">#</th>
+                                <th scope="col" i18n>Contract</th>
+                                <th scope="col" i18n>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!--New Data table from Sessions Apply-->
                             <tr
-                            *ngFor="let LoanApplyObj of utilityService._.values( allSessionApplyData) | mySessionsFilter : 'status' : ['accepted']:checkCreatedByUserId:checkCreatedByT">
+                            *ngFor="let LoanApplyObj of utilityService._.values( allSessionApplyData) | mySessionsFilter : 'status' : ['accepted']:checkCreatedByUserId:checkCreatedByT; let i=index;">
                             <td class="text-capitalize">{{(LoanApplyObj.sessionForBorrower.loanType ||
                                 "").replace("_", " ")}}</td>
                             <td class="text-capitalize">
+                                {{(LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId.firstName:LoanApplyObj.borrowerId.firstName)}}
+                                <!--
                                 {{userService.returnUsersObjFromLocal(null,
                                 null,'firstName',
-                                (LoanApplyObj.lenderId!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId:LoanApplyObj.borrowerId))}}
+                                (LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId._id:LoanApplyObj.borrowerId._id))}}
+                                -->
                             </td>
                             <td>{{LoanApplyObj.loanAmount || LoanApplyObj.sessionForBorrower.loanAmount}}</td>
                             <td>{{utilityService.returnRoundedNumber((LoanApplyObj.calculatedMonthlyAmountForEMI ||
@@ -248,7 +252,7 @@
                                 LoanApplyObj.sessionForBorrower.loanTenureInMonths)}}</td>
                             <td>{{LoanApplyObj.nextInstallment | date:'dd-MMM-YYYY'}}</td>
                             <td>
-                                <div *ngIf="LoanApplyObj.lenderId!=authenticationService.currentUserValue._id">
+                                <div *ngIf="LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id">
                                     <a *ngIf="!LoanApplyObj.isLoanAmountPaidByLender">
                                         <span class="badge badge-danger" i18n>
                                             Pending
@@ -267,10 +271,10 @@
                                         </span>
                                     </a>
                                 </div>
-                                <div *ngIf="LoanApplyObj.lenderId==authenticationService.currentUserValue._id">
+                                <div *ngIf="LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id">
                                     <a *ngIf="!LoanApplyObj.isLoanAmountPaidByLender">
                                         <span
-                                            *ngIf="LoanApplyObj.lenderId==authenticationService.currentUserValue._id"
+                                            *ngIf="LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id"
                                             class="badge badge-danger" i18n>
                                             Money Not Sent
                                         </span>
@@ -290,29 +294,46 @@
                                 </div>
                             </td>
                             <td>
-                                <div *ngIf="LoanApplyObj.lenderId!=authenticationService.currentUserValue._id">
-                                    <a (click)="LoanMoneyTransferStatusModel(LoanApplyObj.sessionForBorrower, LoanApplyObj)"
-                                        *ngIf="LoanApplyObj.isLoanAmountPaidByLender && !LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower">
-                                        <span class="badge badge-success" i18n>is Money Received?</span>
+                                <a class="btn btn-success btn-sm float-left ml-2" i18n target="_blank"
+                                [href]="returnUrl4downloadCOntractPDF(LoanApplyObj._id)" download><i
+                                    class="icon-cloud-down"></i>&nbsp;</a>
+                            </td>
+                            <td>
+                                <div *ngIf="LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id">
+                                    <a *ngIf="LoanApplyObj.isLoanAmountPaidByLender && !LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower">
+                                            <!--<span class="badge badge-success" i18n>is Money Received?</span>-->
+
+                                            <div class="form-check-inline">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input name="isLoanAmountPaidByLenderConfirmByBorrower_{{i}}" id="isLoanAmountPaidByLenderConfirmByBorrower_{{i}}" type="checkbox"
+                                                        class="custom-control-input" [value]="true"
+                                                        (change)="LoanMoneyTransferStatusChange($event, LoanApplyObj.sessionForBorrower, LoanApplyObj)"
+                                                        [checked]="LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower">
+                                                    <label for="isLoanAmountPaidByLenderConfirmByBorrower_{{i}}" class="custom-control-label" i18n>
+                                                        Money Received
+                                                    </label>
+                                                </div>
+                                            </div>
                                     </a>
+                                    
                                     <a *ngIf="LoanApplyObj.isLoanAmountPaidByLender && LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower && LoanApplyObj.nextInstallment && !LoanApplyObj.isLoanAmountPaidByBorrower">
                                        <!--
                                         <span (click)="LoanMoneyTransferStatusModel(LoanApplyObj.sessionForBorrower, LoanApplyObj, LoanApplyObj.nextInstallment)" class="badge badge-success">is Installment Money Transfered?</span>
                                     -->
                                     <div class="form-check-inline">
                                         <div class="custom-control custom-checkbox">
-                                            <input name="isLoanAmountPaidByBorrower" id="isLoanAmountPaidByBorrower" type="checkbox"
+                                            <input name="isLoanAmountPaidByBorrower_{{i}}" id="isLoanAmountPaidByBorrower_{{i}}" type="checkbox"
                                                 class="custom-control-input" [value]="true"
                                                 (change)="LoanMoneyTransferStatusChange($event, LoanApplyObj.sessionForBorrower, LoanApplyObj, LoanApplyObj.nextInstallment)"
                                                 [checked]="LoanApplyObj.isLoanAmountPaidByBorrower">
-                                            <label for="isLoanAmountPaidByBorrower" class="custom-control-label" i18n>
+                                            <label for="isLoanAmountPaidByBorrower_{{i}}" class="custom-control-label" i18n>
                                                 Installment Money Transfered
                                             </label>
                                         </div>
                                     </div>
                                     </a>
                                 </div>
-                                <div *ngIf="LoanApplyObj.lenderId==authenticationService.currentUserValue._id">
+                                <div *ngIf="LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id">
                                     <a *ngIf="!LoanApplyObj.isLoanAmountPaidByLender">
                                        <!--
                                         <span (click)="LoanMoneyTransferStatusModel(LoanApplyObj.sessionForBorrower, LoanApplyObj)" class="badge badge-success">
@@ -321,22 +342,32 @@
                                     -->
                                         <div class="form-check-inline">
                                             <div class="custom-control custom-checkbox">
-                                                <input name="isLoanAmountPaidByLender" id="isLoanAmountPaidByLender" type="checkbox"
+                                                <input name="isLoanAmountPaidByLender_{{i}}" id="isLoanAmountPaidByLender_{{i}}" type="checkbox"
                                                     class="custom-control-input" [value]="true"
                                                     (change)="LoanMoneyTransferStatusChange($event, LoanApplyObj.sessionForBorrower, LoanApplyObj)"
                                                     [checked]="LoanApplyObj.isLoanAmountPaidByLender">
-                                                <label for="isLoanAmountPaidByLender" class="custom-control-label" i18n>
+                                                <label for="isLoanAmountPaidByLender_{{i}}" class="custom-control-label" i18n>
                                                     Money Transfered
                                                 </label>
                                             </div>
                                         </div>
                                     </a>
-                                    <a (click)="LoanMoneyTransferStatusModel(LoanApplyObj.sessionForBorrower, LoanApplyObj, null, true)"
-                                        *ngIf="!LoanApplyObj.isLoanAmountPaidByBorrower && LoanApplyObj.installmentWiseLoanAmountPaidByBorrower">
-                                        <span class="badge badge-success" i18n>is Installment Money Received?&nbsp;</span>
+                                    <a *ngIf="!LoanApplyObj.isLoanAmountPaidByBorrower && LoanApplyObj.installmentWiseLoanAmountPaidByBorrower">
+                                        <!--<span class="badge badge-success" i18n>is Installment Money Received?&nbsp;</span>-->
+                                        <div class="form-check-inline">
+                                            <div class="custom-control custom-checkbox">
+                                                <input name="isLoanAmountPaidByBorrowerConfirmedByLender_{{i}}" id="isLoanAmountPaidByBorrowerConfirmedByLender_{{i}}" type="checkbox"
+                                                    class="custom-control-input" [value]="true"
+                                                    (change)="LoanMoneyTransferStatusChange($event, LoanApplyObj.sessionForBorrower, LoanApplyObj, LoanApplyObj.nextInstallment, true)"
+                                                    [checked]="LoanApplyObj.isLoanAmountPaidByBorrower">
+                                                <label for="isLoanAmountPaidByBorrowerConfirmedByLender_{{i}}" class="custom-control-label" i18n>
+                                                    Installment Money Received
+                                                </label>
+                                            </div>
+                                        </div>
                                         <span
-                                            *ngFor="let installmentObj of LoanApplyObj.installmentWiseLoanAmountPaidByBorrower">
-                                            <i *nfIf="installmentObj.createdOnForLoanAmountPaidToLender && !installmentObj.createdOnForLoanAmountPaidToLenderConfirmByLender">*</i>
+                                            *ngFor="let installmentObj of utilityService._.values(LoanApplyObj.installmentWiseLoanAmountPaidByBorrower)">
+                                            <i *ngIf="installmentObj.createdOnForLoanAmountPaidToLender && !installmentObj.createdOnForLoanAmountPaidToLenderConfirmByLender">*</i>
                                         </span>
                                     </a>
 
@@ -401,43 +432,84 @@
                         <thead>
                             <tr>
                                 <th scope="col" i18n>Type</th>
-                                <th scope="col" i18n>Lender Name</th>
+                                <th scope="col" i18n>
+                                    {{Role.Lender!=authenticationService.currentUserValue.role?'Lender
+                                        Name':'Borrower Name'}}
+                                </th>
                                 <th scope="col" i18n>Amount</th>
                                 <th scope="col" i18n>Refund</th>
-                                <!--<th scope="col">Next EMI</th>-->
+                                <!--<th scope="col" i18n>Next EMI</th>-->
                                 <th scope="col" i18n>Application Date</th>
-                                <th scope="col" i18n>Status</th>
-                                <th scope="col">#</th>
+                                <th scope="col" i18n>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr
-                                *ngFor="let LoanObj of allSessionsData | mySessionsFilter : 'sessionAppliedByBorrowers[0].status' : ['awaiting_for_approval']:checkCreatedByUserId:checkCreatedByT">
-                                <td class="text-capitalize">{{(LoanObj.loanType || "").replace("_", " ")}}</td>
-                                <td class="text-capitalize">
-                                    {{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,
-                                    true,'firstName')}}</td>
-                                <td>{{LoanObj.loanAmount}}</td>
-                                <td>{{utilityService.returnRoundedNumber(LoanObj.calculatedMonthlyAmountForEMI *
-                                    LoanObj.loanTenureInMonths)}}</td>
-                                <!--<td>{{LoanObj.nextInstallment | date:'dd-MMM-YYYY'}}</td>-->
-                                <td>{{LoanObj.applicationDate | datePretty}}</td>
-                                <td>
-                                    <div *ngFor="let LoanApplyObj of LoanObj.sessionAppliedByBorrowers">
-                                        <a>
-                                            <span *ngIf="!LoanApplyObj.isLoanAmountPaidByLender"
-                                                class="badge badge-danger" i18n>Pending</span>
-                                            <span *ngIf="LoanApplyObj.isLoanAmountPaidByLender"
-                                                class="badge badge-success" i18n>Received Money</span>
-                                        </a>
-                                    </div>
-                                </td>
-                                <td>
-                                    <a (click)="showAppliedToSession(LoanObj)">
-                                        <span class="badge badge-primary" i18n>Details</span>
+                            <tr *ngFor="let LoanApplyObj of utilityService._.values( allSessionApplyData) | mySessionsFilter : 'status' : ['awaiting_for_approval']:checkCreatedByUserId:checkCreatedByT; let i=index;">
+                            <td class="text-capitalize">{{(LoanApplyObj.sessionForBorrower.loanType ||
+                                "").replace("_", " ")}}</td>
+                            <td class="text-capitalize">
+                                {{(LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId.firstName:LoanApplyObj.borrowerId.firstName)}}
+                                <!--
+                                {{userService.returnUsersObjFromLocal(null,
+                                null,'firstName',
+                                (LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId._id:LoanApplyObj.borrowerId._id))}}
+                                -->
+                            </td>
+                            <td>{{LoanApplyObj.loanAmount || LoanApplyObj.sessionForBorrower.loanAmount}}</td>
+                            <td>{{utilityService.returnRoundedNumber((LoanApplyObj.calculatedMonthlyAmountForEMI ||
+                                LoanApplyObj.sessionForBorrower.calculatedMonthlyAmountForEMI) *
+                                LoanApplyObj.sessionForBorrower.loanTenureInMonths)}}</td>
+                            <td>{{LoanApplyObj.nextInstallment | date:'dd-MMM-YYYY'}}</td>
+                            <!--
+                            <td>
+                                <div *ngIf="LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id">
+                                    <a *ngIf="!LoanApplyObj.isLoanAmountPaidByLender">
+                                        <span class="badge badge-danger" i18n>
+                                            Pending
+                                        </span>
                                     </a>
-                                </td>
-                            </tr>
+                                    <a
+                                        *ngIf="LoanApplyObj.isLoanAmountPaidByLender && !LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower">
+                                        <span class="badge badge-warning" i18n>
+                                            Money Sent
+                                        </span>
+                                    </a>
+                                    <a
+                                        *ngIf="LoanApplyObj.isLoanAmountPaidByLender && LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower">
+                                        <span class="badge badge-success" i18n>
+                                            Received Money
+                                        </span>
+                                    </a>
+                                </div>
+                                <div *ngIf="LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id">
+                                    <a *ngIf="!LoanApplyObj.isLoanAmountPaidByLender">
+                                        <span
+                                            *ngIf="LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id"
+                                            class="badge badge-danger" i18n>
+                                            Money Not Sent
+                                        </span>
+                                    </a>
+                                    <a
+                                    *ngIf="LoanApplyObj.isLoanAmountPaidByLender && !LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower">
+                                    <span class="badge badge-warning" i18n>
+                                        Money Sent
+                                    </span>
+                                    </a>
+                                    <a
+                                        *ngIf="LoanApplyObj.isLoanAmountPaidByLender && LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower">
+                                        <span class="badge badge-success" i18n>
+                                            Money Sent
+                                        </span>
+                                    </a>
+                                </div>
+                            </td>
+                        -->
+                            <td>
+                                <a (click)="showAppliedToSession(null, LoanApplyObj.loanId)">
+                                    <span class="badge badge-primary" i18n>Details</span>
+                                </a>
+                            </td>
+                        </tr>
                             <tr class="mt-2 text-center no-item">
 
                                 <h5 class="my-4 font-weight-normal" i18n>No Data Found.</h5>
@@ -463,35 +535,39 @@
                         <thead>
                             <tr>
                                 <th scope="col" i18n>Type</th>
-                                <th scope="col" i18n>Lender Name</th>
+                                <th scope="col" i18n>
+                                    {{Role.Lender!=authenticationService.currentUserValue.role?'Lender
+                                        Name':'Borrower Name'}}
+                                </th>
                                 <th scope="col" i18n>Amount</th>
                                 <th scope="col" i18n>Refund</th>
-                                <th scope="col" i18n>Status</th>
-                                <th scope="col">#</th>
+                                <th scope="col" i18n>Contract</th>
+                                <th scope="col" i18n>#</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr
-                                *ngFor="let LoanObj of allSessionsData | mySessionsFilter : 'sessionAppliedByBorrowers[0].status' : ['paid','completed']:checkCreatedByUserId:checkCreatedByT">
-                                <td class="text-capitalize">{{(LoanObj.loanType || "").replace("_", " ")}}</td>
+                                *ngFor="let LoanApplyObj of utilityService._.values( allSessionApplyData) | mySessionsFilter : 'status' : ['paid','completed']:checkCreatedByUserId:checkCreatedByT">
+                                <td class="text-capitalize">{{(LoanApplyObj.sessionForBorrower.loanType ||
+                                    "").replace("_", " ")}}</td>
                                 <td class="text-capitalize">
+                                    {{(LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId.firstName:LoanApplyObj.borrowerId.firstName)}}
+                                    <!--
                                     {{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,
-                                    true,'firstName')}}</td>
-                                <td>{{LoanObj.loanAmount}}</td>
-                                <td>{{utilityService.returnRoundedNumber(LoanObj.calculatedMonthlyAmountForEMI *
-                                    LoanObj.loanTenureInMonths)}}</td>
+                                    true,'firstName')}}
+                                    -->
+                                </td>
+                                <td>{{LoanApplyObj.loanAmount || LoanApplyObj.sessionForBorrower.loanAmount}}</td>
+                                <td>{{utilityService.returnRoundedNumber((LoanApplyObj.calculatedMonthlyAmountForEMI ||
+                                    LoanApplyObj.sessionForBorrower.calculatedMonthlyAmountForEMI) *
+                                    LoanApplyObj.sessionForBorrower.loanTenureInMonths)}}</td>
                                 <td>
-                                    <div *ngFor="let LoanApplyObj of LoanObj.sessionAppliedByBorrowers">
-                                        <a>
-                                            <span *ngIf="!LoanApplyObj.isLoanAmountPaidByLender"
-                                                class="badge badge-danger" i18n>Pending</span>
-                                            <span *ngIf="LoanApplyObj.isLoanAmountPaidByLender"
-                                                class="badge badge-success" i18n>Received Money</span>
-                                        </a>
-                                    </div>
+                                    <a class="btn btn-success btn-sm float-left ml-2" i18n target="_blank"
+                                    [href]="returnUrl4downloadCOntractPDF(LoanApplyObj._id)" download><i
+                                        class="icon-cloud-down"></i>&nbsp;</a>
                                 </td>
                                 <td>
-                                    <a (click)="showAppliedToSession(LoanObj)">
+                                    <a (click)="showAppliedToSession(null, LoanApplyObj.loanId)">
                                         <span class="badge badge-primary" i18n>Details</span>
                                     </a>
                                 </td>

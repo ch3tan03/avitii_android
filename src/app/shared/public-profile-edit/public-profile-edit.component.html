@@ -102,7 +102,7 @@
                     <div class="row">
                         <div class="col-xl-4">
                             <div class="card"
-                                *ngFor="let previewUrl of _.union(_.values(f.myPassportMedia.value),_.values(f.myPassportMediaSelfVerify.value))">
+                                *ngFor="let previewUrl of _.union(_.values(f.myPassportMedia.value))">
                                 <img class="card-img-top" [src]="previewUrl.url" style="height: 200px;">
                                 <div *ngIf="fileUploadProgress" i18n>
                                     Upload progress: {{ fileUploadProgress }}
@@ -116,12 +116,27 @@
 
                                 </div>
                             </div>
+                            <div class="card"
+                                *ngFor="let previewUrl of _.union(_.values(f.myPassportMediaSelfVerify.value))">
+                                <img class="card-img-top" [src]="previewUrl.url" style="height: 200px;">
+                                <div *ngIf="fileUploadProgress" i18n>
+                                    Upload progress: {{ fileUploadProgress }}
+                                </div>
+                                <div class="card-body" i18n>
+                                    Passport
+
+                                    <a class="btn btn-primary btn-sm btn-xs float-right text-white"><i
+                                            class="icon icon-trash"
+                                            (click)="onUploadCleanAssetDocs('myPassportMediaSelfVerify')"></i></a>
+
+                                </div>
+                            </div>
 
 
                         </div>
                         <div class="col-xl-4">
                             <div class="card"
-                                *ngFor="let previewUrl of _.union(_.values(f.myDLMedia.value),_.values(f.myDLMediaSelfVerify.value))">
+                                *ngFor="let previewUrl of _.union(_.values(f.myDLMedia.value))">
                                 <img class="card-img-top" [src]="previewUrl.url" style="height: 200px;">
                                 <div *ngIf="fileUploadProgress" i18n>
                                     Upload progress: {{ fileUploadProgress }}
@@ -135,12 +150,26 @@
 
                                 </div>
                             </div>
+                            <div class="card"
+                            *ngFor="let previewUrl of _.union(_.values(f.myDLMediaSelfVerify.value))">
+                            <img class="card-img-top" [src]="previewUrl.url" style="height: 200px;">
+                            <div *ngIf="fileUploadProgress" i18n>
+                                Upload progress: {{ fileUploadProgress }}
+                            </div>
+                            <div class="card-body" i18n>
+                                Driving Licence
 
+                                <a class="btn btn-primary btn-sm btn-xs float-right text-white"><i
+                                        class="icon icon-trash"
+                                        (click)="onUploadCleanAssetDocs('myDLMediaSelfVerify')"></i></a>
+
+                            </div>
+                        </div>
 
                         </div>
                         <div class="col-xl-4">
                             <div class="card"
-                                *ngFor="let previewUrl of _.union(_.values(f.myHICardMedia.value),_.values(f.myHICardMediaSelfVerify.value))">
+                                *ngFor="let previewUrl of _.union(_.values(f.myHICardMedia.value))">
                                 <img class="card-img-top" [src]="previewUrl.url" style="height: 200px;">
                                 <div *ngIf="fileUploadProgress" i18n>
                                     Upload progress: {{ fileUploadProgress }}
@@ -154,13 +183,27 @@
 
                                 </div>
                             </div>
+                            <div class="card"
+                            *ngFor="let previewUrl of _.union(_.values(f.myHICardMediaSelfVerify.value))">
+                            <img class="card-img-top" [src]="previewUrl.url" style="height: 200px;">
+                            <div *ngIf="fileUploadProgress" i18n>
+                                Upload progress: {{ fileUploadProgress }}
+                            </div>
+                            <div class="card-body" i18n>
+                                Health Insurance Card
 
+                                <a class="btn btn-primary btn-sm btn-xs float-right text-white"><i
+                                        class="icon icon-trash"
+                                        (click)="onUploadCleanAssetDocs('myHICardMediaSelfVerify')"></i></a>
+
+                            </div>
+                        </div>
                         </div>
                     </div>
                     <div class="row" *ngIf="_role == Role.Borrower">
                         <div class="col-xl-12">
                             <div class="row">
-                                <div class="col-xl-12 mt-3">
+                                <div class="col-xl-12 mt-3" i18n>
                                     RKI
                                 </div>
                             </div>
@@ -183,10 +226,18 @@
 
                                     <div class="row">
                                         <div class="col-xl-12"
-                                            *ngFor="let previewUrl of _.union(_.values(f.myRKIMedia.value),_.values(f.myRKIMediaSelfVerify.value))">
+                                            *ngFor="let previewUrl of _.union(_.values(f.myRKIMedia.value))">
 
                                             <i class="icon-trash text-danger"
                                                 (click)="onUploadCleanAssetDocs('myRKIMedia')"></i>
+
+                                            <img class="img-fluid" [src]="previewUrl.url" />
+                                        </div>
+                                        <div class="col-xl-12"
+                                            *ngFor="let previewUrl of _.union(_.values(f.myRKIMediaSelfVerify.value))">
+
+                                            <i class="icon-trash text-danger"
+                                                (click)="onUploadCleanAssetDocs('myRKIMediaSelfVerify')"></i>
 
                                             <img class="img-fluid" [src]="previewUrl.url" />
                                         </div>

@@ -18,17 +18,16 @@
                         [attr.href]="'#collapse_userIncomeDetailsForm'" i18n>
                         <h6 class="m-0 font-weight-bold text-primary">
                             Update {{adminViewT?userObj.firstName+'`s':'Your'}} Income Details
-                            <span class="float-right"
+                            <!-- <span class="float-right"
                                 [ngClass]="{ 'text-success': userObj.totalAllowedBudget, 'text-danger': !userObj.totalAllowedBudget }">
-                                &nbsp;{{userObj.totalAllowedBudget}}&nbsp;
+                                &nbsp;{{userObj.totalAllowedBudget}}&nbsp;({{maxPercentageAllowed2user||0}}%)
                             </span>
                             <span class="float-right">
                                 &nbsp;{{userObj.totalIncome4currentUser || 0
                                 }}&nbsp;-&nbsp;{{userObj.totalExpense4currentUser || 0}}&nbsp;=&nbsp;
-                            </span>
+                            </span> -->
                         </h6>
                     </a>
-
                 </div>
                 <div [attr.id]="'collapse_userIncomeDetailsForm'" class="collapse show"
                     data-parent="#accordion_userIncomeDetailsForm">

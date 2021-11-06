@@ -26,23 +26,29 @@ export class MySessionsPipe implements PipeTransform {
         let master_objAttr = field.replace('[0]', '').split('.')[0];
 
         let child_objAttr = field.replace('[0]', '').split('.')[1]
+        let atLeastOneSatisfyCaseT = false;
         for (let index in it[master_objAttr]) {
           let _obj = it[master_objAttr][index];
           if (_obj) {
             _fieldData = _obj[child_objAttr];
-
             if (_fieldData) {
-              return valuesArr.indexOf(_fieldData.toLowerCase()) != -1
+              if ((valuesArr.indexOf(_fieldData.toLowerCase()) != -1)) {
+                atLeastOneSatisfyCaseT = true;
+              }
+            }
+          }
+        }
+        if (atLeastOneSatisfyCaseT) {
+          return true;
+        }
+        if (!_fieldData) {
+          if (sendMasterDataBackIfChildMissingT) {
+            if (valuesArr.indexOf('pending') > -1) {
+              return true;
             }
           }
         }
 
-        if (sendMasterDataBackIfChildMissingT) {
-          if (valuesArr.indexOf('pending') > -1) {
-            return true;
-          }
-        }
-        
       } else {
         _fieldData = _.get(it, field);
         if (_fieldData) {

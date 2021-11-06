@@ -56,6 +56,7 @@ export class MySessionsComponent implements OnInit {
   }
 
   setFilteresOfMySessionDependsOnTab(selectedTab) {
+    this.selectedTab = selectedTab;
     switch (selectedTab) {
       case 'received':
         this.SessionStatusTypeFilter = [SessionStatus.Pending, SessionStatus.AwaitingForApproval];
@@ -83,12 +84,17 @@ export class MySessionsComponent implements OnInit {
         this.checkCreatedByT = false;
         break;
       case 'unpaid':
-        this.SessionStatusTypeFilter = [SessionStatus.RejectedOngoing, SessionStatus.Suspended, SessionStatus.Unpaid];
+        this.SessionStatusTypeFilter = [SessionStatus.Unpaid];
         this.checkCreatedByUserId = null;
         this.checkCreatedByT = false;
         break;
       case 'inkasso':
-        this.SessionStatusTypeFilter = [SessionStatus.Rejected, SessionStatus.RejectedOngoingWithRefund, SessionStatus.Inkasso];
+        this.SessionStatusTypeFilter = [SessionStatus.Inkasso];
+        this.checkCreatedByUserId = null;
+        this.checkCreatedByT = false;
+        break;
+      default:
+        this.SessionStatusTypeFilter = this.utilityService._.values(SessionStatus);
         this.checkCreatedByUserId = null;
         this.checkCreatedByT = false;
         break;
@@ -103,7 +109,9 @@ export class MySessionsComponent implements OnInit {
         //console.log('48', ex.message);
       }
     })(jQuery);
+  }
 
+  getSessionsDataFromServer() {
     this.sessionsService.getSessionAllByBorrowerId(this.authenticationService.currentUserValue._id, null, null, null, true, null)
       .pipe(first())
       .subscribe(
@@ -117,7 +125,9 @@ export class MySessionsComponent implements OnInit {
               _keyPairedMapObj[_currentObj._id] = _currentObj
             }
             this.allSessionsData = this.utilityService._.values(_keyPairedMapObj);
-            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')));
+            this.filterAllSessionsDataForAppliedCurrentUserOnly();
+
+            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')),'_id')));
             //this.alertService.success(data['message'], true);
             this.loading = false;
             //this.element_btn_click_addSession_skills_verification.click();
@@ -152,7 +162,9 @@ export class MySessionsComponent implements OnInit {
               _keyPairedMapObj[_currentObj._id] = _currentObj
             }
             this.allSessionsData = this.utilityService._.values(_keyPairedMapObj);
-            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')));
+            this.filterAllSessionsDataForAppliedCurrentUserOnly();
+
+            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')),'_id')));
             this.loading = false;
           } else {
             this.loading = false;
@@ -171,8 +183,9 @@ export class MySessionsComponent implements OnInit {
           _keyPairedMapObj[_currentObj._id] = _currentObj
         }
         this.allSessionsData = this.utilityService._.values(_keyPairedMapObj);
+        this.filterAllSessionsDataForAppliedCurrentUserOnly();
 
-        this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')));
+        this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')),'_id')));
 
       } else {
         //this.allSessionsData = [];
@@ -181,7 +194,7 @@ export class MySessionsComponent implements OnInit {
     let _obj2Save = {
       createdBy: this.authenticationService.currentUserValue._id
     };
-    this.socketService.getSessionAllByQuery(false, _obj2Save, null);
+    this.socketService.getSessionAllByQuery(false, _obj2Save, null);  
   }
 
   showAppliedToSession(sessionObj) {
@@ -189,7 +202,7 @@ export class MySessionsComponent implements OnInit {
     switch (this.authenticationService.currentUserValue.role) {
       case Role.Borrower:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
-        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId": this.authenticationService.currentUserValue._id });
+        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId":{"_id": this.authenticationService.currentUserValue._id }});
         break;
       default:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
@@ -206,7 +219,8 @@ export class MySessionsComponent implements OnInit {
       width: '100%',
       data: {
         sessionObj: _proccessedSessionObj,
-        borrowerId: this.authenticationService.currentUserValue._id
+        borrowerId: this.authenticationService.currentUserValue._id,
+        selectedTab:this.selectedTab
       }
     });
 
@@ -237,7 +251,9 @@ export class MySessionsComponent implements OnInit {
             _keyPairedMapObj[result.data.updatedSessionObj._id] = result.data.updatedSessionObj;
 
             this.allSessionsData = this.utilityService._.values(_keyPairedMapObj);
-            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')));
+            this.filterAllSessionsDataForAppliedCurrentUserOnly();
+
+            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')),'_id')));
 
             this._cdr.detectChanges();
           }
@@ -269,7 +285,7 @@ export class MySessionsComponent implements OnInit {
     if (sessionObj && sessionObj.sessionAppliedByBorrowers) {
       if (checkCreatedBySelfT) {
         if (sessionObj.createdBy == this.authenticationService.currentUserValue._id) {
-          if (_.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId": this.authenticationService.currentUserValue._id }).length > 0) {
+          if (_.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId":{"_id": this.authenticationService.currentUserValue._id }}).length > 0) {
             return true;
           }
         }
@@ -311,12 +327,12 @@ export class MySessionsComponent implements OnInit {
           _currentSessionApply = result.data.sessionApply
           if (_currentSessionApply) {
             if (!_currentSessionApply._id) {
-              _currentSessionApply._id = _currentSessionApply.loanId + '__' + _currentSessionApply.borrowerId;
+              _currentSessionApply._id = _currentSessionApply.loanId + '__' + (_currentSessionApply.borrowerId._id || _currentSessionApply.borrowerId);
             }
             let _loanId = _currentSessionApply.loanId;
             let _sessionPrice = _currentSessionApply.loanAmount;
             let _loanApplyId = _currentSessionApply._id;
-            let _borrowerId = _currentSessionApply.borrowerId;
+            let _borrowerId = (_currentSessionApply.borrowerId._id || _currentSessionApply.borrowerId);
             let _transactionId = result.data.transactionId;
             let _status = result.data.status;
             _currentSessionApply.status = result.data.status || SessionStatus.Pending;
@@ -374,6 +390,7 @@ export class MySessionsComponent implements OnInit {
             this.authenticationService.currentUserLoanTypeWiseCountDetails = data['data'];
           } else {
           }
+          this.getSessionsDataFromServer();
         },
         error => {
           let errorMsg2show = "";
@@ -453,7 +470,9 @@ export class MySessionsComponent implements OnInit {
                   this.alertService.success('Updated successfully');
                 }
                 this.allSessionsData = _.values(temp_allLoanMarketData);
-                this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')));
+                this.filterAllSessionsDataForAppliedCurrentUserOnly();
+
+                this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')),'_id')));
 
                 this._cdr.detectChanges();
               }
@@ -480,4 +499,28 @@ export class MySessionsComponent implements OnInit {
           this.loading = false;
         });
   }
+  filterAllSessionsDataForAppliedCurrentUserOnly() {
+    if (this.allSessionsData) {
+      let allSessionsDataKeyPaired = {};
+      for (let _items in this.allSessionsData) {
+        let _proccessedSessionObj = {
+          _id: null,
+          sessionAppliedByBorrowers: []
+        };
+        let sessionObj = this.allSessionsData[_items];
+        switch (this.authenticationService.currentUserValue.role) {
+          case Role.Borrower:
+            _proccessedSessionObj =this.utilityService._.cloneDeep(sessionObj);
+            _proccessedSessionObj.sessionAppliedByBorrowers = this.utilityService._.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId":{"_id": this.authenticationService.currentUserValue._id }});
+            break;
+          default:
+            _proccessedSessionObj = this.utilityService._.cloneDeep(sessionObj);
+            break;
+        }
+        allSessionsDataKeyPaired[_proccessedSessionObj._id] = _proccessedSessionObj;
+      }
+      this.allSessionsData = this.utilityService._.values(allSessionsDataKeyPaired);
+    }
+  }
+
 }

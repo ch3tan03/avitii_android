@@ -23,10 +23,11 @@ import { LoanPaymentComponent } from './loan-payment/loan-payment.component';
 import { CustomerReviewComponent } from './customer-review/customer-review.component';
 import { PartnersComponent } from './partners/partners.component';
 import { HttpClientModule} from '@angular/common/http';
-import { AngularEditorModule } from '@kolkov/angular-editor'
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { UserManagementPendingComponent } from './user-management-pending/user-management-pending.component'
 
 @NgModule({
-  declarations: [AdminComponent, HomeComponent, HeaderComponent, FooterComponent, ServicesComponent, ServiceTypesAddComponent, UserManagementComponent, PaymentTransactionsComponent, BorrowerEarningsComponent, AddUserComponent, UserLevelsComponent, BlogsComponent, LoanPaymentComponent, CustomerReviewComponent, PartnersComponent],
+  declarations: [AdminComponent, HomeComponent, HeaderComponent, FooterComponent, ServicesComponent, ServiceTypesAddComponent, UserManagementComponent, PaymentTransactionsComponent, BorrowerEarningsComponent, AddUserComponent, UserLevelsComponent, BlogsComponent, LoanPaymentComponent, CustomerReviewComponent, PartnersComponent, UserManagementPendingComponent],
   imports: [
     CommonModule,
     AdminRoutingModule,

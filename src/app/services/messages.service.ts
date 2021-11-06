@@ -90,7 +90,7 @@ export class MessagesService implements OnInit {
 
   getAllUsers() {
     let _data = {};
-    this.socketService.getAllUsers(_data).pipe(first()).subscribe(users => {
+    this.socketService.getAllUsers(_data, null, null, null).pipe(first()).subscribe(users => {
       this.allUsersList = users;
     });
   }

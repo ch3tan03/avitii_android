@@ -4,7 +4,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-xl-11 col-10">
-                        <div class="font-weight-bold text-primary" >
+                        <div class="font-weight-bold text-primary">
                             {{userObj.firstName}}&nbsp;{{userObj.lastName}}
                         </div>
                     </div>
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="row">                   
+                <div class="row">
                     <div class="col-xl-12 col-12 mb-4">
                         <div class="view view-cascade gradient-card-header white">
                             <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
@@ -28,9 +28,16 @@
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let obj of utilityService._.values(PaymentTransactionDetailsArray)">
-                                        <td class="d-none" >{{obj._id}}</td>
-                                        <td >{{obj.comment}}</td>
-                                        <td >{{obj.isVerified?'UnBlocked':'Blocked'}}</td>
+                                        <td class="d-none">{{obj._id}}</td>
+                                        <td>{{obj.comment}}</td>
+                                        <td>
+                                            <span [ngSwitch]="obj.isVerified" i18n>
+                                                <i *ngSwitchCase="2" class="badge badge-danger font-weight-light">Blocked</i>
+                                                <i *ngSwitchCase="1" class="badge badge-success font-weight-light">UnBlocked/Verified</i>
+                                                <i *ngSwitchDefault class="badge badge-danger font-weight-light">Pending</i>
+                                            </span>
+                                            <!--{{obj.isVerified?'UnBlocked':'Blocked'}}-->
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>

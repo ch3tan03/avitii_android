@@ -32,7 +32,7 @@ export class UserService {
     ////var _result = this.socket.fromEvent<User[]>('user_getall_list');
     //alert(JSON.stringify( _result));
     ////return _result;
-    return this.http.post(this.baseurl + 'api/post/user/getall', user,{});
+    return this.http.post(this.baseurl + 'api/post/user/getall', user, {});
   }
 
   getById(id: number) {
@@ -83,15 +83,30 @@ export class UserService {
   }
 
   getUserById(id: string) {
-    return this.http.post(this.baseurl + 'api/post/user/getbyid', { userId: id });
+    if (this.socketioService.isSocketConnected() && false) {
+      this.socketioService.emitEventWithNameAndData('request_user_get_byid', id);
+      return fromEvent<any[]>(this.socketioService.socket, 'response_user_get_byid');
+    } else {
+      return this.http.post(this.baseurl + 'api/post/user/getbyid', { userId: id });
+    }
   }
 
   updateUserById(user: User) {
-    return this.http.post(this.baseurl + 'api/post/user/update/byid', user);
+    if (this.socketioService.isSocketConnected() && false) {
+      this.socketioService.emitEventWithNameAndData('request_user_update_byid', user);
+      return fromEvent<any[]>(this.socketioService.socket, 'response_user_update_byid');
+    } else {
+      return this.http.post(this.baseurl + 'api/post/user/update/byid', user);
+    }
   }
 
   updateUserByIdFromAdmin(user: User, updatedBy) {
-    return this.http.post(this.baseurl + 'api/post/user/admin/update/byid', { user, updatedBy });
+    if (this.socketioService.isSocketConnected() && false) {
+      this.socketioService.emitEventWithNameAndData('request_user_admin_update_byid', user, updatedBy);
+      return fromEvent<any[]>(this.socketioService.socket, 'response_user_admin_update_byid');
+    } else {
+      return this.http.post(this.baseurl + 'api/post/user/admin/update/byid', { user, updatedBy });
+    }
   }
 
   authenticateAndLoginUser(userName: string, password: string) {
@@ -115,6 +130,7 @@ export class UserService {
   latestUserIdArrayMissingFromLocal = [];
   proccessAllAppUsersCollections(userIdArray) {
     if (userIdArray && Object.keys(userIdArray).length > 0) {
+      userIdArray = this.utilityService._.uniq(userIdArray);
       if (!this.latestUserIdArrayMissingFromLocal) {
         this.latestUserIdArrayMissingFromLocal = [];
       }
@@ -214,9 +230,9 @@ export class UserService {
           let _obj = this.utilityService._.first(sessionAppliedByBorrowers);
           if (_obj) {
             if (lenderTrue) {
-              userId = _obj.lenderId;
+              userId = _obj.lenderId._id;
             } else {
-              userId = _obj.borrowerId;
+              userId = _obj.borrowerId._id;
             }
           }
         }
@@ -260,8 +276,8 @@ export class UserService {
     return fromEvent<any[]>(this.socketioService.socket, 'response_to_get_admin_dashboard_details_data');
   }
 
-  getUsersDashboardData(userId, role) {
-    this.socketioService.emitEventWithNameAndData('request_to_get_users_dashboard_details_data', userId, role);
+  getUsersDashboardData(userId, role, sendOnlyBudget:boolean=false) {
+    this.socketioService.emitEventWithNameAndData('request_to_get_users_dashboard_details_data', userId, role, sendOnlyBudget);
     return fromEvent<any[]>(this.socketioService.socket, 'response_to_get_users_dashboard_details_data');
   }
 

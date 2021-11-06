@@ -66,7 +66,8 @@ export class GetALoanComponent implements OnInit {
     //#endregion do not allow to create new loan in last 3 day's of the month
     //this.currentUserRoleType = this.authenticationService.currentUserValue.userType;
     this.currentUserMaxLoanAmount = 1000;
-
+    this.authenticationService.getUsersDashboardDataForSelf();
+    
     this.initForm();
 
     let paramobj = history.state;
@@ -166,7 +167,7 @@ export class GetALoanComponent implements OnInit {
       deletedBy: [_userObj.deletedBy || ''],
       updatedBy: [this.authenticationService.currentUserValue._id || ''],
       bannerUrl: [_userObj.bannerUrl || ''],
-      borrowerId: [_userObj.borrowerId || ''],
+      borrowerId: [(_userObj.borrowerId?(_userObj.borrowerId._id || _userObj.borrowerId):null )|| ''],
       isLoanRequested: [true],
       calculatedMonthlyAmountForEMI: []
     });
@@ -255,7 +256,12 @@ export class GetALoanComponent implements OnInit {
     if (this.addSessionForm.invalid) {
       return;
     }
-
+    if (this._calculatedMonthlyAmountForEMI) {
+      if (this.authenticationService.currentUserValue.totalAllowedBudget < this._calculatedMonthlyAmountForEMI) {
+        this.alertService.error("Monthly EMI exceeding limit of allowed budget");
+        return;
+      }
+    }
     let _loanStartDateTime = this.addSessionForm.get('loanStartDateTimeCustomised').value;
     let _loanEndDateTime = this.addSessionForm.get('loanEndDateTimeCustomised').value;
     /*

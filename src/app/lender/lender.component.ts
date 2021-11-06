@@ -54,7 +54,7 @@ export class ModalApplySession implements OnInit {
     this.sessionApply = {};
     this.sessionApply.loanId = this.LoanObj._id;
     this.sessionApply.loanAmount = this.LoanObj.loanAmount;
-    this.sessionApply.borrowerId = data.borrowerId;
+    this.sessionApply.borrowerId._id = data.borrowerId._id;
     this.sessionApply.sessionExecutionType = SessionExecutionType.FixedPrice;
     this.sessionApply.mileStoneProposal = [];
     this.sessionApply.mileStoneProposal.push({ "milestones": null, "milestonesProposal": null });
@@ -121,6 +121,55 @@ export class ModalAppliedSessionDisplay implements OnInit {
     this.LoanApplyObjCurrentCheckBoxes = {};
     this.LoanApplyObjCurrentCheckBoxes.visibleKeys = {};
     this.LoanApplyObjCurrent4Installment = {};
+    this.setFilteresOfMySessionDependsOnTab(data.selectedTab);
+  }
+  SessionStatusTypeFilter = [];
+  checkCreatedByUserId = null;
+  checkCreatedByT = true;
+  setFilteresOfMySessionDependsOnTab(selectedTab) {
+    //this.selectedTab = selectedTab;
+    switch (selectedTab) {
+      case 'received':
+        this.SessionStatusTypeFilter = [SessionStatus.Pending, SessionStatus.AwaitingForApproval];
+        this.checkCreatedByUserId = this.authenticationService.currentUserValue._id;
+        this.checkCreatedByT = true;
+        break;
+      case 'sent':
+        this.SessionStatusTypeFilter = [SessionStatus.AwaitingForApproval];
+        this.checkCreatedByUserId = this.authenticationService.currentUserValue._id;
+        this.checkCreatedByT = false;
+        break;
+      case 'canceled':
+        this.SessionStatusTypeFilter = [SessionStatus.Canceled, SessionStatus.Rejected, SessionStatus.RejectedOngoing, SessionStatus.Suspended, SessionStatus.RejectedOngoingWithRefund];
+        this.checkCreatedByUserId = null;
+        this.checkCreatedByT = false;
+        break;
+      case 'active':
+        this.SessionStatusTypeFilter = [SessionStatus.Accepted];
+        this.checkCreatedByUserId = null;
+        this.checkCreatedByT = false;
+        break;
+      case 'paid':
+        this.SessionStatusTypeFilter = [SessionStatus.Completed];
+        this.checkCreatedByUserId = null;
+        this.checkCreatedByT = false;
+        break;
+      case 'unpaid':
+        this.SessionStatusTypeFilter = [SessionStatus.Unpaid];
+        this.checkCreatedByUserId = null;
+        this.checkCreatedByT = false;
+        break;
+      case 'inkasso':
+        this.SessionStatusTypeFilter = [SessionStatus.Inkasso];
+        this.checkCreatedByUserId = null;
+        this.checkCreatedByT = false;
+        break;
+      default:
+        this.SessionStatusTypeFilter = this.utilityService._.values(SessionStatus);
+        this.checkCreatedByUserId = null;
+        this.checkCreatedByT = false;
+        break;
+    }
   }
 
   initiateLoanAmountPaidByBorrower(event, LoanApplyObj, currentRowDate, _key) {
@@ -473,15 +522,15 @@ export class ModalAppliedSessionDisplay implements OnInit {
   addNewRatings(_sessionApply) {
     let _loanId = _sessionApply.loanId;
     let _createdBy = this.authenticationService.currentUserValue._id;
-    let _userId = _sessionApply.borrowerId;
+    let _userId = _sessionApply.borrowerId._id || _sessionApply.borrowerId;
     let _parentRouting = '';
     switch (this.authenticationService.currentUserValue.role) {
       case Role.Borrower:
-        _userId = _sessionApply.lenderId;
+        _userId = _sessionApply.lenderId._id || _sessionApply.lenderId;
         _parentRouting = 'borrower';
         break;
       case Role.Lender:
-        _userId = _sessionApply.borrowerId;
+        _userId = _sessionApply.borrowerId._id || _sessionApply.borrowerId;
         _parentRouting = 'lender';
         break;
       case Role.Admin:

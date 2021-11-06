@@ -48,13 +48,13 @@ export class BorrowNowComponent implements OnInit {
     if (paramobj) {
       this.loanId = paramobj['loanId'];
       delete history.state['loanId'];
-
       this.loanApplyId = paramobj['loanApplyId'];
       delete history.state['loanApplyId'];
       if (this.loanApplyId) {
         this.initForm();
         this.clickedOnSignLoanContract(true);
       }
+      this.authenticationService.getUsersDashboardDataForSelf();
       if (this.loanId) {
         this.socketioService.getLoanMarketDataById(this.loanId)
           .pipe(first())
@@ -77,7 +77,7 @@ export class BorrowNowComponent implements OnInit {
                   let _userIdOfLoanCreatorOrEditorWhichisNotCurrentUser = this.LoanObj.createdByUserObj._id;
                   if (this.loanApplyId) {
                     if (this.authenticationService.currentUserValue._id == this.LoanObj.createdByUserObj._id) {
-                      _userIdOfLoanCreatorOrEditorWhichisNotCurrentUser = _obj4LoanApply.lenderId;
+                      _userIdOfLoanCreatorOrEditorWhichisNotCurrentUser = _obj4LoanApply.lenderId._id;
                     }
                   }
                   //#endregion data set to local of loan obj
@@ -246,6 +246,7 @@ export class BorrowNowComponent implements OnInit {
   }
 
   clickedOnSignLoanContract(bypass2CheckOfProposedAmount: boolean = false) {
+    let _calculatedMonthlyAmountForEMI = null;
     if (!bypass2CheckOfProposedAmount) {
       if (this.borrowNowForm.get('proposedLoanAmount').value) {
         /*
@@ -270,13 +271,20 @@ export class BorrowNowComponent implements OnInit {
           return;
         }
 
-        let _calculatedMonthlyAmountForEMI = this.utilityService.fnCalculateMonthlyAmountForEMI(this.borrowNowForm.get('proposedLoanAmount').value, this.LoanObj.loanTenureInMonths, this.LoanObj.loanInterestRate);
+        _calculatedMonthlyAmountForEMI = this.utilityService.fnCalculateMonthlyAmountForEMI(this.borrowNowForm.get('proposedLoanAmount').value, this.LoanObj.loanTenureInMonths, this.LoanObj.loanInterestRate);
         this.borrowNowForm.get('calculatedMonthlyAmountForEMI').setValue(_calculatedMonthlyAmountForEMI);
       } else {
         if (!this.borrowNowForm.get('calculatedMonthlyAmountForEMI').value) {
-          let _calculatedMonthlyAmountForEMI = this.utilityService.fnCalculateMonthlyAmountForEMI(this.LoanObj.loanAmount, this.LoanObj.loanTenureInMonths, this.LoanObj.loanInterestRate);
+          _calculatedMonthlyAmountForEMI = this.utilityService.fnCalculateMonthlyAmountForEMI(this.LoanObj.loanAmount, this.LoanObj.loanTenureInMonths, this.LoanObj.loanInterestRate);
           this.borrowNowForm.get('calculatedMonthlyAmountForEMI').setValue(_calculatedMonthlyAmountForEMI);
         }
+      }
+    }
+    _calculatedMonthlyAmountForEMI = this.borrowNowForm.get('calculatedMonthlyAmountForEMI').value;
+    if (_calculatedMonthlyAmountForEMI) {
+      if (this.authenticationService.currentUserValue.totalAllowedBudget < _calculatedMonthlyAmountForEMI) {
+        this.alertService.error("Monthly EMI exceeding limit of allowed budget");
+        return;
       }
     }
 
@@ -284,7 +292,18 @@ export class BorrowNowComponent implements OnInit {
     this.returnHeaderTitleForPage();
     if (this.borrowerUserObj) {
       this.borrowNowForm.get('eSignatureBorrowersName').setValue(this.borrowerUserObj.firstName || this.borrowerUserObj.lastName);
-      this.borrowNowForm.get('eSignatureBorrowersPassportNumber').setValue(this.borrowerUserObj.myPassportNumber || this.borrowerUserObj.myDLNumber);
+
+      if (this.borrowerUserObj.myPassportNumber && this.borrowerUserObj.myPassportMediaVerified == 1) {
+        this.borrowNowForm.get('eSignatureBorrowersPassportNumber').setValue(this.borrowerUserObj.myPassportNumber);
+      } else if (this.borrowerUserObj.myDLNumber && this.borrowerUserObj.myDLMediaVerified == 1) {
+        this.borrowNowForm.get('eSignatureBorrowersPassportNumber').setValue(this.borrowerUserObj.myDLNumber);
+      } else {
+        this.borrowNowForm.get('eSignatureBorrowersPassportNumber').setValue(this.borrowerUserObj.myPassportNumber || this.lenderUserObj.myDLNumber);
+      }
+      /* else if (this.borrowerUserObj.cprNumber && this.borrowerUserObj.myHICardMediaVerified == 1) {
+              this.borrowNowForm.get('eSignatureBorrowersPassportNumber').setValue(this.borrowerUserObj.cprNumber);
+            } */
+
     }
   }
 
@@ -313,12 +332,22 @@ export class BorrowNowComponent implements OnInit {
   }
 
   clickedOnVerifiedSignLoanContract() {
+    debugger;
     if (this.borrowerUserObj) {
       if (!this.borrowNowForm.get('eSignatureBorrowersName').value) {
         this.borrowNowForm.get('eSignatureBorrowersName').setValue(this.borrowerUserObj.firstName || this.borrowerUserObj.lastName);
       }
       if (!this.borrowNowForm.get('eSignatureBorrowersPassportNumber').value) {
-        this.borrowNowForm.get('eSignatureBorrowersPassportNumber').setValue(this.borrowerUserObj.myPassportNumber || this.borrowerUserObj.myDLNumber);
+        if (this.borrowerUserObj.myPassportNumber && this.borrowerUserObj.myPassportMediaVerified == 1) {
+          this.borrowNowForm.get('eSignatureBorrowersPassportNumber').setValue(this.borrowerUserObj.myPassportNumber);
+        } else if (this.borrowerUserObj.myDLNumber && this.borrowerUserObj.myDLMediaVerified == 1) {
+          this.borrowNowForm.get('eSignatureBorrowersPassportNumber').setValue(this.borrowerUserObj.myDLNumber);
+        } else {
+          this.borrowNowForm.get('eSignatureBorrowersPassportNumber').setValue(this.borrowerUserObj.myPassportNumber || this.lenderUserObj.myDLNumber);
+        }
+        /* else if (this.borrowerUserObj.cprNumber && this.borrowerUserObj.myHICardMediaVerified == 1) {
+                this.borrowNowForm.get('eSignatureBorrowersPassportNumber').setValue(this.borrowerUserObj.cprNumber);
+              } */
       }
     }
     this.submitted = true;
@@ -327,7 +356,11 @@ export class BorrowNowComponent implements OnInit {
     }
 
     if (this.borrowNowForm.get('eSignatureBorrowersPassportNumber').value != this.borrowerUserObj.myPassportNumber) {
-      this.alertService.error("Passport Number miss match. Please enter proper number");
+      //this.alertService.error("Passport Number miss match. Please enter proper number");
+      //return;
+    }
+    if (!this.borrowNowForm.get('eSignatureBorrowersPassportNumber').value) {
+      this.alertService.error("Document missing, Passport/DL");
       return;
     }
     switch (this.authenticationService.currentUserValue.role) {
@@ -368,7 +401,7 @@ export class BorrowNowComponent implements OnInit {
     _currentSessionApply._id = this.loanApplyId;
     if (_currentSessionApply) {
       if (!_currentSessionApply._id) {
-        _currentSessionApply._id = _currentSessionApply.loanId + '__' + _currentSessionApply.borrowerId;
+        _currentSessionApply._id = _currentSessionApply.loanId + '__' + (_currentSessionApply.borrowerId._id || _currentSessionApply.borrowerId);
       }
       if (this.LoanObj.createdBy == this.borrowerUserObj._id) {
         //here status set to accepted as this is lender side and creator is same so borrower already initiated ongoing proccess
@@ -420,8 +453,22 @@ export class BorrowNowComponent implements OnInit {
           _LoanObj.lendersUserObj = _.cloneDeep(this.lenderUserObj);
 
           _LoanObj.loanStartDateTime = moment(this.LoanObj.loanStartDateTime).format("DD-MMM-YYYY");
-          _LoanObj.lendersUserObj.lenderPassportOrDlNumber = this.lenderUserObj.myPassportNumber;
-          _LoanObj.borrowersUserObj.borrowerPassportOrDlNumber = this.borrowerUserObj.myPassportNumber;
+
+          if (this.lenderUserObj.myPassportNumber && this.lenderUserObj.myPassportMediaVerified == 1) {
+            _LoanObj.lendersUserObj.lenderPassportOrDlNumber = this.lenderUserObj.myPassportNumber;
+          } else if (this.lenderUserObj.myDLNumber && this.lenderUserObj.myDLMediaVerified == 1) {
+            _LoanObj.lendersUserObj.lenderPassportOrDlNumber = this.lenderUserObj.myDLNumber;
+          } else {
+            _LoanObj.lendersUserObj.lenderPassportOrDlNumber = (this.lenderUserObj.myPassportNumber || this.lenderUserObj.myDLNumber);
+          }
+
+          if (this.borrowerUserObj.myPassportNumber && this.borrowerUserObj.myPassportMediaVerified == 1) {
+            _LoanObj.borrowersUserObj.borrowerPassportOrDlNumber = this.borrowerUserObj.myPassportNumber;
+          } else if (this.borrowerUserObj.myDLNumber && this.borrowerUserObj.myDLMediaVerified == 1) {
+            _LoanObj.borrowersUserObj.borrowerPassportOrDlNumber = this.borrowerUserObj.myDLNumber;
+          } else {
+            _LoanObj.borrowersUserObj.borrowerPassportOrDlNumber = (this.borrowerUserObj.myPassportNumber || this.borrowerUserObj.myDLNumber);
+          }
 
           _LoanObj.installments = [];
           for (let index = 0; index < this.LoanObj.loanTenureInMonths; index++) {

@@ -189,7 +189,7 @@ export class NewSessionComponent implements OnInit {
       deletedBy: [_userObj.deletedBy || ''],
       updatedBy: [this.authenticationService.currentUserValue._id || ''],
       bannerUrl: [_userObj.bannerUrl || ''],
-      borrowerId: [_userObj.borrowerId || ''],
+      borrowerId: [(_userObj.borrowerId?(_userObj.borrowerId._id || _userObj.borrowerId):null )|| ''],
       isLoanRequested: [false],
       calculatedMonthlyAmountForEMI: []
     });

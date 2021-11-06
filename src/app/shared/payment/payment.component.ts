@@ -24,7 +24,7 @@ export class PaymentComponent implements OnInit {
   selectedPaymentMethod: any;
   PaymentMethod = PaymentMethod;
   handler: any = null;
-  currency = 'dkk';
+  currency = '$';
   loanId = null;
   loanApplyId = null;
   appPlanId = null;
@@ -65,7 +65,7 @@ export class PaymentComponent implements OnInit {
       this.header4Payment = this.currentPaymentObj.header4Payment || 'Insurance Payment';
       this.amount4Payment = this.currentPaymentObj.amount4Payment || 100;
       this.selectedPaymentMethod = this.currentPaymentObj.selectedPaymentMethod || PaymentMethod.Online;
-      this.currency = this.currentPaymentObj.currency || 'dkk';
+      this.currency = this.currentPaymentObj.currency || '$';
       this.loanId = this.currentPaymentObj.loanId || null;
       this.loanApplyId = this.currentPaymentObj.loanApplyId || null;
       this.appPlanId = this.currentPaymentObj.appPlanId || null;

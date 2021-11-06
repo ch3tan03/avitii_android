@@ -80,7 +80,7 @@ export class BrowseSessionsComponent implements OnInit {
 
   check4applyToSession(sessionObj) {
     if (sessionObj && sessionObj.sessionAppliedByBorrowers) {
-      if (_.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId": this.authenticationService.currentUserValue._id }).length > 0) {
+      if (_.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId":{"_id": this.authenticationService.currentUserValue._id }}).length > 0) {
         return true;
       }
     }
@@ -102,6 +102,8 @@ export class BrowseSessionsComponent implements OnInit {
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.allSessionsData = data['data'];
+            this.filterAllSessionsDataForAppliedCurrentUserOnly();
+            
             this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq( this.utilityService._.map( this.utilityService._.flattenDepth( this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"),1),'borrowerId')));
             //this.alertService.success(data['message'], true);
             this.loading = false;
@@ -193,6 +195,8 @@ export class BrowseSessionsComponent implements OnInit {
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.allSessionsData = data['data'];
+            this.filterAllSessionsDataForAppliedCurrentUserOnly();
+
             this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq( this.utilityService._.map( this.utilityService._.flattenDepth( this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"),1),'borrowerId')));
             //this.alertService.success(data['message'], true);
             this.loading = false;
@@ -238,7 +242,7 @@ export class BrowseSessionsComponent implements OnInit {
           _currentSessionApply = result.data.sessionApply
           if (_currentSessionApply) {
             if (!_currentSessionApply._id) {
-              _currentSessionApply._id = _currentSessionApply.loanId + '__' + _currentSessionApply.borrowerId;
+              _currentSessionApply._id = _currentSessionApply.loanId + '__' + (_currentSessionApply.borrowerId._id || _currentSessionApply.borrowerId);
             }
             _currentSessionApply.status = result.data.status || SessionStatus.Pending;
             this.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
@@ -288,7 +292,7 @@ export class BrowseSessionsComponent implements OnInit {
     switch (this.authenticationService.currentUserValue.role) {
       case Role.Borrower:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
-        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId": this.authenticationService.currentUserValue._id });
+        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId":{"_id": this.authenticationService.currentUserValue._id }});
         break;
       default:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
@@ -308,5 +312,27 @@ export class BrowseSessionsComponent implements OnInit {
       //console.log(`191 :: bcs :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
-
+  filterAllSessionsDataForAppliedCurrentUserOnly() {
+    if (this.allSessionsData) {
+      let allSessionsDataKeyPaired = {};
+      for (let _items in this.allSessionsData) {
+        let _proccessedSessionObj = {
+          _id: null,
+          sessionAppliedByBorrowers: []
+        };
+        let sessionObj = this.allSessionsData[_items];
+        switch (this.authenticationService.currentUserValue.role) {
+          case Role.Borrower:
+            _proccessedSessionObj =this.utilityService._.cloneDeep(sessionObj);
+            _proccessedSessionObj.sessionAppliedByBorrowers = this.utilityService._.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId":{"_id": this.authenticationService.currentUserValue._id }});
+            break;
+          default:
+            _proccessedSessionObj = this.utilityService._.cloneDeep(sessionObj);
+            break;
+        }
+        allSessionsDataKeyPaired[_proccessedSessionObj._id] = _proccessedSessionObj;
+      }
+      this.allSessionsData = this.utilityService._.values(allSessionsDataKeyPaired);
+    }
+  }
 }

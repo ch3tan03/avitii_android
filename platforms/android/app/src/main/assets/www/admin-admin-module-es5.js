@@ -590,6 +590,12 @@
       var _customer_review_customer_review_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(
       /*! ./customer-review/customer-review.component */
       "yxQR");
+      /* harmony import */
+
+
+      var _user_management_pending_user_management_pending_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(
+      /*! ./user-management-pending/user-management-pending.component */
+      "joR3");
 
       var routes = [{
         path: '',
@@ -614,6 +620,13 @@
         }, {
           path: 'users',
           component: _user_management_user_management_component__WEBPACK_IMPORTED_MODULE_8__["UserManagementComponent"],
+          canActivate: [_components_guards__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]],
+          data: {
+            appPermissions: [_models_role__WEBPACK_IMPORTED_MODULE_12__["AppAccessPermissions"].usersAddEdit, _models_role__WEBPACK_IMPORTED_MODULE_12__["AppAccessPermissions"].adminAddEdit]
+          }
+        }, {
+          path: 'pending-users',
+          component: _user_management_pending_user_management_pending_component__WEBPACK_IMPORTED_MODULE_21__["UserManagementPendingComponent"],
           canActivate: [_components_guards__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]],
           data: {
             appPermissions: [_models_role__WEBPACK_IMPORTED_MODULE_12__["AppAccessPermissions"].usersAddEdit, _models_role__WEBPACK_IMPORTED_MODULE_12__["AppAccessPermissions"].adminAddEdit]
@@ -2948,7 +2961,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"row\">\n  \n    <div class=\"col-xl-12 col-md-12 mb-4\">\n        <div class=\"card shadow h-100\">\n            <div class=\"card-header\">\n                <div class=\"font-weight-bold text-primary\" i18n>User Management</div>\n            </div>\n            <div class=\"card-body\">\n                <div class=\"row\">\n                    \n                    <div class=\"col-xl-12 col-12 mb-4\">\n                        <div class=\"view view-cascade gradient-card-header white\">\n                            <table datatable [dtOptions]=\"dtOptions\" class=\"row-border hover table table-striped table-responsive-md btn-table\">\n                                <thead>\n                                    <tr>\n                                        <th class=\"d-none\" i18n>ID</th>\n                                        <th i18n>Email</th>\n                                        <th i18n>Full Name</th>\n                                        <th i18n>Role</th>\n                                        <th i18n>Mobile</th>\n                                        <th i18n>Verified</th>\n                                        <th class=\"text-right\" i18n>Actions</th>\n                                    </tr>\n                                </thead>\n                                <tbody>\n                                    <tr *ngFor=\"let obj of utilityService._.values(PaymentTransactionDetailsArray)\">\n                                        <td class=\"d-none\" >{{obj._id}}</td>\n                                        <td >{{obj.emailAddress}}</td>\n                                        <td >{{obj.firstName}}&nbsp;{{obj.middleName}}&nbsp;{{obj.lastName}}</td>\n                                        <td >{{obj.role}}</td>\n                                        <td >{{obj.mobileNo}}</td>\n                                        <td>\n                                            <div\n                                                *ngIf=\"returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id\">\n                                               <div *ngIf=\"!obj.isDeleted\">\n                                                <span i18n *ngIf=\"!obj.isVerified\"\n                                                    class=\"btn text-white badge badge-danger font-weight-light\">\n                                                    Pending\n                                                </span>\n                                                <span i18n *ngIf=\"obj.isVerified\"\n                                                    class=\"badge badge-success font-weight-light\">\n                                                    Approved\n                                                </span>\n                                               </div>\n                                               <div *ngIf=\"obj.isDeleted\">\n                                                <span class=\"btn text-white badge badge-danger font-weight-light\" i18n>\n                                                    Deleted\n                                                </span>\n                                               </div>                                            \n                                            </div>\n                                        </td>\n                                        <td class=\"text-left\">\n                                            <div\n                                                *ngIf=\"!obj.isDeleted && returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id\">\n                                                <button *ngIf=\"obj.isVerified && returnT4CurrentUserIsSAdmin()\"\n                                                    class=\"btn btn-success btn-sm btn-xs mr-1\" (click)=\"navigate2EditUser(obj._id)\" data-title=\"Edit\">\n                                                    <i class=\"icon-pencil\"></i>\n                                                </button>\n                                                <button class=\"btn btn-success btn-sm btn-xs mr-1\" (click)=\"usersProfile(obj)\" data-title=\"View User Details\">\n                                                    <i class=\"icon-user\"></i>\n                                                </button>\n                                                \n                                                <button *ngIf=\"obj.role==Role.Borrower\" class=\"btn btn-success btn-sm btn-xs mr-1\" (click)=\"usersIncomeExpenseDetails(obj)\" data-title=\"Income Proof and Monthly Expenses Details\">\n                                                    <i class=\"icon-receipt\"></i>\n                                                </button>\n\n                                                <button *ngIf=\"obj.isVerified\" class=\"btn btn-warning btn-sm btn-xs mr-1\" data-title=\"Block User\" (click)=\"usersRestrictionModal(obj, false)\">\n                                                    <i class=\"icon-lock\"></i>\n                                                </button>\n                                                <button *ngIf=\"!obj.isVerified\" class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verify User\" (click)=\"usersRestrictionModal(obj, true)\">\n                                                    <i class=\"icon-unlock\"></i>\n                                                </button>\n\n\n                                                <button class=\"btn btn-danger btn-sm btn-xs\" (click)=\"deleteUserById(obj._id)\" data-title=\"Delete\">\n                                                    <i class=\"icon-trash\"></i>\n                                                </button>\n                                            </div>\n                                        </td>\n                                    </tr>\n                                   \n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
+      __webpack_exports__["default"] = "<div class=\"row\">\n\n    <div class=\"col-xl-12 col-md-12 mb-4\">\n        <div class=\"card shadow h-100\">\n            <div class=\"card-header\">\n                <div class=\"font-weight-bold text-primary\" i18n>User Management</div>\n            </div>\n            <div class=\"card-body\">\n                <div class=\"row\">\n\n                    <div class=\"col-xl-12 col-12 mb-4\">\n                        <div class=\"view view-cascade gradient-card-header white\">\n                            <table datatable [dtOptions]=\"dtOptions\"\n                                class=\"row-border hover table table-striped table-responsive-md btn-table\">\n                                <thead>\n                                    <tr>\n                                        <th class=\"d-none\" i18n>ID</th>\n                                        <th i18n>Email</th>\n                                        <th i18n>Full Name</th>\n                                        <th i18n>Role</th>\n                                        <!--<th i18n>Mobile</th>-->\n                                        <th i18n>Verified</th>\n                                        <th i18n>Status</th>\n                                        <th class=\"text-right\" i18n>Actions</th>\n                                    </tr>\n                                </thead>\n                                <tbody>\n                                    <tr *ngFor=\"let obj of utilityService._.values(PaymentTransactionDetailsArray)\">\n                                        <td class=\"d-none\">{{obj._id}}</td>\n                                        <td>{{obj.emailAddress}}</td>\n                                        <td>{{obj.firstName}}&nbsp;{{obj.middleName}}&nbsp;{{obj.lastName}}</td>\n                                        <td class=\"text-capitalize\">{{obj.role}}</td>\n                                        <!--<td>{{obj.mobileNo}}</td>-->\n                                        <td>\n                                            <div\n                                                *ngIf=\"returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id\">\n                                                <div *ngIf=\"!obj.isDeleted\">\n                                                    <span [ngSwitch]=\"obj.isVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\">Blocked</i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\">Verified</i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-danger font-weight-light\">Pending</i>\n                                                    </span>\n                                                    <!--\n                                                <span i18n *ngIf=\"!obj.isVerified\"\n                                                    class=\"btn text-white badge badge-danger font-weight-light\">\n                                                    Pending\n                                                </span>\n                                                <span i18n *ngIf=\"obj.isVerified\"\n                                                    class=\"badge badge-success font-weight-light\">\n                                                    Approved\n                                                </span>\n                                            -->\n                                                </div>\n                                                <div *ngIf=\"obj.isDeleted\">\n                                                    <span class=\"btn text-white badge badge-danger font-weight-light\"\n                                                        i18n>\n                                                        Deleted\n                                                    </span>\n                                                </div>\n                                            </div>\n                                        </td>\n                                        <td>\n                                            <div *ngIf=\"!obj.isDeleted\">\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.myPassportMedia).length>0\">\n                                                    <span [ngSwitch]=\"obj.myPassportMediaVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">Passport </i>\n                                                    </span>\n                                                </div>\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.myDLMedia).length>0\">\n                                                    <span [ngSwitch]=\"obj.myDLMediaVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">DL </i>\n                                                    </span>\n                                                </div>\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.myHICardMedia).length>0\">\n                                                    <span [ngSwitch]=\"obj.myHICardMediaVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">HI </i>\n                                                    </span>\n                                                </div>\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.myRKIMedia).length>0\">\n                                                    <span [ngSwitch]=\"obj.myRKIMediaVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">RKI</i>\n                                                    </span>\n                                                </div>\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.externalAppLinks).length>0\">\n                                                    <span [ngSwitch]=\"obj.externalAppLinksVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">Facebook</i>\n                                                    </span>\n                                                </div>\n\n\n                                            </div>\n                                        </td>\n                                        <td class=\"text-left\">\n                                            <div\n                                                *ngIf=\"!obj.isDeleted && returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id\">\n                                                <button *ngIf=\"obj.isVerified==1 && returnT4CurrentUserIsSAdmin()\"\n                                                    class=\"btn btn-success btn-sm btn-xs mr-1\"\n                                                    (click)=\"navigate2EditUser(obj._id)\" data-title=\"Edit\">\n                                                    <i class=\"icon-pencil\"></i>\n                                                </button>\n                                                <button class=\"btn btn-success btn-sm btn-xs mr-1\"\n                                                    (click)=\"usersProfile(obj)\" data-title=\"View User Details\">\n                                                    <i class=\"icon-user\"></i>\n                                                </button>\n\n                                                <button *ngIf=\"obj.role==Role.Borrower\"\n                                                    class=\"btn btn-success btn-sm btn-xs mr-1\"\n                                                    (click)=\"usersIncomeExpenseDetails(obj)\"\n                                                    data-title=\"Income Proof and Monthly Expenses Details\">\n                                                    <i class=\"icon-receipt\"></i>\n                                                </button>\n\n                                                <button *ngIf=\"obj.isVerified==1\"\n                                                    class=\"btn btn-warning btn-sm btn-xs mr-1\" data-title=\"Block User\"\n                                                    (click)=\"usersRestrictionModal(obj, 2)\">\n                                                    <i class=\"icon-lock\"></i>\n                                                </button>\n                                                <button *ngIf=\"!obj.isVerified || obj.isVerified==2\"\n                                                    class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verify User\"\n                                                    (click)=\"usersRestrictionModal(obj, 1)\">\n                                                    <i class=\"icon-unlock\"></i>\n                                                </button>\n\n\n                                                <button class=\"btn btn-danger btn-sm btn-xs\"\n                                                    (click)=\"deleteUserById(obj._id)\" data-title=\"Delete\">\n                                                    <i class=\"icon-trash\"></i>\n                                                </button>\n                                            </div>\n                                        </td>\n                                    </tr>\n\n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
       /***/
     },
 
@@ -3255,8 +3268,9 @@
 
             var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
             var dataTablesParameters = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+            var returnOnlyPendingT = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
             var _data = {};
-            this.socketService.getAllUsersWithRequestData(_data, _skip, dataTablesParameters).subscribe(function (data) {
+            this.socketService.getAllUsersWithRequestData(_data, _skip, dataTablesParameters, returnOnlyPendingT).subscribe(function (data) {
               if (data && data['success']) {
                 //this.PaymentTransactionDetailsArray = this.utilityService._.uniq(this.utilityService._.union((this.PaymentTransactionDetailsArray || []), data["data"]));
                 _this18.PaymentTransactionDetailsArray = data["data"];
@@ -3309,12 +3323,24 @@
             this.alertService.success("Please wait while we updating status of user");
             this.socketService.updateUsersVerificationStatus(_userId, _isVerified).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
-                var usersObjArr = _this19.utilityService._.mapKeys(_this19.PaymentTransactionDetailsArray, '_id');
+                var i = 0;
 
-                usersObjArr[data["data"]["_id"]] = data["data"];
-                _this19.PaymentTransactionDetailsArray = usersObjArr;
+                _this19.PaymentTransactionDetailsArray.forEach(function (item) {
+                  if (item._id == data["data"]["_id"]) {
+                    _this19.PaymentTransactionDetailsArray.splice(i, 1, data["data"]);
 
-                _this19.populateUsersDataInTable(); //this.rerender();
+                    return;
+                  }
+
+                  i++;
+                });
+
+                _this19.populateUsersDataInTable();
+                /*let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+                usersObjArr[data["data"]["_id"]] = data["data"]
+                this.PaymentTransactionDetailsArray = usersObjArr;
+                this.populateUsersDataInTable();*/
+                //this.rerender();
 
 
                 _this19.alertService.success(data['message']);
@@ -3351,12 +3377,26 @@
             this.alertService.success("Please wait while we deleting user");
             this.socketService.deleteUserById(_userId, this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
-                var usersObjArr = _this20.utilityService._.mapKeys(_this20.PaymentTransactionDetailsArray, '_id');
+                var i = 0;
 
+                _this20.PaymentTransactionDetailsArray.forEach(function (item) {
+                  if (item._id == _userId) {
+                    _this20.PaymentTransactionDetailsArray.splice(i, 1, null);
+
+                    return;
+                  }
+
+                  i++;
+                });
+
+                _this20.populateUsersDataInTable();
+                /*
+                let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
                 delete usersObjArr[_userId];
-                _this20.PaymentTransactionDetailsArray = usersObjArr;
-
-                _this20.populateUsersDataInTable(); //this.rerender();
+                this.PaymentTransactionDetailsArray = usersObjArr;
+                this.populateUsersDataInTable();
+                */
+                //this.rerender();
 
 
                 _this20.alertService.success(data['message']);
@@ -3404,13 +3444,25 @@
             });
             dialogRef.afterClosed().subscribe(function (result) {
               if (result && result.data) {
-                var _userId = result.data._id;
+                var i = 0;
 
-                var usersObjArr = _this21.utilityService._.mapKeys(_this21.PaymentTransactionDetailsArray, '_id');
+                _this21.PaymentTransactionDetailsArray.forEach(function (item) {
+                  if (item._id == result.data["_id"]) {
+                    _this21.PaymentTransactionDetailsArray.splice(i, 1, result.data);
 
+                    return;
+                  }
+
+                  i++;
+                });
+                /*
+                let _userId = result.data._id;
+                let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
                 delete usersObjArr[_userId];
                 usersObjArr[_userId] = result.data;
-                _this21.PaymentTransactionDetailsArray = usersObjArr;
+                this.PaymentTransactionDetailsArray = usersObjArr;
+                */
+
               } //console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
 
             });
@@ -3634,10 +3686,23 @@
             });
             dialogRef.afterClosed().subscribe(function (result) {
               if (result && result.data && result.data["_id"]) {
-                var usersObjArr = _this23.utilityService._.mapKeys(_this23.PaymentTransactionDetailsArray, '_id');
+                var i = 0;
 
-                usersObjArr[result.data["_id"]] = result.data;
-                _this23.PaymentTransactionDetailsArray = usersObjArr;
+                _this23.PaymentTransactionDetailsArray.forEach(function (item) {
+                  if (item._id == result.data["_id"]) {
+                    _this23.PaymentTransactionDetailsArray.splice(i, 1, result.data);
+
+                    return;
+                  }
+
+                  i++;
+                });
+                /*
+                        let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+                        usersObjArr[result.data["_id"]] = result.data;
+                        this.PaymentTransactionDetailsArray = usersObjArr;
+                        */
+
 
                 _this23.populateUsersDataInTable();
               } //console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
@@ -4988,15 +5053,15 @@
 
           _adminUsersArray.push(this.authenticationService.currentUserValue._id);
 
-          var _currentContactObjAll = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'System', 'app-system-group', 'app-system-group', _adminUsersArray, null, null, [src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Admin, src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Borrower, src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Lender], false);
+          var _currentContactObjAll = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'System', 'app-system-group', 'app-system-group', _adminUsersArray, null, null, [src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Admin, src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Borrower, src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Lender], true);
 
           this.socketService.sendEventToAddNewContact(_currentContactObjAll);
 
-          var _currentContactObjLender = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'Avitii Lending(L)', 'app-system-group-lenders', 'app-system-group-lenders', _adminUsersArray, null, null, [src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Admin, src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Lender], false);
+          var _currentContactObjLender = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'Avitii Lending(L)', 'app-system-group-lenders', 'app-system-group-lenders', _adminUsersArray, null, null, [src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Admin, src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Lender], true);
 
           this.socketService.sendEventToAddNewContact(_currentContactObjLender);
 
-          var _currentContactObjBorrower = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'Avitii Lending(B)', 'app-system-group-borrower', 'app-system-group-borrower', _adminUsersArray, null, null, [src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Admin, src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Borrower], false);
+          var _currentContactObjBorrower = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'Avitii Lending(B)', 'app-system-group-borrower', 'app-system-group-borrower', _adminUsersArray, null, null, [src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Admin, src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Borrower], true);
 
           this.socketService.sendEventToAddNewContact(_currentContactObjBorrower);
         }
@@ -5711,15 +5776,664 @@
       var _kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(
       /*! @kolkov/angular-editor */
       "mUB+");
+      /* harmony import */
+
+
+      var _user_management_pending_user_management_pending_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(
+      /*! ./user-management-pending/user-management-pending.component */
+      "joR3");
 
       var AdminModule = function AdminModule() {
         _classCallCheck(this, AdminModule);
       };
 
       AdminModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [_admin_component__WEBPACK_IMPORTED_MODULE_6__["AdminComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_7__["HomeComponent"], _header_header_component__WEBPACK_IMPORTED_MODULE_8__["HeaderComponent"], _footer_footer_component__WEBPACK_IMPORTED_MODULE_9__["FooterComponent"], _services_services_component__WEBPACK_IMPORTED_MODULE_10__["ServicesComponent"], _service_types_add_service_types_add_component__WEBPACK_IMPORTED_MODULE_11__["ServiceTypesAddComponent"], _user_management_user_management_component__WEBPACK_IMPORTED_MODULE_12__["UserManagementComponent"], _payment_transactions_payment_transactions_component__WEBPACK_IMPORTED_MODULE_13__["PaymentTransactionsComponent"], _borrower_earnings_borrower_earnings_component__WEBPACK_IMPORTED_MODULE_14__["BorrowerEarningsComponent"], _add_user_add_user_component__WEBPACK_IMPORTED_MODULE_16__["AddUserComponent"], _user_levels_user_levels_component__WEBPACK_IMPORTED_MODULE_18__["UserLevelsComponent"], _blogs_blogs_component__WEBPACK_IMPORTED_MODULE_19__["BlogsComponent"], _loan_payment_loan_payment_component__WEBPACK_IMPORTED_MODULE_20__["LoanPaymentComponent"], _customer_review_customer_review_component__WEBPACK_IMPORTED_MODULE_21__["CustomerReviewComponent"], _partners_partners_component__WEBPACK_IMPORTED_MODULE_22__["PartnersComponent"]],
+        declarations: [_admin_component__WEBPACK_IMPORTED_MODULE_6__["AdminComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_7__["HomeComponent"], _header_header_component__WEBPACK_IMPORTED_MODULE_8__["HeaderComponent"], _footer_footer_component__WEBPACK_IMPORTED_MODULE_9__["FooterComponent"], _services_services_component__WEBPACK_IMPORTED_MODULE_10__["ServicesComponent"], _service_types_add_service_types_add_component__WEBPACK_IMPORTED_MODULE_11__["ServiceTypesAddComponent"], _user_management_user_management_component__WEBPACK_IMPORTED_MODULE_12__["UserManagementComponent"], _payment_transactions_payment_transactions_component__WEBPACK_IMPORTED_MODULE_13__["PaymentTransactionsComponent"], _borrower_earnings_borrower_earnings_component__WEBPACK_IMPORTED_MODULE_14__["BorrowerEarningsComponent"], _add_user_add_user_component__WEBPACK_IMPORTED_MODULE_16__["AddUserComponent"], _user_levels_user_levels_component__WEBPACK_IMPORTED_MODULE_18__["UserLevelsComponent"], _blogs_blogs_component__WEBPACK_IMPORTED_MODULE_19__["BlogsComponent"], _loan_payment_loan_payment_component__WEBPACK_IMPORTED_MODULE_20__["LoanPaymentComponent"], _customer_review_customer_review_component__WEBPACK_IMPORTED_MODULE_21__["CustomerReviewComponent"], _partners_partners_component__WEBPACK_IMPORTED_MODULE_22__["PartnersComponent"], _user_management_pending_user_management_pending_component__WEBPACK_IMPORTED_MODULE_25__["UserManagementPendingComponent"]],
         imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _admin_routing_module__WEBPACK_IMPORTED_MODULE_5__["AdminRoutingModule"], _angular_material_dialog__WEBPACK_IMPORTED_MODULE_3__["MatDialogModule"], _angular_cdk_scrolling__WEBPACK_IMPORTED_MODULE_4__["ScrollingModule"], _shared_shared_module__WEBPACK_IMPORTED_MODULE_15__["SharedModule"], angular_datatables__WEBPACK_IMPORTED_MODULE_17__["DataTablesModule"], _angular_common_http__WEBPACK_IMPORTED_MODULE_23__["HttpClientModule"], _kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_24__["AngularEditorModule"]]
       })], AdminModule);
+      /***/
+    },
+
+    /***/
+    "joR3":
+    /*!************************************************************************************!*\
+      !*** ./src/app/admin/user-management-pending/user-management-pending.component.ts ***!
+      \************************************************************************************/
+
+    /*! exports provided: UserManagementPendingComponent */
+
+    /***/
+    function joR3(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony export (binding) */
+
+
+      __webpack_require__.d(__webpack_exports__, "UserManagementPendingComponent", function () {
+        return UserManagementPendingComponent;
+      });
+      /* harmony import */
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _raw_loader_user_management_pending_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! raw-loader!./user-management-pending.component.html */
+      "xwQy");
+      /* harmony import */
+
+
+      var _user_management_pending_component_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! ./user-management-pending.component.css */
+      "o7O4");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/core */
+      "fXoL");
+      /* harmony import */
+
+
+      var src_app_socketio_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! src/app/socketio.service */
+      "bgkY");
+      /* harmony import */
+
+
+      var src_app_services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! src/app/services */
+      "o0su");
+      /* harmony import */
+
+
+      var src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! src/app/services/utility.service */
+      "A1CT");
+      /* harmony import */
+
+
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! rxjs/operators */
+      "kU1M");
+      /* harmony import */
+
+
+      var src_app_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! src/app/shared/public-profile/public-profile.component */
+      "bLZ2");
+      /* harmony import */
+
+
+      var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! @angular/material/dialog */
+      "0IaG");
+      /* harmony import */
+
+
+      var src_app_models_role__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      /*! src/app/models/role */
+      "z56L");
+      /* harmony import */
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
+      /*! @angular/router */
+      "tyNb");
+      /* harmony import */
+
+
+      var angular_datatables__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
+      /*! angular-datatables */
+      "njyG");
+      /* harmony import */
+
+
+      var rxjs_internal_Subject__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
+      /*! rxjs/internal/Subject */
+      "ds6q");
+      /* harmony import */
+
+
+      var rxjs_internal_Subject__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_Subject__WEBPACK_IMPORTED_MODULE_13__);
+      /* harmony import */
+
+
+      var src_app_shared_income_proof_income_proof_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
+      /*! src/app/shared/income-proof/income-proof.component */
+      "KRlv");
+      /* harmony import */
+
+
+      var src_app_shared_user_restriction_details_user_restriction_details_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
+      /*! src/app/shared/user-restriction-details/user-restriction-details.component */
+      "arha");
+      /* harmony import */
+
+
+      var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
+      /*! src/app/services/user.service */
+      "qfBg");
+
+      var that;
+
+      var UserManagementPendingComponent = /*#__PURE__*/function () {
+        function UserManagementPendingComponent(dialog, socketService, alertService, utilityService, authenticationService, router, elementRef, userService) {
+          _classCallCheck(this, UserManagementPendingComponent);
+
+          this.dialog = dialog;
+          this.socketService = socketService;
+          this.alertService = alertService;
+          this.utilityService = utilityService;
+          this.authenticationService = authenticationService;
+          this.router = router;
+          this.elementRef = elementRef;
+          this.userService = userService;
+          this.dtTrigger = new rxjs_internal_Subject__WEBPACK_IMPORTED_MODULE_13__["Subject"]();
+          this.dtOptions = {};
+          this.PaymentTransactionDetailsArray = null;
+          this.loading = false;
+          this.Role = src_app_models_role__WEBPACK_IMPORTED_MODULE_10__["Role"];
+          this.recordsTotal = 0;
+          this.nextPageIndex = 0;
+          this.totalPages = 0;
+          this.limit4Filtered = 0;
+          this.recordsFiltered = 0; //this.getAllUsersWithRequestData();
+        }
+
+        _createClass(UserManagementPendingComponent, [{
+          key: "getAllUsersWithRequestData",
+          value: function getAllUsersWithRequestData() {
+            var _this35 = this;
+
+            var _skip = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+            var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+            var dataTablesParameters = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+            var returnOnlyPendingT = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+            var _data = {};
+            this.socketService.getAllUsersWithRequestData(_data, _skip, dataTablesParameters, returnOnlyPendingT).subscribe(function (data) {
+              if (data && data['success']) {
+                //this.PaymentTransactionDetailsArray = this.utilityService._.uniq(this.utilityService._.union((this.PaymentTransactionDetailsArray || []), data["data"]));
+                _this35.PaymentTransactionDetailsArray = data["data"];
+                _this35.recordsTotal = data['metaData']['totalDocs'] || 0;
+                _this35.nextPageIndex = data['metaData']['nextPage'] || 0;
+                _this35.totalPages = data['metaData']['totalPages'] || 0;
+                _this35.limit4Filtered = data['metaData']['limit'] || 0;
+                _this35.recordsFiltered = data['metaData']['recordsFiltered'] || _this35.recordsTotal;
+
+                if (callback) {
+                  callback({
+                    recordsTotal: _this35.recordsTotal || 0,
+                    recordsFiltered: _this35.recordsFiltered || 0,
+                    data: []
+                  });
+                } else {
+                  _this35.populateUsersDataInTable();
+                } //this.rerender();
+
+
+                _this35.loading = false;
+              } else {
+                _this35.alertService.error(data['message']);
+
+                _this35.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = ""; //this.PaymentTransactionDetailsArray = [];
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this35.alertService.error(errorMsg2show);
+
+              _this35.loading = false;
+            });
+          }
+        }, {
+          key: "updateUsersVerificationStatus",
+          value: function updateUsersVerificationStatus(_userId, _isVerified) {
+            var _this36 = this;
+
+            this.alertService.success("Please wait while we updating status of user");
+            this.socketService.updateUsersVerificationStatus(_userId, _isVerified).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
+              if (data && data['success']) {
+                var i = 0;
+
+                _this36.PaymentTransactionDetailsArray.forEach(function (item) {
+                  if (item._id == data["data"]["_id"]) {
+                    _this36.PaymentTransactionDetailsArray.splice(i, 1, data["data"]);
+
+                    return;
+                  }
+
+                  i++;
+                });
+
+                _this36.populateUsersDataInTable();
+                /*let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+                usersObjArr[data["data"]["_id"]] = data["data"]
+                this.PaymentTransactionDetailsArray = usersObjArr;
+                this.populateUsersDataInTable();*/
+                //this.rerender();
+
+
+                _this36.alertService.success(data['message']);
+
+                _this36.loading = false;
+              } else {
+                _this36.alertService.error(data['message']);
+
+                _this36.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = ""; //this.PaymentTransactionDetailsArray = [];
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this36.alertService.error(errorMsg2show);
+
+              _this36.loading = false;
+            });
+          }
+        }, {
+          key: "deleteUserById",
+          value: function deleteUserById(_userId) {
+            var _this37 = this;
+
+            this.alertService.success("Please wait while we deleting user");
+            this.socketService.deleteUserById(_userId, this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
+              if (data && data['success']) {
+                var i = 0;
+
+                _this37.PaymentTransactionDetailsArray.forEach(function (item) {
+                  if (item._id == _userId) {
+                    _this37.PaymentTransactionDetailsArray.splice(i, 1, null);
+
+                    return;
+                  }
+
+                  i++;
+                });
+
+                _this37.populateUsersDataInTable();
+                /*
+                let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+                delete usersObjArr[_userId];
+                this.PaymentTransactionDetailsArray = usersObjArr;
+                this.populateUsersDataInTable();
+                */
+                //this.rerender();
+
+
+                _this37.alertService.success(data['message']);
+
+                _this37.loading = false;
+              } else {
+                _this37.alertService.error(data['message']);
+
+                _this37.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = ""; //this.PaymentTransactionDetailsArray = [];
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this37.alertService.error(errorMsg2show);
+
+              _this37.loading = false;
+            });
+          }
+        }, {
+          key: "usersProfile",
+          value: function usersProfile(userObj) {
+            var _this38 = this;
+
+            //console.log('95', this.authenticationService.currentUserValue);
+            var dialogRef = this.dialog.open(src_app_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_8__["PublicProfileComponent"], {
+              maxWidth: '100vw',
+              maxHeight: '100vh',
+              height: '100%',
+              width: '100%',
+              hasBackdrop: true,
+              data: {
+                userObj: userObj,
+                adminViewT: true
+              }
+            });
+            dialogRef.afterClosed().subscribe(function (result) {
+              if (result && result.data) {
+                var i = 0;
+
+                _this38.PaymentTransactionDetailsArray.forEach(function (item) {
+                  if (item._id == result.data["_id"]) {
+                    _this38.PaymentTransactionDetailsArray.splice(i, 1, result.data);
+
+                    return;
+                  }
+
+                  i++;
+                });
+                /*
+                let _userId = result.data._id;
+                let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+                delete usersObjArr[_userId];
+                usersObjArr[_userId] = result.data;
+                this.PaymentTransactionDetailsArray = usersObjArr;
+                */
+
+              } //console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+
+            });
+          }
+        }, {
+          key: "returnT4CurrentUserIsSAdmin",
+          value: function returnT4CurrentUserIsSAdmin() {
+            try {
+              if (this.authenticationService.currentUserValue.appPermissions && this.authenticationService.currentUserValue.appPermissions.indexOf(src_app_models_role__WEBPACK_IMPORTED_MODULE_10__["AppAccessPermissions"].adminAddEdit) > -1) {
+                return true;
+              }
+            } catch (ex) {}
+
+            return false;
+          }
+        }, {
+          key: "returnT4CurrentUserAllowedToShow",
+          value: function returnT4CurrentUserAllowedToShow(currentUserRole) {
+            if (this.returnT4CurrentUserIsSAdmin()) {
+              return true;
+            }
+
+            if (currentUserRole != src_app_models_role__WEBPACK_IMPORTED_MODULE_10__["Role"].Admin) {
+              return true;
+            }
+
+            return false;
+          }
+        }, {
+          key: "navigate2EditUser",
+          value: function navigate2EditUser(userId) {
+            this.router.navigate(['/admin/add-user'], {
+              state: {
+                userId: userId
+              }
+            });
+          } //#region datatable actions
+
+        }, {
+          key: "ngOnInit",
+          value: function ngOnInit() {
+            this.populateUsersDataInTable();
+          }
+        }, {
+          key: "ngOnDestroy",
+          value: function ngOnDestroy() {
+            // Do not forget to unsubscribe the event
+            this.dtTrigger.unsubscribe();
+
+            if (this.elementRef && this.elementRef.nativeElement && this.elementRef.nativeElement.querySelector('.paginate_button.next')) {
+              this.elementRef.nativeElement.querySelector('.paginate_button.next').removeEventListener('click', this.paginateButtonNext);
+              this.elementRef.nativeElement.querySelector('.paginate_button.last').removeEventListener('click', this.paginateButtonNext);
+            }
+          }
+        }, {
+          key: "populateUsersDataInTable",
+          value: function populateUsersDataInTable() {
+            that = this; //this.destroyTable();
+
+            this.dtOptions = {
+              pagingType: 'full_numbers',
+              pageLength: 100,
+              serverSide: true,
+              processing: false,
+              ajax: function ajax(dataTablesParameters, callback) {
+                that.getAllUsersWithRequestData(that.nextPageIndex || 1, callback, dataTablesParameters);
+                /*
+                        if ((dataTablesParameters.start + dataTablesParameters.length) < that.utilityService._.keys(that.PaymentTransactionDetailsArray).length) {
+                          //No Action here
+                          callback({
+                            recordsTotal: that.recordsTotal || 0,
+                            recordsFiltered: that.utilityService._.keys(that.PaymentTransactionDetailsArray).length || 0,
+                            data: [],
+                          });
+                
+                          //that.getAllUsersWithRequestData((that.nextPageIndex || 1), callback, dataTablesParameters);
+                        } else {
+                          that.getAllUsersWithRequestData((that.nextPageIndex || 1), callback, dataTablesParameters);
+                          //that.dtTrigger.next();
+                          //that.rerender();
+                        }
+                        */
+
+                /*{"draw":3,"columns":[{"data":0,"name":"_id","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":1,"name":"emailAddress","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":2,"name":"firstName","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":3,"name":"role","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":4,"name":"mobileNo","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":5,"name":"verified","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":6,"name":"actions","searchable":false,"orderable":false,"search":{"value":"","regex":false}}],"order":[{"column":0,"dir":"asc"}],"start":0,"length":100,"search":{"value":"oo","regex":false}}*/
+              },
+              columns: [{
+                "data": 0,
+                "name": "_id",
+                "searchable": true,
+                "orderable": true
+              }, {
+                "data": 1,
+                "name": "emailAddress",
+                "searchable": true,
+                "orderable": true
+              }, {
+                "data": 2,
+                "name": "firstName",
+                "searchable": true,
+                "orderable": true
+              }, {
+                "data": 3,
+                "name": "role",
+                "searchable": true,
+                "orderable": true
+              }, {
+                "data": 4,
+                "name": "mobileNo",
+                "searchable": true,
+                "orderable": true
+              }, {
+                "data": 5,
+                "name": "verified",
+                "searchable": true,
+                "orderable": true
+              }, {
+                "data": 6,
+                "name": "actions",
+                "searchable": false,
+                "orderable": false
+              }]
+              /*
+                    drawCallback: () => {
+                      if (this.elementRef && this.elementRef.nativeElement && this.elementRef.nativeElement.querySelector('.paginate_button.next')) {
+                        this.elementRef.nativeElement.querySelector('.paginate_button.next')
+                          .addEventListener('click', this.paginateButtonNext);
+                        this.elementRef.nativeElement.querySelector('.paginate_button.last')
+                          .addEventListener('click', this.paginateButtonNext);
+                      }
+                    }
+                    */
+
+            }; //this.dtTrigger.next();
+            //this.rerender();
+          }
+        }, {
+          key: "paginateButtonNext",
+          value: function paginateButtonNext() {
+            that.getAllUsersWithRequestData(that.nextPageIndex || 1);
+          }
+        }, {
+          key: "ngAfterViewInit",
+          value: function ngAfterViewInit() {
+            if (this.datatableElement && this.datatableElement.dtInstance) {
+              this.datatableElement.dtInstance.then(function (dtInstance) {
+                dtInstance.columns().every(function () {
+                  var that = this;
+                  $('input', this.footer()).on('keyup change', function () {
+                    if (that.search() !== this['value']) {
+                      that.search(this['value']).draw();
+                    }
+                  });
+                });
+              });
+            }
+          }
+        }, {
+          key: "rerender",
+          value: function rerender() {
+            var _this39 = this;
+
+            if (this.datatableElement && this.datatableElement.dtInstance) {
+              this.datatableElement.dtInstance.then(function (dtInstance) {
+                // Destroy the table first
+                dtInstance.destroy(); // Call the dtTrigger to rerender again
+
+                _this39.dtTrigger.next();
+              });
+            }
+          }
+        }, {
+          key: "destroyTable",
+          value: function destroyTable() {
+            if (this.datatableElement && this.datatableElement.dtInstance) {
+              this.datatableElement.dtInstance.then(function (dtInstance) {
+                // Destroy the table first
+                dtInstance.destroy();
+              });
+            }
+          }
+        }, {
+          key: "onClick",
+          value: function onClick(event) {} //#endregion datatable actions
+
+        }, {
+          key: "usersIncomeExpenseDetails",
+          value: function usersIncomeExpenseDetails(userObj) {
+            //console.log('241', this.authenticationService.currentUserValue);
+            var dialogRef = this.dialog.open(src_app_shared_income_proof_income_proof_component__WEBPACK_IMPORTED_MODULE_14__["IncomeProofComponent"], {
+              maxWidth: '100vw',
+              maxHeight: '100vh',
+              height: '100%',
+              width: '100%',
+              hasBackdrop: true,
+              data: {
+                userObj: userObj,
+                isOpenedInModel: true,
+                adminViewT: true
+              }
+            });
+            dialogRef.afterClosed().subscribe(function (result) {//console.log(`256 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+            });
+          }
+        }, {
+          key: "usersRestrictionModal",
+          value: function usersRestrictionModal(userObj, isVerified) {
+            var _this40 = this;
+
+            var dialogRef = this.dialog.open(src_app_shared_user_restriction_details_user_restriction_details_component__WEBPACK_IMPORTED_MODULE_15__["UserRestrictionDetailsComponent"], {
+              maxWidth: '100vw',
+              maxHeight: '100vh',
+              height: '100%',
+              width: '100%',
+              hasBackdrop: true,
+              data: {
+                userObj: userObj,
+                adminViewT: true,
+                isVerified: isVerified,
+                isOpenedInModel: true
+              }
+            });
+            dialogRef.afterClosed().subscribe(function (result) {
+              if (result && result.data && result.data["_id"]) {
+                var i = 0;
+
+                _this40.PaymentTransactionDetailsArray.forEach(function (item) {
+                  if (item._id == result.data["_id"]) {
+                    _this40.PaymentTransactionDetailsArray.splice(i, 1, result.data);
+
+                    return;
+                  }
+
+                  i++;
+                });
+                /*
+                        let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+                        usersObjArr[result.data["_id"]] = result.data;
+                        this.PaymentTransactionDetailsArray = usersObjArr;
+                        */
+
+
+                _this40.populateUsersDataInTable();
+              } //console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+
+            });
+          }
+        }]);
+
+        return UserManagementPendingComponent;
+      }();
+
+      UserManagementPendingComponent.ctorParameters = function () {
+        return [{
+          type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialog"]
+        }, {
+          type: src_app_socketio_service__WEBPACK_IMPORTED_MODULE_4__["SocketioService"]
+        }, {
+          type: src_app_services__WEBPACK_IMPORTED_MODULE_5__["AlertService"]
+        }, {
+          type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_6__["UtilityService"]
+        }, {
+          type: src_app_services__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"]
+        }, {
+          type: _angular_router__WEBPACK_IMPORTED_MODULE_11__["Router"]
+        }, {
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ElementRef"]
+        }, {
+          type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_16__["UserService"]
+        }];
+      };
+
+      UserManagementPendingComponent.propDecorators = {
+        datatableElement: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"],
+          args: [angular_datatables__WEBPACK_IMPORTED_MODULE_12__["DataTableDirective"], {
+            "static": false
+          }]
+        }]
+      };
+      UserManagementPendingComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-user-management-pending',
+        template: _raw_loader_user_management_pending_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_user_management_pending_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialog"], src_app_socketio_service__WEBPACK_IMPORTED_MODULE_4__["SocketioService"], src_app_services__WEBPACK_IMPORTED_MODULE_5__["AlertService"], src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_6__["UtilityService"], src_app_services__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"], _angular_router__WEBPACK_IMPORTED_MODULE_11__["Router"], _angular_core__WEBPACK_IMPORTED_MODULE_3__["ElementRef"], src_app_services_user_service__WEBPACK_IMPORTED_MODULE_16__["UserService"]])], UserManagementPendingComponent);
       /***/
     },
 
@@ -6610,7 +7324,7 @@
 
       var AngularEditorService = /*#__PURE__*/function () {
         function AngularEditorService(http, doc) {
-          var _this35 = this;
+          var _this41 = this;
 
           _classCallCheck(this, AngularEditorService);
 
@@ -6621,17 +7335,17 @@
            */
 
           this.saveSelection = function () {
-            if (_this35.doc.getSelection) {
-              var sel = _this35.doc.getSelection();
+            if (_this41.doc.getSelection) {
+              var sel = _this41.doc.getSelection();
 
               if (sel.getRangeAt && sel.rangeCount) {
-                _this35.savedSelection = sel.getRangeAt(0);
-                _this35.selectedText = sel.toString();
+                _this41.savedSelection = sel.getRangeAt(0);
+                _this41.selectedText = sel.toString();
               }
-            } else if (_this35.doc.getSelection && _this35.doc.createRange) {
-              _this35.savedSelection = document.createRange();
+            } else if (_this41.doc.getSelection && _this41.doc.createRange) {
+              _this41.savedSelection = document.createRange();
             } else {
-              _this35.savedSelection = null;
+              _this41.savedSelection = null;
             }
           };
         }
@@ -6835,13 +7549,13 @@
         }, {
           key: "insertVimeoVideoTag",
           value: function insertVimeoVideoTag(videoUrl) {
-            var _this36 = this;
+            var _this42 = this;
 
             var sub = this.http.get("https://vimeo.com/api/oembed.json?url=".concat(videoUrl)).subscribe(function (data) {
               var imageUrl = data.thumbnail_url_with_play_button;
               var thumbnail = "<div>\n        <a href='".concat(videoUrl, "' target='_blank'>\n          <img src=\"").concat(imageUrl, "\" alt=\"").concat(data.title, "\"/>\n        </a>\n      </div>");
 
-              _this36.insertHtml(thumbnail);
+              _this42.insertHtml(thumbnail);
 
               sub.unsubscribe();
             });
@@ -6928,13 +7642,13 @@
         }, {
           key: "removeSelectedElements",
           value: function removeSelectedElements(tagNames) {
-            var _this37 = this;
+            var _this43 = this;
 
             var tagNamesArray = tagNames.toLowerCase().split(',');
             this.getSelectedNodes().forEach(function (node) {
               if (node.nodeType === 1 && tagNamesArray.indexOf(node.tagName.toLowerCase()) > -1) {
                 // Remove the node and replace it with its children
-                _this37.replaceWithOwnChildren(node);
+                _this43.replaceWithOwnChildren(node);
               }
             });
           }
@@ -7125,7 +7839,7 @@
         }, {
           key: "onTextAreaFocus",
           value: function onTextAreaFocus(event) {
-            var _this38 = this;
+            var _this44 = this;
 
             if (this.focused) {
               event.stopPropagation();
@@ -7137,9 +7851,9 @@
 
             if (!this.touched || !this.changed) {
               this.editorService.executeInNextQueueIteration(function () {
-                _this38.configure();
+                _this44.configure();
 
-                _this38.touched = true;
+                _this44.touched = true;
               });
             }
           }
@@ -7320,7 +8034,7 @@
         }, {
           key: "toggleEditorMode",
           value: function toggleEditorMode(bToSource) {
-            var _this39 = this;
+            var _this45 = this;
 
             var oContent;
             var editableElement = this.textArea.nativeElement;
@@ -7343,10 +8057,10 @@
               this.r.setProperty(oCode, 'contentEditable', true);
               this.r.appendChild(oCode, oContent);
               this.focusInstance = this.r.listen(oCode, 'focus', function (event) {
-                return _this39.onTextAreaFocus(event);
+                return _this45.onTextAreaFocus(event);
               });
               this.blurInstance = this.r.listen(oCode, 'blur', function (event) {
-                return _this39.onTextAreaBlur(event);
+                return _this45.onTextAreaBlur(event);
               });
               this.r.appendChild(oPre, oCode);
               this.r.appendChild(editableElement, oPre); // ToDo move to service
@@ -7912,21 +8626,21 @@
         }, {
           key: "triggerButtons",
           value: function triggerButtons() {
-            var _this40 = this;
+            var _this46 = this;
 
             if (!this.showToolbar) {
               return;
             }
 
             this.buttons.forEach(function (e) {
-              var result = _this40.doc.queryCommandState(e);
+              var result = _this46.doc.queryCommandState(e);
 
-              var elementById = _this40.doc.getElementById(e + '-' + _this40.id);
+              var elementById = _this46.doc.getElementById(e + '-' + _this46.id);
 
               if (result) {
-                _this40.r.addClass(elementById, 'active');
+                _this46.r.addClass(elementById, 'active');
               } else {
-                _this40.r.removeClass(elementById, 'active');
+                _this46.r.removeClass(elementById, 'active');
               }
             });
           }
@@ -7937,7 +8651,7 @@
         }, {
           key: "triggerBlocks",
           value: function triggerBlocks(nodes) {
-            var _this41 = this;
+            var _this47 = this;
 
             if (!this.showToolbar) {
               return;
@@ -7954,11 +8668,11 @@
 
               if (node !== undefined && y === node.nodeName) {
                 if (found === false) {
-                  _this41.block = node.nodeName.toLowerCase();
+                  _this47.block = node.nodeName.toLowerCase();
                   found = true;
                 }
               } else if (found === false) {
-                _this41.block = 'default';
+                _this47.block = 'default';
               }
             });
             found = false;
@@ -7973,26 +8687,26 @@
 
                 if (node !== undefined) {
                   if (found === false) {
-                    _this41.customClassId = index.toString();
+                    _this47.customClassId = index.toString();
                     found = true;
                   }
                 } else if (found === false) {
-                  _this41.customClassId = '-1';
+                  _this47.customClassId = '-1';
                 }
               });
             }
 
             Object.keys(this.tagMap).map(function (e) {
-              var elementById = _this41.doc.getElementById(_this41.tagMap[e] + '-' + _this41.id);
+              var elementById = _this47.doc.getElementById(_this47.tagMap[e] + '-' + _this47.id);
 
               var node = nodes.find(function (x) {
                 return x.nodeName === e;
               });
 
               if (node !== undefined && e === node.nodeName) {
-                _this41.r.addClass(elementById, 'active');
+                _this47.r.addClass(elementById, 'active');
               } else {
-                _this41.r.removeClass(elementById, 'active');
+                _this47.r.removeClass(elementById, 'active');
               }
             });
             this.foreColour = this.doc.queryCommandValue('ForeColor');
@@ -8093,18 +8807,18 @@
         }, {
           key: "onFileChanged",
           value: function onFileChanged(event) {
-            var _this42 = this;
+            var _this48 = this;
 
             var file = event.target.files[0];
 
             if (file.type.includes('image/')) {
               if (this.upload) {
                 this.upload(file).subscribe(function () {
-                  return _this42.watchUploadImage;
+                  return _this48.watchUploadImage;
                 });
               } else if (this.uploadUrl) {
                 this.editorService.uploadImage(file).subscribe(function () {
-                  return _this42.watchUploadImage;
+                  return _this48.watchUploadImage;
                 });
               } else {
                 var reader = new FileReader();
@@ -8112,7 +8826,7 @@
                 reader.onload = function (e) {
                   var fr = e.currentTarget;
 
-                  _this42.editorService.insertImage(fr.result.toString());
+                  _this48.editorService.insertImage(fr.result.toString());
                 };
 
                 reader.readAsDataURL(file);
@@ -8858,6 +9572,26 @@
     },
 
     /***/
+    "o7O4":
+    /*!*************************************************************************************!*\
+      !*** ./src/app/admin/user-management-pending/user-management-pending.component.css ***!
+      \*************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function o7O4(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ1c2VyLW1hbmFnZW1lbnQtcGVuZGluZy5jb21wb25lbnQuY3NzIn0= */";
+      /***/
+    },
+
+    /***/
     "rCAk":
     /*!************************************************************************!*\
       !*** ./src/app/admin/borrower-earnings/borrower-earnings.component.ts ***!
@@ -8943,7 +9677,7 @@
 
       var BorrowerEarningsComponent = /*#__PURE__*/function () {
         function BorrowerEarningsComponent(socketService, alertService, utilityService, authenticationService) {
-          var _this43 = this;
+          var _this49 = this;
 
           _classCallCheck(this, BorrowerEarningsComponent);
 
@@ -8956,7 +9690,7 @@
           this.transactionIdCtrl = [];
           this.editingIdCtrl = {};
           this.authenticationService.currentUser.subscribe(function (x) {
-            return _this43.currentUser = x;
+            return _this49.currentUser = x;
           });
           this.callLatestPaymentDetails();
         }
@@ -8964,21 +9698,21 @@
         _createClass(BorrowerEarningsComponent, [{
           key: "callLatestPaymentDetails",
           value: function callLatestPaymentDetails() {
-            var _this44 = this;
+            var _this50 = this;
 
             var _data = {};
             this.socketService.getAllBorrowerPaymentTransactionDetails(_data).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
-                _this44.PaymentBorrowerDetailsArray = data["data"];
-                _this44.loading = false;
+                _this50.PaymentBorrowerDetailsArray = data["data"];
+                _this50.loading = false;
               } else {
-                _this44.alertService.error(data['message']);
+                _this50.alertService.error(data['message']);
 
-                _this44.loading = false;
+                _this50.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
-              _this44.PaymentBorrowerDetailsArray = [];
+              _this50.PaymentBorrowerDetailsArray = [];
 
               try {
                 if (error && error.error && error.error.message) {
@@ -8990,9 +9724,9 @@
                 }
               } catch (ex) {}
 
-              _this44.alertService.error(errorMsg2show);
+              _this50.alertService.error(errorMsg2show);
 
-              _this44.loading = false;
+              _this50.loading = false;
             });
           }
         }, {
@@ -9001,7 +9735,7 @@
         }, {
           key: "updateTransactionIdDoPaymentForBorrower",
           value: function updateTransactionIdDoPaymentForBorrower(index, transactionId, obj) {
-            var _this45 = this;
+            var _this51 = this;
 
             if (index > -1 && transactionId && obj) {
               this.editingIdCtrl[index] = false;
@@ -9034,13 +9768,13 @@
               };
               this.socketService.adminPaidToBorrowerUpdateInTransactions(_Obj2Save).pipe(Object(rxjs_internal_operators_first__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
                 if (data && data['success']) {
-                  _this45.callLatestPaymentDetails();
+                  _this51.callLatestPaymentDetails();
 
-                  _this45.loading = false;
+                  _this51.loading = false;
                 } else {
-                  _this45.alertService.error(data['message']);
+                  _this51.alertService.error(data['message']);
 
-                  _this45.loading = false;
+                  _this51.loading = false;
                 }
               }, function (error) {
                 var errorMsg2show = "";
@@ -9055,9 +9789,9 @@
                   }
                 } catch (ex) {}
 
-                _this45.alertService.error(errorMsg2show);
+                _this51.alertService.error(errorMsg2show);
 
-                _this45.loading = false;
+                _this51.loading = false;
               });
               _msg2show = "Request Queued => Borrower : " + _borrowerId + ", TransactionId : " + transactionId + ", Paid : " + obj.totalPayment4CurrentUser;
               this.alertService.success(_msg2show);
@@ -9146,7 +9880,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ul  class=\"navbar-nav bg-gradient-primary sidebar sidebar-dark accordion navbar_side_panel\" id=\"accordionSidebar\">\n\n    <!-- Sidebar - Brand -->\n    <a class=\"sidebar-brand d-flex align-items-center justify-content-center\">\n        <img class=\"img-fluid\" src=\"./assets/img/avitii-logo.png\">\n    </a>\n\n    <!-- Divider -->\n    <hr class=\"sidebar-divider my-0\">\n    <div class=\"text-white text-center mt-2\">\n        <a class=\"mr-1 small text-white\" href=\"/en\">English</a> |\n        <a href=\"/da\" class=\"ml-1 small text-white\">Dansk</a>\n    </div>\n    <!-- Nav Item - Dashboard -->\n    <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/admin\">\n            <i class=\"icon icon-home\"></i>\n            <span i18n>Dashboard</span>\n            <!--\n            <span>&nbsp;{{authenticationService.currentUserValue.lastLoginTime | date:'dd-MMM-YYYY HH:mm'}}</span>\n            -->\n        </a>\n    </li>\n\n    <!-- Divider -->\n    <hr class=\"sidebar-divider\">\n\n    <!-- Heading -->\n    <!-- <div class=\"sidebar-heading\">\n        Interface\n    </div> -->\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/users\" routerLinkActive=\"active\">\n            <i class=\"icon icon-user\"></i>\n            <span i18n>User Mangement</span></a>\n    </li>\n    <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/add-user\" routerLinkActive=\"active\">\n            <i class=\"icon icon-bag\"></i>\n            <span>Add User</span></a>\n    </li> -->\n   \n    <li class=\"nav-item\">\n        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\" aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n            <i class=\"icon icon-credit-card\"></i>\n            <span i18n>Transactions</span>\n        </a>\n        <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">\n            <div class=\"bg-white py-2 collapse-inner rounded\">\n               \n                <a class=\"collapse-item\" (click)=\"navigate2State('/admin/payments',{'transactionActionType':TransactionActionType.plan_purchase})\" routerLinkActive=\"active\" i18n>Plan Purchase</a>\n                <a class=\"collapse-item\" (click)=\"navigate2State('/admin/payments',{'transactionActionType':TransactionActionType.insurance_purchase})\" routerLinkActive=\"active\" i18n>Insurance Purchase</a>\n              \n            </div>\n        </div>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/loan-pay\" routerLinkActive=\"active\">\n            <i class=\"icon icon-money\"></i>\n            <span i18n>Pending Loans</span></a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-comments\"></i>\n            <span i18n>Messages</span></a>\n            <span *ngIf=\"messagesService.returnTotalPendingMessagesForUser()>0\" class=\"badge badge-success float-right font-weight-lighter text-capitalize\" i18n> {{messagesService.returnTotalPendingMessagesForUser()}}</span>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/user-levels\" routerLinkActive=\"active\">\n            <i class=\"icon icon-medall-alt\"></i>\n            <span i18n>User Levels</span></a>\n    </li>\n\n    \n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/blogs\" routerLinkActive=\"active\">\n            <i class=\"icon icon-clipboard\"></i>\n            <span i18n>Blogs</span></a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/customer-review\" routerLinkActive=\"active\">\n            <i class=\"icon icon-clipboard\"></i>\n            <span i18n>Customer Review</span></a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/partners\" routerLinkActive=\"active\">\n            <i class=\"icon icon-clipboard\"></i>\n            <span i18n>Partners</span></a>\n    </li>\n \n    <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-comments\"></i>\n            <span>Messages</span></a>\n    </li>\n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\"  routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-calendar\"></i>\n            <span>Calendar</span></a>\n    </li>\n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\"  routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-star\"></i>\n            <span>My Ratings</span></a>\n    </li> -->\n\n    <!-- <li class=\"nav-item\">\n        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapsePages\" aria-expanded=\"true\" aria-controls=\"collapsePages\">\n            <i class=\"icon icon-settings\"></i>\n            <span>Settings</span>\n        </a>\n        <div id=\"collapsePages\" class=\"collapse\" aria-labelledby=\"headingPages\" data-parent=\"#accordionSidebar\">\n            <div class=\"bg-white py-2 collapse-inner rounded\">\n             \n                <a class=\"collapse-item\" routerLink=\"/lender/profile\">My Profile</a>\n                <a class=\"collapse-item\" href=\"register.html\">Change Password</a>\n                <a class=\"collapse-item\" href=\"forgot-password.html\">Bank Details</a>\n                <a class=\"collapse-item\" href=\"forgot-password.html\">Payment Agreement</a>\n               \n            </div>\n        </div>\n    </li> -->\n\n \n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/logout\">\n            <i class=\"icon icon-flickr-alt\"></i>\n            <span i18n>Logout</span></a>\n    </li>\n\n    <!-- Divider -->\n    <!-- <hr class=\"sidebar-divider d-none d-md-block\"> -->\n\n    <!-- Sidebar Toggler (Sidebar) -->\n    <!-- <div class=\"text-center d-none d-md-inline\">\n        <button class=\"rounded-circle border-0\" id=\"sidebarToggle\"></button>\n    </div> -->\n\n\n</ul>\n\n<div class=\"sidebar_overlay navbar_side_panel btn-back\" ></div>\n\n\n\n\n<!-- Nav Start [ngClass]=\"{'dark position-relative' : (router.url!='/')}\"-->\n<header id=\"custom-header-nav\" class=\"ecommerce nav-fix shadow-sm p-0 hide-lg\">\n    \n        <div class=\"row\">\n            <div class=\"col\">\n                <nav>\n                    <div class=\"responsive-btn ml-1\">\n                        <a class=\"toggle-nav\"><i aria-hidden=\"true\" class=\"icon-align-center\"></i></a>\n                    </div>\n                    <a class=\"logo-light\" routerLink=\"/home\">\n                        <img class=\"img-fluid\" src=\"./assets/img/avitii-logo-purple.png\"></a>\n\n                    <!-- <div class=\"navbar navbar_side_panel m-l-auto p-1 btn-back\" id=\"togglebtn\">\n                     <div class=\"responsive-btn\">\n                            <h5 class=\"btn-back\">back</h5>\n                        </div> \n                        <ul class=\"main-menu\">\n                            <li><a routerLink=\"/lender\">Home</a></li>\n\n                            <li><a routerLink=\"/lender/search-consulatnt\" routerLinkActive=\"active\">Search</a></li>\n                            <li><a routerLink=\"/lender/my-contract\" routerLinkActive=\"active\">My Contract</a></li>\n                            <li><a routerLink=\"/lender/make-a-loan\" routerLinkActive=\"active\"><i class=\"icon-plus\"></i>\n                                    Make a Loan</a></li>\n\n                        </ul>\n                    </div> -->\n                    <div class=\"top-header-right mr-1\">\n                        <ul>\n\n                            <!-- <li class=\"cart\">\n                                <a aria-expanded=\"false\" routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n                                    <i class=\"icon-comment-alt\"></i>\n                                </a>\n\n                            </li>\n                            <li class=\"cart\">\n                                <a aria-expanded=\"false\" data-toggle=\"dropdown\" href=\"#\" id=\"dropdownMenuButton1\">\n                                    <i class=\"icon-bell bell\"></i>\n                                    <span *ngIf=\"(utilityService._.keys(notificationService.appNotifications).length)>0\"\n                                        class=\"badge badge-primary bell-count\"\n                                        [textContent]=\"utilityService._.keys(notificationService.appNotifications).length\"></span>\n                                </a>\n                                <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\"\n                                    x-placement=\"bottom-end\"\n                                    style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\n                                    <ul class=\"shopping-cart list-group list-group-flush\">\n                                        <li class=\"list-group-item\"\n                                            *ngFor=\"let notification of utilityService._.values(notificationService.appNotifications)\">\n                                            <div class=\"pb-2\">\n                                                <div class=\"mb-1\">{{notification.message}}&nbsp;<a\n                                                        class=\"float-lg-right font-large text-danger\"\n                                                        (click)=\"notificationService.check4Notification(notification)\"><i\n                                                            class=\"icon-close\" style=\"font-size: 0.6rem;\"></i></a></div>\n                                                <div class=\"font-weight-light small mb-1\">{{notification.description}}\n                                                </div>\n                                            </div>\n                                        </li>\n\n\n                                        <li class=\"no-item text-center\">\n                                            <h4 class=\"my-4 font-weight-normal\">No Notifications</h4>\n                                        </li>\n                                    </ul>\n                                </div>\n                            </li> -->\n                            <li class=\"cart\">\n                                <a aria-expanded=\"false\" data-toggle=\"dropdown\"  id=\"dropdownMenuButton1\">\n                                    <!-- <img class=\"userimg mt-n2\" src=\"./assets/img/user-default.png\"> -->\n                                    <i class=\"icon icon-user\"></i>\n                                </a>\n                                <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\"\n                                    x-placement=\"bottom-end\"\n                                    style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\n                                    <ul class=\"shopping-cart\">\n                                        <li>\n                                            <a class=\"h6 d-block\" routerLink=\"/lender\">\n                                                {{currentUser.firstName}}\n                                                <span class=\"badge badge-primary float-right\"\n                                                    [textContent]=\"currentUser.role\" i18n> Borrower</span>\n                                            </a>\n                                        </li>\n\n                                        <!-- <li>\n                                            <a class=\"d-block\" routerLink=\"/lender/wallet\">Wallet\n                                                <span\n                                                    class=\"badge badge-success float-right\">${{fundService.totalFund4currentUser}}</span>\n                                            </a>\n                                        </li> -->\n                                        <li><a routerLink=\"/lender/profile\" i18n>Profile</a></li>\n                                        <hr>\n                                        <li>\n                                            <a routerLink=\"/logout\" i18n>Logout</a>\n                                        </li>\n                                    </ul>\n                                </div>\n\n                            </li>\n                        </ul>\n                    </div>\n                    \n                    <div class=\"sidebar_overlay navbar_side_panel btn-back\" style=\"display: none;\"></div>\n                </nav>\n            </div>\n        </div>\n   \n</header>\n<!-- Nav end-->";
+      __webpack_exports__["default"] = "<ul  class=\"navbar-nav bg-gradient-primary sidebar sidebar-dark accordion navbar_side_panel\" id=\"accordionSidebar\">\n\n    <!-- Sidebar - Brand -->\n    <a class=\"sidebar-brand d-flex align-items-center justify-content-center\">\n        <img class=\"img-fluid\" src=\"./assets/img/avitii-logo.png\">\n    </a>\n\n    <!-- Divider -->\n    <hr class=\"sidebar-divider my-0\">\n    <div class=\"text-white text-center mt-2\">\n        <a class=\"mr-1 small text-white\" href=\"/en\">English</a> |\n        <a href=\"/da\" class=\"ml-1 small text-white\">Dansk</a>\n    </div>\n    <!-- Nav Item - Dashboard -->\n    <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/admin\">\n            <i class=\"icon icon-home\"></i>\n            <span i18n>Dashboard</span>\n            <!--\n            <span>&nbsp;{{authenticationService.currentUserValue.lastLoginTime | date:'dd-MMM-YYYY HH:mm'}}</span>\n            -->\n        </a>\n    </li>\n\n    <!-- Divider -->\n    <hr class=\"sidebar-divider\">\n\n    <!-- Heading -->\n    <!-- <div class=\"sidebar-heading\">\n        Interface\n    </div> -->\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/users\" routerLinkActive=\"active\">\n            <i class=\"icon icon-user\"></i>\n            <span i18n>User Mangement</span></a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/pending-users\" routerLinkActive=\"active\">\n            <i class=\"icon icon-user\"></i>\n            <span i18n>Pending User's</span></a>\n    </li>\n    <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/add-user\" routerLinkActive=\"active\">\n            <i class=\"icon icon-bag\"></i>\n            <span>Add User</span></a>\n    </li> -->\n   \n    <li class=\"nav-item\">\n        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\" aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n            <i class=\"icon icon-credit-card\"></i>\n            <span i18n>Transactions</span>\n        </a>\n        <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">\n            <div class=\"bg-white py-2 collapse-inner rounded\">\n               \n                <a class=\"collapse-item\" (click)=\"navigate2State('/admin/payments',{'transactionActionType':TransactionActionType.plan_purchase})\" routerLinkActive=\"active\" i18n>Plan Purchase</a>\n                <a class=\"collapse-item\" (click)=\"navigate2State('/admin/payments',{'transactionActionType':TransactionActionType.insurance_purchase})\" routerLinkActive=\"active\" i18n>Insurance Purchase</a>\n              \n            </div>\n        </div>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/loan-pay\" routerLinkActive=\"active\">\n            <i class=\"icon icon-money\"></i>\n            <span i18n>Pending Loans</span></a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-comments\"></i>\n            <span i18n>Messages</span></a>\n            <span *ngIf=\"messagesService.returnTotalPendingMessagesForUser()>0\" class=\"badge badge-success float-right font-weight-lighter text-capitalize\" i18n> {{messagesService.returnTotalPendingMessagesForUser()}}</span>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/user-levels\" routerLinkActive=\"active\">\n            <i class=\"icon icon-medall-alt\"></i>\n            <span i18n>User Levels</span></a>\n    </li>\n\n    \n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/blogs\" routerLinkActive=\"active\">\n            <i class=\"icon icon-clipboard\"></i>\n            <span i18n>Blogs</span></a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/customer-review\" routerLinkActive=\"active\">\n            <i class=\"icon icon-clipboard\"></i>\n            <span i18n>Customer Review</span></a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/partners\" routerLinkActive=\"active\">\n            <i class=\"icon icon-clipboard\"></i>\n            <span i18n>Partners</span></a>\n    </li>\n \n    <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-comments\"></i>\n            <span>Messages</span></a>\n    </li>\n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\"  routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-calendar\"></i>\n            <span>Calendar</span></a>\n    </li>\n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\"  routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-star\"></i>\n            <span>My Ratings</span></a>\n    </li> -->\n\n    <!-- <li class=\"nav-item\">\n        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapsePages\" aria-expanded=\"true\" aria-controls=\"collapsePages\">\n            <i class=\"icon icon-settings\"></i>\n            <span>Settings</span>\n        </a>\n        <div id=\"collapsePages\" class=\"collapse\" aria-labelledby=\"headingPages\" data-parent=\"#accordionSidebar\">\n            <div class=\"bg-white py-2 collapse-inner rounded\">\n             \n                <a class=\"collapse-item\" routerLink=\"/lender/profile\">My Profile</a>\n                <a class=\"collapse-item\" href=\"register.html\">Change Password</a>\n                <a class=\"collapse-item\" href=\"forgot-password.html\">Bank Details</a>\n                <a class=\"collapse-item\" href=\"forgot-password.html\">Payment Agreement</a>\n               \n            </div>\n        </div>\n    </li> -->\n\n \n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/logout\">\n            <i class=\"icon icon-flickr-alt\"></i>\n            <span i18n>Logout</span></a>\n    </li>\n\n    <!-- Divider -->\n    <!-- <hr class=\"sidebar-divider d-none d-md-block\"> -->\n\n    <!-- Sidebar Toggler (Sidebar) -->\n    <!-- <div class=\"text-center d-none d-md-inline\">\n        <button class=\"rounded-circle border-0\" id=\"sidebarToggle\"></button>\n    </div> -->\n\n\n</ul>\n\n<div class=\"sidebar_overlay navbar_side_panel btn-back\" ></div>\n\n\n\n\n<!-- Nav Start [ngClass]=\"{'dark position-relative' : (router.url!='/')}\"-->\n<header id=\"custom-header-nav\" class=\"ecommerce nav-fix shadow-sm p-0 hide-lg\">\n    \n        <div class=\"row\">\n            <div class=\"col\">\n                <nav>\n                    <div class=\"responsive-btn ml-1\">\n                        <a class=\"toggle-nav\"><i aria-hidden=\"true\" class=\"icon-align-center\"></i></a>\n                    </div>\n                    <a class=\"logo-light\" routerLink=\"/home\">\n                        <img class=\"img-fluid\" src=\"./assets/img/avitii-logo-purple.png\"></a>\n\n                    <!-- <div class=\"navbar navbar_side_panel m-l-auto p-1 btn-back\" id=\"togglebtn\">\n                     <div class=\"responsive-btn\">\n                            <h5 class=\"btn-back\">back</h5>\n                        </div> \n                        <ul class=\"main-menu\">\n                            <li><a routerLink=\"/lender\">Home</a></li>\n\n                            <li><a routerLink=\"/lender/search-consulatnt\" routerLinkActive=\"active\">Search</a></li>\n                            <li><a routerLink=\"/lender/my-contract\" routerLinkActive=\"active\">My Contract</a></li>\n                            <li><a routerLink=\"/lender/make-a-loan\" routerLinkActive=\"active\"><i class=\"icon-plus\"></i>\n                                    Make a Loan</a></li>\n\n                        </ul>\n                    </div> -->\n                    <div class=\"top-header-right mr-1\">\n                        <ul>\n\n                            <!-- <li class=\"cart\">\n                                <a aria-expanded=\"false\" routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n                                    <i class=\"icon-comment-alt\"></i>\n                                </a>\n\n                            </li>\n                            <li class=\"cart\">\n                                <a aria-expanded=\"false\" data-toggle=\"dropdown\" href=\"#\" id=\"dropdownMenuButton1\">\n                                    <i class=\"icon-bell bell\"></i>\n                                    <span *ngIf=\"(utilityService._.keys(notificationService.appNotifications).length)>0\"\n                                        class=\"badge badge-primary bell-count\"\n                                        [textContent]=\"utilityService._.keys(notificationService.appNotifications).length\"></span>\n                                </a>\n                                <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\"\n                                    x-placement=\"bottom-end\"\n                                    style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\n                                    <ul class=\"shopping-cart list-group list-group-flush\">\n                                        <li class=\"list-group-item\"\n                                            *ngFor=\"let notification of utilityService._.values(notificationService.appNotifications)\">\n                                            <div class=\"pb-2\">\n                                                <div class=\"mb-1\">{{notification.message}}&nbsp;<a\n                                                        class=\"float-lg-right font-large text-danger\"\n                                                        (click)=\"notificationService.check4Notification(notification)\"><i\n                                                            class=\"icon-close\" style=\"font-size: 0.6rem;\"></i></a></div>\n                                                <div class=\"font-weight-light small mb-1\">{{notification.description}}\n                                                </div>\n                                            </div>\n                                        </li>\n\n\n                                        <li class=\"no-item text-center\">\n                                            <h4 class=\"my-4 font-weight-normal\">No Notifications</h4>\n                                        </li>\n                                    </ul>\n                                </div>\n                            </li> -->\n                            <li class=\"cart\">\n                                <a aria-expanded=\"false\" data-toggle=\"dropdown\"  id=\"dropdownMenuButton1\">\n                                    <!-- <img class=\"userimg mt-n2\" src=\"./assets/img/user-default.png\"> -->\n                                    <i class=\"icon icon-user\"></i>\n                                </a>\n                                <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\"\n                                    x-placement=\"bottom-end\"\n                                    style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\n                                    <ul class=\"shopping-cart\">\n                                        <li>\n                                            <a class=\"h6 d-block\" routerLink=\"/lender\">\n                                                {{currentUser.firstName}}\n                                                <span class=\"badge badge-primary float-right\"\n                                                    [textContent]=\"currentUser.role\" i18n> Borrower</span>\n                                            </a>\n                                        </li>\n\n                                        <!-- <li>\n                                            <a class=\"d-block\" routerLink=\"/lender/wallet\">Wallet\n                                                <span\n                                                    class=\"badge badge-success float-right\">${{fundService.totalFund4currentUser}}</span>\n                                            </a>\n                                        </li> -->\n                                        <li><a routerLink=\"/lender/profile\" i18n>Profile</a></li>\n                                        <hr>\n                                        <li>\n                                            <a routerLink=\"/logout\" i18n>Logout</a>\n                                        </li>\n                                    </ul>\n                                </div>\n\n                            </li>\n                        </ul>\n                    </div>\n                    \n                    <div class=\"sidebar_overlay navbar_side_panel btn-back\" style=\"display: none;\"></div>\n                </nav>\n            </div>\n        </div>\n   \n</header>\n<!-- Nav end-->";
       /***/
     },
 
@@ -9167,6 +9901,26 @@
 
 
       __webpack_exports__["default"] = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJsb2FuLXBheW1lbnQuY29tcG9uZW50LmNzcyJ9 */";
+      /***/
+    },
+
+    /***/
+    "xwQy":
+    /*!****************************************************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/admin/user-management-pending/user-management-pending.component.html ***!
+      \****************************************************************************************************************************/
+
+    /*! exports provided: default */
+
+    /***/
+    function xwQy(module, __webpack_exports__, __webpack_require__) {
+      "use strict";
+
+      __webpack_require__.r(__webpack_exports__);
+      /* harmony default export */
+
+
+      __webpack_exports__["default"] = "<div class=\"row\">\n\n    <div class=\"col-xl-12 col-md-12 mb-4\">\n        <div class=\"card shadow h-100\">\n            <div class=\"card-header\">\n                <div class=\"font-weight-bold text-primary\" i18n>User Management</div>\n            </div>\n            <div class=\"card-body\">\n                <div class=\"row\">\n\n                    <div class=\"col-xl-12 col-12 mb-4\">\n                        <div class=\"view view-cascade gradient-card-header white\">\n                            <table datatable [dtOptions]=\"dtOptions\"\n                                class=\"row-border hover table table-striped table-responsive-md btn-table\">\n                                <thead>\n                                    <tr>\n                                        <th class=\"d-none\" i18n>ID</th>\n                                        <th i18n>Email</th>\n                                        <th i18n>Full Name</th>\n                                        <th i18n>Role</th>\n                                        <!--<th i18n>Mobile</th>-->\n                                        <th i18n>Verified</th>\n                                        <th i18n>Status</th>\n                                        <th class=\"text-right\" i18n>Actions</th>\n                                    </tr>\n                                </thead>\n                                <tbody>\n                                    <tr *ngFor=\"let obj of utilityService._.values(PaymentTransactionDetailsArray)\">\n                                        <td class=\"d-none\">{{obj._id}}</td>\n                                        <td>{{obj.emailAddress}}</td>\n                                        <td>{{obj.firstName}}&nbsp;{{obj.middleName}}&nbsp;{{obj.lastName}}</td>\n                                        <td class=\"text-capitalize\">{{obj.role}}</td>\n                                        <!--<td>{{obj.mobileNo}}</td>-->\n                                        <td>\n                                            <div\n                                                *ngIf=\"returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id\">\n                                                <div *ngIf=\"!obj.isDeleted\">\n                                                    <span [ngSwitch]=\"obj.isVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\">Blocked</i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\">Verified</i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-danger font-weight-light\">Pending</i>\n                                                    </span>\n                                                    <!--\n                                                <span i18n *ngIf=\"!obj.isVerified\"\n                                                    class=\"btn text-white badge badge-danger font-weight-light\">\n                                                    Pending\n                                                </span>\n                                                <span i18n *ngIf=\"obj.isVerified\"\n                                                    class=\"badge badge-success font-weight-light\">\n                                                    Approved\n                                                </span>\n                                            -->\n                                                </div>\n                                                <div *ngIf=\"obj.isDeleted\">\n                                                    <span class=\"btn text-white badge badge-danger font-weight-light\"\n                                                        i18n>\n                                                        Deleted\n                                                    </span>\n                                                </div>\n                                            </div>\n                                        </td>\n                                        <td>\n                                            <div *ngIf=\"!obj.isDeleted\">\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.myPassportMedia).length>0\">\n                                                    <span [ngSwitch]=\"obj.myPassportMediaVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">Passport </i>\n                                                    </span>\n                                                </div>\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.myDLMedia).length>0\">\n                                                    <span [ngSwitch]=\"obj.myDLMediaVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">DL </i>\n                                                    </span>\n                                                </div>\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.myHICardMedia).length>0\">\n                                                    <span [ngSwitch]=\"obj.myHICardMediaVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">HI </i>\n                                                    </span>\n                                                </div>\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.myRKIMedia).length>0\">\n                                                    <span [ngSwitch]=\"obj.myRKIMediaVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">RKI</i>\n                                                    </span>\n                                                </div>\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.externalAppLinks).length>0\">\n                                                    <span [ngSwitch]=\"obj.externalAppLinksVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">Facebook</i>\n                                                    </span>\n                                                </div>\n\n\n                                            </div>\n                                        </td>\n                                        <td class=\"text-left\">\n                                            <div\n                                                *ngIf=\"!obj.isDeleted && returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id\">\n                                                <button *ngIf=\"obj.isVerified==1 && returnT4CurrentUserIsSAdmin()\"\n                                                    class=\"btn btn-success btn-sm btn-xs mr-1\"\n                                                    (click)=\"navigate2EditUser(obj._id)\" data-title=\"Edit\">\n                                                    <i class=\"icon-pencil\"></i>\n                                                </button>\n                                                <button class=\"btn btn-success btn-sm btn-xs mr-1\"\n                                                    (click)=\"usersProfile(obj)\" data-title=\"View User Details\">\n                                                    <i class=\"icon-user\"></i>\n                                                </button>\n\n                                                <button *ngIf=\"obj.role==Role.Borrower\"\n                                                    class=\"btn btn-success btn-sm btn-xs mr-1\"\n                                                    (click)=\"usersIncomeExpenseDetails(obj)\"\n                                                    data-title=\"Income Proof and Monthly Expenses Details\">\n                                                    <i class=\"icon-receipt\"></i>\n                                                </button>\n\n                                                <button *ngIf=\"obj.isVerified==1\"\n                                                    class=\"btn btn-warning btn-sm btn-xs mr-1\" data-title=\"Block User\"\n                                                    (click)=\"usersRestrictionModal(obj, 2)\">\n                                                    <i class=\"icon-lock\"></i>\n                                                </button>\n                                                <button *ngIf=\"!obj.isVerified || obj.isVerified==2\"\n                                                    class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verify User\"\n                                                    (click)=\"usersRestrictionModal(obj, 1)\">\n                                                    <i class=\"icon-unlock\"></i>\n                                                </button>\n\n\n                                                <button class=\"btn btn-danger btn-sm btn-xs\"\n                                                    (click)=\"deleteUserById(obj._id)\" data-title=\"Delete\">\n                                                    <i class=\"icon-trash\"></i>\n                                                </button>\n                                            </div>\n                                        </td>\n                                    </tr>\n\n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>";
       /***/
     },
 
@@ -9278,7 +10032,7 @@
 
       var PaymentTransactionsComponent = /*#__PURE__*/function () {
         function PaymentTransactionsComponent(socketService, alertService, utilityService, elementRef) {
-          var _this46 = this;
+          var _this52 = this;
 
           _classCallCheck(this, PaymentTransactionsComponent);
 
@@ -9308,20 +10062,20 @@
           };
           this.socketService.getAllPaymentTransactionDetails(_data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["first"])()).subscribe(function (data) {
             if (data && data['success']) {
-              _this46.PaymentTransactionDetailsArray = data["data"];
+              _this52.PaymentTransactionDetailsArray = data["data"];
 
-              _this46.populateUsersDataInTable(); //this.rerender();
+              _this52.populateUsersDataInTable(); //this.rerender();
 
 
-              _this46.loading = false;
+              _this52.loading = false;
             } else {
-              _this46.alertService.error(data['message']);
+              _this52.alertService.error(data['message']);
 
-              _this46.loading = false;
+              _this52.loading = false;
             }
           }, function (error) {
             var errorMsg2show = "";
-            _this46.PaymentTransactionDetailsArray = [];
+            _this52.PaymentTransactionDetailsArray = [];
 
             try {
               if (error && error.error && error.error.message) {
@@ -9333,9 +10087,9 @@
               }
             } catch (ex) {}
 
-            _this46.alertService.error(errorMsg2show);
+            _this52.alertService.error(errorMsg2show);
 
-            _this46.loading = false;
+            _this52.loading = false;
           });
         } //#region datatable actions
 
@@ -9358,13 +10112,13 @@
         }, {
           key: "populateUsersDataInTable",
           value: function populateUsersDataInTable() {
-            var _this47 = this;
+            var _this53 = this;
 
             this.dtOptions = {
               pagingType: 'full_numbers',
               pageLength: 10,
               drawCallback: function drawCallback() {
-                _this47.elementRef.nativeElement.querySelector('.paginate_button.next').addEventListener('click', _this47.onClick.bind(_this47));
+                _this53.elementRef.nativeElement.querySelector('.paginate_button.next').addEventListener('click', _this53.onClick.bind(_this53));
               }
             };
             this.dtTrigger.next();
@@ -9389,14 +10143,14 @@
         }, {
           key: "rerender",
           value: function rerender() {
-            var _this48 = this;
+            var _this54 = this;
 
             if (this.datatableElement && this.datatableElement.dtInstance) {
               this.datatableElement.dtInstance.then(function (dtInstance) {
                 // Destroy the table first
                 dtInstance.destroy(); // Call the dtTrigger to rerender again
 
-                _this48.dtTrigger.next();
+                _this54.dtTrigger.next();
               });
             }
           }
@@ -9593,15 +10347,15 @@
         }, {
           key: "fetchAllCustomerReviewByUserId",
           value: function fetchAllCustomerReviewByUserId() {
-            var _this49 = this;
+            var _this55 = this;
 
             this.userService.getCustomerReviewAll(null).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
               ////console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this49.allCustomerReviewData = data["data"]; //this.alertService.success(data['message'], true);
+                _this55.allCustomerReviewData = data["data"]; //this.alertService.success(data['message'], true);
 
-                _this49.loading = false;
+                _this55.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -9616,11 +10370,11 @@
                 }
               } catch (ex) {}
 
-              _this49.alertService.error(errorMsg2show);
+              _this55.alertService.error(errorMsg2show);
 
-              _this49.loading = false;
+              _this55.loading = false;
 
-              _this49.appRouterService.appRouter('');
+              _this55.appRouterService.appRouter('');
             });
           }
         }, {
@@ -9631,7 +10385,7 @@
         }, {
           key: "onCustomerReviewUpdateSubmit",
           value: function onCustomerReviewUpdateSubmit() {
-            var _this50 = this;
+            var _this56 = this;
 
             this.submitted = true;
 
@@ -9648,19 +10402,19 @@
             this.userService.addUpdateUserCustomerReview(this.userCustomerReviewForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this50.alertService.success('Customer Review Updated successfully', true);
+                _this56.alertService.success('Customer Review Updated successfully', true);
 
-                _this50.fetchAllCustomerReviewByUserId();
+                _this56.fetchAllCustomerReviewByUserId();
 
-                _this50.submitted = false;
+                _this56.submitted = false;
 
-                _this50.closeDialog(); //this.appRouterService.appRouter(this.userObj);
+                _this56.closeDialog(); //this.appRouterService.appRouter(this.userObj);
 
               } else {
                 //alert(JSON.stringify(data['message']));
-                _this50.alertService.error(data['message']);
+                _this56.alertService.error(data['message']);
 
-                _this50.loading = false;
+                _this56.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -9675,9 +10429,9 @@
                 }
               } catch (ex) {}
 
-              _this50.alertService.error(errorMsg2show);
+              _this56.alertService.error(errorMsg2show);
 
-              _this50.loading = false; //this.closeDialog();
+              _this56.loading = false; //this.closeDialog();
             });
           }
         }, {
@@ -9723,7 +10477,7 @@
         }, {
           key: "previewForCustomerReviewDocument",
           value: function previewForCustomerReviewDocument() {
-            var _this51 = this;
+            var _this57 = this;
 
             // Show preview 
             var mimeType = this.fileData4refDocument.type;
@@ -9736,15 +10490,15 @@
             reader.readAsDataURL(this.fileData4refDocument);
 
             reader.onload = function (_event) {
-              _this51.userCustomerReviewForm.get('refDocument').setValue(reader.result);
+              _this57.userCustomerReviewForm.get('refDocument').setValue(reader.result);
 
-              _this51.fileData4refDocumentPendingForUpload = true;
+              _this57.fileData4refDocumentPendingForUpload = true;
             };
           }
         }, {
           key: "onUploadForCustomerReviewDocument",
           value: function onUploadForCustomerReviewDocument() {
-            var _this52 = this;
+            var _this58 = this;
 
             if (!this.fileData4refDocument) {
               this.alertService.error("Select file first.");
@@ -9767,14 +10521,14 @@
               observe: 'events'
             }).subscribe(function (events) {
               if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpEventType"].UploadProgress) {
-                _this52.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
+                _this58.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%'; //console.log(this.fileUploadProgress);
               } else if (events.type === _angular_common_http__WEBPACK_IMPORTED_MODULE_10__["HttpEventType"].Response) {
-                _this52.fileUploadProgress = ''; //console.log(events.body);
+                _this58.fileUploadProgress = ''; //console.log(events.body);
                 //alert('SUCCESS !!');
 
-                _this52.fileData4Profile = null;
+                _this58.fileData4Profile = null;
 
-                _this52.alertService.success('Uploaded successfully', true);
+                _this58.alertService.success('Uploaded successfully', true);
 
                 var _uploadedUrl = events.body["data"].path;
 
@@ -9782,11 +10536,11 @@
                   _uploadedUrl = _uploadedUrl.substr(1);
                 }
 
-                _this52.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
+                _this58.uploadedFilePath = uploadAccessUrl + '' + _uploadedUrl;
 
-                _this52.userCustomerReviewForm.get('refDocument').setValue(_this52.uploadedFilePath);
+                _this58.userCustomerReviewForm.get('refDocument').setValue(_this58.uploadedFilePath);
 
-                _this52.fileData4refDocumentPendingForUpload = false;
+                _this58.fileData4refDocumentPendingForUpload = false;
               }
             });
           }

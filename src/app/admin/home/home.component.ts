@@ -23,13 +23,13 @@ export class HomeComponent implements OnInit {
     let _adminUsersArray = [];
     _adminUsersArray.push(this.authenticationService.currentUserValue._id);
 
-    let _currentContactObjAll = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'System', 'app-system-group', 'app-system-group', _adminUsersArray, null, null, [Role.Admin, Role.Borrower, Role.Lender], false);
+    let _currentContactObjAll = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'System', 'app-system-group', 'app-system-group', _adminUsersArray, null, null, [Role.Admin, Role.Borrower, Role.Lender], true);
     this.socketService.sendEventToAddNewContact(_currentContactObjAll);
 
-    let _currentContactObjLender = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'Avitii Lending(L)', 'app-system-group-lenders', 'app-system-group-lenders', _adminUsersArray, null, null, [Role.Admin, Role.Lender], false);
+    let _currentContactObjLender = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'Avitii Lending(L)', 'app-system-group-lenders', 'app-system-group-lenders', _adminUsersArray, null, null, [Role.Admin, Role.Lender], true);
     this.socketService.sendEventToAddNewContact(_currentContactObjLender);
 
-    let _currentContactObjBorrower = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'Avitii Lending(B)', 'app-system-group-borrower', 'app-system-group-borrower', _adminUsersArray, null, null, [Role.Admin, Role.Borrower], false);
+    let _currentContactObjBorrower = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'Avitii Lending(B)', 'app-system-group-borrower', 'app-system-group-borrower', _adminUsersArray, null, null, [Role.Admin, Role.Borrower], true);
     this.socketService.sendEventToAddNewContact(_currentContactObjBorrower);
 
   }

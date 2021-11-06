@@ -247,7 +247,15 @@ export class SocketioService {
     return this.SocketConnectionStatus.asObservable();
   }
   //#endregion send status of socket connected or disconnected
-
+  isSocketConnected() {
+    try {
+      if (this.socket && this.socket.connected) {
+        return true;
+      }
+    } catch (ex) {
+    }
+    return false;
+  }
   //#region handle events from server in single end point
   setupSocketConnectionIfNotExists(_user_id: string) {
     if (_user_id) {
@@ -518,8 +526,8 @@ export class SocketioService {
     }
   }
 
-  getAllUsers(_data) {
-    this.socket.emit("user_getall", _data);
+  getAllUsers(_data: any, skip: number, dataTablesParameters: any, returnOnlyPendingT: boolean) {
+    this.socket.emit("user_getall", _data, skip, dataTablesParameters, returnOnlyPendingT);
     return fromEvent<any[]>(this.socket, 'user_getall_list');
   }
 
@@ -589,8 +597,8 @@ export class SocketioService {
     return fromEvent<any[]>(this.socket, 'response_borrower_payment_transaction_details');
   }
 
-  getAllUsersWithRequestData(_data, skip, dataTablesParameters) {
-    this.socket.emit("request_user_getall", _data, skip, dataTablesParameters);
+  getAllUsersWithRequestData(_data: any, skip: number, dataTablesParameters: any, returnOnlyPendingT: boolean) {
+    this.socket.emit("request_user_getall", _data, skip, dataTablesParameters, returnOnlyPendingT);
     return fromEvent<any[]>(this.socket, 'response_user_getall');
   }
 

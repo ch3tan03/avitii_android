@@ -19,6 +19,7 @@ import { MessagesComponent } from './../shared/messages/messages.component';
 import { LoanPaymentComponent } from './loan-payment/loan-payment.component';
 import { PartnersComponent } from './partners/partners.component';
 import { CustomerReviewComponent } from './customer-review/customer-review.component';
+import { UserManagementPendingComponent } from './user-management-pending/user-management-pending.component';
 
 const routes: Routes = [
   {
@@ -45,6 +46,13 @@ const routes: Routes = [
       {
         path: 'users',
         component: UserManagementComponent,
+        canActivate: [AuthGuard],
+        data: {
+          appPermissions: [AppAccessPermissions.usersAddEdit, AppAccessPermissions.adminAddEdit],
+        }
+      },{
+        path: 'pending-users',
+        component: UserManagementPendingComponent,
         canActivate: [AuthGuard],
         data: {
           appPermissions: [AppAccessPermissions.usersAddEdit, AppAccessPermissions.adminAddEdit],

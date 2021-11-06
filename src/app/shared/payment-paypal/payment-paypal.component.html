@@ -1,0 +1,15 @@
+<div [hidden]="true" class="custom-control custom-radio custom-control-inline">
+    <input type="radio" class="custom-control-input" id="customRadio" [(ngModel)]="selectedPaymentMethod" name="selectedPaymentMethod" value="wallet">
+    <label class="custom-control-label" for="customRadio">Use Wallet</label>
+</div>
+<div [hidden]="true" class="custom-control custom-radio custom-control-inline">
+    <input type="radio" class="custom-control-input" id="customRadio2" [(ngModel)]="selectedPaymentMethod" name="selectedPaymentMethod" value="online">
+    <label class="custom-control-label" for="customRadio2">Pay Now</label>
+</div>
+<div [ngClass]="{ 'd-none': selectedPaymentMethod!=PaymentMethod.Online }">
+    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+</div>
+<div [ngClass]="{ 'd-none': selectedPaymentMethod==PaymentMethod.Online }">
+    <button class="btn btn-success btn-sm text-white" [disabled]="addFundsService.totalFund4currentUser < payment.amount" (click)="paymentThroughWallet()">
+    Pay Now</button>
+</div>

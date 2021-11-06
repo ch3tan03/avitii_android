@@ -573,7 +573,7 @@ export class MessagesComponent implements OnInit {
     switch (this.authenticationService.currentUserValue.role) {
       case Role.Borrower:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
-        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "lenderId": this.authenticationService.currentUserValue._id });
+        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "lenderId": {"_id":this.authenticationService.currentUserValue._id} });
         break;
       default:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
@@ -602,7 +602,6 @@ export class MessagesComponent implements OnInit {
             let _loanId = result.data.sessionApply.loanId;
             let _sessionPrice = result.data.sessionApply.loanAmount;
             let _loanApplyId = result.data.sessionApply._id;
-            let _borrowerId = result.data.sessionApply.borrowerId;
             let _transactionId = result.data.transactionId;
             let _status = result.data.status;
             //initiate payment here
@@ -655,7 +654,7 @@ export class MessagesComponent implements OnInit {
     switch (this.authenticationService.currentUserValue.role) {
       case Role.Borrower:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
-        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId": this.authenticationService.currentUserValue._id });
+        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId": { "_id": this.authenticationService.currentUserValue._id } });
         break;
       default:
         _proccessedSessionObj = _.cloneDeep(sessionObj);

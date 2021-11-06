@@ -558,11 +558,40 @@
               "name": "20% of amounts lent up to 5000 ddk"
             }
           };
+          this.MaxPercentileOfBudget = {
+            'gt': {
+              "amount": 12000,
+              per: 35
+            },
+            'lte': {
+              "amount": 12000,
+              per: 25
+            }
+          };
           this._ = lodash__WEBPACK_IMPORTED_MODULE_2__;
           this.moment = moment__WEBPACK_IMPORTED_MODULE_3__;
         }
 
         _createClass(UtilityService, [{
+          key: "returnCalculatedAllowedBudgetObj",
+          value: function returnCalculatedAllowedBudgetObj(totalIncome4currentUser, totalExpense4currentUser) {
+            var obj4Budget = {
+              totalAllowedBudget: 0,
+              totalAllowedBudgetFinal: 0,
+              maxPercentageAllowed2user: 0
+            };
+            obj4Budget.totalAllowedBudget = parseInt(totalIncome4currentUser || 0) - parseInt(totalExpense4currentUser || 0);
+
+            if (this.MaxPercentileOfBudget.lte.amount >= obj4Budget.totalAllowedBudget) {
+              obj4Budget.maxPercentageAllowed2user = this.MaxPercentileOfBudget.lte.per;
+            } else {
+              obj4Budget.maxPercentageAllowed2user = this.MaxPercentileOfBudget.gt.per;
+            }
+
+            obj4Budget.totalAllowedBudgetFinal = obj4Budget.totalAllowedBudget * obj4Budget.maxPercentageAllowed2user / 100;
+            return obj4Budget;
+          }
+        }, {
           key: "returnStringWithReplacing_",
           value: function returnStringWithReplacing_(_string) {
             if (_string) {
@@ -4441,7 +4470,18 @@
           value: function getSocketConnectionStatus() {
             return this.SocketConnectionStatus.asObservable();
           } //#endregion send status of socket connected or disconnected
-          //#region handle events from server in single end point
+
+        }, {
+          key: "isSocketConnected",
+          value: function isSocketConnected() {
+            try {
+              if (this.socket && this.socket.connected) {
+                return true;
+              }
+            } catch (ex) {}
+
+            return false;
+          } //#region handle events from server in single end point
 
         }, {
           key: "setupSocketConnectionIfNotExists",
@@ -4784,8 +4824,8 @@
           }
         }, {
           key: "getAllUsers",
-          value: function getAllUsers(_data) {
-            this.socket.emit("user_getall", _data);
+          value: function getAllUsers(_data, skip, dataTablesParameters, returnOnlyPendingT) {
+            this.socket.emit("user_getall", _data, skip, dataTablesParameters, returnOnlyPendingT);
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'user_getall_list');
           }
         }, {
@@ -4874,8 +4914,8 @@
           }
         }, {
           key: "getAllUsersWithRequestData",
-          value: function getAllUsersWithRequestData(_data, skip, dataTablesParameters) {
-            this.socket.emit("request_user_getall", _data, skip, dataTablesParameters);
+          value: function getAllUsersWithRequestData(_data, skip, dataTablesParameters, returnOnlyPendingT) {
+            this.socket.emit("request_user_getall", _data, skip, dataTablesParameters, returnOnlyPendingT);
             return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_user_getall');
           }
         }, {
@@ -5512,6 +5552,35 @@
               } catch (ex) {}
             });
           }
+        }, {
+          key: "getUsersDashboardDataForSelf",
+          value: function getUsersDashboardDataForSelf() {
+            var _this20 = this;
+
+            this.currentUserValue.totalAllowedBudget = 0;
+            this.userService.getUsersDashboardData(this.currentUserValue._id, this.currentUserValue.role, true).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["first"])()).subscribe(function (data) {
+              if (data && data['success']) {
+                var obj4Budget = data['data'];
+
+                if (obj4Budget.totalAllowedBudget || obj4Budget.totalAmountAvailableInBudget) {
+                  _this20.currentUserValue.totalAllowedBudget = obj4Budget.totalAmountAvailableInBudget || obj4Budget.totalAllowedBudget;
+                } //this.profileAdditionalData = data["data"];
+
+              } else {}
+            }, function (error) {
+              var errorMsg2show = "";
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+            });
+          }
         }]);
 
         return AuthenticationService;
@@ -5671,7 +5740,7 @@
 
       var BlogViewComponent = /*#__PURE__*/function () {
         function BlogViewComponent(alertService, userService, route, socketService, utilityService) {
-          var _this20 = this;
+          var _this21 = this;
 
           _classCallCheck(this, BlogViewComponent);
 
@@ -5685,10 +5754,10 @@
           this.route.queryParams.subscribe(function (params) {
             var documentId = params['id'];
 
-            _this20.socketService.setupSocketConnectionIfNotExists(_this20.utilityService.randomString(30, null));
+            _this21.socketService.setupSocketConnectionIfNotExists(_this21.utilityService.randomString(30, null));
 
             setTimeout(function () {
-              _this20.fetchBlogById(documentId);
+              _this21.fetchBlogById(documentId);
             }, 3000);
           });
         }
@@ -5696,18 +5765,18 @@
         _createClass(BlogViewComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this21 = this;
+            var _this22 = this;
 
             var documentId = this.route.snapshot.params.id;
             this.socketService.setupSocketConnectionIfNotExists(this.utilityService.randomString(30, null));
             setTimeout(function () {
-              _this21.fetchBlogById(documentId);
+              _this22.fetchBlogById(documentId);
             }, 3000);
           }
         }, {
           key: "fetchBlogById",
           value: function fetchBlogById(documentId) {
-            var _this22 = this;
+            var _this23 = this;
 
             if (!documentId) {
               return;
@@ -5717,9 +5786,9 @@
               ////console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this22.blogsData = data["data"]; //this.alertService.success(data['message'], true);
+                _this23.blogsData = data["data"]; //this.alertService.success(data['message'], true);
 
-                _this22.loading = false;
+                _this23.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -5734,9 +5803,9 @@
                 }
               } catch (ex) {}
 
-              _this22.alertService.error(errorMsg2show);
+              _this23.alertService.error(errorMsg2show);
 
-              _this22.loading = false;
+              _this23.loading = false;
             });
           }
         }]);
@@ -5997,7 +6066,7 @@
         }, {
           key: "onforgotPasswordSendOtp",
           value: function onforgotPasswordSendOtp() {
-            var _this23 = this;
+            var _this24 = this;
 
             this.isOtpSent = false;
 
@@ -6017,66 +6086,16 @@
                 //console.log('data => ', data)
                 if (data && data['success']) {
                   //alert(JSON.stringify( data));
-                  _this23.alertService.success(data['message'], true);
+                  _this24.alertService.success(data['message'], true);
 
-                  _this23.loading = false;
-                  _this23.isOtpSent = true;
-                } else {
-                  //alert(JSON.stringify(data['message']));
-                  _this23.alertService.error(data['message']);
-
-                  _this23.loading = false;
-                  _this23.isOtpSent = false;
-                }
-              }, function (error) {
-                var errorMsg2show = "";
-
-                try {
-                  if (error && error.error && error.error.message) {
-                    errorMsg2show = error.error.message;
-                  } else if (error && error.message) {
-                    errorMsg2show = error.message;
-                  } else {
-                    errorMsg2show = error;
-                  }
-                } catch (ex) {}
-
-                _this23.alertService.error(errorMsg2show);
-
-                _this23.loading = false;
-                _this23.isOtpSent = false;
-              });
-            }
-          }
-        }, {
-          key: "onSubmitResetPasswordOfUser",
-          value: function onSubmitResetPasswordOfUser() {
-            var _this24 = this;
-
-            if (this.isOtpSent) {
-              this.submitted = true; //console.log('inside onSubmitRegisterUser ' + (this.forgotPasswordForm.invalid && this.forgotPasswordForm.controls.password.invalid && this.forgotPasswordForm.controls.confirmPassword.invalid && this.forgotPasswordForm.controls.acceptTerms.invalid && this.forgotPasswordForm.controls.otp.invalid));
-              // stop here if form is invalid
-
-              if (this.forgotPasswordForm.controls.password.invalid || this.forgotPasswordForm.controls.confirmPassword.invalid || this.forgotPasswordForm.controls.otp.invalid) {
-                return;
-              } //console.log('inside');
-
-
-              this.loading = true; //console.log("Reg Data => ", this.forgotPasswordForm.value);
-
-              this.forgotPasswordForm.get('userName').setValue(this.forgotPasswordForm.get('emailAddress').value);
-              this.userService.resetPasswordVerifyOtpAndUpdate(this.forgotPasswordForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (data) {
-                //console.log('data => ', data)
-                if (data && data['success']) {
-                  //alert(JSON.stringify( data));//, {state:{ data} }
-                  _this24.alertService.success('Password reset successfully', true);
-
-                  _this24.router.navigate(['/login']);
+                  _this24.loading = false;
+                  _this24.isOtpSent = true;
                 } else {
                   //alert(JSON.stringify(data['message']));
                   _this24.alertService.error(data['message']);
 
                   _this24.loading = false;
+                  _this24.isOtpSent = false;
                 }
               }, function (error) {
                 var errorMsg2show = "";
@@ -6094,6 +6113,56 @@
                 _this24.alertService.error(errorMsg2show);
 
                 _this24.loading = false;
+                _this24.isOtpSent = false;
+              });
+            }
+          }
+        }, {
+          key: "onSubmitResetPasswordOfUser",
+          value: function onSubmitResetPasswordOfUser() {
+            var _this25 = this;
+
+            if (this.isOtpSent) {
+              this.submitted = true; //console.log('inside onSubmitRegisterUser ' + (this.forgotPasswordForm.invalid && this.forgotPasswordForm.controls.password.invalid && this.forgotPasswordForm.controls.confirmPassword.invalid && this.forgotPasswordForm.controls.acceptTerms.invalid && this.forgotPasswordForm.controls.otp.invalid));
+              // stop here if form is invalid
+
+              if (this.forgotPasswordForm.controls.password.invalid || this.forgotPasswordForm.controls.confirmPassword.invalid || this.forgotPasswordForm.controls.otp.invalid) {
+                return;
+              } //console.log('inside');
+
+
+              this.loading = true; //console.log("Reg Data => ", this.forgotPasswordForm.value);
+
+              this.forgotPasswordForm.get('userName').setValue(this.forgotPasswordForm.get('emailAddress').value);
+              this.userService.resetPasswordVerifyOtpAndUpdate(this.forgotPasswordForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (data) {
+                //console.log('data => ', data)
+                if (data && data['success']) {
+                  //alert(JSON.stringify( data));//, {state:{ data} }
+                  _this25.alertService.success('Password reset successfully', true);
+
+                  _this25.router.navigate(['/login']);
+                } else {
+                  //alert(JSON.stringify(data['message']));
+                  _this25.alertService.error(data['message']);
+
+                  _this25.loading = false;
+                }
+              }, function (error) {
+                var errorMsg2show = "";
+
+                try {
+                  if (error && error.error && error.error.message) {
+                    errorMsg2show = error.error.message;
+                  } else if (error && error.message) {
+                    errorMsg2show = error.message;
+                  } else {
+                    errorMsg2show = error;
+                  }
+                } catch (ex) {}
+
+                _this25.alertService.error(errorMsg2show);
+
+                _this25.loading = false;
               });
             } else {
               this.alertService.error("Please Verify Email first");
@@ -6422,22 +6491,37 @@
         }, {
           key: "getUserById",
           value: function getUserById(id) {
-            return this.http.post(this.baseurl + 'api/post/user/getbyid', {
-              userId: id
-            });
+            if (this.socketioService.isSocketConnected() && false) {
+              this.socketioService.emitEventWithNameAndData('request_user_get_byid', id);
+              return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_byid');
+            } else {
+              return this.http.post(this.baseurl + 'api/post/user/getbyid', {
+                userId: id
+              });
+            }
           }
         }, {
           key: "updateUserById",
           value: function updateUserById(user) {
-            return this.http.post(this.baseurl + 'api/post/user/update/byid', user);
+            if (this.socketioService.isSocketConnected() && false) {
+              this.socketioService.emitEventWithNameAndData('request_user_update_byid', user);
+              return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_update_byid');
+            } else {
+              return this.http.post(this.baseurl + 'api/post/user/update/byid', user);
+            }
           }
         }, {
           key: "updateUserByIdFromAdmin",
           value: function updateUserByIdFromAdmin(user, updatedBy) {
-            return this.http.post(this.baseurl + 'api/post/user/admin/update/byid', {
-              user: user,
-              updatedBy: updatedBy
-            });
+            if (this.socketioService.isSocketConnected() && false) {
+              this.socketioService.emitEventWithNameAndData('request_user_admin_update_byid', user, updatedBy);
+              return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_admin_update_byid');
+            } else {
+              return this.http.post(this.baseurl + 'api/post/user/admin/update/byid', {
+                user: user,
+                updatedBy: updatedBy
+              });
+            }
           }
         }, {
           key: "authenticateAndLoginUser",
@@ -6465,9 +6549,11 @@
         }, {
           key: "proccessAllAppUsersCollections",
           value: function proccessAllAppUsersCollections(userIdArray) {
-            var _this25 = this;
+            var _this26 = this;
 
             if (userIdArray && Object.keys(userIdArray).length > 0) {
+              userIdArray = this.utilityService._.uniq(userIdArray);
+
               if (!this.latestUserIdArrayMissingFromLocal) {
                 this.latestUserIdArrayMissingFromLocal = [];
               }
@@ -6494,7 +6580,7 @@
                   }
 
                   if (data) {
-                    _this25.allAppUsersCollections = _this25.utilityService._.merge(_this25.allAppUsersCollections, _this25.utilityService._.mapKeys(data, '_id'));
+                    _this26.allAppUsersCollections = _this26.utilityService._.merge(_this26.allAppUsersCollections, _this26.utilityService._.mapKeys(data, '_id'));
                   }
                 });
               }
@@ -6586,9 +6672,9 @@
 
                   if (_obj) {
                     if (lenderTrue) {
-                      userId = _obj.lenderId;
+                      userId = _obj.lenderId._id;
                     } else {
-                      userId = _obj.borrowerId;
+                      userId = _obj.borrowerId._id;
                     }
                   }
                 }
@@ -6642,7 +6728,8 @@
         }, {
           key: "getUsersDashboardData",
           value: function getUsersDashboardData(userId, role) {
-            this.socketioService.emitEventWithNameAndData('request_to_get_users_dashboard_details_data', userId, role);
+            var sendOnlyBudget = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+            this.socketioService.emitEventWithNameAndData('request_to_get_users_dashboard_details_data', userId, role, sendOnlyBudget);
             return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_to_get_users_dashboard_details_data');
           }
         }, {
@@ -6931,13 +7018,13 @@
         _createClass(ErrorInterceptor, [{
           key: "intercept",
           value: function intercept(request, next) {
-            var _this26 = this;
+            var _this27 = this;
 
             return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["catchError"])(function (err) {
               switch (err.status) {
                 case 401:
                   // auto logout if 401 response returned from api
-                  _this26.authenticationService.logout();
+                  _this27.authenticationService.logout();
 
                   location.reload(true);
                   break;

@@ -65,6 +65,30 @@ export class UtilityService {
     "20_5000": { "_id": "20_5000", "name": "20% of amounts lent up to 5000 ddk" },
   };
 
+  public MaxPercentileOfBudget: any = {
+    'gt': { "amount": 12000, per: 35 },
+    'lte': { "amount": 12000, per: 25 }
+  };
+
+  returnCalculatedAllowedBudgetObj(totalIncome4currentUser, totalExpense4currentUser) {
+    let obj4Budget = {
+      totalAllowedBudget: 0,
+      totalAllowedBudgetFinal: 0,
+      maxPercentageAllowed2user: 0
+    };
+
+    obj4Budget.totalAllowedBudget = parseInt(totalIncome4currentUser || 0) - parseInt(totalExpense4currentUser || 0);
+    if (this.MaxPercentileOfBudget.lte.amount >= obj4Budget.totalAllowedBudget) {
+      obj4Budget.maxPercentageAllowed2user = this.MaxPercentileOfBudget.lte.per;
+    } else {
+      obj4Budget.maxPercentageAllowed2user = this.MaxPercentileOfBudget.gt.per;
+    }
+
+    obj4Budget.totalAllowedBudgetFinal = ((obj4Budget.totalAllowedBudget * obj4Budget.maxPercentageAllowed2user) / 100);
+
+    return obj4Budget;
+  }
+
   returnStringWithReplacing_(_string) {
     if (_string) {
       return _string.replace(/_/g, ' ');

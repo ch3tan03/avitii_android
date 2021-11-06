@@ -197,7 +197,7 @@ export class AuthenticationService implements OnInit {
 
                 });
     }
-    
+
     fetchAllUserLevelsByUserId() {
         this.userService.getUserLevelsAll(null)
             .pipe(first())
@@ -230,5 +230,34 @@ export class AuthenticationService implements OnInit {
 
                 });
     }
+    
+    getUsersDashboardDataForSelf() {
+        this.currentUserValue.totalAllowedBudget = 0;
+        this.userService.getUsersDashboardData(this.currentUserValue._id, this.currentUserValue.role, true)
+            .pipe(first())
+            .subscribe(
+                data => {
+                    if (data && data['success']) {
+                        let obj4Budget = data['data'];
+                        if(obj4Budget.totalAllowedBudget || obj4Budget.totalAmountAvailableInBudget){
+                        this.currentUserValue.totalAllowedBudget = obj4Budget.totalAmountAvailableInBudget || obj4Budget.totalAllowedBudget;
+                        }
+                        //this.profileAdditionalData = data["data"];
+                    } else {
+                    }
+                },
+                error => {
+                    let errorMsg2show = "";
+                    try {
+                        if (error && error.error && error.error.message) {
+                            errorMsg2show = error.error.message;
+                        } else if (error && error.message) {
+                            errorMsg2show = error.message;
+                        } else {
+                            errorMsg2show = error;
+                        }
+                    } catch (ex) { }
 
+                });
+    }
 }

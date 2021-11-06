@@ -16,6 +16,7 @@ import { SessionsService } from 'src/app/services/sessions.service';
 import { ModalAppliedSessionDisplay } from '../lender.component';
 import * as _ from "lodash";
 import { MoneyTransferDataComponent } from 'src/app/shared/money-transfer-data/money-transfer-data.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -216,7 +217,9 @@ export class HomeComponent implements OnInit, OnDestroy {
           if (data && data['success']) {
             //alert(JSON.stringify( data));
             this.allSessionsData = data['data'];
-            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId')));//_sessionAppliedByLenders
+            this.filterAllSessionsDataForAppliedCurrentUserOnly();
+
+            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId')),'_id')));//_sessionAppliedByLenders
             this.calculateAndStoreLocalNextEMIDateOfAppliedLoansForBorrower();
             setTimeout(() => {                           //<<<---using ()=> syntax
               this.calculateAndStoreLocalNextEMIDateOfAppliedLoansForBorrower();
@@ -255,7 +258,9 @@ export class HomeComponent implements OnInit, OnDestroy {
               _keyPairedMapObj[_currentObj._id] = _currentObj
             }
             this.allSessionsData = this.utilityService._.values(_keyPairedMapObj);
-            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId')));//_sessionAppliedByLenders
+            this.filterAllSessionsDataForAppliedCurrentUserOnly();
+
+            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId')),'_id')));//_sessionAppliedByLenders
             this.calculateAndStoreLocalNextEMIDateOfAppliedLoansForBorrower();
             this.loading = false;
           } else {
@@ -335,9 +340,12 @@ export class HomeComponent implements OnInit, OnDestroy {
 
               this.authenticationService.currentUserValue.totalIncome4currentUser = data["data"]["totalIncome4currentUser"];
               this.authenticationService.currentUserValue.totalExpense4currentUser = data["data"]["totalExpense4currentUser"];
-              this.authenticationService.currentUserValue.totalAllowedBudget = this.authenticationService.currentUserValue.totalIncome4currentUser - this.authenticationService.currentUserValue.totalExpense4currentUser;
 
-              this.authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified = true;
+              let obj4Budget = this.utilityService.returnCalculatedAllowedBudgetObj(this.authenticationService.currentUserValue.totalIncome4currentUser, this.authenticationService.currentUserValue.totalExpense4currentUser);
+              this.authenticationService.currentUserValue.totalAllowedBudget = obj4Budget.totalAllowedBudgetFinal;
+              //this.maxPercentageAllowed2user = obj4Budget.maxPercentageAllowed2user;
+
+              this.authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified = 1;
               this.authenticationService.sendCurrentUserObj(this.authenticationService.currentUserValue);
             }
 
@@ -420,16 +428,22 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.router.navigate(['/' + _parentRouting + '/messages'], { state: { contactId: _contactId, AVTrueChatFalse: AVTrueChatFalse } });
   }
 
-  showAppliedToSession(sessionObj) {
+  showAppliedToSession(sessionObj, _id) {
+    if (!sessionObj && _id) {
+      sessionObj = this.utilityService._.filter(this.allSessionsData, { "_id": _id })[0];
+    }
+    if(!sessionObj){
+      return;
+    }
     let _proccessedSessionObj = null;
     switch (this.authenticationService.currentUserValue.role) {
       case Role.Borrower:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
-        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId": this.authenticationService.currentUserValue._id });
+        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId":{"_id": this.authenticationService.currentUserValue._id }});
         break;
       case Role.Lender:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
-        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "lenderId": this.authenticationService.currentUserValue._id });//_sessionAppliedByLenders
+        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "lenderId":{"_id": this.authenticationService.currentUserValue._id }});//_sessionAppliedByLenders
         break;
       default:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
@@ -474,7 +488,9 @@ export class HomeComponent implements OnInit, OnDestroy {
             _keyPairedMapObj[result.data.updatedSessionObj._id] = result.data.updatedSessionObj;
 
             this.allSessionsData = this.utilityService._.values(_keyPairedMapObj);
-            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId')));//_sessionAppliedByLenders
+            this.filterAllSessionsDataForAppliedCurrentUserOnly();
+
+            this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId')),'_id')));//_sessionAppliedByLenders
             this.calculateAndStoreLocalNextEMIDateOfAppliedLoansForBorrower();
             this._cdr.detectChanges();
           }
@@ -490,7 +506,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     switch (this.authenticationService.currentUserValue.role) {
       case Role.Borrower:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
-        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId": this.authenticationService.currentUserValue._id });
+        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId":{"_id": this.authenticationService.currentUserValue._id }});
         break;
       default:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
@@ -534,11 +550,11 @@ export class HomeComponent implements OnInit, OnDestroy {
         switch (this.authenticationService.currentUserValue.role) {
           case Role.Borrower:
             _proccessedSessionObj = _.cloneDeep(_LoanObj);
-            _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(_LoanObj.sessionAppliedByBorrowers, { "borrowerId": this.authenticationService.currentUserValue._id });
+            _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(_LoanObj.sessionAppliedByBorrowers, { "borrowerId":{"_id": this.authenticationService.currentUserValue._id }});
             break;
           case Role.Lender:
             _proccessedSessionObj = _.cloneDeep(_LoanObj);
-            _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(_LoanObj.sessionAppliedByBorrowers, { "lenderId": this.authenticationService.currentUserValue._id });//_sessionAppliedByLenders
+            _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(_LoanObj.sessionAppliedByBorrowers, { "lenderId":{"_id": this.authenticationService.currentUserValue._id }});//_sessionAppliedByLenders
             break;
           default:
             _proccessedSessionObj = _.cloneDeep(_LoanObj);
@@ -567,7 +583,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                 }
                 _LoanObj.applicationDate = (LoanApplyObj.eSignatureLendersCreatedOn || LoanApplyObj.eSignatureBorrowersCreatedOn);
                 _LoanObj.nextInstallment = installment.loanStartDateTime;
-                _LoanObj.nextInstallmentBorrowerId = LoanApplyObj.borrowerId;
+                _LoanObj.nextInstallmentBorrowerId = LoanApplyObj.borrowerId._id;
                 _LoanObj.nextInstallmentBorrowerFirstName = this.userService.returnUsersObjFromLocal(null, false, 'firstName', _LoanObj.nextInstallmentBorrowerId);
                 break;
               }
@@ -614,7 +630,237 @@ export class HomeComponent implements OnInit, OnDestroy {
     //#endregion create session apply from sessions
   }
 
+  //#region UPDATED STATUS CHANGE
   LoanMoneyTransferStatusChange(event, LoanObj: any, LoanApplyObj: any, installmentKey: string = null, updateLastInstallmentPaymentStatus: boolean = false) {
+    //console.log('585', this.authenticationService.currentUserValue);
+    let LoanApplyObjCurrent4Installment = {
+      isInstallmentPaidByAdmin: null,
+      transactionOnForLoanAmountPaidToLender: null,
+      transactionIdForLoanAmountPaidToLender: null,
+      installmentKey: null,
+      createdOnForLoanAmountPaidToLender: null,
+      transactionOnForLoanAmountPaidToLenderConfirmByLender: null,
+      createdOnForLoanAmountPaidToLenderConfirmByLender: null
+    };
+
+    if (installmentKey) {
+      if (!_.isString(installmentKey)) {
+        installmentKey = this.utilityService.moment(installmentKey).format('DD-MMM-YYYY');
+      }
+      if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+        for (let _items in LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+          let _currentObj = LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_items];
+          if (_currentObj) {
+
+            if (_currentObj.createdOnForLoanAmountPaidToLender && !_currentObj.createdOnForLoanAmountPaidToLenderConfirmByLender) {
+
+              switch (this.authenticationService.currentUserValue.role) {
+                case Role.Borrower:
+                  this.alertService.error('Last installment payment confirmation is pending from Lender', true);
+                  return;
+                  break;
+                default:
+                  installmentKey = _currentObj.installmentKey;
+                  break;
+              }
+            }
+
+            if (_currentObj.installmentKey == installmentKey) {
+              LoanApplyObjCurrent4Installment = _.cloneDeep(_currentObj);
+              break;
+            }
+          }
+        }
+      }
+    }
+
+    if (updateLastInstallmentPaymentStatus) {
+      if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+        for (let _items in LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+          let _currentObj = LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[_items];
+          if (_currentObj) {
+
+            if (_currentObj.createdOnForLoanAmountPaidToLender && !_currentObj.createdOnForLoanAmountPaidToLenderConfirmByLender) {
+              installmentKey = _currentObj.installmentKey;
+              if (_currentObj.installmentKey == installmentKey) {
+                LoanApplyObjCurrent4Installment = _.cloneDeep(_currentObj);
+              }
+              break;
+            }
+          }
+        }
+      }
+      if (!installmentKey) {
+        this.alertService.error('Last installment payment not done by borrower', true);
+        return;
+      }
+    }
+
+    if (event.srcElement.checked) {
+      //#region update status add data
+      if (installmentKey) {
+        if (!updateLastInstallmentPaymentStatus) {
+          //#region Borrower updating status for installment done
+          LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin = LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin || false;
+          LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender = LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender || this.utilityService._.now();
+          LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender = LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender || 'AUTO-SAVED';
+          LoanApplyObjCurrent4Installment.installmentKey = LoanApplyObjCurrent4Installment.installmentKey || installmentKey;
+          LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender = LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender || this.utilityService._.now();
+          //#endregion Borrower updating status for installment done
+        } else {
+          //#region Lender updating status for installment done by Borrower
+          if (LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender) {
+            LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender = LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender || this.utilityService._.now();
+            LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender = LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender || this.utilityService._.now();
+          }
+          //#endregion Lender updating status for installment done by Borrower
+        }
+        if (!LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender) {
+          this.alertService.error('Loan installment amount payment is pending from Borrower', true);
+          return;
+        }
+        let _loanTenureInMonths: number = parseInt(LoanObj.loanTenureInMonths);
+        let _totalInstallmentConfirmedByLender = 0;
+        for (let items2verify in LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
+          if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower[items2verify]['createdOnForLoanAmountPaidToLenderConfirmByLender']) {
+            _totalInstallmentConfirmedByLender = _totalInstallmentConfirmedByLender + 1;
+          }
+        }
+        if (_loanTenureInMonths == (_totalInstallmentConfirmedByLender + 1)) {
+          if (confirm("This is confirmation of last installment") == false) {
+            event.srcElement.checked = false;
+            return;
+          }
+        }
+        if (!LoanApplyObj.isLoanAmountPaidByLender) {
+          //#region direct action here with BYPASS ALL CASES
+          //this.middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, true, true);
+          //#endregion direct action here with BYPASS ALL CASES
+          this.alertService.error('Loan amount payment is pending from Lender', true);
+          return;
+        }
+        this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, installmentKey, _loanTenureInMonths, LoanApplyObjCurrent4Installment)
+          .pipe(first())
+          .subscribe(details => {
+            if (details && details["success"]) {
+              this.broadcastUpdatedEvent2All(details["data"]);
+            }
+          });
+        //#endregion direct action here with BYPASS ALL CASES
+      } else {
+        if (!LoanApplyObj.isLoanAmountPaidByLender) {
+          //#region Lender updating status for payment done
+          this.middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, true, false, false);
+          //#endregion Lender updating status for payment done
+        } else {
+          //#region Borrower updating status for payment done by Lender
+          this.middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, true, false, true);
+          //#endregion Borrower updating status for payment done by Lender
+        }
+        //#region direct action here with BYPASS ALL CASES
+        //this.middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, true, false);
+        //#endregion direct action here with BYPASS ALL CASES
+      }
+      //#endregion update status add data
+    } else {
+      //#region update status remove data
+      if (installmentKey) {
+        if (!updateLastInstallmentPaymentStatus) {
+          //#region Borrower updating status for installment done
+          LoanApplyObjCurrent4Installment.isInstallmentPaidByAdmin = false;
+          LoanApplyObjCurrent4Installment["installmentKeyDeleteThisKey"] = true;
+          LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLender = null;
+          LoanApplyObjCurrent4Installment.transactionIdForLoanAmountPaidToLender = null;
+          LoanApplyObjCurrent4Installment.installmentKey = installmentKey;//this.utilityService.moment(installmentKey).format('DD-MMM-YYYY');
+          LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLender = null;
+          LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender = null;
+          LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender = null;
+          //#endregion Borrower updating status for installment done
+        } else {
+          //#region Lender updating status for installment done by Borrower
+          LoanApplyObjCurrent4Installment.transactionOnForLoanAmountPaidToLenderConfirmByLender = null;
+          LoanApplyObjCurrent4Installment.createdOnForLoanAmountPaidToLenderConfirmByLender = null;
+          //#endregion Lender updating status for installment done by Borrower
+        }
+        //#region direct action here with BYPASS ALL CASES
+
+        let _loanTenureInMonths: number = parseInt(LoanObj.loanTenureInMonths);
+        this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, installmentKey, _loanTenureInMonths, LoanApplyObjCurrent4Installment)
+          .pipe(first())
+          .subscribe(details => {
+            if (details && details["success"]) {
+              this.broadcastUpdatedEvent2All(details["data"]);
+            }
+          });
+        //#endregion direct action here with BYPASS ALL CASES
+      } else {
+        if (!LoanApplyObj.isLoanAmountPaidByLender) {
+          //#region Lender updating status for payment done
+          this.middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, true, false, false);
+          //#endregion Lender updating status for payment done
+        } else {
+          //#region Borrower updating status for payment done by Lender
+          this.middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, true, false, true);
+          //#endregion Borrower updating status for payment done by Lender
+        }
+        //#region direct action here with BYPASS ALL CASES
+        //this.middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, false, false);
+        //#endregion direct action here with BYPASS ALL CASES
+      }
+      //#endregion update status remove data
+    }
+  }
+
+  middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj: any, addTremoveF: boolean, addedWithInstallment: boolean, borrowerConfirmation: boolean) {
+    let LoanApplyObjCurrent = {
+      isLoanAmountPaidByLender: null,
+      _id: null,
+      createdOnForLoanAmountPaidByLender: null,
+      transactionIdForLoanAmountPaidByLender: null,
+      transactionOnForLoanAmountPaidByLender: null,
+      transactionDescriptionForLoanAmountPaidByLender: null,
+      transactionOnForLoanAmountPaidByLenderConfirmByBorrower: null,
+      createdOnForLoanAmountPaidByLenderConfirmByBorrower: null,
+      transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower: null,
+      isLoanAmountPaidByLenderConfirmByBorrower: null,
+    };
+
+    if (addTremoveF) {
+      LoanApplyObjCurrent.isLoanAmountPaidByLender = true;
+      LoanApplyObjCurrent._id = LoanApplyObj._id;
+      LoanApplyObjCurrent.createdOnForLoanAmountPaidByLender = LoanApplyObj.createdOnForLoanAmountPaidByLender || this.utilityService._.now();
+      LoanApplyObjCurrent.transactionIdForLoanAmountPaidByLender = LoanApplyObj.transactionIdForLoanAmountPaidByLender || 'AUTO-SAVED';
+      LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLender = LoanApplyObj.transactionOnForLoanAmountPaidByLender || this.utilityService._.now();
+      LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLender = LoanApplyObj.transactionDescriptionForLoanAmountPaidByLender || 'This data is auto saved' + (addedWithInstallment ? ' with installment payment' : '');
+      if (borrowerConfirmation) {
+        LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower = LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower || true;
+        LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLenderConfirmByBorrower = LoanApplyObj.transactionOnForLoanAmountPaidByLenderConfirmByBorrower || this.utilityService._.now();
+        LoanApplyObjCurrent.createdOnForLoanAmountPaidByLenderConfirmByBorrower = LoanApplyObj.createdOnForLoanAmountPaidByLenderConfirmByBorrower || this.utilityService._.now();
+        LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower = LoanApplyObj.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower || 'This data is auto saved' + (addedWithInstallment ? ' with installment payment' : '');
+      }
+    } else {
+      if (!borrowerConfirmation) {
+        LoanApplyObjCurrent.isLoanAmountPaidByLender = false;
+        LoanApplyObjCurrent.createdOnForLoanAmountPaidByLender = this.utilityService._.now();
+        LoanApplyObjCurrent.transactionIdForLoanAmountPaidByLender = 'AUTO-SAVED';
+        LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLender = this.utilityService._.now();
+        LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLender = 'This data is auto saved' + (addedWithInstallment ? ' with installment payment' : '');
+      }
+      LoanApplyObjCurrent.isLoanAmountPaidByLenderConfirmByBorrower = false;
+      LoanApplyObjCurrent.transactionOnForLoanAmountPaidByLenderConfirmByBorrower = this.utilityService._.now();
+      LoanApplyObjCurrent.createdOnForLoanAmountPaidByLenderConfirmByBorrower = this.utilityService._.now();
+      LoanApplyObjCurrent.transactionDescriptionForLoanAmountPaidByLenderConfirmByBorrower = 'This data is auto saved' + (addedWithInstallment ? ' with installment payment' : '');
+
+    }
+    this.socketService.sendEventForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, LoanApplyObjCurrent).pipe(first()).subscribe(details => {
+      if (details && details["success"]) {
+        this.broadcastUpdatedEvent2All(details["data"]);
+      }
+    });
+  }
+  //#endregion UPDATED STATUS CHANGE
+  //#region NOT USING NOW
+  LoanMoneyTransferStatusChange_NOT_USING_NOW(event, LoanObj: any, LoanApplyObj: any, installmentKey: string = null, updateLastInstallmentPaymentStatus: boolean = false) {
     //console.log('585', this.authenticationService.currentUserValue);
     if (installmentKey) {
       if (LoanApplyObj.installmentWiseLoanAmountPaidByBorrower) {
@@ -684,7 +930,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
         if (!LoanApplyObj.isLoanAmountPaidByLender) {
           //#region direct action here with BYPASS ALL CASES
-          this.middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, true, true);
+          this.middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll_NOT_USING_NOW(LoanApplyObj, true, true);
           //#endregion direct action here with BYPASS ALL CASES
         }
         this.socketService.sendEventForLoanAmountPaidToLenderConfirmByLenderWithUpdateAll(LoanApplyObj.loanId, LoanApplyObj._id, this.authenticationService.currentUserValue._id, installmentKey, _loanTenureInMonths, LoanApplyObjCurrent4Installment)
@@ -704,7 +950,7 @@ export class HomeComponent implements OnInit, OnDestroy {
           //#endregion Borrower updating status for payment done by Lender
         }
         //#region direct action here with BYPASS ALL CASES
-        this.middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, true, false);
+        this.middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll_NOT_USING_NOW(LoanApplyObj, true, false);
         //#endregion direct action here with BYPASS ALL CASES
       }
       //#endregion update status add data
@@ -745,14 +991,14 @@ export class HomeComponent implements OnInit, OnDestroy {
           //#endregion Borrower updating status for payment done by Lender
         }
         //#region direct action here with BYPASS ALL CASES
-        this.middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj, false, false);
+        this.middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll_NOT_USING_NOW(LoanApplyObj, false, false);
         //#endregion direct action here with BYPASS ALL CASES
       }
       //#endregion update status remove data
     }
   }
 
-  middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll(LoanApplyObj: any, addTremoveF: boolean, addedWithInstallment: boolean) {
+  middiatorFnForLoanAmountPaidByLenderConfirmByBorrowerWithUpdateAll_NOT_USING_NOW(LoanApplyObj: any, addTremoveF: boolean, addedWithInstallment: boolean) {
     let LoanApplyObjCurrent = {
       isLoanAmountPaidByLender: null,
       _id: null,
@@ -795,6 +1041,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     });
   }
+  //#endregion NOT USING NOW
 
   LoanMoneyTransferStatusModel(LoanObj: any, LoanApplyObj: any, installmentKey: string = null, updateLastInstallmentPaymentStatus: boolean = false) {
 
@@ -859,12 +1106,40 @@ export class HomeComponent implements OnInit, OnDestroy {
 
       _keyPairedMapObj[sessionObj._id] = sessionObj;
       this.allSessionsData = this.utilityService._.values(_keyPairedMapObj);
+      this.filterAllSessionsDataForAppliedCurrentUserOnly();
 
-      this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId')));
+      this.userService.proccessAllAppUsersCollections(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.uniq(this.utilityService._.map(this.utilityService._.flattenDepth(this.utilityService._.map(this.utilityService._.values(this.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId')),'_id')));
       this.calculateAndStoreLocalNextEMIDateOfAppliedLoansForBorrower();
 
       this._cdr.detectChanges();
     }
   }
 
+  filterAllSessionsDataForAppliedCurrentUserOnly() {
+    if (this.allSessionsData) {
+      let allSessionsDataKeyPaired = {};
+      for (let _items in this.allSessionsData) {
+        let _proccessedSessionObj = {
+          _id: null,
+          sessionAppliedByBorrowers: []
+        };
+        let sessionObj = this.allSessionsData[_items];
+        switch (this.authenticationService.currentUserValue.role) {
+          case Role.Borrower:
+            _proccessedSessionObj =this.utilityService._.cloneDeep(sessionObj);
+            _proccessedSessionObj.sessionAppliedByBorrowers = this.utilityService._.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId":{"_id": this.authenticationService.currentUserValue._id }});
+            break;
+          default:
+            _proccessedSessionObj = this.utilityService._.cloneDeep(sessionObj);
+            break;
+        }
+        allSessionsDataKeyPaired[_proccessedSessionObj._id] = _proccessedSessionObj;
+      }
+      this.allSessionsData = this.utilityService._.values(allSessionsDataKeyPaired);
+    }
+  }
+  returnUrl4downloadCOntractPDF(sessionApplyId) {
+    let Url4downloadCOntractPDF = environment.apiUrl + '/signed_pdf_contract/' + sessionApplyId + '.pdf';
+    return Url4downloadCOntractPDF;
+  }
 }

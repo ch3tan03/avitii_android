@@ -46,9 +46,9 @@ export class UserManagementComponent implements OnDestroy, OnInit {
     //this.getAllUsersWithRequestData();
   }
 
-  getAllUsersWithRequestData(_skip: number = 0, callback: any = null, dataTablesParameters: any = null) {
+  getAllUsersWithRequestData(_skip: number = 0, callback: any = null, dataTablesParameters: any = null, returnOnlyPendingT:boolean=false) {
     let _data = {};
-    this.socketService.getAllUsersWithRequestData(_data, _skip, dataTablesParameters)
+    this.socketService.getAllUsersWithRequestData(_data, _skip, dataTablesParameters, returnOnlyPendingT)
       .subscribe(
         data => {
           if (data && data['success']) {
@@ -99,10 +99,20 @@ export class UserManagementComponent implements OnDestroy, OnInit {
       .subscribe(
         data => {
           if (data && data['success']) {
-            let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+            let i: number = 0;
+            this.PaymentTransactionDetailsArray.forEach((item: any) => {
+              if (item._id == data["data"]["_id"]) {
+                this.PaymentTransactionDetailsArray.splice(i, 1, data["data"]);
+                return;
+              }
+              i++;
+            });
+ 
+            this.populateUsersDataInTable();
+            /*let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
             usersObjArr[data["data"]["_id"]] = data["data"]
             this.PaymentTransactionDetailsArray = usersObjArr;
-            this.populateUsersDataInTable();
+            this.populateUsersDataInTable();*/
             //this.rerender();
             this.alertService.success(data['message']);
             this.loading = false;
@@ -135,10 +145,22 @@ export class UserManagementComponent implements OnDestroy, OnInit {
       .subscribe(
         data => {
           if (data && data['success']) {
+            let i: number = 0;
+            this.PaymentTransactionDetailsArray.forEach((item: any) => {
+              if (item._id == _userId) {
+                this.PaymentTransactionDetailsArray.splice(i, 1, null);
+                return;
+              }
+              i++;
+            });
+           
+            this.populateUsersDataInTable();
+            /*
             let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
             delete usersObjArr[_userId];
             this.PaymentTransactionDetailsArray = usersObjArr;
             this.populateUsersDataInTable();
+            */
             //this.rerender();
             this.alertService.success(data['message']);
             this.loading = false;
@@ -182,11 +204,21 @@ export class UserManagementComponent implements OnDestroy, OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.data) {
+        let i: number = 0;
+        this.PaymentTransactionDetailsArray.forEach((item: any) => {
+          if (item._id == result.data["_id"]) {
+            this.PaymentTransactionDetailsArray.splice(i, 1, result.data);
+            return;
+          }
+          i++;
+        });
+        /*
         let _userId = result.data._id;
         let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
         delete usersObjArr[_userId];
         usersObjArr[_userId] = result.data;
         this.PaymentTransactionDetailsArray = usersObjArr;
+        */
       }
       //console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
     });
@@ -344,7 +376,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
     });
   }
 
-  usersRestrictionModal(userObj: any, isVerified: boolean) {
+  usersRestrictionModal(userObj: any, isVerified: number) {
     const dialogRef = this.dialog.open(UserRestrictionDetailsComponent, {
 
       maxWidth: '100vw',
@@ -362,9 +394,19 @@ export class UserManagementComponent implements OnDestroy, OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result && result.data && result.data["_id"]) {
-        let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
-        usersObjArr[result.data["_id"]] = result.data;
-        this.PaymentTransactionDetailsArray = usersObjArr;
+        let i: number = 0;
+        this.PaymentTransactionDetailsArray.forEach((item: any) => {
+          if (item._id == result.data["_id"]) {
+            this.PaymentTransactionDetailsArray.splice(i, 1, result.data);
+            return;
+          }
+          i++;
+        });
+        /*
+                let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+                usersObjArr[result.data["_id"]] = result.data;
+                this.PaymentTransactionDetailsArray = usersObjArr;
+                */
         this.populateUsersDataInTable();
       }
       //console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);

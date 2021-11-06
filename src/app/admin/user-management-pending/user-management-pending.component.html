@@ -1,0 +1,169 @@
+<div class="row">
+
+    <div class="col-xl-12 col-md-12 mb-4">
+        <div class="card shadow h-100">
+            <div class="card-header">
+                <div class="font-weight-bold text-primary" i18n>User Management</div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="col-xl-12 col-12 mb-4">
+                        <div class="view view-cascade gradient-card-header white">
+                            <table datatable [dtOptions]="dtOptions"
+                                class="row-border hover table table-striped table-responsive-md btn-table">
+                                <thead>
+                                    <tr>
+                                        <th class="d-none" i18n>ID</th>
+                                        <th i18n>Email</th>
+                                        <th i18n>Full Name</th>
+                                        <th i18n>Role</th>
+                                        <!--<th i18n>Mobile</th>-->
+                                        <th i18n>Verified</th>
+                                        <th i18n>Status</th>
+                                        <th class="text-right" i18n>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let obj of utilityService._.values(PaymentTransactionDetailsArray)">
+                                        <td class="d-none">{{obj._id}}</td>
+                                        <td>{{obj.emailAddress}}</td>
+                                        <td>{{obj.firstName}}&nbsp;{{obj.middleName}}&nbsp;{{obj.lastName}}</td>
+                                        <td class="text-capitalize">{{obj.role}}</td>
+                                        <!--<td>{{obj.mobileNo}}</td>-->
+                                        <td>
+                                            <div
+                                                *ngIf="returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id">
+                                                <div *ngIf="!obj.isDeleted">
+                                                    <span [ngSwitch]="obj.isVerified" i18n>
+                                                        <i *ngSwitchCase="2"
+                                                            class="badge badge-danger font-weight-light">Blocked</i>
+                                                        <i *ngSwitchCase="1"
+                                                            class="badge badge-success font-weight-light">Verified</i>
+                                                        <i *ngSwitchDefault
+                                                            class="badge badge-danger font-weight-light">Pending</i>
+                                                    </span>
+                                                    <!--
+                                                <span i18n *ngIf="!obj.isVerified"
+                                                    class="btn text-white badge badge-danger font-weight-light">
+                                                    Pending
+                                                </span>
+                                                <span i18n *ngIf="obj.isVerified"
+                                                    class="badge badge-success font-weight-light">
+                                                    Approved
+                                                </span>
+                                            -->
+                                                </div>
+                                                <div *ngIf="obj.isDeleted">
+                                                    <span class="btn text-white badge badge-danger font-weight-light"
+                                                        i18n>
+                                                        Deleted
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div *ngIf="!obj.isDeleted">
+                                                <div style="display: inline;margin-right: 2px;" *ngIf="utilityService._.keys(obj.myPassportMedia).length>0">
+                                                    <span [ngSwitch]="obj.myPassportMediaVerified" i18n>
+                                                        <i *ngSwitchCase="2"
+                                                            class="badge badge-danger font-weight-light"></i>
+                                                        <i *ngSwitchCase="1"
+                                                            class="badge badge-success font-weight-light"></i>
+                                                        <i *ngSwitchDefault
+                                                            class="badge badge-secondary font-weight-light">Passport </i>
+                                                    </span>
+                                                </div>
+                                                <div style="display: inline;margin-right: 2px;" *ngIf="utilityService._.keys(obj.myDLMedia).length>0">
+                                                    <span [ngSwitch]="obj.myDLMediaVerified" i18n>
+                                                        <i *ngSwitchCase="2"
+                                                            class="badge badge-danger font-weight-light"></i>
+                                                        <i *ngSwitchCase="1"
+                                                            class="badge badge-success font-weight-light"></i>
+                                                        <i *ngSwitchDefault
+                                                            class="badge badge-secondary font-weight-light">DL </i>
+                                                    </span>
+                                                </div>
+                                                <div style="display: inline;margin-right: 2px;" *ngIf="utilityService._.keys(obj.myHICardMedia).length>0">
+                                                    <span [ngSwitch]="obj.myHICardMediaVerified" i18n>
+                                                        <i *ngSwitchCase="2"
+                                                            class="badge badge-danger font-weight-light"></i>
+                                                        <i *ngSwitchCase="1"
+                                                            class="badge badge-success font-weight-light"></i>
+                                                        <i *ngSwitchDefault
+                                                            class="badge badge-secondary font-weight-light">HI </i>
+                                                    </span>
+                                                </div>
+                                                <div style="display: inline;margin-right: 2px;" *ngIf="utilityService._.keys(obj.myRKIMedia).length>0">
+                                                    <span [ngSwitch]="obj.myRKIMediaVerified" i18n>
+                                                        <i *ngSwitchCase="2"
+                                                            class="badge badge-danger font-weight-light"></i>
+                                                        <i *ngSwitchCase="1"
+                                                            class="badge badge-success font-weight-light"></i>
+                                                        <i *ngSwitchDefault
+                                                            class="badge badge-secondary font-weight-light">RKI</i>
+                                                    </span>
+                                                </div>
+                                                <div style="display: inline;margin-right: 2px;" *ngIf="utilityService._.keys(obj.externalAppLinks).length>0">
+                                                    <span [ngSwitch]="obj.externalAppLinksVerified" i18n>
+                                                        <i *ngSwitchCase="2"
+                                                            class="badge badge-danger font-weight-light"></i>
+                                                        <i *ngSwitchCase="1"
+                                                            class="badge badge-success font-weight-light"></i>
+                                                        <i *ngSwitchDefault
+                                                            class="badge badge-secondary font-weight-light">Facebook</i>
+                                                    </span>
+                                                </div>
+
+
+                                            </div>
+                                        </td>
+                                        <td class="text-left">
+                                            <div
+                                                *ngIf="!obj.isDeleted && returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id">
+                                                <button *ngIf="obj.isVerified==1 && returnT4CurrentUserIsSAdmin()"
+                                                    class="btn btn-success btn-sm btn-xs mr-1"
+                                                    (click)="navigate2EditUser(obj._id)" data-title="Edit">
+                                                    <i class="icon-pencil"></i>
+                                                </button>
+                                                <button class="btn btn-success btn-sm btn-xs mr-1"
+                                                    (click)="usersProfile(obj)" data-title="View User Details">
+                                                    <i class="icon-user"></i>
+                                                </button>
+
+                                                <button *ngIf="obj.role==Role.Borrower"
+                                                    class="btn btn-success btn-sm btn-xs mr-1"
+                                                    (click)="usersIncomeExpenseDetails(obj)"
+                                                    data-title="Income Proof and Monthly Expenses Details">
+                                                    <i class="icon-receipt"></i>
+                                                </button>
+
+                                                <button *ngIf="obj.isVerified==1"
+                                                    class="btn btn-warning btn-sm btn-xs mr-1" data-title="Block User"
+                                                    (click)="usersRestrictionModal(obj, 2)">
+                                                    <i class="icon-lock"></i>
+                                                </button>
+                                                <button *ngIf="!obj.isVerified || obj.isVerified==2"
+                                                    class="btn btn-success btn-sm btn-xs mr-1" data-title="Verify User"
+                                                    (click)="usersRestrictionModal(obj, 1)">
+                                                    <i class="icon-unlock"></i>
+                                                </button>
+
+
+                                                <button class="btn btn-danger btn-sm btn-xs"
+                                                    (click)="deleteUserById(obj._id)" data-title="Delete">
+                                                    <i class="icon-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

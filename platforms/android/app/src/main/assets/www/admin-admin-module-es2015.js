@@ -356,6 +356,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _loan_payment_loan_payment_component__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./loan-payment/loan-payment.component */ "dEW4");
 /* harmony import */ var _partners_partners_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./partners/partners.component */ "hu3n");
 /* harmony import */ var _customer_review_customer_review_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./customer-review/customer-review.component */ "yxQR");
+/* harmony import */ var _user_management_pending_user_management_pending_component__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./user-management-pending/user-management-pending.component */ "joR3");
+
 
 
 
@@ -402,6 +404,13 @@ const routes = [
             {
                 path: 'users',
                 component: _user_management_user_management_component__WEBPACK_IMPORTED_MODULE_8__["UserManagementComponent"],
+                canActivate: [_components_guards__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]],
+                data: {
+                    appPermissions: [_models_role__WEBPACK_IMPORTED_MODULE_12__["AppAccessPermissions"].usersAddEdit, _models_role__WEBPACK_IMPORTED_MODULE_12__["AppAccessPermissions"].adminAddEdit],
+                }
+            }, {
+                path: 'pending-users',
+                component: _user_management_pending_user_management_pending_component__WEBPACK_IMPORTED_MODULE_21__["UserManagementPendingComponent"],
                 canActivate: [_components_guards__WEBPACK_IMPORTED_MODULE_13__["AuthGuard"]],
                 data: {
                     appPermissions: [_models_role__WEBPACK_IMPORTED_MODULE_12__["AppAccessPermissions"].usersAddEdit, _models_role__WEBPACK_IMPORTED_MODULE_12__["AppAccessPermissions"].adminAddEdit],
@@ -2113,7 +2122,7 @@ exports.SubjectSubscription = SubjectSubscription;
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row\">\n  \n    <div class=\"col-xl-12 col-md-12 mb-4\">\n        <div class=\"card shadow h-100\">\n            <div class=\"card-header\">\n                <div class=\"font-weight-bold text-primary\" i18n>User Management</div>\n            </div>\n            <div class=\"card-body\">\n                <div class=\"row\">\n                    \n                    <div class=\"col-xl-12 col-12 mb-4\">\n                        <div class=\"view view-cascade gradient-card-header white\">\n                            <table datatable [dtOptions]=\"dtOptions\" class=\"row-border hover table table-striped table-responsive-md btn-table\">\n                                <thead>\n                                    <tr>\n                                        <th class=\"d-none\" i18n>ID</th>\n                                        <th i18n>Email</th>\n                                        <th i18n>Full Name</th>\n                                        <th i18n>Role</th>\n                                        <th i18n>Mobile</th>\n                                        <th i18n>Verified</th>\n                                        <th class=\"text-right\" i18n>Actions</th>\n                                    </tr>\n                                </thead>\n                                <tbody>\n                                    <tr *ngFor=\"let obj of utilityService._.values(PaymentTransactionDetailsArray)\">\n                                        <td class=\"d-none\" >{{obj._id}}</td>\n                                        <td >{{obj.emailAddress}}</td>\n                                        <td >{{obj.firstName}}&nbsp;{{obj.middleName}}&nbsp;{{obj.lastName}}</td>\n                                        <td >{{obj.role}}</td>\n                                        <td >{{obj.mobileNo}}</td>\n                                        <td>\n                                            <div\n                                                *ngIf=\"returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id\">\n                                               <div *ngIf=\"!obj.isDeleted\">\n                                                <span i18n *ngIf=\"!obj.isVerified\"\n                                                    class=\"btn text-white badge badge-danger font-weight-light\">\n                                                    Pending\n                                                </span>\n                                                <span i18n *ngIf=\"obj.isVerified\"\n                                                    class=\"badge badge-success font-weight-light\">\n                                                    Approved\n                                                </span>\n                                               </div>\n                                               <div *ngIf=\"obj.isDeleted\">\n                                                <span class=\"btn text-white badge badge-danger font-weight-light\" i18n>\n                                                    Deleted\n                                                </span>\n                                               </div>                                            \n                                            </div>\n                                        </td>\n                                        <td class=\"text-left\">\n                                            <div\n                                                *ngIf=\"!obj.isDeleted && returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id\">\n                                                <button *ngIf=\"obj.isVerified && returnT4CurrentUserIsSAdmin()\"\n                                                    class=\"btn btn-success btn-sm btn-xs mr-1\" (click)=\"navigate2EditUser(obj._id)\" data-title=\"Edit\">\n                                                    <i class=\"icon-pencil\"></i>\n                                                </button>\n                                                <button class=\"btn btn-success btn-sm btn-xs mr-1\" (click)=\"usersProfile(obj)\" data-title=\"View User Details\">\n                                                    <i class=\"icon-user\"></i>\n                                                </button>\n                                                \n                                                <button *ngIf=\"obj.role==Role.Borrower\" class=\"btn btn-success btn-sm btn-xs mr-1\" (click)=\"usersIncomeExpenseDetails(obj)\" data-title=\"Income Proof and Monthly Expenses Details\">\n                                                    <i class=\"icon-receipt\"></i>\n                                                </button>\n\n                                                <button *ngIf=\"obj.isVerified\" class=\"btn btn-warning btn-sm btn-xs mr-1\" data-title=\"Block User\" (click)=\"usersRestrictionModal(obj, false)\">\n                                                    <i class=\"icon-lock\"></i>\n                                                </button>\n                                                <button *ngIf=\"!obj.isVerified\" class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verify User\" (click)=\"usersRestrictionModal(obj, true)\">\n                                                    <i class=\"icon-unlock\"></i>\n                                                </button>\n\n\n                                                <button class=\"btn btn-danger btn-sm btn-xs\" (click)=\"deleteUserById(obj._id)\" data-title=\"Delete\">\n                                                    <i class=\"icon-trash\"></i>\n                                                </button>\n                                            </div>\n                                        </td>\n                                    </tr>\n                                   \n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row\">\n\n    <div class=\"col-xl-12 col-md-12 mb-4\">\n        <div class=\"card shadow h-100\">\n            <div class=\"card-header\">\n                <div class=\"font-weight-bold text-primary\" i18n>User Management</div>\n            </div>\n            <div class=\"card-body\">\n                <div class=\"row\">\n\n                    <div class=\"col-xl-12 col-12 mb-4\">\n                        <div class=\"view view-cascade gradient-card-header white\">\n                            <table datatable [dtOptions]=\"dtOptions\"\n                                class=\"row-border hover table table-striped table-responsive-md btn-table\">\n                                <thead>\n                                    <tr>\n                                        <th class=\"d-none\" i18n>ID</th>\n                                        <th i18n>Email</th>\n                                        <th i18n>Full Name</th>\n                                        <th i18n>Role</th>\n                                        <!--<th i18n>Mobile</th>-->\n                                        <th i18n>Verified</th>\n                                        <th i18n>Status</th>\n                                        <th class=\"text-right\" i18n>Actions</th>\n                                    </tr>\n                                </thead>\n                                <tbody>\n                                    <tr *ngFor=\"let obj of utilityService._.values(PaymentTransactionDetailsArray)\">\n                                        <td class=\"d-none\">{{obj._id}}</td>\n                                        <td>{{obj.emailAddress}}</td>\n                                        <td>{{obj.firstName}}&nbsp;{{obj.middleName}}&nbsp;{{obj.lastName}}</td>\n                                        <td class=\"text-capitalize\">{{obj.role}}</td>\n                                        <!--<td>{{obj.mobileNo}}</td>-->\n                                        <td>\n                                            <div\n                                                *ngIf=\"returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id\">\n                                                <div *ngIf=\"!obj.isDeleted\">\n                                                    <span [ngSwitch]=\"obj.isVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\">Blocked</i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\">Verified</i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-danger font-weight-light\">Pending</i>\n                                                    </span>\n                                                    <!--\n                                                <span i18n *ngIf=\"!obj.isVerified\"\n                                                    class=\"btn text-white badge badge-danger font-weight-light\">\n                                                    Pending\n                                                </span>\n                                                <span i18n *ngIf=\"obj.isVerified\"\n                                                    class=\"badge badge-success font-weight-light\">\n                                                    Approved\n                                                </span>\n                                            -->\n                                                </div>\n                                                <div *ngIf=\"obj.isDeleted\">\n                                                    <span class=\"btn text-white badge badge-danger font-weight-light\"\n                                                        i18n>\n                                                        Deleted\n                                                    </span>\n                                                </div>\n                                            </div>\n                                        </td>\n                                        <td>\n                                            <div *ngIf=\"!obj.isDeleted\">\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.myPassportMedia).length>0\">\n                                                    <span [ngSwitch]=\"obj.myPassportMediaVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">Passport </i>\n                                                    </span>\n                                                </div>\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.myDLMedia).length>0\">\n                                                    <span [ngSwitch]=\"obj.myDLMediaVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">DL </i>\n                                                    </span>\n                                                </div>\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.myHICardMedia).length>0\">\n                                                    <span [ngSwitch]=\"obj.myHICardMediaVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">HI </i>\n                                                    </span>\n                                                </div>\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.myRKIMedia).length>0\">\n                                                    <span [ngSwitch]=\"obj.myRKIMediaVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">RKI</i>\n                                                    </span>\n                                                </div>\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.externalAppLinks).length>0\">\n                                                    <span [ngSwitch]=\"obj.externalAppLinksVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">Facebook</i>\n                                                    </span>\n                                                </div>\n\n\n                                            </div>\n                                        </td>\n                                        <td class=\"text-left\">\n                                            <div\n                                                *ngIf=\"!obj.isDeleted && returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id\">\n                                                <button *ngIf=\"obj.isVerified==1 && returnT4CurrentUserIsSAdmin()\"\n                                                    class=\"btn btn-success btn-sm btn-xs mr-1\"\n                                                    (click)=\"navigate2EditUser(obj._id)\" data-title=\"Edit\">\n                                                    <i class=\"icon-pencil\"></i>\n                                                </button>\n                                                <button class=\"btn btn-success btn-sm btn-xs mr-1\"\n                                                    (click)=\"usersProfile(obj)\" data-title=\"View User Details\">\n                                                    <i class=\"icon-user\"></i>\n                                                </button>\n\n                                                <button *ngIf=\"obj.role==Role.Borrower\"\n                                                    class=\"btn btn-success btn-sm btn-xs mr-1\"\n                                                    (click)=\"usersIncomeExpenseDetails(obj)\"\n                                                    data-title=\"Income Proof and Monthly Expenses Details\">\n                                                    <i class=\"icon-receipt\"></i>\n                                                </button>\n\n                                                <button *ngIf=\"obj.isVerified==1\"\n                                                    class=\"btn btn-warning btn-sm btn-xs mr-1\" data-title=\"Block User\"\n                                                    (click)=\"usersRestrictionModal(obj, 2)\">\n                                                    <i class=\"icon-lock\"></i>\n                                                </button>\n                                                <button *ngIf=\"!obj.isVerified || obj.isVerified==2\"\n                                                    class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verify User\"\n                                                    (click)=\"usersRestrictionModal(obj, 1)\">\n                                                    <i class=\"icon-unlock\"></i>\n                                                </button>\n\n\n                                                <button class=\"btn btn-danger btn-sm btn-xs\"\n                                                    (click)=\"deleteUserById(obj._id)\" data-title=\"Delete\">\n                                                    <i class=\"icon-trash\"></i>\n                                                </button>\n                                            </div>\n                                        </td>\n                                    </tr>\n\n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>");
 
 /***/ }),
 
@@ -2273,9 +2282,9 @@ let UserManagementComponent = class UserManagementComponent {
         this.recordsFiltered = 0;
         //this.getAllUsersWithRequestData();
     }
-    getAllUsersWithRequestData(_skip = 0, callback = null, dataTablesParameters = null) {
+    getAllUsersWithRequestData(_skip = 0, callback = null, dataTablesParameters = null, returnOnlyPendingT = false) {
         let _data = {};
-        this.socketService.getAllUsersWithRequestData(_data, _skip, dataTablesParameters)
+        this.socketService.getAllUsersWithRequestData(_data, _skip, dataTablesParameters, returnOnlyPendingT)
             .subscribe(data => {
             if (data && data['success']) {
                 //this.PaymentTransactionDetailsArray = this.utilityService._.uniq(this.utilityService._.union((this.PaymentTransactionDetailsArray || []), data["data"]));
@@ -2327,10 +2336,19 @@ let UserManagementComponent = class UserManagementComponent {
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])())
             .subscribe(data => {
             if (data && data['success']) {
-                let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
-                usersObjArr[data["data"]["_id"]] = data["data"];
-                this.PaymentTransactionDetailsArray = usersObjArr;
+                let i = 0;
+                this.PaymentTransactionDetailsArray.forEach((item) => {
+                    if (item._id == data["data"]["_id"]) {
+                        this.PaymentTransactionDetailsArray.splice(i, 1, data["data"]);
+                        return;
+                    }
+                    i++;
+                });
                 this.populateUsersDataInTable();
+                /*let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+                usersObjArr[data["data"]["_id"]] = data["data"]
+                this.PaymentTransactionDetailsArray = usersObjArr;
+                this.populateUsersDataInTable();*/
                 //this.rerender();
                 this.alertService.success(data['message']);
                 this.loading = false;
@@ -2364,10 +2382,21 @@ let UserManagementComponent = class UserManagementComponent {
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])())
             .subscribe(data => {
             if (data && data['success']) {
+                let i = 0;
+                this.PaymentTransactionDetailsArray.forEach((item) => {
+                    if (item._id == _userId) {
+                        this.PaymentTransactionDetailsArray.splice(i, 1, null);
+                        return;
+                    }
+                    i++;
+                });
+                this.populateUsersDataInTable();
+                /*
                 let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
                 delete usersObjArr[_userId];
                 this.PaymentTransactionDetailsArray = usersObjArr;
                 this.populateUsersDataInTable();
+                */
                 //this.rerender();
                 this.alertService.success(data['message']);
                 this.loading = false;
@@ -2410,11 +2439,21 @@ let UserManagementComponent = class UserManagementComponent {
         });
         dialogRef.afterClosed().subscribe(result => {
             if (result && result.data) {
+                let i = 0;
+                this.PaymentTransactionDetailsArray.forEach((item) => {
+                    if (item._id == result.data["_id"]) {
+                        this.PaymentTransactionDetailsArray.splice(i, 1, result.data);
+                        return;
+                    }
+                    i++;
+                });
+                /*
                 let _userId = result.data._id;
                 let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
                 delete usersObjArr[_userId];
                 usersObjArr[_userId] = result.data;
                 this.PaymentTransactionDetailsArray = usersObjArr;
+                */
             }
             //console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
         });
@@ -2572,9 +2611,19 @@ let UserManagementComponent = class UserManagementComponent {
         });
         dialogRef.afterClosed().subscribe(result => {
             if (result && result.data && result.data["_id"]) {
-                let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
-                usersObjArr[result.data["_id"]] = result.data;
-                this.PaymentTransactionDetailsArray = usersObjArr;
+                let i = 0;
+                this.PaymentTransactionDetailsArray.forEach((item) => {
+                    if (item._id == result.data["_id"]) {
+                        this.PaymentTransactionDetailsArray.splice(i, 1, result.data);
+                        return;
+                    }
+                    i++;
+                });
+                /*
+                        let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+                        usersObjArr[result.data["_id"]] = result.data;
+                        this.PaymentTransactionDetailsArray = usersObjArr;
+                        */
                 this.populateUsersDataInTable();
             }
             //console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
@@ -3495,11 +3544,11 @@ let HomeComponent = class HomeComponent {
         this.getAdminDashboardDataOnLogin();
         let _adminUsersArray = [];
         _adminUsersArray.push(this.authenticationService.currentUserValue._id);
-        let _currentContactObjAll = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'System', 'app-system-group', 'app-system-group', _adminUsersArray, null, null, [src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Admin, src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Borrower, src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Lender], false);
+        let _currentContactObjAll = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'System', 'app-system-group', 'app-system-group', _adminUsersArray, null, null, [src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Admin, src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Borrower, src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Lender], true);
         this.socketService.sendEventToAddNewContact(_currentContactObjAll);
-        let _currentContactObjLender = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'Avitii Lending(L)', 'app-system-group-lenders', 'app-system-group-lenders', _adminUsersArray, null, null, [src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Admin, src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Lender], false);
+        let _currentContactObjLender = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'Avitii Lending(L)', 'app-system-group-lenders', 'app-system-group-lenders', _adminUsersArray, null, null, [src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Admin, src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Lender], true);
         this.socketService.sendEventToAddNewContact(_currentContactObjLender);
-        let _currentContactObjBorrower = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'Avitii Lending(B)', 'app-system-group-borrower', 'app-system-group-borrower', _adminUsersArray, null, null, [src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Admin, src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Borrower], false);
+        let _currentContactObjBorrower = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, 'Avitii Lending(B)', 'app-system-group-borrower', 'app-system-group-borrower', _adminUsersArray, null, null, [src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Admin, src_app_models__WEBPACK_IMPORTED_MODULE_4__["Role"].Borrower], true);
         this.socketService.sendEventToAddNewContact(_currentContactObjBorrower);
     }
     getAdminDashboardDataOnLogin() {
@@ -3932,6 +3981,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _partners_partners_component__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./partners/partners.component */ "hu3n");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
 /* harmony import */ var _kolkov_angular_editor__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @kolkov/angular-editor */ "mUB+");
+/* harmony import */ var _user_management_pending_user_management_pending_component__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./user-management-pending/user-management-pending.component */ "joR3");
+
 
 
 
@@ -3961,7 +4012,7 @@ let AdminModule = class AdminModule {
 };
 AdminModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [_admin_component__WEBPACK_IMPORTED_MODULE_6__["AdminComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_7__["HomeComponent"], _header_header_component__WEBPACK_IMPORTED_MODULE_8__["HeaderComponent"], _footer_footer_component__WEBPACK_IMPORTED_MODULE_9__["FooterComponent"], _services_services_component__WEBPACK_IMPORTED_MODULE_10__["ServicesComponent"], _service_types_add_service_types_add_component__WEBPACK_IMPORTED_MODULE_11__["ServiceTypesAddComponent"], _user_management_user_management_component__WEBPACK_IMPORTED_MODULE_12__["UserManagementComponent"], _payment_transactions_payment_transactions_component__WEBPACK_IMPORTED_MODULE_13__["PaymentTransactionsComponent"], _borrower_earnings_borrower_earnings_component__WEBPACK_IMPORTED_MODULE_14__["BorrowerEarningsComponent"], _add_user_add_user_component__WEBPACK_IMPORTED_MODULE_16__["AddUserComponent"], _user_levels_user_levels_component__WEBPACK_IMPORTED_MODULE_18__["UserLevelsComponent"], _blogs_blogs_component__WEBPACK_IMPORTED_MODULE_19__["BlogsComponent"], _loan_payment_loan_payment_component__WEBPACK_IMPORTED_MODULE_20__["LoanPaymentComponent"], _customer_review_customer_review_component__WEBPACK_IMPORTED_MODULE_21__["CustomerReviewComponent"], _partners_partners_component__WEBPACK_IMPORTED_MODULE_22__["PartnersComponent"]],
+        declarations: [_admin_component__WEBPACK_IMPORTED_MODULE_6__["AdminComponent"], _home_home_component__WEBPACK_IMPORTED_MODULE_7__["HomeComponent"], _header_header_component__WEBPACK_IMPORTED_MODULE_8__["HeaderComponent"], _footer_footer_component__WEBPACK_IMPORTED_MODULE_9__["FooterComponent"], _services_services_component__WEBPACK_IMPORTED_MODULE_10__["ServicesComponent"], _service_types_add_service_types_add_component__WEBPACK_IMPORTED_MODULE_11__["ServiceTypesAddComponent"], _user_management_user_management_component__WEBPACK_IMPORTED_MODULE_12__["UserManagementComponent"], _payment_transactions_payment_transactions_component__WEBPACK_IMPORTED_MODULE_13__["PaymentTransactionsComponent"], _borrower_earnings_borrower_earnings_component__WEBPACK_IMPORTED_MODULE_14__["BorrowerEarningsComponent"], _add_user_add_user_component__WEBPACK_IMPORTED_MODULE_16__["AddUserComponent"], _user_levels_user_levels_component__WEBPACK_IMPORTED_MODULE_18__["UserLevelsComponent"], _blogs_blogs_component__WEBPACK_IMPORTED_MODULE_19__["BlogsComponent"], _loan_payment_loan_payment_component__WEBPACK_IMPORTED_MODULE_20__["LoanPaymentComponent"], _customer_review_customer_review_component__WEBPACK_IMPORTED_MODULE_21__["CustomerReviewComponent"], _partners_partners_component__WEBPACK_IMPORTED_MODULE_22__["PartnersComponent"], _user_management_pending_user_management_pending_component__WEBPACK_IMPORTED_MODULE_25__["UserManagementPendingComponent"]],
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
             _admin_routing_module__WEBPACK_IMPORTED_MODULE_5__["AdminRoutingModule"],
@@ -3973,6 +4024,455 @@ AdminModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         ]
     })
 ], AdminModule);
+
+
+
+/***/ }),
+
+/***/ "joR3":
+/*!************************************************************************************!*\
+  !*** ./src/app/admin/user-management-pending/user-management-pending.component.ts ***!
+  \************************************************************************************/
+/*! exports provided: UserManagementPendingComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UserManagementPendingComponent", function() { return UserManagementPendingComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_user_management_pending_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./user-management-pending.component.html */ "xwQy");
+/* harmony import */ var _user_management_pending_component_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./user-management-pending.component.css */ "o7O4");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "fXoL");
+/* harmony import */ var src_app_socketio_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/socketio.service */ "bgkY");
+/* harmony import */ var src_app_services__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/services */ "o0su");
+/* harmony import */ var src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/services/utility.service */ "A1CT");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! rxjs/operators */ "kU1M");
+/* harmony import */ var src_app_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! src/app/shared/public-profile/public-profile.component */ "bLZ2");
+/* harmony import */ var _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/material/dialog */ "0IaG");
+/* harmony import */ var src_app_models_role__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! src/app/models/role */ "z56L");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/router */ "tyNb");
+/* harmony import */ var angular_datatables__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! angular-datatables */ "njyG");
+/* harmony import */ var rxjs_internal_Subject__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! rxjs/internal/Subject */ "ds6q");
+/* harmony import */ var rxjs_internal_Subject__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(rxjs_internal_Subject__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var src_app_shared_income_proof_income_proof_component__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! src/app/shared/income-proof/income-proof.component */ "KRlv");
+/* harmony import */ var src_app_shared_user_restriction_details_user_restriction_details_component__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! src/app/shared/user-restriction-details/user-restriction-details.component */ "arha");
+/* harmony import */ var src_app_services_user_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! src/app/services/user.service */ "qfBg");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var that;
+let UserManagementPendingComponent = class UserManagementPendingComponent {
+    constructor(dialog, socketService, alertService, utilityService, authenticationService, router, elementRef, userService) {
+        this.dialog = dialog;
+        this.socketService = socketService;
+        this.alertService = alertService;
+        this.utilityService = utilityService;
+        this.authenticationService = authenticationService;
+        this.router = router;
+        this.elementRef = elementRef;
+        this.userService = userService;
+        this.dtTrigger = new rxjs_internal_Subject__WEBPACK_IMPORTED_MODULE_13__["Subject"]();
+        this.dtOptions = {};
+        this.PaymentTransactionDetailsArray = null;
+        this.loading = false;
+        this.Role = src_app_models_role__WEBPACK_IMPORTED_MODULE_10__["Role"];
+        this.recordsTotal = 0;
+        this.nextPageIndex = 0;
+        this.totalPages = 0;
+        this.limit4Filtered = 0;
+        this.recordsFiltered = 0;
+        //this.getAllUsersWithRequestData();
+    }
+    getAllUsersWithRequestData(_skip = 0, callback = null, dataTablesParameters = null, returnOnlyPendingT = true) {
+        let _data = {};
+        this.socketService.getAllUsersWithRequestData(_data, _skip, dataTablesParameters, returnOnlyPendingT)
+            .subscribe(data => {
+            if (data && data['success']) {
+                //this.PaymentTransactionDetailsArray = this.utilityService._.uniq(this.utilityService._.union((this.PaymentTransactionDetailsArray || []), data["data"]));
+                this.PaymentTransactionDetailsArray = data["data"];
+                this.recordsTotal = data['metaData']['totalDocs'] || 0;
+                this.nextPageIndex = data['metaData']['nextPage'] || 0;
+                this.totalPages = data['metaData']['totalPages'] || 0;
+                this.limit4Filtered = data['metaData']['limit'] || 0;
+                this.recordsFiltered = data['metaData']['recordsFiltered'] || this.recordsTotal;
+                if (callback) {
+                    callback({
+                        recordsTotal: this.recordsTotal || 0,
+                        recordsFiltered: this.recordsFiltered || 0,
+                        data: [],
+                    });
+                }
+                else {
+                    this.populateUsersDataInTable();
+                }
+                //this.rerender();
+                this.loading = false;
+            }
+            else {
+                this.alertService.error(data['message']);
+                this.loading = false;
+            }
+        }, error => {
+            let errorMsg2show = "";
+            //this.PaymentTransactionDetailsArray = [];
+            try {
+                if (error && error.error && error.error.message) {
+                    errorMsg2show = error.error.message;
+                }
+                else if (error && error.message) {
+                    errorMsg2show = error.message;
+                }
+                else {
+                    errorMsg2show = error;
+                }
+            }
+            catch (ex) { }
+            this.alertService.error(errorMsg2show);
+            this.loading = false;
+        });
+    }
+    updateUsersVerificationStatus(_userId, _isVerified) {
+        this.alertService.success("Please wait while we updating status of user");
+        this.socketService.updateUsersVerificationStatus(_userId, _isVerified)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])())
+            .subscribe(data => {
+            if (data && data['success']) {
+                let i = 0;
+                this.PaymentTransactionDetailsArray.forEach((item) => {
+                    if (item._id == data["data"]["_id"]) {
+                        this.PaymentTransactionDetailsArray.splice(i, 1, data["data"]);
+                        return;
+                    }
+                    i++;
+                });
+                this.populateUsersDataInTable();
+                /*let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+                usersObjArr[data["data"]["_id"]] = data["data"]
+                this.PaymentTransactionDetailsArray = usersObjArr;
+                this.populateUsersDataInTable();*/
+                //this.rerender();
+                this.alertService.success(data['message']);
+                this.loading = false;
+            }
+            else {
+                this.alertService.error(data['message']);
+                this.loading = false;
+            }
+        }, error => {
+            let errorMsg2show = "";
+            //this.PaymentTransactionDetailsArray = [];
+            try {
+                if (error && error.error && error.error.message) {
+                    errorMsg2show = error.error.message;
+                }
+                else if (error && error.message) {
+                    errorMsg2show = error.message;
+                }
+                else {
+                    errorMsg2show = error;
+                }
+            }
+            catch (ex) { }
+            this.alertService.error(errorMsg2show);
+            this.loading = false;
+        });
+    }
+    deleteUserById(_userId) {
+        this.alertService.success("Please wait while we deleting user");
+        this.socketService.deleteUserById(_userId, this.authenticationService.currentUserValue._id)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])())
+            .subscribe(data => {
+            if (data && data['success']) {
+                let i = 0;
+                this.PaymentTransactionDetailsArray.forEach((item) => {
+                    if (item._id == _userId) {
+                        this.PaymentTransactionDetailsArray.splice(i, 1, null);
+                        return;
+                    }
+                    i++;
+                });
+                this.populateUsersDataInTable();
+                /*
+                let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+                delete usersObjArr[_userId];
+                this.PaymentTransactionDetailsArray = usersObjArr;
+                this.populateUsersDataInTable();
+                */
+                //this.rerender();
+                this.alertService.success(data['message']);
+                this.loading = false;
+            }
+            else {
+                this.alertService.error(data['message']);
+                this.loading = false;
+            }
+        }, error => {
+            let errorMsg2show = "";
+            //this.PaymentTransactionDetailsArray = [];
+            try {
+                if (error && error.error && error.error.message) {
+                    errorMsg2show = error.error.message;
+                }
+                else if (error && error.message) {
+                    errorMsg2show = error.message;
+                }
+                else {
+                    errorMsg2show = error;
+                }
+            }
+            catch (ex) { }
+            this.alertService.error(errorMsg2show);
+            this.loading = false;
+        });
+    }
+    usersProfile(userObj) {
+        //console.log('95', this.authenticationService.currentUserValue);
+        const dialogRef = this.dialog.open(src_app_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_8__["PublicProfileComponent"], {
+            maxWidth: '100vw',
+            maxHeight: '100vh',
+            height: '100%',
+            width: '100%',
+            hasBackdrop: true,
+            data: {
+                userObj: userObj,
+                adminViewT: true
+            }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result && result.data) {
+                let i = 0;
+                this.PaymentTransactionDetailsArray.forEach((item) => {
+                    if (item._id == result.data["_id"]) {
+                        this.PaymentTransactionDetailsArray.splice(i, 1, result.data);
+                        return;
+                    }
+                    i++;
+                });
+                /*
+                let _userId = result.data._id;
+                let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+                delete usersObjArr[_userId];
+                usersObjArr[_userId] = result.data;
+                this.PaymentTransactionDetailsArray = usersObjArr;
+                */
+            }
+            //console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+        });
+    }
+    returnT4CurrentUserIsSAdmin() {
+        try {
+            if (this.authenticationService.currentUserValue.appPermissions && this.authenticationService.currentUserValue.appPermissions.indexOf(src_app_models_role__WEBPACK_IMPORTED_MODULE_10__["AppAccessPermissions"].adminAddEdit) > -1) {
+                return true;
+            }
+        }
+        catch (ex) {
+        }
+        return false;
+    }
+    returnT4CurrentUserAllowedToShow(currentUserRole) {
+        if (this.returnT4CurrentUserIsSAdmin()) {
+            return true;
+        }
+        if (currentUserRole != src_app_models_role__WEBPACK_IMPORTED_MODULE_10__["Role"].Admin) {
+            return true;
+        }
+        return false;
+    }
+    navigate2EditUser(userId) {
+        this.router.navigate(['/admin/add-user'], { state: { userId: userId } });
+    }
+    //#region datatable actions
+    ngOnInit() {
+        this.populateUsersDataInTable();
+    }
+    ngOnDestroy() {
+        // Do not forget to unsubscribe the event
+        this.dtTrigger.unsubscribe();
+        if (this.elementRef && this.elementRef.nativeElement && this.elementRef.nativeElement.querySelector('.paginate_button.next')) {
+            this.elementRef.nativeElement.querySelector('.paginate_button.next')
+                .removeEventListener('click', this.paginateButtonNext);
+            this.elementRef.nativeElement.querySelector('.paginate_button.last')
+                .removeEventListener('click', this.paginateButtonNext);
+        }
+    }
+    populateUsersDataInTable() {
+        that = this;
+        //this.destroyTable();
+        this.dtOptions = {
+            pagingType: 'full_numbers',
+            pageLength: 100,
+            serverSide: true,
+            processing: false,
+            ajax: (dataTablesParameters, callback) => {
+                that.getAllUsersWithRequestData((that.nextPageIndex || 1), callback, dataTablesParameters);
+                /*
+                        if ((dataTablesParameters.start + dataTablesParameters.length) < that.utilityService._.keys(that.PaymentTransactionDetailsArray).length) {
+                          //No Action here
+                          callback({
+                            recordsTotal: that.recordsTotal || 0,
+                            recordsFiltered: that.utilityService._.keys(that.PaymentTransactionDetailsArray).length || 0,
+                            data: [],
+                          });
+                
+                          //that.getAllUsersWithRequestData((that.nextPageIndex || 1), callback, dataTablesParameters);
+                        } else {
+                          that.getAllUsersWithRequestData((that.nextPageIndex || 1), callback, dataTablesParameters);
+                          //that.dtTrigger.next();
+                          //that.rerender();
+                        }
+                        */
+                /*{"draw":3,"columns":[{"data":0,"name":"_id","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":1,"name":"emailAddress","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":2,"name":"firstName","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":3,"name":"role","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":4,"name":"mobileNo","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":5,"name":"verified","searchable":true,"orderable":true,"search":{"value":"","regex":false}},{"data":6,"name":"actions","searchable":false,"orderable":false,"search":{"value":"","regex":false}}],"order":[{"column":0,"dir":"asc"}],"start":0,"length":100,"search":{"value":"oo","regex":false}}*/
+            },
+            columns: [{ "data": 0, "name": "_id", "searchable": true, "orderable": true }, { "data": 1, "name": "emailAddress", "searchable": true, "orderable": true, }, { "data": 2, "name": "firstName", "searchable": true, "orderable": true, }, { "data": 3, "name": "role", "searchable": true, "orderable": true, }, { "data": 4, "name": "mobileNo", "searchable": true, "orderable": true, }, { "data": 5, "name": "verified", "searchable": true, "orderable": true, }, { "data": 6, "name": "actions", "searchable": false, "orderable": false }]
+            /*
+                  drawCallback: () => {
+                    if (this.elementRef && this.elementRef.nativeElement && this.elementRef.nativeElement.querySelector('.paginate_button.next')) {
+                      this.elementRef.nativeElement.querySelector('.paginate_button.next')
+                        .addEventListener('click', this.paginateButtonNext);
+                      this.elementRef.nativeElement.querySelector('.paginate_button.last')
+                        .addEventListener('click', this.paginateButtonNext);
+                    }
+                  }
+                  */
+        };
+        //this.dtTrigger.next();
+        //this.rerender();
+    }
+    paginateButtonNext() {
+        that.getAllUsersWithRequestData((that.nextPageIndex || 1));
+    }
+    ngAfterViewInit() {
+        if (this.datatableElement && this.datatableElement.dtInstance) {
+            this.datatableElement.dtInstance.then((dtInstance) => {
+                dtInstance.columns().every(function () {
+                    const that = this;
+                    $('input', this.footer()).on('keyup change', function () {
+                        if (that.search() !== this['value']) {
+                            that
+                                .search(this['value'])
+                                .draw();
+                        }
+                    });
+                });
+            });
+        }
+    }
+    rerender() {
+        if (this.datatableElement && this.datatableElement.dtInstance) {
+            this.datatableElement.dtInstance.then((dtInstance) => {
+                // Destroy the table first
+                dtInstance.destroy();
+                // Call the dtTrigger to rerender again
+                this.dtTrigger.next();
+            });
+        }
+    }
+    destroyTable() {
+        if (this.datatableElement && this.datatableElement.dtInstance) {
+            this.datatableElement.dtInstance.then((dtInstance) => {
+                // Destroy the table first
+                dtInstance.destroy();
+            });
+        }
+    }
+    onClick(event) {
+    }
+    //#endregion datatable actions
+    usersIncomeExpenseDetails(userObj) {
+        //console.log('241', this.authenticationService.currentUserValue);
+        const dialogRef = this.dialog.open(src_app_shared_income_proof_income_proof_component__WEBPACK_IMPORTED_MODULE_14__["IncomeProofComponent"], {
+            maxWidth: '100vw',
+            maxHeight: '100vh',
+            height: '100%',
+            width: '100%',
+            hasBackdrop: true,
+            data: {
+                userObj: userObj,
+                isOpenedInModel: true,
+                adminViewT: true
+            }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            //console.log(`256 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+        });
+    }
+    usersRestrictionModal(userObj, isVerified) {
+        const dialogRef = this.dialog.open(src_app_shared_user_restriction_details_user_restriction_details_component__WEBPACK_IMPORTED_MODULE_15__["UserRestrictionDetailsComponent"], {
+            maxWidth: '100vw',
+            maxHeight: '100vh',
+            height: '100%',
+            width: '100%',
+            hasBackdrop: true,
+            data: {
+                userObj: userObj,
+                adminViewT: true,
+                isVerified: isVerified,
+                isOpenedInModel: true
+            }
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            if (result && result.data && result.data["_id"]) {
+                let i = 0;
+                this.PaymentTransactionDetailsArray.forEach((item) => {
+                    if (item._id == result.data["_id"]) {
+                        this.PaymentTransactionDetailsArray.splice(i, 1, result.data);
+                        return;
+                    }
+                    i++;
+                });
+                /*
+                        let usersObjArr = this.utilityService._.mapKeys(this.PaymentTransactionDetailsArray, '_id');
+                        usersObjArr[result.data["_id"]] = result.data;
+                        this.PaymentTransactionDetailsArray = usersObjArr;
+                        */
+                this.populateUsersDataInTable();
+            }
+            //console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+        });
+    }
+};
+UserManagementPendingComponent.ctorParameters = () => [
+    { type: _angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialog"] },
+    { type: src_app_socketio_service__WEBPACK_IMPORTED_MODULE_4__["SocketioService"] },
+    { type: src_app_services__WEBPACK_IMPORTED_MODULE_5__["AlertService"] },
+    { type: src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_6__["UtilityService"] },
+    { type: src_app_services__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_11__["Router"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ElementRef"] },
+    { type: src_app_services_user_service__WEBPACK_IMPORTED_MODULE_16__["UserService"] }
+];
+UserManagementPendingComponent.propDecorators = {
+    datatableElement: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_3__["ViewChild"], args: [angular_datatables__WEBPACK_IMPORTED_MODULE_12__["DataTableDirective"], { static: false },] }]
+};
+UserManagementPendingComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
+        selector: 'app-user-management-pending',
+        template: _raw_loader_user_management_pending_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+        styles: [_user_management_pending_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
+    }),
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_material_dialog__WEBPACK_IMPORTED_MODULE_9__["MatDialog"],
+        src_app_socketio_service__WEBPACK_IMPORTED_MODULE_4__["SocketioService"],
+        src_app_services__WEBPACK_IMPORTED_MODULE_5__["AlertService"],
+        src_app_services_utility_service__WEBPACK_IMPORTED_MODULE_6__["UtilityService"],
+        src_app_services__WEBPACK_IMPORTED_MODULE_5__["AuthenticationService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_11__["Router"],
+        _angular_core__WEBPACK_IMPORTED_MODULE_3__["ElementRef"],
+        src_app_services_user_service__WEBPACK_IMPORTED_MODULE_16__["UserService"]])
+], UserManagementPendingComponent);
 
 
 
@@ -5751,6 +6251,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "o7O4":
+/*!*************************************************************************************!*\
+  !*** ./src/app/admin/user-management-pending/user-management-pending.component.css ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJ1c2VyLW1hbmFnZW1lbnQtcGVuZGluZy5jb21wb25lbnQuY3NzIn0= */");
+
+/***/ }),
+
 /***/ "rCAk":
 /*!************************************************************************!*\
   !*** ./src/app/admin/borrower-earnings/borrower-earnings.component.ts ***!
@@ -5946,7 +6459,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<ul  class=\"navbar-nav bg-gradient-primary sidebar sidebar-dark accordion navbar_side_panel\" id=\"accordionSidebar\">\n\n    <!-- Sidebar - Brand -->\n    <a class=\"sidebar-brand d-flex align-items-center justify-content-center\">\n        <img class=\"img-fluid\" src=\"./assets/img/avitii-logo.png\">\n    </a>\n\n    <!-- Divider -->\n    <hr class=\"sidebar-divider my-0\">\n    <div class=\"text-white text-center mt-2\">\n        <a class=\"mr-1 small text-white\" href=\"/en\">English</a> |\n        <a href=\"/da\" class=\"ml-1 small text-white\">Dansk</a>\n    </div>\n    <!-- Nav Item - Dashboard -->\n    <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/admin\">\n            <i class=\"icon icon-home\"></i>\n            <span i18n>Dashboard</span>\n            <!--\n            <span>&nbsp;{{authenticationService.currentUserValue.lastLoginTime | date:'dd-MMM-YYYY HH:mm'}}</span>\n            -->\n        </a>\n    </li>\n\n    <!-- Divider -->\n    <hr class=\"sidebar-divider\">\n\n    <!-- Heading -->\n    <!-- <div class=\"sidebar-heading\">\n        Interface\n    </div> -->\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/users\" routerLinkActive=\"active\">\n            <i class=\"icon icon-user\"></i>\n            <span i18n>User Mangement</span></a>\n    </li>\n    <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/add-user\" routerLinkActive=\"active\">\n            <i class=\"icon icon-bag\"></i>\n            <span>Add User</span></a>\n    </li> -->\n   \n    <li class=\"nav-item\">\n        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\" aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n            <i class=\"icon icon-credit-card\"></i>\n            <span i18n>Transactions</span>\n        </a>\n        <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">\n            <div class=\"bg-white py-2 collapse-inner rounded\">\n               \n                <a class=\"collapse-item\" (click)=\"navigate2State('/admin/payments',{'transactionActionType':TransactionActionType.plan_purchase})\" routerLinkActive=\"active\" i18n>Plan Purchase</a>\n                <a class=\"collapse-item\" (click)=\"navigate2State('/admin/payments',{'transactionActionType':TransactionActionType.insurance_purchase})\" routerLinkActive=\"active\" i18n>Insurance Purchase</a>\n              \n            </div>\n        </div>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/loan-pay\" routerLinkActive=\"active\">\n            <i class=\"icon icon-money\"></i>\n            <span i18n>Pending Loans</span></a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-comments\"></i>\n            <span i18n>Messages</span></a>\n            <span *ngIf=\"messagesService.returnTotalPendingMessagesForUser()>0\" class=\"badge badge-success float-right font-weight-lighter text-capitalize\" i18n> {{messagesService.returnTotalPendingMessagesForUser()}}</span>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/user-levels\" routerLinkActive=\"active\">\n            <i class=\"icon icon-medall-alt\"></i>\n            <span i18n>User Levels</span></a>\n    </li>\n\n    \n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/blogs\" routerLinkActive=\"active\">\n            <i class=\"icon icon-clipboard\"></i>\n            <span i18n>Blogs</span></a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/customer-review\" routerLinkActive=\"active\">\n            <i class=\"icon icon-clipboard\"></i>\n            <span i18n>Customer Review</span></a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/partners\" routerLinkActive=\"active\">\n            <i class=\"icon icon-clipboard\"></i>\n            <span i18n>Partners</span></a>\n    </li>\n \n    <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-comments\"></i>\n            <span>Messages</span></a>\n    </li>\n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\"  routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-calendar\"></i>\n            <span>Calendar</span></a>\n    </li>\n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\"  routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-star\"></i>\n            <span>My Ratings</span></a>\n    </li> -->\n\n    <!-- <li class=\"nav-item\">\n        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapsePages\" aria-expanded=\"true\" aria-controls=\"collapsePages\">\n            <i class=\"icon icon-settings\"></i>\n            <span>Settings</span>\n        </a>\n        <div id=\"collapsePages\" class=\"collapse\" aria-labelledby=\"headingPages\" data-parent=\"#accordionSidebar\">\n            <div class=\"bg-white py-2 collapse-inner rounded\">\n             \n                <a class=\"collapse-item\" routerLink=\"/lender/profile\">My Profile</a>\n                <a class=\"collapse-item\" href=\"register.html\">Change Password</a>\n                <a class=\"collapse-item\" href=\"forgot-password.html\">Bank Details</a>\n                <a class=\"collapse-item\" href=\"forgot-password.html\">Payment Agreement</a>\n               \n            </div>\n        </div>\n    </li> -->\n\n \n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/logout\">\n            <i class=\"icon icon-flickr-alt\"></i>\n            <span i18n>Logout</span></a>\n    </li>\n\n    <!-- Divider -->\n    <!-- <hr class=\"sidebar-divider d-none d-md-block\"> -->\n\n    <!-- Sidebar Toggler (Sidebar) -->\n    <!-- <div class=\"text-center d-none d-md-inline\">\n        <button class=\"rounded-circle border-0\" id=\"sidebarToggle\"></button>\n    </div> -->\n\n\n</ul>\n\n<div class=\"sidebar_overlay navbar_side_panel btn-back\" ></div>\n\n\n\n\n<!-- Nav Start [ngClass]=\"{'dark position-relative' : (router.url!='/')}\"-->\n<header id=\"custom-header-nav\" class=\"ecommerce nav-fix shadow-sm p-0 hide-lg\">\n    \n        <div class=\"row\">\n            <div class=\"col\">\n                <nav>\n                    <div class=\"responsive-btn ml-1\">\n                        <a class=\"toggle-nav\"><i aria-hidden=\"true\" class=\"icon-align-center\"></i></a>\n                    </div>\n                    <a class=\"logo-light\" routerLink=\"/home\">\n                        <img class=\"img-fluid\" src=\"./assets/img/avitii-logo-purple.png\"></a>\n\n                    <!-- <div class=\"navbar navbar_side_panel m-l-auto p-1 btn-back\" id=\"togglebtn\">\n                     <div class=\"responsive-btn\">\n                            <h5 class=\"btn-back\">back</h5>\n                        </div> \n                        <ul class=\"main-menu\">\n                            <li><a routerLink=\"/lender\">Home</a></li>\n\n                            <li><a routerLink=\"/lender/search-consulatnt\" routerLinkActive=\"active\">Search</a></li>\n                            <li><a routerLink=\"/lender/my-contract\" routerLinkActive=\"active\">My Contract</a></li>\n                            <li><a routerLink=\"/lender/make-a-loan\" routerLinkActive=\"active\"><i class=\"icon-plus\"></i>\n                                    Make a Loan</a></li>\n\n                        </ul>\n                    </div> -->\n                    <div class=\"top-header-right mr-1\">\n                        <ul>\n\n                            <!-- <li class=\"cart\">\n                                <a aria-expanded=\"false\" routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n                                    <i class=\"icon-comment-alt\"></i>\n                                </a>\n\n                            </li>\n                            <li class=\"cart\">\n                                <a aria-expanded=\"false\" data-toggle=\"dropdown\" href=\"#\" id=\"dropdownMenuButton1\">\n                                    <i class=\"icon-bell bell\"></i>\n                                    <span *ngIf=\"(utilityService._.keys(notificationService.appNotifications).length)>0\"\n                                        class=\"badge badge-primary bell-count\"\n                                        [textContent]=\"utilityService._.keys(notificationService.appNotifications).length\"></span>\n                                </a>\n                                <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\"\n                                    x-placement=\"bottom-end\"\n                                    style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\n                                    <ul class=\"shopping-cart list-group list-group-flush\">\n                                        <li class=\"list-group-item\"\n                                            *ngFor=\"let notification of utilityService._.values(notificationService.appNotifications)\">\n                                            <div class=\"pb-2\">\n                                                <div class=\"mb-1\">{{notification.message}}&nbsp;<a\n                                                        class=\"float-lg-right font-large text-danger\"\n                                                        (click)=\"notificationService.check4Notification(notification)\"><i\n                                                            class=\"icon-close\" style=\"font-size: 0.6rem;\"></i></a></div>\n                                                <div class=\"font-weight-light small mb-1\">{{notification.description}}\n                                                </div>\n                                            </div>\n                                        </li>\n\n\n                                        <li class=\"no-item text-center\">\n                                            <h4 class=\"my-4 font-weight-normal\">No Notifications</h4>\n                                        </li>\n                                    </ul>\n                                </div>\n                            </li> -->\n                            <li class=\"cart\">\n                                <a aria-expanded=\"false\" data-toggle=\"dropdown\"  id=\"dropdownMenuButton1\">\n                                    <!-- <img class=\"userimg mt-n2\" src=\"./assets/img/user-default.png\"> -->\n                                    <i class=\"icon icon-user\"></i>\n                                </a>\n                                <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\"\n                                    x-placement=\"bottom-end\"\n                                    style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\n                                    <ul class=\"shopping-cart\">\n                                        <li>\n                                            <a class=\"h6 d-block\" routerLink=\"/lender\">\n                                                {{currentUser.firstName}}\n                                                <span class=\"badge badge-primary float-right\"\n                                                    [textContent]=\"currentUser.role\" i18n> Borrower</span>\n                                            </a>\n                                        </li>\n\n                                        <!-- <li>\n                                            <a class=\"d-block\" routerLink=\"/lender/wallet\">Wallet\n                                                <span\n                                                    class=\"badge badge-success float-right\">${{fundService.totalFund4currentUser}}</span>\n                                            </a>\n                                        </li> -->\n                                        <li><a routerLink=\"/lender/profile\" i18n>Profile</a></li>\n                                        <hr>\n                                        <li>\n                                            <a routerLink=\"/logout\" i18n>Logout</a>\n                                        </li>\n                                    </ul>\n                                </div>\n\n                            </li>\n                        </ul>\n                    </div>\n                    \n                    <div class=\"sidebar_overlay navbar_side_panel btn-back\" style=\"display: none;\"></div>\n                </nav>\n            </div>\n        </div>\n   \n</header>\n<!-- Nav end-->");
+/* harmony default export */ __webpack_exports__["default"] = ("<ul  class=\"navbar-nav bg-gradient-primary sidebar sidebar-dark accordion navbar_side_panel\" id=\"accordionSidebar\">\n\n    <!-- Sidebar - Brand -->\n    <a class=\"sidebar-brand d-flex align-items-center justify-content-center\">\n        <img class=\"img-fluid\" src=\"./assets/img/avitii-logo.png\">\n    </a>\n\n    <!-- Divider -->\n    <hr class=\"sidebar-divider my-0\">\n    <div class=\"text-white text-center mt-2\">\n        <a class=\"mr-1 small text-white\" href=\"/en\">English</a> |\n        <a href=\"/da\" class=\"ml-1 small text-white\">Dansk</a>\n    </div>\n    <!-- Nav Item - Dashboard -->\n    <li class=\"nav-item active\">\n        <a class=\"nav-link\" routerLink=\"/admin\">\n            <i class=\"icon icon-home\"></i>\n            <span i18n>Dashboard</span>\n            <!--\n            <span>&nbsp;{{authenticationService.currentUserValue.lastLoginTime | date:'dd-MMM-YYYY HH:mm'}}</span>\n            -->\n        </a>\n    </li>\n\n    <!-- Divider -->\n    <hr class=\"sidebar-divider\">\n\n    <!-- Heading -->\n    <!-- <div class=\"sidebar-heading\">\n        Interface\n    </div> -->\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/users\" routerLinkActive=\"active\">\n            <i class=\"icon icon-user\"></i>\n            <span i18n>User Mangement</span></a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/pending-users\" routerLinkActive=\"active\">\n            <i class=\"icon icon-user\"></i>\n            <span i18n>Pending User's</span></a>\n    </li>\n    <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/add-user\" routerLinkActive=\"active\">\n            <i class=\"icon icon-bag\"></i>\n            <span>Add User</span></a>\n    </li> -->\n   \n    <li class=\"nav-item\">\n        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\" aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n            <i class=\"icon icon-credit-card\"></i>\n            <span i18n>Transactions</span>\n        </a>\n        <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">\n            <div class=\"bg-white py-2 collapse-inner rounded\">\n               \n                <a class=\"collapse-item\" (click)=\"navigate2State('/admin/payments',{'transactionActionType':TransactionActionType.plan_purchase})\" routerLinkActive=\"active\" i18n>Plan Purchase</a>\n                <a class=\"collapse-item\" (click)=\"navigate2State('/admin/payments',{'transactionActionType':TransactionActionType.insurance_purchase})\" routerLinkActive=\"active\" i18n>Insurance Purchase</a>\n              \n            </div>\n        </div>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/loan-pay\" routerLinkActive=\"active\">\n            <i class=\"icon icon-money\"></i>\n            <span i18n>Pending Loans</span></a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-comments\"></i>\n            <span i18n>Messages</span></a>\n            <span *ngIf=\"messagesService.returnTotalPendingMessagesForUser()>0\" class=\"badge badge-success float-right font-weight-lighter text-capitalize\" i18n> {{messagesService.returnTotalPendingMessagesForUser()}}</span>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/user-levels\" routerLinkActive=\"active\">\n            <i class=\"icon icon-medall-alt\"></i>\n            <span i18n>User Levels</span></a>\n    </li>\n\n    \n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/blogs\" routerLinkActive=\"active\">\n            <i class=\"icon icon-clipboard\"></i>\n            <span i18n>Blogs</span></a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/customer-review\" routerLinkActive=\"active\">\n            <i class=\"icon icon-clipboard\"></i>\n            <span i18n>Customer Review</span></a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/admin/partners\" routerLinkActive=\"active\">\n            <i class=\"icon icon-clipboard\"></i>\n            <span i18n>Partners</span></a>\n    </li>\n \n    <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-comments\"></i>\n            <span>Messages</span></a>\n    </li>\n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\"  routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-calendar\"></i>\n            <span>Calendar</span></a>\n    </li>\n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\"  routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-star\"></i>\n            <span>My Ratings</span></a>\n    </li> -->\n\n    <!-- <li class=\"nav-item\">\n        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapsePages\" aria-expanded=\"true\" aria-controls=\"collapsePages\">\n            <i class=\"icon icon-settings\"></i>\n            <span>Settings</span>\n        </a>\n        <div id=\"collapsePages\" class=\"collapse\" aria-labelledby=\"headingPages\" data-parent=\"#accordionSidebar\">\n            <div class=\"bg-white py-2 collapse-inner rounded\">\n             \n                <a class=\"collapse-item\" routerLink=\"/lender/profile\">My Profile</a>\n                <a class=\"collapse-item\" href=\"register.html\">Change Password</a>\n                <a class=\"collapse-item\" href=\"forgot-password.html\">Bank Details</a>\n                <a class=\"collapse-item\" href=\"forgot-password.html\">Payment Agreement</a>\n               \n            </div>\n        </div>\n    </li> -->\n\n \n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/logout\">\n            <i class=\"icon icon-flickr-alt\"></i>\n            <span i18n>Logout</span></a>\n    </li>\n\n    <!-- Divider -->\n    <!-- <hr class=\"sidebar-divider d-none d-md-block\"> -->\n\n    <!-- Sidebar Toggler (Sidebar) -->\n    <!-- <div class=\"text-center d-none d-md-inline\">\n        <button class=\"rounded-circle border-0\" id=\"sidebarToggle\"></button>\n    </div> -->\n\n\n</ul>\n\n<div class=\"sidebar_overlay navbar_side_panel btn-back\" ></div>\n\n\n\n\n<!-- Nav Start [ngClass]=\"{'dark position-relative' : (router.url!='/')}\"-->\n<header id=\"custom-header-nav\" class=\"ecommerce nav-fix shadow-sm p-0 hide-lg\">\n    \n        <div class=\"row\">\n            <div class=\"col\">\n                <nav>\n                    <div class=\"responsive-btn ml-1\">\n                        <a class=\"toggle-nav\"><i aria-hidden=\"true\" class=\"icon-align-center\"></i></a>\n                    </div>\n                    <a class=\"logo-light\" routerLink=\"/home\">\n                        <img class=\"img-fluid\" src=\"./assets/img/avitii-logo-purple.png\"></a>\n\n                    <!-- <div class=\"navbar navbar_side_panel m-l-auto p-1 btn-back\" id=\"togglebtn\">\n                     <div class=\"responsive-btn\">\n                            <h5 class=\"btn-back\">back</h5>\n                        </div> \n                        <ul class=\"main-menu\">\n                            <li><a routerLink=\"/lender\">Home</a></li>\n\n                            <li><a routerLink=\"/lender/search-consulatnt\" routerLinkActive=\"active\">Search</a></li>\n                            <li><a routerLink=\"/lender/my-contract\" routerLinkActive=\"active\">My Contract</a></li>\n                            <li><a routerLink=\"/lender/make-a-loan\" routerLinkActive=\"active\"><i class=\"icon-plus\"></i>\n                                    Make a Loan</a></li>\n\n                        </ul>\n                    </div> -->\n                    <div class=\"top-header-right mr-1\">\n                        <ul>\n\n                            <!-- <li class=\"cart\">\n                                <a aria-expanded=\"false\" routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n                                    <i class=\"icon-comment-alt\"></i>\n                                </a>\n\n                            </li>\n                            <li class=\"cart\">\n                                <a aria-expanded=\"false\" data-toggle=\"dropdown\" href=\"#\" id=\"dropdownMenuButton1\">\n                                    <i class=\"icon-bell bell\"></i>\n                                    <span *ngIf=\"(utilityService._.keys(notificationService.appNotifications).length)>0\"\n                                        class=\"badge badge-primary bell-count\"\n                                        [textContent]=\"utilityService._.keys(notificationService.appNotifications).length\"></span>\n                                </a>\n                                <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\"\n                                    x-placement=\"bottom-end\"\n                                    style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\n                                    <ul class=\"shopping-cart list-group list-group-flush\">\n                                        <li class=\"list-group-item\"\n                                            *ngFor=\"let notification of utilityService._.values(notificationService.appNotifications)\">\n                                            <div class=\"pb-2\">\n                                                <div class=\"mb-1\">{{notification.message}}&nbsp;<a\n                                                        class=\"float-lg-right font-large text-danger\"\n                                                        (click)=\"notificationService.check4Notification(notification)\"><i\n                                                            class=\"icon-close\" style=\"font-size: 0.6rem;\"></i></a></div>\n                                                <div class=\"font-weight-light small mb-1\">{{notification.description}}\n                                                </div>\n                                            </div>\n                                        </li>\n\n\n                                        <li class=\"no-item text-center\">\n                                            <h4 class=\"my-4 font-weight-normal\">No Notifications</h4>\n                                        </li>\n                                    </ul>\n                                </div>\n                            </li> -->\n                            <li class=\"cart\">\n                                <a aria-expanded=\"false\" data-toggle=\"dropdown\"  id=\"dropdownMenuButton1\">\n                                    <!-- <img class=\"userimg mt-n2\" src=\"./assets/img/user-default.png\"> -->\n                                    <i class=\"icon icon-user\"></i>\n                                </a>\n                                <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\"\n                                    x-placement=\"bottom-end\"\n                                    style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\n                                    <ul class=\"shopping-cart\">\n                                        <li>\n                                            <a class=\"h6 d-block\" routerLink=\"/lender\">\n                                                {{currentUser.firstName}}\n                                                <span class=\"badge badge-primary float-right\"\n                                                    [textContent]=\"currentUser.role\" i18n> Borrower</span>\n                                            </a>\n                                        </li>\n\n                                        <!-- <li>\n                                            <a class=\"d-block\" routerLink=\"/lender/wallet\">Wallet\n                                                <span\n                                                    class=\"badge badge-success float-right\">${{fundService.totalFund4currentUser}}</span>\n                                            </a>\n                                        </li> -->\n                                        <li><a routerLink=\"/lender/profile\" i18n>Profile</a></li>\n                                        <hr>\n                                        <li>\n                                            <a routerLink=\"/logout\" i18n>Logout</a>\n                                        </li>\n                                    </ul>\n                                </div>\n\n                            </li>\n                        </ul>\n                    </div>\n                    \n                    <div class=\"sidebar_overlay navbar_side_panel btn-back\" style=\"display: none;\"></div>\n                </nav>\n            </div>\n        </div>\n   \n</header>\n<!-- Nav end-->");
 
 /***/ }),
 
@@ -5960,6 +6473,19 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJsb2FuLXBheW1lbnQuY29tcG9uZW50LmNzcyJ9 */");
+
+/***/ }),
+
+/***/ "xwQy":
+/*!****************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/admin/user-management-pending/user-management-pending.component.html ***!
+  \****************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"row\">\n\n    <div class=\"col-xl-12 col-md-12 mb-4\">\n        <div class=\"card shadow h-100\">\n            <div class=\"card-header\">\n                <div class=\"font-weight-bold text-primary\" i18n>User Management</div>\n            </div>\n            <div class=\"card-body\">\n                <div class=\"row\">\n\n                    <div class=\"col-xl-12 col-12 mb-4\">\n                        <div class=\"view view-cascade gradient-card-header white\">\n                            <table datatable [dtOptions]=\"dtOptions\"\n                                class=\"row-border hover table table-striped table-responsive-md btn-table\">\n                                <thead>\n                                    <tr>\n                                        <th class=\"d-none\" i18n>ID</th>\n                                        <th i18n>Email</th>\n                                        <th i18n>Full Name</th>\n                                        <th i18n>Role</th>\n                                        <!--<th i18n>Mobile</th>-->\n                                        <th i18n>Verified</th>\n                                        <th i18n>Status</th>\n                                        <th class=\"text-right\" i18n>Actions</th>\n                                    </tr>\n                                </thead>\n                                <tbody>\n                                    <tr *ngFor=\"let obj of utilityService._.values(PaymentTransactionDetailsArray)\">\n                                        <td class=\"d-none\">{{obj._id}}</td>\n                                        <td>{{obj.emailAddress}}</td>\n                                        <td>{{obj.firstName}}&nbsp;{{obj.middleName}}&nbsp;{{obj.lastName}}</td>\n                                        <td class=\"text-capitalize\">{{obj.role}}</td>\n                                        <!--<td>{{obj.mobileNo}}</td>-->\n                                        <td>\n                                            <div\n                                                *ngIf=\"returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id\">\n                                                <div *ngIf=\"!obj.isDeleted\">\n                                                    <span [ngSwitch]=\"obj.isVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\">Blocked</i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\">Verified</i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-danger font-weight-light\">Pending</i>\n                                                    </span>\n                                                    <!--\n                                                <span i18n *ngIf=\"!obj.isVerified\"\n                                                    class=\"btn text-white badge badge-danger font-weight-light\">\n                                                    Pending\n                                                </span>\n                                                <span i18n *ngIf=\"obj.isVerified\"\n                                                    class=\"badge badge-success font-weight-light\">\n                                                    Approved\n                                                </span>\n                                            -->\n                                                </div>\n                                                <div *ngIf=\"obj.isDeleted\">\n                                                    <span class=\"btn text-white badge badge-danger font-weight-light\"\n                                                        i18n>\n                                                        Deleted\n                                                    </span>\n                                                </div>\n                                            </div>\n                                        </td>\n                                        <td>\n                                            <div *ngIf=\"!obj.isDeleted\">\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.myPassportMedia).length>0\">\n                                                    <span [ngSwitch]=\"obj.myPassportMediaVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">Passport </i>\n                                                    </span>\n                                                </div>\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.myDLMedia).length>0\">\n                                                    <span [ngSwitch]=\"obj.myDLMediaVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">DL </i>\n                                                    </span>\n                                                </div>\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.myHICardMedia).length>0\">\n                                                    <span [ngSwitch]=\"obj.myHICardMediaVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">HI </i>\n                                                    </span>\n                                                </div>\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.myRKIMedia).length>0\">\n                                                    <span [ngSwitch]=\"obj.myRKIMediaVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">RKI</i>\n                                                    </span>\n                                                </div>\n                                                <div style=\"display: inline;margin-right: 2px;\" *ngIf=\"utilityService._.keys(obj.externalAppLinks).length>0\">\n                                                    <span [ngSwitch]=\"obj.externalAppLinksVerified\" i18n>\n                                                        <i *ngSwitchCase=\"2\"\n                                                            class=\"badge badge-danger font-weight-light\"></i>\n                                                        <i *ngSwitchCase=\"1\"\n                                                            class=\"badge badge-success font-weight-light\"></i>\n                                                        <i *ngSwitchDefault\n                                                            class=\"badge badge-secondary font-weight-light\">Facebook</i>\n                                                    </span>\n                                                </div>\n\n\n                                            </div>\n                                        </td>\n                                        <td class=\"text-left\">\n                                            <div\n                                                *ngIf=\"!obj.isDeleted && returnT4CurrentUserAllowedToShow(obj.role) && obj._id != authenticationService.currentUserValue._id\">\n                                                <button *ngIf=\"obj.isVerified==1 && returnT4CurrentUserIsSAdmin()\"\n                                                    class=\"btn btn-success btn-sm btn-xs mr-1\"\n                                                    (click)=\"navigate2EditUser(obj._id)\" data-title=\"Edit\">\n                                                    <i class=\"icon-pencil\"></i>\n                                                </button>\n                                                <button class=\"btn btn-success btn-sm btn-xs mr-1\"\n                                                    (click)=\"usersProfile(obj)\" data-title=\"View User Details\">\n                                                    <i class=\"icon-user\"></i>\n                                                </button>\n\n                                                <button *ngIf=\"obj.role==Role.Borrower\"\n                                                    class=\"btn btn-success btn-sm btn-xs mr-1\"\n                                                    (click)=\"usersIncomeExpenseDetails(obj)\"\n                                                    data-title=\"Income Proof and Monthly Expenses Details\">\n                                                    <i class=\"icon-receipt\"></i>\n                                                </button>\n\n                                                <button *ngIf=\"obj.isVerified==1\"\n                                                    class=\"btn btn-warning btn-sm btn-xs mr-1\" data-title=\"Block User\"\n                                                    (click)=\"usersRestrictionModal(obj, 2)\">\n                                                    <i class=\"icon-lock\"></i>\n                                                </button>\n                                                <button *ngIf=\"!obj.isVerified || obj.isVerified==2\"\n                                                    class=\"btn btn-success btn-sm btn-xs mr-1\" data-title=\"Verify User\"\n                                                    (click)=\"usersRestrictionModal(obj, 1)\">\n                                                    <i class=\"icon-unlock\"></i>\n                                                </button>\n\n\n                                                <button class=\"btn btn-danger btn-sm btn-xs\"\n                                                    (click)=\"deleteUserById(obj._id)\" data-title=\"Delete\">\n                                                    <i class=\"icon-trash\"></i>\n                                                </button>\n                                            </div>\n                                        </td>\n                                    </tr>\n\n                                </tbody>\n                            </table>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>");
 
 /***/ }),
 

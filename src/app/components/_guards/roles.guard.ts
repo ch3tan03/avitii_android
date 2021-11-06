@@ -27,7 +27,7 @@ export class RolesGuard implements CanActivate {
             } catch (ex) { }
             switch (_currentUserRole) {
                 case Role.Lender:
-                    if (!currentUser.isVerified) {
+                    if (!currentUser.isVerified || currentUser.isVerified == 2) {
                         if (!currentUser.isRegisteredAllowed2EditProfile) {
                             this.router.navigate(['/logout']);
                             this.alertService.error("Approval is still pending. We will notify you when approved.", true);
@@ -60,14 +60,18 @@ export class RolesGuard implements CanActivate {
                     }
                     break;
                 case Role.Borrower:
-                    if (!currentUser.isVerified) {
+                    if (!currentUser.isVerified || currentUser.isVerified == 2) {
                         switch (route.routeConfig.path) {
                             case '/borrower/profile':
                             case 'profile':
+                            case '/borrower/bank-details':
+                            case 'bank-details':
+                            case '/borrower/income-proof':
+                            case 'income-proof':
                                 //NO Action here
                                 break;
                             default:
-                                this.alertService.error("Your account approval is pending. Please upload educational/work documents and complete your profile to expedite the approval process. Ignore if already uploaded.", true);
+                                this.alertService.error("Your account approval is pending. Please upload documents and complete your profile to expedite the approval process. Ignore if already uploaded.", true);
                                 this.router.navigate(['/borrower/profile']);
                                 return false;
                                 break;

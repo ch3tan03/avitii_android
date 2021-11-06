@@ -533,7 +533,7 @@ export class ProfileComponent implements OnInit {
             if (byPassValidation) {
               this.alertService.success('Basic details of your profile is updated successfully', true);
             } else {
-              if (!isVerified) {
+              if (!isVerified || isVerified==2) {
                 //this.alertService.success('Dear ' + firstName + ', Thank you for uploading your documents. You have to wait for Admin to approve it all manually before your account is active. Remember to check your email for more info, or try logging in later. If there are still problems, contact support through our live chat.', true);
                 this.alertService.success('Thank you for using our platform. It can take up to 48 hours for your documents to be approved, as we go through all the documents manually.', true);
               } else {

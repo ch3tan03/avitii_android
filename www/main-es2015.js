@@ -298,8 +298,28 @@ let UtilityService = class UtilityService {
         this.InsuranceTypes = {
             "20_5000": { "_id": "20_5000", "name": "20% of amounts lent up to 5000 ddk" },
         };
+        this.MaxPercentileOfBudget = {
+            'gt': { "amount": 12000, per: 35 },
+            'lte': { "amount": 12000, per: 25 }
+        };
         this._ = lodash__WEBPACK_IMPORTED_MODULE_2__;
         this.moment = moment__WEBPACK_IMPORTED_MODULE_3__;
+    }
+    returnCalculatedAllowedBudgetObj(totalIncome4currentUser, totalExpense4currentUser) {
+        let obj4Budget = {
+            totalAllowedBudget: 0,
+            totalAllowedBudgetFinal: 0,
+            maxPercentageAllowed2user: 0
+        };
+        obj4Budget.totalAllowedBudget = parseInt(totalIncome4currentUser || 0) - parseInt(totalExpense4currentUser || 0);
+        if (this.MaxPercentileOfBudget.lte.amount >= obj4Budget.totalAllowedBudget) {
+            obj4Budget.maxPercentageAllowed2user = this.MaxPercentileOfBudget.lte.per;
+        }
+        else {
+            obj4Budget.maxPercentageAllowed2user = this.MaxPercentileOfBudget.gt.per;
+        }
+        obj4Budget.totalAllowedBudgetFinal = ((obj4Budget.totalAllowedBudget * obj4Budget.maxPercentageAllowed2user) / 100);
+        return obj4Budget;
     }
     returnStringWithReplacing_(_string) {
         if (_string) {
@@ -2884,6 +2904,16 @@ let SocketioService = class SocketioService {
         return this.SocketConnectionStatus.asObservable();
     }
     //#endregion send status of socket connected or disconnected
+    isSocketConnected() {
+        try {
+            if (this.socket && this.socket.connected) {
+                return true;
+            }
+        }
+        catch (ex) {
+        }
+        return false;
+    }
     //#region handle events from server in single end point
     setupSocketConnectionIfNotExists(_user_id) {
         if (_user_id) {
@@ -3136,8 +3166,8 @@ let SocketioService = class SocketioService {
             this.socket.emit(_eventName, ...args);
         }
     }
-    getAllUsers(_data) {
-        this.socket.emit("user_getall", _data);
+    getAllUsers(_data, skip, dataTablesParameters, returnOnlyPendingT) {
+        this.socket.emit("user_getall", _data, skip, dataTablesParameters, returnOnlyPendingT);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'user_getall_list');
     }
     getAllMyContacts(_userId, role, skip = null) {
@@ -3196,8 +3226,8 @@ let SocketioService = class SocketioService {
         this.socket.emit("request_borrower_payment_transaction_details", _data);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_borrower_payment_transaction_details');
     }
-    getAllUsersWithRequestData(_data, skip, dataTablesParameters) {
-        this.socket.emit("request_user_getall", _data, skip, dataTablesParameters);
+    getAllUsersWithRequestData(_data, skip, dataTablesParameters, returnOnlyPendingT) {
+        this.socket.emit("request_user_getall", _data, skip, dataTablesParameters, returnOnlyPendingT);
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_5__["fromEvent"])(this.socket, 'response_user_getall');
     }
     updateUsersVerificationStatus(_userId, _isVerified) {
@@ -3630,6 +3660,36 @@ let AuthenticationService = class AuthenticationService {
                 //this.allUserLevelsDataLenders = _.filter(data["data"], { 'role': Role.Lender });
                 //this.allUserLevelsDataBorrower = _.filter(data["data"], { 'role': Role.Borrower });
                 //this.alertService.success(data['message'], true);
+            }
+        }, error => {
+            let errorMsg2show = "";
+            try {
+                if (error && error.error && error.error.message) {
+                    errorMsg2show = error.error.message;
+                }
+                else if (error && error.message) {
+                    errorMsg2show = error.message;
+                }
+                else {
+                    errorMsg2show = error;
+                }
+            }
+            catch (ex) { }
+        });
+    }
+    getUsersDashboardDataForSelf() {
+        this.currentUserValue.totalAllowedBudget = 0;
+        this.userService.getUsersDashboardData(this.currentUserValue._id, this.currentUserValue.role, true)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["first"])())
+            .subscribe(data => {
+            if (data && data['success']) {
+                let obj4Budget = data['data'];
+                if (obj4Budget.totalAllowedBudget || obj4Budget.totalAmountAvailableInBudget) {
+                    this.currentUserValue.totalAllowedBudget = obj4Budget.totalAmountAvailableInBudget || obj4Budget.totalAllowedBudget;
+                }
+                //this.profileAdditionalData = data["data"];
+            }
+            else {
             }
         }, error => {
             let errorMsg2show = "";
@@ -4234,13 +4294,31 @@ let UserService = class UserService {
         return;
     }
     getUserById(id) {
-        return this.http.post(this.baseurl + 'api/post/user/getbyid', { userId: id });
+        if (this.socketioService.isSocketConnected() && false) {
+            this.socketioService.emitEventWithNameAndData('request_user_get_byid', id);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_get_byid');
+        }
+        else {
+            return this.http.post(this.baseurl + 'api/post/user/getbyid', { userId: id });
+        }
     }
     updateUserById(user) {
-        return this.http.post(this.baseurl + 'api/post/user/update/byid', user);
+        if (this.socketioService.isSocketConnected() && false) {
+            this.socketioService.emitEventWithNameAndData('request_user_update_byid', user);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_update_byid');
+        }
+        else {
+            return this.http.post(this.baseurl + 'api/post/user/update/byid', user);
+        }
     }
     updateUserByIdFromAdmin(user, updatedBy) {
-        return this.http.post(this.baseurl + 'api/post/user/admin/update/byid', { user, updatedBy });
+        if (this.socketioService.isSocketConnected() && false) {
+            this.socketioService.emitEventWithNameAndData('request_user_admin_update_byid', user, updatedBy);
+            return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_user_admin_update_byid');
+        }
+        else {
+            return this.http.post(this.baseurl + 'api/post/user/admin/update/byid', { user, updatedBy });
+        }
     }
     authenticateAndLoginUser(userName, password) {
         return this.http.post(this.baseurl + 'api/post/user/admin/login', { userName, password });
@@ -4258,6 +4336,7 @@ let UserService = class UserService {
     }
     proccessAllAppUsersCollections(userIdArray) {
         if (userIdArray && Object.keys(userIdArray).length > 0) {
+            userIdArray = this.utilityService._.uniq(userIdArray);
             if (!this.latestUserIdArrayMissingFromLocal) {
                 this.latestUserIdArrayMissingFromLocal = [];
             }
@@ -4346,10 +4425,10 @@ let UserService = class UserService {
                     let _obj = this.utilityService._.first(sessionAppliedByBorrowers);
                     if (_obj) {
                         if (lenderTrue) {
-                            userId = _obj.lenderId;
+                            userId = _obj.lenderId._id;
                         }
                         else {
-                            userId = _obj.borrowerId;
+                            userId = _obj.borrowerId._id;
                         }
                     }
                 }
@@ -4387,8 +4466,8 @@ let UserService = class UserService {
         this.socketioService.emitEventWithNameAndData('request_to_get_admin_dashboard_details_data', userId, role);
         return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_to_get_admin_dashboard_details_data');
     }
-    getUsersDashboardData(userId, role) {
-        this.socketioService.emitEventWithNameAndData('request_to_get_users_dashboard_details_data', userId, role);
+    getUsersDashboardData(userId, role, sendOnlyBudget = false) {
+        this.socketioService.emitEventWithNameAndData('request_to_get_users_dashboard_details_data', userId, role, sendOnlyBudget);
         return Object(rxjs_internal_observable_fromEvent__WEBPACK_IMPORTED_MODULE_6__["fromEvent"])(this.socketioService.socket, 'response_to_get_users_dashboard_details_data');
     }
     addUpdateUserBlogs(blogs) {

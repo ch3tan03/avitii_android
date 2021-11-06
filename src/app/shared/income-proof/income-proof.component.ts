@@ -23,6 +23,7 @@ const uploadAccessUrl = environment.apiUrl + '/';
   styleUrls: ['./income-proof.component.css']
 })
 export class IncomeProofComponent implements OnInit {
+  maxPercentageAllowed2user: number;
   fileData4MonthlyIncomeProofDocument: File = null;
   fileData4MonthlyIncomeProofDocumentPendingForUpload: Boolean = false;
 
@@ -80,6 +81,13 @@ export class IncomeProofComponent implements OnInit {
     this.fetchAllIncomeDetailsByUserId();
     this.fetchAllExpenseDetailsByUserId();
     this.fetchSumOfIncomeExpenseDetailsByUserId();
+    
+    if(this.userObj){
+      let obj4Budget = this.utilityService.returnCalculatedAllowedBudgetObj(this.userObj.totalIncome4currentUser, this.userObj.totalExpense4currentUser);             
+      this.userObj.totalAllowedBudget = obj4Budget.totalAllowedBudgetFinal; 
+      this.maxPercentageAllowed2user = obj4Budget.maxPercentageAllowed2user;
+    }
+    
   }
 
   fetchAllIncomeDetailsByUserId() {
@@ -156,7 +164,10 @@ export class IncomeProofComponent implements OnInit {
             if (this.userObj._id == data["data"]["_id"]) {
               this.userObj.totalIncome4currentUser = data["data"]["totalIncome4currentUser"];
               this.userObj.totalExpense4currentUser = data["data"]["totalExpense4currentUser"];
-              this.userObj.totalAllowedBudget = this.userObj.totalIncome4currentUser - this.userObj.totalExpense4currentUser;
+
+              let obj4Budget = this.utilityService.returnCalculatedAllowedBudgetObj(this.userObj.totalIncome4currentUser, this.userObj.totalExpense4currentUser);             
+              this.userObj.totalAllowedBudget = obj4Budget.totalAllowedBudgetFinal; 
+              this.maxPercentageAllowed2user = obj4Budget.maxPercentageAllowed2user;
             }
             this._cdr.detectChanges();
 
@@ -422,7 +433,7 @@ export class IncomeProofComponent implements OnInit {
     formData.append('files', this.fileData4MonthlyIncomeProofDocument);
     formData.append('documentId', this.userObj._id + '__income_proof');
     this.fileUploadProgress = '0%';
-    
+
     this.http.post(uploadAPI, formData, {
       reportProgress: true,
       observe: 'events'
@@ -544,54 +555,54 @@ export class IncomeProofComponent implements OnInit {
         });
   }
 
-    //#region open media uploader with crop feature
-    modalMediaUploadWithCropFeature(documentId, attributeKey, subFolderName) {
-      switch (attributeKey) {
-        case 'selfProfileUrl':
-  
-          break;
-        case 'myPassportMedia':
-        case 'myDLMedia':
-        case 'myHICardMedia':
-        case 'myRKIMedia':
-          const checkArray: FormArray = this.userIncomeDetailsForm.get(attributeKey) as FormArray;
-          if (checkArray.length >= 1) {
-            this.alertService.error("Your can upload document only once.");
-            return;
-          }
-  
-          break;
-      }
-      //console.log('912', this.authenticationService.currentUserValue);
-      const dialogRef = this.dialog.open(MediaProccessComponent, {
-  
-        maxWidth: '100vw',
-        maxHeight: '100vh',
-        height: '100%',
-        width: '100%',
-        hasBackdrop: true,
-        data: {
-          documentId: documentId,
-          attributeKey: attributeKey,
-          subFolderName: subFolderName
+  //#region open media uploader with crop feature
+  modalMediaUploadWithCropFeature(documentId, attributeKey, subFolderName) {
+    switch (attributeKey) {
+      case 'selfProfileUrl':
+
+        break;
+      case 'myPassportMedia':
+      case 'myDLMedia':
+      case 'myHICardMedia':
+      case 'myRKIMedia':
+        const checkArray: FormArray = this.userIncomeDetailsForm.get(attributeKey) as FormArray;
+        if (checkArray.length >= 1) {
+          this.alertService.error("Your can upload document only once.");
+          return;
         }
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          if (result.data) {
-            switch (result.data.attributeKey) {
-              case 'monthlyIncomeProofDocument':
-                if (result.data.uploadedFilePath) {
-                  this.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(result.data.uploadedFilePath);
-                }
-                break;
-            }
-          }
-        }
-        //console.log(`946 :: msc :: Dialog result: ${JSON.stringify(result)}`);
-      });
+
+        break;
     }
-    //#endregion open media uploader with crop feature
+    //console.log('912', this.authenticationService.currentUserValue);
+    const dialogRef = this.dialog.open(MediaProccessComponent, {
+
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      hasBackdrop: true,
+      data: {
+        documentId: documentId,
+        attributeKey: attributeKey,
+        subFolderName: subFolderName
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result.data) {
+          switch (result.data.attributeKey) {
+            case 'monthlyIncomeProofDocument':
+              if (result.data.uploadedFilePath) {
+                this.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(result.data.uploadedFilePath);
+              }
+              break;
+          }
+        }
+      }
+      //console.log(`946 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+    });
+  }
+  //#endregion open media uploader with crop feature
 
 }

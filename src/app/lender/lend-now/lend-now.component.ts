@@ -76,7 +76,7 @@ export class LendNowComponent implements OnInit {
                   let _userIdOfLoanCreatorOrEditorWhichisNotCurrentUser = this.LoanObj.createdByUserObj._id;
                   if (this.loanApplyId) {
                     if (this.authenticationService.currentUserValue._id == this.LoanObj.createdByUserObj._id) {
-                      _userIdOfLoanCreatorOrEditorWhichisNotCurrentUser = _obj4LoanApply.borrowerId;
+                      _userIdOfLoanCreatorOrEditorWhichisNotCurrentUser = _obj4LoanApply.borrowerId._id;
                     }
                   }
                   //#endregion data set to local of loan obj
@@ -252,11 +252,22 @@ export class LendNowComponent implements OnInit {
     this.returnHeaderTitleForPage();
     if (this.lenderUserObj) {
       this.lendNowForm.get('eSignatureLendersName').setValue(this.lenderUserObj.firstName || this.lenderUserObj.lastName);
-      this.lendNowForm.get('eSignatureLendersPassportNumber').setValue(this.lenderUserObj.myPassportNumber || this.lenderUserObj.myDLNumber);
+
+      if (this.lenderUserObj.myPassportNumber && this.lenderUserObj.myPassportMediaVerified == 1) {
+        this.lendNowForm.get('eSignatureLendersPassportNumber').setValue(this.lenderUserObj.myPassportNumber);
+      } else if (this.lenderUserObj.myDLNumber && this.lenderUserObj.myDLMediaVerified == 1) {
+        this.lendNowForm.get('eSignatureLendersPassportNumber').setValue(this.lenderUserObj.myDLNumber);
+      } else {
+        this.lendNowForm.get('eSignatureLendersPassportNumber').setValue(this.lenderUserObj.myPassportNumber || this.lenderUserObj.myDLNumber);
+      }
+      /* else if (this.lenderUserObj.cprNumber && this.lenderUserObj.myHICardMediaVerified == 1) {
+              this.lendNowForm.get('eSignatureLendersPassportNumber').setValue(this.lenderUserObj.cprNumber);
+            } */
     }
   }
 
   clickedOnVerifiedSignLoanContract() {
+    debugger;
     this.submitted = true;
     if (this.lendNowForm.invalid) {
       return;
@@ -266,7 +277,11 @@ export class LendNowComponent implements OnInit {
       return;
     }
     if (this.lendNowForm.get('eSignatureLendersPassportNumber').value != this.lenderUserObj.myPassportNumber) {
-      this.alertService.error("Passport Number miss match. Please enter proper number");
+      //this.alertService.error("Passport Number miss match. Please enter proper number");
+      //return;
+    }
+    if (!this.lendNowForm.get('eSignatureLendersPassportNumber').value) {
+      this.alertService.error("Document missing, Passport/DL");
       return;
     }
     switch (this.authenticationService.currentUserValue.role) {
@@ -312,7 +327,7 @@ export class LendNowComponent implements OnInit {
     _currentSessionApply._id = this.loanApplyId;
     if (_currentSessionApply) {
       if (!_currentSessionApply._id) {
-        _currentSessionApply._id = _currentSessionApply.loanId + '__' + _currentSessionApply.borrowerId;
+        _currentSessionApply._id = _currentSessionApply.loanId + '__' + (_currentSessionApply.borrowerId._id || _currentSessionApply.borrowerId);
       }
       if (this.LoanObj.createdBy == this.lenderUserObj._id) {
         //here status set to accepted as this is lender side and creator is same so borrower already initiated ongoing proccess
@@ -362,8 +377,22 @@ export class LendNowComponent implements OnInit {
           _LoanObj.lendersUserObj = _.cloneDeep(this.lenderUserObj);
 
           _LoanObj.loanStartDateTime = moment(this.LoanObj.loanStartDateTime).format("DD-MMM-YYYY");
-          _LoanObj.lendersUserObj.lenderPassportOrDlNumber = this.lenderUserObj.myPassportNumber;
-          _LoanObj.borrowersUserObj.borrowerPassportOrDlNumber = this.borrowerUserObj.myPassportNumber;
+ 
+          if (this.lenderUserObj.myPassportNumber && this.lenderUserObj.myPassportMediaVerified == 1) {
+            _LoanObj.lendersUserObj.lenderPassportOrDlNumber = this.lenderUserObj.myPassportNumber;
+          } else if (this.lenderUserObj.myDLNumber && this.lenderUserObj.myDLMediaVerified == 1) {
+            _LoanObj.lendersUserObj.lenderPassportOrDlNumber = this.lenderUserObj.myDLNumber;
+          } else {
+            _LoanObj.lendersUserObj.lenderPassportOrDlNumber = (this.lenderUserObj.myPassportNumber || this.lenderUserObj.myDLNumber);
+          }
+
+          if (this.borrowerUserObj.myPassportNumber && this.borrowerUserObj.myPassportMediaVerified == 1) {
+            _LoanObj.borrowersUserObj.borrowerPassportOrDlNumber = this.borrowerUserObj.myPassportNumber;
+          } else if (this.borrowerUserObj.myDLNumber && this.borrowerUserObj.myDLMediaVerified == 1) {
+            _LoanObj.borrowersUserObj.borrowerPassportOrDlNumber = this.borrowerUserObj.myDLNumber;
+          } else {
+            _LoanObj.borrowersUserObj.borrowerPassportOrDlNumber = (this.borrowerUserObj.myPassportNumber || this.borrowerUserObj.myDLNumber);
+          }
 
           _LoanObj.installments = [];
           for (let index = 0; index < this.LoanObj.loanTenureInMonths; index++) {
@@ -444,7 +473,11 @@ export class LendNowComponent implements OnInit {
     }
 
     if (this.lendNowForm.get('eSignatureLendersPassportNumber').value != this.lenderUserObj.myPassportNumber) {
-      this.alertService.error("Passport Number miss match. Please enter proper number");
+      //this.alertService.error("Passport Number miss match. Please enter proper number");
+      //return;
+    }
+    if (!this.lendNowForm.get('eSignatureLendersPassportNumber').value) {
+      this.alertService.error("Document missing, Passport/DL");
       return;
     }
 
@@ -455,7 +488,7 @@ export class LendNowComponent implements OnInit {
       _calculatedInsuranceValue = this.utilityService.returnRoundedNumber((this.LoanObj.loanAmount / 100) * 20);
       this.lendNowForm.get('loanInsuranceAmount').setValue(_calculatedInsuranceValue);
       let _header4Payment = 'Insurance Payment for ' + this.utilityService.returnLoanType(this.LoanObj.loanType);
-
+debugger;
       let _loanApplyId = this.loanApplyId;
       if (!_loanApplyId) {
         _loanApplyId = this.loanId + '__' + this.borrowerUserObj._id;

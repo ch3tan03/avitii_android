@@ -21,7 +21,7 @@ export class UserRestrictionDetailsComponent implements OnInit {
   userObj: any = null;
   isOpenedInModel: boolean = false;
   adminViewT: boolean = false
-  isVerified: boolean = false;
+  isVerified: number = 0;
   submitted: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
@@ -39,7 +39,7 @@ export class UserRestrictionDetailsComponent implements OnInit {
       this.isOpenedInModel = true;
       this.userObj = data.userObj;
       this.adminViewT = !!data.adminViewT;
-      this.isVerified = !!data.isVerified;
+      this.isVerified = data.isVerified || 0;
     } else {
       this.appRouterService.appRouter('');
       return;
@@ -96,7 +96,7 @@ export class UserRestrictionDetailsComponent implements OnInit {
     this.userRestrictionDetailsForm = this.formBuilder.group({
       _id: [_userObj._id || ''],
       comment: [_userObj.comment || '', Validators.required],
-      isVerified: [_userObj.isVerified || false, Validators.required],
+      isVerified: [_userObj.isVerified || 0, Validators.required],
       userId: [_userObj.userId || this.userObj._id],
       createdOn: [_userObj.createdOn || ''],
       updatedOn: [_userObj.updatedOn || ''],
@@ -112,7 +112,7 @@ export class UserRestrictionDetailsComponent implements OnInit {
     this.userRestrictionDetailsForm = this.formBuilder.group({
       _id: [''],
       comment: ['', Validators.required],
-      isVerified: [this.isVerified || false, Validators.required],
+      isVerified: [this.isVerified || 0, Validators.required],
       userId: [this.userObj._id],
       createdOn: [''],
       updatedOn: [''],
