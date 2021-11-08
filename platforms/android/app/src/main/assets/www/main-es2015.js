@@ -1836,6 +1836,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _socketio_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./socketio.service */ "bgkY");
 /* harmony import */ var _services_notification_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/notification.service */ "OC8m");
 /* harmony import */ var _services_utility_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/utility.service */ "A1CT");
+/* harmony import */ var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/app-version/ngx */ "uJRU");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic/angular */ "TEn/");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/common/http */ "tk/3");
+/* harmony import */ var _ionic_native_market_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/market/ngx */ "1qvn");
+
+
+
+
 
 
 
@@ -1846,11 +1854,29 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AppComponent = class AppComponent {
-    constructor(authenticationService, socketService, utilityService, notificationService) {
+    constructor(platform, authenticationService, socketService, utilityService, notificationService, appVersion, http, market) {
         this.authenticationService = authenticationService;
         this.socketService = socketService;
         this.utilityService = utilityService;
         this.notificationService = notificationService;
+        this.appVersion = appVersion;
+        this.http = http;
+        this.market = market;
+        platform.ready().then(() => {
+            this.getJSON().subscribe(data => {
+                let appConfig = JSON.parse(data);
+                this.appVersion.getVersionCode().then(version => {
+                    //console.log(version)
+                    if (appConfig.versionCode != version) {
+                        this.isUpdateAvailable = true;
+                    }
+                }).catch(err => {
+                    console.log(err);
+                });
+            }, err => {
+                console.log(err);
+            });
+        });
         this.subscription = this.authenticationService.getCurrentUserObj().subscribe(_currentUser => {
             if (_currentUser) {
                 this.currentUser = _currentUser;
@@ -1866,6 +1892,12 @@ let AppComponent = class AppComponent {
         });
         this.authenticationService.initCurrentUserObj();
     }
+    getJSON() {
+        return this.http.get("https://avitii-lending.com/endpoint/version/versionCheck.json", { responseType: 'text' });
+    }
+    navigateToStore() {
+        this.market.open('com.avitiilending.dev');
+    }
     ngOnInit() {
         //	document.styleSheets[0].disabled = true;
         //	document.styleSheets[1].disabled = true;
@@ -1876,10 +1908,14 @@ let AppComponent = class AppComponent {
     }
 };
 AppComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_10__["Platform"] },
     { type: _services_authentication_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"] },
     { type: _socketio_service__WEBPACK_IMPORTED_MODULE_6__["SocketioService"] },
     { type: _services_utility_service__WEBPACK_IMPORTED_MODULE_8__["UtilityService"] },
-    { type: _services_notification_service__WEBPACK_IMPORTED_MODULE_7__["NotificationService"] }
+    { type: _services_notification_service__WEBPACK_IMPORTED_MODULE_7__["NotificationService"] },
+    { type: _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_9__["AppVersion"] },
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpClient"] },
+    { type: _ionic_native_market_ngx__WEBPACK_IMPORTED_MODULE_12__["Market"] }
 ];
 AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["Component"])({
@@ -1887,10 +1923,14 @@ AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
         template: _raw_loader_app_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
         styles: [_app_component_css__WEBPACK_IMPORTED_MODULE_2__["default"]]
     }),
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_services_authentication_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"],
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_10__["Platform"],
+        _services_authentication_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"],
         _socketio_service__WEBPACK_IMPORTED_MODULE_6__["SocketioService"],
         _services_utility_service__WEBPACK_IMPORTED_MODULE_8__["UtilityService"],
-        _services_notification_service__WEBPACK_IMPORTED_MODULE_7__["NotificationService"]])
+        _services_notification_service__WEBPACK_IMPORTED_MODULE_7__["NotificationService"],
+        _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_9__["AppVersion"],
+        _angular_common_http__WEBPACK_IMPORTED_MODULE_11__["HttpClient"],
+        _ionic_native_market_ngx__WEBPACK_IMPORTED_MODULE_12__["Market"]])
 ], AppComponent);
 
 
@@ -2031,7 +2071,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<app-alert></app-alert>\t\t\n<router-outlet></router-outlet>  \n");
+/* harmony default export */ __webpack_exports__["default"] = ("<app-alert></app-alert>\t\t\n<router-outlet *ngIf=\"!isUpdateAvailable\"></router-outlet>  \n\n\n<div class=\"text-center align-self-center mt-5 mx-4\" *ngIf=\"isUpdateAvailable\">\n    <img class=\"img-fluid mx-5\"  src=\"/assets/img/rocket.svg\">\n<h2 class=\"mt-5\">Update available</h2>\n\n<h3 class=\"my-4 text-secondary font-weight-light\">For better experince, we recommend to update the application to the latest version.</h3>\n\n<a class=\"btn btn-default btn-gradient col-5 mr-3 py-3\" (click)=\"navigateToStore()\">UPDATE</a>\n</div>");
 
 /***/ }),
 
@@ -2558,6 +2598,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! @angular/material/snack-bar */ "dNgK");
 /* harmony import */ var stripe_angular__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! stripe-angular */ "CnOO");
 /* harmony import */ var angular_datatables__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! angular-datatables */ "njyG");
+/* harmony import */ var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! @ionic-native/app-version/ngx */ "uJRU");
+/* harmony import */ var _ionic_native_market_ngx__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! @ionic-native/market/ngx */ "1qvn");
 
 
 
@@ -2568,6 +2610,8 @@ __webpack_require__.r(__webpack_exports__);
 // used to create fake backend
 //import { fakeBackendProvider } from './components/_helpers';
 //import { routing }        from './app.routing';
+
+
 
 
 
@@ -2622,11 +2666,14 @@ AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             _ngui_common__WEBPACK_IMPORTED_MODULE_5__["NguiUtilsModule"]
         ],
         providers: [
+            _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_27__["AppVersion"],
             { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"], useClass: _components_helpers__WEBPACK_IMPORTED_MODULE_6__["JwtInterceptor"], multi: true },
             { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"], useClass: _components_helpers__WEBPACK_IMPORTED_MODULE_6__["ErrorInterceptor"], multi: true },
             _services_utility_service__WEBPACK_IMPORTED_MODULE_7__["UtilityService"],
             _socketio_service__WEBPACK_IMPORTED_MODULE_21__["SocketioService"],
             _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_24__["MatSnackBar"],
+            _ionic_native_market_ngx__WEBPACK_IMPORTED_MODULE_28__["Market"]
+            // provider used to create fake backend
         ],
         bootstrap: [
             _app_component__WEBPACK_IMPORTED_MODULE_8__["AppComponent"]
@@ -3872,6 +3919,244 @@ BlogViewComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 ], BlogViewComponent);
 
 
+
+/***/ }),
+
+/***/ "kLfG":
+/*!*****************************************************************************************************************************************!*\
+  !*** ./node_modules/@ionic/core/dist/esm lazy ^\.\/.*\.entry\.js$ include: \.entry\.js$ exclude: \.system\.entry\.js$ namespace object ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var map = {
+	"./ion-action-sheet.entry.js": [
+		"dUtr",
+		"common",
+		0
+	],
+	"./ion-alert.entry.js": [
+		"Q8AI",
+		"common",
+		1
+	],
+	"./ion-app_8.entry.js": [
+		"hgI1",
+		"common",
+		2
+	],
+	"./ion-avatar_3.entry.js": [
+		"CfoV",
+		"common",
+		3
+	],
+	"./ion-back-button.entry.js": [
+		"Nt02",
+		"common",
+		4
+	],
+	"./ion-backdrop.entry.js": [
+		"Q2Bp",
+		5
+	],
+	"./ion-button_2.entry.js": [
+		"0Pbj",
+		"common",
+		6
+	],
+	"./ion-card_5.entry.js": [
+		"ydQj",
+		"common",
+		7
+	],
+	"./ion-checkbox.entry.js": [
+		"4fMi",
+		"common",
+		8
+	],
+	"./ion-chip.entry.js": [
+		"czK9",
+		"common",
+		9
+	],
+	"./ion-col_3.entry.js": [
+		"/CAe",
+		10
+	],
+	"./ion-datetime_3.entry.js": [
+		"WgF3",
+		"common",
+		11
+	],
+	"./ion-fab_3.entry.js": [
+		"uQcF",
+		"common",
+		12
+	],
+	"./ion-img.entry.js": [
+		"wHD8",
+		13
+	],
+	"./ion-infinite-scroll_2.entry.js": [
+		"2lz6",
+		14
+	],
+	"./ion-input.entry.js": [
+		"ercB",
+		"common",
+		15
+	],
+	"./ion-item-option_3.entry.js": [
+		"MGMP",
+		"common",
+		16
+	],
+	"./ion-item_8.entry.js": [
+		"9bur",
+		"common",
+		17
+	],
+	"./ion-loading.entry.js": [
+		"cABk",
+		"common",
+		18
+	],
+	"./ion-menu_3.entry.js": [
+		"kyFE",
+		"common",
+		19
+	],
+	"./ion-modal.entry.js": [
+		"TvZU",
+		"common",
+		20
+	],
+	"./ion-nav_2.entry.js": [
+		"vnES",
+		"common",
+		21
+	],
+	"./ion-popover.entry.js": [
+		"qCuA",
+		"common",
+		22
+	],
+	"./ion-progress-bar.entry.js": [
+		"0tOe",
+		"common",
+		23
+	],
+	"./ion-radio_2.entry.js": [
+		"h11V",
+		"common",
+		24
+	],
+	"./ion-range.entry.js": [
+		"XGij",
+		"common",
+		25
+	],
+	"./ion-refresher_2.entry.js": [
+		"nYbb",
+		"common",
+		26
+	],
+	"./ion-reorder_2.entry.js": [
+		"smMY",
+		"common",
+		27
+	],
+	"./ion-ripple-effect.entry.js": [
+		"STjf",
+		28
+	],
+	"./ion-route_4.entry.js": [
+		"k5eQ",
+		"common",
+		29
+	],
+	"./ion-searchbar.entry.js": [
+		"OR5t",
+		"common",
+		30
+	],
+	"./ion-segment_2.entry.js": [
+		"fSgp",
+		"common",
+		31
+	],
+	"./ion-select_3.entry.js": [
+		"lfGF",
+		"common",
+		32
+	],
+	"./ion-slide_2.entry.js": [
+		"5xYT",
+		33
+	],
+	"./ion-spinner.entry.js": [
+		"nI0H",
+		"common",
+		34
+	],
+	"./ion-split-pane.entry.js": [
+		"NAQR",
+		35
+	],
+	"./ion-tab-bar_2.entry.js": [
+		"knkW",
+		"common",
+		36
+	],
+	"./ion-tab_2.entry.js": [
+		"TpdJ",
+		"common",
+		37
+	],
+	"./ion-text.entry.js": [
+		"ISmu",
+		"common",
+		38
+	],
+	"./ion-textarea.entry.js": [
+		"U7LX",
+		"common",
+		39
+	],
+	"./ion-toast.entry.js": [
+		"L3sA",
+		"common",
+		40
+	],
+	"./ion-toggle.entry.js": [
+		"IUOf",
+		"common",
+		41
+	],
+	"./ion-virtual-scroll.entry.js": [
+		"8Mb5",
+		42
+	]
+};
+function webpackAsyncContext(req) {
+	if(!__webpack_require__.o(map, req)) {
+		return Promise.resolve().then(function() {
+			var e = new Error("Cannot find module '" + req + "'");
+			e.code = 'MODULE_NOT_FOUND';
+			throw e;
+		});
+	}
+
+	var ids = map[req], id = ids[0];
+	return Promise.all(ids.slice(1).map(__webpack_require__.e)).then(function() {
+		return __webpack_require__(id);
+	});
+}
+webpackAsyncContext.keys = function webpackAsyncContextKeys() {
+	return Object.keys(map);
+};
+webpackAsyncContext.id = "kLfG";
+module.exports = webpackAsyncContext;
 
 /***/ }),
 

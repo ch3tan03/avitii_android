@@ -181,7 +181,7 @@ export class HeaderComponent implements AfterViewInit {
 
   check4applyToSession(sessionObj) {
     if (sessionObj && sessionObj.sessionAppliedByBorrowers) {
-      if (_.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId": this.authenticationService.currentUserValue._id }).length > 0) {
+      if (_.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId":{"_id": this.authenticationService.currentUserValue._id }}).length > 0) {
         return true;
       }
     }
@@ -225,7 +225,7 @@ export class HeaderComponent implements AfterViewInit {
             this.allInstantSessionsData = _.values(_existingSessionObjKryPair);
 
             if (!_currentSessionApply._id) {
-              _currentSessionApply._id = _currentSessionApply.loanId + '__' + _currentSessionApply.borrowerId;
+              _currentSessionApply._id = _currentSessionApply.loanId + '__' + (_currentSessionApply.borrowerId._id || _currentSessionApply.borrowerId);
             }
             _currentSessionApply.status = result.data.status || SessionStatus.Pending;
             this.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
@@ -275,7 +275,7 @@ export class HeaderComponent implements AfterViewInit {
     switch (this.authenticationService.currentUserValue.role) {
       case Role.Borrower:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
-        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId": this.authenticationService.currentUserValue._id });
+        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "borrowerId":{"_id": this.authenticationService.currentUserValue._id }});
         break;
       default:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
@@ -333,10 +333,12 @@ export class HeaderComponent implements AfterViewInit {
         $('.navbar').css("right", "-350px");
         $('.navbar_side_panel').hide();
       });
+
       $('#accordionSidebar').on('click', function (e) {
         $('.navbar').css("right", "-350px");
         $('.navbar_side_panel').hide();
       });
+  
       function checkWidth() {
         var windowSize = $(window).width();
         if (windowSize <= 991) {

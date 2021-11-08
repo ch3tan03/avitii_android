@@ -19,6 +19,7 @@ import { UtilityService } from 'src/app/services/utility.service';
 import { ModalAppliedSessionDisplay } from 'src/app/borrower/borrower.component';
 import { MessagesService } from 'src/app/services/messages.service';
 declare let window: any;
+import { PublicProfileComponent } from 'src/app/shared/public-profile/public-profile.component';
 
 @Component({
   selector: 'app-messages',
@@ -133,6 +134,11 @@ export class MessagesComponent implements OnInit {
                   this.joinNewVCSessionWithContact(contactId, data["data"].loanId, data["data"].isGroup);
                 } else {
                   this.setCurrentContact(data["data"]);
+                }
+
+                let existingData = _.filter(this.messagesService.myContactsList, { _id: data["data"]["_id"] });
+                if (existingData.length <= 0) {
+                  this.messagesService.myContactsList.push(existingData);
                 }
                 //this.alertService.success(data['message'], true);
                 this.loading = false;
@@ -299,8 +305,8 @@ export class MessagesComponent implements OnInit {
     }
   }
 
-  setCurrentContact(currentContactItem) {
-
+  setCurrentContact = _.debounce(function (currentContactItem) {
+    this.allChatListOfRoom = [];
     if (currentContactItem) {
       //console.log(window.innerWidth)
       if (window.innerWidth < 768) {
@@ -344,13 +350,25 @@ export class MessagesComponent implements OnInit {
       }
     }
 
-  }
+  }, 500, { leading: true, trailing: false });
 
   getAllChatByRoomId(_roomId) {
     let _allChatListOfRoomFiltered = _.filter(this.allChatListOfRoom, { roomId: _roomId });
     let _data = {};
-    this.socketService.sendEventToGetAllChatOfRoomWithPromise(_roomId, _.keys(_allChatListOfRoomFiltered).length).pipe(first()).subscribe(chats => {
-      this.allChatListOfRoom = chats;
+    let skip = _.keys(_allChatListOfRoomFiltered).length;
+    this.socketService.sendEventToGetAllChatOfRoomWithPromise(_roomId, skip).pipe(first()).subscribe(chats => {
+      if (_.keys(chats).length > 0) {
+        if (chats[0].roomId == this.currentContact._id) {
+          if (_.keys(this.allChatListOfRoom).length > 0) {
+            this.allChatListOfRoom = _.union(this.allChatListOfRoom, chats);
+          } else {
+            this.allChatListOfRoom = _.union(this.allChatListOfRoom, chats);
+          }
+        }
+      } else {
+        this.allChatListOfRoom = _.union(this.allChatListOfRoom, chats);
+      }
+      console.log('367 :: ' + this.currentContact._id + ' :: ' + _.keys(this.allChatListOfRoom).length + ' :: ' + _.keys(chats).length);
       setTimeout(() => {
         $('#chat_messages').animate({
           scrollTop: $('#chat_messages').get(0).scrollHeight
@@ -511,12 +529,16 @@ export class MessagesComponent implements OnInit {
     this.router.navigate(['/' + _parentRouting + '/vcmeet'], { state: { roomId: _roomId, currentUser: this.currentUser, loanId: loanId } });
   }
 
-  returnNameOfAnyNonSelfUserFromList(userColl: any, concatThisSubString: string = '', mainString: string = '',) {
+  returnNameOfAnyNonSelfUserFromList(userColl: any, concatThisSubString: string = '', mainString: string = '', isGroup) {
     if (_.keys(userColl).length == 2) {
       for (let _item in userColl) {
         let usersObj = userColl[_item];
         if (usersObj && usersObj._id && usersObj._id != this.currentUser._id) {
-          return (usersObj.firstName || '') + (concatThisSubString || '') + (mainString || '');
+          if (isGroup) {
+            return (usersObj.firstName || '') + (concatThisSubString || '') + (mainString || '');
+          } else {
+            return (usersObj.firstName || '');
+          }
         }
       }
     }
@@ -573,7 +595,7 @@ export class MessagesComponent implements OnInit {
     switch (this.authenticationService.currentUserValue.role) {
       case Role.Borrower:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
-        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "lenderId": {"_id":this.authenticationService.currentUserValue._id} });
+        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "lenderId": { "_id": this.authenticationService.currentUserValue._id } });
         break;
       default:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
@@ -744,6 +766,57 @@ export class MessagesComponent implements OnInit {
     } catch (ex) {
     }
     return '';
+  }
+
+  usersProfile(_userObj, userColl) {
+    let adminViewT = false;
+    switch (this.currentUser.role) {
+      case Role.Admin:
+        adminViewT = true;
+        break;
+      default:
+        break;
+    }
+    if (!_userObj) {
+      if (_.keys(userColl).length == 2) {
+        for (let _item in userColl) {
+          let usersObj = userColl[_item];
+          if (usersObj && usersObj._id && usersObj._id != this.currentUser._id) {
+            //return (usersObj.firstName || '') + (concatThisSubString || '') + (mainString || '');
+            _userObj = usersObj;
+          }
+        }
+      }
+    }
+
+    if (!_userObj) {
+      return;
+    }
+    //console.log('95', this.authenticationService.currentUserValue);
+    const dialogRef = this.dialog.open(PublicProfileComponent, {
+
+      maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
+      hasBackdrop: true,
+      data: {
+        userObj: _userObj,
+        adminViewT: adminViewT
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      //console.log(`105 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+    });
+  }
+
+  lastUserReached(message) {
+    if (message == 'last-user-in-app') {
+      console.log('812', _.keys(this.messagesService.myContactsList).length);
+      this.messagesService.getAllMyContacts();
+    }
   }
 
 }

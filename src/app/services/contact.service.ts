@@ -10,7 +10,7 @@ export class ContactService {
   ContactRole = ContactRole;
   constructor() { }
 
-  returnContactJsonData(_createdByUserId: string, _groupFirstName: string, _loanId: string, _loanApplyId: string, _adminUsersArray: string[], _memberUsersArray: string[], _guestUsersArray: string[], openRoleGroup: string[], isOneWayGroup: boolean) {
+  returnContactJsonData(_createdByUserId: string, _groupFirstName: string, _loanId: string, _loanApplyId: string, _adminUsersArray: string[], _memberUsersArray: string[], _guestUsersArray: string[], openRoleGroup: string[], isOneWayGroup: boolean, isGroup: boolean = true) {
     let _contactObj = {
       _id: "",
       firstName: "",
@@ -42,6 +42,9 @@ export class ContactService {
 
     if (_loanId && _loanApplyId) {
       _contactObj._id = this.returnContactIdForSession(_loanId, _loanApplyId);
+    }
+
+    if (isGroup) {
       _contactObj.isGroup = true;
     }
 
@@ -53,5 +56,15 @@ export class ContactService {
 
   returnContactIdForSession(_loanId, _loanApplyId) {
     return _loanApplyId;
+  }
+
+  returnContactIdForPrivate(_userId_1, _userId_2) {
+    let _contactId = '';
+    if (_.lt(_userId_1, _userId_2)) {
+      _contactId = _userId_1 + '__' + _userId_2;
+    } else {
+      _contactId = _userId_2 + '__' + _userId_1;
+    }
+    return _contactId;
   }
 }

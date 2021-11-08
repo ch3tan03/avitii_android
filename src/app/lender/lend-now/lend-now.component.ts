@@ -267,7 +267,7 @@ export class LendNowComponent implements OnInit {
   }
 
   clickedOnVerifiedSignLoanContract() {
-    debugger;
+    //debugger;
     this.submitted = true;
     if (this.lendNowForm.invalid) {
       return;
@@ -488,7 +488,7 @@ export class LendNowComponent implements OnInit {
       _calculatedInsuranceValue = this.utilityService.returnRoundedNumber((this.LoanObj.loanAmount / 100) * 20);
       this.lendNowForm.get('loanInsuranceAmount').setValue(_calculatedInsuranceValue);
       let _header4Payment = 'Insurance Payment for ' + this.utilityService.returnLoanType(this.LoanObj.loanType);
-debugger;
+//debugger;
       let _loanApplyId = this.loanApplyId;
       if (!_loanApplyId) {
         _loanApplyId = this.loanId + '__' + this.borrowerUserObj._id;

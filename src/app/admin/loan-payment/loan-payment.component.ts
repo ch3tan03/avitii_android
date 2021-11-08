@@ -50,7 +50,7 @@ export class LoanPaymentComponent implements OnInit {
             this.populateUsersDataInTable();
             //this.rerender();
             let _dataObj = _.flattenDepth(_.map(_.values(this.PaymentTransactionDetailsArray), "sessionAppliedByBorrowers"), 1);
-            let _allUsersArray = _.uniq(_.union(_.map(_dataObj, 'borrowerId'), _.map(_dataObj, 'lenderId')));
+            let _allUsersArray = _.map(_.uniq(_.union(_.map(_dataObj, 'borrowerId'), _.map(_dataObj, 'lenderId'))),'_id');
 
             this.userService.proccessAllAppUsersCollections(_allUsersArray);
             this.calculateAndStoreLocalNextEMIDateOfAppliedLoansForBorrower();
@@ -163,11 +163,11 @@ export class LoanPaymentComponent implements OnInit {
         switch (this.authenticationService.currentUserValue.role) {
           case Role.Borrower:
             _proccessedSessionObj = _.cloneDeep(_LoanObj);
-            _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(_LoanObj.sessionAppliedByBorrowers, { "borrowerId": this.authenticationService.currentUserValue._id });
+            _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(_LoanObj.sessionAppliedByBorrowers, { "borrowerId":{"_id": this.authenticationService.currentUserValue._id }});
             break;
           case Role.Lender:
             _proccessedSessionObj = _.cloneDeep(_LoanObj);
-            _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(_LoanObj.sessionAppliedByBorrowers, { "lenderId": this.authenticationService.currentUserValue._id });//_sessionAppliedByLenders
+            _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(_LoanObj.sessionAppliedByBorrowers, { "lenderId":{"_id": this.authenticationService.currentUserValue._id }});//_sessionAppliedByLenders
             break;
           default:
             _proccessedSessionObj = _.cloneDeep(_LoanObj);
@@ -195,9 +195,9 @@ export class LoanPaymentComponent implements OnInit {
                   }
                 }
                 _LoanObj.nextInstallment = installment.loanStartDateTime;
-                _LoanObj.nextInstallmentBorrowerId = LoanApplyObj.borrowerId;
+                _LoanObj.nextInstallmentBorrowerId = LoanApplyObj.borrowerId._id;
                 _LoanObj.nextInstallmentBorrowerFirstName = this.userService.returnUsersObjFromLocal(null, false, 'firstName', _LoanObj.nextInstallmentBorrowerId);
-                _LoanObj.nextInstallmentLenderId = LoanApplyObj.lenderId;
+                _LoanObj.nextInstallmentLenderId = LoanApplyObj.lenderId._id;
                 _LoanObj.nextInstallmentLenderFirstName = this.userService.returnUsersObjFromLocal(null, false, 'firstName', _LoanObj.nextInstallmentLenderId);
                 break;
               }
@@ -225,7 +225,7 @@ export class LoanPaymentComponent implements OnInit {
     switch (this.authenticationService.currentUserValue.role) {
       case Role.Borrower:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
-        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "lenderId": this.authenticationService.currentUserValue._id });
+        _proccessedSessionObj.sessionAppliedByBorrowers = _.filter(sessionObj.sessionAppliedByBorrowers, { "lenderId": {"_id":this.authenticationService.currentUserValue._id} });
         break;
       default:
         _proccessedSessionObj = _.cloneDeep(sessionObj);
@@ -254,7 +254,7 @@ export class LoanPaymentComponent implements OnInit {
             let _loanId = result.data.sessionApply.loanId;
             let _sessionPrice = result.data.sessionApply.loanAmount;
             let _loanApplyId = result.data.sessionApply._id;
-            let _borrowerId = result.data.sessionApply.borrowerId;
+            //let _borrowerId = result.data.sessionApply.borrowerId._id;
             let _transactionId = result.data.transactionId;
             let _status = result.data.status;
             //initiate payment here
@@ -323,7 +323,7 @@ export class LoanPaymentComponent implements OnInit {
             this.PaymentTransactionDetailsArray = this.utilityService._.values(_keyPairedMapObj);
 
             let _dataObj = _.flattenDepth(_.map(_.values(this.PaymentTransactionDetailsArray), "sessionAppliedByBorrowers"), 1);
-            let _allUsersArray = _.uniq(_.union(_.map(_dataObj, 'borrowerId'), _.map(_dataObj, 'lenderId')));
+            let _allUsersArray = _.map(_.uniq(_.union(_.map(_dataObj, 'borrowerId'), _.map(_dataObj, 'lenderId'))),'_id');
 
             this.userService.proccessAllAppUsersCollections(_allUsersArray);
 

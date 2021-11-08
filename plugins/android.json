@@ -47,6 +47,12 @@
     },
     "cordova-plugin-inappbrowser": {
       "PACKAGE_NAME": "com.avitiilending.dev"
+    },
+    "cordova-plugin-app-version": {
+      "PACKAGE_NAME": "com.avitiilending.dev"
+    },
+    "cordova-plugin-market": {
+      "PACKAGE_NAME": "com.avitiilending.dev"
     }
   },
   "dependent_plugins": {

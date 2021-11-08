@@ -30,6 +30,8 @@ import {OverlayModule} from '@angular/cdk/overlay';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { StripeModule } from "stripe-angular";
 import { DataTablesModule } from "angular-datatables";
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { Market } from '@ionic-native/market/ngx';
 
 @NgModule({
 
@@ -62,11 +64,13 @@ import { DataTablesModule } from "angular-datatables";
     NguiUtilsModule
   ],
   providers: [
+    AppVersion,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     UtilityService,
     SocketioService,
      MatSnackBar,
+     Market
     // provider used to create fake backend
 
   ],

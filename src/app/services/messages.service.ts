@@ -37,19 +37,25 @@ export class MessagesService implements OnInit {
       if (_currentContactObj) {
         this.myContactsList.push(_currentContactObj);
       }
+      this.resuffleMyContactList();
     });
   }
 
   getAllMyContacts() {
     let _currentUserId = this.currentUser._id;
-    this.socketService.getAllMyContacts(_currentUserId, this.currentUser.role).pipe(first()).subscribe(users => {
-      this.myContactsList = _.filter(_.values(users), function (e) {
+    this.socketService.getAllMyContacts(_currentUserId, this.currentUser.role, _.keys(this.myContactsList).length).pipe(first()).subscribe(users => {
+      this.myContactsList = _.union(this.myContactsList, _.filter(_.values(users), function (e) {
         if (e) {
           return (e._id != _currentUserId);
         }
-      });
+      }));
+      this.resuffleMyContactList();
       this.getAllPendingMessageCountOfContact();
     });
+  }
+
+  resuffleMyContactList() {
+    this.myContactsList = _.values(_.mapKeys(this.myContactsList, "_id"));
   }
 
   getAllPendingMessageCountOfContact(_roomIdArr: string[] = null) {

@@ -7,10 +7,7 @@
 
     <!-- Divider -->
     <hr class="sidebar-divider my-0">
-    <div class="text-white text-center mt-2">
-        <a class="mr-1 small text-white" href="/en">English</a> |
-        <a href="/da" class="ml-1 small text-white">Dansk</a>
-    </div>
+  
     <!-- Nav Item - Dashboard -->
     <li class="nav-item active">
         <a class="nav-link" routerLink="/admin">
@@ -64,11 +61,15 @@
             <i class="icon icon-money"></i>
             <span i18n>Pending Loans</span></a>
     </li>
+ 
+
     <li class="nav-item">
         <a class="nav-link" routerLink="/admin/messages" routerLinkActive="active">
             <i class="icon icon-comments"></i>
-            <span i18n>Messages</span></a>
-            <span *ngIf="messagesService.returnTotalPendingMessagesForUser()>0" class="badge badge-success float-right font-weight-lighter text-capitalize" i18n> {{messagesService.returnTotalPendingMessagesForUser()}}</span>
+            <span i18n>Messages</span>
+            <span *ngIf="messagesService.returnTotalPendingMessagesForUser()>0" class="badge badge-light float-right font-weight-lighter text-capitalize" i18n> {{messagesService.returnTotalPendingMessagesForUser()}}</span>
+        </a>
+          
     </li>
     <li class="nav-item">
         <a class="nav-link" routerLink="/admin/user-levels" routerLinkActive="active">

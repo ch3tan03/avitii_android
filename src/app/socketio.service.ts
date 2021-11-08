@@ -531,7 +531,7 @@ export class SocketioService {
     return fromEvent<any[]>(this.socket, 'user_getall_list');
   }
 
-  getAllMyContacts(_userId: string, role: string, skip: boolean = null) {
+  getAllMyContacts(_userId: string, role: string, skip: number = null) {
     this.socket.emit("request_contact_getall", _userId, role, skip);
     return fromEvent<any[]>(this.socket, 'response_contact_getall');
   }

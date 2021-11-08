@@ -26,6 +26,8 @@ export class IncomeProofComponent implements OnInit {
   maxPercentageAllowed2user: number;
   fileData4MonthlyIncomeProofDocument: File = null;
   fileData4MonthlyIncomeProofDocumentPendingForUpload: Boolean = false;
+  fileData4monthlyExpenseProofDocument: File = null;
+  fileData4monthlyExpenseProofDocumentPendingForUpload: Boolean = false;
 
   allIncomeDetailsData: any;
   allExpenseDetailsData: any;
@@ -81,13 +83,13 @@ export class IncomeProofComponent implements OnInit {
     this.fetchAllIncomeDetailsByUserId();
     this.fetchAllExpenseDetailsByUserId();
     this.fetchSumOfIncomeExpenseDetailsByUserId();
-    
-    if(this.userObj){
-      let obj4Budget = this.utilityService.returnCalculatedAllowedBudgetObj(this.userObj.totalIncome4currentUser, this.userObj.totalExpense4currentUser);             
-      this.userObj.totalAllowedBudget = obj4Budget.totalAllowedBudgetFinal; 
+
+    if (this.userObj) {
+      let obj4Budget = this.utilityService.returnCalculatedAllowedBudgetObj(this.userObj.totalIncome4currentUser, this.userObj.totalExpense4currentUser);
+      this.userObj.totalAllowedBudget = obj4Budget.totalAllowedBudgetFinal;
       this.maxPercentageAllowed2user = obj4Budget.maxPercentageAllowed2user;
     }
-    
+
   }
 
   fetchAllIncomeDetailsByUserId() {
@@ -165,8 +167,8 @@ export class IncomeProofComponent implements OnInit {
               this.userObj.totalIncome4currentUser = data["data"]["totalIncome4currentUser"];
               this.userObj.totalExpense4currentUser = data["data"]["totalExpense4currentUser"];
 
-              let obj4Budget = this.utilityService.returnCalculatedAllowedBudgetObj(this.userObj.totalIncome4currentUser, this.userObj.totalExpense4currentUser);             
-              this.userObj.totalAllowedBudget = obj4Budget.totalAllowedBudgetFinal; 
+              let obj4Budget = this.utilityService.returnCalculatedAllowedBudgetObj(this.userObj.totalIncome4currentUser, this.userObj.totalExpense4currentUser);
+              this.userObj.totalAllowedBudget = obj4Budget.totalAllowedBudgetFinal;
               this.maxPercentageAllowed2user = obj4Budget.maxPercentageAllowed2user;
             }
             this._cdr.detectChanges();
@@ -252,7 +254,10 @@ export class IncomeProofComponent implements OnInit {
       this.alertService.error("Please Provide all data");
       return;
     }
-
+    if (this.fileData4monthlyExpenseProofDocumentPendingForUpload) {
+      this.alertService.error('Please upload document first');
+      return;
+    }
     let _monthlyExpenseStartDateTimeCustomised = this.userExpenseDetailsForm.get('monthlyExpenseStartDateTimeCustomised').value;
     let _monthlyExpensePaymentDateTimeCustomised = this.userExpenseDetailsForm.get('monthlyExpensePaymentDateTimeCustomised').value;
 
@@ -316,7 +321,7 @@ export class IncomeProofComponent implements OnInit {
       _id: [_userObj._id || ''],
 
       incomeSource: [_userObj.incomeSource || '', Validators.required],
-      monthlyIncomeAmount: [_userObj.monthlyIncomeAmount || '', Validators.required],
+      monthlyIncomeAmount: [_userObj.monthlyIncomeAmount || '', [Validators.required, Validators.min(1)]],
       monthlyIncomeProofDocument: [_userObj.monthlyIncomeProofDocument || '', Validators.required],
       monthlyIncomeStatus: [_userObj.monthlyIncomeStatus || SessionStatus.Pending, Validators.required],
 
@@ -336,7 +341,8 @@ export class IncomeProofComponent implements OnInit {
       _id: [_userObj._id || ''],
 
       expenseDetails: [_userObj.expenseDetails || '', Validators.required],
-      monthlyEMIAmount: [_userObj.monthlyEMIAmount || '', Validators.required],
+      monthlyExpenseProofDocument: [_userObj.monthlyExpenseProofDocument || '', Validators.required],
+      monthlyEMIAmount: [_userObj.monthlyEMIAmount || '', [Validators.required, Validators.min(1)]],
       monthlyExpenseStartDateTimeCustomised: [_userObj.monthlyExpenseStartDateTimeCustomised || ''],
       monthlyExpensePaymentDateTimeCustomised: [_userObj.monthlyExpensePaymentDateTimeCustomised || ''],
       monthlyExpenseStartDate: [_userObj.monthlyExpenseStartDate || ''],
@@ -361,7 +367,7 @@ export class IncomeProofComponent implements OnInit {
       _id: [''],
 
       incomeSource: ['', Validators.required],
-      monthlyIncomeAmount: ['', Validators.required],
+      monthlyIncomeAmount: ['', [Validators.required, Validators.min(1)]],
       monthlyIncomeProofDocument: ['', Validators.required],
       monthlyIncomeStatus: [SessionStatus.Pending, Validators.required],
 
@@ -379,7 +385,8 @@ export class IncomeProofComponent implements OnInit {
       _id: [''],
 
       expenseDetails: ['', Validators.required],
-      monthlyEMIAmount: ['', Validators.required],
+      monthlyExpenseProofDocument: ['', Validators.required],
+      monthlyEMIAmount: ['', [Validators.required, Validators.min(1)]],
       monthlyExpenseStartDateTimeCustomised: [''],
       monthlyExpensePaymentDateTimeCustomised: [''],
       monthlyExpenseStartDate: [''],
@@ -458,12 +465,74 @@ export class IncomeProofComponent implements OnInit {
     });
   }
 
+  onfileProgressFormonthlyExpenseProofDocument(fileInput: any) {
+    this.fileData4monthlyExpenseProofDocument = <File>fileInput.target.files[0];
+    this.previewFormonthlyExpenseProofDocument();
+  }
+
+  previewFormonthlyExpenseProofDocument() {
+    // Show preview 
+    var mimeType = this.fileData4monthlyExpenseProofDocument.type;
+    if (mimeType.match(/image\/*/) == null) {
+      return;
+    }
+
+    var reader = new FileReader();
+    reader.readAsDataURL(this.fileData4monthlyExpenseProofDocument);
+    reader.onload = (_event) => {
+      this.userExpenseDetailsForm.get('monthlyExpenseProofDocument').setValue(reader.result);
+      this.fileData4monthlyExpenseProofDocumentPendingForUpload = true;
+    }
+  }
+
+  onUploadFormonthlyExpenseProofDocument() {
+
+    if (!this.fileData4monthlyExpenseProofDocument) {
+      this.alertService.error("Select file first.");
+      return;
+    }
+    var mimeType = this.fileData4monthlyExpenseProofDocument.type;
+    if (mimeType.match(/image\/*/) == null) {
+      this.alertService.error("Select Image file only.");
+      return;
+    }
+    const formData = new FormData();
+    formData.append('files', this.fileData4monthlyExpenseProofDocument);
+    formData.append('documentId', this.userObj._id + '__income_proof');
+    this.fileUploadProgress = '0%';
+
+    this.http.post(uploadAPI, formData, {
+      reportProgress: true,
+      observe: 'events'
+    }).subscribe(events => {
+      if (events.type === HttpEventType.UploadProgress) {
+        this.fileUploadProgress = Math.round(events.loaded / events.total * 100) + '%';
+        //console.log(this.fileUploadProgress);
+      } else if (events.type === HttpEventType.Response) {
+        this.fileUploadProgress = '';
+        //console.log(events.body);
+        //alert('SUCCESS !!');
+        this.fileData4Profile = null;
+        this.alertService.success('Uploaded successfully', true);
+        let _uploadedUrl = events.body["data"].path;
+        if (_.startsWith(_uploadedUrl, '/')) {
+          _uploadedUrl = _uploadedUrl.substr(1);
+        }
+        this.uploadedFilePath = (uploadAccessUrl + '' + _uploadedUrl);
+        this.userExpenseDetailsForm.get('monthlyExpenseProofDocument').setValue(this.uploadedFilePath);
+        this.fileData4monthlyExpenseProofDocumentPendingForUpload = false;
+      }
+    });
+  }
+
   closeDialog() {
     this.dialogRef.close({ event: 'close', data: true });
   }
 
   mediaPreviewModel(mediaSrc, mimeType) {
-
+    if (!mediaSrc || !mimeType) {
+      return;
+    }
     //console.log('411', this.authenticationService.currentUserValue);
     const dialogRef = this.dialog.open(MediaPreviewComponent, {
 
@@ -595,6 +664,11 @@ export class IncomeProofComponent implements OnInit {
             case 'monthlyIncomeProofDocument':
               if (result.data.uploadedFilePath) {
                 this.userIncomeDetailsForm.get('monthlyIncomeProofDocument').setValue(result.data.uploadedFilePath);
+              }
+              break;
+            case 'monthlyExpenseProofDocument':
+              if (result.data.uploadedFilePath) {
+                this.userExpenseDetailsForm.get('monthlyExpenseProofDocument').setValue(result.data.uploadedFilePath);
               }
               break;
           }

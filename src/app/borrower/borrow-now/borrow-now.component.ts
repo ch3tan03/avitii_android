@@ -332,7 +332,7 @@ export class BorrowNowComponent implements OnInit {
   }
 
   clickedOnVerifiedSignLoanContract() {
-    debugger;
+    //debugger;
     if (this.borrowerUserObj) {
       if (!this.borrowNowForm.get('eSignatureBorrowersName').value) {
         this.borrowNowForm.get('eSignatureBorrowersName').setValue(this.borrowerUserObj.firstName || this.borrowerUserObj.lastName);

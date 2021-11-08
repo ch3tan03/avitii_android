@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 import { ContactService } from 'src/app/services/contact.service';
 import { MoneyTransferDataComponent } from 'src/app/shared/money-transfer-data/money-transfer-data.component';
 import { environment } from 'src/environments/environment';
+import { PublicProfileComponent } from 'src/app/shared/public-profile/public-profile.component';
 
 @Component({
   selector: 'app-home',
@@ -1329,5 +1330,51 @@ export class HomeComponent implements OnInit, OnDestroy {
   returnUrl4downloadCOntractPDF(sessionApplyId) {
     let Url4downloadCOntractPDF = environment.apiUrl + '/signed_pdf_contract/' + sessionApplyId + '.pdf';
     return Url4downloadCOntractPDF;
+  }
+  usersProfile(userObj) {
+    //#region fetch creator id
+    this.userService.getUserById(userObj._id)
+      .pipe(first())
+      .subscribe(
+        data => {
+          if (data && data['success']) {
+            //console.log('84', this.authenticationService.currentUserValue);
+            const dialogRef = this.dialog.open(PublicProfileComponent, {
+
+              maxWidth: '100vw',
+              maxHeight: '100vh',
+              height: '100%',
+              width: '100%',
+              hasBackdrop: true,
+              data: {
+                userObj: this.utilityService._.cloneDeep(data['data']),
+                adminViewT: false
+              }
+            });
+
+            dialogRef.afterClosed().subscribe(result => {
+              //console.log(`99 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+            });
+
+          } else {
+
+          }
+        },
+        error => {
+          let errorMsg2show = "";
+          try {
+            if (error && error.error && error.error.message) {
+              errorMsg2show = error.error.message;
+            } else if (error && error.message) {
+              errorMsg2show = error.message;
+            } else {
+              errorMsg2show = error;
+            }
+          } catch (ex) { }
+          this.alertService.error(errorMsg2show);
+
+        });
+    //#endregion fetch creator id
+
   }
 }

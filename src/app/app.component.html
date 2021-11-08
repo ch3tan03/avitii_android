@@ -1,2 +1,12 @@
 <app-alert></app-alert>		
-<router-outlet></router-outlet>  
+<router-outlet *ngIf="!isUpdateAvailable"></router-outlet>  
+
+
+<div class="text-center align-self-center mt-5 mx-4" *ngIf="isUpdateAvailable">
+    <img class="img-fluid mx-5"  src="/assets/img/rocket.svg">
+<h2 class="mt-5">Update available</h2>
+
+<h3 class="my-4 text-secondary font-weight-light">For better experince, we recommend to update the application to the latest version.</h3>
+
+<a class="btn btn-default btn-gradient col-5 mr-3 py-3" (click)="navigateToStore()">UPDATE</a>
+</div>

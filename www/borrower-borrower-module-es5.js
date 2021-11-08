@@ -62,7 +62,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<!-- Page Heading -->\n<!-- <div class=\"d-sm-flex align-items-center justify-content-between mb-4\">\n        <h1 class=\"h3 mb-0 text-gray-800\">Dashboard</h1>\n        <a href=\"#\" class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\"><i class=\"fas fa-download fa-sm text-white-50\"></i> Profile</a>\n    </div> -->\n\n<div [ngSwitch]=\"authenticationService.currentUserValue.role\">\n    <div *ngSwitchCase=\"Role.Borrower\">\n        <div class=\"jumbotron\"\n            *ngIf=\"(authenticationService.currentUserValue.isVerified==0 || authenticationService.currentUserValue.isVerified==2) || !authenticationService.currentUserValue.isUsersBankDetailsSubmitted || (authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified==0 || authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified==2)\">\n            <div class=\"text-black-50 h2 font-weight-lighter\" i18n>\n                Welome{{authenticationService.currentUserValue.isVerified==1?', Your profile has been verified succesfully':''}}. Your need to submit your\n                <span class=\"badge badge-danger\" >Bank Details</span> and\n                <span class=\"badge badge-danger\" >Income Proof Documents</span> to access the loan market.\n            </div>\n            <hr>\n            <ul class=\"list-unstyled\">\n                <li class=\"d-flex align-items-center justify-content-center mb-3 h4\" i18n>\n                    Profile and personal document verification\n                    <span [ngSwitch]=\"authenticationService.currentUserValue.isVerified\">\n                        <i *ngSwitchCase=\"1\" class=\"icon icon-check-box text-success ml-3\"></i>\n                        <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\n                            routerLink=\"/borrower/profile\"></i>\n                    </span>\n                </li>\n                <li class=\"d-flex align-items-center justify-content-center mb-3 h4\" i18n>\n                    Bank details submission\n                    <span [ngSwitch]=\"authenticationService.currentUserValue.isUsersBankDetailsSubmitted\">\n                        <i *ngSwitchCase=\"true\" class=\"icon icon-check-box text-success ml-3\"></i>\n                        <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\n                            routerLink=\"/borrower/bank-details\"></i>\n                    </span>\n                </li>\n                <li class=\"d-flex align-items-center justify-content-center mb-3 h4\" i18n>\n                    Income Proof Documents and Mothly Expenses\n                    <span [ngSwitch]=\"authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified\">\n                        <i *ngSwitchCase=\"1\" class=\"icon icon-check-box text-success ml-3\"></i>\n                        <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\n                            routerLink=\"/borrower/income-proof\"></i>\n                    </span>\n                </li>\n            </ul>\n        </div>\n    </div>\n    <div *ngSwitchCase=\"Role.Lender\">\n        <div class=\"jumbotron\"\n            *ngIf=\"(authenticationService.currentUserValue.isVerified==0 || authenticationService.currentUserValue.isVerified==2) || !authenticationService.currentUserValue.isUsersBankDetailsSubmitted\">\n            <div class=\"text-black-50 h2 font-weight-lighter\" i18n>\n                Welome{{authenticationService.currentUserValue.isVerified==1?', Your profile has been verified succesfully':''}}. Your need to submit your\n                <span class=\"badge badge-danger\">Bank Details</span> to access the Loan Market.\n            </div>\n            <hr>\n            <ul class=\"list-unstyled\">\n                <li class=\"d-flex align-items-center justify-content-center mb-3 h4\" i18n>\n                    Profile and personal document verification\n                    <span [ngSwitch]=\"authenticationService.currentUserValue.isVerified\">\n                        <i *ngSwitchCase=\"1\" class=\"icon icon-check-box text-success ml-3\"></i>\n                        <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\n                            routerLink=\"/lender/profile\"></i>\n                    </span>\n                </li>\n                <li class=\"d-flex align-items-center justify-content-center mb-3 h4\" i18n>\n                    Bank details submission\n                    <span [ngSwitch]=\"authenticationService.currentUserValue.isUsersBankDetailsSubmitted\">\n                        <i *ngSwitchCase=\"true\" class=\"icon icon-check-box text-success ml-3\"></i>\n                        <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\n                            routerLink=\"/lender/bank-details\"></i>\n                    </span>\n                </li>\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <!-- Earnings (Monthly) Card Example -->\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\n        <div class=\"card border-left-warning shadow h-100\">\n            <div class=\"card-body dashobard-card\">\n                <div class=\"row no-gutters align-items-center\">\n                    <div class=\"col mr-2\">\n                        <div class=\"text-xs font-weight-bold text-warning text-uppercase mb-1\" i18n>\n                            Member since\n                        </div>\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\">\n                            {{authenticationService.currentUserValue.userVerifiedOn | date:'dd-MMM-YYYY'}}\n                        </div>\n                    </div>\n                    <div class=\"col-auto\">\n                        <i class=\"fas fa-dollar-sign fa-2x text-gray-300\"></i>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\n        <div class=\"card border-left-primary shadow h-100\">\n            <div class=\"card-body dashobard-card\">\n                <div class=\"row no-gutters align-items-center\">\n                    <div class=\"col mr-2\">\n                        <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\" i18n>\n                            My Level\n                        </div>\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800 text-capitalize text-cap\">\n                            <!--{{utilityService.returnStringWithReplacing_(authenticationService.currentUserValue.userType)}}-->\n                            {{(authenticationService.currentUserValue.userTypeTitle || authenticationService.returnUserTypeForUserFromSuppliedUserLevel(authenticationService.currentUserValue.userType))}}\n                        </div>\n                    </div>\n                    <div class=\"col-auto\">\n                        <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <!-- Earnings (Monthly) Card Example -->\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\n        <div class=\"card border-left-success shadow h-100\">\n            <div class=\"card-body dashobard-card\">\n                <div class=\"row no-gutters align-items-center\">\n                    <div class=\"col mr-2\">\n                        <div class=\"text-xs font-weight-bold text-success text-uppercase mb-1\" i18n>\n                            Paid Contracts\n                        </div>\n                        <div class=\"row no-gutters align-items-center\">\n                            <div class=\"col-auto\">\n                                <div class=\"h5 mb-0 mr-3 font-weight-bold text-gray-800\">{{allMyPaidContractCount}}\n                                </div>\n                            </div>\n                            <!-- <div class=\"col\">\n                                            <div class=\"progress progress-sm mr-2\">\n                                                <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 50%\" aria-valuenow=\"50\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\n                                            </div>\n                                        </div> -->\n                        </div>\n                    </div>\n                    <div class=\"col-auto\">\n                        <i class=\"fas fa-clipboard-list fa-2x text-gray-300\"></i>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <!-- Pending Requests Card Example -->\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\n        <div class=\"card border-left-secondary shadow h-100\">\n            <div class=\"card-body dashobard-card\">\n                <div class=\"row no-gutters align-items-center\">\n                    <div class=\"col mr-2\">\n                        <div class=\"text-xs font-weight-bold text-secondary text-uppercase mb-1\" i18n>\n                            Paid Loans</div>\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\">{{allMyPaidLoanCount}}</div>\n                    </div>\n                    <div class=\"col-auto\">\n                        <i class=\"fas fa-comments fa-2x text-gray-300\"></i>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\n        <div class=\"card bg-primary text-white shadow\">\n            <div class=\"card-body dashobard-card\">\n                <div class=\"text-xs font-weight-bold text-uppercase mb-1\" i18n>\n                    Active Loan</div>\n                <div class=\"h5 mb-0 font-weight-bold\">{{allMyActiveLoanCount}}</div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\n        <div class=\"card bg-success text-white shadow\">\n            <div class=\"card-body dashobard-card\">\n                <div class=\"text-xs font-weight-bold text-uppercase mb-1\" i18n>\n                    UnSigned contracts</div>\n                <div class=\"h5 mb-0 font-weight-bold\">{{allMyUnSignedContractLoanCount}}</div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\n        <div class=\"card bg-warning text-white shadow\">\n            <div class=\"card-body dashobard-card\">\n                <div class=\"text-xs font-weight-bold text-uppercase mb-1\" i18n>\n                    Disbursed Loans</div>\n                <div class=\"h5 mb-0 font-weight-bold\">{{allMyDisbursedLoanCount}}</div>\n            </div>\n        </div>\n    </div>\n    <!--\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\n        <div class=\"card bg-secondary text-white shadow\">\n            <div class=\"card-body dashobard-card\">\n                <div class=\"text-xs font-weight-bold text-uppercase mb-1\">\n                    Profit Overview</div>\n                <div class=\"h5 mb-0 font-weight-bold\">{{allMyProfitOverviewCount}}</div>\n            </div>\n        </div>\n    </div>\n-->\n</div>\n\n<div class=\"row\">\n\n    <div class=\"col-xl-12 col-12\">\n        <div class=\"card shadow mb-4\">\n\n            <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\n                <h6 class=\"m-0 font-weight-bold text-primary\" i18n>Active Loans</h6>\n\n            </div>\n\n            <div class=\"card-body p-0\">\n                <div class=\"table-responsive table-billing-history\">\n                    <table class=\"table mb-0\">\n                        <thead>\n                            <tr>\n                                <th scope=\"col\" i18n>Type</th>\n                                <th scope=\"col\" i18n>\n                                    {{Role.Lender!=authenticationService.currentUserValue.role?'Lender\n                                    Name':'Borrower Name'}}\n                                </th>\n                                <th scope=\"col\" i18n>Amount</th>\n                                <th scope=\"col\" i18n>Refund</th>\n                                <th scope=\"col\" i18n>Next EMI</th>\n                                <th scope=\"col\" i18n>Status</th>\n                                <th scope=\"col\" i18n>Contract</th>\n                                <th scope=\"col\" i18n>Action</th>\n                            </tr>\n                        </thead>\n                        <tbody>\n                            <!--New Data table from Sessions Apply-->\n                            <tr\n                            *ngFor=\"let LoanApplyObj of utilityService._.values( allSessionApplyData) | mySessionsFilter : 'status' : ['accepted']:checkCreatedByUserId:checkCreatedByT; let i=index;\">\n                            <td class=\"text-capitalize\">{{(LoanApplyObj.sessionForBorrower.loanType ||\n                                \"\").replace(\"_\", \" \")}}</td>\n                            <td class=\"text-capitalize\">\n                                {{(LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId.firstName:LoanApplyObj.borrowerId.firstName)}}\n                                <!--\n                                {{userService.returnUsersObjFromLocal(null,\n                                null,'firstName',\n                                (LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId._id:LoanApplyObj.borrowerId._id))}}\n                                -->\n                            </td>\n                            <td>{{LoanApplyObj.loanAmount || LoanApplyObj.sessionForBorrower.loanAmount}}</td>\n                            <td>{{utilityService.returnRoundedNumber((LoanApplyObj.calculatedMonthlyAmountForEMI ||\n                                LoanApplyObj.sessionForBorrower.calculatedMonthlyAmountForEMI) *\n                                LoanApplyObj.sessionForBorrower.loanTenureInMonths)}}</td>\n                            <td>{{LoanApplyObj.nextInstallment | date:'dd-MMM-YYYY'}}</td>\n                            <td>\n                                <div *ngIf=\"LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id\">\n                                    <a *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender\">\n                                        <span class=\"badge badge-danger\" i18n>\n                                            Pending\n                                        </span>\n                                    </a>\n                                    <a\n                                        *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && !LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                        <span class=\"badge badge-warning\" i18n>\n                                            Money Sent\n                                        </span>\n                                    </a>\n                                    <a\n                                        *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                        <span class=\"badge badge-success\" i18n>\n                                            Received Money\n                                        </span>\n                                    </a>\n                                </div>\n                                <div *ngIf=\"LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\">\n                                    <a *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender\">\n                                        <span\n                                            *ngIf=\"LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\"\n                                            class=\"badge badge-danger\" i18n>\n                                            Money Not Sent\n                                        </span>\n                                    </a>\n                                    <a\n                                    *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && !LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                    <span class=\"badge badge-warning\" i18n>\n                                        Money Sent\n                                    </span>\n                                    </a>\n                                    <a\n                                        *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                        <span class=\"badge badge-success\" i18n>\n                                            Money Sent\n                                        </span>\n                                    </a>\n                                </div>\n                            </td>\n                            <td>\n                                <a class=\"btn btn-success btn-sm float-left ml-2\" i18n target=\"_blank\"\n                                [href]=\"returnUrl4downloadCOntractPDF(LoanApplyObj._id)\" download><i\n                                    class=\"icon-cloud-down\"></i>&nbsp;</a>\n                            </td>\n                            <td>\n                                <div *ngIf=\"LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id\">\n                                    <a *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && !LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                            <!--<span class=\"badge badge-success\" i18n>is Money Received?</span>-->\n\n                                            <div class=\"form-check-inline\">\n                                                <div class=\"custom-control custom-checkbox\">\n                                                    <input name=\"isLoanAmountPaidByLenderConfirmByBorrower_{{i}}\" id=\"isLoanAmountPaidByLenderConfirmByBorrower_{{i}}\" type=\"checkbox\"\n                                                        class=\"custom-control-input\" [value]=\"true\"\n                                                        (change)=\"LoanMoneyTransferStatusChange($event, LoanApplyObj.sessionForBorrower, LoanApplyObj)\"\n                                                        [checked]=\"LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                                    <label for=\"isLoanAmountPaidByLenderConfirmByBorrower_{{i}}\" class=\"custom-control-label\" i18n>\n                                                        Money Received\n                                                    </label>\n                                                </div>\n                                            </div>\n                                    </a>\n                                    \n                                    <a *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower && LoanApplyObj.nextInstallment && !LoanApplyObj.isLoanAmountPaidByBorrower\">\n                                       <!--\n                                        <span (click)=\"LoanMoneyTransferStatusModel(LoanApplyObj.sessionForBorrower, LoanApplyObj, LoanApplyObj.nextInstallment)\" class=\"badge badge-success\">is Installment Money Transfered?</span>\n                                    -->\n                                    <div class=\"form-check-inline\">\n                                        <div class=\"custom-control custom-checkbox\">\n                                            <input name=\"isLoanAmountPaidByBorrower_{{i}}\" id=\"isLoanAmountPaidByBorrower_{{i}}\" type=\"checkbox\"\n                                                class=\"custom-control-input\" [value]=\"true\"\n                                                (change)=\"LoanMoneyTransferStatusChange($event, LoanApplyObj.sessionForBorrower, LoanApplyObj, LoanApplyObj.nextInstallment)\"\n                                                [checked]=\"LoanApplyObj.isLoanAmountPaidByBorrower\">\n                                            <label for=\"isLoanAmountPaidByBorrower_{{i}}\" class=\"custom-control-label\" i18n>\n                                                Installment Money Transfered\n                                            </label>\n                                        </div>\n                                    </div>\n                                    </a>\n                                </div>\n                                <div *ngIf=\"LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\">\n                                    <a *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender\">\n                                       <!--\n                                        <span (click)=\"LoanMoneyTransferStatusModel(LoanApplyObj.sessionForBorrower, LoanApplyObj)\" class=\"badge badge-success\">\n                                            is Money Transfered?\n                                        </span>\n                                    -->\n                                        <div class=\"form-check-inline\">\n                                            <div class=\"custom-control custom-checkbox\">\n                                                <input name=\"isLoanAmountPaidByLender_{{i}}\" id=\"isLoanAmountPaidByLender_{{i}}\" type=\"checkbox\"\n                                                    class=\"custom-control-input\" [value]=\"true\"\n                                                    (change)=\"LoanMoneyTransferStatusChange($event, LoanApplyObj.sessionForBorrower, LoanApplyObj)\"\n                                                    [checked]=\"LoanApplyObj.isLoanAmountPaidByLender\">\n                                                <label for=\"isLoanAmountPaidByLender_{{i}}\" class=\"custom-control-label\" i18n>\n                                                    Money Transfered\n                                                </label>\n                                            </div>\n                                        </div>\n                                    </a>\n                                    <a *ngIf=\"!LoanApplyObj.isLoanAmountPaidByBorrower && LoanApplyObj.installmentWiseLoanAmountPaidByBorrower\">\n                                        <!--<span class=\"badge badge-success\" i18n>is Installment Money Received?&nbsp;</span>-->\n                                        <div class=\"form-check-inline\">\n                                            <div class=\"custom-control custom-checkbox\">\n                                                <input name=\"isLoanAmountPaidByBorrowerConfirmedByLender_{{i}}\" id=\"isLoanAmountPaidByBorrowerConfirmedByLender_{{i}}\" type=\"checkbox\"\n                                                    class=\"custom-control-input\" [value]=\"true\"\n                                                    (change)=\"LoanMoneyTransferStatusChange($event, LoanApplyObj.sessionForBorrower, LoanApplyObj, LoanApplyObj.nextInstallment, true)\"\n                                                    [checked]=\"LoanApplyObj.isLoanAmountPaidByBorrower\">\n                                                <label for=\"isLoanAmountPaidByBorrowerConfirmedByLender_{{i}}\" class=\"custom-control-label\" i18n>\n                                                    Installment Money Received\n                                                </label>\n                                            </div>\n                                        </div>\n                                        <span\n                                            *ngFor=\"let installmentObj of utilityService._.values(LoanApplyObj.installmentWiseLoanAmountPaidByBorrower)\">\n                                            <i *ngIf=\"installmentObj.createdOnForLoanAmountPaidToLender && !installmentObj.createdOnForLoanAmountPaidToLenderConfirmByLender\">*</i>\n                                        </span>\n                                    </a>\n\n\n                                </div>\n                            </td>\n                        </tr>\n                            <!--New Data table from Session Apply-->\n\n                            <!--Old Data table from Sessions-->\n                            <!--\n                            <tr\n                                *ngFor=\"let LoanObj of allSessionsData | mySessionsFilter : 'sessionAppliedByBorrowers[0].status' : ['accepted']:checkCreatedByUserId:checkCreatedByT\">\n                                <td class=\"text-capitalize\">{{(LoanObj.loanType || \"\").replace(\"_\", \" \")}}</td>\n                                <td class=\"text-capitalize\">\n                                    {{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                    true,'firstName')}}</td>\n                                <td>{{LoanObj.loanAmount}}</td>\n                                <td>{{utilityService.returnRoundedNumber(LoanObj.calculatedMonthlyAmountForEMI *\n                                    LoanObj.loanTenureInMonths)}}</td>\n                                <td>{{LoanObj.nextInstallment | date:'dd-MMM-YYYY'}}</td>\n                                <td>\n                                    <div *ngFor=\"let LoanApplyObj of LoanObj.sessionAppliedByBorrowers\">\n                                        <a>\n                                            <span *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender\"\n                                                class=\"badge badge-danger\">Pending</span>\n                                            <span *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender\"\n                                                class=\"badge badge-success\">Received Money</span>\n                                        </a>\n                                    </div>\n                                </td>\n                                <td>\n                                    <a (click)=\"showAppliedToSession(LoanObj)\">\n                                        <span class=\"badge badge-primary\">Details</span>\n                                    </a>\n                                </td>\n                            </tr>\n                        -->\n                            <!--Old Data table from Sessions-->\n                            <tr class=\"mt-2 text-center no-item\">\n\n                                <h5 class=\"my-4 font-weight-normal\" i18n>No Data Found.</h5>\n                            </tr>\n                        </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"col-xl-12 col-12\">\n        <div class=\"card shadow mb-4\">\n\n            <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\n                <h6 class=\"m-0 font-weight-bold text-primary\" i18n>Unsigned Contracts</h6>\n\n            </div>\n\n            <div class=\"card-body p-0\">\n                <div class=\"table-responsive table-billing-history\">\n                    <table class=\"table mb-0\">\n                        <thead>\n                            <tr>\n                                <th scope=\"col\" i18n>Type</th>\n                                <th scope=\"col\" i18n>\n                                    {{Role.Lender!=authenticationService.currentUserValue.role?'Lender\n                                        Name':'Borrower Name'}}\n                                </th>\n                                <th scope=\"col\" i18n>Amount</th>\n                                <th scope=\"col\" i18n>Refund</th>\n                                <!--<th scope=\"col\" i18n>Next EMI</th>-->\n                                <th scope=\"col\" i18n>Application Date</th>\n                                <th scope=\"col\" i18n>Action</th>\n                            </tr>\n                        </thead>\n                        <tbody>\n                            <tr *ngFor=\"let LoanApplyObj of utilityService._.values( allSessionApplyData) | mySessionsFilter : 'status' : ['awaiting_for_approval']:checkCreatedByUserId:checkCreatedByT; let i=index;\">\n                            <td class=\"text-capitalize\">{{(LoanApplyObj.sessionForBorrower.loanType ||\n                                \"\").replace(\"_\", \" \")}}</td>\n                            <td class=\"text-capitalize\">\n                                {{(LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId.firstName:LoanApplyObj.borrowerId.firstName)}}\n                                <!--\n                                {{userService.returnUsersObjFromLocal(null,\n                                null,'firstName',\n                                (LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId._id:LoanApplyObj.borrowerId._id))}}\n                                -->\n                            </td>\n                            <td>{{LoanApplyObj.loanAmount || LoanApplyObj.sessionForBorrower.loanAmount}}</td>\n                            <td>{{utilityService.returnRoundedNumber((LoanApplyObj.calculatedMonthlyAmountForEMI ||\n                                LoanApplyObj.sessionForBorrower.calculatedMonthlyAmountForEMI) *\n                                LoanApplyObj.sessionForBorrower.loanTenureInMonths)}}</td>\n                            <td>{{LoanApplyObj.nextInstallment | date:'dd-MMM-YYYY'}}</td>\n                            <!--\n                            <td>\n                                <div *ngIf=\"LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id\">\n                                    <a *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender\">\n                                        <span class=\"badge badge-danger\" i18n>\n                                            Pending\n                                        </span>\n                                    </a>\n                                    <a\n                                        *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && !LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                        <span class=\"badge badge-warning\" i18n>\n                                            Money Sent\n                                        </span>\n                                    </a>\n                                    <a\n                                        *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                        <span class=\"badge badge-success\" i18n>\n                                            Received Money\n                                        </span>\n                                    </a>\n                                </div>\n                                <div *ngIf=\"LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\">\n                                    <a *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender\">\n                                        <span\n                                            *ngIf=\"LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\"\n                                            class=\"badge badge-danger\" i18n>\n                                            Money Not Sent\n                                        </span>\n                                    </a>\n                                    <a\n                                    *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && !LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                    <span class=\"badge badge-warning\" i18n>\n                                        Money Sent\n                                    </span>\n                                    </a>\n                                    <a\n                                        *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                        <span class=\"badge badge-success\" i18n>\n                                            Money Sent\n                                        </span>\n                                    </a>\n                                </div>\n                            </td>\n                        -->\n                            <td>\n                                <a (click)=\"showAppliedToSession(null, LoanApplyObj.loanId)\">\n                                    <span class=\"badge badge-primary\" i18n>Details</span>\n                                </a>\n                            </td>\n                        </tr>\n                            <tr class=\"mt-2 text-center no-item\">\n\n                                <h5 class=\"my-4 font-weight-normal\" i18n>No Data Found.</h5>\n                            </tr>\n                        </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"col-xl-12 col-12\">\n        <div class=\"card shadow mb-4\">\n\n            <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\n                <h6 class=\"m-0 font-weight-bold text-primary\" i18n>Paid Loans</h6>\n\n            </div>\n\n            <div class=\"card-body p-0\">\n                <div class=\"table-responsive table-billing-history\">\n                    <table class=\"table mb-0\">\n                        <thead>\n                            <tr>\n                                <th scope=\"col\" i18n>Type</th>\n                                <th scope=\"col\" i18n>\n                                    {{Role.Lender!=authenticationService.currentUserValue.role?'Lender\n                                        Name':'Borrower Name'}}\n                                </th>\n                                <th scope=\"col\" i18n>Amount</th>\n                                <th scope=\"col\" i18n>Refund</th>\n                                <th scope=\"col\" i18n>Contract</th>\n                                <th scope=\"col\" i18n>#</th>\n                            </tr>\n                        </thead>\n                        <tbody>\n                            <tr\n                                *ngFor=\"let LoanApplyObj of utilityService._.values( allSessionApplyData) | mySessionsFilter : 'status' : ['paid','completed']:checkCreatedByUserId:checkCreatedByT\">\n                                <td class=\"text-capitalize\">{{(LoanApplyObj.sessionForBorrower.loanType ||\n                                    \"\").replace(\"_\", \" \")}}</td>\n                                <td class=\"text-capitalize\">\n                                    {{(LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId.firstName:LoanApplyObj.borrowerId.firstName)}}\n                                    <!--\n                                    {{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                    true,'firstName')}}\n                                    -->\n                                </td>\n                                <td>{{LoanApplyObj.loanAmount || LoanApplyObj.sessionForBorrower.loanAmount}}</td>\n                                <td>{{utilityService.returnRoundedNumber((LoanApplyObj.calculatedMonthlyAmountForEMI ||\n                                    LoanApplyObj.sessionForBorrower.calculatedMonthlyAmountForEMI) *\n                                    LoanApplyObj.sessionForBorrower.loanTenureInMonths)}}</td>\n                                <td>\n                                    <a class=\"btn btn-success btn-sm float-left ml-2\" i18n target=\"_blank\"\n                                    [href]=\"returnUrl4downloadCOntractPDF(LoanApplyObj._id)\" download><i\n                                        class=\"icon-cloud-down\"></i>&nbsp;</a>\n                                </td>\n                                <td>\n                                    <a (click)=\"showAppliedToSession(null, LoanApplyObj.loanId)\">\n                                        <span class=\"badge badge-primary\" i18n>Details</span>\n                                    </a>\n                                </td>\n                            </tr>\n                            <tr class=\"mt-2 text-center no-item\">\n\n                                <h5 class=\"my-4 font-weight-normal\" i18n>No Data Found.</h5>\n                            </tr>\n                        </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n\n<!--\n    <div class=\"row d-none\">\n    \n        <div class=\"col-xl-4 col-12\">\n            <div class=\"row\">\n    \n                <div class=\"col-xl-12 col-md-6 mb-3\">\n                    <div class=\"card shadow-sm\">\n                        <div class=\"card-body\">\n                            <div class=\"row no-gutters align-items-center\">\n                                <div class=\"col text-center border-right\">\n                                    <div class=\"text-xs font-weight-bold text-success text-uppercase mb-1\">My Wallet\n                                    </div>\n                                    <div class=\"h5 mb-0 font-weight-bold text-gray-800\">\n                                        ${{fundService.totalFund4currentUser}}</div>\n                                </div>\n    \n                                <div class=\"col text-center\">\n                                    <div class=\"text-xs font-weight-bold text-success text-uppercase mb-1\">My Sessions\n                                    </div>\n                                    <div class=\"h5 mb-0 font-weight-bold text-gray-800\">\n                                        {{allSessionsCount}}/{{allSessionsTodayCount}}</div>\n                                </div>\n    \n                            </div>\n                        </div>\n                    </div>\n                </div>\n    \n                <div class=\"col-xl-12 col-md-6 mb-3\">\n    \n                    <section class=\"blog-sidebar pt-0\">\n                        <div class=\"row pl-0 pr-0\">\n                            <div class=\"col-lg-12\">\n                                 <div>\n                                    <h5 class=\"blog-title\">upcoming sessions</h5>\n                                    <div class=\"sidebar-container\">\n                                        <div *ngFor=\"let item of utilityService._.values(allSessionsTodayList);\" class=\"post-container d-flex\">\n                                            <div class=\"w-35 m-r-25\">\n                                                <img alt=\"\" class=\"img-fluid\" src=\"./assets/img/na.png\">\n                                                <div class=\"badge badge-blue\">\n                                                    {{item.location}}\n                                                </div>\n                                            </div>\n                                            <div>\n                                                <h5 class=\"post-head\">{{item.sessionSubject}}</h5>\n                                                <h6 class=\"date\">{{item.loanStartDateTime | date:'medium'}}</h6>\n                                                <div class=\"mt-3\">\n                                                    <i class=\"icon-video-camera fa-lg mr-3\" (click)=\"clickedOnSessionChatVideo(item, true)\"></i>\n                                                    <i class=\"icon-comment\" (click)=\"clickedOnSessionChatVideo(item, false)\"></i>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"mt-2 text-center blog-agency no-item\">\n                                            <img src=\"assets/img/noresult.png\" style=\"height: 60px;\">\n                                            <h5 class=\"mt-3 font-weight-normal\">Looks like you don't have any counselling Session today</h5>\n                                        </div>\n    \n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </section>\n                </div>\n    \n            </div>\n    \n        </div>\n    \n        <div class=\"col-xl-8 col-12\">\n    \n            <section class=\"agency blog blog-sec blog-sidebar sider p-0\">\n    \n                <div class=\"h6 mb-3\">\n    \n                    LATEST SESSIONS\n                   \n                </div>\n                <div class=\"card shadow-sm mb-4\" *ngFor=\"let session of allSessionsData\">\n                    <div class=\"bg-white blog-title card-header mb-0 text-capitalize\">\n                        {{session.sessionSubject}}\n                    </div>\n                    <div class=\"card-body px-md-3 px-1 small\">\n                         <div class=\"row\">               \n                        <div class=\"col-xl-12 col-12\">\n                            <p class=\"para2\" [class.show_more]=\"!session._id\">\n                                {{session.loanDescription}}\n                            </p>\n                        </div>          \n                        <div class=\"col-xl-6 col-6 border-right mb-2\">\n                            <i aria-hidden=\"true\" class=\"icon-timer mr-2\"></i> {{session.loanStartDateTime | date:'MMM d, h:mm a'}}\n                        </div>\n                       \n                        <div class=\"col-xl-6 col-6\">\n                            <i aria-hidden=\"true\" class=\"icon-location-pin m-r-10\"></i>\n                            \n                            {{session.location}}\n                        </div>\n                      \n                    </div>\n                    </div>\n                    <div class=\"card-footer bg-white\">\n                        <span class=\"badge badge-success font-weight-normal text-capitalize btn float-left\" >{{session.sessionType}}</span>\n                        <a *ngIf=\"!check4applyToSession(session)\" class=\"btn btn-success  text-capitalize btn-sm float-right text-white\" (click)=\"applyToSession(session)\">Apply</a>\n                        <a *ngIf=\"check4applyToSession(session)\" class=\"btn btn-primary text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(session)\"> Details</a>\n                    </div>\n                </div>\n                \n                <div *ngIf=\"!allSessionsData\">\n                    <div class=\"content_loader\"></div>\n                    <div class=\"content_loader\"></div>\n                </div>\n    \n            </section>\n        </div>\n    </div>\n    -->";
+      __webpack_exports__["default"] = "<!-- Page Heading -->\n<!-- <div class=\"d-sm-flex align-items-center justify-content-between mb-4\">\n        <h1 class=\"h3 mb-0 text-gray-800\">Dashboard</h1>\n        <a href=\"#\" class=\"d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm\"><i class=\"fas fa-download fa-sm text-white-50\"></i> Profile</a>\n    </div> -->\n\n<div [ngSwitch]=\"authenticationService.currentUserValue.role\">\n    <div *ngSwitchCase=\"Role.Borrower\">\n        <div class=\"jumbotron\"\n            *ngIf=\"(authenticationService.currentUserValue.isVerified==0 || authenticationService.currentUserValue.isVerified==2) || !authenticationService.currentUserValue.isUsersBankDetailsSubmitted || (authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified==0 || authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified==2)\">\n            <div class=\"text-black-50 h2 font-weight-lighter\" i18n>\n                Welome{{authenticationService.currentUserValue.isVerified==1?', Your profile has been verified\n                succesfully':''}}. Your need to submit your\n                <span class=\"badge badge-danger\">Bank Details</span> and\n                <span class=\"badge badge-danger\">Income Proof Documents</span> to access the loan market.\n            </div>\n            <hr>\n            <ul class=\"list-unstyled\">\n                <li class=\"d-flex align-items-center justify-content-center mb-3 h4\" i18n>\n                    Profile and personal document verification\n                    <span [ngSwitch]=\"authenticationService.currentUserValue.isVerified\">\n                        <i *ngSwitchCase=\"1\" class=\"icon icon-check-box text-success ml-3\"></i>\n                        <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\n                            routerLink=\"/borrower/profile\"></i>\n                    </span>\n                </li>\n                <li class=\"d-flex align-items-center justify-content-center mb-3 h4\" i18n>\n                    Bank details submission\n                    <span [ngSwitch]=\"authenticationService.currentUserValue.isUsersBankDetailsSubmitted\">\n                        <i *ngSwitchCase=\"true\" class=\"icon icon-check-box text-success ml-3\"></i>\n                        <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\n                            routerLink=\"/borrower/bank-details\"></i>\n                    </span>\n                </li>\n                <li class=\"d-flex align-items-center justify-content-center mb-3 h4\" i18n>\n                    Income Proof Documents and Mothly Expenses\n                    <span [ngSwitch]=\"authenticationService.currentUserValue.isUsersIncomeAndExpenseProofVerified\">\n                        <i *ngSwitchCase=\"1\" class=\"icon icon-check-box text-success ml-3\"></i>\n                        <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\n                            routerLink=\"/borrower/income-proof\"></i>\n                    </span>\n                </li>\n            </ul>\n        </div>\n    </div>\n    <div *ngSwitchCase=\"Role.Lender\">\n        <div class=\"jumbotron\"\n            *ngIf=\"(authenticationService.currentUserValue.isVerified==0 || authenticationService.currentUserValue.isVerified==2) || !authenticationService.currentUserValue.isUsersBankDetailsSubmitted\">\n            <div class=\"text-black-50 h2 font-weight-lighter\" i18n>\n                Welome{{authenticationService.currentUserValue.isVerified==1?', Your profile has been verified\n                succesfully':''}}. Your need to submit your\n                <span class=\"badge badge-danger\">Bank Details</span> to access the Loan Market.\n            </div>\n            <hr>\n            <ul class=\"list-unstyled\">\n                <li class=\"d-flex align-items-center justify-content-center mb-3 h4\" i18n>\n                    Profile and personal document verification\n                    <span [ngSwitch]=\"authenticationService.currentUserValue.isVerified\">\n                        <i *ngSwitchCase=\"1\" class=\"icon icon-check-box text-success ml-3\"></i>\n                        <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\n                            routerLink=\"/lender/profile\"></i>\n                    </span>\n                </li>\n                <li class=\"d-flex align-items-center justify-content-center mb-3 h4\" i18n>\n                    Bank details submission\n                    <span [ngSwitch]=\"authenticationService.currentUserValue.isUsersBankDetailsSubmitted\">\n                        <i *ngSwitchCase=\"true\" class=\"icon icon-check-box text-success ml-3\"></i>\n                        <i *ngSwitchDefault class=\"icon icon-pencil-alt text-danger ml-3\"\n                            routerLink=\"/lender/bank-details\"></i>\n                    </span>\n                </li>\n            </ul>\n        </div>\n    </div>\n</div>\n\n<div class=\"row\">\n    <!-- Earnings (Monthly) Card Example -->\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\n        <div class=\"card border-left-warning shadow h-100\">\n            <div class=\"card-body dashobard-card\">\n                <div class=\"row no-gutters align-items-center\">\n                    <div class=\"col mr-2\">\n                        <div class=\"text-xs font-weight-bold text-warning text-uppercase mb-1\" i18n>\n                            Member since\n                        </div>\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\">\n                            {{authenticationService.currentUserValue.userVerifiedOn | date:'dd-MMM-YYYY'}}\n                        </div>\n                    </div>\n                    <div class=\"col-auto\">\n                        <i class=\"fas fa-dollar-sign fa-2x text-gray-300\"></i>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\n        <div class=\"card border-left-primary shadow h-100\">\n            <div class=\"card-body dashobard-card\">\n                <div class=\"row no-gutters align-items-center\">\n                    <div class=\"col mr-2\">\n                        <div class=\"text-xs font-weight-bold text-primary text-uppercase mb-1\" i18n>\n                            My Level\n                        </div>\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800 text-capitalize text-cap\">\n                            <!--{{utilityService.returnStringWithReplacing_(authenticationService.currentUserValue.userType)}}-->\n                            {{(authenticationService.currentUserValue.userTypeTitle ||\n                            authenticationService.returnUserTypeForUserFromSuppliedUserLevel(authenticationService.currentUserValue.userType))}}\n                        </div>\n                    </div>\n                    <div class=\"col-auto\">\n                        <i class=\"fas fa-calendar fa-2x text-gray-300\"></i>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <!-- Earnings (Monthly) Card Example -->\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\n        <div class=\"card border-left-success shadow h-100\">\n            <div class=\"card-body dashobard-card\">\n                <div class=\"row no-gutters align-items-center\">\n                    <div class=\"col mr-2\">\n                        <div class=\"text-xs font-weight-bold text-success text-uppercase mb-1\" i18n>\n                            Paid Contracts\n                        </div>\n                        <div class=\"row no-gutters align-items-center\">\n                            <div class=\"col-auto\">\n                                <div class=\"h5 mb-0 mr-3 font-weight-bold text-gray-800\">{{allMyPaidContractCount}}\n                                </div>\n                            </div>\n                            <!-- <div class=\"col\">\n                                            <div class=\"progress progress-sm mr-2\">\n                                                <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 50%\" aria-valuenow=\"50\" aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\n                                            </div>\n                                        </div> -->\n                        </div>\n                    </div>\n                    <div class=\"col-auto\">\n                        <i class=\"fas fa-clipboard-list fa-2x text-gray-300\"></i>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <!-- Pending Requests Card Example -->\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\n        <div class=\"card border-left-secondary shadow h-100\">\n            <div class=\"card-body dashobard-card\">\n                <div class=\"row no-gutters align-items-center\">\n                    <div class=\"col mr-2\">\n                        <div class=\"text-xs font-weight-bold text-secondary text-uppercase mb-1\" i18n>\n                            Paid Loans</div>\n                        <div class=\"h5 mb-0 font-weight-bold text-gray-800\">{{allMyPaidLoanCount}}</div>\n                    </div>\n                    <div class=\"col-auto\">\n                        <i class=\"fas fa-comments fa-2x text-gray-300\"></i>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\n        <div class=\"card bg-primary text-white shadow\">\n            <div class=\"card-body dashobard-card\">\n                <div class=\"text-xs font-weight-bold text-uppercase mb-1\" i18n>\n                    Active Loan</div>\n                <div class=\"h5 mb-0 font-weight-bold\">{{allMyActiveLoanCount}}</div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\n        <div class=\"card bg-success text-white shadow\">\n            <div class=\"card-body dashobard-card\">\n                <div class=\"text-xs font-weight-bold text-uppercase mb-1\" i18n>\n                    UnSigned contracts</div>\n                <div class=\"h5 mb-0 font-weight-bold\">{{allMyUnSignedContractLoanCount}}</div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"col-xl-3 col-md-3 col-6 mb-4\">\n        <div class=\"card bg-warning text-white shadow\">\n            <div class=\"card-body dashobard-card\">\n                <div class=\"text-xs font-weight-bold text-uppercase mb-1\" i18n>\n                    Disbursed Loans</div>\n                <div class=\"h5 mb-0 font-weight-bold\">{{allMyDisbursedLoanCount}}</div>\n            </div>\n        </div>\n    </div>\n    \n    <div *ngIf=\"authenticationService.currentUserValue.role==Role.Borrower\" class=\"col-xl-3 col-md-3 col-6 mb-4\">\n        <div class=\"card bg-secondary text-white shadow\">\n            <div class=\"card-body dashobard-card\">\n                <div class=\"text-xs font-weight-bold text-uppercase mb-1\">\n                    Budget\n            </div>\n                <div class=\"h5 mb-0 font-weight-bold\">{{authenticationService.currentUserValue.totalAllowedBudget}}</div>\n            </div>\n        </div>\n    </div>\n\n</div>\n\n<div class=\"row\">\n\n    <div class=\"col-xl-12 col-12\">\n        <div class=\"card shadow mb-4\">\n\n            <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\n                <h6 class=\"m-0 font-weight-bold text-primary\" i18n>Active Loans</h6>\n\n            </div>\n\n            <div class=\"card-body p-0\">\n                <div class=\"table-responsive table-billing-history\">\n                    <table class=\"table mb-0\">\n                        <thead>\n                            <tr>\n                                <th scope=\"col\" i18n>Type</th>\n                                <th scope=\"col\" i18n>\n                                    {{Role.Lender!=authenticationService.currentUserValue.role?'Lender\n                                    Name':'Borrower Name'}}\n                                </th>\n                                <th scope=\"col\" i18n>Amount</th>\n                                <th scope=\"col\" i18n>Refund</th>\n                                <th scope=\"col\" i18n>Next EMI</th>\n                                <th scope=\"col\" i18n>Status</th>\n                                <th scope=\"col\" i18n>Contract</th>\n                                <th scope=\"col\" i18n>Action</th>\n                            </tr>\n                        </thead>\n                        <tbody>\n                            <!--New Data table from Sessions Apply-->\n                            <tr\n                                *ngFor=\"let LoanApplyObj of utilityService._.values( allSessionApplyData) | mySessionsFilter : 'status' : ['accepted']:checkCreatedByUserId:checkCreatedByT; let i=index;\">\n                                <td class=\"text-capitalize\">\n                                    <span (click)=\"showAppliedToSession(null, LoanApplyObj.loanId)\">\n                                        {{(LoanApplyObj.sessionForBorrower.loanType || \"\").replace(\"_\", \" \")}}   \n                                    </span>\n                                </td>\n                                <td class=\"text-capitalize\">\n                                    <span (click)=\"usersProfile((LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId:LoanApplyObj.borrowerId))\">\n                                        {{(LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId.firstName:LoanApplyObj.borrowerId.firstName)}}\n                                    </span>\n                                    <!--\n                                {{userService.returnUsersObjFromLocal(null,\n                                null,'firstName',\n                                (LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId._id:LoanApplyObj.borrowerId._id))}}\n                                -->\n                                </td>\n                                <td>{{LoanApplyObj.loanAmount || LoanApplyObj.sessionForBorrower.loanAmount}}</td>\n                                <td>{{utilityService.returnRoundedNumber((LoanApplyObj.calculatedMonthlyAmountForEMI ||\n                                    LoanApplyObj.sessionForBorrower.calculatedMonthlyAmountForEMI) *\n                                    LoanApplyObj.sessionForBorrower.loanTenureInMonths)}}</td>\n                                <td>{{LoanApplyObj.nextInstallment | date:'dd-MMM-YYYY'}}</td>\n                                <td>\n                                    <div *ngIf=\"LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id\">\n                                        <a *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender\">\n                                            <span class=\"badge badge-danger\" i18n>\n                                                Pending\n                                            </span>\n                                        </a>\n                                        <a\n                                            *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && !LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                            <span class=\"badge badge-warning\" i18n>\n                                                Money Received but Confirmation is Pending\n                                            </span>\n                                        </a>\n                                        <a\n                                            *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                            <span class=\"badge badge-success\" i18n>\n                                                Money Received and Confirmed\n                                            </span>\n                                        </a>\n                                    </div>\n                                    <div *ngIf=\"LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\">\n                                        <a *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender\">\n                                            <span\n                                                *ngIf=\"LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\"\n                                                class=\"badge badge-danger\" i18n>\n                                                Money Not Sent\n                                            </span>\n                                        </a>\n                                        <a\n                                            *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && !LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                            <span class=\"badge badge-warning\" i18n>\n                                                Money Received but Confirmation is Pending\n                                            </span>\n                                        </a>\n                                        <a\n                                            *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                            <span class=\"badge badge-success\" i18n>\n                                                Money Received and Confirmed\n                                            </span>\n                                        </a>\n                                    </div>\n                                </td>\n                                <td>\n                                    <a class=\"btn btn-success btn-sm float-left ml-2\" i18n target=\"_blank\"\n                                        [href]=\"returnUrl4downloadCOntractPDF(LoanApplyObj._id)\" download><i\n                                            class=\"icon-cloud-down\"></i>&nbsp;</a>\n                                </td>\n                                <td>\n                                    <div *ngIf=\"LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id\">\n                                        <a\n                                            *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && !LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                            <!--<span class=\"badge badge-success\" i18n>is Money Received?</span>-->\n\n                                            <div class=\"form-check-inline\">\n                                                <div class=\"custom-control custom-checkbox\">\n                                                    <input name=\"isLoanAmountPaidByLenderConfirmByBorrower_{{i}}\"\n                                                        id=\"isLoanAmountPaidByLenderConfirmByBorrower_{{i}}\"\n                                                        type=\"checkbox\" class=\"custom-control-input\" [value]=\"true\"\n                                                        (change)=\"LoanMoneyTransferStatusChange($event, LoanApplyObj.sessionForBorrower, LoanApplyObj)\"\n                                                        [checked]=\"LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                                    <label for=\"isLoanAmountPaidByLenderConfirmByBorrower_{{i}}\"\n                                                        class=\"custom-control-label\" i18n>\n                                                        Money Received\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </a>\n\n                                        <a\n                                            *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower && LoanApplyObj.nextInstallment && !LoanApplyObj.isLoanAmountPaidByBorrower\">\n                                            <!--\n                                        <span (click)=\"LoanMoneyTransferStatusModel(LoanApplyObj.sessionForBorrower, LoanApplyObj, LoanApplyObj.nextInstallment)\" class=\"badge badge-success\">is Installment Money Transfered?</span>\n                                    -->\n                                            <div class=\"form-check-inline\">\n                                                <div class=\"custom-control custom-checkbox\">\n                                                    <input name=\"isLoanAmountPaidByBorrower_{{i}}\"\n                                                        id=\"isLoanAmountPaidByBorrower_{{i}}\" type=\"checkbox\"\n                                                        class=\"custom-control-input\" [value]=\"true\"\n                                                        (change)=\"LoanMoneyTransferStatusChange($event, LoanApplyObj.sessionForBorrower, LoanApplyObj, LoanApplyObj.nextInstallment)\"\n                                                        [checked]=\"LoanApplyObj.isLoanAmountPaidByBorrower\">\n                                                    <label for=\"isLoanAmountPaidByBorrower_{{i}}\"\n                                                        class=\"custom-control-label\" i18n>\n                                                        Installment Money Transfered\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </a>\n                                    </div>\n                                    <div *ngIf=\"LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\">\n                                        <a *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender\">\n                                            <!--\n                                        <span (click)=\"LoanMoneyTransferStatusModel(LoanApplyObj.sessionForBorrower, LoanApplyObj)\" class=\"badge badge-success\">\n                                            is Money Transfered?\n                                        </span>\n                                    -->\n                                            <div class=\"form-check-inline\">\n                                                <div class=\"custom-control custom-checkbox\">\n                                                    <input name=\"isLoanAmountPaidByLender_{{i}}\"\n                                                        id=\"isLoanAmountPaidByLender_{{i}}\" type=\"checkbox\"\n                                                        class=\"custom-control-input\" [value]=\"true\"\n                                                        (change)=\"LoanMoneyTransferStatusChange($event, LoanApplyObj.sessionForBorrower, LoanApplyObj)\"\n                                                        [checked]=\"LoanApplyObj.isLoanAmountPaidByLender\">\n                                                    <label for=\"isLoanAmountPaidByLender_{{i}}\"\n                                                        class=\"custom-control-label\" i18n>\n                                                        Money Transfered\n                                                    </label>\n                                                </div>\n                                            </div>\n                                        </a>\n                                        <a\n                                            *ngIf=\"!LoanApplyObj.isLoanAmountPaidByBorrower && LoanApplyObj.installmentWiseLoanAmountPaidByBorrower\">\n                                            <!--<span class=\"badge badge-success\" i18n>is Installment Money Received?&nbsp;</span>-->\n                                            <div class=\"form-check-inline\">\n                                                <div class=\"custom-control custom-checkbox\">\n                                                    <input name=\"isLoanAmountPaidByBorrowerConfirmedByLender_{{i}}\"\n                                                        id=\"isLoanAmountPaidByBorrowerConfirmedByLender_{{i}}\"\n                                                        type=\"checkbox\" class=\"custom-control-input\" [value]=\"true\"\n                                                        (change)=\"LoanMoneyTransferStatusChange($event, LoanApplyObj.sessionForBorrower, LoanApplyObj, LoanApplyObj.nextInstallment, true)\"\n                                                        [checked]=\"LoanApplyObj.isLoanAmountPaidByBorrower\">\n                                                    <label for=\"isLoanAmountPaidByBorrowerConfirmedByLender_{{i}}\"\n                                                        class=\"custom-control-label\" i18n>\n                                                        Installment Money Received\n                                                    </label>\n                                                </div>\n                                            </div>\n                                            <span\n                                                *ngFor=\"let installmentObj of utilityService._.values(LoanApplyObj.installmentWiseLoanAmountPaidByBorrower)\">\n                                                <i\n                                                    *ngIf=\"installmentObj.createdOnForLoanAmountPaidToLender && !installmentObj.createdOnForLoanAmountPaidToLenderConfirmByLender\">*</i>\n                                            </span>\n                                        </a>\n\n\n                                    </div>\n                                </td>\n                            </tr>\n                            <!--New Data table from Session Apply-->\n\n                            <!--Old Data table from Sessions-->\n                            <!--\n                            <tr\n                                *ngFor=\"let LoanObj of allSessionsData | mySessionsFilter : 'sessionAppliedByBorrowers[0].status' : ['accepted']:checkCreatedByUserId:checkCreatedByT\">\n                                <td class=\"text-capitalize\">{{(LoanObj.loanType || \"\").replace(\"_\", \" \")}}</td>\n                                <td class=\"text-capitalize\">\n                                    {{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                    true,'firstName')}}</td>\n                                <td>{{LoanObj.loanAmount}}</td>\n                                <td>{{utilityService.returnRoundedNumber(LoanObj.calculatedMonthlyAmountForEMI *\n                                    LoanObj.loanTenureInMonths)}}</td>\n                                <td>{{LoanObj.nextInstallment | date:'dd-MMM-YYYY'}}</td>\n                                <td>\n                                    <div *ngFor=\"let LoanApplyObj of LoanObj.sessionAppliedByBorrowers\">\n                                        <a>\n                                            <span *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender\"\n                                                class=\"badge badge-danger\">Pending</span>\n                                            <span *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender\"\n                                                class=\"badge badge-success\">Received Money</span>\n                                        </a>\n                                    </div>\n                                </td>\n                                <td>\n                                    <a (click)=\"showAppliedToSession(LoanObj)\">\n                                        <span class=\"badge badge-primary\">Details</span>\n                                    </a>\n                                </td>\n                            </tr>\n                        -->\n                            <!--Old Data table from Sessions-->\n                            <tr class=\"mt-2 text-center no-item\">\n\n                                <h5 class=\"my-4 font-weight-normal\" i18n>No Data Found.</h5>\n                            </tr>\n                        </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"col-xl-12 col-12\">\n        <div class=\"card shadow mb-4\">\n\n            <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\n                <h6 class=\"m-0 font-weight-bold text-primary\" i18n>Unsigned Contracts</h6>\n\n            </div>\n\n            <div class=\"card-body p-0\">\n                <div class=\"table-responsive table-billing-history\">\n                    <table class=\"table mb-0\">\n                        <thead>\n                            <tr>\n                                <th scope=\"col\" i18n>Type</th>\n                                <th scope=\"col\" i18n>\n                                    {{Role.Lender!=authenticationService.currentUserValue.role?'Lender\n                                    Name':'Borrower Name'}}\n                                </th>\n                                <th scope=\"col\" i18n>Amount</th>\n                                <th scope=\"col\" i18n>Refund</th>\n                                <!--<th scope=\"col\" i18n>Next EMI</th>-->\n                                <th scope=\"col\" i18n>Application Date</th>\n                                <th scope=\"col\" i18n>Action</th>\n                            </tr>\n                        </thead>\n                        <tbody>\n                            <tr\n                                *ngFor=\"let LoanApplyObj of utilityService._.values( allSessionApplyData) | mySessionsFilter : 'status' : ['awaiting_for_approval']:checkCreatedByUserId:checkCreatedByT; let i=index;\">\n                                <td class=\"text-capitalize\">\n                                    <span (click)=\"showAppliedToSession(null, LoanApplyObj.loanId)\">\n                                        {{(LoanApplyObj.sessionForBorrower.loanType || \"\").replace(\"_\", \" \")}}\n                                    </span>\n                                </td>\n                                <td class=\"text-capitalize\">\n                                    <span (click)=\"usersProfile((LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId:LoanApplyObj.borrowerId))\">\n                                        {{(LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId.firstName:LoanApplyObj.borrowerId.firstName)}}\n                                    </span>\n                                    <!--\n                                {{userService.returnUsersObjFromLocal(null,\n                                null,'firstName',\n                                (LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId._id:LoanApplyObj.borrowerId._id))}}\n                                -->\n                                </td>\n                                <td>{{LoanApplyObj.loanAmount || LoanApplyObj.sessionForBorrower.loanAmount}}</td>\n                                <td>{{utilityService.returnRoundedNumber((LoanApplyObj.calculatedMonthlyAmountForEMI ||\n                                    LoanApplyObj.sessionForBorrower.calculatedMonthlyAmountForEMI) *\n                                    LoanApplyObj.sessionForBorrower.loanTenureInMonths)}}</td>\n                                <td>{{LoanApplyObj.nextInstallment | date:'dd-MMM-YYYY'}}</td>\n                                <!--\n                            <td>\n                                <div *ngIf=\"LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id\">\n                                    <a *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender\">\n                                        <span class=\"badge badge-danger\" i18n>\n                                            Pending\n                                        </span>\n                                    </a>\n                                    <a\n                                        *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && !LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                        <span class=\"badge badge-warning\" i18n>\n                                            Money Sent\n                                        </span>\n                                    </a>\n                                    <a\n                                        *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                        <span class=\"badge badge-success\" i18n>\n                                            Received Money\n                                        </span>\n                                    </a>\n                                </div>\n                                <div *ngIf=\"LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\">\n                                    <a *ngIf=\"!LoanApplyObj.isLoanAmountPaidByLender\">\n                                        <span\n                                            *ngIf=\"LoanApplyObj.lenderId._id==authenticationService.currentUserValue._id\"\n                                            class=\"badge badge-danger\" i18n>\n                                            Money Not Sent\n                                        </span>\n                                    </a>\n                                    <a\n                                    *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && !LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                    <span class=\"badge badge-warning\" i18n>\n                                        Money Sent\n                                    </span>\n                                    </a>\n                                    <a\n                                        *ngIf=\"LoanApplyObj.isLoanAmountPaidByLender && LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower\">\n                                        <span class=\"badge badge-success\" i18n>\n                                            Money Sent\n                                        </span>\n                                    </a>\n                                </div>\n                            </td>\n                        -->\n                                <td>\n                                    <a (click)=\"showAppliedToSession(null, LoanApplyObj.loanId)\">\n                                        <span class=\"badge badge-primary\" i18n>Details</span>\n                                    </a>\n                                </td>\n                            </tr>\n                            <tr class=\"mt-2 text-center no-item\">\n\n                                <h5 class=\"my-4 font-weight-normal\" i18n>No Data Found.</h5>\n                            </tr>\n                        </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n    </div>\n\n    <div class=\"col-xl-12 col-12\">\n        <div class=\"card shadow mb-4\">\n\n            <div class=\"card-header py-3 d-flex flex-row align-items-center justify-content-between\">\n                <h6 class=\"m-0 font-weight-bold text-primary\" i18n>Paid Loans</h6>\n\n            </div>\n\n            <div class=\"card-body p-0\">\n                <div class=\"table-responsive table-billing-history\">\n                    <table class=\"table mb-0\">\n                        <thead>\n                            <tr>\n                                <th scope=\"col\" i18n>Type</th>\n                                <th scope=\"col\" i18n>\n                                    {{Role.Lender!=authenticationService.currentUserValue.role?'Lender\n                                    Name':'Borrower Name'}}\n                                </th>\n                                <th scope=\"col\" i18n>Amount</th>\n                                <th scope=\"col\" i18n>Refund</th>\n                                <th scope=\"col\" i18n>Contract</th>\n                                <th scope=\"col\" i18n>#</th>\n                            </tr>\n                        </thead>\n                        <tbody>\n                            <tr\n                                *ngFor=\"let LoanApplyObj of utilityService._.values( allSessionApplyData) | mySessionsFilter : 'status' : ['paid','completed']:checkCreatedByUserId:checkCreatedByT\">\n                                <td class=\"text-capitalize\">\n                                    <span (click)=\"showAppliedToSession(null, LoanApplyObj.loanId)\">\n                                        {{(LoanApplyObj.sessionForBorrower.loanType || \"\").replace(\"_\", \" \")}}\n                                    </span>\n                                </td>\n                                <td class=\"text-capitalize\">\n                                    <span (click)=\"usersProfile((LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId:LoanApplyObj.borrowerId))\">\n                                        {{(LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId.firstName:LoanApplyObj.borrowerId.firstName)}}\n                                    </span>\n                                    <!--\n                                    {{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,\n                                    true,'firstName')}}\n                                    -->\n                                </td>\n                                <td>{{LoanApplyObj.loanAmount || LoanApplyObj.sessionForBorrower.loanAmount}}</td>\n                                <td>{{utilityService.returnRoundedNumber((LoanApplyObj.calculatedMonthlyAmountForEMI ||\n                                    LoanApplyObj.sessionForBorrower.calculatedMonthlyAmountForEMI) *\n                                    LoanApplyObj.sessionForBorrower.loanTenureInMonths)}}</td>\n                                <td>\n                                    <a class=\"btn btn-success btn-sm float-left ml-2\" i18n target=\"_blank\"\n                                        [href]=\"returnUrl4downloadCOntractPDF(LoanApplyObj._id)\" download><i\n                                            class=\"icon-cloud-down\"></i>&nbsp;</a>\n                                </td>\n                                <td>\n                                    <a (click)=\"showAppliedToSession(null, LoanApplyObj.loanId)\">\n                                        <span class=\"badge badge-primary\" i18n>Details</span>\n                                    </a>\n                                </td>\n                            </tr>\n                            <tr class=\"mt-2 text-center no-item\">\n\n                                <h5 class=\"my-4 font-weight-normal\" i18n>No Data Found.</h5>\n                            </tr>\n                        </tbody>\n                    </table>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n\n<!--\n    <div class=\"row d-none\">\n    \n        <div class=\"col-xl-4 col-12\">\n            <div class=\"row\">\n    \n                <div class=\"col-xl-12 col-md-6 mb-3\">\n                    <div class=\"card shadow-sm\">\n                        <div class=\"card-body\">\n                            <div class=\"row no-gutters align-items-center\">\n                                <div class=\"col text-center border-right\">\n                                    <div class=\"text-xs font-weight-bold text-success text-uppercase mb-1\">My Wallet\n                                    </div>\n                                    <div class=\"h5 mb-0 font-weight-bold text-gray-800\">\n                                        ${{fundService.totalFund4currentUser}}</div>\n                                </div>\n    \n                                <div class=\"col text-center\">\n                                    <div class=\"text-xs font-weight-bold text-success text-uppercase mb-1\">My Sessions\n                                    </div>\n                                    <div class=\"h5 mb-0 font-weight-bold text-gray-800\">\n                                        {{allSessionsCount}}/{{allSessionsTodayCount}}</div>\n                                </div>\n    \n                            </div>\n                        </div>\n                    </div>\n                </div>\n    \n                <div class=\"col-xl-12 col-md-6 mb-3\">\n    \n                    <section class=\"blog-sidebar pt-0\">\n                        <div class=\"row pl-0 pr-0\">\n                            <div class=\"col-lg-12\">\n                                 <div>\n                                    <h5 class=\"blog-title\">upcoming sessions</h5>\n                                    <div class=\"sidebar-container\">\n                                        <div *ngFor=\"let item of utilityService._.values(allSessionsTodayList);\" class=\"post-container d-flex\">\n                                            <div class=\"w-35 m-r-25\">\n                                                <img alt=\"\" class=\"img-fluid\" src=\"./assets/img/na.png\">\n                                                <div class=\"badge badge-blue\">\n                                                    {{item.location}}\n                                                </div>\n                                            </div>\n                                            <div>\n                                                <h5 class=\"post-head\">{{item.sessionSubject}}</h5>\n                                                <h6 class=\"date\">{{item.loanStartDateTime | date:'medium'}}</h6>\n                                                <div class=\"mt-3\">\n                                                    <i class=\"icon-video-camera fa-lg mr-3\" (click)=\"clickedOnSessionChatVideo(item, true)\"></i>\n                                                    <i class=\"icon-comment\" (click)=\"clickedOnSessionChatVideo(item, false)\"></i>\n                                                </div>\n                                            </div>\n                                        </div>\n                                        <div class=\"mt-2 text-center blog-agency no-item\">\n                                            <img src=\"assets/img/noresult.png\" style=\"height: 60px;\">\n                                            <h5 class=\"mt-3 font-weight-normal\">Looks like you don't have any counselling Session today</h5>\n                                        </div>\n    \n                                    </div>\n                                </div>\n                            </div>\n                        </div>\n                    </section>\n                </div>\n    \n            </div>\n    \n        </div>\n    \n        <div class=\"col-xl-8 col-12\">\n    \n            <section class=\"agency blog blog-sec blog-sidebar sider p-0\">\n    \n                <div class=\"h6 mb-3\">\n    \n                    LATEST SESSIONS\n                   \n                </div>\n                <div class=\"card shadow-sm mb-4\" *ngFor=\"let session of allSessionsData\">\n                    <div class=\"bg-white blog-title card-header mb-0 text-capitalize\">\n                        {{session.sessionSubject}}\n                    </div>\n                    <div class=\"card-body px-md-3 px-1 small\">\n                         <div class=\"row\">               \n                        <div class=\"col-xl-12 col-12\">\n                            <p class=\"para2\" [class.show_more]=\"!session._id\">\n                                {{session.loanDescription}}\n                            </p>\n                        </div>          \n                        <div class=\"col-xl-6 col-6 border-right mb-2\">\n                            <i aria-hidden=\"true\" class=\"icon-timer mr-2\"></i> {{session.loanStartDateTime | date:'MMM d, h:mm a'}}\n                        </div>\n                       \n                        <div class=\"col-xl-6 col-6\">\n                            <i aria-hidden=\"true\" class=\"icon-location-pin m-r-10\"></i>\n                            \n                            {{session.location}}\n                        </div>\n                      \n                    </div>\n                    </div>\n                    <div class=\"card-footer bg-white\">\n                        <span class=\"badge badge-success font-weight-normal text-capitalize btn float-left\" >{{session.sessionType}}</span>\n                        <a *ngIf=\"!check4applyToSession(session)\" class=\"btn btn-success  text-capitalize btn-sm float-right text-white\" (click)=\"applyToSession(session)\">Apply</a>\n                        <a *ngIf=\"check4applyToSession(session)\" class=\"btn btn-primary text-capitalize btn-sm float-right text-white\" (click)=\"showAppliedToSession(session)\"> Details</a>\n                    </div>\n                </div>\n                \n                <div *ngIf=\"!allSessionsData\">\n                    <div class=\"content_loader\"></div>\n                    <div class=\"content_loader\"></div>\n                </div>\n    \n            </section>\n        </div>\n    </div>\n    -->";
       /***/
     },
 
@@ -1191,8 +1191,7 @@
           value: function clickedOnVerifiedSignLoanContract() {
             var _this3 = this;
 
-            debugger;
-
+            //debugger;
             if (this.borrowerUserObj) {
               if (!this.borrowNowForm.get('eSignatureBorrowersName').value) {
                 this.borrowNowForm.get('eSignatureBorrowersName').setValue(this.borrowerUserObj.firstName || this.borrowerUserObj.lastName);
@@ -1699,6 +1698,12 @@
       var src_environments_environment__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(
       /*! src/environments/environment */
       "AytR");
+      /* harmony import */
+
+
+      var src_app_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(
+      /*! src/app/shared/public-profile/public-profile.component */
+      "bLZ2");
 
       var HomeComponent = /*#__PURE__*/function () {
         function HomeComponent(userService, socketService, formBuilder, sessionsService, alertService, utilityService, dialog, authenticationService, fundService, router, contactService, _cdr) {
@@ -3082,6 +3087,46 @@
             var Url4downloadCOntractPDF = src_environments_environment__WEBPACK_IMPORTED_MODULE_18__["environment"].apiUrl + '/signed_pdf_contract/' + sessionApplyId + '.pdf';
             return Url4downloadCOntractPDF;
           }
+        }, {
+          key: "usersProfile",
+          value: function usersProfile(userObj) {
+            var _this13 = this;
+
+            //#region fetch creator id
+            this.userService.getUserById(userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_11__["first"])()).subscribe(function (data) {
+              if (data && data['success']) {
+                //console.log('84', this.authenticationService.currentUserValue);
+                var dialogRef = _this13.dialog.open(src_app_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_19__["PublicProfileComponent"], {
+                  maxWidth: '100vw',
+                  maxHeight: '100vh',
+                  height: '100%',
+                  width: '100%',
+                  hasBackdrop: true,
+                  data: {
+                    userObj: _this13.utilityService._.cloneDeep(data['data']),
+                    adminViewT: false
+                  }
+                });
+
+                dialogRef.afterClosed().subscribe(function (result) {//console.log(`99 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+                });
+              } else {}
+            }, function (error) {
+              var errorMsg2show = "";
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {}
+
+              _this13.alertService.error(errorMsg2show);
+            }); //#endregion fetch creator id
+          }
         }]);
 
         return HomeComponent;
@@ -3339,31 +3384,31 @@
         }, {
           key: "getSessionsDataFromServer",
           value: function getSessionsDataFromServer() {
-            var _this13 = this;
+            var _this14 = this;
 
             this.sessionsService.getSessionAllByBorrowerId(this.authenticationService.currentUserValue._id, null, null, null, true, null).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
               ////console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                var _keyPairedMapObj = _this13.utilityService._.mapKeys(_this13.allSessionsData, "_id");
+                var _keyPairedMapObj = _this14.utilityService._.mapKeys(_this14.allSessionsData, "_id");
 
                 for (var _items in data['data']) {
                   var _currentObj = data['data'][_items];
                   _keyPairedMapObj[_currentObj._id] = _currentObj;
                 }
 
-                _this13.allSessionsData = _this13.utilityService._.values(_keyPairedMapObj);
+                _this14.allSessionsData = _this14.utilityService._.values(_keyPairedMapObj);
 
-                _this13.filterAllSessionsDataForAppliedCurrentUserOnly();
+                _this14.filterAllSessionsDataForAppliedCurrentUserOnly();
 
-                _this13.userService.proccessAllAppUsersCollections(_this13.utilityService._.uniq(_this13.utilityService._.map(_this13.utilityService._.uniq(_this13.utilityService._.map(_this13.utilityService._.flattenDepth(_this13.utilityService._.map(_this13.utilityService._.values(_this13.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')), '_id'))); //this.alertService.success(data['message'], true);
+                _this14.userService.proccessAllAppUsersCollections(_this14.utilityService._.uniq(_this14.utilityService._.map(_this14.utilityService._.uniq(_this14.utilityService._.map(_this14.utilityService._.flattenDepth(_this14.utilityService._.map(_this14.utilityService._.values(_this14.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')), '_id'))); //this.alertService.success(data['message'], true);
 
 
-                _this13.loading = false; //this.element_btn_click_addSession_skills_verification.click();
+                _this14.loading = false; //this.element_btn_click_addSession_skills_verification.click();
               } else {
                 //alert(JSON.stringify(data['message']));
                 //this.alertService.error(data['message']);
-                _this13.loading = false;
+                _this14.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -3379,29 +3424,29 @@
               } catch (ex) {} //this.alertService.error(errorMsg2show);
 
 
-              _this13.loading = false;
+              _this14.loading = false;
             });
             this.sessionsService.getUpdatesForSessionAllByBorrowerId().subscribe(function (data) {
               if (data && data['success']) {
-                var _keyPairedMapObj = _this13.utilityService._.mapKeys(_this13.allSessionsData, "_id");
+                var _keyPairedMapObj = _this14.utilityService._.mapKeys(_this14.allSessionsData, "_id");
 
                 for (var _items in data['data']) {
                   var _currentObj = data['data'][_items];
                   _keyPairedMapObj[_currentObj._id] = _currentObj;
                 }
 
-                _this13.allSessionsData = _this13.utilityService._.values(_keyPairedMapObj);
+                _this14.allSessionsData = _this14.utilityService._.values(_keyPairedMapObj);
 
-                _this13.filterAllSessionsDataForAppliedCurrentUserOnly();
+                _this14.filterAllSessionsDataForAppliedCurrentUserOnly();
 
-                _this13.userService.proccessAllAppUsersCollections(_this13.utilityService._.uniq(_this13.utilityService._.map(_this13.utilityService._.uniq(_this13.utilityService._.map(_this13.utilityService._.flattenDepth(_this13.utilityService._.map(_this13.utilityService._.values(_this13.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')), '_id')));
+                _this14.userService.proccessAllAppUsersCollections(_this14.utilityService._.uniq(_this14.utilityService._.map(_this14.utilityService._.uniq(_this14.utilityService._.map(_this14.utilityService._.flattenDepth(_this14.utilityService._.map(_this14.utilityService._.values(_this14.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')), '_id')));
 
-                _this13.loading = false;
+                _this14.loading = false;
               } else {
-                _this13.loading = false;
+                _this14.loading = false;
               }
             }, function (error) {
-              _this13.loading = false;
+              _this14.loading = false;
             });
             this.socketService.getCurrentSessionAll().subscribe(function (_allSessionsData) {
               if (_allSessionsData) {
@@ -3409,18 +3454,18 @@
                   'data': _allSessionsData
                 };
 
-                var _keyPairedMapObj = _this13.utilityService._.mapKeys(_this13.allSessionsData, "_id");
+                var _keyPairedMapObj = _this14.utilityService._.mapKeys(_this14.allSessionsData, "_id");
 
                 for (var _items in data['data']) {
                   var _currentObj = data['data'][_items];
                   _keyPairedMapObj[_currentObj._id] = _currentObj;
                 }
 
-                _this13.allSessionsData = _this13.utilityService._.values(_keyPairedMapObj);
+                _this14.allSessionsData = _this14.utilityService._.values(_keyPairedMapObj);
 
-                _this13.filterAllSessionsDataForAppliedCurrentUserOnly();
+                _this14.filterAllSessionsDataForAppliedCurrentUserOnly();
 
-                _this13.userService.proccessAllAppUsersCollections(_this13.utilityService._.uniq(_this13.utilityService._.map(_this13.utilityService._.uniq(_this13.utilityService._.map(_this13.utilityService._.flattenDepth(_this13.utilityService._.map(_this13.utilityService._.values(_this13.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')), '_id')));
+                _this14.userService.proccessAllAppUsersCollections(_this14.utilityService._.uniq(_this14.utilityService._.map(_this14.utilityService._.uniq(_this14.utilityService._.map(_this14.utilityService._.flattenDepth(_this14.utilityService._.map(_this14.utilityService._.values(_this14.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')), '_id')));
               } else {//this.allSessionsData = [];
               }
             });
@@ -3432,7 +3477,7 @@
         }, {
           key: "showAppliedToSession",
           value: function showAppliedToSession(sessionObj) {
-            var _this14 = this;
+            var _this15 = this;
 
             var _proccessedSessionObj = null;
 
@@ -3479,28 +3524,28 @@
                     switch (_status) {
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Accepted:
                         //this.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
-                        _this14.proccedAppliedToSession(sessionObj, _loanApplyId);
+                        _this15.proccedAppliedToSession(sessionObj, _loanApplyId);
 
                         break;
 
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Rejected:
-                        _this14.socketService.setSessionApplyUpdateStatus(true, result.data.sessionApply.loanId, _loanApplyId, _status, _this14.authenticationService.currentUserValue._id, null);
+                        _this15.socketService.setSessionApplyUpdateStatus(true, result.data.sessionApply.loanId, _loanApplyId, _status, _this15.authenticationService.currentUserValue._id, null);
 
                         break;
                     }
                   }
 
                   if (result.data.updatedSessionObj) {
-                    var _keyPairedMapObj = _this14.utilityService._.mapKeys(_this14.allSessionsData, "_id");
+                    var _keyPairedMapObj = _this15.utilityService._.mapKeys(_this15.allSessionsData, "_id");
 
                     _keyPairedMapObj[result.data.updatedSessionObj._id] = result.data.updatedSessionObj;
-                    _this14.allSessionsData = _this14.utilityService._.values(_keyPairedMapObj);
+                    _this15.allSessionsData = _this15.utilityService._.values(_keyPairedMapObj);
 
-                    _this14.filterAllSessionsDataForAppliedCurrentUserOnly();
+                    _this15.filterAllSessionsDataForAppliedCurrentUserOnly();
 
-                    _this14.userService.proccessAllAppUsersCollections(_this14.utilityService._.uniq(_this14.utilityService._.map(_this14.utilityService._.uniq(_this14.utilityService._.map(_this14.utilityService._.flattenDepth(_this14.utilityService._.map(_this14.utilityService._.values(_this14.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')), '_id')));
+                    _this15.userService.proccessAllAppUsersCollections(_this15.utilityService._.uniq(_this15.utilityService._.map(_this15.utilityService._.uniq(_this15.utilityService._.map(_this15.utilityService._.flattenDepth(_this15.utilityService._.map(_this15.utilityService._.values(_this15.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')), '_id')));
 
-                    _this14._cdr.detectChanges();
+                    _this15._cdr.detectChanges();
                   }
                 }
               }
@@ -3573,7 +3618,7 @@
         }, {
           key: "sessionApplyOngoingCheck",
           value: function sessionApplyOngoingCheck(sessionObj, sessionApply) {
-            var _this15 = this;
+            var _this16 = this;
 
             //console.log('179', this.authenticationService.currentUserValue);
             var dialogRef = this.dialog.open(_borrower_component__WEBPACK_IMPORTED_MODULE_10__["ModalApplySession"], {
@@ -3609,47 +3654,47 @@
                     var _status = result.data.status;
                     _currentSessionApply.status = result.data.status || src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Pending;
 
-                    _this15.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
+                    _this16.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
 
                     switch (_currentSessionApply.status) {
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Pending:
-                        _currentSessionApply.createdBy = _this15.authenticationService.currentUserValue._id;
+                        _currentSessionApply.createdBy = _this16.authenticationService.currentUserValue._id;
 
-                        _this15.socketService.setSessionApply(true, _currentSessionApply);
+                        _this16.socketService.setSessionApply(true, _currentSessionApply);
 
                         break;
 
                       default:
-                        _this15.socketService.updateSessionApply(true, _currentSessionApply, _this15.authenticationService.currentUserValue);
+                        _this16.socketService.updateSessionApply(true, _currentSessionApply, _this16.authenticationService.currentUserValue);
 
                         break;
                     }
 
                     switch (_currentSessionApply.status) {
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Accepted:
-                        _this15.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
+                        _this16.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
 
                         break;
 
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Pending:
-                        _this15.alertService.success("Added. Session is available under My Sessions->Pending tab.", true);
+                        _this16.alertService.success("Added. Session is available under My Sessions->Pending tab.", true);
 
                         break;
 
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Rejected:
-                        _this15.socketService.setSessionApplyUpdateStatus(true, _loanId, _loanApplyId, _status, _this15.authenticationService.currentUserValue._id, _transactionId);
+                        _this16.socketService.setSessionApplyUpdateStatus(true, _loanId, _loanApplyId, _status, _this16.authenticationService.currentUserValue._id, _transactionId);
 
                         break;
 
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].RejectedOngoing:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].RejectedOngoingWithRefund:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Suspended:
-                        _this15.alertService.success("Updated. Session is available under My Sessions->Rejected tab.", true);
+                        _this16.alertService.success("Updated. Session is available under My Sessions->Rejected tab.", true);
 
                         break;
 
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Completed:
-                        _this15.alertService.success("Updated. Session is available under My Sessions->Completed tab.", true);
+                        _this16.alertService.success("Updated. Session is available under My Sessions->Completed tab.", true);
 
                         break;
 
@@ -3657,7 +3702,7 @@
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Ongoing:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].OngoingInitiated:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].AwaitingForApproval:
-                        _this15.alertService.success("Updated. Session is available under My Sessions->Ongoing tab.", true);
+                        _this16.alertService.success("Updated. Session is available under My Sessions->Ongoing tab.", true);
 
                         break;
 
@@ -3673,15 +3718,15 @@
         }, {
           key: "getUserLoanTypeWiseCountDetailsByUserId",
           value: function getUserLoanTypeWiseCountDetailsByUserId() {
-            var _this16 = this;
+            var _this17 = this;
 
             this.userService.getUserLoanTypeWiseCountDetailsByUserId(this.authenticationService.currentUserValue._id, this.authenticationService.currentUserValue.role).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
               ////console.log('data => ', data)
               if (data && data['success']) {
-                _this16.authenticationService.currentUserLoanTypeWiseCountDetails = data['data'];
+                _this17.authenticationService.currentUserLoanTypeWiseCountDetails = data['data'];
               } else {}
 
-              _this16.getSessionsDataFromServer();
+              _this17.getSessionsDataFromServer();
             }, function (error) {
               var errorMsg2show = "";
 
@@ -3699,13 +3744,13 @@
         }, {
           key: "usersProfile",
           value: function usersProfile(userObj) {
-            var _this17 = this;
+            var _this18 = this;
 
             //#region fetch creator id
             this.userService.getUserById(userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
                 //console.log('84', this.authenticationService.currentUserValue);
-                var dialogRef = _this17.dialog.open(src_app_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_14__["PublicProfileComponent"], {
+                var dialogRef = _this18.dialog.open(src_app_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_14__["PublicProfileComponent"], {
                   maxWidth: '100vw',
                   maxHeight: '100vh',
                   height: '100%',
@@ -3733,47 +3778,47 @@
                 }
               } catch (ex) {}
 
-              _this17.alertService.error(errorMsg2show);
+              _this18.alertService.error(errorMsg2show);
             }); //#endregion fetch creator id
           }
         }, {
           key: "deleteSessionById",
           value: function deleteSessionById(sessionId) {
-            var _this18 = this;
+            var _this19 = this;
 
             this.sessionsService.deleteSessionById(sessionId, this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_9__["first"])()).subscribe(function (_allLoanMarketData) {
               if (_allLoanMarketData && _allLoanMarketData['success']) {
                 //alert(JSON.stringify( data));
                 if (_allLoanMarketData) {
                   if (_allLoanMarketData["success"]) {
-                    var temp_allLoanMarketData = lodash__WEBPACK_IMPORTED_MODULE_11__["mapKeys"](_this18.allSessionsData, '_id');
+                    var temp_allLoanMarketData = lodash__WEBPACK_IMPORTED_MODULE_11__["mapKeys"](_this19.allSessionsData, '_id');
 
                     if (_allLoanMarketData["data"].isDeleted) {
                       delete temp_allLoanMarketData[_allLoanMarketData["data"]._id];
 
-                      _this18.alertService.success('Deleted successfully');
+                      _this19.alertService.success('Deleted successfully');
                     } else {
                       temp_allLoanMarketData[_allLoanMarketData["data"]._id] = _allLoanMarketData["data"];
 
-                      _this18.alertService.success('Updated successfully');
+                      _this19.alertService.success('Updated successfully');
                     }
 
-                    _this18.allSessionsData = lodash__WEBPACK_IMPORTED_MODULE_11__["values"](temp_allLoanMarketData);
+                    _this19.allSessionsData = lodash__WEBPACK_IMPORTED_MODULE_11__["values"](temp_allLoanMarketData);
 
-                    _this18.filterAllSessionsDataForAppliedCurrentUserOnly();
+                    _this19.filterAllSessionsDataForAppliedCurrentUserOnly();
 
-                    _this18.userService.proccessAllAppUsersCollections(_this18.utilityService._.uniq(_this18.utilityService._.map(_this18.utilityService._.uniq(_this18.utilityService._.map(_this18.utilityService._.flattenDepth(_this18.utilityService._.map(_this18.utilityService._.values(_this18.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')), '_id')));
+                    _this19.userService.proccessAllAppUsersCollections(_this19.utilityService._.uniq(_this19.utilityService._.map(_this19.utilityService._.uniq(_this19.utilityService._.map(_this19.utilityService._.flattenDepth(_this19.utilityService._.map(_this19.utilityService._.values(_this19.allSessionsData), "sessionAppliedByBorrowers"), 1), 'lenderId')), '_id')));
 
-                    _this18._cdr.detectChanges();
+                    _this19._cdr.detectChanges();
                   }
                 }
 
-                _this18.loading = false;
+                _this19.loading = false;
               } else {
                 //alert(JSON.stringify(data['message']));
-                _this18.alertService.error(_allLoanMarketData['message']);
+                _this19.alertService.error(_allLoanMarketData['message']);
 
-                _this18.loading = false;
+                _this19.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -3788,9 +3833,9 @@
                 }
               } catch (ex) {}
 
-              _this18.alertService.error(errorMsg2show);
+              _this19.alertService.error(errorMsg2show);
 
-              _this18.loading = false;
+              _this19.loading = false;
             });
           }
         }, {
@@ -4414,7 +4459,7 @@
 
       var GetALoanComponent = /*#__PURE__*/function () {
         function GetALoanComponent(formBuilder, authenticationService, sessionsService, alertService, appRouterService, utilityService, route) {
-          var _this19 = this;
+          var _this20 = this;
 
           _classCallCheck(this, GetALoanComponent);
 
@@ -4500,15 +4545,15 @@
                 ////console.log('data => ', data)
                 if (data && data['success']) {
                   //alert(JSON.stringify( data));
-                  _this19.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
+                  _this20.showEditingForm(data["data"]); //this.alertService.success(data['message'], true);
 
 
-                  _this19.loading = false; //this.element_btn_click_addSession_skills_verification.click();
+                  _this20.loading = false; //this.element_btn_click_addSession_skills_verification.click();
                 } else {
                   //alert(JSON.stringify(data['message']));
-                  _this19.alertService.error(data['message']);
+                  _this20.alertService.error(data['message']);
 
-                  _this19.loading = false;
+                  _this20.loading = false;
                 }
               }, function (error) {
                 var errorMsg2show = "";
@@ -4523,9 +4568,9 @@
                   }
                 } catch (ex) {}
 
-                _this19.alertService.error(errorMsg2show);
+                _this20.alertService.error(errorMsg2show);
 
-                _this19.loading = false;
+                _this20.loading = false;
               });
             } else if (this.borrowerId) {
               this.initForm();
@@ -4679,7 +4724,7 @@
         }, {
           key: "onaddSessionUpdateSubmit",
           value: function onaddSessionUpdateSubmit() {
-            var _this20 = this;
+            var _this21 = this;
 
             this.submitted = true;
 
@@ -4760,16 +4805,16 @@
                   //alert(JSON.stringify( data));
                   //this.alertService.success('Loan Request Updated successfully', true);
                   //this.appRouterService.appRouter(this.authenticationService.currentUserValue);
-                  _this20.alertService.success("Loan Request Updated successfully. Loan contract is available under My Contract->My Contract tab.", true);
+                  _this21.alertService.success("Loan Request Updated successfully. Loan contract is available under My Contract->My Contract tab.", true);
 
-                  _this20.appRouterService.appRouteToPath("/borrower/my-contract", {
+                  _this21.appRouterService.appRouteToPath("/borrower/my-contract", {
                     selectedTab: 'received'
                   }, true);
                 } else {
                   //alert(JSON.stringify(data['message']));
-                  _this20.alertService.error(data['message']);
+                  _this21.alertService.error(data['message']);
 
-                  _this20.loading = false;
+                  _this21.loading = false;
                 }
               }, function (error) {
                 var errorMsg2show = "";
@@ -4784,9 +4829,9 @@
                   }
                 } catch (ex) {}
 
-                _this20.alertService.error(errorMsg2show);
+                _this21.alertService.error(errorMsg2show);
 
-                _this20.loading = false;
+                _this21.loading = false;
               });
             } else {
               this.sessionsService.addNewSession(this.addSessionForm.value).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (data) {
@@ -4794,16 +4839,16 @@
                   //alert(JSON.stringify( data));
                   //this.alertService.success('Loan Request added in loan market. Lenders request will be visible under receivers tab.', true);
                   //this.appRouterService.appRouter(this.authenticationService.currentUserValue);
-                  _this20.alertService.success("Loan Request added in loan market. Loan contract is available under My Contract->My Contract tab.", true);
+                  _this21.alertService.success("Loan Request added in loan market. Loan contract is available under My Contract->My Contract tab.", true);
 
-                  _this20.appRouterService.appRouteToPath("/borrower/my-contract", {
+                  _this21.appRouterService.appRouteToPath("/borrower/my-contract", {
                     selectedTab: 'received'
                   }, true);
                 } else {
                   //alert(JSON.stringify(data['message']));
-                  _this20.alertService.error(data['message']);
+                  _this21.alertService.error(data['message']);
 
-                  _this20.loading = false;
+                  _this21.loading = false;
                 }
               }, function (error) {
                 var errorMsg2show = "";
@@ -4818,9 +4863,9 @@
                   }
                 } catch (ex) {}
 
-                _this20.alertService.error(errorMsg2show);
+                _this21.alertService.error(errorMsg2show);
 
-                _this20.loading = false;
+                _this21.loading = false;
               });
             }
           }
@@ -5065,7 +5110,7 @@
 
       var LoanMarketComponent = /*#__PURE__*/function () {
         function LoanMarketComponent(userService, dialog, socketService, utilityService, alertService, router, authenticationService, sessionsService) {
-          var _this21 = this;
+          var _this22 = this;
 
           _classCallCheck(this, LoanMarketComponent);
 
@@ -5083,7 +5128,7 @@
           this.sessionsService.getSessionNewAdded().subscribe(function (_allLoanMarketData) {
             if (_allLoanMarketData) {
               if (_allLoanMarketData["success"]) {
-                var temp_allLoanMarketData = lodash__WEBPACK_IMPORTED_MODULE_10__["mapKeys"](_this21.allLoanMarketData, '_id');
+                var temp_allLoanMarketData = lodash__WEBPACK_IMPORTED_MODULE_10__["mapKeys"](_this22.allLoanMarketData, '_id');
 
                 if (_allLoanMarketData["data"].isDeleted) {
                   delete temp_allLoanMarketData[_allLoanMarketData["data"]._id];
@@ -5091,14 +5136,14 @@
                   temp_allLoanMarketData[_allLoanMarketData["data"]._id] = _allLoanMarketData["data"];
                 }
 
-                _this21.allLoanMarketData = lodash__WEBPACK_IMPORTED_MODULE_10__["values"](temp_allLoanMarketData);
+                _this22.allLoanMarketData = lodash__WEBPACK_IMPORTED_MODULE_10__["values"](temp_allLoanMarketData);
               }
             }
           });
           this.sessionsService.getSessionUpdated().subscribe(function (_allLoanMarketData) {
             if (_allLoanMarketData) {
               if (_allLoanMarketData["success"]) {
-                var temp_allLoanMarketData = lodash__WEBPACK_IMPORTED_MODULE_10__["mapKeys"](_this21.allLoanMarketData, '_id');
+                var temp_allLoanMarketData = lodash__WEBPACK_IMPORTED_MODULE_10__["mapKeys"](_this22.allLoanMarketData, '_id');
 
                 if (_allLoanMarketData["data"].isDeleted) {
                   delete temp_allLoanMarketData[_allLoanMarketData["data"]._id];
@@ -5106,7 +5151,7 @@
                   temp_allLoanMarketData[_allLoanMarketData["data"]._id] = _allLoanMarketData["data"];
                 }
 
-                _this21.allLoanMarketData = lodash__WEBPACK_IMPORTED_MODULE_10__["values"](temp_allLoanMarketData);
+                _this22.allLoanMarketData = lodash__WEBPACK_IMPORTED_MODULE_10__["values"](temp_allLoanMarketData);
               }
             }
           });
@@ -5219,13 +5264,13 @@
         }, {
           key: "usersProfile",
           value: function usersProfile(userObj) {
-            var _this22 = this;
+            var _this23 = this;
 
             //#region fetch creator id
             this.userService.getUserById(userObj._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_13__["first"])()).subscribe(function (data) {
               if (data && data['success']) {
                 //console.log('84', this.authenticationService.currentUserValue);
-                var dialogRef = _this22.dialog.open(src_app_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_12__["PublicProfileComponent"], {
+                var dialogRef = _this23.dialog.open(src_app_shared_public_profile_public_profile_component__WEBPACK_IMPORTED_MODULE_12__["PublicProfileComponent"], {
                   maxWidth: '100vw',
                   maxHeight: '100vh',
                   height: '100%',
@@ -5253,13 +5298,13 @@
                 }
               } catch (ex) {}
 
-              _this22.alertService.error(errorMsg2show);
+              _this23.alertService.error(errorMsg2show);
             }); //#endregion fetch creator id
           }
         }, {
           key: "showSearchPanel",
           value: function showSearchPanel() {
-            var _this23 = this;
+            var _this24 = this;
 
             //console.log('84', this.authenticationService.currentUserValue);
             var dialogRef = this.dialog.open(src_app_shared_search_search_component__WEBPACK_IMPORTED_MODULE_16__["SearchComponent"], {
@@ -5281,12 +5326,12 @@
                   _obj2Save = {};
                 }
 
-                _this23.searchFilterObj = _obj2Save;
+                _this24.searchFilterObj = _obj2Save;
                 _obj2Save.status = 'pending';
                 _obj2Save.isDeleted = false;
                 var emitThisEvent = null;
 
-                switch (_this23.authenticationService.currentUserValue.role) {
+                switch (_this24.authenticationService.currentUserValue.role) {
                   case src_app_models_role__WEBPACK_IMPORTED_MODULE_5__["Role"].Borrower:
                     _obj2Save.isLoanRequested = false;
                     emitThisEvent = 'sessions_response_getall_bysearch_from_borrower';
@@ -5298,7 +5343,7 @@
                     break;
                 }
 
-                _this23.socketService.getLoanMarketDataForSearch(_obj2Save, emitThisEvent).subscribe(function (_allLoanMarketData) {}); //console.log(`223 :: msc :: Dialog result: ${JSON.stringify(result)}`);
+                _this24.socketService.getLoanMarketDataForSearch(_obj2Save, emitThisEvent).subscribe(function (_allLoanMarketData) {}); //console.log(`223 :: msc :: Dialog result: ${JSON.stringify(result)}`);
 
               }
             }); //#endregion fetch creator id
@@ -5312,13 +5357,13 @@
         }, {
           key: "getLoanMarketData",
           value: function getLoanMarketData() {
-            var _this24 = this;
+            var _this25 = this;
 
             this.subscription = this.socketService.getLoanMarketDataForBorrower().subscribe(function (_allLoanMarketData) {
               if (_allLoanMarketData) {
-                _this24.allLoanMarketData = _allLoanMarketData["data"];
+                _this25.allLoanMarketData = _allLoanMarketData["data"];
               } else {
-                _this24.allLoanMarketData = [];
+                _this25.allLoanMarketData = [];
               }
             });
           }
@@ -5479,7 +5524,7 @@
         function HeaderComponent(router, authenticationService, alertService, sessionsService, dialog,
         /*private serviceTypesService: ServiceTypesService,*/
         socketService, fundService, utilityService, notificationService, messagesService) {
-          var _this25 = this;
+          var _this26 = this;
 
           _classCallCheck(this, HeaderComponent);
 
@@ -5496,26 +5541,26 @@
           this.ParentServicesTypes = null;
           this.messagesService.getAllMyContacts();
           this.authenticationService.currentUser.subscribe(function (x) {
-            _this25.currentUser = x;
+            _this26.currentUser = x;
 
-            if (!_this25.currentUser) {
+            if (!_this26.currentUser) {
               return;
             }
 
-            fundService.getFundsCountForRequestedUser(_this25.currentUser._id);
-            fundService.getSessionSpentCountForRequestedUser(_this25.currentUser._id);
+            fundService.getFundsCountForRequestedUser(_this26.currentUser._id);
+            fundService.getSessionSpentCountForRequestedUser(_this26.currentUser._id);
 
-            _this25.sessionsService.getSessionAllWithSessionApply(_this25.authenticationService.currentUserValue._id).subscribe(function (data) {
+            _this26.sessionsService.getSessionAllWithSessionApply(_this26.authenticationService.currentUserValue._id).subscribe(function (data) {
               ////console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
-                _this25.allSessionsData = data['data']; //this.alertService.success(data['message'], true);
+                _this26.allSessionsData = data['data']; //this.alertService.success(data['message'], true);
 
-                _this25.loading = false; //this.element_btn_click_addSession_skills_verification.click();
+                _this26.loading = false; //this.element_btn_click_addSession_skills_verification.click();
               } else {
                 //alert(JSON.stringify(data['message']));
                 //this.alertService.error(data['message']);
-                _this25.loading = false;
+                _this26.loading = false;
               }
             }, function (error) {
               var errorMsg2show = "";
@@ -5531,57 +5576,57 @@
               } catch (ex) {} //this.alertService.error(errorMsg2show);
 
 
-              _this25.loading = false;
+              _this26.loading = false;
             });
           });
           this.sessionsService.getSessionInstastTypeAdded().subscribe(function (data) {
             if (data && data['success']) {
-              if (!_this25.allInstantSessionsData) {
-                _this25.allInstantSessionsData = [];
+              if (!_this26.allInstantSessionsData) {
+                _this26.allInstantSessionsData = [];
               }
 
               var _currentSessionObj = data['data'];
 
-              var _existingSessionObjKryPair = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_this25.allInstantSessionsData), '_id');
+              var _existingSessionObjKryPair = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_this26.allInstantSessionsData), '_id');
 
               if (lodash__WEBPACK_IMPORTED_MODULE_8__["keys"](_existingSessionObjKryPair).length > 0) {
                 delete _existingSessionObjKryPair[_currentSessionObj._id];
               }
 
               _existingSessionObjKryPair[_currentSessionObj._id] = _currentSessionObj;
-              _this25.allInstantSessionsData = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_existingSessionObjKryPair);
+              _this26.allInstantSessionsData = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_existingSessionObjKryPair);
             } else {//this.alertService.error(data['message']);
             }
           }, function (error) {});
           this.socketService.getCurrentAppliedSessionObj().subscribe(function (data) {
             if (data) {
-              if (!_this25.allInstantSessionsData) {
-                _this25.allInstantSessionsData = [];
+              if (!_this26.allInstantSessionsData) {
+                _this26.allInstantSessionsData = [];
               }
 
-              var _existingSessionObjKryPair = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_this25.allInstantSessionsData), '_id');
+              var _existingSessionObjKryPair = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_this26.allInstantSessionsData), '_id');
 
               delete _existingSessionObjKryPair[data];
-              _this25.allInstantSessionsData = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_existingSessionObjKryPair);
+              _this26.allInstantSessionsData = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_existingSessionObjKryPair);
             } else {//this.alertService.error(data['message']);
             }
           }, function (error) {});
           this.socketService.getSessionUpdates().subscribe(function (data) {
             if (data && data['success']) {
-              if (!_this25.allSessionsData) {
-                _this25.allSessionsData = [];
+              if (!_this26.allSessionsData) {
+                _this26.allSessionsData = [];
               }
 
               var _currentSessionObj = data['data'];
 
-              var _existingSessionObjKryPair = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_this25.allSessionsData), '_id');
+              var _existingSessionObjKryPair = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_this26.allSessionsData), '_id');
 
               if (lodash__WEBPACK_IMPORTED_MODULE_8__["keys"](_existingSessionObjKryPair).length > 0) {
                 delete _existingSessionObjKryPair[_currentSessionObj._id];
               }
 
               _existingSessionObjKryPair[_currentSessionObj._id] = _currentSessionObj;
-              _this25.allSessionsData = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_existingSessionObjKryPair);
+              _this26.allSessionsData = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_existingSessionObjKryPair);
             } else {//this.alertService.error(data['message']);
             }
           }, function (error) {});
@@ -5626,7 +5671,9 @@
           value: function check4applyToSession(sessionObj) {
             if (sessionObj && sessionObj.sessionAppliedByBorrowers) {
               if (lodash__WEBPACK_IMPORTED_MODULE_8__["filter"](sessionObj.sessionAppliedByBorrowers, {
-                "borrowerId": this.authenticationService.currentUserValue._id
+                "borrowerId": {
+                  "_id": this.authenticationService.currentUserValue._id
+                }
               }).length > 0) {
                 return true;
               }
@@ -5643,7 +5690,7 @@
         }, {
           key: "applyToSession",
           value: function applyToSession(sessionObj) {
-            var _this26 = this;
+            var _this27 = this;
 
             //console.log('179', this.authenticationService.currentUserValue);
             var dialogRef = this.dialog.open(_borrower_component__WEBPACK_IMPORTED_MODULE_11__["ModalApplySession"], {
@@ -5666,48 +5713,48 @@
                   _currentSessionApply = result.data.sessionApply;
 
                   if (_currentSessionApply) {
-                    if (!_this26.allInstantSessionsData) {
-                      _this26.allInstantSessionsData = [];
+                    if (!_this27.allInstantSessionsData) {
+                      _this27.allInstantSessionsData = [];
                     }
 
-                    var _existingSessionObjKryPair = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_this26.allInstantSessionsData), '_id');
+                    var _existingSessionObjKryPair = lodash__WEBPACK_IMPORTED_MODULE_8__["mapKeys"](lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_this27.allInstantSessionsData), '_id');
 
                     if (lodash__WEBPACK_IMPORTED_MODULE_8__["keys"](_existingSessionObjKryPair).length > 0) {
                       delete _existingSessionObjKryPair[_currentSessionApply.loanId];
                     }
 
-                    _this26.allInstantSessionsData = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_existingSessionObjKryPair);
+                    _this27.allInstantSessionsData = lodash__WEBPACK_IMPORTED_MODULE_8__["values"](_existingSessionObjKryPair);
 
                     if (!_currentSessionApply._id) {
-                      _currentSessionApply._id = _currentSessionApply.loanId + '__' + _currentSessionApply.borrowerId;
+                      _currentSessionApply._id = _currentSessionApply.loanId + '__' + (_currentSessionApply.borrowerId._id || _currentSessionApply.borrowerId);
                     }
 
                     _currentSessionApply.status = result.data.status || src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Pending;
 
-                    _this26.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
+                    _this27.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
 
                     switch (_currentSessionApply.status) {
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Pending:
-                        _currentSessionApply.createdBy = _this26.authenticationService.currentUserValue._id;
+                        _currentSessionApply.createdBy = _this27.authenticationService.currentUserValue._id;
 
-                        _this26.socketService.setSessionApply(true, _currentSessionApply);
+                        _this27.socketService.setSessionApply(true, _currentSessionApply);
 
                         break;
 
                       default:
-                        _this26.socketService.updateSessionApply(true, _currentSessionApply, _this26.authenticationService.currentUserValue);
+                        _this27.socketService.updateSessionApply(true, _currentSessionApply, _this27.authenticationService.currentUserValue);
 
                         break;
                     }
 
                     switch (_currentSessionApply.status) {
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Accepted:
-                        _this26.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
+                        _this27.alertService.success("Updated. Session is available under My Sessions->Accepted tab.", true);
 
                         break;
 
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Pending:
-                        _this26.alertService.success("Added. Session is available under My Sessions->Pending tab.", true);
+                        _this27.alertService.success("Added. Session is available under My Sessions->Pending tab.", true);
 
                         break;
 
@@ -5715,12 +5762,12 @@
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].RejectedOngoing:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].RejectedOngoingWithRefund:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Suspended:
-                        _this26.alertService.success("Updated. Session is available under My Sessions->Rejected tab.", true);
+                        _this27.alertService.success("Updated. Session is available under My Sessions->Rejected tab.", true);
 
                         break;
 
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Completed:
-                        _this26.alertService.success("Updated. Session is available under My Sessions->Completed tab.", true);
+                        _this27.alertService.success("Updated. Session is available under My Sessions->Completed tab.", true);
 
                         break;
 
@@ -5728,7 +5775,7 @@
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].Ongoing:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].OngoingInitiated:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_5__["SessionStatus"].AwaitingForApproval:
-                        _this26.alertService.success("Updated. Session is available under My Sessions->Ongoing tab.", true);
+                        _this27.alertService.success("Updated. Session is available under My Sessions->Ongoing tab.", true);
 
                         break;
 
@@ -5750,7 +5797,9 @@
               case src_app_models__WEBPACK_IMPORTED_MODULE_5__["Role"].Borrower:
                 _proccessedSessionObj = lodash__WEBPACK_IMPORTED_MODULE_8__["cloneDeep"](sessionObj);
                 _proccessedSessionObj.sessionAppliedByBorrowers = lodash__WEBPACK_IMPORTED_MODULE_8__["filter"](sessionObj.sessionAppliedByBorrowers, {
-                  "borrowerId": this.authenticationService.currentUserValue._id
+                  "borrowerId": {
+                    "_id": this.authenticationService.currentUserValue._id
+                  }
                 });
                 break;
 
@@ -5994,7 +6043,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<ul class=\"navbar-nav bg-gradient-primary sidebar sidebar-dark accordion navbar_side_panel\" id=\"accordionSidebar\">\n\n    <!-- Sidebar - Brand -->\n    <a class=\"sidebar-brand d-flex align-items-center justify-content-center\">\n        <img class=\"img-fluid\" src=\"./assets/img/avitii-logo.png\">\n    </a>\n\n    <!-- Divider -->\n    <hr class=\"sidebar-divider my-0\">\n \n    <!-- Nav Item - Dashboard -->\n    <li class=\"nav-item\">\n        <a class=\"nav-link\">\n            {{currentUser.firstName}} \n            <span class=\"badge badge-success float-right font-weight-lighter text-capitalize\" [textContent]=\"currentUser.role\" i18n> Borrower</span>\n         </a>\n    </li>\n    \n\n    <!-- Divider -->\n    <hr class=\"sidebar-divider\">\n\n    <!-- Heading -->\n    <!-- <div class=\"sidebar-heading\">\n        Interface\n    </div> -->\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/borrower\">\n            <i class=\"icon icon-home\"></i>\n            <span i18n>Dashboard</span></a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/borrower/loan-market\" routerLinkActive=\"active\">\n            <i class=\"icon icon-shopping-cart\"></i>\n            <span i18n>Loan Market</span></a>\n    </li>\n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\"\n        routerLink=\"/borrower/make-a-loan\"\n       \n        routerLinkActive=\"active\">\n            <i class=\"icon icon-money\"></i>\n            <span i18n>Get a Loan</span></a>\n    </li>\n     <!-- routerLink=\"/borrower/make-a-loan\"  -->\n     \n    <!-- Nav Item - Pages Collapse Menu -->\n    <!-- <li class=\"nav-item\">\n        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\" aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n            <i class=\"icon icon-bag\"></i>\n            <span>My Contracts</span>\n        </a>\n        <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">\n            <div class=\"bg-white py-2 collapse-inner rounded\">\n            \n                <a class=\"collapse-item\" (click)=\"navigate2State('/borrower/my-contract')\" routerLinkActive=\"active\">My Offers</a>\n                <a class=\"collapse-item\" (click)=\"navigate2State('/borrower/my-contract')\" routerLinkActive=\"active\">Paid Contracts</a>\n                <a class=\"collapse-item\" (click)=\"navigate2State('/borrower/my-contract')\" routerLinkActive=\"active\">Unpaid Contracts</a>\n                <a class=\"collapse-item\" (click)=\"navigate2State('/borrower/my-contract')\" routerLinkActive=\"active\">Inkasso cases</a>\n           \n            </div>\n        </div>\n    </li> -->\n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/borrower/my-contract\" routerLinkActive=\"active\">\n            <i class=\"icon icon-bag\"></i>\n            <span i18n>My Contracts</span></a>\n    </li>\n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\"  routerLink=\"/borrower/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-comments\"></i>\n            <span i18n>Messages</span>\n            <span *ngIf=\"messagesService.returnTotalPendingMessagesForUser()>0\" class=\"badge badge-light float-right font-weight-lighter text-capitalize\" i18n> {{messagesService.returnTotalPendingMessagesForUser()}}</span>\n        </a>\n    </li>\n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\"  routerLink=\"/borrower/calendar\" routerLinkActive=\"active\">\n            <i class=\"icon icon-calendar\"></i>\n            <span i18n>Calendar</span></a>\n    </li>\n\n    <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/borrower/ratings\" routerLinkActive=\"active\">\n            <i class=\"icon icon-star\"></i>\n            <span>My Ratings</span></a>\n    </li> -->\n\n    <!-- Divider -->\n    <hr class=\"sidebar-divider\">\n\n    <!-- Heading -->\n    <!-- <div class=\"sidebar-heading\">\n        Addons\n    </div> -->\n\n    <!-- Nav Item - Pages Collapse Menu -->\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" data-toggle=\"collapse\" data-target=\"#collapsePages\" aria-expanded=\"true\" aria-controls=\"collapsePages\">\n            <i class=\"icon icon-settings\"></i>\n            <span i18n>Settings</span>\n        </a>\n        <div id=\"collapsePages\" class=\"collapse show\" aria-labelledby=\"headingPages\" data-parent=\"#accordionSidebar\">\n            <div class=\"bg-white py-2 collapse-inner rounded\">\n            \n                <a class=\"collapse-item\" routerLink=\"/borrower/profile\" routerLinkActive=\"active\" i18n>My Profile</a>\n                <a class=\"collapse-item\" routerLink=\"/borrower/update-password\" routerLinkActive=\"active\" i18n>Change Password</a>\n                <a class=\"collapse-item\" routerLink=\"/borrower/bank-details\" routerLinkActive=\"active\" i18n>Bank Details</a>\n                <a class=\"collapse-item\" routerLink=\"/borrower/income-proof\" routerLinkActive=\"active\" i18n>Income Proof</a>\n                <a class=\"collapse-item\" routerLink=\"/borrower/my-subscriptions\" routerLinkActive=\"active\" i18n>My Subscriptions</a>\n               \n            </div>\n        </div>\n    </li>\n\n \n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/logout\">\n            <i class=\"icon icon-flickr-alt\"></i>\n            <span i18n>Logout</span></a>\n    </li>\n\n    <!-- Divider -->\n    <!-- <hr class=\"sidebar-divider d-none d-md-block\">\n\n\n    <div class=\"text-center d-none d-md-inline\">\n        <button class=\"rounded-circle border-0\" id=\"sidebarToggle\"></button>\n    </div> -->\n\n\n</ul>\n\n\n<div class=\"sidebar_overlay navbar_side_panel btn-back\" ></div>\n\n\n\n\n<!-- Nav Start [ngClass]=\"{'dark position-relative' : (router.url!='/')}\"-->\n<header id=\"custom-header-nav\" class=\"ecommerce nav-fix shadow-sm p-0 hide-lg\">\n    \n        <div class=\"row\">\n            <div class=\"col\">\n                <nav>\n                    <div class=\"responsive-btn ml-1\">\n                        <a class=\"toggle-nav\"><i aria-hidden=\"true\" class=\"icon-align-center\"></i></a>\n                    </div>\n                    <a class=\"logo-light\" routerLink=\"/home\">\n                        <img class=\"img-fluid\" src=\"./assets/img/avitii-logo-purple.png\"></a>\n\n                    <!-- <div class=\"navbar navbar_side_panel m-l-auto p-1 btn-back\" id=\"togglebtn\">\n                     <div class=\"responsive-btn\">\n                            <h5 class=\"btn-back\">back</h5>\n                        </div> \n                        <ul class=\"main-menu\">\n                            <li><a routerLink=\"/lender\">Home</a></li>\n\n                            <li><a routerLink=\"/lender/search-consulatnt\" routerLinkActive=\"active\">Search</a></li>\n                            <li><a routerLink=\"/lender/my-contract\" routerLinkActive=\"active\">My Contract</a></li>\n                            <li><a routerLink=\"/lender/make-a-loan\" routerLinkActive=\"active\"><i class=\"icon-plus\"></i>\n                                    Make a Loan</a></li>\n\n                        </ul>\n                    </div> -->\n                    <div class=\"top-header-right mr-1\">\n                        <ul>\n\n                            <!-- <li class=\"cart\">\n                                <a aria-expanded=\"false\" routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n                                    <i class=\"icon-comment-alt\"></i>\n                                </a>\n\n                            </li>\n                            <li class=\"cart\">\n                                <a aria-expanded=\"false\" data-toggle=\"dropdown\" href=\"#\" id=\"dropdownMenuButton1\">\n                                    <i class=\"icon-bell bell\"></i>\n                                    <span *ngIf=\"(utilityService._.keys(notificationService.appNotifications).length)>0\"\n                                        class=\"badge badge-primary bell-count\"\n                                        [textContent]=\"utilityService._.keys(notificationService.appNotifications).length\"></span>\n                                </a>\n                                <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\"\n                                    x-placement=\"bottom-end\"\n                                    style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\n                                    <ul class=\"shopping-cart list-group list-group-flush\">\n                                        <li class=\"list-group-item\"\n                                            *ngFor=\"let notification of utilityService._.values(notificationService.appNotifications)\">\n                                            <div class=\"pb-2\">\n                                                <div class=\"mb-1\">{{notification.message}}&nbsp;<a\n                                                        class=\"float-lg-right font-large text-danger\"\n                                                        (click)=\"notificationService.check4Notification(notification)\"><i\n                                                            class=\"icon-close\" style=\"font-size: 0.6rem;\"></i></a></div>\n                                                <div class=\"font-weight-light small mb-1\">{{notification.description}}\n                                                </div>\n                                            </div>\n                                        </li>\n\n\n                                        <li class=\"no-item text-center\">\n                                            <h4 class=\"my-4 font-weight-normal\">No Notifications</h4>\n                                        </li>\n                                    </ul>\n                                </div>\n                            </li> -->\n                            <li class=\"cart\">\n                                <a aria-expanded=\"false\" data-toggle=\"dropdown\"  id=\"dropdownMenuButton1\">\n                                    <!-- <img class=\"userimg mt-n2\" src=\"./assets/img/user-default.png\"> -->\n                                    <i class=\"icon icon-user\"></i>\n                                </a>\n                                <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\"\n                                    x-placement=\"bottom-end\"\n                                    style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\n                                    <ul class=\"shopping-cart\">\n                                        <li>\n                                            <a class=\"h6 d-block\" routerLink=\"/lender\">\n                                                {{currentUser.firstName}}\n                                                <span class=\"badge badge-primary float-right\"\n                                                    [textContent]=\"currentUser.role\" i18n> Borrower</span>\n                                            </a>\n                                        </li>\n\n                                        <!-- <li>\n                                            <a class=\"d-block\" routerLink=\"/lender/wallet\">Wallet\n                                                <span\n                                                    class=\"badge badge-success float-right\">${{fundService.totalFund4currentUser}}</span>\n                                            </a>\n                                        </li> -->\n                                        <li><a routerLink=\"/lender/profile\" i18n>Profile</a></li>\n                                        <hr>\n                                        <li>\n                                            <a routerLink=\"/logout\" i18n>Logout</a>\n                                        </li>\n                                    </ul>\n                                </div>\n\n                            </li>\n                        </ul>\n                    </div>\n                    \n                    <div class=\"sidebar_overlay navbar_side_panel btn-back\" style=\"display: none;\"></div>\n                </nav>\n            </div>\n        </div>\n   \n</header>\n<!-- Nav end-->";
+      __webpack_exports__["default"] = "<ul class=\"navbar-nav bg-gradient-primary sidebar sidebar-dark accordion navbar_side_panel\" id=\"accordionSidebar\">\n\n    <!-- Sidebar - Brand -->\n    <a class=\"sidebar-brand d-flex align-items-center justify-content-center\">\n        <img class=\"img-fluid\" src=\"./assets/img/avitii-logo.png\">\n    </a>\n\n    <!-- Divider -->\n    <hr class=\"sidebar-divider my-0\">\n  \n    <!-- Nav Item - Dashboard -->\n    <li class=\"nav-item\">\n        <a class=\"nav-link\">\n            {{currentUser.firstName}} \n            <span class=\"badge badge-success float-right font-weight-lighter text-capitalize\" [textContent]=\"currentUser.role\" i18n> Borrower</span>\n         </a>\n    </li>\n    \n\n    <!-- Divider -->\n    <hr class=\"sidebar-divider\">\n\n    <!-- Heading -->\n    <!-- <div class=\"sidebar-heading\">\n        Interface\n    </div> -->\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/borrower\">\n            <i class=\"icon icon-home\"></i>\n            <span i18n>Dashboard</span></a>\n    </li>\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/borrower/loan-market\" routerLinkActive=\"active\">\n            <i class=\"icon icon-shopping-cart\"></i>\n            <span i18n>Loan Market</span></a>\n    </li>\n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\"\n        routerLink=\"/borrower/make-a-loan\"\n       \n        routerLinkActive=\"active\">\n            <i class=\"icon icon-money\"></i>\n            <span i18n>Get a Loan</span></a>\n    </li>\n     <!-- routerLink=\"/borrower/make-a-loan\"  -->\n     \n    <!-- Nav Item - Pages Collapse Menu -->\n    <!-- <li class=\"nav-item\">\n        <a class=\"nav-link collapsed\" href=\"#\" data-toggle=\"collapse\" data-target=\"#collapseTwo\" aria-expanded=\"true\" aria-controls=\"collapseTwo\">\n            <i class=\"icon icon-bag\"></i>\n            <span>My Contracts</span>\n        </a>\n        <div id=\"collapseTwo\" class=\"collapse\" aria-labelledby=\"headingTwo\" data-parent=\"#accordionSidebar\">\n            <div class=\"bg-white py-2 collapse-inner rounded\">\n            \n                <a class=\"collapse-item\" (click)=\"navigate2State('/borrower/my-contract')\" routerLinkActive=\"active\">My Offers</a>\n                <a class=\"collapse-item\" (click)=\"navigate2State('/borrower/my-contract')\" routerLinkActive=\"active\">Paid Contracts</a>\n                <a class=\"collapse-item\" (click)=\"navigate2State('/borrower/my-contract')\" routerLinkActive=\"active\">Unpaid Contracts</a>\n                <a class=\"collapse-item\" (click)=\"navigate2State('/borrower/my-contract')\" routerLinkActive=\"active\">Inkasso cases</a>\n           \n            </div>\n        </div>\n    </li> -->\n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/borrower/my-contract\" routerLinkActive=\"active\">\n            <i class=\"icon icon-bag\"></i>\n            <span i18n>My Contracts</span></a>\n    </li>\n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\"  routerLink=\"/borrower/messages\" routerLinkActive=\"active\">\n            <i class=\"icon icon-comments\"></i>\n            <span i18n>Messages</span>\n            <span *ngIf=\"messagesService.returnTotalPendingMessagesForUser()>0\" class=\"badge badge-light float-right font-weight-lighter text-capitalize\" i18n> {{messagesService.returnTotalPendingMessagesForUser()}}</span>\n        </a>\n    </li>\n\n    <li class=\"nav-item\">\n        <a class=\"nav-link\"  routerLink=\"/borrower/calendar\" routerLinkActive=\"active\">\n            <i class=\"icon icon-calendar\"></i>\n            <span i18n>Calendar</span></a>\n    </li>\n\n    <!-- <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/borrower/ratings\" routerLinkActive=\"active\">\n            <i class=\"icon icon-star\"></i>\n            <span>My Ratings</span></a>\n    </li> -->\n\n    <!-- Divider -->\n    <hr class=\"sidebar-divider\">\n\n    <!-- Heading -->\n    <!-- <div class=\"sidebar-heading\">\n        Addons\n    </div> -->\n\n    <!-- Nav Item - Pages Collapse Menu -->\n    <li class=\"nav-item\">\n        <a class=\"nav-link\" data-toggle=\"collapse\" data-target=\"#collapsePages\" aria-expanded=\"true\" aria-controls=\"collapsePages\">\n            <i class=\"icon icon-settings\"></i>\n            <span i18n>Settings</span>\n        </a>\n        <div id=\"collapsePages\" class=\"collapse show\" aria-labelledby=\"headingPages\" data-parent=\"#accordionSidebar\">\n            <div class=\"bg-white py-2 collapse-inner rounded\">\n            \n                <a class=\"collapse-item\" routerLink=\"/borrower/profile\" routerLinkActive=\"active\" i18n>My Profile</a>\n                <a class=\"collapse-item\" routerLink=\"/borrower/update-password\" routerLinkActive=\"active\" i18n>Change Password</a>\n                <a class=\"collapse-item\" routerLink=\"/borrower/bank-details\" routerLinkActive=\"active\" i18n>Bank Details</a>\n                <a class=\"collapse-item\" routerLink=\"/borrower/income-proof\" routerLinkActive=\"active\" i18n>Income Proof</a>\n                <a class=\"collapse-item\" routerLink=\"/borrower/my-subscriptions\" routerLinkActive=\"active\" i18n>My Subscriptions</a>\n               \n            </div>\n        </div>\n    </li>\n\n \n    <li class=\"nav-item\">\n        <a class=\"nav-link\" routerLink=\"/logout\">\n            <i class=\"icon icon-flickr-alt\"></i>\n            <span i18n>Logout</span></a>\n    </li>\n\n    <!-- Divider -->\n    <!-- <hr class=\"sidebar-divider d-none d-md-block\">\n\n\n    <div class=\"text-center d-none d-md-inline\">\n        <button class=\"rounded-circle border-0\" id=\"sidebarToggle\"></button>\n    </div> -->\n\n\n</ul>\n\n\n<div class=\"sidebar_overlay navbar_side_panel btn-back\" ></div>\n\n\n\n\n<!-- Nav Start [ngClass]=\"{'dark position-relative' : (router.url!='/')}\"-->\n<header id=\"custom-header-nav\" class=\"ecommerce nav-fix shadow-sm p-0 hide-lg\">\n    \n        <div class=\"row\">\n            <div class=\"col\">\n                <nav>\n                    <div class=\"responsive-btn ml-1\">\n                        <a class=\"toggle-nav\"><i aria-hidden=\"true\" class=\"icon-align-center\"></i></a>\n                    </div>\n                    <a class=\"logo-light\" routerLink=\"/home\">\n                        <img class=\"img-fluid\" src=\"./assets/img/avitii-logo-purple.png\"></a>\n\n                    <!-- <div class=\"navbar navbar_side_panel m-l-auto p-1 btn-back\" id=\"togglebtn\">\n                     <div class=\"responsive-btn\">\n                            <h5 class=\"btn-back\">back</h5>\n                        </div> \n                        <ul class=\"main-menu\">\n                            <li><a routerLink=\"/lender\">Home</a></li>\n\n                            <li><a routerLink=\"/lender/search-consulatnt\" routerLinkActive=\"active\">Search</a></li>\n                            <li><a routerLink=\"/lender/my-contract\" routerLinkActive=\"active\">My Contract</a></li>\n                            <li><a routerLink=\"/lender/make-a-loan\" routerLinkActive=\"active\"><i class=\"icon-plus\"></i>\n                                    Make a Loan</a></li>\n\n                        </ul>\n                    </div> -->\n                    <div class=\"top-header-right mr-1\">\n                        <ul>\n\n                            <!-- <li class=\"cart\">\n                                <a aria-expanded=\"false\" routerLink=\"/lender/messages\" routerLinkActive=\"active\">\n                                    <i class=\"icon-comment-alt\"></i>\n                                </a>\n\n                            </li>\n                            <li class=\"cart\">\n                                <a aria-expanded=\"false\" data-toggle=\"dropdown\" href=\"#\" id=\"dropdownMenuButton1\">\n                                    <i class=\"icon-bell bell\"></i>\n                                    <span *ngIf=\"(utilityService._.keys(notificationService.appNotifications).length)>0\"\n                                        class=\"badge badge-primary bell-count\"\n                                        [textContent]=\"utilityService._.keys(notificationService.appNotifications).length\"></span>\n                                </a>\n                                <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\"\n                                    x-placement=\"bottom-end\"\n                                    style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\n                                    <ul class=\"shopping-cart list-group list-group-flush\">\n                                        <li class=\"list-group-item\"\n                                            *ngFor=\"let notification of utilityService._.values(notificationService.appNotifications)\">\n                                            <div class=\"pb-2\">\n                                                <div class=\"mb-1\">{{notification.message}}&nbsp;<a\n                                                        class=\"float-lg-right font-large text-danger\"\n                                                        (click)=\"notificationService.check4Notification(notification)\"><i\n                                                            class=\"icon-close\" style=\"font-size: 0.6rem;\"></i></a></div>\n                                                <div class=\"font-weight-light small mb-1\">{{notification.description}}\n                                                </div>\n                                            </div>\n                                        </li>\n\n\n                                        <li class=\"no-item text-center\">\n                                            <h4 class=\"my-4 font-weight-normal\">No Notifications</h4>\n                                        </li>\n                                    </ul>\n                                </div>\n                            </li> -->\n                            <li class=\"cart\">\n                                <a aria-expanded=\"false\" data-toggle=\"dropdown\"  id=\"dropdownMenuButton1\">\n                                    <!-- <img class=\"userimg mt-n2\" src=\"./assets/img/user-default.png\"> -->\n                                    <i class=\"icon icon-user\"></i>\n                                </a>\n                                <div aria-labelledby=\"dropdownMenuButton1\" class=\"dropdown-menu dropdown-menu-right\"\n                                    x-placement=\"bottom-end\"\n                                    style=\"position: absolute; transform: translate3d(46px, 47px, 0px); top: 0px; left: 0px; will-change: transform;\">\n                                    <ul class=\"shopping-cart\">\n                                        <li>\n                                            <a class=\"h6 d-block\" routerLink=\"/lender\">\n                                                {{currentUser.firstName}}\n                                                <span class=\"badge badge-primary float-right\"\n                                                    [textContent]=\"currentUser.role\" i18n> Borrower</span>\n                                            </a>\n                                        </li>\n\n                                        <!-- <li>\n                                            <a class=\"d-block\" routerLink=\"/lender/wallet\">Wallet\n                                                <span\n                                                    class=\"badge badge-success float-right\">${{fundService.totalFund4currentUser}}</span>\n                                            </a>\n                                        </li> -->\n                                        <li><a routerLink=\"/lender/profile\" i18n>Profile</a></li>\n                                        <hr>\n                                        <li>\n                                            <a routerLink=\"/logout\" i18n>Logout</a>\n                                        </li>\n                                    </ul>\n                                </div>\n\n                            </li>\n                        </ul>\n                    </div>\n                    \n                    <div class=\"sidebar_overlay navbar_side_panel btn-back\" style=\"display: none;\"></div>\n                </nav>\n            </div>\n        </div>\n   \n</header>\n<!-- Nav end-->";
       /***/
     },
 
@@ -6228,7 +6277,7 @@
         }, {
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this27 = this;
+            var _this28 = this;
 
             this.browseSessionForm = this.formBuilder.group({
               services4search: [''],
@@ -6236,100 +6285,6 @@
               generaldata4search: ['']
             });
             this.sessionsService.getSessionAllWithSessionApply(this.authenticationService.currentUserValue._id).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
-              ////console.log('data => ', data)
-              if (data && data['success']) {
-                //alert(JSON.stringify( data));
-                _this27.allSessionsData = data['data'];
-
-                _this27.filterAllSessionsDataForAppliedCurrentUserOnly();
-
-                _this27.userService.proccessAllAppUsersCollections(_this27.utilityService._.uniq(_this27.utilityService._.map(_this27.utilityService._.flattenDepth(_this27.utilityService._.map(_this27.utilityService._.values(_this27.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId'))); //this.alertService.success(data['message'], true);
-
-
-                _this27.loading = false; //this.element_btn_click_addSession_skills_verification.click();
-              } else {
-                //alert(JSON.stringify(data['message']));
-                //this.alertService.error(data['message']);
-                _this27.loading = false;
-              }
-            }, function (error) {
-              var errorMsg2show = "";
-
-              try {
-                if (error && error.error && error.error.message) {
-                  errorMsg2show = error.error.message;
-                } else if (error && error.message) {
-                  errorMsg2show = error.message;
-                } else {
-                  errorMsg2show = error;
-                }
-              } catch (ex) {} //this.alertService.error(errorMsg2show);
-
-
-              _this27.loading = false;
-            });
-            this.sessionsService.getUpdatesForSessionAllByBorrowerId().subscribe(function (data) {
-              if (data && data['success']) {
-                var _keyPairedMapObj = _this27.utilityService._.mapKeys(_this27.allSessionsData, "_id");
-
-                for (var _items in data['data']) {
-                  var _currentObj = data['data'][_items];
-                  _keyPairedMapObj[_currentObj._id] = _currentObj;
-                }
-
-                _this27.allSessionsData = _this27.utilityService._.values(_keyPairedMapObj);
-                _this27.loading = false;
-              } else {
-                _this27.loading = false;
-              }
-            }, function (error) {
-              _this27.loading = false;
-            });
-            this.sessionsService.getSessionLengthByService(null, null, null, null, null).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
-              ////console.log('data => ', data)
-              if (data && data['success']) {
-                //alert(JSON.stringify( data));
-                _this27.allSessionsCount = data['data']; //this.alertService.success(data['message'], true);
-
-                _this27.loading = false; //this.element_btn_click_addSession_skills_verification.click();
-              } else {
-                //alert(JSON.stringify(data['message']));
-                //this.alertService.error(data['message']);
-                _this27.loading = false;
-              }
-            }, function (error) {
-              var errorMsg2show = "";
-
-              try {
-                if (error && error.error && error.error.message) {
-                  errorMsg2show = error.error.message;
-                } else if (error && error.message) {
-                  errorMsg2show = error.message;
-                } else {
-                  errorMsg2show = error;
-                }
-              } catch (ex) {} //this.alertService.error(errorMsg2show);
-
-
-              _this27.loading = false;
-            });
-          }
-        }, {
-          key: "f",
-          get: function get() {
-            return this.browseSessionForm.controls;
-          }
-        }, {
-          key: "sessionSearchByService",
-          value: function sessionSearchByService() {
-            var _this28 = this;
-
-            var services = this.browseSessionForm.get('services4search').value;
-            var location = this.browseSessionForm.get('location4search').value;
-            var generaldata4search = this.browseSessionForm.get('generaldata4search').value;
-            var useAndTrueOrFalse = false;
-            this.allSessionsData = [];
-            this.sessionsService.getSessionAllByService(services, location, generaldata4search, generaldata4search, useAndTrueOrFalse).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
               ////console.log('data => ', data)
               if (data && data['success']) {
                 //alert(JSON.stringify( data));
@@ -6362,11 +6317,105 @@
 
               _this28.loading = false;
             });
+            this.sessionsService.getUpdatesForSessionAllByBorrowerId().subscribe(function (data) {
+              if (data && data['success']) {
+                var _keyPairedMapObj = _this28.utilityService._.mapKeys(_this28.allSessionsData, "_id");
+
+                for (var _items in data['data']) {
+                  var _currentObj = data['data'][_items];
+                  _keyPairedMapObj[_currentObj._id] = _currentObj;
+                }
+
+                _this28.allSessionsData = _this28.utilityService._.values(_keyPairedMapObj);
+                _this28.loading = false;
+              } else {
+                _this28.loading = false;
+              }
+            }, function (error) {
+              _this28.loading = false;
+            });
+            this.sessionsService.getSessionLengthByService(null, null, null, null, null).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
+              ////console.log('data => ', data)
+              if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                _this28.allSessionsCount = data['data']; //this.alertService.success(data['message'], true);
+
+                _this28.loading = false; //this.element_btn_click_addSession_skills_verification.click();
+              } else {
+                //alert(JSON.stringify(data['message']));
+                //this.alertService.error(data['message']);
+                _this28.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = "";
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {} //this.alertService.error(errorMsg2show);
+
+
+              _this28.loading = false;
+            });
+          }
+        }, {
+          key: "f",
+          get: function get() {
+            return this.browseSessionForm.controls;
+          }
+        }, {
+          key: "sessionSearchByService",
+          value: function sessionSearchByService() {
+            var _this29 = this;
+
+            var services = this.browseSessionForm.get('services4search').value;
+            var location = this.browseSessionForm.get('location4search').value;
+            var generaldata4search = this.browseSessionForm.get('generaldata4search').value;
+            var useAndTrueOrFalse = false;
+            this.allSessionsData = [];
+            this.sessionsService.getSessionAllByService(services, location, generaldata4search, generaldata4search, useAndTrueOrFalse).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_7__["first"])()).subscribe(function (data) {
+              ////console.log('data => ', data)
+              if (data && data['success']) {
+                //alert(JSON.stringify( data));
+                _this29.allSessionsData = data['data'];
+
+                _this29.filterAllSessionsDataForAppliedCurrentUserOnly();
+
+                _this29.userService.proccessAllAppUsersCollections(_this29.utilityService._.uniq(_this29.utilityService._.map(_this29.utilityService._.flattenDepth(_this29.utilityService._.map(_this29.utilityService._.values(_this29.allSessionsData), "sessionAppliedByBorrowers"), 1), 'borrowerId'))); //this.alertService.success(data['message'], true);
+
+
+                _this29.loading = false; //this.element_btn_click_addSession_skills_verification.click();
+              } else {
+                //alert(JSON.stringify(data['message']));
+                //this.alertService.error(data['message']);
+                _this29.loading = false;
+              }
+            }, function (error) {
+              var errorMsg2show = "";
+
+              try {
+                if (error && error.error && error.error.message) {
+                  errorMsg2show = error.error.message;
+                } else if (error && error.message) {
+                  errorMsg2show = error.message;
+                } else {
+                  errorMsg2show = error;
+                }
+              } catch (ex) {} //this.alertService.error(errorMsg2show);
+
+
+              _this29.loading = false;
+            });
           }
         }, {
           key: "applyToSession",
           value: function applyToSession(sessionObj) {
-            var _this29 = this;
+            var _this30 = this;
 
             //console.log('179', this.authenticationService.currentUserValue);
             var dialogRef = this.dialog.open(_borrower_component__WEBPACK_IMPORTED_MODULE_10__["ModalApplySession"], {
@@ -6391,30 +6440,30 @@
 
                     _currentSessionApply.status = result.data.status || src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Pending;
 
-                    _this29.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
+                    _this30.socketService.sendCurrentAppliedSessionObj(_currentSessionApply.loanId);
 
                     switch (_currentSessionApply.status) {
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Pending:
-                        _currentSessionApply.createdBy = _this29.authenticationService.currentUserValue._id;
+                        _currentSessionApply.createdBy = _this30.authenticationService.currentUserValue._id;
 
-                        _this29.socketService.setSessionApply(true, _currentSessionApply);
+                        _this30.socketService.setSessionApply(true, _currentSessionApply);
 
                         break;
 
                       default:
-                        _this29.socketService.updateSessionApply(true, _currentSessionApply, _this29.authenticationService.currentUserValue);
+                        _this30.socketService.updateSessionApply(true, _currentSessionApply, _this30.authenticationService.currentUserValue);
 
                         break;
                     }
 
                     switch (_currentSessionApply.status) {
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Accepted:
-                        _this29.alertService.success("Updated. Session is available under My Sessionss ->Accepted tab.", true);
+                        _this30.alertService.success("Updated. Session is available under My Sessionss ->Accepted tab.", true);
 
                         break;
 
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Pending:
-                        _this29.alertService.success("Applied. Session is available under My Sessionss->Pending tab.", true);
+                        _this30.alertService.success("Applied. Session is available under My Sessionss->Pending tab.", true);
 
                         break;
 
@@ -6422,12 +6471,12 @@
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].RejectedOngoing:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].RejectedOngoingWithRefund:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Suspended:
-                        _this29.alertService.success("Updated. Session is available under My Sessionss->Rejected tab.", true);
+                        _this30.alertService.success("Updated. Session is available under My Sessionss->Rejected tab.", true);
 
                         break;
 
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Completed:
-                        _this29.alertService.success("Updated. Session is available under My Sessionss->Completed tab.", true);
+                        _this30.alertService.success("Updated. Session is available under My Sessionss->Completed tab.", true);
 
                         break;
 
@@ -6435,7 +6484,7 @@
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].Ongoing:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].OngoingInitiated:
                       case src_app_models__WEBPACK_IMPORTED_MODULE_12__["SessionStatus"].AwaitingForApproval:
-                        _this29.alertService.success("Updated. Session is available under My Sessionss->Ongoing tab.", true);
+                        _this30.alertService.success("Updated. Session is available under My Sessionss->Ongoing tab.", true);
 
                         break;
 

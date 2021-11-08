@@ -236,10 +236,15 @@
                                 <!--New Data table from Sessions Apply-->
                                 <tr
                                 *ngFor="let LoanApplyObj of utilityService._.values( allSessionApplyData) | mySessionsFilter : 'status' : ['accepted']:checkCreatedByUserId:checkCreatedByT; let i=index;">
-                                <td class="text-capitalize">{{(LoanApplyObj.sessionForBorrower.loanType ||
-                                    "").replace("_", " ")}}</td>
                                 <td class="text-capitalize">
-                                    {{LoanApplyObj.borrowerId.firstName+' '+LoanApplyObj.borrowerId.lastName}}
+                                    <span (click)="showAppliedToSession(null, LoanApplyObj.loanId)">
+                                        {{(LoanApplyObj.sessionForBorrower.loanType || "").replace("_", " ")}}   
+                                    </span>
+                                </td>
+                                <td class="text-capitalize">
+                                    <span (click)="usersProfile((LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId:LoanApplyObj.borrowerId))">
+                                        {{(LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId.firstName:LoanApplyObj.borrowerId.firstName)}}
+                                    </span>
                                     <!-- {{userService.returnUsersObjFromLocal(null,
                                     null,'firstName',
                                     (LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId._id:LoanApplyObj.borrowerId._id))}} -->
@@ -259,13 +264,13 @@
                                         <a
                                             *ngIf="LoanApplyObj.isLoanAmountPaidByLender && !LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower">
                                             <span class="badge badge-warning" i18n>
-                                                Money Sent
+                                                Money Sent, Confirmation Pending From Borrower
                                             </span>
                                         </a>
                                         <a
                                             *ngIf="LoanApplyObj.isLoanAmountPaidByLender && LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower">
                                             <span class="badge badge-success" i18n>
-                                                Received Money
+                                                Money Sent and Confirmed by Borrower
                                             </span>
                                         </a>
                                     </div>
@@ -280,13 +285,13 @@
                                         <a
                                         *ngIf="LoanApplyObj.isLoanAmountPaidByLender && !LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower">
                                         <span class="badge badge-warning" i18n>
-                                            Money Sent
+                                            Money Sent, Confirmation Pending From Borrower
                                         </span>
                                         </a>
                                         <a
                                             *ngIf="LoanApplyObj.isLoanAmountPaidByLender && LoanApplyObj.isLoanAmountPaidByLenderConfirmByBorrower">
                                             <span class="badge badge-success" i18n>
-                                                Money Sent
+                                                Money Sent and Confirmed by Borrower
                                             </span>
                                         </a>
                                     </div>
@@ -443,10 +448,15 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let LoanApplyObj of utilityService._.values( allSessionApplyData) | mySessionsFilter : 'status' : ['awaiting_for_approval']:checkCreatedByUserId:checkCreatedByT; let i=index;">
-                                <td class="text-capitalize">{{(LoanApplyObj.sessionForBorrower.loanType ||
-                                    "").replace("_", " ")}}</td>
                                 <td class="text-capitalize">
-                                    {{(LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId.firstName:LoanApplyObj.borrowerId.firstName)}}
+                                    <span (click)="showAppliedToSession(null, LoanApplyObj.loanId)">
+                                        {{(LoanApplyObj.sessionForBorrower.loanType || "").replace("_", " ")}}  
+                                    </span>
+                                </td>
+                                <td class="text-capitalize">
+                                    <span (click)="usersProfile((LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId:LoanApplyObj.borrowerId))">
+                                        {{(LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId.firstName:LoanApplyObj.borrowerId.firstName)}}
+                                    </span>
                                     <!--
                                     {{userService.returnUsersObjFromLocal(null,
                                     null,'firstName',
@@ -546,10 +556,15 @@
                             <tbody>
                                 <tr
                                     *ngFor="let LoanApplyObj of utilityService._.values( allSessionApplyData) | mySessionsFilter : 'status' : ['paid','completed']:checkCreatedByUserId:checkCreatedByT">
-                                    <td class="text-capitalize">{{(LoanApplyObj.sessionForBorrower.loanType ||
-                                        "").replace("_", " ")}}</td>
                                     <td class="text-capitalize">
-                                        {{(LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId.firstName:LoanApplyObj.borrowerId.firstName)}}
+                                        <span (click)="showAppliedToSession(null, LoanApplyObj.loanId)">
+                                            {{(LoanApplyObj.sessionForBorrower.loanType || "").replace("_", " ")}}   
+                                        </span>
+                                    </td>
+                                    <td class="text-capitalize">
+                                        <span (click)="usersProfile((LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId:LoanApplyObj.borrowerId))">
+                                            {{(LoanApplyObj.lenderId._id!=authenticationService.currentUserValue._id?LoanApplyObj.lenderId.firstName:LoanApplyObj.borrowerId.firstName)}}
+                                        </span>
                                         <!--
                                         {{userService.returnUsersObjFromLocal(LoanObj.sessionAppliedByBorrowers,
                                         true,'firstName')}}

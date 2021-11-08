@@ -35,14 +35,23 @@
                             </div>
                             <div class="name">
                                 {{returnNameOfAnyNonSelfUserFromList(currentContactItem.usersCollAdmin, '
-                                - ', currentContactItem.firstName) | titlecase}}
+                                - ', currentContactItem.firstName, currentContactItem.isGroup) | titlecase}}
                             </div>
                             <div class="small font-weight-light">
-                                {{currentContactItem.createdOn | date}}
+                                {{currentContactItem.createdOn | date}}   <div  *ngIf="!currentContactItem.isGroup"  class="badge badge-success float-right">Private</div>
                                 <!-- {{currentContactItem.lastMessage || 'NA'}} -->
                             </div>
                         </div>
                     </div>
+                </li>
+                <li>
+                   
+                    <ngui-inview (inview)="lastUserReached('last-user-in-app')">
+                    </ngui-inview>
+                    <span class="small font-weight-light float-right">
+                        ...
+                    </span>
+                
                 </li>
             </ul>
         </div>
@@ -86,8 +95,11 @@
             <i class="icon-arrow-left float-left" (click)="goback_to_contacts()"></i>
 
             <div class="name m-md-3 m-0">{{returnNameOfAnyNonSelfUserFromList(currentContact.usersCollAdmin, ' - ',
-                currentContact.firstName) | titlecase}}</div>
-            <a class="p-2 float-right my-2" (click)="showAppliedToSessionCallMediator(currentContact._id)">
+                currentContact.firstName, currentContact.isGroup) | titlecase}}</div>
+            <a *ngIf="currentContact.isGroup" class="p-2 float-right my-2" (click)="showAppliedToSessionCallMediator(currentContact._id)">
+                <span class="badge badge-light">Details</span>
+            </a>
+            <a *ngIf="!currentContact.isGroup" class="p-2 float-right my-2" (click)="usersProfile(null, currentContact.usersCollAdmin)">
                 <span class="badge badge-light">Details</span>
             </a>
             <div class="social-media avittiNone" style="right: 0;top: 3px;position: absolute;">
@@ -146,16 +158,16 @@
                         </span>
                     </p>
                 </li>
-                <!--
+                
                 <li>
                     <ngui-inview [observerOptions]="myObserverOptions"
                         (inview)="lastScreenReached('last-message-in-app')">
                     </ngui-inview>
-                    <span class="small font-weight-light">
-                        load more...
+                    <span class="small font-weight-light float-right">
+                        ...
                     </span>
                 </li>
-                -->
+               
             </ul>
         </div>
         <div class="message-input">

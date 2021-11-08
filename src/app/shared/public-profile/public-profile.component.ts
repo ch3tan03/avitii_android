@@ -1,4 +1,4 @@
-import { Component, Inject, Optional, OnInit,ChangeDetectorRef } from '@angular/core';
+import { Component, Inject, Optional, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AlertService, AuthenticationService, UserService } from 'src/app/services';
 import { Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { SocketioService } from 'src/app/socketio.service';
 import { RatingsListComponent } from '../ratings-list/ratings-list.component';
 import { MediaPreviewComponent } from '../media-preview/media-preview.component';
 import { PublicProfileEditComponent } from '../public-profile-edit/public-profile-edit.component';
+import { ContactService } from 'src/app/services/contact.service';
 
 @Component({
   selector: 'app-public-profile',
@@ -49,11 +50,22 @@ export class PublicProfileComponent implements OnInit {
     private alertService: AlertService,
     private socketService: SocketioService,
     public dialog: MatDialog,
-    private _cdr: ChangeDetectorRef
+    private _cdr: ChangeDetectorRef,
+    private contactService: ContactService
   ) {
     this.userObj = data.userObj;
     if (data.adminViewT) {
       this.adminViewT = true;
+      let _contactId = this.sendEvent2CreateNewCpntactIfMissing(this.userObj);
+    }
+    switch (this.userObj.role) {
+      case Role.Admin:
+        this.closeDialog();
+        return;
+        break;
+        default:
+          break;
+
     }
     this.userService.getUserProfilePortFolioByUserId(this.userObj._id)
       .pipe(first())
@@ -301,4 +313,41 @@ export class PublicProfileComponent implements OnInit {
       ////console.log(`426 :: msc :: Dialog result: ${JSON.stringify(result)}`);
     });
   }
+
+  sendEvent2CreateNewCpntactIfMissing(userObj) {
+    if (!userObj) {
+      return
+    }
+    let id2check = userObj._id;
+    let _contactId = this.contactService.returnContactIdForPrivate(id2check, this.authenticationService.currentUserValue._id);
+    let _adminUsersArray = [];
+    _adminUsersArray.push(this.authenticationService.currentUserValue._id);
+    _adminUsersArray.push(id2check);
+    let _currentContactObj = this.contactService.returnContactJsonData(this.authenticationService.currentUserValue._id, userObj.firstName + ' ' + userObj.lastName, _contactId, _contactId, _adminUsersArray, null, null, null, false, false);
+    this.socketService.sendEventToAddNewContact(_currentContactObj);
+    return _contactId;
+  }
+
+
+  clickedOnUsersChat(userObj) {
+    if (!userObj) {
+      return
+    }
+    let _parentRouting = '';
+    let _contactId = this.sendEvent2CreateNewCpntactIfMissing(userObj);
+    switch (this.authenticationService.currentUserValue.role) {
+      case Role.Borrower:
+        _parentRouting = 'borrower';
+        break;
+      case Role.Lender:
+        _parentRouting = 'lender';
+        break;
+      case Role.Admin:
+        _parentRouting = 'admin';
+        break;
+    }
+    this.dialogRef.close({ event: 'close', data: {} });
+    this.router.navigate(['/' + _parentRouting + '/messages'], { state: { contactId: _contactId, AVTrueChatFalse: false } });
+  }
+
 }

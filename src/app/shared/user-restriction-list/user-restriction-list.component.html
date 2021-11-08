@@ -23,6 +23,7 @@
                                     <tr>
                                         <th class="d-none" i18n>ID</th>
                                         <th i18n>Comment</th>
+                                        <th i18n>Created On</th>
                                         <th i18n>Status</th>
                                     </tr>
                                 </thead>
@@ -30,6 +31,7 @@
                                     <tr *ngFor="let obj of utilityService._.values(PaymentTransactionDetailsArray)">
                                         <td class="d-none">{{obj._id}}</td>
                                         <td>{{obj.comment}}</td>
+                                        <td>{{obj.createdOn | date}}</td>
                                         <td>
                                             <span [ngSwitch]="obj.isVerified" i18n>
                                                 <i *ngSwitchCase="2" class="badge badge-danger font-weight-light">Blocked</i>
